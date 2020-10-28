@@ -1,11 +1,20 @@
 package comcom.example.secrettextprinter;
 
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class SecretLeakageController {
+
+    private static Logger log = LoggerFactory.getLogger(SecretLeakageController.class);
+
 
     @Value("${password}")
     String hardcodedPassword;
@@ -17,24 +26,57 @@ public class SecretLeakageController {
     String hardcodedEnvPassword;
 
 
-    @GetMapping("/leak-code")
-    public String getHardcodedSecret(){
+    @GetMapping("/spoil-1")
+    public String getHardcodedSecret() {
         return hardcodedPassword;
     }
 
-    @GetMapping("/leak-arg")
-    public String getEnvArgBasedSecret(){
+    @GetMapping("/spoil-2")
+    public String getEnvArgBasedSecret() {
         return argBasedPassword;
     }
 
-    @GetMapping("/leak-docker-env")
-    public String getEnvStaticSecret(){
+    @GetMapping("/spoil-3")
+    public String getEnvStaticSecret() {
         return hardcodedEnvPassword;
     }
 
-    @GetMapping("/leak-old")
-    public String getOldSecret(){
+    @GetMapping("/spoil-4")
+    public String getOldSecret() {
         return Constants.password;
+    }
+
+
+    @PostMapping("/challenge/1")
+    public ResponseEntity postControler(@RequestBody ChallengeForm challengeForm) {
+        log.info("POST received - serializing form: solution: " + challengeForm.getSolution());
+        return setResponse(hardcodedPassword, challengeForm.getSolution());
+    }
+
+    @PostMapping("/challenge/2")
+    public ResponseEntity postControler2(@RequestBody ChallengeForm challengeForm) {
+        log.info("POST received - serializing form: solution: " + challengeForm.getSolution());
+        return setResponse(argBasedPassword, challengeForm.getSolution());
+    }
+
+    @PostMapping("/challenge/3")
+    public ResponseEntity postControler3(@RequestBody ChallengeForm challengeForm) {
+        log.info("POST received - serializing form: solution: " + challengeForm.getSolution());
+        return setResponse(hardcodedEnvPassword, challengeForm.getSolution());
+    }
+
+    @PostMapping("/challenge/4")
+    public ResponseEntity postControler4(@RequestBody ChallengeForm challengeForm) {
+        log.info("POST received - serializing form: solution: " + challengeForm.getSolution());
+        return setResponse(Constants.password, challengeForm.getSolution());
+    }
+
+    private ResponseEntity setResponse(String target, String providedSolution) {
+        if (target.equals(providedSolution)) {
+            return ResponseEntity.ok(HttpStatus.OK);
+        } else {
+            return ResponseEntity.badRequest().body("Wrong anser!");
+        }
     }
 
 
