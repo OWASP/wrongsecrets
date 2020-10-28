@@ -1,5 +1,7 @@
-FROM openjdk/15-jdk-slim
+FROM azul/zulu-openjdk-alpine:15
 
-ARG password
+ARG envPassword
+ENV hardcodedEnvPassword="This is it"
 
-RUN java -jar application.jar $password //TODO create a separate repo, ADD COMPILATION STEP AND COPY IT TO DROPBOX!!
+ADD target/secrettextprinter-0.0.1-SNAPSHOT.jar /application.jar
+RUN java -jar application.jar -DenvPassword=${envPassword}

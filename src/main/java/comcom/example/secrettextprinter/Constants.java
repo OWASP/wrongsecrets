@@ -1,7 +1,11 @@
 package comcom.example.secrettextprinter;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Constants {
 
-    private static String password = "DefaultLoginPasswordDoNotChange!";
+    public static String password = "DefaultLoginPasswordDoNotChange!";
+
 
 }
