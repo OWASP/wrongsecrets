@@ -1,4 +1,4 @@
-package comcom.example.secrettextprinter;
+package com.example.secrettextprinter;
 
 import org.springframework.stereotype.Component;
 

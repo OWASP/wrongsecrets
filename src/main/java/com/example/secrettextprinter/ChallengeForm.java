@@ -1,4 +1,4 @@
-package comcom.example.secrettextprinter;
+package com.example.secrettextprinter;
 
 
 public class ChallengeForm {

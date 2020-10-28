@@ -1,4 +1,4 @@
-package comcom.example.secrettextprinter;
+package com.example.secrettextprinter;
 
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
