@@ -5,34 +5,34 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class AuthenticateController {
+public class SecretLeakageController {
 
-    //todo: rewrite as funny onepassword auth (posts!)
     @Value("${password}")
-    String password;
+    String hardcodedPassword;
 
-    @Value("${envPassword}")
-    String envBasedPassword;
+    @Value("${ARG_BASED_PASSWORD}")
+    String argBasedPassword;
 
-    @Value("${hardcodedEnvPassword}")
+    @Value("${DOCKER_ENV_PASSWORD}")
     String hardcodedEnvPassword;
 
-    @GetMapping("/leakit")
-    public String getSecret(){
-        return password;
+
+    @GetMapping("/leak-code")
+    public String getHardcodedSecret(){
+        return hardcodedPassword;
     }
 
-    @GetMapping("/leakit-env")
-    public String getEnvSecret(){
-        return envBasedPassword;
+    @GetMapping("/leak-arg")
+    public String getEnvArgBasedSecret(){
+        return argBasedPassword;
     }
 
-    @GetMapping("/leakit-docker-env")
+    @GetMapping("/leak-docker-env")
     public String getEnvStaticSecret(){
         return hardcodedEnvPassword;
     }
 
-    @GetMapping("/leakold")
+    @GetMapping("/leak-old")
     public String getOldSecret(){
         return Constants.password;
     }
