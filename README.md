@@ -25,6 +25,7 @@ The K8S setup currently is based on using Minikube for local fun:
 
 ```bash
     minikube start
+    kubectl apply -f k8s/secrets-config.yml
     kubectl apply -f k8s/secret-challenge-deployment.yml
     kubectl expose deployment secret-challenge --type=LoadBalancer --port=8080
     minikube service secret-challenge

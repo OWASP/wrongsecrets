@@ -25,6 +25,9 @@ public class SecretLeakageController {
     @Value("${DOCKER_ENV_PASSWORD}")
     String hardcodedEnvPassword;
 
+    @Value("${SPECIAL_K8S_SECRET}")
+    String configmapK8sSecret;
+
 
     @GetMapping("/spoil-1")
     public String getHardcodedSecret() {
@@ -46,6 +49,10 @@ public class SecretLeakageController {
         return Constants.password;
     }
 
+    @GetMapping("/spoil-5")
+    public String getK8sSecret() {
+        return configmapK8sSecret;
+    }
 
     @PostMapping("/challenge/1")
     public ResponseEntity postControler(@RequestBody ChallengeForm challengeForm) {
@@ -69,6 +76,12 @@ public class SecretLeakageController {
     public ResponseEntity postControler4(@RequestBody ChallengeForm challengeForm) {
         log.info("POST received - serializing form: solution: " + challengeForm.getSolution());
         return setResponse(Constants.password, challengeForm.getSolution());
+    }
+
+    @PostMapping("/challenge/5")
+    public ResponseEntity postControler5(@RequestBody ChallengeForm challengeForm) {
+        log.info("POST received - serializing form: solution: " + challengeForm.getSolution());
+        return setResponse(configmapK8sSecret, challengeForm.getSolution());
     }
 
     private ResponseEntity setResponse(String target, String providedSolution) {
