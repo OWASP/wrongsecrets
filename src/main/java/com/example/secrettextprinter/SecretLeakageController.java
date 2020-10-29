@@ -28,6 +28,9 @@ public class SecretLeakageController {
     @Value("${SPECIAL_K8S_SECRET}")
     String configmapK8sSecret;
 
+    @Value("${SPECIAL_SPECIAL_K8S_SECRET}")
+    String secretK8sSecret;
+
 
     @GetMapping("/spoil-1")
     public String getHardcodedSecret() {
@@ -54,34 +57,45 @@ public class SecretLeakageController {
         return configmapK8sSecret;
     }
 
+    @GetMapping("/spoil-6")
+    public String getSecretK8sSecret() {
+        return secretK8sSecret;
+    }
+
     @PostMapping("/challenge/1")
-    public ResponseEntity postControler(@RequestBody ChallengeForm challengeForm) {
+    public ResponseEntity postController(@RequestBody ChallengeForm challengeForm) {
         log.info("POST received - serializing form: solution: " + challengeForm.getSolution());
         return setResponse(hardcodedPassword, challengeForm.getSolution());
     }
 
     @PostMapping("/challenge/2")
-    public ResponseEntity postControler2(@RequestBody ChallengeForm challengeForm) {
+    public ResponseEntity postController2(@RequestBody ChallengeForm challengeForm) {
         log.info("POST received - serializing form: solution: " + challengeForm.getSolution());
         return setResponse(argBasedPassword, challengeForm.getSolution());
     }
 
     @PostMapping("/challenge/3")
-    public ResponseEntity postControler3(@RequestBody ChallengeForm challengeForm) {
+    public ResponseEntity postController3(@RequestBody ChallengeForm challengeForm) {
         log.info("POST received - serializing form: solution: " + challengeForm.getSolution());
         return setResponse(hardcodedEnvPassword, challengeForm.getSolution());
     }
 
     @PostMapping("/challenge/4")
-    public ResponseEntity postControler4(@RequestBody ChallengeForm challengeForm) {
+    public ResponseEntity postController4(@RequestBody ChallengeForm challengeForm) {
         log.info("POST received - serializing form: solution: " + challengeForm.getSolution());
         return setResponse(Constants.password, challengeForm.getSolution());
     }
 
     @PostMapping("/challenge/5")
-    public ResponseEntity postControler5(@RequestBody ChallengeForm challengeForm) {
+    public ResponseEntity postController5(@RequestBody ChallengeForm challengeForm) {
         log.info("POST received - serializing form: solution: " + challengeForm.getSolution());
         return setResponse(configmapK8sSecret, challengeForm.getSolution());
+    }
+
+    @PostMapping("/challenge/6")
+    public ResponseEntity postController6(@RequestBody ChallengeForm challengeForm) {
+        log.info("POST received - serializing form: solution: " + challengeForm.getSolution());
+        return setResponse(secretK8sSecret, challengeForm.getSolution());
     }
 
     private ResponseEntity setResponse(String target, String providedSolution) {
