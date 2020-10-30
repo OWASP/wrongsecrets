@@ -5,10 +5,8 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class SecretLeakageController {
@@ -30,7 +28,6 @@ public class SecretLeakageController {
 
     @Value("${SPECIAL_SPECIAL_K8S_SECRET}")
     String secretK8sSecret;
-
 
     @GetMapping("/spoil-1")
     public String getHardcodedSecret() {
@@ -60,6 +57,12 @@ public class SecretLeakageController {
     @GetMapping("/spoil-6")
     public String getSecretK8sSecret() {
         return secretK8sSecret;
+    }
+
+    @GetMapping("/challenge")
+    public String greetingForm(Model model) {
+        model.addAttribute("test", new String("test"));
+        return "This is challenge 1";
     }
 
     @PostMapping("/challenge/1")
