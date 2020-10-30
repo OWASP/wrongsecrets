@@ -6,9 +6,14 @@
 </head>
 <body>
 <h1>Form</h1>
-<form action="#" th:action="@{challenge/1}" th:object="${challengeForm}" method="post">
-    <p>Message: <input type="text" th:field="*{solution}" /></p>
+<!--"'Hello, ' + ${name} + '!'"-->
+<p th:text="'Welcome to challenge ' + ${challengeNumber} + '. You need to guess the secret that is hidden in the java/docker/k8s/Vault.'"></p>
+<p th:text="${answerCorrect}"></p>
+<form action="#" th:action="'/challenge/'+${challengeNumber}" th:object="${challengeForm}" method="post">
+    <p>Answer to solution : <input type="text" th:field="*{solution}" /></p>
     <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
 </form>
+
+There are 6 challenges (/challenge/1-8), can you solve them all?
 </body>
 </html>
