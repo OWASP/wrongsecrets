@@ -5,10 +5,11 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+@Controller
 public class SecretLeakageController {
 
     private static Logger log = LoggerFactory.getLogger(SecretLeakageController.class);
@@ -61,8 +62,8 @@ public class SecretLeakageController {
 
     @GetMapping("/challenge")
     public String greetingForm(Model model) {
-        model.addAttribute("test", new String("test"));
-        return "This is challenge 1";
+        model.addAttribute("challengeForm", new ChallengeForm());
+        return "challenge";
     }
 
     @PostMapping("/challenge/1")
