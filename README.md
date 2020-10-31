@@ -15,12 +15,13 @@ docker run -p 8080:8080 jeroenwillemsen/addo-example:15
 ```
 
 Now you can try to find the secrets by means of solving the challenge offered at:
-[localhost:8080/chalelnge/1](localhost:8080/chalelnge/1)
-[localhost:8080/chalelnge/2](localhost:8080/chalelnge/2)
-[localhost:8080/chalelnge/3](localhost:8080/chalelnge/3)
-[localhost:8080/chalelnge/4](localhost:8080/chalelnge/4)
-[localhost:8080/chalelnge/5](localhost:8080/chalelnge/5)
-[localhost:8080/chalelnge/6](localhost:8080/chalelnge/6)
+
+- [localhost:8080/chalelnge/1](localhost:8080/chalelnge/1)
+- [localhost:8080/chalelnge/2](localhost:8080/chalelnge/2)
+- [localhost:8080/chalelnge/3](localhost:8080/chalelnge/3)
+- [localhost:8080/chalelnge/4](localhost:8080/chalelnge/4)
+- [localhost:8080/chalelnge/5](localhost:8080/chalelnge/5)
+- [localhost:8080/chalelnge/6](localhost:8080/chalelnge/6)
 
 ## Basic K8s exercise
 
