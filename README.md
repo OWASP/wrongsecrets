@@ -16,12 +16,12 @@ docker run -p 8080:8080 jeroenwillemsen/addo-example:15
 
 Now you can try to find the secrets by means of solving the challenge offered at:
 
-- [localhost:8080/chalelnge/1](localhost:8080/chalelnge/1)
-- [localhost:8080/chalelnge/2](localhost:8080/chalelnge/2)
-- [localhost:8080/chalelnge/3](localhost:8080/chalelnge/3)
-- [localhost:8080/chalelnge/4](localhost:8080/chalelnge/4)
-- [localhost:8080/chalelnge/5](localhost:8080/chalelnge/5)
-- [localhost:8080/chalelnge/6](localhost:8080/chalelnge/6)
+- [localhost:8080/chalelnge/1](localhost:8080/challenge/1)
+- [localhost:8080/chalelnge/2](localhost:8080/challenge/2)
+- [localhost:8080/chalelnge/3](localhost:8080/challenge/3)
+- [localhost:8080/chalelnge/4](localhost:8080/challenge/4)
+- [localhost:8080/chalelnge/5](localhost:8080/challenge/5)
+- [localhost:8080/chalelnge/6](localhost:8080/challenge/6)
 
 ## Basic K8s exercise
 
