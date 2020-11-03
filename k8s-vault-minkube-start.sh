@@ -4,7 +4,7 @@
 # set -o nounset
 
 echo "This is only a script for demoing purposes. You need to have installed: minikube, helm, kubectl, jq, vault, grep, cat, sed and is only tested on mac"
-
+echo "This script is based on the steps defined in https://learn.hashicorp.com/tutorials/vault/kubernetes-minikube . Vault is awesome!"
 minikube start
 kubectl get configmaps | grep 'secrets-file' &> /dev/null
 if [ $? == 0 ]; then
