@@ -3,6 +3,8 @@
 # set -o pipefail
 # set -o nounset
 
+echo "This is only a script for demoing purposes. You need to have installed: minikube, helm, kubectl, jq, vault, grep, cat, sed and is only tested on mac"
+
 minikube start
 kubectl get configmaps | grep 'secrets-file' &> /dev/null
 if [ $? == 0 ]; then
