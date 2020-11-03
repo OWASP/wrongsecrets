@@ -40,8 +40,8 @@ fi
 
 
 
-isvaultrunning=kubectl get pods --field-selector=status.phase=Running;
-while [![ $isvaultrunning == *"vault-0"* ]]; do echo "waiting for Vault" && sleep 1 && isvaultrunning=kubectl get pods --field-selector=status.phase=Running; done
+isvaultrunning=$(kubectl get pods --field-selector=status.phase=Running)
+while [[ $isvaultrunning != *"vault-0"* ]]; do echo "waiting for Vault" && sleep 1 && isvaultrunning=$(kubectl get pods --field-selector=status.phase=Running); done
 
 echo "Setting up port forwarding"
 kubectl port-forward vault-0 8200:8200 &
@@ -60,8 +60,11 @@ jq .root_token cluster-keys.json > commentedroottoken
 sed "s/^\([\"']\)\(.*\)\1\$/\2/g" commentedroottoken > root_token
 ROOTTOKEN=$(cat root_token)
 
+echo "Logging in"
+kubectl exec vault-0 -- vault login $ROOTTOKEN 
+
 echo "Enabling kv-v2 and kubernetes"
-kubectl exec vault-0 -- vault login $ROOTTOKEN && vault secrets enable -path=secret kv-v2 && vault auth enable kubernetes
+kubectl exec vault-0 -- vault secrets enable -path=secret kv-v2 && vault auth enable kubernetes
 
 echo "Writing k8s auth config"
 kubectl exec vault-0 -- vault write auth/kubernetes/config \
