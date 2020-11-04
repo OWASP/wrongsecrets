@@ -73,7 +73,7 @@ echo "Enable k8s auth"
 kubectl exec vault-0 -- vault auth enable kubernetes
 
 echo "Writing k8s auth config" 
-#TODO: below should be executed on he host only, so pick it up from the pod!
+
 kubectl exec vault-0 -- /bin/sh -c 'vault write auth/kubernetes/config \
         token_reviewer_jwt="$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" \
         kubernetes_host="https://$KUBERNETES_PORT_443_TCP_ADDR:443" \
@@ -97,4 +97,6 @@ kubectl exec vault-0 -- vault write auth/kubernetes/role/webapp \
 kubectl apply -f k8s/secret-challenge-deployment.yml
 kubectl expose deployment secret-challenge --type=LoadBalancer --port=8080
 echo "exposing over minikube, want to use pure k8s? define an ingress..."
-minikube service secret-challenge --url 
+kubectl port-forward \
+    $(kubectl get pod -l app=secret-challenge -o jsonpath="{.items[0].metadata.name}") \
+    8080:8080
