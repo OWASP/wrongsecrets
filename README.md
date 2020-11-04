@@ -35,5 +35,8 @@ The K8S setup currently is based on using Minikube for local fun:
     kubectl expose deployment secret-challenge --type=LoadBalancer --port=8080
     minikube service secret-challenge
 ```
+
 now you can use the provided ip-address and port to further play with the K8s variant (instead of localhost).
 
+With thanks to @bendehaan for accelerating the project.
+ 

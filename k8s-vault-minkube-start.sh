@@ -74,17 +74,17 @@ kubectl exec vault-0 -- vault auth enable kubernetes
 
 echo "Writing k8s auth config" 
 #TODO: below should be executed on he host only, so pick it up from the pod!
-kubectl exec vault-0 -- bash -c 'vault write auth/kubernetes/config \
+kubectl exec vault-0 -- /bin/sh -c 'vault write auth/kubernetes/config \
         token_reviewer_jwt="$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" \
         kubernetes_host="https://$KUBERNETES_PORT_443_TCP_ADDR:443" \
         kubernetes_ca_cert=@/var/run/secrets/kubernetes.io/serviceaccount/ca.crt'
 
 echo "Writing policy for webapp"
-kubectl exec vault-0 -- vault policy write webapp - <<EOF
+kubectl exec vault-0 -- kubectl exec vault-0 -- /bin/sh -c 'vault policy write webapp - <<EOF
 path "secret/data/webapp/config" {
   capabilities = ["read"]
 }
-EOF
+EOF'
 
 echo "Write secrets for webapp"
 kubectl exec vault-0 -- vault write auth/kubernetes/role/webapp \
@@ -96,6 +96,5 @@ kubectl exec vault-0 -- vault write auth/kubernetes/role/webapp \
 
 kubectl apply -f k8s/secret-challenge-deployment.yml
 kubectl expose deployment secret-challenge --type=LoadBalancer --port=8080
-kubectl port-forward secret-challenge 8080:8080 
-#or 
-#minikube service secret-challenge
+echo "exposing over minikube, want to use pure k8s? define an ingress..."
+minikube service secret-challenge --url 
