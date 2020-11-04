@@ -74,10 +74,10 @@ kubectl exec vault-0 -- vault auth enable kubernetes
 
 echo "Writing k8s auth config" 
 #TODO: below should be executed on he host only, so pick it up from the pod!
-kubectl exec vault-0 -- vault write auth/kubernetes/config \
+kubectl exec vault-0 -- bash -c 'vault write auth/kubernetes/config \
         token_reviewer_jwt="$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" \
         kubernetes_host="https://$KUBERNETES_PORT_443_TCP_ADDR:443" \
-        kubernetes_ca_cert=@/var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+        kubernetes_ca_cert=@/var/run/secrets/kubernetes.io/serviceaccount/ca.crt'
 
 echo "Writing policy for webapp"
 kubectl exec vault-0 -- vault policy write webapp - <<EOF
