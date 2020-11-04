@@ -67,7 +67,7 @@ echo "Enabling kv-v2 kubernetes"
 kubectl exec vault-0 -- vault secrets enable -path=secret kv-v2
 
 echo "Putting a secret in"
-kubectl exec vault-0 -- vault kv put secret/webapp/config username="static-user" password="$(openssl rand -base64 16)"
+kubectl exec vault-0 -- vault kv put secret/secret-challenge vaultpassword.password="$(openssl rand -base64 16)"
 
 echo "Enable k8s auth"
 kubectl exec vault-0 -- vault auth enable kubernetes
@@ -79,20 +79,20 @@ kubectl exec vault-0 -- /bin/sh -c 'vault write auth/kubernetes/config \
         kubernetes_host="https://$KUBERNETES_PORT_443_TCP_ADDR:443" \
         kubernetes_ca_cert=@/var/run/secrets/kubernetes.io/serviceaccount/ca.crt'
 
-echo "Writing policy for webapp"
-kubectl exec vault-0 -- kubectl exec vault-0 -- /bin/sh -c 'vault policy write webapp - <<EOF
-path "secret/data/webapp/config" {
+echo "Writing policy for secret-challenge"
+kubectl exec vault-0 -- kubectl exec vault-0 -- /bin/sh -c 'vault policy write secret-challenge - <<EOF
+path "secret/data/secret-challenge" {
   capabilities = ["read"]
 }
 EOF'
 
-echo "Write secrets for webapp"
-kubectl exec vault-0 -- vault write auth/kubernetes/role/webapp \
+echo "Write secrets for secret-challenge"
+kubectl exec vault-0 -- vault write auth/kubernetes/role/secret-challenge \
         bound_service_account_names=vault \
         bound_service_account_namespaces=default \
-        policies=webapp \
+        policies=secret-challenge \
         ttl=24h \
- && vault kv put secret/webapp/config username="static-user" password="static-password"
+ && vault kv put secret/secret-challenge vaultpassword.password="$(openssl rand -base64 16)"
 
 kubectl apply -f k8s/secret-challenge-deployment.yml
 kubectl expose deployment secret-challenge --type=LoadBalancer --port=8080

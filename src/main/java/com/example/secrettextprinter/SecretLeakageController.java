@@ -3,6 +3,7 @@ package com.example.secrettextprinter;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -10,10 +11,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
+@EnableConfigurationProperties(Vaultpassword.class)
 public class SecretLeakageController {
 
     private static Logger log = LoggerFactory.getLogger(SecretLeakageController.class);
 
+    public final Vaultpassword vaultPassword;
+
+    public SecretLeakageController(Vaultpassword vaultpassword) {
+        this.vaultPassword = vaultpassword;
+    }
 
     @Value("${password}")
     String hardcodedPassword;
@@ -29,6 +36,9 @@ public class SecretLeakageController {
 
     @Value("${SPECIAL_SPECIAL_K8S_SECRET}")
     String secretK8sSecret;
+
+    @Value("${vaultpassword}")
+    String vaultPasswordString;
 
     @GetMapping("/spoil-1")
     public String getHardcodedSecret() {
@@ -58,6 +68,14 @@ public class SecretLeakageController {
     @GetMapping("/spoil-6")
     public String getSecretK8sSecret() {
         return secretK8sSecret;
+    }
+
+    @GetMapping("/spoil-7")
+    public String getVaultPassword() {
+        if (null != vaultPassword.getPasssword()) {
+            return vaultPassword.getPasssword();
+        }
+        return vaultPasswordString;
     }
 
     @GetMapping("/challenge/{id}")
@@ -111,7 +129,7 @@ public class SecretLeakageController {
     }
 
 
-    private String handleModel(String targetPassword, String given, Model model){
+    private String handleModel(String targetPassword, String given, Model model) {
         if (targetPassword.equals(given)) {
             model.addAttribute("answerCorrect", "You're answer is correct!");
         } else {
