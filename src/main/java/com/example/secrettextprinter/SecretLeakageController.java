@@ -41,41 +41,46 @@ public class SecretLeakageController {
     String vaultPasswordString;
 
     @GetMapping("/spoil-1")
-    public String getHardcodedSecret() {
-        return hardcodedPassword;
+    public String getHardcodedSecret(Model model) {
+        return getSpoil(model, hardcodedPassword);
     }
 
+    private String getSpoil(Model model, String password){
+        model.addAttribute("spoil", new Spoil());
+        model.addAttribute("solution", password);
+        return "spoil";
+    }
     @GetMapping("/spoil-2")
-    public String getEnvArgBasedSecret() {
-        return argBasedPassword;
+    public String getEnvArgBasedSecret(Model model) {
+        return getSpoil(model,argBasedPassword);
     }
 
     @GetMapping("/spoil-3")
-    public String getEnvStaticSecret() {
-        return hardcodedEnvPassword;
+    public String getEnvStaticSecret(Model model) {
+        return getSpoil(model, hardcodedEnvPassword);
     }
 
     @GetMapping("/spoil-4")
-    public String getOldSecret() {
-        return Constants.password;
+    public String getOldSecret(Model model) {
+        return getSpoil(model,Constants.password);
     }
 
     @GetMapping("/spoil-5")
-    public String getK8sSecret() {
-        return configmapK8sSecret;
+    public String getK8sSecret(Model model) {
+        return getSpoil(model,configmapK8sSecret);
     }
 
     @GetMapping("/spoil-6")
-    public String getSecretK8sSecret() {
-        return secretK8sSecret;
+    public String getSecretK8sSecret(Model model) {
+        return getSpoil(model,secretK8sSecret);
     }
 
     @GetMapping("/spoil-7")
-    public String getVaultPassword() {
+    public String getVaultPassword(Model model) {
         if (null != vaultPassword.getPasssword()) {
-            return vaultPassword.getPasssword();
+            return getSpoil(model, vaultPassword.getPasssword());
         }
-        return vaultPasswordString;
+        return getSpoil(model, vaultPasswordString);
     }
 
     @GetMapping("/challenge/{id}")

@@ -1,14 +1,14 @@
 package com.example.secrettextprinter;
 
 
-public class ChallengeForm {
+public class Spoil {
     private String solution;
 
-    public ChallengeForm(){
+    public Spoil(){
 
     }
 
-    public ChallengeForm(String solution) {
+    public Spoil(String solution) {
         this.solution = solution;
     }
 
