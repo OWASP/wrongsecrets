@@ -3,7 +3,7 @@
 # set -o pipefail
 # set -o nounset
 
-echo "This is only a script for demoing purposes. You need to have installed: minikube, helm, kubectl, jq, vault, grep, cat, sed and is only tested on mac"
+echo "This is only a script for demoing purposes. You need to have installed: minikube (or comment out line 8 and work at your own k8s setup), helm, kubectl, jq, vault, grep, cat, sed and is only tested on mac"
 echo "This script is based on the steps defined in https://learn.hashicorp.com/tutorials/vault/kubernetes-minikube . Vault is awesome!"
 minikube start
 kubectl get configmaps | grep 'secrets-file' &> /dev/null
@@ -94,9 +94,9 @@ kubectl exec vault-0 -- vault write auth/kubernetes/role/secret-challenge \
         ttl=24h \
  && vault kv put secret/secret-challenge vaultpassword.password="$(openssl rand -base64 16)"
 
-kubectl apply -f k8s/secret-challenge-deployment.yml
-while [[ $(kubectl get pods -l app=secret-challenge -o 'jsonpath={..status.conditions[?(@.type=="Running")].status}') != "True True" ]]; do echo "waiting for Secret Challenge" && sleep 2; done
-kubectl expose deployment secret-challenge --type=LoadBalancer --port=8080
+kubectl apply -f k8s/secret-challenge-vault-deployment.yml
+while [[ $(kubectl get pods -l app=secret-challenge -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do echo "waiting for secret-challenge" && sleep 2; done
+#kubectl expose deployment secret-challenge --type=LoadBalancer --port=8080
 kubectl port-forward \
     $(kubectl get pod -l app=secret-challenge -o jsonpath="{.items[0].metadata.name}") \
     8080:8080

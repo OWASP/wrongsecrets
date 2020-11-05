@@ -30,3 +30,6 @@ target
 .idea
 
 k8s/cluster-keys.json
+cluster-keys.json
+commentedroottoken
+root_token
