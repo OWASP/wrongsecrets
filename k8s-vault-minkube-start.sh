@@ -80,7 +80,7 @@ kubectl exec vault-0 -- /bin/sh -c 'vault write auth/kubernetes/config \
         kubernetes_ca_cert=@/var/run/secrets/kubernetes.io/serviceaccount/ca.crt'
 
 echo "Writing policy for secret-challenge"
-kubectl exec vault-0 -- kubectl exec vault-0 -- /bin/sh -c 'vault policy write secret-challenge - <<EOF
+kubectl exec vault-0 -- /bin/sh -c 'vault policy write secret-challenge - <<EOF
 path "secret/data/secret-challenge" {
   capabilities = ["read"]
 }
