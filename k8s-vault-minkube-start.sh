@@ -84,6 +84,9 @@ kubectl exec vault-0 -- /bin/sh -c 'vault policy write secret-challenge - <<EOF
 path "secret/data/secret-challenge" {
   capabilities = ["read"]
 }
+path "secret/data/application" {
+  capabilities = ["read"]
+}
 EOF'
 
 echo "Write secrets for secret-challenge"
@@ -92,7 +95,8 @@ kubectl exec vault-0 -- vault write auth/kubernetes/role/secret-challenge \
         bound_service_account_namespaces=default \
         policies=secret-challenge \
         ttl=24h \
- && vault kv put secret/secret-challenge vaultpassword.password="$(openssl rand -base64 16)"
+ && vault kv put secret/secret-challenge vaultpassword.password="$(openssl rand -base64 16)" \
+ && vault kv put secret/application vaultpassword.password="$(openssl rand -base64 16)" \
 
 kubectl apply -f k8s/secret-challenge-vault-deployment.yml
 while [[ $(kubectl get pods -l app=secret-challenge -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do echo "waiting for secret-challenge" && sleep 2; done
