@@ -28,6 +28,11 @@ hs_err_pid*
 target
 
 .idea
+.classpath
+.project
+.settings/
+.secrets.json
+
 
 k8s/cluster-keys.json
 cluster-keys.json
