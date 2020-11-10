@@ -23,6 +23,7 @@ Now you can try to find the secrets by means of solving the challenge offered at
 - [localhost:8080/challenge/5](localhost:8080/challenge/5)
 - [localhost:8080/challenge/6](localhost:8080/challenge/6)
 - [localhost:8080/challenge/6](localhost:8080/challenge/7)
+- [localhost:8080/challenge/6](localhost:8080/challenge/8)
 
 ## Basic K8s exercise
 
