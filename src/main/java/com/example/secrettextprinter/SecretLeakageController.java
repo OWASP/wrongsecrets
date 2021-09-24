@@ -1,22 +1,21 @@
 package com.example.secrettextprinter;
 
-import org.slf4j.LoggerFactory;
-import org.slf4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 @EnableConfigurationProperties(Vaultpassword.class)
+@Slf4j
 public class SecretLeakageController {
 
-    private static Logger log = LoggerFactory.getLogger(SecretLeakageController.class);
-
-    public final Vaultpassword vaultPassword;
+    private final Vaultpassword vaultPassword;
 
     public SecretLeakageController(Vaultpassword vaultpassword) {
         this.vaultPassword = vaultpassword;

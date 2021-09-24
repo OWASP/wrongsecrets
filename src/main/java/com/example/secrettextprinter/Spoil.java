@@ -1,23 +1,10 @@
 package com.example.secrettextprinter;
 
 
+import lombok.Data;
+
+@Data
 public class Spoil {
+
     private String solution;
-
-    public Spoil(){
-
-    }
-
-    public Spoil(String solution) {
-        this.solution = solution;
-    }
-
-
-    public String getSolution() {
-        return solution;
-    }
-
-    public void setSolution(String solution) {
-        this.solution = solution;
-    }
 }
