@@ -59,6 +59,20 @@ Want to run vanilla on your own k8s? Use the commands below:
 
 ```
 
+## Vault exercises with minikube
+
+Make sure you have the following installed:
+- minikube with docker (or comment out line 8 and work at your own k8s setup), 
+- helm, 
+- kubectl,
+- jq,
+- vault, 
+- grep, 
+- cat, 
+- sed
+
+Run `./k8s-vault-minkube-start.sh`, the challenge will wait for you at http://localhost:8080
+
 ## Special thanks
 
 With thanks to [@bendehaan](https://github.com/bendehaan) & [@nbaars](https://github.com/nbaars) for accelerating the project.

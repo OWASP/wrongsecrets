@@ -3,9 +3,9 @@
 # set -o pipefail
 # set -o nounset
 
-echo "This is only a script for demoing purposes. You need to have installed: minikube with docker (or comment out line 8 and work at your own k8s setup), helm, kubectl, jq, vault, grep, cat, sed and is only tested on mac"
+echo "This is only a script for demoing purposes. You need to have installed: minikube with docker (or comment out line 8 and work at your own k8s setup), helm, kubectl, jq, vault, grep, cat, sed and is only tested on mac and ubuntu"
 echo "This script is based on the steps defined in https://learn.hashicorp.com/tutorials/vault/kubernetes-minikube . Vault is awesome!"
-minikube start
+minikube start --kubernetes-version=v1.20.10
 
 kubectl get configmaps | grep 'secrets-file' &> /dev/null
 if [ $? == 0 ]; then
@@ -26,7 +26,7 @@ if [ $? == 0 ]; then
    echo "Consul is already installed"
 else
   helm repo add hashicorp https://helm.releases.hashicorp.com
-  helm install consul hashicorp/consul --values k8s/helm-consul-values.yml
+  helm install consul hashicorp/consul --version 0.30.0 --values k8s/helm-consul-values.yml
 fi
 
 while [[ $(kubectl get pods -l app=consul -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True True" ]]; do echo "waiting for Consul" && sleep 2; done
@@ -36,7 +36,7 @@ if [ $? == 0 ]; then
    echo "Vault is already installed"
 else
   helm repo add hashicorp https://helm.releases.hashicorp.com
-  helm install vault hashicorp/vault --values k8s/helm-vault-values.yml
+  helm install vault hashicorp/vault --version 0.9.1 --values k8s/helm-vault-values.yml
 fi
 
 isvaultrunning=$(kubectl get pods --field-selector=status.phase=Running)
@@ -104,4 +104,4 @@ kubectl port-forward \
     $(kubectl get pod -l app=secret-challenge -o jsonpath="{.items[0].metadata.name}") \
     8080:8080 \
     &
-echo "Do `minikube delete` to stop minikube from running and cleanup to start fresh again"
+echo "Do minikube delete to stop minikube from running and cleanup to start fresh again"
