@@ -12,13 +12,18 @@ on:
 jobs:
   test-minikube:
     name: Test with minikube
-    runs-on: macos-11
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - uses: actions/checkout@v2
-      - name: Install Homebrew dependencies
-        run: |
-         brew install docker helm kubectl jq vault grep virtualbox minikube
-      - name: Run testscript
+      - uses: innovationnorway/setup-vault@v1
+        with:
+          version: '~1.4'
+      - name: start minikube
+          id: minikube
+          uses: medyagh/setup-minikube@master
+      - uses: azure/setup-helm@v1
+        id: install
+      - name: test script
         run: |
           ./k8s-vault-minkube-start.sh
+

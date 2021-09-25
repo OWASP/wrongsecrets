@@ -104,4 +104,4 @@ kubectl port-forward \
     $(kubectl get pod -l app=secret-challenge -o jsonpath="{.items[0].metadata.name}") \
     8080:8080 \
     &
-echo "Do minikube stop to stop minikube from running"
+echo "Do `minikube delete` to stop minikube from running and cleanup to start fresh again"
