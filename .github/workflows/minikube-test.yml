@@ -4,8 +4,8 @@ name: Test minikube script
 
 # Controls when the workflow will run
 on:
-    pull_request:
-      branches: [ master ]
+  pull_request:
+    branches: [ master ]
   workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -16,21 +16,9 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - uses: actions/checkout@v2
-      - name: Update Homebrew
-        run: |
-          brew update --preinstall
-          cat "$(brew --repository)/Library/Taps/homebrew/homebrew-core/Formula/foo.rb" > .github/brew-formulae
-      - name: Configure Homebrew cache
-        uses: actions/cache@v2
-        with:
-          path: |
-            ~/Library/Caches/Homebrew/foo--*
-            ~/Library/Caches/Homebrew/downloads/*--foo-*
-          key: brew-${{ hashFiles('.github/brew-formulae') }}
-          restore-keys: brew-
       - name: Install Homebrew dependencies
         run: |
-          env HOMEBREW_NO_AUTO_UPDATE=1 brew install helm kubectl jq vault grep minikube
+         brew install helm kubectl jq vault grep minikube
       - name: Run testscript
         run: |
           ./k8s-vault-minkube-start.sh
