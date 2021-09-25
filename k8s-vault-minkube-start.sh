@@ -26,7 +26,7 @@ if [ $? == 0 ]; then
    echo "Consul is already installed"
 else
   helm repo add hashicorp https://helm.releases.hashicorp.com
-  helm install consul hashicorp/consul --values k8s/helm-consul-values.yml
+  helm install consul hashicorp/consul --version 0.30.0 --values k8s/helm-consul-values.yml
 fi
 
 while [[ $(kubectl get pods -l app=consul -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True True" ]]; do echo "waiting for Consul" && sleep 2; done
@@ -36,7 +36,7 @@ if [ $? == 0 ]; then
    echo "Vault is already installed"
 else
   helm repo add hashicorp https://helm.releases.hashicorp.com
-  helm install vault hashicorp/vault --values k8s/helm-vault-values.yml
+  helm install vault hashicorp/vault --version 0.9.1 --values k8s/helm-vault-values.yml
 fi
 
 isvaultrunning=$(kubectl get pods --field-selector=status.phase=Running)
