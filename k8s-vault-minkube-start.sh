@@ -3,7 +3,7 @@
 # set -o pipefail
 # set -o nounset
 
-echo "This is only a script for demoing purposes. You need to have installed: minikube with docker (or comment out line 8 and work at your own k8s setup), helm, kubectl, jq, vault, grep, cat, sed and is only tested on mac"
+echo "This is only a script for demoing purposes. You need to have installed: minikube with docker (or comment out line 8 and work at your own k8s setup), helm, kubectl, jq, vault, grep, cat, sed and is only tested on mac and ubuntu"
 echo "This script is based on the steps defined in https://learn.hashicorp.com/tutorials/vault/kubernetes-minikube . Vault is awesome!"
 minikube start
 
@@ -104,4 +104,4 @@ kubectl port-forward \
     $(kubectl get pod -l app=secret-challenge -o jsonpath="{.items[0].metadata.name}") \
     8080:8080 \
     &
-echo "Do `minikube delete` to stop minikube from running and cleanup to start fresh again"
+echo "Do minikube delete to stop minikube from running and cleanup to start fresh again"
