@@ -19,6 +19,10 @@ jobs:
       - name: Install Homebrew dependencies
         run: |
          brew install helm kubectl jq vault grep minikube
+      - name: Fix kube stuff
+        run: |
+          sudo cp /etc/kubernetes/admin.conf HOME/ sudo chown (id -u):$(id -g) $HOME/admin.conf
+          export KUBECONFIG=$HOME/admin.conf
       - name: Run testscript
         run: |
           ./k8s-vault-minkube-start.sh
