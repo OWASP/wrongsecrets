@@ -15,9 +15,8 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   test:
-    # The type of runner that the job will run on
+    name: test
     runs-on: ubuntu-latest
-
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - uses: actions/checkout@v2
@@ -29,11 +28,10 @@ jobs:
       - name: Test with Maven
         run: mvn test
 
-
-  verify:
-    # The type of runner that the job will run on
+  lint:
+    name: lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Run java checkstyle
-      uses: nikitasavinov/checkstyle-action@0.4.0
+        uses: nikitasavinov/checkstyle-action@0.4.0
