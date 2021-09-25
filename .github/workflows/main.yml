@@ -15,7 +15,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   test:
-    name: test
+    name: test with java
     runs-on: ubuntu-latest
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -29,7 +29,7 @@ jobs:
         run: mvn test
 
   lint:
-    name: lint
+    name: lint javacode
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
