@@ -18,7 +18,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Install Homebrew dependencies
         run: |
-         brew install docker helm kubectl jq vault grep minikube
+         brew install docker helm kubectl jq vault grep virtualbox minikube
       - name: Run testscript
         run: |
           ./k8s-vault-minkube-start.sh
