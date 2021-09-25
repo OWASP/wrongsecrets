@@ -5,7 +5,7 @@
 
 echo "This is only a script for demoing purposes. You need to have installed: minikube with docker (or comment out line 8 and work at your own k8s setup), helm, kubectl, jq, vault, grep, cat, sed and is only tested on mac and ubuntu"
 echo "This script is based on the steps defined in https://learn.hashicorp.com/tutorials/vault/kubernetes-minikube . Vault is awesome!"
-minikube start
+minikube start --kubernetes-version=v1.20.10
 
 kubectl get configmaps | grep 'secrets-file' &> /dev/null
 if [ $? == 0 ]; then
