@@ -75,5 +75,5 @@ Run `./k8s-vault-minkube-start.sh`, the challenge will wait for you at http://lo
 
 ## Special thanks
 
-With thanks to [@bendehaan](https://github.com/bendehaan) & [@nbaars](https://github.com/nbaars) for accelerating the project.
+With thanks to [@madhuakula](https://github.com/madhuakula) for motivating me to setup the project, and thanks to [@bendehaan](https://github.com/bendehaan) & [@nbaars](https://github.com/nbaars) for accelerating the project.
  
