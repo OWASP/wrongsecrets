@@ -16,6 +16,8 @@ Make sure you have an active account at AWS for which you have configured the cr
 
 ## Installation
 
+The terraform code is loosely based on [This Fargate TF example](https://github.com/terraform-aws-modules/terraform-aws-eks/tree/master/examples/fargate).
+
 TODO ADD STUFF HERE
 
 
