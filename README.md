@@ -1,5 +1,5 @@
 # Wrong Secrets
-Examples with how to not use secrets, used for the talk "Our secrets management journey from Code to Vault"
+Examples with how to not use secrets, used for the talk "Our secrets management journey from Code to Vault" and "Securing Your Secrets in the Cloud".
 
 
 ## Basic docker exercises
