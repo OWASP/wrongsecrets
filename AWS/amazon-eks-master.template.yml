@@ -1,0 +1,643 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Deploys an EKS cluster in a new VPC (qs-1p7nknoht)
+Metadata:
+  LintSpellExclude:
+    - https://support.snyk.io/hc/en-us/articles/360003916158-Install-the-Snyk-controller-with-Helm
+    - Kubernetes
+    - ARNs
+    - Resource Names
+    - autoscaler
+    - IOPS
+    - EfsStorageClass
+    - Lambda
+    - maxIO
+    - Resource Name
+    - Enabled
+    - Disabled
+    - Prometheus
+    - Encrypt
+    - Fargate
+    - namespace
+    - Snyk
+    - Security
+  AWS::CloudFormation::Interface:
+    ParameterGroups:
+      - Label:
+          default: VPC network configuration
+        Parameters:
+          - NumberOfAZs
+          - AvailabilityZones
+          - VPCCIDR
+          - PrivateSubnet1CIDR
+          - PrivateSubnet2CIDR
+          - PrivateSubnet3CIDR
+          - PublicSubnet1CIDR
+          - PublicSubnet2CIDR
+          - PublicSubnet3CIDR
+          - RemoteAccessCIDR
+          - ProvisionBastionHost
+      - Label:
+          default: Amazon EC2 configuration
+        Parameters:
+          - KeyPairName
+      - Label:
+          default: Amazon EKS configuration
+        Parameters:
+          - EKSClusterName
+          - NodeInstanceType
+          - NumberOfNodes
+          - MaxNumberOfNodes
+          - NodeGroupName
+          - NodeVolumeSize
+          - ManagedNodeGroup
+          - ManagedNodeGroupAMIType
+          - MangedNodeGroupLabel
+          - AdditionalEKSAdminUserArn
+          - AdditionalEKSAdminRoleArn
+          - KubernetesVersion
+          - EKSPublicAccessEndpoint
+          - EKSPublicAccessCIDRs
+          - EKSPrivateAccessEndpoint
+          - EKSClusterLoggingTypes
+          - EKSEncryptSecrets
+          - EKSEncryptSecretsKmsKeyArn
+          - FargateNamespaces
+          - FargateLabels
+          - IamOidcProvider
+      - Label:
+          default: Snyk monitor [APN security partner]
+        Parameters:
+          - SnykIntegration
+          - SnykIntegrationId
+      - Label:
+          default: New Relic infrastructure [APN monitoring partner]
+        Parameters:
+          - NewRelicIntegration
+          - NewRelicLicenseKey
+      - Label:
+          default: Optional Kubernetes add-ins
+        Parameters:
+          - ALBIngressController
+          - ClusterAutoScaler
+          - EfsStorageClass
+          - EfsPerformanceMode
+          - EfsThroughputMode
+          - EfsProvisionedThroughputInMibps
+          - MonitoringStack
+      - Label:
+          default: AWS Quick Start configuration
+        Parameters:
+          - QSS3BucketName
+          - QSS3KeyPrefix
+          - QSS3BucketRegion
+          - LambdaZipsBucketName
+    ParameterLabels:
+      AvailabilityZones:
+        default: Availability Zones
+      KeyPairName:
+        default: SSH key name
+      PrivateSubnet1CIDR:
+        default: Private subnet 1 CIDR
+      PrivateSubnet2CIDR:
+        default: Private subnet 2 CIDR
+      PrivateSubnet3CIDR:
+        default: Private subnet 3 CIDR
+      PublicSubnet1CIDR:
+        default: Public subnet 1 CIDR
+      PublicSubnet2CIDR:
+        default: Public subnet 2 CIDR
+      PublicSubnet3CIDR:
+        default: Public subnet 3 CIDR
+      QSS3BucketName:
+        default: Quick Start S3 bucket name
+      QSS3KeyPrefix:
+        default: Quick Start S3 key prefix
+      QSS3BucketRegion:
+        default: Quick Start S3 bucket region
+      RemoteAccessCIDR:
+        default: Allowed external access CIDR
+      VPCCIDR:
+        default: VPC CIDR
+      NodeInstanceType:
+        default: Nodes instance type
+      NumberOfNodes:
+        default: Number of nodes
+      MaxNumberOfNodes:
+        default: Maximum number of nodes  
+      NodeGroupName:
+        default: Node group name
+      NodeVolumeSize:
+        default: Node volume size
+      ManagedNodeGroup:
+        default: Managed node group
+      ManagedNodeGroupAMIType:
+        default: Managed node group AMI type
+      MangedNodeGroupLabel:
+        default: Managed node group label
+      AdditionalEKSAdminUserArn:
+        default: Additional EKS admin ARN (IAM user)
+      AdditionalEKSAdminRoleArn:
+        default: Additional EKS admin ARN (IAM role)
+      KubernetesVersion:
+        default: Kubernetes version
+      LambdaZipsBucketName:
+        default: Lambda zips bucket name
+      ClusterAutoScaler:
+        default: Cluster autoscaler
+      EfsStorageClass:
+        default: EFS storage class
+      EfsPerformanceMode:
+        default: EFS performance mode
+      EfsThroughputMode:
+        default: EFS throughput mode
+      EfsProvisionedThroughputInMibps:
+        default: EFS provisioned throughput in Mibps
+      MonitoringStack:
+        default: Monitoring stack
+      NumberOfAZs:
+        default: Number of Availability Zones
+      ProvisionBastionHost:
+        default: Provision bastion host
+      EKSPrivateAccessEndpoint:
+        default: EKS private access endpoint
+      EKSPublicAccessEndpoint:
+        default: EKS public access endpoint
+      EKSPublicAccessCIDRs:
+        default: EKS public access CIDRs
+      EKSClusterLoggingTypes:
+        default: EKS cluster logging types
+      EKSEncryptSecrets:
+        default: Encrypt EKS secrets
+      EKSEncryptSecretsKmsKeyArn:
+        default: Encrypt EKS secrets KMS key ARN
+      ALBIngressController:
+        default: ALB ingress controller
+      FargateNamespaces:
+        default: Fargate namespaces
+      FargateLabels:
+        default: Fargate labels
+      IamOidcProvider:
+        default: IAM OIDC provider
+      EKSClusterName:
+        default: EKS cluster name
+      SnykIntegrationId:
+        default: Snyk integration ID
+      SnykIntegration:
+        default: Snyk integration
+      NewRelicIntegration:
+        default: New Relic integration
+      NewRelicLicenseKey:
+        default: New Relic license key
+Parameters:
+  AvailabilityZones:
+    Description: The list of Availability Zones to use for the subnets in the VPC. Three
+      Availability Zones are used for this deployment, and the logical order of your
+      selections is preserved.
+    Type: List<AWS::EC2::AvailabilityZone::Name>
+  KeyPairName:
+    Description: The name of an existing public/private key pair, which allows you
+      to securely connect to your instance after it launches
+    Type: AWS::EC2::KeyPair::KeyName
+  PrivateSubnet1CIDR:
+    AllowedPattern: ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/(1[6-9]|2[0-8]))$
+    ConstraintDescription: CIDR block parameter must be in the form x.x.x.x/16-28
+    Default: 10.0.0.0/19
+    Description: The CIDR block for private subnet 1 located in Availability Zone 1
+    Type: String
+  PrivateSubnet2CIDR:
+    AllowedPattern: ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/(1[6-9]|2[0-8]))$
+    ConstraintDescription: CIDR block parameter must be in the form x.x.x.x/16-28
+    Default: 10.0.32.0/19
+    Description: The CIDR block for private subnet 2 located in Availability Zone 2
+    Type: String
+  PrivateSubnet3CIDR:
+    AllowedPattern: ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/(1[6-9]|2[0-8]))$
+    ConstraintDescription: CIDR block parameter must be in the form x.x.x.x/16-28
+    Default: 10.0.64.0/19
+    Description: The CIDR block for private subnet 3 located in Availability Zone 3
+    Type: String
+  PublicSubnet1CIDR:
+    AllowedPattern: ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/(1[6-9]|2[0-8]))$
+    ConstraintDescription: CIDR block parameter must be in the form x.x.x.x/16-28
+    Default: 10.0.128.0/20
+    Description: CIDR block for the public (DMZ) subnet 1 located in Availability
+      Zone 1
+    Type: String
+  PublicSubnet2CIDR:
+    AllowedPattern: ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/(1[6-9]|2[0-8]))$
+    ConstraintDescription: CIDR block parameter must be in the form x.x.x.x/16-28
+    Default: 10.0.144.0/20
+    Description: The CIDR block for the public (DMZ) subnet 2 located in Availability
+      Zone 2
+    Type: String
+  PublicSubnet3CIDR:
+    AllowedPattern: ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/(1[6-9]|2[0-8]))$
+    ConstraintDescription: CIDR block parameter must be in the form x.x.x.x/16-28
+    Default: 10.0.160.0/20
+    Description: The CIDR block for the public (DMZ) subnet 3 located in Availability
+      Zone 3
+    Type: String
+  QSS3BucketName:
+    AllowedPattern: ^[0-9a-zA-Z]+([0-9a-zA-Z-]*[0-9a-zA-Z])*$
+    ConstraintDescription: Quick Start bucket name can include numbers, lowercase
+      letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen
+      (-).
+    Default: aws-quickstart
+    Description: S3 bucket name for the Quick Start assets. This string can include
+      numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start
+      or end with a hyphen (-).
+    Type: String
+  QSS3KeyPrefix:
+    AllowedPattern: ^[0-9a-zA-Z-/.]*$
+    ConstraintDescription: Quick Start key prefix can include numbers, lowercase letters,
+      uppercase letters, hyphens (-), dots(.) and forward slash (/).
+    Default: quickstart-amazon-eks/
+    Description: S3 key prefix for the Quick Start assets. Quick Start key prefix
+      can include numbers, lowercase letters, uppercase letters, hyphens (-), dots(.) and
+      forward slash (/).
+    Type: String
+  QSS3BucketRegion:
+    Default: 'us-east-1'
+    Description: The AWS Region where the Quick Start S3 bucket (QSS3BucketName) is
+      hosted. When using your own bucket, you must specify this value.
+    Type: String
+  RemoteAccessCIDR:
+    AllowedPattern: ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/([0-9]|[1-2][0-9]|3[0-2]))$
+    ConstraintDescription: CIDR block parameter must be in the form x.x.x.x/x
+    Description: The CIDR IP range that is permitted to access the instances. We recommend
+      that you set this value to a trusted IP range.
+    Type: String
+  EKSPublicAccessCIDRs:
+    AllowedPattern: ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/([0-9]|[1-2][0-9]|3[0-2]))$
+    ConstraintDescription: CIDR block parameter must be in the form x.x.x.x/x
+    Description: The public CIDR IP ranges that are permitted to access the Kubernetes API. These values are only used
+      if EKSPublicAccessEndpoint is enabled. Can't contain private IP ranges.
+    Type: List<String>
+    Default: 0.0.0.0/0
+  EKSPublicAccessEndpoint:
+    Type: String
+    AllowedValues: [Enabled, Disabled]
+    Default: Disabled
+    Description: Configure access to the Kubernetes API server endpoint from outside of your VPC.
+  EKSPrivateAccessEndpoint:
+    Type: String
+    AllowedValues: [Enabled, Disabled]
+    Default: Enabled
+    Description: Configure access to the Kubernetes API server endpoint from within your VPC. If this is disabled,
+      EKSPublicAccessEndpoint must be enabled.
+  EKSClusterLoggingTypes:
+    Type: List<String>
+    Default: "api,audit,authenticator,controllerManager,scheduler"
+    AllowedPattern: "^(api|audit|authenticator|controllerManager|scheduler|,)*$"
+    ConstraintDescription: Valid logging types are api, audit, authenticator, controllerManager, scheduler.
+    Description: EKS cluster control plane logs to be exported to CloudWatch Logs.
+  EKSEncryptSecrets:
+    Type: String
+    AllowedValues: [Enabled, Disabled]
+    Default: Enabled
+    Description: Envelope encryption of Kubernetes secrets using KMS.
+  EKSEncryptSecretsKmsKeyArn:
+    Type: String
+    Default: ""
+    Description: "[OPTIONAL] KMS key to use for envelope encryption of Kubernetes secrets. If this parameter is omitted
+      A key will be created for the cluster. The CMK must be symmetric, created in the same region as the cluster, and
+      if the CMK was created in a different account, the user must have access to the CMK."
+  VPCCIDR:
+    AllowedPattern: ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/(1[6-9]|2[0-8]))$
+    ConstraintDescription: CIDR block parameter must be in the form x.x.x.x/16-28
+    Default: 10.0.0.0/16
+    Description: The CIDR block for the VPC
+    Type: String
+  AdditionalEKSAdminUserArn:
+    Default: ""
+    Description: "[OPTIONAL] IAM user Amazon Resource Name (ARN) to be granted admin access to the EKS cluster"
+    Type: String
+  AdditionalEKSAdminRoleArn:
+    Default: ""
+    Description: "[OPTIONAL] IAM role Amazon Resource Name (ARN) to be granted admin access to the EKS cluster"
+    Type: String
+  NodeInstanceType:
+    Default: t3.medium
+    AllowedValues:
+      - t3.nano
+      - t3.micro
+      - t3.small
+      - t3.medium
+      - t3.large
+      - t3.xlarge
+      - t3.2xlarge
+      - t3a.nano
+      - t3a.micro
+      - t3a.small
+      - t3a.medium
+      - t3a.large
+      - t3a.xlarge
+      - t3a.2xlarge
+      - m5.large
+      - m5.xlarge
+      - m5.2xlarge
+      - m5.4xlarge
+      - m5.12xlarge
+      - m5.24xlarge
+      - m5a.large
+      - m5a.xlarge
+      - m5a.2xlarge
+      - m5a.4xlarge
+      - m5a.12xlarge
+      - m5a.24xlarge
+      - c5.large
+      - c5.xlarge
+      - c5.2xlarge
+      - c5.4xlarge
+      - c5.9xlarge
+      - c5.18xlarge
+      - c5a.large
+      - c5a.xlarge
+      - c5a.2xlarge
+      - c5a.4xlarge
+      - c5a.12xlarge
+      - c5a.24xlarge
+      - i3.large
+      - i3.xlarge
+      - i3.2xlarge
+      - i3.4xlarge
+      - i3.8xlarge
+      - i3.16xlarge
+      - x1.16xlarge
+      - x1.32xlarge
+      - p3.2xlarge
+      - p3.8xlarge
+      - p3.16xlarge
+      - r5.large
+      - r5.xlarge
+      - r5.2xlarge
+      - r5.4xlarge
+      - r5.12xlarge
+      - r5.24xlarge
+      - r5a.large
+      - r5a.xlarge
+      - r5a.2xlarge
+      - r5a.4xlarge
+      - r5a.12xlarge
+      - r5a.24xlarge
+      - r5d.large
+      - r5d.xlarge
+      - r5d.2xlarge
+      - r5d.4xlarge
+      - r5d.12xlarge
+      - r5d.24xlarge
+      - z1d.large
+      - z1d.xlarge
+      - z1d.2xlarge
+      - z1d.3xlarge
+      - z1d.6xlarge
+      - z1d.12xlarge
+    ConstraintDescription: Must be a valid EC2 instance type
+    Description: The type of EC2 instance for the node instances.
+    Type: String
+  NumberOfNodes:
+    Default: 3
+    Description: The number of Amazon EKS node instances. The default is one for each of the three Availability Zones.
+    Type: Number
+  MaxNumberOfNodes:
+    Default: 3
+    Description: The maximum number of Amazon EKS node instances. The default is three node.
+    Type: Number  
+  NodeGroupName:
+    Default: Default
+    Description: The name for EKS node group.
+    Type: String
+  NodeVolumeSize:
+    Default: 20
+    Description: "The size for the node's root EBS volumes."
+    Type: String
+  ManagedNodeGroup:
+    AllowedValues: [ "yes", "no" ]
+    Default: "no"
+    Description: Choose if you want to use a managed node group. If you select "yes", you must select Kubernetes version 1.14 or higher.
+    Type: String
+  ManagedNodeGroupAMIType:
+    Description: Select one of the two AMI types for your managed node group (only applies if you chose "yes" for ManagedNodeGroup). GPU instance types should use the AL2_x86_64_GPU AMI type, which uses the Amazon EKS-optimized Linux AMI with GPU support. Non-GPU instances should use the AL2_x86_64 AMI type, which uses the Amazon EKS-optimized Linux AMI.
+    AllowedValues: [ "AL2_x86_64", "AL2_x86_64_GPU", ""]
+    Default: "AL2_x86_64"
+    Type: String
+  MangedNodeGroupLabel:
+    Description: Add a custom name label to the managed node group nodes. If you dont do this then a default one will be added for you.
+    Type: String
+    Default: ''
+  KubernetesVersion:
+    Type: String
+    AllowedValues: [ "1.13", "1.14", "1.15", "1.16" ]
+    Default: "1.16"
+    Description: The Kubernetes control plane version.
+  LambdaZipsBucketName:
+    Description: '[OPTIONAL] The name of the S3 bucket where the Lambda zip files should be placed. If you leave this parameter blank, an S3 bucket will be created.'
+    Type: String
+    Default: ''
+  ClusterAutoScaler:
+    Type: String
+    AllowedValues: [ Enabled, Disabled ]
+    Default: Disabled
+    Description: Choose "Enabled" to enable Kubernetes cluster autoscaler.
+  EfsStorageClass:
+    Type: String
+    AllowedValues: [ Enabled, Disabled ]
+    Default: Disabled
+    Description: Choose Enabled to enable EFS storage class, which will create the required EFS volume.
+  EfsPerformanceMode:
+    Type: String
+    AllowedValues: [ generalPurpose, maxIO ]
+    Default: generalPurpose
+    Description: Choose maxIO mode to provide greater IOPS with an increased latency. Only has an effect when EfsStorageClass is enabled.
+  EfsThroughputMode:
+    Type: String
+    AllowedValues: [ bursting, provisioned ]
+    Default: bursting
+    Description: Choose provisioned for throughput that is not dependent on the amount of data stored in the file system. Only has an effect when EfsStorageClass is enabled.
+  EfsProvisionedThroughputInMibps:
+    Type: Number
+    MinValue: 0
+    MaxValue: 1024
+    Default: 0
+    Description: Set to 0 if EfsThroughputMode is set to bursting. Only has an effect when EfsStorageClass is enabled. If using provisioned throughput, value must be between 0-1024.
+  MonitoringStack:
+    Type: String
+    AllowedValues: [ "Prometheus + Grafana", "None" ]
+    Default: "None"
+    Description: Enable monitoring stack with "Prometheus+Grafana"
+  NumberOfAZs:
+    Type: String
+    AllowedValues: ["2", "3"]
+    Default: "3"
+    Description: Number of Availability Zones to use in the VPC. This must match your selections in the list of Availability Zones parameter.
+  ProvisionBastionHost:
+    Type: String
+    AllowedValues: [ "Enabled", "Disabled" ]
+    Default: "Enabled"
+    Description: "Skip creating a bastion host by setting this is set to Disabled."
+  ALBIngressController:
+    Type: String
+    AllowedValues: [ "Enabled", "Disabled" ]
+    Default: "Disabled"
+    Description: "Set this to Enabled to deploy the ALB ingress controller."
+  FargateNamespaces:
+    Type: String
+    Default: ""
+    Description: "[OPTIONAL] Comma separated list of namespaces that Fargate should be enabled for."
+  FargateLabels:
+    Type: String
+    Default: ""
+    Description: >-
+      [OPTIONAL] Comma separated list of key=value pod labels. Requires at least one Fargate namespace to be specified.
+      For a pod to be run on Fargate, all labels must match and it must be running in a namespace included in
+      FargateNamespaces.
+  IamOidcProvider:
+    Type: String
+    AllowedValues: [ "Enabled", "Disabled" ]
+    Default: "Disabled"
+    Description: Enables IAM roles for Kubernetes service accounts.
+  EKSClusterName:
+    Type: String
+    Default: ""
+    Description: "[OPTIONAL] Name for the EKS cluster, if left blank one will be auto-generated. Must be unique within the AWS Region."
+  SnykIntegrationId:
+    Type: String
+    AllowedPattern: '^[a-z0-9-]{36}$|^$'
+    Default: ""
+    Description: '[Optional] Snyk Kubernetes integration ID. If Snyk is enabled, this must be provided. For more information see https://support.snyk.io/hc/en-us/articles/360003916158-Install-the-Snyk-controller-with-Helm .'
+  SnykIntegration:
+    Type: String
+    AllowedValues: [Enabled, Disabled]
+    Default: Disabled
+    Description: "Snyk security monitor integration. For more information see https://github.com/aws-quickstart/quickstart-eks-snyk/ ."
+  NewRelicLicenseKey:
+    Type: String
+    Default: ""
+    NoEcho: true
+    Description: '[Optional] New Relic infrastructure license key. If New Relic is enabled, this must be provided. For more information see https://docs.newrelic.com/docs/accounts/install-new-relic/account-setup/license-key .'
+  NewRelicIntegration:
+    Type: String
+    AllowedValues: [Enabled, Disabled]
+    Default: Disabled
+    Description: "New Relic infrastructure monitoring integration. For more information see https://github.com/aws-quickstart/quickstart-eks-newrelic-infrastructure/ ."
+Rules:
+  LablesNeedNamespaces:
+    RuleCondition: !Not
+      - !Equals [ !Ref FargateLabels, "" ]
+    Assertions:
+      - AssertDescription: You must specify at least one Fargate namespace in order to enable fargate.
+        Assert: !Not
+          - !Equals [ !Ref FargateNamespaces, "" ]
+  EKSVersion_ManagedNodeGroup:
+    RuleCondition: !Equals [ !Ref 'ManagedNodeGroup', 'yes' ]
+    Assertions:
+      - AssertDescription: To use Managed Node Groups you must use EKS version 1.14 or higher
+        Assert: Contains
+          - [ '1.16', '1.15', '1.14', '1.17' ]
+          - !Ref 'KubernetesVersion'
+Conditions:
+  3AZDeployment: !Equals [!Ref NumberOfAZs, "3"]
+  2AZDeployment: !Or
+    - !Equals [!Ref NumberOfAZs, "2"]
+    - !Equals [!Ref NumberOfAZs, "3"]
+  UsingDefaultBucket: !Equals [!Ref QSS3BucketName, 'aws-quickstart']
+Resources:
+  VPCStack:
+    Type: AWS::CloudFormation::Stack
+    Metadata:
+      cfn-lint: { config: { ignore_checks: [ W9901 ] } }
+    Properties:
+      TemplateURL: !Sub
+        - 'https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}submodules/quickstart-aws-vpc/templates/aws-vpc.template'
+        - S3Region: !If [UsingDefaultBucket, !Ref 'AWS::Region', !Ref QSS3BucketRegion]
+          S3Bucket: !If [UsingDefaultBucket, !Sub '${QSS3BucketName}-${AWS::Region}', !Ref QSS3BucketName]
+      Parameters:
+        AvailabilityZones: !Join [ ',', !Ref 'AvailabilityZones' ]
+        KeyPairName: !Ref 'KeyPairName'
+        NumberOfAZs: !Ref 'NumberOfAZs'
+        PrivateSubnet1ACIDR: !Ref 'PrivateSubnet1CIDR'
+        PrivateSubnet2ACIDR: !Ref 'PrivateSubnet2CIDR'
+        PrivateSubnet3ACIDR: !Ref 'PrivateSubnet3CIDR'
+        PrivateSubnetATag2: "kubernetes.io/role/internal-elb="
+        PublicSubnet1CIDR: !Ref 'PublicSubnet1CIDR'
+        PublicSubnet2CIDR: !Ref 'PublicSubnet2CIDR'
+        PublicSubnet3CIDR: !Ref 'PublicSubnet3CIDR'
+        PublicSubnetTag2: "kubernetes.io/role/elb="
+        VPCCIDR: !Ref 'VPCCIDR'
+  EKSStack:
+    Type: AWS::CloudFormation::Stack
+    Metadata:
+      cfn-lint: { config: { ignore_checks: [ W9901 ] } }
+    Properties:
+      TemplateURL: !Sub
+        - 'https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}templates/amazon-eks.template.yaml'
+        - S3Region: !If [UsingDefaultBucket, !Ref 'AWS::Region', !Ref QSS3BucketRegion]
+          S3Bucket: !If [UsingDefaultBucket, !Sub '${QSS3BucketName}-${AWS::Region}', !Ref QSS3BucketName]
+      Parameters:
+        PublicSubnet1ID: !GetAtt VPCStack.Outputs.PublicSubnet1ID
+        PublicSubnet2ID: !If
+          - 2AZDeployment
+          - !GetAtt VPCStack.Outputs.PublicSubnet2ID
+          - !Ref AWS::NoValue
+        PublicSubnet3ID: !If
+          - 3AZDeployment
+          - !GetAtt VPCStack.Outputs.PublicSubnet3ID
+          - !Ref AWS::NoValue
+        KeyPairName: !Ref KeyPairName
+        QSS3BucketName: !Ref QSS3BucketName
+        QSS3KeyPrefix: !Ref QSS3KeyPrefix
+        QSS3BucketRegion: !Ref QSS3BucketRegion
+        PrivateSubnet1ID: !GetAtt VPCStack.Outputs.PrivateSubnet1AID
+        PrivateSubnet2ID: !If
+          - 2AZDeployment
+          - !GetAtt VPCStack.Outputs.PrivateSubnet2AID
+          - !Ref AWS::NoValue
+        PrivateSubnet3ID: !If
+          - 3AZDeployment
+          - !GetAtt VPCStack.Outputs.PrivateSubnet3AID
+          - !Ref AWS::NoValue
+        NumberOfNodes: !Ref NumberOfNodes
+        MaxNumberOfNodes: !Ref MaxNumberOfNodes
+        NodeGroupName: !Ref NodeGroupName
+        NodeVolumeSize: !Ref NodeVolumeSize
+        ManagedNodeGroup: !Ref ManagedNodeGroup
+        ManagedNodeGroupAMIType: !Ref ManagedNodeGroupAMIType
+        MangedNodeGroupLabel: !Ref MangedNodeGroupLabel
+        LambdaZipsBucketName: !Ref LambdaZipsBucketName
+        NodeInstanceType: !Ref NodeInstanceType
+        RemoteAccessCIDR: !Ref RemoteAccessCIDR
+        AdditionalEKSAdminUserArn: !Ref AdditionalEKSAdminUserArn
+        AdditionalEKSAdminRoleArn: !Ref AdditionalEKSAdminRoleArn
+        VPCID: !GetAtt VPCStack.Outputs.VPCID
+        KubernetesVersion: !Ref KubernetesVersion
+        ProvisionClusterAutoScaler: !Ref ClusterAutoScaler
+        EfsStorageClass: !Ref EfsStorageClass
+        EfsPerformanceMode: !Ref EfsPerformanceMode
+        EfsThroughputMode: !Ref EfsThroughputMode
+        EfsProvisionedThroughputInMibps: !Ref EfsProvisionedThroughputInMibps
+        ProvisionMonitoringStack: !Ref MonitoringStack
+        ProvisionBastionHost: !Ref ProvisionBastionHost
+        EKSPublicAccessCIDRs: !Join [ ',', !Ref 'EKSPublicAccessCIDRs' ]
+        EKSPublicAccessEndpoint: !Ref EKSPublicAccessEndpoint
+        EKSPrivateAccessEndpoint: !Ref EKSPrivateAccessEndpoint
+        EKSClusterLoggingTypes: !Join [ ',', !Ref 'EKSClusterLoggingTypes' ]
+        EKSEncryptSecrets: !Ref EKSEncryptSecrets
+        EKSEncryptSecretsKmsKeyArn: !Ref EKSEncryptSecretsKmsKeyArn
+        ProvisionALBIngressController: !Ref ALBIngressController
+        FargateLabels: !Ref FargateLabels
+        FargateNamespaces: !Ref FargateNamespaces
+        IamOidcProvider: !Ref IamOidcProvider
+        EKSClusterName: !Ref EKSClusterName
+        SnykIntegrationId: !Ref SnykIntegrationId
+        SnykIntegration: !Ref SnykIntegration
+        NewRelicLicenseKey: !Ref NewRelicLicenseKey
+        NewRelicIntegration: !Ref NewRelicIntegration
+Outputs:
+  EKSClusterName:
+    Value: !GetAtt EKSStack.Outputs.EKSClusterName
+  BastionIP:
+    Value: !GetAtt EKSStack.Outputs.BastionIP
+  BastionSecurityGroup:
+    Value: !GetAtt EKSStack.Outputs.BastionSecurityGroup
+  NodeGroupSecurityGroup:
+    Value: !GetAtt EKSStack.Outputs.NodeGroupSecurityGroup
