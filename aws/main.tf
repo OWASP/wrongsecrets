@@ -55,7 +55,7 @@ resource "aws_route_table_association" "association" {
 module "eks" {
   source = "terraform-aws-modules/eks/aws"
 
-  cluster_name    = random_pet.cluster.id
+  cluster_name    = "wrongsecrets-exercise-cluster"
   cluster_version = "1.21"
 
   vpc_id          = aws_default_vpc.default.id

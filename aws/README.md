@@ -26,6 +26,9 @@ Note-II: The cluster you will create with this code has its access bound to your
 3. Do `terraform init` (if required, use tfenv to select TF 0.13.1 or higher )
 4. Do `terraform plan`
 5. Do `terraform apply`
+6. When creation is done, do `aws eks update-kubeconfig --region eu-west-1 --name wrongsecrets-exercise-cluster --kubeconfig ~/.kube/wrongsecrets` 
+7. Do `export KUBECONFIG=~/.kube/wrongsecrets`
+
 
 Your Fargate EKS cluster should be visilbe in [EU-West-1](https://eu-west-1.console.aws.amazon.com/eks/home?region=eu-west-1#/clusters).
 
