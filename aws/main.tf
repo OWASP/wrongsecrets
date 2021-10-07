@@ -74,11 +74,7 @@ module "eks" {
   cluster_endpoint_private_access_cidrs          = [local.subnet_cidr]
 
   cluster_endpoint_public_access_cidrs = ["${data.http.ip.body}/32"]
-
-  cluster_endpoint_private_access                = true
-  cluster_create_endpoint_private_access_sg_rule = true
-  cluster_endpoint_private_access_cidrs          = [local.subnet_cidr]
-
+  
   fargate_profiles = {
     default = {
       name = "default"
