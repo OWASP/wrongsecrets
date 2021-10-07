@@ -1,5 +1,6 @@
 locals {
   cluster_version = "1.21"
+  subnet_cidr     = "172.31.100.0/24"
 }
 
 provider "aws" {
@@ -62,7 +63,11 @@ module "eks" {
   subnets         = [aws_default_subnet.default_az1.id, aws_default_subnet.default_az2.id]
   fargate_subnets = [aws_subnet.private.id]
 
-  cluster_endpoint_public_access       = true
+  
+  cluster_endpoint_private_access                = true
+  cluster_create_endpoint_private_access_sg_rule = true
+  cluster_endpoint_private_access_cidrs          = [local.subnet_cidr]
+
   cluster_endpoint_public_access_cidrs = ["${data.http.ip.body}/32"]
 
   fargate_profiles = {
