@@ -1,0 +1,19 @@
+name: Terraform FMT
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    paths: 
+    - 'aws/**'
+
+jobs:
+  terraform-fmt:
+    name: terraform-fmt
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 0.13.1
+      - run: terraform init
+      - run: terraform fmt
