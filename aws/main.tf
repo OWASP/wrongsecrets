@@ -31,6 +31,7 @@ module "eks" {
 
   vpc_id          = aws_default_vpc.default.id
   fargate_subnets = [aws_default_subnet.default_az1.id]
+  subnets         = [aws_default_subnet.default_az1.id]
 
   fargate_profiles = {
     default = {
