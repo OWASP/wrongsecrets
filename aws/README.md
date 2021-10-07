@@ -11,6 +11,7 @@ Have the following tos installed:
 - EKS CTL - [Installation](https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html)
 - Tfenv (Optional) - [Installation](https://github.com/tfutils/tfenv)
 - Terraform CLI - [Installation](https://learn.hashicorp.com/tutorials/terraform/install-cli)
+- Wget - [Installation](https://www.jcchouinard.com/wget/)
 
 Make sure you have an active account at AWS for which you have configured the credentials on the system where you will execute the steps below. In this example we stored the credentials under an aws profile as `awsuser`.
 
@@ -25,6 +26,8 @@ Please note that applying the Terraform means you are creating cloud infrastruct
 4. Do `terraform plan`
 5. Do `terraform apply`
 
+Your Fargate EKS cluster should be visilbe in [EU-West-1](https://eu-west-1.console.aws.amazon.com/eks/home?region=eu-west-1#/clusters).
+
 Are you done playing? Please do `terraform destroy` again.
 
 ### Test it
@@ -35,3 +38,4 @@ Are you done playing? Please do `terraform destroy` again.
 2. Can you easily obtain the instance profile of the Node?
 3. Can you get the secrets in the SSM Parameter Store and Secrets Manager easily? Which paths do you see?
 4. Which of the 2 (SSM Parameter Store and Secrets Manager) works cross-account?
+5. If you have applied the secrets to the cluster, you should see at the configuration details of the cluster that Secrets encryption is "Disabled", what does that mean?
