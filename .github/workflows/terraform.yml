@@ -5,6 +5,11 @@ on:
   push:
     paths: 
     - 'aws/**'
+  workflow_dispatch:
+  pull_request:
+    branches: [ master ]
+    paths:
+     - 'aws/**'
 
 jobs:
   terraform-fmt:

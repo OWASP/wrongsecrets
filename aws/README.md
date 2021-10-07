@@ -18,7 +18,8 @@ Make sure you have an active account at AWS for which you have configured the cr
 ## Installation (NOTE; WIP!!!)
 
 The terraform code is loosely based on [This Fargate TF example](https://github.com/terraform-aws-modules/terraform-aws-eks/tree/master/examples/fargate).
-Please note that applying the Terraform means you are creating cloud infrastructure which actually costs you money. The authors are not responsible for any cost coming from following the instructions below.
+Note: Applying the Terraform means you are creating cloud infrastructure which actually costs you money. The authors are not responsible for any cost coming from following the instructions below.
+Note-II: The cluster you will create with this code has its access bound to your public IP-address. 
 
 1. export your AWS credentials (`export AWS_PROFILE=awsuser`)
 2. check whether you have the right profile by doing `aws sts get-caller-identity` and make sure you have enough rights with the caller its identity and that the actual accountnumber displayed is the account designated for you to apply this TF to.
