@@ -23,6 +23,10 @@ resource "aws_default_subnet" "default_az1" {
   availability_zone = "${var.region}a"
 }
 
+resource "aws_default_subnet" "default_az2" {
+  availability_zone = "${var.region}b"
+}
+
 module "eks" {
   source = "terraform-aws-modules/eks/aws"
 
@@ -30,8 +34,8 @@ module "eks" {
   cluster_version = "1.21"
 
   vpc_id          = aws_default_vpc.default.id
-  fargate_subnets = [aws_default_subnet.default_az1.id]
-  subnets         = [aws_default_subnet.default_az1.id]
+  fargate_subnets = [aws_default_subnet.default_az1.id, aws_default_subnet.default_az2.id]
+  subnets         = [aws_default_subnet.default_az1.id, aws_default_subnet.default_az2.id]
 
   fargate_profiles = {
     default = {
