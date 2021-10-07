@@ -15,11 +15,6 @@ data "http" "ip" {
   url = "http://ipecho.net/plain"
 }
 
-resource "random_pet" "cluster" {
-  length    = 4
-  separator = "-"
-}
-
 resource "aws_default_vpc" "default" {
   tags = {
     Name = "Default VPC"
@@ -38,14 +33,24 @@ resource "aws_subnet" "private" {
   availability_zone               = "${var.region}a"
   map_public_ip_on_launch         = false
   assign_ipv6_address_on_creation = false
-  cidr_block                      = "172.31.100.0/24"
+  cidr_block                      = local.subnet_cidr
   vpc_id                          = aws_default_vpc.default.id
+}
+
+resource "aws_eip" "eip" {}
+
+resource "aws_nat_gateway" "gateway" {
+  allocation_id = aws_eip.eip.id
+  subnet_id     = aws_default_subnet.default_az1.id
 }
 
 resource "aws_route_table" "table" {
   vpc_id = aws_default_vpc.default.id
 
-  route = []
+  route {
+    cidr_block     = "0.0.0.0/0"
+    nat_gateway_id = aws_nat_gateway.gateway.id
+  }
 }
 
 resource "aws_route_table_association" "association" {
@@ -70,6 +75,10 @@ module "eks" {
 
   cluster_endpoint_public_access_cidrs = ["${data.http.ip.body}/32"]
 
+  cluster_endpoint_private_access                = true
+  cluster_create_endpoint_private_access_sg_rule = true
+  cluster_endpoint_private_access_cidrs          = [local.subnet_cidr]
+
   fargate_profiles = {
     default = {
       name = "default"
@@ -91,6 +100,14 @@ module "eks" {
       tags = {
         Owner = "default"
       }
+    }
+    secondary = {
+      name = "secondary"
+      selectors = [
+        {
+          namespace = "default"
+        }
+      ]
     }
   }
 
