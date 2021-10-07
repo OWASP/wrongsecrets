@@ -10,7 +10,7 @@ Have the following tos installed:
 - AWS CLI - [Installation](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)
 - EKS CTL - [Installation](https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html)
 - Tfenv (Optional) - [Installation](https://github.com/tfutils/tfenv)
-- Terraform CLI - [Installation(https://learn.hashicorp.com/tutorials/terraform/install-cli)
+- Terraform CLI - [Installation](https://learn.hashicorp.com/tutorials/terraform/install-cli)
 
 Make sure you have an active account at AWS for which you have configured the credentials on the system where you will execute the steps below. In this example we stored the credentials under an aws profile as `awsuser`.
 
