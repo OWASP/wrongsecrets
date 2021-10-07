@@ -8,6 +8,12 @@ provider "aws" {
 
 provider "random" {}
 
+provider "http" {}
+
+data "http" "ip" {
+  url = "http://ipecho.net/plain"
+}
+
 resource "random_pet" "cluster" {
   length    = 4
   separator = "-"
@@ -55,6 +61,9 @@ module "eks" {
   vpc_id          = aws_default_vpc.default.id
   subnets         = [aws_default_subnet.default_az1.id, aws_default_subnet.default_az2.id]
   fargate_subnets = [aws_subnet.private.id]
+
+  cluster_endpoint_public_access       = true
+  cluster_endpoint_public_access_cidrs = ["${data.http.ip.body}/32"]
 
   fargate_profiles = {
     default = {
