@@ -20,9 +20,10 @@ The terraform code is loosely based on [This Fargate TF example](https://github.
 Please note that applying the Terraform means you are creating cloud infrastructure which actually costs you money. The authors are not responsible for any cost coming from following the instructions below.
 
 1. export your AWS credentials (`export AWS_PROFILE=awsuser`)
-2. Do `terraform init` (if required, use tfenv to select TF 0.13.1 or higher )
-3. Do `terraform plan`
-4. Do `terraform apply`
+2. check whether you have the right profile by doing `aws sts get-caller-identity` and make sure you have enough rights with the caller its identity and that the actual accountnumber displayed is the account designated for you to apply this TF to.
+3. Do `terraform init` (if required, use tfenv to select TF 0.13.1 or higher )
+4. Do `terraform plan`
+5. Do `terraform apply`
 
 Are you done playing? Please do `terraform destroy` again.
 
