@@ -14,12 +14,17 @@ Have the following tos installed:
 
 Make sure you have an active account at AWS for which you have configured the credentials on the system where you will execute the steps below. In this example we stored the credentials under an aws profile as `awsuser`.
 
-## Installation
+## Installation (NOTE; WIP!!!)
 
 The terraform code is loosely based on [This Fargate TF example](https://github.com/terraform-aws-modules/terraform-aws-eks/tree/master/examples/fargate).
+Please note that applying the Terraform means you are creating cloud infrastructure which actually costs you money. The authors are not responsible for any cost coming from following the instructions below.
 
-TODO ADD STUFF HERE
+1. export your AWS credentials (`export AWS_PROFILE=awsuser`)
+2. Do `terraform init` (if required, use tfenv to select TF 0.13.1 or higher )
+3. Do `terraform plan`
+4. Do `terraform apply`
 
+Are you done playing? Please do `terraform destroy` again.
 
 ### Test it
 

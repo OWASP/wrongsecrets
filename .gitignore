@@ -42,3 +42,5 @@ root_token
 # Terraform
 .terraform
 .terraform.lock.hcl
+aws/terraform.tfstate
+aws/terraform.tfstate.backup
