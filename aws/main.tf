@@ -27,6 +27,25 @@ resource "aws_default_subnet" "default_az2" {
   availability_zone = "${var.region}b"
 }
 
+resource "aws_subnet" "private" {
+  availability_zone               = "${var.region}a"
+  map_public_ip_on_launch         = false
+  assign_ipv6_address_on_creation = false
+  cidr_block                      = "172.31.100.0/24"
+  vpc_id                          = aws_default_vpc.default.id
+}
+
+resource "aws_route_table" "table" {
+  vpc_id = aws_default_vpc.default.id
+
+  route = []
+}
+
+resource "aws_route_table_association" "association" {
+  subnet_id      = aws_subnet.private.id
+  route_table_id = aws_route_table.table.id
+}
+
 module "eks" {
   source = "terraform-aws-modules/eks/aws"
 
@@ -34,8 +53,8 @@ module "eks" {
   cluster_version = "1.21"
 
   vpc_id          = aws_default_vpc.default.id
-  fargate_subnets = [aws_default_subnet.default_az1.id, aws_default_subnet.default_az2.id]
   subnets         = [aws_default_subnet.default_az1.id, aws_default_subnet.default_az2.id]
+  fargate_subnets = [aws_subnet.private.id]
 
   fargate_profiles = {
     default = {
@@ -67,6 +86,10 @@ module "eks" {
     Environment = "test"
     Application = "wrongsecrets"
   }
+
+  depends_on = [
+    aws_route_table_association.association,
+  ]
 }
 
 
