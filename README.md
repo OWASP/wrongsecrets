@@ -1,6 +1,7 @@
 # Wrong Secrets
-Examples with how to not use secrets, used for the talk "Our secrets management journey from Code to Vault" and "Securing Your Secrets in the Cloud".
 
+[![Java checkstyle and testing](https://github.com/commjoen/wrongsecrets/actions/workflows/main.yml/badge.svg)](https://github.com/commjoen/wrongsecrets/actions/workflows/main.yml) [![Terraform FMT](https://github.com/commjoen/wrongsecrets/actions/workflows/terraform.yml/badge.svg)](https://github.com/commjoen/wrongsecrets/actions/workflows/terraform.yml) [![Test minikube script](https://github.com/commjoen/wrongsecrets/actions/workflows/minikube-test.yml/badge.svg)](https://github.com/commjoen/wrongsecrets/actions/workflows/minikube-test.yml)
+Examples with how to not use secrets, used for the talk "Our secrets management journey from Code to Vault" and "Securing Your Secrets in the Cloud".
 
 ## Basic docker exercises
 
