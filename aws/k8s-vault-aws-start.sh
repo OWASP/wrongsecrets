@@ -39,7 +39,9 @@ else
 fi
 
 isvaultrunning=$(kubectl get pods --field-selector=status.phase=Running)
-while [[ $isvaultrunning != *"vault-0"* ]]; do echo "waiting for Vault" && sleep 2 && isvaultrunning=$(kubectl get pods --field-selector=status.phase=Running); done
+while [[ $isvaultrunning != *"vault-0"* ]]; do echo "waiting for Vault0" && sleep 2 && isvaultrunning=$(kubectl get pods --field-selector=status.phase=Running); done
+while [[ $isvaultrunning != *"vault-1"* ]]; do echo "waiting for Vaul1" && sleep 2 && isvaultrunning=$(kubectl get pods --field-selector=status.phase=Running); done
+while [[ $isvaultrunning != *"vault-2"* ]]; do echo "waiting for Vaul2" && sleep 2 && isvaultrunning=$(kubectl get pods --field-selector=status.phase=Running); done
 
 echo "Setting up port forwarding"
 kubectl port-forward vault-0 8200:8200 &
