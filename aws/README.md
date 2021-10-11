@@ -17,11 +17,11 @@ Make sure you have an active account at AWS for which you have configured the cr
 
 ## Installation (NOTE; WIP!!!)
 
-The terraform code is loosely based on [this Managed Node Group TF example](https://github.com/terraform-aws-modules/terraform-aws-eks/tree/master/examples/managed_node_groups).
+The terraform code is loosely based on [this EKS managed Node Group TF example](https://github.com/terraform-aws-modules/terraform-aws-eks/tree/master/examples/managed_node_groups).
 
 Note: Applying the Terraform means you are creating cloud infrastructure which actually costs you money. The authors are not responsible for any cost coming from following the instructions below.
 
-Note-II: The cluster you will create with this code has its access bound to your public IP-address if you apply it locally.
+Note-II: The cluster you create, has its access bound to the public IP of the creator. In other words: the cluster you create with this code has its access bound to your public IP-address if you apply it locally.
 
 1. export your AWS credentials (`export AWS_PROFILE=awsuser`)
 2. check whether you have the right profile by doing `aws sts get-caller-identity` and make sure you have enough rights with the caller its identity and that the actual accountnumber displayed is the account designated for you to apply this TF to.
@@ -38,6 +38,8 @@ Your EKS cluster should be visible in [EU-West-1](https://eu-west-1.console.aws.
 Are you done playing? Please run `terraform destroy` to clean up.
 
 ### Test it
+
+In `k8s-vault-minikube-start.sh` comment the line that says `minikube start ..` near the top of the file. This allows the script to be compatible with AWS infrastructure. Run it and follow the steps outlined in the main README as normal.
 
 ### A few things to consider
 
