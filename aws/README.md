@@ -17,9 +17,11 @@ Make sure you have an active account at AWS for which you have configured the cr
 
 ## Installation (NOTE; WIP!!!)
 
-The terraform code is loosely based on [This Fargate TF example](https://github.com/terraform-aws-modules/terraform-aws-eks/tree/master/examples/fargate).
+The terraform code is loosely based on [this Managed Node Group TF example](https://github.com/terraform-aws-modules/terraform-aws-eks/tree/master/examples/managed_node_groups).
+
 Note: Applying the Terraform means you are creating cloud infrastructure which actually costs you money. The authors are not responsible for any cost coming from following the instructions below.
-Note-II: The cluster you will create with this code has its access bound to your public IP-address.
+
+Note-II: The cluster you will create with this code has its access bound to your public IP-address if you apply it locally.
 
 1. export your AWS credentials (`export AWS_PROFILE=awsuser`)
 2. check whether you have the right profile by doing `aws sts get-caller-identity` and make sure you have enough rights with the caller its identity and that the actual accountnumber displayed is the account designated for you to apply this TF to.
@@ -29,11 +31,11 @@ Note-II: The cluster you will create with this code has its access bound to your
 6. When creation is done, do `aws eks update-kubeconfig --region eu-west-1 --name wrongsecrets-exercise-cluster --kubeconfig ~/.kube/wrongsecrets`
 7. Do `export KUBECONFIG=~/.kube/wrongsecrets`
 
-TODO: continue here with adding SM/SSM and actual deployment instructions, as for now: follow ../README.md its instructions on how to deploy the wrongsecrets application to AWS Fargate.
+TODO: continue here with adding SM/SSM and actual deployment instructions, as for now: follow ../README.md its instructions on how to deploy the wrongsecrets application to AWS EKS.
 
-Your Fargate EKS cluster should be visilbe in [EU-West-1](https://eu-west-1.console.aws.amazon.com/eks/home?region=eu-west-1#/clusters).
+Your EKS cluster should be visible in [EU-West-1](https://eu-west-1.console.aws.amazon.com/eks/home?region=eu-west-1#/clusters) by default. Want a different region? You can modify `variables.tf` or input it directly using the `region` variable in plan/apply.
 
-Are you done playing? Please do `terraform destroy` again.
+Are you done playing? Please run `terraform destroy` to clean up.
 
 ### Test it
 
