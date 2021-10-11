@@ -8,7 +8,8 @@ Examples with how to not use secrets, used for the talk "Our secrets management 
 
 For the basic docker exercises you currently require:
 
-- Docker
+- Docker [Install from here](https://docs.docker.com/get-docker/)
+- Some Browser that can render HTML
 
 You can install it by doing:
 
@@ -27,9 +28,16 @@ Now you can try to find the secrets by means of solving the challenge offered at
 - [localhost:8080/challenge/7](localhost:8080/challenge/7)
 - [localhost:8080/challenge/8](localhost:8080/challenge/8)
 
+Note that these are still very basic, as we still need to add some explanations. [This is being worked on](https://github.com/commjoen/wrongsecrets/issues/14).
+
 ## Basic K8s exercise
 
 ### Minikube based
+
+Make sure you have the following installed:
+
+- Docker [Install from here](https://docs.docker.com/get-docker/)
+- Minikube [Install from here](https://minikube.sigs.k8s.io/docs/start/)
 
 The K8S setup currently is based on using Minikube for local fun:
 
@@ -44,6 +52,10 @@ The K8S setup currently is based on using Minikube for local fun:
 ```
 
 now you can use the provided ip-address and port to further play with the K8s variant (instead of localhost).
+
+### EKS Based
+
+Follow the steps in [the README in the AWS subfolder](aws/README.md).
 
 ### k8s based
 
@@ -66,16 +78,23 @@ Want to run vanilla on your own k8s? Use the commands below:
 Make sure you have the following installed:
 
 - minikube with docker (or comment out line 8 and work at your own k8s setup),
-- helm,
-- kubectl,
-- jq,
-- vault,
-- grep,
-- cat,
-- sed
+- docker,
+- helm [Install from here](https://helm.sh/docs/intro/install/),
+- kubectl [Install from here](https://kubernetes.io/docs/tasks/tools/),
+- jq [Install from here](https://stedolan.github.io/jq/download/),
+- vault [Install from here](https://www.vaultproject.io/downloads),
+- grep, Cat, and Sed
 
-Run `./k8s-vault-minkube-start.sh`, the challenge will wait for you at http://localhost:8080
+Run `./k8s-vault-minkube-start.sh`, when the script is done, then the challenge will wait for you at <http://localhost:8080>
 
-## Special thanks
+## Cloud based exercise
 
-With thanks to [@madhuakula](https://github.com/madhuakula) for motivating me to setup the project, and thanks to [@bendehaan](https://github.com/bendehaan) & [@nbaars](https://github.com/nbaars) for accelerating the project.
+Have a look at the [aws folder](aws/README.md), Note that we are [not done yet](https://github.com/commjoen/wrongsecrets/issues/15).
+
+## Special thanks & Contributors
+
+With thanks to [@madhuakula](https://github.com/madhuakula) for motivating me to setup the project, and thanks to [@bendehaan](https://github.com/bendehaan) & [@nbaars](https://github.com/nbaars) for contributing to the project.
+
+## Help Wanted
+
+Ofcourse we can always use your help to getmore flavors of "wrongly" configured secrets in to spread awareness! We would love to get some help with a Google Cloud or Azure integration for instance. Do you miss something else than a cloud-provider as an example? File an issue or create a PR!

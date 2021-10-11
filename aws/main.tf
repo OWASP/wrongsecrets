@@ -1,6 +1,13 @@
 locals {
-  cluster_version = "1.21"
-  subnet_cidr     = "172.31.100.0/24"
+  vpc_cidr = "172.16.0.0/16"
+
+  private_subnet_1_cidr = "172.16.1.0/24"
+  private_subnet_2_cidr = "172.16.2.0/24"
+  private_subnet_3_cidr = "172.16.3.0/24"
+
+  public_subnet_1_cidr = "172.16.4.0/24"
+  public_subnet_2_cidr = "172.16.5.0/24"
+  public_subnet_3_cidr = "172.16.6.0/24"
 }
 
 provider "aws" {
@@ -15,96 +22,80 @@ data "http" "ip" {
   url = "http://ipecho.net/plain"
 }
 
-resource "aws_default_vpc" "default" {
-  tags = {
-    Name = "Default VPC"
+data "aws_availability_zones" "available" {}
+
+
+module "vpc" {
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "~> 3.7.0"
+
+  name                 = "${var.cluster_name}-vpc"
+  cidr                 = local.vpc_cidr
+  azs                  = data.aws_availability_zones.available.names
+  private_subnets      = [local.private_subnet_1_cidr, local.private_subnet_2_cidr, local.private_subnet_3_cidr]
+  public_subnets       = [local.public_subnet_1_cidr, local.public_subnet_2_cidr, local.public_subnet_3_cidr]
+  enable_nat_gateway   = true
+  single_nat_gateway   = true
+  enable_dns_hostnames = true
+
+  public_subnet_tags = {
+    "kubernetes.io/cluster/${var.cluster_name}" = "shared"
+    "kubernetes.io/role/elb"                    = "1"
+  }
+
+  private_subnet_tags = {
+    "kubernetes.io/cluster/${var.cluster_name}" = "shared"
+    "kubernetes.io/role/internal-elb"           = "1"
   }
 }
 
-resource "aws_default_subnet" "default_az1" {
-  availability_zone = "${var.region}a"
-}
-
-resource "aws_default_subnet" "default_az2" {
-  availability_zone = "${var.region}b"
-}
-
-resource "aws_subnet" "private" {
-  availability_zone               = "${var.region}a"
-  map_public_ip_on_launch         = false
-  assign_ipv6_address_on_creation = false
-  cidr_block                      = local.subnet_cidr
-  vpc_id                          = aws_default_vpc.default.id
-}
-
-resource "aws_eip" "eip" {}
-
-resource "aws_nat_gateway" "gateway" {
-  allocation_id = aws_eip.eip.id
-  subnet_id     = aws_default_subnet.default_az1.id
-}
-
-resource "aws_route_table" "table" {
-  vpc_id = aws_default_vpc.default.id
-
-  route {
-    cidr_block     = "0.0.0.0/0"
-    nat_gateway_id = aws_nat_gateway.gateway.id
-  }
-}
-
-resource "aws_route_table_association" "association" {
-  subnet_id      = aws_subnet.private.id
-  route_table_id = aws_route_table.table.id
-}
 
 module "eks" {
   source = "terraform-aws-modules/eks/aws"
 
-  cluster_name    = "wrongsecrets-exercise-cluster"
-  cluster_version = "1.21"
+  cluster_name    = var.cluster_name
+  cluster_version = var.cluster_version
 
-  vpc_id          = aws_default_vpc.default.id
-  subnets         = [aws_default_subnet.default_az1.id, aws_default_subnet.default_az2.id]
-  fargate_subnets = [aws_subnet.private.id]
+  vpc_id  = module.vpc.vpc_id
+  subnets = module.vpc.private_subnets
 
-  
+
   cluster_endpoint_private_access                = true
   cluster_create_endpoint_private_access_sg_rule = true
-  cluster_endpoint_private_access_cidrs          = [local.subnet_cidr]
+  cluster_endpoint_private_access_cidrs          = [local.private_subnet_1_cidr, local.private_subnet_2_cidr, local.private_subnet_3_cidr]
 
   cluster_endpoint_public_access_cidrs = ["${data.http.ip.body}/32"]
-  
-  fargate_profiles = {
-    default = {
-      name = "default"
-      selectors = [
-        {
-          namespace = "kube-system"
-          labels = {
-            k8s-app = "kube-dns"
-          }
-        },
-        {
-          namespace = "default"
-          labels = {
-            WorkerType = "fargate"
-          }
-        }
-      ]
 
-      tags = {
-        Owner = "default"
+  node_groups_defaults = {
+    ami_type  = "AL2_x86_64"
+    disk_size = 50
+  }
+
+  node_groups = {
+    managed = {
+      create_launch_template = true
+
+      desired_capacity = 1
+      max_capacity     = 10
+      min_capacity     = 1
+
+      disk_size       = 50
+      disk_type       = "gp3"
+      disk_throughput = 150
+      disk_iops       = 3000
+
+      instance_types = ["t3a.large"]
+      capacity_type  = "SPOT"
+
+      additional_tags = {
+        Environment = "test"
+        Application = "wrongsecrets"
+      }
+      update_config = {
+        max_unavailable_percentage = 25 # or set `max_unavailable`
       }
     }
-    secondary = {
-      name = "secondary"
-      selectors = [
-        {
-          namespace = "default"
-        }
-      ]
-    }
+
   }
 
   manage_aws_auth = true
@@ -113,39 +104,7 @@ module "eks" {
     Environment = "test"
     Application = "wrongsecrets"
   }
-
-  depends_on = [
-    aws_route_table_association.association,
-  ]
 }
-
-######
-# PAtching as per https://github.com/terraform-aws-modules/terraform-aws-eks/issues/1286#issuecomment-811157662
-######
-# Provider configuration
-provider "shell" {
-  interpreter = ["/bin/bash", "-c"]
-  sensitive_environment = {
-    KUBECTL_CONFIG = base64encode(module.eks.kubeconfig)
-  }
-}
-
-# Configures coredns to run on Fargate.
-# Per default coredns runs with EC2. 
-# The Terraform eks module does not offer any inputs to set the compute type of coredns to Fargate.
-# See: https://github.com/terraform-aws-modules/terraform-aws-eks/issues/1286
-# Therefore, we are using the kubectl to patch coredns using the Kubernetes API.
-resource "shell_script" "coredns_fargate_patch" {
-  lifecycle_commands {
-    create = file("${path.module}/scripts/patch_coredns_for_fargate.sh")
-    delete = file("${path.module}/scripts/patch_coredns_for_ec2.sh")
-  }
-
-  # Wait for the EKS module to get provisioned completely including the kube-system Fargate profile.
-  depends_on = [module.eks]
-}
-
-
 
 #############
 # Kubernetes

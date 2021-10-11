@@ -5,7 +5,7 @@ Why Fargate? We on't want the hassle of managing the EC2 instances ourselves. If
 
 ## Pre-requisites
 
-Have the following tos installed:
+Have the following tools installed:
 
 - AWS CLI - [Installation](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)
 - EKS CTL - [Installation](https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html)
@@ -17,25 +17,38 @@ Make sure you have an active account at AWS for which you have configured the cr
 
 ## Installation (NOTE; WIP!!!)
 
-The terraform code is loosely based on [This Fargate TF example](https://github.com/terraform-aws-modules/terraform-aws-eks/tree/master/examples/fargate).
+The terraform code is loosely based on [this EKS managed Node Group TF example](https://github.com/terraform-aws-modules/terraform-aws-eks/tree/master/examples/managed_node_groups).
+
 Note: Applying the Terraform means you are creating cloud infrastructure which actually costs you money. The authors are not responsible for any cost coming from following the instructions below.
-Note-II: The cluster you will create with this code has its access bound to your public IP-address.
+
+Note-II: The cluster you create, has its access bound to the public IP of the creator. In other words: the cluster you create with this code has its access bound to your public IP-address if you apply it locally.
 
 1. export your AWS credentials (`export AWS_PROFILE=awsuser`)
 2. check whether you have the right profile by doing `aws sts get-caller-identity` and make sure you have enough rights with the caller its identity and that the actual accountnumber displayed is the account designated for you to apply this TF to.
 3. Do `terraform init` (if required, use tfenv to select TF 0.13.1 or higher )
 4. Do `terraform plan`
-5. Do `terraform apply`
+5. Do `terraform apply`. Note: the apply will take 10 to 20 minutes depending on the speed of the AWS backplane.
 6. When creation is done, do `aws eks update-kubeconfig --region eu-west-1 --name wrongsecrets-exercise-cluster --kubeconfig ~/.kube/wrongsecrets`
 7. Do `export KUBECONFIG=~/.kube/wrongsecrets`
 
-TODO: continue here with adding SM/SSM and actual deployment instructions, as for now: follow ../README.md its instructions on how to deploy the wrongsecrets application to AWS Fargate.
+TODO: continue here with adding SM/SSM and actual deployment instructions, as for now: follow ../README.md its instructions on how to deploy the wrongsecrets application to AWS EKS.
 
-Your Fargate EKS cluster should be visilbe in [EU-West-1](https://eu-west-1.console.aws.amazon.com/eks/home?region=eu-west-1#/clusters).
+Your EKS cluster should be visible in [EU-West-1](https://eu-west-1.console.aws.amazon.com/eks/home?region=eu-west-1#/clusters) by default. Want a different region? You can modify `variables.tf` or input it directly using the `region` variable in plan/apply.
 
-Are you done playing? Please do `terraform destroy` again.
+Are you done playing? Please run `terraform destroy` to clean up.
 
 ### Test it
+
+Run `k8s-vault-aws-start.sh` and connect to http://localhost:8080 when it's ready to accept connections (you'll the the line `Forwarding from 127.0.0.1:8080 -> 8080` in your console).
+
+### Clean it up
+
+When you're done:
+
+1. Kill the port forward.
+2. Run `terraform destroy` to clean up the infrastructure.
+3. Run `unset KUBECONFIG` to unset the KUBECONFIG env var.
+4. Run `rm ~/.kube/wrongsecrets` to remove the kubeconfig file.
 
 ### A few things to consider
 

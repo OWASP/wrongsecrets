@@ -40,9 +40,10 @@ commentedroottoken
 root_token
 
 # Terraform
+kubeconfig_wrongsecrets-exercise-cluster
 .terraform
 .terraform.lock.hcl
-terraform.tfstate
-aws/terraform.tfstate
+terraform.tfstate*
+aws/terraform.tfstate.*
 aws/terraform.tfstate.backup
 aws/.terraform.tfstate.lock.info
