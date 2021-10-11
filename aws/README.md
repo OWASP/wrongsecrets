@@ -5,7 +5,7 @@ Why Fargate? We on't want the hassle of managing the EC2 instances ourselves. If
 
 ## Pre-requisites
 
-Have the following tos installed:
+Have the following tools installed:
 
 - AWS CLI - [Installation](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)
 - EKS CTL - [Installation](https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html)
