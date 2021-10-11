@@ -53,6 +53,10 @@ The K8S setup currently is based on using Minikube for local fun:
 
 now you can use the provided ip-address and port to further play with the K8s variant (instead of localhost).
 
+### EKS Based
+
+Follow the steps in [the README in the AWS subfolder](aws/README.md).
+
 ### k8s based
 
 Want to run vanilla on your own k8s? Use the commands below:
