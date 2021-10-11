@@ -1,0 +1,5 @@
+=== Challenge 4: Centralized hardcoded password
+
+So you spotted the secret in docker. What if we put it somewhere else in the code?
+
+You can spot the secret easily by using Trufflehog or Git-secrets. Just dive into the code!

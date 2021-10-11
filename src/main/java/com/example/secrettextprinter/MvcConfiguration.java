@@ -4,9 +4,12 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ITemplateResolver;
+
+import java.util.Set;
 
 @Configuration
 public class MvcConfiguration implements WebMvcConfigurer {
@@ -26,11 +29,21 @@ public class MvcConfiguration implements WebMvcConfigurer {
     }
 
     @Bean
-    public AsciiDoctorTemplateResolver asciiDoctorTemplateResolver(Language language) {
-        AsciiDoctorTemplateResolver resolver = new AsciiDoctorTemplateResolver(language);
+    public AsciiDoctorTemplateResolver asciiDoctorTemplateResolver() {
+        AsciiDoctorTemplateResolver resolver = new AsciiDoctorTemplateResolver();
         resolver.setCacheable(false);
         resolver.setOrder(1);
         resolver.setCharacterEncoding(UTF8);
         return resolver;
+    }
+
+    @Bean
+    public SpringTemplateEngine thymeleafTemplateEngine(ITemplateResolver springThymeleafTemplateResolver,
+                                                        AsciiDoctorTemplateResolver asciiDoctorTemplateResolver) {
+        SpringTemplateEngine engine = new SpringTemplateEngine();
+        engine.setEnableSpringELCompiler(true);
+        engine.setTemplateResolvers(
+                Set.of(asciiDoctorTemplateResolver, springThymeleafTemplateResolver));
+        return engine;
     }
 }

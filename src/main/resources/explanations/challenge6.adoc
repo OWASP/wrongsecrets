@@ -1,0 +1,5 @@
+=== Challenge 6: K8s Secrets
+
+Hardcoding something in docker was not smart. But what about a K8s secret in the default namespace with no RBAC?
+
+Spin up Minikube or a K8s cluster as the README tells and find the secret. You might have spotted it as well if the secret was committed to Git for instance.

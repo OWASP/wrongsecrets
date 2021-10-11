@@ -30,28 +30,19 @@ public class AsciiDoctorTemplateResolver extends FileTemplateResolver {
 
     private static final Asciidoctor asciidoctor = create();
     private static final String PREFIX = "doc:";
-    private final Language language;
 
-    public AsciiDoctorTemplateResolver(Language language) {
-        this.language = language;
+    public AsciiDoctorTemplateResolver(){
         setResolvablePatterns(Set.of(PREFIX + "*"));
     }
 
     @Override
     protected ITemplateResource computeTemplateResource(IEngineConfiguration configuration, String ownerTemplate, String template, String resourceName, String characterEncoding, Map<String, Object> templateResolutionAttributes) {
         var templateName = resourceName.substring(PREFIX.length());
-        try (InputStream is = readInputStreamOrFallbackToEnglish(templateName, language)) {
+        try (InputStream is = this.getClass().getResourceAsStream(computeResourceName(templateName))) {
             if (is == null) {
                 log.warn("Resource name: {} not found, did you add the adoc file?", templateName);
                 return new StringTemplateResource("");
             } else {
-                JavaExtensionRegistry extensionRegistry = asciidoctor.javaExtensionRegistry();
-                extensionRegistry.inlineMacro("webWolfLink", WebWolfMacro.class);
-                extensionRegistry.inlineMacro("webWolfRootLink", WebWolfRootMacro.class);
-                extensionRegistry.inlineMacro("webGoatVersion", WebGoatVersionMacro.class);
-                extensionRegistry.inlineMacro("webGoatTempDir", WebGoatTmpDirMacro.class);
-                extensionRegistry.inlineMacro("operatingSystem", OperatingSystemMacro.class);
-                extensionRegistry.inlineMacro("username", UsernameMacro.class);
 
                 StringWriter writer = new StringWriter();
                 asciidoctor.convert(new InputStreamReader(is), writer, createAttributes());
@@ -67,16 +58,8 @@ public class AsciiDoctorTemplateResolver extends FileTemplateResolver {
      * The resource name is for example HttpBasics_content1.adoc. This is always located in the following directory:
      * <code>plugin/HttpBasics/lessonPlans/en/HttpBasics_content1.adoc</code>
      */
-    private String computeResourceName(String resourceName, String language) {
-        return String.format("lessonPlans/%s/%s", language, resourceName);
-    }
-
-    private InputStream readInputStreamOrFallbackToEnglish(String resourceName, Language language) {
-        InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(computeResourceName(resourceName, language.getLocale().getLanguage()));
-        if (is == null) {
-            is = Thread.currentThread().getContextClassLoader().getResourceAsStream(computeResourceName(resourceName, "en"));
-        }
-        return is;
+    private String computeResourceName(String resourceName) {
+        return String.format("/explanations/%s", resourceName);
     }
 
     private Map<String, Object> createAttributes() {

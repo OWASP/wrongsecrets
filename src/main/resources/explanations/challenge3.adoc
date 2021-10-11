@@ -1,0 +1,5 @@
+=== Challenge 3: Docker based password
+
+Did you know that you can use the ENV as well in docker containers to set the password? What a great idea to share it with everyone!.
+
+You can easily spot the secret easily by looking at how the layers got constructed, or detect it with a tool like Dockle.
