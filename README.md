@@ -98,3 +98,7 @@ With thanks to [@madhuakula](https://github.com/madhuakula) for motivating me to
 ## Help Wanted
 
 Ofcourse we can always use your help to getmore flavors of "wrongly" configured secrets in to spread awareness! We would love to get some help with a Google Cloud or Azure integration for instance. Do you miss something else than a cloud-provider as an example? File an issue or create a PR!
+
+### Note on development
+
+If you want to build containers to try out new challenges, use `docker build --build-arg "argBasedPassword=this is on my commandline" --build-arg "spring_profile=without-vault"` to test without vault integration.
