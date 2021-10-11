@@ -1,0 +1,5 @@
+=== Challenge 5: K8s Configmap based secret
+
+Hardcoding something in docker was not smart. But what about a config-map in the default namespace with no RBAC?
+
+Spin up Minikube or a K8s cluster as the README tells and find the secret. You might have spotted it as well if the configmap was committed to Git for instance.
