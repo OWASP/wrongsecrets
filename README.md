@@ -28,8 +28,7 @@ Now you can try to find the secrets by means of solving the challenge offered at
 - [localhost:8080/challenge/7](localhost:8080/challenge/7)
 - [localhost:8080/challenge/8](localhost:8080/challenge/8)
 
-Note that these are still very basic, as we still need to add some explanations. this is being worked on.
-
+Note that these are still very basic, as we still need to add some explanations. [This is being worked on](https://github.com/commjoen/wrongsecrets/issues/14).
 
 ## Basic K8s exercise
 
@@ -82,12 +81,16 @@ Make sure you have the following installed:
 - vault [Install from here](https://www.vaultproject.io/downloads),
 - grep, Cat, and Sed
 
-Run `./k8s-vault-minkube-start.sh`, when the script is done, then the challenge will wait for you at http://localhost:8080
+Run `./k8s-vault-minkube-start.sh`, when the script is done, then the challenge will wait for you at <http://localhost:8080>
 
 ## Cloud based exercise
 
-Have a look at the [aws folder](aws/README.md). 
+Have a look at the [aws folder](aws/README.md), Note that we are [not done yet](https://github.com/commjoen/wrongsecrets/issues/15).
 
 ## Special thanks & Contributors
 
 With thanks to [@madhuakula](https://github.com/madhuakula) for motivating me to setup the project, and thanks to [@bendehaan](https://github.com/bendehaan) & [@nbaars](https://github.com/nbaars) for contributing to the project.
+
+## Help Wanted
+
+Ofcourse we can always use your help to getmore flavors of "wrongly" configured secrets in to spread awareness! We would love to get some help with a Google Cloud or Azure integration for instance. Do you miss something else than a cloud-provider as an example? File an issue or create a PR!
