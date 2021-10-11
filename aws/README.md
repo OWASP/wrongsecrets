@@ -27,7 +27,7 @@ Note-II: The cluster you create, has its access bound to the public IP of the cr
 2. check whether you have the right profile by doing `aws sts get-caller-identity` and make sure you have enough rights with the caller its identity and that the actual accountnumber displayed is the account designated for you to apply this TF to.
 3. Do `terraform init` (if required, use tfenv to select TF 0.13.1 or higher )
 4. Do `terraform plan`
-5. Do `terraform apply`
+5. Do `terraform apply`. Note: the apply will take 10 to 20 minutes depending on the speed of the AWS backplane.
 6. When creation is done, do `aws eks update-kubeconfig --region eu-west-1 --name wrongsecrets-exercise-cluster --kubeconfig ~/.kube/wrongsecrets`
 7. Do `export KUBECONFIG=~/.kube/wrongsecrets`
 
@@ -39,7 +39,16 @@ Are you done playing? Please run `terraform destroy` to clean up.
 
 ### Test it
 
-In `k8s-vault-minikube-start.sh` comment the line that says `minikube start ..` near the top of the file. This allows the script to be compatible with AWS infrastructure. Run it and follow the steps outlined in the main README as normal.
+Run `k8s-vault-aws-start.sh` and connect to http://localhost:8080 when it's ready to accept connections (you'll the the line `Forwarding from 127.0.0.1:8080 -> 8080` in your console).
+
+### Clean it up
+
+When you're done:
+
+1. Kill the port forward.
+2. Run `terraform destroy` to clean up the infrastructure.
+3. Run `unset KUBECONFIG` to unset the KUBECONFIG env var.
+4. Run `rm ~/.kube/wrongsecrets` to remove the kubeconfig file.
 
 ### A few things to consider
 
