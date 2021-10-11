@@ -14,7 +14,7 @@ For the basic docker exercises you currently require:
 You can install it by doing:
 
 ```bash
-docker run -p 8080:8080 jeroenwillemsen/addo-example:36
+docker run -p 8080:8080 jeroenwillemsen/addo-example:37
 ```
 
 Now you can try to find the secrets by means of solving the challenge offered at:
@@ -28,7 +28,7 @@ Now you can try to find the secrets by means of solving the challenge offered at
 - [localhost:8080/challenge/7](localhost:8080/challenge/7)
 - [localhost:8080/challenge/8](localhost:8080/challenge/8)
 
-Note that these are still very basic, as we still need to add some explanations. [This is being worked on](https://github.com/commjoen/wrongsecrets/issues/14).
+Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look better ;-).
 
 ## Basic K8s exercise
 
