@@ -19,14 +19,14 @@ docker run -p 8080:8080 jeroenwillemsen/addo-example:39
 
 Now you can try to find the secrets by means of solving the challenge offered at:
 
-- [localhost:8080/challenge/1](localhost:8080/challenge/1)
-- [localhost:8080/challenge/2](localhost:8080/challenge/2)
-- [localhost:8080/challenge/3](localhost:8080/challenge/3)
-- [localhost:8080/challenge/4](localhost:8080/challenge/4)
-- [localhost:8080/challenge/5](localhost:8080/challenge/5)
-- [localhost:8080/challenge/6](localhost:8080/challenge/6)
-- [localhost:8080/challenge/7](localhost:8080/challenge/7)
-- [localhost:8080/challenge/8](localhost:8080/challenge/8)
+- [localhost:8080/challenge/1](http://localhost:8080/challenge/1)
+- [localhost:8080/challenge/2](http://localhost:8080/challenge/2)
+- [localhost:8080/challenge/3](http://localhost:8080/challenge/3)
+- [localhost:8080/challenge/4](http://localhost:8080/challenge/4)
+- [localhost:8080/challenge/5](http://localhost:8080/challenge/5)
+- [localhost:8080/challenge/6](http://localhost:8080/challenge/6)
+- [localhost:8080/challenge/7](http://localhost:8080/challenge/7)
+- [localhost:8080/challenge/8](http://localhost:8080/challenge/8)
 
 Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look better ;-).
 
