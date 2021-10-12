@@ -40,8 +40,9 @@ else
 fi
 
 isvaultrunning=$(kubectl get pods --field-selector=status.phase=Running)
-while [[ $isvaultrunning != *"vault-0"* ]]; do echo "waiting for Vault" && sleep 2 && isvaultrunning=$(kubectl get pods --field-selector=status.phase=Running); done
-
+while [[ $isvaultrunning != *"vault-0"* ]]; do echo "waiting for Vault1" && sleep 2 && isvaultrunning=$(kubectl get pods --field-selector=status.phase=Running); done
+while [[ $isvaultrunning != *"vault-1"* ]]; do echo "waiting for Vault2" && sleep 2 && isvaultrunning=$(kubectl get pods --field-selector=status.phase=Running); done
+while [[ $isvaultrunning != *"vault-2"* ]]; do echo "waiting for Vault3" && sleep 2 && isvaultrunning=$(kubectl get pods --field-selector=status.phase=Running); done
 echo "Setting up port forwarding"
 kubectl port-forward vault-0 8200:8200 &
 echo "Unsealing Vault"
@@ -97,6 +98,7 @@ kubectl exec vault-0 -- vault write auth/kubernetes/role/secret-challenge \
  && vault kv put secret/secret-challenge vaultpassword.password="$(openssl rand -base64 16)" \
  && vault kv put secret/application vaultpassword.password="$(openssl rand -base64 16)" \
 
+echo "Deploy secret challenge app"
 kubectl apply -f k8s/secret-challenge-vault-deployment.yml
 while [[ $(kubectl get pods -l app=secret-challenge -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do echo "waiting for secret-challenge" && sleep 2; done
 #kubectl expose deployment secret-challenge --type=LoadBalancer --port=8080
@@ -105,3 +107,6 @@ kubectl port-forward \
     8080:8080 \
     &
 echo "Do minikube delete to stop minikube from running and cleanup to start fresh again"
+echo "wait 10 seconds so we can check if vault-k8s-container works"
+sleep 10
+curl http://localhost:8080/spoil-7

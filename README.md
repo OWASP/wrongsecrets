@@ -14,7 +14,7 @@ For the basic docker exercises you currently require:
 You can install it by doing:
 
 ```bash
-docker run -p 8080:8080 jeroenwillemsen/addo-example:36
+docker run -p 8080:8080 jeroenwillemsen/addo-example:39
 ```
 
 Now you can try to find the secrets by means of solving the challenge offered at:
@@ -28,7 +28,7 @@ Now you can try to find the secrets by means of solving the challenge offered at
 - [localhost:8080/challenge/7](localhost:8080/challenge/7)
 - [localhost:8080/challenge/8](localhost:8080/challenge/8)
 
-Note that these are still very basic, as we still need to add some explanations. [This is being worked on](https://github.com/commjoen/wrongsecrets/issues/14).
+Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look better ;-).
 
 ## Basic K8s exercise
 
@@ -98,3 +98,33 @@ With thanks to [@madhuakula](https://github.com/madhuakula) for motivating me to
 ## Help Wanted
 
 Ofcourse we can always use your help to getmore flavors of "wrongly" configured secrets in to spread awareness! We would love to get some help with a Google Cloud or Azure integration for instance. Do you miss something else than a cloud-provider as an example? File an issue or create a PR!
+
+### Note on development
+
+If you want to build containers to try out new challenges, use `docker build --build-arg "argBasedPassword=this is on my commandline" --build-arg "spring_profile=without-vault"` to test without vault integration.
+
+If you want to test against vault without K8s: start vault with
+
+```shell
+ export VAULT_ADDR='http://127.0.0.1:8200'
+ export VAULT_API_ADDR='http://127.0.0.1:8200'
+ vault server -dev
+ ```
+
+and in your next terminal:
+```shell
+export VAULT_ADDR='http://127.0.0.1:8200'
+export VAULT_TOKEN='<TOKENHERE>'
+vault token create -id="00000000-0000-0000-0000-000000000000" -policy="root"
+vault kv put secret/secret-challenge vaultpassword.password="$(openssl rand -base64 16)"
+```
+
+Now use the `without-vault` profile to do you development.
+
+Want to push a container? This is how you do it if you have the credentials:
+for local exercise/k8s containers:
+`docker build --build-arg "argBasedPassword=<YOUKNOWWHATTHATISRIGHT?>" --build-arg "spring_profile=without-vault" -t jeroenwillemsen/addo-example:<TAG> .`
+for local vault containers:
+`docker build --build-arg "argBasedPassword=<YOUKNOWWHATTHATISRIGHT?>" --build-arg "spring_profile=local-vault" -t jeroenwillemsen/addo-example:<TAG> .`
+for vault k8s containers:
+`docker build --build-arg "argBasedPassword=<YOUKNOWWHATTHATISRIGHT?>" --build-arg "spring_profile=kubernetes-vault" -t jeroenwillemsen/addo-example:<TAG> .`

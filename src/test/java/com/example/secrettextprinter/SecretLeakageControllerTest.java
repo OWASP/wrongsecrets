@@ -8,12 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.vault.core.VaultTemplate;
 import org.springframework.web.context.WebApplicationContext;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -27,12 +29,15 @@ class SecretLeakageControllerTest {
     @Autowired
     private WebApplicationContext webApplicationContext;
     private MockMvc mockMvc;
+    @MockBean
+    VaultTemplate vaultTemplate;
     @Value("${password}")
     private String hardcodedPassword;
     @Value("${ARG_BASED_PASSWORD}")
     private String argBasedPassword;
     @Value("${DOCKER_ENV_PASSWORD}")
     String hardcodedEnvPassword;
+
 
     @BeforeEach
     public void setup() {
@@ -85,6 +90,7 @@ class SecretLeakageControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().string(CoreMatchers.containsString("You&#39;re answer is correct!")));
     }
+
     private void testSpoil(String endpoint, String soluton) throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.get(endpoint))
                 .andDo(print())
