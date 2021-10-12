@@ -120,3 +120,11 @@ vault kv put secret/secret-challenge vaultpassword.password="$(openssl rand -bas
 ```
 
 Now use the `without-vault` profile to do you development.
+
+Want to push a container? This is how you do it if you have the credentials:
+for local exercise/k8s containers:
+`docker build --build-arg "argBasedPassword=<YOUKNOWWHATTHATISRIGHT?>" --build-arg "spring_profile=without-vault" -t jeroenwillemsen/addo-example:<TAG> .`
+for local vault containers:
+`docker build --build-arg "argBasedPassword=<YOUKNOWWHATTHATISRIGHT?>" --build-arg "spring_profile=local-vault" -t jeroenwillemsen/addo-example:<TAG> .`
+for vault k8s containers:
+`docker build --build-arg "argBasedPassword=<YOUKNOWWHATTHATISRIGHT?>" --build-arg "spring_profile=kubernetes-vault" -t jeroenwillemsen/addo-example:<TAG> .`
