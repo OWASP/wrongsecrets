@@ -107,3 +107,6 @@ kubectl port-forward \
     8080:8080 \
     &
 echo "Do minikube delete to stop minikube from running and cleanup to start fresh again"
+echo "wait 10 seconds so we can check if vault-k8s-container works"
+sleep 10
+curl http://localhost:8080/spoil-7
