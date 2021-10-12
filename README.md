@@ -16,7 +16,7 @@ For the basic docker exercises you currently require:
 You can install it by doing:
 
 ```bash
-docker run -p 8080:8080 jeroenwillemsen/addo-example:39
+docker run -p 8080:8080 jeroenwillemsen/addo-example:0.0.1-no-vault
 ```
 
 Now you can try to find the secrets by means of solving the challenge offered at:
@@ -124,4 +124,4 @@ Now use the `local-vault` profile to do you development.
 
 If you want to dev without a Vault instance, use the `without-vault` profile to do your development.
 
-Want to push a container? See `.github/scripts/docker-create-and-push.sh` for a script that generates and pushes all containers.
+Want to push a container? See `.github/scripts/docker-create-and-push.sh` for a script that generates and pushes all containers. Do not forget to rebuild the app before composing the container
