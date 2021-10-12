@@ -99,11 +99,9 @@ With thanks to [@madhuakula](https://github.com/madhuakula) for motivating me to
 
 Ofcourse we can always use your help to getmore flavors of "wrongly" configured secrets in to spread awareness! We would love to get some help with a Google Cloud or Azure integration for instance. Do you miss something else than a cloud-provider as an example? File an issue or create a PR!
 
-### Note on development
+### Notes on development
 
-If you want to build containers to try out new challenges, use `docker build --build-arg "argBasedPassword=this is on my commandline" --build-arg "spring_profile=without-vault"` to test without vault integration.
-
-If you want to test against vault without K8s: start vault with
+If you want to test against vault without K8s: start vault locally with
 
 ```shell
  export VAULT_ADDR='http://127.0.0.1:8200'
@@ -111,7 +109,7 @@ If you want to test against vault without K8s: start vault with
  vault server -dev
  ```
 
-and in your next terminal:
+and in your next terminal, do (with the token from the previous commands):
 
 ```shell
 export VAULT_ADDR='http://127.0.0.1:8200'
@@ -120,7 +118,9 @@ vault token create -id="00000000-0000-0000-0000-000000000000" -policy="root"
 vault kv put secret/secret-challenge vaultpassword.password="$(openssl rand -base64 16)"
 ```
 
-Now use the `without-vault` profile to do you development.
+Now use the `local-vault` profile to do you development.
+
+If you want to dev without a Vault instance, use the `without-vault` profile to do your development.
 
 Want to push a container? This is how you do it if you have the credentials:
 for local exercise/k8s containers:
