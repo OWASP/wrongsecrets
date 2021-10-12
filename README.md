@@ -102,3 +102,21 @@ Ofcourse we can always use your help to getmore flavors of "wrongly" configured 
 ### Note on development
 
 If you want to build containers to try out new challenges, use `docker build --build-arg "argBasedPassword=this is on my commandline" --build-arg "spring_profile=without-vault"` to test without vault integration.
+
+If you want to test against vault without K8s: start vault with
+
+```shell
+ export VAULT_ADDR='http://127.0.0.1:8200'
+ export VAULT_API_ADDR='http://127.0.0.1:8200'
+ vault server -dev
+ ```
+
+and in your next terminal:
+```shell
+export VAULT_ADDR='http://127.0.0.1:8200'
+export VAULT_TOKEN='<TOKENHERE>'
+vault token create -id="00000000-0000-0000-0000-000000000000" -policy="root"
+vault kv put secret/secret-challenge vaultpassword.password="$(openssl rand -base64 16)"
+```
+
+Now use the `application-local-vault.properties` to do you development.
