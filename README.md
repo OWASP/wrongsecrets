@@ -119,4 +119,4 @@ vault token create -id="00000000-0000-0000-0000-000000000000" -policy="root"
 vault kv put secret/secret-challenge vaultpassword.password="$(openssl rand -base64 16)"
 ```
 
-Now use the `application-local-vault.properties` to do you development.
+Now use the `without-vault` profile to do you development.
