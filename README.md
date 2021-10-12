@@ -124,21 +124,4 @@ Now use the `local-vault` profile to do you development.
 
 If you want to dev without a Vault instance, use the `without-vault` profile to do your development.
 
-Want to push a container? This is how you do it if you have the credentials:
-for local exercise/k8s containers:
-
-```shell
-docker build --build-arg "argBasedPassword=<YOUKNOWWHATTHATISRIGHT?>" --build-arg "spring_profile=without-vault" -t jeroenwillemsen/addo-example:<TAG> .
-```
-
-for local vault containers:
-
-```shell
-docker build --build-arg "argBasedPassword=<YOUKNOWWHATTHATISRIGHT?>" --build-arg "spring_profile=local-vault" -t jeroenwillemsen/addo-example:<TAG> .
-```
-
-for vault k8s containers:
-
-```shell
-docker build --build-arg "argBasedPassword=<YOUKNOWWHATTHATISRIGHT?>" --build-arg "spring_profile=kubernetes-vault" -t jeroenwillemsen/addo-example:<TAG> .
-```
+Want to push a container? See `.github/scripts/docker-create-and-push.sh` for a script that generates and pushes all containers.
