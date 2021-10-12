@@ -112,6 +112,7 @@ If you want to test against vault without K8s: start vault with
  ```
 
 and in your next terminal:
+
 ```shell
 export VAULT_ADDR='http://127.0.0.1:8200'
 export VAULT_TOKEN='<TOKENHERE>'
@@ -123,8 +124,19 @@ Now use the `without-vault` profile to do you development.
 
 Want to push a container? This is how you do it if you have the credentials:
 for local exercise/k8s containers:
-`docker build --build-arg "argBasedPassword=<YOUKNOWWHATTHATISRIGHT?>" --build-arg "spring_profile=without-vault" -t jeroenwillemsen/addo-example:<TAG> .`
+
+```shell
+docker build --build-arg "argBasedPassword=<YOUKNOWWHATTHATISRIGHT?>" --build-arg "spring_profile=without-vault" -t jeroenwillemsen/addo-example:<TAG> .
+```
+
 for local vault containers:
-`docker build --build-arg "argBasedPassword=<YOUKNOWWHATTHATISRIGHT?>" --build-arg "spring_profile=local-vault" -t jeroenwillemsen/addo-example:<TAG> .`
+
+```shell
+docker build --build-arg "argBasedPassword=<YOUKNOWWHATTHATISRIGHT?>" --build-arg "spring_profile=local-vault" -t jeroenwillemsen/addo-example:<TAG> .
+```
+
 for vault k8s containers:
-`docker build --build-arg "argBasedPassword=<YOUKNOWWHATTHATISRIGHT?>" --build-arg "spring_profile=kubernetes-vault" -t jeroenwillemsen/addo-example:<TAG> .`
+
+```shell
+docker build --build-arg "argBasedPassword=<YOUKNOWWHATTHATISRIGHT?>" --build-arg "spring_profile=kubernetes-vault" -t jeroenwillemsen/addo-example:<TAG> .
+```
