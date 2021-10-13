@@ -30,7 +30,7 @@ Now you can try to find the secrets by means of solving the challenge offered at
 - [localhost:8080/challenge/7](http://localhost:8080/challenge/7)
 - [localhost:8080/challenge/8](http://localhost:8080/challenge/8)
 
-Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look better ;-).
+Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look better ;-). [See this issue as well.](https://github.com/commjoen/wrongsecrets/issues/23)
 
 ## Basic K8s exercise
 
