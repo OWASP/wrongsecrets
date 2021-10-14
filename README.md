@@ -1,6 +1,7 @@
 # Wrong Secrets
 
 [![Java checkstyle and testing](https://github.com/commjoen/wrongsecrets/actions/workflows/main.yml/badge.svg)](https://github.com/commjoen/wrongsecrets/actions/workflows/main.yml) [![Terraform FMT](https://github.com/commjoen/wrongsecrets/actions/workflows/terraform.yml/badge.svg)](https://github.com/commjoen/wrongsecrets/actions/workflows/terraform.yml) [![Test minikube script](https://github.com/commjoen/wrongsecrets/actions/workflows/minikube-test.yml/badge.svg)](https://github.com/commjoen/wrongsecrets/actions/workflows/minikube-test.yml)
+
 Welcome to the Wrong Secrets p0wnable app. With this app we have packed various ways of how to not store your secrets. These can help you to realize whether your secret management is ok. The challenge is to find all the different secrets by means of various tools and techniques.
 
 Can you solve all the challenges?
@@ -98,9 +99,13 @@ With thanks to [@madhuakula](https://github.com/madhuakula) for motivating me to
 
 ## Help Wanted
 
-Ofcourse we can always use your help to getmore flavors of "wrongly" configured secrets in to spread awareness! We would love to get some help with a Google Cloud or Azure integration for instance. Do you miss something else than a cloud-provider as an example? File an issue or create a PR!
+You can help us by the following methods:
 
-### Notes on development
+- Star us
+- Share this app with others
+- Ofcourse we can always use your help to get more flavors of "wrongly" configured secrets in to spread awareness! We would love to get some help with a Google Cloud or Azure integration for instance. Do you miss something else than a cloud-provider as an example? File an issue or create a PR!
+
+## Notes on development
 
 If you want to test against vault without K8s: start vault locally with
 
