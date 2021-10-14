@@ -1,11 +1,10 @@
 # Wrong Secrets
 
 [![Java checkstyle and testing](https://github.com/commjoen/wrongsecrets/actions/workflows/main.yml/badge.svg)](https://github.com/commjoen/wrongsecrets/actions/workflows/main.yml) [![Terraform FMT](https://github.com/commjoen/wrongsecrets/actions/workflows/terraform.yml/badge.svg)](https://github.com/commjoen/wrongsecrets/actions/workflows/terraform.yml) [![Test minikube script](https://github.com/commjoen/wrongsecrets/actions/workflows/minikube-test.yml/badge.svg)](https://github.com/commjoen/wrongsecrets/actions/workflows/minikube-test.yml)
-![screenshot.png](screenshot.png)
 Welcome to the Wrong Secrets p0wnable app. With this app we have packed various ways of how to not store your secrets. These can help you to realize whether your secret management is ok. The challenge is to find all the different secrets by means of various tools and techniques.
 
 Can you solve all the challenges?
-
+![screenshot.png](screenshot.png)
 ## Basic docker exercises
 
 For the basic docker exercises you currently require:
