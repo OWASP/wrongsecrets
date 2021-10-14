@@ -3,23 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <title>Secret Challenge</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.2/css/bootstrap.min.css} "/>
 </head>
 <body>
-Welcome to secret challenge. This is a demo app for the ADDO talk "From code to Vault".
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">WrongSecrets</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Challenges
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/challenge/1">Challenge 1</a>
+                        <a class="dropdown-item" href="/challenge/2">Challenge 2</a>
+                        <a class="dropdown-item" href="/challenge/3">Challenge 3</a>
+                        <a class="dropdown-item" href="/challenge/4">Challenge 4</a>
+                        <a class="dropdown-item" href="/challenge/5">Challenge 5</a>
+                        <a class="dropdown-item" href="/challenge/6">Challenge 6</a>
+                        <a class="dropdown-item" href="/challenge/7">Challenge 7</a>
+                        <a class="dropdown-item" href="/challenge/8">Challenge 8</a>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="display-4"> Welcome </h1>
+        <p class="lead">Welcome to Wrong-Secrets. With this app we hope you will re-evaluate your secrets management
+            strategy</p>
+        <hr class="my-4">
+        <p>Special Thanks to: Nanne Baars, Ben de Haan & Madhu Akula for motivating and helping me out to build
+            this.</p>
 
-<h2>Challenges:</h2>
-<a href="challenge/1">challenge/1</a> <br/>
-<a href="challenge/2">challenge/2</a> <br/>
-<a href="challenge/3">challenge/3</a> <br/>
-<a href="challenge/4">challenge/4</a> <br/>
-<a href="challenge/5">challenge/5</a> <br/>
-<a href="challenge/6">challenge/6</a> <br/>
-<a href="challenge/7">challenge/7</a> <br/>
-<a href="challenge/8">challenge/8</a> <br/>
+    </div>
+    <div class="row">
+        <div class="col">
+            <p>
+                <a href="challenge/1">Challenge 1</a><br/>
+                <a href="challenge/2">Challenge 2</a><br/>
+                <a href="challenge/3">Challenge 3</a><br/>
+                <a href="challenge/4">Challenge 4</a><br/>
+                <a href="challenge/5">Challenge 5</a><br/>
+                <a href="challenge/6">Challenge 6</a><br/>
+                <a href="challenge/7">Challenge 7</a><br/>
+                <a href="challenge/8">Challenge 8</a><br/>
+            </p>
+            <p>Don't want to wait with Vault? here is <a href="spoil-7">the secret :(</a>.</p>
+        </div>
+    </div>
+</div>
 
-Don't want to wait with Vault? here is <a href="spoil-7">the secret :(</a>.
 
-
-Special Thanks to: Nanne Baars, Ben de Haan & Madhu Akula for motivating and helping me out to build this.
+<script th:src="@{/webjars/popper.js/2.9.3/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/5.1.2/js/bootstrap.min.js}"></script>
 </body>
 </html>
