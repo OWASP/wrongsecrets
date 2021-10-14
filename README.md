@@ -15,7 +15,7 @@ For the basic docker exercises you currently require:
 You can install it by doing:
 
 ```bash
-docker run -p 8080:8080 jeroenwillemsen/addo-example:0.0.1-no-vault
+docker run -p 8080:8080 jeroenwillemsen/addo-example:0.0.2-no-vault
 ```
 
 Now you can try to find the secrets by means of solving the challenge offered at:
