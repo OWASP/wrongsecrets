@@ -2,7 +2,7 @@
 
 [![Java checkstyle and testing](https://github.com/commjoen/wrongsecrets/actions/workflows/main.yml/badge.svg)](https://github.com/commjoen/wrongsecrets/actions/workflows/main.yml) [![Terraform FMT](https://github.com/commjoen/wrongsecrets/actions/workflows/terraform.yml/badge.svg)](https://github.com/commjoen/wrongsecrets/actions/workflows/terraform.yml) [![Test minikube script](https://github.com/commjoen/wrongsecrets/actions/workflows/minikube-test.yml/badge.svg)](https://github.com/commjoen/wrongsecrets/actions/workflows/minikube-test.yml)
 
-Welcome to the Wrong Secrets p0wnable app. With this app we have packed various ways of how to not store your secrets. These can help you to realize whether your secret management is ok. The challenge is to find all the different secrets by means of various tools and techniques.
+Welcome to the Wrong Secrets p0wnable app. With this app, we have packed various ways of how to not store your secrets. These can help you to realize whether your secret management is ok. The challenge is to find all the different secrets by means of various tools and techniques.
 
 Can you solve all the challenges?
 ![screenshot.png](screenshot.png)
@@ -53,7 +53,7 @@ The K8S setup currently is based on using Minikube for local fun:
     minikube service secret-challenge
 ```
 
-now you can use the provided ip-address and port to further play with the K8s variant (instead of localhost).
+now you can use the provided IP address and port to further play with the K8s variant (instead of localhost).
 
 ### EKS Based
 
@@ -89,13 +89,13 @@ Make sure you have the following installed:
 
 Run `./k8s-vault-minkube-start.sh`, when the script is done, then the challenge will wait for you at <http://localhost:8080>
 
-## Cloud based exercise
+## Cloud-based exercise
 
 Have a look at the [aws folder](aws/README.md), Note that we are [not done yet](https://github.com/commjoen/wrongsecrets/issues/15).
 
 ## Special thanks & Contributors
 
-With thanks to [@madhuakula](https://github.com/madhuakula) for motivating me to setup the project, and thanks to [@bendehaan](https://github.com/bendehaan) & [@nbaars](https://github.com/nbaars) for contributing to the project.
+With thanks to [@madhuakula](https://github.com/madhuakula) for motivating me to set up the project, and thanks to [@bendehaan](https://github.com/bendehaan) & [@nbaars](https://github.com/nbaars) for contributing to the project.
 
 ## Help Wanted
 
@@ -103,7 +103,7 @@ You can help us by the following methods:
 
 - Star us
 - Share this app with others
-- Ofcourse we can always use your help to get more flavors of "wrongly" configured secrets in to spread awareness! We would love to get some help with a Google Cloud or Azure integration for instance. Do you miss something else than a cloud-provider as an example? File an issue or create a PR!
+- Of course, we can always use your help to get more flavors of "wrongly" configured secrets in to spread awareness! We would love to get some help with a Google Cloud or Azure integration for instance. Do you miss something else than a cloud provider as an example? File an issue or create a PR!
 
 ## Notes on development
 
@@ -124,7 +124,7 @@ vault token create -id="00000000-0000-0000-0000-000000000000" -policy="root"
 vault kv put secret/secret-challenge vaultpassword.password="$(openssl rand -base64 16)"
 ```
 
-Now use the `local-vault` profile to do you development.
+Now use the `local-vault` profile to do your development.
 
 If you want to dev without a Vault instance, use the `without-vault` profile to do your development.
 
