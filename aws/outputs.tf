@@ -22,3 +22,13 @@ output "fargate_profile_arns" {
   description = "Outputs from node groups"
   value       = module.eks.fargate_profile_arns
 }
+
+output "irsa_role" {
+  description = "The role ARN used in the IRSA setup"
+  value       = aws_iam_role.irsa_role.arn
+}
+
+output "secrets_manager_secret_name" {
+  description = "The name of the secrets manager secret"
+  value       = aws_secretsmanager_secret.secret.name
+}

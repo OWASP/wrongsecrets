@@ -15,7 +15,7 @@ Have the following tools installed:
 
 Make sure you have an active account at AWS for which you have configured the credentials on the system where you will execute the steps below. In this example we stored the credentials under an aws profile as `awsuser`.
 
-## Installation (NOTE; WIP!!!)
+## Installation
 
 The terraform code is loosely based on [this EKS managed Node Group TF example](https://github.com/terraform-aws-modules/terraform-aws-eks/tree/master/examples/managed_node_groups).
 
