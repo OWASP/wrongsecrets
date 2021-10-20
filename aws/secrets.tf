@@ -3,7 +3,8 @@
 ###############################
 
 resource "aws_secretsmanager_secret" "secret" {
-  name = "wrongsecret"
+  name                    = "wrongsecret"
+  recovery_window_in_days = 0
 }
 
 resource "aws_secretsmanager_secret_version" "secret" {
@@ -46,7 +47,8 @@ POLICY
 ###############################
 
 resource "aws_secretsmanager_secret" "secret_2" {
-  name = "wrongsecret-2"
+  name                    = "wrongsecret-2"
+  recovery_window_in_days = 0
 }
 
 resource "aws_secretsmanager_secret_policy" "policy_2" {
