@@ -3,8 +3,10 @@
 # set -o pipefail
 # set -o nounset
 
+AWS_REGION="eu-west-1"
+
 echo "This is only a script for demoing purposes. You need to have installed: helm, kubectl, jq, vault, grep, cat, sed, and awscli, and is only tested on mac, Debian and Ubuntu"
-echo "This script is based on the steps defined in https://learn.hashicorp.com/tutorials/vault/kubernetes-minikube . Vault is awesome!"
+echo "This script is based on the steps defined in https://learn.hashicorp.com/tutorials/vault/kubernetes-minikube. Vault is awesome!"
 
 kubectl get configmaps | grep 'secrets-file' &>/dev/null
 if [ $? == 0 ]; then
@@ -97,9 +99,29 @@ kubectl exec vault-0 -- vault write auth/kubernetes/role/secret-challenge \
   vault kv put secret/secret-challenge vaultpassword.password="$(openssl rand -base64 16)" &&
   vault kv put secret/application vaultpassword.password="$(openssl rand -base64 16)"
 
+echo "Setting up IRSA for the vault service account"
 kubectl annotate --overwrite sa vault eks.amazonaws.com/role-arn="$(terraform output -raw irsa_role)"
 
-kubectl apply -f../k8s/secret-challenge-vault-deployment.yml
+echo "Add secrets manager driver to EKS"
+helm repo add secrets-store-csi-driver https://raw.githubusercontent.com/kubernetes-sigs/secrets-store-csi-driver/master/charts
+
+helm list --namespace kube-system | grep 'csi-secrets-store' &>/dev/null
+if [ $? == 0 ]; then
+  echo "CSI driver is already installed"
+else
+  helm install -n kube-system csi-secrets-store secrets-store-csi-driver/secrets-store-csi-driver --set enableSecretRotation=true --set rotationPollInterval=60s
+fi
+
+echo "Install ACSP"
+kubectl apply -f https://raw.githubusercontent.com/aws/secrets-store-csi-driver-provider-aws/main/deployment/aws-provider-installer.yaml
+
+echo "Generate secrets manager challenge secret 2"
+aws secretsmanager put-secret-value --secret-id wrongsecret-2 --secret-string "$(openssl rand -base64 24)" --region $AWS_REGION --output json --no-cli-pager
+
+echo "Apply secretsmanager storage volume"
+kubectl apply -f./k8s/secret-volume.yml
+
+kubectl apply -f./k8s/secret-challenge-vault-deployment.yml
 while [[ $(kubectl get pods -l app=secret-challenge -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do echo "waiting for secret-challenge" && sleep 2; done
 #kubectl expose deployment secret-challenge --type=LoadBalancer --port=8080
 kubectl port-forward \
