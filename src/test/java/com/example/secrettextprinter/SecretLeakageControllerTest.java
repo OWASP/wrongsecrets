@@ -88,7 +88,7 @@ class SecretLeakageControllerTest {
     private void solveChallenge(String endpoint, String solution) throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.post("/challenge/1").param("solution", hardcodedPassword))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().string(CoreMatchers.containsString("You&#39;re answer is correct!")));
+                .andExpect(MockMvcResultMatchers.content().string(CoreMatchers.containsString("Your answer is correct!")));
     }
 
     private void testSpoil(String endpoint, String soluton) throws Exception {

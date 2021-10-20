@@ -142,7 +142,7 @@ public class SecretLeakageController {
     @PostMapping("/challenge/7")
     public String postController7(@ModelAttribute ChallengeForm challengeForm, Model model) {
         log.info("POST received at 7 - serializing form: solution: " + challengeForm.getSolution());
-        model.addAttribute("challengeNumber", 6);
+        model.addAttribute("challengeNumber", 7);
         if (null != vaultPassword.getPasssword()) {
             return handleModel(vaultPassword.getPasssword(), challengeForm.getSolution(), model);
         }
@@ -152,16 +152,16 @@ public class SecretLeakageController {
     @PostMapping("/challenge/8")
     public String postController8(@ModelAttribute ChallengeForm challengeForm, Model model) {
         log.info("POST received at 8 - serializing form: solution: " + challengeForm.getSolution());
-        model.addAttribute("challengeNumber", 6);
+        model.addAttribute("challengeNumber", 8);
         return handleModel(Constants.newKey, challengeForm.getSolution(), model);
     }
 
 
     private String handleModel(String targetPassword, String given, Model model) {
         if (targetPassword.equals(given)) {
-            model.addAttribute("answerCorrect", "You're answer is correct!");
+            model.addAttribute("answerCorrect", "Your answer is correct!");
         } else {
-            model.addAttribute("answerCorrect", "You're answer is incorrect, try harder ;-)");
+            model.addAttribute("answerCorrect", "Your answer is incorrect, try harder ;-)");
         }
         return "challenge";
     }

@@ -41,6 +41,8 @@
                         <a class="dropdown-item" href="/challenge/6">Challenge 6</a>
                         <a class="dropdown-item" href="/challenge/7">Challenge 7</a>
                         <a class="dropdown-item" href="/challenge/8">Challenge 8</a>
+                        <a class="dropdown-item" href="/challenge/9">Challenge 9</a>
+                        <a class="dropdown-item" href="/challenge/10">Challenge 10</a>
                     </ul>
                 </li>
             </ul>
@@ -49,7 +51,7 @@
 </nav>
 <div class="container">
     <h1 th:text="'Challenge '+${challengeNumber}"/>
-    <p th:text="'Welcome to challenge ' + ${challengeNumber} + '. You need to guess the secret that is hidden in the java/docker/k8s/Vault.'"></p>
+    <p th:text="'Welcome to challenge ' + ${challengeNumber} + '. You need to guess the secret that is hidden in the java, docker, k8s, Vault or AWS.'"></p>
     <div class="explanation" th:replace="doc:challenge__${challengeNumber}__.adoc"></div>
     <p th:text="${answerCorrect}"></p>
     <form action="#" th:action="'/challenge/'+${challengeNumber}" th:object="${challengeForm}" method="post">
@@ -57,7 +59,7 @@
         <p><input class="btn btn-primary" type="submit" value="Submit"/> <input class="btn btn-secondary" type="reset" value="Reset"/></p>
     </form>
 
-    There are 8 challenges (/challenge/1-8), can you solve them all? <br/>
+    There are 10 challenges (/challenge/1-10), can you solve them all? <br/>
     Go back to <a href="/">the main page</a>.
 </div>
 <script th:src="@{/webjars/jquery/3.2.1/jquery.js}"></script>

@@ -1,0 +1,3 @@
+=== Challenge 9: AWS Secrets manager part 1
+
+Okay, now we're generating an AWS secret through Terraform. What happens in the Terraform state?
