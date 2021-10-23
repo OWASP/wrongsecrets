@@ -30,8 +30,7 @@ Note-II: The cluster you create, has its access bound to the public IP of the cr
 5. Do `terraform apply`. Note: the apply will take 10 to 20 minutes depending on the speed of the AWS backplane.
 6. When creation is done, do `aws eks update-kubeconfig --region eu-west-1 --name wrongsecrets-exercise-cluster --kubeconfig ~/.kube/wrongsecrets`
 7. Do `export KUBECONFIG=~/.kube/wrongsecrets`
-
-TODO: continue here with adding SM/SSM and actual deployment instructions, as for now: follow ../README.md its instructions on how to deploy the wrongsecrets application to AWS EKS.
+8. Run `./k8s-vault-aws-start.sh`
 
 Your EKS cluster should be visible in [EU-West-1](https://eu-west-1.console.aws.amazon.com/eks/home?region=eu-west-1#/clusters) by default. Want a different region? You can modify `variables.tf` or input it directly using the `region` variable in plan/apply.
 
