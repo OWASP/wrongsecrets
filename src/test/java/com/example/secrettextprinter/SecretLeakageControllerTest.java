@@ -99,14 +99,15 @@ class SecretLeakageControllerTest {
     @Test
     void solveChallenge9WithoutFile() throws Exception {
         solveChallenge("/challenge/9", tempAWSfiller);
-
     }
 
     @Test
     void solveChallenge9WithFile() throws Exception {
         File testFile = new File(tempMountPath, "wrongsecret");
-        Files.writeString(testFile.toPath(), "secretvalueWitFile", StandardOpenOption.APPEND);
-        solveChallenge("/challenge/9","secretvalueWitFile" );
+        String secret = "secretvalueWitFile";
+        Files.writeString(testFile.toPath(), secret, StandardOpenOption.CREATE, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
+        solveChallenge("/challenge/9", secret);
+        testFile.deleteOnExit();
     }
 
 
