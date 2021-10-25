@@ -45,8 +45,11 @@ class SecretLeakageControllerTest {
     @Value("${DOCKER_ENV_PASSWORD}")
     String hardcodedEnvPassword;
 
-    @Value("default_aws_value")
+    @Value("${default_aws_value}")
     String tempAWSfiller;
+
+    @Value("${secretmountpath}")
+    String tempMountPath;
 
     @BeforeEach
     public void setup() {
@@ -101,11 +104,9 @@ class SecretLeakageControllerTest {
 
     @Test
     void solveChallenge9WithFile() throws Exception {
-        File testfile = File.createTempFile("wrongsecret", "", new File("/mnt/secrets-store"));
-        Files.writeString(testfile.toPath(), "secretvalueWitFile", StandardOpenOption.APPEND);
+        File testFile = new File(tempMountPath, "wrongsecret");
+        Files.writeString(testFile.toPath(), "secretvalueWitFile", StandardOpenOption.APPEND);
         solveChallenge("/challenge/9","secretvalueWitFile" );
-        testfile.deleteOnExit();
-        //create file with entry /mnt/secrets-store/wrongsecret and /mnt/secrets-store/wrongsecret-2
     }
 
 

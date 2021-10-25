@@ -45,10 +45,10 @@ public class SecretLeakageController {
     @Value("${vaultpassword}")
     String vaultPasswordString;
 
-    @Value("default_aws_value")
+    @Value("${default_aws_value}")
     String awsDefaultValue;
 
-    @Value("secretmountpath")
+    @Value("${secretmountpath}")
     String filePath;
 
     @GetMapping("/spoil-1")
@@ -205,7 +205,7 @@ public class SecretLeakageController {
     private String getAWSChallengeValue(String fileName) {
 
         try {
-            Path filePath = Paths.get("mnt", "secrets-store", fileName);
+            Path filePath = Paths.get(this.filePath, fileName);
             return Files.readString(filePath);
         } catch (IOException e) {
             log.error("Exception during file reading, defaulting to default without aWS", e);
