@@ -84,9 +84,19 @@ class SecretLeakageControllerTest {
         solveChallenge("/challenge/4", Constants.password);
     }
 
+    @Test
+    void solveChallenge9WithoutFile() {
+
+    }
+
+    @Test
+    void solveChallenge9WithFile() {
+
+    }
+
 
     private void solveChallenge(String endpoint, String solution) throws Exception {
-        this.mockMvc.perform(MockMvcRequestBuilders.post("/challenge/1").param("solution", hardcodedPassword))
+        this.mockMvc.perform(MockMvcRequestBuilders.post(endpoint).param("solution", solution))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().string(CoreMatchers.containsString("Your answer is correct!")));
     }

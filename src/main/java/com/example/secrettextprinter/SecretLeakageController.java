@@ -1,6 +1,7 @@
 package com.example.secrettextprinter;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Controller;
@@ -38,6 +39,9 @@ public class SecretLeakageController {
 
     @Value("${vaultpassword}")
     String vaultPasswordString;
+
+    @Value("default_aws_value")
+    String awsDefaultValue;
 
     @GetMapping("/spoil-1")
     public String getHardcodedSecret(Model model) {
@@ -86,6 +90,26 @@ public class SecretLeakageController {
     @GetMapping("/spoil-8")
     public String getRandCode(Model model) {
         return getSpoil(model, Constants.newKey);
+    }
+
+    @GetMapping("/spoil-9")
+    public String getAWSChanngelenge1(Model model) {
+        String actualSecret = getAWSChallengeValue(1);
+        if (Strings.isNotEmpty(awsDefaultValue)) {
+            return getSpoil(model, actualSecret);
+        } else {
+            return getSpoil(model, awsDefaultValue);
+        }
+    }
+
+    @GetMapping("/spoil-10")
+    public String getAWSChanngelenge2(Model model) {
+        String actualSecret = getAWSChallengeValue(2);
+        if (Strings.isNotEmpty(awsDefaultValue)) {
+            return getSpoil(model, actualSecret);
+        } else {
+            return getSpoil(model, awsDefaultValue);
+        }
     }
 
     @GetMapping("/challenge/{id}")
@@ -156,6 +180,20 @@ public class SecretLeakageController {
         return handleModel(Constants.newKey, challengeForm.getSolution(), model);
     }
 
+    @PostMapping("/challenge/9")
+    public String postController9(@ModelAttribute ChallengeForm challengeForm, Model model) {
+        log.info("POST received at 9 - serializing form: solution: " + challengeForm.getSolution());
+        model.addAttribute("challengeNumber", 9);
+        return handleModel(getAWSChallengeValue(1), challengeForm.getSolution(), model);
+    }
+
+    @PostMapping("/challenge/10")
+    public String postController10(@ModelAttribute ChallengeForm challengeForm, Model model) {
+        log.info("POST received at 10 - serializing form: solution: " + challengeForm.getSolution());
+        model.addAttribute("challengeNumber", 10);
+        return handleModel(getAWSChallengeValue(2), challengeForm.getSolution(), model);
+    }
+
 
     private String handleModel(String targetPassword, String given, Model model) {
         if (targetPassword.equals(given)) {
@@ -166,5 +204,8 @@ public class SecretLeakageController {
         return "challenge";
     }
 
+    private String getAWSChallengeValue(int number){
+        return null;
+    }
 
 }
