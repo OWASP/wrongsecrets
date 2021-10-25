@@ -55,7 +55,7 @@ The K8S setup currently is based on using Minikube for local fun:
 
 now you can use the provided IP address and port to further play with the K8s variant (instead of localhost).
 
-### EKS Based
+### AWS challenge 9 and 10
 
 Follow the steps in [the README in the AWS subfolder](aws/README.md).
 
@@ -91,7 +91,7 @@ Run `./k8s-vault-minkube-start.sh`, when the script is done, then the challenge 
 
 ## Cloud-based exercise
 
-Have a look at the [aws folder](aws/README.md), Note that we are [not done yet](https://github.com/commjoen/wrongsecrets/issues/15).
+Have a look at the [aws folder](aws/README.md), Note that we are [not done yet and want to add 2 more challenges](https://github.com/commjoen/wrongsecrets/issues/15).
 
 ## Special thanks & Contributors
 
