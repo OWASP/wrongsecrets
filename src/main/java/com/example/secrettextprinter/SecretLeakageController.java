@@ -11,6 +11,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 @Controller
 @EnableConfigurationProperties(Vaultpassword.class)
 @Slf4j
@@ -42,6 +47,9 @@ public class SecretLeakageController {
 
     @Value("default_aws_value")
     String awsDefaultValue;
+
+    @Value("secretmountpath")
+    String filePath;
 
     @GetMapping("/spoil-1")
     public String getHardcodedSecret(Model model) {
@@ -94,22 +102,12 @@ public class SecretLeakageController {
 
     @GetMapping("/spoil-9")
     public String getAWSChanngelenge1(Model model) {
-        String actualSecret = getAWSChallengeValue(1);
-        if (Strings.isNotEmpty(awsDefaultValue)) {
-            return getSpoil(model, actualSecret);
-        } else {
-            return getSpoil(model, awsDefaultValue);
-        }
+        return getSpoil(model, getAWSChallengeValue("wrongsecret"));
     }
 
     @GetMapping("/spoil-10")
     public String getAWSChanngelenge2(Model model) {
-        String actualSecret = getAWSChallengeValue(2);
-        if (Strings.isNotEmpty(awsDefaultValue)) {
-            return getSpoil(model, actualSecret);
-        } else {
-            return getSpoil(model, awsDefaultValue);
-        }
+        return getSpoil(model, getAWSChallengeValue("wrongsecret-2"));
     }
 
     @GetMapping("/challenge/{id}")
@@ -184,14 +182,14 @@ public class SecretLeakageController {
     public String postController9(@ModelAttribute ChallengeForm challengeForm, Model model) {
         log.info("POST received at 9 - serializing form: solution: " + challengeForm.getSolution());
         model.addAttribute("challengeNumber", 9);
-        return handleModel(getAWSChallengeValue(1), challengeForm.getSolution(), model);
+        return handleModel(getAWSChallengeValue("wrongsecret"), challengeForm.getSolution(), model);
     }
 
     @PostMapping("/challenge/10")
     public String postController10(@ModelAttribute ChallengeForm challengeForm, Model model) {
         log.info("POST received at 10 - serializing form: solution: " + challengeForm.getSolution());
         model.addAttribute("challengeNumber", 10);
-        return handleModel(getAWSChallengeValue(2), challengeForm.getSolution(), model);
+        return handleModel(getAWSChallengeValue("wrongsecret-2"), challengeForm.getSolution(), model);
     }
 
 
@@ -204,8 +202,16 @@ public class SecretLeakageController {
         return "challenge";
     }
 
-    private String getAWSChallengeValue(int number){
-        return null;
+    private String getAWSChallengeValue(String fileName) {
+
+        try {
+            Path filePath = Paths.get("mnt", "secrets-store", fileName);
+            return Files.readString(filePath);
+        } catch (IOException e) {
+            log.error("Exception during file reading, defaulting to default without aWS", e);
+            return awsDefaultValue;
+        }
+
     }
 
 }

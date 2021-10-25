@@ -18,6 +18,13 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.vault.core.VaultTemplate;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -38,6 +45,8 @@ class SecretLeakageControllerTest {
     @Value("${DOCKER_ENV_PASSWORD}")
     String hardcodedEnvPassword;
 
+    @Value("default_aws_value")
+    String tempAWSfiller;
 
     @BeforeEach
     public void setup() {
@@ -85,13 +94,18 @@ class SecretLeakageControllerTest {
     }
 
     @Test
-    void solveChallenge9WithoutFile() {
+    void solveChallenge9WithoutFile() throws Exception {
+        solveChallenge("/challenge/9", tempAWSfiller);
 
     }
 
     @Test
-    void solveChallenge9WithFile() {
-
+    void solveChallenge9WithFile() throws Exception {
+        File testfile = File.createTempFile("wrongsecret", "", new File("/mnt/secrets-store"));
+        Files.writeString(testfile.toPath(), "secretvalueWitFile", StandardOpenOption.APPEND);
+        solveChallenge("/challenge/9","secretvalueWitFile" );
+        testfile.deleteOnExit();
+        //create file with entry /mnt/secrets-store/wrongsecret and /mnt/secrets-store/wrongsecret-2
     }
 
 
