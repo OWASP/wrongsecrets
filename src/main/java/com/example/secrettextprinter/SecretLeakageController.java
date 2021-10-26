@@ -51,7 +51,7 @@ public class SecretLeakageController {
     @Value("${secretmountpath}")
     String filePath;
 
-    @Value("/wrongsecretvalue")
+    @Value("${wrongsecretvalue}")
     private String ssmValue;
 
     @GetMapping("/spoil-1")
