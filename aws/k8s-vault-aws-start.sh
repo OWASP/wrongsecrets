@@ -119,7 +119,7 @@ echo "Generate secrets manager challenge secret 2"
 aws secretsmanager put-secret-value --secret-id wrongsecret-2 --secret-string "$(openssl rand -base64 24)" --region $AWS_REGION --output json --no-cli-pager
 
 echo "Generate Parameter store challenge secret"
-aws ssm put-parameter --name wrongsecret --value "$(openssl rand -base64 24)" --region $AWS_REGION --output json --no-cli-pager
+aws ssm put-parameter --name wrongsecret --overwrite --value "$(openssl rand -base64 24)" --region $AWS_REGION --output json --no-cli-pager
 
 echo "Apply secretsmanager storage volume"
 kubectl apply -f./k8s/secret-volume.yml
