@@ -73,3 +73,20 @@ resource "aws_secretsmanager_secret_policy" "policy_2" {
 POLICY
 
 }
+
+###############################
+# Parameter store challenge 1 #
+###############################
+
+resource "aws_ssm_parameter" "secret" {
+  name        = "wrongsecret"
+  description = "A secret "
+  type        = "SecureString"
+  value       = random_password.password.result # Bootstrap something, not used in challenge
+
+  lifecycle {
+    ignore_changes = [
+      value
+    ]
+  }
+}

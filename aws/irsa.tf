@@ -56,6 +56,8 @@ data "aws_iam_policy_document" "secret_manager" {
       "secretsmanager:Update*",
       "secretsmanager:Rotate*",
       "secretsmanager:PutSecret*",
+      "ssm:DescribeParameters",
+      "ssm:GetParameter*"
     ]
 
     resources = ["*"]

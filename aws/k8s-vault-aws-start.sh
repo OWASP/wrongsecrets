@@ -5,7 +5,7 @@
 
 AWS_REGION="eu-west-1"
 
-echo "This is only a script for demoing purposes. You need to have installed: helm, kubectl, jq, vault, grep, cat, sed, and awscli, and is only tested on mac, Debian and Ubuntu"
+echo "This is a script to bootstrap. You need to have installed: helm, kubectl, jq, vault, grep, cat, sed, and awscli, and is only tested on mac, Debian and Ubuntu"
 echo "This script is based on the steps defined in https://learn.hashicorp.com/tutorials/vault/kubernetes-minikube. Vault is awesome!"
 
 kubectl get configmaps | grep 'secrets-file' &>/dev/null
@@ -117,6 +117,9 @@ kubectl apply -f https://raw.githubusercontent.com/aws/secrets-store-csi-driver-
 
 echo "Generate secrets manager challenge secret 2"
 aws secretsmanager put-secret-value --secret-id wrongsecret-2 --secret-string "$(openssl rand -base64 24)" --region $AWS_REGION --output json --no-cli-pager
+
+echo "Generate Parameter store challenge secret"
+aws ssm put-parameter --name wrongsecret --value "$(openssl rand -base64 24)" --region $AWS_REGION --output json --no-cli-pager
 
 echo "Apply secretsmanager storage volume"
 kubectl apply -f./k8s/secret-volume.yml
