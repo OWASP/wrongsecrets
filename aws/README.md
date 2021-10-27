@@ -48,6 +48,7 @@ When you're done:
 2. Run `terraform destroy` to clean up the infrastructure.
 3. Run `unset KUBECONFIG` to unset the KUBECONFIG env var.
 4. Run `rm ~/.kube/wrongsecrets` to remove the kubeconfig file.
+5. Run `rm terraform.ts*` to remove local state files.
 
 ### A few things to consider
 
