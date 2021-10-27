@@ -1,5 +1,5 @@
 === Challenge 2: Docker based password
 
-The developer got smarter: now the password is no longer overloaded by Spring, but by means of a docker container build argument.
+The developer got smarter: now the password is no longer defined by Spring, but by means of a docker container build argument.
 
 You can easily spot it by looking at how the layers got constructed, or detect it with a tool like https://github.com/goodwithtech/dockle[*Dockle*].
