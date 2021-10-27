@@ -1,6 +1,6 @@
 === Challenge 1: Hardcoded password
 
-There is a hardcoded password directly hidden in the controller. Using secrets in `application.properties` is not a proper way to keep your secrets safe as they are part of your source code and are visible by anyone with access to your source code repository.
+There is a hardcoded password directly hidden in the controller by a developer. He tried to hide it by overloading the value using the `application.properties`.
 
 This you can easily detect by SAST solutions, solutions like https://github.com/trufflesecurity/truffleHog[truffleHog] and https://github.com/awslabs/git-secrets[git-secrets], and by manual inspection of your `application.properties`.
 
