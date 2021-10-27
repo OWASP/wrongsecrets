@@ -233,7 +233,7 @@ public class SecretLeakageController {
         try {
             Path filePath = Paths.get(this.filePath, fileName);
             return Files.readString(filePath);
-        } catch (IOException e) {
+        } catch (Exception e) {
             log.error("Exception during file reading, defaulting to default without aWS", e);
             return awsDefaultValue;
         }
