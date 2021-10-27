@@ -9,6 +9,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import software.amazon.awssdk.regions.Region;
+import software.amazon.awssdk.services.ssm.SsmClient;
+import software.amazon.awssdk.services.ssm.model.GetParameterRequest;
+import software.amazon.awssdk.services.ssm.model.GetParameterResponse;
+import software.amazon.awssdk.services.ssm.model.SsmException;
+import software.amazon.awssdk.services.sts.StsClient;
+import software.amazon.awssdk.services.sts.auth.StsAssumeRoleWithWebIdentityCredentialsProvider;
+import software.amazon.awssdk.services.sts.model.AssumeRoleWithWebIdentityRequest;
+import software.amazon.awssdk.services.sts.model.AssumeRoleWithWebIdentityResponse;
+import software.amazon.awssdk.services.sts.model.StsException;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -49,6 +59,12 @@ public class SecretLeakageController {
 
     @Value("${secretmountpath}")
     String filePath;
+
+    @Value("${AWS_ROLE_ARN}")
+    private String awsRoleArn;
+
+    @Value("${AWS_WEB_IDENTITY_TOKEN_FILE}")
+    private String tokenFileLocation;
 
     @GetMapping("/spoil-1")
     public String getHardcodedSecret(Model model) {
@@ -101,12 +117,17 @@ public class SecretLeakageController {
 
     @GetMapping("/spoil-9")
     public String getAWSChanngelenge1(Model model) {
-        return getSpoil(model, getAWSChallengeValue("wrongsecret"));
+        return getSpoil(model, getAWSChallenge9and10Value("wrongsecret"));
     }
 
     @GetMapping("/spoil-10")
     public String getAWSChanngelenge2(Model model) {
-        return getSpoil(model, getAWSChallengeValue("wrongsecret-2"));
+        return getSpoil(model, getAWSChallenge9and10Value("wrongsecret-2"));
+    }
+
+    @GetMapping("/spoil-11")
+    public String getAWSChanngelenge3(Model model) {
+        return getSpoil(model, getAWSChallenge11Value());
     }
 
     @GetMapping("/challenge/{id}")
@@ -181,14 +202,21 @@ public class SecretLeakageController {
     public String postController9(@ModelAttribute ChallengeForm challengeForm, Model model) {
         log.info("POST received at 9 - serializing form: solution: " + challengeForm.getSolution());
         model.addAttribute("challengeNumber", 9);
-        return handleModel(getAWSChallengeValue("wrongsecret"), challengeForm.getSolution(), model);
+        return handleModel(getAWSChallenge9and10Value("wrongsecret"), challengeForm.getSolution(), model);
     }
 
     @PostMapping("/challenge/10")
     public String postController10(@ModelAttribute ChallengeForm challengeForm, Model model) {
         log.info("POST received at 10 - serializing form: solution: " + challengeForm.getSolution());
         model.addAttribute("challengeNumber", 10);
-        return handleModel(getAWSChallengeValue("wrongsecret-2"), challengeForm.getSolution(), model);
+        return handleModel(getAWSChallenge9and10Value("wrongsecret-2"), challengeForm.getSolution(), model);
+    }
+
+    @PostMapping("/challenge/11")
+    public String postController11(@ModelAttribute ChallengeForm challengeForm, Model model) {
+        log.info("POST received at 11 - serializing form: solution: " + challengeForm.getSolution());
+        model.addAttribute("challengeNumber", 11);
+        return handleModel(getAWSChallenge11Value(), challengeForm.getSolution(), model);
     }
 
 
@@ -201,8 +229,7 @@ public class SecretLeakageController {
         return "challenge";
     }
 
-    private String getAWSChallengeValue(String fileName) {
-
+    private String getAWSChallenge9and10Value(String fileName) {
         try {
             Path filePath = Paths.get(this.filePath, fileName);
             return Files.readString(filePath);
@@ -210,7 +237,49 @@ public class SecretLeakageController {
             log.error("Exception during file reading, defaulting to default without aWS", e);
             return awsDefaultValue;
         }
+    }
 
+    private String getAWSChallenge11Value() {
+        log.info("Getting credentials");
+        if (!"not_using_aws".equals(awsRoleArn)) {
+
+            try { //based on https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javav2/example_code/sts/src/main/java/com/example/sts
+                String webIDentityToken = Files.readString(Paths.get(tokenFileLocation));
+                StsClient stsClient = StsClient.builder()
+                        .region(Region.EU_CENTRAL_1)
+                        .build();
+                AssumeRoleWithWebIdentityRequest webIdentityRequest = AssumeRoleWithWebIdentityRequest.builder()
+                        .roleArn(awsRoleArn)
+                        .roleSessionName("WrongsecretsApp")
+                        .webIdentityToken(webIDentityToken)
+                        .build();
+
+                AssumeRoleWithWebIdentityResponse tokenResponse = stsClient.assumeRoleWithWebIdentity(webIdentityRequest);
+                log.info("The token value is " + tokenResponse.credentials().sessionToken());
+                SsmClient ssmClient = SsmClient.builder()
+                        .region(Region.EU_CENTRAL_1)
+                        .credentialsProvider(StsAssumeRoleWithWebIdentityCredentialsProvider.builder()
+                                .stsClient(stsClient)
+                                .refreshRequest(webIdentityRequest)
+                                .build())
+                        .build();
+                GetParameterRequest parameterRequest = GetParameterRequest.builder()
+                        .name("wrongsecretvalue")
+                        .withDecryption(true)
+                        .build();
+                GetParameterResponse parameterResponse = ssmClient.getParameter(parameterRequest);
+                log.info("The parameter value is " + parameterResponse.parameter().value());
+                ssmClient.close();
+                return parameterResponse.parameter().value();
+            } catch (StsException e) {
+                log.error("Exception with getting credentials", e);
+            } catch (SsmException e) {
+                log.error("Exception with getting parameter", e);
+            } catch (IOException e) {
+                log.error("Could not get the web identity token, due to ", e);
+            }
+        }
+        return awsDefaultValue;
     }
 
 }

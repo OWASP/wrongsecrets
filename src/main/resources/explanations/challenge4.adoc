@@ -2,4 +2,4 @@
 
 So you spotted the secret in docker. What if we put it somewhere else in the code?
 
-You can spot the secret easily by using Trufflehog or Git-secrets. Just dive into the code!
+You can spot the secret easily by using https://github.com/trufflesecurity/truffleHog[*Trufflehog*] and https://github.com/awslabs/git-secrets[*Git-secrets*]. Just dive into the code!

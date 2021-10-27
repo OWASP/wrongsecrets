@@ -1,5 +1,5 @@
 === Challenge 7: A secret hidden in Vault
 
 So now the secret is no longer in K8s or code... the developer hopes.
-If you used the README.md instructions you should be able to have the challenge running on K8s/Minikube and now you can search for the secret.
-What is the mistake made here? Trufflehog might have been able to help if the entropy was a little larger ;-).
+If you used the `README.md` instructions you should be able to have the challenge running on K8s/Minikube and now you can search for the secret.
+What is the mistake made here? https://github.com/trufflesecurity/truffleHog[*Trufflehog*] might have been able to help if the entropy was a little larger ;-).

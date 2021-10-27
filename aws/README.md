@@ -34,7 +34,7 @@ Note-II: The cluster you create, has its access bound to the public IP of the cr
 
 Your EKS cluster should be visible in [EU-West-1](https://eu-west-1.console.aws.amazon.com/eks/home?region=eu-west-1#/clusters) by default. Want a different region? You can modify `variables.tf` or input it directly using the `region` variable in plan/apply.
 
-Are you done playing? Please run `terraform destroy` to clean up.
+Are you done playing? Please run `terraform destroy` twice to clean up.
 
 ### Test it
 
