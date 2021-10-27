@@ -3,5 +3,5 @@
 There is a hardcoded password directly hidden in the controller.
 a developer tride to hide it by overloading it using the Spring Framework using the default `application.properties`.
 
-This you can easily detect with SAST solutions, solutions like Trufflehog and Git-secrets, and through manual inspection of your application.properties.
+This you can easily detect with SAST solutions, solutions like https://github.com/trufflesecurity/truffleHog[*Trufflehog*] and https://github.com/awslabs/git-secrets[*Git-secrets*], and through manual inspection of your `application.properties`.
 Watch out for solutions like Spring Config Server where we will overload it again using a centralized approach.
