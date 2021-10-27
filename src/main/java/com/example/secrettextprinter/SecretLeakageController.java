@@ -233,7 +233,7 @@ public class SecretLeakageController {
         try {
             Path filePath = Paths.get(this.filePath, fileName);
             return Files.readString(filePath);
-        } catch (IOException e) {
+        } catch (Exception e) {
             log.error("Exception during file reading, defaulting to default without aWS", e);
             return awsDefaultValue;
         }
@@ -241,7 +241,7 @@ public class SecretLeakageController {
 
     private String getAWSChallenge11Value() {
         log.info("Getting credentials");
-        if (!"not_using_aws".equals(awsRoleArn)) {
+        if (!"if_you_see_this_please_use_AWS_Setup".equals(awsRoleArn)) {
 
             try { //based on https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javav2/example_code/sts/src/main/java/com/example/sts
                 String webIDentityToken = Files.readString(Paths.get(tokenFileLocation));
