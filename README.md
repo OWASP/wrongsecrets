@@ -4,9 +4,11 @@
 
 Welcome to the Wrong Secrets p0wnable app. With this app, we have packed various ways of how to not store your secrets. These can help you to realize whether your secret management is ok. The challenge is to find all the different secrets by means of various tools and techniques.
 
-Can you solve all the challenges?
+Can you solve all the 11 challenges?
 ![screenshot.png](screenshot.png)
+
 ## Basic docker exercises
+*Can be used for challenges 1-4, 8* 
 
 For the basic docker exercises you currently require:
 
@@ -25,14 +27,13 @@ Now you can try to find the secrets by means of solving the challenge offered at
 - [localhost:8080/challenge/2](http://localhost:8080/challenge/2)
 - [localhost:8080/challenge/3](http://localhost:8080/challenge/3)
 - [localhost:8080/challenge/4](http://localhost:8080/challenge/4)
-- [localhost:8080/challenge/5](http://localhost:8080/challenge/5)
-- [localhost:8080/challenge/6](http://localhost:8080/challenge/6)
-- [localhost:8080/challenge/7](http://localhost:8080/challenge/7)
 - [localhost:8080/challenge/8](http://localhost:8080/challenge/8)
+
 
 Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look better ;-). [See this issue as well.](https://github.com/commjoen/wrongsecrets/issues/23)
 
 ## Basic K8s exercise
+*Can be used for challenges 1-6, 8*
 
 ### Minikube based
 
@@ -55,9 +56,9 @@ The K8S setup currently is based on using Minikube for local fun:
 
 now you can use the provided IP address and port to further play with the K8s variant (instead of localhost).
 
-### AWS challenge 9 and 10
+- [localhost:8080/challenge/5](http://localhost:8080/challenge/5)
+- [localhost:8080/challenge/6](http://localhost:8080/challenge/6)
 
-Follow the steps in [the README in the AWS subfolder](aws/README.md).
 
 ### k8s based
 
@@ -75,8 +76,12 @@ Want to run vanilla on your own k8s? Use the commands below:
 
 ```
 
-## Vault exercises with minikube
+now you can use the provided IP address and port to further play with the K8s variant (instead of localhost).
+- [localhost:8080/challenge/5](http://localhost:8080/challenge/5)
+- [localhost:8080/challenge/6](http://localhost:8080/challenge/6)
 
+## Vault exercises with minikube
+*Can be used for challenges 1-8*
 Make sure you have the following installed:
 
 - minikube with docker (or comment out line 8 and work at your own k8s setup),
@@ -87,11 +92,13 @@ Make sure you have the following installed:
 - vault [Install from here](https://www.vaultproject.io/downloads),
 - grep, Cat, and Sed
 
-Run `./k8s-vault-minkube-start.sh`, when the script is done, then the challenge will wait for you at <http://localhost:8080>
+Run `./k8s-vault-minkube-start.sh`, when the script is done, then the challenges will wait for you at <http://localhost:8080> . 
+This will allow you to run challenge 1-8.
 
-## Cloud-based exercise
+### AWS challenge 9, 10 and 11 
+*Can be used for challenges 1-11*
 
-Have a look at the [aws folder](aws/README.md), Note that we are [not done yet and want to add 2 more challenges](https://github.com/commjoen/wrongsecrets/issues/15).
+Follow the steps in [the README in the AWS subfolder](aws/README.md).
 
 ## Special thanks & Contributors
 
