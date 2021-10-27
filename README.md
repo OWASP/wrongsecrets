@@ -137,7 +137,7 @@ If you want to dev without a Vault instance, use the `without-vault` profile to 
 
 Want to push a container? See `.github/scripts/docker-create-and-push.sh` for a script that generates and pushes all containers. Do not forget to rebuild the app before composing the container
 
-## Automatic reload during development
+### Automatic reload during development
 
 To make changes made load faster we added `spring-dev-tools` to the Maven project. To enable this in IntelliJ automatically, make sure:
 
