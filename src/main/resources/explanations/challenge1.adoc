@@ -1,7 +1,7 @@
-=== Challenge 1: Hardcoded Password
+=== Challenge 1: Hardcoded password
 
-There is a hardcoded password directly hidden in the controller.
-a developer tride to hide it by overloading it using the Spring Framework using the default `application.properties`.
+There is a hardcoded password directly hidden in the controller. Using secrets in `application.properties` is not a proper way to keep your secrets safe as they are part of your source code and are visible by anyone with access to your source code repository.
 
-This you can easily detect with SAST solutions, solutions like https://github.com/trufflesecurity/truffleHog[*Trufflehog*] and https://github.com/awslabs/git-secrets[*Git-secrets*], and through manual inspection of your `application.properties`.
-Watch out for solutions like Spring Config Server where we will overload it again using a centralized approach.
+This you can easily detect by SAST solutions, solutions like https://github.com/trufflesecurity/truffleHog[truffleHog] and https://github.com/awslabs/git-secrets[git-secrets], and by manual inspection of your `application.properties`.
+
+Using a distributed solution like https://cloud.spring.io/spring-cloud-config/reference/html/[Spring Cloud Config] where you manage your application properties externally can have the same problem if you are not careful. Take a close look at the https://cloud.spring.io/spring-cloud-config/reference/html/#_security[security section] before using Spring Cloud Config.
