@@ -63,6 +63,9 @@ public class SecretLeakageController {
     @Value("${AWS_ROLE_ARN}")
     private String awsRoleArn;
 
+    @Value("${AWS_WEB_IDENTITY_TOKEN_FILE}")
+    private String tokenFileLocation;
+
     @GetMapping("/spoil-1")
     public String getHardcodedSecret(Model model) {
         return getSpoil(model, hardcodedPassword);
@@ -239,12 +242,16 @@ public class SecretLeakageController {
     private String getAWSChallenge11Value() {
         log.info("Getting credentials");
         if (!"not_using_aws".equals(awsRoleArn)) {
+
             try { //based on https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javav2/example_code/sts/src/main/java/com/example/sts
+                String webIDentityToken = Files.readString(Paths.get(tokenFileLocation));
                 StsClient stsClient = StsClient.builder()
                         .region(Region.EU_CENTRAL_1)
                         .build();
                 AssumeRoleWithWebIdentityRequest webIdentityRequest = AssumeRoleWithWebIdentityRequest.builder()
                         .roleArn(awsRoleArn)
+                        .roleSessionName("WrongsecretsApp")
+                        .webIdentityToken(webIDentityToken)
                         .build();
 
                 AssumeRoleWithWebIdentityResponse tokenResponse = stsClient.assumeRoleWithWebIdentity(webIdentityRequest);
@@ -268,6 +275,8 @@ public class SecretLeakageController {
                 log.error("Exception with getting credentials", e);
             } catch (SsmException e) {
                 log.error("Exception with getting parameter", e);
+            } catch (IOException e) {
+                log.error("Could not get the web identity token, due to ", e);
             }
         }
         return awsDefaultValue;
