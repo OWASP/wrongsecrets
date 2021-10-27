@@ -1,8 +1,6 @@
 package com.example.secrettextprinter;
 
-import com.amazonaws.services.simplesystemsmanagement.model.GetParameterRequest;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Controller;
@@ -13,18 +11,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.ssm.SsmClient;
+import software.amazon.awssdk.services.ssm.model.GetParameterRequest;
 import software.amazon.awssdk.services.ssm.model.GetParameterResponse;
 import software.amazon.awssdk.services.ssm.model.SsmException;
 import software.amazon.awssdk.services.sts.StsClient;
-import software.amazon.awssdk.services.sts.model.GetSessionTokenRequest;
-import software.amazon.awssdk.services.sts.model.GetSessionTokenResponse;
+import software.amazon.awssdk.services.sts.auth.StsAssumeRoleWithWebIdentityCredentialsProvider;
+import software.amazon.awssdk.services.sts.model.AssumeRoleWithWebIdentityRequest;
+import software.amazon.awssdk.services.sts.model.AssumeRoleWithWebIdentityResponse;
 import software.amazon.awssdk.services.sts.model.StsException;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.function.Consumer;
 
 @Controller
 @EnableConfigurationProperties(Vaultpassword.class)
@@ -60,9 +59,6 @@ public class SecretLeakageController {
 
     @Value("${secretmountpath}")
     String filePath;
-
-    @Value("${wrongsecretvalue}")
-    private String ssmValue;
 
     @Value("${AWS_ROLE_ARN}")
     private String awsRoleArn;
@@ -241,38 +237,38 @@ public class SecretLeakageController {
     }
 
     private String getAWSChallenge11Value() {
-        if (Strings.isNotEmpty(ssmValue) && !"wrongsecret".equals(ssmValue)) {
-            log.info("Getting credentials");
-            if (!"not_using_aws".equals(awsRoleArn)) {
-                try { //based on https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javav2/example_code/sts/src/main/java/com/example/sts
-                    StsClient stsClient = StsClient.builder()
-                            .region(Region.EU_CENTRAL_1)
-                            .build();
-                    GetSessionTokenRequest tokenRequest = GetSessionTokenRequest.builder()
-                            .durationSeconds(1500)
-                            .build();
+        log.info("Getting credentials");
+        if (!"not_using_aws".equals(awsRoleArn)) {
+            try { //based on https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javav2/example_code/sts/src/main/java/com/example/sts
+                StsClient stsClient = StsClient.builder()
+                        .region(Region.EU_CENTRAL_1)
+                        .build();
+                AssumeRoleWithWebIdentityRequest webIdentityRequest = AssumeRoleWithWebIdentityRequest.builder()
+                        .roleArn(awsRoleArn)
+                        .build();
 
-                    GetSessionTokenResponse tokenResponse = stsClient.getSessionToken(tokenRequest);
-                    log.info("The token value is " + tokenResponse.credentials().sessionToken());
-                    SsmClient ssmClient = SsmClient.builder()
-                            .region(Region.EU_CENTRAL_1)
-                            .build();
-                    GetParameterRequest parameterRequest = new GetParameterRequest().withName("wrongsecretvalue");
-                    parameterRequest.setWithDecryption(true);
-                    GetParameterResponse parameterResponse = ssmClient.getParameter((Consumer<software.amazon.awssdk.services.ssm.model.GetParameterRequest.Builder>) parameterRequest);
-                    log.info("The parameter value is " + parameterResponse.parameter().value());
-                    ssmClient.close();
-                    return parameterResponse.parameter().value();
-                } catch (StsException e) {
-                    log.error("Exception with getting credentials", e);
-                } catch (SsmException e) {
-                    log.error("Exception with getting parameter", e);
-                }
-
+                AssumeRoleWithWebIdentityResponse tokenResponse = stsClient.assumeRoleWithWebIdentity(webIdentityRequest);
+                log.info("The token value is " + tokenResponse.credentials().sessionToken());
+                SsmClient ssmClient = SsmClient.builder()
+                        .region(Region.EU_CENTRAL_1)
+                        .credentialsProvider(StsAssumeRoleWithWebIdentityCredentialsProvider.builder()
+                                .stsClient(stsClient)
+                                .refreshRequest(webIdentityRequest)
+                                .build())
+                        .build();
+                GetParameterRequest parameterRequest = GetParameterRequest.builder()
+                        .name("wrongsecretvalue")
+                        .withDecryption(true)
+                        .build();
+                GetParameterResponse parameterResponse = ssmClient.getParameter(parameterRequest);
+                log.info("The parameter value is " + parameterResponse.parameter().value());
+                ssmClient.close();
+                return parameterResponse.parameter().value();
+            } catch (StsException e) {
+                log.error("Exception with getting credentials", e);
+            } catch (SsmException e) {
+                log.error("Exception with getting parameter", e);
             }
-
-
-            return ssmValue;
         }
         return awsDefaultValue;
     }
