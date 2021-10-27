@@ -18,3 +18,5 @@ docker build --build-arg "$3" --build-arg "spring_profile=local-vault" -t jeroen
 docker push jeroenwillemsen/addo-example:$1-local-vault
 docker build --build-arg "$3" --build-arg "spring_profile=kubernetes-vault" -t jeroenwillemsen/addo-example:$1-k8s-vault ./../../.
 docker push jeroenwillemsen/addo-example:$1-k8s-vault
+docker build --build-arg "$3" --build-arg "spring_profile=kubernetes-vault-ssm" -t jeroenwillemsen/addo-example:$1-kubernetes-vault-ssm ./../../.
+docker push jeroenwillemsen/addo-example:$1-kubernetes-vault-ssm

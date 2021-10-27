@@ -1,0 +1,7 @@
+=== Challenge 11: AWS SSM Parameter Store
+
+We've now used Parameter Store directly from within the app, but there's an IAM problem...
+
+Assume the role `cant-read-screts` and try some IAM privilege escalation. Don't cheat using your own roles :) 
+
+If you're stuck, try spotting the error in Terraform.
