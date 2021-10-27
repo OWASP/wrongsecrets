@@ -129,3 +129,12 @@ Now use the `local-vault` profile to do your development.
 If you want to dev without a Vault instance, use the `without-vault` profile to do your development.
 
 Want to push a container? See `.github/scripts/docker-create-and-push.sh` for a script that generates and pushes all containers. Do not forget to rebuild the app before composing the container
+
+## Automatic reload during development
+
+To make changes made load faster we added `spring-dev-tools` to the Maven project. To enable this in IntelliJ automatically, make sure:
+
+- Under Compiler -> Automatically build project is enabled, and
+- Under Advanced settings -> Allow auto-make to start even if developed application is currently running.
+
+You can also manually invoke: Build -> Recompile the file you just changed, this will also force a reload of the application.
