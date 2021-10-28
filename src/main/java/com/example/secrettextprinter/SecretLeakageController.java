@@ -32,9 +32,11 @@ import java.nio.file.Paths;
 public class SecretLeakageController {
 
     private final Vaultpassword vaultPassword;
+    Scoring scoring;
 
     public SecretLeakageController(Vaultpassword vaultpassword) {
         this.vaultPassword = vaultpassword;
+        scoring = new Scoring(11);
     }
 
     @Value("${password}")
@@ -157,6 +159,11 @@ public class SecretLeakageController {
             model.addAttribute("runtimeWarning", "We are running outside of a properly configured AWS environment. Please run this in an AWS environment as explained in the README.md.");
         }
         model.addAttribute("version", version);
+        model.addAttribute("totalPoints", scoring.getTotalReceivedPoints());
+        model.addAttribute("progress", scoring.getProgress());
+        if(scoring.getChallengeCompleted(Integer.parseInt(id))){
+            model.addAttribute("challengeCompletedAlready", "This exercise is already completed");
+        }
         return "challenge";
     }
 
@@ -164,7 +171,7 @@ public class SecretLeakageController {
     public String postController(@ModelAttribute ChallengeForm challengeForm, Model model) {
         log.info("POST received at 1 - serializing form: solution: " + challengeForm.getSolution());
         model.addAttribute("challengeNumber", 1);
-        return handleModel(hardcodedPassword, challengeForm.getSolution(), model);
+        return handleModel(hardcodedPassword, challengeForm.getSolution(), model, 1);
 
     }
 
@@ -172,35 +179,35 @@ public class SecretLeakageController {
     public String postController2(@ModelAttribute ChallengeForm challengeForm, Model model) {
         log.info("POST received at 2- serializing form: solution: " + challengeForm.getSolution());
         model.addAttribute("challengeNumber", 2);
-        return handleModel(argBasedPassword, challengeForm.getSolution(), model);
+        return handleModel(argBasedPassword, challengeForm.getSolution(), model, 2);
     }
 
     @PostMapping("/challenge/3")
     public String postController3(@ModelAttribute ChallengeForm challengeForm, Model model) {
         log.info("POST received at 3 - serializing form: solution: " + challengeForm.getSolution());
         model.addAttribute("challengeNumber", 3);
-        return handleModel(hardcodedEnvPassword, challengeForm.getSolution(), model);
+        return handleModel(hardcodedEnvPassword, challengeForm.getSolution(), model, 3);
     }
 
     @PostMapping("/challenge/4")
     public String postController4(@ModelAttribute ChallengeForm challengeForm, Model model) {
         log.info("POST received at 4 - serializing form: solution: " + challengeForm.getSolution());
         model.addAttribute("challengeNumber", 4);
-        return handleModel(Constants.password, challengeForm.getSolution(), model);
+        return handleModel(Constants.password, challengeForm.getSolution(), model, 4);
     }
 
     @PostMapping("/challenge/5")
     public String postController5(@ModelAttribute ChallengeForm challengeForm, Model model) {
         log.info("POST received at 5 - serializing form: solution: " + challengeForm.getSolution());
         model.addAttribute("challengeNumber", 5);
-        return handleModel(configmapK8sSecret, challengeForm.getSolution(), model);
+        return handleModel(configmapK8sSecret, challengeForm.getSolution(), model, 5);
     }
 
     @PostMapping("/challenge/6")
     public String postController6(@ModelAttribute ChallengeForm challengeForm, Model model) {
         log.info("POST received at 6 - serializing form: solution: " + challengeForm.getSolution());
         model.addAttribute("challengeNumber", 6);
-        return handleModel(secretK8sSecret, challengeForm.getSolution(), model);
+        return handleModel(secretK8sSecret, challengeForm.getSolution(), model, 6);
     }
 
 
@@ -209,42 +216,43 @@ public class SecretLeakageController {
         log.info("POST received at 7 - serializing form: solution: " + challengeForm.getSolution());
         model.addAttribute("challengeNumber", 7);
         if (null != vaultPassword.getPasssword()) {
-            return handleModel(vaultPassword.getPasssword(), challengeForm.getSolution(), model);
+            return handleModel(vaultPassword.getPasssword(), challengeForm.getSolution(), model, 7);
         }
-        return handleModel(vaultPasswordString, challengeForm.getSolution(), model);
+        return handleModel(vaultPasswordString, challengeForm.getSolution(), model, 7);
     }
 
     @PostMapping("/challenge/8")
     public String postController8(@ModelAttribute ChallengeForm challengeForm, Model model) {
         log.info("POST received at 8 - serializing form: solution: " + challengeForm.getSolution());
         model.addAttribute("challengeNumber", 8);
-        return handleModel(Constants.newKey, challengeForm.getSolution(), model);
+        return handleModel(Constants.newKey, challengeForm.getSolution(), model, 8);
     }
 
     @PostMapping("/challenge/9")
     public String postController9(@ModelAttribute ChallengeForm challengeForm, Model model) {
         log.info("POST received at 9 - serializing form: solution: " + challengeForm.getSolution());
         model.addAttribute("challengeNumber", 9);
-        return handleModel(getAWSChallenge9and10Value("wrongsecret"), challengeForm.getSolution(), model);
+        return handleModel(getAWSChallenge9and10Value("wrongsecret"), challengeForm.getSolution(), model, 8);
     }
 
     @PostMapping("/challenge/10")
     public String postController10(@ModelAttribute ChallengeForm challengeForm, Model model) {
         log.info("POST received at 10 - serializing form: solution: " + challengeForm.getSolution());
         model.addAttribute("challengeNumber", 10);
-        return handleModel(getAWSChallenge9and10Value("wrongsecret-2"), challengeForm.getSolution(), model);
+        return handleModel(getAWSChallenge9and10Value("wrongsecret-2"), challengeForm.getSolution(), model, 9);
     }
 
     @PostMapping("/challenge/11")
     public String postController11(@ModelAttribute ChallengeForm challengeForm, Model model) {
         log.info("POST received at 11 - serializing form: solution: " + challengeForm.getSolution());
         model.addAttribute("challengeNumber", 11);
-        return handleModel(getAWSChallenge11Value(), challengeForm.getSolution(), model);
+        return handleModel(getAWSChallenge11Value(), challengeForm.getSolution(), model, 10);
     }
 
 
-    private String handleModel(String targetPassword, String given, Model model) {
+    private String handleModel(String targetPassword, String given, Model model, int challenge) {
         if (targetPassword.equals(given)) {
+            scoring.completeChallenge(challenge);
             model.addAttribute("answerCorrect", "Your answer is correct!");
         } else {
             model.addAttribute("answerCorrect", "Your answer is incorrect, try harder ;-)");
