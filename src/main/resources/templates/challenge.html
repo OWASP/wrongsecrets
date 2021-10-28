@@ -17,7 +17,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/">WrongSecrets</a>
+        <a class="navbar-brand" href="/">WrongSecrets </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -46,8 +46,13 @@
                         <a class="dropdown-item" href="/challenge/11">Challenge 11</a>
                     </ul>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"
+                       th:text="'Version:'+${version}"></a>
+                </li>
             </ul>
         </div>
+
     </div>
 </nav>
 <div class="container">
@@ -57,7 +62,8 @@
     <p th:text="${answerCorrect}"></p>
     <form action="#" th:action="'/challenge/'+${challengeNumber}" th:object="${challengeForm}" method="post">
         <p>Answer to solution : <input type="text" th:field="*{solution}"/></p>
-        <p><input class="btn btn-primary" type="submit" value="Submit"/> <input class="btn btn-secondary" type="reset" value="Reset"/></p>
+        <p><input class="btn btn-primary" type="submit" value="Submit"/> <input class="btn btn-secondary" type="reset"
+                                                                                value="Reset"/></p>
     </form>
 
     There are 11 challenges (/challenge/1-11), can you solve them all? <br/>

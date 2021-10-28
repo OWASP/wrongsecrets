@@ -67,6 +67,9 @@ public class SecretLeakageController {
     @Value("${AWS_WEB_IDENTITY_TOKEN_FILE}")
     private String tokenFileLocation;
 
+    @Value("${APP_VERSION}")
+    private String version;
+
     @GetMapping("/spoil-1")
     public String getHardcodedSecret(Model model) {
         return getSpoil(model, hardcodedPassword);
@@ -131,6 +134,12 @@ public class SecretLeakageController {
         return getSpoil(model, getAWSChallenge11Value());
     }
 
+    @GetMapping("/")
+    public String rootPage(Model model) {
+        model.addAttribute("version", version);
+        return "index";
+    }
+
     @GetMapping("/challenge/{id}")
     public String challengeForm(@PathVariable String id, Model model) {
         model.addAttribute("challengeForm", new ChallengeForm());
@@ -147,6 +156,7 @@ public class SecretLeakageController {
         if (("9".equals(id) || "10".equals(id) || "11".equals(id)) && "if_you_see_this_please_use_AWS_Setup".equals(awsRoleArn)) {
             model.addAttribute("runtimeWarning", "We are running outside of a properly configured AWS environment. Please run this in an AWS environment as explained in the README.md.");
         }
+        model.addAttribute("version", version);
         return "challenge";
     }
 
