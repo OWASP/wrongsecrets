@@ -20,6 +20,7 @@ import software.amazon.awssdk.services.sts.model.AssumeRoleWithWebIdentityReques
 import software.amazon.awssdk.services.sts.model.AssumeRoleWithWebIdentityResponse;
 import software.amazon.awssdk.services.sts.model.StsException;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -134,6 +135,10 @@ public class SecretLeakageController {
     public String challengeForm(@PathVariable String id, Model model) {
         model.addAttribute("challengeForm", new ChallengeForm());
         model.addAttribute("challengeNumber", id);
+        if (!isDockerized()) {
+            model.addAttribute("dockerizedWarning", "We are running outside of a docker container. Please run this in a container.");
+        }
+
         return "challenge";
     }
 
@@ -280,6 +285,11 @@ public class SecretLeakageController {
             }
         }
         return awsDefaultValue;
+    }
+
+    public boolean isDockerized() {
+        File f = new File("/.dockerenv");
+        return f.exists();
     }
 
 }
