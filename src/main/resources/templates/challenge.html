@@ -60,8 +60,9 @@
         <p><input class="btn btn-primary" type="submit" value="Submit"/> <input class="btn btn-secondary" type="reset" value="Reset"/></p>
     </form>
 
-    There are 10 challenges (/challenge/1-11), can you solve them all? <br/>
+    There are 11 challenges (/challenge/1-11), can you solve them all? <br/>
     Go back to <a href="/">the main page</a>.
+    <div class="alert alert-danger" role="alert" th:if="${runtimeWarning!=null}" th:text="${runtimeWarning}"></div>
 </div>
 <script th:src="@{/webjars/popper.js/2.9.3/umd/popper.min.js}"></script>
 <script th:src="@{/webjars/bootstrap/5.1.2/js/bootstrap.min.js}"></script>
