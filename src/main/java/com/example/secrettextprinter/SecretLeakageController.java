@@ -158,13 +158,17 @@ public class SecretLeakageController {
         if (("9".equals(id) || "10".equals(id) || "11".equals(id)) && "if_you_see_this_please_use_AWS_Setup".equals(awsRoleArn)) {
             model.addAttribute("runtimeWarning", "We are running outside of a properly configured AWS environment. Please run this in an AWS environment as explained in the README.md.");
         }
+        includeScoringStatus(Integer.parseInt(id), model);
+        return "challenge";
+    }
+
+    private void includeScoringStatus(int id, Model model) {
         model.addAttribute("version", version);
         model.addAttribute("totalPoints", scoring.getTotalReceivedPoints());
-        model.addAttribute("progress", scoring.getProgress());
-        if(scoring.getChallengeCompleted(Integer.parseInt(id))){
+        model.addAttribute("progress", "" + scoring.getProgress());
+        if (scoring.getChallengeCompleted(id)) {
             model.addAttribute("challengeCompletedAlready", "This exercise is already completed");
         }
-        return "challenge";
     }
 
     @PostMapping("/challenge/1")
@@ -257,6 +261,7 @@ public class SecretLeakageController {
         } else {
             model.addAttribute("answerCorrect", "Your answer is incorrect, try harder ;-)");
         }
+        includeScoringStatus(challenge, model);
         return "challenge";
     }
 

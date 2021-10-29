@@ -24,8 +24,8 @@ public class Scoring {
         return challenges[challengeNumber - 1].isCompleted();
     }
 
-    public int getProgress() {
-        return (100 / maxPoints) * getTotalReceivedPoints();
+    public float getProgress() {
+        return (100 / (float) maxPoints) * getTotalReceivedPoints();
         //return progresspercentage
     }
 
