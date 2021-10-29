@@ -72,13 +72,14 @@
     <div class="progress">
         <div class="progress-bar" role="progressbar" th:style="'width:'+${progress}+'%;'"
              th:attr="aria-valuenow=${progress}" aria-valuemin="0" aria-valuemax="100"
-             th:text="${totalPoints} pts earned"></div>
+             th:text="${totalPoints}"></div>
     </div>
 
     <!--    <div class="progress">-->
     <!--        <div class="progress-bar" role="progressbar"  aria-valuemin="0" aria-valuemax="100" th:attr="aria-valuenow=${progress}" th:style="'width:'+ ${progress}+'%;'" th:text="${totalPoints}"></div>-->
     <!--    </div>-->
     <div th:text="${challengeCompletedAlready}"></div>
+
     <div class="alert alert-danger" role="alert" th:if="${runtimeWarning!=null}" th:text="${runtimeWarning}"></div>
 </div>
 <script th:src="@{/webjars/popper.js/2.9.3/umd/popper.min.js}"></script>
