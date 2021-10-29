@@ -146,30 +146,11 @@ public class SecretLeakageController {
     public String challengeForm(@PathVariable String id, Model model) {
         model.addAttribute("challengeForm", new ChallengeForm());
         model.addAttribute("challengeNumber", id);
-        if (!isDockerized() && (Integer.parseInt(id) < 5 || "8".equals(id))) {
-            model.addAttribute("runtimeWarning", "We are running outside of a docker container. Please run this in a container as explained in the README.md.");
-        }
-        if (("5".equals(id) || "6".equals(id)) && "if_you_see_this_please_use_k8s".equals(configmapK8sSecret)) {
-            model.addAttribute("runtimeWarning", "We are running outside of a K8s cluster. Please run this in the K8s cluster as explained in the README.md.");
-        }
-        if ("7".equals(id) && vaultPassword.getPasssword() == null) {
-            model.addAttribute("runtimeWarning", "We are running outside of a K8s cluster with Vault. Please run this in the K8s cluster as explained in the README.md.");
-        }
-        if (("9".equals(id) || "10".equals(id) || "11".equals(id)) && "if_you_see_this_please_use_AWS_Setup".equals(awsRoleArn)) {
-            model.addAttribute("runtimeWarning", "We are running outside of a properly configured AWS environment. Please run this in an AWS environment as explained in the README.md.");
-        }
         includeScoringStatus(Integer.parseInt(id), model);
+        addWarning(Integer.parseInt(id), model);
         return "challenge";
     }
 
-    private void includeScoringStatus(int id, Model model) {
-        model.addAttribute("version", version);
-        model.addAttribute("totalPoints", scoring.getTotalReceivedPoints());
-        model.addAttribute("progress", "" + scoring.getProgress());
-        if (scoring.getChallengeCompleted(id)) {
-            model.addAttribute("challengeCompletedAlready", "This exercise is already completed");
-        }
-    }
 
     @PostMapping("/challenge/1")
     public String postController(@ModelAttribute ChallengeForm challengeForm, Model model) {
@@ -262,7 +243,32 @@ public class SecretLeakageController {
             model.addAttribute("answerCorrect", "Your answer is incorrect, try harder ;-)");
         }
         includeScoringStatus(challenge, model);
+        addWarning(challenge, model);
         return "challenge";
+    }
+
+    private void addWarning(int id, Model model) {
+        if (!isDockerized() && (id < 5 || 8 == id)) {
+            model.addAttribute("runtimeWarning", "We are running outside of a docker container. Please run this in a container as explained in the README.md.");
+        }
+        if ((5 == id || 6 == id) && "if_you_see_this_please_use_k8s".equals(configmapK8sSecret)) {
+            model.addAttribute("runtimeWarning", "We are running outside of a K8s cluster. Please run this in the K8s cluster as explained in the README.md.");
+        }
+        if (7 == id && vaultPassword.getPasssword() == null) {
+            model.addAttribute("runtimeWarning", "We are running outside of a K8s cluster with Vault. Please run this in the K8s cluster as explained in the README.md.");
+        }
+        if ((9 == id || 10 == id || 11 == id) && "if_you_see_this_please_use_AWS_Setup".equals(awsRoleArn)) {
+            model.addAttribute("runtimeWarning", "We are running outside of a properly configured AWS environment. Please run this in an AWS environment as explained in the README.md.");
+        }
+    }
+
+    private void includeScoringStatus(int id, Model model) {
+        model.addAttribute("version", version);
+        model.addAttribute("totalPoints", scoring.getTotalReceivedPoints());
+        model.addAttribute("progress", "" + scoring.getProgress());
+        if (scoring.getChallengeCompleted(id)) {
+            model.addAttribute("challengeCompletedAlready", "This exercise is already completed");
+        }
     }
 
     private String getAWSChallenge9and10Value(String fileName) {
