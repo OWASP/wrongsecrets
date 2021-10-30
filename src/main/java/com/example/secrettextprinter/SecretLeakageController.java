@@ -20,11 +20,13 @@ import software.amazon.awssdk.services.sts.model.AssumeRoleWithWebIdentityReques
 import software.amazon.awssdk.services.sts.model.AssumeRoleWithWebIdentityResponse;
 import software.amazon.awssdk.services.sts.model.StsException;
 
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Controller
 @EnableConfigurationProperties(Vaultpassword.class)
@@ -32,11 +34,11 @@ import java.nio.file.Paths;
 public class SecretLeakageController {
 
     private final Vaultpassword vaultPassword;
-    Scoring scoring;
+    private final ConcurrentHashMap<String, InMemoryScoring> scoringCache;
 
     public SecretLeakageController(Vaultpassword vaultpassword) {
+        scoringCache = new ConcurrentHashMap<>();
         this.vaultPassword = vaultpassword;
-        scoring = new Scoring(11);
     }
 
     @Value("${password}")
@@ -137,115 +139,134 @@ public class SecretLeakageController {
     }
 
     @GetMapping("/")
-    public String rootPage(Model model) {
+    public String rootPage(Model model, HttpSession session) {
         model.addAttribute("version", version);
+        String sessionID = session.getId();
+        if (!scoringCache.containsKey(sessionID)) {
+            InMemoryScoring newScore = new InMemoryScoring(11);
+            scoringCache.put(sessionID, newScore);
+        }
         return "index";
     }
 
     @GetMapping("/challenge/{id}")
-    public String challengeForm(@PathVariable String id, Model model) {
+    public String challengeForm(@PathVariable String id, Model model, HttpSession session) {
+        InMemoryScoring newScore = getInMemoryScoring(session);
         model.addAttribute("challengeForm", new ChallengeForm());
         model.addAttribute("challengeNumber", id);
         model.addAttribute("answerCorrect", null);
         model.addAttribute("answerIncorrect", null);
         model.addAttribute("solution", null);
-        includeScoringStatus(Integer.parseInt(id), model);
+        includeScoringStatus(newScore, Integer.parseInt(id), model);
         addWarning(Integer.parseInt(id), model);
         return "challenge";
     }
 
+    private InMemoryScoring getInMemoryScoring(HttpSession session) {
+        String sessionID = session.getId();
+        InMemoryScoring newScore;
+        if (!scoringCache.containsKey(sessionID)) {
+            newScore = new InMemoryScoring(11);
+            scoringCache.put(sessionID, newScore);
+        } else {
+            newScore = scoringCache.get(sessionID);
+        }
+        return newScore;
+    }
+
 
     @PostMapping("/challenge/1")
-    public String postController(@ModelAttribute ChallengeForm challengeForm, Model model) {
+    public String postController(@ModelAttribute ChallengeForm challengeForm, Model model, HttpSession session) {
         log.info("POST received at 1 - serializing form: solution: " + challengeForm.getSolution());
         model.addAttribute("challengeNumber", 1);
-        return handleModel(hardcodedPassword, challengeForm.getSolution(), model, 1);
+        return handleModel(session, hardcodedPassword, challengeForm.getSolution(), model, 1);
 
     }
 
     @PostMapping("/challenge/2")
-    public String postController2(@ModelAttribute ChallengeForm challengeForm, Model model) {
+    public String postController2(@ModelAttribute ChallengeForm challengeForm, Model model, HttpSession session) {
         log.info("POST received at 2- serializing form: solution: " + challengeForm.getSolution());
         model.addAttribute("challengeNumber", 2);
-        return handleModel(argBasedPassword, challengeForm.getSolution(), model, 2);
+        return handleModel(session, argBasedPassword, challengeForm.getSolution(), model, 2);
     }
 
     @PostMapping("/challenge/3")
-    public String postController3(@ModelAttribute ChallengeForm challengeForm, Model model) {
+    public String postController3(@ModelAttribute ChallengeForm challengeForm, Model model, HttpSession session) {
         log.info("POST received at 3 - serializing form: solution: " + challengeForm.getSolution());
         model.addAttribute("challengeNumber", 3);
-        return handleModel(hardcodedEnvPassword, challengeForm.getSolution(), model, 3);
+        return handleModel(session, hardcodedEnvPassword, challengeForm.getSolution(), model, 3);
     }
 
     @PostMapping("/challenge/4")
-    public String postController4(@ModelAttribute ChallengeForm challengeForm, Model model) {
+    public String postController4(@ModelAttribute ChallengeForm challengeForm, Model model, HttpSession session) {
         log.info("POST received at 4 - serializing form: solution: " + challengeForm.getSolution());
         model.addAttribute("challengeNumber", 4);
-        return handleModel(Constants.password, challengeForm.getSolution(), model, 4);
+        return handleModel(session, Constants.password, challengeForm.getSolution(), model, 4);
     }
 
     @PostMapping("/challenge/5")
-    public String postController5(@ModelAttribute ChallengeForm challengeForm, Model model) {
+    public String postController5(@ModelAttribute ChallengeForm challengeForm, Model model, HttpSession session) {
         log.info("POST received at 5 - serializing form: solution: " + challengeForm.getSolution());
         model.addAttribute("challengeNumber", 5);
-        return handleModel(configmapK8sSecret, challengeForm.getSolution(), model, 5);
+        return handleModel(session, configmapK8sSecret, challengeForm.getSolution(), model, 5);
     }
 
     @PostMapping("/challenge/6")
-    public String postController6(@ModelAttribute ChallengeForm challengeForm, Model model) {
+    public String postController6(@ModelAttribute ChallengeForm challengeForm, Model model, HttpSession session) {
         log.info("POST received at 6 - serializing form: solution: " + challengeForm.getSolution());
         model.addAttribute("challengeNumber", 6);
-        return handleModel(secretK8sSecret, challengeForm.getSolution(), model, 6);
+        return handleModel(session, secretK8sSecret, challengeForm.getSolution(), model, 6);
     }
 
 
     @PostMapping("/challenge/7")
-    public String postController7(@ModelAttribute ChallengeForm challengeForm, Model model) {
+    public String postController7(@ModelAttribute ChallengeForm challengeForm, Model model, HttpSession session) {
         log.info("POST received at 7 - serializing form: solution: " + challengeForm.getSolution());
         model.addAttribute("challengeNumber", 7);
         if (null != vaultPassword.getPasssword()) {
-            return handleModel(vaultPassword.getPasssword(), challengeForm.getSolution(), model, 7);
+            return handleModel(session, vaultPassword.getPasssword(), challengeForm.getSolution(), model, 7);
         }
-        return handleModel(vaultPasswordString, challengeForm.getSolution(), model, 7);
+        return handleModel(session, vaultPasswordString, challengeForm.getSolution(), model, 7);
     }
 
     @PostMapping("/challenge/8")
-    public String postController8(@ModelAttribute ChallengeForm challengeForm, Model model) {
+    public String postController8(@ModelAttribute ChallengeForm challengeForm, Model model, HttpSession session) {
         log.info("POST received at 8 - serializing form: solution: " + challengeForm.getSolution());
         model.addAttribute("challengeNumber", 8);
-        return handleModel(Constants.newKey, challengeForm.getSolution(), model, 8);
+        return handleModel(session, Constants.newKey, challengeForm.getSolution(), model, 8);
     }
 
     @PostMapping("/challenge/9")
-    public String postController9(@ModelAttribute ChallengeForm challengeForm, Model model) {
+    public String postController9(@ModelAttribute ChallengeForm challengeForm, Model model, HttpSession session) {
         log.info("POST received at 9 - serializing form: solution: " + challengeForm.getSolution());
         model.addAttribute("challengeNumber", 9);
-        return handleModel(getAWSChallenge9and10Value("wrongsecret"), challengeForm.getSolution(), model, 8);
+        return handleModel(session, getAWSChallenge9and10Value("wrongsecret"), challengeForm.getSolution(), model, 8);
     }
 
     @PostMapping("/challenge/10")
-    public String postController10(@ModelAttribute ChallengeForm challengeForm, Model model) {
+    public String postController10(@ModelAttribute ChallengeForm challengeForm, Model model, HttpSession session) {
         log.info("POST received at 10 - serializing form: solution: " + challengeForm.getSolution());
         model.addAttribute("challengeNumber", 10);
-        return handleModel(getAWSChallenge9and10Value("wrongsecret-2"), challengeForm.getSolution(), model, 9);
+        return handleModel(session, getAWSChallenge9and10Value("wrongsecret-2"), challengeForm.getSolution(), model, 9);
     }
 
     @PostMapping("/challenge/11")
-    public String postController11(@ModelAttribute ChallengeForm challengeForm, Model model) {
+    public String postController11(@ModelAttribute ChallengeForm challengeForm, Model model, HttpSession session) {
         log.info("POST received at 11 - serializing form: solution: " + challengeForm.getSolution());
         model.addAttribute("challengeNumber", 11);
-        return handleModel(getAWSChallenge11Value(), challengeForm.getSolution(), model, 10);
+        return handleModel(session, getAWSChallenge11Value(), challengeForm.getSolution(), model, 10);
     }
 
 
-    private String handleModel(String targetPassword, String given, Model model, int challenge) {
+    private String handleModel(HttpSession session, String targetPassword, String given, Model model, int challenge) {
+        InMemoryScoring newScore = getInMemoryScoring(session);
         if (targetPassword.equals(given)) {
-            scoring.completeChallenge(challenge);
+            newScore.completeChallenge(challenge);
             model.addAttribute("answerCorrect", "Your answer is correct!");
         } else {
             model.addAttribute("answerIncorrect", "Your answer is incorrect, try harder ;-)");
         }
-        includeScoringStatus(challenge, model);
+        includeScoringStatus(newScore, challenge, model);
         addWarning(challenge, model);
         return "challenge";
     }
@@ -265,7 +286,7 @@ public class SecretLeakageController {
         }
     }
 
-    private void includeScoringStatus(int id, Model model) {
+    private void includeScoringStatus(InMemoryScoring scoring, int id, Model model) {
         model.addAttribute("version", version);
         model.addAttribute("totalPoints", scoring.getTotalReceivedPoints());
         model.addAttribute("progress", "" + scoring.getProgress());
