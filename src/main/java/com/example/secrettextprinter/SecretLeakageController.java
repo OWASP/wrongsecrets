@@ -146,6 +146,9 @@ public class SecretLeakageController {
     public String challengeForm(@PathVariable String id, Model model) {
         model.addAttribute("challengeForm", new ChallengeForm());
         model.addAttribute("challengeNumber", id);
+        model.addAttribute("answerCorrect", null);
+        model.addAttribute("answerIncorrect", null);
+        model.addAttribute("solution", null);
         includeScoringStatus(Integer.parseInt(id), model);
         addWarning(Integer.parseInt(id), model);
         return "challenge";
@@ -240,7 +243,7 @@ public class SecretLeakageController {
             scoring.completeChallenge(challenge);
             model.addAttribute("answerCorrect", "Your answer is correct!");
         } else {
-            model.addAttribute("answerCorrect", "Your answer is incorrect, try harder ;-)");
+            model.addAttribute("answerIncorrect", "Your answer is incorrect, try harder ;-)");
         }
         includeScoringStatus(challenge, model);
         addWarning(challenge, model);
