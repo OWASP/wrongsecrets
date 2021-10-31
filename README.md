@@ -30,7 +30,20 @@ Now you can try to find the secrets by means of solving the challenge offered at
 - [localhost:8080/challenge/8](http://localhost:8080/challenge/8)
 
 
-Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look better ;-). [See this issue as well.](https://github.com/commjoen/wrongsecrets/issues/23)
+Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look better ;-).
+
+### Running these on Heroku
+
+You can test them out at [https://wrongsecrets.herokuapp.com/](https://wrongsecrets.herokuapp.com/) as well! But please understand that we have NO guarantees that this works. Given we run in Heroku free-tier, please do not fuzz and/or try to bring it down: you would be spoiling it for others that want to testdrive it.
+
+### Deploying the app under your own heroku account
+
+
+1. [Sign up to Heroku](https://signup.heroku.com/) and
+   [log in to your account](https://id.heroku.com/login)
+2. Click the button below and follow the instructions
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 ## Basic K8s exercise
 *Can be used for challenges 1-6, 8*
