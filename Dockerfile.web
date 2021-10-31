@@ -11,4 +11,5 @@ RUN echo "$ARG_BASED_PASSWORD"
 RUN echo "$argBasedPassword"
 
 ADD target/secrettextprinter-0.0.2-SNAPSHOT.jar /application.jar
+RUN mvn clean install
 CMD java -jar -Dserver.port=$PORT -Dspring.profiles.active=without-vault application.jar
