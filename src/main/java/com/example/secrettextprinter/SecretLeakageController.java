@@ -145,6 +145,7 @@ public class SecretLeakageController {
         if (!scoringCache.containsKey(sessionID)) {
             InMemoryScoring newScore = new InMemoryScoring(11);
             scoringCache.put(sessionID, newScore);
+            log.info("Number of in memory scoring: {}", scoringCache.size());
         }
         return "index";
     }
@@ -171,6 +172,7 @@ public class SecretLeakageController {
         } else {
             newScore = scoringCache.get(sessionID);
         }
+        log.info("Number of in memory scoring: {}", scoringCache.size());
         return newScore;
     }
 
