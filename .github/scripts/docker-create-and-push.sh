@@ -19,4 +19,9 @@ docker build --build-arg "$3" --build-arg "PORT=8081" --build-arg "argBasedVersi
 docker push jeroenwillemsen/addo-example:$1-local-vault
 docker build --build-arg "$3" --build-arg "PORT=8081" --build-arg "argBasedVersion=$1" --build-arg "spring_profile=kubernetes-vault" -t jeroenwillemsen/addo-example:$1-k8s-vault ./../../.
 docker push jeroenwillemsen/addo-example:$1-k8s-vault
+#staging (https://arcane-scrubland-42646.herokuapp.com/)
 heroku container:push --recursive --arg ${3},argBasedVersion=${1}heroku
+heroku container:release web
+#prep prod
+heroku container:push --recursive --arg ${3},argBasedVersion=${1}heroku --app=wrongsecrets
+#want to release? do heroku container:release web --app=wrongsecrets
