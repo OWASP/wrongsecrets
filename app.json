@@ -12,7 +12,7 @@
   ],
   "stack": "container",
   "formation": {
-    "": {
+    "heroku": {
       "quantity": 1
     }
   },
