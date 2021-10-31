@@ -274,7 +274,7 @@ public class SecretLeakageController {
     }
 
     private void addWarning(int id, Model model) {
-        if (!isDockerized() && (id < 5 || 8 == id)) {
+        if ("if_you_see_this_please_use_docker_instead".equals(argBasedPassword) && (id < 5 || 8 == id)) {
             model.addAttribute("runtimeWarning", "We are running outside of a docker container. Please run this in a container as explained in the README.md.");
         }
         if ((5 == id || 6 == id) && "if_you_see_this_please_use_k8s".equals(configmapK8sSecret)) {
@@ -348,11 +348,6 @@ public class SecretLeakageController {
             }
         }
         return awsDefaultValue;
-    }
-
-    public boolean isDockerized() {
-        File f = new File("/.dockerenv");
-        return f.exists();
     }
 
 }
