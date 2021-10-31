@@ -10,6 +10,12 @@
     "vulnerability",
     "awareness"
   ],
+  "stack": "container",
+  "formation": {
+    "": {
+      "quantity": 1
+    }
+  },
   "website": "https://github.com/commjoen/wrongsecrets",
   "repository": "https://github.com/commjoen/wrongsecrets"
 }
