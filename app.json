@@ -13,9 +13,11 @@
   "stack": "container",
   "formation": {
     "web": {
-      "quantity": 1
+      "quantity": 1,
+      "size": "Free"
     }
-  },
+  }
+},
   "website": "https://github.com/commjoen/wrongsecrets",
   "repository": "https://github.com/commjoen/wrongsecrets"
 }
