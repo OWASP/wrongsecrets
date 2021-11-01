@@ -38,6 +38,13 @@
                         <a class="dropdown-item" href="/challenge/11">Challenge 11</a>
                     </ul>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://github.com/commjoen/wrongsecrets" target="_blank">Github</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"
+                       th:text="'Version:'+${version}"></a>
+                </li>
             </ul>
         </div>
     </div>
@@ -68,12 +75,13 @@
                 <a href="challenge/11">Challenge 11 (requires AWS)</a><br/>
             </p>
             <p>Don't want to wait for Vault? here is <a href="spoil-7">the secret :(</a>.</p>
+            <p>Like what you see? Please <a class="github-button" href="https://github.com/commjoen/wrongsecrets" data-icon="octicon-star" aria-label="Star commjoen/wrongsecrets on GitHub">Star us</a></p>
         </div>
     </div>
 </div>
 
-
 <script th:src="@{/webjars/popper.js/2.9.3/umd/popper.min.js}"></script>
 <script th:src="@{/webjars/bootstrap/5.1.2/js/bootstrap.min.js}"></script>
+<script th:src="@{/webjars/github-buttons/2.14.1/dist/buttons.js}"></script>
 </body>
 </html>

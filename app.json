@@ -1,0 +1,21 @@
+{
+  "name": "WrongSecrets",
+  "description": "A P0wnable app to get inspired on your secrets management strategy",
+  "keywords": [
+    "secrets",
+    "secrets-management",
+    "java",
+    "Spring Boot",
+    "security",
+    "vulnerability",
+    "awareness"
+  ],
+  "stack": "container",
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "website": "https://github.com/commjoen/wrongsecrets",
+  "repository": "https://github.com/commjoen/wrongsecrets"
+}

@@ -10,14 +10,19 @@
             border-radius: 25px;
             border: 2px solid black;
             width: 80%;
-            padding: 20px
+            padding: 20px;
+            margin: 20px 0px 20px 0px;
+        }
+
+        .progress {
+            margin: 20px 0px 20px 0px;
         }
     </style>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/">WrongSecrets</a>
+        <a class="navbar-brand" href="/">WrongSecrets </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -46,22 +51,42 @@
                         <a class="dropdown-item" href="/challenge/11">Challenge 11</a>
                     </ul>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://github.com/commjoen/wrongsecrets" target="_blank">Github</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"
+                       th:text="'Version:'+${version}"></a>
+                </li>
             </ul>
         </div>
+
     </div>
 </nav>
 <div class="container">
     <h1 th:text="'Challenge '+${challengeNumber}"/>
     <p th:text="'Welcome to challenge ' + ${challengeNumber} + '. You need to guess the secret that is hidden in the java, docker, k8s, Vault or AWS.'"></p>
     <div class="explanation" th:replace="doc:challenge__${challengeNumber}__.adoc"></div>
-    <p th:text="${answerCorrect}"></p>
+    <div th:text="${challengeCompletedAlready}"></div>
+    <div class="feedback alert alert-success" role="alert" th:if="${answerCorrect!=null}"
+         th:text="${answerCorrect}"></div>
+    <div class="feedback alert alert-danger" role="alert" th:if="${answerIncorrect!=null}"
+         th:text="${answerIncorrect}"></div>
     <form action="#" th:action="'/challenge/'+${challengeNumber}" th:object="${challengeForm}" method="post">
         <p>Answer to solution : <input type="text" th:field="*{solution}"/></p>
-        <p><input class="btn btn-primary" type="submit" value="Submit"/> <input class="btn btn-secondary" type="reset" value="Reset"/></p>
+        <p><input class="btn btn-primary" type="submit" value="Submit"/> <input class="btn btn-secondary" type="reset"
+                                                                                value="Reset"/></p>
     </form>
 
     There are 11 challenges (/challenge/1-11), can you solve them all? <br/>
     Go back to <a href="/">the main page</a>.
+
+    <div class="progress">
+        <div class="progress-bar" role="progressbar" th:style="'width:'+${progress}+'%;'"
+             th:attr="aria-valuenow=${progress}" aria-valuemin="0" aria-valuemax="100"
+             th:text="${totalPoints}"></div>
+    </div>
+
     <div class="alert alert-danger" role="alert" th:if="${runtimeWarning!=null}" th:text="${runtimeWarning}"></div>
 </div>
 <script th:src="@{/webjars/popper.js/2.9.3/umd/popper.min.js}"></script>
