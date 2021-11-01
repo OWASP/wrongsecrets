@@ -9,7 +9,6 @@ fi
 echo "tag supplied: $1"
 echo "tag message: $2"
 echo "buildarg supplied: $3"
-echo "Port: $4"
 
 git tag -a $1 -m "$2"
 git push --tags
