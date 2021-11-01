@@ -7,6 +7,9 @@ Welcome to the Wrong Secrets p0wnable app. With this app, we have packed various
 Can you solve all the 11 challenges?
 ![screenshot.png](screenshot.png)
 
+## Support
+Need support? Contact us via [OWASP Slack](https://owasp.slack.com/archives/C02KQ7D9XHR)
+
 ## Basic docker exercises
 *Can be used for challenges 1-4, 8* 
 
@@ -37,7 +40,6 @@ Note that these challenges are still very basic, and so are their explanations. 
 You can test them out at [https://wrongsecrets.herokuapp.com/](https://wrongsecrets.herokuapp.com/) as well! But please understand that we have NO guarantees that this works. Given we run in Heroku free-tier, please do not fuzz and/or try to bring it down: you would be spoiling it for others that want to testdrive it.
 
 ### Deploying the app under your own heroku account
-
 
 1. [Sign up to Heroku](https://signup.heroku.com/) and
    [log in to your account](https://id.heroku.com/login)
