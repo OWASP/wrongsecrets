@@ -8,7 +8,7 @@ Can you solve all the 11 challenges?
 ![screenshot.png](screenshot.png)
 
 ## Support
-Need support? Contact us via [OWASP Slack](https://owasp.slack.com/archives/C02KQ7D9XHR)
+Need support? Contact us via [OWASP Slack](https://owasp.slack.com/archives/C02KQ7D9XHR), file a [PR](https://github.com/commjoen/wrongsecrets/pulls) or file an [issue](https://github.com/commjoen/wrongsecrets/issues). Please note that this is a volunteer based project, so it might take a little while before we respond.
 
 ## Basic docker exercises
 *Can be used for challenges 1-4, 8* 
