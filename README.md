@@ -1,6 +1,6 @@
 # Wrong Secrets [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Want%20to%20dive%20into%20secrets%20management%20and%20do%20some%20hunting?%20try%20this&url=https://github.com/commjoen/wrongsecrets&hashtags=secretsmanagement,secrets,hunting,p0wnableapp)
 
-[![Java checkstyle and testing](https://github.com/commjoen/wrongsecrets/actions/workflows/main.yml/badge.svg)](https://github.com/commjoen/wrongsecrets/actions/workflows/main.yml) [![Terraform FMT](https://github.com/commjoen/wrongsecrets/actions/workflows/terraform.yml/badge.svg)](https://github.com/commjoen/wrongsecrets/actions/workflows/terraform.yml) [![Test minikube script](https://github.com/commjoen/wrongsecrets/actions/workflows/minikube-test.yml/badge.svg)](https://github.com/commjoen/wrongsecrets/actions/workflows/minikube-test.yml)
+[![Java checkstyle and testing](https://github.com/commjoen/wrongsecrets/actions/workflows/main.yml/badge.svg)](https://github.com/commjoen/wrongsecrets/actions/workflows/main.yml) [![Terraform FMT](https://github.com/commjoen/wrongsecrets/actions/workflows/terraform.yml/badge.svg)](https://github.com/commjoen/wrongsecrets/actions/workflows/terraform.yml) [![Test minikube script](https://github.com/commjoen/wrongsecrets/actions/workflows/minikube-test.yml/badge.svg)](https://github.com/commjoen/wrongsecrets/actions/workflows/minikube-test.yml) [![OWASP Incubator Project](https://img.shields.io/badge/owasp-incubator%20project-48A646.svg)](https://owasp.org/projects/)
 
 Welcome to the Wrong Secrets p0wnable app. With this app, we have packed various ways of how to not store your secrets. These can help you to realize whether your secret management is ok. The challenge is to find all the different secrets by means of various tools and techniques.
 
@@ -8,10 +8,12 @@ Can you solve all the 11 challenges?
 ![screenshot.png](screenshot.png)
 
 ## Support
-Need support? Contact us via [OWASP Slack](https://owasp.slack.com/archives/C02KQ7D9XHR), file a [PR](https://github.com/commjoen/wrongsecrets/pulls) or file an [issue](https://github.com/commjoen/wrongsecrets/issues). Please note that this is a volunteer based project, so it might take a little while before we respond.
+
+Need support? Contact us via [OWASP Slack](https://owasp.slack.com/archives/C02KQ7D9XHR), file a [PR](https://github.com/commjoen/wrongsecrets/pulls) or file an [issue](https://github.com/commjoen/wrongsecrets/issues). Please note that this is an OWASP volunteer based project, so it might take a little while before we respond.
 
 ## Basic docker exercises
-*Can be used for challenges 1-4, 8* 
+
+*Can be used for challenges 1-4, 8*
 
 For the basic docker exercises you currently require:
 
@@ -32,12 +34,11 @@ Now you can try to find the secrets by means of solving the challenge offered at
 - [localhost:8080/challenge/4](http://localhost:8080/challenge/4)
 - [localhost:8080/challenge/8](http://localhost:8080/challenge/8)
 
-
 Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look better ;-).
 
 ### Running these on Heroku
 
-You can test them out at <a href="https://wrongsecrets.herokuapp.com/" target="_blank">https://wrongsecrets.herokuapp.com/</a> as well! But please understand that we have NO guarantees that this works. Given we run in Heroku free-tier, please do not fuzz and/or try to bring it down: you would be spoiling it for others that want to testdrive it.
+You can test them out at <a href="<https://wrongsecrets.herokuapp.com/>" target="_blank">https://wrongsecrets.herokuapp.com/</a> as well! But please understand that we have NO guarantees that this works. Given we run in Heroku free-tier, please do not fuzz and/or try to bring it down: you would be spoiling it for others that want to testdrive it.
 
 ### Deploying the app under your own heroku account
 
@@ -48,6 +49,7 @@ You can test them out at <a href="https://wrongsecrets.herokuapp.com/" target="_
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 ## Basic K8s exercise
+
 *Can be used for challenges 1-6, 8*
 
 ### Minikube based
@@ -74,7 +76,6 @@ now you can use the provided IP address and port to further play with the K8s va
 - [localhost:8080/challenge/5](http://localhost:8080/challenge/5)
 - [localhost:8080/challenge/6](http://localhost:8080/challenge/6)
 
-
 ### k8s based
 
 Want to run vanilla on your own k8s? Use the commands below:
@@ -92,10 +93,12 @@ Want to run vanilla on your own k8s? Use the commands below:
 ```
 
 now you can use the provided IP address and port to further play with the K8s variant (instead of localhost).
+
 - [localhost:8080/challenge/5](http://localhost:8080/challenge/5)
 - [localhost:8080/challenge/6](http://localhost:8080/challenge/6)
 
 ## Vault exercises with minikube
+
 *Can be used for challenges 1-8*
 Make sure you have the following installed:
 
@@ -107,17 +110,30 @@ Make sure you have the following installed:
 - vault [Install from here](https://www.vaultproject.io/downloads),
 - grep, Cat, and Sed
 
-Run `./k8s-vault-minkube-start.sh`, when the script is done, then the challenges will wait for you at <http://localhost:8080> . 
+Run `./k8s-vault-minkube-start.sh`, when the script is done, then the challenges will wait for you at <http://localhost:8080> .
 This will allow you to run challenge 1-8.
 
-### AWS challenge 9, 10 and 11 
+### AWS challenge 9, 10 and 11
+
 *Can be used for challenges 1-11*
 
 Follow the steps in [the README in the AWS subfolder](aws/README.md).
 
 ## Special thanks & Contributors
 
-With thanks to [@madhuakula](https://github.com/madhuakula) for motivating me to set up the project, and thanks to [@bendehaan](https://github.com/bendehaan) & [@nbaars](https://github.com/nbaars) for contributing to the project.
+Leaders:
+
+- [Ben de Haan @bendehaan](https://github.com/bendehaan)
+- [Jeroen willemsen @commjoen](https://github.com/commjoen)
+
+Top contributors:
+
+- [Nanne Baars@nbaars](https://github.com/nbaars)
+
+Special mentions for helping out:
+
+- [Madhu Akula @madhuakula](https://github.com/madhuakula)
+- [Björn Kimminich @bkimminich](https://github.com/bkimminich)
 
 ## Help Wanted
 
@@ -125,7 +141,7 @@ You can help us by the following methods:
 
 - Star us
 - Share this app with others
-- Of course, we can always use your help to get more flavors of "wrongly" configured secrets in to spread awareness! We would love to get some help with a Google Cloud or Azure integration for instance. Do you miss something else than a cloud provider as an example? File an issue or create a PR! See [our guide on contributing for more details](CONTRIBUTING.md).
+- Of course, we can always use your help to get more flavors of "wrongly" configured secrets in to spread awareness! We would love to get some help with a Google Cloud or Azure integration for instance. Do you miss something else than a cloud provider as an example? File an issue or create a PR! See [our guide on contributing for more details](CONTRIBUTING.md). Contributors will be listed in releases, in "Sepcial thanks & Contributors", and the web-app. 
 
 ## Notes on development
 
