@@ -38,7 +38,7 @@ Note that these challenges are still very basic, and so are their explanations. 
 
 ### Running these on Heroku
 
-You can test them out at <a href="<https://wrongsecrets.herokuapp.com/>" target="_blank">https://wrongsecrets.herokuapp.com/</a> as well! But please understand that we have NO guarantees that this works. Given we run in Heroku free-tier, please do not fuzz and/or try to bring it down: you would be spoiling it for others that want to testdrive it.
+You can test them out at <a href="https://wrongsecrets.herokuapp.com/" target="_blank"> https://wrongsecrets.herokuapp.com/</a> as well! But please understand that we have NO guarantees that this works. Given we run in Heroku free-tier, please do not fuzz and/or try to bring it down: you would be spoiling it for others that want to testdrive it.
 
 ### Deploying the app under your own heroku account
 
