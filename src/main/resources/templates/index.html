@@ -5,6 +5,14 @@
     <title>Secret Challenge</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.2/css/bootstrap.min.css} "/>
+    <style>
+        div.thank-you {
+            border-radius: 25px;
+            border: 2px solid black;
+            padding: 10px;
+            margin: 00px 0px 10px 0px;
+        }
+    </style>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -60,7 +68,7 @@
 
     </div>
     <div class="row">
-        <div class="col">
+        <div class="col-12 col-md-9">
             <p>
                 <a href="challenge/1">Challenge 1 (requires Docker)</a><br/>
                 <a href="challenge/2">Challenge 2 (requires Docker)</a><br/>
@@ -75,7 +83,28 @@
                 <a href="challenge/11">Challenge 11 (requires AWS)</a><br/>
             </p>
             <p>Don't want to wait for Vault? here is <a href="spoil-7">the secret :(</a>.</p>
-            <p>Like what you see? Please <a class="github-button" href="https://github.com/commjoen/wrongsecrets" data-icon="octicon-star" aria-label="Star commjoen/wrongsecrets on GitHub">Star us</a></p>
+            <p>Like what you see? Please <a class="github-button" href="https://github.com/commjoen/wrongsecrets"
+                                            data-icon="octicon-star" aria-label="Star commjoen/wrongsecrets on GitHub">Star
+                us</a></p>
+        </div>
+        <div class="col-12 col-md-3">
+            <div class="border border-dark thank-you">
+                Leaders:
+                <ul>
+                    <li>Ben de Haan @bendehaan</li>
+                    <li>Jeroen willemsen @commjoen</li>
+                </ul>
+                Top contributors:
+                <ul>
+                    <li>Nanne Baars@nbaars</li>
+                </ul>
+
+                Special mentions for helping out:
+                <ul>
+                    <li>Madhu Akula @madhuakula</li>
+                    <li>Björn Kimminich @bkimminich</li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
