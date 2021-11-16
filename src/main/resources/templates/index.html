@@ -5,6 +5,14 @@
     <title>Secret Challenge</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.2/css/bootstrap.min.css} "/>
+    <style>
+        div.thank-you {
+            border-radius: 25px;
+            border: 2px solid black;
+            padding: 10px;
+            margin: 00px 0px 10px 0px;
+        }
+    </style>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -55,12 +63,12 @@
         <p class="lead">Welcome to Wrong-Secrets. With this app, we hope you will re-evaluate your secrets management
             strategy</p>
         <hr class="my-4">
-        <p>Special Thanks to: Nanne Baars, Ben de Haan & Madhu Akula for motivating and helping me out to build
-            this.</p>
+        <p>For each of the challenges below: try to find the secret! Enter it in the `Answer to solution` box and score points!
+        Note that some of the challenges require this app to run on additional infrastructure (see in the links below).</p>
 
     </div>
     <div class="row">
-        <div class="col">
+        <div class="col-12 col-md-9">
             <p>
                 <a href="challenge/1">Challenge 1 (requires Docker)</a><br/>
                 <a href="challenge/2">Challenge 2 (requires Docker)</a><br/>
@@ -75,7 +83,27 @@
                 <a href="challenge/11">Challenge 11 (requires AWS)</a><br/>
             </p>
             <p>Don't want to wait for Vault? here is <a href="spoil-7">the secret :(</a>.</p>
-            <p>Like what you see? Please <a class="github-button" href="https://github.com/commjoen/wrongsecrets" data-icon="octicon-star" aria-label="Star commjoen/wrongsecrets on GitHub">Star us</a></p>
+            <p>Like what you see? Please <a class="github-button" href="https://github.com/commjoen/wrongsecrets"
+                                            data-icon="octicon-star" aria-label="Star commjoen/wrongsecrets on GitHub">Star
+                us</a></p>
+        </div>
+        <div class="col-12 col-lg-3">
+            <div class="border border-dark thank-you">
+                OWASP Project Leaders:
+                <ul>
+                    <li><a href="https://github.com/bendehaan">Ben de Haan @bendehaan</a></li>
+                    <li><a href="https://github.com/commjoen">Jeroen willemsen @commjoen</a></li>
+                </ul>
+                Top Contributors:
+                <ul>
+                    <li><a href="https://github.com/nbaars">Nanne Baars @nbaars</a></li>
+                </ul>
+                Special mentions for helping out:
+                <ul>
+                    <li><a href="https://github.com/madhuakula">Madhu Akula @madhuakula</a></li>
+                    <li><a href="https://github.com/bkimminich">Björn Kimminich @bkimminich</a></li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
