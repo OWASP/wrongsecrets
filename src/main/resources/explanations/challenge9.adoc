@@ -1,3 +1,5 @@
 === Challenge 9: AWS Secrets manager part 1
 
 Okay, now we're generating an AWS secret through Terraform. What happens in the Terraform state?
+
+You can try to find the secret by sniffing through your `terraform.tfstate` files using https://github.com/trufflesecurity/truffleHog[*Trufflehog*].
