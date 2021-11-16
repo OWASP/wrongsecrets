@@ -4,6 +4,6 @@ We've now used Parameter Store directly from within the app, but there's an IAM 
 
 Assume the role `cant-read-secrets` and try some IAM privilege escalation. Don't cheat using your own roles :)
 
-Here is where tools like https://github.com/nccgroup/ScoutSuite[ScoutSuite] can really help detecting issues with your IAM that can help you to identify possible paths towards privilege escalation. 
+Here is where tools like https://github.com/nccgroup/ScoutSuite[ScoutSuite] can really help detecting issues with your IAM which might provide possible paths towards privilege escalation. These privilege escalation paths can often help to create and/or assume other more powerful roles which might actually allow you to read the secret.
 
 If you're stuck, try spotting the error in Terraform.
