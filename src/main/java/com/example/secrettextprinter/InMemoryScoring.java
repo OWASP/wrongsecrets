@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class InMemoryScoring implements Scoring {
 
     private int maxPoints = 0;
-    private ChallengeEntry[] challenges;
+    private final ChallengeEntry[] challenges;
 
     public InMemoryScoring(int numberOfChallenge) {
         challenges = new ChallengeEntry[numberOfChallenge];
@@ -41,7 +41,7 @@ public class InMemoryScoring implements Scoring {
         return totalscore[0];
     }
 
-    class ChallengeEntry {
+    static class ChallengeEntry {
         private boolean completed;
         private final int score;
 

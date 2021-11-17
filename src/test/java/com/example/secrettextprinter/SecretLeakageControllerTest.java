@@ -19,10 +19,7 @@ import org.springframework.vault.core.VaultTemplate;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;

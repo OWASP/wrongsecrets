@@ -21,7 +21,6 @@ import software.amazon.awssdk.services.sts.model.AssumeRoleWithWebIdentityRespon
 import software.amazon.awssdk.services.sts.model.StsException;
 
 import javax.servlet.http.HttpSession;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -82,12 +81,6 @@ public class SecretLeakageController {
         return getSpoil(model, hardcodedPassword);
     }
 
-    private String getSpoil(Model model, String password) {
-        model.addAttribute("spoil", new Spoil());
-        model.addAttribute("solution", password);
-        return "spoil";
-    }
-
     @GetMapping("/spoil-2")
     public String getEnvArgBasedSecret(Model model) {
         return getSpoil(model, argBasedPassword);
@@ -121,24 +114,31 @@ public class SecretLeakageController {
         return getSpoil(model, vaultPasswordString);
     }
 
+
     @GetMapping("/spoil-8")
     public String getRandCode(Model model) {
         return getSpoil(model, Constants.newKey);
     }
 
     @GetMapping("/spoil-9")
-    public String getAWSChanngelenge1(Model model) {
+    public String getAWSChallenge1(Model model) {
         return getSpoil(model, getAWSChallenge9and10Value("wrongsecret"));
     }
 
     @GetMapping("/spoil-10")
-    public String getAWSChanngelenge2(Model model) {
+    public String getAWSChallenge2(Model model) {
         return getSpoil(model, getAWSChallenge9and10Value("wrongsecret-2"));
     }
 
     @GetMapping("/spoil-11")
-    public String getAWSChanngelenge3(Model model) {
+    public String getAWSChallenge3(Model model) {
         return getSpoil(model, getAWSChallenge11Value());
+    }
+
+    private String getSpoil(Model model, String password) {
+        model.addAttribute("spoil", new Spoil());
+        model.addAttribute("solution", password);
+        return "spoil";
     }
 
     @GetMapping("/")
@@ -163,7 +163,7 @@ public class SecretLeakageController {
         model.addAttribute("answerIncorrect", null);
         model.addAttribute("solution", null);
         includeScoringStatus(newScore, Integer.parseInt(id), model);
-        addWarning(Integer.parseInt(id), model);
+        addEnvWarning(Integer.parseInt(id), model);
         return "challenge";
     }
 
@@ -273,11 +273,11 @@ public class SecretLeakageController {
             model.addAttribute("answerIncorrect", "Your answer is incorrect, try harder ;-)");
         }
         includeScoringStatus(newScore, challenge, model);
-        addWarning(challenge, model);
+        addEnvWarning(challenge, model);
         return "challenge";
     }
 
-    private void addWarning(int id, Model model) {
+    private void addEnvWarning(int id, Model model) {
         if ("if_you_see_this_please_use_docker_instead".equals(argBasedPassword) && (id < 5 || 8 == id)) {
             model.addAttribute("runtimeWarning", "We are running outside of a docker container. Please run this in a container as explained in the README.md.");
         }
@@ -316,14 +316,14 @@ public class SecretLeakageController {
         if (!"if_you_see_this_please_use_AWS_Setup".equals(awsRoleArn)) {
 
             try { //based on https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javav2/example_code/sts/src/main/java/com/example/sts
-                String webIDentityToken = Files.readString(Paths.get(tokenFileLocation));
+                String webIdentityToken = Files.readString(Paths.get(tokenFileLocation));
                 StsClient stsClient = StsClient.builder()
                         .region(Region.EU_CENTRAL_1)
                         .build();
                 AssumeRoleWithWebIdentityRequest webIdentityRequest = AssumeRoleWithWebIdentityRequest.builder()
                         .roleArn(awsRoleArn)
                         .roleSessionName("WrongsecretsApp")
-                        .webIdentityToken(webIDentityToken)
+                        .webIdentityToken(webIdentityToken)
                         .build();
 
                 AssumeRoleWithWebIdentityResponse tokenResponse = stsClient.assumeRoleWithWebIdentity(webIdentityRequest);
