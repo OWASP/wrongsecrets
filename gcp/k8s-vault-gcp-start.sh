@@ -3,10 +3,10 @@
 # set -o pipefail
 # set -o nounset
 
-AWS_REGION="eu-west-1"
-
-echo "This is a script to bootstrap the configuration. You need to have installed: helm, kubectl, jq, vault, grep, cat, sed, and awscli, and is only tested on mac, Debian and Ubuntu"
+echo "This is a script to bootstrap the configuration. You need to have installed: helm, kubectl, jq, vault, grep, cat, sed, and google cloud cli, and is only tested on mac, Debian and Ubuntu"
 echo "This script is based on the steps defined in https://learn.hashicorp.com/tutorials/vault/kubernetes-minikube. Vault is awesome!"
+
+GCP_PROJECT=$(gcloud config list --format 'value(core.project)' 2>/dev/null)
 
 kubectl get configmaps | grep 'secrets-file' &>/dev/null
 if [ $? == 0 ]; then
@@ -99,8 +99,9 @@ kubectl exec vault-0 -- vault write auth/kubernetes/role/secret-challenge \
   vault kv put secret/secret-challenge vaultpassword.password="$(openssl rand -base64 16)" &&
   vault kv put secret/application vaultpassword.password="$(openssl rand -base64 16)"
 
-echo "Setting up IRSA for the vault service account"
-kubectl annotate --overwrite sa vault eks.amazonaws.com/role-arn="$(terraform output -raw irsa_role)"
+# TODO: figure out whether something like this is necessaray
+# echo "Setting up IRSA for the vault service account"
+# kubectl annotate --overwrite sa vault .......com/role-arn="$(terraform output -raw irsa_role)"
 
 echo "Add secrets manager driver to EKS"
 helm repo add secrets-store-csi-driver https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts
@@ -112,14 +113,16 @@ else
   helm install -n kube-system csi-secrets-store secrets-store-csi-driver/secrets-store-csi-driver --set enableSecretRotation=true --set rotationPollInterval=60s
 fi
 
-echo "Install ACSP"
-kubectl apply -f https://raw.githubusercontent.com/aws/secrets-store-csi-driver-provider-aws/main/deployment/aws-provider-installer.yaml
+echo "Generate secret manager challenge secret 2"
+# TODO: replace
+# aws secretsmanager put-secret-value --secret-id wrongsecret-2 --secret-string "$(openssl rand -base64 24)" --region $AWS_REGION --output json --no-cli-pager
 
-echo "Generate secrets manager challenge secret 2"
-aws secretsmanager put-secret-value --secret-id wrongsecret-2 --secret-string "$(openssl rand -base64 24)" --region $AWS_REGION --output json --no-cli-pager
+# echo "Generate Parameter store challenge secret"
+# TODO: replace by different challenge.
+# aws ssm put-parameter --name wrongsecretvalue --overwrite --type SecureString --value "$(openssl rand -base64 24)" --region $AWS_REGION --output json --no-cli-pager
 
-echo "Generate Parameter store challenge secret"
-aws ssm put-parameter --name wrongsecretvalue --overwrite --type SecureString --value "$(openssl rand -base64 24)" --region $AWS_REGION --output json --no-cli-pager
+echo ""
+envsubst <./k8s/secret-volume.yml.tpl >./k8s/secret-volume.yml
 
 echo "Apply secretsmanager storage volume"
 kubectl apply -f./k8s/secret-volume.yml
