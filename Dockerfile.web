@@ -1,6 +1,6 @@
-FROM jeroenwillemsen/addo-example:1.0.1-no-vault
+FROM jeroenwillemsen/addo-example:1.0.2-no-vault
 
-ARG argBasedVersion="1.0.1"
+ARG argBasedVersion="1.0.2"
 ENV APP_VERSION=$argBasedVersion
 
 CMD java -jar -Dserver.port=$PORT -Dspring.profiles.active=without-vault application.jar
