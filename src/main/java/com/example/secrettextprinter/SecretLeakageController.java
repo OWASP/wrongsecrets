@@ -65,6 +65,9 @@ public class SecretLeakageController {
     @Value("${secretmountpath}")
     String filePath;
 
+    @Value("${K8S_ENV}")
+    private String k8sEnvironment;
+
     @Value("${AWS_ROLE_ARN}")
     private String awsRoleArn;
 
@@ -141,6 +144,7 @@ public class SecretLeakageController {
     @GetMapping("/")
     public String rootPage(Model model, HttpSession session) {
         model.addAttribute("version", version);
+        model.addAttribute("environment", k8sEnvironment);
         String sessionID = session.getId();
         if (!scoringCache.containsKey(sessionID)) {
             InMemoryScoring newScore = new InMemoryScoring(11);
