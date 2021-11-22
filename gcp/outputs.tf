@@ -17,3 +17,8 @@ output "kubernetes_cluster_host" {
   value       = google_container_cluster.gke.endpoint
   description = "GKE Cluster Host"
 }
+
+output "gke_config" {
+  value       = "gcloud container clusters get-credentials --project ${var.project_id} --zone ${var.region} ${var.cluster_name}"
+  description = "config string for the cluster credentials"
+}
