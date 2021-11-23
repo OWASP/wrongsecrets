@@ -74,6 +74,9 @@ public class SecretLeakageController {
     @Value("${AWS_WEB_IDENTITY_TOKEN_FILE}")
     private String tokenFileLocation;
 
+    @Value("${AWS_REGION}")
+    private String awsRegion;
+
     @Value("${APP_VERSION}")
     private String version;
 
@@ -318,7 +321,7 @@ public class SecretLeakageController {
             try { //based on https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javav2/example_code/sts/src/main/java/com/example/sts
                 String webIDentityToken = Files.readString(Paths.get(tokenFileLocation));
                 StsClient stsClient = StsClient.builder()
-                        .region(Region.EU_CENTRAL_1)
+                        .region(Region.of(awsRegion))
                         .build();
                 AssumeRoleWithWebIdentityRequest webIdentityRequest = AssumeRoleWithWebIdentityRequest.builder()
                         .roleArn(awsRoleArn)
@@ -329,7 +332,7 @@ public class SecretLeakageController {
                 AssumeRoleWithWebIdentityResponse tokenResponse = stsClient.assumeRoleWithWebIdentity(webIdentityRequest);
                 log.info("The token value is " + tokenResponse.credentials().sessionToken());
                 SsmClient ssmClient = SsmClient.builder()
-                        .region(Region.EU_CENTRAL_1)
+                        .region(Region.of(awsRegion))
                         .credentialsProvider(StsAssumeRoleWithWebIdentityCredentialsProvider.builder()
                                 .stsClient(stsClient)
                                 .refreshRequest(webIdentityRequest)
