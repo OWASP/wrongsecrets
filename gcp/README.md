@@ -54,7 +54,6 @@ When you're done:
 ### A few things to consider
 
 1. Does your worker node now have access as well?
-2. Can you easily obtain the instance profile of the Node?
-3. Can you get the secrets in the SSM Parameter Store and Secrets Manager easily? Which paths do you see?
-4. Which of the 2 (SSM Parameter Store and Secrets Manager) works cross-account?
-5. If you have applied the secrets to the cluster, you should see at the configuration details of the cluster that Secrets encryption is "Disabled", what does that mean?
+2. Can you easily obtain the GCP IAM role of the Node?
+3. Can you get the secrets in the SSM Parameter Store and Secret Manager easily? Which paths do you see?
+4. You should see at the configuration details of the cluster that `databaseEncryption` is `DECRYPTED` (`gcloud container clusters describe wrongsecrets-exercise-cluster --region europe-west4`). What does that mean?
