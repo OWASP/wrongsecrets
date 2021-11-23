@@ -116,8 +116,8 @@ fi
 kubectl apply -f https://raw.githubusercontent.com/GoogleCloudPlatform/secrets-store-csi-driver-provider-gcp/main/deploy/provider-gcp-plugin.yaml
 
 echo "Generate secret manager challenge secret 2"
-# TODO: replace
-# aws secretsmanager put-secret-value --secret-id wrongsecret-2 --secret-string "$(openssl rand -base64 24)" --region $AWS_REGION --output json --no-cli-pager
+echo -n "$(openssl rand -base64 16)" |
+  gcloud secrets versions add wrongsecret-2 --data-file=-
 
 # echo "Generate Parameter store challenge secret"
 # TODO: replace by different challenge.
@@ -128,6 +128,11 @@ envsubst <./k8s/secret-volume.yml.tpl >./k8s/secret-volume.yml
 
 echo "Apply secretsmanager storage volume"
 kubectl apply -f./k8s/secret-volume.yml
+
+echo "Annotate service account"
+kubectl annotate serviceaccount \
+  --namespace default vault \
+  "iam.gke.io/gcp-service-account=wrongsecrets-sa@$(GCP_PROJECT).iam.gserviceaccount.com"
 
 kubectl apply -f./k8s/secret-challenge-vault-deployment.yml
 while [[ $(kubectl get pods -l app=secret-challenge -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do echo "waiting for secret-challenge" && sleep 2; done
