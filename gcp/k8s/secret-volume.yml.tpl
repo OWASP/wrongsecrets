@@ -5,7 +5,7 @@ metadata:
 spec:
   provider: gcp
   parameters:
-    objects: |
+    secrets: |
       - resourceName: "projects/${GCP_PROJECT}/secrets/wrongsecret-1/versions/latest"
         fileName: "wrongsecret"
       - resourceName: "projects/${GCP_PROJECT}/secrets/wrongsecret-2/versions/latest"

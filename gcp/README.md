@@ -1,6 +1,6 @@
 # Setup your secrets in GCP
 
-In this setup we integrate the secrets exercise with GCP GKE and let pods consume secrets from the GCP Secret manager. We use GCP Autopilot since we don't want the hassle of managing nodes ourselves. If you want to know more about integrating secrets with GKE, check [this link](https://github.com/GoogleCloudPlatform/secrets-store-csi-driver-provider-gcp).
+In this setup we integrate the secrets exercise with GCP GKE and let pods consume secrets from the GCP Secret manager. If you want to know more about integrating secrets with GKE, check [this link](https://github.com/GoogleCloudPlatform/secrets-store-csi-driver-provider-gcp).
 
 ## Pre-requisites
 
@@ -22,7 +22,7 @@ Make sure you have an active account at GCP for which you have configured the cr
 
 **Note-II**: The cluster you create, has its access bound to the public IP of the creator. In other words: the cluster you create with this code has its access bound to your public IP-address if you apply it locally.
 
-**Note-III**: We create resources in `eu-west4` by default. You can set the region by editing `terraform.tfvars`.
+**Note-III**: We create resources in `europe-west4` by default. You can set the region by editing `terraform.tfvars`.
 
 1. check whether you have the right project by doing `gcloud config list`.
 2. Run `gcloud auth application-default login` to be able to use your account credentials for terraform.
@@ -30,9 +30,8 @@ Make sure you have an active account at GCP for which you have configured the cr
 4. Run `terraform init` (if required, use tfenv to select TF 0.14.0 or higher )
 5. Run `terraform plan`
 6. Run `terraform apply`. Note: the apply will take 10 to 20 minutes depending on the speed of the GCP backplane.
-7. When creation is done, run `gcloud container clusters get-credentials wrongsecrets-exercise-cluster`
-8. Run `export KUBECONFIG=~/.kube/wrongsecrets`
-9. Run `./k8s-vault-gcp-start.sh`
+7. When creation is done, run `gcloud container clusters get-credentials wrongsecrets-exercise-cluster --region YOUR_REGION`
+8. Run `./k8s-vault-gcp-start.sh`
 
 Your EKS cluster should be visible in [EU-West4](https://console.cloud.google.com/kubernetes?referrer=search&project=wrongsecrets) by default. Want a different region? You can modify `terraform.tfvars` or input it directly using the `region` variable in plan/apply.
 

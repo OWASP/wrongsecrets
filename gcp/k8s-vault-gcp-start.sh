@@ -30,7 +30,7 @@ else
   helm install consul hashicorp/consul --version 0.30.0 --values ../k8s/helm-consul-values.yml
 fi
 
-while [[ $(kubectl get pods -l app=consul -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True True" ]]; do echo "waiting for Consul" && sleep 2; done
+while [[ $(kubectl get pods -l app=consul -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True True True True" ]]; do echo "waiting for Consul" && sleep 2; done
 
 helm list | grep 'vault' &>/dev/null
 if [ $? == 0 ]; then
@@ -112,6 +112,8 @@ if [ $? == 0 ]; then
 else
   helm install -n kube-system csi-secrets-store secrets-store-csi-driver/secrets-store-csi-driver --set enableSecretRotation=true --set rotationPollInterval=60s
 fi
+
+kubectl apply -f https://raw.githubusercontent.com/GoogleCloudPlatform/secrets-store-csi-driver-provider-gcp/main/deploy/provider-gcp-plugin.yaml
 
 echo "Generate secret manager challenge secret 2"
 # TODO: replace

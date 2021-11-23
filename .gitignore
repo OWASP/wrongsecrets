@@ -49,3 +49,6 @@ terraform.tfstate*
 aws/terraform.tfstate.*
 aws/terraform.tfstate.backup
 aws/.terraform.tfstate.lock.info
+
+# Templated
+gcp/k8s/secret-volume.yml

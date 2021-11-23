@@ -23,7 +23,9 @@ resource "google_container_cluster" "gke" {
   network    = google_compute_network.vpc.name
   subnetwork = google_compute_subnetwork.node_subnet.name
 
-  enable_autopilot = true
+  workload_identity_config {
+    workload_pool = "${var.project_id}.svc.id.goog"
+  }
 
   node_config {
     # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
