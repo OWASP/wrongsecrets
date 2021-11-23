@@ -20,9 +20,9 @@ Make sure you have an active account at GCP for which you have configured the cr
 
 **Note**: Applying the Terraform means you are creating cloud infrastructure which actually costs you money. The authors are not responsible for any cost coming from following the instructions below. If you have a brand new GCP account, you could use the $300 in credits to set up the infrastructure for free.
 
-**Note-II**: The cluster you create, has its access bound to the public IP of the creator. In other words: the cluster you create with this code has its access bound to your public IP-address if you apply it locally.
+**Note-II**: We create resources in `europe-west4` by default. You can set the region by editing `terraform.tfvars`.
 
-**Note-III**: We create resources in `europe-west4` by default. You can set the region by editing `terraform.tfvars`.
+<!-- **Note-III**: The cluster you create, has its access bound to the public IP of the creator. In other words: the cluster you create with this code has its access bound to your public IP-address if you apply it locally. -->
 
 1. check whether you have the right project by doing `gcloud config list`.
 2. Run `gcloud auth application-default login` to be able to use your account credentials for terraform.
