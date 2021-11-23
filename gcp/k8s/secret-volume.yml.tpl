@@ -6,7 +6,7 @@ spec:
   provider: gcp
   parameters:
     objects: |
-      - resourceName: "projects/${PROJECT_ID}/secrets/wrongsecret-1/versions/latest"
+      - resourceName: "projects/${GCP_PROJECT}/secrets/wrongsecret-1/versions/latest"
         fileName: "wrongsecret"
-      - resourceName: "projects/${PROJECT_ID}/secrets/wrongsecret-2/versions/latest"
+      - resourceName: "projects/${GCP_PROJECT}/secrets/wrongsecret-2/versions/latest"
         fileName: "wrongsecret-2"
