@@ -1,0 +1,11 @@
+=== Challenge 12: GCP Secret Manager part 3
+
+In our GKE cluster, there's a service account for workloads, which maps to a service account in kubernetes. 
+
+Unfortunately the developers used only one GCP service account to bind to multiple K8s service accounts. This means a different pod can access our secrets... 
+
+Try provisioning `wrongsecret-3` with a pod with the `default` service account in the default namespace.
+
+
+Hint: You could use a job with the image `gcr.io/google.com/cloudsdktool/cloud-sdk:latest` and use the `gcloud` cli.
+See https://cloud.google.com/secret-manager/docs/creating-and-accessing-secrets#a_note_on_resource_consistency[accessing a secret] for some help.

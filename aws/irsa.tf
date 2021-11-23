@@ -74,7 +74,7 @@ data "aws_iam_policy_document" "secret_manager" {
 #############
 
 resource "aws_iam_role" "user_role" {
-  name = "cant-read-screts"
+  name = "cant-read-secrets"
 
   assume_role_policy = data.aws_iam_policy_document.user_assume_role.json
 }

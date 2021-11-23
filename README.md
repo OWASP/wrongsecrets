@@ -13,7 +13,7 @@ Need support? Contact us via [OWASP Slack](https://owasp.slack.com/archives/C02K
 
 ## Basic docker exercises
 
-*Can be used for challenges 1-4, 8*
+_Can be used for challenges 1-4, 8_
 
 For the basic docker exercises you currently require:
 
@@ -50,7 +50,7 @@ You can test them out at <a href="https://wrongsecrets.herokuapp.com/" target="_
 
 ## Basic K8s exercise
 
-*Can be used for challenges 1-6, 8*
+_Can be used for challenges 1-6, 8_
 
 ### Minikube based
 
@@ -99,7 +99,7 @@ now you can use the provided IP address and port to further play with the K8s va
 
 ## Vault exercises with minikube
 
-*Can be used for challenges 1-8*
+_Can be used for challenges 1-8_
 Make sure you have the following installed:
 
 - minikube with docker (or comment out line 8 and work at your own k8s setup),
@@ -115,9 +115,17 @@ This will allow you to run challenge 1-8.
 
 ### AWS challenge 9, 10 and 11
 
-*Can be used for challenges 1-11*
+_Can be used for challenges 1-11_
+
+**NOTE** Challenge 11 only works in eu-central-1 for now. See [issue 63](https://github.com/commjoen/wrongsecrets/issues/63).
 
 Follow the steps in [the README in the AWS subfolder](aws/README.md).
+
+### GCP challenge 9 and 10 - EXPERIMENTAL
+
+_Can be used for challenges 1-10_
+
+Follow the steps in [the README in the GCP subfolder](gcp/README.md). Note that this is [still](https://github.com/commjoen/wrongsecrets/issues/39) [work in progress](https://github.com/commjoen/wrongsecrets/issues/40)
 
 ## Special thanks & Contributors
 
@@ -129,6 +137,7 @@ Leaders:
 Top contributors:
 
 - [Nanne Baars@nbaars](https://github.com/nbaars)
+- [Filip Chyla](https://github.com/fchyla)
 
 Special mentions for helping out:
 
@@ -141,7 +150,7 @@ You can help us by the following methods:
 
 - Star us
 - Share this app with others
-- Of course, we can always use your help to get more flavors of "wrongly" configured secrets in to spread awareness! We would love to get some help with a Google Cloud or Azure integration for instance. Do you miss something else than a cloud provider as an example? File an issue or create a PR! See [our guide on contributing for more details](CONTRIBUTING.md). Contributors will be listed in releases, in "Sepcial thanks & Contributors", and the web-app. 
+- Of course, we can always use your help to get more flavors of "wrongly" configured secrets in to spread awareness! We would love to get some help with a Google Cloud or Azure integration for instance. Do you miss something else than a cloud provider as an example? File an issue or create a PR! See [our guide on contributing for more details](CONTRIBUTING.md). Contributors will be listed in releases, in "Sepcial thanks & Contributors", and the web-app.
 
 ## Notes on development
 
@@ -151,7 +160,7 @@ If you want to test against vault without K8s: start vault locally with
  export VAULT_ADDR='http://127.0.0.1:8200'
  export VAULT_API_ADDR='http://127.0.0.1:8200'
  vault server -dev
- ```
+```
 
 and in your next terminal, do (with the token from the previous commands):
 
