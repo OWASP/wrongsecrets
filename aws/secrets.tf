@@ -85,7 +85,7 @@ resource "random_password" "password2" {
 }
 
 resource "aws_ssm_parameter" "secret" {
-  name        = "wrongsecret"
+  name        = "wrongsecretvalue"
   description = "A secret "
   type        = "SecureString"
   value       = random_password.password2.result # Bootstrap something, not used in challenge
