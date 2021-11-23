@@ -14,7 +14,7 @@ resource "google_secret_manager_secret_iam_member" "wrongsecret_1_member" {
   project   = google_secret_manager_secret.wrongsecret_1.project
   secret_id = google_secret_manager_secret.wrongsecret_1.secret_id
   role      = "roles/secretmanager.secretAccessor"
-  member    = google_service_account.wrongsecrets_cluster.id
+  member    = "serviceAccount:${google_service_account.wrongsecrets_cluster.email}"
 }
 
 resource "random_password" "password" {
@@ -46,7 +46,7 @@ resource "google_secret_manager_secret_iam_member" "wrongsecret_2_member" {
   project   = google_secret_manager_secret.wrongsecret_2.project
   secret_id = google_secret_manager_secret.wrongsecret_2.secret_id
   role      = "roles/secretmanager.secretAccessor"
-  member    = google_service_account.wrongsecrets_cluster.id
+  member    = "serviceAccount:${google_service_account.wrongsecrets_cluster.email}"
 }
 
 ###############################

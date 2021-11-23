@@ -14,5 +14,5 @@ resource "google_compute_subnetwork" "master_subnet" {
   name          = "${var.project_id}-master-subnet"
   region        = var.region
   network       = google_compute_network.vpc.name
-  ip_cidr_range = "10.31.0.0/28"
+  ip_cidr_range = "10.32.0.0/28"
 }

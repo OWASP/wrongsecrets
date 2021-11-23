@@ -44,6 +44,7 @@ root_token
 kubeconfig_wrongsecrets-exercise-cluster
 .terraform
 .terraform.lock.hcl
+.terraform*
 terraform.tfstate*
 aws/terraform.tfstate.*
 aws/terraform.tfstate.backup

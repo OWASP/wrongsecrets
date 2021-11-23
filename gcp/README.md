@@ -26,7 +26,7 @@ Make sure you have an active account at GCP for which you have configured the cr
 
 1. check whether you have the right project by doing `gcloud config list`.
 2. Run `gcloud auth application-default login` to be able to use your account credentials for terraform.
-3. Enable the required gcloud services using `gcloud services enable compute.googleapis.com`
+3. Enable the required gcloud services using `gcloud services enable compute.googleapis.com container.googleapis.com`
 4. Run `terraform init` (if required, use tfenv to select TF 0.14.0 or higher )
 5. Run `terraform plan`
 6. Run `terraform apply`. Note: the apply will take 10 to 20 minutes depending on the speed of the GCP backplane.

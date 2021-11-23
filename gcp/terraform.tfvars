@@ -1,2 +1,2 @@
-project_id = "wrongsecrets"
-region     = "eu-west4"
+project_id = "owasp-wrongsecrets"
+region     = "europe-west4"

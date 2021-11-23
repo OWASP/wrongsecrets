@@ -37,18 +37,18 @@ resource "google_container_cluster" "gke" {
     tags = ["wrongsecrets"]
   }
 
-  private_cluster_config {
-    enable_private_endpoint = true
-    enable_private_nodes    = true
-    master_ipv4_cidr_block  = google_compute_subnetwork.master_subnet.ip_cidr_range
-  }
+  # private_cluster_config {
+  #   enable_private_endpoint = true
+  #   enable_private_nodes    = true
+  #   master_ipv4_cidr_block  = "10.31.0.0/28"
+  # }
 
-  master_authorized_networks_config {
-    cidr_blocks {
-      cidr_block   = "${data.http.ip.body}/32"
-      display_name = "user origin"
-    }
-  }
+  # master_authorized_networks_config {
+  #   cidr_blocks {
+  #     cidr_block   = "${data.http.ip.body}/32"
+  #     display_name = "user origin"
+  #   }
+  # }
 
   timeouts {
     create = "30m"
