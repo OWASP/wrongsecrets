@@ -132,7 +132,7 @@ kubectl apply -f./k8s/secret-volume.yml
 echo "Annotate service account"
 kubectl annotate serviceaccount \
   --namespace default vault \
-  "iam.gke.io/gcp-service-account=wrongsecrets-sa@$(GCP_PROJECT).iam.gserviceaccount.com"
+  "iam.gke.io/gcp-service-account=wrongsecrets-workload-sa@$(GCP_PROJECT).iam.gserviceaccount.com"
 
 kubectl apply -f./k8s/secret-challenge-vault-deployment.yml
 while [[ $(kubectl get pods -l app=secret-challenge -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do echo "waiting for secret-challenge" && sleep 2; done
