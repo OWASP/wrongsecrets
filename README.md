@@ -129,7 +129,7 @@ Follow the steps in [the README in the GCP subfolder](gcp/README.md).
 
 Leaders:
 
-- [Ben de Haan @benno001](https://github.com/benno001)
+- [Ben de Haan @bendehaan](https://github.com/bendehaan)
 - [Jeroen willemsen @commjoen](https://github.com/commjoen)
 
 Top contributors:
