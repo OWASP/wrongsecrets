@@ -123,7 +123,7 @@ Follow the steps in [the README in the AWS subfolder](aws/README.md).
 
 _Can be used for challenges 1-10_
 
-Follow the steps in [the README in the GCP subfolder](gcp/README.md).
+Follow the steps in [the README in the GCP subfolder](gcp/README.md). Note that this is [still](https://github.com/commjoen/wrongsecrets/issues/39) [work in progress](https://github.com/commjoen/wrongsecrets/issues/40)
 
 ## Special thanks & Contributors
 
