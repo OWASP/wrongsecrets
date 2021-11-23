@@ -119,7 +119,7 @@ _Can be used for challenges 1-11_
 
 Follow the steps in [the README in the AWS subfolder](aws/README.md).
 
-### GCP challenge 9 and 10
+### GCP challenge 9 and 10 - EXPERIMENTAL
 
 _Can be used for challenges 1-10_
 
