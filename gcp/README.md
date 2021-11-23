@@ -40,7 +40,7 @@ Are you done playing? Please run `terraform destroy` twice to clean up.
 
 ### Test it
 
-Run `./k8s-vault-gcp-start.sh` and connect to http://localhost:8080 when it's ready to accept connections (you'll read the line `Forwarding from 127.0.0.1:8080 -> 8080` in your console). Now challenge 9 and 10 should be available as well.
+Run `./k8s-vault-gcp-start.sh` and connect to [http://localhost:8080](http://localhost:8080) when it's ready to accept connections (you'll read the line `Forwarding from 127.0.0.1:8080 -> 8080` in your console). Now challenge 9 and 10 should be available as well.
 
 ### Clean it up
 
