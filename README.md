@@ -136,8 +136,9 @@ Leaders:
 
 Top contributors:
 
-- [Nanne Baars@nbaars](https://github.com/nbaars)
-- [Filip Chyla](https://github.com/fchyla)
+- [Nanne Baars @nbaars](https://github.com/nbaars)
+- [Filip Chyla @fchyla](https://github.com/fchyla)
+- [Dmitry Litosh @Dlitosh](https://github.com/Dlitosh)
 
 Special mentions for helping out:
 

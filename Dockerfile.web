@@ -2,5 +2,5 @@ FROM jeroenwillemsen/addo-example:ENV-test3-no-vault
 
 ARG argBasedVersion="1.0.2B"
 ENV APP_VERSION=$argBasedVersion
-
+ENV K8S_ENV=Heroku(Docker)
 CMD java -jar -Dserver.port=$PORT -Dspring.profiles.active=without-vault application.jar
