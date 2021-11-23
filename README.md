@@ -117,6 +117,8 @@ This will allow you to run challenge 1-8.
 
 _Can be used for challenges 1-11_
 
+**NOTE** Challenge 11 only works in eu-central-1 for now. See [issue 63](https://github.com/commjoen/wrongsecrets/issues/63).
+
 Follow the steps in [the README in the AWS subfolder](aws/README.md).
 
 ### GCP challenge 9 and 10 - EXPERIMENTAL
