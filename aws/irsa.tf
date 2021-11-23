@@ -26,6 +26,15 @@ data "aws_iam_policy_document" "assume_role_with_oidc" {
     effect  = "Allow"
     actions = ["sts:AssumeRoleWithWebIdentity"]
   }
+
+  statement {
+    principals {
+      type        = "AWS"
+      identifiers = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"]
+    }
+    effect  = "Allow"
+    actions = ["sts:AssumeRole"]
+  }
 }
 
 resource "aws_iam_role_policy_attachment" "irsa_role_attachment" {
