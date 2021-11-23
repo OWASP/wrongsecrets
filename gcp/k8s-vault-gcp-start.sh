@@ -99,11 +99,7 @@ kubectl exec vault-0 -- vault write auth/kubernetes/role/secret-challenge \
   vault kv put secret/secret-challenge vaultpassword.password="$(openssl rand -base64 16)" &&
   vault kv put secret/application vaultpassword.password="$(openssl rand -base64 16)"
 
-# TODO: figure out whether something like this is necessaray
-# echo "Setting up IRSA for the vault service account"
-# kubectl annotate --overwrite sa vault .......com/role-arn="$(terraform output -raw irsa_role)"
-
-echo "Add secrets manager driver to EKS"
+echo "Add secrets manager driver to repo"
 helm repo add secrets-store-csi-driver https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts
 
 helm list --namespace kube-system | grep 'csi-secrets-store' &>/dev/null
@@ -119,20 +115,24 @@ echo "Generate secret manager challenge secret 2"
 echo -n "$(openssl rand -base64 16)" |
   gcloud secrets versions add wrongsecret-2 --data-file=-
 
-# echo "Generate Parameter store challenge secret"
-# TODO: replace by different challenge.
-# aws ssm put-parameter --name wrongsecretvalue --overwrite --type SecureString --value "$(openssl rand -base64 24)" --region $AWS_REGION --output json --no-cli-pager
+echo "Generate secret manager challenge secret 3"
+echo -n "$(openssl rand -base64 16)" |
+  gcloud secrets versions add wrongsecret-3 --data-file=-
 
-echo ""
+echo "Fill-out the secret volume manifest template"
 envsubst <./k8s/secret-volume.yml.tpl >./k8s/secret-volume.yml
 
 echo "Apply secretsmanager storage volume"
 kubectl apply -f./k8s/secret-volume.yml
 
-echo "Annotate service account"
+echo "Annotate service accounts"
 kubectl annotate serviceaccount \
   --namespace default vault \
-  "iam.gke.io/gcp-service-account=wrongsecrets-workload-sa@$(GCP_PROJECT).iam.gserviceaccount.com"
+  "iam.gke.io/gcp-service-account=wrongsecrets-workload-sa@${GCP_PROJECT}.iam.gserviceaccount.com"
+
+kubectl annotate serviceaccount \
+  --namespace default default \
+  "iam.gke.io/gcp-service-account=wrongsecrets-workload-sa@${GCP_PROJECT}.iam.gserviceaccount.com"
 
 kubectl apply -f./k8s/secret-challenge-vault-deployment.yml
 while [[ $(kubectl get pods -l app=secret-challenge -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do echo "waiting for secret-challenge" && sleep 2; done
