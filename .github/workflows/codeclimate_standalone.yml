@@ -26,11 +26,11 @@ jobs:
         uses: erzz/codeclimate-standalone@v0.0.3
         with:
           html_report: true
-          info_threshold: 10
-          minor_threshold: 5
-          major_threshold: 1
-          critical_threshold: 0
-          blocker_threshold: 0
+          info_threshold: 50
+          minor_threshold: 25
+          major_threshold: 10
+          critical_threshold: 5
+          blocker_threshold: 1
 
       - name: Upload Report
         uses: actions/upload-artifact@v2
