@@ -1,6 +1,8 @@
 package org.owasp.wrongsecrets;
 
+import lombok.extern.slf4j.Slf4j;
 import org.hamcrest.CoreMatchers;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,14 +27,18 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.io.File;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ExtendWith({SpringExtension.class})
 @ActiveProfiles("cloud-aws-test")
 @AutoConfigureWebTestClient
+@Slf4j
 class SecretLeakageControllerCloudTest {
 
     @Autowired
@@ -54,6 +60,8 @@ class SecretLeakageControllerCloudTest {
 
     @Test
     void solveChallenge9WithoutFile() throws Exception {
+        File testFile = new File(tempMountPath, "wrongsecret");
+        assertFalse(Files.exists(testFile.toPath()), "path exists: "+ testFile.toPath().toString());
         solveChallenge("/challenge/9", tempAWSfiller);
     }
 
@@ -62,7 +70,9 @@ class SecretLeakageControllerCloudTest {
     void solveChallenge9WithAWSFile() throws Exception {
         File testFile = new File(tempMountPath, "wrongsecret");
         String secret = "secretvalueWitFile";
-        Files.writeString(testFile.toPath(), secret, StandardOpenOption.CREATE, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
+        Path path = Files.writeString(testFile.toPath(), secret, StandardOpenOption.CREATE, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
+        log.info("using path: "+ path);
+        assertTrue(Files.exists(path));
         solveChallenge("/challenge/9", secret);
         testFile.deleteOnExit();
     }
@@ -71,7 +81,9 @@ class SecretLeakageControllerCloudTest {
     void solveChallenge10WithAWSFile() throws Exception {
         File testFile = new File(tempMountPath, "wrongsecret-2");
         String secret = "secretvalueWitFile";
-        Files.writeString(testFile.toPath(), secret, StandardOpenOption.CREATE, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
+        Path path = Files.writeString(testFile.toPath(), secret, StandardOpenOption.CREATE, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
+        log.info("using path: "+ path);
+        assertTrue(Files.exists(path));
         solveChallenge("/challenge/10", secret);
         testFile.deleteOnExit();
     }
