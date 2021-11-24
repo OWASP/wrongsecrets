@@ -15,7 +15,7 @@ function checkCommandsAvailable() {
   done
 }
 
-checkCommandsAvailable helm minikube jq vault sed grep docker grep cat
+checkCommandsAvailable helm minikube jq vault sed grep docker grep cat gcloud
 
 echo "This is a script to bootstrap the configuration. You need to have installed: helm, kubectl, jq, vault, grep, cat, sed, and google cloud cli, and is only tested on mac, Debian and Ubuntu"
 echo "This script is based on the steps defined in https://learn.hashicorp.com/tutorials/vault/kubernetes-minikube. Vault is awesome!"
