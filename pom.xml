@@ -8,10 +8,10 @@
         <version>2.5.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.example</groupId>
-    <artifactId>secrettextprinter</artifactId>
+    <groupId>org.owasp</groupId>
+    <artifactId>wrongsecrets</artifactId>
     <version>0.0.2-SNAPSHOT</version>
-    <name>secrettextprinter</name>
+    <name>wrongsecrets</name>
     <description>Demo project for our journey to Vault</description>
 
     <properties>
