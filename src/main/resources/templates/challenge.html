@@ -58,7 +58,7 @@
          class="explanation">
         <div th:replace="doc:challenge__${challengeNumber}+'-gcp'__.adoc"></div>
     </div>
-    <div th:if="${ environment !='gcp'}"
+    <div th:if="${ environment !='gcp'} or ${ challengeNumber  &lt; 8}"
          class="explanation">
         <div th:replace="doc:challenge__${challengeNumber}__.adoc"></div>
     </div>
