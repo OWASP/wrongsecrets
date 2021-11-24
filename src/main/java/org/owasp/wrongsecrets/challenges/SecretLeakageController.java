@@ -2,7 +2,6 @@ package org.owasp.wrongsecrets.challenges;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.owasp.wrongsecrets.Constants;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.Vaultpassword;
 import org.springframework.beans.factory.annotation.Value;
@@ -74,11 +73,6 @@ public class SecretLeakageController {
     @Value("${APP_VERSION}")
     private String version;
 
-    @GetMapping("/spoil-9")
-    public String getCloudChallenge1(Model model) {
-        return getSpoil(model, getCloudChallenge9and10Value("wrongsecret"));
-    }
-
     @GetMapping("/spoil-10")
     public String getCloudChallenge2(Model model) {
         return getSpoil(model, getCloudChallenge9and10Value("wrongsecret-2"));
@@ -102,7 +96,7 @@ public class SecretLeakageController {
         return "index";
     }
 
-    @GetMapping("/challenge/{id:9|10|11}")
+    @GetMapping("/challenge/{id:10|11}")
     public String challengeForm(@PathVariable String id, Model model) {
         model.addAttribute("challengeForm", new ChallengeForm(""));
         model.addAttribute("challengeNumber", id);
@@ -125,13 +119,6 @@ public class SecretLeakageController {
         includeScoringStatus(challengeNumber, model, null);
         addWarning(challengeNumber, model);
         return "challenge";
-    }
-
-    @PostMapping("/challenge/9")
-    public String postController9(@ModelAttribute ChallengeForm challengeForm, Model model) {
-        log.info("POST received at 9 - serializing form: solution: " + challengeForm.solution());
-        model.addAttribute("challengeNumber", 9);
-        return handleModel(getCloudChallenge9and10Value("wrongsecret"), challengeForm.solution(), model, 8);
     }
 
     @PostMapping("/challenge/10")
