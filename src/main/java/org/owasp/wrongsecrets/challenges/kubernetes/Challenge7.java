@@ -3,7 +3,6 @@ package org.owasp.wrongsecrets.challenges.kubernetes;
 
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.Spoiler;
-import org.owasp.wrongsecrets.Vaultpassword;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.ChallengeEnvironment;
 import org.owasp.wrongsecrets.challenges.ChallengeNumber;
@@ -33,7 +32,7 @@ public class Challenge7 extends Challenge {
     }
 
     @Override
-    public boolean solved(String answer) {
+    public boolean answerCorrect(String answer) {
         return getAnswer().equals(answer);
     }
 

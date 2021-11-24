@@ -28,7 +28,7 @@ public class Challenge3 extends Challenge {
     }
 
     @Override
-    public boolean solved(String answer) {
+    public boolean answerCorrect(String answer) {
         return hardcodedEnvPassword.equals(answer);
     }
 

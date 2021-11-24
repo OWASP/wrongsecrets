@@ -23,7 +23,7 @@ public class Challenge8 extends Challenge {
     }
 
     @Override
-    public boolean solved(String answer) {
+    public boolean answerCorrect(String answer) {
         return Constants.newKey.equals(answer);
     }
 

@@ -26,7 +26,7 @@ public class Challenge5 extends Challenge {
     }
 
     @Override
-    public boolean solved(String answer) {
+    public boolean answerCorrect(String answer) {
         return configmapK8sSecret.equals(answer);
     }
 

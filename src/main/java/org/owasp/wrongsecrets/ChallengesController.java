@@ -1,6 +1,8 @@
-package org.owasp.wrongsecrets.challenges;
+package org.owasp.wrongsecrets;
 
-import org.owasp.wrongsecrets.ScoreCard;
+import org.owasp.wrongsecrets.challenges.Challenge;
+import org.owasp.wrongsecrets.challenges.ChallengeForm;
+import org.owasp.wrongsecrets.challenges.ChallengeNumber;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,14 +42,14 @@ public class ChallengesController {
         return Integer.valueOf(challenge.getClass().getAnnotation(ChallengeNumber.class).value());
     }
 
-    @GetMapping("/spoil-{id:1|2|3|4|5|6|7|8|9|10}") //TODO needed for migration
+    @GetMapping("/spoil-{id}")
     public String spoiler(Model model, @PathVariable String id) {
         var challenge = findChallenge(id);
         model.addAttribute("solution", challenge.spoiler().solution()); //TODO update spoiler class directly instead of the String
         return "spoil";
     }
 
-    @GetMapping("/challenge/{id:1|2|3|4|5|6|7|8|9|10}") //TODO needed for migration
+    @GetMapping("/challenge/{id}")
     public String challenge(Model model, @PathVariable String id) {
         var challenge = findChallenge(id);
 
@@ -63,7 +65,7 @@ public class ChallengesController {
         return "challenge";
     }
 
-    @PostMapping("/challenge/{id:1|2|3|4|5|6|7|8|9}")
+    @PostMapping("/challenge/{id}")
     public String postController(@ModelAttribute ChallengeForm challengeForm, Model model, @PathVariable String id) {
         var challenge = findChallenge(id);
         model.addAttribute("challengeNumber", challengeNumber(challenge));
@@ -83,7 +85,7 @@ public class ChallengesController {
         model.addAttribute("totalPoints", scoreCard.getTotalReceivedPoints());
         model.addAttribute("progress", "" + scoreCard.getProgress());
 
-        if (scoreCard.getChallengeCompleted(challengeNumber(challenge))) {
+        if (scoreCard.getChallengeCompleted(challenge)) {
             model.addAttribute("challengeCompletedAlready", "This exercise is already completed");
         }
     }
@@ -95,7 +97,7 @@ public class ChallengesController {
                 case K8S -> "We are running outside of a K8s cluster. Please run this in the K8s cluster as explained in the README.md.";
                 case K8S_VAULT -> "We are running outside of a K8s cluster with Vault. Please run this in the K8s cluster as explained in the README.md.";
                 case CLOUD -> "We are running outside of a properly configured AWS or GCP environment. Please run this in an AWS or GCP environment as explained in the README.md.";
-                default -> "??";
+                case AWS -> "We are running outside of a properly configured AWS environment. Please run this in an AWS environment as explained in the README.md. GCP is not done yet";
             });
     }
 }

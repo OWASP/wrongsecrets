@@ -26,7 +26,7 @@ public class Challenge2 extends Challenge {
     }
 
     @Override
-    public boolean solved(String answer) {
+    public boolean answerCorrect(String answer) {
         return argBasedPassword.equals(answer);
     }
 

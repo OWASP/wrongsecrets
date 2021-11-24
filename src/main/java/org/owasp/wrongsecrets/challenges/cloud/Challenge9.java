@@ -10,7 +10,6 @@ import org.owasp.wrongsecrets.challenges.ChallengeNumber;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -39,7 +38,7 @@ public class Challenge9 extends Challenge {
     }
 
     @Override
-    public boolean solved(String answer) {
+    public boolean answerCorrect(String answer) {
         return challengeAnswer.equals(answer);
     }
 
@@ -52,7 +51,7 @@ public class Challenge9 extends Challenge {
         try {
             return Files.readString(Paths.get(filePath, fileName));
         } catch (Exception e) {
-            log.error("Exception during file reading, defaulting to default without aWS", e);
+            log.warn("Exception during file reading, defaulting to default without cloud environment");
             return awsDefaultValue;
         }
     }

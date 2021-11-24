@@ -26,7 +26,7 @@ public class Challenge6 extends Challenge {
     }
 
     @Override
-    public boolean solved(String answer) {
+    public boolean answerCorrect(String answer) {
         return secretK8sSecret.equals(answer);
     }
 

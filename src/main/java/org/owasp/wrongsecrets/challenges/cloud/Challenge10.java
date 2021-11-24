@@ -38,7 +38,7 @@ public class Challenge10 extends Challenge {
     }
 
     @Override
-    public boolean solved(String answer) {
+    public boolean answerCorrect(String answer) {
         return challengeAnswer.equals(answer);
     }
 
@@ -51,7 +51,7 @@ public class Challenge10 extends Challenge {
         try {
             return Files.readString(Paths.get(filePath, fileName));
         } catch (Exception e) {
-            log.error("Exception during file reading, defaulting to default without aWS", e);
+            log.warn("Exception during file reading, defaulting to default without AWS");
             return awsDefaultValue;
         }
     }

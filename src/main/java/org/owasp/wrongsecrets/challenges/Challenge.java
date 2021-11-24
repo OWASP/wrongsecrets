@@ -14,7 +14,15 @@ public abstract class Challenge {
 
     public abstract Spoiler spoiler();
 
-    public abstract boolean solved(String answer);
+    public boolean solved(String answer) {
+        var correctAnswer = answerCorrect(answer);
+        if (correctAnswer) {
+            scoreCard.completeChallenge(this);
+        }
+        return correctAnswer;
+    }
+
+    protected abstract boolean answerCorrect(String answer);
 
     public boolean environmentSupported() {
         return false;

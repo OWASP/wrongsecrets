@@ -2,29 +2,26 @@ package org.owasp.wrongsecrets;
 
 import org.owasp.wrongsecrets.challenges.Challenge;
 
-import java.util.List;
-import java.util.stream.IntStream;
+import java.util.HashSet;
+import java.util.Set;
 
 public class InMemoryScoreCard implements ScoreCard {
 
     private final int maxPoints;
-    private final List<ChallengeScore> challengeScores;
+    private final Set<Challenge> solvedChallenges = new HashSet<>();
 
     public InMemoryScoreCard(int numberOfChallenge) {
         maxPoints = numberOfChallenge * 50;
-        this.challengeScores = IntStream.range(0, numberOfChallenge)
-                .mapToObj(i -> new ChallengeScore(50))
-                .toList();
     }
 
     @Override
-    public void completeChallenge(int challengeNumber) {
-        challengeScores.get(challengeNumber - 1).complete();
+    public void completeChallenge(Challenge challenge) {
+        solvedChallenges.add(challenge);
     }
 
     @Override
-    public boolean getChallengeCompleted(int challengeNumber) {
-        return challengeScores.get(challengeNumber - 1).isCompleted();
+    public boolean getChallengeCompleted(Challenge challenge) {
+        return solvedChallenges.contains(challenge);
     }
 
     @Override
@@ -34,31 +31,6 @@ public class InMemoryScoreCard implements ScoreCard {
 
     @Override
     public int getTotalReceivedPoints() {
-        return challengeScores.stream()
-                .filter(ChallengeScore::isCompleted)
-                .mapToInt(ChallengeScore::getScore).sum();
+        return solvedChallenges.size() * 50;
     }
-
-    class ChallengeScore {
-        private boolean completed;
-        private final int score;
-
-        public ChallengeScore(int score) {
-            this.score = score;
-            completed = false;
-        }
-
-        public boolean isCompleted() {
-            return completed;
-        }
-
-        public void complete() {
-            this.completed = true;
-        }
-
-        public int getScore() {
-            return score;
-        }
-    }
-
 }

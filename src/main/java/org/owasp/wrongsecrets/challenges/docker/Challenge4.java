@@ -7,7 +7,6 @@ import org.owasp.wrongsecrets.Spoiler;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.ChallengeEnvironment;
 import org.owasp.wrongsecrets.challenges.ChallengeNumber;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -24,7 +23,7 @@ public class Challenge4 extends Challenge {
     }
 
     @Override
-    public boolean solved(String answer) {
+    public boolean answerCorrect(String answer) {
         return Constants.password.equals(answer);
     }
 

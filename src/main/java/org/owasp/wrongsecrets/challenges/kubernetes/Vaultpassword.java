@@ -1,4 +1,4 @@
-package org.owasp.wrongsecrets;
+package org.owasp.wrongsecrets.challenges.kubernetes;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
