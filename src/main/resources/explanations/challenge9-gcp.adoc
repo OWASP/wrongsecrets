@@ -1,4 +1,4 @@
-=== Challenge 9: AWS Secrets Manager
+=== Challenge 9: GCP Secret Manager part 1
 
 Okay, now we're generating a secret through Terraform and storing that with our Cloud Provider. What happens in the Terraform state?
 

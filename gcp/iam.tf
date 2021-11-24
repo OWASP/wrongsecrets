@@ -7,17 +7,24 @@ resource "google_service_account" "wrongsecrets_workload" {
   display_name = "WrongSecrets Workload Service Account"
 }
 
+resource "random_integer" "int" {
+  min = 10000
+  max = 99999
+}
+
+
 resource "google_iam_workload_identity_pool" "pool" {
   provider                  = google-beta
-  workload_identity_pool_id = var.project_id
+  workload_identity_pool_id = "${var.project_id}-${random_integer.int.result}"
   project                   = var.project_id
+  display_name              = "WrongSecrets"
 }
 
 resource "google_service_account_iam_member" "wrongsecret_pod_sa" {
   service_account_id = google_service_account.wrongsecrets_workload.id
   role               = "roles/iam.workloadIdentityUser"
   member             = "serviceAccount:${var.project_id}.svc.id.goog[default/vault]"
-  depends_on = [
+  depends_on         = [
     google_iam_workload_identity_pool.pool,
     google_container_cluster.gke
   ]
@@ -28,7 +35,7 @@ resource "google_service_account_iam_member" "wrongsecret_wrong_pod_sa" {
   service_account_id = google_service_account.wrongsecrets_workload.id
   role               = "roles/iam.workloadIdentityUser"
   member             = "serviceAccount:${var.project_id}.svc.id.goog[default/default]"
-  depends_on = [
+  depends_on         = [
     google_iam_workload_identity_pool.pool,
     google_container_cluster.gke
   ]
