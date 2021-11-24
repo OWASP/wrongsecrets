@@ -18,6 +18,7 @@
         <java.version>17</java.version>
         <spring.cloud-version>2020.0.4</spring.cloud-version>
         <lombok.version>1.18.22</lombok.version>
+        <maven.compiler.target>17</maven.compiler.target>
     </properties>
 
     <dependencies>
