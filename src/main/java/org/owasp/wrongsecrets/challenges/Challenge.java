@@ -3,7 +3,6 @@ package org.owasp.wrongsecrets.challenges;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.owasp.wrongsecrets.ScoreCard;
-import org.owasp.wrongsecrets.Spoiler;
 
 @RequiredArgsConstructor
 @Getter

@@ -3,7 +3,7 @@ package org.owasp.wrongsecrets.challenges.cloud;
 
 import lombok.extern.slf4j.Slf4j;
 import org.owasp.wrongsecrets.ScoreCard;
-import org.owasp.wrongsecrets.Spoiler;
+import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.ChallengeEnvironment;
 import org.owasp.wrongsecrets.challenges.ChallengeNumber;

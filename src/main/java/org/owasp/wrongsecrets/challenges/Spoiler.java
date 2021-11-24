@@ -1,4 +1,4 @@
-package org.owasp.wrongsecrets;
+package org.owasp.wrongsecrets.challenges;
 
 public record Spoiler(String solution) {
 }
