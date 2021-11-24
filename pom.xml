@@ -15,7 +15,7 @@
     <description>Demo project for our journey to Vault</description>
 
     <properties>
-        <java.version>11</java.version>
+        <java.version>17</java.version>
         <spring.cloud-version>2020.0.4</spring.cloud-version>
         <lombok.version>1.18.20</lombok.version>
     </properties>
