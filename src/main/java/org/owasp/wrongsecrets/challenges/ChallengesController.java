@@ -36,8 +36,8 @@ public class ChallengesController {
                 .orElseThrow(() -> new IllegalArgumentException("Challenge " + id + " + not found, did you add the annotation?"));
     }
 
-    private String challengeNumber(Challenge challenge) {
-        return challenge.getClass().getAnnotation(ChallengeNumber.class).value();
+    private Integer challengeNumber(Challenge challenge) {
+        return Integer.valueOf(challenge.getClass().getAnnotation(ChallengeNumber.class).value());
     }
 
     @GetMapping("/challenge/{id:1}")
