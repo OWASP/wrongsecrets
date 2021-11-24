@@ -1,4 +1,4 @@
-FROM azul/zulu-openjdk-alpine:15
+FROM eclipse-temurin:17_35-jdk-focal
 
 ARG argBasedPassword="default"
 ARG argBasedVersion="0.0.0"
