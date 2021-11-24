@@ -4,9 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.owasp.wrongsecrets.Constants;
 import org.owasp.wrongsecrets.ScoreCard;
-import org.owasp.wrongsecrets.Spoiler;
 import org.owasp.wrongsecrets.Vaultpassword;
-import org.owasp.wrongsecrets.challenges.docker.Challenge1;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Controller;
@@ -76,11 +74,6 @@ public class SecretLeakageController {
     @Value("${APP_VERSION}")
     private String version;
 
-    @GetMapping("/spoil-5")
-    public String getK8sSecret(Model model) {
-        return getSpoil(model, configmapK8sSecret);
-    }
-
     @GetMapping("/spoil-6")
     public String getSecretK8sSecret(Model model) {
         return getSpoil(model, secretK8sSecret);
@@ -127,7 +120,7 @@ public class SecretLeakageController {
         return "index";
     }
 
-    @GetMapping("/challenge/{id:5|6|7|8|9|10|11}")
+    @GetMapping("/challenge/{id:6|7|8|9|10|11}")
     public String challengeForm(@PathVariable String id, Model model) {
         model.addAttribute("challengeForm", new ChallengeForm(""));
         model.addAttribute("challengeNumber", id);
@@ -150,13 +143,6 @@ public class SecretLeakageController {
         includeScoringStatus(challengeNumber, model, null);
         addWarning(challengeNumber, model);
         return "challenge";
-    }
-
-    @PostMapping("/challenge/5")
-    public String postController5(@ModelAttribute ChallengeForm challengeForm, Model model) {
-        log.info("POST received at 5 - serializing form: solution: " + challengeForm.solution());
-        model.addAttribute("challengeNumber", 5);
-        return handleModel(configmapK8sSecret, challengeForm.solution(), model, 5);
     }
 
     @PostMapping("/challenge/6")
@@ -216,14 +202,6 @@ public class SecretLeakageController {
         includeScoringStatus(challenge, model, null);
         addWarning(challenge, model);
         return "challenge";
-    }
-
-    private void addWarning(Challenge challenge, Model model) {
-        if (!challenge.environmentSupported())
-            model.addAttribute("runtimeWarning", switch (challenge.getEnvironment()) {
-                case DOCKER -> "We are running outside of a docker container. Please run this in a container as explained in the README.md.";
-                default -> "??";
-            });
     }
 
     @Deprecated

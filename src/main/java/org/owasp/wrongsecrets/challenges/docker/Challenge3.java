@@ -13,11 +13,13 @@ import org.springframework.stereotype.Component;
 @ChallengeNumber("3")
 public class Challenge3 extends Challenge {
 
-    @Value("${DOCKER_ENV_PASSWORD}")
-    private String hardcodedEnvPassword;
+    private final String hardcodedEnvPassword;
+    private final String argBasedPassword;
 
-    public Challenge3(ScoreCard scoreCard) {
+    public Challenge3(ScoreCard scoreCard, @Value("${DOCKER_ENV_PASSWORD}") String hardcodedEnvPassword, @Value("${ARG_BASED_PASSWORD}") String argBasedPassword) {
         super(scoreCard, ChallengeEnvironment.DOCKER);
+        this.hardcodedEnvPassword = hardcodedEnvPassword;
+        this.argBasedPassword = argBasedPassword;
     }
 
     @Override
@@ -32,6 +34,6 @@ public class Challenge3 extends Challenge {
 
     @Override
     public boolean environmentSupported() {
-        return "if_you_see_this_please_use_docker_instead".equals(hardcodedEnvPassword);
+        return !"if_you_see_this_please_use_docker_instead".equals(argBasedPassword);
     }
 }
