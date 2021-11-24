@@ -1,10 +1,5 @@
 package com.example.secrettextprinter;
 
+public record ChallengeForm(String solution) {
 
-import lombok.Data;
-
-@Data
-public class ChallengeForm {
-
-    private String solution;
 }
