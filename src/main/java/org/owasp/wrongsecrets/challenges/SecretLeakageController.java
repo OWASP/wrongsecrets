@@ -79,11 +79,6 @@ public class SecretLeakageController {
     @Value("${APP_VERSION}")
     private String version;
 
-    @GetMapping("/spoil-3")
-    public String getEnvStaticSecret(Model model) {
-        return getSpoil(model, hardcodedEnvPassword);
-    }
-
     @GetMapping("/spoil-4")
     public String getOldSecret(Model model) {
         return getSpoil(model, Constants.password);
@@ -140,7 +135,7 @@ public class SecretLeakageController {
         return "index";
     }
 
-    @GetMapping("/challenge/{id:3|4|5|6|7|8|9|10|11}")
+    @GetMapping("/challenge/{id:4|5|6|7|8|9|10|11}")
     public String challengeForm(@PathVariable String id, Model model) {
         model.addAttribute("challengeForm", new ChallengeForm(""));
         model.addAttribute("challengeNumber", id);
@@ -163,13 +158,6 @@ public class SecretLeakageController {
         includeScoringStatus(challengeNumber, model, null);
         addWarning(challengeNumber, model);
         return "challenge";
-    }
-
-    @PostMapping("/challenge/3")
-    public String postController3(@ModelAttribute ChallengeForm challengeForm, Model model) {
-        log.info("POST received at 3 - serializing form: solution: " + challengeForm.solution());
-        model.addAttribute("challengeNumber", 3);
-        return handleModel(hardcodedEnvPassword, challengeForm.solution(), model, 3);
     }
 
     @PostMapping("/challenge/4")
