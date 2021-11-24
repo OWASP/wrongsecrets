@@ -21,7 +21,6 @@ import software.amazon.awssdk.services.sts.model.AssumeRoleWithWebIdentityRespon
 import software.amazon.awssdk.services.sts.model.StsException;
 
 import javax.servlet.http.HttpSession;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -42,28 +41,28 @@ public class SecretLeakageController {
     }
 
     @Value("${password}")
-    String hardcodedPassword;
+    private String hardcodedPassword;
 
     @Value("${ARG_BASED_PASSWORD}")
-    String argBasedPassword;
+    private String argBasedPassword;
 
     @Value("${DOCKER_ENV_PASSWORD}")
-    String hardcodedEnvPassword;
+    private String hardcodedEnvPassword;
 
     @Value("${SPECIAL_K8S_SECRET}")
-    String configmapK8sSecret;
+    private String configmapK8sSecret;
 
     @Value("${SPECIAL_SPECIAL_K8S_SECRET}")
-    String secretK8sSecret;
+    private String secretK8sSecret;
 
     @Value("${vaultpassword}")
-    String vaultPasswordString;
+    private String vaultPasswordString;
 
     @Value("${default_aws_value}")
-    String awsDefaultValue;
+    private String awsDefaultValue;
 
     @Value("${secretmountpath}")
-    String filePath;
+    private String filePath;
 
     @Value("${K8S_ENV}")
     private String k8sEnvironment;
@@ -83,12 +82,6 @@ public class SecretLeakageController {
     @GetMapping("/spoil-1")
     public String getHardcodedSecret(Model model) {
         return getSpoil(model, hardcodedPassword);
-    }
-
-    private String getSpoil(Model model, String password) {
-        model.addAttribute("spoil", new Spoil());
-        model.addAttribute("solution", password);
-        return "spoil";
     }
 
     @GetMapping("/spoil-2")
@@ -130,18 +123,24 @@ public class SecretLeakageController {
     }
 
     @GetMapping("/spoil-9")
-    public String getAWSChanngelenge1(Model model) {
-        return getSpoil(model, getAWSChallenge9and10Value("wrongsecret"));
+    public String getCloudChallenge1(Model model) {
+        return getSpoil(model, getCloudChallenge9and10Value("wrongsecret"));
     }
 
     @GetMapping("/spoil-10")
-    public String getAWSChanngelenge2(Model model) {
-        return getSpoil(model, getAWSChallenge9and10Value("wrongsecret-2"));
+    public String getCloudChallenge2(Model model) {
+        return getSpoil(model, getCloudChallenge9and10Value("wrongsecret-2"));
     }
 
     @GetMapping("/spoil-11")
-    public String getAWSChanngelenge3(Model model) {
+    public String getCloudChallenge3(Model model) {
         return getSpoil(model, getAWSChallenge11Value());
+    }
+
+    private String getSpoil(Model model, String password) {
+        model.addAttribute("spoil", new Spoil());
+        model.addAttribute("solution", password);
+        return "spoil";
     }
 
     @GetMapping("/")
@@ -165,6 +164,12 @@ public class SecretLeakageController {
         model.addAttribute("answerCorrect", null);
         model.addAttribute("answerIncorrect", null);
         model.addAttribute("solution", null);
+        model.addAttribute("environment", k8sEnvironment);
+        try {
+            model.addAttribute("challengeNumberNumber", Integer.parseInt(id));
+        }catch (NumberFormatException e){
+            model.addAttribute("challengeNumberNumber", 0);
+        }
         includeScoringStatus(newScore, Integer.parseInt(id), model);
         addWarning(Integer.parseInt(id), model);
         return "challenge";
@@ -249,14 +254,14 @@ public class SecretLeakageController {
     public String postController9(@ModelAttribute ChallengeForm challengeForm, Model model, HttpSession session) {
         log.info("POST received at 9 - serializing form: solution: " + challengeForm.getSolution());
         model.addAttribute("challengeNumber", 9);
-        return handleModel(session, getAWSChallenge9and10Value("wrongsecret"), challengeForm.getSolution(), model, 8);
+        return handleModel(session, getCloudChallenge9and10Value("wrongsecret"), challengeForm.getSolution(), model, 8);
     }
 
     @PostMapping("/challenge/10")
     public String postController10(@ModelAttribute ChallengeForm challengeForm, Model model, HttpSession session) {
         log.info("POST received at 10 - serializing form: solution: " + challengeForm.getSolution());
         model.addAttribute("challengeNumber", 10);
-        return handleModel(session, getAWSChallenge9and10Value("wrongsecret-2"), challengeForm.getSolution(), model, 9);
+        return handleModel(session, getCloudChallenge9and10Value("wrongsecret-2"), challengeForm.getSolution(), model, 9);
     }
 
     @PostMapping("/challenge/11")
@@ -290,8 +295,11 @@ public class SecretLeakageController {
         if (7 == id && vaultPassword.getPasssword() == null) {
             model.addAttribute("runtimeWarning", "We are running outside of a K8s cluster with Vault. Please run this in the K8s cluster as explained in the README.md.");
         }
-        if ((9 == id || 10 == id || 11 == id) && "if_you_see_this_please_use_AWS_Setup".equals(awsRoleArn)) {
-            model.addAttribute("runtimeWarning", "We are running outside of a properly configured AWS environment. Please run this in an AWS environment as explained in the README.md.");
+        if ((9 == id || 10 == id) && (!"gcp".equals(k8sEnvironment)) && (!"aws".equals(k8sEnvironment))) {
+            model.addAttribute("runtimeWarning", "We are running outside of a properly configured AWS or GCP environment. Please run this in an AWS or GCP environment as explained in the README.md.");
+        }
+        if ((11 == id) && (!"aws".equals(k8sEnvironment))) {
+            model.addAttribute("runtimeWarning", "We are running outside of a properly configured AWS environment. Please run this in an AWS environment as explained in the README.md. GCP is not done yet");
         }
     }
 
@@ -304,7 +312,7 @@ public class SecretLeakageController {
         }
     }
 
-    private String getAWSChallenge9and10Value(String fileName) {
+    private String getCloudChallenge9and10Value(String fileName) {
         try {
             Path filePath = Paths.get(this.filePath, fileName);
             return Files.readString(filePath);
