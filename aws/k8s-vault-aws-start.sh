@@ -3,6 +3,20 @@
 # set -o pipefail
 # set -o nounset
 
+function checkCommandsAvailable() {
+  for var in "$@"
+  do
+    if ! [ -x "$(command -v "$var")" ]; then
+      echo "🔥 ${var} is not installed." >&2
+      exit 1
+    else
+      echo "🏄 $var is installed..."
+    fi
+  done
+}
+
+checkCommandsAvailable helm minikube jq vault sed grep docker grep cat
+
 AWS_REGION="eu-west-1"
 
 echo "This is a script to bootstrap the configuration. You need to have installed: helm, kubectl, jq, vault, grep, cat, sed, and awscli, and is only tested on mac, Debian and Ubuntu"
