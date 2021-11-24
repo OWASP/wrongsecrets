@@ -14,6 +14,13 @@
     <name>wrongsecrets</name>
     <description>Demo project for our journey to Vault</description>
 
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+        </license>
+    </licenses>
+
     <properties>
         <java.version>17</java.version>
         <spring.cloud-version>2020.0.4</spring.cloud-version>
