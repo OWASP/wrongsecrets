@@ -3,25 +3,27 @@
 # set -o pipefail
 # set -o nounset
 
-function checkCommandAvailable() {
-  if ! [ -x "$(command -v "$1")" ]; then
-    echo "Error: ${1} is not installed." >&2
-    exit 1
-  fi
+function checkCommandsAvailable() {
+  for var in "$@"
+  do
+    if ! [ -x "$(command -v "$var")" ]; then
+      echo "🔥 ${var} is not installed." >&2
+      exit 1
+    else
+      echo "🏄 $var is installed..."
+    fi
+  done
 }
 
-checkCommandAvailable "helm"
-checkCommandAvailable "minikube"
-checkCommandAvailable "jq"
+checkCommandsAvailable helm minikube jq vault sed grep docker grep cat
 
-
-echo "This is only a script for demoing purposes. You need to have installed: minikube with docker (or comment out line 8 and work at your own k8s setup), helm, kubectl, jq, grep, cat, sed and is only tested on mac and ubuntu"
+echo "This is only a script for demoing purposes. You can comment out line 22 and work with your own k8s setup"
 echo "This script is based on the steps defined in https://learn.hashicorp.com/tutorials/vault/kubernetes-minikube . Vault is awesome!"
 minikube start --kubernetes-version=v1.20.10
 
 kubectl get configmaps | grep 'secrets-file' &> /dev/null
 if [ $? == 0 ]; then
-   echo "secrets config is already installed"
+  echo "secrets config is already installed"
 else
   kubectl apply -f k8s/secrets-config.yml
 fi
