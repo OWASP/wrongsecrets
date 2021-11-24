@@ -14,7 +14,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 @Component
-@ChallengeNumber("9")
+@ChallengeNumber("10")
 @Slf4j
 public class Challenge10 extends Challenge {
 
