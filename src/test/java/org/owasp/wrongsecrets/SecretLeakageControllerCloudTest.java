@@ -9,13 +9,12 @@ import org.owasp.wrongsecrets.challenges.cloud.Challenge9;
 import org.owasp.wrongsecrets.challenges.docker.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.support.TestPropertySourceUtils;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -32,21 +31,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ExtendWith({SpringExtension.class})
-@ActiveProfiles("test")
+@ActiveProfiles("cloud-aws-test")
 @AutoConfigureWebTestClient
-class SecretLeakageControllerTest {
+class SecretLeakageControllerCloudTest {
 
     @Autowired
     private WebApplicationContext webApplicationContext;
     private MockMvc mockMvc;
     @MockBean
     VaultTemplate vaultTemplate;
-    @Value("${password}")
-    private String hardcodedPassword;
-    @Value("${ARG_BASED_PASSWORD}")
-    private String argBasedPassword;
-    @Value("${DOCKER_ENV_PASSWORD}")
-    String hardcodedEnvPassword;
 
     @Value("${default_aws_value}")
     String tempAWSfiller;
@@ -59,47 +52,29 @@ class SecretLeakageControllerTest {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
     }
 
+
     @Test
-    void spoil1() throws Exception {
-        testSpoil("/spoil-1", hardcodedPassword);
+    void solveChallenge9WithoutFile() throws Exception {
+        solveChallenge("/challenge/9", tempAWSfiller);
     }
 
     @Test
-    void spoil2() throws Exception {
-        testSpoil("/spoil-2", argBasedPassword);
+    void solveChallenge9WithAWSFile() throws Exception {
+        File testFile = new File(tempMountPath, "wrongsecret");
+        String secret = "secretvalueWitFile";
+        Files.writeString(testFile.toPath(), secret, StandardOpenOption.CREATE, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
+        solveChallenge("/challenge/9", secret);
+        testFile.deleteOnExit();
     }
 
     @Test
-    void spoil3() throws Exception {
-        testSpoil("/spoil-3", hardcodedEnvPassword);
+    void solveChallenge10WithGCPFile() throws Exception {
+        File testFile = new File(tempMountPath, "wrongsecret");
+        String secret = "secretvalueWitFile";
+        Files.writeString(testFile.toPath(), secret, StandardOpenOption.CREATE, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
+        solveChallenge("/challenge/10", secret);
+        testFile.deleteOnExit();
     }
-
-    @Test
-    void spoil4() throws Exception {
-        testSpoil("/spoil-4", Constants.password);
-    }
-
-    @Test
-    void solveChallenge1() throws Exception {
-        solveChallenge("/challenge/1", hardcodedPassword);
-    }
-
-    @Test
-    void solveChallenge2() throws Exception {
-        solveChallenge("/challenge/2", argBasedPassword);
-    }
-
-    @Test
-    void solveChallenge3() throws Exception {
-        solveChallenge("/challenge/3", hardcodedEnvPassword);
-    }
-
-    @Test
-    void solveChallenge4() throws Exception {
-        solveChallenge("/challenge/4", Constants.password);
-    }
-
-
 
 
     private void solveChallenge(String endpoint, String solution) throws Exception {
