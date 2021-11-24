@@ -1,4 +1,4 @@
-package com.example.secrettextprinter;
+package org.owasp.wrongsecrets;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;

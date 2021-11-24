@@ -1,4 +1,4 @@
-package com.example.secrettextprinter;
+package org.owasp.wrongsecrets;
 
 
 import lombok.Data;

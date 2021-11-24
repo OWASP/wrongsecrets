@@ -1,4 +1,4 @@
-package com.example.secrettextprinter;
+package org.owasp.wrongsecrets;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,10 +7,10 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 
 @SpringBootApplication
-public class SecrettextprinterApplication {
+public class WrongSecretsApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SecrettextprinterApplication.class, args);
+		SpringApplication.run(WrongSecretsApplication.class, args);
 	}
 
 	@Bean

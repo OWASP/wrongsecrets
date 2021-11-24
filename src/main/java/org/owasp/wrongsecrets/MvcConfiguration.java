@@ -1,4 +1,4 @@
-package com.example.secrettextprinter;
+package org.owasp.wrongsecrets;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
