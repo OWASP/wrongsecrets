@@ -26,7 +26,7 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
       - name: Test with Maven
-        run: mvn test
+        run: mvn --no-transfer-progress test
 
   lint:
     name: lint javacode
@@ -39,4 +39,4 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
       - name: checkstyle with Maven
-        run: mvn checkstyle:checkstyle
+        run: mvn --no-transfer-progress checkstyle:checkstyle
