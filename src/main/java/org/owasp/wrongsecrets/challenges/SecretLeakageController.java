@@ -40,9 +40,6 @@ public class SecretLeakageController {
     private final Vaultpassword vaultPassword;
     private final ScoreCard scoreCard;
 
-    //NOTE: Fix this later, needed to do a graceful migration
-    private final Challenge1 challenge1;
-
     @Value("${ARG_BASED_PASSWORD}")
     private String argBasedPassword;
 
@@ -78,11 +75,6 @@ public class SecretLeakageController {
 
     @Value("${APP_VERSION}")
     private String version;
-
-    @GetMapping("/spoil-4")
-    public String getOldSecret(Model model) {
-        return getSpoil(model, Constants.password);
-    }
 
     @GetMapping("/spoil-5")
     public String getK8sSecret(Model model) {
@@ -135,7 +127,7 @@ public class SecretLeakageController {
         return "index";
     }
 
-    @GetMapping("/challenge/{id:4|5|6|7|8|9|10|11}")
+    @GetMapping("/challenge/{id:5|6|7|8|9|10|11}")
     public String challengeForm(@PathVariable String id, Model model) {
         model.addAttribute("challengeForm", new ChallengeForm(""));
         model.addAttribute("challengeNumber", id);
@@ -158,13 +150,6 @@ public class SecretLeakageController {
         includeScoringStatus(challengeNumber, model, null);
         addWarning(challengeNumber, model);
         return "challenge";
-    }
-
-    @PostMapping("/challenge/4")
-    public String postController4(@ModelAttribute ChallengeForm challengeForm, Model model) {
-        log.info("POST received at 4 - serializing form: solution: " + challengeForm.solution());
-        model.addAttribute("challengeNumber", 4);
-        return handleModel(Constants.password, challengeForm.solution(), model, 4);
     }
 
     @PostMapping("/challenge/5")
