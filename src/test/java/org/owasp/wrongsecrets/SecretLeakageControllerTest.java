@@ -99,9 +99,6 @@ class SecretLeakageControllerTest {
         solveChallenge("/challenge/4", Constants.password);
     }
 
-
-
-
     private void solveChallenge(String endpoint, String solution) throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.post(endpoint).param("solution", solution))
                 .andExpect(MockMvcResultMatchers.status().isOk())

@@ -52,11 +52,11 @@ class SecretLeakageControllerCloudTest {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
     }
 
-
     @Test
     void solveChallenge9WithoutFile() throws Exception {
         solveChallenge("/challenge/9", tempAWSfiller);
     }
+
 
     @Test
     void solveChallenge9WithAWSFile() throws Exception {
@@ -68,8 +68,8 @@ class SecretLeakageControllerCloudTest {
     }
 
     @Test
-    void solveChallenge10WithGCPFile() throws Exception {
-        File testFile = new File(tempMountPath, "wrongsecret");
+    void solveChallenge10WithAWSFile() throws Exception {
+        File testFile = new File(tempMountPath, "wrongsecret-2");
         String secret = "secretvalueWitFile";
         Files.writeString(testFile.toPath(), secret, StandardOpenOption.CREATE, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
         solveChallenge("/challenge/10", secret);
