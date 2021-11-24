@@ -9,9 +9,9 @@ resource "google_service_account" "wrongsecrets_workload" {
 
 resource "google_iam_workload_identity_pool" "pool" {
   provider                  = google-beta
-  workload_identity_pool_id = "other"
+  workload_identity_pool_id = var.project_id
   project                   = var.project_id
-  display_name              = "refreshedpool"
+  display_name              = "WrongSecrets"
 }
 
 resource "google_service_account_iam_member" "wrongsecret_pod_sa" {
