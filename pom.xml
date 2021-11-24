@@ -26,6 +26,11 @@
         <spring.cloud-version>2020.0.4</spring.cloud-version>
         <lombok.version>1.18.22</lombok.version>
         <maven.compiler.target>17</maven.compiler.target>
+        <aws.sdk.version>2.17.68</aws.sdk.version>
+        <asciidoctorj.version>2.4.3</asciidoctorj.version>
+        <jruby.version>9.3.0.0</jruby.version>
+        <bootstrap.version>5.1.2</bootstrap.version>
+        <github.button.version>2.14.1</github.button.version>
     </properties>
 
     <dependencies>
@@ -63,12 +68,12 @@
         <dependency>
             <groupId>software.amazon.awssdk</groupId>
             <artifactId>sts</artifactId>
-            <version>2.17.68</version>
+            <version>${aws.sdk.version}</version>
         </dependency>
         <dependency>
             <groupId>software.amazon.awssdk</groupId>
             <artifactId>ssm</artifactId>
-            <version>2.17.68</version>
+            <version>${aws.sdk.version}</version>
         </dependency>
         <dependency>
             <groupId>org.asciidoctor</groupId>
@@ -78,22 +83,22 @@
         <dependency>
             <groupId>org.asciidoctor</groupId>
             <artifactId>asciidoctorj</artifactId>
-            <version>2.4.3</version>
+            <version>${asciidoctorj.version}</version>
         </dependency>
         <dependency>
             <groupId>org.jruby</groupId>
             <artifactId>jruby-complete</artifactId>
-            <version>9.3.0.0</version>
+            <version>${jruby.version}</version>
         </dependency>
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>bootstrap</artifactId>
-            <version>5.1.2</version>
+            <version>${bootstrap.version}</version>
         </dependency>
         <dependency>
             <groupId>org.webjars.npm</groupId>
             <artifactId>github-buttons</artifactId>
-            <version>2.14.1</version>
+            <version>${github.button.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
