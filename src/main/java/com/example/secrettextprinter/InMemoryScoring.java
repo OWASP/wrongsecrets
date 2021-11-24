@@ -1,51 +1,47 @@
 package com.example.secrettextprinter;
 
-import java.util.Arrays;
+import java.util.List;
+import java.util.stream.IntStream;
 
 public class InMemoryScoring implements Scoring {
 
-    private int maxPoints = 0;
-    private ChallengeEntry[] challenges;
+    private final int maxPoints;
+    private final List<Challenge> challenges;
 
     public InMemoryScoring(int numberOfChallenge) {
-        challenges = new ChallengeEntry[numberOfChallenge];
-        for (int i = 0; numberOfChallenge > i; i++) {
-            challenges[i] = new ChallengeEntry(50);
-            maxPoints += 50;
-
-        }
+        maxPoints = numberOfChallenge * 50;
+        this.challenges = IntStream.range(0, numberOfChallenge)
+                .mapToObj(i -> new Challenge(50))
+                .toList();
     }
 
     @Override
     public void completeChallenge(int challengeNumber) {
-        challenges[challengeNumber - 1].complete();
+        challenges.get(challengeNumber - 1).complete();
     }
 
     @Override
     public boolean getChallengeCompleted(int challengeNumber) {
-        return challenges[challengeNumber - 1].isCompleted();
+        return challenges.get(challengeNumber - 1).isCompleted();
     }
 
     @Override
     public float getProgress() {
         return (100 / (float) maxPoints) * getTotalReceivedPoints();
-        //return progresspercentage
     }
 
     @Override
     public int getTotalReceivedPoints() {
-        final int[] totalscore = {0};
-        Arrays.stream(challenges)
-                .filter(ChallengeEntry::isCompleted)
-                .forEach(challengeEntry -> totalscore[0] += challengeEntry.getScore());
-        return totalscore[0];
+        return challenges.stream()
+                .filter(Challenge::isCompleted)
+                .mapToInt(Challenge::getScore).sum();
     }
 
-    class ChallengeEntry {
+    class Challenge {
         private boolean completed;
         private final int score;
 
-        public ChallengeEntry(int score) {
+        public Challenge(int score) {
             this.score = score;
             completed = false;
         }
