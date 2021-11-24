@@ -10,8 +10,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.support.TestPropertySourceUtils;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -100,11 +102,22 @@ class SecretLeakageControllerTest {
     }
 
     @Test
-    void solveChallenge9WithFile() throws Exception {
+    void solveChallenge9WithAWSFile() throws Exception {
+        TestPropertySourceUtils.addInlinedPropertiesToEnvironment((ConfigurableApplicationContext) webApplicationContext, "K8S_ENV=aws");
         File testFile = new File(tempMountPath, "wrongsecret");
         String secret = "secretvalueWitFile";
         Files.writeString(testFile.toPath(), secret, StandardOpenOption.CREATE, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
         solveChallenge("/challenge/9", secret);
+        testFile.deleteOnExit();
+    }
+
+    @Test
+    void solveChallenge10WithGCPFile() throws Exception {
+        TestPropertySourceUtils.addInlinedPropertiesToEnvironment((ConfigurableApplicationContext) webApplicationContext, "K8S_ENV=gcp");
+        File testFile = new File(tempMountPath, "wrongsecret");
+        String secret = "secretvalueWitFile";
+        Files.writeString(testFile.toPath(), secret, StandardOpenOption.CREATE, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
+        solveChallenge("/challenge/10", secret);
         testFile.deleteOnExit();
     }
 
