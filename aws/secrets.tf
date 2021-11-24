@@ -78,11 +78,17 @@ POLICY
 # Parameter store challenge 1 #
 ###############################
 
+resource "random_password" "password2" {
+  length           = 24
+  special          = true
+  override_special = "_%@"
+}
+
 resource "aws_ssm_parameter" "secret" {
-  name        = "wrongsecret"
+  name        = "wrongsecretvalue"
   description = "A secret "
   type        = "SecureString"
-  value       = random_password.password.result # Bootstrap something, not used in challenge
+  value       = random_password.password2.result # Bootstrap something, not used in challenge
 
   lifecycle {
     ignore_changes = [
