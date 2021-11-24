@@ -1,6 +1,12 @@
-package org.owasp.wrongsecrets;
+package org.owasp.wrongsecrets.challenges;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.owasp.wrongsecrets.Constants;
+import org.owasp.wrongsecrets.ScoreCard;
+import org.owasp.wrongsecrets.Spoiler;
+import org.owasp.wrongsecrets.Vaultpassword;
+import org.owasp.wrongsecrets.challenges.docker.Challenge1;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Controller;
@@ -28,18 +34,14 @@ import java.nio.file.Paths;
 @Controller
 @EnableConfigurationProperties(Vaultpassword.class)
 @Slf4j
+@RequiredArgsConstructor
 public class SecretLeakageController {
 
     private final Vaultpassword vaultPassword;
     private final ScoreCard scoreCard;
 
-    public SecretLeakageController(Vaultpassword vaultpassword, ScoreCard scoreCard) {
-        this.vaultPassword = vaultpassword;
-        this.scoreCard = scoreCard;
-    }
-
-    @Value("${password}")
-    private String hardcodedPassword;
+    //NOTE: Fix this later, needed to do a graceful migration
+    private final Challenge1 challenge1;
 
     @Value("${ARG_BASED_PASSWORD}")
     private String argBasedPassword;
@@ -79,7 +81,7 @@ public class SecretLeakageController {
 
     @GetMapping("/spoil-1")
     public String getHardcodedSecret(Model model) {
-        return getSpoil(model, hardcodedPassword);
+        return getSpoil(model, challenge1.spoiler());
     }
 
     @GetMapping("/spoil-2")
@@ -135,8 +137,14 @@ public class SecretLeakageController {
         return getSpoil(model, getAWSChallenge11Value());
     }
 
+    private String getSpoil(Model model, Spoiler spoiler) {
+        model.addAttribute("spoil", spoiler);
+        model.addAttribute("solution", spoiler.solution());
+        return "spoil";
+    }
+
+    @Deprecated(forRemoval = true)
     private String getSpoil(Model model, String password) {
-        model.addAttribute("spoil", new Spoil());
         model.addAttribute("solution", password);
         return "spoil";
     }
@@ -148,7 +156,8 @@ public class SecretLeakageController {
         return "index";
     }
 
-    @GetMapping("/challenge/{id}")
+
+    @GetMapping("/challenge/{id:2|3|4|5|6|7|8|9|10|11}")
     public String challengeForm(@PathVariable String id, Model model) {
         model.addAttribute("challengeForm", new ChallengeForm(""));
         model.addAttribute("challengeNumber", id);
@@ -166,19 +175,11 @@ public class SecretLeakageController {
             challengeNumber = 1;
             model.addAttribute("runtimeWarning", "There are only 11 challenges, please navigate to another one");
         }
-        model.addAttribute("challengeNumberNumber", challengeNumber);
+        model.addAttribute("challengeNumber", challengeNumber);
 
-        includeScoringStatus(challengeNumber, model);
+        includeScoringStatus(challengeNumber, model, null);
         addWarning(challengeNumber, model);
         return "challenge";
-    }
-
-    @PostMapping("/challenge/1")
-    public String postController(@ModelAttribute ChallengeForm challengeForm, Model model) {
-        log.info("POST received at 1 - serializing form: solution: " + challengeForm.solution());
-        model.addAttribute("challengeNumber", 1);
-        return handleModel(hardcodedPassword, challengeForm.solution(), model, 1);
-
     }
 
     @PostMapping("/challenge/2")
@@ -263,11 +264,20 @@ public class SecretLeakageController {
         } else {
             model.addAttribute("answerIncorrect", "Your answer is incorrect, try harder ;-)");
         }
-        includeScoringStatus(challenge, model);
+        includeScoringStatus(challenge, model, null);
         addWarning(challenge, model);
         return "challenge";
     }
 
+    private void addWarning(Challenge challenge, Model model) {
+        if (!challenge.environmentSupported())
+            model.addAttribute("runtimeWarning", switch (challenge.getEnvironment()) {
+                case DOCKER -> "We are running outside of a docker container. Please run this in a container as explained in the README.md.";
+                default -> "??";
+            });
+    }
+
+    @Deprecated
     private void addWarning(int id, Model model) {
         if ("if_you_see_this_please_use_docker_instead".equals(argBasedPassword) && ((1 < id && id < 5) || 8 == id)) {
             model.addAttribute("runtimeWarning", "We are running outside of a docker container. Please run this in a container as explained in the README.md.");
@@ -286,12 +296,19 @@ public class SecretLeakageController {
         }
     }
 
-    private void includeScoringStatus(int id, Model model) {
+    private void includeScoringStatus(int id, Model model, Challenge challenge) {
         model.addAttribute("version", version);
         model.addAttribute("totalPoints", scoreCard.getTotalReceivedPoints());
         model.addAttribute("progress", "" + scoreCard.getProgress());
-        if (scoreCard.getChallengeCompleted(id)) {
-            model.addAttribute("challengeCompletedAlready", "This exercise is already completed");
+
+        if (challenge == null) { //TODO remove after migration of all challenges
+            if (scoreCard.getChallengeCompleted(id)) {
+                model.addAttribute("challengeCompletedAlready", "This exercise is already completed");
+            }
+        } else {
+            if (scoreCard.getChallengeCompleted(challenge.getId())) {
+                model.addAttribute("challengeCompletedAlready", "This exercise is already completed");
+            }
         }
     }
 
