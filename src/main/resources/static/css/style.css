@@ -1,0 +1,11 @@
+div.sect2 {
+    border-radius: 25px;
+    border: 2px solid black;
+    width: 80%;
+    padding: 20px;
+    margin: 20px 0px 20px 0px;
+}
+
+.progress {
+    margin: 20px 0px 20px 0px;
+}
