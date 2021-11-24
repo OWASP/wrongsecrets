@@ -67,11 +67,13 @@
     <h1 th:text="'Challenge '+${challengeNumber}"/>
     <p th:text="'Welcome to challenge ' + ${challengeNumber} + '. You need to guess the secret that is hidden in the java, docker, k8s, Vault or AWS.'"></p>
     <div th:if="${ environment =='gcp'} and ${ challengeNumberNumber  &gt; 8} "
-         class="explanation" th:replace="doc:challenge__${challengeNumber}+'-gcp'__.adoc"></div>
+         class="explanation">
+        <div th:replace="doc:challenge__${challengeNumber}+'-gcp'__.adoc"></div>
+    </div>
     <div th:if="${ environment !='gcp'} and ${challengeNumberNumber &gt; 8} "
-         class="explanation" th:replace="doc:challenge__${challengeNumber}__.adoc"></div>
-    <div th:if="${ environment =='Docker'} "
-         class="explanation" th:text="${environment}"></div>
+         class="explanation">
+        <div th:replace="doc:challenge__${challengeNumber}__.adoc"></div>
+    </div>
     <div th:text="${challengeCompletedAlready}"></div>
     <div class="feedback alert alert-success" role="alert" th:if="${answerCorrect!=null}"
          th:text="${answerCorrect}"></div>

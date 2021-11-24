@@ -165,13 +165,20 @@ public class SecretLeakageController {
         model.addAttribute("answerIncorrect", null);
         model.addAttribute("solution", null);
         model.addAttribute("environment", k8sEnvironment);
+        int challengeNumber = 0;
         try {
-            model.addAttribute("challengeNumberNumber", Integer.parseInt(id));
-        }catch (NumberFormatException e){
-            model.addAttribute("challengeNumberNumber", 0);
+            challengeNumber = Integer.parseInt(id);
+        } catch (NumberFormatException e) {
+            challengeNumber = 12;
         }
-        includeScoringStatus(newScore, Integer.parseInt(id), model);
-        addWarning(Integer.parseInt(id), model);
+        if (challengeNumber > 11) {
+            challengeNumber = 1;
+            model.addAttribute("runtimeWarning", "There are only 11 challenges, please navigate to another one");
+        }
+        model.addAttribute("challengeNumberNumber", challengeNumber);
+
+        includeScoringStatus(newScore, challengeNumber, model);
+        addWarning(challengeNumber, model);
         return "challenge";
     }
 
@@ -286,7 +293,7 @@ public class SecretLeakageController {
     }
 
     private void addWarning(int id, Model model) {
-        if ("if_you_see_this_please_use_docker_instead".equals(argBasedPassword) && (id < 5 || 8 == id)) {
+        if ("if_you_see_this_please_use_docker_instead".equals(argBasedPassword) && ((1 < id && id < 5) || 8 == id)) {
             model.addAttribute("runtimeWarning", "We are running outside of a docker container. Please run this in a container as explained in the README.md.");
         }
         if ((5 == id || 6 == id) && "if_you_see_this_please_use_k8s".equals(configmapK8sSecret)) {
