@@ -1,0 +1,37 @@
+package org.owasp.wrongsecrets.challenges.docker;
+
+
+import org.owasp.wrongsecrets.ScoreCard;
+import org.owasp.wrongsecrets.Spoiler;
+import org.owasp.wrongsecrets.challenges.Challenge;
+import org.owasp.wrongsecrets.challenges.ChallengeEnvironment;
+import org.owasp.wrongsecrets.challenges.ChallengeNumber;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+@Component
+@ChallengeNumber("2")
+public class Challenge2 extends Challenge {
+
+    @Value("${ARG_BASED_PASSWORD}")
+    private String argBasedPassword;
+
+    public Challenge2(ScoreCard scoreCard) {
+        super(scoreCard, ChallengeEnvironment.DOCKER);
+    }
+
+    @Override
+    public Spoiler spoiler() {
+        return new Spoiler(argBasedPassword);
+    }
+
+    @Override
+    public boolean solved(String answer) {
+        return argBasedPassword.equals(answer);
+    }
+
+    @Override
+    public boolean environmentSupported() {
+        return "if_you_see_this_please_use_docker_instead".equals(argBasedPassword);
+    }
+}
