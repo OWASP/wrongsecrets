@@ -74,11 +74,6 @@ public class SecretLeakageController {
     @Value("${APP_VERSION}")
     private String version;
 
-    @GetMapping("/spoil-6")
-    public String getSecretK8sSecret(Model model) {
-        return getSpoil(model, secretK8sSecret);
-    }
-
     @GetMapping("/spoil-7")
     public String getVaultPassword(Model model) {
         if (null != vaultPassword.getPasssword()) {
@@ -120,7 +115,7 @@ public class SecretLeakageController {
         return "index";
     }
 
-    @GetMapping("/challenge/{id:6|7|8|9|10|11}")
+    @GetMapping("/challenge/{id:7|8|9|10|11}")
     public String challengeForm(@PathVariable String id, Model model) {
         model.addAttribute("challengeForm", new ChallengeForm(""));
         model.addAttribute("challengeNumber", id);
@@ -144,14 +139,6 @@ public class SecretLeakageController {
         addWarning(challengeNumber, model);
         return "challenge";
     }
-
-    @PostMapping("/challenge/6")
-    public String postController6(@ModelAttribute ChallengeForm challengeForm, Model model) {
-        log.info("POST received at 6 - serializing form: solution: " + challengeForm.solution());
-        model.addAttribute("challengeNumber", 6);
-        return handleModel(secretK8sSecret, challengeForm.solution(), model, 6);
-    }
-
 
     @PostMapping("/challenge/7")
     public String postController7(@ModelAttribute ChallengeForm challengeForm, Model model) {
