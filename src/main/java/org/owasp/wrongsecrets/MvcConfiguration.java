@@ -15,6 +15,7 @@ import java.util.Set;
 public class MvcConfiguration implements WebMvcConfigurer {
 
     private static final String UTF8 = "UTF-8";
+
     @Bean
     public ITemplateResolver springThymeleafTemplateResolver(ApplicationContext applicationContext) {
         SpringResourceTemplateResolver resolver = new SpringResourceTemplateResolver();

@@ -2,10 +2,10 @@ package org.owasp.wrongsecrets.challenges.kubernetes;
 
 
 import org.owasp.wrongsecrets.ScoreCard;
-import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.ChallengeEnvironment;
 import org.owasp.wrongsecrets.challenges.ChallengeNumber;
+import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 

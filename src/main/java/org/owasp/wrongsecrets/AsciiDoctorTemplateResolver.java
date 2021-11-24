@@ -31,7 +31,7 @@ public class AsciiDoctorTemplateResolver extends FileTemplateResolver {
     private static final Asciidoctor asciidoctor = create();
     private static final String PREFIX = "doc:";
 
-    public AsciiDoctorTemplateResolver(){
+    public AsciiDoctorTemplateResolver() {
         setResolvablePatterns(Set.of(PREFIX + "*"));
     }
 

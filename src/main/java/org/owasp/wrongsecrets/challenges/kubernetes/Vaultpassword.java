@@ -6,6 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class Vaultpassword {
 
     private String password;
+
     public void setPassword(String password) {
         this.password = password;
     }
@@ -13,7 +14,6 @@ public class Vaultpassword {
     public String getPasssword() {
         return password;
     }
-
 
 
 }
