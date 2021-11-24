@@ -1,4 +1,4 @@
-package org.owasp.wrongsecrets;
+package org.owasp.wrongsecrets.challenges.docker;
 
 import org.springframework.stereotype.Component;
 

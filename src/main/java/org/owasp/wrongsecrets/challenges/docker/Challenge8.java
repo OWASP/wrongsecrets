@@ -1,7 +1,6 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
 
-import org.owasp.wrongsecrets.Constants;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.Spoiler;
 import org.owasp.wrongsecrets.challenges.Challenge;
