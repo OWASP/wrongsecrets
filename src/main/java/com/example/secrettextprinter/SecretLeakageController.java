@@ -20,7 +20,6 @@ import software.amazon.awssdk.services.sts.model.AssumeRoleWithWebIdentityReques
 import software.amazon.awssdk.services.sts.model.AssumeRoleWithWebIdentityResponse;
 import software.amazon.awssdk.services.sts.model.StsException;
 
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -32,9 +31,9 @@ import java.nio.file.Paths;
 public class SecretLeakageController {
 
     private final Vaultpassword vaultPassword;
-    private final Scoring scoreCard;
+    private final ScoreCard scoreCard;
 
-    public SecretLeakageController(Vaultpassword vaultpassword, Scoring scoreCard) {
+    public SecretLeakageController(Vaultpassword vaultpassword, ScoreCard scoreCard) {
         this.vaultPassword = vaultpassword;
         this.scoreCard = scoreCard;
     }
@@ -143,14 +142,14 @@ public class SecretLeakageController {
     }
 
     @GetMapping("/")
-    public String rootPage(Model model, HttpSession session) {
+    public String rootPage(Model model) {
         model.addAttribute("version", version);
         model.addAttribute("environment", k8sEnvironment);
         return "index";
     }
 
     @GetMapping("/challenge/{id}")
-    public String challengeForm(@PathVariable String id, Model model, HttpSession session) {
+    public String challengeForm(@PathVariable String id, Model model) {
         model.addAttribute("challengeForm", new ChallengeForm(""));
         model.addAttribute("challengeNumber", id);
         model.addAttribute("answerCorrect", null);
@@ -175,7 +174,7 @@ public class SecretLeakageController {
     }
 
     @PostMapping("/challenge/1")
-    public String postController(@ModelAttribute ChallengeForm challengeForm, Model model, HttpSession session) {
+    public String postController(@ModelAttribute ChallengeForm challengeForm, Model model) {
         log.info("POST received at 1 - serializing form: solution: " + challengeForm.solution());
         model.addAttribute("challengeNumber", 1);
         return handleModel(hardcodedPassword, challengeForm.solution(), model, 1);
@@ -183,35 +182,35 @@ public class SecretLeakageController {
     }
 
     @PostMapping("/challenge/2")
-    public String postController2(@ModelAttribute ChallengeForm challengeForm, Model model, HttpSession session) {
+    public String postController2(@ModelAttribute ChallengeForm challengeForm, Model model) {
         log.info("POST received at 2- serializing form: solution: " + challengeForm.solution());
         model.addAttribute("challengeNumber", 2);
         return handleModel(argBasedPassword, challengeForm.solution(), model, 2);
     }
 
     @PostMapping("/challenge/3")
-    public String postController3(@ModelAttribute ChallengeForm challengeForm, Model model, HttpSession session) {
+    public String postController3(@ModelAttribute ChallengeForm challengeForm, Model model) {
         log.info("POST received at 3 - serializing form: solution: " + challengeForm.solution());
         model.addAttribute("challengeNumber", 3);
         return handleModel(hardcodedEnvPassword, challengeForm.solution(), model, 3);
     }
 
     @PostMapping("/challenge/4")
-    public String postController4(@ModelAttribute ChallengeForm challengeForm, Model model, HttpSession session) {
+    public String postController4(@ModelAttribute ChallengeForm challengeForm, Model model) {
         log.info("POST received at 4 - serializing form: solution: " + challengeForm.solution());
         model.addAttribute("challengeNumber", 4);
         return handleModel(Constants.password, challengeForm.solution(), model, 4);
     }
 
     @PostMapping("/challenge/5")
-    public String postController5(@ModelAttribute ChallengeForm challengeForm, Model model, HttpSession session) {
+    public String postController5(@ModelAttribute ChallengeForm challengeForm, Model model) {
         log.info("POST received at 5 - serializing form: solution: " + challengeForm.solution());
         model.addAttribute("challengeNumber", 5);
         return handleModel(configmapK8sSecret, challengeForm.solution(), model, 5);
     }
 
     @PostMapping("/challenge/6")
-    public String postController6(@ModelAttribute ChallengeForm challengeForm, Model model, HttpSession session) {
+    public String postController6(@ModelAttribute ChallengeForm challengeForm, Model model) {
         log.info("POST received at 6 - serializing form: solution: " + challengeForm.solution());
         model.addAttribute("challengeNumber", 6);
         return handleModel(secretK8sSecret, challengeForm.solution(), model, 6);
@@ -219,7 +218,7 @@ public class SecretLeakageController {
 
 
     @PostMapping("/challenge/7")
-    public String postController7(@ModelAttribute ChallengeForm challengeForm, Model model, HttpSession session) {
+    public String postController7(@ModelAttribute ChallengeForm challengeForm, Model model) {
         log.info("POST received at 7 - serializing form: solution: " + challengeForm.solution());
         model.addAttribute("challengeNumber", 7);
         if (null != vaultPassword.getPasssword()) {
@@ -229,28 +228,28 @@ public class SecretLeakageController {
     }
 
     @PostMapping("/challenge/8")
-    public String postController8(@ModelAttribute ChallengeForm challengeForm, Model model, HttpSession session) {
+    public String postController8(@ModelAttribute ChallengeForm challengeForm, Model model) {
         log.info("POST received at 8 - serializing form: solution: " + challengeForm.solution());
         model.addAttribute("challengeNumber", 8);
         return handleModel(Constants.newKey, challengeForm.solution(), model, 8);
     }
 
     @PostMapping("/challenge/9")
-    public String postController9(@ModelAttribute ChallengeForm challengeForm, Model model, HttpSession session) {
+    public String postController9(@ModelAttribute ChallengeForm challengeForm, Model model) {
         log.info("POST received at 9 - serializing form: solution: " + challengeForm.solution());
         model.addAttribute("challengeNumber", 9);
         return handleModel(getCloudChallenge9and10Value("wrongsecret"), challengeForm.solution(), model, 8);
     }
 
     @PostMapping("/challenge/10")
-    public String postController10(@ModelAttribute ChallengeForm challengeForm, Model model, HttpSession session) {
+    public String postController10(@ModelAttribute ChallengeForm challengeForm, Model model) {
         log.info("POST received at 10 - serializing form: solution: " + challengeForm.solution());
         model.addAttribute("challengeNumber", 10);
         return handleModel(getCloudChallenge9and10Value("wrongsecret-2"), challengeForm.solution(), model, 9);
     }
 
     @PostMapping("/challenge/11")
-    public String postController11(@ModelAttribute ChallengeForm challengeForm, Model model, HttpSession session) {
+    public String postController11(@ModelAttribute ChallengeForm challengeForm, Model model) {
         log.info("POST received at 11 - serializing form: solution: " + challengeForm.solution());
         model.addAttribute("challengeNumber", 11);
         return handleModel(getAWSChallenge11Value(), challengeForm.solution(), model, 10);

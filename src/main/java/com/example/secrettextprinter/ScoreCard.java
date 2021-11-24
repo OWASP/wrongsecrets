@@ -1,6 +1,6 @@
 package com.example.secrettextprinter;
 
-public interface Scoring {
+public interface ScoreCard {
     void completeChallenge(int challengeNumber);
 
     boolean getChallengeCompleted(int challengeNumber);

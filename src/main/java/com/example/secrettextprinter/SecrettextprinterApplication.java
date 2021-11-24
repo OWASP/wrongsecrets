@@ -15,8 +15,8 @@ public class SecrettextprinterApplication {
 
 	@Bean
 	@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
-	public InMemoryScoring scoreCard() {
-		return new InMemoryScoring(11);
+	public InMemoryScoreCard scoreCard() {
+		return new InMemoryScoreCard(11);
 	}
 
 }

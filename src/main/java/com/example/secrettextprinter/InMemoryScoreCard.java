@@ -3,12 +3,12 @@ package com.example.secrettextprinter;
 import java.util.List;
 import java.util.stream.IntStream;
 
-public class InMemoryScoring implements Scoring {
+public class InMemoryScoreCard implements ScoreCard {
 
     private final int maxPoints;
     private final List<Challenge> challenges;
 
-    public InMemoryScoring(int numberOfChallenge) {
+    public InMemoryScoreCard(int numberOfChallenge) {
         maxPoints = numberOfChallenge * 50;
         this.challenges = IntStream.range(0, numberOfChallenge)
                 .mapToObj(i -> new Challenge(50))
