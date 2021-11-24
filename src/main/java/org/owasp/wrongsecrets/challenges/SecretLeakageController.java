@@ -74,14 +74,6 @@ public class SecretLeakageController {
     @Value("${APP_VERSION}")
     private String version;
 
-    @GetMapping("/spoil-7")
-    public String getVaultPassword(Model model) {
-        if (null != vaultPassword.getPasssword()) {
-            return getSpoil(model, vaultPassword.getPasssword());
-        }
-        return getSpoil(model, vaultPasswordString);
-    }
-
     @GetMapping("/spoil-8")
     public String getRandCode(Model model) {
         return getSpoil(model, Constants.newKey);
@@ -115,7 +107,7 @@ public class SecretLeakageController {
         return "index";
     }
 
-    @GetMapping("/challenge/{id:7|8|9|10|11}")
+    @GetMapping("/challenge/{id:8|9|10|11}")
     public String challengeForm(@PathVariable String id, Model model) {
         model.addAttribute("challengeForm", new ChallengeForm(""));
         model.addAttribute("challengeNumber", id);
@@ -138,16 +130,6 @@ public class SecretLeakageController {
         includeScoringStatus(challengeNumber, model, null);
         addWarning(challengeNumber, model);
         return "challenge";
-    }
-
-    @PostMapping("/challenge/7")
-    public String postController7(@ModelAttribute ChallengeForm challengeForm, Model model) {
-        log.info("POST received at 7 - serializing form: solution: " + challengeForm.solution());
-        model.addAttribute("challengeNumber", 7);
-        if (null != vaultPassword.getPasssword()) {
-            return handleModel(vaultPassword.getPasssword(), challengeForm.solution(), model, 7);
-        }
-        return handleModel(vaultPasswordString, challengeForm.solution(), model, 7);
     }
 
     @PostMapping("/challenge/8")
@@ -215,14 +197,8 @@ public class SecretLeakageController {
         model.addAttribute("totalPoints", scoreCard.getTotalReceivedPoints());
         model.addAttribute("progress", "" + scoreCard.getProgress());
 
-        if (challenge == null) { //TODO remove after migration of all challenges
-            if (scoreCard.getChallengeCompleted(id)) {
-                model.addAttribute("challengeCompletedAlready", "This exercise is already completed");
-            }
-        } else {
-            if (scoreCard.getChallengeCompleted(challenge.getId())) {
-                model.addAttribute("challengeCompletedAlready", "This exercise is already completed");
-            }
+        if (scoreCard.getChallengeCompleted(id)) {
+            model.addAttribute("challengeCompletedAlready", "This exercise is already completed");
         }
     }
 

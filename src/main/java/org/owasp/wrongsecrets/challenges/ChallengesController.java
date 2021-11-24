@@ -40,14 +40,14 @@ public class ChallengesController {
         return Integer.valueOf(challenge.getClass().getAnnotation(ChallengeNumber.class).value());
     }
 
-    @GetMapping("/spoil-{id:1|2|3|4|5|6}") //TODO needed for migration
+    @GetMapping("/spoil-{id:1|2|3|4|5|6|7}") //TODO needed for migration
     public String spoiler(Model model, @PathVariable String id) {
         var challenge = findChallenge(id);
         model.addAttribute("solution", challenge.spoiler().solution()); //TODO update spoiler class directly instead of the String
         return "spoil";
     }
 
-    @GetMapping("/challenge/{id:1|2|3|4|5|6}") //TODO needed for migration
+    @GetMapping("/challenge/{id:1|2|3|4|5|6|7}") //TODO needed for migration
     public String challenge(Model model, @PathVariable String id) {
         var challenge = findChallenge(id);
 
@@ -63,7 +63,7 @@ public class ChallengesController {
         return "challenge";
     }
 
-    @PostMapping("/challenge/{id:1|2|3|4|5|6}")
+    @PostMapping("/challenge/{id:1|2|3|4|5|6|7}")
     public String postController(@ModelAttribute ChallengeForm challengeForm, Model model, @PathVariable String id) {
         var challenge = findChallenge(id);
         model.addAttribute("challengeNumber", challengeNumber(challenge));
@@ -83,7 +83,7 @@ public class ChallengesController {
         model.addAttribute("totalPoints", scoreCard.getTotalReceivedPoints());
         model.addAttribute("progress", "" + scoreCard.getProgress());
 
-        if (scoreCard.getChallengeCompleted(challenge.getId())) {
+        if (scoreCard.getChallengeCompleted(challengeNumber(challenge))) {
             model.addAttribute("challengeCompletedAlready", "This exercise is already completed");
         }
     }
@@ -93,6 +93,7 @@ public class ChallengesController {
             model.addAttribute("runtimeWarning", switch (challenge.getEnvironment()) {
                 case DOCKER -> "We are running outside of a docker container. Please run this in a container as explained in the README.md.";
                 case K8S -> "We are running outside of a K8s cluster. Please run this in the K8s cluster as explained in the README.md.";
+                case K8S_VAULT -> "We are running outside of a K8s cluster with Vault. Please run this in the K8s cluster as explained in the README.md.";
                 default -> "??";
             });
     }

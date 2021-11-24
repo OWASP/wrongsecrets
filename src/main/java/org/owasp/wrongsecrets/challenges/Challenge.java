@@ -19,9 +19,4 @@ public abstract class Challenge {
     public boolean environmentSupported() {
         return false;
     }
-
-    public String getId() {
-        return this.getClass().getSimpleName();
-    }
-
 }
