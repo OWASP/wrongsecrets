@@ -73,11 +73,6 @@ public class SecretLeakageController {
     @Value("${APP_VERSION}")
     private String version;
 
-    @GetMapping("/spoil-10")
-    public String getCloudChallenge2(Model model) {
-        return getSpoil(model, getCloudChallenge9and10Value("wrongsecret-2"));
-    }
-
     @GetMapping("/spoil-11")
     public String getCloudChallenge3(Model model) {
         return getSpoil(model, getAWSChallenge11Value());
@@ -96,7 +91,7 @@ public class SecretLeakageController {
         return "index";
     }
 
-    @GetMapping("/challenge/{id:10|11}")
+    @GetMapping("/challenge/{id:11}")
     public String challengeForm(@PathVariable String id, Model model) {
         model.addAttribute("challengeForm", new ChallengeForm(""));
         model.addAttribute("challengeNumber", id);
@@ -119,13 +114,6 @@ public class SecretLeakageController {
         includeScoringStatus(challengeNumber, model, null);
         addWarning(challengeNumber, model);
         return "challenge";
-    }
-
-    @PostMapping("/challenge/10")
-    public String postController10(@ModelAttribute ChallengeForm challengeForm, Model model) {
-        log.info("POST received at 10 - serializing form: solution: " + challengeForm.solution());
-        model.addAttribute("challengeNumber", 10);
-        return handleModel(getCloudChallenge9and10Value("wrongsecret-2"), challengeForm.solution(), model, 9);
     }
 
     @PostMapping("/challenge/11")

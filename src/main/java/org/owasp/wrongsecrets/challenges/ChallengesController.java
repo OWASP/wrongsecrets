@@ -40,14 +40,14 @@ public class ChallengesController {
         return Integer.valueOf(challenge.getClass().getAnnotation(ChallengeNumber.class).value());
     }
 
-    @GetMapping("/spoil-{id:1|2|3|4|5|6|7|8|9}") //TODO needed for migration
+    @GetMapping("/spoil-{id:1|2|3|4|5|6|7|8|9|10}") //TODO needed for migration
     public String spoiler(Model model, @PathVariable String id) {
         var challenge = findChallenge(id);
         model.addAttribute("solution", challenge.spoiler().solution()); //TODO update spoiler class directly instead of the String
         return "spoil";
     }
 
-    @GetMapping("/challenge/{id:1|2|3|4|5|6|7|8|9}") //TODO needed for migration
+    @GetMapping("/challenge/{id:1|2|3|4|5|6|7|8|9|10}") //TODO needed for migration
     public String challenge(Model model, @PathVariable String id) {
         var challenge = findChallenge(id);
 
