@@ -13,7 +13,7 @@ public abstract class Challenge {
 
     public abstract Spoiler spoiler();
 
-    public boolean solved(String answer) {
+    public boolean solved(final String answer) {
         var correctAnswer = answerCorrect(answer);
         if (correctAnswer) {
             scoreCard.completeChallenge(this);
@@ -21,7 +21,7 @@ public abstract class Challenge {
         return correctAnswer;
     }
 
-    protected abstract boolean answerCorrect(String answer);
+    protected abstract boolean answerCorrect(final String answer);
 
     public boolean environmentSupported() {
         return false;

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @ChallengeNumber("8")
 public class Challenge8 extends Challenge {
 
-    public Challenge8(ScoreCard scoreCard) {
+    public Challenge8(final ScoreCard scoreCard) {
         super(scoreCard, ChallengeEnvironment.DOCKER);
     }
 
@@ -22,7 +22,7 @@ public class Challenge8 extends Challenge {
     }
 
     @Override
-    public boolean answerCorrect(String answer) {
+    public boolean answerCorrect(final String answer) {
         return Constants.newKey.equals(answer);
     }
 

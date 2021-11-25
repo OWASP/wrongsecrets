@@ -36,12 +36,12 @@ public class Challenge11 extends Challenge {
     private final String challengeAnswer;
     private final String k8sEnvironment;
 
-    public Challenge11(ScoreCard scoreCard,
-                       @Value("${AWS_ROLE_ARN}") String awsRoleArn,
-                       @Value("${AWS_WEB_IDENTITY_TOKEN_FILE}") String tokenFileLocation,
-                       @Value("${AWS_REGION}") String awsRegion,
-                       @Value("${default_aws_value}") String awsDefaultValue,
-                       @Value("${K8S_ENV}") String k8sEnvironment) {
+    public Challenge11(final ScoreCard scoreCard,
+                       final @Value("${AWS_ROLE_ARN}") String awsRoleArn,
+                       final @Value("${AWS_WEB_IDENTITY_TOKEN_FILE}") String tokenFileLocation,
+                       final @Value("${AWS_REGION}") String awsRegion,
+                       final @Value("${default_aws_value}") String awsDefaultValue,
+                       final @Value("${K8S_ENV}") String k8sEnvironment) {
         super(scoreCard, ChallengeEnvironment.CLOUD);
         this.awsRoleArn = awsRoleArn;
         this.tokenFileLocation = tokenFileLocation;
@@ -57,7 +57,7 @@ public class Challenge11 extends Challenge {
     }
 
     @Override
-    public boolean answerCorrect(String answer) {
+    public boolean answerCorrect(final String answer) {
         return challengeAnswer.equals(answer);
     }
 

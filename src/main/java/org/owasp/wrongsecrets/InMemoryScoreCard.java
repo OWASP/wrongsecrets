@@ -8,10 +8,11 @@ import java.util.Set;
 public class InMemoryScoreCard implements ScoreCard {
 
     private final int maxPoints;
+    private final int pointsPerExercise = 50;
     private final Set<Challenge> solvedChallenges = new HashSet<>();
 
     public InMemoryScoreCard(int numberOfChallenge) {
-        maxPoints = numberOfChallenge * 50;
+        maxPoints = numberOfChallenge * pointsPerExercise;
     }
 
     @Override
@@ -31,6 +32,6 @@ public class InMemoryScoreCard implements ScoreCard {
 
     @Override
     public int getTotalReceivedPoints() {
-        return solvedChallenges.size() * 50;
+        return solvedChallenges.size() * pointsPerExercise;
     }
 }

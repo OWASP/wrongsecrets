@@ -17,7 +17,8 @@ public class Challenge7 extends Challenge {
     private final Vaultpassword vaultPassword;
     private final String vaultPasswordString;
 
-    public Challenge7(ScoreCard scoreCard, Vaultpassword vaultPassword, @Value("${vaultpassword}") String vaultPasswordString) {
+    public Challenge7(final ScoreCard scoreCard,
+                      final Vaultpassword vaultPassword, @Value("${vaultpassword}") String vaultPasswordString) {
         super(scoreCard, ChallengeEnvironment.K8S_VAULT);
         this.vaultPassword = vaultPassword;
         this.vaultPasswordString = vaultPasswordString;
@@ -33,7 +34,7 @@ public class Challenge7 extends Challenge {
     }
 
     @Override
-    public boolean answerCorrect(String answer) {
+    public boolean answerCorrect(final String answer) {
         return getAnswer().equals(answer);
     }
 

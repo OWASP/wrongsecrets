@@ -21,7 +21,7 @@ class Challenge9Test {
     private ScoreCard scoreCard;
 
     @Test
-    void solveChallenge9WithoutFile(@TempDir Path dir) throws Exception {
+    void solveChallenge9WithoutFile(@TempDir Path dir) {
         var challenge = new Challenge9(scoreCard, dir.toString(), "test", "k8s");
 
         Assertions.assertThat(challenge.answerCorrect("secretvalueWitFile")).isFalse();

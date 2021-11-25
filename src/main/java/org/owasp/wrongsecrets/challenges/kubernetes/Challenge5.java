@@ -15,7 +15,8 @@ public class Challenge5 extends Challenge {
 
     private final String configmapK8sSecret;
 
-    public Challenge5(ScoreCard scoreCard, @Value("${SPECIAL_K8S_SECRET}") String configmapK8sSecret) {
+    public Challenge5(final ScoreCard scoreCard,
+                      final @Value("${SPECIAL_K8S_SECRET}") String configmapK8sSecret) {
         super(scoreCard, ChallengeEnvironment.K8S);
         this.configmapK8sSecret = configmapK8sSecret;
     }
@@ -26,7 +27,7 @@ public class Challenge5 extends Challenge {
     }
 
     @Override
-    public boolean answerCorrect(String answer) {
+    public boolean answerCorrect(final String answer) {
         return configmapK8sSecret.equals(answer);
     }
 

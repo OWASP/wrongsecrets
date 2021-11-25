@@ -16,7 +16,9 @@ public class Challenge1 extends Challenge {
     private final String hardcodedPassword;
     private final String argBasedPassword;
 
-    public Challenge1(ScoreCard scoreCard, @Value("${password}") String hardcodedPassword, @Value("${ARG_BASED_PASSWORD}") String argBasedPassword) {
+    public Challenge1(final ScoreCard scoreCard,
+                      final @Value("${password}") String hardcodedPassword,
+                      final @Value("${ARG_BASED_PASSWORD}") String argBasedPassword) {
         super(scoreCard, ChallengeEnvironment.DOCKER);
         this.hardcodedPassword = hardcodedPassword;
         this.argBasedPassword = argBasedPassword;
@@ -28,7 +30,7 @@ public class Challenge1 extends Challenge {
     }
 
     @Override
-    public boolean answerCorrect(String answer) {
+    public boolean answerCorrect(final String answer) {
         return hardcodedPassword.equals(answer);
     }
 

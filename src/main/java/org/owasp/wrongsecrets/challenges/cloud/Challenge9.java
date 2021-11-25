@@ -20,12 +20,12 @@ public class Challenge9 extends Challenge {
 
     private final String awsDefaultValue;
     private final String challengeAnswer;
-    private String k8sEnvironment;
+    private final String k8sEnvironment;
 
-    public Challenge9(ScoreCard scoreCard,
-                      @Value("${secretmountpath}") String filePath,
-                      @Value("${default_aws_value}") String awsDefaultValue,
-                      @Value("${K8S_ENV}") String k8sEnvironment) {
+    public Challenge9(final ScoreCard scoreCard,
+                      final @Value("${secretmountpath}") String filePath,
+                      final @Value("${default_aws_value}") String awsDefaultValue,
+                      final @Value("${K8S_ENV}") String k8sEnvironment) {
         super(scoreCard, ChallengeEnvironment.CLOUD);
         this.awsDefaultValue = awsDefaultValue;
         this.challengeAnswer = getCloudChallenge9and10Value(filePath, "wrongsecret");
@@ -38,7 +38,7 @@ public class Challenge9 extends Challenge {
     }
 
     @Override
-    public boolean answerCorrect(String answer) {
+    public boolean answerCorrect(final String answer) {
         return challengeAnswer.equals(answer);
     }
 
@@ -47,7 +47,7 @@ public class Challenge9 extends Challenge {
         return k8sEnvironment.equals("gcp") || k8sEnvironment.contains("aws");
     }
 
-    private String getCloudChallenge9and10Value(String filePath, String fileName) {
+    private String getCloudChallenge9and10Value(final String filePath, final String fileName) {
         try {
             return Files.readString(Paths.get(filePath, fileName));
         } catch (Exception e) {

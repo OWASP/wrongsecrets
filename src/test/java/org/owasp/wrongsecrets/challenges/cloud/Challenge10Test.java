@@ -31,7 +31,7 @@ class Challenge10Test {
     }
 
     @Test
-    void solveChallenge10WithoutAWSFile(@TempDir Path dir) throws Exception {
+    void solveChallenge10WithoutAWSFile(@TempDir Path dir) {
         var challenge = new Challenge10(scoreCard, dir.toString(), "test", "K8s");
 
         Assertions.assertThat(challenge.answerCorrect("secretvalueWitFile")).isFalse();
