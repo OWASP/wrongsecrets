@@ -1,16 +1,22 @@
-package com.example.secrettextprinter;
+package org.owasp.wrongsecrets;
 
 import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.owasp.wrongsecrets.challenges.cloud.Challenge10;
+import org.owasp.wrongsecrets.challenges.cloud.Challenge9;
+import org.owasp.wrongsecrets.challenges.docker.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.support.TestPropertySourceUtils;
+import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -19,10 +25,7 @@ import org.springframework.vault.core.VaultTemplate;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -95,21 +98,6 @@ class SecretLeakageControllerTest {
     void solveChallenge4() throws Exception {
         solveChallenge("/challenge/4", Constants.password);
     }
-
-    @Test
-    void solveChallenge9WithoutFile() throws Exception {
-        solveChallenge("/challenge/9", tempAWSfiller);
-    }
-
-    @Test
-    void solveChallenge9WithFile() throws Exception {
-        File testFile = new File(tempMountPath, "wrongsecret");
-        String secret = "secretvalueWitFile";
-        Files.writeString(testFile.toPath(), secret, StandardOpenOption.CREATE, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
-        solveChallenge("/challenge/9", secret);
-        testFile.deleteOnExit();
-    }
-
 
     private void solveChallenge(String endpoint, String solution) throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.post(endpoint).param("solution", solution))

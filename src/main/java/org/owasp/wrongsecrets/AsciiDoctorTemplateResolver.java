@@ -1,4 +1,4 @@
-package com.example.secrettextprinter;
+package org.owasp.wrongsecrets;
 
 import lombok.extern.slf4j.Slf4j;
 import org.asciidoctor.Asciidoctor;
@@ -31,7 +31,7 @@ public class AsciiDoctorTemplateResolver extends FileTemplateResolver {
     private static final Asciidoctor asciidoctor = create();
     private static final String PREFIX = "doc:";
 
-    public AsciiDoctorTemplateResolver(){
+    public AsciiDoctorTemplateResolver() {
         setResolvablePatterns(Set.of(PREFIX + "*"));
     }
 

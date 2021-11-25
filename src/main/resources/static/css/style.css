@@ -1,0 +1,18 @@
+div.sect2 {
+    border-radius: 25px;
+    border: 2px solid black;
+    width: 80%;
+    padding: 20px;
+    margin: 20px 0px 20px 0px;
+}
+
+.progress {
+    margin: 20px 0px 20px 0px;
+}
+
+div.thank-you {
+    border-radius: 25px;
+    border: 2px solid black;
+    padding: 10px;
+    margin: 00px 0px 10px 0px;
+}
