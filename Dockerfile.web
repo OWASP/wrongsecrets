@@ -1,6 +1,6 @@
-FROM jeroenwillemsen/addo-example:1.0.4-no-vault
+FROM jeroenwillemsen/addo-example:java-rebuild-no-vault
 
-ARG argBasedVersion="1.0.4"
+ARG argBasedVersion="1.0.4B"
 ENV APP_VERSION=$argBasedVersion
 ENV K8S_ENV=Heroku(Docker)
 CMD java -jar -Dserver.port=$PORT -Dspring.profiles.active=without-vault application.jar
