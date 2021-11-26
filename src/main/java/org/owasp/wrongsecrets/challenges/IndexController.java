@@ -27,10 +27,10 @@ public class IndexController {
         if (k8sEnvironment == "gcp" || k8sEnvironment == "aws") {
             model.addAttribute("cloud", "enabled");
         }
-        if (k8sEnvironment.toLowerCase(Locale.ROOT).contains("vault") || k8sEnvironment == "gcp" || k8sEnvironment == "aws") {
+        if (k8sEnvironment.contains("k8s-with-vault") || k8sEnvironment == "gcp" || k8sEnvironment == "aws") {
             model.addAttribute("vault", "enabled");
         }
-        if (k8sEnvironment.toLowerCase(Locale.ROOT).contains("k8s") || k8sEnvironment == "gcp" || k8sEnvironment == "aws") {
+        if (k8sEnvironment.contains("k8s") || k8sEnvironment == "gcp" || k8sEnvironment == "aws") {
             model.addAttribute("k8s", "enabled");
         }
 
