@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.Locale;
+import java.util.Objects;
 
 @Controller
 @Slf4j
@@ -24,17 +25,15 @@ public class IndexController {
     public String index(Model model) {
         model.addAttribute("version", version);
         model.addAttribute("environment", k8sEnvironment);
-        if (k8sEnvironment == "gcp" || k8sEnvironment == "aws") {
+        if ("gcp".equals(k8sEnvironment) || "aws".equals(k8sEnvironment)) {
             model.addAttribute("cloud", "enabled");
         }
-        if (k8sEnvironment.contains("k8s-with-vault") || k8sEnvironment == "gcp" || k8sEnvironment == "aws") {
+        if ("k8s-with-vault".equals(k8sEnvironment) || "gcp".equals(k8sEnvironment) || "aws".equals(k8sEnvironment)) {
             model.addAttribute("vault", "enabled");
         }
-        if (k8sEnvironment.contains("k8s") || k8sEnvironment == "gcp" || k8sEnvironment == "aws") {
+        if (k8sEnvironment.contains("k8s") || "gcp".equals(k8sEnvironment) || "aws".equals(k8sEnvironment)) {
             model.addAttribute("k8s", "enabled");
         }
-
-
         return "index";
     }
 }
