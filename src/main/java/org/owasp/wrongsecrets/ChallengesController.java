@@ -60,7 +60,7 @@ public class ChallengesController {
         model.addAttribute("answerIncorrect", null);
         model.addAttribute("solution", null);
         model.addAttribute("challengeNumber", challengeNumber(challenge));
-        model.addAttribute("k8sEnvironment", k8sEnvironment);
+        model.addAttribute("environment", k8sEnvironment);
         includeScoringStatus(model, challenge);
         addWarning(challenge, model);
 
@@ -71,7 +71,7 @@ public class ChallengesController {
     public String postController(@ModelAttribute ChallengeForm challengeForm, Model model, @PathVariable String id) {
         var challenge = findChallenge(id);
         model.addAttribute("challengeNumber", challengeNumber(challenge));
-        model.addAttribute("k8sEnvironment", k8sEnvironment);
+        model.addAttribute("environment", k8sEnvironment);
         if (challenge.solved(challengeForm.solution())) {
             model.addAttribute("answerCorrect", "Your answer is correct!");
         } else {
