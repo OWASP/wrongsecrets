@@ -23,11 +23,16 @@ public class IndexController {
 
     @GetMapping("/")
     public String index(Model model) {
+        linkDisableInstruction(model);
         model.addAttribute("version", version);
         model.addAttribute("environment", k8sEnvironment);
-        /**
-         * Added the cloud, vault, and k8s variables in the model in order ot highlight the challenges which are functional and which are not.
-         */
+        return "index";
+    }
+
+    /**
+     * Added the cloud, vault, and k8s variables in the model in order ot highlight the challenges which are functional and which are not.
+     */
+    private void linkDisableInstruction(Model model) {
         if ("gcp".equals(k8sEnvironment) || "aws".equals(k8sEnvironment)) {
             model.addAttribute("cloud", "enabled");
         }
@@ -37,6 +42,5 @@ public class IndexController {
         if (k8sEnvironment.contains("k8s") || "gcp".equals(k8sEnvironment) || "aws".equals(k8sEnvironment)) {
             model.addAttribute("k8s", "enabled");
         }
-        return "index";
     }
 }
