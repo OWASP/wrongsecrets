@@ -1,4 +1,4 @@
-FROM jeroenwillemsen/addo-example:1.0.4-no-vault
+FROM jeroenwillemsen/wrongsecrets:1.0.4-no-vault
 
 ARG argBasedVersion="1.0.4"
 ENV APP_VERSION=$argBasedVersion
