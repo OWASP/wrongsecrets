@@ -25,6 +25,9 @@ public class IndexController {
     public String index(Model model) {
         model.addAttribute("version", version);
         model.addAttribute("environment", k8sEnvironment);
+        /**
+         * Added the cloud, vault, and k8s variables in the model in order ot highlight the challenges which are functional and which are not.
+         */
         if ("gcp".equals(k8sEnvironment) || "aws".equals(k8sEnvironment)) {
             model.addAttribute("cloud", "enabled");
         }
