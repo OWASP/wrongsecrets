@@ -18,12 +18,7 @@ import java.util.Set;
 import static org.asciidoctor.Asciidoctor.Factory.create;
 
 /**
- * Thymeleaf resolver for AsciiDoc used in the lesson, can be used as follows inside a lesson file:
- * <p>
- * <code>
- * <div th:replace="doc:AccessControlMatrix_plan.adoc"></div>
- * </code>
- * Copied from WEbGoat
+ * Thymeleaf resolver for AsciiDoc used in the lesson, can be used as follows inside a lesson file.
  */
 @Slf4j
 public class AsciiDoctorTemplateResolver extends FileTemplateResolver {
