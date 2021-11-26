@@ -25,6 +25,9 @@ public class ChallengesController {
         this.version = version;
         this.scoreCard = scoreCard;
         this.challenges = challenges;
+        /**
+         * note: this is required as "environment" in our model, as the templates require it to show the right cloud explanation
+         */
         this.k8sEnvironment = k8sEnvironment;
     }
 
