@@ -119,7 +119,6 @@ public class Challenge11 extends Challenge {
 
     private String getGCPChallenge11Value() {
         log.info("Getting credentials from GCP");
-        log.info(k8sEnvironment);
         if (k8sEnvironment == "gcp") {
             // Based on https://cloud.google.com/secret-manager/docs/reference/libraries
             try (SecretManagerServiceClient client = SecretManagerServiceClient.create()) {
