@@ -39,4 +39,4 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
       - name: checkstyle with Maven
-        run: mvn --no-transfer-progress checkstyle:checkstyle
+        run: mvn --no-transfer-progress checkstyle:check
