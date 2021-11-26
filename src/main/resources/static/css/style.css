@@ -16,3 +16,10 @@ div.thank-you {
     padding: 10px;
     margin: 00px 0px 10px 0px;
 }
+
+a.disabled{
+    cursor: default;
+    pointer-events: none;
+    text-decoration: none;
+    color: black;
+}
