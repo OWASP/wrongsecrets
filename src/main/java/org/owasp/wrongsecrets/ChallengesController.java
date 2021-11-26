@@ -71,7 +71,7 @@ public class ChallengesController {
     public String postController(@ModelAttribute ChallengeForm challengeForm, Model model, @PathVariable String id) {
         var challenge = findChallenge(id);
         model.addAttribute("challengeNumber", challengeNumber(challenge));
-
+        model.addAttribute("k8sEnvironment", k8sEnvironment);
         if (challenge.solved(challengeForm.solution())) {
             model.addAttribute("answerCorrect", "Your answer is correct!");
         } else {
