@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.Locale;
+
 @Controller
 @Slf4j
 @RequiredArgsConstructor
@@ -22,6 +24,17 @@ public class IndexController {
     public String index(Model model) {
         model.addAttribute("version", version);
         model.addAttribute("environment", k8sEnvironment);
+        if(k8sEnvironment== "gcp"|| k8sEnvironment== "aws"){
+            model.addAttribute("cloud", "enabled");
+        }
+        if(k8sEnvironment.toLowerCase(Locale.ROOT).contains("vault")|| k8sEnvironment== "gcp"|| k8sEnvironment== "aws"){
+            model.addAttribute("vault", "enabled");
+        }
+        if(k8sEnvironment.toLowerCase(Locale.ROOT).contains("k8s")|| k8sEnvironment== "gcp"|| k8sEnvironment== "aws"){
+            model.addAttribute("k8s", "enabled");
+        }
+
+
         return "index";
     }
 }
