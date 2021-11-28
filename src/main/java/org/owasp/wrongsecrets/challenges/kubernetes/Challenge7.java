@@ -33,6 +33,11 @@ public class Challenge7 extends Challenge {
     }
 
     @Override
+    public String getExplanationFile() {
+        return "challenge__7__.adoc";
+    }
+
+    @Override
     public boolean answerCorrect(String answer) {
         return getAnswer().equals(answer);
     }

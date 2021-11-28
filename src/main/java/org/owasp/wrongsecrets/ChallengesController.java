@@ -58,7 +58,7 @@ public class ChallengesController {
         model.addAttribute("answerIncorrect", null);
         model.addAttribute("solution", null);
         model.addAttribute("challengeNumber", challengeNumber(challenge));
-
+        model.addAttribute("explanationfile", challenge.getExplanationFile());
         includeScoringStatus(model, challenge);
         addWarning(challenge, model);
 

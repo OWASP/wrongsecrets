@@ -38,6 +38,14 @@ public class Challenge9 extends Challenge {
     }
 
     @Override
+    public String getExplanationFile() {
+        if ("gcp".equals(k8sEnvironment)){
+            return "challenge__9-gcp__.adoc";
+        }
+        return "challenge__9__.adoc";
+    }
+
+    @Override
     public boolean answerCorrect(String answer) {
         return challengeAnswer.equals(answer);
     }

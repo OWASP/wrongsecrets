@@ -22,6 +22,11 @@ public class Challenge4 extends Challenge {
     }
 
     @Override
+    public String getExplanationFile() {
+        return "challenge__4__.adoc";
+    }
+
+    @Override
     public boolean answerCorrect(String answer) {
         return Constants.password.equals(answer);
     }

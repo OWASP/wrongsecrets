@@ -13,6 +13,8 @@ public abstract class Challenge {
 
     public abstract Spoiler spoiler();
 
+    public abstract String getExplanationFile();
+
     public boolean solved(String answer) {
         var correctAnswer = answerCorrect(answer);
         if (correctAnswer) {

@@ -26,6 +26,11 @@ public class Challenge5 extends Challenge {
     }
 
     @Override
+    public String getExplanationFile() {
+        return "challenge__5__.adoc";
+    }
+
+    @Override
     public boolean answerCorrect(String answer) {
         return configmapK8sSecret.equals(answer);
     }
