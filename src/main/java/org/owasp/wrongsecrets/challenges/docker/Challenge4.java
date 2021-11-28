@@ -4,12 +4,12 @@ package org.owasp.wrongsecrets.challenges.docker;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.ChallengeEnvironment;
-import org.owasp.wrongsecrets.challenges.ChallengeNumber;
 import org.owasp.wrongsecrets.challenges.Spoiler;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Component
-@ChallengeNumber("4")
+@Order(4)
 public class Challenge4 extends Challenge {
 
     public Challenge4(ScoreCard scoreCard) {

@@ -5,8 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.ChallengeEnvironment;
-import org.owasp.wrongsecrets.challenges.ChallengeNumber;
 import org.owasp.wrongsecrets.challenges.Spoiler;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.security.SecureRandom;
@@ -14,7 +14,7 @@ import java.util.Random;
 
 @Slf4j
 @Component
-@ChallengeNumber("8")
+@Order(8)
 public class Challenge8 extends Challenge {
 
     private final Random secureRandom = new SecureRandom();

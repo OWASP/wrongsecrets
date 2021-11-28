@@ -6,9 +6,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.ChallengeEnvironment;
-import org.owasp.wrongsecrets.challenges.ChallengeNumber;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.ssm.SsmClient;
@@ -31,7 +31,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 @Component
-@ChallengeNumber("11")
+@Order(11)
 @Slf4j
 public class Challenge11 extends Challenge {
 

@@ -5,13 +5,13 @@ import org.apache.logging.log4j.util.Strings;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.ChallengeEnvironment;
-import org.owasp.wrongsecrets.challenges.ChallengeNumber;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Component
-@ChallengeNumber("7")
+@Order(7)
 public class Challenge7 extends Challenge {
 
     private final Vaultpassword vaultPassword;

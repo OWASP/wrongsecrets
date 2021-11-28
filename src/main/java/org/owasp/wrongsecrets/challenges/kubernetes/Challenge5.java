@@ -4,13 +4,13 @@ package org.owasp.wrongsecrets.challenges.kubernetes;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.ChallengeEnvironment;
-import org.owasp.wrongsecrets.challenges.ChallengeNumber;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Component
-@ChallengeNumber("5")
+@Order(5)
 public class Challenge5 extends Challenge {
 
     private final String configmapK8sSecret;

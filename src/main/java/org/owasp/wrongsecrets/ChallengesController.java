@@ -2,7 +2,6 @@ package org.owasp.wrongsecrets;
 
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.ChallengeForm;
-import org.owasp.wrongsecrets.challenges.ChallengeNumber;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,26 +35,23 @@ public class ChallengesController {
      * annotation on Challenge classes. This way it stays limited to the controller and the order of challenges can easily
      * be changed
      */
-    private Challenge findChallenge(String id) {
-        return challenges.stream()
-                .filter(c -> c.getClass().getAnnotation(ChallengeNumber.class).value().equals(id))
-                .findAny()
-                .orElseThrow(() -> new IllegalArgumentException("Challenge " + id + " + not found, did you add the annotation?"));
+    private Challenge findChallenge(Integer id) {
+        return challenges.get(id);
     }
 
     private Integer challengeNumber(Challenge challenge) {
-        return Integer.valueOf(challenge.getClass().getAnnotation(ChallengeNumber.class).value());
+        return challenges.indexOf(challenge);
     }
 
     @GetMapping("/spoil-{id}")
-    public String spoiler(Model model, @PathVariable String id) {
+    public String spoiler(Model model, @PathVariable Integer id) {
         var challenge = findChallenge(id);
         model.addAttribute("solution", challenge.spoiler().solution()); //TODO update spoiler class directly instead of the String
         return "spoil";
     }
 
     @GetMapping("/challenge/{id}")
-    public String challenge(Model model, @PathVariable String id) {
+    public String challenge(Model model, @PathVariable Integer id) {
         var challenge = findChallenge(id);
 
         model.addAttribute("challengeForm", new ChallengeForm(""));
@@ -82,7 +78,7 @@ public class ChallengesController {
     }
 
     @PostMapping("/challenge/{id}")
-    public String postController(@ModelAttribute ChallengeForm challengeForm, Model model, @PathVariable String id) {
+    public String postController(@ModelAttribute ChallengeForm challengeForm, Model model, @PathVariable Integer id) {
         var challenge = findChallenge(id);
         model.addAttribute("challengeNumber", challengeNumber(challenge));
         model.addAttribute("explanationfile", challenge.getExplanationFileIdentifier());
