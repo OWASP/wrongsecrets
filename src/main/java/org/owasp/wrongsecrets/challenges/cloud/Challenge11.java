@@ -57,11 +57,11 @@ public class Challenge11 extends Challenge {
     }
 
     @Override
-    public String getExplanationFile() {
+    public String getExplanationFileIdentifier() {
         if ("gcp".equals(k8sEnvironment)){
-            return "challenge__11-gcp__.adoc";
+            return "11-gcp";
         }
-        return "challenge__11__.adoc";
+        return "11";
     }
 
     @Override

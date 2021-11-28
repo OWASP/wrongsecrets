@@ -22,8 +22,8 @@ public class Challenge8 extends Challenge {
     }
 
     @Override
-    public String getExplanationFile() {
-        return "challenge__8__.adoc";
+    public String getExplanationFileIdentifier() {
+        return "8";
     }
 
     @Override

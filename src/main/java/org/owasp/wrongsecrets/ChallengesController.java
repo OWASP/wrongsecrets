@@ -58,7 +58,7 @@ public class ChallengesController {
         model.addAttribute("answerIncorrect", null);
         model.addAttribute("solution", null);
         model.addAttribute("challengeNumber", challengeNumber(challenge));
-        model.addAttribute("explanationfile", challenge.getExplanationFile());
+        model.addAttribute("explanationfile", challenge.getExplanationFileIdentifier());
         includeScoringStatus(model, challenge);
         addWarning(challenge, model);
 
@@ -69,6 +69,7 @@ public class ChallengesController {
     public String postController(@ModelAttribute ChallengeForm challengeForm, Model model, @PathVariable String id) {
         var challenge = findChallenge(id);
         model.addAttribute("challengeNumber", challengeNumber(challenge));
+        model.addAttribute("explanationfile", challenge.getExplanationFileIdentifier());
 
         if (challenge.solved(challengeForm.solution())) {
             model.addAttribute("answerCorrect", "Your answer is correct!");
