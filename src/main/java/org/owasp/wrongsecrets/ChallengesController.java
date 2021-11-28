@@ -58,18 +58,22 @@ public class ChallengesController {
         model.addAttribute("answerIncorrect", null);
         model.addAttribute("solution", null);
         model.addAttribute("challengeNumber", challengeNumber(challenge));
-        if (challengeNumber(challenge) > 0) {
-            model.addAttribute("previouschallenge", challengeNumber(challenge) - 1);
-        }
-        if (challengeNumber(challenge) < challenges.size()) {
-            model.addAttribute("nextchallenge", challengeNumber(challenge) - 1);
-        }
+        addPreviousAndNextChallenge(model, challenge);
 
         model.addAttribute("explanationfile", challenge.getExplanationFileIdentifier());
         includeScoringStatus(model, challenge);
         addWarning(challenge, model);
 
         return "challenge";
+    }
+
+    private void addPreviousAndNextChallenge(Model model, Challenge challenge) {
+        if (challengeNumber(challenge) > 1) {
+            model.addAttribute("previouschallenge", challengeNumber(challenge) - 1);
+        }
+        if (challengeNumber(challenge) < challenges.size()) {
+            model.addAttribute("nextchallenge", challengeNumber(challenge) + 1);
+        }
     }
 
     @PostMapping("/challenge/{id}")
@@ -85,6 +89,7 @@ public class ChallengesController {
         }
         includeScoringStatus(model, challenge);
         addWarning(challenge, model);
+        addPreviousAndNextChallenge(model, challenge);
         return "challenge";
     }
 

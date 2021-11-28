@@ -13,7 +13,9 @@ public abstract class Challenge {
 
     public abstract Spoiler spoiler();
 
-    public abstract String getExplanationFileIdentifier();
+    public String getExplanationFileIdentifier() {
+        return this.getClass().getAnnotation(ChallengeNumber.class).value();
+    }
 
     public boolean solved(String answer) {
         var correctAnswer = answerCorrect(answer);

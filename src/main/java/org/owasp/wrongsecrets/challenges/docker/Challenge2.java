@@ -26,11 +26,6 @@ public class Challenge2 extends Challenge {
     }
 
     @Override
-    public String getExplanationFileIdentifier() {
-        return "2";
-    }
-
-    @Override
     public boolean answerCorrect(String answer) {
         return argBasedPassword.equals(answer);
     }

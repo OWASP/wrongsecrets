@@ -26,11 +26,6 @@ public class Challenge6 extends Challenge {
     }
 
     @Override
-    public String getExplanationFileIdentifier() {
-        return "6";
-    }
-
-    @Override
     public boolean answerCorrect(String answer) {
         return secretK8sSecret.equals(answer);
     }

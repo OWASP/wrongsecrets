@@ -33,11 +33,6 @@ public class Challenge7 extends Challenge {
     }
 
     @Override
-    public String getExplanationFileIdentifier() {
-        return "7";
-    }
-
-    @Override
     public boolean answerCorrect(String answer) {
         return getAnswer().equals(answer);
     }

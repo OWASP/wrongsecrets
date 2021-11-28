@@ -22,11 +22,6 @@ public class Challenge8 extends Challenge {
     }
 
     @Override
-    public String getExplanationFileIdentifier() {
-        return "8";
-    }
-
-    @Override
     public boolean answerCorrect(String answer) {
         return Constants.newKey.equals(answer);
     }

@@ -22,11 +22,6 @@ public class Challenge4 extends Challenge {
     }
 
     @Override
-    public String getExplanationFileIdentifier() {
-        return "4";
-    }
-
-    @Override
     public boolean answerCorrect(String answer) {
         return Constants.password.equals(answer);
     }

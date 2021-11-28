@@ -69,15 +69,15 @@
     </form>
 
     There are 11 challenges (/challenge/1-11), can you solve them all? <br/>
-    <div class="position-relative">
-        <div th:if="${previouschallenge}" class="position-absolute top-0 start-0">
-            <a href="'/challenge/'+${previouschallenge}">Previous</a>
+    <div class="row">
+        <div th:if="${previouschallenge!=null}" class="col-4">
+            <a th:href="'/challenge/'+${previouschallenge}">Previous</a>
         </div>
-        <div class="position-absolute top-50 start-50">
-            Go back to <a href="/">the main page</a>.
+        <div class="col-4">
+            <a href="/">Go the main page</a>
         </div>
-        <div th:if="${nextchallenge}" class="position-absolute top-0 end-0">
-            <a href="'/challenge/'+${nextchallenge}">Next</a>
+        <div th:if="${nextchallenge!=null}" class="col-4">
+            <a th:href="'/challenge/'+${nextchallenge}">Next</a>
         </div>
     </div>
 
