@@ -39,7 +39,7 @@ public class Challenge9 extends Challenge {
 
     @Override
     public String getExplanationFileIdentifier() {
-        if ("gcp".equals(k8sEnvironment)){
+        if ("gcp".equals(k8sEnvironment)) {
             return "9-gcp";
         }
         return "9";
