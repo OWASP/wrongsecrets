@@ -58,6 +58,13 @@ public class ChallengesController {
         model.addAttribute("answerIncorrect", null);
         model.addAttribute("solution", null);
         model.addAttribute("challengeNumber", challengeNumber(challenge));
+        if (challengeNumber(challenge) > 0) {
+            model.addAttribute("previouschallenge", challengeNumber(challenge) - 1);
+        }
+        if (challengeNumber(challenge) < challenges.size()) {
+            model.addAttribute("nextchallenge", challengeNumber(challenge) - 1);
+        }
+
         model.addAttribute("explanationfile", challenge.getExplanationFileIdentifier());
         includeScoringStatus(model, challenge);
         addWarning(challenge, model);
