@@ -23,7 +23,7 @@ For the basic docker exercises you currently require:
 You can install it by doing:
 
 ```bash
-docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:1.0.4-no-vault
+docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:1.1.0-no-vault
 ```
 
 Now you can try to find the secrets by means of solving the challenge offered at:
@@ -121,9 +121,9 @@ _Can be used for challenges 1-11_
 
 Follow the steps in [the README in the AWS subfolder](aws/README.md).
 
-### GCP challenge 9 and 10 - EXPERIMENTAL
+### GCP challenge 9, 10 and 11
 
-_Can be used for challenges 1-10_
+_Can be used for challenges 1-11_
 
 Follow the steps in [the README in the GCP subfolder](gcp/README.md). Note that this is [still](https://github.com/commjoen/wrongsecrets/issues/39) [work in progress](https://github.com/commjoen/wrongsecrets/issues/40)
 
