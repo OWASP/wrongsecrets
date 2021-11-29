@@ -115,7 +115,7 @@ public class ChallengesController {
                 case K8S -> "We are running outside of a K8s cluster. Please run this in the K8s cluster as explained in the README.md.";
                 case K8S_VAULT -> "We are running outside of a K8s cluster with Vault. Please run this in the K8s cluster as explained in the README.md.";
                 case CLOUD -> "We are running outside of a properly configured AWS or GCP environment. Please run this in an AWS or GCP environment as explained in the README.md.";
-                case AWS -> "We are running outside of a properly configured AWS environment. Please run this in an AWS environment as explained in the README.md. GCP is not done yet";
+                case AWS -> "We are running outside of a properly configured AWS environment. Please run this in an AWS environment as explained in the README.md.";
             });
     }
 }
