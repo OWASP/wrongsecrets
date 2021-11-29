@@ -1,38 +1,35 @@
-package org.owasp.wrongsecrets.challenges;
+package org.owasp.wrongsecrets;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.owasp.wrongsecrets.challenges.Challenge;
+import org.owasp.wrongsecrets.challenges.ChallengeUI;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.util.Locale;
-import java.util.Objects;
+import java.util.List;
 
 @Controller
 @Slf4j
-@RequiredArgsConstructor
 public class IndexController {
 
-    @Value("${K8S_ENV}")
-    private String k8sEnvironment;
+    private final String k8sEnvironment;
+    private final String version;
+    private final List<ChallengeUI> challenges;
 
-    @Value("${APP_VERSION}")
-    private String version;
+    public IndexController(@Value("${K8S_ENV}") String k8sEnvironment, @Value("${APP_VERSION}") String version, List<Challenge> challenges) {
+        this.k8sEnvironment = k8sEnvironment;
+        this.version = version;
+        this.challenges = ChallengeUI.toUI(challenges, k8sEnvironment);
+    }
 
     @GetMapping("/")
     public String index(Model model) {
-        linkDisableInstruction(model);
+        model.addAttribute("page", "index");
+        model.addAttribute("challenges", challenges);
         model.addAttribute("version", version);
         model.addAttribute("environment", k8sEnvironment);
-        return "index";
-    }
-
-    /**
-     * Added the cloud, vault, and k8s variables in the model in order ot highlight the challenges which are functional and which are not.
-     */
-    private void linkDisableInstruction(Model model) {
         if ("gcp".equals(k8sEnvironment) || "aws".equals(k8sEnvironment)) {
             model.addAttribute("cloud", "enabled");
         }
@@ -42,5 +39,6 @@ public class IndexController {
         if (k8sEnvironment.contains("k8s") || "gcp".equals(k8sEnvironment) || "aws".equals(k8sEnvironment)) {
             model.addAttribute("k8s", "enabled");
         }
+        return "index";
     }
 }

@@ -1,0 +1,69 @@
+<html>
+<body>
+
+<div class="container-fluid text-sm p-5 bg-light" th:fragment="welcome">
+    <div class="display-5">Welcome</div>
+    <p class="lead">Welcome to OWASP WrongSecrets. With this app, we hope you will re-evaluate your secrets
+        management
+        strategy</p>
+    <hr class="my-4">
+    <p>For each of the challenges below: try to find the secret! Enter it in the `Answer to solution` box and
+        score
+        points!
+        Note that some challenges require this app to run on additional infrastructure (see in the links
+        below).</p>
+
+    <div class="row">
+        <div class="col-12 col-md-9 mt-3">
+            <p>
+                <!-- TODO:               th:classappend="${isAdmin} ? 'adminclass' : userclass'"-->
+                <a href="challenge/1">Challenge 1 (requires Docker)</a><br/>
+                <a href="challenge/2">Challenge 2 (requires Docker)</a><br/>
+                <a href="challenge/3">Challenge 3 (requires Docker)</a><br/>
+                <a href="challenge/4">Challenge 4 (requires Docker)</a><br/>
+                <a href="challenge/5" th:class="${k8s == null}  ? 'disabled' : ''">Challenge 5 (requires
+                    K8s/Minikube)</a><br/>
+                <a href="challenge/6" th:class="${k8s == null}  ? 'disabled' : ''">Challenge 6 (requires
+                    K8s/minikube)</a><br/>
+                <a href="challenge/7" th:class="${vault == null}  ? 'disabled' : ''">Challenge 7 (requires
+                    k8s/minikube
+                    with Vault)</a><br/>
+                <a href="challenge/8">Challenge 8 (requires Docker)</a><br/>
+                <a href="challenge/9" th:class="${cloud == null}  ? 'disabled' : ''">Challenge
+                    9 (requires AWS or GCP)</a><br/>
+                <a href="challenge/10" th:class="${cloud == null}  ? 'disabled' : ''">Challenge
+                    10 (requires AWS or GCP)</a><br/>
+                <a href="challenge/11" th:class="${cloud == null}  ? 'disabled' : ''">Challenge
+                    11 (requires AWS or GCP-WIP)</a><br/>
+            </p>
+            <p>Don't want to wait for Vault? here is <a href="spoil-7">the secret :(</a>.</p>
+            <p th:text="'You are currently running on the following environment: '+${environment}"></p>
+            <p>Like what you see? Please <a class="github-button" href="https://github.com/commjoen/wrongsecrets"
+                                            data-icon="octicon-star"
+                                            aria-label="Star commjoen/wrongsecrets on GitHub">Star
+                us</a></p>
+        </div>
+        <div class="col-12 col-lg-3">
+            <div class="border border-dark thank-you mt-4">
+                OWASP Project Leaders:
+                <ul>
+                    <li><a href="https://github.com/bendehaan">Ben de Haan @bendehaan</a></li>
+                    <li><a href="https://github.com/commjoen">Jeroen willemsen @commjoen</a></li>
+                </ul>
+                Top Contributors:
+                <ul>
+                    <li><a href="https://github.com/nbaars">Nanne Baars @nbaars</a></li>
+                    <li><a href="https://github.com/fchyla">Filip Chyla @fchyla</a></li>
+                    <li><a href="https://github.com/Dlitosh">Dmitry Litosh @Dlitosh</a></li>
+                </ul>
+                Special mentions for helping out:
+                <ul>
+                    <li><a href="https://github.com/madhuakula">Madhu Akula @madhuakula</a></li>
+                    <li><a href="https://github.com/bkimminich">Björn Kimminich @bkimminich</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

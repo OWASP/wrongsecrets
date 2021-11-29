@@ -1,0 +1,31 @@
+<html>
+<body>
+<div class="container" th:fragment="challenge">
+    <!--/*@thymesVar id="challenge" type="org.owasp.wrongsecrets.challenges.ChallengeUI"*/-->
+    <h1 class="mt-3" th:text="${challenge.name}"/>
+    <p th:text="'Welcome to challenge ' + ${challenge.challengeNumber} + '. You need to guess the secret that is hidden in Java, Docker, Kubernetes, Vault, AWS or GCP.'"></p>
+    <div th:replace="doc:__${challenge.explanation}__.adoc"></div>
+    <div th:text="${challengeCompletedAlready}"></div>
+    <div class="feedback alert alert-success" role="alert" th:if="${answerCorrect!=null}"
+         th:text="${answerCorrect}"></div>
+    <div class="feedback alert alert-danger" role="alert" th:if="${answerIncorrect!=null}"
+         th:text="${answerIncorrect}"></div>
+    <form action="#" th:action="'/challenge/'+${challenge.link}" th:object="${challengeForm}" method="post">
+        <p>Answer to solution : <input type="text" th:field="*{solution}"/></p>
+        <p><input class="btn btn-primary" type="submit" value="Submit"/> <input class="btn btn-secondary" type="reset"
+                                                                                value="Reset"/></p>
+    </form>
+
+    There are <span th:text="${challenges.size()}"></span> challenges (/challenge/1-<span th:text="${challenges.size()}"></span>), can you solve them all? <br/>
+    Go back to <a href="/">the main page</a>.
+
+    <div class="progress">
+        <div class="progress-bar" role="progressbar" th:style="'width:'+${progress}+'%;'"
+             th:attr="aria-valuenow=${progress}" aria-valuemin="0" aria-valuemax="100"
+             th:text="${totalPoints}"></div>
+    </div>
+
+    <div class="alert alert-danger" role="alert" th:if="${runtimeWarning!=null}" th:text="${runtimeWarning}"></div>
+</div>
+</body>
+</html>

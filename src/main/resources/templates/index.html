@@ -8,111 +8,19 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="/">WrongSecrets</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false">
-                        Challenges
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/challenge/1">Challenge 1</a>
-                        <a class="dropdown-item" href="/challenge/2">Challenge 2</a>
-                        <a class="dropdown-item" href="/challenge/3">Challenge 3</a>
-                        <a class="dropdown-item" href="/challenge/4">Challenge 4</a>
-                        <a class="dropdown-item" href="/challenge/5">Challenge 5</a>
-                        <a class="dropdown-item" href="/challenge/6">Challenge 6</a>
-                        <a class="dropdown-item" href="/challenge/7">Challenge 7</a>
-                        <a class="dropdown-item" href="/challenge/8">Challenge 8</a>
-                        <a class="dropdown-item" href="/challenge/9">Challenge 9</a>
-                        <a class="dropdown-item" href="/challenge/10">Challenge 10</a>
-                        <a class="dropdown-item" href="/challenge/11">Challenge 11</a>
-                        <a class="dropdown-item" href="/challenge/12">Challenge 12</a>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="https://github.com/commjoen/wrongsecrets" target="_blank">Github</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"
-                       th:text="'Version:'+${version}"></a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<div th:replace="fragments/header :: header"></div>
 <div class="container">
-    <div class="container-fluid text-sm p-5 bg-light">
-        <h1 class="display-2">Welcome</h1>
-        <p class="lead">Welcome to OWASP WrongSecrets. With this app, we hope you will re-evaluate your secrets
-            management
-            strategy</p>
-        <hr class="my-4">
-        <p>For each of the challenges below: try to find the secret! Enter it in the `Answer to solution` box and score
-            points!
-            Note that some of the challenges require this app to run on additional infrastructure (see in the links
-            below).</p>
 
-    </div>
-    <div class="row">
-        <div class="col-12 col-md-9 mt-3">
-            <p>
-                <!-- TODO:               th:classappend="${isAdmin} ? 'adminclass' : userclass'"-->
-                <a href="challenge/1">Challenge 1 (requires Docker)</a><br/>
-                <a href="challenge/2">Challenge 2 (requires Docker)</a><br/>
-                <a href="challenge/3">Challenge 3 (requires Docker)</a><br/>
-                <a href="challenge/4">Challenge 4 (requires Docker)</a><br/>
-                <a href="challenge/5" th:class="${k8s == null}  ? 'disabled' : ''">Challenge 5 (requires
-                    K8s/Minikube)</a><br/>
-                <a href="challenge/6" th:class="${k8s == null}  ? 'disabled' : ''">Challenge 6 (requires
-                    K8s/minikube)</a><br/>
-                <a href="challenge/7" th:class="${vault == null}  ? 'disabled' : ''">Challenge 7 (requires k8s/minikube
-                    with Vault)</a><br/>
-                <a href="challenge/8">Challenge 8 (requires Docker)</a><br/>
-                <a href="challenge/9" th:class="${cloud == null}  ? 'disabled' : ''">Challenge
-                    9 (requires AWS or GCP)</a><br/>
-                <a href="challenge/10" th:class="${cloud == null}  ? 'disabled' : ''">Challenge
-                    10 (requires AWS or GCP)</a><br/>
-                <a href="challenge/11" th:class="${cloud == null}  ? 'disabled' : ''">Challenge
-                    11 (requires AWS or GCP)</a><br/>
-                <a href="/challenge/12">Challenge 12 (requires Docker)</a><br/>
-            </p>
-            <p>Don't want to wait for Vault? here is <a href="spoil-7">the secret :(</a>.</p>
-            <p th:text="'You are currently running on the following environment: '+${environment}"></p>
-            <p>Like what you see? Please <a class="github-button" href="https://github.com/commjoen/wrongsecrets"
-                                            data-icon="octicon-star" aria-label="Star commjoen/wrongsecrets on GitHub">Star
-                us</a></p>
-        </div>
-        <div class="col-12 col-lg-3">
-            <div class="border border-dark thank-you mt-4">
-                OWASP Project Leaders:
-                <ul>
-                    <li><a href="https://github.com/bendehaan">Ben de Haan @bendehaan</a></li>
-                    <li><a href="https://github.com/commjoen">Jeroen willemsen @commjoen</a></li>
-                </ul>
-                Top Contributors:
-                <ul>
-                    <li><a href="https://github.com/nbaars">Nanne Baars @nbaars</a></li>
-                    <li><a href="https://github.com/fchyla">Filip Chyla @fchyla</a></li>
-                    <li><a href="https://github.com/Dlitosh">Dmitry Litosh @Dlitosh</a></li>
-                </ul>
-                Special mentions for helping out:
-                <ul>
-                    <li><a href="https://github.com/madhuakula">Madhu Akula @madhuakula</a></li>
-                    <li><a href="https://github.com/bkimminich">Björn Kimminich @bkimminich</a></li>
-                </ul>
-            </div>
-        </div>
+    <div>
+        <th:block th:if="${page == 'index'}">
+            <div th:insert="fragments/welcome :: welcome" th:remove="tag"/>
+        </th:block>
+        <th:block th:if="${page == 'challenge'}">
+            <div th:insert="fragments/challenge :: challenge" th:remove="tag"/>
+        </th:block>
+        <th:block th:if="${page == 'error'}">
+            <div th:insert="error" th:remove="tag"/>
+        </th:block>
     </div>
 </div>
 

@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="https://www.thymeleaf.org">
+<html xmlns:th="https://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <title>OWASP WrongSecrets Spoil</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -8,6 +8,6 @@
 <h1>Spoiling secret</h1>
 <p th:text="${solution}"></p>
 
-There are 12 challenges (/challenge/1-12), can you solve them all?
+There are <span th:text="${challenges.size()}"></span> challenges (/challenge/1-<span th:text="${challenges.size()}"></span>), can you solve them all?
 </body>
 </html>
