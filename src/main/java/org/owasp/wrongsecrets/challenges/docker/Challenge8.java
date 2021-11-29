@@ -5,7 +5,6 @@ import org.owasp.wrongsecrets.RuntimeEnvironment;
 import lombok.extern.slf4j.Slf4j;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
-import org.owasp.wrongsecrets.challenges.ChallengeEnvironment;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -27,7 +26,7 @@ public class Challenge8 extends Challenge {
     private String randomValue;
 
     public Challenge8(ScoreCard scoreCard) {
-        super(scoreCard, ChallengeEnvironment.DOCKER);
+        super(scoreCard);
         randomValue = generateRandomString(10);
         log.info("Initializing challenge 8 with value {}", randomValue);
     }
@@ -40,11 +39,6 @@ public class Challenge8 extends Challenge {
     @Override
     public boolean answerCorrect(String answer) {
         return randomValue.equals(answer);
-    }
-
-    @Override
-    public boolean environmentSupported() {
-        return true;
     }
 
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {

@@ -5,7 +5,6 @@ import org.apache.logging.log4j.util.Strings;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
-import org.owasp.wrongsecrets.challenges.ChallengeEnvironment;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
@@ -21,7 +20,7 @@ public class Challenge7 extends Challenge {
     private final String vaultPasswordString;
 
     public Challenge7(ScoreCard scoreCard, Vaultpassword vaultPassword, @Value("${vaultpassword}") String vaultPasswordString) {
-        super(scoreCard, ChallengeEnvironment.K8S_VAULT);
+        super(scoreCard);
         this.vaultPassword = vaultPassword;
         this.vaultPasswordString = vaultPasswordString;
     }
@@ -40,12 +39,7 @@ public class Challenge7 extends Challenge {
         return getAnswer().equals(answer);
     }
 
-    @Override
-    public boolean environmentSupported() {
-        return vaultPassword != null && vaultPassword.getPasssword() != null;
-    }
-
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
-        return List.of(RuntimeEnvironment.Environment.K8S, RuntimeEnvironment.Environment.VAULT);
+        return List.of(RuntimeEnvironment.Environment.VAULT, RuntimeEnvironment.Environment.K8S);
     }
 }

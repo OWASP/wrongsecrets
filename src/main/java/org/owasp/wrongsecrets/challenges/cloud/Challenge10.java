@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
-import org.owasp.wrongsecrets.challenges.ChallengeEnvironment;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
@@ -31,7 +30,7 @@ public class Challenge10 extends Challenge {
                        @Value("${secretmountpath}") String filePath,
                        @Value("${default_aws_value}") String awsDefaultValue,
                        @Value("${K8S_ENV}") String k8sEnvironment) {
-        super(scoreCard, ChallengeEnvironment.CLOUD);
+        super(scoreCard);
         this.awsDefaultValue = awsDefaultValue;
         this.challengeAnswer = getCloudChallenge9and10Value(filePath, "wrongsecret-2");
         this.k8sEnvironment = k8sEnvironment;
@@ -53,11 +52,6 @@ public class Challenge10 extends Challenge {
     @Override
     public boolean answerCorrect(String answer) {
         return challengeAnswer.equals(answer);
-    }
-
-    @Override
-    public boolean environmentSupported() {
-        return k8sEnvironment.equals("gcp") || k8sEnvironment.contains("aws");
     }
 
     private String getCloudChallenge9and10Value(String filePath, String fileName) {

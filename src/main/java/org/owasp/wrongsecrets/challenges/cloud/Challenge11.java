@@ -6,7 +6,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
-import org.owasp.wrongsecrets.challenges.ChallengeEnvironment;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
@@ -56,7 +55,7 @@ public class Challenge11 extends Challenge {
                        @Value("${default_aws_value}") String awsDefaultValue,
                        @Value("${GCP_PROJECT_ID}") String projectId,
                        @Value("${K8S_ENV}") String k8sEnvironment) {
-        super(scoreCard, ChallengeEnvironment.CLOUD);
+        super(scoreCard);
         this.awsRoleArn = awsRoleArn;
         this.tokenFileLocation = tokenFileLocation;
         this.awsRegion = awsRegion;
@@ -83,11 +82,6 @@ public class Challenge11 extends Challenge {
     @Override
     public boolean answerCorrect(String answer) {
         return challengeAnswer.equals(answer);
-    }
-
-    @Override
-    public boolean environmentSupported() {
-        return k8sEnvironment.contains("aws");
     }
 
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
