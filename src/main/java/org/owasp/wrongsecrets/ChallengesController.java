@@ -19,11 +19,16 @@ public class ChallengesController {
     private final String version;
     private final ScoreCard scoreCard;
     private final List<Challenge> challenges;
+    private final String k8sEnvironment;
 
-    public ChallengesController(@Value("${APP_VERSION}") String version, ScoreCard scoreCard, List<Challenge> challenges) {
+    public ChallengesController(@Value("${APP_VERSION}") String version, ScoreCard scoreCard, List<Challenge> challenges, @Value("${K8S_ENV}") String k8sEnvironment) {
         this.version = version;
         this.scoreCard = scoreCard;
         this.challenges = challenges;
+        /**
+         * note: this is required as "environment" in our model, as the templates require it to show the right cloud explanation
+         */
+        this.k8sEnvironment = k8sEnvironment;
     }
 
     /**
@@ -59,8 +64,8 @@ public class ChallengesController {
         model.addAttribute("solution", null);
         model.addAttribute("challengeNumber", challengeNumber(challenge));
         addPreviousAndNextChallenge(model, challenge);
-
         model.addAttribute("explanationfile", challenge.getExplanationFileIdentifier());
+        model.addAttribute("environment", k8sEnvironment);
         includeScoringStatus(model, challenge);
         addWarning(challenge, model);
 
@@ -81,7 +86,7 @@ public class ChallengesController {
         var challenge = findChallenge(id);
         model.addAttribute("challengeNumber", challengeNumber(challenge));
         model.addAttribute("explanationfile", challenge.getExplanationFileIdentifier());
-
+        model.addAttribute("environment", k8sEnvironment);
         if (challenge.solved(challengeForm.solution())) {
             model.addAttribute("answerCorrect", "Your answer is correct!");
         } else {

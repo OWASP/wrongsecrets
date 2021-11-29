@@ -4,7 +4,6 @@ import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.owasp.wrongsecrets.challenges.docker.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
@@ -25,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 @ExtendWith({SpringExtension.class})
 @ActiveProfiles("test")
 @AutoConfigureWebTestClient
-class SecretLeakageControllerTest {
+public class IndexControllerTest {
 
     @Autowired
     private WebApplicationContext webApplicationContext;
@@ -51,56 +50,13 @@ class SecretLeakageControllerTest {
     }
 
     @Test
-    void spoil1() throws Exception {
-        testSpoil("/spoil-1", hardcodedPassword);
-    }
-
-    @Test
-    void spoil2() throws Exception {
-        testSpoil("/spoil-2", argBasedPassword);
-    }
-
-    @Test
-    void spoil3() throws Exception {
-        testSpoil("/spoil-3", hardcodedEnvPassword);
-    }
-
-    @Test
-    void spoil4() throws Exception {
-        testSpoil("/spoil-4", Constants.password);
-    }
-
-    @Test
-    void solveChallenge1() throws Exception {
-        solveChallenge("/challenge/1", hardcodedPassword);
-    }
-
-    @Test
-    void solveChallenge2() throws Exception {
-        solveChallenge("/challenge/2", argBasedPassword);
-    }
-
-    @Test
-    void solveChallenge3() throws Exception {
-        solveChallenge("/challenge/3", hardcodedEnvPassword);
-    }
-
-    @Test
-    void solveChallenge4() throws Exception {
-        solveChallenge("/challenge/4", Constants.password);
-    }
-
-    private void solveChallenge(String endpoint, String solution) throws Exception {
-        this.mockMvc.perform(MockMvcRequestBuilders.post(endpoint).param("solution", solution))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().string(CoreMatchers.containsString("Your answer is correct!")));
-    }
-
-    private void testSpoil(String endpoint, String soluton) throws Exception {
-        this.mockMvc.perform(MockMvcRequestBuilders.get(endpoint))
+    void testIndexModel() throws Exception {
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/"))
                 .andDo(print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().string(CoreMatchers.containsString(soluton)));
+                .andExpect(MockMvcResultMatchers.content().string(CoreMatchers.containsString("<a href=\"challenge/4\">Challenge 4 (requires Docker)</a><br/>")))
+                .andExpect(MockMvcResultMatchers.content().string(CoreMatchers.containsString("<a href=\"challenge/5\" class=\"disabled\">Challenge 5 (requires")));
     }
+
 
 }

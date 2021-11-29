@@ -1,6 +1,7 @@
 package org.owasp.wrongsecrets.challenges.cloud;
 
 
+import com.google.api.gax.rpc.ApiException;
 import lombok.extern.slf4j.Slf4j;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
@@ -20,6 +21,11 @@ import software.amazon.awssdk.services.sts.model.AssumeRoleWithWebIdentityReques
 import software.amazon.awssdk.services.sts.model.AssumeRoleWithWebIdentityResponse;
 import software.amazon.awssdk.services.sts.model.StsException;
 
+import com.google.cloud.secretmanager.v1.AccessSecretVersionResponse;
+import com.google.cloud.secretmanager.v1.SecretManagerServiceClient;
+import com.google.cloud.secretmanager.v1.SecretVersionName;
+
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -33,22 +39,28 @@ public class Challenge11 extends Challenge {
     private final String awsRegion;
     private final String tokenFileLocation;
     private final String awsDefaultValue;
+    private final String gcpDefaultValue;
     private final String challengeAnswer;
     private final String k8sEnvironment;
+    private final String projectId;
 
     public Challenge11(ScoreCard scoreCard,
                        @Value("${AWS_ROLE_ARN}") String awsRoleArn,
                        @Value("${AWS_WEB_IDENTITY_TOKEN_FILE}") String tokenFileLocation,
                        @Value("${AWS_REGION}") String awsRegion,
+                       @Value("${default_gcp_value}") String gcpDefaultValue,
                        @Value("${default_aws_value}") String awsDefaultValue,
+                       @Value("${GCP_PROJECT_ID}") String projectId,
                        @Value("${K8S_ENV}") String k8sEnvironment) {
         super(scoreCard, ChallengeEnvironment.CLOUD);
         this.awsRoleArn = awsRoleArn;
         this.tokenFileLocation = tokenFileLocation;
         this.awsRegion = awsRegion;
         this.awsDefaultValue = awsDefaultValue;
-        this.challengeAnswer = getAWSChallenge11Value();
+        this.gcpDefaultValue = gcpDefaultValue;
         this.k8sEnvironment = k8sEnvironment;
+        this.projectId = projectId;
+        this.challengeAnswer = k8sEnvironment.equals("aws") ? getAWSChallenge11Value() : getGCPChallenge11Value();
     }
 
     @Override
@@ -75,7 +87,7 @@ public class Challenge11 extends Challenge {
     }
 
     private String getAWSChallenge11Value() {
-        log.info("Getting credentials");
+        log.info("Getting credentials from AWS");
         if (!"if_you_see_this_please_use_AWS_Setup".equals(awsRoleArn)) {
 
             try { //based on https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javav2/example_code/sts/src/main/java/com/example/sts
@@ -115,5 +127,24 @@ public class Challenge11 extends Challenge {
             }
         }
         return awsDefaultValue;
+    }
+
+    private String getGCPChallenge11Value() {
+        log.info("Getting credentials from GCP");
+        if ("gcp".equals(k8sEnvironment)) {
+            // Based on https://cloud.google.com/secret-manager/docs/reference/libraries
+            try (SecretManagerServiceClient client = SecretManagerServiceClient.create()) {
+                log.info("Fetching secret form Google Secret Manager...");
+                SecretVersionName secretVersionName = SecretVersionName.of(projectId, "wrongsecret-3", "latest");
+                AccessSecretVersionResponse response = client.accessSecretVersion(secretVersionName);
+                String payload = response.getPayload().getData().toStringUtf8();
+                return payload;
+            } catch (ApiException e) {
+                log.error("Exception getting secret", e);
+            } catch (IOException e) {
+                log.error("Could not get the web identity token, due to ", e);
+            }
+        }
+        return gcpDefaultValue;
     }
 }
