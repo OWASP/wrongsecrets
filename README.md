@@ -113,15 +113,15 @@ Make sure you have the following installed:
 Run `./k8s-vault-minkube-start.sh`, when the script is done, then the challenges will wait for you at <http://localhost:8080> .
 This will allow you to run challenge 1-8.
 
-### AWS challenge 9, 10 and 11
+## Cloud Challenges
 
 _Can be used for challenges 1-11_
+
+### AWS challenge 9, 10 and 11
 
 Follow the steps in [the README in the AWS subfolder](aws/README.md).
 
 ### GCP challenge 9, 10 and 11
-
-_Can be used for challenges 1-11_
 
 Follow the steps in [the README in the GCP subfolder](gcp/README.md).
 
