@@ -22,7 +22,7 @@ resource "random_password" "password" {
   override_special = "_%@"
 }
 
-resource "google_secret_manager_secret_version" "secret-version-basic" {
+resource "google_secret_manager_secret_version" "secret_version_basic" {
   secret = google_secret_manager_secret.wrongsecret_1.id
 
   secret_data = random_password.password.result

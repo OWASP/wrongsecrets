@@ -11,8 +11,8 @@ echo "tag message: $2"
 echo "buildarg supplied: $3"
 
 echo "tagging version"
-git tag -a $1 -m "$2"
-git push --tags
+#git tag -a $1 -m "$2"
+#git push --tags
 docker buildx create --name mybuilder
 docker buildx use mybuilder
 echo "creating containers"

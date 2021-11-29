@@ -33,7 +33,7 @@ spec:
             volumeAttributes:
               secretProviderClass: "wrongsecrets-gcp-secretsmanager"
       containers:
-        - image: jeroenwillemsen/addo-example:1.0.4-k8s-vault
+        - image: jeroenwillemsen/wrongsecrets:1.0.4-k8s-vault
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
@@ -43,6 +43,8 @@ spec:
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
           env:
+            - name: GCP_PROJECT_ID
+              value: ${GCP_PROJECT}
             - name: K8S_ENV
               value: gcp
             - name: SPECIAL_K8S_SECRET
