@@ -1,13 +1,10 @@
 <!DOCTYPE HTML>
-<html xmlns:th="https://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
-<head>
-    <title>OWASP WrongSecrets Spoil</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-</head>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{index.html}">
 <body>
-<h1>Spoiling secret</h1>
-<p th:text="${solution}"></p>
-
-There are <span th:text="${challenges.size()}"></span> challenges (/challenge/1-<span th:text="${challenges.size()}"></span>), can you solve them all?
+<div class="container-fluid text-sm p-5 bg-light" layout:fragment="content">
+    <h1>Spoiling secret</h1>
+    <p th:text="${spoiler.solution}"></p>
+</div>
 </body>
 </html>

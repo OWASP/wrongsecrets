@@ -1,7 +1,6 @@
 package org.owasp.wrongsecrets.challenges;
 
 import org.owasp.wrongsecrets.ScoreCard;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,14 +13,12 @@ import java.util.List;
 @Controller
 public class ChallengesController {
 
-    private final String version;
     private final ScoreCard scoreCard;
     private final List<ChallengeUI> challenges;
 
-    public ChallengesController(@Value("${APP_VERSION}") String version, @Value("${K8S_ENV}") String k8sEnvironment, ScoreCard scoreCard, List<Challenge> challenges) {
-        this.version = version;
+    public ChallengesController(ScoreCard scoreCard, List<ChallengeUI> challenges) {
         this.scoreCard = scoreCard;
-        this.challenges = ChallengeUI.toUI(challenges, k8sEnvironment);
+        this.challenges = challenges;
     }
 
     @GetMapping
@@ -32,8 +29,7 @@ public class ChallengesController {
     @GetMapping("/spoil-{id}")
     public String spoiler(Model model, @PathVariable Integer id) {
         var challenge = challenges.get(id - 1).getChallenge();
-        model.addAttribute("challenges", challenges);
-        model.addAttribute("solution", challenge.spoiler().solution()); //TODO update spoiler class directly instead of the String
+        model.addAttribute("solution", challenge.spoiler());
         return "spoil";
     }
 
@@ -41,9 +37,7 @@ public class ChallengesController {
     public String challenge(Model model, @PathVariable Integer id) {
         var challenge = challenges.get(id - 1);
 
-        model.addAttribute("page", "challenge");
         model.addAttribute("challengeForm", new ChallengeForm(""));
-        model.addAttribute("challenges", challenges);
         model.addAttribute("challenge", challenge);
 
         model.addAttribute("answerCorrect", null);
@@ -53,7 +47,7 @@ public class ChallengesController {
         includeScoringStatus(model, challenge.getChallenge());
         addWarning(challenge.getChallenge(), model);
 
-        return "index";
+        return "challenge";
     }
 
     @PostMapping("/challenge/{id}")
@@ -67,14 +61,11 @@ public class ChallengesController {
         }
 
         model.addAttribute("challenge", challenge);
-        model.addAttribute("challenges", challenges);
-        model.addAttribute("page", "challenge");
         includeScoringStatus(model, challenge.getChallenge());
-        return "index";
+        return "challenge";
     }
 
     private void includeScoringStatus(Model model, Challenge challenge) {
-        model.addAttribute("version", version);
         model.addAttribute("totalPoints", scoreCard.getTotalReceivedPoints());
         model.addAttribute("progress", "" + scoreCard.getProgress());
 

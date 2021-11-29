@@ -5,7 +5,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.owasp.wrongsecrets.RuntimeEnvironment.Environment;
 import org.owasp.wrongsecrets.challenges.Challenge;
+import org.owasp.wrongsecrets.challenges.ChallengeUI;
 import org.owasp.wrongsecrets.challenges.ChallengesController;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.test.web.servlet.MockMvc;
@@ -31,8 +33,8 @@ class ChallengesControllerTest {
 
     @BeforeEach
     void setup() {
-        mvc = MockMvcBuilders.standaloneSetup(new ChallengesController("1", "test", scoreCard, List.of(challenge)))
-                .build();
+        var controller = new ChallengesController(scoreCard, ChallengeUI.toUI(List.of(challenge), new RuntimeEnvironment(Environment.GCP)));
+        mvc = MockMvcBuilders.standaloneSetup(controller).build();
     }
 
     @Test

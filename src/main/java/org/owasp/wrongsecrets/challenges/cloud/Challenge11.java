@@ -3,6 +3,7 @@ package org.owasp.wrongsecrets.challenges.cloud;
 
 import com.google.api.gax.rpc.ApiException;
 import lombok.extern.slf4j.Slf4j;
+import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.ChallengeEnvironment;
@@ -29,6 +30,9 @@ import com.google.cloud.secretmanager.v1.SecretVersionName;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
+
+import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.AWS;
 
 @Component
 @Order(11)
@@ -83,7 +87,11 @@ public class Challenge11 extends Challenge {
 
     @Override
     public boolean environmentSupported() {
-        return k8sEnvironment.equals("gcp") || k8sEnvironment.contains("aws");
+        return k8sEnvironment.contains("aws");
+    }
+
+    public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
+        return List.of(AWS);
     }
 
     private String getAWSChallenge11Value() {

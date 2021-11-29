@@ -1,6 +1,7 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
 
+import org.owasp.wrongsecrets.RuntimeEnvironment;
 import lombok.extern.slf4j.Slf4j;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
@@ -8,6 +9,10 @@ import org.owasp.wrongsecrets.challenges.ChallengeEnvironment;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
+
+import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 
 import java.security.SecureRandom;
 import java.util.Random;
@@ -40,6 +45,10 @@ public class Challenge8 extends Challenge {
     @Override
     public boolean environmentSupported() {
         return true;
+    }
+
+    public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
+        return List.of(DOCKER);
     }
 
     private String generateRandomString(int length) {

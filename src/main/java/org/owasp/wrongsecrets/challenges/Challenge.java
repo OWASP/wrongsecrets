@@ -2,7 +2,10 @@ package org.owasp.wrongsecrets.challenges;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.owasp.wrongsecrets.RuntimeEnvironment.Environment;
 import org.owasp.wrongsecrets.ScoreCard;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @Getter
@@ -30,4 +33,6 @@ public abstract class Challenge {
     public boolean environmentSupported() {
         return false;
     }
+
+    public abstract List<Environment> supportedRuntimeEnvironments();
 }

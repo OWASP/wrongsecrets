@@ -10,7 +10,6 @@ public class SecretsErrorController implements ErrorController {
 
     @RequestMapping("/error")
     public String handleError(Model model) {
-        model.addAttribute("page", "error");
-        return "index";
+        return "error";
     }
 }

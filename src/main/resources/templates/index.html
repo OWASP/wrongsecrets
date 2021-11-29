@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
     <title>OWASP WrongSecrets</title>
@@ -10,18 +10,7 @@
 <body>
 <div th:replace="fragments/header :: header"></div>
 <div class="container">
-
-    <div>
-        <th:block th:if="${page == 'index'}">
-            <div th:insert="fragments/welcome :: welcome" th:remove="tag"/>
-        </th:block>
-        <th:block th:if="${page == 'challenge'}">
-            <div th:insert="fragments/challenge :: challenge" th:remove="tag"/>
-        </th:block>
-        <th:block th:if="${page == 'error'}">
-            <div th:insert="error" th:remove="tag"/>
-        </th:block>
-    </div>
+    <th:block layout:fragment="content"></th:block>
 </div>
 
 <script th:src="@{/webjars/popper.js/2.9.3/umd/popper.min.js}"></script>

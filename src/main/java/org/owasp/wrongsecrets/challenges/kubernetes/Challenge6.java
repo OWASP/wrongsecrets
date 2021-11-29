@@ -1,6 +1,7 @@
 package org.owasp.wrongsecrets.challenges.kubernetes;
 
 
+import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.ChallengeEnvironment;
@@ -8,6 +9,10 @@ import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
+
+import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.K8S;
 
 @Component
 @Order(6)
@@ -33,5 +38,9 @@ public class Challenge6 extends Challenge {
     @Override
     public boolean environmentSupported() {
         return !"if_you_see_this_please_use_k8s".equals(secretK8sSecret);
+    }
+
+    public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
+        return List.of(K8S);
     }
 }

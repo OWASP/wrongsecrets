@@ -2,6 +2,7 @@ package org.owasp.wrongsecrets.challenges.cloud;
 
 
 import lombok.extern.slf4j.Slf4j;
+import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.ChallengeEnvironment;
@@ -12,6 +13,10 @@ import org.springframework.stereotype.Component;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
+
+import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.AWS;
+import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.GCP;
 
 @Component
 @Order(9)
@@ -62,5 +67,9 @@ public class Challenge9 extends Challenge {
             log.warn("Exception during file reading, defaulting to default without cloud environment");
             return awsDefaultValue;
         }
+    }
+
+    public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
+        return List.of(GCP, AWS);
     }
 }
