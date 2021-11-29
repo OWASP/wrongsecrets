@@ -27,9 +27,22 @@
                 <tbody>
                 <tr th:each="challenge: ${challenges}">
                     <td th:text="${challenge.link}"></td>
-                    <td><a th:href="@{/challenge} + '/' + ${challenge.link}" th:class="${challenge.isChallengeEnabled} ? '' : 'disabled'"><span th:text="${challenge.name}"
-                                                                                   th:remove="tag"></span></a></td>
-                    <td th:text="${challenge.supportedEnvironments}"></td>
+                    <td><a th:href="@{/challenge} + '/' + ${challenge.link}"
+                           th:class="${challenge.isChallengeEnabled} ? '' : 'disabled'"><span
+                            th:text="${challenge.name}"
+                            th:remove="tag"></span></a></td>
+                    <th:block th:if="${challenge.requiredEnv} == 'DOCKER'">
+                        <td>Docker</td>
+                    </th:block>
+                    <th:block th:if="${challenge.requiredEnv} == 'K8S'">
+                        <td>Kubernetes or Minikube</td>
+                    </th:block>
+                    <th:block th:if="${challenge.requiredEnv} == 'VAULT'">
+                        <td>Kubernetes or Minikube with Vault</td>
+                    </th:block>
+                    <th:block th:if="${challenge.requiredEnv} == 'AWS' or ${challenge.requiredEnv} == 'GCP'">
+                        <td>AWS, GCP</td>
+                    </th:block>
                 </tr>
                 </tbody>
             </table>

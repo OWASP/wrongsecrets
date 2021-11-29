@@ -1,5 +1,6 @@
 package org.owasp.wrongsecrets.challenges;
 
+import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,16 +10,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class ChallengesController {
 
     private final ScoreCard scoreCard;
     private final List<ChallengeUI> challenges;
+    private final RuntimeEnvironment runtimeEnvironment;
 
-    public ChallengesController(ScoreCard scoreCard, List<ChallengeUI> challenges) {
+    public ChallengesController(ScoreCard scoreCard, List<ChallengeUI> challenges, RuntimeEnvironment runtimeEnvironment) {
         this.scoreCard = scoreCard;
         this.challenges = challenges;
+        this.runtimeEnvironment = runtimeEnvironment;
     }
 
     @GetMapping
@@ -87,13 +91,12 @@ public class ChallengesController {
     }
 
     private void addWarning(Challenge challenge, Model model) {
-        if (!challenge.environmentSupported())
-            model.addAttribute("runtimeWarning", switch (challenge.getEnvironment()) {
-                case DOCKER -> "We are running outside of a docker container. Please run this in a container as explained in the README.md.";
-                case K8S -> "We are running outside of a K8s cluster. Please run this in the K8s cluster as explained in the README.md.";
-                case K8S_VAULT -> "We are running outside of a K8s cluster with Vault. Please run this in the K8s cluster as explained in the README.md.";
-                case CLOUD -> "We are running outside of a properly configured AWS or GCP environment. Please run this in an AWS or GCP environment as explained in the README.md.";
-                case AWS -> "We are running outside of a properly configured AWS environment. Please run this in an AWS environment as explained in the README.md. GCP is not done yet";
-            });
+        if (!runtimeEnvironment.isFitFor(challenge)) {
+            var warning = challenge.supportedRuntimeEnvironments().stream()
+                    .map(env -> env.name())
+                    .limit(1)
+                    .collect(Collectors.joining());
+            model.addAttribute("missingEnvWarning", warning);
+        }
     }
 }

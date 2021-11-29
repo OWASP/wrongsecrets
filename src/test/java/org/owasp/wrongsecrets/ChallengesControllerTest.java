@@ -33,7 +33,8 @@ class ChallengesControllerTest {
 
     @BeforeEach
     void setup() {
-        var controller = new ChallengesController(scoreCard, ChallengeUI.toUI(List.of(challenge), new RuntimeEnvironment(Environment.GCP)));
+        var env = new RuntimeEnvironment(Environment.GCP);
+        var controller = new ChallengesController(scoreCard, ChallengeUI.toUI(List.of(challenge), env), env);
         mvc = MockMvcBuilders.standaloneSetup(controller).build();
     }
 

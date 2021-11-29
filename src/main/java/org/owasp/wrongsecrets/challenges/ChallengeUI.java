@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import static org.owasp.wrongsecrets.challenges.ChallengeEnvironment.CLOUD;
+import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.GCP;
 
 /**
  * Wrapper class to move logic from Thymeleaf to keep logic in code instead of the html file
@@ -43,35 +43,20 @@ public class ChallengeUI {
 
     public String getExplanation() {
         var name = this.getChallenge().getClass().getSimpleName().toLowerCase();
-        var env = challenge.getEnvironment() == CLOUD && runtimeEnvironment.equals("gcp") ? "-gcp" : "";
+        var env = runtimeEnvironment.getRuntimeEnvironment() == GCP ? "-gcp" : "";
 
         return String.format("%s%s", name, env);
     }
 
-    public String supportedEnvironments() {
-        return challenge.supportedRuntimeEnvironments().stream().map(environment ->
-                switch (environment) {
-                    case DOCKER -> "Docker";
-                    case VAULT -> "Kubernetes or Minikube with Vault";
-                    case K8S -> "Kubernetes or Minikube";
-                    case AWS, GCP -> "AWS, GCP";
-                }
-        ).limit(1).collect(Collectors.joining());
+    public String requiredEnv() {
+        return challenge.supportedRuntimeEnvironments().stream()
+                .map(environment -> environment.name())
+                .limit(1)
+                .collect(Collectors.joining());
     }
 
     public boolean isChallengeEnabled() {
-        return runtimeEnvironment.environmentIsFitFor(challenge);
-
-
-        //        if ("gcp".equals(k8sEnvironment) || "aws".equals(k8sEnvironment)) {
-//            model.addAttribute("cloud", "enabled");
-//        }
-//        if ("k8s-with-vault".equals(k8sEnvironment) || "gcp".equals(k8sEnvironment) || "aws".equals(k8sEnvironment)) {
-//            model.addAttribute("vault", "enabled");
-//        }
-//        if (k8sEnvironment.contains("k8s") || "gcp".equals(k8sEnvironment) || "aws".equals(k8sEnvironment)) {
-//            model.addAttribute("k8s", "enabled");
-//        }
+        return runtimeEnvironment.isFitFor(challenge);
     }
 
     public static List<ChallengeUI> toUI(List<Challenge> challenges, RuntimeEnvironment environment) {

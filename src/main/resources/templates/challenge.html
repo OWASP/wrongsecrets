@@ -13,8 +13,10 @@
          th:text="${answerIncorrect}"></div>
     <form action="#" th:action="'/challenge/'+${challenge.link}" th:object="${challengeForm}" method="post">
         <p>Answer to solution : <input type="text" th:field="*{solution}"/></p>
-        <p><button class="btn btn-primary" type="submit" name="action" value="submit">Submit</button>
-            <button class="btn btn-secondary" type="submit" name="action"value="reset">Reset</button></p>
+        <p>
+            <button class="btn btn-primary" type="submit" name="action" value="submit">Submit</button>
+            <button class="btn btn-secondary" type="submit" name="action" value="reset">Reset</button>
+        </p>
     </form>
 
     <div class="progress">
@@ -23,7 +25,18 @@
              th:text="${totalPoints}"></div>
     </div>
 
-    <div class="alert alert-danger" role="alert" th:if="${runtimeWarning!=null}" th:text="${runtimeWarning}"></div>
+    <div th:if="${missingEnvWarning} eq 'DOCKER'" class="alert alert-danger" role="alert">
+        We are running outside of a docker container. Please run this in a container as explained in the README.md.
+    </div>
+    <div th:if="${missingEnvWarning} eq 'VAULT'" class="alert alert-danger" role="alert">
+        We are running outside of a K8s cluster with Vault. Please run this in the K8s cluster as explained in the README.md.
+    </div>
+    <div th:if="${missingEnvWarning} eq 'K8S'" class="alert alert-danger" role="alert">
+        We are running outside of a K8s cluster. Please run this in the K8s cluster as explained in the README.md.
+    </div>
+    <div th:if="${missingEnvWarning} eq 'AWS' or ${missingEnvWarning} eq 'GCP'" class="alert alert-danger" role="alert">
+        We are running outside of a properly configured AWS environment. Please run this in an AWS environment as explained in the README.md. GCP is not done yet
+    </div>
 </div>
 </body>
 </html>

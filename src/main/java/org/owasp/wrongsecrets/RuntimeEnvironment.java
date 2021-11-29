@@ -1,5 +1,6 @@
 package org.owasp.wrongsecrets;
 
+import lombok.Getter;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,6 +25,7 @@ public class RuntimeEnvironment {
         }
     }
 
+    @Getter
     private final Environment runtimeEnvironment;
 
     @Autowired
@@ -35,8 +37,7 @@ public class RuntimeEnvironment {
         this.runtimeEnvironment = runtimeEnvironment;
     }
 
-    public boolean environmentIsFitFor(Challenge challenge) {
+    public boolean isFitFor(Challenge challenge) {
         return challenge.supportedRuntimeEnvironments().contains(runtimeEnvironment);
     }
-
 }
