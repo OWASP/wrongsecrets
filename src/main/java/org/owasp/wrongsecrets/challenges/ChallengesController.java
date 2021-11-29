@@ -50,7 +50,19 @@ public class ChallengesController {
         return "challenge";
     }
 
-    @PostMapping("/challenge/{id}")
+    @PostMapping(value = "/challenge/{id}", params = "action=reset")
+    public String reset(@ModelAttribute ChallengeForm challengeForm, @PathVariable Integer id, Model model) {
+        var challenge = challenges.get(id - 1);
+        scoreCard.reset(challenge.getChallenge());
+
+        model.addAttribute("challenge", challenge);
+        includeScoringStatus(model, challenge.getChallenge());
+
+        return "challenge";
+    }
+
+
+    @PostMapping(value = "/challenge/{id}", params = "action=submit")
     public String postController(@ModelAttribute ChallengeForm challengeForm, Model model, @PathVariable Integer id) {
         var challenge = challenges.get(id - 1);
 

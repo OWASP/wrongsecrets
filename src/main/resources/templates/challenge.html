@@ -13,12 +13,9 @@
          th:text="${answerIncorrect}"></div>
     <form action="#" th:action="'/challenge/'+${challenge.link}" th:object="${challengeForm}" method="post">
         <p>Answer to solution : <input type="text" th:field="*{solution}"/></p>
-        <p><input class="btn btn-primary" type="submit" value="Submit"/> <input class="btn btn-secondary" type="reset"
-                                                                                value="Reset"/></p>
+        <p><button class="btn btn-primary" type="submit" name="action" value="submit">Submit</button>
+            <button class="btn btn-secondary" type="submit" name="action"value="reset">Reset</button></p>
     </form>
-
-    There are <span th:text="${challenges.size()}"></span> challenges (/challenge/1-<span th:text="${challenges.size()}"></span>), can you solve them all? <br/>
-    Go back to <a href="/">the main page</a>.
 
     <div class="progress">
         <div class="progress-bar" role="progressbar" th:style="'width:'+${progress}+'%;'"

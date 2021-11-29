@@ -10,4 +10,6 @@ public interface ScoreCard {
     float getProgress();
 
     int getTotalReceivedPoints();
+
+    void reset(Challenge challenge);
 }
