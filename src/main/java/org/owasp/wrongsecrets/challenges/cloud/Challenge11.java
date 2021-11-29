@@ -22,8 +22,9 @@ import software.amazon.awssdk.services.sts.model.AssumeRoleWithWebIdentityRespon
 import software.amazon.awssdk.services.sts.model.StsException;
 
 import com.google.cloud.secretmanager.v1.AccessSecretVersionResponse;
-import com.google.cloud.secretmanager.v1.ProjectName;
 import com.google.cloud.secretmanager.v1.SecretManagerServiceClient;
+import com.google.cloud.secretmanager.v1.SecretVersionName;
+
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -41,6 +42,7 @@ public class Challenge11 extends Challenge {
     private final String gcpDefaultValue;
     private final String challengeAnswer;
     private final String k8sEnvironment;
+    private final String projectId;
 
     public Challenge11(ScoreCard scoreCard,
                        @Value("${AWS_ROLE_ARN}") String awsRoleArn,
@@ -48,6 +50,7 @@ public class Challenge11 extends Challenge {
                        @Value("${AWS_REGION}") String awsRegion,
                        @Value("${default_gcp_value}") String gcpDefaultValue,
                        @Value("${default_aws_value}") String awsDefaultValue,
+                       @Value("${GCP_PROJECT_ID}") String projectId,
                        @Value("${K8S_ENV}") String k8sEnvironment) {
         super(scoreCard, ChallengeEnvironment.CLOUD);
         this.awsRoleArn = awsRoleArn;
@@ -55,8 +58,9 @@ public class Challenge11 extends Challenge {
         this.awsRegion = awsRegion;
         this.awsDefaultValue = awsDefaultValue;
         this.gcpDefaultValue = gcpDefaultValue;
-        this.challengeAnswer = k8sEnvironment.equals("aws") ? getAWSChallenge11Value() : getGCPChallenge11Value();
         this.k8sEnvironment = k8sEnvironment;
+        this.projectId = projectId;
+        this.challengeAnswer = k8sEnvironment.equals("aws") ? getAWSChallenge11Value() : getGCPChallenge11Value();
     }
 
     @Override
@@ -119,14 +123,14 @@ public class Challenge11 extends Challenge {
 
     private String getGCPChallenge11Value() {
         log.info("Getting credentials from GCP");
-        if (k8sEnvironment == "gcp") {
+        if ("gcp".equals(k8sEnvironment)) {
             // Based on https://cloud.google.com/secret-manager/docs/reference/libraries
             try (SecretManagerServiceClient client = SecretManagerServiceClient.create()) {
-                final String secretId = "wrongsecret-3";
-                // Access the secret version.
-                AccessSecretVersionResponse response = client.accessSecretVersion(secretId);
-                log.info(response.getPayload().getData().toStringUtf8());
-                return response.getPayload().getData().toStringUtf8();
+                log.info("Fetching secret form Google Secret Manager...");
+                SecretVersionName secretVersionName = SecretVersionName.of(projectId, "wrongsecret-3", "latest");
+                AccessSecretVersionResponse response = client.accessSecretVersion(secretVersionName);
+                String payload = response.getPayload().getData().toStringUtf8();
+                return payload;
             } catch (ApiException e) {
                 log.error("Exception getting secret", e);
             } catch (IOException e) {
