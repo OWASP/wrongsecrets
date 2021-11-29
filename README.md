@@ -186,3 +186,13 @@ To make changes made load faster we added `spring-dev-tools` to the Maven projec
 - Under Advanced settings -> Allow auto-make to start even if developed application is currently running.
 
 You can also manually invoke: Build -> Recompile the file you just changed, this will also force a reload of the application.
+
+### How to add a Challenge
+
+Follow the steps below on adding a challenge:
+
+1. First make sure that you have an [Issue](https://github.com/commjoen/wrongsecrets/issues) reported for which a challenge is really wanteds.
+2. Add the new challenge in the `org.owasp.wrongsecrets.challenges` folder. Make sure you add an explanation in `src/main/resources/explanations` and refer to it from your new Challenge class.
+3. Add a unit and integration test to show that your challenge is working.
+
+If you want to move existing cloud challenges to antoerh cloud: extend Challenge classes in the `org.owasp.wrongsecrets.challenges.cloud` package and make sure you add the required Terraform in a folder with the separate cloud identified. Collaborate with the others at the project to get your container running so you can test at the cloud account.

@@ -63,6 +63,8 @@ public class ChallengesController {
         model.addAttribute("answerIncorrect", null);
         model.addAttribute("solution", null);
         model.addAttribute("challengeNumber", challengeNumber(challenge));
+        addPreviousAndNextChallenge(model, challenge);
+        model.addAttribute("explanationfile", challenge.getExplanationFileIdentifier());
         model.addAttribute("environment", k8sEnvironment);
         includeScoringStatus(model, challenge);
         addWarning(challenge, model);
@@ -70,10 +72,20 @@ public class ChallengesController {
         return "challenge";
     }
 
+    private void addPreviousAndNextChallenge(Model model, Challenge challenge) {
+        if (challengeNumber(challenge) > 1) {
+            model.addAttribute("previouschallenge", challengeNumber(challenge) - 1);
+        }
+        if (challengeNumber(challenge) < challenges.size()) {
+            model.addAttribute("nextchallenge", challengeNumber(challenge) + 1);
+        }
+    }
+
     @PostMapping("/challenge/{id}")
     public String postController(@ModelAttribute ChallengeForm challengeForm, Model model, @PathVariable String id) {
         var challenge = findChallenge(id);
         model.addAttribute("challengeNumber", challengeNumber(challenge));
+        model.addAttribute("explanationfile", challenge.getExplanationFileIdentifier());
         model.addAttribute("environment", k8sEnvironment);
         if (challenge.solved(challengeForm.solution())) {
             model.addAttribute("answerCorrect", "Your answer is correct!");
@@ -82,6 +94,7 @@ public class ChallengesController {
         }
         includeScoringStatus(model, challenge);
         addWarning(challenge, model);
+        addPreviousAndNextChallenge(model, challenge);
         return "challenge";
     }
 

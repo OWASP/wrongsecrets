@@ -54,13 +54,8 @@
 <div class="container">
     <h1 class="mt-3" th:text="'Challenge '+${challengeNumber}"/>
     <p th:text="'Welcome to challenge ' + ${challengeNumber} + '. You need to guess the secret that is hidden in Java, Docker, Kubernetes, Vault, AWS or GCP.'"></p>
-    <div th:if="${ environment =='gcp'} and ${ challengeNumber  &gt; 8} "
-         class="explanation">
-        <div th:replace="doc:challenge__${challengeNumber}+'-gcp'__.adoc"></div>
-    </div>
-    <div th:if="${ environment !='gcp'} or ${ challengeNumber  &lt; 9}"
-         class="explanation">
-        <div th:replace="doc:challenge__${challengeNumber}__.adoc"></div>
+    <div class="explanation">
+        <div th:replace="doc:challenge__${explanationfile}__.adoc"></div>
     </div>
     <div th:text="${challengeCompletedAlready}"></div>
     <div class="feedback alert alert-success" role="alert" th:if="${answerCorrect!=null}"
@@ -74,7 +69,18 @@
     </form>
 
     There are 11 challenges (/challenge/1-11), can you solve them all? <br/>
-    Go back to <a href="/">the main page</a>.
+    <div class="row">
+        <div th:if="${previouschallenge!=null}" class="col-4">
+            <a th:href="'/challenge/'+${previouschallenge}">Previous</a>
+        </div>
+        <div class="col-4">
+            <a href="/">Go the main page</a>
+        </div>
+        <div th:if="${nextchallenge!=null}" class="col-4">
+            <a th:href="'/challenge/'+${nextchallenge}">Next</a>
+        </div>
+    </div>
+
 
     <div class="progress">
         <div class="progress-bar" role="progressbar" th:style="'width:'+${progress}+'%;'"
