@@ -21,13 +21,13 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Challenge</th>
-                    <th scope="col">Supported environments</th>
+                    <th scope="col">Required environments</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="challenge: ${challenges}">
                     <td th:text="${challenge.link}"></td>
-                    <td><a th:href="@{/challenge} + '/' + ${challenge.link}"><span th:text="${challenge.name}"
+                    <td><a th:href="@{/challenge} + '/' + ${challenge.link}" th:class="${challenge.isChallengeEnabled} ? '' : 'disabled'"><span th:text="${challenge.name}"
                                                                                    th:remove="tag"></span></a></td>
                     <td th:text="${challenge.supportedEnvironments}"></td>
                 </tr>
