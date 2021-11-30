@@ -13,4 +13,5 @@ RUN echo "$ARG_BASED_PASSWORD"
 RUN echo "$argBasedPassword"
 
 ADD target/wrongsecrets-0.0.2-SNAPSHOT.jar /application.jar
+COPY .github/scripts/ /var/tmp/helpers
 CMD java -jar -Dspring.profiles.active=$(echo ${SPRING_PROFILES_ACTIVE}) application.jar

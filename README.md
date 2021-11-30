@@ -4,7 +4,7 @@
 
 Welcome to the OWASP WrongSecrets p0wnable app. With this app, we have packed various ways of how to not store your secrets. These can help you to realize whether your secret management is ok. The challenge is to find all the different secrets by means of various tools and techniques.
 
-Can you solve all the 11 challenges?
+Can you solve all the 12 challenges?
 ![screenshot.png](screenshot.png)
 
 ## Support
@@ -13,7 +13,7 @@ Need support? Contact us via [OWASP Slack](https://owasp.slack.com/archives/C02K
 
 ## Basic docker exercises
 
-_Can be used for challenges 1-4, 8_
+_Can be used for challenges 1-4, 8, 12_
 
 For the basic docker exercises you currently require:
 
@@ -33,7 +33,7 @@ Now you can try to find the secrets by means of solving the challenge offered at
 - [localhost:8080/challenge/3](http://localhost:8080/challenge/3)
 - [localhost:8080/challenge/4](http://localhost:8080/challenge/4)
 - [localhost:8080/challenge/8](http://localhost:8080/challenge/8)
-
+- [localhost:8080/challenge/12](http://localhost:8080/challenge/12)
 Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look better ;-).
 
 ### Running these on Heroku
@@ -50,7 +50,7 @@ You can test them out at <a href="https://wrongsecrets.herokuapp.com/" target="_
 
 ## Basic K8s exercise
 
-_Can be used for challenges 1-6, 8_
+_Can be used for challenges 1-6, 8, 12_
 
 ### Minikube based
 
@@ -99,7 +99,7 @@ now you can use the provided IP address and port to further play with the K8s va
 
 ## Vault exercises with minikube
 
-_Can be used for challenges 1-8_
+_Can be used for challenges 1-8, 12_
 Make sure you have the following installed:
 
 - minikube with docker (or comment out line 8 and work at your own k8s setup),
@@ -115,7 +115,7 @@ This will allow you to run challenge 1-8.
 
 ## Cloud Challenges
 
-_Can be used for challenges 1-11_
+_Can be used for challenges 1-12_
 
 ### Running WrongSecrets in AWS
 

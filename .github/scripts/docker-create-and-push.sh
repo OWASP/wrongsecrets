@@ -9,7 +9,8 @@ fi
 echo "tag supplied: $1"
 echo "tag message: $2"
 echo "buildarg supplied: $3"
-
+echo "generating challenge 12-data"
+openssl rand -base64 32 | tr -d '\n' > yourkey.txt
 echo "tagging version"
 git tag -a $1 -m "$2"
 git push --tags
