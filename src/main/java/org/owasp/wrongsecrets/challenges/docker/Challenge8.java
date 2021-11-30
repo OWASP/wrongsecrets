@@ -17,8 +17,8 @@ import java.util.Random;
 @ChallengeNumber("8")
 public class Challenge8 extends Challenge {
 
-    private final Random RANDOM = new SecureRandom();
-    private final String ALPHABET = "0123456789QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm";
+    private final Random secureRandom = new SecureRandom();
+    private final String alphabet = "0123456789QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm";
     private String randomValue;
 
     public Challenge8(ScoreCard scoreCard) {
@@ -44,10 +44,10 @@ public class Challenge8 extends Challenge {
 
 
     private String generateRandomString(int length) {
-        StringBuffer buffer = new StringBuffer(length);
+        StringBuilder builder = new StringBuilder(length);
         for (int i = 0; i < length; i++) {
-            buffer.append(ALPHABET.charAt(RANDOM.nextInt(ALPHABET.length())));
+            builder.append(alphabet.charAt(secureRandom.nextInt(alphabet.length())));
         }
-        return new String(buffer);
+        return new String(builder);
     }
 }
