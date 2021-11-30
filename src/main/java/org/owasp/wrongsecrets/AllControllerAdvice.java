@@ -38,7 +38,7 @@ public class AllControllerAdvice {
     }
 
     @ModelAttribute
-    public void addRuntimeEnviroment(Model model) {
+    public void addRuntimeEnvironment(Model model) {
         model.addAttribute("environment", runtimeEnvironment);
     }
 
