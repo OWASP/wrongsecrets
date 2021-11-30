@@ -32,6 +32,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.AWS;
+import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.GCP;
 
 @Component
 @Order(11)
@@ -77,7 +78,7 @@ public class Challenge11 extends Challenge {
     }
 
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
-        return List.of(AWS);
+        return List.of(AWS, GCP);
     }
 
     private String getAWSChallenge11Value() {
