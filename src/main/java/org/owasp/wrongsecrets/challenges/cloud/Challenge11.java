@@ -72,14 +72,6 @@ public class Challenge11 extends Challenge {
     }
 
     @Override
-    public String getExplanationFileIdentifier() {
-        if ("gcp".equals(k8sEnvironment)) {
-            return "11-gcp";
-        }
-        return "11";
-    }
-
-    @Override
     public boolean answerCorrect(String answer) {
         return challengeAnswer.equals(answer);
     }
