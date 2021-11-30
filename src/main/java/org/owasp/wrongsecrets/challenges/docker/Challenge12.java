@@ -37,7 +37,7 @@ public class Challenge12 extends Challenge {
 
     @Override
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
-        return List.of(RuntimeEnvironment.Environment.AWS, RuntimeEnvironment.Environment.GCP);
+        return List.of(RuntimeEnvironment.Environment.DOCKER);
     }
 
     private String getActualData() {

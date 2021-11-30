@@ -61,6 +61,7 @@ public class ChallengesController {
 
         model.addAttribute("challenge", challenge);
         includeScoringStatus(model, challenge.getChallenge());
+        addWarning(challenge.getChallenge(), model);
 
         return "challenge";
     }

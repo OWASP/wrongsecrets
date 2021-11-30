@@ -39,7 +39,7 @@ public class AllControllerAdvice {
 
     @ModelAttribute
     public void addRuntimeEnvironment(Model model) {
-        model.addAttribute("environment", runtimeEnvironment);
+        model.addAttribute("environment", runtimeEnvironment.getRuntimeEnvironment().name());
     }
 
     @Bean
