@@ -1,6 +1,6 @@
 === Challenge 12: Docker COPY and WORKDIR
 
-Often, wen convenience containers are made, large parts of the local filesystem of the creator are being copied so that they are available to the author of the convenience container.
+Sometimes large parts of the local filesystem are copied over to the container so that they are available in the container for the convenience of the author.
 
 In this challenge, we did some COPY as well for you and hid a key there. Given that the key changes on every generation of the docker container, you better look around quickly.
 
