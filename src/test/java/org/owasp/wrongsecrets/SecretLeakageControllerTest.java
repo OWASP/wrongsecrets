@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.owasp.wrongsecrets.challenges.docker.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -32,37 +31,12 @@ class SecretLeakageControllerTest {
     private MockMvc mockMvc;
     @MockBean
     VaultTemplate vaultTemplate;
-    @Value("${password}")
-    private String hardcodedPassword;
-    @Value("${ARG_BASED_PASSWORD}")
-    private String argBasedPassword;
-    @Value("${DOCKER_ENV_PASSWORD}")
-    String hardcodedEnvPassword;
-
-    @Value("${default_aws_value}")
-    String tempAWSfiller;
-
-    @Value("${secretmountpath}")
-    String tempMountPath;
+    @MockBean
+    RuntimeEnvironment runtimeEnvironment;
 
     @BeforeEach
     public void setup() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
-    }
-
-    @Test
-    void spoil1() throws Exception {
-        testSpoil("/spoil-1", hardcodedPassword);
-    }
-
-    @Test
-    void spoil2() throws Exception {
-        testSpoil("/spoil-2", argBasedPassword);
-    }
-
-    @Test
-    void spoil3() throws Exception {
-        testSpoil("/spoil-3", hardcodedEnvPassword);
     }
 
     @Test
@@ -71,36 +45,23 @@ class SecretLeakageControllerTest {
     }
 
     @Test
-    void solveChallenge1() throws Exception {
-        solveChallenge("/challenge/1", hardcodedPassword);
-    }
-
-    @Test
-    void solveChallenge2() throws Exception {
-        solveChallenge("/challenge/2", argBasedPassword);
-    }
-
-    @Test
-    void solveChallenge3() throws Exception {
-        solveChallenge("/challenge/3", hardcodedEnvPassword);
-    }
-
-    @Test
     void solveChallenge4() throws Exception {
         solveChallenge("/challenge/4", Constants.password);
     }
 
     private void solveChallenge(String endpoint, String solution) throws Exception {
-        this.mockMvc.perform(MockMvcRequestBuilders.post(endpoint).param("solution", solution))
+        this.mockMvc.perform(MockMvcRequestBuilders.post(endpoint)
+                        .param("solution", solution)
+                        .param("action", "submit"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().string(CoreMatchers.containsString("Your answer is correct!")));
     }
 
-    private void testSpoil(String endpoint, String soluton) throws Exception {
+    private void testSpoil(String endpoint, String solution) throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.get(endpoint))
                 .andDo(print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().string(CoreMatchers.containsString(soluton)));
+                .andExpect(MockMvcResultMatchers.content().string(CoreMatchers.containsString(solution)));
     }
 
 }

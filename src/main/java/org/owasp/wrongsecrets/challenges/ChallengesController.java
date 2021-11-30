@@ -33,7 +33,7 @@ public class ChallengesController {
     @GetMapping("/spoil-{id}")
     public String spoiler(Model model, @PathVariable Integer id) {
         var challenge = challenges.get(id - 1).getChallenge();
-        model.addAttribute("solution", challenge.spoiler());
+        model.addAttribute("spoiler", challenge.spoiler());
         return "spoil";
     }
 

@@ -42,7 +42,9 @@ class ChallengesControllerTest {
     void startingChallengeShouldClearCorrectOrIncorrectMessage() throws Exception {
         when(challenge.solved(anyString())).thenReturn(false);
 
-        this.mvc.perform(post("/challenge/1").param("solution", "wrong"))
+        this.mvc.perform(post("/challenge/1")
+                        .param("solution", "wrong")
+                        .param("action", "submit"))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeDoesNotExist("answerCorrect"))
                 .andExpect(model().attributeExists("answerIncorrect"));
@@ -54,14 +56,16 @@ class ChallengesControllerTest {
         when(challenge.spoiler()).thenReturn(new Spoiler("solution"));
         this.mvc.perform(get("/spoil-1"))
                 .andExpect(status().isOk())
-                .andExpect(model().attribute("solution", "solution"));
+                .andExpect(model().attribute("solution", new Spoiler("solution")));
     }
 
     @Test
     void shouldReturnIncorrectAnswerMessageWhenChallengeIsNotSolved() throws Exception {
         when(challenge.solved(anyString())).thenReturn(false);
 
-        this.mvc.perform(post("/challenge/1").param("solution", "wrong"))
+        this.mvc.perform(post("/challenge/1")
+                        .param("solution", "wrong")
+                        .param("action", "submit"))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeDoesNotExist("answerCorrect"))
                 .andExpect(model().attributeExists("answerIncorrect"));
@@ -71,7 +75,9 @@ class ChallengesControllerTest {
     void shouldReturnCorrectAnswerMessageWhenChallengeIsSolved() throws Exception {
         when(challenge.solved(anyString())).thenReturn(true);
 
-        this.mvc.perform(post("/challenge/1").param("solution", "wrong"))
+        this.mvc.perform(post("/challenge/1")
+                        .param("solution", "wrong")
+                        .param("action", "submit"))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("answerCorrect"))
                 .andExpect(model().attributeDoesNotExist("answerIncorrect"));
