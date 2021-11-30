@@ -55,8 +55,8 @@ public class RuntimeEnvironment {
     }
 
     public boolean isFitFor(Challenge challenge) {
-        return challenge.supportedRuntimeEnvironments().contains(runtimeEnvironment) ||
-                !Collections.disjoint(envToOverlappingEnvs.get(runtimeEnvironment), challenge.supportedRuntimeEnvironments());
+        return challenge.supportedRuntimeEnvironments().contains(runtimeEnvironment)
+                || !Collections.disjoint(envToOverlappingEnvs.get(runtimeEnvironment), challenge.supportedRuntimeEnvironments());
     }
 
 }
