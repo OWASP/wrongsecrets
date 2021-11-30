@@ -87,9 +87,9 @@ public class Challenge11 extends Challenge {
     }
 
     private String getAWSChallenge11Value() {
-        log.info("Getting credentials from AWS");
-        if (!"if_you_see_this_please_use_AWS_Setup".equals(awsRoleArn)) {
 
+        if (!"if_you_see_this_please_use_AWS_Setup".equals(awsRoleArn)) {
+            log.info("Getting credentials from AWS");
             try { //based on https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javav2/example_code/sts/src/main/java/com/example/sts
                 String webIDentityToken = Files.readString(Paths.get(tokenFileLocation));
                 StsClient stsClient = StsClient.builder()
@@ -126,12 +126,13 @@ public class Challenge11 extends Challenge {
                 log.error("Could not get the web identity token, due to ", e);
             }
         }
+        log.info("Skipping credentials from AWS");
         return awsDefaultValue;
     }
 
     private String getGCPChallenge11Value() {
-        log.info("Getting credentials from GCP");
         if ("gcp".equals(k8sEnvironment)) {
+            log.info("Getting credentials from GCP");
             // Based on https://cloud.google.com/secret-manager/docs/reference/libraries
             try (SecretManagerServiceClient client = SecretManagerServiceClient.create()) {
                 log.info("Fetching secret form Google Secret Manager...");
@@ -145,6 +146,7 @@ public class Challenge11 extends Challenge {
                 log.error("Could not get the web identity token, due to ", e);
             }
         }
+        log.info("Skipping credentials from GCP");
         return gcpDefaultValue;
     }
 }

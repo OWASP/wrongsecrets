@@ -1,4 +1,6 @@
 === Challenge 8: Generating random values
 
-Now, let's randomize the secret... Can you find the answer?
+Now, let's randomize the secret at startup... Can you find the answer?
 How can we use this on the next startup ;-)?
+
+Tip: take a look at the logging of the application at startup!

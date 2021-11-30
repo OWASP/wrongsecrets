@@ -16,7 +16,7 @@ echo "tagging version"
 docker buildx create --name mybuilder
 docker buildx use mybuilder
 echo "generating challenge 12-data"
-openssl rand -base64 32 > yourkey.txt
+openssl rand -base64 32 | tr -d '\n' > yourkey.txt
 echo "creating containers"
 docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/addo-example:$1-no-vault --build-arg "$3" --build-arg "PORT=8081" --build-arg "argBasedVersion=$1" --build-arg "spring_profile=without-vault" --push ./../../.
 docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/addo-example:$1-local-vault --build-arg "$3" --build-arg "PORT=8081" --build-arg "argBasedVersion=$1" --build-arg "spring_profile=local-vault" --push ./../../.
