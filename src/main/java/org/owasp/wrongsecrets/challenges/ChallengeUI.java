@@ -41,6 +41,15 @@ public class ChallengeUI {
         return challengeNumber;
     }
 
+    public Integer next() {
+        return challengeNumber + 1;
+    }
+
+    public Integer previous() {
+        return challengeNumber - 1;
+    }
+
+
     public String getExplanation() {
         var name = this.getChallenge().getClass().getSimpleName().toLowerCase();
         var env = runtimeEnvironment.getRuntimeEnvironment() == GCP && runtimeEnvironment.isFitFor(challenge) ? "-gcp" : "";

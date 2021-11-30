@@ -19,23 +19,31 @@
         </p>
     </form>
 
+    <div th:replace="fragments/navigation :: navigation"></div>
+
     <div class="progress">
         <div class="progress-bar" role="progressbar" th:style="'width:'+${progress}+'%;'"
              th:attr="aria-valuenow=${progress}" aria-valuemin="0" aria-valuemax="100"
              th:text="${totalPoints}"></div>
     </div>
 
-    <div th:if="${missingEnvWarning} eq 'DOCKER'" class="alert alert-danger" role="alert">
-        We are running outside a docker container. Please run this in a container as explained in the README.md.
-    </div>
-    <div th:if="${missingEnvWarning} eq 'VAULT'" class="alert alert-danger" role="alert">
-        We are running outside a K8s cluster with Vault. Please run this in the K8s cluster as explained in the README.md.
-    </div>
-    <div th:if="${missingEnvWarning} eq 'K8S'" class="alert alert-danger" role="alert">
-        We are running outside a K8s cluster. Please run this in the K8s cluster as explained in the README.md.
-    </div>
-    <div th:if="${missingEnvWarning} eq 'AWS' or ${missingEnvWarning} eq 'GCP'" class="alert alert-danger" role="alert">
-        We are running outside a properly configured AWS environment. Please run this in an AWS/GCP environment as explained in the README.md.
+    <div class="row">
+        <div th:if="${missingEnvWarning} eq 'DOCKER'" class="alert alert-danger" role="alert">
+            We are running outside a docker container. Please run this in a container as explained in the README.md.
+        </div>
+        <div th:if="${missingEnvWarning} eq 'VAULT'" class="alert alert-danger" role="alert">
+            We are running outside a K8s cluster with Vault. Please run this in the K8s cluster as explained in the
+            README.md.
+        </div>
+        <div th:if="${missingEnvWarning} eq 'K8S'" class="alert alert-danger" role="alert">
+            We are running outside a K8s cluster. Please run this in the K8s cluster as explained in the README.md.
+        </div>
+        <div th:if="${missingEnvWarning} eq 'AWS' or ${missingEnvWarning} eq 'GCP'" class="alert alert-danger"
+             role="alert">
+            We are running outside a properly configured AWS environment. Please run this in an AWS/GCP environment as
+            explained
+            in the README.md.
+        </div>
     </div>
 </div>
 </body>
