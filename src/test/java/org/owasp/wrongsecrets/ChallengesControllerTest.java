@@ -56,7 +56,7 @@ class ChallengesControllerTest {
         when(challenge.spoiler()).thenReturn(new Spoiler("solution"));
         this.mvc.perform(get("/spoil-1"))
                 .andExpect(status().isOk())
-                .andExpect(model().attribute("solution", new Spoiler("solution")));
+                .andExpect(model().attribute("spoiler", new Spoiler("solution")));
     }
 
     @Test

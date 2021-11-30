@@ -25,7 +25,8 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <!--/*@thymesVar id="challenges" type="java.util.List<org.owasp.wrongsecrets.challenges.ChallengeUI>"*/-->
                             <span th:each="challenge : ${challenges}" th:remove="tag">
-                             <a class="dropdown-item" th:href="@{/challenge} + '/' + ${challenge.link}"><span th:text="${challenge.name}" th:remove="tag"></span></a>
+                             <a class="dropdown-item" th:href="@{/challenge} + '/' + ${challenge.link}"><span
+                                     th:text="${challenge.name}" th:remove="tag"></span></a>
                             </span>
                         </ul>
                     </li>
@@ -40,3 +41,4 @@
     </nav>
 </div>
 </body>
+</html>
