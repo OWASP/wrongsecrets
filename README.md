@@ -117,11 +117,11 @@ This will allow you to run challenge 1-8.
 
 _Can be used for challenges 1-11_
 
-### AWS challenge 9, 10 and 11
+### Running WrongSecrets in AWS
 
 Follow the steps in [the README in the AWS subfolder](aws/README.md).
 
-### GCP challenge 9, 10 and 11
+### Running WrongSecrets in GCP
 
 Follow the steps in [the README in the GCP subfolder](gcp/README.md).
 
