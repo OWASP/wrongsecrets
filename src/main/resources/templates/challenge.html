@@ -12,7 +12,7 @@
     <div class="feedback alert alert-danger" role="alert" th:if="${answerIncorrect!=null}"
          th:text="${answerIncorrect}"></div>
     <form action="#" th:action="'/challenge/'+${challenge.link}" th:object="${challengeForm}" method="post">
-        <p>Answer to solution : <input type="text" th:field="*{solution}"/></p>
+        <p>Answer to solution : <input type="text" id="answerfield" th:field="*{solution}"/> <button class="btn btn-secondary" onclick="document.getElementById('answerfield').value='';event.preventDefault();">Clear</button></p>
         <p>
             <button class="btn btn-primary" type="submit" name="action" value="submit">Submit</button>
             <button class="btn btn-secondary" type="submit" name="action" value="reset">Reset</button>
@@ -35,7 +35,7 @@
         We are running outside a K8s cluster. Please run this in the K8s cluster as explained in the README.md.
     </div>
     <div th:if="${missingEnvWarning} eq 'AWS' or ${missingEnvWarning} eq 'GCP'" class="alert alert-danger" role="alert">
-        We are running outside a properly configured AWS environment. Please run this in an AWS environment as explained in the README.md.
+        We are running outside a properly configured AWS environment. Please run this in an AWS/GCP environment as explained in the README.md.
     </div>
 </div>
 </body>
