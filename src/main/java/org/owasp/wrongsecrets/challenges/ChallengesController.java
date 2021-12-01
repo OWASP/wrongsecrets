@@ -94,7 +94,7 @@ public class ChallengesController {
     private void addWarning(Challenge challenge, Model model) {
         if (!runtimeEnvironment.isFitFor(challenge)) {
             var warning = challenge.supportedRuntimeEnvironments().stream()
-                    .map(env -> env.name())
+                    .map(Enum::name)
                     .limit(1)
                     .collect(Collectors.joining());
             model.addAttribute("missingEnvWarning", warning);

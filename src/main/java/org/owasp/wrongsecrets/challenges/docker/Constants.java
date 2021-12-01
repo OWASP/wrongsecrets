@@ -1,11 +1,10 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
-import org.springframework.stereotype.Component;
+import lombok.experimental.UtilityClass;
 
-@Component
+@UtilityClass
 public class Constants {
 
-    public static String password = "DefaultLoginPasswordDoNotChange!";
-
-    public static String newKey = "mISydD0En55Fq8FXbUfX720K8Vc6/aQYtkFmkp7ntsM=";
+    public static final String password = "DefaultLoginPasswordDoNotChange!";
+    public static final String newKey = "mISydD0En55Fq8FXbUfX720K8Vc6/aQYtkFmkp7ntsM=";
 }
