@@ -4,7 +4,6 @@ package org.owasp.wrongsecrets.challenges.cloud;
 import lombok.extern.slf4j.Slf4j;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
-import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
@@ -20,15 +19,16 @@ import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.GCP;
 @Component
 @Order(10)
 @Slf4j
-public class Challenge10 extends Challenge {
+public class Challenge10 extends CloudChallenge {
 
     private final String awsDefaultValue;
     private final String challengeAnswer;
 
     public Challenge10(ScoreCard scoreCard,
                        @Value("${secretmountpath}") String filePath,
-                       @Value("${default_aws_value}") String awsDefaultValue) {
-        super(scoreCard);
+                       @Value("${default_aws_value}") String awsDefaultValue,
+                       RuntimeEnvironment runtimeEnvironment) {
+        super(scoreCard, runtimeEnvironment);
         this.awsDefaultValue = awsDefaultValue;
         this.challengeAnswer = getCloudChallenge9and10Value(filePath, "wrongsecret-2");
     }

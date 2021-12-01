@@ -8,7 +8,6 @@ import com.google.cloud.secretmanager.v1.SecretVersionName;
 import lombok.extern.slf4j.Slf4j;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
-import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
@@ -35,7 +34,7 @@ import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.GCP;
 @Component
 @Order(11)
 @Slf4j
-public class Challenge11 extends Challenge {
+public class Challenge11 extends CloudChallenge {
 
     private final String awsRoleArn;
     private final String awsRegion;
@@ -44,7 +43,6 @@ public class Challenge11 extends Challenge {
     private final String gcpDefaultValue;
     private final String challengeAnswer;
     private final String projectId;
-    private final RuntimeEnvironment runtimeEnvironment;
 
     public Challenge11(ScoreCard scoreCard,
                        @Value("${AWS_ROLE_ARN}") String awsRoleArn,
@@ -54,14 +52,13 @@ public class Challenge11 extends Challenge {
                        @Value("${default_aws_value}") String awsDefaultValue,
                        @Value("${GCP_PROJECT_ID}") String projectId,
                        RuntimeEnvironment runtimeEnvironment) {
-        super(scoreCard);
+        super(scoreCard, runtimeEnvironment);
         this.awsRoleArn = awsRoleArn;
         this.tokenFileLocation = tokenFileLocation;
         this.awsRegion = awsRegion;
         this.awsDefaultValue = awsDefaultValue;
         this.gcpDefaultValue = gcpDefaultValue;
         this.projectId = projectId;
-        this.runtimeEnvironment = runtimeEnvironment;
         this.challengeAnswer = runtimeEnvironment.getRuntimeEnvironment() == AWS ? getAWSChallenge11Value() : getGCPChallenge11Value();
     }
 
@@ -124,15 +121,14 @@ public class Challenge11 extends Challenge {
     }
 
     private String getGCPChallenge11Value() {
-        if (runtimeEnvironment.getRuntimeEnvironment() == GCP) {
+        if (isGCP()) {
             log.info("Getting credentials from GCP");
             // Based on https://cloud.google.com/secret-manager/docs/reference/libraries
             try (SecretManagerServiceClient client = SecretManagerServiceClient.create()) {
                 log.info("Fetching secret form Google Secret Manager...");
                 SecretVersionName secretVersionName = SecretVersionName.of(projectId, "wrongsecret-3", "latest");
                 AccessSecretVersionResponse response = client.accessSecretVersion(secretVersionName);
-                String payload = response.getPayload().getData().toStringUtf8();
-                return payload;
+                return response.getPayload().getData().toStringUtf8();
             } catch (ApiException e) {
                 log.error("Exception getting secret", e);
             } catch (IOException e) {

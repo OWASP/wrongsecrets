@@ -26,4 +26,8 @@ public abstract class Challenge {
         }
         return correctAnswer;
     }
+
+    public String getExplanation() {
+        return this.getClass().getSimpleName().toLowerCase();
+    }
 }

@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.GCP;
-
 /**
  * Wrapper class to move logic from Thymeleaf to keep logic in code instead of the html file
  */
@@ -50,15 +48,12 @@ public class ChallengeUI {
     }
 
     public String getExplanation() {
-        var name = this.getChallenge().getClass().getSimpleName().toLowerCase();
-        var env = runtimeEnvironment.getRuntimeEnvironment() == GCP && runtimeEnvironment.isFitFor(challenge) ? "-gcp" : "";
-
-        return String.format("%s%s", name, env);
+        return challenge.getExplanation();
     }
 
     public String requiredEnv() {
         return challenge.supportedRuntimeEnvironments().stream()
-                .map(environment -> environment.name())
+                .map(Enum::name)
                 .limit(1)
                 .collect(Collectors.joining());
     }
