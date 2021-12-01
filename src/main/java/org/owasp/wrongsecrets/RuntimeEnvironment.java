@@ -54,7 +54,7 @@ public class RuntimeEnvironment {
         this.runtimeEnvironment = runtimeEnvironment;
     }
 
-    public boolean isFitFor(Challenge challenge) {
+    public boolean canRun(Challenge challenge) {
         return challenge.supportedRuntimeEnvironments().contains(runtimeEnvironment)
                 || !Collections.disjoint(envToOverlappingEnvs.get(runtimeEnvironment), challenge.supportedRuntimeEnvironments());
     }

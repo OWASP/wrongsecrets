@@ -59,7 +59,7 @@ public class ChallengeUI {
     }
 
     public boolean isChallengeEnabled() {
-        return runtimeEnvironment.isFitFor(challenge);
+        return runtimeEnvironment.canRun(challenge);
     }
 
     public static List<ChallengeUI> toUI(List<Challenge> challenges, RuntimeEnvironment environment) {

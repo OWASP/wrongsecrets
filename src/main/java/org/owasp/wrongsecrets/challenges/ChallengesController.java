@@ -92,7 +92,7 @@ public class ChallengesController {
     }
 
     private void addWarning(Challenge challenge, Model model) {
-        if (!runtimeEnvironment.isFitFor(challenge)) {
+        if (!runtimeEnvironment.canRun(challenge)) {
             var warning = challenge.supportedRuntimeEnvironments().stream()
                     .map(Enum::name)
                     .limit(1)
