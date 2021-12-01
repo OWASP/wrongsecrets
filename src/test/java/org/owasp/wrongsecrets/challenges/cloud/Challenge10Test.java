@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.io.TempDir;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
@@ -38,6 +39,24 @@ class Challenge10Test {
         var challenge = new Challenge10(scoreCard, dir.toString(), "test", runtimeEnvironment);
 
         Assertions.assertThat(challenge.answerCorrect("secretvalueWitFile")).isFalse();
+    }
+
+    @Test
+    void whenGCPEnvGCPDocumentationShouldBeReturned() {
+        Mockito.when(runtimeEnvironment.getRuntimeEnvironment()).thenReturn(RuntimeEnvironment.Environment.GCP);
+
+        var challenge = new Challenge10(scoreCard, "", "test", runtimeEnvironment);
+
+        Assertions.assertThat(challenge.getExplanation()).isEqualTo("challenge10-gcp");
+    }
+
+    @Test
+    void whenAWSEnvAWSDocumentationShouldBeReturned() {
+        Mockito.when(runtimeEnvironment.getRuntimeEnvironment()).thenReturn(RuntimeEnvironment.Environment.AWS);
+
+        var challenge = new Challenge10(scoreCard, "", "test", runtimeEnvironment);
+
+        Assertions.assertThat(challenge.getExplanation()).isEqualTo("challenge10");
     }
 
 }
