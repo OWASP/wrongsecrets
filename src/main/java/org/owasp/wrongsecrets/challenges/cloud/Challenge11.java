@@ -2,6 +2,9 @@ package org.owasp.wrongsecrets.challenges.cloud;
 
 
 import com.google.api.gax.rpc.ApiException;
+import com.google.cloud.secretmanager.v1.AccessSecretVersionResponse;
+import com.google.cloud.secretmanager.v1.SecretManagerServiceClient;
+import com.google.cloud.secretmanager.v1.SecretVersionName;
 import lombok.extern.slf4j.Slf4j;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
@@ -20,11 +23,6 @@ import software.amazon.awssdk.services.sts.auth.StsAssumeRoleWithWebIdentityCred
 import software.amazon.awssdk.services.sts.model.AssumeRoleWithWebIdentityRequest;
 import software.amazon.awssdk.services.sts.model.AssumeRoleWithWebIdentityResponse;
 import software.amazon.awssdk.services.sts.model.StsException;
-
-import com.google.cloud.secretmanager.v1.AccessSecretVersionResponse;
-import com.google.cloud.secretmanager.v1.SecretManagerServiceClient;
-import com.google.cloud.secretmanager.v1.SecretVersionName;
-
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -45,8 +43,8 @@ public class Challenge11 extends Challenge {
     private final String awsDefaultValue;
     private final String gcpDefaultValue;
     private final String challengeAnswer;
-    private final String k8sEnvironment;
     private final String projectId;
+    private final RuntimeEnvironment runtimeEnvironment;
 
     public Challenge11(ScoreCard scoreCard,
                        @Value("${AWS_ROLE_ARN}") String awsRoleArn,
@@ -55,16 +53,16 @@ public class Challenge11 extends Challenge {
                        @Value("${default_gcp_value}") String gcpDefaultValue,
                        @Value("${default_aws_value}") String awsDefaultValue,
                        @Value("${GCP_PROJECT_ID}") String projectId,
-                       @Value("${K8S_ENV}") String k8sEnvironment) {
+                       RuntimeEnvironment runtimeEnvironment) {
         super(scoreCard);
         this.awsRoleArn = awsRoleArn;
         this.tokenFileLocation = tokenFileLocation;
         this.awsRegion = awsRegion;
         this.awsDefaultValue = awsDefaultValue;
         this.gcpDefaultValue = gcpDefaultValue;
-        this.k8sEnvironment = k8sEnvironment;
         this.projectId = projectId;
-        this.challengeAnswer = k8sEnvironment.equals("aws") ? getAWSChallenge11Value() : getGCPChallenge11Value();
+        this.runtimeEnvironment = runtimeEnvironment;
+        this.challengeAnswer = runtimeEnvironment.getRuntimeEnvironment() == AWS ? getAWSChallenge11Value() : getGCPChallenge11Value();
     }
 
     @Override
@@ -126,7 +124,7 @@ public class Challenge11 extends Challenge {
     }
 
     private String getGCPChallenge11Value() {
-        if ("gcp".equals(k8sEnvironment)) {
+        if (runtimeEnvironment.getRuntimeEnvironment() == GCP) {
             log.info("Getting credentials from GCP");
             // Based on https://cloud.google.com/secret-manager/docs/reference/libraries
             try (SecretManagerServiceClient client = SecretManagerServiceClient.create()) {

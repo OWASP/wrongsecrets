@@ -25,14 +25,14 @@ class Challenge10Test {
         var secret = "secretvalueWitFile";
         Files.writeString(testFile.toPath(), secret, StandardOpenOption.CREATE, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
 
-        var challenge = new Challenge10(scoreCard, dir.toString(), "test", "K8s");
+        var challenge = new Challenge10(scoreCard, dir.toString(), "test");
 
         Assertions.assertThat(challenge.answerCorrect("secretvalueWitFile")).isTrue();
     }
 
     @Test
     void solveChallenge10WithoutAWSFile(@TempDir Path dir) throws Exception {
-        var challenge = new Challenge10(scoreCard, dir.toString(), "test", "K8s");
+        var challenge = new Challenge10(scoreCard, dir.toString(), "test");
 
         Assertions.assertThat(challenge.answerCorrect("secretvalueWitFile")).isFalse();
     }

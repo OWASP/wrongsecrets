@@ -24,16 +24,13 @@ public class Challenge10 extends Challenge {
 
     private final String awsDefaultValue;
     private final String challengeAnswer;
-    private String k8sEnvironment;
 
     public Challenge10(ScoreCard scoreCard,
                        @Value("${secretmountpath}") String filePath,
-                       @Value("${default_aws_value}") String awsDefaultValue,
-                       @Value("${K8S_ENV}") String k8sEnvironment) {
+                       @Value("${default_aws_value}") String awsDefaultValue) {
         super(scoreCard);
         this.awsDefaultValue = awsDefaultValue;
         this.challengeAnswer = getCloudChallenge9and10Value(filePath, "wrongsecret-2");
-        this.k8sEnvironment = k8sEnvironment;
     }
 
     @Override

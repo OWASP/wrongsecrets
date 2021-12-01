@@ -22,7 +22,7 @@ class Challenge9Test {
 
     @Test
     void solveChallenge9WithoutFile(@TempDir Path dir) throws Exception {
-        var challenge = new Challenge9(scoreCard, dir.toString(), "test", "k8s");
+        var challenge = new Challenge9(scoreCard, dir.toString(), "test");
 
         Assertions.assertThat(challenge.answerCorrect("secretvalueWitFile")).isFalse();
     }
@@ -33,7 +33,7 @@ class Challenge9Test {
         var secret = "secretvalueWitFile";
         Files.writeString(testFile.toPath(), secret);
 
-        var challenge = new Challenge9(scoreCard, dir.toString(), "test", "k8s");
+        var challenge = new Challenge9(scoreCard, dir.toString(), "test");
 
         Assertions.assertThat(challenge.answerCorrect("secretvalueWitFile")).isTrue();
     }
@@ -44,7 +44,7 @@ class Challenge9Test {
         var secret = "secretvalueWitFile";
         Files.writeString(testFile.toPath(), secret);
 
-        var challenge = new Challenge9(scoreCard, dir.toString(), "test", "k8s");
+        var challenge = new Challenge9(scoreCard, dir.toString(), "test");
 
         Assertions.assertThat(challenge.spoiler()).isEqualTo(new Spoiler("secretvalueWitFile"));
     }
