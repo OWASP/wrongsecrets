@@ -16,12 +16,14 @@ import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.GCP;
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.K8S;
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.VAULT;
+import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.HEROKU_DOCKER;
 
 @Component
 public class RuntimeEnvironment {
 
     private static Map<Environment, List<Environment>> envToOverlappingEnvs = Map.of(
-            DOCKER, List.of(DOCKER),
+            HEROKU_DOCKER, List.of(DOCKER, HEROKU_DOCKER),
+            DOCKER, List.of(DOCKER, HEROKU_DOCKER),
             GCP, List.of(DOCKER, K8S, VAULT),
             AWS, List.of(DOCKER, K8S, VAULT),
             VAULT, List.of(DOCKER, K8S),
@@ -29,7 +31,7 @@ public class RuntimeEnvironment {
     );
 
     public enum Environment {
-        DOCKER("Docker"), GCP("gcp"), AWS("aws"), VAULT("k8s-with-vault"), K8S("k8s");
+        DOCKER("Docker"), HEROKU_DOCKER("Heroku(Docker)"), GCP("gcp"), AWS("aws"), VAULT("k8s-with-vault"), K8S("k8s");
 
         private final String id;
 
