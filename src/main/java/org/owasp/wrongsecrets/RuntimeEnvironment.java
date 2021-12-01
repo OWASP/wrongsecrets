@@ -38,7 +38,7 @@ public class RuntimeEnvironment {
         }
 
         static Environment fromId(String id) {
-            return Arrays.asList(Environment.values()).stream().filter(e -> e.id.equals(id)).findAny().get();
+            return Arrays.asList(Environment.values()).stream().filter(e -> e.id.equalsIgnoreCase(id)).findAny().get();
         }
     }
 
