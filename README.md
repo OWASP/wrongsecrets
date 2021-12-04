@@ -34,6 +34,7 @@ Now you can try to find the secrets by means of solving the challenge offered at
 - [localhost:8080/challenge/4](http://localhost:8080/challenge/4)
 - [localhost:8080/challenge/8](http://localhost:8080/challenge/8)
 - [localhost:8080/challenge/12](http://localhost:8080/challenge/12)
+
 Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look better ;-).
 
 ### Running these on Heroku
@@ -81,7 +82,6 @@ now you can use the provided IP address and port to further play with the K8s va
 Want to run vanilla on your own k8s? Use the commands below:
 
 ```bash
-
     kubectl apply -f k8s/secrets-config.yml
     kubectl apply -f k8s/secrets-secret.yml
     kubectl apply -f k8s/secret-challenge-deployment.yml
@@ -89,7 +89,6 @@ Want to run vanilla on your own k8s? Use the commands below:
     kubectl port-forward \
         $(kubectl get pod -l app=secret-challenge -o jsonpath="{.items[0].metadata.name}") \
         8080:8080
-
 ```
 
 now you can use the provided IP address and port to further play with the K8s variant (instead of localhost).
@@ -189,8 +188,8 @@ You can also manually invoke: Build -> Recompile the file you just changed, this
 
 Follow the steps below on adding a challenge:
 
-1. First make sure that you have an [Issue](https://github.com/commjoen/wrongsecrets/issues) reported for which a challenge is really wanteds.
+1. First make sure that you have an [Issue](https://github.com/commjoen/wrongsecrets/issues) reported for which a challenge is really wanted.
 2. Add the new challenge in the `org.owasp.wrongsecrets.challenges` folder. Make sure you add an explanation in `src/main/resources/explanations` and refer to it from your new Challenge class.
 3. Add a unit and integration test to show that your challenge is working.
 
-If you want to move existing cloud challenges to antoerh cloud: extend Challenge classes in the `org.owasp.wrongsecrets.challenges.cloud` package and make sure you add the required Terraform in a folder with the separate cloud identified. Collaborate with the others at the project to get your container running so you can test at the cloud account.
+If you want to move existing cloud challenges to another cloud: extend Challenge classes in the `org.owasp.wrongsecrets.challenges.cloud` package and make sure you add the required Terraform in a folder with the separate cloud identified. Make sure that the environment is added to `org.owasp.wrongsecrets.RuntimeEnvironment`. Collaborate with the others at the project to get your container running so you can test at the cloud account.
