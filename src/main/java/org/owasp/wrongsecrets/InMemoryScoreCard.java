@@ -33,4 +33,9 @@ public class InMemoryScoreCard implements ScoreCard {
     public int getTotalReceivedPoints() {
         return solvedChallenges.size() * 50;
     }
+
+    @Override
+    public void reset(Challenge challenge) {
+        solvedChallenges.remove(challenge);
+    }
 }

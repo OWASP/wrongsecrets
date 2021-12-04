@@ -2,34 +2,35 @@ package org.owasp.wrongsecrets.challenges.cloud;
 
 
 import lombok.extern.slf4j.Slf4j;
+import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
-import org.owasp.wrongsecrets.challenges.Challenge;
-import org.owasp.wrongsecrets.challenges.ChallengeEnvironment;
-import org.owasp.wrongsecrets.challenges.ChallengeNumber;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
+
+import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.AWS;
+import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.GCP;
 
 @Component
-@ChallengeNumber("9")
+@Order(9)
 @Slf4j
-public class Challenge9 extends Challenge {
+public class Challenge9 extends CloudChallenge {
 
     private final String awsDefaultValue;
     private final String challengeAnswer;
-    private String k8sEnvironment;
 
     public Challenge9(ScoreCard scoreCard,
                       @Value("${secretmountpath}") String filePath,
                       @Value("${default_aws_value}") String awsDefaultValue,
-                      @Value("${K8S_ENV}") String k8sEnvironment) {
-        super(scoreCard, ChallengeEnvironment.CLOUD);
+                      RuntimeEnvironment runtimeEnvironment) {
+        super(scoreCard, runtimeEnvironment);
         this.awsDefaultValue = awsDefaultValue;
         this.challengeAnswer = getCloudChallenge9and10Value(filePath, "wrongsecret");
-        this.k8sEnvironment = k8sEnvironment;
     }
 
     @Override
@@ -38,21 +39,8 @@ public class Challenge9 extends Challenge {
     }
 
     @Override
-    public String getExplanationFileIdentifier() {
-        if ("gcp".equals(k8sEnvironment)) {
-            return "9-gcp";
-        }
-        return "9";
-    }
-
-    @Override
     public boolean answerCorrect(String answer) {
         return challengeAnswer.equals(answer);
-    }
-
-    @Override
-    public boolean environmentSupported() {
-        return k8sEnvironment.equals("gcp") || k8sEnvironment.contains("aws");
     }
 
     private String getCloudChallenge9and10Value(String filePath, String fileName) {
@@ -62,5 +50,9 @@ public class Challenge9 extends Challenge {
             log.warn("Exception during file reading, defaulting to default without cloud environment");
             return awsDefaultValue;
         }
+    }
+
+    public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
+        return List.of(GCP, AWS);
     }
 }

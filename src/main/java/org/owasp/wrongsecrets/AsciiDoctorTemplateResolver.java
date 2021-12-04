@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -40,7 +39,7 @@ public class AsciiDoctorTemplateResolver extends FileTemplateResolver {
             } else {
 
                 StringWriter writer = new StringWriter();
-                asciidoctor.convert(new InputStreamReader(is), writer, createAttributes());
+                asciidoctor.convert(new InputStreamReader(is), writer, Map.of());
                 return new StringTemplateResource(writer.getBuffer().toString());
             }
         } catch (IOException e) {
@@ -55,17 +54,5 @@ public class AsciiDoctorTemplateResolver extends FileTemplateResolver {
      */
     private String computeResourceName(String resourceName) {
         return String.format("/explanations/%s", resourceName);
-    }
-
-    private Map<String, Object> createAttributes() {
-        Map<String, Object> attributes = new HashMap<>();
-        attributes.put("source-highlighter", "coderay");
-        attributes.put("backend", "xhtml");
-        attributes.put("icons", org.asciidoctor.Attributes.FONT_ICONS);
-
-        Map<String, Object> options = new HashMap<>();
-        options.put("attributes", attributes);
-
-        return options;
     }
 }

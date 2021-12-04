@@ -17,14 +17,14 @@ class Challenge1Test {
 
     @Test
     void spoilerShouldRevealAnswer() {
-        var challenge = new Challenge1(scoreCard, "test", "test");
+        var challenge = new Challenge1(scoreCard, "test");
 
         Assertions.assertThat(challenge.spoiler()).isEqualTo(new Spoiler("test"));
     }
 
     @Test
     void rightAnswerShouldSolveChallenge() {
-        var challenge = new Challenge1(scoreCard, "test", "test");
+        var challenge = new Challenge1(scoreCard, "test");
 
         Assertions.assertThat(challenge.solved("test")).isTrue();
         Mockito.verify(scoreCard).completeChallenge(challenge);
@@ -32,7 +32,7 @@ class Challenge1Test {
 
     @Test
     void incorrectAnswerShouldNotSolveChallenge() {
-        var challenge = new Challenge1(scoreCard, "test", "test");
+        var challenge = new Challenge1(scoreCard, "test");
 
         Assertions.assertThat(challenge.solved("wrong answer")).isFalse();
         Mockito.verifyNoInteractions(scoreCard);

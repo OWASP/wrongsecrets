@@ -22,4 +22,6 @@ public class WrongSecretsApplication {
         return new InMemoryScoreCard(11);
     }
 
+
+
 }

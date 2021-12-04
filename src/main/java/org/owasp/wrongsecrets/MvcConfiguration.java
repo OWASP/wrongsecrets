@@ -1,5 +1,6 @@
 package org.owasp.wrongsecrets;
 
+import nz.net.ultraq.thymeleaf.layoutdialect.LayoutDialect;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -43,6 +44,7 @@ public class MvcConfiguration implements WebMvcConfigurer {
                                                         AsciiDoctorTemplateResolver asciiDoctorTemplateResolver) {
         SpringTemplateEngine engine = new SpringTemplateEngine();
         engine.setEnableSpringELCompiler(true);
+        engine.addDialect(new LayoutDialect());
         engine.setTemplateResolvers(
                 Set.of(asciiDoctorTemplateResolver, springThymeleafTemplateResolver));
         return engine;

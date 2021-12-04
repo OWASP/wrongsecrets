@@ -1,22 +1,26 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
 
+import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
-import org.owasp.wrongsecrets.challenges.ChallengeEnvironment;
-import org.owasp.wrongsecrets.challenges.ChallengeNumber;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
+import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
+
 @Component
-@ChallengeNumber("2")
+@Order(2)
 public class Challenge2 extends Challenge {
 
     private final String argBasedPassword;
 
     public Challenge2(ScoreCard scoreCard, @Value("${ARG_BASED_PASSWORD}") String argBasedPassword) {
-        super(scoreCard, ChallengeEnvironment.DOCKER);
+        super(scoreCard);
         this.argBasedPassword = argBasedPassword;
     }
 
@@ -30,8 +34,8 @@ public class Challenge2 extends Challenge {
         return argBasedPassword.equals(answer);
     }
 
-    @Override
-    public boolean environmentSupported() {
-        return !"if_you_see_this_please_use_docker_instead".equals(argBasedPassword);
+    public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
+        return List.of(DOCKER);
     }
+
 }

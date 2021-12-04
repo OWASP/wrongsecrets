@@ -1,0 +1,91 @@
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{index.html}">
+<body>
+
+<div layout:fragment="content">
+    <div class="container-fluid text-sm p-4 bg-light">
+        <div class="display-5">Welcome</div>
+        <p class="lead">Welcome to OWASP WrongSecrets. With this app, we hope you will re-evaluate your secrets
+            management
+            strategy</p>
+        <hr class="my-2 my-lg-3">
+        <p>For each of the challenges below: try to find the secret! Enter it in the `Answer to solution` box and
+            score points! Note that some challenges require this app to run on additional infrastructure (see in the
+            table
+            below).
+        </p>
+    </div>
+    <div class="container-fluid text-sm p-2 p-lg-3">
+        <div class="row">
+            <div class="col-12 col-lg-7">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Challenge</th>
+                        <th scope="col" th:text="'Required environments (current: '+${environment}+')'"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="challenge: ${challenges}">
+                        <td th:text="${challenge.link}"></td>
+                        <td><a th:href="@{/challenge} + '/' + ${challenge.link}"
+                               th:class="${challenge.isChallengeEnabled} ? '' : 'disabled'"><span
+                                th:text="${challenge.name}"
+                                th:remove="tag"></span></a></td>
+                        <th:block th:if="${challenge.requiredEnv} == 'DOCKER'">
+                            <td>Docker</td>
+                        </th:block>
+                        <th:block th:if="${challenge.requiredEnv} == 'K8S'">
+                            <td>Kubernetes or Minikube</td>
+                        </th:block>
+                        <th:block th:if="${challenge.requiredEnv} == 'VAULT'">
+                            <td>Kubernetes or Minikube with Vault</td>
+                        </th:block>
+                        <th:block th:if="${challenge.requiredEnv} == 'AWS' or ${challenge.requiredEnv} == 'GCP'">
+                            <td>AWS, GCP</td>
+                        </th:block>
+                    </tr>
+                    </tbody>
+                </table>
+
+
+<!--                <p th:text="'You are currently running on the following environment: '+${environment}"></p>-->
+                <p>Hasty? Here is the Vault <a href="spoil-7">secret;-)</a></p>
+
+
+            </div>
+            <div class="col-12 col-lg-4 offset-lg-1">
+                <div class="border border-dark thank-you text-center">
+                    Like what you see? Please <a class="github-button"
+                                                 href="https://github.com/commjoen/wrongsecrets"
+                                                 data-icon="octicon-star"
+                                                 data-size="large"
+                                                 data-color-scheme="dark: light;"
+                                                 data-show-count="true"
+                                                 aria-label="Star commjoen/wrongsecrets on GitHub">Star us on Github</a>
+                </div>
+                <div class="border border-dark thank-you">
+                    OWASP Project Leaders:
+                    <ul>
+                        <li><a href="https://github.com/bendehaan">Ben de Haan @bendehaan</a></li>
+                        <li><a href="https://github.com/commjoen">Jeroen willemsen @commjoen</a></li>
+                    </ul>
+                    Top Contributors:
+                    <ul>
+                        <li><a href="https://github.com/nbaars">Nanne Baars @nbaars</a></li>
+                        <li><a href="https://github.com/fchyla">Filip Chyla @fchyla</a></li>
+                        <li><a href="https://github.com/Dlitosh">Dmitry Litosh @Dlitosh</a></li>
+                    </ul>
+                    Special mentions for helping out:
+                    <ul>
+                        <li><a href="https://github.com/madhuakula">Madhu Akula @madhuakula</a></li>
+                        <li><a href="https://github.com/bkimminich">Björn Kimminich @bkimminich</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

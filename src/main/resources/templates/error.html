@@ -1,53 +1,8 @@
-<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{index.html}">
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>OWASP WrongSecrets-ERROR!</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.2/css/bootstrap.min.css} "/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
-</head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="/">WrongSecrets</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false">
-                        Challenges
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/challenge/1">Challenge 1</a>
-                        <a class="dropdown-item" href="/challenge/2">Challenge 2</a>
-                        <a class="dropdown-item" href="/challenge/3">Challenge 3</a>
-                        <a class="dropdown-item" href="/challenge/4">Challenge 4</a>
-                        <a class="dropdown-item" href="/challenge/5">Challenge 5</a>
-                        <a class="dropdown-item" href="/challenge/6">Challenge 6</a>
-                        <a class="dropdown-item" href="/challenge/7">Challenge 7</a>
-                        <a class="dropdown-item" href="/challenge/8">Challenge 8</a>
-                        <a class="dropdown-item" href="/challenge/9">Challenge 9</a>
-                        <a class="dropdown-item" href="/challenge/10">Challenge 10</a>
-                        <a class="dropdown-item" href="/challenge/11">Challenge 11</a>
-                        <a class="dropdown-item" href="/challenge/12">Challenge 12</a>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="https://github.com/commjoen/wrongsecrets" target="_blank">Github</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-<div class="container">
+<div class="container" layout:fragment="content">
     <div class="container-fluid text-sm p-5 bg-light">
         <h1 class="display-2">WHOOOOPS</h1>
         <p class="lead">Something went wrong!</p>
@@ -57,12 +12,7 @@
         <button class="btn btn-primary btn-lg" type="button" onclick='javascript:history.back();return false;'>Go Back
         </button>
         <a class="btn btn-secondary btn-lg" type="button" href="/">Go Home</a>
-
     </div>
 </div>
-
-<script th:src="@{/webjars/popper.js/2.9.3/umd/popper.min.js}"></script>
-<script th:src="@{/webjars/bootstrap/5.1.2/js/bootstrap.min.js}"></script>
-<script th:src="@{/webjars/github-buttons/2.14.1/dist/buttons.js}"></script>
 </body>
 </html>

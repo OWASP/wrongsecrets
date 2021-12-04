@@ -2,20 +2,22 @@ package org.owasp.wrongsecrets.challenges;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.owasp.wrongsecrets.RuntimeEnvironment.Environment;
 import org.owasp.wrongsecrets.ScoreCard;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @Getter
 public abstract class Challenge {
 
     private final ScoreCard scoreCard;
-    private final ChallengeEnvironment environment;
 
     public abstract Spoiler spoiler();
 
-    public String getExplanationFileIdentifier() {
-        return this.getClass().getAnnotation(ChallengeNumber.class).value();
-    }
+    protected abstract boolean answerCorrect(String answer);
+
+    public abstract List<Environment> supportedRuntimeEnvironments();
 
     public boolean solved(String answer) {
         var correctAnswer = answerCorrect(answer);
@@ -25,9 +27,7 @@ public abstract class Challenge {
         return correctAnswer;
     }
 
-    protected abstract boolean answerCorrect(String answer);
-
-    public boolean environmentSupported() {
-        return false;
+    public String getExplanation() {
+        return this.getClass().getSimpleName().toLowerCase();
     }
 }
