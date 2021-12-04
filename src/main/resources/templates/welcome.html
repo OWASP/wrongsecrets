@@ -3,27 +3,27 @@
 <body>
 
 <div layout:fragment="content">
-    <div class="container-fluid text-sm p-5 bg-light">
+    <div class="container-fluid text-sm p-4 bg-light">
         <div class="display-5">Welcome</div>
         <p class="lead">Welcome to OWASP WrongSecrets. With this app, we hope you will re-evaluate your secrets
             management
             strategy</p>
-        <hr class="my-4">
+        <hr class="my-2 my-lg-3">
         <p>For each of the challenges below: try to find the secret! Enter it in the `Answer to solution` box and
-            score
-            points!
-            Note that some challenges require this app to run on additional infrastructure (see in the links
-            below).</p>
+            score points! Note that some challenges require this app to run on additional infrastructure (see in the
+            table
+            below).
+        </p>
     </div>
-    <div class="container-fluid text-sm p-5">
+    <div class="container-fluid text-sm p-4">
         <div class="row">
-            <div class="col-12 col-lg-6 mt-3">
+            <div class="col-12 col-lg-7">
                 <table class="table">
                     <thead>
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Challenge</th>
-                        <th scope="col">Required environments</th>
+                        <th scope="col" th:text="'Required environments (current: '+${environment}+')'"></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -49,16 +49,23 @@
                     </tbody>
                 </table>
 
-                <p>Don't want to wait for Vault? here is <a href="spoil-7">the secret :(</a>.</p>
-                <p th:text="'You are currently running on the following environment: '+${environment}"></p>
-                <p>Like what you see? Please <a class="github-button"
-                                                href="https://github.com/commjoen/wrongsecrets"
-                                                data-icon="octicon-star"
-                                                aria-label="Star commjoen/wrongsecrets on GitHub">Star
-                    us</a></p>
+
+<!--                <p th:text="'You are currently running on the following environment: '+${environment}"></p>-->
+                <p>Hasty? Here is the Vault <a href="spoil-7">secret;-)</a></p>
+
+
             </div>
-            <div class="col-12 col-lg-3 offset-md-3 mt-3">
-                <div class="border border-dark thank-you mt-4">
+            <div class="col-12 col-lg-4 offset-lg-1">
+                <div class="border border-dark thank-you text-center">
+                    Like what you see? Please <a class="github-button"
+                                                 href="https://github.com/commjoen/wrongsecrets"
+                                                 data-icon="octicon-star"
+                                                 data-size="large"
+                                                 data-color-scheme="dark: light;"
+                                                 data-show-count="true"
+                                                 aria-label="Star commjoen/wrongsecrets on GitHub">Star us on Github</a>
+                </div>
+                <div class="border border-dark thank-you">
                     OWASP Project Leaders:
                     <ul>
                         <li><a href="https://github.com/bendehaan">Ben de Haan @bendehaan</a></li>
@@ -79,5 +86,6 @@
             </div>
         </div>
     </div>
+</div>
 </body>
 </html>
