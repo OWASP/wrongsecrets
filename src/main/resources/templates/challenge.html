@@ -3,7 +3,7 @@
 <body>
 <div class="container" layout:fragment="content">
     <!--/*@thymesVar id="challenge" type="org.owasp.wrongsecrets.challenges.ChallengeUI"*/-->
-    <h1 class="mt-3" th:text="${challenge.name}"/>
+    <h1 class="mt-2" th:text="${challenge.name}"/>
     <p th:text="'Welcome to challenge ' + ${challenge.challengeNumber} + '. You need to guess the secret that is hidden in Java, Docker, Kubernetes, Vault, AWS or GCP.'"></p>
     <div th:replace="doc:__${challenge.explanation}__.adoc"></div>
     <div th:text="${challengeCompletedAlready}"></div>
