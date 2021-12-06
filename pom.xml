@@ -32,6 +32,7 @@
         <bootstrap.version>5.1.2</bootstrap.version>
         <github.button.version>2.14.1</github.button.version>
         <gcp.sdk.version>24.0.0</gcp.sdk.version>
+        <thymeleaf.layout>3.0.0</thymeleaf.layout>
     </properties>
 
     <dependencies>
@@ -48,7 +49,7 @@
         <dependency>
             <groupId>nz.net.ultraq.thymeleaf</groupId>
             <artifactId>thymeleaf-layout-dialect</artifactId>
-            <version>3.0.0</version>
+            <version>${thymeleaf.layout}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -67,11 +68,6 @@
             <artifactId>spring-cloud-vault-config</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>software.amazon.awssdk</groupId>
             <artifactId>sts</artifactId>
             <version>${aws.sdk.version}</version>
@@ -84,7 +80,7 @@
         <dependency>
             <groupId>org.asciidoctor</groupId>
             <artifactId>asciidoctorj-api</artifactId>
-            <version>2.4.3</version>
+            <version>${asciidoctorj.version}</version>
         </dependency>
         <dependency>
             <groupId>org.asciidoctor</groupId>
@@ -115,6 +111,13 @@
             <groupId>com.google.cloud</groupId>
             <artifactId>google-cloud-secretmanager</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <dependencyManagement>
