@@ -1,4 +1,4 @@
-Challenge 12: Docker COPY and WORKDIR
+=== Challenge 12: Docker COPY and WORKDIR
 Sometimes large parts of the local filesystem are copied over to the container so that they are available in the container for the convenience of the author.
 
 In this challenge, we did some COPY'ing as well and hid a key there. Note that the key changes on every generation of the docker container, so you'd better extract and use it quickly :).
