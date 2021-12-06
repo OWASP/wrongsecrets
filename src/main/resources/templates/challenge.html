@@ -5,14 +5,24 @@
     <!--/*@thymesVar id="challenge" type="org.owasp.wrongsecrets.challenges.ChallengeUI"*/-->
     <h1 class="mt-2" th:text="${challenge.name}"/>
     <p th:text="'Welcome to challenge ' + ${challenge.challengeNumber} + '. You need to guess the secret that is hidden in Java, Docker, Kubernetes, Vault, AWS or GCP.'"></p>
-    <div th:replace="doc:__${challenge.explanation}__.adoc"></div>
+    <div class="row">
+        <div class="offset-lg-1 col-lg-10 col-md-12">
+            <div th:replace="doc:__${challenge.explanation}__.adoc"></div>
+        </div>
+
+    </div>
+
     <div th:text="${challengeCompletedAlready}"></div>
     <div class="feedback alert alert-success" role="alert" th:if="${answerCorrect!=null}"
          th:text="${answerCorrect}"></div>
     <div class="feedback alert alert-danger" role="alert" th:if="${answerIncorrect!=null}"
          th:text="${answerIncorrect}"></div>
     <form action="#" th:action="'/challenge/'+${challenge.link}" th:object="${challengeForm}" method="post">
-        <p>Answer to solution : <input type="text" id="answerfield" th:field="*{solution}"/> <button class="btn btn-secondary" onclick="document.getElementById('answerfield').value='';event.preventDefault();">Clear</button></p>
+        <p>Answer to solution : <input type="text" id="answerfield" th:field="*{solution}"/>
+            <button class="btn btn-secondary"
+                    onclick="document.getElementById('answerfield').value='';event.preventDefault();">Clear
+            </button>
+        </p>
         <p>
             <button class="btn btn-primary" type="submit" name="action" value="submit">Submit</button>
             <button class="btn btn-secondary" type="submit" name="action" value="reset">Reset</button>
