@@ -31,8 +31,8 @@
                         <td th:text="${challenge.link}"></td>
                         <td><a th:href="@{/challenge} + '/' + ${challenge.link}"
                                th:class="${challenge.isChallengeEnabled} ? '' : 'disabled'"><span
-                                th:text="${challenge.name}"
-                                th:remove="tag"></span></a></td>
+                            th:text="${challenge.name}"
+                            th:remove="tag"></span></a></td>
                         <th:block th:if="${challenge.requiredEnv} == 'DOCKER'">
                             <td>Docker</td>
                         </th:block>
@@ -50,20 +50,21 @@
                 </table>
 
 
-<!--                <p th:text="'You are currently running on the following environment: '+${environment}"></p>-->
+                <!--                <p th:text="'You are currently running on the following environment: '+${environment}"></p>-->
                 <p>Hasty? Here is the Vault <a href="spoil-7">secret;-)</a></p>
 
 
             </div>
             <div class="col-12 col-lg-4 offset-lg-1">
                 <div class="border border-dark thank-you text-center">
-                    Like what you see? Please <a class="github-button"
-                                                 href="https://github.com/commjoen/wrongsecrets"
-                                                 data-icon="octicon-star"
-                                                 data-size="large"
-                                                 data-color-scheme="dark: light;"
-                                                 data-show-count="true"
-                                                 aria-label="Star commjoen/wrongsecrets on GitHub">Star us on Github</a>
+                    Like what you see? Please <br/>
+                    <a class="github-button"
+                       href="https://github.com/commjoen/wrongsecrets"
+                       data-icon="octicon-star"
+                       data-size="large"
+                       data-color-scheme="dark: light;"
+                       data-show-count="true"
+                       aria-label="Star commjoen/wrongsecrets on GitHub">Star us on Github</a>
                 </div>
                 <div class="border border-dark thank-you">
                     OWASP Project Leaders:
