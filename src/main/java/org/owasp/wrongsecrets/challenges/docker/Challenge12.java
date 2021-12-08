@@ -44,7 +44,7 @@ public class Challenge12 extends Challenge {
         try {
             return Files.readString(Paths.get(dockerMountPath, "yourkey.txt"));
         } catch (Exception e) {
-            log.warn("Exception during file reading, defaulting to default without cloud environment");
+            log.warn("Exception during file reading, defaulting to default without cloud environment", e);
             return "if_you_see_this_please_use_docker_instead";
         }
     }

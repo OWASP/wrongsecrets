@@ -47,7 +47,7 @@ public class Challenge10 extends CloudChallenge {
         try {
             return Files.readString(Paths.get(filePath, fileName));
         } catch (Exception e) {
-            log.warn("Exception during file reading, defaulting to default without AWS");
+            log.warn("Exception during file reading, defaulting to default without AWS", e);
             return awsDefaultValue;
         }
     }
