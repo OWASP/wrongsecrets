@@ -1,6 +1,6 @@
-FROM jeroenwillemsen/wrongsecrets:1.1.4-no-vault
+FROM jeroenwillemsen/wrongsecrets:1.1.5-no-vault
 
-ARG argBasedVersion="1.1.4"
+ARG argBasedVersion="1.1.5"
 ENV APP_VERSION=$argBasedVersion
 ENV K8S_ENV=Heroku(Docker)
 CMD java -Xms128m -Xmx128m -Xss512k -jar -Dserver.port=$PORT -XX:+UseContainerSupport -Dspring.profiles.active=without-vault application.jar
