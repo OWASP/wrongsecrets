@@ -1,6 +1,12 @@
 package org.owasp.wrongsecrets;
 
 import nz.net.ultraq.thymeleaf.layoutdialect.LayoutDialect;
+import org.owasp.wrongsecrets.asciidoc.AsciiDocGenerator;
+import org.owasp.wrongsecrets.asciidoc.AsciiDoctorTemplateResolver;
+import org.owasp.wrongsecrets.asciidoc.PreCompiledGenerator;
+import org.owasp.wrongsecrets.asciidoc.TemplateGenerator;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,6 +14,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.templatemode.TemplateMode;
+import org.thymeleaf.templateresolver.FileTemplateResolver;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 
 import java.util.Set;
@@ -31,8 +38,20 @@ public class MvcConfiguration implements WebMvcConfigurer {
     }
 
     @Bean
-    public AsciiDoctorTemplateResolver asciiDoctorTemplateResolver() {
-        AsciiDoctorTemplateResolver resolver = new AsciiDoctorTemplateResolver();
+    @ConditionalOnMissingBean
+    public TemplateGenerator preCompiledGenerator() {
+        return new PreCompiledGenerator();
+    }
+
+    @Bean
+    @ConditionalOnProperty("asciidoctor.enabled")
+    public TemplateGenerator generator() {
+        return new AsciiDocGenerator();
+    }
+
+    @Bean
+    public AsciiDoctorTemplateResolver asciiDoctorTemplateResolver(TemplateGenerator generator) {
+        AsciiDoctorTemplateResolver resolver = new AsciiDoctorTemplateResolver(generator);
         resolver.setCacheable(false);
         resolver.setOrder(1);
         resolver.setCharacterEncoding(UTF8);
@@ -41,12 +60,12 @@ public class MvcConfiguration implements WebMvcConfigurer {
 
     @Bean
     public SpringTemplateEngine thymeleafTemplateEngine(ITemplateResolver springThymeleafTemplateResolver,
-                                                        AsciiDoctorTemplateResolver asciiDoctorTemplateResolver) {
+                                                        FileTemplateResolver asciiDoctorTemplateResolver) {
         SpringTemplateEngine engine = new SpringTemplateEngine();
         engine.setEnableSpringELCompiler(true);
         engine.addDialect(new LayoutDialect());
         engine.setTemplateResolvers(
-                Set.of(asciiDoctorTemplateResolver, springThymeleafTemplateResolver));
+            Set.of(asciiDoctorTemplateResolver, springThymeleafTemplateResolver));
         return engine;
     }
 }

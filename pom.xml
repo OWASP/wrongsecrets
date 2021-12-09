@@ -33,6 +33,7 @@
         <github.button.version>2.14.1</github.button.version>
         <gcp.sdk.version>24.0.0</gcp.sdk.version>
         <thymeleaf.layout>3.0.0</thymeleaf.layout>
+        <asciidoctor.maven.plugin.version>2.2.1</asciidoctor.maven.plugin.version>
     </properties>
 
     <dependencies>
@@ -102,7 +103,7 @@
             <artifactId>github-buttons</artifactId>
             <version>${github.button.version}</version>
         </dependency>
-<!--        <dependency>-->
+        <!--        <dependency>-->
         <!--            <groupId>org.springframework.boot</groupId>-->
         <!--            <artifactId>spring-boot-devtools</artifactId>-->
         <!--            <optional>true</optional>-->
@@ -192,9 +193,34 @@
                     <suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>
                 </configuration>
             </plugin>
+            <plugin>
+                <!-- https://github.com/asciidoctor/asciidoctor-maven-examples/blob/main/asciidoc-to-html-example/pom.xml -->
+                <groupId>org.asciidoctor</groupId>
+                <artifactId>asciidoctor-maven-plugin</artifactId>
+                <version>${asciidoctor.maven.plugin.version}</version>
+                <configuration>
+                    <baseDir>${project.basedir}</baseDir>
+                    <sourceDirectory>src/main/resources/explanations</sourceDirectory>
+                    <outputDirectory>${project.build.outputDirectory}/explanations</outputDirectory>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>asciidoc-to-html</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>process-asciidoc</goal>
+                        </goals>
+                        <configuration>
+                            <headerFooter>false</headerFooter>
+                            <attributes>
+                                <docType>null</docType>
+                            </attributes>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
-
 
 
 </project>
