@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.5.5</version>
+        <version>${sping.boot-starter.version}</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>org.owasp</groupId>
@@ -23,6 +23,7 @@
 
     <properties>
         <java.version>17</java.version>
+        <sping.boot-starter.version>2.5.7</sping.boot-starter.version>
         <spring.cloud-version>2020.0.4</spring.cloud-version>
         <lombok.version>1.18.22</lombok.version>
         <maven.compiler.target>17</maven.compiler.target>
