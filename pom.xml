@@ -34,6 +34,7 @@
         <bootstrap.version>5.1.3</bootstrap.version>
         <github.button.version>2.14.1</github.button.version>
         <gcp.sdk.version>24.0.0</gcp.sdk.version>
+        <thymeleaf-spring5.version>3.0.15</thymeleaf-spring5.version>
         <thymeleaf.layout>3.0.0</thymeleaf.layout>
     </properties>
 
