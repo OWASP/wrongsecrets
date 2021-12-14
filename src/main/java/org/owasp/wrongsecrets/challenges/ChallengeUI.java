@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 @Getter
 public class ChallengeUI {
 
-    private static final Asciidoctor asciidoctor = Asciidoctor.Factory.create();
     private static final Pattern challengePattern = Pattern.compile("(\\D+)(\\d+)");
 
     private final Challenge challenge;
