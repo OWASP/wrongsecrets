@@ -35,6 +35,7 @@
         <github.button.version>2.14.1</github.button.version>
         <gcp.sdk.version>24.1.0</gcp.sdk.version>
         <thymeleaf-spring5.version>3.0.14.RELEASE</thymeleaf-spring5.version>
+        <thymeleaf.version>3.0.14.RELEASE</thymeleaf.version>
         <thymeleaf.layout>3.0.0</thymeleaf.layout>
         <asciidoctor.maven.plugin.version>2.2.1</asciidoctor.maven.plugin.version>
     </properties>
@@ -49,12 +50,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
-            <exclusions>
-                <exclusion>
-                    <artifactId>thymeleaf-spring5</artifactId>
-                    <groupId>org.thymeleaf</groupId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.thymeleaf</groupId>
