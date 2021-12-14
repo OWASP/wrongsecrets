@@ -35,6 +35,6 @@ public class AsciiDoctorTemplateResolver extends FileTemplateResolver {
     }
 
     private String computeResourceName(String resourceName) {
-        return String.format("classpath:explanations/%s", resourceName.replace(".adoc", ""));
+        return String.format("explanations/%s", resourceName.replace(".adoc", ""));
     }
 }
