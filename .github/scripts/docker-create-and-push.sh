@@ -12,8 +12,8 @@ echo "buildarg supplied: $3"
 echo "generating challenge 12-data"
 openssl rand -base64 32 | tr -d '\n' > yourkey.txt
 echo "tagging version"
-#git tag -a $1 -m "$2"
-#git push --tags
+git tag -a $1 -m "$2"
+git push --tags
 docker buildx create --name mybuilder
 docker buildx use mybuilder
 echo "creating containers"
