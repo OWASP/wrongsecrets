@@ -1,6 +1,7 @@
 package org.owasp.wrongsecrets.asciidoc;
 
 import org.asciidoctor.Asciidoctor;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.util.ResourceUtils;
 
 import java.io.FileInputStream;
@@ -17,8 +18,8 @@ public class AsciiDocGenerator implements TemplateGenerator {
 
     @Override
     public String generate(String name) throws IOException {
-        var templateFile = ResourceUtils.getFile(name + ".adoc");
-        try (var is = new FileInputStream(templateFile)) {
+        var templateFile = name + ".adoc";
+        try (var is = new ClassPathResource(templateFile).getInputStream()) {
             var writer = new StringWriter();
             asciidoctor.convert(new InputStreamReader(is), writer, Map.of());
             return writer.toString();
