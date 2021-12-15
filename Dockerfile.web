@@ -1,8 +1,8 @@
-FROM jeroenwillemsen/wrongsecrets:1.1.8-no-vault
+FROM jeroenwillemsen/wrongsecrets:1.1.9-no-vault
 
-ARG argBasedVersion="1.1.8"
+ARG argBasedVersion="1.1.9"
 ENV APP_VERSION=$argBasedVersion
 ENV K8S_ENV=Heroku(Docker)
 ENV challengedockermtpath="/var/helpers"
 COPY .github/scripts/ /var/helpers
-CMD java -Xms128m -Xmx128m -Xss512k -jar -Dserver.port=$PORT -XX:+UseContainerSupport -Dspring.profiles.active=without-vault application.jar
+CMD java -Xms128m -Xmx128m -Xss512k -jar -Dserver.port=$PORT -XX:MaxRAMPercentage=75 -XX:MinRAMPercentage=25 -Dspring.profiles.active=without-vault application.jar
