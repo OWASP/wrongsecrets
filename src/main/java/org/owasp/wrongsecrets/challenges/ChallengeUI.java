@@ -49,6 +49,12 @@ public class ChallengeUI {
     public String getExplanation() {
         return challenge.getExplanation();
     }
+    public String getHint() {
+        return challenge.getHint();
+    }
+    public String getReason() {
+        return challenge.getReason();
+    }
 
     public String requiredEnv() {
         return challenge.supportedRuntimeEnvironments().stream()
