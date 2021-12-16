@@ -30,10 +30,12 @@ public abstract class Challenge {
     public String getExplanation() {
         return this.getClass().getSimpleName().toLowerCase();
     }
+
     public String getHint() {
-        return this.getClass().getSimpleName().toLowerCase()+"_hint";
+        return this.getClass().getSimpleName().toLowerCase() + "_hint";
     }
+
     public String getReason() {
-        return this.getClass().getSimpleName().toLowerCase()+"_reason";
+        return this.getClass().getSimpleName().toLowerCase() + "_reason";
     }
 }
