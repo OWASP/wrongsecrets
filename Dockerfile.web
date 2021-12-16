@@ -1,6 +1,6 @@
-FROM jeroenwillemsen/wrongsecrets:1.1.9-no-vault
+FROM jeroenwillemsen/wrongsecrets:1.1.10-no-vault
 
-ARG argBasedVersion="1.1.9"
+ARG argBasedVersion="1.1.10"
 ENV APP_VERSION=$argBasedVersion
 ENV K8S_ENV=Heroku(Docker)
 ENV challengedockermtpath="/var/helpers"
