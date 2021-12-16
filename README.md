@@ -137,6 +137,10 @@ Top contributors:
 - [Filip Chyla @fchyla](https://github.com/fchyla)
 - [Dmitry Litosh @Dlitosh](https://github.com/Dlitosh)
 
+Testers:
+
+- [Marcin Nowak @MarcinNowak-codes](https://github.com/MarcinNowak-codes)
+
 Special mentions for helping out:
 
 - [Madhu Akula @madhuakula](https://github.com/madhuakula)
