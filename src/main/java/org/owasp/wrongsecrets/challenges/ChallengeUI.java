@@ -1,7 +1,6 @@
 package org.owasp.wrongsecrets.challenges;
 
 import lombok.Getter;
-import org.asciidoctor.Asciidoctor;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 
 import java.util.List;
@@ -49,18 +48,20 @@ public class ChallengeUI {
     public String getExplanation() {
         return challenge.getExplanation();
     }
+
     public String getHint() {
         return challenge.getHint();
     }
+
     public String getReason() {
         return challenge.getReason();
     }
 
     public String requiredEnv() {
         return challenge.supportedRuntimeEnvironments().stream()
-                .map(Enum::name)
-                .limit(1)
-                .collect(Collectors.joining());
+            .map(Enum::name)
+            .limit(1)
+            .collect(Collectors.joining());
     }
 
     public boolean isChallengeEnabled() {

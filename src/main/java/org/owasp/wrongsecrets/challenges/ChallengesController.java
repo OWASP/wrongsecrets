@@ -2,6 +2,7 @@ package org.owasp.wrongsecrets.challenges;
 
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,10 @@ public class ChallengesController {
     private final ScoreCard scoreCard;
     private final List<ChallengeUI> challenges;
     private final RuntimeEnvironment runtimeEnvironment;
+    @Value("${hints_enabled}")
+    private boolean hintsEnabled;
+    @Value("${reason_enabled}")
+    private boolean reasonEnabled;
 
     public ChallengesController(ScoreCard scoreCard, List<ChallengeUI> challenges, RuntimeEnvironment runtimeEnvironment) {
         this.scoreCard = scoreCard;
@@ -47,7 +52,8 @@ public class ChallengesController {
         model.addAttribute("answerCorrect", null);
         model.addAttribute("answerIncorrect", null);
         model.addAttribute("solution", null);
-
+        model.addAttribute("hintsEnabled", hintsEnabled);
+        model.addAttribute("reasonEnabled", reasonEnabled);
         includeScoringStatus(model, challenge.getChallenge());
         addWarning(challenge.getChallenge(), model);
 

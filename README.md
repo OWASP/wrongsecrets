@@ -124,6 +124,11 @@ Follow the steps in [the README in the AWS subfolder](aws/README.md).
 
 Follow the steps in [the README in the GCP subfolder](gcp/README.md).
 
+## Do you want to play without guidance?
+TODO: TALK ABOUT ENV SETTINGS:
+hints_enabled=true
+reason_enabled=true
+
 ## Special thanks & Contributors
 
 Leaders:
