@@ -145,6 +145,7 @@ Top contributors:
 Testers:
 
 - [Marcin Nowak @MarcinNowak-codes](https://github.com/MarcinNowak-codes)
+- [Marc Chang Sing Pang @https://github.com/mchangsp](https://github.com/mchangsp)
 
 Special mentions for helping out:
 
