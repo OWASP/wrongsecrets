@@ -1,3 +1,6 @@
 You can solve this challenge by the following steps:
 
--
+1. Use https://github.com/trufflesecurity/truffleHog[*Trufflehog*]:
+
+2. Inspect the `Application.properties` in the src/resources folder:
+3. When you do not have the sourcecode available:
