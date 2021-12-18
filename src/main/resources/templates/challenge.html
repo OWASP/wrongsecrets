@@ -24,10 +24,9 @@
                     onclick="document.getElementById('answerfield').value='';event.preventDefault();">Clear
             </button>
         </p>
-        <p>
+        <p class="my-1">
             <button class="btn btn-primary" type="submit" name="action" value="submit">Submit</button>
             <button class="btn btn-secondary" type="submit" name="action" value="reset">Reset</button>
-
             <a th:if="${hintsEnabled==true}" class="btn btn-secondary" data-bs-toggle="collapse" href="#collapseHint" role="button"
                aria-expanded="false" aria-controls="collapseHint">
                 Show hints
