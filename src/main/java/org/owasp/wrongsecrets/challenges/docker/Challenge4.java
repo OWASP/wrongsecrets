@@ -14,27 +14,28 @@ import java.util.List;
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 
 @Component
-@Order(1)
+@Order(4)
 public class Challenge4 extends Challenge {
 
-    private final String hardcodedPassword;
+    private final String argBasedPassword;
 
-    public Challenge4(ScoreCard scoreCard, @Value("${password}") String hardcodedPassword) {
+    public Challenge4(ScoreCard scoreCard, @Value("${ARG_BASED_PASSWORD}") String argBasedPassword) {
         super(scoreCard);
-        this.hardcodedPassword = hardcodedPassword;
+        this.argBasedPassword = argBasedPassword;
     }
 
     @Override
     public Spoiler spoiler() {
-        return new Spoiler(hardcodedPassword);
+        return new Spoiler(argBasedPassword);
     }
 
     @Override
     public boolean answerCorrect(String answer) {
-        return hardcodedPassword.equals(answer);
+        return argBasedPassword.equals(answer);
     }
 
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
         return List.of(DOCKER);
     }
+
 }

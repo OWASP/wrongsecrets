@@ -1,7 +1,6 @@
-=== Challenge 4: Hardcoded password part 2
+=== Docker arg based password
 
-There is a hardcoded password directly hidden in the controller by a developer. He tried to hide it by putting the value in the `application.properties`.
 
-This you can easily detect by SAST solutions, solutions like https://github.com/trufflesecurity/truffleHog[truffleHog] and https://github.com/awslabs/git-secrets[git-secrets], and by manual inspection of your `application.properties`.
+The developer got smarter: now the password is no longer defined by Spring, but by means of a docker container build argument.
 
-Using a distributed solution like https://cloud.spring.io/spring-cloud-config/reference/html/[Spring Cloud Config] where you manage your application properties externally can have the same problem if you are not careful. Take a close look at the https://cloud.spring.io/spring-cloud-config/reference/html/#_security[security section] before using Spring Cloud Config.
+You can easily spot it by looking at how the layers got constructed.

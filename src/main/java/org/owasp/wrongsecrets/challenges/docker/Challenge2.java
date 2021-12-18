@@ -17,25 +17,24 @@ import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 @Order(2)
 public class Challenge2 extends Challenge {
 
-    private final String argBasedPassword;
+    private final String hardcodedPassword;
 
-    public Challenge2(ScoreCard scoreCard, @Value("${ARG_BASED_PASSWORD}") String argBasedPassword) {
+    public Challenge2(ScoreCard scoreCard, @Value("${password}") String hardcodedPassword) {
         super(scoreCard);
-        this.argBasedPassword = argBasedPassword;
+        this.hardcodedPassword = hardcodedPassword;
     }
 
     @Override
     public Spoiler spoiler() {
-        return new Spoiler(argBasedPassword);
+        return new Spoiler(hardcodedPassword);
     }
 
     @Override
     public boolean answerCorrect(String answer) {
-        return argBasedPassword.equals(answer);
+        return hardcodedPassword.equals(answer);
     }
 
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
         return List.of(DOCKER);
     }
-
 }

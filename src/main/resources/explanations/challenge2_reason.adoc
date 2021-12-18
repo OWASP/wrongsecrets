@@ -1,3 +1,7 @@
-Why using containers to put secrets in is a bad idea
+You can solve this challenge by the following steps:
 
-As you can tell by now, you can easily detect any secret that stored within a container. Wheter it is an ENV, a file, or another property: if a system can read it, so can a human.
+- Use `docker history`: steps
+- Visit the repoistory: steps
+- check for odd env-vars with tools like https://github.com/goodwithtech/dockle[*Dockle*]: steps.
+
+

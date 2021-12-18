@@ -1,0 +1,3 @@
+Why using containers to put secrets in is a bad idea
+
+As you can tell by now, you can easily detect any secret that stored within a container. Wheter it is an ENV, a file, or another property: if a system can read it, so can a human.
