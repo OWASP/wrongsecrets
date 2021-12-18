@@ -5,6 +5,7 @@ import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.Spoiler;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -13,21 +14,24 @@ import java.util.List;
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 
 @Component
-@Order(4)
+@Order(1)
 public class Challenge4 extends Challenge {
 
-    public Challenge4(ScoreCard scoreCard) {
+    private final String hardcodedPassword;
+
+    public Challenge4(ScoreCard scoreCard, @Value("${password}") String hardcodedPassword) {
         super(scoreCard);
+        this.hardcodedPassword = hardcodedPassword;
     }
 
     @Override
     public Spoiler spoiler() {
-        return new Spoiler(Constants.password);
+        return new Spoiler(hardcodedPassword);
     }
 
     @Override
     public boolean answerCorrect(String answer) {
-        return Constants.password.equals(answer);
+        return hardcodedPassword.equals(answer);
     }
 
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {

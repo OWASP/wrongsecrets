@@ -1,0 +1,7 @@
+You can solve this challenge by the following steps:
+
+- Use `docker history`: steps
+- Visit the repoistory: steps
+- check for odd env-vars with tools like https://github.com/goodwithtech/dockle[*Dockle*]: steps.
+
+

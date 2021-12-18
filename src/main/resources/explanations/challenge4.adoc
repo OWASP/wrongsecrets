@@ -1,5 +1,7 @@
-=== Challenge 4: Centralized hardcoded password
+=== Challenge 4: Hardcoded password part 2
 
-So you spotted the secret in docker. What if we put it somewhere else in the code?
+There is a hardcoded password directly hidden in the controller by a developer. He tried to hide it by putting the value in the `application.properties`.
 
-You can spot the secret easily by using https://github.com/trufflesecurity/truffleHog[*Trufflehog*] and https://github.com/awslabs/git-secrets[*Git-secrets*]. Just dive into the code!
+This you can easily detect by SAST solutions, solutions like https://github.com/trufflesecurity/truffleHog[truffleHog] and https://github.com/awslabs/git-secrets[git-secrets], and by manual inspection of your `application.properties`.
+
+Using a distributed solution like https://cloud.spring.io/spring-cloud-config/reference/html/[Spring Cloud Config] where you manage your application properties externally can have the same problem if you are not careful. Take a close look at the https://cloud.spring.io/spring-cloud-config/reference/html/#_security[security section] before using Spring Cloud Config.

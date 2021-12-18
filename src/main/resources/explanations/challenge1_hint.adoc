@@ -1,0 +1,4 @@
+You can solve this challenge by the following steps:
+
+- Use https://github.com/trufflesecurity/truffleHog[*Trufflehog*]: checkout the repository TODO: CONTINUE HERE!
+- Exec into the container and unzip the Jar file, now look through it with https://java-decompiler.github.io/[*JD-GUI*]
