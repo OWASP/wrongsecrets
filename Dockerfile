@@ -12,10 +12,12 @@ RUN echo "2vars"
 RUN echo "$ARG_BASED_PASSWORD"
 RUN echo "$argBasedPassword"
 
-RUN useradd -ms /bin/bash wrongsecrets
+RUN groupadd -r wrongsecrets && useradd -ms /bin/bash wrongsecrets
 RUN chgrp -R 0 /home/wrongsecrets
 RUN chmod -R g=u /home/wrongsecrets
+
 COPY --chown=wrongsecrets target/wrongsecrets-0.0.2-SNAPSHOT.jar /home/wrongsecrets/application.jar
 COPY --chown=wrongsecrets .github/scripts/ /var/tmp/helpers
 WORKDIR /home/wrongsecrets
+USER wrongsecrets
 CMD java -jar -Dspring.profiles.active=$(echo ${SPRING_PROFILES_ACTIVE})  /home/wrongsecrets/application.jar
