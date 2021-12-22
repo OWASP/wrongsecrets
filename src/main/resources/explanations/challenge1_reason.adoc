@@ -1,4 +1,5 @@
 Why using code to put secrets in is a bad idea.
 
-As you can tell by now, you can easily detect many secrets that stored within code. Even when the code is compiled, you can still reverse-engineer it to find the secret. Therefore hardcoded secrets are never a good idea.
-To make it worse: if the dev leaves the organization, he might know the secret as it is still in code! Similarly, when code is leaked or the asset is leaked, the secret will be compromised, and rotating will be hard. Besides: do you still know where this password is for after a few years?
+As you can tell by now, you can easily detect many secrets that stored within code. Even when the code is compiled, you can still reverse-engineer it to find the secret. That's why hardcoded secrets are never a good idea. We often fall for the misconception that, if I cannot reverse-engineer it, so can't an attacker. Which is why meany people believe that hardcoding in C/C++/Golang is safer than in Java. For those that believe this: please decompile an app with tools like https://ghidra-sre.org/[*Ghidra*].
+
+Secrecy of a secret in code is one thing. Another challenge is the openness: anyone with access to the code and/or compiled assets, now can learn the secret. To make it worse: if the dev who hardcoded leaves the organization, he might know the secret as it is still in code! Similarly, when code is leaked or the asset is leaked, the secret will be compromised, and rotating will be hard. Besides: do you still know where this password is for after a few years?

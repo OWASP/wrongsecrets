@@ -1,4 +1,4 @@
-=== Challenge 5: K8s Configmap based secret
+=== K8s Configmap based secret
 
 Hardcoding something in docker was not smart. But what about a config-map in the default namespace without RBAC?
 

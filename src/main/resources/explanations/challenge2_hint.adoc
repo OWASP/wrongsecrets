@@ -1,6 +1,10 @@
 You can solve this challenge by the following steps:
 
 1. Use https://github.com/trufflesecurity/truffleHog[*Trufflehog*]:
-
+- Read up on the instructions of the tool at https://github.com/trufflesecurity/truffleHog[Trufflehog] and install it using `pip install truffleHog` or use its docker container.
+- Now run Trufflehog at our repository: `trufflehog https://github.com/commjoen/wrongsecrets`. Can you find the value of `password` in the output?
 2. Inspect the `Application.properties` in the src/resources folder:
+- Just open de `Application.properties` file in the `src/resources` folder at https://github.com/commjoen/wrongsecrets[*the target repo*]  and take a look. Can you find the secret?
 3. When you do not have the sourcecode available:
+- Follow the instructions of https://docs.docker.com/engine/reference/commandline/cp/[the Docker documentation] to copy the Jar file from the root of the container to your local filesystem.
+- open the JAR file in https://java-decompiler.github.io/[*JD-GUI*] or https://github.com/skylot/jadx[*jadx-gui*], find the `application.properties` in  `Resources/BOOT-INF` now look for a password!

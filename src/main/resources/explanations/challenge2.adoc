@@ -1,9 +1,8 @@
 === Hardcoded password part 2
 
-TODO: CONTINUE HERE!
+Instead of hardcoding the password directly, the developer now tried to hide it in the Spring Boot its `application.properties`.
 
-There is a hardcoded password directly hidden in the controller by a developer. He tried to hide it by putting the value in the `application.properties`.
-
+This means it is no longer to be found directly in `.java` or in compiled `.Class` files. So how can you detect it?
 
 This you can easily detect by SAST solutions, solutions like https://github.com/trufflesecurity/truffleHog[truffleHog] and https://github.com/awslabs/git-secrets[git-secrets], and by manual inspection of your `application.properties`.
 
