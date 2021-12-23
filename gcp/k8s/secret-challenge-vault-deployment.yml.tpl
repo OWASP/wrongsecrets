@@ -24,6 +24,10 @@ spec:
         app: secret-challenge
       name: secret-challenge
     spec:
+      securityContext:
+        runAsUser: 2000
+        runAsGroup: 2000
+        fsGroup: 2000
       serviceAccountName: vault
       volumes:
         - name: secrets-store-inline
@@ -68,5 +72,4 @@ spec:
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
-      securityContext: {}
       terminationGracePeriodSeconds: 30
