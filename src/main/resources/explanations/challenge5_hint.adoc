@@ -1,2 +1,10 @@
 You can solve this challenge by the following steps:
 
+1. Check the status of the configmap in Git
+- Can you see where in git we stored the `secrets-config.yml`? If not, just do a search.
+- Take a look at the `Data` field: what can you find there?
+2. Ask nicely using Kubectl:
+- TODO: CONTINUE HERE!
+
+3. Exec into the pod and get the data
+

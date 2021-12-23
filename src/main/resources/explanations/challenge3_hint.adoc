@@ -4,7 +4,7 @@ You can solve this challenge by the following steps:
  - download the container,
 - run `docker history --no-trunc  jeroenwillemsen/wrongsecrets:<TAGNAME-HERE>` with which you can find the arguments used for the container with the given tag.
 - Now try finding the `DOCKER_ENV_PASSWORD` .
-2. Visit the repository online:
+2. Visit the Docker-repository online:
 - go to the https://hub.docker.com/r/jeroenwillemsen/wrongsecrets[*WrongSecrets docker repo*]
 - take a look the tag relevant for you. There you can find all the commands used to compose the container. What is the value of `DOCKER_ENV_PASSWORD` ?
 3. Use Dockle https://github.com/goodwithtech/dockle[*Dockle*]:

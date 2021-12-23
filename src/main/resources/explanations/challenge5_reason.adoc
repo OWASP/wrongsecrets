@@ -1,1 +1,4 @@
-WHY YOU HAVE TO FILL THIS IN
+Why using configmaps is not a good idea
+
+Configmaps were never designed to host secrets. Instead, they were designed to host additional data for your Job or Pod and such.
+Configmaps are often readable for everyone that needs to develop/operate the processes which require the configuration of the configmap. Next, configmaps are often stored in Git to speed up development. <TODO: CONTINUE HERE!>
