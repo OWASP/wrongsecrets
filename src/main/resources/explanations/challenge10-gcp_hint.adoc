@@ -1,2 +1,5 @@
 You can solve this challenge by the following steps:
 
+1. exec into the pod and find the file with the secret:
+
+2. find the secret in Google Secrets Manager:

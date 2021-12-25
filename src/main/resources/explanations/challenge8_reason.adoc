@@ -1,5 +1,11 @@
 What to look out for when using random secrets at startup
 
-Using a random secret at startup might work if the secret
-WHY YOU HAVE TO FILL THIS IN
-//TODO: CONTINUE HERE (COPY FROM CHALLNEGE5_HINT)
+Using a random secret at startup might work if the secret does not need to be consumed by other systems than the system holding/generating the secret itself. Otherwise, you will need some sort of synchronisation mechanism.
+
+The mechanism used here in this challenge, can be observed in various other systems, such as Jenkins for instance, where we used to see the admin password of Jenkins in the logs on first boot.
+
+Though nothing might be necessarily wrong with this approach, there are a few things you need to pay attention to:
+
+- anybody with access to the logs, now has access to this secret. So be careful where you send your logs off to, and be careful who you allow to read the logs in your production system.
+- if the system does not restart for a very long time, the secret becomes stale. If you have to reboot often, so will the secret be rotated.
+- the moment you start persisting the secret, you will often end up with challenges like the ones you faced in this app.

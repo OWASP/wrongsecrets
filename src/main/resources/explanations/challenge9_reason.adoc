@@ -1,1 +1,11 @@
-WHY YOU HAVE TO FILL THIS IN
+Why you need to be careful with secrets in your cloud:
+
+Secrets and terraform state:
+
+Terraform state can be stored in many places: locally, on a cloud provider its storage solution, etc.. It can easily happen that secrets end up in Terraform state, as the systems which are created by it often needs to communicate with other systems for which it requires authentication. So, ensure that secrets are always encrypted in terraform state, or ensure that all secrets are stored in a secrets management system.
+
+Note that secrets are not the only reason not to let people access terraform state. TF state read access can expose configuration details to unauthorized eyes, while terraform write access can allow an attacker to setup a bogus state which, on the next terraform apply-run ends up with unauthorized changes.
+
+TODO: secrets-manager too open
+
+TODO: K8s securit still holds!
