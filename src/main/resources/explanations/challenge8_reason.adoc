@@ -1,2 +1,5 @@
+What to look out for when using random secrets at startup
+
+Using a random secret at startup might work if the secret
 WHY YOU HAVE TO FILL THIS IN
 //TODO: CONTINUE HERE (COPY FROM CHALLNEGE5_HINT)
