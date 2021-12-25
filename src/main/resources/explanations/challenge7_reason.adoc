@@ -1,1 +1,12 @@
-WHY YOU HAVE TO FILL THIS IN
+Why you need to configure your secrets management solution well
+
+https://www.vaultproject.io/[*Hashicorp Vault*] is designed to manage secrets. Vault safeguards secrets by having them encrypted and has a lot of security controls involved to secure (access to) the secrets.
+
+Some of these controls can easily be misconfigured or misused. In this challenge we only have (root)tokens to use vault and leak them, even to Git by mistake. These tokens should actually never be the default way of authenticating yourself towards vault. Instead, it is better to enable https://www.vaultproject.io/docs/auth/ldap[LDAP] or https://www.vaultproject.io/docs/auth/azure[Azure] authentication instead.
+
+Next, the secret itself does not have any metadata where it is used for. Which makes it harder to maintain the secret over time.
+
+When using a third party solution, like Hashicorp Vault or any other: make sure you read the documentation well and secure the system.
+Additionally, do a threatmodel exercise to understand what the risks are of it being used wrongly.
+
+

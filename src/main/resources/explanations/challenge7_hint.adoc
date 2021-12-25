@@ -1,7 +1,24 @@
 You can solve this challenge by the following steps:
 
-1. Find the Secret in logging
+1. Find the Secret in Vault using the logged root token:
+  - When you setup the K8s environment, the script tells you the value of the root token as below:
 
-2. Get the secret from the vault using a root token
+    Key                  Value
+    ---                  -----
+    token                s.Jqka4lSy8ayQw2LFsvyAgnTI
+    token_accessor       HEr9RYa3OcZNDOHeFRXIMYCV
+    token_duration       ∞
+    token_renewable      false
+    token_policies       ["root"]
+    identity_policies    []
+    policies             ["root"]
 
-3. Exec into the pod
+
+  -  use the token to login into Vault exposed at port 8200
+  -  take a look around: can you find the location of the secret in the secrets overview?
+
+
+
+
+
+

@@ -1,6 +1,5 @@
 You can solve this challenge by the following steps:
 
-//TODO: CONTINUE HERE (COPY FROM CHALLNEGE5_HINT)
 1. Check the status of the secret in Git:
 - Can you see where in git we stored the `secrets-secret.yml`? If not, just do a search.
 - Take a look at the `Data` field: what can you find there?
