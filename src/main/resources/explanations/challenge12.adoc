@@ -1,4 +1,4 @@
-=== Challenge 12: Docker COPY and WORKDIR
+=== Docker COPY and WORKDIR
 
 Sometimes large parts of the local filesystem are copied over to the container so that they are available in the container for the convenience of the author.
 

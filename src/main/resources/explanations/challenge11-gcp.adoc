@@ -1,4 +1,4 @@
-=== Challenge 11: GCP Secret Manager part 3
+=== GCP Secret Manager part 3
 
 In our GKE cluster, there's a service account for workloads, which maps to a service account in kubernetes. 
 
