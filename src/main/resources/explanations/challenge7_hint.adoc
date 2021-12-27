@@ -14,8 +14,8 @@ You can solve this challenge by the following steps:
     policies             ["root"]
 
 
-  -  use the token to login into Vault exposed at port 8200
-  -  take a look around: can you find the location of the secret in the secrets overview?
+  -  Use the token to login into Vault exposed at port 8200
+  -  Take a look around: can you find the location of the secret in the secrets overview?
 
 
 

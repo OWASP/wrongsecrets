@@ -1,8 +1,8 @@
 You can solve this challenge by the following steps:
 
 1. Find the secret in Google Secretsmanager:
-- login to the Google https://cloud.google.com/[cloud] with the account with which you created the WrongSecrets setup.
-- get the data from wrongsecrets2
+- Login to the Google https://cloud.google.com/[cloud] with the account with which you created the WrongSecrets setup.
+- Get the data from wrongsecrets2
 
 2. Find the secret by exec-ing into the POD
 - Make sure you have Kubectl installed as defined in the README.MD & make sure kubectl is configured to send commands to the right cluster.

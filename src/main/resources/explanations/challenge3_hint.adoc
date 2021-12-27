@@ -1,17 +1,17 @@
 You can solve this challenge by the following steps:
 
 1. Use `docker history`:
- - download the container,
-- run `docker history --no-trunc  jeroenwillemsen/wrongsecrets:<TAGNAME-HERE>` with which you can find the arguments used for the container with the given tag.
+ - Download the container,
+- Run `docker history --no-trunc  jeroenwillemsen/wrongsecrets:<TAGNAME-HERE>` with which you can find the arguments used for the container with the given tag.
 - Now try finding the `DOCKER_ENV_PASSWORD` .
 2. Visit the Docker-repository online:
-- go to the https://hub.docker.com/r/jeroenwillemsen/wrongsecrets[*WrongSecrets docker repo*]
-- take a look the tag relevant for you. There you can find all the commands used to compose the container. What is the value of `DOCKER_ENV_PASSWORD` ?
+- Go to the https://hub.docker.com/r/jeroenwillemsen/wrongsecrets[*WrongSecrets docker repo*]
+- Take a look the tag relevant for you. There you can find all the commands used to compose the container. What is the value of `DOCKER_ENV_PASSWORD` ?
 3. Use Dockle https://github.com/goodwithtech/dockle[*Dockle*]:
  - Install Dockle as described at its https://github.com/goodwithtech/dockle[Github page]
  - Run `dockle jeroenwillemsen/wrongsecrets:<TAGNAME-HERE>` and use its output for your secrets hunt.
 4. Exec into the container and dump the ENV-vars:
  - Start the container locally with `docker run jeroenwillemsen/wrongsecrets:<TAGNAME-HERE>`
  - Find the container id by doing `docker ps` in a next terminal
- - now do `docker exec -it <container id> "/bin/sh"`
- - in the container do `env` .
+ - Do `docker exec -it <container id> "/bin/sh"`
+ - In the container do `env` .
