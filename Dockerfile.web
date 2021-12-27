@@ -1,4 +1,4 @@
-FROM jeroenwillemsen/wrongsecrets:explain3-no-vault
+FROM jeroenwillemsen/wrongsecrets:explain4-no-vault
 
 ARG argBasedVersion="1.2.0Alpha2"
 ENV APP_VERSION=$argBasedVersion
