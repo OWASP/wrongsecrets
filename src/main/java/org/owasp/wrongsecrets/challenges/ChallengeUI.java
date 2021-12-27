@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
- * Wrapper class to move logic from Thymeleaf to keep logic in code instead of the html file
+ * Wrapper class to move logic from Thymeleaf to keep logic in code instead of the html file.
  */
 @Getter
 public class ChallengeUI {
