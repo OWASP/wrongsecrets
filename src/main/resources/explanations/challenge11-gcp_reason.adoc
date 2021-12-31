@@ -1,1 +1,3 @@
-WHY YOU HAVE TO FILL THIS IN
+Secrets management is more than storing it:
+
+As you can tell by now: there are many ways to get to a secret: whether hardcoded, stored in a misconfigured third party solution, or stored correctly, but with the wrong IAM access rights in accounts next to it. You will, by now see, why we say that "your security maturity reflects in your secrets management".

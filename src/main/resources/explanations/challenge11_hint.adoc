@@ -1,1 +1,7 @@
 You can solve this challenge by the following steps:
+
+1. Find the privilege escalation path using just Terraform:
+
+2. Find the privilege escalation path using https://github.com/nccgroup/ScoutSuite[ScoutSuite]
+
+//TODO FILL THIS IN
