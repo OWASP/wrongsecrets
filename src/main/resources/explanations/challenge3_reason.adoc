@@ -3,3 +3,5 @@ Why using containers to put secrets in is a bad idea
 As you can tell by now, you can easily detect any secret that stored within a container. Whether it is an ENV, a file, or another property: if a system can read it, so can a human.
 
 Given it is a best practice to let a container be immutable and versioned, you will often end up with the secret within a container forever, unless you remove it again from the registry.
+
+Interesting ENV vars for you to have a look at can be found at this https://github.com/Puliczek/awesome-list-of-secrets-in-environment-variables[list].
