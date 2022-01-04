@@ -12,9 +12,10 @@ RUN echo "2vars"
 RUN echo "$ARG_BASED_PASSWORD"
 RUN echo "$argBasedPassword"
 
-RUN useradd -ms /bin/bash wrongsecrets
+RUN useradd -ms /bin/bash wrongsecrets -u 2000
 RUN chgrp -R 0 /home/wrongsecrets
 RUN chmod -R g=u /home/wrongsecrets
+
 
 COPY --chown=wrongsecrets target/wrongsecrets-0.0.2-SNAPSHOT.jar /home/wrongsecrets/application.jar
 COPY --chown=wrongsecrets .github/scripts/ /var/tmp/helpers

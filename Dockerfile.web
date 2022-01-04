@@ -1,4 +1,4 @@
-FROM jeroenwillemsen/wrongsecrets:1.2-pre-release-no-vault
+FROM jeroenwillemsen/wrongsecrets:1.2-pre-release2-no-vault
 
 ARG argBasedVersion="1.2.0Alpha3"
 ENV APP_VERSION=$argBasedVersion
