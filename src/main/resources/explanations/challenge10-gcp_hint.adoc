@@ -8,4 +8,4 @@ You can solve this challenge by the following steps:
 - Make sure you have Kubectl installed as defined in the README.MD & make sure kubectl is configured to send commands to the right cluster.
 - now do `kubectl get pods`. Here you see all the Pods active in the namespace you are in, which is for this app normally `default` (unless otherwise specified by your administrator/trainer).
 - for your instance of the WrongSecrets pod, do `kubectl exec -it secret-challenge-<rest of the name of the pod from the prev.step> -- /bin/sh`.
-- now examinate the data which you can find in `/mnt/secrets-store`
+- examine the data which you can find in `/mnt/secrets-store`
