@@ -1,0 +1,18 @@
+Why secrets need RBAC so badly
+
+K8s Secrets are designed to host secrets. As you can tell by solving the challenge and careful reconnaissance secrets are already `base64` encoded so that they can contain encrypted binary data.
+
+Secrets should, unless encrypted (and better yet, even not then), obviously not be committed to git, which is one of the first mistakes made here as we then end up with the same problems as described in the previous challenges.
+
+Most importantly: RBAC should be really tight around secrets: only the processes which requires the actual secret should be able to read it and a very limited of other roles to maintain the secret.
+
+And then there is the storage of the K8s cluster where the secrets are now hosted by. This is not encrypted at the moment and could be misused as well.
+
+So: K8S secrets are not a _bad_ idea. They do, however, require a proper configuration of the K8s cluster hosting them in order to be more effectively secured.
+
+
+Last but not least: we could easily exec into the container, to grep the ENV vars with the secret. This has to do with 3 things:
+
+- we are allowed to do so by means of RBAC, which should not be your normal case in PRD: otherwise everybody of your organization can poke around in the container.
+- we are having executables within the container (sh/openssl/etc) which we can execute to setup a shell. Stripping your container from any non-necessary binary can help to reduce attack-surface and make it harder for any attacker that did an RCE at your container to jump to other places within the container to further gain execution.
+- we have exposed the configmap as an ENV. This means that anybody who got to the container runtime within the pod can now dump the secret. We brought the secret close to the consumer, but maybe not close enough yet (e.g. the app only).

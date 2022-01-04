@@ -1,0 +1,5 @@
+Secrets management is more than secure storage:
+
+As you can tell by now: there are many ways to get to a secret: whether hardcoded, stored in a misconfigured third party solution, or stored correctly, but with the wrong IAM access rights in accounts next to it. You will, by now see, why we say that "your security maturity reflects in your secrets management".
+
+In this specific case, it would be a bad idea to have this kind of production access without triggering some "break glass" procedure and appropriate alarms. Additionally, anything that explicitly logs secrets is dangerous. If you spot any code logging secrets, flag it!

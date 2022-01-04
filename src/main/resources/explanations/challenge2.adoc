@@ -1,5 +1,8 @@
-=== Challenge 2: Docker based password
+=== Hardcoded password part 2
 
-The developer got smarter: now the password is no longer defined by Spring, but by means of a docker container build argument.
+Instead of hardcoding the password directly, the developer now tried to hide it in the Spring Boot its `application.properties`.
 
-You can easily spot it by looking at how the layers got constructed, or detect it with a tool like https://github.com/goodwithtech/dockle[*Dockle*].
+This means it is no longer to be found directly in `.java` or in compiled `.Class` files. So how can you detect it?
+
+This you can easily detect by SAST solutions, solutions like https://github.com/trufflesecurity/truffleHog[truffleHog] and https://github.com/awslabs/git-secrets[git-secrets], and by manual inspection of your `application.properties`.
+

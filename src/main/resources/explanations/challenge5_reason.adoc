@@ -1,0 +1,17 @@
+Why using configmaps is not a good idea
+
+Configmaps were never designed to host secrets. Instead, they were designed to host additional data for your Job or Pod and other K8s resources.
+Configmaps are often readable for everyone who needs to develop/operate the processes which require data from the configmap. This could still mean that you put restrictions on who can read the configmap using RBAC. Maybe it is a good idea in production to limit who can read the configmap: to start, how about "not everyone"?
+Next, configmaps are often stored in Git to speed up development, which means overall that the data is quite exposed.
+
+Given that a configmap just works with strings, you cannot easily encrypt it, other than through "rolling your own" on top of a configmap. Of course, you can encrypt the storage of where the configmap is hosted in after deployment, but that means it is still readable in Git.
+
+This makes a configmap not a very suitable item to place a secret in, especially without strict RBAC: many people within the organization that have access to it, can still read it.
+
+So: try not use configmaps for secrets & make sure you apply RBAC properly!
+
+Last but not least: we could easily exec into the container, to grep the ENV vars with the secret. This has to do with 3 things:
+
+- we are allowed to do so by means of RBAC, which should not be your normal case in PRD: otherwise everybody of your organization can poke around in the container.
+- we have executables within the container (sh/openssl/etc) which we can execute to setup a shell. Stripping your container from any non-necessary binary can help to reduce attack-surface and make it harder for any attacker that did an RCE at your container to jump to other places within the container to further gain execution.
+- we have exposed the configmap as an ENV. This means that anybody who got to the container runtime within the pod can now dump the secret. We brought the secret close to the consumer, but maybe not close enough yet (e.g. the app only).

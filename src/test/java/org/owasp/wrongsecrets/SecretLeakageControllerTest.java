@@ -42,13 +42,13 @@ class SecretLeakageControllerTest {
     }
 
     @Test
-    void spoil4() throws Exception {
-        testSpoil("/spoil-4", Constants.password);
+    void spoil1() throws Exception {
+        testSpoil("/spoil-1", Constants.password);
     }
 
     @Test
-    void solveChallenge4() throws Exception {
-        solveChallenge("/challenge/4", Constants.password);
+    void solveChallenge1() throws Exception {
+        solveChallenge("/challenge/1", Constants.password);
     }
 
     private void solveChallenge(String endpoint, String solution) throws Exception {

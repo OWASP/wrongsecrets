@@ -1,4 +1,4 @@
-=== Challenge 8: Generating random values
+=== Generating random values
 
 Now, let's randomize the secret at startup... Can you find the answer?
 How can we use this on the next startup ;-)?

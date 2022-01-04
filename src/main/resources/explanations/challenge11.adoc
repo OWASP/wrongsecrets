@@ -1,4 +1,4 @@
-=== Challenge 11: AWS SSM Parameter Store
+=== AWS SSM Parameter Store
 
 We've now used Parameter Store directly from within the app, but there's an IAM problem...
 

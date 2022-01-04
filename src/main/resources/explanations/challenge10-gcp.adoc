@@ -1,3 +1,3 @@
-=== Challenge 10: GCP Secret Manager part 2
+=== GCP Secret Manager part 2
 
-The secret is now randomized and stored directly in the cloud's Secret(s) manager. We're still mounting it to the K8s pod via the https://secrets-store-csi-driver.sigs.k8s.io[CSI driver] for https://github.com/GoogleCloudPlatform/secrets-store-csi-driver-provider-gcp[GCP] though... Can you access it?
+The secret is now randomized and stored directly in the GCP Secret manager. We're still mounting it to the K8s pod via the https://secrets-store-csi-driver.sigs.k8s.io[CSI driver] for https://github.com/GoogleCloudPlatform/secrets-store-csi-driver-provider-gcp[GCP] though... Can you access it?

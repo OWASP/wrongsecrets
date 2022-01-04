@@ -1,7 +1,6 @@
 package org.owasp.wrongsecrets.challenges;
 
 import lombok.Getter;
-import org.asciidoctor.Asciidoctor;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 
 import java.util.List;
@@ -9,7 +8,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
- * Wrapper class to move logic from Thymeleaf to keep logic in code instead of the html file
+ * Wrapper class to move logic from Thymeleaf to keep logic in code instead of the html file.
  */
 @Getter
 public class ChallengeUI {
@@ -50,11 +49,19 @@ public class ChallengeUI {
         return challenge.getExplanation();
     }
 
+    public String getHint() {
+        return challenge.getHint();
+    }
+
+    public String getReason() {
+        return challenge.getReason();
+    }
+
     public String requiredEnv() {
         return challenge.supportedRuntimeEnvironments().stream()
-                .map(Enum::name)
-                .limit(1)
-                .collect(Collectors.joining());
+            .map(Enum::name)
+            .limit(1)
+            .collect(Collectors.joining());
     }
 
     public boolean isChallengeEnabled() {

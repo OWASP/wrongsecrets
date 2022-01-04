@@ -4,12 +4,13 @@
 <div class="container" layout:fragment="content">
     <!--/*@thymesVar id="challenge" type="org.owasp.wrongsecrets.challenges.ChallengeUI"*/-->
     <h1 class="mt-2" th:text="${challenge.name}"/>
-    <p th:text="'Welcome to challenge ' + ${challenge.challengeNumber} + '. You need to guess the secret that is hidden in Java, Docker, Kubernetes, Vault, AWS or GCP.'"></p>
+    <p><span th:text="'Welcome to challenge ' + ${challenge.challengeNumber} + '.'"></span> You need to guess the secret
+        that is hidden in <a href="https://github.com/commjoen/wrongsecrets">Java</a>, <a
+            href="https://hub.docker.com/r/jeroenwillemsen/wrongsecrets">Docker</a>, Kubernetes, Vault, AWS or GCP.</p>
     <div class="row">
         <div class="offset-lg-1 col-lg-10 col-md-12">
             <div th:replace="doc:__${challenge.explanation}__.adoc"></div>
         </div>
-
     </div>
 
     <div th:text="${challengeCompletedAlready}"></div>
@@ -24,9 +25,27 @@
             </button>
         </p>
         <p>
-            <button class="btn btn-primary" type="submit" name="action" value="submit">Submit</button>
-            <button class="btn btn-secondary" type="submit" name="action" value="reset">Reset</button>
+            <button class="btn btn-primary mt-1" type="submit" name="action" value="submit">Submit</button>
+            <button class="btn btn-secondary mt-1" type="submit" name="action" value="reset">Reset</button>
+            <a th:if="${hintsEnabled==true}" class="btn btn-secondary mt-1" data-bs-toggle="collapse" href="#collapseHint" role="button"
+               aria-expanded="false" aria-controls="collapseHint">
+                Show hints
+            </a>
+            <a th:if="${reasonEnabled==true}"  class="btn btn-secondary mt-1" data-bs-toggle="collapse" href="#collapseExplain" role="button"
+               aria-expanded="false" aria-controls="collapseExplain">
+                What's wrong?
+            </a>
         </p>
+        <div th:if="${hintsEnabled==true}" class="collapse" id="collapseHint">
+            <div class="card card-body">
+                <div th:replace="doc:__${challenge.hint}__.adoc"></div>
+            </div>
+        </div>
+        <div th:if="${reasonEnabled==true}" class="collapse" id="collapseExplain">
+            <div class="card card-body">
+                <div th:replace="doc:__${challenge.reason}__.adoc"></div>
+            </div>
+        </div>
     </form>
 
     <div th:replace="fragments/navigation :: navigation"></div>
@@ -39,20 +58,19 @@
 
     <div class="row">
         <div th:if="${missingEnvWarning} eq 'DOCKER'" class="alert alert-danger" role="alert">
-            We are running outside a docker container. Please run this in a container as explained in the README.md.
+            We are running outside a docker container. Please run this in a container as explained in the <a href="https://github.com/commjoen/wrongsecrets#basic-docker-exercises">README.md</a>.
         </div>
         <div th:if="${missingEnvWarning} eq 'VAULT'" class="alert alert-danger" role="alert">
             We are running outside a K8s cluster with Vault. Please run this in the K8s cluster as explained in the
-            README.md.
+            <a href="https://github.com/commjoen/wrongsecrets#vault-exercises-with-minikube">README.md</a>.
         </div>
         <div th:if="${missingEnvWarning} eq 'K8S'" class="alert alert-danger" role="alert">
-            We are running outside a K8s cluster. Please run this in the K8s cluster as explained in the README.md.
+            We are running outside a K8s cluster. Please run this in the K8s cluster as explained in the <a href="https://github.com/commjoen/wrongsecrets#basic-k8s-exercise">README.md</a>.
         </div>
         <div th:if="${missingEnvWarning} eq 'AWS' or ${missingEnvWarning} eq 'GCP'" class="alert alert-danger"
              role="alert">
             We are running outside a properly configured AWS environment. Please run this in an AWS/GCP environment as
-            explained
-            in the README.md.
+            explained in the <a href="https://github.com/commjoen/wrongsecrets#cloud-challenges">README.md</a>.
         </div>
     </div>
 </div>

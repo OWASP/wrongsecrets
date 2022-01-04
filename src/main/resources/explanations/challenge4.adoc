@@ -1,5 +1,4 @@
-=== Challenge 4: Centralized hardcoded password
+=== Docker arg based password
+The developer got smarter: now the password is no longer defined by Spring, but by means of a docker container build argument.
 
-So you spotted the secret in docker. What if we put it somewhere else in the code?
-
-You can spot the secret easily by using https://github.com/trufflesecurity/truffleHog[*Trufflehog*] and https://github.com/awslabs/git-secrets[*Git-secrets*]. Just dive into the code!
+You can easily spot it by looking at how the layers got constructed.

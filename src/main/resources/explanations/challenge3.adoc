@@ -1,4 +1,4 @@
-=== Challenge 3: Docker based password
+=== Docker ENV based password
 
 Did you know that you can use the ENV as well in docker containers to set the password? What a great idea to share it with everyone!
 

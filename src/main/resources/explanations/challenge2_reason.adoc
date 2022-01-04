@@ -1,0 +1,8 @@
+Why using code to put secrets in is a bad idea.
+
+As you can tell, we got a little more flexibility than with challenge1. However: we still have the password in code!
+
+Though we can now easily overload the variables in a later stage - as you can see in the next challenges, we often see that secrets are stored as part of the Spring Config or Spring Cloud config, without overriding it in a later stage. This means that everybody with the access to the Spring Cloud config can now learn what the secret is.
+
+Using a distributed solution like https://cloud.spring.io/spring-cloud-config/reference/html/[Spring Cloud Config] where you manage your application properties externally can have the same problem if you are not careful. Take a close look at the https://cloud.spring.io/spring-cloud-config/reference/html/#_security[security section] before using Spring Cloud Config.
+
