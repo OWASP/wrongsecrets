@@ -1,6 +1,6 @@
 You can solve this challenge by the following steps:
 
-1. Find the secret in Google Secretsmanager:
+1. Find the secret in Google Secret manager:
 - Login to the Google https://cloud.google.com/[cloud] with the account with which you created the WrongSecrets setup.
 - Get the data from wrongsecrets2
 
