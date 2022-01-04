@@ -2,7 +2,7 @@ Why secrets need RBAC so badly
 
 K8s Secrets are designed to host secrets. As you can tell by solving the challenge and careful reconnaissance secrets are already `base64` encoded so that they can contain encrypted binary data.
 
-Secrets should, unless encrypted, obviously not be committed to git, which is one of the first mistakes made here as we then end up with the same problems as described in the previous challenges.
+Secrets should, unless encrypted (and better yet, even not then), obviously not be committed to git, which is one of the first mistakes made here as we then end up with the same problems as described in the previous challenges.
 
 Most importantly: RBAC should be really tight around secrets: only the processes which requires the actual secret should be able to read it and a very limited of other roles to maintain the secret.
 
