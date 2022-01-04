@@ -2,24 +2,24 @@
 # Key vault challenge 1 #
 #########################
 
-# Azure Key Vault for Testing Access
 resource "azurerm_key_vault" "vault" {
   name                = "owasp-wrongsecrets-vault"
-  location            = azurerm_resource_group.default.location
-  resource_group_name = azurerm_resource_group.default.name
+  location            = data.azurerm_resource_group.default.location
+  resource_group_name = data.azurerm_resource_group.default.name
   tenant_id           = data.azurerm_client_config.current.tenant_id
   sku_name            = "standard"
 }
 
-# resource "azurerm_key_vault_access_policy" "user" {
-#   key_vault_id = azurerm_key_vault.vault.id
-#   tenant_id    = data.azurerm_client_config.current.tenant_id
-#   object_id    = data.azurerm_client_config.current.object_id
+# Needed for user permissions
+resource "azurerm_key_vault_access_policy" "user" {
+  key_vault_id = azurerm_key_vault.vault.id
+  tenant_id    = data.azurerm_client_config.current.tenant_id
+  object_id    = data.azurerm_client_config.current.object_id
 
-#   secret_permissions = [
-#     "get", "list", "set", "delete"
-#   ]
-# }
+  secret_permissions = [
+    "get", "list", "set", "delete"
+  ]
+}
 
 resource "azurerm_key_vault_access_policy" "identity_access" {
   key_vault_id = azurerm_key_vault.vault.id
@@ -65,7 +65,7 @@ resource "azurerm_key_vault_secret" "wrongsecret_2" {
 
 resource "azurerm_key_vault_secret" "wrongsecret_3" {
   name         = "wrongsecret-3"
-  value        = "Hello from Terraform" # bootstrap something, not used in challenge
+  value        = "Hello from Terraform 2" # bootstrap something, not used in challenge
   key_vault_id = azurerm_key_vault.vault.id
 
   lifecycle {

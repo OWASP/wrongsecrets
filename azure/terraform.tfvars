@@ -1,1 +1,1 @@
-region = "West Europe"
+region = "East US"

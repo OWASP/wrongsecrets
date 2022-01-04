@@ -1,12 +1,12 @@
 resource "azurerm_user_assigned_identity" "aks_pod_identity" {
-  resource_group_name = azurerm_resource_group.default.name
-  location            = azurerm_resource_group.default.location
+  resource_group_name = data.azurerm_resource_group.default.name
+  location            = data.azurerm_resource_group.default.location
   name                = "wrongsecrets-identity"
 }
 
 resource "azurerm_user_assigned_identity" "aks_extra_pod_identity" {
-  resource_group_name = azurerm_resource_group.default.name
-  location            = azurerm_resource_group.default.location
+  resource_group_name = data.azurerm_resource_group.default.name
+  location            = data.azurerm_resource_group.default.location
   name                = "wrongsecrets-extra-identity"
 }
 

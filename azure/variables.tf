@@ -1,13 +1,13 @@
 variable "region" {
   description = "The Azure region to use"
   type        = string
-  default     = "West Europe"
+  default     = "East US"
 }
 
 variable "cluster_version" {
   description = "The AKS cluster version to use"
   type        = string
-  default     = "1.20"
+  default     = "1.20.13"
 }
 
 variable "cluster_name" {
