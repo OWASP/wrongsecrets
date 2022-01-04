@@ -5,8 +5,8 @@ You can solve this challenge by the following steps:
 - Take a look at the `Data` field: what can you find there?
 2. Ask nicely using Kubectl:
 - Make sure you have Kubectl installed as defined in the README.MD & make sure kubectl is configured to send commands to the right cluster.
-- Do `kubectl get configmap` . Here you see all the configmaps active in the namespace you are in, which is for this app normally `default` (unless otherwise specified by your administrator/trainer).
-- Now do `kubectl get configmap secrets-file -o Yaml` . Can you see the secret?
+- Do `kubectl get configmap`. Here you see all the configmaps active in the namespace you are in, which is for this app normally `default` (unless otherwise specified by your administrator/trainer).
+- Now do `kubectl get configmap secrets-file -o Yaml`. Can you see the secret?
 3. Exec into the pod and get the data:
 - Make sure you have Kubectl installed as defined in the README.MD & make sure kubectl is configured to send commands to the right cluster.
 - Do `kubectl get pods`. Here you see all the Pods active in the namespace you are in, which is for this app normally `default` (unless otherwise specified by your administrator/trainer).
