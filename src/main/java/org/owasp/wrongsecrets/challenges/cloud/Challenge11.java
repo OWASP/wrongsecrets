@@ -38,7 +38,7 @@ import java.util.List;
 
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.AWS;
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.GCP;
-import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.AZURE;;
+import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.AZURE;
 
 @Component
 @Order(11)
@@ -173,7 +173,7 @@ public class Challenge11 extends CloudChallenge {
     private String getAzureChallenge11Value() {
         if (isAzure()) {
             String keyVaultUri = System.getenv("AZ_VAULT_URI");
-            try{
+            try {
                 SecretClient secretClient = new SecretClientBuilder()
                     .vaultUrl(keyVaultUri)
                     .credential(new DefaultAzureCredentialBuilder().build())

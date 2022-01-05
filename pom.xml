@@ -37,6 +37,8 @@
         <thymeleaf.version>3.0.14.RELEASE</thymeleaf.version>
         <thymeleaf.layout>3.0.0</thymeleaf.layout>
         <asciidoctor.maven.plugin.version>2.2.1</asciidoctor.maven.plugin.version>
+        <azure.keyvault.version>4.2.3</azure.keyvault.version>
+        <azure.identity.version>1.2.0</azure.identity.version>
     </properties>
 
     <dependencies>
@@ -120,13 +122,13 @@
         <dependency>
             <groupId>com.azure</groupId>
             <artifactId>azure-security-keyvault-secrets</artifactId>
-            <version>4.2.3</version>
+            <version>${azure.keyvault.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.azure</groupId>
             <artifactId>azure-identity</artifactId>
-            <version>1.2.0</version>
+            <version>${azure.identity.version}</version>
         </dependency>
 
         <dependency>
