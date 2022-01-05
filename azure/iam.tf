@@ -11,7 +11,7 @@ resource "azurerm_user_assigned_identity" "aks_extra_pod_identity" {
 }
 
 # Role assignments
-# Details: https://github.com/Azure/aad-pod-identity/blob/master/docs/readmes/README.role-assignment.md
+# Details: https://github.com/Azure/aad-pod-identity/blob/master/website/content/en/docs/Getting%20started/role-assignment.md
 resource "azurerm_role_assignment" "aks_identity_operator" {
   scope                = azurerm_user_assigned_identity.aks_pod_identity.id
   role_definition_name = "Managed Identity Operator"
