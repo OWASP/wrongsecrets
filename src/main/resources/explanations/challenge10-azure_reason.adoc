@@ -1,0 +1,8 @@
+Access to the Administrator/owner account:
+If you were able to use the Azure cloud administrator/owner account to access the data, then you can see why this is a bad idea for production. In short, with this account you can change anything within the account, and you can easily exfiltrate any of the secrets.
+
+Last but not least: we could easily exec into the container, to grep the mount with the secret. This has to do with 3 things:
+
+- we are allowed to do so by means of RBAC, which should not be your normal case in PRD: otherwise everybody of your organization can poke around in the container.
+- we have executables within the container (sh/openssl/etc) which we can execute to setup a shell. Stripping your container from any non-necessary binary can help to reduce attack-surface and make it harder for any attacker that did an RCE in your container to jump to other places within the container to further gain execution.
+- we have exposed the configmap as an ENV. This means that anybody who got to the container runtime within the pod can now dump the secret. We brought the secret close to the consumer, but maybe not close enough yet (e.g. the app only).

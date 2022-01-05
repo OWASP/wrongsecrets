@@ -1,8 +1,9 @@
 You can solve this challenge by the following steps:
 
-1. Find the secret in Google Secret manager (this is the cheap way, try the other one :) ):
-- Login to the Google https://cloud.google.com/[cloud] with the account with which you created the WrongSecrets setup.
-- Get the data from wrongsecrets2
+1. Find the secret in Azure Key Vault (this is the cheap way, try the other one :) ):
+- Login to the Azure https://portal.azure.com[cloud] with the account with which you created the WrongSecrets setup.
+- Navigate to key vault
+- Get the data from wrongsecret2
 
 2. Find the secret by exec-ing into the POD
 - Make sure you have Kubectl installed as defined in the README.MD & make sure kubectl is configured to send commands to the right cluster.

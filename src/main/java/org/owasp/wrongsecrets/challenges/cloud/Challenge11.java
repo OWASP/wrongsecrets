@@ -53,6 +53,7 @@ public class Challenge11 extends CloudChallenge {
     private final String azureDefaultValue;
     private final String challengeAnswer;
     private final String projectId;
+    private final RuntimeEnvironment runtimeEnvironment;
 
     public Challenge11(ScoreCard scoreCard,
                        @Value("${AWS_ROLE_ARN}") String awsRoleArn,
@@ -71,7 +72,8 @@ public class Challenge11 extends CloudChallenge {
         this.gcpDefaultValue = gcpDefaultValue;
         this.azureDefaultValue = azureDefaultValue;
         this.projectId = projectId;
-        this.challengeAnswer = getChallenge11Value(runtimeEnvironment);
+        this.runtimeEnvironment = runtimeEnvironment;
+        this.challengeAnswer = getChallenge11Value(this.runtimeEnvironment);
     }
 
     @Override
@@ -89,7 +91,7 @@ public class Challenge11 extends CloudChallenge {
     }
 
     private String getChallenge11Value(RuntimeEnvironment runtimeEnvironment) {
-        if (runtimeEnvironment != null) {
+        if (runtimeEnvironment != null && runtimeEnvironment.getRuntimeEnvironment() != null) {
             switch (runtimeEnvironment.getRuntimeEnvironment()) {
                 case AWS:
                     return getAWSChallenge11Value();

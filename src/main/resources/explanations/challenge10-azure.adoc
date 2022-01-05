@@ -1,0 +1,3 @@
+=== Azure Key Vault part 2
+
+The secret is now randomized and stored directly in the Azure Key Vault. We're still mounting it to the K8s pod via the https://secrets-store-csi-driver.sigs.k8s.io[CSI driver] for https://azure.github.io/secrets-store-csi-driver-provider-azure/[Azure] though... Can you access it?
