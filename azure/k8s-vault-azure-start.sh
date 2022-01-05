@@ -19,15 +19,24 @@ checkCommandsAvailable helm minikube jq vault sed grep docker grep cat az envsub
 echo "This is a script to bootstrap the configuration. You need to have installed: helm, kubectl, jq, vault, grep, cat, sed, envsubst, and azure cli, and is only tested on mac, Debian and Ubuntu"
 echo "This script is based on the steps defined in https://learn.hashicorp.com/tutorials/vault/kubernetes-minikube. Vault is awesome!"
 
-export AZURE_SUBSCRIPTION_ID=$(az account show --query id --output tsv)
+export AZURE_SUBSCRIPTION_ID="$(az account show --query id --output tsv)"
 export AZURE_TENANT_ID="$(az account show --query tenantId --output tsv)"
 
-export RESOURCE_GROUP="<AKSResourceGroup>"
-export CLUSTER_NAME="<AKSClusterName>"
+export RESOURCE_GROUP="$(terraform output -raw resource_group)"
+export CLUSTER_NAME="$(terraform output -raw cluster_name)"
 
 # for this demo, we will be deploying a user-assigned identity to the AKS node resource group
 export IDENTITY_RESOURCE_GROUP="$(az aks show -g ${RESOURCE_GROUP} -n ${CLUSTER_NAME} --query nodeResourceGroup -otsv)"
-export IDENTITY_NAME="demo"
+export IDENTITY_NAME="wrongsecrets-identity"
+
+export AZ_POD_RESOURCE_ID="$(terraform output -raw aad_pod_identity_resource_id)"
+export AZ_POD_CLIENT_ID="$(terraform output -raw aad_pod_identity_client_id)"
+export AZ_VAULT_URI="$(terraform output -raw vault_uri)"
+export AZ_KEY_VAULT_TENANT_ID="$(terraform output -raw tenant_id)"
+export AZ_KEY_VAULT_NAME="$(terraform output -raw vault_name)"
+
+# Set the kubeconfig
+az aks get-credentials --resource-group $RESOURCE_GROUP --name $CLUSTER_NAME
 
 kubectl get configmaps | grep 'secrets-file' &>/dev/null
 if [ $? == 0 ]; then
@@ -51,7 +60,7 @@ else
   helm install consul hashicorp/consul --version 0.30.0 --values ../k8s/helm-consul-values.yml
 fi
 
-while [[ $(kubectl get pods -l app=consul -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True True True True" ]]; do echo "waiting for Consul" && sleep 2; done
+while [[ $(kubectl get pods -l app=consul -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True True" ]]; do echo "waiting for Consul" && sleep 2; done
 
 helm list | grep 'vault' &>/dev/null
 if [ $? == 0 ]; then
@@ -142,14 +151,15 @@ else
   helm install aad-pod-identity aad-pod-identity/aad-pod-identity
 fi
 
-# TODO change to az cli commands
-# echo "Generate secret manager challenge secret 2"
-# echo -n "$(openssl rand -base64 16)" |
-#   gcloud secrets versions add wrongsecret-2 --data-file=-
+echo "Install Azure key vault provider"
+kubectl apply -f https://raw.githubusercontent.com/Azure/secrets-store-csi-driver-provider-azure/master/deployment/provider-azure-installer.yaml
 
-# echo "Generate secret manager challenge secret 3"
-# echo -n "$(openssl rand -base64 16)" |
-#   gcloud secrets versions add wrongsecret-3 --data-file=-
+# TODO change to az cli commands
+echo "Generate secret manager challenge secret 2"
+az keyvault secret set --name wrongsecret-2 --vault-name "${AZ_KEY_VAULT_NAME}" --value "$(openssl rand -base64 16)" >/dev/null
+
+echo "Generate secret manager challenge secret 3"
+az keyvault secret set --name wrongsecret-3 --vault-name "${AZ_KEY_VAULT_NAME}" --value "$(openssl rand -base64 16)" >/dev/null
 
 echo "Fill-out the secret volume manifest template"
 envsubst <./k8s/secret-volume.yml.tpl >./k8s/secret-volume.yml
@@ -157,18 +167,10 @@ envsubst <./k8s/secret-volume.yml.tpl >./k8s/secret-volume.yml
 echo "Apply secretsmanager storage volume"
 kubectl apply -f./k8s/secret-volume.yml
 
-# TODO change to azure binding
-# echo "Annotate service accounts"
-# kubectl annotate serviceaccount \
-#   --namespace default vault \
-#   "iam.gke.io/gcp-service-account=wrongsecrets-workload-sa@${GCP_PROJECT}.iam.gserviceaccount.com"
-
-# kubectl annotate serviceaccount \
-#   --namespace default default \
-#   "iam.gke.io/gcp-service-account=wrongsecrets-workload-sa@${GCP_PROJECT}.iam.gserviceaccount.com"
-
+envsubst <./k8s/pod-id.yml.tpl >./k8s/pod-id.yml
 envsubst <./k8s/secret-challenge-vault-deployment.yml.tpl >./k8s/secret-challenge-vault-deployment.yml
 
+kubectl apply -f./k8s/pod-id.yml
 kubectl apply -f./k8s/secret-challenge-vault-deployment.yml
 while [[ $(kubectl get pods -l app=secret-challenge -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do echo "waiting for secret-challenge" && sleep 2; done
 #kubectl expose deployment secret-challenge --type=LoadBalancer --port=8080

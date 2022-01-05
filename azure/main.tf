@@ -34,6 +34,10 @@ resource "azurerm_kubernetes_cluster" "cluster" {
 
   api_server_authorized_ip_ranges = ["${data.http.ip.body}/32"]
 
+  network_profile {
+    network_plugin = "azure"
+  }
+
   default_node_pool {
     name       = "default"
     node_count = 1

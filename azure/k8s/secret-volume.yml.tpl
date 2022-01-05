@@ -1,4 +1,4 @@
-apiVersion: secrets-store.csi.x-k8s.io/v1
+apiVersion: secrets-store.csi.x-k8s.io/v1alpha1
 kind: SecretProviderClass
 metadata:
   name: azure-wrongsecrets-vault
@@ -6,7 +6,8 @@ spec:
   provider: azure
   parameters:
     usePodIdentity: "true"
-    tenantId: ${AZURE_KEY_VAULT_TENANT_ID}
+    tenantId: ${AZ_KEY_VAULT_TENANT_ID}
+    keyvaultName: ${AZ_KEY_VAULT_NAME}
     objects: |
       array:
         - |

@@ -55,6 +55,7 @@ gcp/k8s/secret-volume.yml
 gcp/k8s/secret-challenge-vault-deployment.yml
 azure/k8s/secret-volume.yml
 azure/k8s/secret-challenge-vault-deployment.yml
+azure/k8s/pod-id.yml
 
 # Challenge 12 ;-)
 .github/scripts/yourkey.txt

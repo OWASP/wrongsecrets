@@ -2,8 +2,13 @@
 # Key vault challenge 1 #
 #########################
 
+resource "random_integer" "suffix" {
+  min = 11111
+  max = 99999
+}
+
 resource "azurerm_key_vault" "vault" {
-  name                = "owasp-wrongsecrets-vault"
+  name                = "wrongsecrets-vault-${random_integer.suffix.result}"
   location            = data.azurerm_resource_group.default.location
   resource_group_name = data.azurerm_resource_group.default.name
   tenant_id           = data.azurerm_client_config.current.tenant_id
@@ -41,6 +46,10 @@ resource "azurerm_key_vault_secret" "wrongsecret_1" {
   name         = "wrongsecret"
   value        = random_password.password.result
   key_vault_id = azurerm_key_vault.vault.id
+
+  depends_on = [
+    azurerm_key_vault_access_policy.user
+  ]
 }
 
 #########################
@@ -57,6 +66,10 @@ resource "azurerm_key_vault_secret" "wrongsecret_2" {
       value
     ]
   }
+
+  depends_on = [
+    azurerm_key_vault_access_policy.user
+  ]
 }
 
 #########################
@@ -73,6 +86,10 @@ resource "azurerm_key_vault_secret" "wrongsecret_3" {
       value
     ]
   }
+
+  depends_on = [
+    azurerm_key_vault_access_policy.user
+  ]
 }
 
 resource "azurerm_key_vault_access_policy" "extra_identity_access" {

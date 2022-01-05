@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   labels:
     app: secret-challenge
+    aadpodidbinding: wrongsecrets-pod-id
   name: secret-challenge
   namespace: default
 spec:
@@ -22,6 +23,7 @@ spec:
       creationTimestamp: "2020-10-28T20:21:04Z"
       labels:
         app: secret-challenge
+        aadpodidbinding: wrongsecrets-pod-id
       name: secret-challenge
     spec:
       serviceAccountName: vault
@@ -33,7 +35,7 @@ spec:
             volumeAttributes:
               secretProviderClass: "azure-wrongsecrets-vault"
       containers:
-        - image: jeroenwillemsen/wrongsecrets:rework11-k8s-vault
+        - image: jeroenwillemsen/wrongsecrets:1.2-pre-release4-k8s-vault
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
@@ -43,10 +45,10 @@ spec:
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
           env:
-            - name: GCP_PROJECT_ID
-              value: ${GCP_PROJECT}
             - name: K8S_ENV
-              value: gcp
+              value: azure
+            - name: AzureKeyVaultUri
+              value: ${AZ_VAULT_URI}
             - name: SPECIAL_K8S_SECRET
               valueFrom:
                 configMapKeyRef:
