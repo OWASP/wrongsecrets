@@ -1,4 +1,4 @@
-As the text of the challenges is saying: we are looking for a secret in the Java code. But how do we find it?
+As the text of the challenges is saying: we are looking for a secret called `password` in the Java code. But how do we find it?
 
 You can solve this challenge by the following steps:
 
@@ -8,4 +8,4 @@ You can solve this challenge by the following steps:
 - Now run Trufflehog at our repository: `trufflehog https://github.com/commjoen/wrongsecrets`. Can you find the value of `public static String password` in the output?
 2. When you do not have the sourcecode available, try to obtain the actual application to reverse engineer it.
 - Follow the instructions of https://docs.docker.com/engine/reference/commandline/cp/[the Docker documentation] to copy the Jar file from the root of the container to your local filesystem.
-- open the JAR file in https://java-decompiler.github.io/[*JD-GUI*] or https://github.com/skylot/jadx[*jadx-gui*], now look for a password!
+- open the JAR file in https://java-decompiler.github.io/[*JD-GUI*] or https://github.com/skylot/jadx[*jadx-gui*], now look for the `String password`!
