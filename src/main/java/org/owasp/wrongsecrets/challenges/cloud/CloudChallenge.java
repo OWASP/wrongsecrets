@@ -21,8 +21,20 @@ public abstract class CloudChallenge extends Challenge {
         return this.runtimeEnvironment.getRuntimeEnvironment() == RuntimeEnvironment.Environment.GCP;
     }
 
+    public boolean isAzure() {
+        return this.runtimeEnvironment.getRuntimeEnvironment() == RuntimeEnvironment.Environment.AZURE;
+    }
+
     @Override
     public String getExplanation() {
-        return String.format("%s%s", super.getExplanation(), isGCP() ? "-gcp" : "");
+        RuntimeEnvironment.Environment env = runtimeEnvironment.getRuntimeEnvironment();
+        switch (env) {
+            case GCP:
+                return String.format("%s%s", super.getExplanation(), "-gcp");
+            case AZURE:
+                return String.format("%s%s", super.getExplanation(), "-azure");
+            default:
+                return String.format("%s", super.getExplanation()); // Default is AWS
+        }
     }
 }

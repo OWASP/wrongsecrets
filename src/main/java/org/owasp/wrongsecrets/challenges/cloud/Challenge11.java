@@ -23,6 +23,14 @@ import software.amazon.awssdk.services.sts.model.AssumeRoleWithWebIdentityReques
 import software.amazon.awssdk.services.sts.model.AssumeRoleWithWebIdentityResponse;
 import software.amazon.awssdk.services.sts.model.StsException;
 
+import com.azure.core.util.polling.SyncPoller;
+import com.azure.identity.DefaultAzureCredentialBuilder;
+
+import com.azure.security.keyvault.secrets.SecretClient;
+import com.azure.security.keyvault.secrets.SecretClientBuilder;
+import com.azure.security.keyvault.secrets.models.DeletedSecret;
+import com.azure.security.keyvault.secrets.models.KeyVaultSecret;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -30,6 +38,7 @@ import java.util.List;
 
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.AWS;
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.GCP;
+import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.AZURE;;
 
 @Component
 @Order(11)
@@ -41,6 +50,7 @@ public class Challenge11 extends CloudChallenge {
     private final String tokenFileLocation;
     private final String awsDefaultValue;
     private final String gcpDefaultValue;
+    private final String azureDefaultValue;
     private final String challengeAnswer;
     private final String projectId;
 
@@ -50,6 +60,7 @@ public class Challenge11 extends CloudChallenge {
                        @Value("${AWS_REGION}") String awsRegion,
                        @Value("${default_gcp_value}") String gcpDefaultValue,
                        @Value("${default_aws_value}") String awsDefaultValue,
+                       @Value("${default_azure_value}") String azureDefaultValue,
                        @Value("${GCP_PROJECT_ID}") String projectId,
                        RuntimeEnvironment runtimeEnvironment) {
         super(scoreCard, runtimeEnvironment);
@@ -58,8 +69,9 @@ public class Challenge11 extends CloudChallenge {
         this.awsRegion = awsRegion;
         this.awsDefaultValue = awsDefaultValue;
         this.gcpDefaultValue = gcpDefaultValue;
+        this.azureDefaultValue = azureDefaultValue;
         this.projectId = projectId;
-        this.challengeAnswer = runtimeEnvironment.getRuntimeEnvironment() == AWS ? getAWSChallenge11Value() : getGCPChallenge11Value();
+        this.challengeAnswer = getChallenge11Value(runtimeEnvironment);
     }
 
     @Override
@@ -73,7 +85,23 @@ public class Challenge11 extends CloudChallenge {
     }
 
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
-        return List.of(AWS, GCP);
+        return List.of(AWS, GCP, AZURE);
+    }
+
+    private String getChallenge11Value(RuntimeEnvironment runtimeEnvironment) {
+        if (runtimeEnvironment != null) {
+            switch (runtimeEnvironment.getRuntimeEnvironment()) {
+                case AWS:
+                    return getAWSChallenge11Value();
+                case GCP:
+                    return getGCPChallenge11Value();
+                case AZURE:
+                    return getAzureChallenge11Value();
+                default:
+                    return "please_use_supported_cloud_env";
+            }
+        }
+        return "please_use_supported_cloud_env";
     }
 
     private String getAWSChallenge11Value() {
@@ -138,5 +166,22 @@ public class Challenge11 extends CloudChallenge {
             log.info("Skipping credentials from GCP");
         }
         return gcpDefaultValue;
+    }
+
+    private String getAzureChallenge11Value() {
+        if (isAzure()) {
+            String keyVaultUri = System.getenv("AZ_VAULT_URI");
+            try{
+                SecretClient secretClient = new SecretClientBuilder()
+                    .vaultUrl(keyVaultUri)
+                    .credential(new DefaultAzureCredentialBuilder().build())
+                    .buildClient();
+                KeyVaultSecret retrievedSecret = secretClient.getSecret("wrongsecret-3");
+                return retrievedSecret.getValue();
+            } catch (IllegalArgumentException e) {
+                log.error("Exception getting Azure secret ", e);
+            }
+        }
+        return azureDefaultValue;
     }
 }

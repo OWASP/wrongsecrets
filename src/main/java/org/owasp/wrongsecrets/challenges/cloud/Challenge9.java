@@ -15,6 +15,7 @@ import java.util.List;
 
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.AWS;
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.GCP;
+import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.AZURE;
 
 @Component
 @Order(9)
@@ -53,6 +54,6 @@ public class Challenge9 extends CloudChallenge {
     }
 
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
-        return List.of(GCP, AWS);
+        return List.of(GCP, AWS, AZURE);
     }
 }
