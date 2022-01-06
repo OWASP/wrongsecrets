@@ -1,32 +1,27 @@
 You can solve this challenge by the following steps:
 
-- Create a new job file `job.yaml` with the following content:
+- Check your vault name with `terraform output vault_name`.
+
+- Create a new pod file `pod.yaml` with the following content (replace the vault name with output from the previous step):
 
 ```yaml
 apiVersion: batch/v1
 kind: Job
 metadata:
   name: wrongsecret-3
+  labels:
+    aadpodidbinding: separate-workload-pod-id
 spec:
   template:
     spec:
-      serviceAccountName: default
       containers:
-        - name: gcloud
-          image: gcr.io/google.com/cloudsdktool/cloud-sdk:latest
-          command:
-            [
-              "gcloud",
-              "secrets",
-              "versions",
-              "access",
-              "latest",
-              "--secret=wrongsecret-3",
-            ]
+        - name: az
+          image: mcr.microsoft.com/azure-cli:latest
+          command: ["az", "keyvault", "secret", "show", "--name=wrongsecret-3", "--vault-name=YOUR_VAULT_NAME_HERE"]
       restartPolicy: Never
 ```
 
-This job executes the command `gcloud secrets versions access latest --secret=wrongsecret-3`. Since the job can access the same service account as the secret challenge pod, it can access GCP with the same privileges.
+This job executes something like the command `az keyvault secret show --name wrongsecret-3 --vault-name wrongsecrets-vault-00000`. Since the job can access the same vault as the secret challenge pod, it has access to its secrets.
 
 - Apply the job with `kubectl apply -f job.yaml`
 - Check the job's logs with `kubectl logs job/wrongsecret-3`. This should show you the solution :)

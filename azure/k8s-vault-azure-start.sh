@@ -19,6 +19,7 @@ checkCommandsAvailable helm minikube jq vault sed grep docker grep cat az envsub
 echo "This is a script to bootstrap the configuration. You need to have installed: helm, kubectl, jq, vault, grep, cat, sed, envsubst, and azure cli, and is only tested on mac, Debian and Ubuntu"
 echo "This script is based on the steps defined in https://learn.hashicorp.com/tutorials/vault/kubernetes-minikube. Vault is awesome!"
 
+# Most of the variables below are used in envsubst later.
 export AZURE_SUBSCRIPTION_ID="$(az account show --query id --output tsv)"
 export AZURE_TENANT_ID="$(az account show --query tenantId --output tsv)"
 
@@ -31,6 +32,10 @@ export IDENTITY_NAME="wrongsecrets-identity"
 
 export AZ_POD_RESOURCE_ID="$(terraform output -raw aad_pod_identity_resource_id)"
 export AZ_POD_CLIENT_ID="$(terraform output -raw aad_pod_identity_client_id)"
+
+export AZ_EXTRA_POD_RESOURCE_ID="$(terraform output -raw aad_extra_pod_identity_resource_id)"
+export AZ_EXTRA_POD_CLIENT_ID="$(terraform output -raw aad_extra_pod_identity_client_id)"
+
 export AZ_VAULT_URI="$(terraform output -raw vault_uri)"
 export AZ_KEY_VAULT_TENANT_ID="$(terraform output -raw tenant_id)"
 export AZ_KEY_VAULT_NAME="$(terraform output -raw vault_name)"

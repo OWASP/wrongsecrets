@@ -3,7 +3,7 @@
 #########################
 
 resource "random_integer" "suffix" {
-  min = 11111
+  min = 00000
   max = 99999
 }
 
@@ -92,6 +92,8 @@ resource "azurerm_key_vault_secret" "wrongsecret_3" {
   ]
 }
 
+# With Azure key vault, you grant access per vault instead of per secret. Below is a bad idea if these workloads should
+# be separated
 resource "azurerm_key_vault_access_policy" "extra_identity_access" {
   key_vault_id = azurerm_key_vault.vault.id
   tenant_id    = data.azurerm_client_config.current.tenant_id
