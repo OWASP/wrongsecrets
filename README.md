@@ -160,7 +160,7 @@ Testers:
 
 - [Dave van Stein @davevs](https://github.com/davevs) 
 - [Marcin Nowak @MarcinNowak-codes](https://github.com/MarcinNowak-codes)
-- [Marc Chang Sing Pang @https://github.com/mchangsp](https://github.com/mchangsp)
+- [Marc Chang Sing Pang @mchangsp](https://github.com/mchangsp)
 
 Special mentions for helping out:
 
