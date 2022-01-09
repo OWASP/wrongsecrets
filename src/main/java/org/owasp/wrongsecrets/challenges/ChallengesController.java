@@ -52,13 +52,13 @@ public class ChallengesController {
         model.addAttribute("answerCorrect", null);
         model.addAttribute("answerIncorrect", null);
         model.addAttribute("solution", null);
-        model.addAttribute("hintsEnabled", hintsEnabled);
-        model.addAttribute("reasonEnabled", reasonEnabled);
+        enrichWithHintsAndReasons(model);
         includeScoringStatus(model, challenge.getChallenge());
         addWarning(challenge.getChallenge(), model);
 
         return "challenge";
     }
+
 
     @PostMapping(value = "/challenge/{id}", params = "action=reset")
     public String reset(@ModelAttribute ChallengeForm challengeForm, @PathVariable Integer id, Model model) {
@@ -68,6 +68,7 @@ public class ChallengesController {
         model.addAttribute("challenge", challenge);
         includeScoringStatus(model, challenge.getChallenge());
         addWarning(challenge.getChallenge(), model);
+        enrichWithHintsAndReasons(model);
 
         return "challenge";
     }
@@ -85,6 +86,7 @@ public class ChallengesController {
 
         model.addAttribute("challenge", challenge);
         includeScoringStatus(model, challenge.getChallenge());
+        enrichWithHintsAndReasons(model);
         return "challenge";
     }
 
@@ -100,10 +102,15 @@ public class ChallengesController {
     private void addWarning(Challenge challenge, Model model) {
         if (!runtimeEnvironment.canRun(challenge)) {
             var warning = challenge.supportedRuntimeEnvironments().stream()
-                    .map(Enum::name)
-                    .limit(1)
-                    .collect(Collectors.joining());
+                .map(Enum::name)
+                .limit(1)
+                .collect(Collectors.joining());
             model.addAttribute("missingEnvWarning", warning);
         }
+    }
+
+    private void enrichWithHintsAndReasons(Model model) {
+        model.addAttribute("hintsEnabled", hintsEnabled);
+        model.addAttribute("reasonEnabled", reasonEnabled);
     }
 }
