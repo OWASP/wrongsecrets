@@ -1,7 +1,7 @@
 You can solve this challenge by the following steps:
 
 1. Exec into the container and go over the files:
-- First inspect the Dockerfile and see what COPY operations happen
+- First check the actual Dockerfile and see what COPY operations happen. Note that you can get this data using `docker history` (see challenge 3&4 as well) when you have no Dockerfile but only an image.
 - Start the container locally with `docker run jeroenwillemsen/wrongsecrets:<TAGNAME-HERE>`
 - Find the container id by doing `docker ps` in a next terminal
 - Do `docker exec -it <container id> "/bin/sh"`

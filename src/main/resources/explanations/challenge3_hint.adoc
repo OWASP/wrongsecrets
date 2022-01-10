@@ -15,3 +15,6 @@ You can solve this challenge by the following steps:
  - Find the container id by doing `docker ps` in a next terminal
  - Do `docker exec -it <container id> "/bin/sh"`
  - In the container do `env` .
+5. Use `docker inspect` to find the ENV-vars:
+- Download the container,
+- Run `docker inspect jeroenwillemsen/wrongsecrets:<TAGNAME-HERE>` and try to find the `Config` section and then the `Env` section. What is the value of `DOCKER_ENV_PASSWORD` ? Did you know if you use https://stedolan.github.io/jq/[JQ] you could use `docker inspect jeroenwillemsen/wrongsecrets:<TAGNAME-HERE> |  jq '.[] | .Config.Env[]' instead to find it much quicker?

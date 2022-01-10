@@ -1,3 +1,4 @@
+As the text of the challenges is saying: we are looking for a secret in the configuration of the Spring Boot application, with the name `Application.properties`.
 You can solve this challenge by the following steps:
 
 1. Use https://github.com/trufflesecurity/truffleHog[*Trufflehog*]:
