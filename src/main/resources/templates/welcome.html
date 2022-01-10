@@ -41,8 +41,8 @@
                         <th:block th:if="${challenge.requiredEnv} == 'VAULT'">
                             <td>Kubernetes or Minikube with Vault</td>
                         </th:block>
-                        <th:block th:if="${challenge.requiredEnv} == 'AWS' or ${challenge.requiredEnv} == 'GCP'">
-                            <td>AWS, GCP</td>
+                        <th:block th:if="${challenge.requiredEnv} == 'AWS' or ${challenge.requiredEnv} == 'GCP'or ${challenge.requiredEnv} == 'AZURE'">
+                            <td>AWS, GCP, Azure</td>
                         </th:block>
                     </tr>
                     </tbody>

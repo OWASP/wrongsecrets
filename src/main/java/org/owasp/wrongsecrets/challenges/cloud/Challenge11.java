@@ -28,8 +28,9 @@ import com.azure.identity.DefaultAzureCredentialBuilder;
 
 import com.azure.security.keyvault.secrets.SecretClient;
 import com.azure.security.keyvault.secrets.SecretClientBuilder;
-import com.azure.security.keyvault.secrets.models.DeletedSecret;
 import com.azure.security.keyvault.secrets.models.KeyVaultSecret;
+import com.azure.core.credential.TokenCredential;
+import com.azure.identity.ManagedIdentityCredentialBuilder;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -54,6 +55,8 @@ public class Challenge11 extends CloudChallenge {
     private final String challengeAnswer;
     private final String projectId;
     private final RuntimeEnvironment runtimeEnvironment;
+    private final String azureVaultUri;
+    private final String azureWrongSecret3;
 
     public Challenge11(ScoreCard scoreCard,
                        @Value("${AWS_ROLE_ARN}") String awsRoleArn,
@@ -62,6 +65,8 @@ public class Challenge11 extends CloudChallenge {
                        @Value("${default_gcp_value}") String gcpDefaultValue,
                        @Value("${default_aws_value}") String awsDefaultValue,
                        @Value("${default_azure_value}") String azureDefaultValue,
+                       @Value("${azure.keyvault.uri}") String azureVaultUri,
+                       @Value("${wrongsecret-3}") String azureWrongSecret3, // Exclusively auto-wired for Azure
                        @Value("${GCP_PROJECT_ID}") String projectId,
                        RuntimeEnvironment runtimeEnvironment) {
         super(scoreCard, runtimeEnvironment);
@@ -73,6 +78,8 @@ public class Challenge11 extends CloudChallenge {
         this.azureDefaultValue = azureDefaultValue;
         this.projectId = projectId;
         this.runtimeEnvironment = runtimeEnvironment;
+        this.azureVaultUri = azureVaultUri;
+        this.azureWrongSecret3 = azureWrongSecret3;
         this.challengeAnswer = getChallenge11Value(this.runtimeEnvironment);
     }
 
@@ -172,18 +179,8 @@ public class Challenge11 extends CloudChallenge {
 
     private String getAzureChallenge11Value() {
         if (isAzure()) {
-            String keyVaultName = System.getenv("AZ_VAULT_NAME");
-            String keyVaultUri = "https://" + keyVaultName + ".vault.azure.net";
-            try {
-                SecretClient secretClient = new SecretClientBuilder()
-                    .vaultUrl(keyVaultUri)
-                    .credential(new DefaultAzureCredentialBuilder().build())
-                    .buildClient();
-                KeyVaultSecret retrievedSecret = secretClient.getSecret("wrongsecret-3");
-                return retrievedSecret.getValue();
-            } catch (IllegalArgumentException e) {
-                log.error("Exception getting Azure secret ", e);
-            }
+            log.info(String.format("Using Azure Key Vault URI: %s", azureVaultUri));
+            return azureWrongSecret3;
         }
         return azureDefaultValue;
     }

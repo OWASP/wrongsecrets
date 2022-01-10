@@ -35,7 +35,7 @@ spec:
             volumeAttributes:
               secretProviderClass: "azure-wrongsecrets-vault"
       containers:
-        - image: jeroenwillemsen/wrongsecrets:azuretest2-k8s-vault
+        - image: jeroenwillemsen/wrongsecrets:azuretest9-k8s-vault
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
@@ -47,8 +47,10 @@ spec:
           env:
             - name: K8S_ENV
               value: azure
-            - name: AZ_KEY_VAULT_NAME
-              value: ${AZ_KEY_VAULT_NAME}
+            - name: azure_keyvault_enabled
+              value: "true"
+            - name: azure_keyvault_uri
+              value: ${AZ_VAULT_URI}
             - name: SPECIAL_K8S_SECRET
               valueFrom:
                 configMapKeyRef:
