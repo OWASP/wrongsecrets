@@ -1,4 +1,4 @@
-apiVersion: secrets-store.csi.x-k8s.io/v1alpha1
+apiVersion: secrets-store.csi.x-k8s.io/v1
 kind: SecretProviderClass
 metadata:
   name: azure-wrongsecrets-vault
@@ -12,11 +12,11 @@ spec:
       array:
         - |
           objectName: wrongsecret
-          objectAlias: WRONGSECRET
+          objectAlias: wrongsecret
           objectType: secret
           objectVersion: ""
         - |
           objectName: wrongsecret-2
-          objectAlias: WRONGSECRET_2
+          objectAlias: wrongsecret-2
           objectType: secret
           objectVersion: ""

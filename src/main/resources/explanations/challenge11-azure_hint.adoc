@@ -17,11 +17,13 @@ spec:
       containers:
         - name: az
           image: mcr.microsoft.com/azure-cli:latest
-          command: ["az", "keyvault", "secret", "show", "--name=wrongsecret-3", "--vault-name=YOUR_VAULT_NAME_HERE"]
+          command:
+            [
+              "sleep", "7200"
+            ]
       restartPolicy: Never
 ```
-
-This job executes something like the command `az keyvault secret show --name wrongsecret-3 --vault-name wrongsecrets-vault-00000`. Since the job can access the same vault as the secret challenge pod, it has access to its secrets.
-
 - Apply the job with `kubectl apply -f job.yaml`
-- Check the job's logs with `kubectl logs job/wrongsecret-3`. This should show you the solution :)
+
+You can now exec into the pod, and execute something like `az login --identity --allow-no-subscriptions && az keyvault secret show --name wrongsecret-3 --vault-name wrongsecrets-vault-00000`. Since the job can access the same vault as the secret challenge pod, it has access to its secrets.
+

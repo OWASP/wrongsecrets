@@ -142,8 +142,7 @@ if [ $? == 0 ]; then
   echo "CSI driver is already installed"
 else
   echo "Installing CSI driver"
-  helm install -n kube-system csi-secrets-store secrets-store-csi-driver/secrets-store-csi-driver --set enableSecretRotation=true --set rotationPollInterval=60s
-  helm install -n kube-system csi-secrets-store-azure csi-secrets-store-provider-azure/csi-secrets-store-provider-azure
+  helm install -n kube-system csi-secrets-store-provider-azure csi-secrets-store-provider-azure/csi-secrets-store-provider-azure --set enableSecretRotation=true --set rotationPollInterval=60s
 fi
 
 echo "Add Azure pod identity to repo"
@@ -156,10 +155,6 @@ else
   helm install aad-pod-identity aad-pod-identity/aad-pod-identity
 fi
 
-echo "Install Azure key vault provider"
-kubectl apply -f https://raw.githubusercontent.com/Azure/secrets-store-csi-driver-provider-azure/master/deployment/provider-azure-installer.yaml
-
-# TODO change to az cli commands
 echo "Generate secret manager challenge secret 2"
 az keyvault secret set --name wrongsecret-2 --vault-name "${AZ_KEY_VAULT_NAME}" --value "$(openssl rand -base64 16)" >/dev/null
 

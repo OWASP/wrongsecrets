@@ -172,7 +172,8 @@ public class Challenge11 extends CloudChallenge {
 
     private String getAzureChallenge11Value() {
         if (isAzure()) {
-            String keyVaultUri = System.getenv("AZ_VAULT_URI");
+            String keyVaultName = System.getenv("AZ_VAULT_NAME");
+            String keyVaultUri = "https://" + keyVaultName + ".vault.azure.net";
             try {
                 SecretClient secretClient = new SecretClientBuilder()
                     .vaultUrl(keyVaultUri)
