@@ -23,23 +23,12 @@ import software.amazon.awssdk.services.sts.model.AssumeRoleWithWebIdentityReques
 import software.amazon.awssdk.services.sts.model.AssumeRoleWithWebIdentityResponse;
 import software.amazon.awssdk.services.sts.model.StsException;
 
-import com.azure.core.util.polling.SyncPoller;
-import com.azure.identity.DefaultAzureCredentialBuilder;
-
-import com.azure.security.keyvault.secrets.SecretClient;
-import com.azure.security.keyvault.secrets.SecretClientBuilder;
-import com.azure.security.keyvault.secrets.models.KeyVaultSecret;
-import com.azure.core.credential.TokenCredential;
-import com.azure.identity.ManagedIdentityCredentialBuilder;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
-import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.AWS;
-import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.GCP;
-import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.AZURE;
+import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.*;
 
 @Component
 @Order(11)
