@@ -3,3 +3,5 @@ Why using containers to put secrets in is a bad idea
 As you can tell by now, you can easily detect any secret that stored within a container. Whether it is an ENV, a file, or another property: if a system can read it, so can a human.
 
 Given it is a best practice to let a container be immutable and versioned, you will often end up with the secret within a container forever, unless you remove it again from the registry.
+
+Note: when you try to reduce the amount of executables in a container (so no shell is possible), don't forget about `Openssl client` and simple binaries like `ls` and `cat` that might have to be removed as well in order to let an attacker not go through the contents of your container.

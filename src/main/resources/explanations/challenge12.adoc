@@ -4,4 +4,4 @@ Sometimes large parts of the local filesystem are copied over to the container s
 
 In this challenge, we did some COPY'ing as well and hid a key there. Note that the key changes on every generation of the docker container, so you'd better extract and use it quickly :).
 
-Try https://github.com/deepfence/SecretScanner[*deepfenceio/secretscanning*], `docker inspect` of the image, or just `docker exec` against a running container.
+Try https://github.com/deepfence/SecretScanner[*deepfenceio/secretscanning*], `docker history` of the image, or just `docker exec` against a running container.
