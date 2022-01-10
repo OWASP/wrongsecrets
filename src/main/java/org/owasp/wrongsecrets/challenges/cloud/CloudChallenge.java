@@ -27,40 +27,25 @@ public abstract class CloudChallenge extends Challenge {
 
     @Override
     public String getExplanation() {
-        RuntimeEnvironment.Environment env = runtimeEnvironment.getRuntimeEnvironment();
-        switch (env) {
-            case GCP:
-                return String.format("%s%s", super.getExplanation(), "-gcp");
-            case AZURE:
-                return String.format("%s%s", super.getExplanation(), "-azure");
-            default:
-                return String.format("%s", super.getExplanation()); // Default is AWS
-        }
+        return getData(super.getExplanation());
     }
 
     @Override
     public String getHint() {
-        RuntimeEnvironment.Environment env = runtimeEnvironment.getRuntimeEnvironment();
-        switch (env) {
-            case GCP:
-                return String.format("%s%s", super.getHint(), "-gcp");
-            case AZURE:
-                return String.format("%s%s", super.getHint(), "-azure");
-            default:
-                return String.format("%s", super.getHint()); // Default is AWS
-        }
+        return getData(super.getHint());
     }
 
     @Override
     public String getReason() {
+        return getData(super.getReason());
+    }
+
+    private String getData(String defaultAWsPath) {
         RuntimeEnvironment.Environment env = runtimeEnvironment.getRuntimeEnvironment();
-        switch (env) {
-            case GCP:
-                return String.format("%s%s", super.getReason(), "-gcp");
-            case AZURE:
-                return String.format("%s%s", super.getReason(), "-azure");
-            default:
-                return String.format("%s", super.getReason()); // Default is AWS
-        }
+        return switch (env) {
+            case GCP -> String.format("%s%s", defaultAWsPath, "-gcp");
+            case AZURE -> String.format("%s%s", defaultAWsPath, "-azure");
+            default -> String.format("%s", defaultAWsPath); // Default is AWS
+        };
     }
 }

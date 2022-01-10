@@ -23,15 +23,15 @@ Make sure you have an active subscription at Azure for which you have configured
 **Note-II**: The cluster you create has its access bound to the public IP of the creator. In other words: the cluster you create with this code has its access bound to your public IP-address if you apply it locally.
 
 1. Set either a new resource group or use an existing resource group in `main.tf` (it defaults to the existing `OWASP-Projects` resource group). Note that you'll need to find/replace references to "data.azurerm_resource_group.default" to "arurerm_resource_group.default" if you want to create a new one.
-1. check whether you have the right project by doing `az account show`.
-1. If not yet enabled, register the required services for the subscription, run:
+2. check whether you have the right project by doing `az account show` (after `az login`).
+3. If not yet enabled, register the required services for the subscription, run:
     - `az provider register --namespace Microsoft.ContainerService`
     - `az provider register --namespace Microsoft.KeyVault`
     - `az provider register --namespace Microsoft.ManagedIdentity`
-1. Run `terraform init` (if required, use tfenv to select TF 0.14.0 or higher )
-1. Run `terraform plan` to see what will be created (optional).
-1. Run `terraform apply`. Note: the apply will take 5 to 20 minutes depending on the speed of the Azure backplane.
-1. Run `./k8s-vault-azure-start.sh`. Your kubeconfig file will automatically be updated.
+4. Run `terraform init` (if required, use `tfenv` to select TF 0.14.0 or higher )
+5. Run `terraform plan` to see what will be created (optional).
+6. Run `terraform apply`. Note: the apply will take 5 to 20 minutes depending on the speed of the Azure backplane.
+7. Run `./k8s-vault-azure-start.sh`. Your kubeconfig file will automatically be updated.
 
 Your AKS cluster should be visible in your resource group. Want a different region? You can modify `terraform.tfvars` or input it directly using the `region` variable in plan/apply.
 
