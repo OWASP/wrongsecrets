@@ -1,7 +1,7 @@
 You can solve this challenge by the following steps:
 
 1. Dig through terraform.tfstate with Trufflehog:
-- After you have build the infrastructure following the instructions in the README of the `gcp` folder, stay in that folder and run `trufflehog3 --output=terraform-infra.json --format=json .`
+- After you have build the infrastructure following the instructions in the README of the `azure` folder, stay in that folder and run `trufflehog3 --output=terraform-infra.json --format=json .`
 - Now, open the terraform-infra.json file and start looking for the password.
 
 2. Find the secret in Key Vault (this is the cheap way, try the other ones :) ):
