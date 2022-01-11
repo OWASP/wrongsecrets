@@ -14,6 +14,7 @@ import java.util.Map;
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.AWS;
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.GCP;
+import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.AZURE;
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.K8S;
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.VAULT;
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.HEROKU_DOCKER;
@@ -26,12 +27,13 @@ public class RuntimeEnvironment {
             DOCKER, List.of(DOCKER, HEROKU_DOCKER),
             GCP, List.of(DOCKER, K8S, VAULT),
             AWS, List.of(DOCKER, K8S, VAULT),
+            AZURE, List.of(DOCKER, K8S, VAULT),
             VAULT, List.of(DOCKER, K8S),
             K8S, List.of(DOCKER)
     );
 
     public enum Environment {
-        DOCKER("Docker"), HEROKU_DOCKER("Heroku(Docker)"), GCP("gcp"), AWS("aws"), VAULT("k8s-with-vault"), K8S("k8s");
+        DOCKER("Docker"), HEROKU_DOCKER("Heroku(Docker)"), GCP("gcp"), AWS("aws"), AZURE("azure"), VAULT("k8s-with-vault"), K8S("k8s");
 
         private final String id;
 

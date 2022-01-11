@@ -4,7 +4,7 @@ You can solve this challenge by the following steps:
 - After you have build the infrastructure following the instructions in the README of the `gcp` folder, stay in that folder and run `trufflehog3 --output=terraform-infra.json --format=json .`
 - Now, open the terraform-infra.json file and start looking for the password.
 
-2. Find the secret in Google Secret manager:
+2. Find the secret in Google Secret manager (this is the cheap way, try the other ones :) ):
 - Login to the Google https://cloud.google.com/[cloud] with the account with which you created the WrongSecrets setup.
 - Get the data from wrongsecrets1
 

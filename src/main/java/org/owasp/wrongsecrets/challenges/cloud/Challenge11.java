@@ -28,8 +28,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
-import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.AWS;
-import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.GCP;
+import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.*;
 
 @Component
 @Order(11)
@@ -41,8 +40,12 @@ public class Challenge11 extends CloudChallenge {
     private final String tokenFileLocation;
     private final String awsDefaultValue;
     private final String gcpDefaultValue;
+    private final String azureDefaultValue;
     private final String challengeAnswer;
     private final String projectId;
+    private final RuntimeEnvironment runtimeEnvironment;
+    private final String azureVaultUri;
+    private final String azureWrongSecret3;
 
     public Challenge11(ScoreCard scoreCard,
                        @Value("${AWS_ROLE_ARN}") String awsRoleArn,
@@ -50,6 +53,9 @@ public class Challenge11 extends CloudChallenge {
                        @Value("${AWS_REGION}") String awsRegion,
                        @Value("${default_gcp_value}") String gcpDefaultValue,
                        @Value("${default_aws_value}") String awsDefaultValue,
+                       @Value("${default_azure_value}") String azureDefaultValue,
+                       @Value("${azure.keyvault.uri}") String azureVaultUri,
+                       @Value("${wrongsecret-3}") String azureWrongSecret3, // Exclusively auto-wired for Azure
                        @Value("${GCP_PROJECT_ID}") String projectId,
                        RuntimeEnvironment runtimeEnvironment) {
         super(scoreCard, runtimeEnvironment);
@@ -58,8 +64,12 @@ public class Challenge11 extends CloudChallenge {
         this.awsRegion = awsRegion;
         this.awsDefaultValue = awsDefaultValue;
         this.gcpDefaultValue = gcpDefaultValue;
+        this.azureDefaultValue = azureDefaultValue;
         this.projectId = projectId;
-        this.challengeAnswer = runtimeEnvironment.getRuntimeEnvironment() == AWS ? getAWSChallenge11Value() : getGCPChallenge11Value();
+        this.runtimeEnvironment = runtimeEnvironment;
+        this.azureVaultUri = azureVaultUri;
+        this.azureWrongSecret3 = azureWrongSecret3;
+        this.challengeAnswer = getChallenge11Value(this.runtimeEnvironment);
     }
 
     @Override
@@ -73,7 +83,23 @@ public class Challenge11 extends CloudChallenge {
     }
 
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
-        return List.of(AWS, GCP);
+        return List.of(AWS, GCP, AZURE);
+    }
+
+    private String getChallenge11Value(RuntimeEnvironment runtimeEnvironment) {
+        if (runtimeEnvironment != null && runtimeEnvironment.getRuntimeEnvironment() != null) {
+            switch (runtimeEnvironment.getRuntimeEnvironment()) {
+                case AWS:
+                    return getAWSChallenge11Value();
+                case GCP:
+                    return getGCPChallenge11Value();
+                case AZURE:
+                    return getAzureChallenge11Value();
+                default:
+                    return "please_use_supported_cloud_env";
+            }
+        }
+        return "please_use_supported_cloud_env";
     }
 
     private String getAWSChallenge11Value() {
@@ -130,7 +156,7 @@ public class Challenge11 extends CloudChallenge {
                 AccessSecretVersionResponse response = client.accessSecretVersion(secretVersionName);
                 return response.getPayload().getData().toStringUtf8();
             } catch (ApiException e) {
-                log.error("Exception getting secret", e);
+                log.error("Exception getting secret: ", e);
             } catch (IOException e) {
                 log.error("Could not get the web identity token, due to ", e);
             }
@@ -138,5 +164,14 @@ public class Challenge11 extends CloudChallenge {
             log.info("Skipping credentials from GCP");
         }
         return gcpDefaultValue;
+    }
+
+    private String getAzureChallenge11Value() {
+        if (isAzure()) {
+            log.info(String.format("Using Azure Key Vault URI: %s", azureVaultUri));
+            return azureWrongSecret3;
+        }
+        log.error("Fetching secret from Azure did not work, returning default");
+        return azureDefaultValue;
     }
 }

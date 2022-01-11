@@ -1,0 +1,7 @@
+=== Azure Key Vault part 3
+
+In our AKS cluster, there are two Azure Identity bindings. These are used by Azure to inject metadata. In our case, we use these to access Azure Key Vault.
+
+The interesting thing about key vault is that it sets permissions per vault, rather than per secret. The developers unfortunately only have one key vault for two identities...
+
+Hint: There's a binding to `separate-workload-pod-id`. Try creating a pod with the right labels to steal wrongsecret-3 (see also https://docs.microsoft.com/en-us/azure/aks/use-azure-ad-pod-identity#run-a-sample-application[the aks documentation]).
