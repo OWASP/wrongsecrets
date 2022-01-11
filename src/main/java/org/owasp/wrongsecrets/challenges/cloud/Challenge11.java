@@ -156,7 +156,7 @@ public class Challenge11 extends CloudChallenge {
                 AccessSecretVersionResponse response = client.accessSecretVersion(secretVersionName);
                 return response.getPayload().getData().toStringUtf8();
             } catch (ApiException e) {
-                log.error("Exception getting secret", e);
+                log.error("Exception getting secret: ", e);
             } catch (IOException e) {
                 log.error("Could not get the web identity token, due to ", e);
             }
@@ -171,6 +171,7 @@ public class Challenge11 extends CloudChallenge {
             log.info(String.format("Using Azure Key Vault URI: %s", azureVaultUri));
             return azureWrongSecret3;
         }
+        log.error("Fetching secret from Azure did not work, returning default");
         return azureDefaultValue;
     }
 }
