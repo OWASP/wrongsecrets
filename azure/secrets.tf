@@ -13,6 +13,9 @@ resource "azurerm_key_vault" "vault" {
   resource_group_name = data.azurerm_resource_group.default.name
   tenant_id           = data.azurerm_client_config.current.tenant_id
   sku_name            = "standard"
+
+  soft_delete_retention_days = 7
+  purge_protection_enabled   = false
 }
 
 # Needed for user permissions
