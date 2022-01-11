@@ -134,6 +134,11 @@ Follow the steps in [the README in the AWS subfolder](aws/README.md).
 
 Follow the steps in [the README in the GCP subfolder](gcp/README.md).
 
+### Running WrongSecrets in Azure - EXPERIMENTAL!
+
+Follow the steps in [the README in the GCP subfolder](azure/README.md).
+Note that this implementation is still experimental. Feel free to provide feedback through Slack/Github and/or file a PR!
+
 ## Do you want to play without guidance?
 
 Each challenge has a `Show hints` button and a `What's wrong?` button. These buttons help to simplify the challenges and
