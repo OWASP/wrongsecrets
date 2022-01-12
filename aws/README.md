@@ -41,7 +41,7 @@ Are you done playing? Please run `terraform destroy` twice to clean up.
 
 ### Test it
 
-Run `AWS_PROFILE=<your_profile> k8s-vault-aws-start.sh` and connect to http://localhost:8080 when it's ready to accept connections (you'll read the line `Forwarding from 127.0.0.1:8080 -> 8080` in your console). Now challenge 9 and 10 should be available as well.
+Run `AWS_PROFILE=<your_profile> k8s-vault-aws-start.sh` and connect to [http://localhost:8080](http://localhost:8080) when it's ready to accept connections (you'll read the line `Forwarding from 127.0.0.1:8080 -> 8080` in your console). Now challenge 9 and 10 should be available as well.
 
 ### Clean it up
 
@@ -60,3 +60,12 @@ When you're done:
 3. Can you get the secrets in the SSM Parameter Store and Secrets Manager easily? Which paths do you see?
 4. Which of the 2 (SSM Parameter Store and Secrets Manager) works cross-account?
 5. If you have applied the secrets to the cluster, you should see at the configuration details of the cluster that Secrets encryption is "Disabled", what does that mean?
+
+### When you want to share your environment with others
+
+We added additional scripts for adding an ALB and ingress so that you can use your cloudsetup with multiple people.
+Do the following:
+
+1. Follow the installation section first.
+2. Run `k8s-aws-alb-script.sh` and the script will return the url at which you can reach the application.
+3. When you are done, before you do cleanup, first run `k8s-aws-alb-script.sh`.

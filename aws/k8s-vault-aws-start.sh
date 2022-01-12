@@ -15,7 +15,7 @@ function checkCommandsAvailable() {
   done
 }
 
-checkCommandsAvailable helm minikube jq vault sed grep docker grep cat aws
+checkCommandsAvailable helm jq vault sed grep docker grep cat aws
 
 AWS_REGION="eu-west-1"
 
