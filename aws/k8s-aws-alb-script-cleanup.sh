@@ -38,13 +38,18 @@ LBC_VERSION="v2.3.0"
 echo "LBC_VERSION=$LBC_VERSION"
 
 
-echo "Cleanup helm chart"
+echo "cleanup k8s ingress and service"
+kubectl delete ingress wrongsecrets
+kubectl delete service secret-challenge
 
+echo "Cleanup helm chart"
 helm uninstall aws-load-balancer-controller \
     -n kube-system
 
 echo "Cleanup k8s ALB"
 kubectl delete -k "github.com/aws/eks-charts/stable/aws-load-balancer-controller//crds?ref=master"
+
+
 
 echo "Cleanup iam serviceaccount and policy"
 eksctl delete iamserviceaccount \
