@@ -68,4 +68,4 @@ Do the following:
 
 1. Follow the installation section first.
 2. Run `k8s-aws-alb-script.sh` and the script will return the url at which you can reach the application.
-3. When you are done, before you do cleanup, first run `k8s-aws-alb-script.sh`.
+3. When you are done, before you do cleanup, first run `k8s-aws-alb-script-cleanup.sh`.

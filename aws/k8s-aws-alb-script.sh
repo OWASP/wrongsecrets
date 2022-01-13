@@ -38,11 +38,11 @@ LBC_VERSION="v2.3.0"
 echo "LBC_VERSION=$LBC_VERSION"
 
 
-echo "executing eksctl utils associate-iam-oidc-provider"
-eksctl utils associate-iam-oidc-provider \
-    --region ${AWS_REGION} \
-    --cluster ${CLUSTERNAME} \
-    --approve
+# echo "executing eksctl utils associate-iam-oidc-provider"
+# eksctl utils associate-iam-oidc-provider \
+#     --region ${AWS_REGION} \
+#     --cluster ${CLUSTERNAME} \
+#     --approve
 
 echo "creating iam policy"
 curl -o iam_policy.json https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.3.0/docs/install/iam_policy.json
