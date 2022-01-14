@@ -1,5 +1,5 @@
 === Docker ENV based password
 
-Did you know that you can use the ENV as well in docker containers to set the password? What a great idea to share it with everyone!
+Did you know that you can use the ENV as well in Docker containers to set the password? What a great idea to share it with everyone!
 
-You can easily spot the secret easily by looking at how the layers got constructed, or detect it with a tool like https://github.com/goodwithtech/dockle[*Dockle*].
+You can easily spot the secret by looking at how the layers were constructed or detecting it with a tool like https://github.com/goodwithtech/dockle[*Dockle*].

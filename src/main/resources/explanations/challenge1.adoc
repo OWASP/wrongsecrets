@@ -1,6 +1,6 @@
 === Centralized hardcoded password
 
-When people write a Proof of Concept, they often tend to start with hardcoded secrets, such as a `password` in code. What if we forget to remove these hardcoded secrets?
+When people write a Proof of Concept, they often start with hardcoded secrets, such as a `password` in code. What if we forget to remove these hardcoded secrets?
 
 Can you spot the secret we are looking for in code? What about looking for it at the container?
 
