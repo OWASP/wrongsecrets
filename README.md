@@ -2,20 +2,14 @@
 
 [![Java checkstyle and testing](https://github.com/commjoen/wrongsecrets/actions/workflows/main.yml/badge.svg)](https://github.com/commjoen/wrongsecrets/actions/workflows/main.yml) [![Terraform FMT](https://github.com/commjoen/wrongsecrets/actions/workflows/terraform.yml/badge.svg)](https://github.com/commjoen/wrongsecrets/actions/workflows/terraform.yml) [![Test minikube script](https://github.com/commjoen/wrongsecrets/actions/workflows/minikube-test.yml/badge.svg)](https://github.com/commjoen/wrongsecrets/actions/workflows/minikube-test.yml) [![OWASP Incubator Project](https://img.shields.io/badge/OWASP-Incubator%20project-48A646.svg)](https://owasp.org/projects/)[![Discussions](https://img.shields.io/github/discussions/commjoen/wrongsecrets)](https://github.com/commjoen/wrongsecrets/discussions)
 
-Welcome to the OWASP WrongSecrets p0wnable app. With this app, we have packed various ways of how to not store your
-secrets. These can help you to realize whether your secret management is ok. The challenge is to find all the different
-secrets by means of various tools and techniques.
+Welcome to the OWASP WrongSecrets p0wnable app. With this app, we have packed various ways of how to not store your secrets. These can help you to realize whether your secret management is ok. The challenge is to find all the different secrets by means of various tools and techniques.
 
 Can you solve all the 12 challenges?
 ![screenshot.png](screenshot.png)
 
 ## Support
 
-Need support? Contact us
-via [OWASP Slack](https://owasp.slack.com/archives/C02KQ7D9XHR) [sign up here](https://owasp.org/slack/invite), file
-a [PR](https://github.com/commjoen/wrongsecrets/pulls), file an [issue](https://github.com/commjoen/wrongsecrets/issues)
-, or use [discussions](https://github.com/commjoen/wrongsecrets/discussions). Please note that this is an OWASP
-volunteer based project, so it might take a little while before we respond.
+Need support? Contact us via [OWASP Slack](https://owasp.slack.com/archives/C02KQ7D9XHR) [sign up here](https://owasp.org/slack/invite), file a [PR](https://github.com/commjoen/wrongsecrets/pulls), file an [issue](https://github.com/commjoen/wrongsecrets/issues) , or use [discussions](https://github.com/commjoen/wrongsecrets/discussions). Please note that this is an OWASP volunteer based project, so it might take a little while before we respond.
 
 ## Basic docker exercises
 
@@ -41,20 +35,15 @@ Now you can try to find the secrets by means of solving the challenge offered at
 - [localhost:8080/challenge/8](http://localhost:8080/challenge/8)
 - [localhost:8080/challenge/12](http://localhost:8080/challenge/12)
 
-Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look
-better ;-).
+Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look better ;-).
 
 ### Running these on Heroku
 
-You can test them out
-at <a href="https://wrongsecrets.herokuapp.com/" target="_blank"> https://wrongsecrets.herokuapp.com/</a> as well! But
-please understand that we have NO guarantees that this works. Given we run in Heroku free-tier, please do not fuzz
-and/or try to bring it down: you would be spoiling it for others that want to testdrive it.
+You can test them out at <a href="https://wrongsecrets.herokuapp.com/" target="_blank"> https://wrongsecrets.herokuapp.com/</a> as well! But please understand that we have NO guarantees that this works. Given we run in Heroku free-tier, please do not fuzz and/or try to bring it down: you would be spoiling it for others that want to testdrive it.
 
 ### Deploying the app under your own heroku account
 
-1. [Sign up to Heroku](https://signup.heroku.com/) and
-   [log in to your account](https://id.heroku.com/login)
+1. [Sign up to Heroku](https://signup.heroku.com/) and [log in to your account](https://id.heroku.com/login)
 2. Click the button below and follow the instructions
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
@@ -119,8 +108,7 @@ Make sure you have the following installed:
 - vault [Install from here](https://www.vaultproject.io/downloads),
 - grep, Cat, and Sed
 
-Run `./k8s-vault-minkube-start.sh`, when the script is done, then the challenges will wait for you
-at <http://localhost:8080> . This will allow you to run challenge 1-8.
+Run `./k8s-vault-minkube-start.sh`, when the script is done, then the challenges will wait for you at <http://localhost:8080> . This will allow you to run challenge 1-8.
 
 ## Cloud Challenges
 
@@ -136,14 +124,11 @@ Follow the steps in [the README in the GCP subfolder](gcp/README.md).
 
 ### Running WrongSecrets in Azure - EXPERIMENTAL!
 
-Follow the steps in [the README in the GCP subfolder](azure/README.md).
-Note that this implementation is still experimental. Feel free to provide feedback through Slack/Github and/or file a PR!
+Follow the steps in [the README in the Azure subfolder](azure/README.md). Note that this implementation is still experimental. Feel free to provide feedback through Slack/Github and/or file a PR!
 
 ## Do you want to play without guidance?
 
-Each challenge has a `Show hints` button and a `What's wrong?` button. These buttons help to simplify the challenges and
-give explanation to the reader. Though, the explanations can spoil the fun if you want to do this as a hacking exercise.
-Therefore, you can manipulate them by overriding the following settings in your env:
+Each challenge has a `Show hints` button and a `What's wrong?` button. These buttons help to simplify the challenges and give explanation to the reader. Though, the explanations can spoil the fun if you want to do this as a hacking exercise. Therefore, you can manipulate them by overriding the following settings in your env:
 
 - `hints_enabled=false` will turn off the `Show hints` button.
 - `reason_enabled=false` will turn of the `What's wrong?` explanation button.
@@ -179,11 +164,7 @@ You can help us by the following methods:
 
 - Star us
 - Share this app with others
-- Of course, we can always use your help to get more flavors of "wrongly" configured secrets in to spread awareness! We
-  would love to get some help with a Alibaba, Tencent cloud or Azure integration for instance. Do you miss something
-  else than a cloud provider as an example? File an issue or create a PR!
-  See [our guide on contributing for more details](CONTRIBUTING.md). Contributors will be listed in releases, in "
-  Sepcial thanks & Contributors", and the web-app.
+- Of course, we can always use your help [to get more flavors](https://github.com/commjoen/wrongsecrets/issues/37) of "wrongly" configured secrets in to spread awareness! We would love to get some help with other cloudproiders, like Alibabaor Tencent cloud for instance. Do you miss something else than a cloud provider as an example? File an issue or create a PR! See [our guide on contributing for more details](CONTRIBUTING.md). Contributors will be listed in releases, in the "Special thanks & Contributors"-section, and the web-app.
 
 ## Notes on development
 
@@ -208,31 +189,23 @@ Now use the `local-vault` profile to do your development.
 
 If you want to dev without a Vault instance, use the `without-vault` profile to do your development.
 
-Want to push a container? See `.github/scripts/docker-create-and-push.sh` for a script that generates and pushes all
-containers. Do not forget to rebuild the app before composing the container
+Want to push a container? See `.github/scripts/docker-create-and-push.sh` for a script that generates and pushes all containers. Do not forget to rebuild the app before composing the container
 
 ### Automatic reload during development
 
-To make changes made load faster we added `spring-dev-tools` to the Maven project. To enable this in IntelliJ
-automatically, make sure:
+To make changes made load faster we added `spring-dev-tools` to the Maven project. To enable this in IntelliJ automatically, make sure:
 
 - Under Compiler -> Automatically build project is enabled, and
 - Under Advanced settings -> Allow auto-make to start even if developed application is currently running.
 
-You can also manually invoke: Build -> Recompile the file you just changed, this will also force a reload of the
-application.
+You can also manually invoke: Build -> Recompile the file you just changed, this will also force a reload of the application.
 
 ### How to add a Challenge
 
 Follow the steps below on adding a challenge:
 
-1. First make sure that you have an [Issue](https://github.com/commjoen/wrongsecrets/issues) reported for which a
-   challenge is really wanted.
-2. Add the new challenge in the `org.owasp.wrongsecrets.challenges` folder. Make sure you add an explanation
-   in `src/main/resources/explanations` and refer to it from your new Challenge class.
+1. First make sure that you have an [Issue](https://github.com/commjoen/wrongsecrets/issues) reported for which a challenge is really wanted.
+2. Add the new challenge in the `org.owasp.wrongsecrets.challenges` folder. Make sure you add an explanation in `src/main/resources/explanations` and refer to it from your new Challenge class.
 3. Add a unit and integration test to show that your challenge is working.
 
-If you want to move existing cloud challenges to another cloud: extend Challenge classes in
-the `org.owasp.wrongsecrets.challenges.cloud` package and make sure you add the required Terraform in a folder with the
-separate cloud identified. Make sure that the environment is added to `org.owasp.wrongsecrets.RuntimeEnvironment`.
-Collaborate with the others at the project to get your container running so you can test at the cloud account.
+If you want to move existing cloud challenges to another cloud: extend Challenge classes in the `org.owasp.wrongsecrets.challenges.cloud` package and make sure you add the required Terraform in a folder with the separate cloud identified. Make sure that the environment is added to `org.owasp.wrongsecrets.RuntimeEnvironment`. Collaborate with the others at the project to get your container running so you can test at the cloud account.
