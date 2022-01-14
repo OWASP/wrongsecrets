@@ -20,15 +20,15 @@ checkCommandsAvailable helm jq vault sed grep docker grep cat aws curl eksctl ku
 if test -n "${AWS_REGION-}"; then
   echo "AWS_REGION is set to <$AWS_REGION>"
 else
-  echo "AWS_REGION is not set or empty, defaulting to eu-west-1"
   AWS_REGION=eu-west-1
+  echo "AWS_REGION is not set or empty, defaulting to ${AWS_REGION}"
 fi
 
 if test -n "${CLUSTERNAME-}"; then
   echo "CLUSTERNAME is set to <$CLUSTERNAME>"
 else
-  echo "CLUSTERNAME is not set or empty, defaulting to wrongsecrets-exercise-cluster"
   CLUSTERNAME=wrongsecrets-exercise-cluster
+  echo "CLUSTERNAME is not set or empty, defaulting to ${CLUSTERNAME}"
 fi
 
 ACCOUNT_ID=$(aws sts get-caller-identity | jq '.Account' -r)
