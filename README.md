@@ -171,6 +171,7 @@ Special mentions for helping out:
 
 - [Madhu Akula @madhuakula](https://github.com/madhuakula)
 - [Björn Kimminich @bkimminich](https://github.com/bkimminich)
+- [Avinash Pancham @avinashpancham](https://github.com/avinashpancham)
 
 ## Help Wanted
 
