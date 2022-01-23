@@ -156,9 +156,10 @@ echo "Deploying ingress":w
 
 kubectl apply -f k8s/k8s-gke-ingress.yaml
 
-while [[ -z $(kubectl get ingress basic-ingress --output jsonpath='{.status.loadBalancer.ingress[].ip}') ]]; do echo "waiting for ingress IP" && sleep 2; done
+while [[ -z $(kubectl get ingress basic-ingress --output jsonpath='{.status.loadBalancer.ingress[].ip}') ]]; do echo "waiting for ingress IP, this will take a few minutes... last check: $(date +\%T)" && sleep 10; done
 
+echo " "
 echo "Your ingress url is: http://$(kubectl get ingress basic-ingress --output jsonpath='{.status.loadBalancer.ingress[].ip}')"
-
+echo " "
 
 echo "Run terraform destroy to clean everything up."
