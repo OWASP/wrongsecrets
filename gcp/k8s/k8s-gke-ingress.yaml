@@ -22,7 +22,6 @@ spec:
   defaultBackend:
     service:
       name: secret-challenge
-  labels:
-      port:
+      port: 
         number: 80
 
