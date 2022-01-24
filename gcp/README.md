@@ -33,7 +33,12 @@ Make sure you have an active account at GCP for which you have configured the cr
 7. When creation is done, run `gcloud container clusters get-credentials wrongsecrets-exercise-cluster --region YOUR_REGION`
 8. Run `./k8s-vault-gcp-start.sh`
 
-Your EKS cluster should be visible in [EU-West4](https://console.cloud.google.com/kubernetes?referrer=search&project=wrongsecrets) by default. Want a different region? You can modify `terraform.tfvars` or input it directly using the `region` variable in plan/apply.
+### GKE ingres for shared deployment
+
+By default the deployment uses a nodePort tunneled to localhost. For a larger audiance deployment the wrongsecrets app can deployed with a GKE ingress, run `k8s-vault-gcp-ingress-start.sh`
+Please note that the GKE ingress can take a few minues to deploy and is publicly available. A connection URL will be returned once the ingress is available. Note that, after the connection URL is returned, a first lookup might still take a minute, after which it is much faster.
+
+Your GKE cluster should be visible in [EU-West4](https://console.cloud.google.com/kubernetes?referrer=search&project=wrongsecrets) by default. Want a different region? You can modify `terraform.tfvars` or input it directly using the `region` variable in plan/apply.
 
 Are you done playing? Please run `terraform destroy` twice to clean up.
 
