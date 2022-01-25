@@ -145,6 +145,7 @@ Top contributors:
 - [Nanne Baars @nbaars](https://github.com/nbaars)
 - [Filip Chyla @fchyla](https://github.com/fchyla)
 - [Dmitry Litosh @Dlitosh](https://github.com/Dlitosh)
+- [Tibor Hercz @tiborhercz](https://github.com/tiborhercz)
 
 Testers:
 
