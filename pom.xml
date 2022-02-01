@@ -40,6 +40,7 @@
         <azure.keyvault.version>4.2.3</azure.keyvault.version>
         <azure.identity.version>1.2.0</azure.identity.version>
         <azure.keyvault.spring.version>2.2.4</azure.keyvault.spring.version>
+        <spring.security.version>5.6.1</spring.security.version>
     </properties>
 
     <dependencies>
@@ -62,6 +63,16 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring.security.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
