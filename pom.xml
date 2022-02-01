@@ -36,7 +36,7 @@
         <thymeleaf-spring5.version>3.0.14.RELEASE</thymeleaf-spring5.version>
         <thymeleaf.version>3.0.14.RELEASE</thymeleaf.version>
         <thymeleaf.layout>3.0.0</thymeleaf.layout>
-        <asciidoctor.maven.plugin.version>2.2.1</asciidoctor.maven.plugin.version>
+        <asciidoctor.maven.plugin.version>2.2.2</asciidoctor.maven.plugin.version>
         <azure.keyvault.version>4.2.3</azure.keyvault.version>
         <azure.identity.version>1.2.0</azure.identity.version>
         <azure.keyvault.spring.version>2.2.4</azure.keyvault.spring.version>
