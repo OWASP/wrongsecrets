@@ -4,7 +4,7 @@
   "description": "Examples with how to not use secrets",
   "main": "index.js",
   "scripts": {
-    "build": "./node_modules/.bin/javascript-obfuscator index.js --output ../src/main/resources/js/index.js"
+    "build": "./node_modules/.bin/javascript-obfuscator index.js --output ../target/classes/static/js/index.js"
   },
   "keywords": [
     "secrets"
