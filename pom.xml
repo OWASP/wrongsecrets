@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.5.8</version>
+        <version>2.6.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>org.owasp</groupId>
@@ -24,7 +24,7 @@
     <properties>
 
         <java.version>17</java.version>
-        <spring.cloud-version>2020.0.4</spring.cloud-version>
+        <spring.cloud-version>2021.0.0</spring.cloud-version>
         <lombok.version>1.18.22</lombok.version>
         <maven.compiler.target>17</maven.compiler.target>
         <aws.sdk.version>2.17.121</aws.sdk.version>
