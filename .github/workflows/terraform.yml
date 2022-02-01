@@ -5,13 +5,13 @@ on:
   push:
     paths: 
     - 'aws/**'
-    - 'google/**'
+    - 'gcp/**'
     - 'azure/**'
   pull_request:
     branches: [ master ]
     paths:
      - 'aws/**'
-     - 'google/**'
+     - 'gcp/**'
      - 'azure/**'
   workflow_dispatch:
 
