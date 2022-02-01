@@ -39,7 +39,7 @@
         <asciidoctor.maven.plugin.version>2.2.2</asciidoctor.maven.plugin.version>
         <azure.keyvault.version>4.2.3</azure.keyvault.version>
         <azure.identity.version>1.4.3</azure.identity.version>
-        <azure.keyvault.spring.version>2.2.4</azure.keyvault.spring.version>
+        <azure.keyvault.spring.version>2.3.5</azure.keyvault.spring.version>
     </properties>
 
     <dependencies>
