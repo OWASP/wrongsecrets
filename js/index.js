@@ -1,5 +1,5 @@
-function test (){
+function secret (){
     var passwordPrefix = '5' + 3;
     var password = passwordPrefix + 'pass' + 1 + 1;
-    console.log('Secret is: ', password);
+    return password
 }

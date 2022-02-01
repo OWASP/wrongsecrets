@@ -248,12 +248,20 @@
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
+                </executions>
                 <configuration>
                         <executable>./js/node_modules/.bin/javascript-obfuscator</executable>
                         <arguments>
                             <argument>./js/index.js</argument>
                             <argument>--output</argument>
-                            <argument>./src/main/resources/static/js/index.js</argument>
+                            <argument>./target/classes/static/js/index.js</argument>
                         </arguments>
                 </configuration>
             </plugin>
