@@ -31,7 +31,7 @@ public class Challenge15 extends Challenge {
 
     @Override
     protected boolean answerCorrect(String answer) {
-        return false;
+        return isKeyCorrect(answer);
     }
 
     @Override
@@ -44,8 +44,13 @@ public class Challenge15 extends Challenge {
             log.info("Checking secret with values {}, {}, {}", base64EncodedKey, plainText, cipherText);
             return false;
         }
-        
 
+        try {
+            
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
 
     }
 }
