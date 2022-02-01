@@ -18,6 +18,10 @@ openssl rand -base64 32 | tr -d '\n' > yourkey.txt
 echo "tagging version"
 git tag -a $tag -m "$1"
 git push --tags
+
+mvn --batch-mode release:update-versions -DdevelopmentVersion=${tag}-SNAPSHOT
+git commit -am "Update POM file with new version"
+
 docker buildx create --name mybuilder
 docker buildx use mybuilder
 echo "creating containers"
