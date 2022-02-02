@@ -46,7 +46,7 @@ public class Challenge15 extends Challenge {
         }
 
         try {
-            
+
             return true;
         } catch (Exception e) {
             return false;
