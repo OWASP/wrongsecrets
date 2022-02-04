@@ -9,8 +9,8 @@ resource "random_integer" "suffix" {
 
 resource "azurerm_key_vault" "vault" {
   name                = "wrongsecrets-vault-${random_integer.suffix.result}"
-  location            = data.azurerm_resource_group.default.location
-  resource_group_name = data.azurerm_resource_group.default.name
+  location            = azurerm_resource_group.default.location
+  resource_group_name = azurerm_resource_group.default.name
   tenant_id           = data.azurerm_client_config.current.tenant_id
   sku_name            = "standard"
 
