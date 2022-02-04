@@ -146,6 +146,7 @@ Top contributors:
 - [Filip Chyla @fchyla](https://github.com/fchyla)
 - [Dmitry Litosh @Dlitosh](https://github.com/Dlitosh)
 - [Tibor Hercz @tiborhercz](https://github.com/tiborhercz)
+- [Ruben Kruiver @RubenAtBinx](https://github.com/RubenAtBinx)
 
 Testers:
 
