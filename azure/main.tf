@@ -12,12 +12,13 @@ provider "azurerm" {
 
 data "azurerm_client_config" "current" {}
 
-# If you're using an existing resource group, modify this part
+# If you're using an existing resource group, modify this part.
+# Note that you'll need to find/replace references to "arurerm_resource_group.default" to "data.azurerm_resource_group.default"
 #data "azurerm_resource_group" "default" {
 #  name = "OWASP-Projects"
 #}
 
-# If you're creating a new resource group, modify this. Note that you'll need to find/replace references to "data.azurerm_resource_group.default" to "arurerm_resource_group.default"
+# If you're creating a new resource group, modify this.
 resource "azurerm_resource_group" "default" {
   name     = "owasp-wrongsecrets"
   location = var.region
