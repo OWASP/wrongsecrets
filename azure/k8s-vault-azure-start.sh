@@ -135,14 +135,14 @@ kubectl exec vault-0 -- vault write auth/kubernetes/role/secret-challenge \
   vault kv put secret/application vaultpassword.password="$(openssl rand -base64 16)"
 
 echo "Add secrets manager driver to repo"
-helm repo add secrets-store-csi-driver-azure https://raw.githubusercontent.com/Azure/secrets-store-csi-driver-provider-azure/master/charts
+helm repo add csi-secrets-store-provider-azure https://raw.githubusercontent.com/Azure/secrets-store-csi-driver-provider-azure/master/charts
 
 helm list --namespace kube-system | grep 'csi-secrets-store' &>/dev/null
 if [ $? == 0 ]; then
   echo "CSI driver is already installed"
 else
   echo "Installing CSI driver"
-  helm install -n kube-system csi-secrets-store-provider-azure csi-secrets-store-provider-azure/csi-secrets-store-provider-azure --set enableSecretRotation=true --set rotationPollInterval=60s
+  helm install -n kube-system csi csi-secrets-store-provider-azure/csi-secrets-store-provider-azure
 fi
 
 echo "Add Azure pod identity to repo"
@@ -171,6 +171,10 @@ envsubst <./k8s/pod-id.yml.tpl >./k8s/pod-id.yml
 envsubst <./k8s/secret-challenge-vault-deployment.yml.tpl >./k8s/secret-challenge-vault-deployment.yml
 
 kubectl apply -f./k8s/pod-id.yml
+
+while [[ $(kubectl --namespace=default get pods -l "app.kubernetes.io/component=mic" -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True True" ]]; do echo "waiting for component=mic" && sleep 2; done
+while [[ $(kubectl --namespace=default get pods -l "app.kubernetes.io/component=nmi" -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do echo "waiting for component=nmi" && sleep 2; done
+
 kubectl apply -f./k8s/secret-challenge-vault-deployment.yml
 while [[ $(kubectl get pods -l app=secret-challenge -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do echo "waiting for secret-challenge" && sleep 2; done
 #kubectl expose deployment secret-challenge --type=LoadBalancer --port=8080

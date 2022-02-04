@@ -7,10 +7,17 @@ resource "random_integer" "suffix" {
   max = 99999
 }
 
+resource "random_string" "suffix" {
+  length  = 5
+  special = false
+  upper   = false
+  number  = true
+}
+
 resource "azurerm_key_vault" "vault" {
-  name                = "wrongsecrets-vault-${random_integer.suffix.result}"
-  location            = data.azurerm_resource_group.default.location
-  resource_group_name = data.azurerm_resource_group.default.name
+  name                = "wrongsecrets-${random_string.suffix.result}-${random_integer.suffix.result}"
+  location            = azurerm_resource_group.default.location
+  resource_group_name = azurerm_resource_group.default.name
   tenant_id           = data.azurerm_client_config.current.tenant_id
   sku_name            = "standard"
 
