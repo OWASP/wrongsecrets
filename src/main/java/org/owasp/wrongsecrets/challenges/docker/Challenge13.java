@@ -50,7 +50,7 @@ public class Challenge13 extends Challenge {
             log.info("Checking secret with values {}, {}, {}", base64EncodedKey, plainText, cipherText);
             return false;
         }
-
+//VGhpcyBpcyBvdXIgZmlyc3Qga2V5IGFzIGdpdGh1YiBzZWNyZXQK
         try {
             final byte[] keyData = Base64.getDecoder().decode(base64EncodedKey);
             byte[] key = new byte[16];
