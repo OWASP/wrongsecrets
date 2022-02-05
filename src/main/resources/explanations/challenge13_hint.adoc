@@ -1,6 +1,7 @@
 You can solve this challenge by the following steps:
 
-1. Give the hint on forking
-- describe steps
-2. Reverse engineer the key ;-)? Not so cheap..
-- Describe steps
+1. Exfiltrate the secret using Github Actions. Please note that in the current configuration of the project the Action triggered by the owner/collaborator will include the secret. It will not if you try doing it using forks. Let's discuss the steps:
+- Go to https://github.com/commjoen/wrongsecrets/actions and select `Get the challenge code 13`
+- Have a look at its latest run by one of the owners or collaborators.
+- Take the last attempt of the run, where the secret is base64 encoded. Copy the base64 encoded result and decode it somewhere.
+- Enter the decoded solution as an answer.
