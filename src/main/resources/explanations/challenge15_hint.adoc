@@ -1,0 +1,6 @@
+You can solve this challenge by the following steps:
+
+1. Give the hint on forking
+- describe steps
+2. Reverse engineer the key ;-)? Not so cheap..
+- Describe steps
