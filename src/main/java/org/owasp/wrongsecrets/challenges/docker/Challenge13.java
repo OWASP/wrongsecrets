@@ -53,8 +53,8 @@ public class Challenge13 extends Challenge {
 
         try {
             final byte[] keyData = Base64.getDecoder().decode(base64EncodedKey);
-            int Aes256KeyLengthInBytes = 16;
-            byte[] key = new byte[Aes256KeyLengthInBytes];
+            int aes256KeyLengthInBytes = 16;
+            byte[] key = new byte[aes256KeyLengthInBytes];
             System.arraycopy(keyData, 0, key, 0, 16);
             Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
             SecretKeySpec keySpec = new SecretKeySpec(key, "AES");
