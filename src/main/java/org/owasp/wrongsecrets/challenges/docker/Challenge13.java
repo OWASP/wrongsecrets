@@ -60,9 +60,9 @@ public class Challenge13 extends Challenge {
             SecretKeySpec keySpec = new SecretKeySpec(key, "AES");
             int gcmTagLengthInBytes = 16;
             int gcmIVLengthInBytes = 12;
-            byte[] IV = new byte[gcmIVLengthInBytes];
-            Arrays.fill(IV, (byte) 0);
-            GCMParameterSpec gcmParameterSpec = new GCMParameterSpec(gcmTagLengthInBytes * 8, IV);
+            byte[] initializationVector = new byte[gcmIVLengthInBytes];
+            Arrays.fill(initializationVector, (byte) 0);
+            GCMParameterSpec gcmParameterSpec = new GCMParameterSpec(gcmTagLengthInBytes * 8, initializationVector);
             cipher.init(Cipher.ENCRYPT_MODE, keySpec, gcmParameterSpec);
             byte[] cipherTextBytes = cipher.doFinal(plainText.getBytes(StandardCharsets.UTF_8));
             return cipherText.equals(Base64.getEncoder().encodeToString(cipherTextBytes));
