@@ -54,7 +54,7 @@ docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongs
 docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets:$tag-k8s-vault --build-arg "$2" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=kubernetes-vault" --push ./../../.
 
 echo "tagging version"
-git tag -a $tag -m "$1"
+git tag -a $tag -m "${message}"
 git push --tags
 
 #staging (https://arcane-scrubland-42646.herokuapp.com/)
