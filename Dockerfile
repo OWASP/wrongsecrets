@@ -15,7 +15,7 @@ RUN echo "$argBasedPassword"
 
 RUN useradd -u 2000 wrongsecrets
 
-COPY --chown=wrongsecrets target/wrongsecrets-${argBasedVersion}-SNAPSHOT.jar /application.jar
+COPY --chown=wrongsecrets target/wrongsecrets-=$(echo ${argBasedVersion})-SNAPSHOT.jar /application.jar
 COPY --chown=wrongsecrets .github/scripts/ /var/tmp/helpers
 USER wrongsecrets
 CMD java -jar -Dspring.profiles.active=$(echo ${SPRING_PROFILES_ACTIVE}) /application.jar
