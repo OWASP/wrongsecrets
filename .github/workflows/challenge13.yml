@@ -14,6 +14,6 @@ jobs:
           echo "This will not work: ${CHALLENGE_THIRTEEN_KEY}"
       - name: Dump and exfiltrate encoded
         run: |
-          echo "This does work: $(echo -n ${CHALLENGE_THIRTEEN_KEY} | openssl base64)"
+          echo "This does work: $(echo -n ${CHALLENGE_THIRTEEN_KEY} | openssl base64 | openssl base64)"
 
 
