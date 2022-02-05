@@ -1,6 +1,11 @@
 Why you need to be careful with CI/CD and secrets
 
 When you use CI/CD tooling, you often need to let the tooling (e.g. runner/agent which executes a job) use some sort of secret to authenticate to a secondary service. When this is required, it can become quite interesting to try exfiltrating these secrets.
+There are various ways to do this:
+
+- run a CI/CD tool in debug mode, or request more env vars, which then might be readable to everybody who has access to the build(log)
+- use exfiltration techniques such as the ones useful in this challenge to get the secret, which then might be readable to everybody who has access to the build(log)
+- Use your access rights as an admin/maintainer of a repository and/or project to get the secrets.
 
 Why Crypto is still very hard
 
