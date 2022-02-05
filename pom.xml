@@ -9,7 +9,7 @@
     </parent>
     <groupId>org.owasp</groupId>
     <artifactId>wrongsecrets</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>1.3.3A-SNAPSHOT</version>
     <name>OWASP WrongSecrets</name>
     <description>Examples with how to not use secrets</description>
     <url>https://owasp.org/www-project-wrongsecrets/</url>
@@ -31,6 +31,12 @@
         <name>The Open Web Application Security Project (OWASP)</name>
         <url>https://owasp.org/</url>
     </organization>
+<!--    <distributionManagement>-->
+<!--        <snapshotRepository>-->
+<!--            <id>ossrh</id>-->
+<!--            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>-->
+<!--        </snapshotRepository>-->
+<!--    </distributionManagement>-->
 
     <properties>
         <java.version>17</java.version>
@@ -265,6 +271,7 @@
                     </execution>
                 </executions>
             </plugin>
+<!-- todo: #178 add the missing plugins and profiles from https://central.sonatype.org/publish/publish-maven/-->
         </plugins>
     </build>
 
