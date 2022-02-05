@@ -50,18 +50,19 @@ public class Challenge13 extends Challenge {
             log.info("Checking secret with values {}, {}, {}", base64EncodedKey, plainText, cipherText);
             return false;
         }
-//VGhpcyBpcyBvdXIgZmlyc3Qga2V5IGFzIGdpdGh1YiBzZWNyZXQK
+
         try {
             final byte[] keyData = Base64.getDecoder().decode(base64EncodedKey);
-            byte[] key = new byte[16];
+            int Aes256KeyLengthInBytes = 16;
+            byte[] key = new byte[Aes256KeyLengthInBytes];
             System.arraycopy(keyData, 0, key, 0, 16);
             Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
             SecretKeySpec keySpec = new SecretKeySpec(key, "AES");
-            int GCM_TAG_LENGTH = 16;
-            int GCM_IV_LENGTH = 12;
-            byte[] IV = new byte[GCM_IV_LENGTH];
+            int gcmTagLengthInBytes = 16;
+            int gcmIVLengthInBytes = 12;
+            byte[] IV = new byte[gcmIVLengthInBytes];
             Arrays.fill(IV, (byte) 0);
-            GCMParameterSpec gcmParameterSpec = new GCMParameterSpec(GCM_TAG_LENGTH * 8, IV);
+            GCMParameterSpec gcmParameterSpec = new GCMParameterSpec(gcmTagLengthInBytes * 8, IV);
             cipher.init(Cipher.ENCRYPT_MODE, keySpec, gcmParameterSpec);
             byte[] cipherTextBytes = cipher.doFinal(plainText.getBytes(StandardCharsets.UTF_8));
             return cipherText.equals(Base64.getEncoder().encodeToString(cipherTextBytes));
