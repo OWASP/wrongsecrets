@@ -20,7 +20,7 @@ done
 if test -n "${tag+x}"; then
   echo "tag is set"
 else
-  echo "Autotagging with new version"
+  echo "Autotagging with new version: ${tag}"
   SCRIPT_PATH=$(dirname $(dirname $(dirname $(readlink -f "$0"))))
   tag=`docker run -it -v ${SCRIPT_PATH}:/data --workdir /data quay.io/pantheon-public/autotag:latest -n`
 fi
