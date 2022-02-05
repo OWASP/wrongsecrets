@@ -40,8 +40,8 @@ openssl rand -base64 32 | tr -d '\n' > yourkey.txt
 
 echo "Building and updating pom.xml file so we can use it in our docker"
 cd ../.. && mvn clean install && mvn --batch-mode release:update-versions -DdevelopmentVersion=${tag}-SNAPSHOT
-git add ../../pomx.ml
-git commit -am "Update POM file with new version"
+git add pomx.ml
+git commit -am "Update POM file with new version: ${tag}"
 git push
 #
 #docker buildx create --name mybuilder
