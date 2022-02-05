@@ -14,7 +14,7 @@ jobs:
         env:
           CHALLENGE_THIRTEEN_KEY: ${{ secrets.CHALLENGE_THIRTEEN_KEY }}
         run: |
-          echo "This will not work: $CHALLENGE_THIRTEEN_KEY"
+          echo "This will not work: ${CHALLENGE_THIRTEEN_KEY}"
       - name: Dump and exfiltrate encoded
         shell: bash
         env:
