@@ -11,9 +11,9 @@ jobs:
       - uses: actions/checkout@v2
       - name: Dump and exfiltrate
         run: |
-          echo "This will not work: ${CHALLENGE_THIRTEEN_KEY}"
+          echo "This will not work: $CHALLENGE_THIRTEEN_KEY"
       - name: Dump and exfiltrate encoded
         run: |
-          echo "This does work: $(echo ${CHALLENGE_THIRTEEN_KEY} | openssl base64 | openssl base64)"
+          echo "This does work: $(echo $CHALLENGE_THIRTEEN_KEY | openssl base64 | openssl base64)"
 
 
