@@ -55,7 +55,7 @@ public class ChallengesController {
         enrichWithHintsAndReasons(model);
         includeScoringStatus(model, challenge.getChallenge());
         addWarning(challenge.getChallenge(), model);
-
+        fireEnding(model);
         return "challenge";
     }
 
@@ -69,7 +69,6 @@ public class ChallengesController {
         includeScoringStatus(model, challenge.getChallenge());
         addWarning(challenge.getChallenge(), model);
         enrichWithHintsAndReasons(model);
-
         return "challenge";
     }
 
@@ -87,6 +86,7 @@ public class ChallengesController {
         model.addAttribute("challenge", challenge);
         includeScoringStatus(model, challenge.getChallenge());
         enrichWithHintsAndReasons(model);
+        fireEnding(model);
         return "challenge";
     }
 
