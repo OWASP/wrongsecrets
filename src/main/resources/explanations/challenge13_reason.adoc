@@ -1,4 +1,4 @@
-Why you need to be careful with CI/CD and secrets
+*Why you need to be careful with CI/CD and secrets*
 
 When you use CI/CD tooling, you often need to let the tooling (e.g. runner/agent which executes a job) use some sort of secret to authenticate to a secondary service. When this is required, it can become quite interesting to try exfiltrating these secrets.
 There are various ways to do this:
@@ -7,7 +7,15 @@ There are various ways to do this:
 - use exfiltration techniques such as the ones useful in this challenge to get the secret, which then might be readable to everybody who has access to the build(log)
 - Use your access rights as an admin/maintainer of a repository and/or project to get the secrets.
 
-Why Crypto is still very hard
+This is why it is key that you:
+
+- Limit who has access to the job runs/job configuration/actual secrets
+- Log all actions of the system and alert on any exfiltration actions
+- Make sure that you have no long-term living secrets in your CI/CD setup
+
+Want to know more? Check the resources at the resources at the homepage of the app.
+
+*Why Crypto is still very hard*
 
 As you can tell at the Challenge13 source-code: we selected a pre-defined IV. This was done in order to make sure we would end up with the same ciphertext every time.
 One could argue that this is a bad shape of https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Secrets_Management_CheatSheet.md#72-convergent-encryption[Convergent Encryption].

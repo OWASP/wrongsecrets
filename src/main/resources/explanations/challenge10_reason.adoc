@@ -1,4 +1,4 @@
-Access to the Administrator/owner account:
+*Access to the Administrator/owner account:*
 If you were able to use the AWS administrator account to access the data, then you can see why this is a bad idea for production. In short, with this account you can change anything within the account, and you can easily exfiltrate any of the secrets.
 
 Last but not least: we could easily exec into the container, to grep the mount with the secret. This has to do with 3 things:

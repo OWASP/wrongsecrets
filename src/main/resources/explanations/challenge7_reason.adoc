@@ -1,4 +1,4 @@
-Why you need to configure your secrets management solution well
+*Why you need to configure your secrets management solution well*
 
 https://www.vaultproject.io/[*Hashicorp Vault*] is designed to manage secrets. Vault safeguards secrets by having them encrypted and has a lot of security controls involved to secure (access to) the secrets.
 

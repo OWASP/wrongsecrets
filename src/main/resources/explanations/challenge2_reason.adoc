@@ -1,4 +1,4 @@
-Why using code to put secrets in is a bad idea.
+*Why using code to put secrets in is a bad idea.*
 
 As you can tell, we got a little more flexibility than with challenge1. However: we still have the password in code!
 
