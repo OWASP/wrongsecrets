@@ -29,7 +29,7 @@
                 </button>
             </div>
             <div class="d-lg-none mt-2">
-                <button class="btn btn-primary" type="submit" name="action" value="submit"> Submit </button>
+                <button class="btn btn-primary" type="submit" name="action" value="submit"> Submit</button>
                 <button class="btn btn-secondary"
                         onclick="document.getElementById('answerfield').value='';event.preventDefault();"> Clear
                 </button>
@@ -47,12 +47,14 @@
                     What's wrong?
                 </a>
             </div>
-            <div th:if="${hintsEnabled==true}" class="offset-lg-1 col-lg-10 col-md-12 collapse mt-2 mb-2" id="collapseHint">
+            <div th:if="${hintsEnabled==true}" class="offset-lg-1 col-lg-10 col-md-12 collapse mt-2 mb-2"
+                 id="collapseHint">
                 <div class="card card-body">
                     <div th:replace="doc:__${challenge.hint}__.adoc"></div>
                 </div>
             </div>
-            <div th:if="${reasonEnabled==true}" class="offset-lg-1 col-lg-10 col-md-12 collapse mt-2 mb-2" id="collapseExplain">
+            <div th:if="${reasonEnabled==true}" class="offset-lg-1 col-lg-10 col-md-12 collapse mt-2 mb-2"
+                 id="collapseExplain">
                 <div class="card card-body">
                     <div th:replace="doc:__${challenge.reason}__.adoc"></div>
                 </div>
@@ -86,6 +88,30 @@
             explained in the <a href="https://github.com/commjoen/wrongsecrets#cloud-challenges">README.md</a>.
         </div>
     </div>
+    <div class="modal fade" id="finishedModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Congratulations!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>You have finished all the doable challenges! Congratulations!</p>
+                    <p>We hope you have enjoyed the ride! And have learned something about the pitfalls in secrets
+                        management. </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+            new bootstrap.Modal(document.getElementById('finishedModal'), {}).toggle()
+        });
+    </script>
 </div>
+
 </body>
 </html>

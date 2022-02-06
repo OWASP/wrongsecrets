@@ -113,4 +113,15 @@ public class ChallengesController {
         model.addAttribute("hintsEnabled", hintsEnabled);
         model.addAttribute("reasonEnabled", reasonEnabled);
     }
+
+    private void fireEnding(Model model) {
+        var notCompleted = challenges.stream()
+            .filter(ChallengeUI::isChallengeEnabled)
+            .map(challenge -> challenge.getChallenge())
+            .filter(challenge -> !scoreCard.getChallengeCompleted(challenge))
+            .count();
+        if (notCompleted == 0) {
+            model.addAttribute("allcompleted", "party");
+        }
+    }
 }
