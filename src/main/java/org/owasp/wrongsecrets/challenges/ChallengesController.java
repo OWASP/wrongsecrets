@@ -117,11 +117,15 @@ public class ChallengesController {
     private void fireEnding(Model model) {
         var notCompleted = challenges.stream()
             .filter(ChallengeUI::isChallengeEnabled)
-            .map(challenge -> challenge.getChallenge())
-            .filter(challenge -> !scoreCard.getChallengeCompleted(challenge))
+            .map(ChallengeUI::getChallenge)
+            .filter(this::challengeNotCompleted)
             .count();
         if (notCompleted == 0) {
             model.addAttribute("allCompleted", "party");
         }
+    }
+
+    private boolean challengeNotCompleted(Challenge challenge) {
+        return !scoreCard.getChallengeCompleted(challenge);
     }
 }
