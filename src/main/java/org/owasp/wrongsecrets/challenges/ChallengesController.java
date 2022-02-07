@@ -121,7 +121,7 @@ public class ChallengesController {
             .filter(challenge -> !scoreCard.getChallengeCompleted(challenge))
             .count();
         if (notCompleted == 0) {
-            model.addAttribute("allcompleted", "party");
+            model.addAttribute("allCompleted", "party");
         }
     }
 }
