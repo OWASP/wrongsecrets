@@ -62,13 +62,13 @@ public class Challenge13 extends Challenge {
             int gcmTagLengthInBytes = 16;
             int gcmIVLengthInBytes = 12;
             byte[] initializationVector = new byte[gcmIVLengthInBytes];
-            Arrays.fill(initializationVector, (byte) 0);
+            Arrays.fill(initializationVector, (byte) 0); //done for "poor-man's convergent encryption", please check actual convergent cryptosystems for better implementation ;-)
             GCMParameterSpec gcmParameterSpec = new GCMParameterSpec(gcmTagLengthInBytes * 8, initializationVector);
             cipher.init(Cipher.ENCRYPT_MODE, keySpec, gcmParameterSpec);
             byte[] cipherTextBytes = cipher.doFinal(plainText.getBytes(StandardCharsets.UTF_8));
             return cipherText.equals(Base64.getEncoder().encodeToString(cipherTextBytes));
         } catch (Exception e) {
-            log.error("Exception with challnege 13", e);
+            log.error("Exception with Challenge 13", e);
             return false;
         }
 
