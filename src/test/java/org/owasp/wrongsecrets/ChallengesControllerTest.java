@@ -82,4 +82,15 @@ class ChallengesControllerTest {
                 .andExpect(model().attributeExists("answerCorrect"))
                 .andExpect(model().attributeDoesNotExist("answerIncorrect"));
     }
+
+    @Test
+    void shouldReturnCompleteWhenAllItemsDone() throws Exception{
+        when(challenge.solved(anyString())).thenReturn(true);
+        this.mvc.perform(post("/challenge/1")
+                .param("solution", "wrong")
+                .param("action", "submit"))
+            .andExpect(status().isOk())
+            .andExpect(model().attributeExists("answerCorrect"))
+            .andExpect(model().attributeExists("allCompleted"));
+    }
 }
