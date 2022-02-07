@@ -26,7 +26,8 @@ public class Challenge13 extends Challenge {
 
     @Override
     public Spoiler spoiler() {
-        return null;
+        String answer = Base64.getEncoder().encodeToString("This is our first key as github secret".getBytes(StandardCharsets.UTF_8));
+        return new Spoiler(answer);
     }
 
     public Challenge13(ScoreCard scoreCard, @Value("${plainText13}") String plainText, @Value("${cipherText13}") String cipherText) {
