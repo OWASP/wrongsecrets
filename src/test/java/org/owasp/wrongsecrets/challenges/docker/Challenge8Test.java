@@ -7,7 +7,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.owasp.wrongsecrets.ScoreCard;
-import org.owasp.wrongsecrets.challenges.Spoiler;
 
 @ExtendWith(MockitoExtension.class)
 public class Challenge8Test {
