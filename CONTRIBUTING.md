@@ -1,8 +1,9 @@
 # Contributing
+
 [![GitHub contributors](https://img.shields.io/github/contributors/commjoen/wrongsecrets.svg)](https://github.com/commjoen/wrongsecrets/graphs/contributors)
 ![GitHub issues by-label "help wanted"](https://img.shields.io/github/issues/commjoen/wrongsecrets/help%20wanted.svg)
 
-This document describes how you can contribute to WebGoat. Please read it carefully.
+This document describes how you can contribute to WrongSecrets. Please read it carefully.
 
 **Table of Contents**
 
@@ -35,8 +36,7 @@ Additionally, the following guidelines can help:
 Pull requests should be as small/atomic as possible. Large, wide-sweeping changes in a pull request will be **rejected**, with comments to isolate the specific code in your pull request. Some examples:
 
 * If you are making spelling corrections in the docs, don't modify other files.
-* If you are adding new functions don't '*cleanup*' unrelated functions. That cleanup belongs in another pull request.
-
+* If you are adding new functions don't '_cleanup_' unrelated functions. That cleanup belongs in another pull request.
 
 ### Write a good commit message
 
@@ -51,7 +51,7 @@ Pull requests should be as small/atomic as possible. Large, wide-sweeping change
 1. Create a GitHub account. Multiple different GitHub subscription plans are available, but you only need a free one. Follow [these steps](https://help.github.com/en/articles/signing-up-for-a-new-github-account "Signing up for a new GitHub account") to set up your account.
 2. Fork the repository. Creating a fork means creating a copy of the repository on your own account, which you can modify without any impact on this repository. GitHub has an [article that describes all the needed steps](https://help.github.com/en/articles/fork-a-repo "Fork a repo").
 3. Clone your own repository to your host computer so that you can make modifications. If you followed the GitHub tutorial from step 2, you have already done this.
-4. Go to the newly cloned directory "WebGoat" and add the remote upstream repository:
+4. Go to the newly cloned directory "wrongsecrets" and add the remote upstream repository:
 
     ```bash
     $ git remote -v
@@ -68,7 +68,7 @@ Pull requests should be as small/atomic as possible. Large, wide-sweeping change
     ```
 
     See also the GitHub documentation on "[Configuring a remote for a fork](https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/configuring-a-remote-for-a-fork "Configuring a remote for a fork")".
-5. Choose what to work on, based on any of the outstanding [issues](https://github.com/commjoen/wrongsecrets/issues "WebGoat Issues").
+5. Choose what to work on, based on any of the outstanding [issues](https://github.com/commjoen/wrongsecrets/issues "WrongSecrets Issues").
 6. Create a branch so that you can cleanly work on the chosen issue: `git checkout -b FixingIssue66`
 7. Open your favorite editor and start making modifications. We recommend using the [IntelliJ Idea](https://www.jetbrains.com/idea/).
 8. After your modifications are done, push them to your forked repository. This can be done by executing the command `git add MYFILE` for every file you have modified, followed by `git commit -m 'your commit message here'` to commit the modifications and `git push` to push your modifications to GitHub.
@@ -77,8 +77,8 @@ Pull requests should be as small/atomic as possible. Large, wide-sweeping change
 11. When starting on a new PR in the future, make sure to always keep your local repo up to date:
 
     ```bash
-    $ git fetch upstream
-    $ git merge upstream/develop
+    git fetch upstream
+    git merge upstream/develop
     ```
 
     See also the following article for further explanation on "[How to Keep a Downstream git Repository Current with Upstream Repository Changes](https://medium.com/sweetmeat/how-to-keep-a-downstream-git-repository-current-with-upstream-repository-changes-10b76fad6d97 "How to Keep a Downstream git Repository Current with Upstream Repository Changes")".
