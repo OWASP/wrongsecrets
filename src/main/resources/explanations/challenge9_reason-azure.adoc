@@ -1,4 +1,4 @@
-Why you need to be careful with secrets in your cloud:
+*Why you need to be careful with secrets in your cloud:*
 
 Secrets and terraform state:
 

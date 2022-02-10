@@ -1,6 +1,6 @@
-FROM jeroenwillemsen/wrongsecrets:heroku-redirect2-no-vault
+FROM jeroenwillemsen/wrongsecrets:1.3.3RC1-no-vault
 
-ARG argBasedVersion="1.3.2"
+ARG argBasedVersion="1.3.3RC1"
 ENV APP_VERSION=$argBasedVersion
 ENV K8S_ENV=Heroku(Docker)
 ENV challengedockermtpath="/var/helpers"

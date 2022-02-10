@@ -1,4 +1,4 @@
-What to look out for when using random secrets at startup
+*What to look out for when using random secrets at startup*
 
 Using a random secret at startup might work if the secret does not need to be consumed by other systems than the system holding/generating the secret itself. Otherwise, you will need some sort of synchronisation mechanism.
 
