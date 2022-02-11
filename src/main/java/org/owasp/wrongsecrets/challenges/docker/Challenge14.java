@@ -20,7 +20,7 @@ import java.util.List;
 
 @Slf4j
 @Component
-public class Challenge16 extends Challenge {
+public class Challenge14 extends Challenge {
 
     private final String keepassxPassword;
     private final String defaultKeepassValue;
@@ -30,7 +30,7 @@ public class Challenge16 extends Challenge {
         return new Spoiler(findAnswer());
     }
 
-    public Challenge16(ScoreCard scoreCard, @Value("${keepasxpassword}") String keepassxPassword, @Value("${KEEPASS_BROKEN}") String defaultKeepassValue) {
+    public Challenge14(ScoreCard scoreCard, @Value("${keepasxpassword}") String keepassxPassword, @Value("${KEEPASS_BROKEN}") String defaultKeepassValue) {
         super(scoreCard);
         this.keepassxPassword = keepassxPassword;
         this.defaultKeepassValue = defaultKeepassValue;
