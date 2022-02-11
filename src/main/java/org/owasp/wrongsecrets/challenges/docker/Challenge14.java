@@ -15,7 +15,10 @@ import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 
 @Slf4j
@@ -24,16 +27,19 @@ public class Challenge14 extends Challenge {
 
     private final String keepassxPassword;
     private final String defaultKeepassValue;
+    private final String filePath;
 
     @Override
     public Spoiler spoiler() {
         return new Spoiler(findAnswer());
     }
 
-    public Challenge14(ScoreCard scoreCard, @Value("${keepasxpassword}") String keepassxPassword, @Value("${KEEPASS_BROKEN}") String defaultKeepassValue) {
+    public Challenge14(ScoreCard scoreCard, @Value("${keepasxpassword}") String keepassxPassword,
+                       @Value("${KEEPASS_BROKEN}") String defaultKeepassValue, @Value("${keepasspath}") String filePath) {
         super(scoreCard);
         this.keepassxPassword = keepassxPassword;
         this.defaultKeepassValue = defaultKeepassValue;
+        this.filePath = filePath;
     }
 
     @Override
@@ -51,18 +57,20 @@ public class Challenge14 extends Challenge {
             log.info("Checking secret with values {}", keepassxPassword);
             return defaultKeepassValue;
         }
+        KdbxCreds creds = new KdbxCreds(keepassxPassword.getBytes());
         try {
-            KdbxCreds creds = new KdbxCreds(keepassxPassword.getBytes());
-            InputStream inputStream = getClass().getClassLoader().getResourceAsStream("test1.kdbx");
+            InputStream inputStream = Files.newInputStream(Paths.get(filePath));
             Database<SimpleDatabase, SimpleGroup, SimpleEntry, SimpleIcon> database = SimpleDatabase.load(creds, inputStream);
-            return database.findEntries("alibaba").stream().findFirst().toString();
-        } catch (Exception e) {
-            log.error("Exception with challnege 16", e);
+            return database.findEntries("alibaba").get(0).getPassword();
+        } catch (Exception | Error e) {
+            log.info("Exception or Error with Challenge 14: {}", e.getMessage());
             return defaultKeepassValue;
         }
     }
 
-    //todo: write a test!
+
+    //todo: update explanations & write a test and make sure the file can be picked up from resources or somewhere at the container!
+    // (update script to include it at container build time)
     private boolean isanswerCorrectInKeeyPassx(String answer) {
         if (Strings.isEmpty(keepassxPassword) || Strings.isEmpty(answer)) {
             log.info("Checking secret with values {}, {}", keepassxPassword, answer);
