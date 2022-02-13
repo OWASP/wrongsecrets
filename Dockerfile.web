@@ -1,4 +1,4 @@
-FROM jeroenwillemsen/wrongsecrets:1.3.3-no-vault
+FROM jeroenwillemsen/wrongsecrets:ch14tst-no-vault
 
 ARG argBasedVersion="1.3.3"
 ENV APP_VERSION=$argBasedVersion

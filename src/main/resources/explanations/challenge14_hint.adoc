@@ -1,6 +1,7 @@
 You can solve this challenge by the following steps:
 
-1. Get the Keepass file
+Note this challenge requires you to install https://www.keepassx.org/[Keepass(X)] on your system to open the kdbx file.
+1. Get the Keepass file from the Docker container and open it.
  - todo
-2. Find the password in the code or think of a very standard password you often get when you enrole somewhere
+2. Get the Keepass file from the test resources:
  - todo
