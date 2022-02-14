@@ -35,7 +35,7 @@ Now you can try to find the secrets by means of solving the challenge offered at
 - [localhost:8080/challenge/8](http://localhost:8080/challenge/8)
 - [localhost:8080/challenge/12](http://localhost:8080/challenge/12)
 - [localhost:8080/challenge/13](http://localhost:8080/challenge/13)
-- [localhost:8080/challenge/13](http://localhost:8080/challenge/14)
+- [localhost:8080/challenge/14](http://localhost:8080/challenge/14)
 
 Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look better ;-).
 
