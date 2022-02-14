@@ -70,8 +70,6 @@ public class Challenge14 extends Challenge {
         }
     }
 
-
-    //todo: update explanations
     private boolean isanswerCorrectInKeeyPassx(String answer) {
         if (Strings.isEmpty(keepassxPassword) || Strings.isEmpty(answer)) {
             log.info("Checking secret with values {}, {}", keepassxPassword, answer);
