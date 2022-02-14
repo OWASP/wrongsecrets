@@ -29,7 +29,8 @@ public class Challenge14 extends Challenge {
     private final String filePath;
 
     public Challenge14(ScoreCard scoreCard, @Value("${keepasxpassword}") String keepassxPassword,
-                       @Value("${KEEPASS_BROKEN}") String defaultKeepassValue, @Value("${keepasspath}") String filePath) {
+                       @Value("${KEEPASS_BROKEN}") String defaultKeepassValue,
+                       @Value("${keepasspath}") String filePath) {
         super(scoreCard);
         this.keepassxPassword = keepassxPassword;
         this.defaultKeepassValue = defaultKeepassValue;
