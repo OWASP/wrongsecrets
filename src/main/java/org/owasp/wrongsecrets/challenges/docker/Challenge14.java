@@ -65,7 +65,7 @@ public class Challenge14 extends Challenge {
             database = SimpleDatabase.load(creds, inputStream);
             return database.findEntries("alibaba").get(0).getPassword();
         } catch (Exception | Error e) {
-            log.warn("Exception or Error with Challenge 14: {}", e);
+            log.info("Exception or Error with Challenge 14: {}", e.getMessage());
             return defaultKeepassValue;
         }
     }
