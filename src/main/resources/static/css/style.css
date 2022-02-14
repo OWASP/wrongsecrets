@@ -1,6 +1,6 @@
-div.sect2 {
+.sect2 {
     border-radius: 25px;
-    border: 2px solid black;
+    border: 2px solid var(--bs-body-color);
     padding: 20px;
     margin: 20px 0px 20px 0px;
 }
@@ -9,16 +9,27 @@ div.sect2 {
     margin: 20px 0px 20px 0px;
 }
 
-div.thank-you {
+.thank-you {
     border-radius: 25px;
-    border: 2px solid black;
+    border: 2px solid var(--bs-body-color) !important;
     padding: 10px;
     margin: 00px 0px 10px 0px;
 }
 
-a.disabled{
+a.disabled {
     cursor: default;
     pointer-events: none;
     text-decoration: none;
-    color: black;
+    color: var(--bs-body-color);
+}
+.theme-toggle input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.theme-toggle :checked + .checkmark {
+    border-bottom: 1px solid var(--bs-gray-300);
 }

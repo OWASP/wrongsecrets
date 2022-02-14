@@ -41,7 +41,8 @@
                         <th:block th:if="${challenge.requiredEnv} == 'VAULT'">
                             <td>Kubernetes or Minikube with Vault</td>
                         </th:block>
-                        <th:block th:if="${challenge.requiredEnv} == 'AWS' or ${challenge.requiredEnv} == 'GCP'or ${challenge.requiredEnv} == 'AZURE'">
+                        <th:block
+                            th:if="${challenge.requiredEnv} == 'AWS' or ${challenge.requiredEnv} == 'GCP'or ${challenge.requiredEnv} == 'AZURE'">
                             <td>AWS, GCP, Azure</td>
                         </th:block>
                     </tr>
@@ -75,6 +76,7 @@
                     <ul>
                         <li><a href="https://github.com/nbaars">Nanne Baars @nbaars</a></li>
                         <li><a href="https://github.com/fchyla">Filip Chyla @fchyla</a></li>
+                        <li><a href="https://github.com/mikewoudenberg">Mike Woudenberg @mikewoudenberg</a></li>
                         <li><a href="https://github.com/Dlitosh">Dmitry Litosh @Dlitosh</a></li>
                         <li><a href="https://github.com/tiborhercz">Tibor Hercz @tiborhercz</a></li>
                         <li><a href="https://github.com/RubenAtBinx">Ruben Kruiver @RubenAtBinx</a></li>
@@ -96,16 +98,22 @@
                 <div class="border border-dark thank-you">
                     Resources/further reading on secrets management:<br/>
                     <ul>
-                        <li><a href="https://dev.to/commjoen/secure-deployment-10-pointers-on-secrets-management-187j">Blog: 10 Pointers on Secrets Management</a></li>
-                        <li><a href="https://owaspsamm.org/model/implementation/secure-deployment/stream-b/">OWASP SAMM on Secret Management</a></li>
-                        <li><a href="https://github.com/topics/secrets-detection">The secret detection topic at Github</a></li>
-                        <li><a href="https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Secrets_Management_CheatSheet.md">OWASP Secretsmanagement Cheatsheet</a></li>
+                        <li><a href="https://dev.to/commjoen/secure-deployment-10-pointers-on-secrets-management-187j">Blog:
+                            10 Pointers on Secrets Management</a></li>
+                        <li><a href="https://owaspsamm.org/model/implementation/secure-deployment/stream-b/">OWASP SAMM
+                            on Secret Management</a></li>
+                        <li><a href="https://github.com/topics/secrets-detection">The secret detection topic at
+                            Github</a></li>
+                        <li><a
+                            href="https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Secrets_Management_CheatSheet.md">OWASP
+                            Secretsmanagement Cheatsheet</a></li>
                     </ul>
                 </div>
             </div>
             <div class="col-12 col-lg-7">
                 <div class="border border-dark thank-you">
-                    Wondering what a secret is? A secret is often a confidential piece of information that is required to unlock certain functionalities or information.
+                    Wondering what a secret is? A secret is often a confidential piece of information that is required
+                    to unlock certain functionalities or information.
                     It can exists in many shapes or forms, for instance:
                     <ul>
                         <li>2FA keys</li>
