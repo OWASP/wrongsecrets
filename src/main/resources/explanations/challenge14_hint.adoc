@@ -1,7 +1,15 @@
 You can solve this challenge by the following steps:
 
 Note this challenge requires you to install https://www.keepassx.org/[Keepass(X)] on your system to open the kdbx file.
+
 1. Get the Keepass file from the Docker container and open it.
- - todo
-2. Get the Keepass file from the test resources:
- - todo
+ - take a look at the Dockerfile to see where the keepass file has been copied to.
+ - Follow the instructions of https://docs.docker.com/engine/reference/commandline/cp/[the Docker documentation] to copy the Keepass file from the root of the container to your local filesystem.
+- Open the file using KeepassX. You will be asked a password.
+- First check in the code of `Challenge14.java` in https://github.com/commjoen/wrongsecrets/blob/master/src/main/java/org/owasp/wrongsecrets/challenges/docker/Challenge14.java[github] to see where the password might be stored. Then open the `Application.properties` file in the `src/resources` folder at https://github.com/commjoen/wrongsecrets[*the target repo*]  and take a look at the property holding the keepass password.
+- Now use the password you found to open the Keepass file. This should allow you to find credentials to Alibaba Cloud. This is the answer!
+2. Get the Keepass file from the test resources: we were silly enough to put the same file in `src/test/resources/alibabacreds.kdbx` so you can open that ass well.
+ - Checkout the project using git and open the file, or : go get it from https://github.com/commjoen/wrongsecrets/blob/master/src/test/resources/alibabacreds.kdbx[Github]
+ - Open the file using KeepassX. You will be asked a password.
+ - First check in the code of `Challenge14.java` in https://github.com/commjoen/wrongsecrets/blob/master/src/main/java/org/owasp/wrongsecrets/challenges/docker/Challenge14.java[github] to see where the password might be stored. Then open the `Application.properties` file in the `src/resources` folder at https://github.com/commjoen/wrongsecrets[*the target repo*]  and take a look at the property holding the keepass password.
+ - Now use the password you found to open the Keepass file. This should allow you to find credentials to Alibaba Cloud. This is the answer!
