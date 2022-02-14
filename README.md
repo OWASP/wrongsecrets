@@ -13,7 +13,7 @@ Need support? Contact us via [OWASP Slack](https://owasp.slack.com/archives/C02K
 
 ## Basic docker exercises
 
-_Can be used for challenges 1-4, 8, 14_
+_Can be used for challenges 1-4, 8, 12-14_
 
 For the basic docker exercises you currently require:
 
@@ -52,7 +52,7 @@ You can test them out at <a href="https://wrongsecrets.herokuapp.com/" target="_
 
 ## Basic K8s exercise
 
-_Can be used for challenges 1-6, 8, 14_
+_Can be used for challenges 1-6, 8, 12-14_
 
 ### Minikube based
 
@@ -99,7 +99,7 @@ now you can use the provided IP address and port to further play with the K8s va
 
 ## Vault exercises with minikube
 
-_Can be used for challenges 1-8, 14_
+_Can be used for challenges 1-8, 12-14_
 Make sure you have the following installed:
 
 - minikube with docker (or comment out line 8 and work at your own k8s setup),
