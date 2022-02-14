@@ -15,7 +15,6 @@ import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -29,17 +28,17 @@ public class Challenge14 extends Challenge {
     private final String defaultKeepassValue;
     private final String filePath;
 
-    @Override
-    public Spoiler spoiler() {
-        return new Spoiler(findAnswer());
-    }
-
     public Challenge14(ScoreCard scoreCard, @Value("${keepasxpassword}") String keepassxPassword,
                        @Value("${KEEPASS_BROKEN}") String defaultKeepassValue, @Value("${keepasspath}") String filePath) {
         super(scoreCard);
         this.keepassxPassword = keepassxPassword;
         this.defaultKeepassValue = defaultKeepassValue;
         this.filePath = filePath;
+    }
+
+    @Override
+    public Spoiler spoiler() {
+        return new Spoiler(findAnswer());
     }
 
     @Override
@@ -58,9 +57,11 @@ public class Challenge14 extends Challenge {
             return defaultKeepassValue;
         }
         KdbxCreds creds = new KdbxCreds(keepassxPassword.getBytes());
-        try {
-            InputStream inputStream = Files.newInputStream(Paths.get(filePath));
-            Database<SimpleDatabase, SimpleGroup, SimpleEntry, SimpleIcon> database = SimpleDatabase.load(creds, inputStream);
+        Database<SimpleDatabase, SimpleGroup, SimpleEntry, SimpleIcon> database;
+
+
+        try (InputStream inputStream = Files.newInputStream(Paths.get(filePath))) {
+            database = SimpleDatabase.load(creds, inputStream);
             return database.findEntries("alibaba").get(0).getPassword();
         } catch (Exception | Error e) {
             log.info("Exception or Error with Challenge 14: {}", e.getMessage());
@@ -69,8 +70,7 @@ public class Challenge14 extends Challenge {
     }
 
 
-    //todo: update explanations & write a test and make sure the file can be picked up from resources or somewhere at the container!
-    // (update script to include it at container build time)
+    //todo: update explanations
     private boolean isanswerCorrectInKeeyPassx(String answer) {
         if (Strings.isEmpty(keepassxPassword) || Strings.isEmpty(answer)) {
             log.info("Checking secret with values {}, {}", keepassxPassword, answer);
