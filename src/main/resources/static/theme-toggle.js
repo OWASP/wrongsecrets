@@ -5,11 +5,12 @@
         document.querySelector(".theme-toggle input[type=radio][value='dark']").checked = darkMode;
         document.querySelector(".theme-toggle input[type=radio][value='light']").checked = !darkMode;
         document.body.classList.toggle("dark-mode", darkMode);
-        document.cookie = "darkMode=" + darkMode;
+        document.cookie["darkmode"] = darkMode;
     }
 
-    if (document.cookie.startsWith("darkMode")) {
-        const darkModeOn = document.cookie["darkmode"] === "true";
+    if (document.cookie["darkmode"]) {
+        let darkModeOn;
+        darkModeOn = document.cookie["darkmode"] === "true";
         updateToggle(darkModeOn);
     } else {
         darkModeMediaQuery.addEventListener("change", (e) => {
