@@ -1,4 +1,4 @@
-:root {
+.dark-mode {
     --bs-blue: #375a7f;
     --bs-indigo: #673ab7;
     --bs-purple: #654ea3;
@@ -54,22 +54,30 @@
     --bs-body-bg: #222;
 }
 
-a {
+.dark-mode a {
     color: var(--bs-indigo);
 }
-.table {
+
+.dark-mode a.disabled {
+    color: var(--bs-body-color);
+}
+.dark-mode a.btn-secondary {
     color: var(--bs-body-color);
 }
 
-.card {
+.dark-mode .table {
+    color: var(--bs-body-color);
+}
+
+.dark-mode .card {
     background-color: var(--bs-gray-800);
 }
 
-.btn-primary {
+.dark-mode .btn-primary {
     background-color: var(--bs-primary);
     border-color: var(--bs-primary);
 }
-.btn-primary:hover {
+.dark-mode .btn-primary:hover {
     background-color: var(--bs-indigo);
     border-color: var(--bs-indigo);
 }
