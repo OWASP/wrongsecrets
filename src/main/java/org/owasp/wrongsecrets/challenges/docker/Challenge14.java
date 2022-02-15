@@ -23,7 +23,6 @@ import java.util.List;
 
 @Slf4j
 @Component
-@Order(14)
 public class Challenge14 extends Challenge {
 
     private final String keepassxPassword;

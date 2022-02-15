@@ -31,7 +31,6 @@ import java.util.List;
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.*;
 
 @Component
-@Order(11)
 @Slf4j
 public class Challenge11 extends CloudChallenge {
 

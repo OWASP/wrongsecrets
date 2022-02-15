@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-@Order(7)
 public class Challenge7 extends Challenge {
 
     private final Vaultpassword vaultPassword;

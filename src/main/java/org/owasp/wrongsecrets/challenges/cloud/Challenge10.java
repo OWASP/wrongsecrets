@@ -18,7 +18,6 @@ import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.GCP;
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.AZURE;
 
 @Component
-@Order(10)
 @Slf4j
 public class Challenge10 extends CloudChallenge {
 

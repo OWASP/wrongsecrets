@@ -14,7 +14,6 @@ import java.util.List;
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 
 @Component
-@Order(4)
 public class Challenge4 extends Challenge {
 
     private final String argBasedPassword;

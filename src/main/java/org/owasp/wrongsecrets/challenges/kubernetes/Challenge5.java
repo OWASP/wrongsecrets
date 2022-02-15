@@ -14,7 +14,6 @@ import java.util.List;
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.K8S;
 
 @Component
-@Order(5)
 public class Challenge5 extends Challenge {
 
     private final String configmapK8sSecret;

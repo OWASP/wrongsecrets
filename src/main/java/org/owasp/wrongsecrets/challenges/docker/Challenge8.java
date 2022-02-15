@@ -17,7 +17,6 @@ import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 
 @Slf4j
 @Component
-@Order(8)
 public class Challenge8 extends Challenge {
 
     private static final String alphabet = "0123456789QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm";
