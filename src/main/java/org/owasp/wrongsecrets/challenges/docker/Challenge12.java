@@ -7,6 +7,7 @@ import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.nio.file.Files;
@@ -15,6 +16,7 @@ import java.util.List;
 
 @Slf4j
 @Component
+@Order(12)
 public class Challenge12 extends Challenge {
 
     private String dockerMountPath;

@@ -7,6 +7,7 @@ import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.Cipher;
@@ -19,6 +20,7 @@ import java.util.List;
 
 @Slf4j
 @Component
+@Order(13)
 public class Challenge13 extends Challenge {
 
     private String plainText;

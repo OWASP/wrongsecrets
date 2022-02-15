@@ -1,0 +1,10 @@
+*Why you need to be careful with password to other secrets*
+
+Whether you have a password for an enterprise secretsmanagement system or a password manager: your authentication factors make the difference between a breached system and a secure system.
+
+So in simple terms when you authenticate to your password manager directly:
+- have a strong password (E.g. a lengthy one!)
+- use MFA if possible
+- enable any sort of alerting when a new device and/or IP tries to touch it.
+
+If you use SSO: make sure that the system to which you authenticate caters for the same controls: allow for lengthy strong passwords, MFA, and proper security alerts when something spiffy is going on.

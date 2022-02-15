@@ -24,6 +24,24 @@ fi
 echo "Version tag: $tag"
 echo "tag message: $message"
 echo "buildarg supplied: $buildarg"
+
+echo "check if al required binaries are installed"
+function checkCommandsAvailable() {
+  for var in "$@"
+  do
+    if ! [ -x "$(command -v "$var")" ]; then
+      echo "🔥 ${var} is not installed." >&2
+      exit 1
+    else
+      echo "🏄 $var is installed..."
+    fi
+  done
+}
+
+checkCommandsAvailable java git docker mvn
+
+echo "Start building assets required for container"
+
 echo "generating challenge 12-data"
 openssl rand -base64 32 | tr -d '\n' > yourkey.txt
 # preps for #178:
@@ -54,8 +72,8 @@ docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongs
 docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets:$tag-k8s-vault --build-arg "$2" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=kubernetes-vault" --push ./../../.
 
 echo "tagging version"
-git tag -a $tag -m "${message}"
-git push --tags
+#git tag -a $tag -m "${message}"
+#git push --tags
 
 #staging (https://arcane-scrubland-42646.herokuapp.com/)
 echo "Completed docker upload for X86, now taking care of heroku, do yourself: update Dockerfile.web, then run 'heroku container:login' 'heroku container:push --recursive --arg argBasedVersion=${tag}heroku' and 'heroku container:push --recursive --arg argBasedVersion=${tag}heroku --app=wrongsecrets' and release both (heroku container:release web --app=wrongsecrets)"

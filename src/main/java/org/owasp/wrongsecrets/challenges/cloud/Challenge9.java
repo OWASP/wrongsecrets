@@ -18,8 +18,8 @@ import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.GCP;
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.AZURE;
 
 @Component
-@Order(9)
 @Slf4j
+@Order(9)
 public class Challenge9 extends CloudChallenge {
 
     private final String awsDefaultValue;

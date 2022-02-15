@@ -9,7 +9,7 @@
     </parent>
     <groupId>org.owasp</groupId>
     <artifactId>wrongsecrets</artifactId>
-    <version>1.3.3-SNAPSHOT</version>
+    <version>ch14tst7-SNAPSHOT</version>
     <name>OWASP WrongSecrets</name>
     <description>Examples with how to not use secrets</description>
     <url>https://owasp.org/www-project-wrongsecrets/</url>
@@ -111,6 +111,11 @@
             <groupId>software.amazon.awssdk</groupId>
             <artifactId>ssm</artifactId>
             <version>${aws.sdk.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.linguafranca.pwdb</groupId>
+            <artifactId>KeePassJava2</artifactId>
+            <version>2.1.4</version>
         </dependency>
         <dependency>
             <groupId>org.asciidoctor</groupId>

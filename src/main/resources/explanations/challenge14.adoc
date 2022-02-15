@@ -1,0 +1,5 @@
+=== Password Managers
+
+When we showed this project to my friend Kees, he asked us: hey isn't that the same as having a very weak password on your password manager? Because that's what my colleague did.
+
+So here it is: the password manager challenge! We have set up a Keepass file in the Docker container where we put secret credentials to Alibabacloud in. Can you get it?
