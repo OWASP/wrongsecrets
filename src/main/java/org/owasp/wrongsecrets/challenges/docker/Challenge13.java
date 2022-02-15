@@ -20,6 +20,7 @@ import java.util.List;
 
 @Slf4j
 @Component
+@Order(13)
 public class Challenge13 extends Challenge {
 
     private String plainText;

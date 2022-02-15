@@ -32,6 +32,7 @@ import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.*;
 
 @Component
 @Slf4j
+@Order(11)
 public class Challenge11 extends CloudChallenge {
 
     private final String awsRoleArn;

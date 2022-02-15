@@ -19,6 +19,7 @@ import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.AZURE;
 
 @Component
 @Slf4j
+@Order(10)
 public class Challenge10 extends CloudChallenge {
 
     private final String awsDefaultValue;

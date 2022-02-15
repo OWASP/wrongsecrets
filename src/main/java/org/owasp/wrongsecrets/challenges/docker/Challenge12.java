@@ -16,6 +16,7 @@ import java.util.List;
 
 @Slf4j
 @Component
+@Order(12)
 public class Challenge12 extends Challenge {
 
     private String dockerMountPath;
