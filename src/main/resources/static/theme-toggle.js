@@ -4,14 +4,20 @@
     function updateToggle(darkMode) {
         document.querySelector(".theme-toggle input[type=radio][value='dark']").checked = darkMode;
         document.querySelector(".theme-toggle input[type=radio][value='light']").checked = !darkMode;
-
         document.body.classList.toggle("dark-mode", darkMode);
+        document.cookie = "darkMode=" + darkMode;
     }
 
-    darkModeMediaQuery.addEventListener("change", (e) => {
-        const darkModeOn = e.matches;
+    if (document.cookie.startsWith("darkMode")) {
+        const darkModeOn = document.cookie["darkmode"] === "true";
         updateToggle(darkModeOn);
-    });
+    } else {
+        darkModeMediaQuery.addEventListener("change", (e) => {
+            const darkModeOn = e.matches;
+            updateToggle(darkModeOn);
+        });
+    }
+
 
     window.addEventListener("load", function () {
         const radios = document.querySelectorAll(".theme-toggle input[type=radio]");
