@@ -2,9 +2,11 @@
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
       layout:decorate="~{index.html}">
 <body>
-<div class="container-fluid text-sm p-5 bg-light" layout:fragment="content">
-    <h1>Spoiling secret</h1>
-    <p th:text="${spoiler.solution}"></p>
+<div class="container">
+    <div class="container-fluid mt-3 text-sm p-5 bg-light" layout:fragment="content">
+        <h1>Spoiling secret</h1>
+        <p th:text="${spoiler.solution}"></p>
+    </div>
 </div>
 </body>
 </html>
