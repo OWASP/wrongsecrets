@@ -9,7 +9,7 @@ Can you solve all the 14 challenges?
 
 ## Support
 
-Need support? Contact us via [OWASP Slack](https://owasp.slack.com/archives/C02KQ7D9XHR) [sign up here](https://owasp.org/slack/invite), file a [PR](https://github.com/commjoen/wrongsecrets/pulls), file an [issue](https://github.com/commjoen/wrongsecrets/issues) , or use [discussions](https://github.com/commjoen/wrongsecrets/discussions). Please note that this is an OWASP volunteer based project, so it might take a little while before we respond.
+Need support? Contact us via [OWASP Slack](https://owasp.slack.com/archives/C02KQ7D9XHR) [for which you sign up here](https://owasp.org/slack/invite), file a [PR](https://github.com/commjoen/wrongsecrets/pulls), file an [issue](https://github.com/commjoen/wrongsecrets/issues) , or use [discussions](https://github.com/commjoen/wrongsecrets/discussions). Please note that this is an OWASP volunteer based project, so it might take a little while before we respond.
 
 ## Basic docker exercises
 
@@ -41,7 +41,7 @@ Note that these challenges are still very basic, and so are their explanations. 
 
 ### Running these on Heroku
 
-You can test them out at <a href="https://wrongsecrets.herokuapp.com/" target="_blank"> https://wrongsecrets.herokuapp.com/</a> as well! But please understand that we have NO guarantees that this works. Given we run in Heroku free-tier, please do not fuzz and/or try to bring it down: you would be spoiling it for others that want to testdrive it.
+You can test them out at [https://wrongsecrets.herokuapp.com/](https://wrongsecrets.herokuapp.com/) as well! But please understand that we have NO guarantees that this works. Given we run in Heroku free-tier, please do not fuzz and/or try to bring it down: you would be spoiling it for others that want to testdrive it.
 
 ### Deploying the app under your own heroku account
 
@@ -124,9 +124,9 @@ Follow the steps in [the README in the AWS subfolder](aws/README.md).
 
 Follow the steps in [the README in the GCP subfolder](gcp/README.md).
 
-### Running WrongSecrets in Azure - EXPERIMENTAL!
+### Running WrongSecrets in Azure
 
-Follow the steps in [the README in the Azure subfolder](azure/README.md). Note that this implementation is still experimental. Feel free to provide feedback through Slack/Github and/or file a PR!
+Follow the steps in [the README in the Azure subfolder](azure/README.md).
 
 ## Do you want to play without guidance?
 
@@ -153,7 +153,7 @@ Top contributors:
 
 Testers:
 
-- [Dave van Stein @davevs](https://github.com/davevs) 
+- [Dave van Stein @davevs](https://github.com/davevs)
 - [Marcin Nowak @MarcinNowak-codes](https://github.com/MarcinNowak-codes)
 - [Marc Chang Sing Pang @mchangsp](https://github.com/mchangsp)
 
