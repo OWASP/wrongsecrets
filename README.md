@@ -150,6 +150,7 @@ Top contributors:
 - [Dmitry Litosh @Dlitosh](https://github.com/Dlitosh)
 - [Tibor Hercz @tiborhercz](https://github.com/tiborhercz)
 - [Ruben Kruiver @RubenAtBinx](https://github.com/RubenAtBinx)
+- [Finn @f3rn0s](https://github.com/f3rn0s)
 
 Testers:
 
