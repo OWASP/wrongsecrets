@@ -1,0 +1,41 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Test minikube script
+
+# Controls when the workflow will run
+on:
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  test-minikube:
+    name: Test with minikube and Vault
+    runs-on: ubuntu-latest
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - uses: actions/checkout@v2
+      - uses: innovationnorway/setup-vault@v1
+        with:
+          version: '~1.4'
+      - name: Start minikube
+        uses: medyagh/setup-minikube@master
+        with:
+          minikube-version: 1.24.0
+          driver: docker
+          kubernetes-version: v1.20.10
+      - name: Setup helm
+        uses: azure/setup-helm@v2.0
+        id: install
+      - name: test script
+        run: |
+          kubectl apply -f k8s/secrets-secret.yml
+          kubectl apply -f k8s/secret-challenge-deployment.yml
+          while [[ $(kubectl get pods -l app=secret-challenge -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do echo "waiting for secret-challenge" && sleep 2; done
+          kubectl port-forward \
+              $(kubectl get pod -l app=secret-challenge -o jsonpath="{.items[0].metadata.name}") \
+              8080:8080
+          curl http://localhost:8080/spoil-6
+          minikube delete
+
