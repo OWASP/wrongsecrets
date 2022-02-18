@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Test minikube script
+name: Test minikube script (k8s&vault)
 
 # Controls when the workflow will run
 on:
