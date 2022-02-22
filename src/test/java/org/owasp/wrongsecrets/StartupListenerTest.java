@@ -60,7 +60,7 @@ public class StartupListenerTest {
     }
 
     @Test
-    public void testWithK8S_ENVset() throws Exception {
+    public void testWithK8S_ENVsetPropperly() throws Exception {
         new SystemProperties("K8S_ENV", "DOCKER")
             .execute(()->{
                 var ape = new ApplicationEnvironmentPreparedEvent(new DefaultBootstrapContext(), new SpringApplication(), new String[0], configurableApplicationContext.getEnvironment());
