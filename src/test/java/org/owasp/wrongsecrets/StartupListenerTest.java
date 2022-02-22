@@ -8,14 +8,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.context.event.ApplicationEnvironmentPreparedEvent;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-import uk.org.webcompere.systemstubs.environment.EnvironmentVariables;
 import uk.org.webcompere.systemstubs.properties.SystemProperties;
 
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static uk.org.webcompere.systemstubs.SystemStubs.*;
+import static uk.org.webcompere.systemstubs.SystemStubs.catchSystemExit;
+import static uk.org.webcompere.systemstubs.SystemStubs.tapSystemErrAndOut;
 
 @SpringJUnitConfig
 public class StartupListenerTest {
