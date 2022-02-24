@@ -72,13 +72,13 @@ if [ $? == 0 ]; then
   echo "Vault is already installed"
 else
   helm repo add hashicorp https://helm.releases.hashicorp.com
-  helm install vault hashicorp/vault --version 0.9.1 --values ../k8s/helm-vault-values.yml
+  helm install vault hashicorp/vault --version 0.19.0 --values ../k8s/helm-vault-values.yml
 fi
 
 isvaultrunning=$(kubectl get pods --field-selector=status.phase=Running)
 while [[ $isvaultrunning != *"vault-0"* ]]; do echo "waiting for Vault0" && sleep 2 && isvaultrunning=$(kubectl get pods --field-selector=status.phase=Running); done
-while [[ $isvaultrunning != *"vault-1"* ]]; do echo "waiting for Vaul1" && sleep 2 && isvaultrunning=$(kubectl get pods --field-selector=status.phase=Running); done
-while [[ $isvaultrunning != *"vault-2"* ]]; do echo "waiting for Vaul2" && sleep 2 && isvaultrunning=$(kubectl get pods --field-selector=status.phase=Running); done
+while [[ $isvaultrunning != *"vault-1"* ]]; do echo "waiting for Vault1" && sleep 2 && isvaultrunning=$(kubectl get pods --field-selector=status.phase=Running); done
+while [[ $isvaultrunning != *"vault-2"* ]]; do echo "waiting for Vault2" && sleep 2 && isvaultrunning=$(kubectl get pods --field-selector=status.phase=Running); done
 
 echo "Setting up port forwarding"
 kubectl port-forward vault-0 8200:8200 &
