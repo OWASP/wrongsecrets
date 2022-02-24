@@ -30,7 +30,7 @@ public class StartupListenerErrorTest {
         var startupListener = new StartupListener();
         text.set(tapSystemErrAndOut(() -> statusCode.set(catchSystemExit(() -> startupListener.onApplicationEvent(ape)))));
         assertThat(statusCode.get()).isEqualTo(1);
-        assertThat(text.get()).contains("ROR org.owasp.wrongsecrets.StartupListener - K8S_ENV does not contain one of the expected values: DOCKER, HEROKU_DOCKER, GCP, AWS, AZURE, VAULT, K8S.");
+        assertThat(text.get()).contains("K8S_ENV does not contain one of the expected values: DOCKER,");
     }
 
 
