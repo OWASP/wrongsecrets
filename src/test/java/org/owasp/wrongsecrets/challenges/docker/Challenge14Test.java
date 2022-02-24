@@ -11,8 +11,11 @@ import org.owasp.wrongsecrets.challenges.Spoiler;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @ExtendWith(MockitoExtension.class)
 class Challenge14Test {
@@ -21,8 +24,9 @@ class Challenge14Test {
     private ScoreCard scoreCard;
 
     @Test
-    void solveChallenge14() {
-        String filePath = getClass().getClassLoader().getResource("alibabacreds.kdbx").getPath();
+    void solveChallenge14() throws URISyntaxException {
+        URI uri = getClass().getClassLoader().getResource("alibabacreds.kdbx").toURI();
+        String filePath = Paths.get(uri).toString();
         var challenge = new Challenge14(scoreCard, "welcome123", "doesnotwork", filePath);
         Assertions.assertThat(challenge.answerCorrect("doesnotwork")).isFalse();
         Assertions.assertThat(challenge.answerCorrect(challenge.spoiler().solution())).isTrue();
