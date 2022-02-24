@@ -19,7 +19,7 @@ checkCommandsAvailable helm minikube jq vault sed grep docker grep cat
 
 echo "This is only a script for demoing purposes. You can comment out line 22 and work with your own k8s setup"
 echo "This script is based on the steps defined in https://learn.hashicorp.com/tutorials/vault/kubernetes-minikube . Vault is awesome!"
-minikube start --kubernetes-version=v1.20.10
+minikube start --kubernetes-version=v1.21.0
 
 kubectl get configmaps | grep 'secrets-file' &> /dev/null
 if [ $? == 0 ]; then
@@ -50,7 +50,7 @@ if [ $? == 0 ]; then
    echo "Vault is already installed"
 else
   helm repo add hashicorp https://helm.releases.hashicorp.com
-  helm install vault hashicorp/vault --version 0.9.1 --values k8s/helm-vault-values.yml
+  helm install vault hashicorp/vault --version 0.19.0 --values k8s/helm-vault-values.yml
 fi
 
 isvaultrunning=$(kubectl get pods --field-selector=status.phase=Running)
