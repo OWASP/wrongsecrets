@@ -1,8 +1,15 @@
 package org.owasp.wrongsecrets.canaries;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
+@Getter
 public class AdditionalCanaryData {
-    public String srcIp;
-    public String useragent;
-    public String referer;
-    public String location;
+
+    private final String srcIp;
+    private final String useragent;
+    private final String referer;
+    private final String location;
+
 }

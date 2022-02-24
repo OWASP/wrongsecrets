@@ -1,10 +1,15 @@
 package org.owasp.wrongsecrets.canaries;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
+@Getter
 public class CanaryToken {
-    public String manageUrl;
-    public String memo;
-    public String channel;
-    public String time;
-    public AdditionalCanaryData additionalData;
+    private final  String manageUrl;
+    private final  String memo;
+    private final  String channel;
+    private final  String time;
+    private final  AdditionalCanaryData additionalData;
 }
 

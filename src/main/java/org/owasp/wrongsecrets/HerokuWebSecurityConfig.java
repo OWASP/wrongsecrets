@@ -14,11 +14,7 @@ public class HerokuWebSecurityConfig extends WebSecurityConfigurerAdapter {
             .requiresSecure()
             .and()
             .httpBasic().disable();
-        http.requiresChannel()
-            .requestMatchers(r -> r.getRequestURI().contains("canaries/tokencallback"))
-            .requiresInsecure()
-            .and()
-            .httpBasic().disable();
-
-    }
+        http.requestMatcher(r -> r.getRequestURI().contains("canaries/tokencallback"))
+                .csrf().disable();
+   }
 }
