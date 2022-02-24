@@ -8,6 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.context.event.ApplicationEnvironmentPreparedEvent;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
+import uk.org.webcompere.systemstubs.environment.EnvironmentVariables;
 import uk.org.webcompere.systemstubs.properties.SystemProperties;
 
 import java.util.concurrent.atomic.AtomicInteger;
@@ -30,11 +31,7 @@ public class StartupListenerTest {
             .execute(()->{
                 var ape = new ApplicationEnvironmentPreparedEvent(new DefaultBootstrapContext(), new SpringApplication(), new String[0], configurableApplicationContext.getEnvironment());
                 var startupListener = new StartupListener();
-                 text.set(tapSystemErrAndOut(() -> {
-                     statusCode.set(catchSystemExit(() -> {
-                         startupListener.onApplicationEvent(ape);
-                     }));
-                 }));
+                 text.set(tapSystemErrAndOut(() -> statusCode.set(catchSystemExit(() -> startupListener.onApplicationEvent(ape)))));
 
             });
         assertThat(statusCode.get()).isEqualTo(1);
@@ -49,11 +46,7 @@ public class StartupListenerTest {
             .execute(()->{
                 var ape = new ApplicationEnvironmentPreparedEvent(new DefaultBootstrapContext(), new SpringApplication(), new String[0], configurableApplicationContext.getEnvironment());
                 var startupListener = new StartupListener();
-                text.set(tapSystemErrAndOut(() -> {
-                    statusCode.set(catchSystemExit(() -> {
-                        startupListener.onApplicationEvent(ape);
-                    }));
-            }));
+                text.set(tapSystemErrAndOut(() -> statusCode.set(catchSystemExit(() -> startupListener.onApplicationEvent(ape)))));
                 });
         assertThat(statusCode.get()).isEqualTo(1);
         assertThat(text.get()).contains("ROR org.owasp.wrongsecrets.StartupListener - K8S_ENV does not contain one of the expected values: DOCKER, HEROKU_DOCKER, GCP, AWS, AZURE, VAULT, K8S.");
@@ -61,7 +54,7 @@ public class StartupListenerTest {
 
     @Test
     public void testWithK8S_ENVsetPropperly() throws Exception {
-        new SystemProperties("K8S_ENV", "DOCKER")
+        new EnvironmentVariables("K8S_ENV", "DOCKER")
             .execute(()->{
                 var ape = new ApplicationEnvironmentPreparedEvent(new DefaultBootstrapContext(), new SpringApplication(), new String[0], configurableApplicationContext.getEnvironment());
                 var startupListener = new StartupListener();
