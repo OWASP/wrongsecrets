@@ -21,7 +21,7 @@ jobs:
         with:
           minikube-version: 1.24.0
           driver: docker
-          kubernetes-version: v1.20.10
+          kubernetes-version: v1.21.9
       - name: test script
         run: |
           kubectl apply -f k8s/secrets-config.yml
