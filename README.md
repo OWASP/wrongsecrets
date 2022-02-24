@@ -112,6 +112,8 @@ Make sure you have the following installed:
 
 Run `./k8s-vault-minkube-start.sh`, when the script is done, then the challenges will wait for you at <http://localhost:8080> . This will allow you to run challenges 1-8, 12-14.
 
+When you stopped the `k8s-vault-minikube-start.sh` script and want to resume the port forward run: `k8s-vault-minikube-resume.sh`. This is because if you run the start script again it will replace the secret in the vault and not update the secret-challenge application with the new secret.
+
 ## Cloud Challenges
 
 _Can be used for challenges 1-14_
