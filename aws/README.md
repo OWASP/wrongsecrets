@@ -43,6 +43,9 @@ Are you done playing? Please run `terraform destroy` twice to clean up.
 
 Run `AWS_PROFILE=<your_profile> k8s-vault-aws-start.sh` and connect to [http://localhost:8080](http://localhost:8080) when it's ready to accept connections (you'll read the line `Forwarding from 127.0.0.1:8080 -> 8080` in your console). Now challenge 9 and 10 should be available as well.
 
+### Resume it
+When you stopped the `k8s-vault-aws-start.sh` script and want to resume the port forward run: `k8s-vault-aws-resume.sh`. This is because if you run the start script again it will replace the secret in the vault and not update the secret-challenge application with the new secret.
+
 ### Clean it up
 
 When you're done:
