@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class CanariesController {
 
-    @PostMapping(path="/canaries/tokencallback", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> processCanaryToken(@RequestBody CanaryToken canaryToken){
+    @PostMapping(path = "/canaries/tokencallback", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> processCanaryToken(@RequestBody CanaryToken canaryToken) {
         try {
             String canarytokenContents = new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(canaryToken);
             log.info("Canarytoken callback called with following token: {}", canarytokenContents);
         } catch (JsonProcessingException e) {
-           log.warn("Exception with processing canarytoken: {}", e.getMessage());
+            log.warn("Exception with processing canarytoken: {}", e.getMessage());
         }
         log.info("Canarytoken called, with manage_url {}", canaryToken.getManageUrl());
         /*
@@ -28,6 +28,6 @@ public class CanariesController {
         - follow 3 of baeldung.com/spring-server-sent-events, but make sure you register the emitter per connection
         - and in a map lookup which emiter you can use for the given connection to send the event.
          */
-        return new ResponseEntity<>("all good" , HttpStatus.ACCEPTED );
+        return new ResponseEntity<>("all good", HttpStatus.ACCEPTED);
     }
 }
