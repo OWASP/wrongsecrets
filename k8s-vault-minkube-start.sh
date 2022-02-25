@@ -34,7 +34,6 @@ if [ $? == 0 ]; then
 else
   kubectl apply -f k8s/secrets-secret.yml
 fi
-
 helm list | grep 'consul' &> /dev/null
 if [ $? == 0 ]; then
    echo "Consul is already installed"
