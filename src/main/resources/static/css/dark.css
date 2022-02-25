@@ -1,7 +1,8 @@
 .dark-mode {
     --bs-blue: #375a7f;
     --bs-indigo: #673ab7;
-    --bs-purple: #654ea3;
+    --bs-light-purple: #9c7dd2;
+    --bs-purple: #9c7dd2;
     --bs-pink: #e83e8c;
     --bs-red: #e74c3c;
     --bs-orange: #fd7e14;
@@ -55,7 +56,7 @@
 }
 
 .dark-mode a {
-    color: var(--bs-indigo);
+    color: var(--bs-light-purple);
 }
 
 .dark-mode a.disabled {
