@@ -40,7 +40,7 @@
 
     <properties>
         <java.version>17</java.version>
-        <spring.cloud-version>2021.0.0</spring.cloud-version>
+        <spring.cloud-version>2021.0.1</spring.cloud-version>
         <lombok.version>1.18.22</lombok.version>
         <maven.compiler.target>17</maven.compiler.target>
         <aws.sdk.version>2.17.121</aws.sdk.version>
