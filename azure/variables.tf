@@ -7,7 +7,7 @@ variable "region" {
 variable "cluster_version" {
   description = "The AKS cluster version to use"
   type        = string
-  default     = "1.21"
+  default     = "1.21.7"
 }
 
 variable "cluster_name" {

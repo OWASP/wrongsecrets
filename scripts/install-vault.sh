@@ -3,6 +3,7 @@ if [ $? == 0 ]; then
   echo "Vault is already installed"
 else
   helm repo add hashicorp https://helm.releases.hashicorp.com
+  helm repo update hashicorp
   helm install vault hashicorp/vault --version 0.19.0 --values ../k8s/helm-vault-values.yml
 fi
 
