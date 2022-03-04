@@ -50,7 +50,7 @@ fi
 
 source ../scripts/install-consul.sh
 
-source ../scripts/install_vault.sh
+source ../scripts/install-vault.sh
 
 echo "Add secrets manager driver to repo"
 helm repo add csi-secrets-store-provider-azure https://raw.githubusercontent.com/Azure/secrets-store-csi-driver-provider-azure/master/charts
