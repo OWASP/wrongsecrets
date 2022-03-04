@@ -3,7 +3,7 @@
 # set -o pipefail
 # set -o nounset
 
-source ../scripts/check-available-commands.sh
+source scripts/check-available-commands.sh
 
 checkCommandsAvailable helm minikube jq vault sed grep docker grep cat
 
