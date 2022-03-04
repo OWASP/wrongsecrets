@@ -33,17 +33,7 @@ echo "tag message: $message"
 echo "buildarg supplied: $buildarg"
 
 echo "check if al required binaries are installed"
-function checkCommandsAvailable() {
-  for var in "$@"
-  do
-    if ! [ -x "$(command -v "$var")" ]; then
-      echo "🔥 ${var} is not installed." >&2
-      exit 1
-    else
-      echo "🏄 $var is installed..."
-    fi
-  done
-}
+source ../scripts/check-available-commands.sh
 
 checkCommandsAvailable java git docker mvn
 
