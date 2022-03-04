@@ -3,16 +3,7 @@
 # set -o pipefail
 # set -o nounset
 
-function checkCommandsAvailable() {
-  for var in "$@"; do
-    if ! [ -x "$(command -v "$var")" ]; then
-      echo "🔥 ${var} is not installed." >&2
-      exit 1
-    else
-      echo "🏄 $var is installed..."
-    fi
-  done
-}
+source ../scripts/check-available-commands.sh
 
 checkCommandsAvailable helm minikube jq vault sed grep docker grep cat gcloud envsubst
 
