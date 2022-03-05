@@ -17,26 +17,23 @@ done
 if test -n "${tag+x}"; then
   echo "tag is set"
 else
-  echo "Autotagging with new version: ${tag}"
   SCRIPT_PATH=$(dirname $(dirname $(dirname $(readlink -f "$0"))))
   tag=`docker run -it -v ${SCRIPT_PATH}:/data --workdir /data quay.io/pantheon-public/autotag:latest -n`
+  echo "Autotagging with new version: ${tag}"
+fi
+
+if test -n "${buildarg+x}"; then
+  echo "buildarg is set"
+else
+  buildarg="argBasedPassword='this is on your command line'"
+  echo "setting buildarg to ${buildarg}"
 fi
 echo "Version tag: $tag"
 echo "tag message: $message"
 echo "buildarg supplied: $buildarg"
 
 echo "check if al required binaries are installed"
-function checkCommandsAvailable() {
-  for var in "$@"
-  do
-    if ! [ -x "$(command -v "$var")" ]; then
-      echo "🔥 ${var} is not installed." >&2
-      exit 1
-    else
-      echo "🏄 $var is installed..."
-    fi
-  done
-}
+source ../scripts/check-available-commands.sh
 
 checkCommandsAvailable java git docker mvn
 
@@ -67,12 +64,12 @@ cd .github/scripts
 docker buildx create --name mybuilder
 docker buildx use mybuilder
 echo "creating containers"
-docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/addo-example:$tag-no-vault --build-arg "$2" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=without-vault" --push ./../../.
-docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/addo-example:$tag-local-vault --build-arg "$2" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=local-vault" --push ./../../.
-docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/addo-example:$tag-k8s-vault --build-arg "$2" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=kubernetes-vault" --push ./../../.
-docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets:$tag-no-vault --build-arg "$2" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=without-vault" --push ./../../.
-docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets:$tag-local-vault --build-arg "$2" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=local-vault" --push ./../../.
-docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets:$tag-k8s-vault --build-arg "$2" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=kubernetes-vault" --push ./../../.
+docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/addo-example:$tag-no-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=without-vault" --push ./../../.
+docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/addo-example:$tag-local-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=local-vault" --push ./../../.
+docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/addo-example:$tag-k8s-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=kubernetes-vault" --push ./../../.
+docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets:$tag-no-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=without-vault" --push ./../../.
+docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets:$tag-local-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=local-vault" --push ./../../.
+docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets:$tag-k8s-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=kubernetes-vault" --push ./../../.
 
 echo "tagging version"
 #git tag -a $tag -m "${message}"

@@ -1,6 +1,6 @@
-FROM jeroenwillemsen/wrongsecrets:canary-test-no-vault
+FROM jeroenwillemsen/wrongsecrets:1.3.6-no-vault
 
-ARG argBasedVersion="1.3.5RC1"
+ARG argBasedVersion="1.3.6"
 ENV APP_VERSION=$argBasedVersion
 ENV K8S_ENV=Heroku(Docker)
 ENV challengedockermtpath="/var/helpers"

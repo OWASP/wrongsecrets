@@ -3,16 +3,7 @@
 # set -o pipefail
 # set -o nounset
 
-function checkCommandsAvailable() {
-  for var in "$@"; do
-    if ! [ -x "$(command -v "$var")" ]; then
-      echo "🔥 ${var} is not installed." >&2
-      exit 1
-    else
-      echo "🏄 $var is installed..."
-    fi
-  done
-}
+source ../scripts/check-available-commands.sh
 
 checkCommandsAvailable helm minikube jq vault sed grep docker grep cat gcloud envsubst
 
@@ -152,7 +143,7 @@ envsubst <./k8s/secret-challenge-vault-deployment.yml.tpl >./k8s/secret-challeng
 kubectl apply -f./k8s/secret-challenge-vault-deployment.yml
 while [[ $(kubectl get pods -l app=secret-challenge -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do echo "waiting for secret-challenge" && sleep 2; done
 
-echo "Deploying ingress":w
+echo "Deploying ingress"
 
 kubectl apply -f k8s/k8s-gke-ingress.yaml
 

@@ -3,17 +3,7 @@
 # set -o pipefail
 # set -o nounset
 
-function checkCommandsAvailable() {
-  for var in "$@"
-  do
-    if ! [ -x "$(command -v "$var")" ]; then
-      echo "🔥 ${var} is not installed." >&2
-      exit 1
-    else
-      echo "🏄 $var is installed..."
-    fi
-  done
-}
+source scripts/check-available-commands.sh
 
 checkCommandsAvailable helm minikube jq vault sed grep docker grep cat
 
@@ -34,7 +24,6 @@ if [ $? == 0 ]; then
 else
   kubectl apply -f k8s/secrets-secret.yml
 fi
-
 helm list | grep 'consul' &> /dev/null
 if [ $? == 0 ]; then
    echo "Consul is already installed"
