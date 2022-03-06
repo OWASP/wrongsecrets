@@ -37,4 +37,11 @@ public class CanariesController {
          */
         return new ResponseEntity<>("all good", HttpStatus.ACCEPTED);
     }
+
+    @PostMapping(path = "/canaries/tokencallbackdebug", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> processCanaryTokendebug(@RequestBody String canarytokenContents) {
+        canaryCounter.upCallBackCounter();
+        canaryCounter.setLastCanaryToken(canarytokenContents);
+        return new ResponseEntity<>("all good", HttpStatus.ACCEPTED);
+    }
 }
