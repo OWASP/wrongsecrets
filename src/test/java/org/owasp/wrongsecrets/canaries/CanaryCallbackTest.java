@@ -35,3 +35,7 @@ public class CanaryCallbackTest {
         }
     }
 }
+
+/*
+"manageUrl" : "url", "memo" : "memo", "channel" : "channel", "time" : "time", "additionalData" : { "srcIp" : "soruce", "useragent" : "agent", "referer" : "referer", "location" : "locatoin"}}
+ */

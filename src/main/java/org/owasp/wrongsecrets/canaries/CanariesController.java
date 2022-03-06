@@ -24,6 +24,7 @@ public class CanariesController {
             String canarytokenContents = new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(canaryToken);
             log.info("Canarytoken callback called with following token: {}", canarytokenContents);
             canaryCounter.upCallBackCounter();
+            canaryCounter.setLastCanaryToken(canarytokenContents);
         } catch (JsonProcessingException e) {
             log.warn("Exception with processing canarytoken: {}", e.getMessage());
         }

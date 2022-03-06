@@ -10,6 +10,8 @@ public class CanaryCounterImpl implements CanaryCounter {
 
     private static AtomicInteger numberofCanaryCalls = new AtomicInteger(0);
 
+    private static String lastToken;
+
 
     @Override
     public void upCallBackCounter() {
@@ -20,6 +22,16 @@ public class CanaryCounterImpl implements CanaryCounter {
     @Override
     public int getTotalCount() {
         return numberofCanaryCalls.get();
+    }
+
+    @Override
+    public void setLastCanaryToken(String tokenContent) {
+        lastToken = tokenContent;
+    }
+
+    @Override
+    public String getLastToken() {
+        return lastToken;
     }
 }
 
