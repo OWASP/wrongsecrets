@@ -1,0 +1,13 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{index.html}">
+<body>
+<div class="container">
+    <div class="container-fluid mt-3 text-sm p-5 bg-light" layout:fragment="content">
+        <h1>Current Stats</h1>
+        <p>number of canary cals:</p></p><p th:text="${canarycounter}"></p>
+        <p>number of sessions:</p><p th:text="${sessioncounter}"></p>
+    </div>
+</div>
+</body>
+</html>

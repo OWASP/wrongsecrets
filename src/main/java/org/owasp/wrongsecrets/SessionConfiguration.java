@@ -28,4 +28,8 @@ public class SessionConfiguration {
             }
         };
     }
+
+    public AtomicInteger getCounter(){
+        return numberOfSessions;
+    }
 }
