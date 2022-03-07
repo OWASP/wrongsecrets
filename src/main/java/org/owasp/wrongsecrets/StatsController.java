@@ -15,7 +15,7 @@ public class StatsController {
     @Autowired
     private SessionConfiguration sessionConfiguration;
 
-    @Value("$(canarietokenURL}")
+    @Value("${canarietokenURLs}")
     private String[] canaryTokenURLs;
 
     @GetMapping("/stats")
