@@ -1,5 +1,6 @@
 package org.owasp.wrongsecrets.canaries;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -7,7 +8,8 @@ import lombok.RequiredArgsConstructor;
 @Getter
 public class AdditionalCanaryData {
 
-    private final String src_ip;
+    @JsonProperty("src_ip")
+    private final String srcIp;
     private final String useragent;
     private final String referer;
     private final String location;

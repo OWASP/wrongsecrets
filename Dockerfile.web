@@ -1,6 +1,6 @@
-FROM jeroenwillemsen/wrongsecrets:1.3.6Canarytest6-no-vault
+FROM jeroenwillemsen/wrongsecrets:1.3.6Canarytest7-no-vault
 
-ARG argBasedVersion="1.3.6Canarytest6"
+ARG argBasedVersion="1.3.6Canarytest7"
 ENV APP_VERSION=$argBasedVersion
 ENV K8S_ENV=Heroku(Docker)
 ENV challengedockermtpath="/var/helpers"

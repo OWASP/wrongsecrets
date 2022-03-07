@@ -1,16 +1,19 @@
 package org.owasp.wrongsecrets.canaries;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Getter
 public class CanaryToken {
-    private final String manage_url;
+    @JsonProperty("manage_url")
+    private final String manageUrl;
     private final String memo;
     private final String channel;
     private final String time;
-    private final AdditionalCanaryData additional_data;
+    @JsonProperty("additional_data")
+    private final AdditionalCanaryData additionalData;
 }
 
 /*

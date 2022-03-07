@@ -28,7 +28,7 @@ public class CanariesController {
         } catch (JsonProcessingException e) {
             log.warn("Exception with processing canarytoken: {}", e.getMessage());
         }
-        log.info("Canarytoken called, with manage_url {}", canaryToken.getManage_url());
+        log.info("Canarytoken called, with manage_url {}", canaryToken.getManageUrl());
         log.info("Total number of canary callback calls: {}", canaryCounter.getTotalCount());
         /*
         todo:
