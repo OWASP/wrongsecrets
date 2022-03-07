@@ -33,7 +33,7 @@ echo "tag message: $message"
 echo "buildarg supplied: $buildarg"
 
 echo "check if al required binaries are installed"
-source ../scripts/check-available-commands.sh
+source ../../scripts/check-available-commands.sh
 
 checkCommandsAvailable java git docker mvn
 

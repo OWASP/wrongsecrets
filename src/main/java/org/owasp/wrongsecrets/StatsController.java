@@ -15,15 +15,15 @@ public class StatsController {
     @Autowired
     private SessionConfiguration sessionConfiguration;
 
-    @Value("$(canary_token_url}")
-    private String canaryTokenURL;
+    @Value("$(canarietokenURL}")
+    private String[] canaryTokenURLs;
 
     @GetMapping("/stats")
     public String getStats(Model model) {
         model.addAttribute("canaryounter", canaryCounter.getTotalCount());
         model.addAttribute("sessioncounter", sessionConfiguration.getCounter());
         model.addAttribute("lastCanaryToken", canaryCounter.getLastToken());
-        model.addAttribute("canarytokenURL", canaryTokenURL);
+        model.addAttribute("canarytokenURLs", canaryTokenURLs);
         return "stats";
     }
 }

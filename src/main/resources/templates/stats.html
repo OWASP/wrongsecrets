@@ -5,10 +5,16 @@
 <div class="container">
     <div class="container-fluid mt-3 text-sm p-5 bg-light" layout:fragment="content">
         <h1>Current Stats</h1>
-        <p>Number of active sessions:</p><p th:text="${sessioncounter}"></p>
-        <p>Number of canary callbacks since boot:</p><p th:text="${canaryounter}"></p>
-        <p>Last canary token received:</p><p th:text="${lastCanaryToken}"></p>
-        <p>CanaryTokenUrlwebtoken in use:</p><p th:text="${canarytokenURL}"></p>
+        <p>Number of active sessions:</p>
+        <p th:text="${sessioncounter}"></p>
+        <p>Number of canary callbacks since boot:</p>
+        <p th:text="${canaryounter}"></p>
+        <p>Last canary token received:</p>
+        <p th:text="${lastCanaryToken}"></p>
+        <p>CanaryTokenUrlwebtoken in use:</p>
+        <ul th:each="continet : ${canarytokenURLs}">
+            <li th:text="${canarytokenURL}"></li>
+        </ul>
     </div>
 </div>
 </body>
