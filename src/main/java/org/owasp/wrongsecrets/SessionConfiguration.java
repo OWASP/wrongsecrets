@@ -29,7 +29,7 @@ public class SessionConfiguration {
         };
     }
 
-    public AtomicInteger getCounter(){
+    public AtomicInteger getCounter() {
         return numberOfSessions;
     }
 }
