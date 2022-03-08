@@ -33,7 +33,7 @@ echo "tag message: $message"
 echo "buildarg supplied: $buildarg"
 
 echo "check if al required binaries are installed"
-source ../scripts/check-available-commands.sh
+source ../../scripts/check-available-commands.sh
 
 checkCommandsAvailable java git docker mvn
 
@@ -55,9 +55,12 @@ openssl rand -base64 32 | tr -d '\n' > yourkey.txt
 
 echo "Building and updating pom.xml file so we can use it in our docker"
 cd ../.. && mvn clean && mvn --batch-mode release:update-versions -DdevelopmentVersion=${tag}-SNAPSHOT && mvn install
-git add pomx.ml
-git commit -am "Update POM file with new version: ${tag}"
-cd .github/scripts && git push
+#todo: uncomment 3 lines below again!
+#git add pomx.ml
+#git commit -am "Update POM file with new version: ${tag}"
+#cd .github/scripts && git push
+cd .github/scripts
+## todo: comment line above
 docker buildx create --name mybuilder
 docker buildx use mybuilder
 echo "creating containers"
@@ -69,11 +72,11 @@ docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongs
 docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets:$tag-k8s-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=kubernetes-vault" --push ./../../.
 
 echo "tagging version"
-git tag -a $tag -m "${message}"
-git push --tags
+#git tag -a $tag -m "${message}"
+#git push --tags
 
 #staging (https://arcane-scrubland-42646.herokuapp.com/)
-echo "Completed docker upload for X86, now taking care of heroku, do yourself: update Dockerfile.web, then run 'heroku container:login' 'heroku container:push --recursive --arg argBasedVersion=${tag}heroku' and 'heroku container:push --recursive --arg argBasedVersion=${tag}heroku --app=wrongsecrets' and release both (heroku container:release web --app=wrongsecrets)"
+echo "Completed docker upload for X86, now taking care of heroku, do yourself: update Dockerfile.web, then run 'heroku container:login' 'heroku container:push --recursive --arg argBasedVersion=${tag}heroku' and 'heroku container:push --recursive --arg argBasedVersion=${tag}heroku --arg $CANARY_URLS=httpurl1httpurl2 --app=wrongsecrets' and release both (heroku container:release web --app=wrongsecrets)"
 #want to release? do heroku container:release web --app=wrongsecrets
 
 
