@@ -1,7 +1,7 @@
-# Setup your secrets in GCP - EXPERIMENTAL
+# Setup your secrets in GCP
 
 In this setup we integrate the secrets exercise with GCP GKE and let pods consume secrets from the GCP Secret manager. If you want to know more about integrating secrets with GKE, check [this link](https://github.com/GoogleCloudPlatform/secrets-store-csi-driver-provider-gcp).
-
+Please make sure that the account in which you run this exercise has either Cloud Audit Logs enabled, or is not linked to your current organization and/or DTAP environment.
 ## Pre-requisites
 
 Have the following tools installed:

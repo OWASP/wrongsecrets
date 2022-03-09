@@ -2,6 +2,8 @@
 
 In this setup we integrate the secrets-exercise online with AWS EKS and let Pods consume secrets from the AWS Parameter Store and AWS Secrets Manager.
 We use managed node groups so as we don't want the hassle of managing the EC2 instances ourselves, and Fargate doesn't suit our needs since we use a StatefulSet. If you want to know more about integrating secrets with EKS, check [EKS and SSM Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/integrating_csi_driver.html) and [EKS and Secrets Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/integrating_csi_driver.html).
+Please make sure that the account in which you run this exercise has either CloudTrail enabled, or is not linked to your current organization and/or DTAP environment.
+
 
 ## Pre-requisites
 

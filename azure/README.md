@@ -1,6 +1,7 @@
-# Setup your secrets in Azure - EXPERIMENTAL
+# Setup your secrets in Azure
 
 In this setup we integrate the secrets exercise with Azure AKS and let pods consume secrets from an Azure Key Vault. If you want to know more about integrating secrets with AKS, check [this link](https://azure.github.io/secrets-store-csi-driver-provider-azure/getting-started/usage/#provide-identity-to-access-key-vault).
+Please make sure that the account in which you run this exercise has either Log Analytics enabled, or is not linked to your current subscriptions and/or DTAP environment.
 
 ## Pre-requisites
 

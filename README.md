@@ -118,6 +118,9 @@ When you stopped the `k8s-vault-minikube-start.sh` script and want to resume the
 
 _Can be used for challenges 1-14_
 
+**READ THIS**: Given that the exercises below contain IAM privilege escalation exercises, 
+never run this on an account which is related to your production environment or can influence your account-over-arching resources.
+
 ### Running WrongSecrets in AWS
 
 Follow the steps in [the README in the AWS subfolder](aws/README.md).
