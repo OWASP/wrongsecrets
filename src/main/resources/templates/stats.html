@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{index.html}">
+<body>
+<div class="container">
+    <div class="container-fluid mt-3 text-sm p-5 bg-light" layout:fragment="content">
+        <h1>Current Stats</h1>
+        <p>Number of active sessions:</p>
+        <p th:text="${sessioncounter}"></p>
+        <p>Number of canary callbacks since boot:</p>
+        <p th:text="${canaryCounter}"></p>
+        <p>Last canary token received:</p>
+        <p th:text="${lastCanaryToken}"></p>
+        <p>CanaryTokenUrlwebtoken in use:</p>
+        <ul th:each="canarytokenURL : ${canarytokenURLs}">
+            <li th:text="${canarytokenURL}"></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

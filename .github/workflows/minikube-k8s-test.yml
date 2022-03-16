@@ -1,0 +1,42 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Test minikube script (k8s)
+
+# Controls when the workflow will run
+on:
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  test-minikube:
+    name: Test with minikube
+    runs-on: ubuntu-latest
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - uses: actions/checkout@v3
+      - name: Start minikube
+        uses: medyagh/setup-minikube@master
+        with:
+          minikube-version: 1.24.0
+          driver: docker
+          kubernetes-version: v1.21.9
+      - name: test script
+        run: |
+          kubectl apply -f k8s/secrets-config.yml
+          kubectl apply -f k8s/secrets-secret.yml
+          kubectl apply -f k8s/secret-challenge-deployment.yml
+          while [[ $(kubectl get pods -l app=secret-challenge -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do echo "waiting for secret-challenge" && sleep 2; done
+          kubectl logs -l app=secret-challenge -f >> pod.log &
+          kubectl expose deployment secret-challenge --type=LoadBalancer --port=8080
+          kubectl port-forward \
+              $(kubectl get pod -l app=secret-challenge -o jsonpath="{.items[0].metadata.name}") \
+              8080:8080 \
+              &
+          echo "Do minikube delete to stop minikube from running and cleanup to start fresh again"
+          echo "wait 20 seconds so we can check if vault-k8s-container works"
+          sleep 20
+          curl http://localhost:8080/spoil-6
+          echo "logs from pod to make sure:"
+          cat pod.log

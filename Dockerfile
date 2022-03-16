@@ -1,4 +1,4 @@
-FROM eclipse-temurin:17_35-jdk-focal
+FROM eclipse-temurin:17.0.2_8-jdk-focal
 
 ARG argBasedPassword="default"
 ARG argBasedVersion="0.0.0"
@@ -15,7 +15,8 @@ RUN echo "$argBasedPassword"
 
 RUN useradd -u 2000 wrongsecrets
 
-COPY --chown=wrongsecrets target/wrongsecrets-0.0.2-SNAPSHOT.jar /application.jar
+COPY --chown=wrongsecrets target/wrongsecrets-${argBasedVersion}-SNAPSHOT.jar /application.jar
 COPY --chown=wrongsecrets .github/scripts/ /var/tmp/helpers
+COPY --chown=wrongsecrets src/test/resources/alibabacreds.kdbx /var/tmp/helpers
 USER wrongsecrets
 CMD java -jar -Dspring.profiles.active=$(echo ${SPRING_PROFILES_ACTIVE}) /application.jar

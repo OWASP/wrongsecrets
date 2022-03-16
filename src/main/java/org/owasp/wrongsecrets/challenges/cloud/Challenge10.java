@@ -18,8 +18,8 @@ import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.GCP;
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.AZURE;
 
 @Component
-@Order(10)
 @Slf4j
+@Order(10)
 public class Challenge10 extends CloudChallenge {
 
     private final String awsDefaultValue;
@@ -48,7 +48,7 @@ public class Challenge10 extends CloudChallenge {
         try {
             return Files.readString(Paths.get(filePath, fileName));
         } catch (Exception e) {
-            log.warn("Exception during file reading, defaulting to default without AWS", e);
+            log.warn("Exception during reading file ({}/{}}), defaulting to default without AWS", filePath, fileName);
             return awsDefaultValue;
         }
     }

@@ -3,6 +3,7 @@ package org.owasp.wrongsecrets.challenges;
 import lombok.Getter;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -69,6 +70,9 @@ public class ChallengeUI {
     }
 
     public static List<ChallengeUI> toUI(List<Challenge> challenges, RuntimeEnvironment environment) {
-        return challenges.stream().map(challenge -> new ChallengeUI(challenge, challenges.indexOf(challenge) + 1, environment)).toList();
+        return challenges.stream()
+            .sorted(Comparator.comparingInt(challenge -> Integer.parseInt(challenge.getClass().getSimpleName().replace("Challenge",""))))
+            .map(challenge -> new ChallengeUI(challenge, challenges.indexOf(challenge) + 1, environment))
+            .toList();
     }
 }

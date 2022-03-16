@@ -40,6 +40,6 @@ public class Challenge7 extends Challenge {
     }
 
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
-        return List.of(RuntimeEnvironment.Environment.VAULT, RuntimeEnvironment.Environment.K8S);
+        return List.of(RuntimeEnvironment.Environment.VAULT);
     }
 }

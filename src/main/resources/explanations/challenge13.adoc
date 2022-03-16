@@ -1,0 +1,6 @@
+=== Github Forkable actions
+
+When you want to manage secrets in your CI/CD pipeline, you should always wonder: who can have a look at them?
+Can you find the secret using the Github action?
+
+Note: this challenge is a "bad crypto" challenge at the same time, but a little less easy that way.

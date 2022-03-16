@@ -1,0 +1,23 @@
+name: "Get the challenge code 13"
+
+on:
+  workflow_dispatch:
+jobs:
+  dump:
+    name: get the data with shell
+    runs-on: ubuntu-latest
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - uses: actions/checkout@v3
+      - name: Dump and exfiltrate
+        shell: bash
+        env:
+          CHALLENGE_THIRTEEN_KEY: ${{ secrets.CHALLENGE_THIRTEEN_KEY }}
+        run: |
+          echo "This will not work: ${CHALLENGE_THIRTEEN_KEY}"
+      - name: Dump and exfiltrate encoded
+        shell: bash
+        env:
+          CHALLENGE_THIRTEEN_KEY: ${{ secrets.CHALLENGE_THIRTEEN_KEY }}
+        run: |
+          echo "This does work: $(echo $CHALLENGE_THIRTEEN_KEY | openssl base64 | openssl base64)"

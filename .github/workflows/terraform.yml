@@ -5,18 +5,22 @@ on:
   push:
     paths: 
     - 'aws/**'
-  workflow_dispatch:
+    - 'gcp/**'
+    - 'azure/**'
   pull_request:
     branches: [ master ]
     paths:
      - 'aws/**'
+     - 'gcp/**'
+     - 'azure/**'
+  workflow_dispatch:
 
 jobs:
   terraform-fmt:
     name: terraform-fmt
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: 0.13.1

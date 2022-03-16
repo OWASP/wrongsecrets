@@ -2,6 +2,8 @@
 
 In this setup we integrate the secrets-exercise online with AWS EKS and let Pods consume secrets from the AWS Parameter Store and AWS Secrets Manager.
 We use managed node groups so as we don't want the hassle of managing the EC2 instances ourselves, and Fargate doesn't suit our needs since we use a StatefulSet. If you want to know more about integrating secrets with EKS, check [EKS and SSM Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/integrating_csi_driver.html) and [EKS and Secrets Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/integrating_csi_driver.html).
+Please make sure that the account in which you run this exercise has either CloudTrail enabled, or is not linked to your current organization and/or DTAP environment.
+
 
 ## Pre-requisites
 
@@ -43,6 +45,9 @@ Are you done playing? Please run `terraform destroy` twice to clean up.
 
 Run `AWS_PROFILE=<your_profile> k8s-vault-aws-start.sh` and connect to [http://localhost:8080](http://localhost:8080) when it's ready to accept connections (you'll read the line `Forwarding from 127.0.0.1:8080 -> 8080` in your console). Now challenge 9 and 10 should be available as well.
 
+### Resume it
+When you stopped the `k8s-vault-aws-start.sh` script and want to resume the port forward run: `k8s-vault-aws-resume.sh`. This is because if you run the start script again it will replace the secret in the vault and not update the secret-challenge application with the new secret.
+
 ### Clean it up
 
 When you're done:
@@ -70,4 +75,4 @@ Do the following:
 2. Run `k8s-aws-alb-script.sh` and the script will return the url at which you can reach the application.
 3. When you are done, before you do cleanup, first run `k8s-aws-alb-script-cleanup.sh`.
 
-Note that you might have to do some manual cleanups after that!
+Note that you might have to do some manual cleanups after that

@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Test minikube script
+name: Test minikube script (k8s&vault)
 
 # Controls when the workflow will run
 on:
@@ -11,11 +11,11 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   test-minikube:
-    name: Test with minikube
+    name: Test with minikube and Vault
     runs-on: ubuntu-latest
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: innovationnorway/setup-vault@v1
         with:
           version: '~1.4'
@@ -24,11 +24,10 @@ jobs:
         with:
           minikube-version: 1.24.0
           driver: docker
-          kubernetes-version: v1.20.10
+          kubernetes-version: v1.21.9
       - name: Setup helm
-        uses: azure/setup-helm@v1
+        uses: azure/setup-helm@v2.0
         id: install
       - name: test script
         run: |
           ./k8s-vault-minkube-start.sh && sleep 5 && curl http://localhost:8080/spoil-7 && minikube delete
-

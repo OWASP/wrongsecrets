@@ -1,47 +1,63 @@
 <!DOCTYPE html>
 <html>
+
 <body>
-<div th:fragment="header">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/">WrongSecrets</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+    <div th:fragment="header">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">WrongSecrets</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">Home</a>
-                    </li>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                           data-bs-toggle="dropdown" aria-expanded="false">
-                            Challenges
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <!--/*@thymesVar id="challenges" type="java.util.List<org.owasp.wrongsecrets.challenges.ChallengeUI>"*/-->
-                            <span th:each="challenge : ${challenges}" th:remove="tag">
-                             <a class="dropdown-item" th:href="@{/challenge} + '/' + ${challenge.link}"><span
-                                     th:text="${challenge.name}" th:remove="tag"></span></a>
-                            </span>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://github.com/commjoen/wrongsecrets" target="_blank">Github</a>
-                    </li>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/">Home</a>
+                        </li>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Challenges
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <!--/*@thymesVar id="challenges" type="java.util.List<org.owasp.wrongsecrets.challenges.ChallengeUI>"*/-->
+                                <span th:each="challenge : ${challenges}" th:remove="tag">
+                                    <a class="dropdown-item" th:href="@{/challenge} + '/' + ${challenge.link}"><span
+                                            th:text="${challenge.name}" th:remove="tag"></span></a>
+                                </span>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://github.com/commjoen/wrongsecrets"
+                                target="_blank">Github</a>
+                        </li>
+                        <div class="theme-toggle navbar-text">
+                            <label>
+                                <span class="visually-hidden">Light</span>
+                                <input type="radio" value="light" name="theme">
+                                <span class="checkmark">☀️</span>
+                            </label>
+                            <label>
+                                <span class="visually-hidden">Dark</span>
+                                <input type="radio" value="dark" name="theme">
+                                <span class="checkmark">🌜</span>
+                            </label>
+                        </div>
 
-                </ul>
-                <a class="nav-link disabled me-2" href="#" tabindex="-1" aria-disabled="true"
-                   th:text="'Environment:'+${environment}"></a>
-                <a class="nav-link disabled me-2" href="#" tabindex="-1" aria-disabled="true"
-                   th:text="'Version:'+${version}"></a>
+
+                    </ul>
+                    <a class="nav-link disabled me-2" href="#" tabindex="-1" aria-disabled="true"
+                        th:text="'Environment:'+${environment}"></a>
+                    <a class="nav-link disabled me-2" href="#" tabindex="-1" aria-disabled="true"
+                        th:text="'Version:'+${version}"></a>
+                </div>
             </div>
-        </div>
-    </nav>
-</div>
+        </nav>
+    </div>
 </body>
+
 </html>

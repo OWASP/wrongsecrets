@@ -1,7 +1,7 @@
-# Setup your secrets in GCP - EXPERIMENTAL
+# Setup your secrets in GCP
 
 In this setup we integrate the secrets exercise with GCP GKE and let pods consume secrets from the GCP Secret manager. If you want to know more about integrating secrets with GKE, check [this link](https://github.com/GoogleCloudPlatform/secrets-store-csi-driver-provider-gcp).
-
+Please make sure that the account in which you run this exercise has either Cloud Audit Logs enabled, or is not linked to your current organization and/or DTAP environment.
 ## Pre-requisites
 
 Have the following tools installed:
@@ -45,6 +45,9 @@ Are you done playing? Please run `terraform destroy` twice to clean up.
 ### Test it
 
 Run `./k8s-vault-gcp-start.sh` and connect to [http://localhost:8080](http://localhost:8080) when it's ready to accept connections (you'll read the line `Forwarding from 127.0.0.1:8080 -> 8080` in your console). Now challenge 9 and 10 should be available as well.
+
+### Resume it
+When you stopped the `k8s-vault-gcp-start.sh` script and want to resume the port forward run: `k8s-vault-gcp-resume.sh`. This is because if you run the start script again it will replace the secret in the vault and not update the secret-challenge application with the new secret.
 
 ### Clean it up
 

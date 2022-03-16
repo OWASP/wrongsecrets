@@ -1,45 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.5.8</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <version>2.6.4</version>
+        <relativePath /> <!-- lookup parent from repository -->
     </parent>
     <groupId>org.owasp</groupId>
     <artifactId>wrongsecrets</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
-    <name>wrongsecrets</name>
-    <description>Demo project for our journey to Vault</description>
-
+    <version>1.3.7-SNAPSHOT</version>
+    <name>OWASP WrongSecrets</name>
+    <description>Examples with how to not use secrets</description>
+    <url>https://owasp.org/www-project-wrongsecrets/</url>
+    <scm>
+        <url>https://github.com/commjoen/wrongsecrets</url>
+    </scm>
+    <issueManagement>
+        <system>GitHub Issue Tracking</system>
+        <url>https://github.com/commjoen/wrongsecrets/issues</url>
+    </issueManagement>
     <licenses>
         <license>
             <name>MIT License</name>
             <url>https://opensource.org/licenses/MIT</url>
+            <distribution>repo</distribution>
         </license>
     </licenses>
+    <organization>
+        <name>The Open Web Application Security Project (OWASP)</name>
+        <url>https://owasp.org/</url>
+    </organization>
+<!--    <distributionManagement>-->
+<!--        <snapshotRepository>-->
+<!--            <id>ossrh</id>-->
+<!--            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>-->
+<!--        </snapshotRepository>-->
+<!--    </distributionManagement>-->
 
     <properties>
-
         <java.version>17</java.version>
-        <spring.cloud-version>2020.0.4</spring.cloud-version>
+        <spring.cloud-version>2021.0.1</spring.cloud-version>
         <lombok.version>1.18.22</lombok.version>
         <maven.compiler.target>17</maven.compiler.target>
-        <aws.sdk.version>2.17.102</aws.sdk.version>
-        <asciidoctorj.version>2.5.2</asciidoctorj.version>
-        <jruby.version>9.3.2.0</jruby.version>
+        <aws.sdk.version>2.17.139</aws.sdk.version>
+        <asciidoctorj.version>2.5.3</asciidoctorj.version>
+        <jruby.version>9.3.3.0</jruby.version>
         <bootstrap.version>5.1.3</bootstrap.version>
         <github.button.version>2.14.1</github.button.version>
-        <gcp.sdk.version>24.1.1</gcp.sdk.version>
+        <gcp.sdk.version>24.3.0</gcp.sdk.version>
         <thymeleaf-spring5.version>3.0.14.RELEASE</thymeleaf-spring5.version>
         <thymeleaf.version>3.0.14.RELEASE</thymeleaf.version>
         <thymeleaf.layout>3.0.0</thymeleaf.layout>
-        <asciidoctor.maven.plugin.version>2.2.1</asciidoctor.maven.plugin.version>
-        <azure.keyvault.version>4.2.3</azure.keyvault.version>
-        <azure.identity.version>1.2.0</azure.identity.version>
-        <azure.keyvault.spring.version>2.2.4</azure.keyvault.spring.version>
+        <asciidoctor.maven.plugin.version>2.2.2</asciidoctor.maven.plugin.version>
+        <azure.keyvault.version>4.3.7</azure.keyvault.version>
+        <azure.identity.version>1.4.4</azure.identity.version>
+        <azure.keyvault.spring.version>2.3.5</azure.keyvault.spring.version>
+        <spring.security.version>5.6.2</spring.security.version>
     </properties>
 
     <dependencies>
@@ -64,6 +81,16 @@
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
@@ -84,6 +111,11 @@
             <groupId>software.amazon.awssdk</groupId>
             <artifactId>ssm</artifactId>
             <version>${aws.sdk.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.linguafranca.pwdb</groupId>
+            <artifactId>KeePassJava2</artifactId>
+            <version>2.1.4</version>
         </dependency>
         <dependency>
             <groupId>org.asciidoctor</groupId>
@@ -144,6 +176,13 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>uk.org.webcompere</groupId>
+            <artifactId>system-stubs-jupiter</artifactId>
+            <version>2.0.1</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <dependencyManagement>
@@ -176,7 +215,7 @@
                         <dependency>
                             <groupId>com.puppycrawl.tools</groupId>
                             <artifactId>checkstyle</artifactId>
-                            <version>9.2.1</version>
+                            <version>10.0</version>
                         </dependency>
                     </dependencies>
                 </plugin>
@@ -244,6 +283,7 @@
                     </execution>
                 </executions>
             </plugin>
+            <!-- todo: #178 add the missing plugins and profiles from https://central.sonatype.org/publish/publish-maven/-->
             <plugin>
                 <groupId>com.github.eirslett</groupId>
                 <artifactId>frontend-maven-plugin</artifactId>

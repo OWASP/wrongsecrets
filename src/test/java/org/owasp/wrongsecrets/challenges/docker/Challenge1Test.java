@@ -17,22 +17,22 @@ class Challenge1Test {
 
     @Test
     void spoilerShouldRevealAnswer() {
-        var challenge = new Challenge4(scoreCard, "test");
+        var challenge = new Challenge1(scoreCard);
 
-        Assertions.assertThat(challenge.spoiler()).isEqualTo(new Spoiler("test"));
+        Assertions.assertThat(challenge.spoiler()).isEqualTo(new Spoiler(Constants.password));
     }
 
     @Test
     void rightAnswerShouldSolveChallenge() {
-        var challenge = new Challenge4(scoreCard, "test");
+        var challenge = new Challenge1(scoreCard);
 
-        Assertions.assertThat(challenge.solved("test")).isTrue();
+        Assertions.assertThat(challenge.solved(Constants.password)).isTrue();
         Mockito.verify(scoreCard).completeChallenge(challenge);
     }
 
     @Test
     void incorrectAnswerShouldNotSolveChallenge() {
-        var challenge = new Challenge4(scoreCard, "test");
+        var challenge = new Challenge1(scoreCard);
 
         Assertions.assertThat(challenge.solved("wrong answer")).isFalse();
         Mockito.verifyNoInteractions(scoreCard);

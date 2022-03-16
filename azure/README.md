@@ -1,6 +1,7 @@
-# Setup your secrets in Azure - EXPERIMENTAL
+# Setup your secrets in Azure
 
 In this setup we integrate the secrets exercise with Azure AKS and let pods consume secrets from an Azure Key Vault. If you want to know more about integrating secrets with AKS, check [this link](https://azure.github.io/secrets-store-csi-driver-provider-azure/getting-started/usage/#provide-identity-to-access-key-vault).
+Please make sure that the account in which you run this exercise has either Log Analytics enabled, or is not linked to your current subscriptions and/or DTAP environment.
 
 ## Pre-requisites
 
@@ -40,6 +41,9 @@ Are you done playing? Please run `terraform destroy` twice to clean up.
 ### Test it
 
 Run `./k8s-vault-azure-start.sh` and connect to [http://localhost:8080](http://localhost:8080) when it's ready to accept connections (you'll read the line `Forwarding from 127.0.0.1:8080 -> 8080` in your console). Now challenge 9 and 10 should be available as well.
+
+### Resume it
+When you stopped the `k8s-vault-azure-start.sh` script and want to resume the port forward run: `k8s-vault-azure-resume.sh`. This is because if you run the start script again it will replace the secret in the vault and not update the secret-challenge application with the new secret.
 
 ### Clean it up
 

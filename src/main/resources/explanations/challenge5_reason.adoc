@@ -1,4 +1,4 @@
-Why using configmaps is not a good idea
+*Why using configmaps is not a good idea*
 
 Configmaps were never designed to host secrets. Instead, they were designed to host additional data for your Job or Pod and other K8s resources.
 Configmaps are often readable for everyone who needs to develop/operate the processes which require data from the configmap. This could still mean that you put restrictions on who can read the configmap using RBAC. Maybe it is a good idea in production to limit who can read the configmap: to start, how about "not everyone"?

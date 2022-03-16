@@ -1,4 +1,4 @@
-Why secrets need RBAC so badly
+*Why secrets need RBAC so badly*
 
 K8s Secrets are designed to host secrets. As you can tell by solving the challenge and careful reconnaissance secrets are already `base64` encoded so that they can contain encrypted binary data.
 

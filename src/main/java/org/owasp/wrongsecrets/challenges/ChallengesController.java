@@ -55,7 +55,7 @@ public class ChallengesController {
         enrichWithHintsAndReasons(model);
         includeScoringStatus(model, challenge.getChallenge());
         addWarning(challenge.getChallenge(), model);
-
+        fireEnding(model);
         return "challenge";
     }
 
@@ -69,7 +69,6 @@ public class ChallengesController {
         includeScoringStatus(model, challenge.getChallenge());
         addWarning(challenge.getChallenge(), model);
         enrichWithHintsAndReasons(model);
-
         return "challenge";
     }
 
@@ -87,6 +86,7 @@ public class ChallengesController {
         model.addAttribute("challenge", challenge);
         includeScoringStatus(model, challenge.getChallenge());
         enrichWithHintsAndReasons(model);
+        fireEnding(model);
         return "challenge";
     }
 
@@ -112,5 +112,20 @@ public class ChallengesController {
     private void enrichWithHintsAndReasons(Model model) {
         model.addAttribute("hintsEnabled", hintsEnabled);
         model.addAttribute("reasonEnabled", reasonEnabled);
+    }
+
+    private void fireEnding(Model model) {
+        var notCompleted = challenges.stream()
+            .filter(ChallengeUI::isChallengeEnabled)
+            .map(ChallengeUI::getChallenge)
+            .filter(this::challengeNotCompleted)
+            .count();
+        if (notCompleted == 0) {
+            model.addAttribute("allCompleted", "party");
+        }
+    }
+
+    private boolean challengeNotCompleted(Challenge challenge) {
+        return !scoreCard.getChallengeCompleted(challenge);
     }
 }

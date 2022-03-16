@@ -1,0 +1,84 @@
+.dark-mode {
+    --bs-blue: #375a7f;
+    --bs-indigo: #673ab7;
+    --bs-light-purple: #9c7dd2;
+    --bs-purple: #9c7dd2;
+    --bs-pink: #e83e8c;
+    --bs-red: #e74c3c;
+    --bs-orange: #fd7e14;
+    --bs-yellow: #f39c12;
+    --bs-green: #00bc8c;
+    --bs-teal: #45b5aa;
+    --bs-cyan: #17a2b8;
+    --bs-white: #fafafa;
+    --bs-black: #111;
+    --bs-gray: #7e7e7e;
+    --bs-gray-dark: #121212;
+    --bs-gray-100: #e1e1e1;
+    --bs-gray-200: #cfcfcf;
+    --bs-gray-300: #b1b1b1;
+    --bs-gray-400: #9e9e9e;
+    --bs-gray-500: #7e7e7e;
+    --bs-gray-600: #626262;
+    --bs-gray-700: #515151;
+    --bs-gray-800: #3b3b3b;
+    --bs-gray-900: #222;
+    --bs-primary: #375a7f;
+    --bs-secondary: #626262;
+    --bs-success: #00bc8c;
+    --bs-info: #17a2b8;
+    --bs-warning: #f39c12;
+    --bs-danger: #e74c3c;
+    --bs-light: #9e9e9e;
+    --bs-dark: #3b3b3b;
+    --bs-primary-rgb: 55, 90, 127;
+    --bs-secondary-rgb: 98, 98, 98;
+    --bs-success-rgb: 0, 188, 140;
+    --bs-info-rgb: 23, 162, 184;
+    --bs-warning-rgb: 243, 156, 18;
+    --bs-danger-rgb: 231, 76, 60;
+    --bs-light-rgb: 120, 120, 120;
+    --bs-dark-rgb: 59, 59, 59;
+    --bs-white-rgb: 250, 250, 250;
+    --bs-black-rgb: 17, 17, 17;
+    --bs-body-color-rgb: 225, 225, 225;
+    --bs-body-bg-rgb: 34, 34, 34;
+    --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
+        "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --bs-gradient: linear-gradient(180deg, rgba(17, 17, 17, 0.15), rgba(17, 17, 17, 0));
+    --bs-body-font-family: var(--bs-font-sans-serif);
+    --bs-body-font-size: 1rem;
+    --bs-body-font-weight: 400;
+    --bs-body-line-height: 1.5;
+    --bs-body-color: #e1e1e1;
+    --bs-body-bg: #222;
+}
+
+.dark-mode a {
+    color: var(--bs-light-purple);
+}
+
+.dark-mode a.disabled {
+    color: var(--bs-body-color);
+}
+.dark-mode a.btn-secondary {
+    color: var(--bs-body-color);
+}
+
+.dark-mode .table {
+    color: var(--bs-body-color);
+}
+
+.dark-mode .card {
+    background-color: var(--bs-gray-800);
+}
+
+.dark-mode .btn-primary {
+    background-color: var(--bs-primary);
+    border-color: var(--bs-primary);
+}
+.dark-mode .btn-primary:hover {
+    background-color: var(--bs-indigo);
+    border-color: var(--bs-indigo);
+}
