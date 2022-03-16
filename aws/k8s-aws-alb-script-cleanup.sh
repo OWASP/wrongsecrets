@@ -45,5 +45,7 @@ eksctl delete iamserviceaccount \
   --namespace kube-system \
   --region $AWS_REGION
 
+sleep 5 # Prevents race condition - command below may error out because it's still 'attached'
+
 aws iam delete-policy \
   --policy-arn arn:aws:iam::${ACCOUNT_ID}:policy/AWSLoadBalancerControllerIAMPolicy
