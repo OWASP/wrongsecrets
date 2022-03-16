@@ -24,9 +24,8 @@ fi
 ACCOUNT_ID=$(aws sts get-caller-identity | jq '.Account' -r)
 echo "ACCOUNT_ID=${ACCOUNT_ID}"
 
-LBC_VERSION="v2.3.0"
+LBC_VERSION="v2.4.0"
 echo "LBC_VERSION=$LBC_VERSION"
-
 
 # echo "executing eksctl utils associate-iam-oidc-provider"
 # eksctl utils associate-iam-oidc-provider \
@@ -37,8 +36,8 @@ echo "LBC_VERSION=$LBC_VERSION"
 echo "creating iam policy"
 curl -o iam_policy.json https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.3.0/docs/install/iam_policy.json
 aws iam create-policy \
-    --policy-name AWSLoadBalancerControllerIAMPolicy \
-    --policy-document file://iam_policy.json
+  --policy-name AWSLoadBalancerControllerIAMPolicy \
+  --policy-document file://iam_policy.json
 
 echo "creating iam service account for cluster ${CLUSTERNAME}"
 eksctl create iamserviceaccount \
@@ -49,7 +48,6 @@ eksctl create iamserviceaccount \
   --override-existing-serviceaccounts \
   --region $AWS_REGION \
   --approve
-
 
 echo "setting up kubectl"
 
@@ -67,18 +65,19 @@ echo "do helm eks application"
 helm repo add eks https://aws.github.io/eks-charts
 
 helm upgrade -i aws-load-balancer-controller \
-    eks/aws-load-balancer-controller \
-    -n kube-system \
-    --set clusterName=${CLUSTERNAME} \
-    --set serviceAccount.create=false \
-    --set serviceAccount.name=aws-load-balancer-controller \
-    --set image.tag="${LBC_VERSION}"
-
+  eks/aws-load-balancer-controller \
+  -n kube-system \
+  --set clusterName=${CLUSTERNAME} \
+  --set serviceAccount.create=false \
+  --set serviceAccount.name=aws-load-balancer-controller \
+  --set image.tag="${LBC_VERSION}"
 
 kubectl -n kube-system rollout status deployment aws-load-balancer-controller
 
 EKS_CLUSTER_VERSION=$(aws eks describe-cluster --name $CLUSTERNAME --region $AWS_REGION --query cluster.version --output text)
 
 kubectl apply -f k8s/secret-challenge-vault-ingress.yml
+
+echo "http://$(kubectl get ingress wrongsecrets -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')"
 
 echo "Do not forget to cleanup afterwards! Run k8s-aws-alb-script-cleanup.sh"
