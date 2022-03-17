@@ -64,6 +64,7 @@ kubectl get crd
 echo "do helm eks application"
 helm repo add eks https://aws.github.io/eks-charts
 
+echo "upgrade alb controller with helm"
 helm upgrade -i aws-load-balancer-controller \
   eks/aws-load-balancer-controller \
   -n kube-system \
@@ -72,10 +73,19 @@ helm upgrade -i aws-load-balancer-controller \
   --set serviceAccount.name=aws-load-balancer-controller \
   --set image.tag="${LBC_VERSION}"
 
+echo "wait with rollout for 10 s"
+sleep 10
+
+echo "rollout status deployment"
 kubectl -n kube-system rollout status deployment aws-load-balancer-controller
+
+echo "wait after rollout for 10 s"
+sleep 10
 
 EKS_CLUSTER_VERSION=$(aws eks describe-cluster --name $CLUSTERNAME --region $AWS_REGION --query cluster.version --output text)
 
+echo "apply -f k8s/secret-challenge-vault-ingress.yml in 10 s"
+sleep 10
 kubectl apply -f k8s/secret-challenge-vault-ingress.yml
 
 echo "http://$(kubectl get ingress wrongsecrets -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')"
