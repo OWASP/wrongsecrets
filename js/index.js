@@ -1,5 +1,4 @@
-function secret (){
-    var passwordPrefix = '5' + 3;
-    var password = passwordPrefix + 'pass' + 1 + 1;
+function secret() {
+    var password = 'wg2QIk2N' + 8 + 'YmTEd' + 3 + 'C/jnlkFGeIpdeGI+lKzK7rROePYU=';
     return password
 }

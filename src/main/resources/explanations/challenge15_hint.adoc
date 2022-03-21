@@ -1,0 +1,9 @@
+You can solve this challenge by the following steps:
+
+1. Open main page in the browser
+2. Open development tools:
+- select Network tab
+- find request with path `/oauth/token`
+- find in the request `Authorization` header
+- decode Base64 heder value after `Basic`
+- the first part before `:` is user name and the second is password

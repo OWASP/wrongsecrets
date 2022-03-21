@@ -1,5 +1,6 @@
-=== JavaScript key obfuscated
+=== Docker COPY and WORKDIR
 
-When we start new project usually we are focus on new festers implementation than on security aspect. In such situation it easy to store secret or credential in front-end code.
+When we start new project usually we are focus on new festers implementation than on security aspect.
+In such situation it easy to store secret or credential in front-end code.
 
 What about looking for it in the Development Tools in browser?
