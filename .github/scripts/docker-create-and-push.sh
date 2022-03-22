@@ -55,9 +55,10 @@ openssl rand -base64 32 | tr -d '\n' > yourkey.txt
 
 echo "Building and updating pom.xml file so we can use it in our docker"
 cd ../.. && mvn clean && mvn --batch-mode release:update-versions -DdevelopmentVersion=${tag}-SNAPSHOT && mvn install
-git add pomx.ml
-git commit -am "Update POM file with new version: ${tag}"
-cd .github/scripts && git push
+git add pom.xml
+#git commit -am "Update POM file with new version: ${tag}"
+#cd .github/scripts && git push
+cd .github/scripts
 docker buildx create --name mybuilder
 docker buildx use mybuilder
 echo "creating containers"
@@ -69,8 +70,8 @@ docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongs
 docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets:$tag-k8s-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=kubernetes-vault" --push ./../../.
 
 echo "tagging version"
-git tag -a $tag -m "${message}"
-git push --tags
+#git tag -a $tag -m "${message}"
+#git push --tags
 
 #staging (https://arcane-scrubland-42646.herokuapp.com/)
 echo "Completed docker upload for X86, now taking care of heroku, do yourself: update Dockerfile.web, then run 'heroku container:login' 'heroku container:push --recursive --arg argBasedVersion=${tag}heroku' and 'heroku container:push --recursive --arg argBasedVersion=${tag}heroku --arg CANARY_URLS=http://canarytokens.com/feedback/images/traffic/tgy3epux7jm59n0ejb4xv4zg3/submit.aspx,http://canarytokens.com/traffic/cjldn0fsgkz97ufsr92qelimv/post.jsp --app=wrongsecrets' and release both (heroku container:release web --app=wrongsecrets)"
