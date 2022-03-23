@@ -23,7 +23,7 @@ For the basic docker exercises you currently require:
 You can install it by doing:
 
 ```bash
-docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:1.3.7-no-vault
+docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:1.3.8-no-vault
 ```
 
 Now you can try to find the secrets by means of solving the challenge offered at:
@@ -150,11 +150,12 @@ Leaders:
 Top contributors:
 
 - [Nanne Baars @nbaars](https://github.com/nbaars)
-- [Filip Chyla @fchyla](https://github.com/fchyla)
-- [Mike Woudenberg @mikewoudenberg](https://github.com/mikewoudenberg)
-- [Dmitry Litosh @Dlitosh](https://github.com/Dlitosh)
 - [Tibor Hercz @tiborhercz](https://github.com/tiborhercz)
+- [Filip Chyla @fchyla](https://github.com/fchyla)
+- [Dmitry Litosh @Dlitosh](https://github.com/Dlitosh)
+- [Mike Woudenberg @mikewoudenberg](https://github.com/mikewoudenberg)
 - [Ruben Kruiver @RubenAtBinx](https://github.com/RubenAtBinx)
+- [Marcin Nowak @MarcinNowak-codes](https://github.com/MarcinNowak-codes)
 - [Finn @f3rn0s](https://github.com/f3rn0s)
 
 Testers:
