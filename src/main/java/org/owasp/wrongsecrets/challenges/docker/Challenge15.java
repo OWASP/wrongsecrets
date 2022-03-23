@@ -19,7 +19,7 @@ import java.util.List;
 @Order(15)
 public class Challenge15 extends Challenge {
 
-    private String dockerMountPath;
+    private final String dockerMountPath;
 
     public Challenge15(ScoreCard scoreCard, @Value("${challengedockermtpath}") String dockerMountPath) {
         super(scoreCard);
@@ -42,7 +42,7 @@ public class Challenge15 extends Challenge {
         return List.of(RuntimeEnvironment.Environment.DOCKER);
     }
 
-    private String getActualData() {
+    public String getActualData() {
         try {
             return Files.readString(Paths.get(dockerMountPath, "yourkey.txt"));
         } catch (Exception e) {

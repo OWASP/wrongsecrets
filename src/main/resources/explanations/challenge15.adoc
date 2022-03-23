@@ -1,6 +1,8 @@
 === Docker COPY and WORKDIR
 
 When we start new project usually we are focus on new festers implementation than on security aspect.
-In such situation it easy to store secret or credential in front-end code.
+Sometimes Single Page Application or mobile application need to access information for themself rather then on behalf of a user.
+For this purpose OAuth provides the `client_credentials` flow to get access token.
+In such situation it easy to store client secrets in front-end or mobile application code.
 
 What about looking for it in the Development Tools in browser?
