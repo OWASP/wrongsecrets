@@ -1,0 +1,11 @@
+*Why you need to clean & rotate secrets*
+
+When you have a secret committed to Git by mistake, there will be ways to find it, by hand or with tools.
+
+Therefore, when a secret is committed to Git by mistake:
+
+- Inform any responsible security authority in the organization
+- Make sure you rotate the secret
+- Optionally- cleanup: either use https://github.com/rtyley/bfg-repo-cleaner[BFG repo-cleaner], or try to remove the offending commit in another way.
+
+There are many ways to prevent committing a secret, by having https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks[a pre-commit hook] configured with secret-detection controls for instance.

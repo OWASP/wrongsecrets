@@ -70,7 +70,7 @@ public class Challenge13 extends Challenge {
             byte[] cipherTextBytes = cipher.doFinal(plainText.getBytes(StandardCharsets.UTF_8));
             return cipherText.equals(Base64.getEncoder().encodeToString(cipherTextBytes));
         } catch (Exception e) {
-            log.error("Exception with Challenge 13", e);
+            log.warn("Exception with Challenge 13", e);
             return false;
         }
 

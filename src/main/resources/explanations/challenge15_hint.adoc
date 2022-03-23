@@ -1,0 +1,6 @@
+You can solve this challenge by the following steps:
+
+1. Get the secret from older commits!
+ - todo/hvg
+2. Get the secret by "using the encryption"
+ - todo/hvg
