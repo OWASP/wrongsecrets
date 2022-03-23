@@ -9,3 +9,5 @@ Therefore, when a secret is committed to Git by mistake:
 - Optionally- cleanup: either use https://github.com/rtyley/bfg-repo-cleaner[BFG repo-cleaner], or try to remove the offending commit in another way.
 
 There are many ways to prevent committing a secret, by having https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks[a pre-commit hook] configured with secret-detection controls for instance.
+
+TODO: INTEGRATE LINK TO THE CANARYTOKENS HERE!
