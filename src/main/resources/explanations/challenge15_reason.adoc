@@ -1,4 +1,4 @@
-*Why using Single-Page Application or Mobile application to put client secret in is a bad idea*
+*Why using Single-Page apps or Mobile apps to put client secret in is a bad idea*
 
-As you can tell by now, you can easily detect any secret that stored within a Single Page Application or Mobile application.
-To prevent such situation Authorization Code Flow with Proof Key for Code Exchange (PKCE) is used.
+As you can tell by now, you can easily detect any secret that is stored within a Single-Page app or mobile app.
+To prevent such a situation Authorization Code Flow with Proof Key for Code Exchange (PKCE) is used.

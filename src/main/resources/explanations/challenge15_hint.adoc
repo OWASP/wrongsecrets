@@ -1,6 +1,6 @@
 You can solve this challenge by the following steps:
 
-1. Open main page in the Chrome browser
+1. Open the main page in the Chrome browser
 2. Open development tools:
 - select Network tab
 - find request with path `/token`
