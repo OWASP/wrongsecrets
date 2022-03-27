@@ -51,57 +51,60 @@ module "vpc" {
 
 
 module "eks" {
-  source = "terraform-aws-modules/eks/aws"
-  version = "17.24.0"
+  source  = "terraform-aws-modules/eks/aws"
+  version = "18.10.1"
 
   cluster_name    = var.cluster_name
   cluster_version = var.cluster_version
 
-  vpc_id  = module.vpc.vpc_id
-  subnets = module.vpc.private_subnets
+  vpc_id     = module.vpc.vpc_id
+  subnet_ids = module.vpc.private_subnets
 
 
-  cluster_endpoint_private_access                = true
-  cluster_create_endpoint_private_access_sg_rule = true
-  cluster_endpoint_private_access_cidrs          = [local.private_subnet_1_cidr, local.private_subnet_2_cidr, local.private_subnet_3_cidr]
+  cluster_endpoint_private_access = true
 
   cluster_endpoint_public_access_cidrs = ["${data.http.ip.body}/32"]
 
   enable_irsa = true
 
-  node_groups_defaults = {
-    ami_type  = "AL2_x86_64"
-    disk_size = 50
+  eks_managed_node_group_defaults = {
+    disk_size       = 50
+    disk_type       = "gp3"
+    disk_throughput = 150
+    disk_iops       = 3000
+    instance_types  = ["t3a.large"]
+
+    iam_role_additional_policies = [
+      "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy",
+      "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy",
+      "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
+      "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore",
+      "arn:aws:iam::aws:policy/AmazonEKSVPCResourceController"
+    ]
   }
 
-  node_groups = {
-    managed = {
-      create_launch_template = true
+  eks_managed_node_groups = {
+    bottlerocket_default = {
+      create_launch_template = false
+      launch_template_name   = ""
 
-      desired_capacity = 1
-      max_capacity     = 10
-      min_capacity     = 1
+      capacity_type = "SPOT"
 
-      disk_size       = 50
-      disk_type       = "gp3"
-      disk_throughput = 150
-      disk_iops       = 3000
-
-      instance_types = ["t3a.large"]
-      capacity_type  = "SPOT"
-
-      additional_tags = {
-        Environment = "test"
-        Application = "wrongsecrets"
-      }
-      update_config = {
-        max_unavailable_percentage = 25 # or set `max_unavailable`
-      }
+      ami_type = "BOTTLEROCKET_x86_64"
+      platform = "bottlerocket"
     }
-
   }
 
-  manage_aws_auth = true
+  node_security_group_additional_rules = {
+    aws_lb_controller_webhook = {
+      description                   = "Cluster API to AWS LB Controller webhook"
+      protocol                      = "all"
+      from_port                     = 9443
+      to_port                       = 9443
+      type                          = "ingress"
+      source_cluster_security_group = true
+    }
+  }
 
   tags = {
     Environment = "test"
