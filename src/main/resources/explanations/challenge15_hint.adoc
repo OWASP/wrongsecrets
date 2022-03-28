@@ -1,0 +1,11 @@
+You can solve this challenge by the following steps:
+
+1. Get the secret from older commits using Trufflehog
+- install https://github.com/feeltheajf/trufflehog3[trufflehog3] by running `pip3 install trufflehog3` which requires python3 and pip to be installed
+- run `trufflehog3 https://github.com/commjoen/wrongsecrets` and take a look at the output: you should find 3 `aws_secret_access_key` one of them is the solution!
+2. Get the secret by "using the encryption" of the challenge as the encrypted materials are still in the java class (Note this is a more advanced test and requires some java skills).
+- Find the container which is used to offer this challenge to you
+- Extract the ciphertext for Challenge15
+- Clone the project locally and run it locally following the instructions at the https://github.com/commjoen/wrongsecrets#notes-on-development[Readme.md].
+- Debug the project, by setting a breakpoint at the beginning of the `quickDecrypt` method
+- Override the cipherText value with the ciphertext you extracted at step 2, and now find the plaintext.
