@@ -5,6 +5,7 @@ import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.Spoiler;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -21,12 +22,13 @@ import java.util.List;
 @Order(15)
 public class Challenge15 extends Challenge {
 
-    private String ciphterText = "qemGhPXJjmipa9O7cYBJnuO79BQg/MgvSFbV9rhiBFuEmVqEfDsuz6xfBDMV2lH8TAhwKX39OrW+WIYxgaEWl8c1/n93Yxz5G/ZKbuTBbEaJ58YvC88IoB4NtnQciU6p+uJ+P+uHMMzRGQ0oGNvQeb5+bKK9V62Rp4aOhDupHnjeTUPKmWUV9/lzC5IUM7maNGuBLllzJnoM6QHMnGe5YpBBEA==";
-    private String encryptionKey;
+    private final String ciphterText;
+    private final String encryptionKey;
 
 
-    public Challenge15(ScoreCard scoreCard) {
+    public Challenge15(ScoreCard scoreCard, @Value("${challenge15ciphertext}") String ciphterText) {
         super(scoreCard);
+        this.ciphterText = ciphterText;
         encryptionKey = Base64.getEncoder().encodeToString("this is it for now".getBytes(StandardCharsets.UTF_8));
     }
 
@@ -37,7 +39,9 @@ public class Challenge15 extends Challenge {
 
     @Override
     protected boolean answerCorrect(String answer) {
-        return answer.equals(quickDecrypt(ciphterText));
+        String correctString = quickDecrypt(ciphterText);
+        String minimumKey = correctString.substring(75, 115);
+        return answer.equals(correctString) || answer.equals(minimumKey);
     }
 
     @Override
@@ -68,11 +72,11 @@ public class Challenge15 extends Challenge {
     }
 
 
-    //arcane:
+    //arcane:114,74
     //qemGhPXJjmipa9O7cYBJnuO79BQg/MgvSFbV9rhiBFuEmVqEfDsuz6xfBDMV2lH8TAhwKX39OrW+WIYxgaEWl8c1/n93Yxz5G/ZKbuTBbEaJ58YvC88IoB4NtnQciU6p+uJ+P+uHMMzRGQ0oGNvQeb5+bKK9V62Rp4aOhDupHnjeTUPKmWUV9/lzC5IUM7maNGuBLllzJnoM6QHMnGe5YpBBEA==
-    //wrongsecrets:
+    //wrongsecrets:115,75
     //qcyRgfXSh0HUKsW/Xb5LnuWt9DgU8tQJfluR66UDDlmMgVWCGEwk1qxKAzUcpzb0KWQxP3nRFqO4SZEgqp8Ul8Ej/lNDbQCgBuszE/3WTn+g09Q7HcVUphA8g0Atg1GG4MpoepL8QOnhC0wxKMuqbe9TCu2nVqmUptKTmXGwAnmQH1TIl2MUueRuXpRKe72IMzKen1ArbMZqhu0I2HivROZgCUo=
-    //wrongsecrets-2:
+    //wrongsecrets-2:115,75
     //qcyRgfXSh0HUKsW/Xb5LnuWt9DgU8tQJfluR66UDDlmMgVWCGEwk1qxKCi4ZvzDwM38xP3nRFqO4SZEgqp8Ul8Ej/lNDbQCgBuszSILVSV6D9eojOMl6zTcNgzUmjW2K3dJKN9LqXOLYezEpEN2gUaYqPu2nVqmUptKTmXGwAnmQH1TIl2MUueRuXpRKe72IMzKenxZHKRsNFp+ebQebS3qzP+Q=
 
 }

@@ -10,4 +10,11 @@ Therefore, when a secret is committed to Git by mistake:
 
 There are many ways to prevent committing a secret, by having https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks[a pre-commit hook] configured with secret-detection controls for instance.
 
-TODO: INTEGRATE LINK TO THE CANARYTOKENS HERE!
+Note: "hiding" a wrong commit by adding more commits so that it will not show during a PR will just make it worse.
+At best, you should then squash the offending commit with the deletion commit together, so that the secret is only in your branch.
+
+Note-2: if you pushed a secret, note that all pulling colleagues/bots might have it locally as well.
+
+Note-3: the AWS keys hidden in this project are actual canary tokens. When you use them, then a call is done towards our https://github.com/commjoen/wrongsecrets/blob/master/src/main/java/org/owasp/wrongsecrets/canaries/CanariesController.java[CanariesController],
+which can possibly alert systems and/or data that the credentials/canary tokens have been used. The content of the last call to this endpoint can be found at our stats endpoint, for Heroku and Docker setups that is at http://wrongsecrets.herokuapp.com/stats[stats].
+We creage and manage our canarytokens through https://canarytokens.org/[Canarytokens.org]. Imagine what you can do with Canary tokens in your organization!
