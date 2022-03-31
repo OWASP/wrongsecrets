@@ -15,14 +15,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 @ExtendWith(MockitoExtension.class)
-class Challenge15Test {
+class Challenge16Test {
 
     @Mock
     private ScoreCard scoreCard;
 
     @Test
     void solveChallenge15WithoutFile(@TempDir Path dir) {
-        var challenge = new Challenge15(scoreCard, dir.toString());
+        var challenge = new Challenge16(scoreCard, dir.toString());
 
         Assertions.assertThat(challenge.answerCorrect("secretvalueWitFile")).isFalse();
         Assertions.assertThat(challenge.answerCorrect("if_you_see_this_please_use_docker_instead")).isTrue();
@@ -34,7 +34,7 @@ class Challenge15Test {
         var secret = "secretvalueWitFile";
         Files.writeString(testFile.toPath(), secret);
 
-        var challenge = new Challenge15(scoreCard, dir.toString());
+        var challenge = new Challenge16(scoreCard, dir.toString());
 
         Assertions.assertThat(challenge.answerCorrect("secretvalueWitFile")).isTrue();
     }
@@ -45,7 +45,7 @@ class Challenge15Test {
         var secret = "secretvalueWitFile";
         Files.writeString(testFile.toPath(), secret);
 
-        var challenge = new Challenge15(scoreCard, dir.toString());
+        var challenge = new Challenge16(scoreCard, dir.toString());
 
         Assertions.assertThat(challenge.spoiler()).isEqualTo(new Spoiler("secretvalueWitFile"));
     }
