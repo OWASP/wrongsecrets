@@ -1,0 +1,12 @@
+=== Git history
+
+One of the mistakes we often make when we do commit secrets to Git, is trying to get rid of them without rotating the secret.
+What makes it worse, is that without properly overriding the commit with the secret and/or removing the commit, it will remain in history forever.
+
+So, we kept some AWS access-keys in git as a "mistake", can you find them?
+
+Note: the answer contains one of the 3 aws credential profiles you find in a commit its java comments, but then without the java comment markup as a single line.
+Alternatively you can just provide the secret access key with we are looking for.
+
+Note-2: Did you know that these are working access keysfootnote:disclaimer[They are not "normal" AWS access keys: they are canary tokens! Though you can do `aws sts get-caller-identity` with them. When you use them, some of your data (IP/agent) is being logged.]?!
+Go to https://wrongsecrets.herokuapp.com/stats[stats] when you tried them to find out more!
