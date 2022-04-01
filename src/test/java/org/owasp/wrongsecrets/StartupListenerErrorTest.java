@@ -28,7 +28,15 @@ public class StartupListenerErrorTest {
         AtomicReference<String> text = new AtomicReference<>();
         var ape = new ApplicationEnvironmentPreparedEvent(new DefaultBootstrapContext(), new SpringApplication(), new String[0], configurableApplicationContext.getEnvironment());
         var startupListener = new StartupListener();
-        text.set(tapSystemErrAndOut(() -> statusCode.set(catchSystemExit(() -> startupListener.onApplicationEvent(ape)))));
+        text.set(
+            tapSystemErrAndOut(
+                () -> statusCode.set(
+                    catchSystemExit(
+                        () -> startupListener.onApplicationEvent(ape)
+                    )
+                )
+            )
+        );
         assertThat(statusCode.get()).isEqualTo(1);
         assertThat(text.get()).contains("K8S_ENV does not contain one of the expected values: DOCKER,");
     }

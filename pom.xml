@@ -192,6 +192,12 @@
             <version>${cyclonedx.core.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.owasp</groupId>
+            <artifactId>dependency-check-maven</artifactId>
+            <version>7.0.4</version>
+            <type>maven-plugin</type>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
@@ -227,6 +233,18 @@
                             <version>10.1</version>
                         </dependency>
                     </dependencies>
+                </plugin>
+                <plugin>
+                    <groupId>org.owasp</groupId>
+                    <artifactId>dependency-check-maven</artifactId>
+                    <version>7.0.4</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>check</goal>
+                            </goals>
+                        </execution>
+                    </executions>
                 </plugin>
             </plugins>
         </pluginManagement>
