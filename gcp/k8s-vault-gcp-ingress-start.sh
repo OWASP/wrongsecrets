@@ -153,4 +153,4 @@ echo " "
 echo "Your ingress url is: http://$(kubectl get ingress basic-ingress --output jsonpath='{.status.loadBalancer.ingress[].ip}')"
 echo " "
 
-echo "Run terraform destroy to clean everything up."
+echo "Run terraform destroy to clean everything up. You may need to go to the 'network endpoint groups' in google cloud and clean up some remaining resources."
