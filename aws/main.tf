@@ -1,3 +1,23 @@
+
+terraform {
+  required_version = ">= 0.13.1, <= 2.0.0"
+
+  required_providers {
+    aws    = ">= 3.22.0, <5.0.0"
+    random = "~> 3.0"
+    http   = "~> 2.1"
+  }
+
+  # Set your region and bucket name (output from shared state) in the placeholder below
+  # Then uncomment and apply!
+  # backend "s3" {
+  #   region = "eu-west-1" # Change if desired
+  #   bucket = ""
+  #   key    = "wrongsecrets/terraform.tfstate"
+  # }
+}
+
+
 locals {
   vpc_cidr = "172.16.0.0/16"
 
