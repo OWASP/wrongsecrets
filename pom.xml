@@ -51,7 +51,7 @@
         <gcp.sdk.version>24.3.0</gcp.sdk.version>
         <thymeleaf-spring5.version>3.0.15.RELEASE</thymeleaf-spring5.version>
         <thymeleaf.version>3.0.15.RELEASE</thymeleaf.version>
-        <thymeleaf.layout>3.0.0</thymeleaf.layout>
+        <thymeleaf.layout>3.1.0</thymeleaf.layout>
         <asciidoctor.maven.plugin.version>2.2.2</asciidoctor.maven.plugin.version>
         <azure.keyvault.version>4.3.7</azure.keyvault.version>
         <azure.identity.version>1.4.4</azure.identity.version>
