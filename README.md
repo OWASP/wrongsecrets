@@ -218,6 +218,11 @@ If you want to dev without a Vault instance, use the `without-vault` profile to 
 
 Want to push a container? See `.github/scripts/docker-create-and-push.sh` for a script that generates and pushes all containers. Do not forget to rebuild the app before composing the container
 
+### Dependency management
+
+We have CycloneDX and OWASP Dependency-check integrated to check dependencies for vulnerabilities.
+You can use the OWASP Dependency-checker by calling `mvn dependency-check:aggregate` and `mvn cyclonedx:makeBom` to use CycloneDX to create an SBOM.
+
 ### Automatic reload during development
 
 To make changes made load faster we added `spring-dev-tools` to the Maven project. To enable this in IntelliJ automatically, make sure:
