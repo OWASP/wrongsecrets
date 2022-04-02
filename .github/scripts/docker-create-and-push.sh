@@ -41,6 +41,14 @@ echo "Start building assets required for container"
 
 echo "generating challenge 12-data"
 openssl rand -base64 32 | tr -d '\n' > yourkey.txt
+echo "generating challenge 16-data"
+SECENDKEYPART1=$(openssl rand -base64 5 | tr -d '\n')
+SECENDKEYPART2=$(openssl rand -base64 3 | tr -d '\n')
+SECENDKEYPART3=$(openssl rand -base64 2 | tr -d '\n')
+SECENDKEYPART4=$(openssl rand -base64 3 | tr -d '\n')
+echo -n "${SECENDKEYPART1}9${SECENDKEYPART2}6${SECENDKEYPART3}2${SECENDKEYPART4}7" > secondkey.txt
+printf "function secret() { \n var password = \"$SECENDKEYPART1\" + 9 + \"$SECENDKEYPART2\" + 6 + \"$SECENDKEYPART3\" + 2 + \"$SECENDKEYPART4\" + 7;\n return password;\n }\n" > ../../js/index.js
+
 # preps for #178:
 #echo "Building and publishing to maven central, did you set: a settings.xml file with:"
 #echo "<settings>"
