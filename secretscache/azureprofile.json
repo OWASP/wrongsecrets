@@ -1,0 +1,19 @@
+{
+    "installationId": "9600bb1c-b00a-00bc-0000-acde00000022",
+    "subscriptions": [
+        {
+            "id": "3c33fb33-3a3c-33f3-ac37-c33aa236859d",
+            "name": "OWASP Wrong Secrets",
+            "state": "Enabled",
+            "user": {
+                "name": "thisisfortesting@owasp.org",
+                "type": "user"
+            },
+            "isDefault": false,
+            "tenantId": "88da88da-8888-488f-9488-ec8e88c1884a",
+            "environmentName": "AzureCloud",
+            "homeTenantId": "88da88da-8888-488f-9488-ec8e88c1884a",
+            "managedByTenants": []
+        }
+    ]
+}
