@@ -7,14 +7,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 @Configuration
 @EnableWebSecurity(debug = true)
-public class HerokuWebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class TokenCallbackSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.requiresChannel()
-            .requestMatchers(r -> r.getHeader("x-forwarded-proto") != null)
-            .requiresSecure()
-            .and()
-            .httpBasic().disable();
+        http.requestMatcher(r -> r.getRequestURI().contains("canaries/tokencallback"))
+            .csrf().disable();
     }
 }
