@@ -21,7 +21,7 @@ class Challenge16Test {
     private ScoreCard scoreCard;
 
     @Test
-    void solveChallenge15WithoutFile(@TempDir Path dir) {
+    void solveChallenge16WithoutFile(@TempDir Path dir) {
         var challenge = new Challenge16(scoreCard, dir.toString());
 
         Assertions.assertThat(challenge.answerCorrect("secretvalueWitFile")).isFalse();
@@ -29,8 +29,8 @@ class Challenge16Test {
     }
 
     @Test
-    void solveChallenge15WithMNTFile(@TempDir Path dir) throws Exception {
-        var testFile = new File(dir.toFile(), "yourkey.txt");
+    void solveChallenge16WithMNTFile(@TempDir Path dir) throws Exception {
+        var testFile = new File(dir.toFile(), "secondkey.txt");
         var secret = "secretvalueWitFile";
         Files.writeString(testFile.toPath(), secret);
 
@@ -41,7 +41,7 @@ class Challenge16Test {
 
     @Test
     void spoilShouldReturnCorrectAnswer(@TempDir Path dir) throws IOException {
-        var testFile = new File(dir.toFile(), "yourkey.txt");
+        var testFile = new File(dir.toFile(), "secondkey.txt");
         var secret = "secretvalueWitFile";
         Files.writeString(testFile.toPath(), secret);
 

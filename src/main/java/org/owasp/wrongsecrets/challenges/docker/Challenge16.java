@@ -44,7 +44,7 @@ public class Challenge16 extends Challenge {
 
     public String getActualData() {
         try {
-            return Files.readString(Paths.get(dockerMountPath, "yourkey.txt"));
+            return Files.readString(Paths.get(dockerMountPath, "secondkey.txt"));
         } catch (Exception e) {
             log.warn("Exception during file reading, defaulting to default without cloud environment", e);
             return "if_you_see_this_please_use_docker_instead";
