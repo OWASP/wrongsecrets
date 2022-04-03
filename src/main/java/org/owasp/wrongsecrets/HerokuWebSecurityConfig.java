@@ -8,7 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 @Configuration
 @EnableWebSecurity(debug = true)
-@Order(0)
+@Order(1)
 public class HerokuWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override

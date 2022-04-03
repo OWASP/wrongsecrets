@@ -8,12 +8,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 @Configuration
 @EnableWebSecurity(debug = true)
-@Order(1)
+@Order(0)
 public class TokenCallbackSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().requestMatchers(r -> r.getRequestURL().toString().contains("canaries")).permitAll()
-            .and().requestMatcher(r -> r.getRequestURL().toString().contains("canaries")).csrf().disable().httpBasic().disable().sessionManagement().disable();
+        http.requestMatcher(r -> r.getRequestURL().toString().contains("canaries")).csrf().disable();
     }
 }
