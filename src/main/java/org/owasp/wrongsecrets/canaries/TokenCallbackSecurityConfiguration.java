@@ -14,6 +14,6 @@ public class TokenCallbackSecurityConfiguration extends WebSecurityConfigurerAda
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().requestMatchers(r -> r.getRequestURL().toString().contains("canaries")).permitAll()
-            .and().csrf().disable();
+            .and().requestMatcher(r -> r.getRequestURL().toString().contains("canaries")).csrf().disable().httpBasic().disable().sessionManagement().disable();
     }
 }
