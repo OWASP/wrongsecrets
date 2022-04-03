@@ -15,6 +15,8 @@ public class HerokuWebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.requiresChannel()
             .requestMatchers(r -> r.getHeader("x-forwarded-proto") != null || r.getHeader("X-Forwarded-Proto") != null)
-            .requiresSecure();
+            .requiresSecure()
+            .and()
+            .csrf().disable();
     }
 }
