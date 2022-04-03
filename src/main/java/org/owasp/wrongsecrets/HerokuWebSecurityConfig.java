@@ -7,7 +7,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 @Configuration
-@EnableWebSecurity(debug = true)
 @Order(1)
 public class HerokuWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -15,8 +14,6 @@ public class HerokuWebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.requiresChannel()
             .requestMatchers(r -> r.getHeader("x-forwarded-proto") != null || r.getHeader("X-Forwarded-Proto") != null)
-            .requiresSecure()
-            .and()
-            .csrf().disable();
+            .requiresSecure();
     }
 }

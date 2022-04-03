@@ -7,7 +7,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 @Configuration
-@EnableWebSecurity(debug = true)
 @Order(0)
 public class TokenCallbackSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
