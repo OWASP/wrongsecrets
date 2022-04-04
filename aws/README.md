@@ -23,10 +23,11 @@ Make sure you have an active account at AWS for which you have configured the cr
 
 If you want to host a multi-user setup, you will probably want to share the state file so that everyone can try related challenges. We have provided a starter to easily do so using a Terraform S3 backend.
 
-First, create an s3 bucket:
+First, create an s3 bucket (optionally add `-var="region=YOUR_DESIRED_REGION"` to the apply to use a region other than the default eu-west-1):
 
 ```bash
 cd shared-state
+terraform init
 terraform apply
 ```
 
