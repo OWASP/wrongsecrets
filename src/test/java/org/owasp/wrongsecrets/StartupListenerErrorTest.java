@@ -31,13 +31,20 @@ public class StartupListenerErrorTest {
         var ape = new ApplicationEnvironmentPreparedEvent(new DefaultBootstrapContext(), new SpringApplication(), new String[0], configurableApplicationContext.getEnvironment());
         var startupListener = new StartupListener();
         try {
-            text.set(tapSystemErrAndOut(() -> statusCode.set(catchSystemExit(() -> startupListener.onApplicationEvent(ape)))));
+            text.set(
+              tapSystemErrAndOut(
+                () -> statusCode.set(
+                  catchSystemExit(
+                    () -> startupListener.onApplicationEvent(ape)
+                  )
+                )
+              )
+            );
             assertThat(statusCode.get()).isEqualTo(1);
             assertThat(text.get()).contains("K8S_ENV does not contain one of the expected values: DOCKER,");
         } catch (UnsupportedOperationException e) {
            log.info("We can no longer run thistest this way"); //todo:fix this!
         }
-
     }
 
 
