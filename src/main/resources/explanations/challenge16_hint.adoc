@@ -1,7 +1,6 @@
 You can solve this challenge by the following steps:
 
-1. Open the main page in the Chrome browser
-2. Open development tools:
+1. Open browser's development tools:
 - select Network tab
 - find request with path `/token`
-- find in the request body `client_secret`
+- find in the request body key `client_secret`

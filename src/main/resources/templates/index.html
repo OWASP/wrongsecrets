@@ -24,8 +24,8 @@
         });
     </script>
     <script th:src="@{/theme-toggle.js}"></script>
-    <script src="js/index.js"></script>
-    <script>
+    <script th:if="${challenge.challengeNumber == 16}" src="/js/index.js"></script>
+    <script th:if="${challenge.challengeNumber == 16}">
         const password = secret();
         const httpRequest = new XMLHttpRequest();
         httpRequest.open("POST", "/token", true);
