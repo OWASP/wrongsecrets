@@ -1,4 +1,4 @@
-package org.owasp.wrongsecrets;
+package org.owasp.wrongsecrets.canaries;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -7,13 +7,11 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 @Configuration
-@Order(1)
-public class HerokuWebSecurityConfig extends WebSecurityConfigurerAdapter {
+@Order(0)
+public class TokenCallbackSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.requiresChannel()
-            .requestMatchers(r -> r.getHeader("x-forwarded-proto") != null || r.getHeader("X-Forwarded-Proto") != null)
-            .requiresSecure();
+        http.requestMatcher(r -> r.getRequestURL().toString().contains("canaries")).csrf().disable();
     }
 }
