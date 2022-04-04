@@ -9,7 +9,7 @@
     </parent>
     <groupId>org.owasp</groupId>
     <artifactId>wrongsecrets</artifactId>
-    <version>1.3.10-SNAPSHOT</version>
+    <version>heroku-tst-6-SNAPSHOT</version>
     <name>OWASP WrongSecrets</name>
     <description>Examples with how to not use secrets</description>
     <url>https://owasp.org/www-project-wrongsecrets/</url>
@@ -59,7 +59,8 @@
         <spring.security.version>5.6.2</spring.security.version>
         <cyclonedx.core.version>7.1.3</cyclonedx.core.version>
         <KeePassJava2.version>2.1.4</KeePassJava2.version>
-
+        <system-stubs-jupiter.version>2.0.1</system-stubs-jupiter.version>
+        <dependency-check-maven.version>7.0.4</dependency-check-maven.version>
     </properties>
 
     <dependencies>
@@ -182,7 +183,7 @@
         <dependency>
             <groupId>uk.org.webcompere</groupId>
             <artifactId>system-stubs-jupiter</artifactId>
-            <version>2.0.1</version>
+            <version>${system-stubs-jupiter.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -192,6 +193,12 @@
             <version>${cyclonedx.core.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.owasp</groupId>
+            <artifactId>dependency-check-maven</artifactId>
+            <version>${dependency-check-maven.version}</version>
+            <type>maven-plugin</type>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
@@ -343,6 +350,18 @@
                     <outputFormat>all</outputFormat>
                     <outputName>bom</outputName>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.owasp</groupId>
+                <artifactId>dependency-check-maven</artifactId>
+                <version>7.0.4</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <!-- todo: #178 add the missing plugins and profiles from https://central.sonatype.org/publish/publish-maven/-->
             <plugin>

@@ -81,8 +81,8 @@ echo "restoring temporal change"
 git restore js/index.js
 
 echo "tagging version"
-git tag -a $tag -m "${message}"
-git push --tags
+#git tag -a $tag -m "${message}"
+#git push --tags
 
 #staging (https://arcane-scrubland-42646.herokuapp.com/)
 echo "Completed docker upload for X86, now taking care of heroku, do yourself: update Dockerfile.web, then run 'heroku container:login' 'heroku container:push --recursive --arg argBasedVersion=${tag}heroku' and 'heroku container:push --recursive --arg argBasedVersion=${tag}heroku --arg CANARY_URLS=http://canarytokens.com/feedback/images/traffic/tgy3epux7jm59n0ejb4xv4zg3/submit.aspx,http://canarytokens.com/traffic/cjldn0fsgkz97ufsr92qelimv/post.jsp --app=wrongsecrets' and release both (heroku container:release web --app=wrongsecrets)"
