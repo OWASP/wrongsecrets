@@ -195,9 +195,9 @@ You can help us by the following methods:
 
 ## Use OWASP WrongSecrets as a secret detection benchmark
 
-As there are tons of secret detection tools coming up for both Docker and Git, we are creating a Benchmark testbed for it.
+As tons of secret detection tools are coming up for both Docker and Git, we are creating a Benchmark testbed for it.
 Want to know if your tool detects everything? We will keep track of the embedded secrets in [this issue](https://github.com/commjoen/wrongsecrets/issues/201) and have a [branch](https://github.com/commjoen/wrongsecrets/tree/experiment-bed) in which we put additional secrets for your tool to detect.
-The branch will contain a Docker container generation script eventually with which you can test your container secret scanning.
+The branch will contain a Docker container generation script using which you can eventually test your container secret scanning.
 
 ## Notes on development
 
