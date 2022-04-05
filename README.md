@@ -193,6 +193,12 @@ You can help us by the following methods:
 - Share this app with others
 - Of course, we can always use your help [to get more flavors](https://github.com/commjoen/wrongsecrets/issues/37) of "wrongly" configured secrets in to spread awareness! We would love to get some help with other cloudproiders, like Alibabaor Tencent cloud for instance. Do you miss something else than a cloud provider as an example? File an issue or create a PR! See [our guide on contributing for more details](CONTRIBUTING.md). Contributors will be listed in releases, in the "Special thanks & Contributors"-section, and the web-app.
 
+## Use OWASP WrongSecrets as a secret detection benchmark
+
+As tons of secret detection tools are coming up for both Docker and Git, we are creating a Benchmark testbed for it.
+Want to know if your tool detects everything? We will keep track of the embedded secrets in [this issue](https://github.com/commjoen/wrongsecrets/issues/201) and have a [branch](https://github.com/commjoen/wrongsecrets/tree/experiment-bed) in which we put additional secrets for your tool to detect.
+The branch will contain a Docker container generation script using which you can eventually test your container secret scanning.
+
 ## Notes on development
 
 If you want to test against vault without K8s: start vault locally with
@@ -217,6 +223,11 @@ Now use the `local-vault` profile to do your development.
 If you want to dev without a Vault instance, use the `without-vault` profile to do your development.
 
 Want to push a container? See `.github/scripts/docker-create-and-push.sh` for a script that generates and pushes all containers. Do not forget to rebuild the app before composing the container
+
+### Dependency management
+
+We have CycloneDX and OWASP Dependency-check integrated to check dependencies for vulnerabilities.
+You can use the OWASP Dependency-checker by calling `mvn dependency-check:aggregate` and `mvn cyclonedx:makeBom` to use CycloneDX to create an SBOM.
 
 ### Automatic reload during development
 
