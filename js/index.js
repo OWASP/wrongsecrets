@@ -1,4 +1,4 @@
 function secret() { 
- var password = "if you see this please fix the JavaScript setup";
+ var password = "this is second test secret";
  return password;
  }

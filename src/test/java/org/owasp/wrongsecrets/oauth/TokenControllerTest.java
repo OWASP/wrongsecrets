@@ -23,7 +23,7 @@ class TokenControllerTest {
         // When
         var response = mvc.perform(post("/token")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .content("grant_type=client_credentials&client_id=WRONGSECRET_CLIENT_ID&client_secret=this is test secret"));
+            .content("grant_type=client_credentials&client_id=WRONGSECRET_CLIENT_ID&client_secret=this is second test secret"));
 
         // Then
         response.andExpect(status().isOk())
