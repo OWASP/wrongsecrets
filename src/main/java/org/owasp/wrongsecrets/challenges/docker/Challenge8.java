@@ -28,7 +28,7 @@ public class Challenge8 extends Challenge {
     public Challenge8(ScoreCard scoreCard) {
         super(scoreCard);
         randomValue = generateRandomString(10);
-        log.info("Initializing challenge 8 with value {}", randomValue);
+        log.info("Initializing challenge 8 with random value {}", randomValue);
     }
 
     @Override
