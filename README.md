@@ -13,6 +13,12 @@ Can you solve all the 16 challenges?
 
 Need support? Contact us via [OWASP Slack](https://owasp.slack.com/archives/C02KQ7D9XHR) [for which you sign up here](https://owasp.org/slack/invite), file a [PR](https://github.com/commjoen/wrongsecrets/pulls), file an [issue](https://github.com/commjoen/wrongsecrets/issues) , or use [discussions](https://github.com/commjoen/wrongsecrets/discussions). Please note that this is an OWASP volunteer based project, so it might take a little while before we respond.
 
+## Experiment / Benchmark branch
+
+You have arrived at the benchmark branch! This branch contains extra secrets for you to test your secret detection software.
+Next, you can build your own container to test your docker secret detection scripts. For this we modified our [Docker build and release script](.github/scripts/docker-create-and-push.sh).
+We will keep providing updates to this branch, and you can track the status quo of it in [this issue](https://github.com/commjoen/wrongsecrets/issues/201).
+
 ## Basic docker exercises
 
 _Can be used for challenges 1-4, 8, 12-15_
