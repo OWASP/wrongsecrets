@@ -5,9 +5,9 @@
 
 source ../scripts/check-available-commands.sh
 
-checkCommandsAvailable helm minikube jq vault sed grep docker grep cat az envsubst
+checkCommandsAvailable helm vault jq sed grep cat az envsubst
 
-echo "This is a script to bootstrap the configuration. You need to have installed: helm, kubectl, jq, vault, grep, cat, sed, envsubst, and azure cli, and is only tested on mac, Debian and Ubuntu"
+echo "This is a script to bootstrap the configuration. You need to have installed: helm, kubectl, vault, grep, cat, sed, envsubst, and azure cli, and is only tested on mac, Debian and Ubuntu"
 echo "This script is based on the steps defined in https://learn.hashicorp.com/tutorials/vault/kubernetes-minikube. Vault is awesome!"
 
 # Most of the variables below are used in envsubst later.
