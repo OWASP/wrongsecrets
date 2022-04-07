@@ -168,6 +168,7 @@ Top contributors:
 - [Tibor Hercz @tiborhercz](https://github.com/tiborhercz)
 - [Filip Chyla @fchyla](https://github.com/fchyla)
 - [Dmitry Litosh @Dlitosh](https://github.com/Dlitosh)
+- [Josh Grossman @tghosth](https://github.com/tghosth)
 - [Mike Woudenberg @mikewoudenberg](https://github.com/mikewoudenberg)
 - [Ruben Kruiver @RubenAtBinx](https://github.com/RubenAtBinx)
 - [Marcin Nowak @MarcinNowak-codes](https://github.com/MarcinNowak-codes)
