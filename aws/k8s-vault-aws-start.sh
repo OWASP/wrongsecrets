@@ -5,7 +5,7 @@
 
 source ../scripts/check-available-commands.sh
 
-checkCommandsAvailable helm jq vault sed grep docker grep cat aws
+checkCommandsAvailable helm jq vault sed grep cat aws
 
 AWS_REGION="eu-west-1"
 

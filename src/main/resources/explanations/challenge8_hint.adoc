@@ -2,4 +2,4 @@ You can solve this challenge by the following steps:
 
 1. Get the secret from the logging
  - Are you using the docker container? Use `docker logs <containerID>` to get the logs and find the value for challenge8
- - Are you using K8s ? Find the Pod (`kubectl get pods | grep secrets`) and then do `kubectl logs -f <nameOfThePod>` to get the logs and find the value for challenge 8.
+ - Are you using K8s ? Find the Pod (`kubectl get pods | grep secret`) and then do `kubectl logs -f <nameOfThePod>` to get the logs and find the value for challenge 8.

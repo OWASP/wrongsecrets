@@ -4,7 +4,7 @@ You can solve this challenge by the following steps:
 
 
 1. Use https://github.com/trufflesecurity/truffleHog[*Trufflehog*] to scan the repository for secrets:
-- Read up on the instructions of the tool at https://github.com/trufflesecurity/truffleHog[Trufflehog] and install it using `pip install truffleHog` or use its docker container.
+- Read up on the instructions of the tool at https://github.com/trufflesecurity/truffleHog[Trufflehog] and install it using `pip3 install truffleHog` or use its docker container.
 - Now run Trufflehog at our repository: `trufflehog https://github.com/commjoen/wrongsecrets`. Can you find the value of `public static String password` in the output?
 2. When you do not have the source code available, try to obtain the actual application to reverse engineer it. The application, in this case, is a Jar file, which is a set of java class files together with a few resources.
 - Follow the instructions of https://docs.docker.com/engine/reference/commandline/cp/[the Docker documentation] to copy the Jar file from the container's root to your local filesystem.
