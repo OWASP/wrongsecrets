@@ -220,6 +220,32 @@
         </dependencies>
     </dependencyManagement>
 
+    <!-- Required by exec-maven-plugin to run NPM *.CMD script on Windows  -->
+    <profiles>
+        <profile>
+            <id>Windows</id>
+            <activation>
+                <os>
+                    <family>Windows</family>
+                </os>
+            </activation>
+            <properties>
+                <script.extension>.cmd</script.extension>
+            </properties>
+        </profile>
+        <profile>
+            <id>unix</id>
+            <activation>
+                <os>
+                    <family>unix</family>
+                </os>
+            </activation>
+            <properties>
+                <script.extension />
+            </properties>
+        </profile>
+    </profiles>
+
     <build>
         <pluginManagement>
             <plugins>
@@ -337,7 +363,58 @@
                     </execution>
                 </executions>
             </plugin>
-<!-- todo: #178 add the missing plugins and profiles from https://central.sonatype.org/publish/publish-maven/-->
+            <!-- todo: #178 add the missing plugins and profiles from https://central.sonatype.org/publish/publish-maven/-->
+            <plugin>
+                <groupId>com.github.eirslett</groupId>
+                <artifactId>frontend-maven-plugin</artifactId>
+                <version>1.12.1</version>
+                <executions>
+                    <execution>
+                        <id>install node and npm</id>
+                        <goals>
+                            <goal>install-node-and-npm</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                        <configuration>
+                            <nodeVersion>v16.13.2</nodeVersion> <!-- download node from https://nodejs.org/dist/ -->
+                            <workingDirectory>js</workingDirectory>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>npm install</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                        <configuration>
+                            <arguments>install</arguments>
+                            <workingDirectory>js</workingDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+
+                    <executable>./js/node_modules/.bin/javascript-obfuscator${script.extension}</executable>
+                    <arguments>
+                        <argument>./js/index.js</argument>
+                        <argument>--output</argument>
+                        <argument>./target/classes/static/js/index.js</argument>
+                    </arguments>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 

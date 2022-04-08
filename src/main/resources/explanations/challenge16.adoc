@@ -1,0 +1,10 @@
+=== Secrets in front-end code
+
+When we start a new project usually we are focused on new feature implementation than on the security aspect.
+Sometimes Single-Page apps or mobile apps need to access information for themselves rather than on behalf of a user.
+For this purpose, https://oauth.net/2/grant-types/client-credentials/[OAuth] provides the `client_credentials` flow to get access token.
+In such a situation, it's easy to store client secrets in front-end or mobile application code.  And though you can obfuscate the secret in the code, you will still need to use it eventually.
+
+This challenge will try to contact a server using the client credentials flow. Can you find its secret?
+
+What about looking for it in the Development Tools in the browser?
