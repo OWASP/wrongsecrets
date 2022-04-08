@@ -41,6 +41,14 @@ echo "Start building assets required for container"
 
 echo "generating challenge 12-data"
 openssl rand -base64 32 | tr -d '\n' > yourkey.txt
+echo "generating challenge 16-data"
+SECENDKEYPART1=$(openssl rand -base64 5 | tr -d '\n')
+SECENDKEYPART2=$(openssl rand -base64 3 | tr -d '\n')
+SECENDKEYPART3=$(openssl rand -base64 2 | tr -d '\n')
+SECENDKEYPART4=$(openssl rand -base64 3 | tr -d '\n')
+echo -n "${SECENDKEYPART1}9${SECENDKEYPART2}6${SECENDKEYPART3}2${SECENDKEYPART4}7" > secondkey.txt
+printf "function secret() { \n var password = \"$SECENDKEYPART1\" + 9 + \"$SECENDKEYPART2\" + 6 + \"$SECENDKEYPART3\" + 2 + \"$SECENDKEYPART4\" + 7;\n return password;\n }\n" > ../../js/index.js
+
 # preps for #178:
 #echo "Building and publishing to maven central, did you set: a settings.xml file with:"
 #echo "<settings>"
@@ -69,6 +77,8 @@ docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongs
 #echo "tagging version"
 #git tag -a $tag -m "${message}"
 #git push --tags
+echo "restoring temporal change"
+git restore js/index.js
 
 #staging (https://arcane-scrubland-42646.herokuapp.com/)
 echo "Completed docker upload for X86, now taking care of heroku, do yourself: update Dockerfile.web, then run 'heroku container:login' 'heroku container:push --recursive --arg argBasedVersion=${tag}heroku' and 'heroku container:push --recursive --arg argBasedVersion=${tag}heroku --arg CANARY_URLS=http://canarytokens.com/feedback/images/traffic/tgy3epux7jm59n0ejb4xv4zg3/submit.aspx,http://canarytokens.com/traffic/cjldn0fsgkz97ufsr92qelimv/post.jsp --app=wrongsecrets' and release both (heroku container:release web --app=wrongsecrets)"

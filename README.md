@@ -6,7 +6,7 @@
 
 Welcome to the OWASP WrongSecrets p0wnable app. With this app, we have packed various ways of how to not store your secrets. These can help you to realize whether your secret management is ok. The challenge is to find all the different secrets by means of various tools and techniques.
 
-Can you solve all the 15 challenges?
+Can you solve all the 16 challenges?
 ![screenshot.png](screenshot.png)
 
 ## Support
@@ -31,7 +31,7 @@ For the basic docker exercises you currently require:
 You can install it by doing:
 
 ```bash
-docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:1.3.11-no-vault
+docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:1.3.12-no-vault
 ```
 
 Now you can try to find the secrets by means of solving the challenge offered at:
@@ -45,6 +45,7 @@ Now you can try to find the secrets by means of solving the challenge offered at
 - [localhost:8080/challenge/13](http://localhost:8080/challenge/13)
 - [localhost:8080/challenge/14](http://localhost:8080/challenge/14)
 - [localhost:8080/challenge/15](http://localhost:8080/challenge/15)
+- [localhost:8080/challenge/16](http://localhost:8080/challenge/16)
 
 Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look better ;-).
 
@@ -174,6 +175,7 @@ Top contributors:
 - [Tibor Hercz @tiborhercz](https://github.com/tiborhercz)
 - [Filip Chyla @fchyla](https://github.com/fchyla)
 - [Dmitry Litosh @Dlitosh](https://github.com/Dlitosh)
+- [Josh Grossman @tghosth](https://github.com/tghosth)
 - [Mike Woudenberg @mikewoudenberg](https://github.com/mikewoudenberg)
 - [Ruben Kruiver @RubenAtBinx](https://github.com/RubenAtBinx)
 - [Marcin Nowak @MarcinNowak-codes](https://github.com/MarcinNowak-codes)

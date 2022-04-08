@@ -1,0 +1,7 @@
+You can solve this challenge by the following steps:
+
+1. Find the secret when it is used by the app
+- open the browser its development tools:
+- select Network tab
+- find request with path `/token`
+- find in the request body key `client_secret`

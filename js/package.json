@@ -1,0 +1,17 @@
+{
+  "name": "wrongsecrets",
+  "version": "1.3.1",
+  "description": "Examples with how to not use secrets",
+  "main": "index.js",
+  "scripts": {
+    "build": "./node_modules/.bin/javascript-obfuscator index.js --output ../target/classes/static/js/index.js"
+  },
+  "keywords": [
+    "secrets"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "javascript-obfuscator": "^3.1.0"
+  }
+}
