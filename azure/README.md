@@ -43,6 +43,8 @@ terraform apply
 
 The storage account name should be in the output. Please use that to configure the terraform backend in `main.tf` by uncommenting the part on the `backend "azurerm"`.
 
+**Note**: You'll need to follow the description below for the "existing resource group" i.e., use the `data.azurerm_resource_group.default` resource.
+
 ### WrongSecrets
 
 1. Set either a new resource group or use an existing resource group in `main.tf` (it defaults to the existing `OWASP-Projects` resource group). Note that you'll need to find/replace references to "data.azurerm_resource_group.default" to "arurerm_resource_group.default" if you want to create a new one.
