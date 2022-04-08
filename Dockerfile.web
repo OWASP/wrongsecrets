@@ -1,6 +1,6 @@
-FROM jeroenwillemsen/wrongsecrets:1.3.12-no-vault
+FROM jeroenwillemsen/wrongsecrets:1.3.12c-no-vault
 
-ARG argBasedVersion="1.3.12"
+ARG argBasedVersion="1.3.12c"
 ARG CANARY_URLS="http://canarytokens.com/terms/about/s7cfbdakys13246ewd8ivuvku/post.jsp,http://canarytokens.com/terms/about/y0all60b627gzp19ahqh7rl6j/post.jsp"
 ENV APP_VERSION=$argBasedVersion
 ENV K8S_ENV=Heroku(Docker)

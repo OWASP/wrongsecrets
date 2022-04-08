@@ -60,6 +60,9 @@ azure/k8s/pod-id.yml
 # Challenge 12 ;-)
 .github/scripts/yourkey.txt
 
+# Challenge 16
+.github/scripts/secondkey.txt
+
 # Node JS
 js/node/
 js/node_modules/

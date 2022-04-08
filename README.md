@@ -25,7 +25,7 @@ For the basic docker exercises you currently require:
 You can install it by doing:
 
 ```bash
-docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:1.3.12-no-vault
+docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:1.3.12c-no-vault
 ```
 
 Now you can try to find the secrets by means of solving the challenge offered at:
