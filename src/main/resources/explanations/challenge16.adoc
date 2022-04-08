@@ -1,4 +1,4 @@
-=== Docker COPY and WORKDIR
+=== Secrets in front-end code
 
 When we start a new project usually we are focused on new feature implementation than on the security aspect.
 Sometimes Single-Page apps or mobile apps need to access information for themselves rather than on behalf of a user.
