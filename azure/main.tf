@@ -38,7 +38,7 @@ data "azurerm_client_config" "current" {}
 #   name = "owasp-wrongsecrets"
 # }
 
-# If you're creating a new resource group, modify this.
+# If you're using an existing resource group, comment this.
 resource "azurerm_resource_group" "default" {
   name     = "owasp-wrongsecrets"
   location = var.region
