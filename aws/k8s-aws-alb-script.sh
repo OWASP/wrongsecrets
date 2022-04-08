@@ -24,7 +24,7 @@ fi
 ACCOUNT_ID=$(aws sts get-caller-identity | jq '.Account' -r)
 echo "ACCOUNT_ID=${ACCOUNT_ID}"
 
-LBC_VERSION="v2.4.0"
+LBC_VERSION="v2.4.1"
 echo "LBC_VERSION=$LBC_VERSION"
 
 # echo "executing eksctl utils associate-iam-oidc-provider"
@@ -63,6 +63,7 @@ kubectl get crd
 
 echo "do helm eks application"
 helm repo add eks https://aws.github.io/eks-charts
+helm repo update
 
 echo "upgrade alb controller with helm"
 helm upgrade -i aws-load-balancer-controller \
@@ -88,6 +89,8 @@ echo "apply -f k8s/secret-challenge-vault-ingress.yml in 10 s"
 sleep 10
 kubectl apply -f k8s/secret-challenge-vault-ingress.yml
 
-echo "http://$(kubectl get ingress wrongsecrets -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')"
+echo "waiting 10 s for loadBalancer"
+sleep 10
+echo "https://$(kubectl get ingress wrongsecrets -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')"
 
 echo "Do not forget to cleanup afterwards! Run k8s-aws-alb-script-cleanup.sh"
