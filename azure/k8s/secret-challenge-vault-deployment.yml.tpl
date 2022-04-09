@@ -35,7 +35,7 @@ spec:
             volumeAttributes:
               secretProviderClass: "azure-wrongsecrets-vault"
       containers:
-        - image: jeroenwillemsen/wrongsecrets:1.3.12c-k8s-vault
+        - image: jeroenwillemsen/wrongsecrets:1.3.12d-k8s-vault
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
