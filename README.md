@@ -203,6 +203,8 @@ The branch will contain a Docker container generation script using which you can
 
 ## Notes on development
 
+For development on local machine use the `local` profile `./mvnw spring-boot:run -Dspring-boot.run.profiles=local`
+
 If you want to test against vault without K8s: start vault locally with
 
 ```shell
@@ -222,7 +224,15 @@ vault kv put secret/secret-challenge vaultpassword.password="$(openssl rand -bas
 
 Now use the `local-vault` profile to do your development.
 
-If you want to dev without a Vault instance, use the `without-vault` profile to do your development.
+```
+./mvnw spring-boot:run -Dspring-boot.run.profiles=local,local-vault
+```
+
+If you want to dev without a Vault instance, use additionally the `without-vault` profile to do your development:
+
+```
+./mvnw spring-boot:run -Dspring-boot.run.profiles=local,without-vault
+```
 
 Want to push a container? See `.github/scripts/docker-create-and-push.sh` for a script that generates and pushes all containers. Do not forget to rebuild the app before composing the container
 
@@ -238,7 +248,7 @@ To make changes made load faster we added `spring-dev-tools` to the Maven projec
 - Under Compiler -> Automatically build project is enabled, and
 - Under Advanced settings -> Allow auto-make to start even if developed application is currently running.
 
-You can also manually invoke: Build -> Recompile the file you just changed, this will also force a reload of the application.
+You can also manually invoke: Build -> Recompile the file you just changed, this will also force reloading of the application.
 
 ### How to add a Challenge
 
