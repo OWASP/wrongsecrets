@@ -24,14 +24,15 @@ Make sure you have an active account at GCP for which you have configured the cr
 
 **Note-III**: The cluster you create has its access bound to the public IP of the creator. In other words: the cluster you create with this code has its access bound to your public IP-address if you apply it locally.
 
-1. check whether you have the right project by doing `gcloud config list`. Otherwise configure it by doing `gcloud init`.
-2. Run `gcloud auth application-default login` to be able to use your account credentials for terraform.
-3. Enable the required gcloud services using `gcloud services enable compute.googleapis.com container.googleapis.com`
-4. Run `terraform init` (if required, use tfenv to select TF 0.14.0 or higher )
-5. Run `terraform plan`
-6. Run `terraform apply`. Note: the apply will take 10 to 20 minutes depending on the speed of the GCP backplane.
-7. When creation is done, run `gcloud container clusters get-credentials wrongsecrets-exercise-cluster --region YOUR_REGION`
-8. Run `./k8s-vault-gcp-start.sh`
+1. Check whether you have the right project by doing `gcloud config list`. Otherwise configure it by doing `gcloud init`.
+2. Change the `project_id` in the `terraform.tfvars` file to your project id 
+3. Run `gcloud auth application-default login` to be able to use your account credentials for terraform.
+4. Enable the required gcloud services using `gcloud services enable compute.googleapis.com container.googleapis.com secretmanager.googleapis.com`
+5. Run `terraform init` (if required, use tfenv to select TF 0.14.0 or higher )
+6. Run `terraform plan`
+7. Run `terraform apply`. Note: the apply will take 10 to 20 minutes depending on the speed of the GCP backplane.
+8. When creation is done, run `gcloud container clusters get-credentials wrongsecrets-exercise-cluster --region YOUR_REGION`
+9. Run `./k8s-vault-gcp-start.sh`
 
 ### GKE ingres for shared deployment
 
