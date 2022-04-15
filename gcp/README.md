@@ -22,11 +22,10 @@ If you want to host a multi-user setup, you will probably want to share the stat
 
 First, create an s3 bucket:
 
-```bash
-cd shared-state
-terraform init
-terraform apply
-```
+1. Navigate to the 'shared-state' directory `cd shared-state`
+2. Change the `project_id` in the `terraform.tfvars` file to your project id
+3. Run `terraform init`
+4. Run `terraform apply`
 
 The bucket name should be in the output. Please use that to configure the Terraform backend in `versions.tf`.
 
