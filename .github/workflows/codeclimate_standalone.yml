@@ -27,7 +27,7 @@ jobs:
           blocker_threshold: 1
 
       - name: Upload Report
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         if: always()
         with:
           name: Code Climate Report
