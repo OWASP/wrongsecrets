@@ -33,7 +33,7 @@ First, enable the `Microsoft.Storage` API (if it isn't already) using:
 az provider register --namespace Microsoft.Storage
 ```
 
-Then, apply the terraform (optionally add `-var="region=YOUR_DESIRED_REGION"` to the apply to use a region other than the default `East US`):
+Then, apply the Terraform (optionally add `-var="region=YOUR_DESIRED_REGION"` to the apply to use a region other than the default `East US`):
 
 ```bash
 cd shared-state
@@ -41,7 +41,7 @@ terraform init
 terraform apply
 ```
 
-The storage account name should be in the output. Please use that to configure the terraform backend in `main.tf` by uncommenting the part on the `backend "azurerm"`.
+The storage account name should be in the output. Please use that to configure the Terraform backend in `main.tf` by uncommenting the part on the `backend "azurerm"`.
 
 **Note**: You'll need to follow the description below for the "existing resource group" i.e., use the `data.azurerm_resource_group.default` resource.
 
