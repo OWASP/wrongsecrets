@@ -9,7 +9,7 @@ checkCommandsAvailable gcloud kubectl
 
 export GCP_PROJECT=$(gcloud config list --format 'value(core.project)' 2>/dev/null)
 
-kubectl delete -f ./k8s-gke-ingress.yaml
+kubectl delete -f ./k8s/k8s-gke-ingress.yaml
 
 echo "Waiting 10 seconds..."
 sleep 10

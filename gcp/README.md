@@ -16,6 +16,19 @@ Have the following tools installed:
 
 Make sure you have an active account at GCP for which you have configured the credentials on the system where you will execute the steps below.
 
+### Multi-user setup: shared state
+
+If you want to host a multi-user setup, you will probably want to share the state file so that everyone can try related challenges. We have provided a starter to easily do so using a Terraform gcs backend.
+
+First, create an s3 bucket:
+
+1. Navigate to the 'shared-state' directory `cd shared-state`
+2. Change the `project_id` in the `terraform.tfvars` file to your project id
+3. Run `terraform init`
+4. Run `terraform apply`
+
+The bucket name should be in the output. Please use that to configure the Terraform backend in `versions.tf`.
+
 ## Installation
 
 **Note**: Applying the Terraform means you are creating cloud infrastructure which actually costs you money. The authors are not responsible for any cost coming from following the instructions below. If you have a brand new GCP account, you could use the $300 in credits to set up the infrastructure for free.

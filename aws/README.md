@@ -31,7 +31,7 @@ terraform init
 terraform apply
 ```
 
-The bucket name should be in the output. Please use that to configure the terraform backend in `main.tf`.
+The bucket name should be in the output. Please use that to configure the Terraform backend in `main.tf`.
 
 ## Installation
 
