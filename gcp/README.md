@@ -16,6 +16,19 @@ Have the following tools installed:
 
 Make sure you have an active account at GCP for which you have configured the credentials on the system where you will execute the steps below.
 
+### Multi-user setup: shared state
+
+If you want to host a multi-user setup, you will probably want to share the state file so that everyone can try related challenges. We have provided a starter to easily do so using a Terraform gcs backend.
+
+First, create an s3 bucket:
+
+1. Navigate to the 'shared-state' directory `cd shared-state`
+2. Change the `project_id` in the `terraform.tfvars` file to your project id
+3. Run `terraform init`
+4. Run `terraform apply`
+
+The bucket name should be in the output. Please use that to configure the Terraform backend in `versions.tf`.
+
 ## Installation
 
 **Note**: Applying the Terraform means you are creating cloud infrastructure which actually costs you money. The authors are not responsible for any cost coming from following the instructions below. If you have a brand new GCP account, you could use the $300 in credits to set up the infrastructure for free.
@@ -24,14 +37,15 @@ Make sure you have an active account at GCP for which you have configured the cr
 
 **Note-III**: The cluster you create has its access bound to the public IP of the creator. In other words: the cluster you create with this code has its access bound to your public IP-address if you apply it locally.
 
-1. check whether you have the right project by doing `gcloud config list`. Otherwise configure it by doing `gcloud init`.
-2. Run `gcloud auth application-default login` to be able to use your account credentials for terraform.
-3. Enable the required gcloud services using `gcloud services enable compute.googleapis.com container.googleapis.com`
-4. Run `terraform init` (if required, use tfenv to select TF 0.14.0 or higher )
-5. Run `terraform plan`
-6. Run `terraform apply`. Note: the apply will take 10 to 20 minutes depending on the speed of the GCP backplane.
-7. When creation is done, run `gcloud container clusters get-credentials wrongsecrets-exercise-cluster --region YOUR_REGION`
-8. Run `./k8s-vault-gcp-start.sh`
+1. Check whether you have the right project by doing `gcloud config list`. Otherwise configure it by doing `gcloud init`.
+2. Change the `project_id` in the `terraform.tfvars` file to your project id 
+3. Run `gcloud auth application-default login` to be able to use your account credentials for terraform.
+4. Enable the required gcloud services using `gcloud services enable compute.googleapis.com container.googleapis.com secretmanager.googleapis.com`
+5. Run `terraform init` (if required, use tfenv to select TF 0.14.0 or higher )
+6. Run `terraform plan`
+7. Run `terraform apply`. Note: the apply will take 10 to 20 minutes depending on the speed of the GCP backplane.
+8. When creation is done, run `gcloud container clusters get-credentials wrongsecrets-exercise-cluster --region YOUR_REGION`
+9. Run `./k8s-vault-gcp-start.sh`
 
 ### GKE ingres for shared deployment
 

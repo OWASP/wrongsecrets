@@ -31,7 +31,7 @@ For the basic docker exercises you currently require:
 You can install it by doing:
 
 ```bash
-docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:1.3.12-no-vault
+docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:1.3.12d-no-vault
 ```
 
 Now you can try to find the secrets by means of solving the challenge offered at:
@@ -62,7 +62,7 @@ You can test them out at [https://wrongsecrets.herokuapp.com/](https://wrongsecr
 
 ## Basic K8s exercise
 
-_Can be used for challenges 1-6, 8, 12-15_
+_Can be used for challenges 1-6, 8, 12-16_
 
 ### Minikube based
 
@@ -109,7 +109,7 @@ now you can use the provided IP address and port to further play with the K8s va
 
 ## Vault exercises with minikube
 
-_Can be used for challenges 1-8, 12-15_
+_Can be used for challenges 1-8, 12-16_
 Make sure you have the following installed:
 
 - minikube with docker (or comment out line 8 and work at your own k8s setup),
@@ -126,7 +126,7 @@ When you stopped the `k8s-vault-minikube-start.sh` script and want to resume the
 
 ## Cloud Challenges
 
-_Can be used for challenges 1-15_
+_Can be used for challenges 1-16_
 
 **READ THIS**: Given that the exercises below contain IAM privilege escalation exercises, 
 never run this on an account which is related to your production environment or can influence your account-over-arching resources.
@@ -209,6 +209,8 @@ The branch will contain a Docker container generation script using which you can
 
 ## Notes on development
 
+For development on local machine use the `local` profile `./mvnw spring-boot:run -Dspring-boot.run.profiles=local`
+
 If you want to test against vault without K8s: start vault locally with
 
 ```shell
@@ -228,7 +230,15 @@ vault kv put secret/secret-challenge vaultpassword.password="$(openssl rand -bas
 
 Now use the `local-vault` profile to do your development.
 
-If you want to dev without a Vault instance, use the `without-vault` profile to do your development.
+```
+./mvnw spring-boot:run -Dspring-boot.run.profiles=local,local-vault
+```
+
+If you want to dev without a Vault instance, use additionally the `without-vault` profile to do your development:
+
+```
+./mvnw spring-boot:run -Dspring-boot.run.profiles=local,without-vault
+```
 
 Want to push a container? See `.github/scripts/docker-create-and-push.sh` for a script that generates and pushes all containers. Do not forget to rebuild the app before composing the container
 
@@ -244,7 +254,7 @@ To make changes made load faster we added `spring-dev-tools` to the Maven projec
 - Under Compiler -> Automatically build project is enabled, and
 - Under Advanced settings -> Allow auto-make to start even if developed application is currently running.
 
-You can also manually invoke: Build -> Recompile the file you just changed, this will also force a reload of the application.
+You can also manually invoke: Build -> Recompile the file you just changed, this will also force reloading of the application.
 
 ### How to add a Challenge
 
