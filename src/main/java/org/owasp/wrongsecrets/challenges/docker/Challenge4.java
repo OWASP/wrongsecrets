@@ -32,7 +32,7 @@ public class Challenge4 extends Challenge {
     @Override
     public boolean answerCorrect(String answer) {
         return argBasedPassword.equals(answer) 
-        || argBasedPassword.equals("'${answer}'");
+        || argBasedPassword.equals("'" + answer + "'");
     }
 
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {

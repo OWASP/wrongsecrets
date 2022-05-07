@@ -26,7 +26,7 @@ class Challenge4Test {
     void rightAnswerShouldSolveChallenge() {
         var challenge = new Challenge4(scoreCard, "test");
 
-        Assertions.assertThat(challenge.solved("test")).isTrue()
+        Assertions.assertThat(challenge.solved("test")).isTrue();
         Mockito.verify(scoreCard).completeChallenge(challenge);
     } 
     
@@ -34,7 +34,7 @@ class Challenge4Test {
     void rightAnswerWithoutQuotesShouldSolveChallenge() {
         var challenge = new Challenge4(scoreCard, "'test'");
 
-        Assertions.assertThat(challenge.solved("test")).isTrue()
+        Assertions.assertThat(challenge.solved("test")).isTrue();
         Mockito.verify(scoreCard).completeChallenge(challenge);
     }
 
