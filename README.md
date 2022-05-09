@@ -175,6 +175,7 @@ Top contributors:
 - [Mike Woudenberg @mikewoudenberg](https://github.com/mikewoudenberg)
 - [Ruben Kruiver @RubenAtBinx](https://github.com/RubenAtBinx)
 - [Finn @f3rn0s](https://github.com/f3rn0s)
+- [Joss Sparkes @remakingeden](https://github.com/remakingeden)
 
 Testers:
 
