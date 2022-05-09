@@ -18,7 +18,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: innovationnorway/setup-vault@v1
         with:
-          version: '~1.4'
+          version: '~1.9'
       - name: Start minikube
         uses: medyagh/setup-minikube@master
         with:
