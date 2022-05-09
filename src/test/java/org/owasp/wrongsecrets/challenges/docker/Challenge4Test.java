@@ -28,6 +28,14 @@ class Challenge4Test {
 
         Assertions.assertThat(challenge.solved("test")).isTrue();
         Mockito.verify(scoreCard).completeChallenge(challenge);
+    } 
+    
+    @Test
+    void rightAnswerWithoutQuotesShouldSolveChallenge() {
+        var challenge = new Challenge4(scoreCard, "'test'");
+
+        Assertions.assertThat(challenge.solved("test")).isTrue();
+        Mockito.verify(scoreCard).completeChallenge(challenge);
     }
 
     @Test
