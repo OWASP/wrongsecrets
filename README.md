@@ -166,13 +166,14 @@ Leaders:
 Top contributors:
 
 - [Nanne Baars @nbaars](https://github.com/nbaars)
+- [Marcin Nowak @MarcinNowak-codes](https://github.com/MarcinNowak-codes)
 - [Tibor Hercz @tiborhercz](https://github.com/tiborhercz)
 - [Filip Chyla @fchyla](https://github.com/fchyla)
 - [Dmitry Litosh @Dlitosh](https://github.com/Dlitosh)
 - [Josh Grossman @tghosth](https://github.com/tghosth)
+- [Spyros @northdpole](https://github.com/northdpole)
 - [Mike Woudenberg @mikewoudenberg](https://github.com/mikewoudenberg)
 - [Ruben Kruiver @RubenAtBinx](https://github.com/RubenAtBinx)
-- [Marcin Nowak @MarcinNowak-codes](https://github.com/MarcinNowak-codes)
 - [Finn @f3rn0s](https://github.com/f3rn0s)
 
 Testers:
