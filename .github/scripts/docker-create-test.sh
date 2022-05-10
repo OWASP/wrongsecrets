@@ -107,4 +107,3 @@ fi
 
 echo "Restoring temporal change"
 git restore ../../js/index.js
-git restore pom.xml
