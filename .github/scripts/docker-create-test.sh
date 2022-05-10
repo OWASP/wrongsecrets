@@ -74,7 +74,7 @@ echo "buildarg supplied: $buildarg"
 echo "Check if all required binaries are installed"
 ##################################################
 source ../../scripts/check-available-commands.sh
-checkCommandsAvailable java docker mvn
+checkCommandsAvailable java docker mvn git
 
 echo "Start building assets required for container"
 ####################################################
@@ -90,7 +90,7 @@ printf "function secret() { \n var password = \"$SECENDKEYPART1\" + 9 + \"$SECEN
 
 echo "Building and updating pom.xml file so we can use it in our docker"
 ########################################################################
-cd ../.. #&& mvn clean && mvn --batch-mode release:update-versions -DdevelopmentVersion=${tag}-SNAPSHOT && mvn install
+cd ../.. && mvn clean && mvn --batch-mode release:update-versions -DdevelopmentVersion=${tag}-SNAPSHOT && mvn install
 cd .github/scripts
 docker buildx create --name mybuilder
 docker buildx use mybuilder
@@ -107,3 +107,4 @@ fi
 
 echo "Restoring temporal change"
 git restore ../../js/index.js
+git restore pom.xml
