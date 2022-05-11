@@ -11,7 +11,7 @@ Help() {
   echo "options: (All optional)"
   echo "tag=             Write a custom tag that will be added to the container when it is build locally."
   echo "buildarg=        Write a build argument here that will be used as the answer to challenge 4."
-  echo "springProfile=   Specify a certain build. Options: noVault, localVault, k8sVault"
+  echo "springProfile=   Specify a certain build. Options: without-vault, local-vault, kubernetes-vault"
   echo
 }
 
@@ -57,10 +57,10 @@ else
 fi
 
 if test -n "${springProfile+x}"; then
-  if [[ $springProfile == 'localVault' ]] || [[ $springProfile == 'noVault' ]] || [[ $springProfile == 'k8sVault' ]]; then
+  if [[ $springProfile == 'local-vault' ]] || [[ $springProfile == 'without-vault' ]] || [[ $springProfile == 'kubernetes-vault' ]]; then
     echo "Setting springProfile to $springProfile"
   else
-    echo "Please specify a springProfile of noVault, localVault or k8sVault as a springProfile"
+    echo "Please specify a springProfile of without-vault, local-vault or kubernetes-vault as a springProfile"
     exit 1
   fi
 else
