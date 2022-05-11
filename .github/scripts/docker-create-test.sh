@@ -90,7 +90,7 @@ printf "function secret() { \n var password = \"$SECENDKEYPART1\" + 9 + \"$SECEN
 
 echo "Building and updating pom.xml file so we can use it in our docker"
 ########################################################################
-cd ../.. && mvn clean && mvn --batch-mode release:update-versions -DdevelopmentVersion=${tag}-SNAPSHOT && mvn install
+cd ../.. && mvn clean && mvn --batch-mode release:update-versions -DdevelopmentVersion=${tag}-SNAPSHOT && mvn install -DskipTests
 cd .github/scripts
 docker buildx create --name mybuilder
 docker buildx use mybuilder
