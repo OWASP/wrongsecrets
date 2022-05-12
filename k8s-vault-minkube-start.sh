@@ -9,7 +9,7 @@ checkCommandsAvailable helm minikube jq vault sed grep docker grep cat
 
 echo "This is only a script for demoing purposes. You can comment out line 22 and work with your own k8s setup"
 echo "This script is based on the steps defined in https://learn.hashicorp.com/tutorials/vault/kubernetes-minikube . Vault is awesome!"
-minikube start --kubernetes-version=v1.21.9
+minikube start --kubernetes-version=v1.22.5
 
 kubectl get configmaps | grep 'secrets-file' &> /dev/null
 if [ $? == 0 ]; then

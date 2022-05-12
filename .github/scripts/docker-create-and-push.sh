@@ -81,8 +81,8 @@ echo "restoring temporal change"
 git restore js/index.js
 
 echo "tagging version"
-git tag -a $tag -m "${message}"
-git push --tags
+#git tag -a $tag -m "${message}"
+#git push --tags
 
 echo "Don't forget to update experiment-bed"
 echo "git checkout experiment-bed && git merge master --no-edit"
