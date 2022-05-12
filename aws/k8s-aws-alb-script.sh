@@ -72,7 +72,11 @@ helm upgrade -i aws-load-balancer-controller \
   --set clusterName=${CLUSTERNAME} \
   --set serviceAccount.create=false \
   --set serviceAccount.name=aws-load-balancer-controller \
-  --set image.tag="${LBC_VERSION}"
+  --set image.tag="${LBC_VERSION}" \
+  --set region=${AWS_REGION} \
+  --set image.repository=602401143452.dkr.ecr.${AWS_REGION}.amazonaws.com/amazon/aws-load-balancer-controller
+# You may need to modify the account ID above if you're operating in af-south-1, ap-east-1, ap-southeast-3, cn-north and cn-northwest, eu-south-1, me-south-1, or the govcloud.
+# See the full list of accounts per regions here: https://docs.aws.amazon.com/eks/latest/userguide/add-ons-images.html
 
 echo "wait with rollout for 10 s"
 sleep 10
