@@ -1,5 +1,5 @@
-*Why using code to put secrets in is a bad idea.*
+*Why entering secrets in bash is a bad idea.*
 
-You can tell by now that you can easily detect many secrets stored within code. Even when the code is compiled, you can still reverse-engineer it to find the secret. That's why hardcoded secrets are never a good idea. We often fall for the misconception that if I cannot reverse-engineer it, so can't an attacker, which is why many people believe that hardcoding in C/C++/Golang is safer than in Java. For those that think this: please decompile an app with tools like https://ghidra-sre.org/[*Ghidra*].
+The command line can feel temporary and safe but it is often being logged. This is a standard feature with most shells. Some do have protections in place and most tools that request a secret will not print it in any form. However when doing custom commands these protections are not in place and you can easily shoot yourself in the foot.
 
-Secrecy of a secret in code is one thing. Another challenge is openness: anyone with access to the code and/or compiled assets can learn the secret. To make it worse: if the developer who hardcoded the secret leaves the organization, he might know the secret as it is still in code! Similarly, when code leaks or the asset leaks, the secret will be compromised, and rotating will be hard. Besides: do you still know where this password is after a few years?
+Leaking secrets is little hard to do with a Dockerfile when creating a container, however if you have a container that you are using regularly and do not delete. These history issues could arise and a malicious actor could use your seemingly innocuous docker container to escalate privileges and potentially attack something a lot more vital than your pc.

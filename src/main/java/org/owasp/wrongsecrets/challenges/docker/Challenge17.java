@@ -22,12 +22,12 @@ public class Challenge17 extends Challenge {
 
     @Override
     public Spoiler spoiler() {
-        return new Spoiler("bashhistory");
+        return new Spoiler("this is temporary and is not hardcoded anywhere");
     }
 
     @Override
     public boolean answerCorrect(String answer) {
-        return "bashhistory".equals(answer);
+        return "this is temporary and is not hardcoded anywhere".equals(answer);
     }
 
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {

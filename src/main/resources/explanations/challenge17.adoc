@@ -1,7 +1,5 @@
-=== Centralized hardcoded password
+=== Bash history
 
-When people write a Proof of Concept, they often start with hardcoded secrets, such as a `password` in code. What if we forget to remove these hardcoded secrets?
+This developer has created a container and has had it running for a while. He uses it for a lot of work and is careful to not hardcode any secrets. When he needs to use secrets he simply writes them in a Bash command when executing, therefore they disappear as soon as he writes them and remain secret. Right?
 
-Can you spot the secret we are looking for in code? What about looking for it in the container?
-
-Sometimes the simpler tools are the most effective. Try cloning the repo and use https://man7.org/linux/man-pages/man1/grep.1.html[*grep*] to see what you find. It is also possible to find with https://github.com/awslabs/git-secrets[*Git-secrets*]. Just dive into the code! 
+We all have little secrets hidden in our past, including Bash. Access the container and see if you can find one.
