@@ -91,6 +91,6 @@ kubectl apply -f k8s/secret-challenge-vault-ingress.yml
 
 echo "waiting 10 s for loadBalancer"
 sleep 10
-echo "https://$(kubectl get ingress wrongsecrets -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')"
+echo "http://$(kubectl get ingress wrongsecrets -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')"
 
 echo "Do not forget to cleanup afterwards! Run k8s-aws-alb-script-cleanup.sh"
