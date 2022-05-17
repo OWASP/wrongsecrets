@@ -226,13 +226,13 @@ vault kv put secret/secret-challenge vaultpassword.password="$(openssl rand -bas
 
 Now use the `local-vault` profile to do your development.
 
-```
+```shell
 ./mvnw spring-boot:run -Dspring-boot.run.profiles=local,local-vault
 ```
 
 If you want to dev without a Vault instance, use additionally the `without-vault` profile to do your development:
 
-```
+```shell
 ./mvnw spring-boot:run -Dspring-boot.run.profiles=local,without-vault
 ```
 
