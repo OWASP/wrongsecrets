@@ -2,7 +2,12 @@ As the challenge states you need to be looking for the Bash commands that have b
 
 You can solve this challenge using the following steps:
 
-1. First access the bash shell of the container, this can be done with `docker exec -it {Image Name} bash` (Replace the curly brackets and the text with the docker image name e.g. jeroenwillemsen/wrongsecrets:sometag)
+1. Use `bash` within the container to access the history and find the secret:
+- Access the bash shell of the cotnainer, this can be done with `docker exec -it jeroenwillemsen/wrongsecrets:<containertag> bash` (Replace <tag> with the version of the container you want to use). 
+- type `history` to list the commands used when the container was built
+2. Print contents of any .bash_history file within a running container container:
+- Start the container with `docker run -it --entrypoint bash jeroenwillemsen/wrongsecrets:<containertag>`
+- cat the contents of the file: `cat .bash_history`. Once you have this file you can use grep or any other search tool to narrow down the answer.
 
 2. One way to find the answer is using the command `history`. However you may find there is an awful lot to look through.
 
