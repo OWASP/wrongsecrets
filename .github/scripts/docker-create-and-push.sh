@@ -51,7 +51,8 @@ printf "function secret() { \n var password = \"$SECENDKEYPART1\" + 9 + \"$SECEN
 echo "generating challenge 17"
 openssl rand -base64 32 | tr -d '\n' > thirdkey.txt
 answer=$(<thirdkey.txt)
-sed -i "s/Placeholder Password, find the real one in the history of the container/$answer/g" ../../.bash_history
+answerRegexSafe="$(printf '%s' "$answer" | sed -e 's/[]\/$*.^|[]/\\&/g' | sed ':a;N;$!ba;s,\n,\\n,g')"
+sed -i "s/Placeholder Password, find the real one in the history of the container/$answerRegexSafe/g" ../../src/main/resources/.bash_history
 
 # preps for #178:
 #echo "Building and publishing to maven central, did you set: a settings.xml file with:"
