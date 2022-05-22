@@ -25,7 +25,7 @@ For the basic docker exercises you currently require:
 You can install it by doing:
 
 ```bash
-docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:1.3.12d-no-vault
+docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:1.4.0-no-vault
 ```
 
 Now you can try to find the secrets by means of solving the challenge offered at:
@@ -226,13 +226,13 @@ vault kv put secret/secret-challenge vaultpassword.password="$(openssl rand -bas
 
 Now use the `local-vault` profile to do your development.
 
-```
+```shell
 ./mvnw spring-boot:run -Dspring-boot.run.profiles=local,local-vault
 ```
 
 If you want to dev without a Vault instance, use additionally the `without-vault` profile to do your development:
 
-```
+```shell
 ./mvnw spring-boot:run -Dspring-boot.run.profiles=local,without-vault
 ```
 

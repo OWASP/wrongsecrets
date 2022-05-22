@@ -24,12 +24,9 @@ fi
 ACCOUNT_ID=$(aws sts get-caller-identity | jq '.Account' -r)
 echo "ACCOUNT_ID=${ACCOUNT_ID}"
 
-LBC_VERSION="v2.4.0"
-echo "LBC_VERSION=$LBC_VERSION"
-
-echo "cleanup k8s ingress and service"
-kubectl delete ingress wrongsecrets
+echo "cleanup k8s ingress and service. This may take a while"
 kubectl delete service secret-challenge
+kubectl delete ingress wrongsecrets
 
 echo "Cleanup helm chart"
 helm uninstall aws-load-balancer-controller \

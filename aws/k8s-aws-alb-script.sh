@@ -34,7 +34,7 @@ echo "LBC_VERSION=$LBC_VERSION"
 #     --approve
 
 echo "creating iam policy"
-curl -o iam_policy.json https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.3.0/docs/install/iam_policy.json
+curl -o iam_policy.json https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/"${LBC_VERSION}"/docs/install/iam_policy.json
 aws iam create-policy \
   --policy-name AWSLoadBalancerControllerIAMPolicy \
   --policy-document file://iam_policy.json
@@ -72,7 +72,11 @@ helm upgrade -i aws-load-balancer-controller \
   --set clusterName=${CLUSTERNAME} \
   --set serviceAccount.create=false \
   --set serviceAccount.name=aws-load-balancer-controller \
-  --set image.tag="${LBC_VERSION}"
+  --set image.tag="${LBC_VERSION}" \
+  --set region=${AWS_REGION} \
+  --set image.repository=602401143452.dkr.ecr.${AWS_REGION}.amazonaws.com/amazon/aws-load-balancer-controller
+# You may need to modify the account ID above if you're operating in af-south-1, ap-east-1, ap-southeast-3, cn-north and cn-northwest, eu-south-1, me-south-1, or the govcloud.
+# See the full list of accounts per regions here: https://docs.aws.amazon.com/eks/latest/userguide/add-ons-images.html
 
 echo "wait with rollout for 10 s"
 sleep 10
@@ -91,6 +95,6 @@ kubectl apply -f k8s/secret-challenge-vault-ingress.yml
 
 echo "waiting 10 s for loadBalancer"
 sleep 10
-echo "https://$(kubectl get ingress wrongsecrets -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')"
+echo "http://$(kubectl get ingress wrongsecrets -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')"
 
 echo "Do not forget to cleanup afterwards! Run k8s-aws-alb-script-cleanup.sh"

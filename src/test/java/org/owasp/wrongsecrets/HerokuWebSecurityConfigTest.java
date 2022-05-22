@@ -26,7 +26,7 @@ public class HerokuWebSecurityConfigTest {
             var restTemplate = builder
                 .defaultHeader("x-forwarded-proto", "value")
                 .build();
-            var rootAddress = "http://localhost:" + port + "/";
+            var rootAddress = "http://localhost:" + port + "/heroku";//note we loosely ask for "heroku" to be part of the url
             restTemplate.getForEntity(rootAddress, String.class);
             fail();
         } catch (ResourceAccessException e) {

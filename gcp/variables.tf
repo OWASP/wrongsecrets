@@ -12,7 +12,7 @@ variable "project_id" {
 variable "cluster_version" {
   description = "The GKE cluster version to use"
   type        = string
-  default     = "1.21"
+  default     = "1.22"
 }
 
 variable "cluster_name" {
