@@ -1,0 +1,5 @@
+*Why entering secrets in bash is a bad idea.*
+
+The command line can feel temporary and safe, but it is often being logged. This is a standard feature with most shells. Some do have protections in place, and most tools that request a secret will not print it. However, when writing custom commands these protections are not in place and you can easily shoot yourself in the foot.
+
+Leaking secrets is a little hard to do with a Dockerfile when creating a container. However, if you have a container that you are using regularly, you do not delete it and you are typing in secrets in plaintext, then a malicious actor could use your seemingly innocuous docker container to escalate privileges. Potentially leading them to exploit something a lot more important than your PC.

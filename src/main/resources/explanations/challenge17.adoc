@@ -1,0 +1,5 @@
+=== Bash history
+
+This developer has created a container and has had it running for a while. He uses it for a lot of work and is careful to not hardcode any secrets. When he needs to use secrets, he simply writes them in a Bash command when executing; therefore they disappear as soon as he writes them and remain secret. Right?
+
+We all have little secrets hidden in our past, including Bash. Access the container and see if you can find one.
