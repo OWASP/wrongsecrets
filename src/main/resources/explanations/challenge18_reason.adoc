@@ -1,0 +1,7 @@
+*Why MD5 hash alone is not enough.*
+
+MD5 hash is no longer considered safe to store passwords on its own. Speed is what makes MD5 hash so useful, but it is also its downfall. It only takes a few minutes to hash thousands of password, this also means that it only takes minutes to hash thousands of common passwords and use these hashes to compare against a hash that has been obtained.
+
+Companies try different techniques to harden MD5 hashes such as "salting" them. This is the process of adding additional characters to the password that only the person/company that should be decrypting knows. 
+
+As a user sometimes companies will store your password in MD5 and you have no say in this, the only thing you can do in this case is try to make your password longer and more complex. As a password in MD5 that is 18 characters long with upper and lowercase characters will take roughly 6 trillion years to brute force. That would take some real patience.
