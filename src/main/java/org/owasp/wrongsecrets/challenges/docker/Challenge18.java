@@ -13,7 +13,7 @@ import java.util.List;
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 
 @Component
-@Order(1)
+@Order(18)
 public class Challenge18 extends Challenge {
 
     public Challenge18(ScoreCard scoreCard) {

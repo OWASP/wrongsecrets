@@ -3,8 +3,8 @@ This challenge is specifically looking at md5 hashes without salting. Are these 
 You can solve this challenge using the following steps:
 
 1. Use a tool such as Hashcat :
-- Install [Hashcat](https://hashcat.net/hashcat/)
-- Download the [rockyou.txt password list](https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt)
+- Install (https://hashcat.net/hashcat/)[Hashcat]
+- Download the (https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt)[rockyou.txt password list]
 - Run Hashcat on the hash `hashcat -m 0 "2ab96390c7dbe3439de74d0c9b0b1767" /path/to/file/rockyou.txt` 
 2. Use an online hash cracking service to do the heavy lifting for you:
 - Visit `https://crackstation.net/`
