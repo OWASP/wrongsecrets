@@ -49,6 +49,7 @@ SECENDKEYPART4=$(openssl rand -base64 3 | tr -d '\n')
 echo -n "${SECENDKEYPART1}9${SECENDKEYPART2}6${SECENDKEYPART3}2${SECENDKEYPART4}7" > secondkey.txt
 printf "function secret() { \n var password = \"$SECENDKEYPART1\" + 9 + \"$SECENDKEYPART2\" + 6 + \"$SECENDKEYPART3\" + 2 + \"$SECENDKEYPART4\" + 7;\n return password;\n }\n" > ../../js/index.js
 echo "generating challenge 17"
+rm thirdkey.txt
 openssl rand -base64 32 | tr -d '\n' > thirdkey.txt
 answer=$(<thirdkey.txt)
 answerRegexSafe="$(printf '%s' "$answer" | gsed -e 's/[]\/$*.^|[]/\\&/g' | gsed ':a;N;$!ba;s,\n,\\n,g')"
