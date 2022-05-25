@@ -35,7 +35,7 @@ echo "buildarg supplied: $buildarg"
 echo "check if al required binaries are installed"
 source ../../scripts/check-available-commands.sh
 
-checkCommandsAvailable java git docker mvn
+checkCommandsAvailable java git docker mvn gsed
 
 echo "Start building assets required for container"
 
@@ -51,8 +51,8 @@ printf "function secret() { \n var password = \"$SECENDKEYPART1\" + 9 + \"$SECEN
 echo "generating challenge 17"
 openssl rand -base64 32 | tr -d '\n' > thirdkey.txt
 answer=$(<thirdkey.txt)
-answerRegexSafe="$(printf '%s' "$answer" | sed -e 's/[]\/$*.^|[]/\\&/g' | sed ':a;N;$!ba;s,\n,\\n,g')"
-sed -i "s/Placeholder Password, find the real one in the history of the container/$answerRegexSafe/g" ../../src/main/resources/.bash_history
+answerRegexSafe="$(printf '%s' "$answer" | gsed -e 's/[]\/$*.^|[]/\\&/g' | gsed ':a;N;$!ba;s,\n,\\n,g')"
+gsed -i "s/Placeholder Password, find the real one in the history of the container/$answerRegexSafe/g" ../../src/main/resources/.bash_history
 
 # preps for #178:
 #echo "Building and publishing to maven central, did you set: a settings.xml file with:"
