@@ -70,9 +70,7 @@ gsed -i "s/Placeholder Password, find the real one in the history of the contain
 echo "Building and updating pom.xml file so we can use it in our docker"
 cd ../.. && mvn clean && mvn --batch-mode release:update-versions -DdevelopmentVersion=${tag}-SNAPSHOT && mvn install
 git add pom.xml
-git commit -am "Update POM file with new version: ${tag}"
-cd .github/scripts && git push
-#cd .github/scripts
+cd .github/scripts
 docker buildx create --name mybuilder
 docker buildx use mybuilder
 echo "creating containers"
@@ -82,10 +80,13 @@ docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/addo-e
 docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets:$tag-no-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=without-vault" --push ./../../.
 docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets:$tag-local-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=local-vault" --push ./../../.
 docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets:$tag-k8s-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=kubernetes-vault" --push ./../../.
-
+cd ../..
 echo "restoring temporal change"
 git restore js/index.js
-
+git restore src/main/resources/.bash_history
+echo "committing changes and new pom file with version ${tag}"
+git commit -am "Update POM file with new version: ${tag}"
+git push
 echo "tagging version"
 #git tag -a $tag -m "${message}"
 #git push --tags
