@@ -24,7 +24,7 @@ class Challenge18Test {
 
     @Test
     void rightAnswerShouldSolveChallenge() {
-        var challenge = new Challenge18(scoreCard, "test");
+        var challenge = new Challenge18(scoreCard, "dGVzdA==");
 
         Assertions.assertThat(challenge.solved("test")).isTrue();
         Mockito.verify(scoreCard).completeChallenge(challenge);
@@ -32,7 +32,7 @@ class Challenge18Test {
 
     @Test
     void incorrectAnswerShouldNotSolveChallenge() {
-        var challenge = new Challenge18(scoreCard, "test");
+        var challenge = new Challenge18(scoreCard, "dGVzdA==");
 
         Assertions.assertThat(challenge.solved("wrong answer")).isFalse();
         Mockito.verifyNoInteractions(scoreCard);
