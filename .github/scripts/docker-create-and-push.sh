@@ -35,7 +35,7 @@ echo "buildarg supplied: $buildarg"
 echo "check if al required binaries are installed"
 source ../../scripts/check-available-commands.sh
 
-checkCommandsAvailable java git docker mvn
+checkCommandsAvailable java git docker mvn gsed
 
 echo "Start building assets required for container"
 
@@ -49,10 +49,11 @@ SECENDKEYPART4=$(openssl rand -base64 3 | tr -d '\n')
 echo -n "${SECENDKEYPART1}9${SECENDKEYPART2}6${SECENDKEYPART3}2${SECENDKEYPART4}7" > secondkey.txt
 printf "function secret() { \n var password = \"$SECENDKEYPART1\" + 9 + \"$SECENDKEYPART2\" + 6 + \"$SECENDKEYPART3\" + 2 + \"$SECENDKEYPART4\" + 7;\n return password;\n }\n" > ../../js/index.js
 echo "generating challenge 17"
+rm thirdkey.txt
 openssl rand -base64 32 | tr -d '\n' > thirdkey.txt
 answer=$(<thirdkey.txt)
-answerRegexSafe="$(printf '%s' "$answer" | sed -e 's/[]\/$*.^|[]/\\&/g' | sed ':a;N;$!ba;s,\n,\\n,g')"
-sed -i "s/Placeholder Password, find the real one in the history of the container/$answerRegexSafe/g" ../../src/main/resources/.bash_history
+answerRegexSafe="$(printf '%s' "$answer" | gsed -e 's/[]\/$*.^|[]/\\&/g' | gsed ':a;N;$!ba;s,\n,\\n,g')"
+gsed -i "s/Placeholder Password, find the real one in the history of the container/$answerRegexSafe/g" ../../src/main/resources/.bash_history
 
 # preps for #178:
 #echo "Building and publishing to maven central, did you set: a settings.xml file with:"
@@ -69,9 +70,7 @@ sed -i "s/Placeholder Password, find the real one in the history of the containe
 echo "Building and updating pom.xml file so we can use it in our docker"
 cd ../.. && mvn clean && mvn --batch-mode release:update-versions -DdevelopmentVersion=${tag}-SNAPSHOT && mvn install
 git add pom.xml
-git commit -am "Update POM file with new version: ${tag}"
-cd .github/scripts && git push
-#cd .github/scripts
+cd .github/scripts
 docker buildx create --name mybuilder
 docker buildx use mybuilder
 echo "creating containers"
@@ -81,13 +80,16 @@ docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/addo-e
 docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets:$tag-no-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=without-vault" --push ./../../.
 docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets:$tag-local-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=local-vault" --push ./../../.
 docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets:$tag-k8s-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=kubernetes-vault" --push ./../../.
-
+cd ../..
 echo "restoring temporal change"
 git restore js/index.js
-
+git restore src/main/resources/.bash_history
+echo "committing changes and new pom file with version ${tag}"
+git commit -am "Update POM file with new version: ${tag}"
+git push
 echo "tagging version"
-#git tag -a $tag -m "${message}"
-#git push --tags
+git tag -a $tag -m "${message}"
+git push --tags
 
 echo "Don't forget to update experiment-bed"
 echo "git checkout experiment-bed && git merge master --no-edit"
