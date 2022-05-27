@@ -2,6 +2,6 @@
 
 MD5 and SHA1 hash are no longer considered safe to store passwords on their own. Speed is what makes MD5 and SHA1 hashes so useful, but it is also their downfall. It only takes a few minutes to hash thousands of passwords; this also means that it only takes minutes to hash thousands of common passwords and use these hashes to compare against a hash that has been obtained.
 
-Companies try different techniques to harden MD5 and SHA1 hashes, such as "salting" them. This is the process of adding additional characters to the password that only the person/company that should be decrypting knows.
+Companies try different techniques to harden MD5 and SHA1 hashes, such as "salting" them. This is the process of adding additional characters to the password that only the person/company that should be decrypting knows. Unfortunately this is not enough either with the raise of GPU and ASIC based computations. Therefore, companies using these techniques can better migrate to [Argon2](https://en.wikipedia.org/wiki/Argon2) or [Balloon hashing](https://en.wikipedia.org/wiki/Balloon_hashing).
 
 As a user you often have no choice in how your passwords are stored; the only thing you can do in this case is try to make your password longer and more complex. A password hashed with MD5 and SHA1 that is 7 characters long with upper and lowercase characters will take roughly 25 seconds to brute force, whereas one with 18 characters will take roughly 6 trillion years. That would take some real patience.
