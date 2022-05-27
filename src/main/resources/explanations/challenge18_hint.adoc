@@ -1,20 +1,20 @@
-This challenge is specifically looking at md5 and sha1 hashes without salting. Are these un-crackable?
+This challenge is specifically looking at MD5 and SHA1 hashes without salting. Are these un-crackable?
 
 You can solve this challenge using the following steps:
 
-For the first hash (MD5):
+1. For the first hash (MD5):
 - Use a tool such as Hashcat :
-    - Install (https://hashcat.net/hashcat/)[Hashcat]
-    - Download the (https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt)[rockyou.txt password list]
-    - Run Hashcat on the hash `hashcat -m 0 "2ab96390c7dbe3439de74d0c9b0b1767" /path/to/file/rockyou.txt` 
+- Install (https://hashcat.net/hashcat/)[Hashcat]
+- Download the (https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt)[rockyou.txt password list]
+- Run Hashcat on the hash `hashcat -m 0 "2ab96390c7dbe3439de74d0c9b0b1767" /path/to/file/rockyou.txt` 
 
-For the second hash (SHA1):
+2. For the second hash (SHA1):
 - Use a tool such as Hashcat :
-    - Install (https://hashcat.net/hashcat/)[Hashcat]
-    - Download the (https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt)[rockyou.txt password list]
-    - Run Hashcat on the hash `hashcat -m 100 "F3BBBD66A63D4BF1747940578EC3D0103530E21D" /path/to/file/rockyou.txt` 
+- Install (https://hashcat.net/hashcat/)[Hashcat]
+- Download the (https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt)[rockyou.txt password list]
+- Run Hashcat on the hash `hashcat -m 100 "F3BBBD66A63D4BF1747940578EC3D0103530E21D" /path/to/file/rockyou.txt` 
 
-For either of the hashes:
+3. For either of the hashes:
 - Use an online hash cracking service to do the heavy lifting for you:
-    - Visit `https://crackstation.net/`
-    - Enter the hash and click "Crack Hashes"
+- Visit `https://crackstation.net/`
+- Enter the hash and click "Crack Hashes"

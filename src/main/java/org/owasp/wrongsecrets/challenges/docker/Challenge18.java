@@ -31,12 +31,12 @@ public class Challenge18 extends Challenge {
         return new String(decodedBytes);
     }
 
-    private String calculateHash(String hash) {
+    private String calculateHash(String hash, String input) {
         if ("md5".equals(hash)) {
-            return DigestUtils.md5Hex(base64Decode(hashPassword));
+            return DigestUtils.md5Hex(input);
         }
         else if ("sha1".equals(hash)) {
-            return DigestUtils.sha1Hex(base64Decode(hashPassword));
+            return DigestUtils.sha1Hex(input);
         }
         else {
             return "No Hash Selected";
@@ -50,8 +50,8 @@ public class Challenge18 extends Challenge {
 
     @Override
     public boolean answerCorrect(String answer) {
-        return calculateHash("md5").equals(DigestUtils.md5Hex(answer)) 
-        || calculateHash("sha1").equals(DigestUtils.sha1Hex(answer));
+        return calculateHash("md5", base64Decode(hashPassword)).equals(calculateHash("md5", answer)) 
+        || calculateHash("sha1", base64Decode(hashPassword)).equals(calculateHash("sha1", answer));
     }
 
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
