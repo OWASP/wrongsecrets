@@ -5,6 +5,7 @@ name: Dead Link Checker
 on:
   repository_dispatch:
   workflow_dispatch:
+  push:
   schedule:
     - cron: "00 18 * * *"
 
