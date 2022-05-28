@@ -21,7 +21,7 @@ jobs:
         id: lychee
         uses: lycheeverse/lychee-action@v1.4.1
         with:
-          args: --exclude-all-private './**/*.md' './**/*.html'
+          args: --exclude-all-private -r 2 './**/*.md' './**/*.html'
           fail: true
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
