@@ -1,0 +1,9 @@
+repositories {
+    maven {
+        url "http://repo.mycompany.com"
+        credentials {
+            username "aadmin"
+            password "notapassword"
+        }
+    }
+}
