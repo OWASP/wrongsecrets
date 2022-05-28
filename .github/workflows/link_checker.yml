@@ -20,10 +20,11 @@ jobs:
       - name: Link Checker
         id: lychee
         uses: lycheeverse/lychee-action@v1.4.1
-        args: --exclude-all-private 
+        with:
+          args: --exclude-all-private 
+          fail: true
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        fail: true
 
       - name: Create Issue From File
         if: steps.lychee.outputs.exit_code != 0
