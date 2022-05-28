@@ -1,0 +1,4 @@
+registry=https://registry.npmjs.com/
+_auth="<token>"
+email=jeroen.willemsen@owasp.org
+always-auth=true
