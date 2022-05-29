@@ -23,8 +23,6 @@ jobs:
         with:
           args: --exclude-all-private --exclude-file "config/.lycheeignore" -r 2 './**/*.md' './**/*.html'
           fail: true
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
       - name: Create Issue From File
         if: steps.lychee.outputs.exit_code != 0
