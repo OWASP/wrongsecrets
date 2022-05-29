@@ -1,0 +1,9 @@
+=== Bad hashing
+
+This developer has their password stored on their computer. They are no idiot, though, they have hashed it twice using the same systems many of the biggest companies in the world use. Just with a little less seasoning. Nobody is going to be able to crack this...
+
+The first hash is `2ab96390c7dbe3439de74d0c9b0b1767` and the second hash is `F3BBBD66A63D4BF1747940578EC3D0103530E21D`
+
+Despite many large companies using these hashes, is there a way beat the system? 
+
+Cracking either hash will give you the correct answer. As an extra challenge, try cracking both.
