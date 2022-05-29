@@ -1,22 +1,27 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
 
+import lombok.extern.slf4j.Slf4j;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
+import org.springframework.security.crypto.codec.Hex;
 import org.springframework.stereotype.Component;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 import java.util.List;
-import org.apache.commons.codec.digest.DigestUtils;
 
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 
 @Component
 @Order(18)
+@Slf4j
 public class Challenge18 extends Challenge {
 
     private final String hashPassword;
@@ -31,14 +36,14 @@ public class Challenge18 extends Challenge {
         return new String(decodedBytes);
     }
 
-    private String calculateHash(String hash, String input) {
+    private String calculateHash(String hash, String input) throws NoSuchAlgorithmException {
         if ("md5".equals(hash)) {
-            return DigestUtils.md5Hex(input);
-        }
-        else if ("sha1".equals(hash)) {
-            return DigestUtils.sha1Hex(input);
-        }
-        else {
+            var md = MessageDigest.getInstance("MD5");
+            return new String(Hex.encode(md.digest(input.getBytes(StandardCharsets.UTF_8))));
+        } else if ("sha1".equals(hash)) {
+            var sha1 = MessageDigest.getInstance("SHA1");
+            return new String(Hex.encode(sha1.digest(input.getBytes(StandardCharsets.UTF_8))));
+        } else {
             return "No Hash Selected";
         }
     }
@@ -50,8 +55,14 @@ public class Challenge18 extends Challenge {
 
     @Override
     public boolean answerCorrect(String answer) {
-        return calculateHash("md5", base64Decode(hashPassword)).equals(calculateHash("md5", answer)) 
-        || calculateHash("sha1", base64Decode(hashPassword)).equals(calculateHash("sha1", answer));
+        try {
+            return calculateHash("md5", base64Decode(hashPassword)).equals(calculateHash("md5", answer))
+                || calculateHash("sha1", base64Decode(hashPassword)).equals(calculateHash("sha1", answer));
+        } catch (NoSuchAlgorithmException e) {
+            log.warn("Exception thrown when caluclating hash", e);
+            return false;
+        }
+
     }
 
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {

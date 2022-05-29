@@ -199,12 +199,6 @@
             <version>${dependency-check-maven.version}</version>
             <type>maven-plugin</type>
         </dependency>
-
-        <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-            <version>1.15</version>
-        </dependency>
     </dependencies>
 
     <dependencyManagement>
