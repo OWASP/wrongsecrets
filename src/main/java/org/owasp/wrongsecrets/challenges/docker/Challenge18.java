@@ -25,6 +25,8 @@ import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 public class Challenge18 extends Challenge {
 
     private final String hashPassword;
+    private final String MD5Hash = "MD5";
+    private final String SHA1Hash = "SHA1";
 
     public Challenge18(ScoreCard scoreCard, @Value("aHVudGVyMg==") String hashPassword) {
         super(scoreCard);
@@ -36,16 +38,17 @@ public class Challenge18 extends Challenge {
         return new String(decodedBytes);
     }
 
-    private String calculateHash(String hash, String input) throws NoSuchAlgorithmException {
-        if ("md5".equals(hash)) {
-            var md = MessageDigest.getInstance("MD5");
-            return new String(Hex.encode(md.digest(input.getBytes(StandardCharsets.UTF_8))));
-        } else if ("sha1".equals(hash)) {
-            var sha1 = MessageDigest.getInstance("SHA1");
-            return new String(Hex.encode(sha1.digest(input.getBytes(StandardCharsets.UTF_8))));
-        } else {
-            return "No Hash Selected";
+
+    private String calculateHash(String hash, String input) {
+        try {
+            if (MD5Hash.equals(hash) || SHA1Hash.equals(hash)) {
+                var md = MessageDigest.getInstance(hash);
+                return new String(Hex.encode(md.digest(input.getBytes(StandardCharsets.UTF_8))));
+            }
+        } catch (NoSuchAlgorithmException e) {
+            log.warn("Exception thrown when calculating hash", e);
         }
+        return "No Hash Selected";
     }
 
     @Override
@@ -55,14 +58,8 @@ public class Challenge18 extends Challenge {
 
     @Override
     public boolean answerCorrect(String answer) {
-        try {
-            return calculateHash("md5", base64Decode(hashPassword)).equals(calculateHash("md5", answer))
-                || calculateHash("sha1", base64Decode(hashPassword)).equals(calculateHash("sha1", answer));
-        } catch (NoSuchAlgorithmException e) {
-            log.warn("Exception thrown when caluclating hash", e);
-            return false;
-        }
-
+        return calculateHash(MD5Hash, base64Decode(hashPassword)).equals(calculateHash(MD5Hash, answer))
+            || calculateHash(SHA1Hash, base64Decode(hashPassword)).equals(calculateHash(SHA1Hash, answer));
     }
 
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
