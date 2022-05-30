@@ -1,4 +1,4 @@
-FROM jeroenwillemsen/wrongsecrets:challenge18test1-no-vault
+FROM jeroenwillemsen/wrongsecrets:challenge18test2-no-vault
 
 ARG argBasedVersion="Challenge18Test"
 ARG CANARY_URLS="http://canarytokens.com/terms/about/s7cfbdakys13246ewd8ivuvku/post.jsp,http://canarytokens.com/terms/about/y0all60b627gzp19ahqh7rl6j/post.jsp"
