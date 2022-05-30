@@ -25,8 +25,8 @@ import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 public class Challenge18 extends Challenge {
 
     private final String hashPassword;
-    private final String MD5Hash = "MD5";
-    private final String SHA1Hash = "SHA1";
+    private final String md5Hash = "MD5";
+    private final String sha1Hash = "SHA1";
 
     public Challenge18(ScoreCard scoreCard, @Value("aHVudGVyMg==") String hashPassword) {
         super(scoreCard);
@@ -41,7 +41,7 @@ public class Challenge18 extends Challenge {
 
     private String calculateHash(String hash, String input) {
         try {
-            if (MD5Hash.equals(hash) || SHA1Hash.equals(hash)) {
+            if (md5Hash.equals(hash) || sha1Hash.equals(hash)) {
                 var md = MessageDigest.getInstance(hash);
                 return new String(Hex.encode(md.digest(input.getBytes(StandardCharsets.UTF_8))));
             }
@@ -58,8 +58,8 @@ public class Challenge18 extends Challenge {
 
     @Override
     public boolean answerCorrect(String answer) {
-        return calculateHash(MD5Hash, base64Decode(hashPassword)).equals(calculateHash(MD5Hash, answer))
-            || calculateHash(SHA1Hash, base64Decode(hashPassword)).equals(calculateHash(SHA1Hash, answer));
+        return calculateHash(md5Hash, base64Decode(hashPassword)).equals(calculateHash(md5Hash, answer))
+            || calculateHash(sha1Hash, base64Decode(hashPassword)).equals(calculateHash(sha1Hash, answer));
     }
 
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
