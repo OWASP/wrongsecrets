@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.6.7</version>
+        <version>2.7.0</version>
         <relativePath /> <!-- lookup parent from repository -->
     </parent>
     <groupId>org.owasp</groupId>
@@ -53,7 +53,7 @@
         <thymeleaf.version>3.0.15.RELEASE</thymeleaf.version>
         <thymeleaf.layout>3.1.0</thymeleaf.layout>
         <asciidoctor.maven.plugin.version>2.2.2</asciidoctor.maven.plugin.version>
-        <azure.keyvault.version>4.4.1</azure.keyvault.version>
+        <azure.keyvault.version>4.4.2</azure.keyvault.version>
         <azure.identity.version>1.5.0</azure.identity.version>
         <azure.keyvault.spring.version>2.3.5</azure.keyvault.spring.version>
         <spring.security.version>5.6.3</spring.security.version>
