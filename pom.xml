@@ -41,7 +41,7 @@
     <properties>
         <java.version>18</java.version>
         <maven.compiler.target>18</maven.compiler.target>
-        <spring.cloud-version>2021.0.2</spring.cloud-version>
+        <spring.cloud-version>2021.0.3</spring.cloud-version>
         <lombok.version>1.18.24</lombok.version>
         <aws.sdk.version>2.17.202</aws.sdk.version>
         <asciidoctorj.version>2.5.3</asciidoctorj.version>
@@ -53,7 +53,7 @@
         <thymeleaf.version>3.0.15.RELEASE</thymeleaf.version>
         <thymeleaf.layout>3.1.0</thymeleaf.layout>
         <asciidoctor.maven.plugin.version>2.2.2</asciidoctor.maven.plugin.version>
-        <azure.keyvault.version>4.4.1</azure.keyvault.version>
+        <azure.keyvault.version>4.4.2</azure.keyvault.version>
         <azure.identity.version>1.5.0</azure.identity.version>
         <azure.keyvault.spring.version>2.3.5</azure.keyvault.spring.version>
         <spring.security.version>5.7.1</spring.security.version>
