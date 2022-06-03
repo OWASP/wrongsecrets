@@ -9,7 +9,7 @@
     </parent>
     <groupId>org.owasp</groupId>
     <artifactId>wrongsecrets</artifactId>
-    <version>lcmupdate1-SNAPSHOT</version>
+    <version>1.4.2</version>
     <name>OWASP WrongSecrets</name>
     <description>Examples with how to not use secrets</description>
     <url>https://owasp.org/www-project-wrongsecrets/</url>
@@ -257,7 +257,7 @@
                         <dependency>
                             <groupId>com.puppycrawl.tools</groupId>
                             <artifactId>checkstyle</artifactId>
-                            <version>10.2</version>
+                            <version>10.3</version>
                         </dependency>
                     </dependencies>
                 </plugin>
