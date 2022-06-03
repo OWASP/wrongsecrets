@@ -9,7 +9,7 @@
     </parent>
     <groupId>org.owasp</groupId>
     <artifactId>wrongsecrets</artifactId>
-    <version>1.4.2-SNAPSHOT</version>
+    <version>lcmupdate1-SNAPSHOT</version>
     <name>OWASP WrongSecrets</name>
     <description>Examples with how to not use secrets</description>
     <url>https://owasp.org/www-project-wrongsecrets/</url>
@@ -41,22 +41,22 @@
     <properties>
         <java.version>18</java.version>
         <maven.compiler.target>18</maven.compiler.target>
-        <spring.cloud-version>2021.0.2</spring.cloud-version>
+        <spring.cloud-version>2021.0.3</spring.cloud-version>
         <lombok.version>1.18.24</lombok.version>
-        <aws.sdk.version>2.17.181</aws.sdk.version>
+        <aws.sdk.version>2.17.202</aws.sdk.version>
         <asciidoctorj.version>2.5.3</asciidoctorj.version>
         <jruby.version>9.3.4.0</jruby.version>
         <bootstrap.version>5.1.3</bootstrap.version>
         <github.button.version>2.14.1</github.button.version>
-        <gcp.sdk.version>25.2.0</gcp.sdk.version>
+        <gcp.sdk.version>25.3.0</gcp.sdk.version>
         <thymeleaf-spring5.version>3.0.15.RELEASE</thymeleaf-spring5.version>
         <thymeleaf.version>3.0.15.RELEASE</thymeleaf.version>
         <thymeleaf.layout>3.1.0</thymeleaf.layout>
         <asciidoctor.maven.plugin.version>2.2.2</asciidoctor.maven.plugin.version>
-        <azure.keyvault.version>4.4.1</azure.keyvault.version>
+        <azure.keyvault.version>4.4.2</azure.keyvault.version>
         <azure.identity.version>1.5.0</azure.identity.version>
         <azure.keyvault.spring.version>2.3.5</azure.keyvault.spring.version>
-        <spring.security.version>5.6.3</spring.security.version>
+        <spring.security.version>5.7.1</spring.security.version>
         <cyclonedx.core.version>7.1.3</cyclonedx.core.version>
         <KeePassJava2.version>2.1.4</KeePassJava2.version>
         <system-stubs-jupiter.version>2.0.1</system-stubs-jupiter.version>
@@ -257,7 +257,7 @@
                         <dependency>
                             <groupId>com.puppycrawl.tools</groupId>
                             <artifactId>checkstyle</artifactId>
-                            <version>10.2</version>
+                            <version>10.3</version>
                         </dependency>
                     </dependencies>
                 </plugin>
