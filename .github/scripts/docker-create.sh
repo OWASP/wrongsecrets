@@ -39,77 +39,97 @@ for ARGUMENT in "$@"; do
   export "$KEY"="$VALUE"
 done
 
-# Check all arguments added to the command
-################################################
-if test -n "${tag+x}"; then
-  echo "tag is set"
-else
-  SCRIPT_PATH=$(dirname $(dirname $(dirname $(readlink -f "$0"))))
-  tag="local-test"
-  echo "Setting default tag: ${tag}"
-fi
-
-if test -n "${buildarg+x}"; then
-  echo "buildarg is set"
-else
-  buildarg="argBasedPassword='this is on your command line'"
-  echo "Setting buildarg to ${buildarg}"
-fi
-
-if test -n "${springProfile+x}"; then
-  if [[ $springProfile == 'local-vault' ]] || [[ $springProfile == 'without-vault' ]] || [[ $springProfile == 'kubernetes-vault' ]]; then
-    echo "Setting springProfile to $springProfile"
+check_arguments () {
+  # Check all arguments added to the command
+  ################################################
+  if test -n "${tag+x}"; then
+    echo "tag is set"
   else
-    echo "Please specify a springProfile of without-vault, local-vault or kubernetes-vault as a springProfile"
-    exit 1
+    SCRIPT_PATH=$(dirname $(dirname $(dirname $(readlink -f "$0"))))
+    tag="local-test"
+    echo "Setting default tag: ${tag}"
   fi
-else
-  springProfile="All"
-fi
 
-echo "Spring profile: $springProfile"
-echo "Version tag: $tag"
-echo "buildarg supplied: $buildarg"
+  if test -n "${buildarg+x}"; then
+    echo "buildarg is set"
+  else
+    buildarg="argBasedPassword='this is on your command line'"
+    echo "Setting buildarg to ${buildarg}"
+  fi
 
-echo "Start building assets required for container"
-####################################################
-echo "Generating challenge 12-data"
-openssl rand -base64 32 | tr -d '\n' >yourkey.txt
-echo "Generating challenge 16-data"
-SECENDKEYPART1=$(openssl rand -base64 5 | tr -d '\n')
-SECENDKEYPART2=$(openssl rand -base64 3 | tr -d '\n')
-SECENDKEYPART3=$(openssl rand -base64 2 | tr -d '\n')
-SECENDKEYPART4=$(openssl rand -base64 3 | tr -d '\n')
-echo -n "${SECENDKEYPART1}9${SECENDKEYPART2}6${SECENDKEYPART3}2${SECENDKEYPART4}7" >secondkey.txt
-printf "function secret() { \n var password = \"$SECENDKEYPART1\" + 9 + \"$SECENDKEYPART2\" + 6 + \"$SECENDKEYPART3\" + 2 + \"$SECENDKEYPART4\" + 7;\n return password;\n }\n" >../../js/index.js
-echo "Generating challenge 17-data"
-openssl rand -base64 32 | tr -d '\n' > thirdkey.txt
-answer=$(<thirdkey.txt)
-answerRegexSafe="$(printf '%s' "$answer" | gsed -e 's/[]\/$*.^|[]/\\&/g' | gsed ':a;N;$!ba;s,\n,\\n,g')"
-gsed -i "s/Placeholder Password, find the real one in the history of the container/$answerRegexSafe/g" ../../src/main/resources/.bash_history
+  if test -n "${springProfile+x}"; then
+    if [[ $springProfile == 'local-vault' ]] || [[ $springProfile == 'without-vault' ]] || [[ $springProfile == 'kubernetes-vault' ]]; then
+      echo "Setting springProfile to $springProfile"
+    else
+      echo "Please specify a springProfile of without-vault, local-vault or kubernetes-vault as a springProfile"
+      exit 1
+    fi
+  else
+    springProfile="All"
+  fi
 
-echo "Check if all required binaries are installed"
-##################################################
-source ../../scripts/check-available-commands.sh
-checkCommandsAvailable java docker mvn git
+  echo "Spring profile: $springProfile"
+  echo "Version tag: $tag"
+  echo "buildarg supplied: $buildarg"
+}
 
-echo "Building and updating pom.xml file so we can use it in our docker"
-########################################################################
-cd ../.. && mvn clean && mvn --batch-mode release:update-versions -DdevelopmentVersion=${tag}-SNAPSHOT && mvn install -DskipTests
-cd .github/scripts
-docker buildx create --name mybuilder
-docker buildx use mybuilder
+secret_generation () {
+  echo "Start building assets required for container"
+  ##################################################
+  echo "Generating challenge 12-data"
+  openssl rand -base64 32 | tr -d '\n' >yourkey.txt
+  echo "Generating challenge 16-data"
+  SECENDKEYPART1=$(openssl rand -base64 5 | tr -d '\n')
+  SECENDKEYPART2=$(openssl rand -base64 3 | tr -d '\n')
+  SECENDKEYPART3=$(openssl rand -base64 2 | tr -d '\n')
+  SECENDKEYPART4=$(openssl rand -base64 3 | tr -d '\n')
+  echo -n "${SECENDKEYPART1}9${SECENDKEYPART2}6${SECENDKEYPART3}2${SECENDKEYPART4}7" >secondkey.txt
+  printf "function secret() { \n var password = \"$SECENDKEYPART1\" + 9 + \"$SECENDKEYPART2\" + 6 + \"$SECENDKEYPART3\" + 2 + \"$SECENDKEYPART4\" + 7;\n return password;\n }\n" >../../js/index.js
+  echo "Generating challenge 17-data"
+  openssl rand -base64 32 | tr -d '\n' > thirdkey.txt
+  answer=$(<thirdkey.txt)
+  answerRegexSafe="$(printf '%s' "$answer" | gsed -e 's/[]\/$*.^|[]/\\&/g' | gsed ':a;N;$!ba;s,\n,\\n,g')"
+  gsed -i "s/Placeholder Password, find the real one in the history of the container/$answerRegexSafe/g" ../../src/main/resources/.bash_history
+}
 
-echo "Creating containers"
-##########################
-if [[ "$springProfile" != "All" ]]; then
-  docker buildx build -t jeroenwillemsen/wrongsecrets:$tag-$springProfile --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=$springProfile" --load ./../../.
-else
-  docker buildx build -t jeroenwillemsen/wrongsecrets:$tag-no-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=without-vault" --load ./../../.
-  docker buildx build -t jeroenwillemsen/wrongsecrets:$tag-local-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=local-vault" --load ./../../.
-  docker buildx build -t jeroenwillemsen/wrongsecrets:$tag-k8s-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=kubernetes-vault" --load ./../../.
-fi
 
-echo "Restoring temporal change"
-git restore ../../js/index.js
-git restore ../../pom.xml
+check_required_install () {
+  echo "Check if all required binaries are installed"
+  ##################################################
+  source ../../scripts/check-available-commands.sh
+  checkCommandsAvailable java docker mvn git
+}
+
+build_update_pom () {
+  echo "Building and updating pom.xml file so we can use it in our docker"
+  ########################################################################
+  cd ../.. && mvn clean && mvn --batch-mode release:update-versions -DdevelopmentVersion=${tag}-SNAPSHOT && mvn install -DskipTests
+  cd .github/scripts
+  docker buildx create --name mybuilder
+  docker buildx use mybuilder
+}
+
+create_containers () {
+  echo "Creating containers"
+  ##########################
+  if [[ "$springProfile" != "All" ]]; then
+    docker buildx build -t jeroenwillemsen/wrongsecrets:$tag-$springProfile --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=$springProfile" --load ./../../.
+  else
+    docker buildx build -t jeroenwillemsen/wrongsecrets:$tag-no-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=without-vault" --load ./../../.
+    docker buildx build -t jeroenwillemsen/wrongsecrets:$tag-local-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=local-vault" --load ./../../.
+    docker buildx build -t jeroenwillemsen/wrongsecrets:$tag-k8s-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=kubernetes-vault" --load ./../../.
+  fi
+  }
+
+  restore_temp_change () {
+  echo "Restoring temporal change"
+  git restore ../../js/index.js
+  git restore ../../pom.xml
+}
+
+check_arguments
+secret_generation
+check_required_install
+build_update_pom
+create_containers
+restore_temp_change
