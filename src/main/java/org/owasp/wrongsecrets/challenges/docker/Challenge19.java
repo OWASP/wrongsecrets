@@ -31,7 +31,7 @@ import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 @Slf4j
 public class Challenge19 extends Challenge {
 
-    public static String ERROR_EXECUTION="Error with executing";
+    public static String ERROR_EXECUTION = "Error with executing";
 
     public Challenge19(ScoreCard scoreCard) {
         super(scoreCard);
