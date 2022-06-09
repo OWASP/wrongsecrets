@@ -1,0 +1,5 @@
+This challenge is specifically looking at a secret in a C binary
+
+You can solve this challenge using the following steps:
+
+1. TBD

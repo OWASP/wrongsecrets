@@ -1,0 +1,2 @@
+*Why Using binaries to hide a secret will only delay an attacker.*
+TBD
