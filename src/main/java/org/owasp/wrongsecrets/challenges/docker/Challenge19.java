@@ -31,6 +31,8 @@ import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 @Slf4j
 public class Challenge19 extends Challenge {
 
+    public static String ERROR_EXECUTION="Error with executing";
+
     public Challenge19(ScoreCard scoreCard) {
         super(scoreCard);
     }
@@ -51,48 +53,63 @@ public class Challenge19 extends Challenge {
     }
 
 
+    private boolean useX86() {
+        String systemARch = System.getProperty("os.arch");
+        log.info("System arch detected: {}", systemARch);
+        return systemARch.contains("x86_64");
+    }
+
+    private File createTempExecutable() throws IOException {
+        File challengeFile;
+        if (useX86()) {
+            challengeFile = ResourceUtils.getFile("classpath:wrongsecrets-c");
+        } else {
+            challengeFile = ResourceUtils.getFile("classpath:wrongsecrets-c-arm");
+        }
+        //prepare file to execute
+        File execfile = File.createTempFile("c-exec-challenge19", "sh");
+        OutputStream os = new FileOutputStream(execfile.getPath());
+        ByteArrayInputStream is = new ByteArrayInputStream(FileUtils.readFileToByteArray(challengeFile));
+        byte[] b = new byte[2048];
+        int length;
+        while ((length = is.read(b)) != -1) {
+            os.write(b, 0, length);
+        }
+        is.close();
+        os.close();
+        execfile.setExecutable(true);
+        return execfile;
+    }
+
+    private String executeCommand(File execFile, String argument) throws IOException, InterruptedException {
+        ProcessBuilder ps = new ProcessBuilder(execFile.getPath(), argument);
+        ps.redirectErrorStream(true);
+        Process pr = ps.start();
+        BufferedReader in = new BufferedReader(new InputStreamReader(pr.getInputStream()));
+        String line = "";
+        String result = "";
+        while ((line = in.readLine()) != null) {
+            result = result + line;
+        }
+        pr.waitFor();
+        return result;
+    }
+
+
     private String executeCommand(String guess) {
         Runtime runTime = Runtime.getRuntime();
         if (Strings.isNullOrEmpty((guess))) {
             guess = "spoil";
         }
         try {
-            String systemARch = System.getProperty("os.arch");
-            log.info("System arch detected: {}", systemARch);
-            File challengeFile;
-            if (systemARch.contains("x86_64")) {
-                challengeFile = ResourceUtils.getFile("classpath:wrongsecrets-c");
-            } else {
-                challengeFile = ResourceUtils.getFile("classpath:wrongsecrets-c-arm");
-            }
-            //prepare file to execute
-            File execfile = File.createTempFile("c-exec-challenge19", "sh");
-            execfile.setExecutable(true);
-            OutputStream os = new FileOutputStream(execfile.getPath());
-            ByteArrayInputStream is = new ByteArrayInputStream(FileUtils.readFileToByteArray(challengeFile));
-            byte[] b = new byte[2048];
-            int length;
-            while ((length = is.read(b)) != -1) {
-                os.write(b, 0, length);
-            }
-            is.close();
-            os.close();
-            execfile.setExecutable(true);
-            ProcessBuilder ps = new ProcessBuilder(execfile.getPath(), guess);
-            ps.redirectErrorStream(true);
-            Process pr = ps.start();
-            BufferedReader in = new BufferedReader(new InputStreamReader(pr.getInputStream()));
-            String line, result = "";
-            while ((line = in.readLine()) != null) {
-                result = result + line;
-            }
-            pr.waitFor();
+            File execfile = createTempExecutable();
+            String result = executeCommand(execfile, guess);
             execfile.delete();
             log.info("stdout challenge 19: {}", result);
             return result;
         } catch (IOException | NullPointerException | InterruptedException e) {
             log.warn("Error executing:", e);
-            return "Error with executing";
+            return ERROR_EXECUTION;
         }
 
     }
