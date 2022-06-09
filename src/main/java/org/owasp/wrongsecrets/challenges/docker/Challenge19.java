@@ -3,6 +3,7 @@ package org.owasp.wrongsecrets.challenges.docker;
 
 import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FileUtils;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
@@ -12,10 +13,12 @@ import org.springframework.core.annotation.Order;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.crypto.codec.Hex;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ResourceUtils;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.attribute.FileAttribute;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
@@ -47,6 +50,7 @@ public class Challenge19 extends Challenge {
         return List.of(DOCKER);
     }
 
+
     private String executeCommand(String guess) {
         Runtime runTime = Runtime.getRuntime();
         if (Strings.isNullOrEmpty((guess))) {
@@ -55,16 +59,38 @@ public class Challenge19 extends Challenge {
         try {
             String systemARch = System.getProperty("os.arch");
             log.info("System arch detected: {}", systemARch);
-            String fileLocation;
-            if (systemARch == "x86_64") {
-                fileLocation = "wrongsecrets-c";
+            File challengeFile;
+            if (systemARch.contains("x86_64")) {
+                challengeFile = ResourceUtils.getFile("classpath:wrongsecrets-c");
             } else {
-                fileLocation = "wrongsecrets-c-arm";
+                challengeFile = ResourceUtils.getFile("classpath:wrongsecrets-c-arm");
             }
-            String output = runTime.exec(new String[]{fileLocation, guess}).getOutputStream().toString();
-            log.info("Output challenge 19: {}", output);
-            return output;
-        } catch (IOException e) {
+            //prepare file to execute
+            File execfile = File.createTempFile("c-exec-challenge19", "sh");
+            execfile.setExecutable(true);
+            OutputStream os = new FileOutputStream(execfile.getPath());
+            ByteArrayInputStream is = new ByteArrayInputStream(FileUtils.readFileToByteArray(challengeFile));
+            byte[] b = new byte[2048];
+            int length;
+            while ((length = is.read(b)) != -1) {
+                os.write(b, 0, length);
+            }
+            is.close();
+            os.close();
+            execfile.setExecutable(true);
+            ProcessBuilder ps = new ProcessBuilder(execfile.getPath(), guess);
+            ps.redirectErrorStream(true);
+            Process pr = ps.start();
+            BufferedReader in = new BufferedReader(new InputStreamReader(pr.getInputStream()));
+            String line, result = "";
+            while ((line = in.readLine()) != null) {
+                result = result + line;
+            }
+            pr.waitFor();
+            execfile.delete();
+            log.info("stdout challenge 19: {}", result);
+            return result;
+        } catch (IOException | NullPointerException | InterruptedException e) {
             log.warn("Error executing:", e);
             return "Error with executing";
         }
