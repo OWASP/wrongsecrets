@@ -69,11 +69,11 @@ public class Challenge19 extends Challenge {
             challengeFile = retrieveFile("wrongsecrets-c-arm");
         }
         //prepare file to execute
-        File execfile = File.createTempFile("c-exec-challenge19", "sh");
-        if (!execfile.setExecutable(true)) {
-            log.info("setting the file {} executalbe failed... rest can be ignored", execfile.getPath());
+        File execFile = File.createTempFile("c-exec-challenge19", "sh");
+        if (!execFile.setExecutable(true)) {
+            log.info("setting the file {} executable failed... rest can be ignored", execFile.getPath());
         }
-        OutputStream os = new FileOutputStream(execfile.getPath());
+        OutputStream os = new FileOutputStream(execFile.getPath());
         ByteArrayInputStream is = new ByteArrayInputStream(FileUtils.readFileToByteArray(challengeFile));
         byte[] b = new byte[2048];
         int length;
@@ -83,7 +83,7 @@ public class Challenge19 extends Challenge {
         is.close();
         os.close();
 
-        return execfile;
+        return execFile;
     }
 
     private String executeCommand(File execFile, String argument) throws IOException, InterruptedException {
@@ -102,10 +102,10 @@ public class Challenge19 extends Challenge {
             guess = "spoil";
         }
         try {
-            File execfile = createTempExecutable();
-            String result = executeCommand(execfile, guess);
-            if(!execfile.delete()){
-                log.info("Deleting the file {} failed...", execfile.getPath());
+            File execFile = createTempExecutable();
+            String result = executeCommand(execFile, guess);
+            if (!execFile.delete()) {
+                log.info("Deleting the file {} failed...", execFile.getPath());
             }
             log.info("stdout challenge 19: {}", result);
             return result;
