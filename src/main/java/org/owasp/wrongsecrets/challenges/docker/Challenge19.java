@@ -70,6 +70,9 @@ public class Challenge19 extends Challenge {
         }
         //prepare file to execute
         File execfile = File.createTempFile("c-exec-challenge19", "sh");
+        if (!execfile.setExecutable(true)) {
+            log.info("setting the file {} executalbe failed... rest can be ignored", execfile.getPath());
+        }
         OutputStream os = new FileOutputStream(execfile.getPath());
         ByteArrayInputStream is = new ByteArrayInputStream(FileUtils.readFileToByteArray(challengeFile));
         byte[] b = new byte[2048];
@@ -79,7 +82,7 @@ public class Challenge19 extends Challenge {
         }
         is.close();
         os.close();
-        execfile.setExecutable(true);
+
         return execfile;
     }
 
@@ -88,25 +91,22 @@ public class Challenge19 extends Challenge {
         ps.redirectErrorStream(true);
         Process pr = ps.start();
         BufferedReader in = new BufferedReader(new InputStreamReader(pr.getInputStream()));
-        String line = "";
-        String result = "";
-        while ((line = in.readLine()) != null) {
-            result = result + line;
-        }
+        String result = in.readLine();
         pr.waitFor();
         return result;
     }
 
 
     private String executeCommand(String guess) {
-        Runtime runTime = Runtime.getRuntime();
         if (Strings.isNullOrEmpty((guess))) {
             guess = "spoil";
         }
         try {
             File execfile = createTempExecutable();
             String result = executeCommand(execfile, guess);
-            execfile.delete();
+            if(!execfile.delete()){
+                log.info("Deleting the file {} failed...", execfile.getPath());
+            }
             log.info("stdout challenge 19: {}", result);
             return result;
         } catch (IOException | NullPointerException | InterruptedException e) {
