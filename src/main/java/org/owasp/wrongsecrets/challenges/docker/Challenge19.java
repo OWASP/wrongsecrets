@@ -56,7 +56,7 @@ public class Challenge19 extends Challenge {
     private boolean useX86() {
         String systemARch = System.getProperty("os.arch");
         log.info("System arch detected: {}", systemARch);
-        return systemARch.contains("x86_64");
+        return systemARch.contains("x86_64") || systemARch.contains("amd64");
     }
 
     private File createTempExecutable() throws IOException {
