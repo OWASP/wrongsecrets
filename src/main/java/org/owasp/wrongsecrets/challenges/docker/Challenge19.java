@@ -8,20 +8,11 @@ import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.Spoiler;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.security.crypto.codec.Hex;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ResourceUtils;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.attribute.FileAttribute;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
 import java.util.List;
 
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
@@ -56,15 +47,26 @@ public class Challenge19 extends Challenge {
     private boolean useX86() {
         String systemARch = System.getProperty("os.arch");
         log.info("System arch detected: {}", systemARch);
-        return systemARch.contains("x86_64") || systemARch.contains("amd64");
+        return systemARch.contains("amd64") || systemARch.contains("x86");
+    }
+
+    private File retrieveFile(String location) {
+        try {
+            log.info("First looking at location:'classpath:executables/{}", location);
+            return ResourceUtils.getFile("classpath:executables/" + location);
+        } catch (FileNotFoundException e) {
+            log.warn("exception finding file", e);
+            log.info("You might be running this in a docker container, trying alternative path: /home/wrongsecrets/{}", location);
+            return new File("/home/wrongsecrets/" + location);
+        }
     }
 
     private File createTempExecutable() throws IOException {
         File challengeFile;
         if (useX86()) {
-            challengeFile = ResourceUtils.getFile("classpath:wrongsecrets-c");
+            challengeFile = retrieveFile("wrongsecrets-c");
         } else {
-            challengeFile = ResourceUtils.getFile("classpath:wrongsecrets-c-arm");
+            challengeFile = retrieveFile("wrongsecrets-c-arm");
         }
         //prepare file to execute
         File execfile = File.createTempFile("c-exec-challenge19", "sh");
