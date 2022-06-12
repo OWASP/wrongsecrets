@@ -52,11 +52,11 @@ public class Challenge19 extends Challenge {
 
     private File retrieveFile(String location) {
         try {
-            log.info("First looking at location:'classpath:executables/{}", location);
+            log.info("First looking at location:'classpath:executables/{}'", location);
             return ResourceUtils.getFile("classpath:executables/" + location);
         } catch (FileNotFoundException e) {
-            log.warn("exception finding file", e);
-            log.info("You might be running this in a docker container, trying alternative path: /home/wrongsecrets/{}", location);
+            log.debug("exception finding file", e);
+            log.info("You might be running this in a docker container, trying alternative path: '/home/wrongsecrets/{}'", location);
             return new File("/home/wrongsecrets/" + location);
         }
     }

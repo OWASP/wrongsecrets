@@ -3,4 +3,4 @@
 We need to put a secret in a mobile app! Nobody will notice the secret in our compiled code!
 This is a misbelief we have often encountered when presenting on mobile security topics.
 
-Let's debunk this myth for C: can you find the secret in `wrongsecrets-c` (or `wrongsecrets-c-arm`)?
+Let's debunk this myth for C: can you find the secret in https://github.com/commjoen/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-c[wrongsecrets-c] (or https://github.com/commjoen/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-c-arm[wrongsecrets-c-arm])?
