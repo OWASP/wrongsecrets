@@ -20,6 +20,8 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - uses: actions/checkout@v3
+      - name: Navigate to test script
+        run: cd .github/scripts
       - name: Run test script
-        run: .github/scripts/docker-create.sh -t
+        run: bash docker-create.sh -t
 
