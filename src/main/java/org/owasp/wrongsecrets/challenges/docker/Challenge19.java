@@ -50,6 +50,12 @@ public class Challenge19 extends Challenge {
         return systemARch.contains("amd64") || systemARch.contains("x86");
     }
 
+    private boolean useLinux() {
+        String systemARch = System.getProperty("os.arch");
+        log.info("System arch detected: {}", systemARch);
+        return systemARch.contains("amd64");
+    }
+
     private File retrieveFile(String location) {
         try {
             log.info("First looking at location:'classpath:executables/{}'", location);
@@ -65,6 +71,9 @@ public class Challenge19 extends Challenge {
         File challengeFile;
         if (useX86()) {
             challengeFile = retrieveFile("wrongsecrets-c");
+            if (useLinux()) {
+                challengeFile = retrieveFile("wrongsecrets-c-linux");
+            }
         } else {
             challengeFile = retrieveFile("wrongsecrets-c-arm");
         }

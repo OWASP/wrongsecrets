@@ -9,7 +9,7 @@
     </parent>
     <groupId>org.owasp</groupId>
     <artifactId>wrongsecrets</artifactId>
-    <version>challenge19test6-SNAPSHOT</version>
+    <version>challenge19test7-SNAPSHOT</version>
     <name>OWASP WrongSecrets</name>
     <description>Examples with how to not use secrets</description>
     <url>https://owasp.org/www-project-wrongsecrets/</url>
