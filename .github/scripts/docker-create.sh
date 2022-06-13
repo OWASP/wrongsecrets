@@ -161,7 +161,10 @@ test() {
         echo "Running the tests"
         echo "Starting the docker container"
         docker run -d -p 8080:8080 jeroenwillemsen/wrongsecrets:local-test
-        sleep 30
+        until $(curl --output /dev/null --silent --head --fail http://localhost:8080); do
+            printf '.'
+            sleep 5
+        done
         response=$(curl localhost:8080)
         assert_contain "$response" "Wondering what a secret is?"
         if [ "$?" == 0 ]; then
