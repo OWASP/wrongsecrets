@@ -88,14 +88,12 @@ echo "buildarg supplied: $buildarg"
 
 check_required_install() {
     echo "Check if all required binaries are installed"
-    ##################################################
     source ../../scripts/check-available-commands.sh
     checkCommandsAvailable java docker mvn git
 }
 
 build_update_pom() {
     echo "Building and updating pom.xml file so we can use it in our docker"
-    ########################################################################
     cd ../.. && mvn clean && mvn --batch-mode release:update-versions -DdevelopmentVersion=${tag}-SNAPSHOT && mvn install -DskipTests
     cd .github/scripts
     docker buildx create --name mybuilder
@@ -104,7 +102,6 @@ build_update_pom() {
 
 create_containers() {
     echo "Creating containers"
-    ##########################
     if [[ "$script_mode" == "publish" ]]; then
         docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/addo-example:$tag-no-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=without-vault" --push ./../../.
         docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/addo-example:$tag-local-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=local-vault" --push ./../../.
@@ -159,13 +156,20 @@ echo_next_steps() {
 }
 
 test() {
+    source ../../scripts/assert.sh
     if [[ "$script_mode" == "test" ]]; then
         echo "Running the tests"
         echo "Starting the docker container"
         docker run -d -p 8080:8080 jeroenwillemsen/wrongsecrets:local-test
         sleep 30
-        curl localhost:8080/spoil-17
-        echo "testing complete"
+        response=$(curl localhost:8080)
+        assert_contain "$response" "Wondering what a secret is?"
+        if [ "$?" == 0 ]; then
+            log_success "The container test completed successfully"
+        else
+            log_failure "The container test has failed"
+        fi
+        echo "Testing complete"
     else
         return
     fi
