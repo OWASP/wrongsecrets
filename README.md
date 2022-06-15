@@ -169,6 +169,7 @@ Top contributors:
 
 - [Nanne Baars @nbaars](https://github.com/nbaars)
 - [Marcin Nowak @MarcinNowak-codes](https://github.com/MarcinNowak-codes)
+- [Joss Sparkes @remakingeden](https://github.com/remakingeden)
 - [Tibor Hercz @tiborhercz](https://github.com/tiborhercz)
 - [Filip Chyla @fchyla](https://github.com/fchyla)
 - [Dmitry Litosh @Dlitosh](https://github.com/Dlitosh)
@@ -177,7 +178,8 @@ Top contributors:
 - [Mike Woudenberg @mikewoudenberg](https://github.com/mikewoudenberg)
 - [Ruben Kruiver @RubenAtBinx](https://github.com/RubenAtBinx)
 - [Finn @f3rn0s](https://github.com/f3rn0s)
-- [Joss Sparkes @remakingeden](https://github.com/remakingeden)
+- [Alex Bender @alex-bender](https://github.com/alex-bender)
+
 
 Testers:
 
