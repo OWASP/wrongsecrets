@@ -87,9 +87,9 @@ git restore src/main/resources/.bash_history
 echo "committing changes and new pom file with version ${tag}"
 git commit -am "Update POM file with new version: ${tag}"
 git push
-#echo "tagging version"
-#git tag -a $tag -m "${message}"
-#git push --tags
+echo "tagging version"
+git tag -a $tag -m "${message}"
+git push --tags
 
 echo "Don't forget to update experiment-bed"
 echo "git checkout experiment-bed && git merge master --no-edit"

@@ -21,7 +21,7 @@ We will keep providing updates to this branch, and you can track the status quo 
 
 ## Basic docker exercises
 
-_Can be used for challenges 1-4, 8, 12-18_
+_Can be used for challenges 1-4, 8, 12-19_
 
 For the basic docker exercises you currently require:
 
@@ -31,7 +31,7 @@ For the basic docker exercises you currently require:
 You can install it by doing:
 
 ```bash
-docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:1.4.2-no-vault
+docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:1.4.4-no-vault
 ```
 
 Now you can try to find the secrets by means of solving the challenge offered at:
@@ -48,6 +48,7 @@ Now you can try to find the secrets by means of solving the challenge offered at
 - [localhost:8080/challenge/16](http://localhost:8080/challenge/16)
 - [localhost:8080/challenge/17](http://localhost:8080/challenge/17)
 - [localhost:8080/challenge/18](http://localhost:8080/challenge/18)
+- [localhost:8080/challenge/18](http://localhost:8080/challenge/19)
 
 Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look better ;-).
 
@@ -64,7 +65,7 @@ You can test them out at [https://wrongsecrets.herokuapp.com/](https://wrongsecr
 
 ## Basic K8s exercise
 
-_Can be used for challenges 1-6, 8, 12-18_
+_Can be used for challenges 1-6, 8, 12-19_
 
 ### Minikube based
 
@@ -111,7 +112,7 @@ now you can use the provided IP address and port to further play with the K8s va
 
 ## Vault exercises with minikube
 
-_Can be used for challenges 1-8, 12-18_
+_Can be used for challenges 1-8, 12-19_
 Make sure you have the following installed:
 
 - minikube with docker (or comment out line 8 and work at your own k8s setup),
@@ -128,7 +129,7 @@ When you stopped the `k8s-vault-minikube-start.sh` script and want to resume the
 
 ## Cloud Challenges
 
-_Can be used for challenges 1-18_
+_Can be used for challenges 1-19_
 
 **READ THIS**: Given that the exercises below contain IAM privilege escalation exercises, 
 never run this on an account which is related to your production environment or can influence your account-over-arching resources.
@@ -175,6 +176,7 @@ Top contributors:
 
 - [Nanne Baars @nbaars](https://github.com/nbaars)
 - [Marcin Nowak @MarcinNowak-codes](https://github.com/MarcinNowak-codes)
+- [Joss Sparkes @remakingeden](https://github.com/remakingeden)
 - [Tibor Hercz @tiborhercz](https://github.com/tiborhercz)
 - [Filip Chyla @fchyla](https://github.com/fchyla)
 - [Dmitry Litosh @Dlitosh](https://github.com/Dlitosh)
@@ -183,7 +185,7 @@ Top contributors:
 - [Mike Woudenberg @mikewoudenberg](https://github.com/mikewoudenberg)
 - [Ruben Kruiver @RubenAtBinx](https://github.com/RubenAtBinx)
 - [Finn @f3rn0s](https://github.com/f3rn0s)
-- [Joss Sparkes @remakingeden](https://github.com/remakingeden)
+- [Alex Bender @alex-bender](https://github.com/alex-bender)
 
 Testers:
 
@@ -270,3 +272,14 @@ Follow the steps below on adding a challenge:
 4. Don't forget to add `@Order` annotation to your challenge ;-).
 
 If you want to move existing cloud challenges to another cloud: extend Challenge classes in the `org.owasp.wrongsecrets.challenges.cloud` package and make sure you add the required Terraform in a folder with the separate cloud identified. Make sure that the environment is added to `org.owasp.wrongsecrets.RuntimeEnvironment`. Collaborate with the others at the project to get your container running so you can test at the cloud account.
+
+
+## Further reading on secrets management
+
+Want to learn more? Checkout the sources below:
+
+- [Blog: 10 Pointers on Secrets Management](https://dev.to/commjoen/secure-deployment-10-pointers-on-secrets-management-187j)
+- [OWASP SAMM on Secret Management](https://owaspsamm.org/model/implementation/secure-deployment/stream-b/)
+- [The secret detection topic at Github](https://github.com/topics/secrets-detection)
+- [OWASP Secretsmanagement Cheatsheet](https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Secrets_Management_CheatSheet.md)
+- [OpenCRE on secrets management](https://www.opencre.org/cre/223-780?register=true&type=tool&tool_type=training&tags=secrets,training&description=With%20this%20app%2C%20we%20have%20packed%20various%20ways%20of%20how%20to%20not%20store%20your%20secrets.%20These%20can%20help%20you%20to%20realize%20whether%20your%20secret%20management%20is%20ok.%20The%20challenge%20is%20to%20find%20all%20the%20different%20secrets%20by%20means%20of%20various%20tools%20and%20techniques.%20Can%20you%20solve%20all%20the%2014%20challenges%3F&trk=flagship-messaging-web&messageThreadUrn=urn:li:messagingThread:2-YmRkNjRkZTMtNjRlYS00OWNiLWI2YmUtMDYwNzY3ZjI1MDcyXzAxMg==&lipi=urn:li:page:d_flagship3_feed;J58Sgd80TdanpKWFMH6z+w==)

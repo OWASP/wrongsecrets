@@ -18,6 +18,9 @@ RUN useradd -u 2000 -m wrongsecrets
 COPY --chown=wrongsecrets target/wrongsecrets-${argBasedVersion}-SNAPSHOT.jar /application.jar
 COPY --chown=wrongsecrets .github/scripts/ /var/tmp/helpers
 COPY --chown=wrongsecrets src/main/resources/.bash_history /home/wrongsecrets/
+COPY --chown=wrongsecrets src/main/resources/executables/wrongsecrets-c /home/wrongsecrets/
+COPY --chown=wrongsecrets src/main/resources/executables/wrongsecrets-c-arm /home/wrongsecrets/
+COPY --chown=wrongsecrets src/main/resources/executables/wrongsecrets-c-linux /home/wrongsecrets/
 COPY --chown=wrongsecrets src/test/resources/alibabacreds.kdbx /var/tmp/helpers
 USER wrongsecrets
 CMD java -jar -Dspring.profiles.active=$(echo ${SPRING_PROFILES_ACTIVE}) /application.jar
