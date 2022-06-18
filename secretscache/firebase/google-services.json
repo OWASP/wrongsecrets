@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "368606766077",
+    "project_id": "wrongsecrets-60664",
+    "storage_bucket": "wrongsecrets-60664.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:368606766077:android:0e0bc6be074f2663056f94",
+        "android_client_info": {
+          "package_name": "com.owasp.wrongsecrets"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "368606766077-9h639dm2huccj5bmb9gd6aapuimcgihf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgQ3oYWqfGuF6Z2kFHbIvw0GL2GcyvAOo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "368606766077-9h639dm2huccj5bmb9gd6aapuimcgihf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
