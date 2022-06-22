@@ -1,18 +1,14 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
 
-import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.io.FileUtils;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-import org.springframework.util.ResourceUtils;
 
-import java.io.*;
 import java.util.List;
 
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
@@ -22,7 +18,7 @@ import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 @Slf4j
 public class Challenge20 extends Challenge {
 
-    private BinaryExecutionHelper binaryExecutionHelper;
+    private final BinaryExecutionHelper binaryExecutionHelper;
 
     public Challenge20(ScoreCard scoreCard) {
         super(scoreCard);

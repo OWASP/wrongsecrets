@@ -3,8 +3,6 @@ package org.owasp.wrongsecrets.challenges.docker;
 import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
-import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
 import org.springframework.util.ResourceUtils;
 
 import java.io.*;
@@ -14,7 +12,7 @@ public class BinaryExecutionHelper {
 
 
     public static String ERROR_EXECUTION = "Error with executing";
-    private int challengeNumber;
+    private final int challengeNumber;
 
     public BinaryExecutionHelper(int challengeNumber) {
         this.challengeNumber = challengeNumber;
