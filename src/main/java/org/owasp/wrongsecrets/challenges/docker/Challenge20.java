@@ -18,26 +18,26 @@ import java.util.List;
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 
 @Component
-@Order(19)
+@Order(20)
 @Slf4j
-public class Challenge19 extends Challenge {
+public class Challenge20 extends Challenge {
 
     private BinaryExecutionHelper binaryExecutionHelper;
 
-    public Challenge19(ScoreCard scoreCard) {
+    public Challenge20(ScoreCard scoreCard) {
         super(scoreCard);
-        this.binaryExecutionHelper = new BinaryExecutionHelper(19);
+        this.binaryExecutionHelper = new BinaryExecutionHelper(20);
     }
 
 
     @Override
     public Spoiler spoiler() {
-        return new Spoiler(binaryExecutionHelper.executeCommand("", "wrongsecrets-c"));
+        return new Spoiler(binaryExecutionHelper.executeCommand("", "wrongsecrets-cplus"));
     }
 
     @Override
     public boolean answerCorrect(String answer) {
-        return binaryExecutionHelper.executeCommand(answer, "wrongsecrets-c").equals("This is correct! Congrats!");
+        return binaryExecutionHelper.executeCommand(answer, "wrongsecrets-cplus").equals("This is correct! Congrats!");
     }
 
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
