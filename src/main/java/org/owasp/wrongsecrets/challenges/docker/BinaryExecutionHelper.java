@@ -46,7 +46,7 @@ public class BinaryExecutionHelper {
         if (useX86()) {
             challengeFile = retrieveFile(fileName);
             if (useLinux()) {
-                challengeFile = retrieveFile(fileName + "linux");
+                challengeFile = retrieveFile(fileName + "-linux");
             }
         } else {
             challengeFile = retrieveFile(fileName + "-c-arm");
