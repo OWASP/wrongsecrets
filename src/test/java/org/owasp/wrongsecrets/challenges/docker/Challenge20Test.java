@@ -4,20 +4,19 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 
 @ExtendWith(MockitoExtension.class)
-class Challenge19Test {
+class Challenge20Test {
 
     @Mock
     private ScoreCard scoreCard;
 
     @Test
     void spoilerShouldNotCrash() {
-        var challenge = new Challenge19(scoreCard);
+        var challenge = new Challenge20(scoreCard);
 
         Assertions.assertThat(challenge.spoiler()).isNotEqualTo(new Spoiler(BinaryExecutionHelper.ERROR_EXECUTION));
     }

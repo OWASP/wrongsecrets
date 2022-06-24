@@ -1,0 +1,18 @@
+This challenge is specifically looking at a secret in a C++ binary
+
+You can solve this challenge using the following steps:
+
+1. Find the secrets with https://ghidra-sre.org/[Ghidra].
+- Install https://ghidra-sre.org/[Ghidra].
+- Start it whit `ghidraRun`.
+- Load the application `wrongsecrets-cplus` into ghidra by choosing a new project, then import the file and then doubleclick on it.
+- Allow the Ghidra to analyze the application.
+- Search for the secret: Go to `Functions` on the left-hand side, select `__Z6secretv()` . Now on the screen on the right-hand side you can see the secret. This is a string in C++, wrapped in another class (`SecretContainer`).
+- Search for the same secret, which is "hidden" as a char array: Go to `Functions` on the left-hand side, select `__Z7secret2v()`. On the right hand side, you see the function: now click on the return result of the function at `__ZZ7secret2vE6harder` . Now you can see the result in the Listing view.
+- Alternatively: when you have analyzed the application with Ghirda: do a search for strings in all blocks and see if you can spot the secret ;-).
+
+2. Find the secrets with https://www.radare.org[radare2].
+- Install https://www.radare.org[radare2] with either `brew install radare2` on Mac or follow these steps: `git clone https://github.com/radareorg/radare2; cd radare2 ; sys/install.sh`
+- Launch r2 analysis with `$ r2 -A wrongsecrets-cplus`
+- Use command `pdf @ sym.secret__` to see disassembled output of function which returns secret
+- Use command `pdf @ sym.secret2__` to see disassembled output of function which returns secret2
