@@ -6,7 +6,7 @@
 
 Welcome to the OWASP WrongSecrets p0wnable app. With this app, we have packed various ways of how to not store your secrets. These can help you to realize whether your secret management is ok. The challenge is to find all the different secrets by means of various tools and techniques.
 
-Can you solve all the 19 challenges?
+Can you solve all the 20 challenges?
 ![screenshot.png](screenshot.png)
 
 ## Support
@@ -15,7 +15,7 @@ Need support? Contact us via [OWASP Slack](https://owasp.slack.com/archives/C02K
 
 ## Basic docker exercises
 
-_Can be used for challenges 1-4, 8, 12-19_
+_Can be used for challenges 1-4, 8, 12-20_
 
 For the basic docker exercises you currently require:
 
@@ -43,6 +43,7 @@ Now you can try to find the secrets by means of solving the challenge offered at
 - [localhost:8080/challenge/17](http://localhost:8080/challenge/17)
 - [localhost:8080/challenge/18](http://localhost:8080/challenge/18)
 - [localhost:8080/challenge/19](http://localhost:8080/challenge/19)
+- [localhost:8080/challenge/20](http://localhost:8080/challenge/20)
 
 Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look better ;-).
 
@@ -117,13 +118,13 @@ Make sure you have the following installed:
 - vault [Install from here](https://www.vaultproject.io/downloads),
 - grep, Cat, and Sed
 
-Run `./k8s-vault-minkube-start.sh`, when the script is done, then the challenges will wait for you at <http://localhost:8080> . This will allow you to run challenges 1-8, 12-19.
+Run `./k8s-vault-minkube-start.sh`, when the script is done, then the challenges will wait for you at <http://localhost:8080> . This will allow you to run challenges 1-8, 12-20.
 
 When you stopped the `k8s-vault-minikube-start.sh` script and want to resume the port forward run: `k8s-vault-minikube-resume.sh`. This is because if you run the start script again it will replace the secret in the vault and not update the secret-challenge application with the new secret.
 
 ## Cloud Challenges
 
-_Can be used for challenges 1-19_
+_Can be used for challenges 1-20_
 
 **READ THIS**: Given that the exercises below contain IAM privilege escalation exercises, 
 never run this on an account which is related to your production environment or can influence your account-over-arching resources.
