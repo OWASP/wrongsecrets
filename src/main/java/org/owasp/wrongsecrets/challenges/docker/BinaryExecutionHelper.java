@@ -18,6 +18,41 @@ public class BinaryExecutionHelper {
         this.challengeNumber = challengeNumber;
     }
 
+    public String executeGoCommand(String guess) {
+        try {
+            File execFile = createTempExecutable("wrongsecrets-golang");
+            String result;
+            if (Strings.isNullOrEmpty(guess)) {
+                result = executeCommand(execFile, "spoil");
+            } else {
+                result = executeCommand(execFile, "guess " + guess);
+            }
+            deleteFile(execFile);
+            log.info("stdout challenge {}: {}", challengeNumber, result);
+            return result;
+        } catch (IOException | NullPointerException | InterruptedException e) {
+            log.warn("Error executing:", e);
+            return ERROR_EXECUTION;
+        }
+    }
+
+    public String executeCommand(String guess, String fileName) {
+        if (Strings.isNullOrEmpty((guess))) {
+            guess = "spoil";
+        }
+        try {
+            File execFile = createTempExecutable(fileName);
+            String result = executeCommand(execFile, guess);
+            deleteFile(execFile);
+            log.info("stdout challenge {}: {}", challengeNumber, result);
+            return result;
+        } catch (IOException | NullPointerException | InterruptedException e) {
+            log.warn("Error executing:", e);
+            return ERROR_EXECUTION;
+        }
+
+    }
+
     private boolean useX86() {
         String systemARch = System.getProperty("os.arch");
         log.info("System arch detected: {}", systemARch);
@@ -79,44 +114,9 @@ public class BinaryExecutionHelper {
         return result;
     }
 
-    public String executeGoCommand(String guess) {
-        try {
-            File execFile = createTempExecutable("wrongsecrets-golang");
-            String result;
-            if (Strings.isNullOrEmpty(guess)) {
-                result = executeCommand(execFile, "spoil");
-            } else {
-                result = executeCommand(execFile, "guess " + guess);
-            }
-            deleteFile(execFile);
-            log.info("stdout challenge {}: {}", challengeNumber, result);
-            return result;
-        } catch (IOException | NullPointerException | InterruptedException e) {
-            log.warn("Error executing:", e);
-            return ERROR_EXECUTION;
-        }
-    }
-
     private void deleteFile(File execFile) {
         if (!execFile.delete()) {
             log.info("Deleting the file {} failed...", execFile.getPath());
         }
-    }
-
-    public String executeCommand(String guess, String fileName) {
-        if (Strings.isNullOrEmpty((guess))) {
-            guess = "spoil";
-        }
-        try {
-            File execFile = createTempExecutable(fileName);
-            String result = executeCommand(execFile, guess);
-            deleteFile(execFile);
-            log.info("stdout challenge {}: {}", challengeNumber, result);
-            return result;
-        } catch (IOException | NullPointerException | InterruptedException e) {
-            log.warn("Error executing:", e);
-            return ERROR_EXECUTION;
-        }
-
     }
 }
