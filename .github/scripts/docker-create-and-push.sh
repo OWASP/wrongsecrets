@@ -96,6 +96,8 @@ echo "git checkout experiment-bed && git merge master --no-edit"
 echo "git push"
 
 #staging (https://arcane-scrubland-42646.herokuapp.com/)
-echo "Completed docker upload for X86, now taking care of heroku, do yourself: update Dockerfile.web, then run 'heroku container:login' 'heroku container:push --recursive --arg argBasedVersion=${tag}heroku --app ' and 'heroku container:push --recursive --arg argBasedVersion=${tag}heroku --arg CANARY_URLS=http://canarytokens.com/feedback/images/traffic/tgy3epux7jm59n0ejb4xv4zg3/submit.aspx,http://canarytokens.com/traffic/cjldn0fsgkz97ufsr92qelimv/post.jsp --app=wrongsecrets' and release both (heroku container:release web --app=wrongsecrets)"
+echo "Completed docker upload for X86, now taking care of heroku, do yourself: update Dockerfile.web, then run 'heroku container:login'"
+echo "then for the test container: 'heroku container:push --recursive --arg argBasedVersion=${tag}heroku --app arcane-scrubland-42646' and 'heroku container:release web --app arcane-scrubland-42646'"
+echo "then for the prd container:'heroku container:push --recursive --arg argBasedVersion=${tag}heroku --arg CANARY_URLS=http://canarytokens.com/feedback/images/traffic/tgy3epux7jm59n0ejb4xv4zg3/submit.aspx,http://canarytokens.com/traffic/cjldn0fsgkz97ufsr92qelimv/post.jsp --app=wrongsecrets' and release 'heroku container:release web --app=wrongsecrets'"
 #want to release? do heroku container:release web --app=wrongsecrets
 
