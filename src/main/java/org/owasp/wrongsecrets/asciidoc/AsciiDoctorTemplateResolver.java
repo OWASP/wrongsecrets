@@ -17,7 +17,7 @@ import java.util.Set;
 public class AsciiDoctorTemplateResolver extends FileTemplateResolver {
 
     private static final String PREFIX = "doc:";
-    private TemplateGenerator generator;
+    private final TemplateGenerator generator;
 
     public AsciiDoctorTemplateResolver(TemplateGenerator generator) {
         this.generator = generator;

@@ -19,7 +19,7 @@ import java.util.List;
 @Order(12)
 public class Challenge12 extends Challenge {
 
-    private String dockerMountPath;
+    private final String dockerMountPath;
 
     public Challenge12(ScoreCard scoreCard, @Value("${challengedockermtpath}") String dockerMountPath) {
         super(scoreCard);

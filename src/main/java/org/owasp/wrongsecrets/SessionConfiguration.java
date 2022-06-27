@@ -12,7 +12,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Slf4j
 public class SessionConfiguration {
 
-    private static AtomicInteger numberOfSessions = new AtomicInteger(0);
+    private static final AtomicInteger numberOfSessions = new AtomicInteger(0);
 
     @Bean
     public HttpSessionListener httpSessionListener() {

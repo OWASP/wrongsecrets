@@ -11,7 +11,7 @@ import java.io.*;
 public class BinaryExecutionHelper {
 
 
-    public static String ERROR_EXECUTION = "Error with executing";
+    public static final String ERROR_EXECUTION = "Error with executing";
     private final int challengeNumber;
 
     public BinaryExecutionHelper(int challengeNumber) {
@@ -51,6 +51,16 @@ public class BinaryExecutionHelper {
             return ERROR_EXECUTION;
         }
 
+    }
+
+    private String executeCommand(File execFile, String argument) throws IOException, InterruptedException {
+        ProcessBuilder ps = new ProcessBuilder(execFile.getPath(), argument);
+        ps.redirectErrorStream(true);
+        Process pr = ps.start();
+        BufferedReader in = new BufferedReader(new InputStreamReader(pr.getInputStream()));
+        String result = in.readLine();
+        pr.waitFor();
+        return result;
     }
 
     private boolean useX86() {
@@ -102,16 +112,6 @@ public class BinaryExecutionHelper {
         os.close();
 
         return execFile;
-    }
-
-    private String executeCommand(File execFile, String argument) throws IOException, InterruptedException {
-        ProcessBuilder ps = new ProcessBuilder(execFile.getPath(), argument);
-        ps.redirectErrorStream(true);
-        Process pr = ps.start();
-        BufferedReader in = new BufferedReader(new InputStreamReader(pr.getInputStream()));
-        String result = in.readLine();
-        pr.waitFor();
-        return result;
     }
 
     private void deleteFile(File execFile) {

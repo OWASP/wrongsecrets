@@ -22,7 +22,7 @@ import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.HEROKU_DOCKE
 @Component
 public class RuntimeEnvironment {
 
-    private static Map<Environment, List<Environment>> envToOverlappingEnvs = Map.of(
+    private static final Map<Environment, List<Environment>> envToOverlappingEnvs = Map.of(
             HEROKU_DOCKER, List.of(DOCKER, HEROKU_DOCKER),
             DOCKER, List.of(DOCKER, HEROKU_DOCKER),
             GCP, List.of(DOCKER, K8S, VAULT),
@@ -42,7 +42,7 @@ public class RuntimeEnvironment {
         }
 
         static Environment fromId(String id) {
-            return Arrays.asList(Environment.values()).stream().filter(e -> e.id.equalsIgnoreCase(id)).findAny().get();
+            return Arrays.stream(Environment.values()).filter(e -> e.id.equalsIgnoreCase(id)).findAny().get();
         }
     }
 
