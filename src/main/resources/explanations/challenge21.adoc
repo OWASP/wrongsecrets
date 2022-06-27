@@ -1,5 +1,5 @@
-=== Obfuscating part 3: the Golang binary
+=== Obfuscating part 3: the Go binary
 
-Our third language of choice for a compiled application is Golang. With the rise of its popularity, we see an increase of secrets hidden inside the binaries. Can you find the secret in our binary?
+Our third language of choice for a compiled application is Go. With the rise of its popularity, we see an increase of secrets hidden inside the binaries. Can you find the secret in our binary?
 
-Let's debunk the "secrets are hard to find in native compiled applications" myth for C++: can you find the secret in https://github.com/commjoen/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-golang[wrongsecrets-golang] (or https://github.com/commjoen/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-golang-arm[wrongsecrets-golang-arm], https://github.com/commjoen/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-golang-linux[wrongsecrets-golang-linux])?
+Let's debunk the "secrets are hard to find in native compiled applications" myth for Go: can you find the secret in https://github.com/commjoen/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-golang[wrongsecrets-golang] (or https://github.com/commjoen/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-golang-arm[wrongsecrets-golang-arm], https://github.com/commjoen/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-golang-linux[wrongsecrets-golang-linux])?
