@@ -1,0 +1,7 @@
+*Why Using binaries to hide a secret will only delay an attacker.*
+
+With beautiful free Reverse engineering applications as Ghidra, not a lot of things remain safe. Anyone who can load the executable in Ghidra or Radare2 can easily start doing a reconnaissance and find secrets within your binary.
+
+Encrypting the secret with a key embedded in the binary, and other funny puzzles do delay an attacker and just make it fun finding the secret. Be aware that, if the secret needs to be used by the executable, it eventually needs to be in memory ready to be executed.
+
+Still need to have a secret in the binary? Make sure it can only be retrieved remotely after authenticating against a server.
