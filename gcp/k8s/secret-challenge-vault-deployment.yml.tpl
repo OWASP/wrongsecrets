@@ -37,7 +37,7 @@ spec:
             volumeAttributes:
               secretProviderClass: "wrongsecrets-gcp-secretsmanager"
       containers:
-        - image: jeroenwillemsen/wrongsecrets:challenge21test5-k8s-vault
+        - image: jeroenwillemsen/wrongsecrets:1.4.6-k8s-vault
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
