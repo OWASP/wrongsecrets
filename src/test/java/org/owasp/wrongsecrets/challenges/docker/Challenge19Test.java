@@ -20,6 +20,7 @@ class Challenge19Test {
         var challenge = new Challenge19(scoreCard);
 
         Assertions.assertThat(challenge.spoiler()).isNotEqualTo(new Spoiler(BinaryExecutionHelper.ERROR_EXECUTION));
+        Assertions.assertThat(challenge.answerCorrect(challenge.spoiler().solution())).isTrue();
     }
 
 }

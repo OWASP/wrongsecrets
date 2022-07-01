@@ -19,7 +19,7 @@ public class AllControllerAdvice {
 
     private final List<ChallengeUI> challenges;
     private final String version;
-    private RuntimeEnvironment runtimeEnvironment;
+    private final RuntimeEnvironment runtimeEnvironment;
 
     public AllControllerAdvice(List<Challenge> challenges, @Value("${APP_VERSION}") String version, RuntimeEnvironment runtimeEnvironment) {
         this.challenges = ChallengeUI.toUI(challenges, runtimeEnvironment);

@@ -36,7 +36,7 @@ public class StartupListener implements ApplicationListener<ApplicationEvent> {
 
         private String envsToReadableString() {
             return Arrays.stream(RuntimeEnvironment.Environment.values())
-                .map(env -> env.toString())
+                .map(Enum::toString)
                 .collect(Collectors.joining(", "));
         }
     }

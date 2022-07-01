@@ -1,0 +1,18 @@
+This challenge is specifically looking at a secret in a Go binary
+
+This one is a little harder, as we used Cobra to create the CLI, introducing some more overhead.
+You can solve this challenge using the following steps:
+
+1. Find the secrets with https://ghidra-sre.org/[Ghidra].
+- Install https://ghidra-sre.org/[Ghidra].
+- Start it with `ghidraRun`.
+- Load the application `wrongsecrets-golang` into ghidra by choosing a new project, then import the file and then doubleclick on it.
+- Allow the Ghidra to analyze the application. Note that this takes much longer as our binary is a lot larger.
+- Go to the data type manager in the bottom left, now filter for `string`, now right-click at `string` as a member of `wrongsecrets-golang` and select `find uses of`.
+- Now filter for known keywords: you should easily be able to find the secret now!
+
+2. Find the secrets with https://www.radare.org[radare2].
+- Install https://www.radare.org[radare2] with either `brew install radare2` on Mac or follow these steps: `git clone https://github.com/radareorg/radare2; cd radare2 ; sys/install.sh`
+- Launch r2 analysis with `$ r2 -A wrongsecrets-golang`
+- Start a search for the string with `/w secret`
+- Now take the results and look for possible answers, how about `/w his is the secret in Golang` ? You should be able to find the secret now.

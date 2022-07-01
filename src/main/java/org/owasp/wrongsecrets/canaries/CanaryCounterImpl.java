@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Service
 public class CanaryCounterImpl implements CanaryCounter {
 
-    private static AtomicInteger numberofCanaryCalls = new AtomicInteger(0);
+    private static final AtomicInteger numberofCanaryCalls = new AtomicInteger(0);
 
     private static String lastToken;
 
