@@ -28,7 +28,7 @@ public class Challenge21 extends Challenge {
 
     @Override
     public Spoiler spoiler() {
-        return new Spoiler(binaryExecutionHelper.executeCommand("", "wrongsecrets-golang"));
+        return new Spoiler(binaryExecutionHelper.executeGoCommand(""));
     }
 
     @Override

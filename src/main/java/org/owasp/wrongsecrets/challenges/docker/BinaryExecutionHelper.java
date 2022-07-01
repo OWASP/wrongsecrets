@@ -25,10 +25,11 @@ public class BinaryExecutionHelper {
             if (Strings.isNullOrEmpty(guess)) {
                 result = executeCommand(execFile, "spoil");
             } else {
-                result = executeCommand(execFile, "guess " + guess);
+                result = executeCommand(execFile, "guess", guess);
             }
-            deleteFile(execFile);
             log.info("stdout challenge {}: {}", challengeNumber, result);
+
+            deleteFile(execFile);
             return result;
         } catch (IOException | NullPointerException | InterruptedException e) {
             log.warn("Error executing:", e);
@@ -53,14 +54,23 @@ public class BinaryExecutionHelper {
 
     }
 
-    private String executeCommand(File execFile, String argument) throws IOException, InterruptedException {
-        ProcessBuilder ps = new ProcessBuilder(execFile.getPath(), argument);
+    private String executeCommand(File execFile, String argument, String argument2) throws IOException, InterruptedException {
+        ProcessBuilder ps;
+        if (Strings.isNullOrEmpty(argument2)) {
+            ps = new ProcessBuilder(execFile.getPath(), argument);
+        } else {
+            ps = new ProcessBuilder(execFile.getPath(), argument, argument2);
+        }
         ps.redirectErrorStream(true);
         Process pr = ps.start();
         BufferedReader in = new BufferedReader(new InputStreamReader(pr.getInputStream()));
         String result = in.readLine();
         pr.waitFor();
         return result;
+    }
+
+    private String executeCommand(File execFile, String argument) throws IOException, InterruptedException {
+        return executeCommand(execFile, argument, "");
     }
 
     private boolean useX86() {
