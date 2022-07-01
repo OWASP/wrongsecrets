@@ -57,7 +57,7 @@
         <azure.identity.version>1.5.1</azure.identity.version>
         <azure.keyvault.spring.version>2.3.5</azure.keyvault.spring.version>
         <spring.security.version>5.7.1</spring.security.version>
-        <cyclonedx.core.version>7.1.4</cyclonedx.core.version>
+        <cyclonedx.core.version>7.1.5</cyclonedx.core.version>
         <KeePassJava2.version>2.1.4</KeePassJava2.version>
         <system-stubs-jupiter.version>2.0.1</system-stubs-jupiter.version>
         <dependency-check-maven.version>7.0.4</dependency-check-maven.version>
