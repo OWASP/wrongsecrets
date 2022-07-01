@@ -54,7 +54,7 @@
         <thymeleaf.layout>3.1.0</thymeleaf.layout>
         <asciidoctor.maven.plugin.version>2.2.2</asciidoctor.maven.plugin.version>
         <azure.keyvault.version>4.4.2</azure.keyvault.version>
-        <azure.identity.version>1.5.1</azure.identity.version>
+        <azure.identity.version>1.5.3</azure.identity.version>
         <azure.keyvault.spring.version>2.3.5</azure.keyvault.spring.version>
         <spring.security.version>5.7.1</spring.security.version>
         <cyclonedx.core.version>7.1.5</cyclonedx.core.version>
