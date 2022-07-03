@@ -97,15 +97,13 @@ public class BinaryExecutionHelper {
     }
 
     private File createTempExecutable(String fileName) throws IOException {
-        File challengeFile;
-        if (useX86()) {
-            challengeFile = retrieveFile(fileName);
-            if (useLinux()) {
-                challengeFile = retrieveFile(fileName + "-linux");
-            }
-        } else {
-            challengeFile = retrieveFile(fileName + "-c-arm");
+        if (useLinux()) {
+            fileName = fileName + "-linux";
         }
+        if (!useX86()) {
+            fileName = fileName + "-arm";
+        }
+        File challengeFile = retrieveFile(fileName);
         //prepare file to execute
         File execFile = File.createTempFile("c-exec-" + fileName, "sh");
         if (!execFile.setExecutable(true)) {
