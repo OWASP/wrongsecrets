@@ -5,7 +5,7 @@
 ################################################################################
 Help() {
     # Display Help
-    echo "A script to build a wrongsecrets container locally for rapidly testing changes."
+    echo "A versatile script to create a docker image for testing. Call this script with no arguments to simply create a local image that you can use to test your changes. For more complex use see the below help section"
     echo
     echo "Syntax: docker-create.sh [-h (help)|-t (test)|-p (publish) [tag={tag}|buildarg={buildarg}|springProfile={springProfile}]"
     echo "options: (All optional)"
@@ -90,6 +90,15 @@ echo "Spring profile: $springProfile"
 echo "Version tag: $tag"
 echo "buildarg supplied: $buildarg"
 
+local_extra_info() {
+    if [[ $script_mode == "local" ]] ; then
+        echo ""
+        echo "⚠️⚠️ This script is running in local mode, with no arguments this script will build your current code and package into a docker container for easy local testing"
+        echo "If the container gets built correctly you can run the container with the command: docker run jeroenwillemsen/wrongsecrets:local-test, if there are errors the script should tell you what to do ⚠️⚠️"
+        echo ""
+    fi
+}
+
 check_required_install() {
     echo "Check if all required binaries are installed"
     source ../../scripts/check-available-commands.sh
@@ -102,7 +111,7 @@ check_required_install() {
         echo "sed is installed"
         findAndReplace="sed"
     else
-        echo "Error: sed or gsed is not installed"
+        echo "Error: sed or gsed is not installed, please install one of these"
         exit 1
     fi
 }
@@ -238,6 +247,7 @@ test() {
     fi
 }
 
+local_extra_info
 check_correct_launch_location
 check_os
 check_required_install
