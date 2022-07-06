@@ -93,7 +93,63 @@ echo "buildarg supplied: $buildarg"
 check_required_install() {
     echo "Check if all required binaries are installed"
     source ../../scripts/check-available-commands.sh
-    checkCommandsAvailable java docker mvn git
+    checkCommandsAvailable java docker mvn git curl
+    echo "Checking if gsed or sed is installed"
+    if [ -x "$(command -v "gsed")" ] ; then
+        echo "gsed is installed"
+        findAndReplace="gsed"
+    elif [ -x "$(command -v "sed")" ] ; then
+        echo "sed is installed"
+        findAndReplace="sed"
+    else
+        echo "Error: sed or gsed is not installed"
+        exit 1
+    fi
+}
+
+check_os() {
+    echo "Checking for compatible operating system"
+    unameOut="$(uname -s)"
+    case "${unameOut}" in 
+    Darwin*)
+        echo "OSX detected 🍎"
+        ;;
+    Linux*)
+        echo "Linux detected 🐧"
+        ;;
+    MINGW64*|CYGWIN)
+        echo "Windows detected 🗔"
+        ;;
+    *)
+        echo "🛑🛑 Unknown operating system, this script has only been tests on Windows, Mac OS and Ubuntu. Please be aware there may be some issues 🛑🛑"
+        ;;
+    esac
+}
+
+check_correct_launch_location() {
+    if [[ "$(pwd)" != *"scripts"* ]]; then
+        echo "🛑🛑 Please run the script from the scripts folder as it causes issues with the steps that cannot be expected 🛑🛑"
+        echo "🛑🛑 You are currently running it from $(pwd) 🛑🛑"
+        exit 1
+    fi
+}
+
+generate_test_data() {
+    echo "Generating challenge 12-data"
+    openssl rand -base64 32 | tr -d '\n' > yourkey.txt
+    echo "Generating challenge 16-data"
+    SECENDKEYPART1=$(openssl rand -base64 5 | tr -d '\n')
+    SECENDKEYPART2=$(openssl rand -base64 3 | tr -d '\n')
+    SECENDKEYPART3=$(openssl rand -base64 2 | tr -d '\n')
+    SECENDKEYPART4=$(openssl rand -base64 3 | tr -d '\n')
+    echo -n "${SECENDKEYPART1}9${SECENDKEYPART2}6${SECENDKEYPART3}2${SECENDKEYPART4}7" > secondkey.txt
+    printf "function secret() { \n var password = \"$SECENDKEYPART1\" + 9 + \"$SECENDKEYPART2\" + 6 + \"$SECENDKEYPART3\" + 2 + \"$SECENDKEYPART4\" + 7;\n return password;\n }\n" > ../../js/index.js
+    echo "Generating challenge 17"
+    rm thirdkey.txt
+    openssl rand -base64 32 | tr -d '\n' > thirdkey.txt
+    answer=$(<thirdkey.txt)
+    answerRegexSafe="$(printf '%s' "$answer" | $findAndReplace -e 's/[]\/$*.^|[]/\\&/g' | $findAndReplace ':a;N;$!ba;s,\n,\\n,g')"
+    $findAndReplace -i "s/Placeholder Password, find the real one in the history of the container/$answerRegexSafe/g" ../../src/main/resources/.bash_history
 }
 
 build_update_pom() {
@@ -182,7 +238,10 @@ test() {
     fi
 }
 
+check_correct_launch_location
+check_os
 check_required_install
+generate_test_data
 build_update_pom
 create_containers
 restore_temp_change
