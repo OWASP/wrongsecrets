@@ -7,7 +7,7 @@ Help() {
     # Display Help
     echo "A script to build a wrongsecrets container locally for rapidly testing changes."
     echo
-    echo "Syntax: docker-create.sh [-h|--help|-t|--test|-p|--publish] [tag={tag}|buildarg={buildarg}|springProfile={springProfile}]"
+    echo "Syntax: docker-create.sh [-h (help)|-t (test)|-p (publish) [tag={tag}|buildarg={buildarg}|springProfile={springProfile}]"
     echo "options: (All optional)"
     echo "tag=             Write a custom tag that will be added to the container when it is build locally."
     echo "buildarg=        Write a build argument here that will be used as the answer to challenge 4."
@@ -49,11 +49,15 @@ done
 
 # Check all arguments added to the command
 ################################################
-for ARGUMENT in "$@"; do
-    KEY=$(echo $ARGUMENT | cut -f1 -d=)
-    KEY_LENGTH=${#KEY}
-    VALUE="${ARGUMENT:$KEY_LENGTH+1}"
-    export "$KEY"="$VALUE"
+for ARGUMENT in "$@"; 
+do
+    if [[ $ARGUMENT != "-h" && $ARGUMENT != "-t" && $ARGUMENT != "-p" ]]
+    then
+        KEY=$(echo $ARGUMENT | cut -f1 -d=)
+        KEY_LENGTH=${#KEY}
+        VALUE="${ARGUMENT:$KEY_LENGTH+1}"
+        export "$KEY"="$VALUE"
+    fi
 done
 
 if test -n "${tag+x}"; then
