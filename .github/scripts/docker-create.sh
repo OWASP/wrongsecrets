@@ -94,7 +94,7 @@ local_extra_info() {
     if [[ $script_mode == "local" ]] ; then
         echo ""
         echo "⚠️⚠️ This script is running in local mode, with no arguments this script will build your current code and package into a docker container for easy local testing"
-        echo "If the container gets built correctly you can run the container with the command: docker run jeroenwillemsen/wrongsecrets:local-test, if there are errors the script should tell you what to do ⚠️⚠️"
+        echo "If the container gets built correctly you can run the container with the command: docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:local-test, if there are errors the script should tell you what to do ⚠️⚠️"
         echo ""
     fi
 }
