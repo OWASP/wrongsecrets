@@ -23,8 +23,8 @@ import java.util.List;
 @Order(13)
 public class Challenge13 extends Challenge {
 
-    private String plainText;
-    private String cipherText;
+    private final String plainText;
+    private final String cipherText;
 
     @Override
     public Spoiler spoiler() {

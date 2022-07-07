@@ -43,7 +43,6 @@ public class Challenge11 extends CloudChallenge {
     private final String azureDefaultValue;
     private final String challengeAnswer;
     private final String projectId;
-    private final RuntimeEnvironment runtimeEnvironment;
     private final String azureVaultUri;
     private final String azureWrongSecret3;
 
@@ -66,10 +65,9 @@ public class Challenge11 extends CloudChallenge {
         this.gcpDefaultValue = gcpDefaultValue;
         this.azureDefaultValue = azureDefaultValue;
         this.projectId = projectId;
-        this.runtimeEnvironment = runtimeEnvironment;
         this.azureVaultUri = azureVaultUri;
         this.azureWrongSecret3 = azureWrongSecret3;
-        this.challengeAnswer = getChallenge11Value(this.runtimeEnvironment);
+        this.challengeAnswer = getChallenge11Value(runtimeEnvironment);
     }
 
     @Override
@@ -88,16 +86,12 @@ public class Challenge11 extends CloudChallenge {
 
     private String getChallenge11Value(RuntimeEnvironment runtimeEnvironment) {
         if (runtimeEnvironment != null && runtimeEnvironment.getRuntimeEnvironment() != null) {
-            switch (runtimeEnvironment.getRuntimeEnvironment()) {
-                case AWS:
-                    return getAWSChallenge11Value();
-                case GCP:
-                    return getGCPChallenge11Value();
-                case AZURE:
-                    return getAzureChallenge11Value();
-                default:
-                    return "please_use_supported_cloud_env";
-            }
+            return switch (runtimeEnvironment.getRuntimeEnvironment()) {
+                case AWS -> getAWSChallenge11Value();
+                case GCP -> getGCPChallenge11Value();
+                case AZURE -> getAzureChallenge11Value();
+                default -> "please_use_supported_cloud_env";
+            };
         }
         return "please_use_supported_cloud_env";
     }

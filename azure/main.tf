@@ -3,7 +3,7 @@ terraform {
 
   required_providers {
     random  = "~> 3.0"
-    azurerm = "~> 3.0"
+    azurerm = "~> 3.9"
     http    = "~> 2.1"
   }
 
