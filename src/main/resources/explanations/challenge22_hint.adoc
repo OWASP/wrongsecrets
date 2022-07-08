@@ -7,19 +7,25 @@ You can solve this challenge using the following steps:
 - Start it whit `ghidraRun`.
 - Load the application `wrongsecrets-rust` into ghidra by choosing a new project, then import the file and then doubleclick on it.
 - Allow the Ghidra to analyze the application.
-
+- Find the entrypoint of the application (label `_main` or function `entry`).
 TODO
-- find entrypoint
 - Find comparison and return
 - Find what it compares with
-- Alternative: string en array dumping
+/TODO
+- Alternatively: Go to the data type manager in the bottom left, now filter for `string`, now right-click at `string` as a member of `wrongsecrets-rust` and select `find uses of`.
+- Now filter for known keywords: you should easily be able to find the secret now!
 
 2. Find the secrets with https://www.radare.org[radare2].
 - Install https://www.radare.org[radare2] with either `brew install radare2` on Mac or follow these steps: `git clone https://github.com/radareorg/radare2; cd radare2 ; sys/install.sh`
-- Launch r2 analysis with `$ r2 -A wrongsecrets-rust`
-
+- Launch r2 analysis with `$ r2 -AAA wrongsecrets-rust`
+- Print the entrypoint `pdf main`.
 TODO
 - find entrypoint
 - Find comparison and return
 - Find what it compares with
-- Alternative: string en array dumping
+/TODO
+
+- Find comparison and return
+- Find what it compares with
+
+- Alternatively: after launching radare2, run `iz | grep secret` and find the string.
