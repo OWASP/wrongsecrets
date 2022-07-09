@@ -1,4 +1,4 @@
-This challenge is specifically looking at a secret in a Rust binary
+This challenge is specifically looking at a secret in a Rust binary based on a https://doc.rust-lang.org/cargo/reference/profiles.html#release[release profile].
 
 You can solve this challenge using the following steps:
 
@@ -7,8 +7,9 @@ You can solve this challenge using the following steps:
 - Start it whit `ghidraRun`.
 - Load the application `wrongsecrets-rust` into ghidra by choosing a new project, then import the file and then doubleclick on it.
 - Allow the Ghidra to analyze the application.
-- Find the entrypoint of the application (label `_main` or function `entry`).
-TODO
+- Now import https://gist.github.com/str4d/e541f4c28e2bca80d222434ac1a204f4[demangle script] and run it via the Ghidra Script manager to demangle the functions.
+- Find the entrypoint of the application (`lang_start_internal`).
+TODO:
 - Find comparison and return
 - Find what it compares with
 /TODO
@@ -20,7 +21,6 @@ TODO
 - Launch r2 analysis with `$ r2 -AAA wrongsecrets-rust`
 - Print the entrypoint `pdf main`.
 TODO
-- find entrypoint
 - Find comparison and return
 - Find what it compares with
 /TODO
