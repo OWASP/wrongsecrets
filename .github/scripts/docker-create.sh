@@ -194,7 +194,8 @@ create_containers() {
 restore_temp_change() {
     echo "Restoring temporal change"
     git restore ../../js/index.js
-    git restore src/main/resources/.bash_history
+    git restore ../../pom.xml
+    git restore ../../src/main/resources/.bash_history
 }
 
 commit_and_tag() {
