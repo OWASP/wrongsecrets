@@ -271,6 +271,16 @@ Follow the steps below on adding a challenge:
 
 If you want to move existing cloud challenges to another cloud: extend Challenge classes in the `org.owasp.wrongsecrets.challenges.cloud` package and make sure you add the required Terraform in a folder with the separate cloud identified. Make sure that the environment is added to `org.owasp.wrongsecrets.RuntimeEnvironment`. Collaborate with the others at the project to get your container running so you can test at the cloud account.
 
+### Local testing
+
+If you have made some changes to the codebase or added a new challenge and would like to see exactly how the container will look after merge for testing, we have a script that makes this very easy. Follow the steps below:
+
+1. Ensure you have bash installed and open.
+2. Navigate to .github/scripts.
+3. Run the docker-create script `bash docker-create.sh`.
+4. Follow any instructions given, you made need to install/change packages.
+5. Run the newly created container `docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:local-test`
+
 ## Further reading on secrets management
 
 Want to learn more? Checkout the sources below:
