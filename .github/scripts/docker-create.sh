@@ -7,7 +7,7 @@ Help() {
     # Display Help
     echo "A versatile script to create a docker image for testing. Call this script with no arguments to simply create a local image that you can use to test your changes. For more complex use see the below help section"
     echo
-    echo "Syntax: docker-create.sh [-h (help)|-t (test)|-p (publish) [tag={tag}|buildarg={buildarg}|springProfile={springProfile}]"
+    echo "Syntax: docker-create.sh [-h (help)|-t (test)|-p (publish) [tag={tag}|message={message}|buildarg={buildarg}|springProfile={springProfile}]"
     echo "options: (All optional)"
     echo "tag=             Write a custom tag that will be added to the container when it is build locally."
     echo "buildarg=        Write a build argument here that will be used as the answer to challenge 4."
@@ -203,7 +203,7 @@ commit_and_tag() {
         echo "committing changes and new pom file with version ${tag}"
         git commit -am "Update POM file with new version: ${tag}"
         git push
-        echo "tagging version"
+        echo "tagging version with tag ${tag} and message ${message}"
         git tag -a $tag -m "${message}"
         git push --tags
     else
