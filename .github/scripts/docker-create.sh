@@ -239,7 +239,7 @@ test() {
         if [ "$?" == 0 ]; then
             log_success "The container test completed successfully"
         else
-            log_failure "The container test has failed, this means that when we built your changes and ran a basic sanity test on the homepae it failed. Please build the container locally and double check the container is running correctly."
+            log_failure "The container test has failed, this means that when we built your changes and ran a basic sanity test on the homepage it failed. Please build the container locally and double check the container is running correctly."
         fi
         echo "Testing complete"
     else
