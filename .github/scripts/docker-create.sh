@@ -153,6 +153,10 @@ echo "Spring profile: $springProfile"
 echo "Version tag: $tag"
 echo "buildarg supplied: $buildarg"
 
+if test -n "${disable_tagging_in_git+x}"; then
+  echo "tagging is disabled"
+fi
+
 if [[ $script_mode == "heroku_d" ]] ; then
   Heroku_publish_demo
 elif [[ $script_mode == "heroku_p" ]]; then
@@ -276,7 +280,7 @@ commit_and_tag() {
         if test -n "${disable_tagging_in_git+x}"; then
           echo "Skip git tagging"
         else
-          echo "tagging version with tag ${tag} and message ${message}"
+          echo "tagging version with tag '${tag}' and message '${message}'"
           git tag -a $tag -m "${message}"
           git push --tags
         fi
@@ -322,14 +326,14 @@ test() {
     fi
 }
 
-local_extra_info
-check_correct_launch_location
-check_os
-check_required_install
-generate_test_data
-build_update_pom
-create_containers
-restore_temp_change
+#local_extra_info
+#check_correct_launch_location
+#check_os
+#check_required_install
+#generate_test_data
+#build_update_pom
+#create_containers
+#restore_temp_change
 commit_and_tag
 echo_next_steps
 test
