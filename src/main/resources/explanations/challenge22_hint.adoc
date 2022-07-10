@@ -22,8 +22,4 @@ TODO
 - Find comparison and return
 - Find what it compares with
 /TODO
-
-- Find comparison and return
-- Find what it compares with
-
 - Alternatively: after launching radare2, run `iz | grep secret` and find the string.
