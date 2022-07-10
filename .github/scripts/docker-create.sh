@@ -328,14 +328,14 @@ test() {
     fi
 }
 
-#local_extra_info
-#check_correct_launch_location
-#check_os
-#check_required_install
-#generate_test_data
-#build_update_pom
-#create_containers
-#restore_temp_change
+local_extra_info
+check_correct_launch_location
+check_os
+check_required_install
+generate_test_data
+build_update_pom
+create_containers
+restore_temp_change
 commit_and_tag
 echo_next_steps
 test
