@@ -7,12 +7,56 @@ Help() {
     # Display Help
     echo "A versatile script to create a docker image for testing. Call this script with no arguments to simply create a local image that you can use to test your changes. For more complex use see the below help section"
     echo
-    echo "Syntax: docker-create.sh [-h (help)|-t (test)|-p (publish) [tag={tag}|message={message}|buildarg={buildarg}|springProfile={springProfile}]"
+    echo "Syntax: docker-create.sh [-h (help)|-t (test)|-p (publish)|-e (herokud)|-f (herokup) [tag={tag}|message={message}|buildarg={buildarg}|springProfile={springProfile}]"
     echo "options: (All optional)"
     echo "tag=             Write a custom tag that will be added to the container when it is build locally."
+    echo "message=         Write a message used for the actual tag-message in git"
     echo "buildarg=        Write a build argument here that will be used as the answer to challenge 4."
     echo "springProfile=   Specify a certain build. Options: without-vault, local-vault, kubernetes-vault"
     echo
+}
+
+################################################################################
+# Heroku helpers                                                               #
+################################################################################
+
+heroku_check_container() {
+    if test -n "${tag+x}"; then
+        echo "tag is set"
+    else
+      echo "tag ${tag} was not set properly, aborting"
+      exit
+    fi
+    echo "validating dockerfile to contain tag "${tag}" (should be part of '$(head -n 1 ../../Dockerfile.web)')"
+    if [[ "$(head -n 1 ../../Dockerfile.web)" != *"${tag}"* ]]; then
+      echo "tag ${tag} in dockerfile FROM was not set properly, aborting"
+      exit
+    fi
+    echo "Check if all required binaries are installed"
+    source ../../scripts/check-available-commands.sh
+    checkCommandsAvailable heroku
+}
+
+Heroku_publish_demo() {
+    echo "preparing heroku deployment to demo"
+    heroku_check_container
+    heroku container:login
+    echo "heroku deployment to demo"
+    cd ../..
+    heroku container:push --recursive --arg argBasedVersion=${tag}heroku --app arcane-scrubland-42646
+    heroku container:release web --app arcane-scrubland-42646
+    exit
+}
+
+Heroku_publish_prod(){
+    echo "preparing heroku deployment to prod"
+    heroku_check_container
+    heroku container:login
+    echo "heroku deployment to prod"
+    cd ../..
+    heroku container:push --recursive --arg argBasedVersion=${tag}heroku --arg CANARY_URLS=http://canarytokens.com/feedback/images/traffic/tgy3epux7jm59n0ejb4xv4zg3/submit.aspx,http://canarytokens.com/traffic/cjldn0fsgkz97ufsr92qelimv/post.jsp --app=wrongsecrets
+    heroku container:release web --app=wrongsecrets
+    exit
 }
 
 ################################################################################
@@ -26,7 +70,7 @@ Help() {
 # Set option to local if no option provided
 script_mode="local"
 # Parse provided options
-while getopts ":htp*" option; do
+while getopts ":htpef*" option; do
     case $option in
     h) # display Help
         Help
@@ -38,7 +82,19 @@ while getopts ":htp*" option; do
     p) # set script to publish mode
         script_mode="publish"
         ;;
+    e) # Helper
+        script_mode="heroku_d"
+        ;;
+    f) # Helper
+        script_mode="heroku_p"
+        ;;
     \?) # Invalid option
+        echo "Error: Invalid option"
+        echo
+        Help
+        exit
+        ;;
+    -*) # Anything else
         echo "Error: Invalid option"
         echo
         Help
@@ -51,9 +107,9 @@ done
 ################################################
 for ARGUMENT in "$@"; 
 do
-    if [[ $ARGUMENT != "-h" && $ARGUMENT != "-t" && $ARGUMENT != "-p" ]]
+    if [[ $ARGUMENT != "-h" && $ARGUMENT != "-t" && $ARGUMENT != "-p" && $ARGUMENT != "-e" && $ARGUMENT != "-f" ]]
     then
-        KEY=$(echo $ARGUMENT | cut -f1 -d=)
+        KEY=$(echo "$ARGUMENT" | cut -f1 -d=)
         KEY_LENGTH=${#KEY}
         VALUE="${ARGUMENT:$KEY_LENGTH+1}"
         export "$KEY"="$VALUE"
@@ -67,6 +123,16 @@ else
     tag="local-test"
     echo "Setting default tag: ${tag}"
 fi
+
+if test -n "${message+x}"; then
+    echo "message is set"
+else
+    SCRIPT_PATH=$(dirname $(dirname $(dirname $(readlink -f "$0"))))
+    message="local testcontainer build"
+    echo "Setting default message: ${message}"
+fi
+
+
 
 if test -n "${buildarg+x}"; then
     echo "buildarg is set"
@@ -89,6 +155,13 @@ fi
 echo "Spring profile: $springProfile"
 echo "Version tag: $tag"
 echo "buildarg supplied: $buildarg"
+
+if [[ $script_mode == "heroku_d" ]] ; then
+  Heroku_publish_demo
+elif [[ $script_mode == "heroku_p" ]]; then
+  Heroku_publish_prod
+fi
+    
 
 local_extra_info() {
     if [[ $script_mode == "local" ]] ; then
