@@ -1,4 +1,4 @@
-=== Obfuscating in binaries part 4: the Rust binary
+=== Hiding in binaries part 4: the Rust binary
 
 Similar like hiding secrets in an application written in C, you can do this in Rust. Ghidra is not that good at analysing Rust by default, though... Can you find the secret in our binary?
 

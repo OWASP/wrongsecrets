@@ -1,4 +1,4 @@
-=== Obfuscating part 3: the Go binary
+=== Hiding in binaries part 3: the Go binary
 
 Our third language of choice for a compiled application is Go. With the rise of its popularity, we see an increase of secrets hidden inside the binaries. Can you find the secret in our binary?
 

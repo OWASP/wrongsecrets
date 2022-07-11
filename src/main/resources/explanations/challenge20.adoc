@@ -1,4 +1,4 @@
-=== Obfuscating in binaries part 2: the C++ binary
+=== Hiding in binaries part 2: the C++ binary
 
 Similar like hiding secrets in an application written in C, you end up in a similar situation with C++. Can you find the secret in our binary?
 
