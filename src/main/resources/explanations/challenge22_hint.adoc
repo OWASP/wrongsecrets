@@ -1,0 +1,23 @@
+This challenge is specifically looking at a secret in a Rust binary based on a https://doc.rust-lang.org/cargo/reference/profiles.html#release[release profile].
+
+You can solve this challenge using the following steps:
+
+1. Find the secrets with https://ghidra-sre.org/[Ghidra].
+- Install https://ghidra-sre.org/[Ghidra].
+- Start it whit `ghidraRun`.
+- Load the application `wrongsecrets-rust` into ghidra by choosing a new project, then import the file and then doubleclick on it.
+- Allow the Ghidra to analyze the application.
+- Now import https://gist.github.com/str4d/e541f4c28e2bca80d222434ac1a204f4[demangle script] and run it via the Ghidra Script manager to demangle the functions.
+- Find the `main` function in the `rust` namespace
+- Find the argument that needs to be compared (in our example that is `local_80` as defined in `std::env::args((env *)&local_80);`)
+- Find where the argument is compared (in our example that is `iVar1 = __stubs::_memcmp(local_80,puVar2,0x3b);`)
+- Now search the input it is compared to (`puVar2`) its value. Can you find the secret?
+- Alternatively: Go to the data type manager in the bottom left, now filter for `string`, now right-click at `string` as a member of `wrongsecrets-rust` and select `find uses of`. Then, filter for known keywords: you should easily be able to find the secret now!
+
+2. Find the secrets with https://www.radare.org[radare2].
+- Install https://www.radare.org[radare2] with either `brew install radare2` on Mac or follow these steps: `git clone https://github.com/radareorg/radare2; cd radare2 ; sys/install.sh`
+- Launch r2 analysis with `$ r2 -AAA wrongsecrets-rust`
+- Print the entrypoint `s sym.rust::main::h66ace6a84e548891` and then `pdf`. (not the default `main`!)
+- Find the argument that needs to be compared with `pdf | grep memcmp`  (in our example that is `r12`).
+- Try to find how this argument is prepared. Can you spot the secret?
+- Alternatively: after launching radare2, run `iz | grep secret` and find the string.

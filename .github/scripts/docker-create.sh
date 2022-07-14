@@ -7,7 +7,7 @@ Help() {
     # Display Help
     echo "A versatile script to create a docker image for testing. Call this script with no arguments to simply create a local image that you can use to test your changes. For more complex use see the below help section"
     echo
-    echo "Syntax: docker-create.sh [-h (help)|-t (test)|-p (publish)|-e (herokud)|-f (herokup) [tag={tag}|message={message}|buildarg={buildarg}|springProfile={springProfile}]"
+    echo "Syntax: docker-create.sh [-h (help)|-t (test)|-p (publish)|-e (herokud)|-f (herokup)|-n (notag) [tag={tag}|message={message}|buildarg={buildarg}|springProfile={springProfile}]"
     echo "options: (All optional)"
     echo "tag=             Write a custom tag that will be added to the container when it is build locally."
     echo "message=         Write a message used for the actual tag-message in git"
@@ -70,7 +70,7 @@ Heroku_publish_prod(){
 # Set option to local if no option provided
 script_mode="local"
 # Parse provided options
-while getopts ":htpef*" option; do
+while getopts ":htpefn*" option; do
     case $option in
     h) # display Help
         Help
@@ -88,13 +88,10 @@ while getopts ":htpef*" option; do
     f) # Helper
         script_mode="heroku_p"
         ;;
-    \?) # Invalid option
-        echo "Error: Invalid option"
-        echo
-        Help
-        exit
+    n) #notags
+        disable_tagging_in_git="true"
         ;;
-    -*) # Anything else
+    \?|\*) # Invalid option
         echo "Error: Invalid option"
         echo
         Help
@@ -155,6 +152,12 @@ fi
 echo "Spring profile: $springProfile"
 echo "Version tag: $tag"
 echo "buildarg supplied: $buildarg"
+
+if test -n "${disable_tagging_in_git+x}"; then
+  echo "tagging is disabled"
+else
+  disable_tagging_in_git="false"
+fi
 
 if [[ $script_mode == "heroku_d" ]] ; then
   Heroku_publish_demo
@@ -276,9 +279,13 @@ commit_and_tag() {
         echo "committing changes and new pom file with version ${tag}"
         git commit -am "Update POM file with new version: ${tag}"
         git push
-        echo "tagging version with tag ${tag} and message ${message}"
-        git tag -a $tag -m "${message}"
-        git push --tags
+        if [[ "$disable_tagging_in_git" == "true" ]]; then
+          echo "Skip git tagging"
+        else
+          echo "tagging version with tag '${tag}' and message '${message}'"
+          git tag -a $tag -m "${message}"
+          git push --tags
+        fi
     else
         return
     fi

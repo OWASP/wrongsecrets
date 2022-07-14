@@ -1,0 +1,5 @@
+=== Hiding in binaries part 4: the Rust binary
+
+Similar like hiding secrets in an application written in C, you can do this in Rust. Ghidra is not that good at analysing Rust by default, though... Can you find the secret in our binary?
+
+Let's debunk the "secrets are hard to find in native compiled applications" myth for Rust: can you find the secret in https://github.com/commjoen/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-rust[wrongsecrets-rust] (or https://github.com/commjoen/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-rust-arm[wrongsecrets-rust-arm], https://github.com/commjoen/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-rust-linux[wrongsecrets-rust-linux])?

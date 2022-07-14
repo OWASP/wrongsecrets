@@ -8,7 +8,7 @@
 
 Welcome to the OWASP WrongSecrets p0wnable app. With this app, we have packed various ways of how to not store your secrets. These can help you to realize whether your secret management is ok. The challenge is to find all the different secrets by means of various tools and techniques.
 
-Can you solve all the 21 challenges?
+Can you solve all the 22 challenges?
 ![screenshot.png](screenshot.png)
 
 ## Support
@@ -17,7 +17,7 @@ Need support? Contact us via [OWASP Slack](https://owasp.slack.com/archives/C02K
 
 ## Basic docker exercises
 
-_Can be used for challenges 1-4, 8, 12-21_
+_Can be used for challenges 1-4, 8, 12-22_
 
 For the basic docker exercises you currently require:
 
@@ -47,6 +47,7 @@ Now you can try to find the secrets by means of solving the challenge offered at
 - [localhost:8080/challenge/19](http://localhost:8080/challenge/19)
 - [localhost:8080/challenge/20](http://localhost:8080/challenge/20)
 - [localhost:8080/challenge/21](http://localhost:8080/challenge/21)
+- [localhost:8080/challenge/22](http://localhost:8080/challenge/22)
 
 Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look better ;-).
 
@@ -63,7 +64,7 @@ You can test them out at [https://wrongsecrets.herokuapp.com/](https://wrongsecr
 
 ## Basic K8s exercise
 
-_Can be used for challenges 1-6, 8, 12-21_
+_Can be used for challenges 1-6, 8, 12-22_
 
 ### Minikube based
 
@@ -110,7 +111,7 @@ now you can use the provided IP address and port to further play with the K8s va
 
 ## Vault exercises with minikube
 
-_Can be used for challenges 1-8, 12-21_
+_Can be used for challenges 1-8, 12-22_
 Make sure you have the following installed:
 
 - minikube with docker (or comment out line 8 and work at your own k8s setup),
@@ -121,15 +122,15 @@ Make sure you have the following installed:
 - vault [Install from here](https://www.vaultproject.io/downloads),
 - grep, Cat, and Sed
 
-Run `./k8s-vault-minkube-start.sh`, when the script is done, then the challenges will wait for you at <http://localhost:8080> . This will allow you to run challenges 1-8, 12-21.
+Run `./k8s-vault-minkube-start.sh`, when the script is done, then the challenges will wait for you at <http://localhost:8080> . This will allow you to run challenges 1-8, 12-22.
 
 When you stopped the `k8s-vault-minikube-start.sh` script and want to resume the port forward run: `k8s-vault-minikube-resume.sh`. This is because if you run the start script again it will replace the secret in the vault and not update the secret-challenge application with the new secret.
 
 ## Cloud Challenges
 
-_Can be used for challenges 1-21_
+_Can be used for challenges 1-22_
 
-**READ THIS**: Given that the exercises below contain IAM privilege escalation exercises, 
+**READ THIS**: Given that the exercises below contain IAM privilege escalation exercises,
 never run this on an account which is related to your production environment or can influence your account-over-arching resources.
 
 ### Running WrongSecrets in AWS
@@ -147,6 +148,7 @@ Follow the steps in [the README in the Azure subfolder](azure/README.md).
 ### Running Challenge15 in your own cloud only
 
 When you want to include your own Canarytokens for your cloud-deployment, do the following:
+
 1. Fork the project.
 2. Make sure you use the [GCP ingress](/gcp/k8s-vault-gcp-ingress-start.sh) or [AWS ingress](aws/k8s-aws-alb-script.sh) scripts to generate an ingress for your project.
 3. Go to [canarytokens.org](https://canarytokens.org/generate) and select `AWS Keys`, in the webHook URL field add `<your-domain-created-at-step1>/canaries/tokencallback`.
