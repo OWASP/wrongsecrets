@@ -42,4 +42,9 @@ public class Challenge7 extends Challenge {
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
         return List.of(RuntimeEnvironment.Environment.VAULT);
     }
+
+    @Override
+    public int difficulty() {
+        return 4;
+    }
 }

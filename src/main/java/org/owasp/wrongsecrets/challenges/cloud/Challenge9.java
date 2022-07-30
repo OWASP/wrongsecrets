@@ -56,4 +56,9 @@ public class Challenge9 extends CloudChallenge {
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
         return List.of(GCP, AWS, AZURE);
     }
+
+    @Override
+    public int difficulty() {
+        return 3;
+    }
 }

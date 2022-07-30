@@ -49,6 +49,11 @@ public class Challenge15 extends Challenge {
         return List.of(RuntimeEnvironment.Environment.DOCKER);
     }
 
+    @Override
+    public int difficulty() {
+        return 2;
+    }
+
     private String quickDecrypt(String cipherText) {
         try {
             final byte[] keyData = Base64.getDecoder().decode(encryptionKey);
