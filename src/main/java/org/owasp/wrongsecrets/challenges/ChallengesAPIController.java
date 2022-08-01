@@ -13,7 +13,9 @@ import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +26,6 @@ public class ChallengesAPIController {
 
     private final ScoreCard scoreCard;
     private final List<ChallengeUI> challenges;
-    private final RuntimeEnvironment runtimeEnvironment;
 
     private final List<String> descriptions;
 
@@ -33,13 +34,12 @@ public class ChallengesAPIController {
     public ChallengesAPIController(ScoreCard scoreCard, List<ChallengeUI> challenges, RuntimeEnvironment runtimeEnvironment) {
         this.scoreCard = scoreCard;
         this.challenges = challenges;
-        this.runtimeEnvironment = runtimeEnvironment;
         this.descriptions = new ArrayList<>();
         this.hints = new ArrayList<>();
     }
 
 
-    @GetMapping(value = "/api/challenges", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/api/Challenges", produces = MediaType.APPLICATION_JSON_VALUE)
     public String getChallenges() {
         if (descriptions.size() == 0) {
             initiaLizeHintsAndDescriptions();
@@ -74,24 +74,28 @@ public class ChallengesAPIController {
     private void initiaLizeHintsAndDescriptions() {
         log.info("Initialize hints and descriptions");
         challenges.forEach(challengeUI -> {
-            String hintsRaw = null;
-            try {
-                hintsRaw = FileUtils.readFileToString(ResourceUtils.getFile("classpath:explanations/" + challengeUI.getExplanation() + "_hint.adoc"), StandardCharsets.UTF_8);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            String hint = Asciidoctor.Factory.create().convert(hintsRaw, OptionsBuilder.options().build());
+            String rawHint = extractResource("classpath:explanations/" + challengeUI.getExplanation() + "_hint.adoc");
+            String hint = Asciidoctor.Factory.create().convert(rawHint, OptionsBuilder.options().build());
             hints.add(hint);
-
-            String descriptionRaw = null;
-            try {
-                descriptionRaw = FileUtils.readFileToString(ResourceUtils.getFile("classpath:explanations/" + challengeUI.getExplanation() + ".adoc"), StandardCharsets.UTF_8);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            String description = Asciidoctor.Factory.create().convert(descriptionRaw, OptionsBuilder.options().build());
+            String rawDescription = extractResource("classpath:explanations/" + challengeUI.getExplanation() + ".adoc");
+            String description = Asciidoctor.Factory.create().convert(rawDescription, OptionsBuilder.options().build());
             descriptions.add(description);
         });
+    }
+
+    private String extractResource(String resourceName){
+        try {
+            var resource = ResourceUtils.getURL(resourceName);
+            final StringBuilder resourceStringbuilder = new StringBuilder();
+            new BufferedReader(
+                new InputStreamReader(resource.openStream())
+            ).lines().forEach(s -> {
+                resourceStringbuilder.append(s);
+            });
+            return resourceStringbuilder.toString();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private String getDisabledEnv(ChallengeUI challenge) {

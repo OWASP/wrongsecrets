@@ -21,11 +21,14 @@ public class ChallengeAPiControllerTest {
     @Autowired
     private RestTemplateBuilder builder;
 
+    public ChallengeAPiControllerTest() {
+    }
+
     @Test
     void shouldGetListOfChallenges() {
         var restTemplate = builder.build();
 
-        var callbackAdress = "http://localhost:"+port+"/api/challenges";
+        var callbackAdress = "http://localhost:"+port+"/api/Challenges";
 
         try {
             var response = restTemplate.getForEntity(callbackAdress, String.class);
