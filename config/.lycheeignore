@@ -3,3 +3,4 @@ file://.*
 
 # This is used as an example when creating a pull request
 https://github.com/Your_Github_Handle.*
+https://wrongsecrets-ctf.herokuapp.com/api/Challenges

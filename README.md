@@ -225,7 +225,9 @@ Follow the following steps:
     juice-shop-ctf #choose ctfd and https://wrongsecrets-ctf.herokuapp.com as domain. The key is 'TRwzkRJnHOTckssAeyJbysWgP!Qc2T'
     docker run -p 8001:8000 -it ctfd/ctfd:3.4.3 # configure challenge and import the zip from juice-shop-ctf
 ```
-Game on!
+
+Game on using [https://wrongsecrets-ctf.herokuapp.com](https://wrongsecrets-ctf.herokuapp.com) !
+Want to setup your own? You can!
 
 ## Notes on development
 
