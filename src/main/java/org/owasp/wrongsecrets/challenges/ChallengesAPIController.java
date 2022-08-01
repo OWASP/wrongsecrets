@@ -51,25 +51,29 @@ public class ChallengesAPIController {
             jsonChallenge.put("id", i);
             jsonChallenge.put("name", challenges.get(i).getName());
             jsonChallenge.put("key", challenges.get(i).getExplanation());
-            jsonChallenge.put("category", challenges.get(i).getChallenge().supportedRuntimeEnvironments().get(0));
+            jsonChallenge.put("category", getCategory(challenges.get(i)));
             jsonChallenge.put("description", descriptions.get(i));
             jsonChallenge.put("hint", hints.get(i));
             jsonChallenge.put("solved", scoreCard.getChallengeCompleted(challenges.get(i).getChallenge()));
             jsonChallenge.put("disabledEnv", getDisabledEnv(challenges.get(i)));
             jsonChallenge.put("difficulty", challenges.get(i).getChallenge().difficulty());
-            //hintURL and mitigationURL = not implemented yet
             jsonArray.add(jsonChallenge);
         }
         json.put("status", "success");
         json.put("data", jsonArray);
-
-//      "createdAt": "2022-07-28T16:12:07.564Z",
-//      "updatedAt": "2022-07-28T16:12:07.564Z"
         String result = json.toJSONString();
         log.info("returning {}", result);
         return result;
     }
 
+    private String getCategory(ChallengeUI challengeUI) {
+        return switch (challengeUI.getChallenge().supportedRuntimeEnvironments().get(0)) {
+            case DOCKER, HEROKU_DOCKER -> "Docker";
+            case GCP, AWS, AZURE -> "Cloud";
+            case VAULT -> "Vault";
+            case K8S -> "Kubernetes";
+        };
+    }
 
     private void initiaLizeHintsAndDescriptions() {
         log.info("Initialize hints and descriptions");
@@ -83,7 +87,7 @@ public class ChallengesAPIController {
         });
     }
 
-    private String extractResource(String resourceName){
+    private String extractResource(String resourceName) {
         try {
             var resource = ResourceUtils.getURL(resourceName);
             final StringBuilder resourceStringbuilder = new StringBuilder();

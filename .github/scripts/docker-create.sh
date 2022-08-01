@@ -45,6 +45,8 @@ Heroku_publish_demo() {
     cd ../..
     heroku container:push --recursive --arg argBasedVersion=${tag}heroku --app arcane-scrubland-42646
     heroku container:release web --app arcane-scrubland-42646
+    heroku container:push --recursive --arg argBasedVersion=${tag}heroku --arg ctf_enabled=true --app wrongsecrets-ctf
+    heroku container:release web --app wrongsecrets-ctf
     exit
 }
 

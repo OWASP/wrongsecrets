@@ -1,10 +1,12 @@
-FROM jeroenwillemsen/wrongsecrets:ctfdtest3-no-vault
+FROM jeroenwillemsen/wrongsecrets:ctfdtest6-no-vault
 
 ARG argBasedVersion="1.4.7"
 ARG CANARY_URLS="http://canarytokens.com/terms/about/s7cfbdakys13246ewd8ivuvku/post.jsp,http://canarytokens.com/terms/about/y0all60b627gzp19ahqh7rl6j/post.jsp"
+ARG ctf_enabled=false
 ENV APP_VERSION=$argBasedVersion
 ENV K8S_ENV=Heroku(Docker)
 ENV canarytokenURLs=$CANARY_URLS
+ENV CTF_ENABLED=$ctf_enabled
 ENV challengedockermtpath="/var/helpers"
 ENV keepasspath="/var/helpers/alibabacreds.kdbx"
 COPY .github/scripts/ /var/helpers
