@@ -3,11 +3,12 @@ package org.owasp.wrongsecrets.challenges;
 import com.nimbusds.jose.shaded.json.JSONArray;
 import com.nimbusds.jose.shaded.json.JSONObject;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.io.FileUtils;
 import org.asciidoctor.Asciidoctor;
 import org.asciidoctor.OptionsBuilder;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
+import org.owasp.wrongsecrets.asciidoc.TemplateGenerator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,15 +31,18 @@ public class ChallengesAPIController {
 
     private final List<String> hints;
 
-    public ChallengesAPIController(ScoreCard scoreCard, List<ChallengeUI> challenges, RuntimeEnvironment runtimeEnvironment) {
+    private final TemplateGenerator templateGenerator;
+
+    public ChallengesAPIController(ScoreCard scoreCard, List<ChallengeUI> challenges, RuntimeEnvironment runtimeEnvironment, TemplateGenerator templateGenerator) {
         this.scoreCard = scoreCard;
         this.challenges = challenges;
         this.descriptions = new ArrayList<>();
         this.hints = new ArrayList<>();
+        this.templateGenerator = templateGenerator;
     }
 
 
-    @GetMapping(value = "/api/Challenges", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = {"/api/Challenges", "/api/challenges"}, produces = MediaType.APPLICATION_JSON_VALUE)
     public String getChallenges() {
         if (descriptions.size() == 0) {
             initiaLizeHintsAndDescriptions();
@@ -77,13 +80,22 @@ public class ChallengesAPIController {
 
     private void initiaLizeHintsAndDescriptions() {
         log.info("Initialize hints and descriptions");
-        challenges.forEach(challengeUI -> {
-            String rawHint = extractResource("classpath:explanations/" + challengeUI.getExplanation() + "_hint.adoc");
-            String hint = Asciidoctor.Factory.create().convert(rawHint, OptionsBuilder.options().build());
-            hints.add(hint);
-            String rawDescription = extractResource("classpath:explanations/" + challengeUI.getExplanation() + ".adoc");
-            String description = Asciidoctor.Factory.create().convert(rawDescription, OptionsBuilder.options().build());
-            descriptions.add(description);
+        challenges.forEach(challengeUI -> { //note requires mvn install to generate the html files!
+            try {
+                String hint = templateGenerator.generate("explanations/" + challengeUI.getExplanation() + "_hint");
+                hints.add(hint);
+                String description = templateGenerator.generate("explanations/" + challengeUI.getExplanation());
+                descriptions.add(description);
+            } catch (IOException e) {
+                String rawHint = extractResource("classpath:explanations/" + challengeUI.getExplanation() + "_hint.adoc");
+                String hint = Asciidoctor.Factory.create().convert(rawHint, OptionsBuilder.options().build());
+                hints.add(hint);
+                String rawDescription = extractResource("classpath:explanations/" + challengeUI.getExplanation() + ".adoc");
+                String description = Asciidoctor.Factory.create().convert(rawDescription, OptionsBuilder.options().build());
+                descriptions.add(description);
+                throw new RuntimeException(e);
+            }
+
         });
     }
 
