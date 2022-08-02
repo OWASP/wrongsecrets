@@ -19,6 +19,8 @@ public abstract class Challenge {
 
     public abstract List<Environment> supportedRuntimeEnvironments();
 
+    public abstract int difficulty();
+
     public boolean solved(String answer) {
         var correctAnswer = answerCorrect(answer);
         if (correctAnswer) {

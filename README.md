@@ -213,6 +213,22 @@ As tons of secret detection tools are coming up for both Docker and Git, we are 
 Want to know if your tool detects everything? We will keep track of the embedded secrets in [this issue](https://github.com/commjoen/wrongsecrets/issues/201) and have a [branch](https://github.com/commjoen/wrongsecrets/tree/experiment-bed) in which we put additional secrets for your tool to detect.
 The branch will contain a Docker container generation script using which you can eventually test your container secret scanning.
 
+## CTFD Support - Experimental
+
+NOTE: CTFD support is experimental, but can work based on the [Juiceshop CTF CLI](https://github.com/juice-shop/juice-shop-ctf). 
+NOTE-II:  https://wrongsecrets-ctf.herokuapp.com is based on a free heroku instance, which takes time to warm up. Initial creation of the zip file for CTFD requires you to visit [https://wrongsecrets-ctf.herokuapp.com/api/Challenges](https://wrongsecrets-ctf.herokuapp.com/api/Challenges) once before executing the steps below.
+
+Follow the following steps:
+
+```shell
+    npm install -g juice-shop-ctf-cli  
+    juice-shop-ctf #choose ctfd and https://wrongsecrets-ctf.herokuapp.com as domain. No trailing slash! The key is 'TRwzkRJnHOTckssAeyJbysWgP!Qc2T'
+    docker run -p 8001:8000 -it ctfd/ctfd:3.4.3 # configure challenge and import the zip from juice-shop-ctf
+```
+
+Game on using [https://wrongsecrets-ctf.herokuapp.com](https://wrongsecrets-ctf.herokuapp.com) !
+Want to setup your own? You can!
+
 ## Notes on development
 
 For development on local machine use the `local` profile `./mvnw spring-boot:run -Dspring-boot.run.profiles=local`

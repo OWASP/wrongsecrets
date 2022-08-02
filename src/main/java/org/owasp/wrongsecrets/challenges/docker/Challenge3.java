@@ -37,4 +37,9 @@ public class Challenge3 extends Challenge {
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
         return List.of(DOCKER);
     }
+
+    @Override
+    public int difficulty() {
+        return 1;
+    }
 }

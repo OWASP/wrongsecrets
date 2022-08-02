@@ -84,6 +84,11 @@ public class Challenge11 extends CloudChallenge {
         return List.of(AWS, GCP, AZURE);
     }
 
+    @Override
+    public int difficulty() {
+        return 4;
+    }
+
     private String getChallenge11Value(RuntimeEnvironment runtimeEnvironment) {
         if (runtimeEnvironment != null && runtimeEnvironment.getRuntimeEnvironment() != null) {
             return switch (runtimeEnvironment.getRuntimeEnvironment()) {

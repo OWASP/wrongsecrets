@@ -48,6 +48,11 @@ public class Challenge13 extends Challenge {
         return List.of(RuntimeEnvironment.Environment.DOCKER);
     }
 
+    @Override
+    public int difficulty() {
+        return 3;
+    }
+
     private boolean isKeyCorrect(String base64EncodedKey) {
         if (Strings.isEmpty(base64EncodedKey) || Strings.isEmpty(plainText) || Strings.isEmpty(cipherText)) {
             log.info("Checking secret with values {}, {}, {}", base64EncodedKey, plainText, cipherText);

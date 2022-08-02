@@ -39,4 +39,9 @@ public class Challenge4 extends Challenge {
         return List.of(DOCKER);
     }
 
+    @Override
+    public int difficulty() {
+        return 2;
+    }
+
 }
