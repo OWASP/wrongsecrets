@@ -52,8 +52,12 @@ public class ChallengesController {
 
     @GetMapping("/spoil-{id}")
     public String spoiler(Model model, @PathVariable Integer id) {
-        var challenge = challenges.get(id - 1).getChallenge();
-        model.addAttribute("spoiler", challenge.spoiler());
+        if (!ctfModeEnabled) {
+            var challenge = challenges.get(id - 1).getChallenge();
+            model.addAttribute("spoiler", challenge.spoiler());
+        } else {
+            model.addAttribute("spoiler", new Spoiler("Spoils are disabled in CTF mode"));
+        }
         return "spoil";
     }
 
