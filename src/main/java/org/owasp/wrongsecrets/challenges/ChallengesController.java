@@ -33,10 +33,10 @@ public class ChallengesController {
     @Value("${reason_enabled}")
     private boolean reasonEnabled;
 
-    @Value("${CTF_ENABLED}")
+    @Value("${ctf_enabled}")
     private boolean ctfModeEnabled;
 
-    @Value("${CTF_KEY}")
+    @Value("${ctf_key}")
     private String ctfKey;
 
     public ChallengesController(ScoreCard scoreCard, List<ChallengeUI> challenges, RuntimeEnvironment runtimeEnvironment) {
