@@ -33,6 +33,7 @@ public class ChallengeAPiControllerTest {
         try {
             var response = restTemplate.getForEntity(callbackAdress, String.class);
             assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+            assertThat(response.getBody()).contains("hint");
         } catch (RestClientResponseException e) {
            fail(e);
         }
