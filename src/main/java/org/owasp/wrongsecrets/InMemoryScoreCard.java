@@ -7,11 +7,11 @@ import java.util.Set;
 
 public class InMemoryScoreCard implements ScoreCard {
 
-    private final int maxPoints;
+    private final int maxNumberOfChallenges;
     private final Set<Challenge> solvedChallenges = new HashSet<>();
 
     public InMemoryScoreCard(int numberOfChallenge) {
-        maxPoints = numberOfChallenge * 50;
+        maxNumberOfChallenges = numberOfChallenge;
     }
 
     @Override
@@ -26,12 +26,12 @@ public class InMemoryScoreCard implements ScoreCard {
 
     @Override
     public float getProgress() {
-        return (100 / (float) maxPoints) * getTotalReceivedPoints();
+        return ((float) 100 / maxNumberOfChallenges) * solvedChallenges.size();
     }
 
     @Override
     public int getTotalReceivedPoints() {
-        return solvedChallenges.size() * 50;
+        return solvedChallenges.stream().map(challenge -> challenge.difficulty() * (100 + (challenge.difficulty() - 1) * 25)).reduce(0, Integer::sum);
     }
 
     @Override
