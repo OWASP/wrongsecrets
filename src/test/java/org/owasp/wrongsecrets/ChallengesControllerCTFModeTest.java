@@ -56,7 +56,7 @@ class ChallengesControllerCTFModeTest {
     }
 
     @Test
-    void shouldShowKeyWhenInCTFMode() throws Exception {
+    void shouldShowFlagWhenRespondingWithSuccessInCTFMode() throws Exception {
         var spoil = new ChallengeForm(new Challenge1(new InMemoryScoreCard(1)).spoiler().solution()).toString();
         mvc.perform(post("/challenges/1")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
