@@ -213,7 +213,9 @@ As tons of secret detection tools are coming up for both Docker and Git, we are 
 Want to know if your tool detects everything? We will keep track of the embedded secrets in [this issue](https://github.com/commjoen/wrongsecrets/issues/201) and have a [branch](https://github.com/commjoen/wrongsecrets/tree/experiment-bed) in which we put additional secrets for your tool to detect.
 The branch will contain a Docker container generation script using which you can eventually test your container secret scanning.
 
-## CTFD Support
+## CTF
+
+### CTFD Support
 
 NOTE: CTFD support is experimental, and now works based on the [Juiceshop CTF CLI](https://github.com/juice-shop/juice-shop-ctf). 
 NOTE-II:  https://wrongsecrets-ctf.herokuapp.com is based on a free heroku instance, which takes time to warm up. Initial creation of the zip file for CTFD requires you to visit [https://wrongsecrets-ctf.herokuapp.com/api/Challenges](https://wrongsecrets-ctf.herokuapp.com/api/Challenges) once before executing the steps below.
@@ -229,6 +231,14 @@ Follow the following steps:
 Now visit the CTFD instance at [http://localhost:8001](http://localhost:8001) and setup your CTF. Then use the administrative backup function to import the zipfile you created with the juice-shop-ctf command.
 Game on using [https://wrongsecrets-ctf.herokuapp.com](https://wrongsecrets-ctf.herokuapp.com) !
 Want to setup your own? You can! Watch out for people finding your key though, so secure it properly: make sure the running container with the actual ctf-key is not exposed to the audience, similar to our heroku container.
+
+## FBCTF Support (Experimental!)
+
+NOTE: FBCTF support is experimental.
+
+follow the same step as with CTFD, only now choose fbctfd and as a url for the countrymapping choose `https://raw.githubusercontent.com/commjoen/wrongsecrets/79a982558016c8ce70948a8106f9a2ee5b5b9eea/config/fbctf.yml`. Then follow [https://github.com/facebookarchive/fbctf/wiki/Quick-Setup-Guide](https://github.com/facebookarchive/fbctf/wiki/Quick-Setup-Guide) to run the FBCTF.
+
+
 
 ## Notes on development
 
