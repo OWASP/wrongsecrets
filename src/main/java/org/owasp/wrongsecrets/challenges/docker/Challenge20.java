@@ -44,4 +44,9 @@ public class Challenge20 extends Challenge {
     public int difficulty() {
         return 4;
     }
+
+    @Override
+    public String getTech() {
+        return "Binary";
+    }
 }

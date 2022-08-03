@@ -54,7 +54,7 @@ public class ChallengesAPIController {
             jsonChallenge.put("id", i);
             jsonChallenge.put("name", challenges.get(i).getName());
             jsonChallenge.put("key", challenges.get(i).getExplanation());
-            jsonChallenge.put("category", getCategory(challenges.get(i)));
+            jsonChallenge.put("category", getCategory(challenges.get(i)) + " - " + challenges.get(i).getTech());
             jsonChallenge.put("description", descriptions.get(i));
             jsonChallenge.put("hint", hints.get(i));
             jsonChallenge.put("solved", scoreCard.getChallengeCompleted(challenges.get(i).getChallenge()));

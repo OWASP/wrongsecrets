@@ -47,6 +47,11 @@ public class Challenge17 extends Challenge {
         return 3;
     }
 
+    @Override
+    public String getTech() {
+        return "Docker";
+    }
+
     public String getActualData() {
         try {
             return Files.readString(Paths.get(dockerMountPath, "thirdkey.txt"));

@@ -42,4 +42,9 @@ public class Challenge2 extends Challenge {
     public int difficulty() {
         return 1;
     }
+
+    @Override
+    public String getTech() {
+        return "Git";
+    }
 }

@@ -89,6 +89,11 @@ public class Challenge11 extends CloudChallenge {
         return 4;
     }
 
+    @Override
+    public String getTech() {
+        return "IAM Privilege escalation";
+    }
+
     private String getChallenge11Value(RuntimeEnvironment runtimeEnvironment) {
         if (runtimeEnvironment != null && runtimeEnvironment.getRuntimeEnvironment() != null) {
             return switch (runtimeEnvironment.getRuntimeEnvironment()) {

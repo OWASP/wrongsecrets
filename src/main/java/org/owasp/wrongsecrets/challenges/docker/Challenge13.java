@@ -53,6 +53,11 @@ public class Challenge13 extends Challenge {
         return 3;
     }
 
+    @Override
+    public String getTech() {
+        return "CI/CD";
+    }
+
     private boolean isKeyCorrect(String base64EncodedKey) {
         if (Strings.isEmpty(base64EncodedKey) || Strings.isEmpty(plainText) || Strings.isEmpty(cipherText)) {
             log.info("Checking secret with values {}, {}, {}", base64EncodedKey, plainText, cipherText);

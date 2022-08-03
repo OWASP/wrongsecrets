@@ -61,4 +61,9 @@ public class Challenge9 extends CloudChallenge {
     public int difficulty() {
         return 3;
     }
+
+    @Override
+    public String getTech() {
+        return "Terraform";
+    }
 }

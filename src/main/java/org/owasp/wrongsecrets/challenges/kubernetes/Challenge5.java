@@ -42,4 +42,9 @@ public class Challenge5 extends Challenge {
     public int difficulty() {
         return 2;
     }
+
+    @Override
+    public String getTech() {
+        return "Configmaps";
+    }
 }
