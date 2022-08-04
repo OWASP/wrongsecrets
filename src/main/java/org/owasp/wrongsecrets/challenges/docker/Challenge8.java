@@ -50,6 +50,11 @@ public class Challenge8 extends Challenge {
         return 2;
     }
 
+    @Override
+    public String getTech() {
+        return "Logging";
+    }
+
     private String generateRandomString(int length) {
         StringBuilder builder = new StringBuilder(length);
         for (int i = 0; i < length; i++) {

@@ -44,4 +44,9 @@ public class Challenge4 extends Challenge {
         return 2;
     }
 
+    @Override
+    public String getTech() {
+        return "Docker";
+    }
+
 }

@@ -21,6 +21,8 @@ public abstract class Challenge {
 
     public abstract int difficulty();
 
+    public abstract String getTech();
+
     public boolean solved(String answer) {
         var correctAnswer = answerCorrect(answer);
         if (correctAnswer) {

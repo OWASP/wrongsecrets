@@ -61,4 +61,9 @@ public class Challenge10 extends CloudChallenge {
     public int difficulty() {
         return 4;
     }
+
+    @Override
+    public String getTech() {
+        return "CSI-Driver";
+    }
 }

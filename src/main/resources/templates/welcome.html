@@ -21,8 +21,9 @@
                     <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Challenge &nbsp;&nbsp;&nbsp;&nbsp;</th>
-                        <th scope="col" th:text="'Required environments (current: '+${environment}+')'"></th>
+                        <th scope="col">Challenge&nbsp;&nbsp;&nbsp;</th>
+                        <th scope="col">Focus&nbsp;&nbsp;&nbsp;</th>
+                        <th scope="col" th:text="'Runs on environment (current: '+${environment}+')'"></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -32,14 +33,15 @@
                                th:class="${challenge.isChallengeEnabled} ? '' : 'disabled'"><span
                             th:text="${challenge.name}"
                             th:remove="tag"></span></a></td>
+                        <td th:text="${challenge.tech}"></td>
                         <th:block th:if="${challenge.requiredEnv} == 'DOCKER'">
                             <td>Docker</td>
                         </th:block>
                         <th:block th:if="${challenge.requiredEnv} == 'K8S'">
-                            <td>Kubernetes or Minikube</td>
+                            <td>K8s or Minikube</td>
                         </th:block>
                         <th:block th:if="${challenge.requiredEnv} == 'VAULT'">
-                            <td>Kubernetes or Minikube with Vault</td>
+                            <td>K8s or Minikube with Vault</td>
                         </th:block>
                         <th:block
                             th:if="${challenge.requiredEnv} == 'AWS' or ${challenge.requiredEnv} == 'GCP'or ${challenge.requiredEnv} == 'AZURE'">

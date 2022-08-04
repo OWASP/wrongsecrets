@@ -38,6 +38,10 @@ public class ChallengeUI {
         return challengeNumber;
     }
 
+    public String getTech() {
+        return challenge.getTech();
+    }
+
     public Integer next() {
         return challengeNumber + 1;
     }

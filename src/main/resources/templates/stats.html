@@ -7,6 +7,10 @@
         <h1>Current Stats</h1>
         <p>Number of active sessions:</p>
         <p th:text="${sessioncounter}"></p>
+        <p>Hints enabled:<span th:text="${hintsEnabled}"></span></p>
+        <p>Reason enabled:<span th:text="${reasonEnabled}"></span></p>
+        <p>CTF-mode enabled:<span th:text="${ctfModeEnabled}"></span></p>
+
         <p>Number of canary callbacks since boot:</p>
         <p th:text="${canaryCounter}"></p>
         <p>Last canary token received:</p>

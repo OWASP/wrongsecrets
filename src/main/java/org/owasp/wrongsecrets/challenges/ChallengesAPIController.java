@@ -13,12 +13,14 @@ import org.springframework.http.MediaType;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.yaml.snakeyaml.Yaml;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 @Slf4j
 @RestController
@@ -54,7 +56,7 @@ public class ChallengesAPIController {
             jsonChallenge.put("id", i);
             jsonChallenge.put("name", challenges.get(i).getName());
             jsonChallenge.put("key", challenges.get(i).getExplanation());
-            jsonChallenge.put("category", getCategory(challenges.get(i)));
+            jsonChallenge.put("category", getCategory(challenges.get(i)) + " - " + challenges.get(i).getTech());
             jsonChallenge.put("description", descriptions.get(i));
             jsonChallenge.put("hint", hints.get(i));
             jsonChallenge.put("solved", scoreCard.getChallengeCompleted(challenges.get(i).getChallenge()));
@@ -120,4 +122,5 @@ public class ChallengesAPIController {
         }
         return null;
     }
+
 }

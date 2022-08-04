@@ -15,6 +15,13 @@ public class StatsController {
     @Autowired
     private SessionConfiguration sessionConfiguration;
 
+    @Value("${hints_enabled}")
+    private boolean hintsEnabled;
+    @Value("${reason_enabled}")
+    private boolean reasonEnabled;
+    @Value("${ctf_enabled}")
+    private boolean ctfModeEnabled;
+
     @Value("${canarytokenURLs}")
     private String[] canaryTokenURLs;
 
@@ -24,6 +31,9 @@ public class StatsController {
         model.addAttribute("sessioncounter", sessionConfiguration.getCounter());
         model.addAttribute("lastCanaryToken", canaryCounter.getLastToken());
         model.addAttribute("canarytokenURLs", canaryTokenURLs);
+        model.addAttribute("hintsEnabled", hintsEnabled);
+        model.addAttribute("reasonEnabled", reasonEnabled);
+        model.addAttribute("ctfModeEnabled",ctfModeEnabled);
         return "stats";
     }
 }

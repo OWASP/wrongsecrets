@@ -45,7 +45,7 @@ Heroku_publish_demo() {
     cd ../..
     heroku container:push --recursive --arg argBasedVersion=${tag}heroku --app arcane-scrubland-42646
     heroku container:release web --app arcane-scrubland-42646
-    heroku container:push --recursive --arg argBasedVersion=${tag}heroku --arg CTF_ENABLED=true --arg HINTS_ENABLED=false --app wrongsecrets-ctf
+    heroku container:push --recursive --arg argBasedVersion=${tag}heroku,CTF_ENABLED=true,HINTS_ENABLED=false --app wrongsecrets-ctf
     heroku container:release web --app wrongsecrets-ctf
     exit
 }
@@ -56,7 +56,7 @@ Heroku_publish_prod(){
     heroku container:login
     echo "heroku deployment to prod"
     cd ../..
-    heroku container:push --recursive --arg argBasedVersion=${tag}heroku --arg CANARY_URLS=http://canarytokens.com/feedback/images/traffic/tgy3epux7jm59n0ejb4xv4zg3/submit.aspx,http://canarytokens.com/traffic/cjldn0fsgkz97ufsr92qelimv/post.jsp --app=wrongsecrets
+    heroku container:push --recursive --arg argBasedVersion=${tag}heroku,CANARY_URLS=http://canarytokens.com/feedback/images/traffic/tgy3epux7jm59n0ejb4xv4zg3/submit.aspx,http://canarytokens.com/traffic/cjldn0fsgkz97ufsr92qelimv/post.jsp --app=wrongsecrets
     heroku container:release web --app=wrongsecrets
     exit
 }

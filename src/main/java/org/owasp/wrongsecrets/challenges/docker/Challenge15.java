@@ -54,6 +54,11 @@ public class Challenge15 extends Challenge {
         return 2;
     }
 
+    @Override
+    public String getTech() {
+        return "Git";
+    }
+
     private String quickDecrypt(String cipherText) {
         try {
             final byte[] keyData = Base64.getDecoder().decode(encryptionKey);
