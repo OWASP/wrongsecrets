@@ -9,6 +9,10 @@ ARG CTF_KEY=TRwzkRJnHOTckssAeyJbysWgP!Qc2T
 ARG CHALLENGE_5_VALUE=if_you_see_this_please_use_k8s
 ARG CHALLENGE_6_VALUE=if_you_see_this_please_use_k8s
 ARG CHALLENGE_7_VALUE=if_you_see_this_please_use_K8S_and_Vault
+#TODO: CONTINUE ON THE 3 CHALLENGES BELOW AND TEST THEM! (both with and without CTF!)
+ARG CHALLENGE_9_VALUE=if_you_see_this_please_use
+ARG CHALLENGE_10_VALUE=if_you_see_this_please_use
+ARG CHALLENGE_11_VALUE=if_you_see_this_please_use
 ENV APP_VERSION=$argBasedVersion
 ENV K8S_ENV=Heroku(Docker)
 ENV canarytokenURLs=$CANARY_URLS

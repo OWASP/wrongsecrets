@@ -39,6 +39,14 @@ class ChallengesControllerCTFModeTest {
     }
 
     @Test
+    void shouldNotSpoilWhenInCTFModeEvenWhenChallengeUnsupported() throws Exception {
+        mvc.perform(get("/spoil-5"))
+            .andExpect(status().isOk())
+            .andExpect(content().string(containsString("Spoils are disabled in CTF mode")));
+
+    }
+
+    @Test
     void shouldShowFlagWhenRespondingWithSuccessInCTFMode() throws Exception {
         var spoil = new Challenge1(new InMemoryScoreCard(1)).spoiler().solution();
         mvc.perform(post("/challenge/1")
@@ -49,5 +57,30 @@ class ChallengesControllerCTFModeTest {
             .andExpect(status().isOk())
             .andExpect(content().string(containsString("ba9a72ac7057576344856")));
 
+    }
+
+
+    @Test
+    void shouldEnableK8sExercises() throws Exception{
+        mvc.perform(get("/"))
+            .andExpect(status().isOk())
+            .andExpect(content().string(containsString("class=\"disabled\">Challenge 5</a></td>")))
+            .andExpect(content().string(containsString("class=\"disabled\">Challenge 6</a></td>")))
+            .andExpect(content().string(containsString("class=\"disabled\">Challenge 7</a></td>")));
+    }
+
+    @Test
+    void shouldStillDissableTestsIfNotPreconfigured() throws Exception {
+        testChallenge("/challenge/5");
+        testChallenge("/challenge/6");
+        testChallenge("/challenge/7");
+    }
+
+    private void testChallenge(String url) throws Exception {
+        mvc.perform(get(url)
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .with(csrf()))
+            .andExpect(status().isOk())
+            .andExpect(content().string(containsString("We are running outside a K8s cluster. Please run this in the K8s cluster as explained in the")));
     }
 }
