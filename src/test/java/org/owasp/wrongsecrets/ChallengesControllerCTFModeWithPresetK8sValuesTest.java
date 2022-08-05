@@ -2,11 +2,9 @@ package org.owasp.wrongsecrets;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.owasp.wrongsecrets.challenges.docker.Challenge1;
 import org.owasp.wrongsecrets.challenges.kubernetes.Challenge5;
 import org.owasp.wrongsecrets.challenges.kubernetes.Challenge6;
 import org.owasp.wrongsecrets.challenges.kubernetes.Challenge7;
-import org.owasp.wrongsecrets.challenges.kubernetes.Vaultpassword;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;

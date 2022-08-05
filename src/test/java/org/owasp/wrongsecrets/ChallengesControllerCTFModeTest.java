@@ -2,7 +2,6 @@ package org.owasp.wrongsecrets;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.owasp.wrongsecrets.challenges.ChallengeForm;
 import org.owasp.wrongsecrets.challenges.docker.Challenge1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -81,6 +80,6 @@ class ChallengesControllerCTFModeTest {
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .with(csrf()))
             .andExpect(status().isOk())
-            .andExpect(content().string(containsString("We are running outside a K8s cluster. Please run this in the K8s cluster as explained in the")));
+            .andExpect(content().string(containsString("We are running outside a K8s cluster")));
     }
 }
