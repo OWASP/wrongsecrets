@@ -23,8 +23,7 @@ import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.HEROKU_DOCKE
 public class RuntimeEnvironment {
 
     @Value("${ctf_enabled}")
-    private boolean ctf_mode_enabled;
-    private final String defaultValueChallenge5 = "if_you_see_this_please_use_k8s";
+    private boolean ctfModeEnabled;
 
     @Value("${SPECIAL_K8S_SECRET}")
     private String challenge5Value; //used to determine if they are overriden;
@@ -57,7 +56,8 @@ public class RuntimeEnvironment {
     private final Environment runtimeEnvironment;
 
     private boolean isK8sUnlockedInCTFMode() {
-        return ctf_mode_enabled && !challenge5Value.equals(defaultValueChallenge5);
+        String defaultValueChallenge5 = "if_you_see_this_please_use_k8s";
+        return ctfModeEnabled && !challenge5Value.equals(defaultValueChallenge5);
     }
 
     @Autowired
