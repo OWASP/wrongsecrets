@@ -22,14 +22,21 @@ import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.HEROKU_DOCKE
 @Component
 public class RuntimeEnvironment {
 
+    @Value("${ctf_enabled}")
+    private boolean ctf_mode_enabled;
+    private final String defaultValueChallenge5 = "if_you_see_this_please_use_k8s";
+
+    @Value("${SPECIAL_K8S_SECRET}")
+    private String challenge5Value; //used to determine if they are overriden;
+
     private static final Map<Environment, List<Environment>> envToOverlappingEnvs = Map.of(
-            HEROKU_DOCKER, List.of(DOCKER, HEROKU_DOCKER),
-            DOCKER, List.of(DOCKER, HEROKU_DOCKER),
-            GCP, List.of(DOCKER, K8S, VAULT),
-            AWS, List.of(DOCKER, K8S, VAULT),
-            AZURE, List.of(DOCKER, K8S, VAULT),
-            VAULT, List.of(DOCKER, K8S),
-            K8S, List.of(DOCKER)
+        HEROKU_DOCKER, List.of(DOCKER, HEROKU_DOCKER),
+        DOCKER, List.of(DOCKER, HEROKU_DOCKER),
+        GCP, List.of(DOCKER, K8S, VAULT),
+        AWS, List.of(DOCKER, K8S, VAULT),
+        AZURE, List.of(DOCKER, K8S, VAULT),
+        VAULT, List.of(DOCKER, K8S),
+        K8S, List.of(DOCKER)
     );
 
     public enum Environment {
@@ -49,6 +56,10 @@ public class RuntimeEnvironment {
     @Getter
     private final Environment runtimeEnvironment;
 
+    private boolean isK8sUnlockedInCTFMode() {
+        return ctf_mode_enabled && !challenge5Value.equals(defaultValueChallenge5);
+    }
+
     @Autowired
     public RuntimeEnvironment(@Value("${K8S_ENV}") String currentRuntimeEnvironment) {
         this.runtimeEnvironment = Environment.fromId(currentRuntimeEnvironment);
@@ -59,8 +70,11 @@ public class RuntimeEnvironment {
     }
 
     public boolean canRun(Challenge challenge) {
+        if (isK8sUnlockedInCTFMode()) {
+            return challenge.supportedRuntimeEnvironments().contains(runtimeEnvironment) || challenge.supportedRuntimeEnvironments().contains(K8S) || challenge.supportedRuntimeEnvironments().contains(VAULT);
+        } //TODO: WRITE TEST FOR THIS & UPDATE UI THEN!
         return challenge.supportedRuntimeEnvironments().contains(runtimeEnvironment)
-                || !Collections.disjoint(envToOverlappingEnvs.get(runtimeEnvironment), challenge.supportedRuntimeEnvironments());
+            || !Collections.disjoint(envToOverlappingEnvs.get(runtimeEnvironment), challenge.supportedRuntimeEnvironments());
     }
 
 }
