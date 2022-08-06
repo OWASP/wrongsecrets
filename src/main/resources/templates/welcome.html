@@ -17,19 +17,18 @@
     <div class="container-fluid text-sm p-2 p-lg-3">
         <div class="row">
             <div class="col-12 col-lg-7">
-                <table class="table">
+                <table class="table table-responsive">
                     <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Challenge&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                        <th scope="col">&nbsp;Challenge&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                         <th scope="col">Focus&nbsp;&nbsp;&nbsp;</th>
                         <th scope="col" th:text="'Runs on environment (current: '+${environment}+')'"></th>
+                        <th scope="col" class="d-none d-md-table-cell">Difficulty</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="challenge: ${challenges}">
-                        <td th:text="${challenge.link}"></td>
-                        <td><a th:href="@{/challenge} + '/' + ${challenge.link}"
+                        <td>&nbsp;<a th:href="@{/challenge} + '/' + ${challenge.link}"
                                th:class="${challenge.isChallengeEnabled} ? '' : 'disabled'"><span
                             th:text="${challenge.name}"
                             th:remove="tag"></span></a></td>
@@ -47,6 +46,9 @@
                             th:if="${challenge.requiredEnv} == 'AWS' or ${challenge.requiredEnv} == 'GCP'or ${challenge.requiredEnv} == 'AZURE'">
                             <td>AWS, GCP, Azure</td>
                         </th:block>
+                        <td scope="col" class="d-none d-md-table-cell">
+                            <th:block th:each="i: ${#numbers.sequence(1, challenge.difficulty)}"><span>☆</span></th:block>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
