@@ -22,7 +22,8 @@
                     <tr>
                         <th scope="col">&nbsp;Challenge&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                         <th scope="col">Focus&nbsp;&nbsp;&nbsp;</th>
-                        <th scope="col" th:text="'Runs on environment (current: '+${environment}+')'"></th>
+                        <th scope="col" class="d-sm-none" th:text="'Runs on environment (current: '+${#strings.replace(environment,'_',' _')}+')'"></th>
+                        <th scope="col" class="d-none d-sm-table-cell" th:text="'Runs on environment (current: '+${environment}+')'"></th>
                         <th scope="col" class="d-none d-md-table-cell">Difficulty</th>
                     </tr>
                     </thead>

@@ -79,9 +79,9 @@ class ChallengesControllerCTFModeWithPresetK8sValuesTest {
     void shouldEnableK8sExercises() throws Exception{
         mvc.perform(get("/"))
             .andExpect(status().isOk())
-            .andExpect(content().string(containsString("<td><a href=\"/challenge/5\">Challenge 5</a></td>")))
-            .andExpect(content().string(containsString("<td><a href=\"/challenge/6\">Challenge 6</a></td>")))
-            .andExpect(content().string(containsString("<td><a href=\"/challenge/7\">Challenge 7</a></td>")));
+            .andExpect(content().string(containsString("<td>&nbsp;<a href=\"/challenge/5\">Challenge 5</a></td>")))
+            .andExpect(content().string(containsString("<td>&nbsp;<a href=\"/challenge/6\">Challenge 6</a></td>")))
+            .andExpect(content().string(containsString("<td>&nbsp;<a href=\"/challenge/7\">Challenge 7</a></td>")));
     }
 
 }
