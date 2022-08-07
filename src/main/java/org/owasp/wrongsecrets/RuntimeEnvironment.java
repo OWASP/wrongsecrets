@@ -82,9 +82,9 @@ public class RuntimeEnvironment {
             return true;
         }
         if (isK8sUnlockedInCTFMode()) {
-            return challenge.supportedRuntimeEnvironments().contains(runtimeEnvironment) ||
-                challenge.supportedRuntimeEnvironments().contains(DOCKER) || challenge.supportedRuntimeEnvironments().contains(K8S) ||
-                challenge.supportedRuntimeEnvironments().contains(VAULT);
+            return challenge.supportedRuntimeEnvironments().contains(runtimeEnvironment)
+                || challenge.supportedRuntimeEnvironments().contains(DOCKER) || challenge.supportedRuntimeEnvironments().contains(K8S)
+                || challenge.supportedRuntimeEnvironments().contains(VAULT);
         }
         return challenge.supportedRuntimeEnvironments().contains(runtimeEnvironment)
             || !Collections.disjoint(envToOverlappingEnvs.get(runtimeEnvironment), challenge.supportedRuntimeEnvironments());
