@@ -30,11 +30,6 @@ public class CanariesController {
         }
         log.info("Canarytoken called, with manage_url {}", canaryToken.getManageUrl());
         log.info("Total number of canary callback calls: {}", canaryCounter.getTotalCount());
-        /*
-        todo:
-        - follow 3 of baeldung.com/spring-server-sent-events, but make sure you register the emitter per connection
-        - and in a map lookup which emiter you can use for the given connection to send the event.
-         */
         return new ResponseEntity<>("all good", HttpStatus.ACCEPTED);
     }
 

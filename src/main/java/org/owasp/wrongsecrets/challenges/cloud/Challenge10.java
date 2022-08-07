@@ -27,7 +27,7 @@ public class Challenge10 extends CloudChallenge {
 
     public Challenge10(ScoreCard scoreCard,
                        @Value("${secretmountpath}") String filePath,
-                       @Value("${default_aws_value}") String awsDefaultValue,
+                       @Value("${default_aws_value_challenge_10}") String awsDefaultValue,
                        RuntimeEnvironment runtimeEnvironment) {
         super(scoreCard, runtimeEnvironment);
         this.awsDefaultValue = awsDefaultValue;

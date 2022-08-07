@@ -8,19 +8,16 @@ import org.asciidoctor.OptionsBuilder;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.asciidoc.TemplateGenerator;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.yaml.snakeyaml.Yaml;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 @Slf4j
 @RestController
@@ -35,11 +32,14 @@ public class ChallengesAPIController {
 
     private final TemplateGenerator templateGenerator;
 
+    private final RuntimeEnvironment runtimeEnvironment;
+
     public ChallengesAPIController(ScoreCard scoreCard, List<ChallengeUI> challenges, RuntimeEnvironment runtimeEnvironment, TemplateGenerator templateGenerator) {
         this.scoreCard = scoreCard;
         this.challenges = challenges;
         this.descriptions = new ArrayList<>();
         this.hints = new ArrayList<>();
+        this.runtimeEnvironment = runtimeEnvironment;
         this.templateGenerator = templateGenerator;
     }
 
@@ -117,8 +117,8 @@ public class ChallengesAPIController {
     }
 
     private String getDisabledEnv(ChallengeUI challenge) {
-        if (!challenge.getChallenge().supportedRuntimeEnvironments().contains(RuntimeEnvironment.Environment.DOCKER)) {
-            return "Docker";
+        if (runtimeEnvironment.canRun(challenge.getChallenge())) {
+            return runtimeEnvironment.getRuntimeEnvironment().name();
         }
         return null;
     }

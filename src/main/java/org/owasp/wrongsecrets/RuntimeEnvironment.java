@@ -26,7 +26,10 @@ public class RuntimeEnvironment {
     private boolean ctfModeEnabled;
 
     @Value("${SPECIAL_K8S_SECRET}")
-    private String challenge5Value; //used to determine if they are overriden;
+    private String challenge5Value; //used to determine if k8s/vault challenges are overriden;
+
+    @Value("${default_aws_value_challenge_9}")
+    private String defaultChallenge9Value; //used to determine if the cloud challenge values are overriden
 
     private static final Map<Environment, List<Environment>> envToOverlappingEnvs = Map.of(
         HEROKU_DOCKER, List.of(DOCKER, HEROKU_DOCKER),
@@ -60,6 +63,11 @@ public class RuntimeEnvironment {
         return ctfModeEnabled && !challenge5Value.equals(defaultValueChallenge5);
     }
 
+    private boolean isCloudUnlockedInCTFMode() {
+        String defaultValueAWSValue = "if_you_see_this_please_use_AWS_Setup";
+        return ctfModeEnabled && !defaultChallenge9Value.equals(defaultValueAWSValue);
+    }
+
     @Autowired
     public RuntimeEnvironment(@Value("${K8S_ENV}") String currentRuntimeEnvironment) {
         this.runtimeEnvironment = Environment.fromId(currentRuntimeEnvironment);
@@ -70,9 +78,14 @@ public class RuntimeEnvironment {
     }
 
     public boolean canRun(Challenge challenge) {
+        if (isCloudUnlockedInCTFMode()) {
+            return true;
+        }
         if (isK8sUnlockedInCTFMode()) {
-            return challenge.supportedRuntimeEnvironments().contains(runtimeEnvironment) || challenge.supportedRuntimeEnvironments().contains(K8S) || challenge.supportedRuntimeEnvironments().contains(VAULT);
-        } //TODO: WRITE TEST FOR THIS & UPDATE UI THEN!
+            return challenge.supportedRuntimeEnvironments().contains(runtimeEnvironment) ||
+                challenge.supportedRuntimeEnvironments().contains(DOCKER) || challenge.supportedRuntimeEnvironments().contains(K8S) ||
+                challenge.supportedRuntimeEnvironments().contains(VAULT);
+        }
         return challenge.supportedRuntimeEnvironments().contains(runtimeEnvironment)
             || !Collections.disjoint(envToOverlappingEnvs.get(runtimeEnvironment), challenge.supportedRuntimeEnvironments());
     }

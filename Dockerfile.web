@@ -1,4 +1,4 @@
-FROM jeroenwillemsen/wrongsecrets:ctfd-safe-3-no-vault
+FROM jeroenwillemsen/wrongsecrets:ctfd-safe-4-no-vault
 
 ARG argBasedVersion="1.5.0"
 ARG CANARY_URLS="http://canarytokens.com/terms/about/s7cfbdakys13246ewd8ivuvku/post.jsp,http://canarytokens.com/terms/about/y0all60b627gzp19ahqh7rl6j/post.jsp"
@@ -9,8 +9,7 @@ ARG CTF_KEY=TRwzkRJnHOTckssAeyJbysWgP!Qc2T
 ARG CHALLENGE_5_VALUE=if_you_see_this_please_use_k8s
 ARG CHALLENGE_6_VALUE=if_you_see_this_please_use_k8s
 ARG CHALLENGE_7_VALUE=if_you_see_this_please_use_K8S_and_Vault
-#TODO: CONTINUE ON THE 3 CHALLENGES BELOW AND TEST THEM! (both with and without CTF!)
-ARG CHALLENGE_9_VALUE=if_you_see_this_please_use
+ARG CHALLENGE_9_VALUE=if_you_see_this_please_use_AWS_Setup
 ARG CHALLENGE_10_VALUE=if_you_see_this_please_use
 ARG CHALLENGE_11_VALUE=if_you_see_this_please_use
 ENV APP_VERSION=$argBasedVersion
@@ -24,6 +23,9 @@ ENV keepasspath="/var/helpers/alibabacreds.kdbx"
 ENV SPECIAL_K8S_SECRET=$CHALLENGE_5_VALUE
 ENV SPECIAL_SPECIAL_K8S_SECRET=$CHALLENGE_6_VALUE
 ENV vaultpassword=$CHALLENGE_7_VALUE
+ENV default_aws_value_challenge_9=$CHALLENGE_9_VALUE
+ENV default_aws_value_challenge_10=$CHALLENGE_10_VALUE
+ENV default_aws_value_challenge_11=$CHALLENGE_11_VALUE
 COPY .github/scripts/ /var/helpers
 COPY src/test/resources/alibabacreds.kdbx /var/helpers
 CMD java -Xms128m -Xmx128m -Xss512k -jar -Dserver.port=$PORT -XX:MaxRAMPercentage=75 -XX:MinRAMPercentage=25 -Dspring.profiles.active=without-vault application.jar

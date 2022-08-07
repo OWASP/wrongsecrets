@@ -70,16 +70,27 @@ class ChallengesControllerCTFModeTest {
 
     @Test
     void shouldStillDissableTestsIfNotPreconfigured() throws Exception {
-        testChallenge("/challenge/5");
-        testChallenge("/challenge/6");
-        testChallenge("/challenge/7");
+        testK8sChallenge("/challenge/5");
+        testK8sChallenge("/challenge/6");
+        testK8sChallenge("/challenge/7");
+        testForCloudCluster("/challenge/9");
+        testForCloudCluster("/challenge/10");
+        testForCloudCluster("/challenge/11");
     }
 
-    private void testChallenge(String url) throws Exception {
+    private void testK8sChallenge(String url) throws Exception {
         mvc.perform(get(url)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .with(csrf()))
             .andExpect(status().isOk())
             .andExpect(content().string(containsString("We are running outside a K8s cluster")));
+    }
+
+    private void testForCloudCluster(String url) throws Exception {
+        mvc.perform(get(url)
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .with(csrf()))
+            .andExpect(status().isOk())
+            .andExpect(content().string(containsString("We are running outside a properly configured Cloud environment.")));
     }
 }
