@@ -28,10 +28,11 @@ to `juice-shop-ctf` when you run it.
 Want to make it a little more exciting? Override the Dockerfile with your preferred values, so that copying from online
 hosted solutions no longer works!
 
-### K8s based CTF - TODO
+### K8s based CTF
 
-TODO
+TODO as #https://github.com/commjoen/wrongsecrets/issues/372
 
-### Cloud based CTF - TODO 
+### Cloud based CTF 
 
+TODO as #https://github.com/commjoen/wrongsecrets/issues/372
 
