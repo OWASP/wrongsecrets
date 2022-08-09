@@ -46,6 +46,10 @@ public class Challenge11 extends CloudChallenge {
     private final String azureVaultUri;
     private final String azureWrongSecret3;
 
+    private final String ctfValue;
+
+    private final boolean ctfEnabled;
+
     public Challenge11(ScoreCard scoreCard,
                        @Value("${AWS_ROLE_ARN}") String awsRoleArn,
                        @Value("${AWS_WEB_IDENTITY_TOKEN_FILE}") String tokenFileLocation,
@@ -56,6 +60,8 @@ public class Challenge11 extends CloudChallenge {
                        @Value("${azure.keyvault.uri}") String azureVaultUri,
                        @Value("${wrongsecret-3}") String azureWrongSecret3, // Exclusively auto-wired for Azure
                        @Value("${GCP_PROJECT_ID}") String projectId,
+                       @Value("${default_aws_value_challenge_11}") String ctfValue,
+                       @Value("${ctf_enabled}") boolean ctfEnabled,
                        RuntimeEnvironment runtimeEnvironment) {
         super(scoreCard, runtimeEnvironment);
         this.awsRoleArn = awsRoleArn;
@@ -67,6 +73,8 @@ public class Challenge11 extends CloudChallenge {
         this.projectId = projectId;
         this.azureVaultUri = azureVaultUri;
         this.azureWrongSecret3 = azureWrongSecret3;
+        this.ctfValue = ctfValue;
+        this.ctfEnabled = ctfEnabled;
         this.challengeAnswer = getChallenge11Value(runtimeEnvironment);
     }
 
@@ -96,6 +104,9 @@ public class Challenge11 extends CloudChallenge {
 
     private String getChallenge11Value(RuntimeEnvironment runtimeEnvironment) {
         if (runtimeEnvironment != null && runtimeEnvironment.getRuntimeEnvironment() != null) {
+            if (ctfEnabled && ctfValue != awsDefaultValue) {
+                return ctfValue;
+            }
             return switch (runtimeEnvironment.getRuntimeEnvironment()) {
                 case AWS -> getAWSChallenge11Value();
                 case GCP -> getGCPChallenge11Value();
@@ -112,27 +123,27 @@ public class Challenge11 extends CloudChallenge {
             try { //based on https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javav2/example_code/sts/src/main/java/com/example/sts
                 String webIDentityToken = Files.readString(Paths.get(tokenFileLocation));
                 StsClient stsClient = StsClient.builder()
-                        .region(Region.of(awsRegion))
-                        .build();
+                    .region(Region.of(awsRegion))
+                    .build();
                 AssumeRoleWithWebIdentityRequest webIdentityRequest = AssumeRoleWithWebIdentityRequest.builder()
-                        .roleArn(awsRoleArn)
-                        .roleSessionName("WrongsecretsApp")
-                        .webIdentityToken(webIDentityToken)
-                        .build();
+                    .roleArn(awsRoleArn)
+                    .roleSessionName("WrongsecretsApp")
+                    .webIdentityToken(webIDentityToken)
+                    .build();
 
                 AssumeRoleWithWebIdentityResponse tokenResponse = stsClient.assumeRoleWithWebIdentity(webIdentityRequest);
                 log.info("The token value is " + tokenResponse.credentials().sessionToken());
                 SsmClient ssmClient = SsmClient.builder()
-                        .region(Region.of(awsRegion))
-                        .credentialsProvider(StsAssumeRoleWithWebIdentityCredentialsProvider.builder()
-                                .stsClient(stsClient)
-                                .refreshRequest(webIdentityRequest)
-                                .build())
-                        .build();
+                    .region(Region.of(awsRegion))
+                    .credentialsProvider(StsAssumeRoleWithWebIdentityCredentialsProvider.builder()
+                        .stsClient(stsClient)
+                        .refreshRequest(webIdentityRequest)
+                        .build())
+                    .build();
                 GetParameterRequest parameterRequest = GetParameterRequest.builder()
-                        .name("wrongsecretvalue")
-                        .withDecryption(true)
-                        .build();
+                    .name("wrongsecretvalue")
+                    .withDecryption(true)
+                    .build();
                 GetParameterResponse parameterResponse = ssmClient.getParameter(parameterRequest);
                 log.info("The parameter value is " + parameterResponse.parameter().value());
                 ssmClient.close();

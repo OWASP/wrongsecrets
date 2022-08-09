@@ -17,23 +17,33 @@
     <div class="container-fluid text-sm p-2 p-lg-3">
         <div class="row">
             <div class="col-12 col-lg-7">
-                <table class="table">
+                <table class="table table-responsive">
                     <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Challenge&nbsp;&nbsp;&nbsp;</th>
+                        <th scope="col" class="d-none d-xl-table-cell">#</th>
+                        <th scope="col">&nbsp;Challenge&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                         <th scope="col">Focus&nbsp;&nbsp;&nbsp;</th>
-                        <th scope="col" th:text="'Runs on environment (current: '+${environment}+')'"></th>
+                        <th scope="col" class="d-sm-none"
+                            th:text="'Runs on environment (current: '+${#strings.replace(environment,'_',' _')}+')'"></th>
+                        <th scope="col" class="d-none d-md-table-cell">Difficulty&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                        <th scope="col" class="d-none d-sm-table-cell"
+                            th:text="'Runs on environment (current: '+${environment}+')'"></th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="challenge: ${challenges}">
-                        <td th:text="${challenge.link}"></td>
-                        <td><a th:href="@{/challenge} + '/' + ${challenge.link}"
-                               th:class="${challenge.isChallengeEnabled} ? '' : 'disabled'"><span
+                        <th scope="row" class="d-none d-xl-table-cell" th:text="${challenge.link}"></th>
+                        <td>&nbsp;<a th:href="@{/challenge} + '/' + ${challenge.link}"
+                                     th:class="${challenge.isChallengeEnabled} ? '' : 'disabled'"><span
                             th:text="${challenge.name}"
                             th:remove="tag"></span></a></td>
                         <td th:text="${challenge.tech}"></td>
+                        <td class="d-none d-md-table-cell">
+                            <th:span th:each="i: ${#numbers.sequence(1, challenge.difficulty)}"><span>★ </span></th:span>
+                            <th:span th:if="${challenge.difficulty<5}"
+                                     th:each="i: ${#numbers.sequence(challenge.difficulty+1, 5)}"><span>☆</span>
+                            </th:span>
+                        </td>
                         <th:block th:if="${challenge.requiredEnv} == 'DOCKER'">
                             <td>Docker</td>
                         </th:block>
@@ -44,9 +54,10 @@
                             <td>K8s or Minikube with Vault</td>
                         </th:block>
                         <th:block
-                            th:if="${challenge.requiredEnv} == 'AWS' or ${challenge.requiredEnv} == 'GCP'or ${challenge.requiredEnv} == 'AZURE'">
+                            th:if="${challenge.requiredEnv} == 'AWS' or ${challenge.requiredEnv} == 'GCP' or ${challenge.requiredEnv} == 'AZURE'">
                             <td>AWS, GCP, Azure</td>
                         </th:block>
+
                     </tr>
                     </tbody>
                 </table>
@@ -115,7 +126,9 @@
                         <li><a
                             href="https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Secrets_Management_CheatSheet.md">OWASP
                             Secretsmanagement Cheatsheet</a></li>
-                        <li><a href="https://www.opencre.org/cre/223-780?register=true&type=tool&tool_type=training&tags=secrets,training&description=With%20this%20app%2C%20we%20have%20packed%20various%20ways%20of%20how%20to%20not%20store%20your%20secrets.%20These%20can%20help%20you%20to%20realize%20whether%20your%20secret%20management%20is%20ok.%20The%20challenge%20is%20to%20find%20all%20the%20different%20secrets%20by%20means%20of%20various%20tools%20and%20techniques.%20Can%20you%20solve%20all%20the%2014%20challenges%3F&trk=flagship-messaging-web&messageThreadUrn=urn:li:messagingThread:2-YmRkNjRkZTMtNjRlYS00OWNiLWI2YmUtMDYwNzY3ZjI1MDcyXzAxMg==&lipi=urn:li:page:d_flagship3_feed;J58Sgd80TdanpKWFMH6z+w==">Open CRE on Secrets Management</a></li>
+                        <li><a
+                            href="https://www.opencre.org/cre/223-780?register=true&type=tool&tool_type=training&tags=secrets,training&description=With%20this%20app%2C%20we%20have%20packed%20various%20ways%20of%20how%20to%20not%20store%20your%20secrets.%20These%20can%20help%20you%20to%20realize%20whether%20your%20secret%20management%20is%20ok.%20The%20challenge%20is%20to%20find%20all%20the%20different%20secrets%20by%20means%20of%20various%20tools%20and%20techniques.%20Can%20you%20solve%20all%20the%2014%20challenges%3F&trk=flagship-messaging-web&messageThreadUrn=urn:li:messagingThread:2-YmRkNjRkZTMtNjRlYS00OWNiLWI2YmUtMDYwNzY3ZjI1MDcyXzAxMg==&lipi=urn:li:page:d_flagship3_feed;J58Sgd80TdanpKWFMH6z+w==">Open
+                            CRE on Secrets Management</a></li>
                     </ul>
                 </div>
             </div>
@@ -139,7 +152,9 @@
             </div>
             <div class="col-12 col-lg-7">
                 <div class="border border-dark thank-you">
-                    Want to see if your tool of choice detects all the secrets available in this project? <a href="https://github.com/commjoen/wrongsecrets/#use-owasp-wrongsecrets-as-a-secret-detection-benchmark">Check the instructions in the README</a>.
+                    Want to see if your tool of choice detects all the secrets available in this project? <a
+                    href="https://github.com/commjoen/wrongsecrets/#use-owasp-wrongsecrets-as-a-secret-detection-benchmark">Check
+                    the instructions in the README</a>.
                 </div>
             </div>
         </div>

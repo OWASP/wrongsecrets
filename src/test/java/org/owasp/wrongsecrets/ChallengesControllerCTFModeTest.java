@@ -2,7 +2,6 @@ package org.owasp.wrongsecrets;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.owasp.wrongsecrets.challenges.ChallengeForm;
 import org.owasp.wrongsecrets.challenges.docker.Challenge1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -39,6 +38,14 @@ class ChallengesControllerCTFModeTest {
     }
 
     @Test
+    void shouldNotSpoilWhenInCTFModeEvenWhenChallengeUnsupported() throws Exception {
+        mvc.perform(get("/spoil-5"))
+            .andExpect(status().isOk())
+            .andExpect(content().string(containsString("Spoils are disabled in CTF mode")));
+
+    }
+
+    @Test
     void shouldShowFlagWhenRespondingWithSuccessInCTFMode() throws Exception {
         var spoil = new Challenge1(new InMemoryScoreCard(1)).spoiler().solution();
         mvc.perform(post("/challenge/1")
@@ -49,5 +56,41 @@ class ChallengesControllerCTFModeTest {
             .andExpect(status().isOk())
             .andExpect(content().string(containsString("ba9a72ac7057576344856")));
 
+    }
+
+
+    @Test
+    void shouldEnableK8sExercises() throws Exception{
+        mvc.perform(get("/"))
+            .andExpect(status().isOk())
+            .andExpect(content().string(containsString("class=\"disabled\">Challenge 5</a></td>")))
+            .andExpect(content().string(containsString("class=\"disabled\">Challenge 6</a></td>")))
+            .andExpect(content().string(containsString("class=\"disabled\">Challenge 7</a></td>")));
+    }
+
+    @Test
+    void shouldStillDissableTestsIfNotPreconfigured() throws Exception {
+        testK8sChallenge("/challenge/5");
+        testK8sChallenge("/challenge/6");
+        testK8sChallenge("/challenge/7");
+        testForCloudCluster("/challenge/9");
+        testForCloudCluster("/challenge/10");
+        testForCloudCluster("/challenge/11");
+    }
+
+    private void testK8sChallenge(String url) throws Exception {
+        mvc.perform(get(url)
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .with(csrf()))
+            .andExpect(status().isOk())
+            .andExpect(content().string(containsString("We are running outside a K8s cluster")));
+    }
+
+    private void testForCloudCluster(String url) throws Exception {
+        mvc.perform(get(url)
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .with(csrf()))
+            .andExpect(status().isOk())
+            .andExpect(content().string(containsString("We are running outside a properly configured Cloud environment.")));
     }
 }
