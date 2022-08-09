@@ -12,6 +12,6 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "javascript-obfuscator": "^3.1.0"
+    "javascript-obfuscator": "^4.0.0"
   }
 }
