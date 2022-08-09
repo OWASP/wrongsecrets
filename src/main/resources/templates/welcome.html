@@ -39,8 +39,10 @@
                             th:remove="tag"></span></a></td>
                         <td th:text="${challenge.tech}"></td>
                         <td class="d-none d-md-table-cell">
-                            <th:block th:each="i: ${#numbers.sequence(1, challenge.difficulty)}"><span>☆</span>
-                            </th:block>
+                            <th:span th:each="i: ${#numbers.sequence(1, challenge.difficulty)}"><span>★ </span></th:span>
+                            <th:span th:if="${challenge.difficulty<5}"
+                                     th:each="i: ${#numbers.sequence(challenge.difficulty+1, 5)}"><span>☆</span>
+                            </th:span>
                         </td>
                         <th:block th:if="${challenge.requiredEnv} == 'DOCKER'">
                             <td>Docker</td>
