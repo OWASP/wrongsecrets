@@ -186,6 +186,7 @@ Top contributors:
 - [Ruben Kruiver @RubenAtBinx](https://github.com/RubenAtBinx)
 - [Finn @f3rn0s](https://github.com/f3rn0s)
 - [Alex Bender @alex-bender](https://github.com/alex-bender)
+- [Rick M @kingthorin](https://github.com/kingthorin)
 
 Testers:
 
