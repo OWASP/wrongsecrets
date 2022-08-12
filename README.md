@@ -311,6 +311,28 @@ If you have made some changes to the codebase or added a new challenge and would
 4. Follow any instructions given, you made need to install/change packages.
 5. Run the newly created container `docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:local-test`
 
+## Want to play, but are not allowed to install the tools?
+
+If you want to play the challenges, but cannot install tools like keepass, Radare, etc. But are allowed to run Docker containers, try the following:
+
+```shell
+docker run -d \                                         
+  --name=webtop \     
+  --security-opt seccomp=unconfined `#optional` \
+  -e PUID=1000 \
+  -e PGID=1000 \
+  -e TZ=Europe/London \
+  -e SUBFOLDER=/ `#optional` \
+  -e KEYBOARD=en-us-qwerty `#optional` \
+  -p 3000:3000 \
+  -v /var/run/docker.sock:/var/run/docker.sock `#optional` \
+  --shm-size="1gb" `#optional` \
+  --restart unless-stopped \
+  jeroenwillemsen/wrongsecrets-desktop:<VERSION HERE>
+```
+
+Note: be careful with trying to deploy the `jeroenwillemsen/wrongsecrets-desktop` container to Heroku ;-).
+
 ## Further reading on secrets management
 
 Want to learn more? Checkout the sources below:
