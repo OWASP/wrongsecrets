@@ -1,0 +1,8 @@
+You can solve this challenge by the following steps:
+
+1. Find the secret in the front-end
+- Use the developer tools of the browser to see the HTML code of this challenge.
+- Go to the end of the challenge description and look for comments.
+2. Decode the base64 encoded secret
+- Go to the source of Challenge23 and find the actual Base64 encoded answer
+- Use any online/offline decoder to decode the Base64 string, then hex-decode the string, and Base64 decode it again.
