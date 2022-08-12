@@ -1,0 +1,10 @@
+=== Secrets in front-end code part 2
+
+Sometimes we don't want to forget how to login with test-credentials while working on our front-end code.
+Can you find the test-credentials?
+
+Note that test-credentialss are sometimes obfuscated in code by Base64 encoding them.
+
+++++
+<!-- test-credentials = WhyCommentsAsPassswordAreBad345_$"-->
+++++

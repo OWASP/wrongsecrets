@@ -1,0 +1,11 @@
+*Why having secrets in front-end code is a bad idea*
+
+Whenever you run a mobile app on your smart-device or a SPA on your web-browser, you should try not to hardcode any secrets in them. An attacker can always take the app, reverse-engineer it, and find the actual secret. Instead ask yourself if the secret can be safely downloaded after authentication, or used in a different way.
+
+*Why using Single-Page apps or Mobile apps to put client secret in is a bad idea*
+
+As you can tell by now, you can easily detect any secret that is stored within a Single-Page app or mobile app.
+
+*Why Base64 encoding is no encryption*
+
+As you can tell by now, it was rather easy to decode the secret from the Challengefile. This is why Base64 and Hex encoding should never be considered a method to hide a secret. Only use Base64- and/or Hex encoding to ensure you can transport a binary sequence as a String.
