@@ -73,6 +73,6 @@ public class Challenge18 extends Challenge {
 
     @Override
     public String getTech() {
-        return "Hashing";
+        return "Cryptography";
     }
 }
