@@ -8,7 +8,7 @@
 
 Welcome to the OWASP WrongSecrets p0wnable app. With this app, we have packed various ways of how to not store your secrets. These can help you to realize whether your secret management is ok. The challenge is to find all the different secrets by means of various tools and techniques.
 
-Can you solve all the 22 challenges?
+Can you solve all the 23 challenges?
 ![screenshot.png](screenshot.png)
 
 ## Support
