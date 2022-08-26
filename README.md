@@ -17,7 +17,7 @@ Need support? Contact us via [OWASP Slack](https://owasp.slack.com/archives/C02K
 
 ## Basic docker exercises
 
-_Can be used for challenges 1-4, 8, 12-22_
+_Can be used for challenges 1-4, 8, 12-23_
 
 For the basic docker exercises you currently require:
 
@@ -27,7 +27,7 @@ For the basic docker exercises you currently require:
 You can install it by doing:
 
 ```bash
-docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:1.5.1-no-vault
+docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:1.5.2-no-vault
 ```
 
 Now you can try to find the secrets by means of solving the challenge offered at:
@@ -48,6 +48,7 @@ Now you can try to find the secrets by means of solving the challenge offered at
 - [localhost:8080/challenge/20](http://localhost:8080/challenge/20)
 - [localhost:8080/challenge/21](http://localhost:8080/challenge/21)
 - [localhost:8080/challenge/22](http://localhost:8080/challenge/22)
+- [localhost:8080/challenge/23](http://localhost:8080/challenge/23)
 
 Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look better ;-).
 
@@ -64,7 +65,7 @@ You can test them out at [https://wrongsecrets.herokuapp.com/](https://wrongsecr
 
 ## Basic K8s exercise
 
-_Can be used for challenges 1-6, 8, 12-22_
+_Can be used for challenges 1-6, 8, 12-23_
 
 ### Minikube based
 
@@ -111,7 +112,7 @@ now you can use the provided IP address and port to further play with the K8s va
 
 ## Vault exercises with minikube
 
-_Can be used for challenges 1-8, 12-22_
+_Can be used for challenges 1-8, 12-23_
 Make sure you have the following installed:
 
 - minikube with docker (or comment out line 8 and work at your own k8s setup),
@@ -128,7 +129,7 @@ When you stopped the `k8s-vault-minikube-start.sh` script and want to resume the
 
 ## Cloud Challenges
 
-_Can be used for challenges 1-22_
+_Can be used for challenges 1-23_
 
 **READ THIS**: Given that the exercises below contain IAM privilege escalation exercises,
 never run this on an account which is related to your production environment or can influence your account-over-arching resources.
