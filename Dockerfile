@@ -3,9 +3,11 @@ FROM eclipse-temurin:18_36-jdk-focal
 ARG argBasedPassword="default"
 ARG argBasedVersion="0.0.0"
 ARG spring_profile=""
+ARG argBasedEnv="Docker"
 ENV SPRING_PROFILES_ACTIVE=$spring_profile
 ENV ARG_BASED_PASSWORD=$argBasedPassword
 ENV APP_VERSION=$argBasedVersion
+ENV K8S_ENV=$argBasedEnv
 ENV DOCKER_ENV_PASSWORD="This is it"
 ENV AZURE_KEY_VAULT_ENABLED=false
 

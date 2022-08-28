@@ -7,7 +7,7 @@ Help() {
     # Display Help
     echo "A versatile script to create a docker image for testing. Call this script with no arguments to simply create a local image that you can use to test your changes. For more complex use see the below help section"
     echo
-    echo "Syntax: docker-create.sh [-h (help)|-t (test)|-p (publish)|-e (herokud)|-f (herokup)|-n (notag) [tag={tag}|message={message}|buildarg={buildarg}|springProfile={springProfile}]"
+    echo "Syntax: docker-create.sh [-h (help)|-t (test)|-p (publish)|-e (herokud)|-f (herokup)|-g (fly)|-n (notag) [tag={tag}|message={message}|buildarg={buildarg}|springProfile={springProfile}]"
     echo "options: (All optional)"
     echo "tag=             Write a custom tag that will be added to the container when it is build locally."
     echo "message=         Write a message used for the actual tag-message in git"
@@ -20,13 +20,16 @@ Help() {
 # Heroku helpers                                                               #
 ################################################################################
 
+break_on_tag(){
+  if test -n "${tag+x}"; then
+          echo "tag is set"
+      else
+        echo "tag ${tag} was not set properly, aborting"
+        exit
+      fi
+}
 heroku_check_container() {
-    if test -n "${tag+x}"; then
-        echo "tag is set"
-    else
-      echo "tag ${tag} was not set properly, aborting"
-      exit
-    fi
+    break_on_tag
     echo "validating dockerfile to contain tag "${tag}" (should be part of '$(head -n 1 ../../Dockerfile.web)')"
     if [[ "$(head -n 1 ../../Dockerfile.web)" != *"${tag}"* ]]; then
       echo "tag ${tag} in dockerfile FROM was not set properly, aborting"
@@ -61,6 +64,21 @@ Heroku_publish_prod(){
     exit
 }
 
+Fly_publish(){
+    echo "Publishing to Fly.io (wrongsecrets.fly.dev)"
+    echo "Check if all required binaries are installed"
+    source ../../scripts/check-available-commands.sh
+    checkCommandsAvailable fly
+    break_on_tag
+    echo "validating fly.toml to contain tag "${tag}" (should be part of '$(cat ../../fly.toml | grep argBasedVersion)')"
+    if [[ "$(cat ../../fly.toml | grep argBasedVersion)" != *"${tag}"* ]]; then
+      echo "tag ${tag} in fly.toml not properly set, aborting"
+      exit
+    fi
+    cd ../.. && fly deploy
+    exit
+}
+
 ################################################################################
 ################################################################################
 # Main program                                                                 #
@@ -72,7 +90,7 @@ Heroku_publish_prod(){
 # Set option to local if no option provided
 script_mode="local"
 # Parse provided options
-while getopts ":htpefn*" option; do
+while getopts ":htpefgn*" option; do
     case $option in
     h) # display Help
         Help
@@ -90,6 +108,9 @@ while getopts ":htpefn*" option; do
     f) # Helper
         script_mode="heroku_p"
         ;;
+    g) #Helper
+        script_mode="fly_p"
+        ;;
     n) #notags
         disable_tagging_in_git="true"
         ;;
@@ -106,7 +127,7 @@ done
 ################################################
 for ARGUMENT in "$@"; 
 do
-    if [[ $ARGUMENT != "-h" && $ARGUMENT != "-t" && $ARGUMENT != "-p" && $ARGUMENT != "-e" && $ARGUMENT != "-f" ]]
+    if [[ $ARGUMENT != "-h" && $ARGUMENT != "-t" && $ARGUMENT != "-p" && $ARGUMENT != "-e" && $ARGUMENT != "-f" && $ARGUMENT != "-g" ]]
     then
         KEY=$(echo "$ARGUMENT" | cut -f1 -d=)
         KEY_LENGTH=${#KEY}
@@ -165,6 +186,8 @@ if [[ $script_mode == "heroku_d" ]] ; then
   Heroku_publish_demo
 elif [[ $script_mode == "heroku_p" ]]; then
   Heroku_publish_prod
+elif [[ $script_mode == "fly_p" ]]; then
+  Fly_publish
 fi
     
 

@@ -63,6 +63,10 @@ You can test them out at [https://wrongsecrets.herokuapp.com/](https://wrongsecr
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
+### Running on Fly.io
+
+You can test them out at [https://wrongsecrets.fly.dev](https://wrongsecrets.fly.dev) as well! Please understand that we run on a free-tier instance, we cannot give any guarantees. Please do not fuzz and/or try to bring it down: you would be spoiling it for others that want to testdrive it.
+
 ## Basic K8s exercise
 
 _Can be used for challenges 1-6, 8, 12-23_

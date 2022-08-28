@@ -11,9 +11,7 @@ processes = []
 [build.args]
   argBasedVersion="1.5.2"
   spring_profile="without-vault"
-
-[env]
-  PORT = 8080
+  argBasedEnv="Fly(Docker)"
 
 [experimental]
   allowed_public_ports = []
