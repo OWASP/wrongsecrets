@@ -73,7 +73,7 @@ public class ChallengesAPIController {
 
     private String getCategory(ChallengeUI challengeUI) {
         return switch (challengeUI.getChallenge().supportedRuntimeEnvironments().get(0)) {
-            case DOCKER, HEROKU_DOCKER -> "Docker";
+            case DOCKER, HEROKU_DOCKER, FLY_DOCKER -> "Docker";
             case GCP, AWS, AZURE -> "Cloud";
             case VAULT -> "Vault";
             case K8S -> "Kubernetes";

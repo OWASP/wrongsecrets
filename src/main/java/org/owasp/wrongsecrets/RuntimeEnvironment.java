@@ -11,13 +11,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.AWS;
-import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
-import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.GCP;
-import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.AZURE;
-import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.K8S;
-import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.VAULT;
-import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.HEROKU_DOCKER;
+import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.*;
 
 @Component
 public class RuntimeEnvironment {
@@ -32,6 +26,7 @@ public class RuntimeEnvironment {
     private String defaultChallenge9Value; //used to determine if the cloud challenge values are overriden
 
     private static final Map<Environment, List<Environment>> envToOverlappingEnvs = Map.of(
+        FLY_DOCKER, List.of(DOCKER, FLY_DOCKER),
         HEROKU_DOCKER, List.of(DOCKER, HEROKU_DOCKER),
         DOCKER, List.of(DOCKER, HEROKU_DOCKER),
         GCP, List.of(DOCKER, K8S, VAULT),
@@ -42,7 +37,7 @@ public class RuntimeEnvironment {
     );
 
     public enum Environment {
-        DOCKER("Docker"), HEROKU_DOCKER("Heroku(Docker)"), GCP("gcp"), AWS("aws"), AZURE("azure"), VAULT("k8s-with-vault"), K8S("k8s");
+        DOCKER("Docker"), HEROKU_DOCKER("Heroku(Docker)"), FLY_DOCKER("Fly(Docker)"), GCP("gcp"), AWS("aws"), AZURE("azure"), VAULT("k8s-with-vault"), K8S("k8s");
 
         private final String id;
 
