@@ -13,6 +13,9 @@ processes = []
   spring_profile="without-vault"
   argBasedEnv="Fly(Docker)"
 
+[env]
+  K8S_ENV="Fly(Docker)"
+
 [experimental]
   allowed_public_ports = []
   auto_rollback = true
