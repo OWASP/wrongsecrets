@@ -1,0 +1,94 @@
+ctf:
+  showFlagsInNotifications: true
+  showCountryDetailsInNotifications: both
+  countryMapping:
+    challenge1:
+      name: Canada
+      code: CA
+    challenge2:
+      name: Austria
+      code: AT
+    challenge3:
+      name: Israel
+      code: IL
+    challenge4:
+      name: Russian Federation
+      code: RU
+    challenge5:
+      name: Honduras
+      code: HN
+    challenge6:
+      name: Guatemala
+      code: GT
+    challenge7:
+      name: Germany
+      code: DE
+    challenge8:
+      name: Uruguay
+      code: UY
+    challenge9:
+      name: Myanmar
+      code: MM
+    challenge10:
+      name: Costa Rica
+      code: CR
+    challenge11:
+      name: Paraguay
+      code: PY
+    challenge12:
+      name: Slovakia
+      code: SK
+    challenge13:
+      name: Madagascar
+      code: MG
+    challenge14:
+      name: Belize
+      code: BZ
+    challenge15:
+      name: Korea (Democratic People's Republic of)
+      code: KP
+    challenge16:
+      name: Korea
+      code: KR
+    challenge17:
+      name: Belarus
+      code: BY
+    challenge18:
+      name: Bolivia
+      code: BO
+    challenge19:
+      name: Switzerland
+      code: CH
+    challenge20:
+      name: Peru
+      code: PE
+    challenge21:
+      name: Ukraine
+      code: UA
+    challenge22:
+      name: United States of America
+      code: US
+    challenge23:
+      name: Turkey
+      code: TR
+    challenge24:
+      name: Suriname
+      code: SR
+    challenge25:
+      name: Colombia
+      code: CO
+    challenge26:
+      name: Poland
+      code: PL
+    challenge27:
+      name: Ecuador
+      code: EC
+    challenge28:
+      name: Sri Lanka
+      code: LK
+    challenge29:
+      name: Eritrea
+      code: ER
+    challenge30:
+      name: Panama
+      code: PA

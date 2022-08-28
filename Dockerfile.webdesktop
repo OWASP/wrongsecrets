@@ -1,0 +1,12 @@
+FROM lscr.io/linuxserver/webtop:latest
+
+RUN \
+  echo "**** install packages ****" && \
+  apk add --no-cache keepassxc radare2 && \
+  echo "**** cleanup ****" && \
+  rm -rf \
+    /tmp/*
+
+RUN mkdir /home/wrongsecrets
+COPY src/main/resources/executables/ /home/wrongsecrets/
+COPY src/test/resources/alibabacreds.kdbx /var/tmp/helpers

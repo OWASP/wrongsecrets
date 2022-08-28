@@ -54,6 +54,16 @@ public class Challenge14 extends Challenge {
         return List.of(RuntimeEnvironment.Environment.DOCKER);
     }
 
+    @Override
+    public int difficulty() {
+        return 4;
+    }
+
+    @Override
+    public String getTech() {
+        return "Password manager";
+    }
+
     private String findAnswer() {
         if (Strings.isEmpty(keepassxPassword)) {
             log.info("Checking secret with values {}", keepassxPassword);

@@ -42,6 +42,16 @@ public class Challenge16 extends Challenge {
         return List.of(RuntimeEnvironment.Environment.DOCKER);
     }
 
+    @Override
+    public int difficulty() {
+        return 3;
+    }
+
+    @Override
+    public String getTech() {
+        return "Front-end";
+    }
+
     public String getActualData() {
         try {
             return Files.readString(Paths.get(dockerMountPath, "secondkey.txt"));

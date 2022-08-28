@@ -38,6 +38,10 @@ public class ChallengeUI {
         return challengeNumber;
     }
 
+    public String getTech() {
+        return challenge.getTech();
+    }
+
     public Integer next() {
         return challengeNumber + 1;
     }
@@ -65,13 +69,17 @@ public class ChallengeUI {
             .collect(Collectors.joining());
     }
 
+    public int difficulty() {
+        return challenge.difficulty();
+    }
+
     public boolean isChallengeEnabled() {
         return runtimeEnvironment.canRun(challenge);
     }
 
     public static List<ChallengeUI> toUI(List<Challenge> challenges, RuntimeEnvironment environment) {
         return challenges.stream()
-            .sorted(Comparator.comparingInt(challenge -> Integer.parseInt(challenge.getClass().getSimpleName().replace("Challenge",""))))
+            .sorted(Comparator.comparingInt(challenge -> Integer.parseInt(challenge.getClass().getSimpleName().replace("Challenge", ""))))
             .map(challenge -> new ChallengeUI(challenge, challenges.indexOf(challenge) + 1, environment))
             .toList();
     }

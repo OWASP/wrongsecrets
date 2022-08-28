@@ -27,7 +27,7 @@ public class Challenge9 extends CloudChallenge {
 
     public Challenge9(ScoreCard scoreCard,
                       @Value("${secretmountpath}") String filePath,
-                      @Value("${default_aws_value}") String awsDefaultValue,
+                      @Value("${default_aws_value_challenge_9}") String awsDefaultValue,
                       RuntimeEnvironment runtimeEnvironment) {
         super(scoreCard, runtimeEnvironment);
         this.awsDefaultValue = awsDefaultValue;
@@ -55,5 +55,15 @@ public class Challenge9 extends CloudChallenge {
 
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
         return List.of(GCP, AWS, AZURE);
+    }
+
+    @Override
+    public int difficulty() {
+        return 3;
+    }
+
+    @Override
+    public String getTech() {
+        return "Terraform";
     }
 }

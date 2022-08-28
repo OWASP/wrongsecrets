@@ -43,11 +43,11 @@ class ChallengesControllerTest {
         when(challenge.solved(anyString())).thenReturn(false);
 
         this.mvc.perform(post("/challenge/1")
-                        .param("solution", "wrong")
-                        .param("action", "submit"))
-                .andExpect(status().isOk())
-                .andExpect(model().attributeDoesNotExist("answerCorrect"))
-                .andExpect(model().attributeExists("answerIncorrect"));
+                .param("solution", "wrong")
+                .param("action", "submit"))
+            .andExpect(status().isOk())
+            .andExpect(model().attributeDoesNotExist("answerCorrect"))
+            .andExpect(model().attributeExists("answerIncorrect"));
         this.mvc.perform(get("/challenge/1"));
     }
 
@@ -55,8 +55,8 @@ class ChallengesControllerTest {
     void shouldReturnSpoiler() throws Exception {
         when(challenge.spoiler()).thenReturn(new Spoiler("solution"));
         this.mvc.perform(get("/spoil-1"))
-                .andExpect(status().isOk())
-                .andExpect(model().attribute("spoiler", new Spoiler("solution")));
+            .andExpect(status().isOk())
+            .andExpect(model().attribute("spoiler", new Spoiler("solution")));
     }
 
     @Test
@@ -64,11 +64,11 @@ class ChallengesControllerTest {
         when(challenge.solved(anyString())).thenReturn(false);
 
         this.mvc.perform(post("/challenge/1")
-                        .param("solution", "wrong")
-                        .param("action", "submit"))
-                .andExpect(status().isOk())
-                .andExpect(model().attributeDoesNotExist("answerCorrect"))
-                .andExpect(model().attributeExists("answerIncorrect"));
+                .param("solution", "wrong")
+                .param("action", "submit"))
+            .andExpect(status().isOk())
+            .andExpect(model().attributeDoesNotExist("answerCorrect"))
+            .andExpect(model().attributeExists("answerIncorrect"));
     }
 
     @Test
@@ -76,15 +76,15 @@ class ChallengesControllerTest {
         when(challenge.solved(anyString())).thenReturn(true);
 
         this.mvc.perform(post("/challenge/1")
-                        .param("solution", "wrong")
-                        .param("action", "submit"))
-                .andExpect(status().isOk())
-                .andExpect(model().attributeExists("answerCorrect"))
-                .andExpect(model().attributeDoesNotExist("answerIncorrect"));
+                .param("solution", "wrong")
+                .param("action", "submit"))
+            .andExpect(status().isOk())
+            .andExpect(model().attributeExists("answerCorrect"))
+            .andExpect(model().attributeDoesNotExist("answerIncorrect"));
     }
 
     @Test
-    void shouldReturnCompleteWhenAllItemsDone() throws Exception{
+    void shouldReturnCompleteWhenAllItemsDone() throws Exception {
         when(challenge.solved(anyString())).thenReturn(true);
         this.mvc.perform(post("/challenge/1")
                 .param("solution", "wrong")
@@ -93,4 +93,5 @@ class ChallengesControllerTest {
             .andExpect(model().attributeExists("answerCorrect"))
             .andExpect(model().attributeExists("allCompleted"));
     }
+
 }
