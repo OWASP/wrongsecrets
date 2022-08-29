@@ -347,7 +347,7 @@ rm -rf jdk-18_linux-x64_bin.deb
 git rebase -i main
 git rebase -i master
 git stash
-export tempPassword="CenTTAU2n7087B0KMJO2k2j95Qg6exp5F6mXLx9UjQU="
+export tempPassword="Placeholder Password, find the real one in the history of the container"
 mvn run tempPassword
 k6
 npx k6
