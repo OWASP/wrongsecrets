@@ -6,7 +6,7 @@ public class ChallengeTechnology {
 
     public enum Tech {
 
-        GIT("Git"), DOCKER("Docker"), CONFIGMAPS("Configmaps"), SECRETS("Secrets"), VAULT("Vault"), LOGGING("Logging"), TERRAFORM("Terraform"), CSI("CSI-Driver"), CICD("CI/CD"), PASSWORD_MANAGER("Password Manager"), CRYPTOGRAPHY("Cryptography"), BINARY("Binary"), FRONTEND("Frond-end"), IAM("IAM privilege escalation");
+        GIT("Git"), DOCKER("Docker"), CONFIGMAPS("Configmaps"), SECRETS("Secrets"), VAULT("Vault"), LOGGING("Logging"), TERRAFORM("Terraform"), CSI("CSI-Driver"), CICD("CI/CD"), PASSWORD_MANAGER("Password Manager"), CRYPTOGRAPHY("Cryptography"), BINARY("Binary"), FRONTEND("Front-end"), IAM("IAM privilege escalation");
         public final String id;
 
         Tech(String id) {

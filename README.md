@@ -370,17 +370,23 @@ If you want to play the challenges, but cannot install tools like keepass, Radar
 containers, try the following:
 
 ```shell
+docker run -p 3000:3000 jeroenwillemsen/wrongsecrets-desktop:1.5.2
+```
+
+or use something more configurable:
+
+```shell
 docker run -d \
   --name=webtop \
-  --security-opt seccomp=unconfined `#optional` \
+  --security-opt seccomp=unconfined \
   -e PUID=1000 \                   
   -e PGID=1000 \
   -e TZ=Europe/London \
-  -e SUBFOLDER=/ `#optional` \
-  -e KEYBOARD=en-us-qwerty `#optional` \
+  -e SUBFOLDER=/ \
+  -e KEYBOARD=en-us-qwerty \
   -p 3000:3000 \
-  -v /var/run/docker.sock:/var/run/docker.sock `#optional` \
-  --shm-size="1gb" `#optional` \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  --shm-size="1gb" \
   --restart unless-stopped \
   jeroenwillemsen/wrongsecrets-desktop:1.5.2
 ```
