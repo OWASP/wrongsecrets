@@ -2,11 +2,14 @@ FROM lscr.io/linuxserver/webtop:latest
 
 RUN \
   echo "**** install packages ****" && \
-  apk add --no-cache keepassxc radare2 && \
+  apk add --no-cache keepassxc radare2 aws-cli geany && \
   echo "**** cleanup ****" && \
   rm -rf \
     /tmp/*
 
-RUN mkdir /home/wrongsecrets
-COPY src/main/resources/executables/ /home/wrongsecrets/
+RUN mkdir ~/Desktop
+COPY src/main/resources/executables/ /config/Desktop/wrongsecrets
 COPY src/test/resources/alibabacreds.kdbx /var/tmp/helpers
+COPY src/test/resources/alibabacreds.kdbx /config/Desktop/wrongsecrets
+COPY wrongsecret-desktop-resources/welcome.md /config/Desktop
+COPY wrongsecret-desktop-resources/welcome.md /config/Desktop/wrongsecrets

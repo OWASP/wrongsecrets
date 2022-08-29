@@ -321,10 +321,10 @@ If you have made some changes to the codebase or added a new challenge and would
 If you want to play the challenges, but cannot install tools like keepass, Radare, etc. But are allowed to run Docker containers, try the following:
 
 ```shell
-docker run -d \                                         
-  --name=webtop \     
+ocker run -d \
+  --name=webtop \
   --security-opt seccomp=unconfined `#optional` \
-  -e PUID=1000 \
+  -e PUID=1000 \                   
   -e PGID=1000 \
   -e TZ=Europe/London \
   -e SUBFOLDER=/ `#optional` \
@@ -333,8 +333,10 @@ docker run -d \
   -v /var/run/docker.sock:/var/run/docker.sock `#optional` \
   --shm-size="1gb" `#optional` \
   --restart unless-stopped \
-  jeroenwillemsen/wrongsecrets-desktop:<VERSION HERE>
+  jeroenwillemsen/wrongsecrets-desktop:1.5.2
 ```
+
+And then at [http://localhost:3000](http://localhost:3000).
 
 Note: be careful with trying to deploy the `jeroenwillemsen/wrongsecrets-desktop` container to Heroku ;-).
 
