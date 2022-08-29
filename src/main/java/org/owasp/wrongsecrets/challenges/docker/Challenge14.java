@@ -11,6 +11,7 @@ import org.linguafranca.pwdb.kdbx.simple.SimpleIcon;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
+import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
@@ -61,7 +62,7 @@ public class Challenge14 extends Challenge {
 
     @Override
     public String getTech() {
-        return "Password manager";
+        return ChallengeTechnology.Tech.PASSWORD_MANAGER.id;
     }
 
     private String findAnswer() {

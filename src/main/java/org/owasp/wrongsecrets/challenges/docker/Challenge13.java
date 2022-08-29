@@ -5,6 +5,7 @@ import org.apache.logging.log4j.util.Strings;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
+import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
@@ -55,7 +56,7 @@ public class Challenge13 extends Challenge {
 
     @Override
     public String getTech() {
-        return "CI/CD";
+        return ChallengeTechnology.Tech.CICD.id;
     }
 
     private boolean isKeyCorrect(String base64EncodedKey) {

@@ -7,24 +7,18 @@ import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
 import org.owasp.wrongsecrets.challenges.Spoiler;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.List;
 
 @Slf4j
 @Component
-@Order(17)
-public class Challenge17 extends Challenge {
+@Order(24)
+public class Challenge24 extends Challenge {
 
-    private final String dockerMountPath;
-
-    public Challenge17(ScoreCard scoreCard, @Value("${challengedockermtpath}") String dockerMountPath) {
+    public Challenge24(ScoreCard scoreCard) {
         super(scoreCard);
-        this.dockerMountPath = dockerMountPath;
     }
 
     @Override
@@ -34,7 +28,7 @@ public class Challenge17 extends Challenge {
 
     @Override
     public boolean answerCorrect(String answer) {
-        log.info("challenge 17, actualdata: {}, answer: {}", getActualData(), answer);
+        log.info("challenge 24, actualdata: {}, answer: {}", getActualData(), answer);
         return getActualData().equals(answer);
     }
 
@@ -45,20 +39,16 @@ public class Challenge17 extends Challenge {
 
     @Override
     public int difficulty() {
-        return 3;
+        return 2;
     }
 
     @Override
     public String getTech() {
-        return ChallengeTechnology.Tech.DOCKER.id;
+        return ChallengeTechnology.Tech.CRYPTOGRAPHY.id;
     }
 
     public String getActualData() {
-        try {
-            return Files.readString(Paths.get(dockerMountPath, "thirdkey.txt"));
-        } catch (Exception e) {
-            log.warn("Exception during file reading, defaulting to default without cloud environment", e);
-            return "if_you_see_this_please_use_docker_instead";
-        }
+        return "00010203 04050607 08090A0B 0C0D0E0F 10111213 14151617 18191A1B 1C1D1E1F 20212223 24252627 28292A2B 2C2D2E2F 30313233 34353637 38393A3B 3C3D3E3F";
+
     }
 }

@@ -4,6 +4,7 @@ package org.owasp.wrongsecrets.challenges.cloud;
 import lombok.extern.slf4j.Slf4j;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
+import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
@@ -64,6 +65,6 @@ public class Challenge10 extends CloudChallenge {
 
     @Override
     public String getTech() {
-        return "CSI-Driver";
+        return ChallengeTechnology.Tech.CSI.id;
     }
 }

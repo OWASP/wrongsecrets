@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
+import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -52,7 +53,7 @@ public class Challenge8 extends Challenge {
 
     @Override
     public String getTech() {
-        return "Logging";
+        return ChallengeTechnology.Tech.LOGGING.id;
     }
 
     private String generateRandomString(int length) {

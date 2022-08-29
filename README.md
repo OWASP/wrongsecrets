@@ -2,18 +2,25 @@
 
 # OWASP WrongSecrets [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Want%20to%20dive%20into%20secrets%20management%20and%20do%20some%20hunting?%20try%20this&url=https://github.com/commjoen/wrongsecrets&hashtags=secretsmanagement,secrets,hunting,p0wnableapp,OWASP,WrongSecrets)
 
-[![Java checkstyle and testing](https://github.com/commjoen/wrongsecrets/actions/workflows/main.yml/badge.svg)](https://github.com/commjoen/wrongsecrets/actions/workflows/main.yml) [![Terraform FMT](https://github.com/commjoen/wrongsecrets/actions/workflows/terraform.yml/badge.svg)](https://github.com/commjoen/wrongsecrets/actions/workflows/terraform.yml) [![Test minikube script (k8s)](https://github.com/commjoen/wrongsecrets/actions/workflows/minikube-k8s-test.yml/badge.svg)](https://github.com/commjoen/wrongsecrets/actions/workflows/minikube-k8s-test.yml) [![Test minikube script (k8s&vault)](https://github.com/commjoen/wrongsecrets/actions/workflows/minikube-vault-test.yml/badge.svg)](https://github.com/commjoen/wrongsecrets/actions/workflows/minikube-vault-test.yml) [![Docker container test](https://github.com/commjoen/wrongsecrets/actions/workflows/container_test.yml/badge.svg)](https://github.com/commjoen/wrongsecrets/actions/workflows/container_test.yml) 
+[![Java checkstyle and testing](https://github.com/commjoen/wrongsecrets/actions/workflows/main.yml/badge.svg)](https://github.com/commjoen/wrongsecrets/actions/workflows/main.yml) [![Terraform FMT](https://github.com/commjoen/wrongsecrets/actions/workflows/terraform.yml/badge.svg)](https://github.com/commjoen/wrongsecrets/actions/workflows/terraform.yml) [![Test minikube script (k8s)](https://github.com/commjoen/wrongsecrets/actions/workflows/minikube-k8s-test.yml/badge.svg)](https://github.com/commjoen/wrongsecrets/actions/workflows/minikube-k8s-test.yml) [![Test minikube script (k8s&vault)](https://github.com/commjoen/wrongsecrets/actions/workflows/minikube-vault-test.yml/badge.svg)](https://github.com/commjoen/wrongsecrets/actions/workflows/minikube-vault-test.yml) [![Docker container test](https://github.com/commjoen/wrongsecrets/actions/workflows/container_test.yml/badge.svg)](https://github.com/commjoen/wrongsecrets/actions/workflows/container_test.yml)
 [![OWASP Lab Project](https://img.shields.io/badge/OWASP-lab%20project-48A646.svg)](https://owasp.org/projects/)
 [![Discussions](https://img.shields.io/github/discussions/commjoen/wrongsecrets)](https://github.com/commjoen/wrongsecrets/discussions)
 
-Welcome to the OWASP WrongSecrets p0wnable app. With this app, we have packed various ways of how to not store your secrets. These can help you to realize whether your secret management is ok. The challenge is to find all the different secrets by means of various tools and techniques.
+Welcome to the OWASP WrongSecrets p0wnable app. With this app, we have packed various ways of how to not store your
+secrets. These can help you to realize whether your secret management is ok. The challenge is to find all the different
+secrets by means of various tools and techniques.
 
 Can you solve all the 23 challenges?
 ![screenshot.png](screenshot.png)
 
 ## Support
 
-Need support? Contact us via [OWASP Slack](https://owasp.slack.com/archives/C02KQ7D9XHR) [for which you sign up here](https://owasp.org/slack/invite), file a [PR](https://github.com/commjoen/wrongsecrets/pulls), file an [issue](https://github.com/commjoen/wrongsecrets/issues) , or use [discussions](https://github.com/commjoen/wrongsecrets/discussions). Please note that this is an OWASP volunteer based project, so it might take a little while before we respond.
+Need support? Contact us
+via [OWASP Slack](https://owasp.slack.com/archives/C02KQ7D9XHR) [for which you sign up here](https://owasp.org/slack/invite)
+, file a [PR](https://github.com/commjoen/wrongsecrets/pulls), file
+an [issue](https://github.com/commjoen/wrongsecrets/issues) , or
+use [discussions](https://github.com/commjoen/wrongsecrets/discussions). Please note that this is an OWASP volunteer
+based project, so it might take a little while before we respond.
 
 ## Basic docker exercises
 
@@ -50,11 +57,14 @@ Now you can try to find the secrets by means of solving the challenge offered at
 - [localhost:8080/challenge/22](http://localhost:8080/challenge/22)
 - [localhost:8080/challenge/23](http://localhost:8080/challenge/23)
 
-Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look better ;-).
+Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look
+better ;-).
 
 ### Running these on Heroku
 
-You can test them out at [https://wrongsecrets.herokuapp.com/](https://wrongsecrets.herokuapp.com/) as well! But please understand that we have NO guarantees that this works. Given we run in Heroku free-tier, please do not fuzz and/or try to bring it down: you would be spoiling it for others that want to testdrive it.
+You can test them out at [https://wrongsecrets.herokuapp.com/](https://wrongsecrets.herokuapp.com/) as well! But please
+understand that we have NO guarantees that this works. Given we run in Heroku free-tier, please do not fuzz and/or try
+to bring it down: you would be spoiling it for others that want to testdrive it.
 
 ### Deploying the app under your own heroku account
 
@@ -65,7 +75,9 @@ You can test them out at [https://wrongsecrets.herokuapp.com/](https://wrongsecr
 
 ### Running on Fly.io
 
-You can test them out at [https://wrongsecrets.fly.dev](https://wrongsecrets.fly.dev) as well! Please understand that we run on a free-tier instance, we cannot give any guarantees. Please do not fuzz and/or try to bring it down: you would be spoiling it for others that want to testdrive it.
+You can test them out at [https://wrongsecrets.fly.dev](https://wrongsecrets.fly.dev) as well! Please understand that we
+run on a free-tier instance, we cannot give any guarantees. Please do not fuzz and/or try to bring it down: you would be
+spoiling it for others that want to testdrive it.
 
 ## Basic K8s exercise
 
@@ -127,16 +139,20 @@ Make sure you have the following installed:
 - vault [Install from here](https://www.vaultproject.io/downloads),
 - grep, Cat, and Sed
 
-Run `./k8s-vault-minkube-start.sh`, when the script is done, then the challenges will wait for you at <http://localhost:8080> . This will allow you to run challenges 1-8, 12-22.
+Run `./k8s-vault-minkube-start.sh`, when the script is done, then the challenges will wait for you
+at <http://localhost:8080> . This will allow you to run challenges 1-8, 12-22.
 
-When you stopped the `k8s-vault-minikube-start.sh` script and want to resume the port forward run: `k8s-vault-minikube-resume.sh`. This is because if you run the start script again it will replace the secret in the vault and not update the secret-challenge application with the new secret.
+When you stopped the `k8s-vault-minikube-start.sh` script and want to resume the port forward
+run: `k8s-vault-minikube-resume.sh`. This is because if you run the start script again it will replace the secret in the
+vault and not update the secret-challenge application with the new secret.
 
 ## Cloud Challenges
 
 _Can be used for challenges 1-23_
 
 **READ THIS**: Given that the exercises below contain IAM privilege escalation exercises,
-never run this on an account which is related to your production environment or can influence your account-over-arching resources.
+never run this on an account which is related to your production environment or can influence your account-over-arching
+resources.
 
 ### Running WrongSecrets in AWS
 
@@ -155,17 +171,23 @@ Follow the steps in [the README in the Azure subfolder](azure/README.md).
 When you want to include your own Canarytokens for your cloud-deployment, do the following:
 
 1. Fork the project.
-2. Make sure you use the [GCP ingress](/gcp/k8s-vault-gcp-ingress-start.sh) or [AWS ingress](aws/k8s-aws-alb-script.sh) scripts to generate an ingress for your project.
-3. Go to [canarytokens.org](https://canarytokens.org/generate) and select `AWS Keys`, in the webHook URL field add `<your-domain-created-at-step1>/canaries/tokencallback`.
-4. Encrypt the received credentials so that [Challenge15](/src/main/java/org/owasp/wrongsecrets/challenges/docker/Challenge15.java) can decrypt them again.
+2. Make sure you use the [GCP ingress](/gcp/k8s-vault-gcp-ingress-start.sh) or [AWS ingress](aws/k8s-aws-alb-script.sh)
+   scripts to generate an ingress for your project.
+3. Go to [canarytokens.org](https://canarytokens.org/generate) and select `AWS Keys`, in the webHook URL field
+   add `<your-domain-created-at-step1>/canaries/tokencallback`.
+4. Encrypt the received credentials so
+   that [Challenge15](/src/main/java/org/owasp/wrongsecrets/challenges/docker/Challenge15.java) can decrypt them again.
 5. Commit the unencrypted and encrypted materials to Git and then commit again without the decrypted materials.
 6. Adapt the hints of Challenge 15 in your fork to point to your fork.
 7. Create a container and push it to your registry
-8. Override the K8s definition files for either [AWS](/aws/k8s/secret-challenge-vault-deployment.yml) or [GCP](/gcp/k8s/secret-challenge-vault-deployment.yml.tpl).
+8. Override the K8s definition files for either [AWS](/aws/k8s/secret-challenge-vault-deployment.yml)
+   or [GCP](/gcp/k8s/secret-challenge-vault-deployment.yml.tpl).
 
 ## Do you want to play without guidance?
 
-Each challenge has a `Show hints` button and a `What's wrong?` button. These buttons help to simplify the challenges and give explanation to the reader. Though, the explanations can spoil the fun if you want to do this as a hacking exercise. Therefore, you can manipulate them by overriding the following settings in your env:
+Each challenge has a `Show hints` button and a `What's wrong?` button. These buttons help to simplify the challenges and
+give explanation to the reader. Though, the explanations can spoil the fun if you want to do this as a hacking exercise.
+Therefore, you can manipulate them by overriding the following settings in your env:
 
 - `hints_enabled=false` will turn off the `Show hints` button.
 - `reason_enabled=false` will turn of the `What's wrong?` explanation button.
@@ -211,20 +233,32 @@ You can help us by the following methods:
 
 - Star us
 - Share this app with others
-- Of course, we can always use your help [to get more flavors](https://github.com/commjoen/wrongsecrets/issues/37) of "wrongly" configured secrets in to spread awareness! We would love to get some help with other cloudproiders, like Alibabaor Tencent cloud for instance. Do you miss something else than a cloud provider as an example? File an issue or create a PR! See [our guide on contributing for more details](CONTRIBUTING.md). Contributors will be listed in releases, in the "Special thanks & Contributors"-section, and the web-app.
+- Of course, we can always use your help [to get more flavors](https://github.com/commjoen/wrongsecrets/issues/37) of "
+  wrongly" configured secrets in to spread awareness! We would love to get some help with other cloudproiders, like
+  Alibabaor Tencent cloud for instance. Do you miss something else than a cloud provider as an example? File an issue or
+  create a PR! See [our guide on contributing for more details](CONTRIBUTING.md). Contributors will be listed in
+  releases, in the "Special thanks & Contributors"-section, and the web-app.
 
 ## Use OWASP WrongSecrets as a secret detection benchmark
 
 As tons of secret detection tools are coming up for both Docker and Git, we are creating a Benchmark testbed for it.
-Want to know if your tool detects everything? We will keep track of the embedded secrets in [this issue](https://github.com/commjoen/wrongsecrets/issues/201) and have a [branch](https://github.com/commjoen/wrongsecrets/tree/experiment-bed) in which we put additional secrets for your tool to detect.
-The branch will contain a Docker container generation script using which you can eventually test your container secret scanning.
+Want to know if your tool detects everything? We will keep track of the embedded secrets
+in [this issue](https://github.com/commjoen/wrongsecrets/issues/201) and have
+a [branch](https://github.com/commjoen/wrongsecrets/tree/experiment-bed) in which we put additional secrets for your
+tool to detect.
+The branch will contain a Docker container generation script using which you can eventually test your container secret
+scanning.
 
 ## CTF
 
 ### CTFD Support
 
-NOTE: CTFD support is experimental, and now works based on the [Juiceshop CTF CLI](https://github.com/juice-shop/juice-shop-ctf). 
-NOTE-II:  https://wrongsecrets-ctf.herokuapp.com is based on a free heroku instance, which takes time to warm up. Initial creation of the zip file for CTFD requires you to visit [https://wrongsecrets-ctf.herokuapp.com/api/Challenges](https://wrongsecrets-ctf.herokuapp.com/api/Challenges) once before executing the steps below.
+NOTE: CTFD support is experimental, and now works based on
+the [Juiceshop CTF CLI](https://github.com/juice-shop/juice-shop-ctf).
+NOTE-II:  https://wrongsecrets-ctf.herokuapp.com is based on a free heroku instance, which takes time to warm up.
+Initial creation of the zip file for CTFD requires you to
+visit [https://wrongsecrets-ctf.herokuapp.com/api/Challenges](https://wrongsecrets-ctf.herokuapp.com/api/Challenges)
+once before executing the steps below.
 
 Follow the following steps:
 
@@ -234,17 +268,21 @@ Follow the following steps:
     docker run -p 8001:8000 -it ctfd/ctfd:3.4.3 
 ```
 
-Now visit the CTFD instance at [http://localhost:8001](http://localhost:8001) and setup your CTF. Then use the administrative backup function to import the zipfile you created with the juice-shop-ctf command.
+Now visit the CTFD instance at [http://localhost:8001](http://localhost:8001) and setup your CTF. Then use the
+administrative backup function to import the zipfile you created with the juice-shop-ctf command.
 Game on using [https://wrongsecrets-ctf.herokuapp.com](https://wrongsecrets-ctf.herokuapp.com) !
-Want to setup your own? You can! Watch out for people finding your key though, so secure it properly: make sure the running container with the actual ctf-key is not exposed to the audience, similar to our heroku container.
+Want to setup your own? You can! Watch out for people finding your key though, so secure it properly: make sure the
+running container with the actual ctf-key is not exposed to the audience, similar to our heroku container.
 
 ## FBCTF Support (Experimental!)
 
 NOTE: FBCTF support is experimental.
 
-follow the same step as with CTFD, only now choose fbctfd and as a url for the countrymapping choose `https://raw.githubusercontent.com/commjoen/wrongsecrets/79a982558016c8ce70948a8106f9a2ee5b5b9eea/config/fbctf.yml`. Then follow [https://github.com/facebookarchive/fbctf/wiki/Quick-Setup-Guide](https://github.com/facebookarchive/fbctf/wiki/Quick-Setup-Guide) to run the FBCTF.
-
-
+follow the same step as with CTFD, only now choose fbctfd and as a url for the countrymapping
+choose `https://raw.githubusercontent.com/commjoen/wrongsecrets/79a982558016c8ce70948a8106f9a2ee5b5b9eea/config/fbctf.yml`
+. Then
+follow [https://github.com/facebookarchive/fbctf/wiki/Quick-Setup-Guide](https://github.com/facebookarchive/fbctf/wiki/Quick-Setup-Guide)
+to run the FBCTF.
 
 ## Notes on development
 
@@ -279,36 +317,46 @@ If you want to dev without a Vault instance, use additionally the `without-vault
 ./mvnw spring-boot:run -Dspring-boot.run.profiles=local,without-vault
 ```
 
-Want to push a container? See `.github/scripts/docker-create-and-push.sh` for a script that generates and pushes all containers. Do not forget to rebuild the app before composing the container
+Want to push a container? See `.github/scripts/docker-create-and-push.sh` for a script that generates and pushes all
+containers. Do not forget to rebuild the app before composing the container
 
 ### Dependency management
 
 We have CycloneDX and OWASP Dependency-check integrated to check dependencies for vulnerabilities.
-You can use the OWASP Dependency-checker by calling `mvn dependency-check:aggregate` and `mvn cyclonedx:makeBom` to use CycloneDX to create an SBOM.
+You can use the OWASP Dependency-checker by calling `mvn dependency-check:aggregate` and `mvn cyclonedx:makeBom` to use
+CycloneDX to create an SBOM.
 
 ### Automatic reload during development
 
-To make changes made load faster we added `spring-dev-tools` to the Maven project. To enable this in IntelliJ automatically, make sure:
+To make changes made load faster we added `spring-dev-tools` to the Maven project. To enable this in IntelliJ
+automatically, make sure:
 
 - Under Compiler -> Automatically build project is enabled, and
 - Under Advanced settings -> Allow auto-make to start even if developed application is currently running.
 
-You can also manually invoke: Build -> Recompile the file you just changed, this will also force reloading of the application.
+You can also manually invoke: Build -> Recompile the file you just changed, this will also force reloading of the
+application.
 
 ### How to add a Challenge
 
 Follow the steps below on adding a challenge:
 
-1. First make sure that you have an [Issue](https://github.com/commjoen/wrongsecrets/issues) reported for which a challenge is really wanted.
-2. Add the new challenge in the `org.owasp.wrongsecrets.challenges` folder. Make sure you add an explanation in `src/main/resources/explanations` and refer to it from your new Challenge class.
+1. First make sure that you have an [Issue](https://github.com/commjoen/wrongsecrets/issues) reported for which a
+   challenge is really wanted.
+2. Add the new challenge in the `org.owasp.wrongsecrets.challenges` folder. Make sure you add an explanation
+   in `src/main/resources/explanations` and refer to it from your new Challenge class.
 3. Add a unit and integration test to show that your challenge is working.
 4. Don't forget to add `@Order` annotation to your challenge ;-).
 
-If you want to move existing cloud challenges to another cloud: extend Challenge classes in the `org.owasp.wrongsecrets.challenges.cloud` package and make sure you add the required Terraform in a folder with the separate cloud identified. Make sure that the environment is added to `org.owasp.wrongsecrets.RuntimeEnvironment`. Collaborate with the others at the project to get your container running so you can test at the cloud account.
+If you want to move existing cloud challenges to another cloud: extend Challenge classes in
+the `org.owasp.wrongsecrets.challenges.cloud` package and make sure you add the required Terraform in a folder with the
+separate cloud identified. Make sure that the environment is added to `org.owasp.wrongsecrets.RuntimeEnvironment`.
+Collaborate with the others at the project to get your container running so you can test at the cloud account.
 
 ### Local testing
 
-If you have made some changes to the codebase or added a new challenge and would like to see exactly how the container will look after merge for testing, we have a script that makes this very easy. Follow the steps below:
+If you have made some changes to the codebase or added a new challenge and would like to see exactly how the container
+will look after merge for testing, we have a script that makes this very easy. Follow the steps below:
 
 1. Ensure you have bash installed and open.
 2. Navigate to .github/scripts.
@@ -318,23 +366,32 @@ If you have made some changes to the codebase or added a new challenge and would
 
 ## Want to play, but are not allowed to install the tools?
 
-If you want to play the challenges, but cannot install tools like keepass, Radare, etc. But are allowed to run Docker containers, try the following:
+If you want to play the challenges, but cannot install tools like keepass, Radare, etc. But are allowed to run Docker
+containers, try the following:
 
 ```shell
-docker run -d \                                         
-  --name=webtop \     
-  --security-opt seccomp=unconfined `#optional` \
-  -e PUID=1000 \
+docker run -p 3000:3000 jeroenwillemsen/wrongsecrets-desktop:1.5.2
+```
+
+or use something more configurable:
+
+```shell
+docker run -d \
+  --name=webtop \
+  --security-opt seccomp=unconfined \
+  -e PUID=1000 \                   
   -e PGID=1000 \
   -e TZ=Europe/London \
-  -e SUBFOLDER=/ `#optional` \
-  -e KEYBOARD=en-us-qwerty `#optional` \
+  -e SUBFOLDER=/ \
+  -e KEYBOARD=en-us-qwerty \
   -p 3000:3000 \
-  -v /var/run/docker.sock:/var/run/docker.sock `#optional` \
-  --shm-size="1gb" `#optional` \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  --shm-size="1gb" \
   --restart unless-stopped \
-  jeroenwillemsen/wrongsecrets-desktop:<VERSION HERE>
+  jeroenwillemsen/wrongsecrets-desktop:1.5.2
 ```
+
+And then at [http://localhost:3000](http://localhost:3000).
 
 Note: be careful with trying to deploy the `jeroenwillemsen/wrongsecrets-desktop` container to Heroku ;-).
 

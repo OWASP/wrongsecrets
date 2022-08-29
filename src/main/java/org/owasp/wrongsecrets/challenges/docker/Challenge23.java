@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
+import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.spongycastle.util.encoders.Base64;
 import org.spongycastle.util.encoders.Hex;
@@ -45,7 +46,7 @@ public class Challenge23 extends Challenge {
 
     @Override
     public String getTech() {
-        return "Front-end";
+        return ChallengeTechnology.Tech.FRONTEND.id;
     }
 
     public String getActualData() {
