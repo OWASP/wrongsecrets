@@ -16,9 +16,5 @@ public class ChallengeTechnology {
         static ChallengeTechnology.Tech fromId(String id) {
             return Arrays.stream(ChallengeTechnology.Tech.values()).filter(e -> e.id.equalsIgnoreCase(id)).findAny().get();
         }
-
-        static String fromTech(Tech tech){
-            return tech.id;
-        }
     }
 }
