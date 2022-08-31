@@ -126,6 +126,10 @@ now you can use the provided IP address and port to further play with the K8s va
 - [localhost:8080/challenge/5](http://localhost:8080/challenge/5)
 - [localhost:8080/challenge/6](http://localhost:8080/challenge/6)
 
+### Okteto based
+
+Don't want to go over the hassle of setting up K8S yourself? visit [https://wrongsecrets-commjoen.cloud.okteto.net](https://wrongsecrets-commjoen.cloud.okteto.net/). Please note that we are using the free Developer version here, so it might take a while for it to respond. Please: do not try to hack/Fuzz the application as this might bring it down and spoil the fun for others.
+
 ## Vault exercises with minikube
 
 _Can be used for challenges 1-8, 12-23_
