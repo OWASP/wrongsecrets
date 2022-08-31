@@ -47,6 +47,11 @@ public class Challenge24 extends Challenge {
         return ChallengeTechnology.Tech.CRYPTOGRAPHY.id;
     }
 
+    @Override
+    public boolean isLimittedWhenOnlineHosted() {
+        return false;
+    }
+
     public String getActualData() {
         return "00010203 04050607 08090A0B 0C0D0E0F 10111213 14151617 18191A1B 1C1D1E1F 20212223 24252627 28292A2B 2C2D2E2F 30313233 34353637 38393A3B 3C3D3E3F";
 

@@ -50,4 +50,9 @@ public class Challenge21 extends Challenge {
     public String getTech() {
         return ChallengeTechnology.Tech.BINARY.id;
     }
+
+    @Override
+    public boolean isLimittedWhenOnlineHosted() {
+        return false;
+    }
 }

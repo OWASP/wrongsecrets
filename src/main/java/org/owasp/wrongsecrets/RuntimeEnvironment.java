@@ -28,16 +28,17 @@ public class RuntimeEnvironment {
     private static final Map<Environment, List<Environment>> envToOverlappingEnvs = Map.of(
         FLY_DOCKER, List.of(DOCKER, FLY_DOCKER),
         HEROKU_DOCKER, List.of(DOCKER, HEROKU_DOCKER),
-        DOCKER, List.of(DOCKER, HEROKU_DOCKER),
+        DOCKER, List.of(DOCKER, HEROKU_DOCKER, FLY_DOCKER),
         GCP, List.of(DOCKER, K8S, VAULT),
         AWS, List.of(DOCKER, K8S, VAULT),
         AZURE, List.of(DOCKER, K8S, VAULT),
         VAULT, List.of(DOCKER, K8S),
-        K8S, List.of(DOCKER)
+        K8S, List.of(DOCKER),
+        OKTETO_K8S, List.of(K8S, DOCKER, OKTETO_K8S)
     );
 
     public enum Environment {
-        DOCKER("Docker"), HEROKU_DOCKER("Heroku(Docker)"), FLY_DOCKER("Fly(Docker)"), GCP("gcp"), AWS("aws"), AZURE("azure"), VAULT("k8s-with-vault"), K8S("k8s");
+        DOCKER("Docker"), HEROKU_DOCKER("Heroku(Docker)"), FLY_DOCKER("Fly(Docker)"), GCP("gcp"), AWS("aws"), AZURE("azure"), VAULT("k8s-with-vault"), K8S("k8s"), OKTETO_K8S("Okteto(k8s)");
 
         private final String id;
 

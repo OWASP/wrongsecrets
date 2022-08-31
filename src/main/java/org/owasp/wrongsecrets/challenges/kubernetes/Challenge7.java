@@ -52,4 +52,9 @@ public class Challenge7 extends Challenge {
     public String getTech() {
         return "Vault";
     }
+
+    @Override
+    public boolean isLimittedWhenOnlineHosted() {
+        return false;
+    }
 }

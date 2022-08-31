@@ -53,6 +53,11 @@ public class Challenge17 extends Challenge {
         return ChallengeTechnology.Tech.DOCKER.id;
     }
 
+    @Override
+    public boolean isLimittedWhenOnlineHosted() {
+        return false;
+    }
+
     public String getActualData() {
         try {
             return Files.readString(Paths.get(dockerMountPath, "thirdkey.txt"));

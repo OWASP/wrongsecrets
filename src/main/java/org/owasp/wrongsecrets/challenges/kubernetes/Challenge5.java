@@ -47,4 +47,9 @@ public class Challenge5 extends Challenge {
     public String getTech() {
         return "Configmaps";
     }
+
+    @Override
+    public boolean isLimittedWhenOnlineHosted() {
+        return true;
+    }
 }

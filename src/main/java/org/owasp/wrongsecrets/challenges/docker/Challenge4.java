@@ -50,4 +50,9 @@ public class Challenge4 extends Challenge {
         return ChallengeTechnology.Tech.DOCKER.id;
     }
 
+    @Override
+    public boolean isLimittedWhenOnlineHosted() {
+        return false;
+    }
+
 }

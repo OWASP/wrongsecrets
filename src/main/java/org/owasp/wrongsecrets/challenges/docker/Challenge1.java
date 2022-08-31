@@ -44,4 +44,9 @@ public class Challenge1 extends Challenge {
     public String getTech() {
         return ChallengeTechnology.Tech.GIT.id;
     }
+
+    @Override
+    public boolean isLimittedWhenOnlineHosted() {
+        return false;
+    }
 }

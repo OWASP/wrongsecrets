@@ -59,6 +59,11 @@ public class Challenge13 extends Challenge {
         return ChallengeTechnology.Tech.CICD.id;
     }
 
+    @Override
+    public boolean isLimittedWhenOnlineHosted() {
+        return false;
+    }
+
     private boolean isKeyCorrect(String base64EncodedKey) {
         if (Strings.isEmpty(base64EncodedKey) || Strings.isEmpty(plainText) || Strings.isEmpty(cipherText)) {
             log.info("Checking secret with values {}, {}, {}", base64EncodedKey, plainText, cipherText);

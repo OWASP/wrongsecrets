@@ -47,4 +47,9 @@ public class Challenge6 extends Challenge {
     public String getTech() {
         return "Secrets";
     }
+
+    @Override
+    public boolean isLimittedWhenOnlineHosted() {
+        return true;
+    }
 }
