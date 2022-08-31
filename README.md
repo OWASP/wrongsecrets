@@ -374,7 +374,7 @@ If you want to play the challenges, but cannot install tools like keepass, Radar
 containers, try the following:
 
 ```shell
-docker run -p 3000:3000 jeroenwillemsen/wrongsecrets-desktop:1.5.2
+docker run -p 3000:3000 jeroenwillemsen/wrongsecrets-desktop:latest
 ```
 
 or use something more configurable:
@@ -392,7 +392,7 @@ docker run -d \
   -v /var/run/docker.sock:/var/run/docker.sock \
   --shm-size="1gb" \
   --restart unless-stopped \
-  jeroenwillemsen/wrongsecrets-desktop:1.5.2
+  jeroenwillemsen/wrongsecrets-desktop:latest
 ```
 
 And then at [http://localhost:3000](http://localhost:3000).
