@@ -7,7 +7,7 @@ Help() {
     # Display Help
     echo "A versatile script to create a docker image for testing. Call this script with no arguments to simply create a local image that you can use to test your changes. For more complex use see the below help section"
     echo
-    echo "Syntax: docker-create.sh [-h (help)|-t (test)|-p (publish)|-e (herokud)|-f (herokup)|-g (fly)|-n (notag) [tag={tag}|message={message}|buildarg={buildarg}|springProfile={springProfile}]"
+    echo "Syntax: docker-create.sh [-h (help)|-t (test)|-p (publish)|-e (herokud)|-f (herokup)|-g (fly)|-o (okteto)|-n (notag) [tag={tag}|message={message}|buildarg={buildarg}|springProfile={springProfile}]"
     echo "options: (All optional)"
     echo "tag=             Write a custom tag that will be added to the container when it is build locally."
     echo "message=         Write a message used for the actual tag-message in git"
@@ -28,6 +28,23 @@ break_on_tag(){
         exit
       fi
 }
+
+Okteto_redeploy(){
+  break_on_tag
+  echo "Rebuilding the Okteto environment: https://wrongsecrets-commjoen.cloud.okteto.net/"
+  echo "Check if all required binaries are installed"
+  source ../../scripts/check-available-commands.sh
+  checkCommandsAvailable okteto
+  echo "validating okteto k8 deployment to contain the right container with tag "${tag}" (should be part of '$(cat ../../okteto/k8s/secret-challenge-deployment.yml | grep image)')"
+  if [[ "$(cat ../../okteto/k8s/secret-challenge-deployment.yml | grep image)" != *"${tag}"* ]]; then
+    echo "tag ${tag} in  ../../okteto/k8s/secret-challenge-deployment.yml not properly set, aborting"
+    exit
+  fi
+  cd ../../okteto
+  okteto destroy
+  okteto deploy
+}
+
 heroku_check_container() {
     break_on_tag
     echo "validating dockerfile to contain tag "${tag}" (should be part of '$(head -n 1 ../../Dockerfile.web)')"
@@ -90,7 +107,7 @@ Fly_publish(){
 # Set option to local if no option provided
 script_mode="local"
 # Parse provided options
-while getopts ":htpefgn*" option; do
+while getopts ":htpefgon*" option; do
     case $option in
     h) # display Help
         Help
@@ -111,6 +128,9 @@ while getopts ":htpefgn*" option; do
     g) #Helper
         script_mode="fly_p"
         ;;
+    o) #okteto
+        script_mode="okteto"
+        ;;
     n) #notags
         disable_tagging_in_git="true"
         ;;
@@ -127,7 +147,7 @@ done
 ################################################
 for ARGUMENT in "$@"; 
 do
-    if [[ $ARGUMENT != "-h" && $ARGUMENT != "-t" && $ARGUMENT != "-p" && $ARGUMENT != "-e" && $ARGUMENT != "-f" && $ARGUMENT != "-g" ]]
+    if [[ $ARGUMENT != "-h" && $ARGUMENT != "-t" && $ARGUMENT != "-p" && $ARGUMENT != "-e" && $ARGUMENT != "-f" && $ARGUMENT != "-g" && $ARGUMENT != "-o" ]]
     then
         KEY=$(echo "$ARGUMENT" | cut -f1 -d=)
         KEY_LENGTH=${#KEY}
@@ -188,6 +208,8 @@ elif [[ $script_mode == "heroku_p" ]]; then
   Heroku_publish_prod
 elif [[ $script_mode == "fly_p" ]]; then
   Fly_publish
+elif [[ $script_mode == "okteto" ]]; then
+  Okteto_redeploy
 fi
     
 
