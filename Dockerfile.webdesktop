@@ -1,13 +1,19 @@
 FROM lscr.io/linuxserver/webtop:latest
+LABEL NAME="OWASP WrongSecrets Web Desktop" MAINTAINER="Jeroen Willemsen"
 
 RUN \
   echo "**** install packages ****" && \
-  apk add --no-cache keepassxc radare2 aws-cli geany && \
+  apk add --no-cache shadow keepassxc radare2 aws-cli geany && \
+  echo "**** adding abc user to root for Docker ****" && \
+  usermod -aG root abc && \
+  touch /var/run/docker.sock && \
+  chown abc:abc /var/run/docker.sock && \
   echo "**** cleanup ****" && \
   rm -rf \
     /tmp/*
 
-RUN mkdir ~/Desktop
+WORKDIR /config/Desktop
+
 COPY src/main/resources/executables/ /config/Desktop/wrongsecrets
 COPY src/test/resources/alibabacreds.kdbx /var/tmp/helpers
 COPY src/test/resources/alibabacreds.kdbx /config/Desktop/wrongsecrets
