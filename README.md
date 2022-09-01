@@ -370,7 +370,7 @@ If you want to play the challenges, but cannot install tools like keepass, Radar
 containers, try the following:
 
 ```shell
-docker run -p 3000:3000 jeroenwillemsen/wrongsecrets-desktop:1.5.2
+docker run -p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock jeroenwillemsen/wrongsecrets-desktop:1.5.2
 ```
 
 or use something more configurable:
