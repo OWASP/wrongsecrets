@@ -34,7 +34,7 @@ For the basic docker exercises you currently require:
 You can install it by doing:
 
 ```bash
-docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:1.5.2-no-vault
+docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:latest-no-vault
 ```
 
 Now you can try to find the secrets by means of solving the challenge offered at:
@@ -374,7 +374,7 @@ If you want to play the challenges, but cannot install tools like keepass, Radar
 containers, try the following:
 
 ```shell
-docker run -p 3000:3000 jeroenwillemsen/wrongsecrets-desktop:latest
+docker run -p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock jeroenwillemsen/wrongsecrets-desktop:latest
 ```
 
 or use something more configurable:
