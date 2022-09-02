@@ -20,7 +20,7 @@ Make sure you have an active account at GCP for which you have configured the cr
 
 If you want to host a multi-user setup, you will probably want to share the state file so that everyone can try related challenges. We have provided a starter to easily do so using a Terraform gcs backend.
 
-First, create an s3 bucket:
+First, create an storage bucket:
 
 1. Navigate to the 'shared-state' directory `cd shared-state`
 2. Change the `project_id` in the `terraform.tfvars` file to your project id
