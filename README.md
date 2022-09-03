@@ -10,7 +10,7 @@ Welcome to the OWASP WrongSecrets p0wnable app. With this app, we have packed va
 secrets. These can help you to realize whether your secret management is ok. The challenge is to find all the different
 secrets by means of various tools and techniques.
 
-Can you solve all the 23 challenges?
+Can you solve all the 24 challenges?
 ![screenshot.png](screenshot.png)
 
 ## Support
@@ -24,7 +24,7 @@ based project, so it might take a little while before we respond.
 
 ## Basic docker exercises
 
-_Can be used for challenges 1-4, 8, 12-23_
+_Can be used for challenges 1-4, 8, 12-24_
 
 For the basic docker exercises you currently require:
 
@@ -56,6 +56,7 @@ Now you can try to find the secrets by means of solving the challenge offered at
 - [localhost:8080/challenge/21](http://localhost:8080/challenge/21)
 - [localhost:8080/challenge/22](http://localhost:8080/challenge/22)
 - [localhost:8080/challenge/23](http://localhost:8080/challenge/23)
+- [localhost:8080/challenge/24](http://localhost:8080/challenge/24)
 
 Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look
 better ;-).
@@ -81,7 +82,7 @@ spoiling it for others that want to testdrive it.
 
 ## Basic K8s exercise
 
-_Can be used for challenges 1-6, 8, 12-23_
+_Can be used for challenges 1-6, 8, 12-24_
 
 ### Minikube based
 
@@ -132,7 +133,7 @@ Don't want to go over the hassle of setting up K8S yourself? visit [https://wron
 
 ## Vault exercises with minikube
 
-_Can be used for challenges 1-8, 12-23_
+_Can be used for challenges 1-8, 12-24_
 Make sure you have the following installed:
 
 - minikube with docker (or comment out line 8 and work at your own k8s setup),
@@ -152,7 +153,7 @@ vault and not update the secret-challenge application with the new secret.
 
 ## Cloud Challenges
 
-_Can be used for challenges 1-23_
+_Can be used for challenges 1-24_
 
 **READ THIS**: Given that the exercises below contain IAM privilege escalation exercises,
 never run this on an account which is related to your production environment or can influence your account-over-arching
@@ -390,7 +391,7 @@ docker run -d \
   -e KEYBOARD=en-us-qwerty \
   -p 3000:3000 \
   -v /var/run/docker.sock:/var/run/docker.sock \
-  --shm-size="1gb" \
+  --shm-size="2gb" \
   --restart unless-stopped \
   jeroenwillemsen/wrongsecrets-desktop:latest
 ```
