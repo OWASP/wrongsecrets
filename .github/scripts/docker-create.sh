@@ -308,8 +308,8 @@ create_containers() {
         docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets:$tag-k8s-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=kubernetes-vault" --push ./../../.
         docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets:latest-k8s-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=kubernetes-vault" --push ./../../.
         cd ../..
-        docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets-desktop:$tag -f Dockerfile.webdesktop --push .
-        docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets-desktop:latest -f Dockerfile.webdesktop --push .
+        docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets-desktop:$tag -f Dockerfile_webdesktop --push .
+        docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets-desktop:latest -f Dockerfile_webdesktop --push .
         cd .github/scripts
     elif [[ "$script_mode" == "test" ]]; then
         docker buildx build -t jeroenwillemsen/wrongsecrets:$tag --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=without-vault" --load ./../../.
