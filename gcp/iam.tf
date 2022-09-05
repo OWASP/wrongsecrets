@@ -24,7 +24,7 @@ resource "google_service_account_iam_member" "wrongsecret_pod_sa" {
   service_account_id = google_service_account.wrongsecrets_workload.id
   role               = "roles/iam.workloadIdentityUser"
   member             = "serviceAccount:${var.project_id}.svc.id.goog[default/vault]"
-  depends_on         = [
+  depends_on = [
     google_iam_workload_identity_pool.pool,
     google_container_cluster.gke
   ]
@@ -35,7 +35,7 @@ resource "google_service_account_iam_member" "wrongsecret_wrong_pod_sa" {
   service_account_id = google_service_account.wrongsecrets_workload.id
   role               = "roles/iam.workloadIdentityUser"
   member             = "serviceAccount:${var.project_id}.svc.id.goog[default/default]"
-  depends_on         = [
+  depends_on = [
     google_iam_workload_identity_pool.pool,
     google_container_cluster.gke
   ]

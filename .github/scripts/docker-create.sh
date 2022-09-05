@@ -145,7 +145,7 @@ done
 
 # Check all arguments added to the command
 ################################################
-for ARGUMENT in "$@"; 
+for ARGUMENT in "$@";
 do
     if [[ $ARGUMENT != "-h" && $ARGUMENT != "-t" && $ARGUMENT != "-p" && $ARGUMENT != "-e" && $ARGUMENT != "-f" && $ARGUMENT != "-g" && $ARGUMENT != "-o" ]]
     then
@@ -211,7 +211,7 @@ elif [[ $script_mode == "fly_p" ]]; then
 elif [[ $script_mode == "okteto" ]]; then
   Okteto_redeploy
 fi
-    
+
 
 local_extra_info() {
     if [[ $script_mode == "local" ]] ; then
@@ -242,7 +242,7 @@ check_required_install() {
 check_os() {
     echo "Checking for compatible operating system"
     unameOut="$(uname -s)"
-    case "${unameOut}" in 
+    case "${unameOut}" in
     Darwin*)
         echo "OSX detected 🍎"
         ;;

@@ -1,15 +1,10 @@
 terraform {
+  required_version = "~> 1.1"
   required_providers {
     aws = {
       version = "~> 4.0"
     }
   }
-}
-
-variable "region" {
-  description = "The AWS region to use"
-  type        = string
-  default     = "eu-west-1"
 }
 
 provider "aws" {
@@ -25,9 +20,4 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "encryption" {
       sse_algorithm = "AES256"
     }
   }
-}
-
-output "s3_bucket_name" {
-  description = "Name of the terraform state bucket"
-  value       = aws_s3_bucket.state.id
 }

@@ -34,5 +34,3 @@ public class CanaryCounterImpl implements CanaryCounter {
         return lastToken;
     }
 }
-
-

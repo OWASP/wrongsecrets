@@ -8,5 +8,3 @@ Next, the secret itself does not have any metadata where it is used for. Which m
 
 When using a third party solution, like Hashicorp Vault or any other: make sure you read the documentation well and secure the system.
 Additionally, do a threatmodel exercise to understand what the risks are of it being used wrongly.
-
-

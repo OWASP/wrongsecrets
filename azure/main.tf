@@ -1,12 +1,4 @@
 terraform {
-  required_version = ">= 0.14.0"
-
-  required_providers {
-    random  = "~> 3.0"
-    azurerm = "~> 3.9"
-    http    = "~> 2.1"
-  }
-
   # For shared state:
   # Set the resource group in the backend configuration below, then uncomment and apply!
   # Note that you probably already create a resource group. Don't forget to set that correctly in this file.
@@ -17,8 +9,6 @@ terraform {
   #   key                  = "terraform.tfstate"
   # }
 }
-
-provider "http" {}
 
 data "http" "ip" {
   url = "http://ipecho.net/plain"

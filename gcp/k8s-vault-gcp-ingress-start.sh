@@ -143,8 +143,10 @@ envsubst <./k8s/secret-challenge-vault-deployment.yml.tpl >./k8s/secret-challeng
 kubectl apply -f./k8s/secret-challenge-vault-deployment.yml
 while [[ $(kubectl get pods -l app=secret-challenge -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do echo "waiting for secret-challenge" && sleep 2; done
 
-echo "Deploying ingress"
+echo "Deploying service"
+kubectl apply -f k8s/k8s-gke-service.yaml
 
+echo "Deploying ingress"
 kubectl apply -f k8s/k8s-gke-ingress.yaml
 
 while [[ -z $(kubectl get ingress basic-ingress --output jsonpath='{.status.loadBalancer.ingress[].ip}') ]]; do echo "waiting for ingress IP, this will take a few minutes... last check: $(date +\%T)" && sleep 10; done

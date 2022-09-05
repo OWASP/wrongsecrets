@@ -17,25 +17,25 @@ updates:
     directory: "/"
     schedule:
       interval: "monthly"
-  
+
   # check our npm
   - package-ecosystem: "npm"
     directory: "/js"
     schedule:
       interval: "monthly"
-      
+
   # Check our tf -aws
   - package-ecosystem: "terraform"
     directory: "/aws"
     schedule:
       interval: "monthly"
-  
+
   # Check our tf -azure
   - package-ecosystem: "terraform"
     directory: "/azure"
     schedule:
       interval: "monthly"
-  
+
     # Check our tf -gcp
   - package-ecosystem: "terraform"
     directory: "/gcp"
