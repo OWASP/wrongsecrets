@@ -4,7 +4,7 @@ You can solve this challenge by the following steps:
 - Can you see where in git we stored the `secrets-config.yml`? If not, just do a search.
 - Take a look at the `Data` field: what can you find there?
 
-PLEASE NOTE: The following options will only work when you have access to the K8s API. In this hosted version of WrongSecrets you do not have that access. When you are running a CTF: ask the organizer access to the targetted K8s API.
+PLEASE NOTE: The following options will only work when you have access to the K8s API. In this hosted version of WrongSecrets you do not have that access. When you are running a CTF: ask the organizer for access to the K8s API.
 
 
 2. Ask nicely using Kubectl:
