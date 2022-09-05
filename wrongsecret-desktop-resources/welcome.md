@@ -1,6 +1,6 @@
 # WrongSecrets Desktop
 
-Welcome to the WrongSecretss desktop/toolcontainer! With this Docker container you have the minimal tools next to Docker ready on your finger tips. 
+Welcome to the WrongSecretss desktop/toolcontainer! With this Docker container you have the minimal tools next to Docker ready on your finger tips.
 Need more? Don't worry: you can always do `sudo apk add <package>` .
 
 ## What is inside

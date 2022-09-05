@@ -26,4 +26,3 @@ spec:
 - Apply the job with `kubectl apply -f job.yaml`
 
 You can now exec into the pod, and execute something like `az login --identity --allow-no-subscriptions && az keyvault secret show --name wrongsecret-3 --vault-name wrongsecrets-vault-00000`. Since the job can access the same vault as the secret challenge pod, it has access to its secrets.
-

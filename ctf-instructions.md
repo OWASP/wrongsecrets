@@ -32,7 +32,6 @@ hosted solutions no longer works!
 
 TODO as #https://github.com/commjoen/wrongsecrets/issues/372
 
-### Cloud based CTF 
+### Cloud based CTF
 
 TODO as #https://github.com/commjoen/wrongsecrets/issues/372
-

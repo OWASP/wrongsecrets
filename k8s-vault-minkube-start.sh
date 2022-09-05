@@ -64,7 +64,7 @@ sed "s/^\([\"']\)\(.*\)\1\$/\2/g" commentedroottoken > root_token
 ROOTTOKEN=$(cat root_token)
 
 echo "Logging in"
-kubectl exec vault-0 -- vault login $ROOTTOKEN 
+kubectl exec vault-0 -- vault login $ROOTTOKEN
 
 echo "Enabling kv-v2 kubernetes"
 kubectl exec vault-0 -- vault secrets enable -path=secret kv-v2
@@ -75,7 +75,7 @@ kubectl exec vault-0 -- vault kv put secret/secret-challenge vaultpassword.passw
 echo "Enable k8s auth"
 kubectl exec vault-0 -- vault auth enable kubernetes
 
-echo "Writing k8s auth config" 
+echo "Writing k8s auth config"
 
 kubectl exec vault-0 -- /bin/sh -c 'vault write auth/kubernetes/config \
         token_reviewer_jwt="$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" \
@@ -116,4 +116,3 @@ sleep 20
 curl http://localhost:8080/spoil-7
 echo "logs from pod to make sure:"
 cat pod.log
-

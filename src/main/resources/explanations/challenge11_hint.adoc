@@ -1,11 +1,11 @@
 You can solve this challenge by the following steps:
 
 1. Find the privilege escalation path using just Terraform:
-  1. There should be something juicy in `aws/irsa.tf`. 
+  1. There should be something juicy in `aws/irsa.tf`.
 
 2. Find the privilege escalation path using https://github.com/nccgroup/ScoutSuite[ScoutSuite]
 
-- Regardless of which method you use, check out the `cant-read-secrets` role. You'll see it allows `sts:AssumeRole` on `*`. This means it enables assuming **any** role in the account. 
+- Regardless of which method you use, check out the `cant-read-secrets` role. You'll see it allows `sts:AssumeRole` on `*`. This means it enables assuming **any** role in the account.
 - Roles also have a trust relationship, and the one for our pod (`wrongsecrets-secret-manager`) is misconfigured. It allows `arn:aws:iam::<account id>:root`, which is equivalent to 'anyone within this AWS account as long as they have IAM permissions'. This means we are able to assume that role from `cant-read-secrets`!
 
 After jumping to `wrongsecrets-secret-manager` from `cant-read-secrets`, we can simply run `aws ssm get-parameter --name wrongsecretvalue --with-decryption`.

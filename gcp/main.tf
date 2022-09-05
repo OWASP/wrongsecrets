@@ -1,3 +1,13 @@
+terraform {
+  # For shared state:
+  # Set the resource group in the backend configuration below, then uncomment and apply!
+  # Note that you probably already create a resource group. Don't forget to set that correctly in this file.
+  #  backend "gcs" {
+  #    bucket  = ""
+  #    prefix  = "terraform/state"
+  #  }
+}
+
 provider "google" {
   project = var.project_id
   region  = var.region

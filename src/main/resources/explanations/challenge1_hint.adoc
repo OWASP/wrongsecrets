@@ -12,8 +12,8 @@ You can solve this challenge by the following steps:
 - Clone the repo with `git clone https://github.com/commjoen/wrongsecrets`.
 - Follow the instructions https://github.com/awslabs/git-secrets[here] to install Git secrets.
 - Add a new scan to look for the string `git secrets --add 'password\s*=\s*.+'`.
-- Now execute that scan `git secrets --scan`. 
- 
+- Now execute that scan `git secrets --scan`.
+
 3. When you do not have the source code available, try to obtain the actual application to reverse engineer it. The application, in this case, is a Jar file, which is a set of java class files together with a few resources.
 - Follow the instructions of https://docs.docker.com/engine/reference/commandline/cp/[the Docker documentation] to copy the Jar file from the container's root to your local filesystem.
 - open the JAR file in https://java-decompiler.github.io/[*JD-GUI*] or https://github.com/skylot/jadx[*jadx-gui*], now look for the `String password`!

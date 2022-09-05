@@ -1,16 +1,14 @@
 terraform {
+  required_version = "~> 1.1"
   required_providers {
-    azurerm = "~> 3.0"
-    random  = "~> 3.0"
+    azurerm = {
+      version = "~> 3.0"
+    }
+    random = {
+      version = "~> 3.0"
+    }
   }
 }
-
-variable "region" {
-  description = "The Azure region to use"
-  type        = string
-  default     = "East US"
-}
-
 
 provider "azurerm" {
   features {}
@@ -39,7 +37,7 @@ resource "random_string" "suffix" {
   length  = 5
   special = false
   upper   = false
-  number  = true
+  numeric = true
 }
 
 
@@ -57,9 +55,4 @@ resource "azurerm_storage_container" "blob" {
   name                  = "tfstate"
   storage_account_name  = azurerm_storage_account.account.name
   container_access_type = "private"
-}
-
-output "storage_account_name" {
-  description = "The generated storage account name"
-  value       = azurerm_storage_account.account.name
 }
