@@ -18,4 +18,4 @@ PLEASE NOTE: The following options will only work when you have access to the K8
 - Now do `env | grep SPECIAL_K8S_SECRET` and there is your secret.
 
 
-BTW: with `kubectl get <item> -A` gives you an overview of all the items over all the namespaces you have access to. This shows how important it is not to give people access to every namespace in your cluster, as this might mean leaking important config/items to them.
+Note: `kubectl get <item> -A` gives you an overview of all the items over all the namespaces you have access to. It's important *not* to give people access to every namespace in your cluster, as this might mean leaking important config/items to them.
