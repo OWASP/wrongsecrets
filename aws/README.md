@@ -92,6 +92,9 @@ Do the following:
 
 Note that you might have to do some manual cleanups after that.
 
+## Terraform documentation
+The documentation below is auto-generated to give insight on what's created via Terraform.
+
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 

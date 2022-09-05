@@ -86,6 +86,9 @@ When you're done:
 2. Can you easily obtain the AKS managed identity of the Node?
 3. Can you get the secrets in the Key vault? Which paths do you see?
 
+## Terraform documentation
+The documentation below is auto-generated to give insight on what's created via Terraform.
+
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 

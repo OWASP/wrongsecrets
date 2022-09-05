@@ -82,6 +82,9 @@ When you're done:
 3. Can you get the secrets in the SSM Parameter Store and Secret Manager easily? Which paths do you see?
 4. You should see at the configuration details of the cluster that `databaseEncryption` is `DECRYPTED` (`gcloud container clusters describe wrongsecrets-exercise-cluster --region europe-west4`). What does that mean?
 
+## Terraform documentation
+The documentation below is auto-generated to give insight on what's created via Terraform.
+
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
