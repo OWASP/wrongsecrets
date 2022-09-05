@@ -12,11 +12,8 @@ terraform {
     random = {
       version = "~> 3.0"
     }
-    kubernetes = {
-      version = "~> 1.11"
-    }
     http = {
-      version = "~> 2.1"
+      version = "~> 3.1"
     }
   }
 }

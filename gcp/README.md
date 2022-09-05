@@ -94,8 +94,7 @@ The documentation below is auto-generated to give insight on what's created via 
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.1 |
 | <a name="requirement_google"></a> [google](#requirement\_google) | ~> 4.1 |
 | <a name="requirement_google-beta"></a> [google-beta](#requirement\_google-beta) | ~> 4.1 |
-| <a name="requirement_http"></a> [http](#requirement\_http) | ~> 2.1 |
-| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | ~> 1.11 |
+| <a name="requirement_http"></a> [http](#requirement\_http) | ~> 3.1 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | ~> 3.0 |
 
 ## Providers
@@ -104,7 +103,7 @@ The documentation below is auto-generated to give insight on what's created via 
 |------|---------|
 | <a name="provider_google"></a> [google](#provider\_google) | ~> 4.1 |
 | <a name="provider_google-beta"></a> [google-beta](#provider\_google-beta) | ~> 4.1 |
-| <a name="provider_http"></a> [http](#provider\_http) | ~> 2.1 |
+| <a name="provider_http"></a> [http](#provider\_http) | ~> 3.1 |
 | <a name="provider_random"></a> [random](#provider\_random) | ~> 3.0 |
 
 ## Modules
