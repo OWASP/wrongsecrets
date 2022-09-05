@@ -96,7 +96,7 @@ The documentation below is auto-generated to give insight on what's created via 
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.1 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | ~> 3.9 |
-| <a name="requirement_http"></a> [http](#requirement\_http) | ~> 2.1 |
+| <a name="requirement_http"></a> [http](#requirement\_http) | ~> 3.1 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | ~> 3.0 |
 
 ## Providers
@@ -104,7 +104,7 @@ The documentation below is auto-generated to give insight on what's created via 
 | Name | Version |
 |------|---------|
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | ~> 3.9 |
-| <a name="provider_http"></a> [http](#provider\_http) | ~> 2.1 |
+| <a name="provider_http"></a> [http](#provider\_http) | ~> 3.1 |
 | <a name="provider_random"></a> [random](#provider\_random) | ~> 3.0 |
 
 ## Modules
