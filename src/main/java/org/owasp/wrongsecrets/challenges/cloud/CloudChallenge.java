@@ -40,6 +40,11 @@ public abstract class CloudChallenge extends Challenge {
         return getData(super.getReason());
     }
 
+    @Override
+    public boolean isLimittedWhenOnlineHosted() {
+        return false;
+    }
+
     private String getData(String defaultAWsPath) {
         RuntimeEnvironment.Environment env = runtimeEnvironment.getRuntimeEnvironment();
         return switch (env) {

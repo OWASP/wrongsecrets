@@ -11,7 +11,7 @@ echo "This is a script to bootstrap the configuration. You need to have installe
 echo "This script is based on the steps defined in https://learn.hashicorp.com/tutorials/vault/kubernetes-minikube. Vault is awesome!"
 
 export GCP_PROJECT=$(gcloud config list --format 'value(core.project)' 2>/dev/null)
-export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+#export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
 kubectl get configmaps | grep 'secrets-file' &>/dev/null
 if [ $? == 0 ]; then

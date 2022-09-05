@@ -49,6 +49,11 @@ public class Challenge23 extends Challenge {
         return ChallengeTechnology.Tech.FRONTEND.id;
     }
 
+    @Override
+    public boolean isLimittedWhenOnlineHosted() {
+        return false;
+    }
+
     public String getActualData() {
         return new String(Base64.decode(Hex.decode(Base64.decode("NTYzMjY4MzU1MTMyMzk3NDYyNTc1Njc1NjQ0ODRlNDI2MzMxNDI2ODYzMzM0ZTdhNjQzMjM5Nzk1YTQ1NDY3OTVhNTU0YTY4NWE0NDRkMzA0ZTU2Mzg2Yg=="))));
 

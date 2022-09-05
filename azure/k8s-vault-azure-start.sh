@@ -53,14 +53,14 @@ source ../scripts/install-consul.sh
 source ../scripts/install-vault.sh
 
 echo "Add secrets manager driver to repo"
-helm repo add csi-secrets-store-provider-azure https://raw.githubusercontent.com/Azure/secrets-store-csi-driver-provider-azure/master/charts
+helm repo add csi-secrets-store-provider-azure https://azure.github.io/secrets-store-csi-driver-provider-azure/charts
 
 helm list --namespace kube-system | grep 'csi-secrets-store' &>/dev/null
 if [ $? == 0 ]; then
   echo "CSI driver is already installed"
 else
   echo "Installing CSI driver"
-  helm install -n kube-system csi csi-secrets-store-provider-azure/csi-secrets-store-provider-azure
+  helm install csi csi-secrets-store-provider-azure/csi-secrets-store-provider-azure
 fi
 
 echo "Add Azure pod identity to repo"

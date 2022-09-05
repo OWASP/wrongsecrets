@@ -9,8 +9,7 @@ RUN \
   touch /var/run/docker.sock && \
   chown abc:abc /var/run/docker.sock && \
   echo "**** cleanup ****" && \
-  rm -rf \
-    /tmp/*
+  rm -rf /tmp/*
 
 WORKDIR /config/Desktop
 

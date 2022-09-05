@@ -10,7 +10,7 @@ Welcome to the OWASP WrongSecrets p0wnable app. With this app, we have packed va
 secrets. These can help you to realize whether your secret management is ok. The challenge is to find all the different
 secrets by means of various tools and techniques.
 
-Can you solve all the 23 challenges?
+Can you solve all the 24 challenges?
 ![screenshot.png](screenshot.png)
 
 ## Support
@@ -24,7 +24,7 @@ based project, so it might take a little while before we respond.
 
 ## Basic docker exercises
 
-_Can be used for challenges 1-4, 8, 12-23_
+_Can be used for challenges 1-4, 8, 12-24_
 
 For the basic docker exercises you currently require:
 
@@ -34,7 +34,7 @@ For the basic docker exercises you currently require:
 You can install it by doing:
 
 ```bash
-docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:1.5.2-no-vault
+docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:latest-no-vault
 ```
 
 Now you can try to find the secrets by means of solving the challenge offered at:
@@ -56,6 +56,7 @@ Now you can try to find the secrets by means of solving the challenge offered at
 - [localhost:8080/challenge/21](http://localhost:8080/challenge/21)
 - [localhost:8080/challenge/22](http://localhost:8080/challenge/22)
 - [localhost:8080/challenge/23](http://localhost:8080/challenge/23)
+- [localhost:8080/challenge/24](http://localhost:8080/challenge/24)
 
 Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look
 better ;-).
@@ -81,7 +82,7 @@ spoiling it for others that want to testdrive it.
 
 ## Basic K8s exercise
 
-_Can be used for challenges 1-6, 8, 12-23_
+_Can be used for challenges 1-6, 8, 12-24_
 
 ### Minikube based
 
@@ -126,9 +127,13 @@ now you can use the provided IP address and port to further play with the K8s va
 - [localhost:8080/challenge/5](http://localhost:8080/challenge/5)
 - [localhost:8080/challenge/6](http://localhost:8080/challenge/6)
 
+### Okteto based
+
+Don't want to go over the hassle of setting up K8S yourself? visit [https://wrongsecrets-commjoen.cloud.okteto.net](https://wrongsecrets-commjoen.cloud.okteto.net/). Please note that we are using the free Developer version here, so it might take a while for it to respond. Please: do not try to hack/Fuzz the application as this might bring it down and spoil the fun for others.
+
 ## Vault exercises with minikube
 
-_Can be used for challenges 1-8, 12-23_
+_Can be used for challenges 1-8, 12-24_
 Make sure you have the following installed:
 
 - minikube with docker (or comment out line 8 and work at your own k8s setup),
@@ -148,7 +153,7 @@ vault and not update the secret-challenge application with the new secret.
 
 ## Cloud Challenges
 
-_Can be used for challenges 1-23_
+_Can be used for challenges 1-24_
 
 **READ THIS**: Given that the exercises below contain IAM privilege escalation exercises,
 never run this on an account which is related to your production environment or can influence your account-over-arching
@@ -370,7 +375,7 @@ If you want to play the challenges, but cannot install tools like keepass, Radar
 containers, try the following:
 
 ```shell
-docker run -p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock jeroenwillemsen/wrongsecrets-desktop:1.5.2
+docker run -p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock jeroenwillemsen/wrongsecrets-desktop:latest
 ```
 
 or use something more configurable:
@@ -386,9 +391,9 @@ docker run -d \
   -e KEYBOARD=en-us-qwerty \
   -p 3000:3000 \
   -v /var/run/docker.sock:/var/run/docker.sock \
-  --shm-size="1gb" \
+  --shm-size="2gb" \
   --restart unless-stopped \
-  jeroenwillemsen/wrongsecrets-desktop:1.5.2
+  jeroenwillemsen/wrongsecrets-desktop:latest
 ```
 
 And then at [http://localhost:3000](http://localhost:3000).

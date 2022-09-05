@@ -3,6 +3,7 @@ package org.owasp.wrongsecrets.challenges;
 import lombok.Getter;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -55,6 +56,10 @@ public class ChallengeUI {
     }
 
     public String getHint() {
+        List<RuntimeEnvironment.Environment> limittedEnvs = List.of(RuntimeEnvironment.Environment.HEROKU_DOCKER, RuntimeEnvironment.Environment.FLY_DOCKER, RuntimeEnvironment.Environment.OKTETO_K8S);
+        if (limittedEnvs.contains(runtimeEnvironment.getRuntimeEnvironment()) && challenge.isLimittedWhenOnlineHosted()) {
+            return challenge.getHint() + "_limitted";
+        }
         return challenge.getHint();
     }
 

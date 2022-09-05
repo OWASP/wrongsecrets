@@ -20,7 +20,7 @@ Make sure you have an active account at GCP for which you have configured the cr
 
 If you want to host a multi-user setup, you will probably want to share the state file so that everyone can try related challenges. We have provided a starter to easily do so using a Terraform gcs backend.
 
-First, create an s3 bucket:
+First, create an storage bucket:
 
 1. Navigate to the 'shared-state' directory `cd shared-state`
 2. Change the `project_id` in the `terraform.tfvars` file to your project id
@@ -44,7 +44,7 @@ The bucket name should be in the output. Please use that to configure the Terraf
 5. Run `terraform init` (if required, use tfenv to select TF 0.14.0 or higher )
 6. Run `terraform plan`
 7. Run `terraform apply`. Note: the apply will take 10 to 20 minutes depending on the speed of the GCP backplane.
-8. When creation is done, run `gcloud container clusters get-credentials wrongsecrets-exercise-cluster --region YOUR_REGION`
+8. When creation is done, run `gcloud container clusters get-credentials wrongsecrets-exercise-cluster --region YOUR_REGION`. Note if it errors on a missing plugin to support `kubectl`, then run `gcloud components install gke-gcloud-auth-plugin` and `gcloud container clusters get-credentials wrongsecrets-exercise-cluster` .
 9. Run `./k8s-vault-gcp-start.sh`
 
 ### GKE ingres for shared deployment

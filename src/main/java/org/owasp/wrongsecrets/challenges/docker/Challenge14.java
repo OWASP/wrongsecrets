@@ -65,6 +65,11 @@ public class Challenge14 extends Challenge {
         return ChallengeTechnology.Tech.PASSWORD_MANAGER.id;
     }
 
+    @Override
+    public boolean isLimittedWhenOnlineHosted() {
+        return false;
+    }
+
     private String findAnswer() {
         if (Strings.isEmpty(keepassxPassword)) {
             log.info("Checking secret with values {}", keepassxPassword);

@@ -53,6 +53,11 @@ public class Challenge16 extends Challenge {
         return ChallengeTechnology.Tech.FRONTEND.id;
     }
 
+    @Override
+    public boolean isLimittedWhenOnlineHosted() {
+        return false;
+    }
+
     public String getActualData() {
         try {
             return Files.readString(Paths.get(dockerMountPath, "secondkey.txt"));

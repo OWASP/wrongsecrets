@@ -9,9 +9,8 @@ processes = []
   dockerfile = "Dockerfile"
 
 [build.args]
-  argBasedVersion="1.5.2"
+  argBasedVersion="1.5.3RC1"
   spring_profile="without-vault"
-  argBasedEnv="Fly(Docker)"
 
 [env]
   K8S_ENV="Fly(Docker)"

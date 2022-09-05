@@ -60,6 +60,11 @@ public class Challenge15 extends Challenge {
         return ChallengeTechnology.Tech.GIT.id;
     }
 
+    @Override
+    public boolean isLimittedWhenOnlineHosted() {
+        return false;
+    }
+
     private String quickDecrypt(String cipherText) {
         try {
             final byte[] keyData = Base64.getDecoder().decode(encryptionKey);

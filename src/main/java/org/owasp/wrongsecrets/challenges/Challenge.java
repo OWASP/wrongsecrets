@@ -23,6 +23,8 @@ public abstract class Challenge {
 
     public abstract String getTech();
 
+    public abstract boolean isLimittedWhenOnlineHosted();
+
     public boolean solved(String answer) {
         var correctAnswer = answerCorrect(answer);
         if (correctAnswer) {

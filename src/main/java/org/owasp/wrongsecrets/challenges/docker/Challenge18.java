@@ -76,4 +76,9 @@ public class Challenge18 extends Challenge {
     public String getTech() {
         return ChallengeTechnology.Tech.CRYPTOGRAPHY.id;
     }
+
+    @Override
+    public boolean isLimittedWhenOnlineHosted() {
+        return false;
+    }
 }

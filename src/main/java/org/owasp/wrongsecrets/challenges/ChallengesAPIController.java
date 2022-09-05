@@ -76,7 +76,7 @@ public class ChallengesAPIController {
             case DOCKER, HEROKU_DOCKER, FLY_DOCKER -> "Docker";
             case GCP, AWS, AZURE -> "Cloud";
             case VAULT -> "Vault";
-            case K8S -> "Kubernetes";
+            case K8S, OKTETO_K8S -> "Kubernetes";
         };
     }
 
