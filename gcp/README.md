@@ -50,7 +50,7 @@ The bucket name should be in the output. Please use that to configure the Terraf
 
 ### GKE ingres for shared deployment
 
-By default the deployment uses a nodePort tunneled to localhost. For a larger audiance deployment the wrongsecrets app can deployed with a GKE ingress, run `k8s-vault-gcp-ingress-start.sh`
+By default the deployment uses a nodePort tunneled to localhost. For a larger audience deployment the wrongsecrets app can deployed with a GKE ingress, run `k8s-vault-gcp-ingress-start.sh`
 Please note that the GKE ingress can take a few minues to deploy and is publicly available. A connection URL will be returned once the ingress is available. Note that, after the connection URL is returned, a first lookup might still take a minute, after which it is much faster.
 
 Your GKE cluster should be visible in [EU-West4](https://console.cloud.google.com/kubernetes?referrer=search&project=wrongsecrets) by default. Want a different region? You can modify `terraform.tfvars` or input it directly using the `region` variable in plan/apply.
@@ -73,7 +73,7 @@ When you're done:
 2. Run `terraform destroy` to clean up the infrastructure.
 3. Run `unset KUBECONFIG` to unset the KUBECONFIG env var.
 4. Run `rm ~/.kube/wrongsecrets` to remove the kubeconfig file.
-5. Run `rm terraform.ts*` to remove local state files.
+5. Run `rm terraform.tfstate*` to remove local state files.
 
 ### A few things to consider
 
@@ -83,6 +83,7 @@ When you're done:
 4. You should see at the configuration details of the cluster that `databaseEncryption` is `DECRYPTED` (`gcloud container clusters describe wrongsecrets-exercise-cluster --region europe-west4`). What does that mean?
 
 ## Terraform documentation
+
 The documentation below is auto-generated to give insight on what's created via Terraform.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
@@ -95,17 +96,16 @@ The documentation below is auto-generated to give insight on what's created via 
 | <a name="requirement_google-beta"></a> [google-beta](#requirement\_google-beta) | ~> 4.1 |
 | <a name="requirement_http"></a> [http](#requirement\_http) | ~> 2.1 |
 | <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | ~> 1.11 |
-| <a name="requirement_local"></a> [local](#requirement\_local) | ~> 1.4 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | ~> 3.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_google"></a> [google](#provider\_google) | ~> 4.1 |
-| <a name="provider_google-beta"></a> [google-beta](#provider\_google-beta) | ~> 4.1 |
-| <a name="provider_http"></a> [http](#provider\_http) | ~> 2.1 |
-| <a name="provider_random"></a> [random](#provider\_random) | ~> 3.0 |
+| <a name="provider_google"></a> [google](#provider\_google) | 4.34.0 |
+| <a name="provider_google-beta"></a> [google-beta](#provider\_google-beta) | 4.34.0 |
+| <a name="provider_http"></a> [http](#provider\_http) | 2.2.0 |
+| <a name="provider_random"></a> [random](#provider\_random) | 3.4.2 |
 
 ## Modules
 

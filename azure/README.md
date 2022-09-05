@@ -78,7 +78,7 @@ When you're done:
 1. Kill the port forward.
 2. Run `terraform destroy` to clean up the infrastructure. Note that you may need to repeat the destroy to fully clean up.
 3. If you've used the shared state, `cd` to the `shared-state` folder and run `terraform destroy` there too.
-4. Run `rm terraform.ts*` to remove local state files.
+4. Run `rm terraform.tf*` to remove local state files.
 
 ### A few things to consider
 
@@ -103,9 +103,9 @@ The documentation below is auto-generated to give insight on what's created via 
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | ~> 3.9 |
-| <a name="provider_http"></a> [http](#provider\_http) | ~> 2.1 |
-| <a name="provider_random"></a> [random](#provider\_random) | ~> 3.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.21.1 |
+| <a name="provider_http"></a> [http](#provider\_http) | 2.2.0 |
+| <a name="provider_random"></a> [random](#provider\_random) | 3.4.2 |
 
 ## Modules
 

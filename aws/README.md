@@ -71,7 +71,7 @@ When you're done:
     1. If you've deployed the `shared-state` s3 bucket, also `cd shared-state` and `terraform destroy` there.
 3. Run `unset KUBECONFIG` to unset the KUBECONFIG env var.
 4. Run `rm ~/.kube/wrongsecrets` to remove the kubeconfig file.
-5. Run `rm terraform.ts*` to remove local state files.
+5. Run `rm terraform.tfstate*` to remove local state files.
 
 ### A few things to consider
 
@@ -109,9 +109,9 @@ The documentation below is auto-generated to give insight on what's created via 
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 4.1 |
-| <a name="provider_http"></a> [http](#provider\_http) | ~> 2.1 |
-| <a name="provider_random"></a> [random](#provider\_random) | ~> 3.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.8.0 |
+| <a name="provider_http"></a> [http](#provider\_http) | 2.1.0 |
+| <a name="provider_random"></a> [random](#provider\_random) | 3.1.2 |
 
 ## Modules
 
