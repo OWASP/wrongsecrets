@@ -43,7 +43,7 @@
         <maven.compiler.target>18</maven.compiler.target>
         <spring.cloud-version>2021.0.3</spring.cloud-version>
         <lombok.version>1.18.24</lombok.version>
-        <aws.sdk.version>2.17.265</aws.sdk.version>
+        <aws.sdk.version>2.17.267</aws.sdk.version>
         <asciidoctorj.version>2.5.5</asciidoctorj.version>
         <jruby.version>9.3.7.0</jruby.version>
         <bootstrap.version>5.2.0</bootstrap.version>
@@ -54,7 +54,7 @@
         <thymeleaf.layout>3.1.0</thymeleaf.layout>
         <asciidoctor.maven.plugin.version>2.2.2</asciidoctor.maven.plugin.version>
         <azure.keyvault.version>4.4.6</azure.keyvault.version>
-        <azure.identity.version>1.5.4</azure.identity.version>
+        <azure.identity.version>1.5.5</azure.identity.version>
         <azure.keyvault.spring.version>2.3.5</azure.keyvault.spring.version>
         <spring.security.version>5.7.3</spring.security.version>
         <cyclonedx.core.version>7.2.0</cyclonedx.core.version>
