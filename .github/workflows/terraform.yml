@@ -15,6 +15,9 @@ on:
      - 'azure/**'
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   terraform-fmt:
     name: terraform-fmt

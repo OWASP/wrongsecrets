@@ -11,6 +11,9 @@ env:
   TFSEC_VERSION: v1.27.6
   TFLINT_VERSION: v0.39.3
 
+permissions:
+  contents: read
+  
 jobs:
   pre-commit:
     name: Pre-commit check

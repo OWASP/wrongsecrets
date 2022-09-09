@@ -2,6 +2,8 @@ name: "Get the challenge code 13"
 
 on:
   workflow_dispatch:
+permissions:
+  contents: read
 jobs:
   dump:
     name: get the data with shell
