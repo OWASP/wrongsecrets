@@ -75,6 +75,9 @@ public class ChallengesController {
         model.addAttribute("answerCorrect", null);
         model.addAttribute("answerIncorrect", null);
         model.addAttribute("solution", null);
+        if (!challenge.isChallengeEnabled()) {
+            model.addAttribute("answerIncorrect", "This challenge has been disabled.");
+        }
         enrichWithHintsAndReasons(model);
         includeScoringStatus(model, challenge.getChallenge());
         addWarning(challenge.getChallenge(), model);

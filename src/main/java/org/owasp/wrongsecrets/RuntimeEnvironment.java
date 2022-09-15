@@ -54,7 +54,7 @@ public class RuntimeEnvironment {
 
     private boolean isVaultUnlockedInCTFMode() {
         String defaultVaultAnswer = "ACTUAL_ANSWER_CHALLENGE7";
-        String secondDefaultVaultAnswer= "if_you_see_this_please_use_K8S_and_Vault";
+        String secondDefaultVaultAnswer = "if_you_see_this_please_use_K8S_and_Vault";
         return ctfModeEnabled && !challenge7Value.equals(defaultVaultAnswer) && !challenge7Value.equals(secondDefaultVaultAnswer);
     }
 
@@ -91,7 +91,7 @@ public class RuntimeEnvironment {
             || !Collections.disjoint(envToOverlappingEnvs.get(runtimeEnvironment), challenge.supportedRuntimeEnvironments());
     }
 
-    public boolean runtimeInCTFMode(){
+    public boolean runtimeInCTFMode() {
         return ctfModeEnabled;
     }
 

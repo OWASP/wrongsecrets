@@ -80,7 +80,7 @@ public class ChallengeUI {
     }
 
     public boolean isChallengeEnabled() {
-        if(runtimeEnvironment.runtimeInCTFMode()){
+        if (runtimeEnvironment.runtimeInCTFMode()) {
             return runtimeEnvironment.canRun(challenge) && challenge.canRunInCTFMode();
         }
         return runtimeEnvironment.canRun(challenge);

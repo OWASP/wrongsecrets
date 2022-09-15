@@ -30,9 +30,9 @@ public class Challenge8 extends Challenge {
 
     public Challenge8(ScoreCard scoreCard, @Value("${challenge_acht_ctf_host_value}") String serverCode) {
         super(scoreCard);
-        if (!Strings.isNullOrEmpty(serverCode) && !serverCode.equals("not_set")){
+        if (!Strings.isNullOrEmpty(serverCode) && !serverCode.equals("not_set")) {
             randomValue = serverCode;
-        }else{
+        } else {
             randomValue = generateRandomString(10);
         }
         log.info("Initializing challenge 8 with random value {}", randomValue);
