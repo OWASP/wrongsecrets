@@ -39,7 +39,7 @@ public class ChallengesController {
     @Value("${ctf_key}")
     private String ctfKey;
 
-    @Value("challenge_acht_ctf_to_provide_to_host_value")
+    @Value("${challenge_acht_ctf_to_provide_to_host_value}")
     private String keyToProvideToHost;
 
 
@@ -109,11 +109,12 @@ public class ChallengesController {
             if (challenge.getChallenge().solved(challengeForm.solution())) {
                 if (ctfModeEnabled) {
                     String code = generateCode(challenge);
-                    if ((challenge.getChallenge() instanceof Challenge8) && (!Strings.isNullOrEmpty(keyToProvideToHost) && !keyToProvideToHost.equals("not_set"))) {
-                        model.addAttribute("answerCorrect", "Your answer is correct! " + "fill in the following answer in the CTF instance for which you get your code: " + keyToProvideToHost);
-                    }
                     model.addAttribute("answerCorrect", "Your answer is correct! " + "fill in the following code in CTF scoring: " + code);
-
+                    if (challenge.getChallenge() instanceof Challenge8) {
+                        if (!Strings.isNullOrEmpty(keyToProvideToHost) && !keyToProvideToHost.equals("not_set")) { //this means that it was overriden with a code that needs to be returned to the ctf key exchange host.
+                            model.addAttribute("answerCorrect", "Your answer is correct! " + "fill in the following answer in the CTF instance for which you get your code: " + keyToProvideToHost);
+                        }
+                    }
                 } else {
                     model.addAttribute("answerCorrect", "Your answer is correct!");
                 }
@@ -123,8 +124,11 @@ public class ChallengesController {
         }
 
         model.addAttribute("challenge", challenge);
+
         includeScoringStatus(model, challenge.getChallenge());
+
         enrichWithHintsAndReasons(model);
+
         fireEnding(model);
         return "challenge";
     }
