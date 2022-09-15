@@ -1,9 +1,9 @@
 package org.owasp.wrongsecrets.challenges;
 
-import com.nimbusds.jose.crypto.impl.HMAC;
+import com.google.common.base.Strings;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
-import org.spongycastle.crypto.CryptoException;
+import org.owasp.wrongsecrets.challenges.docker.Challenge8;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.codec.Hex;
 import org.springframework.stereotype.Controller;
@@ -38,6 +38,10 @@ public class ChallengesController {
 
     @Value("${ctf_key}")
     private String ctfKey;
+
+    @Value("challenge_acht_ctf_to_provide_to_host_value")
+    private String keyToProvideToHost;
+
 
     public ChallengesController(ScoreCard scoreCard, List<ChallengeUI> challenges, RuntimeEnvironment runtimeEnvironment) {
         this.scoreCard = scoreCard;
@@ -96,15 +100,23 @@ public class ChallengesController {
     public String postController(@ModelAttribute ChallengeForm challengeForm, Model model, @PathVariable Integer id) {
         var challenge = challenges.get(id - 1);
 
-        if (challenge.getChallenge().solved(challengeForm.solution())) {
-            if (ctfModeEnabled) {
-                String code = generateCode(challenge);
-                model.addAttribute("answerCorrect", "Your answer is correct! " + "fill in the following code in CTF scoring: " + code);
-            } else {
-                model.addAttribute("answerCorrect", "Your answer is correct!");
-            }
+        if (!challenge.isChallengeEnabled()) {
+            model.addAttribute("answerIncorrect", "This challenge has been disabled.");
         } else {
-            model.addAttribute("answerIncorrect", "Your answer is incorrect, try harder ;-)");
+            if (challenge.getChallenge().solved(challengeForm.solution())) {
+                if (ctfModeEnabled) {
+                    String code = generateCode(challenge);
+                    if ((challenge.getChallenge() instanceof Challenge8) && (!Strings.isNullOrEmpty(keyToProvideToHost) && !keyToProvideToHost.equals("not_set"))) {
+                        model.addAttribute("answerCorrect", "Your answer is correct! " + "fill in the following answer in the CTF instance for which you get your code: " + keyToProvideToHost);
+                    }
+                    model.addAttribute("answerCorrect", "Your answer is correct! " + "fill in the following code in CTF scoring: " + code);
+
+                } else {
+                    model.addAttribute("answerCorrect", "Your answer is correct!");
+                }
+            } else {
+                model.addAttribute("answerIncorrect", "Your answer is incorrect, try harder ;-)");
+            }
         }
 
         model.addAttribute("challenge", challenge);

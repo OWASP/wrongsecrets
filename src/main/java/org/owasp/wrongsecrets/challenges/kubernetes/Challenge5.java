@@ -25,6 +25,11 @@ public class Challenge5 extends Challenge {
     }
 
     @Override
+    public boolean canRunInCTFMode() {
+        return true;
+    }
+
+    @Override
     public Spoiler spoiler() {
         return new Spoiler(configmapK8sSecret);
     }

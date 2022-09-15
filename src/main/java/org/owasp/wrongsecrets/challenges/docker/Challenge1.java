@@ -22,6 +22,11 @@ public class Challenge1 extends Challenge {
     }
 
     @Override
+    public boolean canRunInCTFMode() {
+        return true;
+    }
+
+    @Override
     public Spoiler spoiler() {
         return new Spoiler(Constants.password);
     }
@@ -49,4 +54,5 @@ public class Challenge1 extends Challenge {
     public boolean isLimittedWhenOnlineHosted() {
         return false;
     }
+
 }

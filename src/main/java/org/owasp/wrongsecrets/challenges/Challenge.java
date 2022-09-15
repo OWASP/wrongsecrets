@@ -25,6 +25,8 @@ public abstract class Challenge {
 
     public abstract boolean isLimittedWhenOnlineHosted();
 
+    public abstract boolean canRunInCTFMode();
+
     public boolean solved(String answer) {
         var correctAnswer = answerCorrect(answer);
         if (correctAnswer) {
