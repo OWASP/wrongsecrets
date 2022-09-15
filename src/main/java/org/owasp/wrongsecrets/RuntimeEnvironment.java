@@ -22,6 +22,9 @@ public class RuntimeEnvironment {
     @Value("${SPECIAL_K8S_SECRET}")
     private String challenge5Value; //used to determine if k8s/vault challenges are overriden;
 
+    @Value("${vaultpassword}")
+    private String challenge7Value;
+
     @Value("${default_aws_value_challenge_9}")
     private String defaultChallenge9Value; //used to determine if the cloud challenge values are overriden
 
@@ -59,6 +62,11 @@ public class RuntimeEnvironment {
         return ctfModeEnabled && !challenge5Value.equals(defaultValueChallenge5);
     }
 
+    private boolean isVaultUnlockedInCTFMode() {
+        String defaultVaultAnswer = "ACTUAL_ANSWER_CHALLENGE7";
+        return ctfModeEnabled && !challenge7Value.equals(defaultVaultAnswer);
+    }
+
     private boolean isCloudUnlockedInCTFMode() {
         String defaultValueAWSValue = "if_you_see_this_please_use_AWS_Setup";
         return ctfModeEnabled && !defaultChallenge9Value.equals(defaultValueAWSValue);
@@ -78,6 +86,10 @@ public class RuntimeEnvironment {
             return true;
         }
         if (isK8sUnlockedInCTFMode()) {
+            return challenge.supportedRuntimeEnvironments().contains(runtimeEnvironment)
+                || challenge.supportedRuntimeEnvironments().contains(DOCKER) || challenge.supportedRuntimeEnvironments().contains(K8S);
+        }
+        if (isVaultUnlockedInCTFMode()) {
             return challenge.supportedRuntimeEnvironments().contains(runtimeEnvironment)
                 || challenge.supportedRuntimeEnvironments().contains(DOCKER) || challenge.supportedRuntimeEnvironments().contains(K8S)
                 || challenge.supportedRuntimeEnvironments().contains(VAULT);
