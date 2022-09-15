@@ -75,7 +75,7 @@ public class RuntimeEnvironment {
         if (isCloudUnlockedInCTFMode()) {
             return true;
         }
-        if (isVaultUnlockedInCTFMode()) {
+        if (isVaultUnlockedInCTFMode() && isK8sUnlockedInCTFMode()) {
             return challenge.supportedRuntimeEnvironments().contains(runtimeEnvironment)
                 || challenge.supportedRuntimeEnvironments().contains(DOCKER)
                 || challenge.supportedRuntimeEnvironments().contains(K8S)
