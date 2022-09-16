@@ -104,16 +104,20 @@ public class Challenge11 extends CloudChallenge {
     }
 
     private String getChallenge11Value(RuntimeEnvironment runtimeEnvironment) {
-        if (runtimeEnvironment != null && runtimeEnvironment.getRuntimeEnvironment() != null) {
-            if (ctfEnabled && ctfValue != awsDefaultValue) {
-                return ctfValue;
+        if (!ctfEnabled) {
+            if (runtimeEnvironment != null && runtimeEnvironment.getRuntimeEnvironment() != null) {
+                if (ctfEnabled && ctfValue != awsDefaultValue) {
+                    return ctfValue;
+                }
+                return switch (runtimeEnvironment.getRuntimeEnvironment()) {
+                    case AWS -> getAWSChallenge11Value();
+                    case GCP -> getGCPChallenge11Value();
+                    case AZURE -> getAzureChallenge11Value();
+                    default -> "please_use_supported_cloud_env";
+                };
             }
-            return switch (runtimeEnvironment.getRuntimeEnvironment()) {
-                case AWS -> getAWSChallenge11Value();
-                case GCP -> getGCPChallenge11Value();
-                case AZURE -> getAzureChallenge11Value();
-                default -> "please_use_supported_cloud_env";
-            };
+        }else{
+            log.info("CTF enabled, skipping challenge11");
         }
         return "please_use_supported_cloud_env";
     }
