@@ -67,4 +67,9 @@ public class Challenge10 extends CloudChallenge {
     public String getTech() {
         return ChallengeTechnology.Tech.CSI.id;
     }
+
+    @Override
+    public boolean canRunInCTFMode() {
+        return true;
+    }
 }

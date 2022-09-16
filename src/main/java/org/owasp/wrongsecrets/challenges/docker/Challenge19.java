@@ -28,6 +28,11 @@ public class Challenge19 extends Challenge {
 
 
     @Override
+    public boolean canRunInCTFMode() {
+        return true;
+    }
+
+    @Override
     public Spoiler spoiler() {
         return new Spoiler(binaryExecutionHelper.executeCommand("", "wrongsecrets-c"));
     }

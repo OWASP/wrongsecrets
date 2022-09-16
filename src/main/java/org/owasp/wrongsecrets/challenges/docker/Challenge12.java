@@ -28,6 +28,11 @@ public class Challenge12 extends Challenge {
     }
 
     @Override
+    public boolean canRunInCTFMode() {
+        return true;
+    }
+
+    @Override
     public Spoiler spoiler() {
         return new Spoiler(getActualData());
     }
@@ -66,4 +71,5 @@ public class Challenge12 extends Challenge {
             return "if_you_see_this_please_use_docker_instead";
         }
     }
+
 }

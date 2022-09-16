@@ -40,6 +40,7 @@ public class AllControllerAdvice {
     @ModelAttribute
     public void addRuntimeEnvironment(Model model) {
         model.addAttribute("environment", runtimeEnvironment.getRuntimeEnvironment().name());
+        model.addAttribute("ctf_enabled", runtimeEnvironment.runtimeInCTFMode());
     }
 
     @Bean

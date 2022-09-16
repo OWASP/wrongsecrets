@@ -34,6 +34,11 @@ public class Challenge18 extends Challenge {
         this.hashPassword = hashPassword;
     }
 
+    @Override
+    public boolean canRunInCTFMode() {
+        return true;
+    }
+
     private String base64Decode(String base64) {
         byte[] decodedBytes = Base64.getDecoder().decode(base64);
         return new String(decodedBytes);

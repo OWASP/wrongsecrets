@@ -190,4 +190,9 @@ public class Challenge11 extends CloudChallenge {
         log.error("Fetching secret from Azure did not work, returning default");
         return azureDefaultValue;
     }
+
+    @Override
+    public boolean canRunInCTFMode() {
+        return false;
+    }
 }

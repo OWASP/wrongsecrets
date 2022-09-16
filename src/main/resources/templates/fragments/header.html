@@ -56,6 +56,7 @@
 
 
                 </ul>
+                <a th:if="${ctf_enabled != null && ctf_enabled == true}" class="nav-link disabled me-2" href="#" tabindex="-1" aria-disabled="true">In CTF-mode</a>
                 <a class="nav-link disabled me-2" href="#" tabindex="-1" aria-disabled="true"
                    th:text="'Environment:'+${environment}"></a>
                 <a class="nav-link disabled me-2" href="#" tabindex="-1" aria-disabled="true"

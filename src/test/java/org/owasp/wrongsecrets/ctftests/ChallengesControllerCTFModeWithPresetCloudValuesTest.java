@@ -1,7 +1,10 @@
-package org.owasp.wrongsecrets;
+package org.owasp.wrongsecrets.ctftests;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.owasp.wrongsecrets.InMemoryScoreCard;
+import org.owasp.wrongsecrets.RuntimeEnvironment;
+import org.owasp.wrongsecrets.WrongSecretsApplication;
 import org.owasp.wrongsecrets.challenges.cloud.Challenge10;
 import org.owasp.wrongsecrets.challenges.cloud.Challenge11;
 import org.owasp.wrongsecrets.challenges.cloud.Challenge9;
@@ -67,7 +70,7 @@ class ChallengesControllerCTFModeWithPresetCloudValuesTest {
     }
 
     @Test
-    void shouldShowFlagWhenRespondingWithSuccessInCTFModeChallenge11() throws Exception {
+    void shouldNotShowFlagWhenRespondingWithSuccessInCTFModeChallenge11() throws Exception {
         var spoil = new Challenge11(new InMemoryScoreCard(1),
             "awsRoleArn", "tokenFileLocation",
             "awsRegion", "gcpDefualtValue", "awsDefaultValue",
@@ -81,16 +84,16 @@ class ChallengesControllerCTFModeWithPresetCloudValuesTest {
                 .param("action", "submit")
                 .with(csrf()))
             .andExpect(status().isOk())
-            .andExpect(content().string(containsString("89aeb4b29d4a0bc13bd")));
+            .andExpect(content().string(containsString("This challenge has been disabled.")));
     }
 
     @Test
-    void shouldEnableCloudExercises() throws Exception {
+    void shouldEnableCloudExerciseBut11() throws Exception {
         mvc.perform(get("/"))
             .andExpect(status().isOk())
             .andExpect(content().string(containsString("<td>&nbsp;<a href=\"/challenge/9\">Challenge 9</a></td>")))
             .andExpect(content().string(containsString("<td>&nbsp;<a href=\"/challenge/10\">Challenge 10</a></td>")))
-            .andExpect(content().string(containsString("<td>&nbsp;<a href=\"/challenge/11\">Challenge 11</a></td>")));
+            .andExpect(content().string(containsString("class=\"disabled\">Challenge 11</a></td>")));
     }
 
     @Test

@@ -26,6 +26,11 @@ public class Challenge20 extends Challenge {
         this.binaryExecutionHelper = new BinaryExecutionHelper(20);
     }
 
+    @Override
+    public boolean canRunInCTFMode() {
+        return true;
+    }
+
 
     @Override
     public Spoiler spoiler() {

@@ -51,6 +51,8 @@ spec:
               value: "true"
             - name: azure_keyvault_uri
               value: ${AZ_VAULT_URI}
+            - name: management.health.azure-key-vault.enabled
+              value: true
             - name: SPECIAL_K8S_SECRET
               valueFrom:
                 configMapKeyRef:

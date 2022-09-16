@@ -67,4 +67,9 @@ public class Challenge9 extends CloudChallenge {
     public String getTech() {
         return ChallengeTechnology.Tech.TERRAFORM.id;
     }
+
+    @Override
+    public boolean canRunInCTFMode() {
+        return true;
+    }
 }

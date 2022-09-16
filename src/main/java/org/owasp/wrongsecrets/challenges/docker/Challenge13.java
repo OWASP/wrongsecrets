@@ -40,6 +40,11 @@ public class Challenge13 extends Challenge {
     }
 
     @Override
+    public boolean canRunInCTFMode() {
+        return true;
+    }
+
+    @Override
     protected boolean answerCorrect(String answer) {
         return isKeyCorrect(answer);
     }
@@ -91,4 +96,5 @@ public class Challenge13 extends Challenge {
         }
 
     }
+
 }

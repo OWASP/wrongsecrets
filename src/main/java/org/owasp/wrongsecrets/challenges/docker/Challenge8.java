@@ -1,12 +1,14 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
 
+import com.google.api.client.util.Strings;
 import lombok.extern.slf4j.Slf4j;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
 import org.owasp.wrongsecrets.challenges.Spoiler;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -26,10 +28,19 @@ public class Challenge8 extends Challenge {
     private final Random secureRandom = new SecureRandom();
     private final String randomValue;
 
-    public Challenge8(ScoreCard scoreCard) {
+    public Challenge8(ScoreCard scoreCard, @Value("${challenge_acht_ctf_host_value}") String serverCode) {
         super(scoreCard);
-        randomValue = generateRandomString(10);
+        if (!Strings.isNullOrEmpty(serverCode) && !serverCode.equals("not_set")) {
+            randomValue = serverCode;
+        } else {
+            randomValue = generateRandomString(10);
+        }
         log.info("Initializing challenge 8 with random value {}", randomValue);
+    }
+
+    @Override
+    public boolean canRunInCTFMode() {
+        return true;
     }
 
     @Override
@@ -68,4 +79,5 @@ public class Challenge8 extends Challenge {
         }
         return new String(builder);
     }
+
 }
