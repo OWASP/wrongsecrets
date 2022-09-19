@@ -16,10 +16,22 @@ The WrongSecrets Desktop contains the following tools:
 - AWS-cli for AWS challenges (Use it with `aws` in the commandline)
 - KeepassXC for password manager related challenges (Use it with `keepassXC` in the commandline)
 - Firefox
-- Docker
+- Docker (disabled in clod env)
+- Kubectl
 - Geany to have a look at the code (use it with `geany` in the commandline)
 
 ### Binaries to play with
 
 We added the Keepass file and the binaries for the reverse-engineer challenges to /config/Desktop/wrongsecrets.
 Just open the `wrongsecrets` folder on the Desktop and you will find it.
+
+### Note on kubectl
+
+When working in a minikube deployment: make sure to export KUBERNETES_SERVICE_HOST and KUBERNETES_SERVICE_PORT first!
+on Aws that would be:
+
+```shell
+export KUBERNETES_SERVICE_HOST=10.100.0.1
+export KUBERNETES_SERVICE_PORT=443
+export KUBERNETES_SERVICE_PORT_HTTPS=443
+```
