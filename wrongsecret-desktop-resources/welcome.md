@@ -3,6 +3,10 @@
 Welcome to the WrongSecretss desktop/toolcontainer! With this Docker container you have the minimal tools next to Docker ready on your finger tips.
 Need more? Don't worry: you can always do `sudo apk add <package>` .
 
+## Warning in CTF-mode
+
+Please note that this is a 1:1 user interface: if you are running a CTF as a team, be aware you cannot run the webtop together at the same time. You will have to reconnect after someone else connected.
+
 ## What is inside
 
 We have packed it with the following content:
