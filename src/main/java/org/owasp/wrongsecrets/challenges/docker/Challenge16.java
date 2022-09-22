@@ -39,7 +39,7 @@ public class Challenge16 extends Challenge {
 
     @Override
     public boolean answerCorrect(String answer) {
-        log.info("challenge 16, actualdata: {}, answer: {}", getActualData(), answer);
+        //log.debug("challenge 16, actualdata: {}, answer: {}", getActualData(), answer);
         return getActualData().equals(answer);
     }
 
