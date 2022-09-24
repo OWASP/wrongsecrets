@@ -43,7 +43,7 @@ public class ChallengesController {
     @Value("${challenge_acht_ctf_to_provide_to_host_value}")
     private String keyToProvideToHost;
 
-    @Value("ctf_server")
+    @Value("CTF_SERVER_ADRES")
     private String ctfServerAdres;
 
 
@@ -103,7 +103,7 @@ public class ChallengesController {
     }
 
 
-//    ##TODO: ADD NEW TESTS
+    //TODO: ADD NEW TESTS
     @PostMapping(value = "/challenge/{id}", params = "action=submit")
     public String postController(@ModelAttribute ChallengeForm challengeForm, Model model, @PathVariable Integer id) {
         var challenge = challenges.get(id - 1);
