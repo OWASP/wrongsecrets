@@ -42,6 +42,9 @@ public class ChallengesController {
     @Value("${challenge_acht_ctf_to_provide_to_host_value}")
     private String keyToProvideToHost;
 
+    @Value("${CTF_SERVER_ADDRESS}")
+    private String ctfServerAddress;
+
 
     public ChallengesController(ScoreCard scoreCard, List<ChallengeUI> challenges, RuntimeEnvironment runtimeEnvironment) {
         this.scoreCard = scoreCard;
@@ -85,7 +88,6 @@ public class ChallengesController {
         return "challenge";
     }
 
-
     @PostMapping(value = "/challenge/{id}", params = "action=reset")
     public String reset(@ModelAttribute ChallengeForm challengeForm, @PathVariable Integer id, Model model) {
         var challenge = challenges.get(id - 1);
@@ -98,7 +100,6 @@ public class ChallengesController {
         return "challenge";
     }
 
-
     @PostMapping(value = "/challenge/{id}", params = "action=submit")
     public String postController(@ModelAttribute ChallengeForm challengeForm, Model model, @PathVariable Integer id) {
         var challenge = challenges.get(id - 1);
@@ -108,12 +109,16 @@ public class ChallengesController {
         } else {
             if (challenge.getChallenge().solved(challengeForm.solution())) {
                 if (ctfModeEnabled) {
-                    String code = generateCode(challenge);
-                    model.addAttribute("answerCorrect", "Your answer is correct! " + "fill in the following code in CTF scoring: " + code);
-                    if (challenge.getChallenge() instanceof Challenge8) {
-                        if (!Strings.isNullOrEmpty(keyToProvideToHost) && !keyToProvideToHost.equals("not_set")) { //this means that it was overriden with a code that needs to be returned to the ctf key exchange host.
-                            model.addAttribute("answerCorrect", "Your answer is correct! " + "fill in the following answer in the CTF instance for which you get your code: " + keyToProvideToHost);
+                    if (!Strings.isNullOrEmpty(ctfServerAddress) && !ctfServerAddress.equals("not_set")) {
+                        if (challenge.getChallenge() instanceof Challenge8) {
+                            if (!Strings.isNullOrEmpty(keyToProvideToHost) && !keyToProvideToHost.equals("not_set")) { //this means that it was overriden with a code that needs to be returned to the ctf key exchange host.
+                                model.addAttribute("answerCorrect", "Your answer is correct! " + "fill in the following answer in the CTF instance at " + ctfServerAddress + "for which you get your code: " + keyToProvideToHost);
+                            }
                         }
+                        model.addAttribute("answerCorrect", "Your answer is correct! " + "fill in the same answer in the ctf-instance of the app: " + ctfServerAddress);
+                    } else {
+                        String code = generateCode(challenge);
+                        model.addAttribute("answerCorrect", "Your answer is correct! " + "fill in the following code in CTF scoring: " + code);
                     }
                 } else {
                     model.addAttribute("answerCorrect", "Your answer is correct!");
