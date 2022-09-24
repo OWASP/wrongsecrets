@@ -1,6 +1,7 @@
 package org.owasp.wrongsecrets.challenges;
 
 import com.google.common.base.Strings;
+import org.boris.pecoff4j.asm.ADD;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.docker.Challenge8;
@@ -41,6 +42,9 @@ public class ChallengesController {
 
     @Value("${challenge_acht_ctf_to_provide_to_host_value}")
     private String keyToProvideToHost;
+
+    @Value("ctf_server")
+    private String ctfServerAdres;
 
 
     public ChallengesController(ScoreCard scoreCard, List<ChallengeUI> challenges, RuntimeEnvironment runtimeEnvironment) {
@@ -99,6 +103,7 @@ public class ChallengesController {
     }
 
 
+//    ##TODO: ADD NEW TESTS
     @PostMapping(value = "/challenge/{id}", params = "action=submit")
     public String postController(@ModelAttribute ChallengeForm challengeForm, Model model, @PathVariable Integer id) {
         var challenge = challenges.get(id - 1);
@@ -108,12 +113,16 @@ public class ChallengesController {
         } else {
             if (challenge.getChallenge().solved(challengeForm.solution())) {
                 if (ctfModeEnabled) {
-                    String code = generateCode(challenge);
-                    model.addAttribute("answerCorrect", "Your answer is correct! " + "fill in the following code in CTF scoring: " + code);
-                    if (challenge.getChallenge() instanceof Challenge8) {
-                        if (!Strings.isNullOrEmpty(keyToProvideToHost) && !keyToProvideToHost.equals("not_set")) { //this means that it was overriden with a code that needs to be returned to the ctf key exchange host.
-                            model.addAttribute("answerCorrect", "Your answer is correct! " + "fill in the following answer in the CTF instance for which you get your code: " + keyToProvideToHost);
+                    if (Strings.isNullOrEmpty(ctfServerAdres) && !ctfServerAdres.equals("not_set")) {
+                        if (challenge.getChallenge() instanceof Challenge8) {
+                            if (!Strings.isNullOrEmpty(keyToProvideToHost) && !keyToProvideToHost.equals("not_set")) { //this means that it was overriden with a code that needs to be returned to the ctf key exchange host.
+                                model.addAttribute("answerCorrect", "Your answer is correct! " + "fill in the following answer in the CTF instance at " + ctfServerAdres + "for which you get your code: " + keyToProvideToHost);
+                            }
                         }
+                        model.addAttribute("answerCorrect", "Your answer is correct! " + "fill in the same answer in the ctf-instance of the app: " + ctfServerAdres);
+                    } else {
+                        String code = generateCode(challenge);
+                        model.addAttribute("answerCorrect", "Your answer is correct! " + "fill in the following code in CTF scoring: " + code);
                     }
                 } else {
                     model.addAttribute("answerCorrect", "Your answer is correct!");
