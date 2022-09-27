@@ -24,14 +24,12 @@ import java.util.List;
 @Order(25)
 public class Challenge25 extends Challenge {
     private final String cipherText;
-    private final String encryptionKey;
 
     public Challenge25(ScoreCard scoreCard, @Value("${challenge25ciphertext}") String cipherText) {
         super(scoreCard);
         this.cipherText = cipherText;
-        encryptionKey = Base64.getEncoder().encodeToString("this is it for now".getBytes(StandardCharsets.UTF_8));
     }
-    
+
     @Override
     public boolean canRunInCTFMode() {
         return true;
@@ -70,20 +68,12 @@ public class Challenge25 extends Challenge {
 
     private String quickDecrypt(String cipherText) {
         try {
-            final byte[] keyData = Base64.getDecoder().decode(encryptionKey);
-            int aes256KeyLengthInBytes = 16;
-            byte[] key = new byte[aes256KeyLengthInBytes];
-            System.arraycopy(keyData, 0, key, 0, 16);
-            Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
-            SecretKeySpec keySpec = new SecretKeySpec(key, "AES");
-            int gcmTagLengthInBytes = 16;
-            int gcmIVLengthInBytes = 12;
-            byte[] initializationVector = new byte[gcmIVLengthInBytes];
-            Arrays.fill(initializationVector, (byte) 0); //done for "poor-man's convergent encryption", please check actual convergent cryptosystems for better implementation ;-)
-            GCMParameterSpec gcmParameterSpec = new GCMParameterSpec(gcmTagLengthInBytes * 8, initializationVector);
-            cipher.init(Cipher.DECRYPT_MODE, keySpec, gcmParameterSpec);
-            byte[] plainTextBytes = cipher.doFinal(Base64.getDecoder().decode(cipherText.getBytes(StandardCharsets.UTF_8)));
-            return new String(plainTextBytes);
+            final Cipher decryptor = Cipher.getInstance("AES/GCM/NoPadding");
+            SecretKey decryptKey = new SecretKeySpec("thiszthekeytoday".getBytes(StandardCharsets.UTF_8), "AES");
+            AlgorithmParameterSpec gcmIv = new GCMParameterSpec(128, Base64.decode(cipherText), 0, 12);
+            decryptor.init(Cipher.DECRYPT_MODE, decryptKey, gcmIv);
+            String newPlainText = new String(decryptor.doFinal(Base64.decode(cipherText), 12, Base64.decode(cipherText).length - 12));
+            return new String(newPlainText);
         } catch (Exception e) {
             log.warn("Exception with Challenge 25", e);
             return "";

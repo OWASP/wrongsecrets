@@ -1,3 +1,3 @@
 *Why storing secrets on the blockchain is a bad idea*
 
-You should never commit any secret to the blockchain. All data is public. 
+You should never commit any secret to the blockchain. All data is public. Especially when a variable is public, it is very easy to read. 
