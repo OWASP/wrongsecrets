@@ -2,6 +2,7 @@ package org.owasp.wrongsecrets.challenges;
 
 import lombok.Getter;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
+import org.owasp.wrongsecrets.challenges.cloud.Challenge11;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -56,8 +57,8 @@ public class ChallengeUI {
     }
 
     public String getHint() {
-        List<RuntimeEnvironment.Environment> limittedEnvs = List.of(RuntimeEnvironment.Environment.HEROKU_DOCKER, RuntimeEnvironment.Environment.FLY_DOCKER, RuntimeEnvironment.Environment.OKTETO_K8S);
-        if (limittedEnvs.contains(runtimeEnvironment.getRuntimeEnvironment()) && challenge.isLimittedWhenOnlineHosted()) {
+        List<RuntimeEnvironment.Environment> limitedOnlineEnvs = List.of(RuntimeEnvironment.Environment.HEROKU_DOCKER, RuntimeEnvironment.Environment.FLY_DOCKER, RuntimeEnvironment.Environment.OKTETO_K8S);
+        if (limitedOnlineEnvs.contains(runtimeEnvironment.getRuntimeEnvironment()) && challenge.isLimittedWhenOnlineHosted()) {
             return challenge.getHint() + "_limitted";
         }
         return challenge.getHint();
@@ -79,6 +80,9 @@ public class ChallengeUI {
     }
 
     public boolean isChallengeEnabled() {
+        if (runtimeEnvironment.runtimeInCTFMode()) {
+            return runtimeEnvironment.canRun(challenge) && challenge.canRunInCTFMode();
+        }
         return runtimeEnvironment.canRun(challenge);
     }
 

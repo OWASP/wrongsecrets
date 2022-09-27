@@ -104,16 +104,20 @@ public class Challenge11 extends CloudChallenge {
     }
 
     private String getChallenge11Value(RuntimeEnvironment runtimeEnvironment) {
-        if (runtimeEnvironment != null && runtimeEnvironment.getRuntimeEnvironment() != null) {
-            if (ctfEnabled && ctfValue != awsDefaultValue) {
-                return ctfValue;
+        if (!ctfEnabled) {
+            if (runtimeEnvironment != null && runtimeEnvironment.getRuntimeEnvironment() != null) {
+                if (ctfEnabled && ctfValue != awsDefaultValue) {
+                    return ctfValue;
+                }
+                return switch (runtimeEnvironment.getRuntimeEnvironment()) {
+                    case AWS -> getAWSChallenge11Value();
+                    case GCP -> getGCPChallenge11Value();
+                    case AZURE -> getAzureChallenge11Value();
+                    default -> "please_use_supported_cloud_env";
+                };
             }
-            return switch (runtimeEnvironment.getRuntimeEnvironment()) {
-                case AWS -> getAWSChallenge11Value();
-                case GCP -> getGCPChallenge11Value();
-                case AZURE -> getAzureChallenge11Value();
-                default -> "please_use_supported_cloud_env";
-            };
+        } else {
+            log.info("CTF enabled, skipping challenge11");
         }
         return "please_use_supported_cloud_env";
     }
@@ -133,7 +137,7 @@ public class Challenge11 extends CloudChallenge {
                     .build();
 
                 AssumeRoleWithWebIdentityResponse tokenResponse = stsClient.assumeRoleWithWebIdentity(webIdentityRequest);
-                log.info("The token value is " + tokenResponse.credentials().sessionToken());
+                //log.debug("The token value is " + tokenResponse.credentials().sessionToken());
                 SsmClient ssmClient = SsmClient.builder()
                     .region(Region.of(awsRegion))
                     .credentialsProvider(StsAssumeRoleWithWebIdentityCredentialsProvider.builder()
@@ -146,7 +150,7 @@ public class Challenge11 extends CloudChallenge {
                     .withDecryption(true)
                     .build();
                 GetParameterResponse parameterResponse = ssmClient.getParameter(parameterRequest);
-                log.info("The parameter value is " + parameterResponse.parameter().value());
+                //log.debug("The parameter value is " + parameterResponse.parameter().value());
                 ssmClient.close();
                 return parameterResponse.parameter().value();
             } catch (StsException e) {
@@ -184,10 +188,15 @@ public class Challenge11 extends CloudChallenge {
 
     private String getAzureChallenge11Value() {
         if (isAzure()) {
-            log.info(String.format("Using Azure Key Vault URI: %s", azureVaultUri));
+            //log.debug(String.format("Using Azure Key Vault URI: %s", azureVaultUri));
             return azureWrongSecret3;
         }
         log.error("Fetching secret from Azure did not work, returning default");
         return azureDefaultValue;
+    }
+
+    @Override
+    public boolean canRunInCTFMode() {
+        return false;
     }
 }

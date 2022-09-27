@@ -2,6 +2,7 @@ package org.owasp.wrongsecrets.challenges.docker;
 
 
 import lombok.extern.slf4j.Slf4j;
+import org.bouncycastle.util.encoders.Hex;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
@@ -10,6 +11,7 @@ import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @Slf4j
@@ -22,13 +24,18 @@ public class Challenge24 extends Challenge {
     }
 
     @Override
+    public boolean canRunInCTFMode() {
+        return true;
+    }
+
+    @Override
     public Spoiler spoiler() {
         return new Spoiler(getActualData());
     }
 
     @Override
     public boolean answerCorrect(String answer) {
-        log.info("challenge 24, actualdata: {}, answer: {}", getActualData(), answer);
+        //log.debug("challenge 24, actualdata: {}, answer: {}", getActualData(), answer);
         return getActualData().equals(answer);
     }
 
@@ -53,7 +60,7 @@ public class Challenge24 extends Challenge {
     }
 
     public String getActualData() {
-        return "00010203 04050607 08090A0B 0C0D0E0F 10111213 14151617 18191A1B 1C1D1E1F 20212223 24252627 28292A2B 2C2D2E2F 30313233 34353637 38393A3B 3C3D3E3F";
+        return new String(Hex.decode("3030303130323033203034303530363037203038303930413042203043304430453046203130313131323133203134313531363137203138313931413142203143314431453146203230323132323233203234323532363237203238323932413242203243324432453246203330333133323333203334333533363337203338333933413342203343334433453346".getBytes(StandardCharsets.UTF_8)));
 
     }
 }

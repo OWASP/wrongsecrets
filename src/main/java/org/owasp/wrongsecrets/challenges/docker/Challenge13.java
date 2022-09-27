@@ -40,6 +40,11 @@ public class Challenge13 extends Challenge {
     }
 
     @Override
+    public boolean canRunInCTFMode() {
+        return true;
+    }
+
+    @Override
     protected boolean answerCorrect(String answer) {
         return isKeyCorrect(answer);
     }
@@ -66,7 +71,7 @@ public class Challenge13 extends Challenge {
 
     private boolean isKeyCorrect(String base64EncodedKey) {
         if (Strings.isEmpty(base64EncodedKey) || Strings.isEmpty(plainText) || Strings.isEmpty(cipherText)) {
-            log.info("Checking secret with values {}, {}, {}", base64EncodedKey, plainText, cipherText);
+            //log.debug("Checking secret with values {}, {}, {}", base64EncodedKey, plainText, cipherText);
             return false;
         }
 
@@ -91,4 +96,5 @@ public class Challenge13 extends Challenge {
         }
 
     }
+
 }

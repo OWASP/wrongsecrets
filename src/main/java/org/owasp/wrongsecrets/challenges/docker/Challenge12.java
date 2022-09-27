@@ -28,13 +28,18 @@ public class Challenge12 extends Challenge {
     }
 
     @Override
+    public boolean canRunInCTFMode() {
+        return true;
+    }
+
+    @Override
     public Spoiler spoiler() {
         return new Spoiler(getActualData());
     }
 
     @Override
     public boolean answerCorrect(String answer) {
-        log.info("challenge 12, actualdata: {}, answer: {}", getActualData(), answer);
+        //log.debug("challenge 12, actualdata: {}, answer: {}", getActualData(), answer);
         return getActualData().equals(answer);
     }
 
@@ -66,4 +71,5 @@ public class Challenge12 extends Challenge {
             return "if_you_see_this_please_use_docker_instead";
         }
     }
+
 }

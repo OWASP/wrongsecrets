@@ -1,9 +1,9 @@
 package org.owasp.wrongsecrets.challenges;
 
-import com.nimbusds.jose.crypto.impl.HMAC;
+import com.google.common.base.Strings;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
-import org.spongycastle.crypto.CryptoException;
+import org.owasp.wrongsecrets.challenges.docker.Challenge8;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.codec.Hex;
 import org.springframework.stereotype.Controller;
@@ -39,6 +39,13 @@ public class ChallengesController {
     @Value("${ctf_key}")
     private String ctfKey;
 
+    @Value("${challenge_acht_ctf_to_provide_to_host_value}")
+    private String keyToProvideToHost;
+
+    @Value("${CTF_SERVER_ADDRESS}")
+    private String ctfServerAddress;
+
+
     public ChallengesController(ScoreCard scoreCard, List<ChallengeUI> challenges, RuntimeEnvironment runtimeEnvironment) {
         this.scoreCard = scoreCard;
         this.challenges = challenges;
@@ -71,13 +78,15 @@ public class ChallengesController {
         model.addAttribute("answerCorrect", null);
         model.addAttribute("answerIncorrect", null);
         model.addAttribute("solution", null);
+        if (!challenge.isChallengeEnabled()) {
+            model.addAttribute("answerIncorrect", "This challenge has been disabled.");
+        }
         enrichWithHintsAndReasons(model);
         includeScoringStatus(model, challenge.getChallenge());
         addWarning(challenge.getChallenge(), model);
         fireEnding(model);
         return "challenge";
     }
-
 
     @PostMapping(value = "/challenge/{id}", params = "action=reset")
     public String reset(@ModelAttribute ChallengeForm challengeForm, @PathVariable Integer id, Model model) {
@@ -91,25 +100,40 @@ public class ChallengesController {
         return "challenge";
     }
 
-
     @PostMapping(value = "/challenge/{id}", params = "action=submit")
     public String postController(@ModelAttribute ChallengeForm challengeForm, Model model, @PathVariable Integer id) {
         var challenge = challenges.get(id - 1);
 
-        if (challenge.getChallenge().solved(challengeForm.solution())) {
-            if (ctfModeEnabled) {
-                String code = generateCode(challenge);
-                model.addAttribute("answerCorrect", "Your answer is correct! " + "fill in the following code in CTF scoring: " + code);
-            } else {
-                model.addAttribute("answerCorrect", "Your answer is correct!");
-            }
+        if (!challenge.isChallengeEnabled()) {
+            model.addAttribute("answerIncorrect", "This challenge has been disabled.");
         } else {
-            model.addAttribute("answerIncorrect", "Your answer is incorrect, try harder ;-)");
+            if (challenge.getChallenge().solved(challengeForm.solution())) {
+                if (ctfModeEnabled) {
+                    if (!Strings.isNullOrEmpty(ctfServerAddress) && !ctfServerAddress.equals("not_set")) {
+                        if (challenge.getChallenge() instanceof Challenge8) {
+                            if (!Strings.isNullOrEmpty(keyToProvideToHost) && !keyToProvideToHost.equals("not_set")) { //this means that it was overriden with a code that needs to be returned to the ctf key exchange host.
+                                model.addAttribute("answerCorrect", "Your answer is correct! " + "fill in the following answer in the CTF instance at " + ctfServerAddress + "for which you get your code: " + keyToProvideToHost);
+                            }
+                        }
+                        model.addAttribute("answerCorrect", "Your answer is correct! " + "fill in the same answer in the ctf-instance of the app: " + ctfServerAddress);
+                    } else {
+                        String code = generateCode(challenge);
+                        model.addAttribute("answerCorrect", "Your answer is correct! " + "fill in the following code in CTF scoring: " + code);
+                    }
+                } else {
+                    model.addAttribute("answerCorrect", "Your answer is correct!");
+                }
+            } else {
+                model.addAttribute("answerIncorrect", "Your answer is incorrect, try harder ;-)");
+            }
         }
 
         model.addAttribute("challenge", challenge);
+
         includeScoringStatus(model, challenge.getChallenge());
+
         enrichWithHintsAndReasons(model);
+
         fireEnding(model);
         return "challenge";
     }

@@ -41,6 +41,11 @@ public class Challenge14 extends Challenge {
     }
 
     @Override
+    public boolean canRunInCTFMode() {
+        return true;
+    }
+
+    @Override
     public Spoiler spoiler() {
         return new Spoiler(findAnswer());
     }
@@ -72,7 +77,7 @@ public class Challenge14 extends Challenge {
 
     private String findAnswer() {
         if (Strings.isEmpty(keepassxPassword)) {
-            log.info("Checking secret with values {}", keepassxPassword);
+            //log.debug("Checking secret with values {}", keepassxPassword);
             return defaultKeepassValue;
         }
         KdbxCreds creds = new KdbxCreds(keepassxPassword.getBytes());
@@ -90,9 +95,10 @@ public class Challenge14 extends Challenge {
 
     private boolean isanswerCorrectInKeeyPassx(String answer) {
         if (Strings.isEmpty(keepassxPassword) || Strings.isEmpty(answer)) {
-            log.info("Checking secret with values {}, {}", keepassxPassword, answer);
+            //log.debug("Checking secret with values {}, {}", keepassxPassword, answer);
             return false;
         }
         return answer.equals(findAnswer());
     }
+
 }

@@ -4,6 +4,7 @@ import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentMatchers;
 import org.owasp.wrongsecrets.challenges.docker.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
@@ -39,6 +40,7 @@ class SecretLeakageControllerTest {
     public void setup() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
         when(runtimeEnvironment.getRuntimeEnvironment()).thenReturn(RuntimeEnvironment.Environment.DOCKER);
+        when(runtimeEnvironment.canRun(ArgumentMatchers.any())).thenReturn(true);
     }
 
     @Test

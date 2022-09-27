@@ -28,13 +28,18 @@ public class Challenge17 extends Challenge {
     }
 
     @Override
+    public boolean canRunInCTFMode() {
+        return true;
+    }
+
+    @Override
     public Spoiler spoiler() {
         return new Spoiler(getActualData());
     }
 
     @Override
     public boolean answerCorrect(String answer) {
-        log.info("challenge 17, actualdata: {}, answer: {}", getActualData(), answer);
+        //log.debug("challenge 17, actualdata: {}, answer: {}", getActualData(), answer);
         return getActualData().equals(answer);
     }
 

@@ -10,11 +10,13 @@ import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.ChallengeUI;
 import org.owasp.wrongsecrets.challenges.ChallengesController;
 import org.owasp.wrongsecrets.challenges.Spoiler;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.List;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -41,6 +43,7 @@ class ChallengesControllerTest {
     @Test
     void startingChallengeShouldClearCorrectOrIncorrectMessage() throws Exception {
         when(challenge.solved(anyString())).thenReturn(false);
+        when(challenge.supportedRuntimeEnvironments()).thenReturn(List.of(Environment.DOCKER));
 
         this.mvc.perform(post("/challenge/1")
                 .param("solution", "wrong")
@@ -62,7 +65,7 @@ class ChallengesControllerTest {
     @Test
     void shouldReturnIncorrectAnswerMessageWhenChallengeIsNotSolved() throws Exception {
         when(challenge.solved(anyString())).thenReturn(false);
-
+        when(challenge.supportedRuntimeEnvironments()).thenReturn(List.of(Environment.DOCKER));
         this.mvc.perform(post("/challenge/1")
                 .param("solution", "wrong")
                 .param("action", "submit"))
@@ -74,9 +77,9 @@ class ChallengesControllerTest {
     @Test
     void shouldReturnCorrectAnswerMessageWhenChallengeIsSolved() throws Exception {
         when(challenge.solved(anyString())).thenReturn(true);
-
+        when(challenge.supportedRuntimeEnvironments()).thenReturn(List.of(Environment.DOCKER));
         this.mvc.perform(post("/challenge/1")
-                .param("solution", "wrong")
+                .param("solution", "right")
                 .param("action", "submit"))
             .andExpect(status().isOk())
             .andExpect(model().attributeExists("answerCorrect"))
@@ -85,7 +88,9 @@ class ChallengesControllerTest {
 
     @Test
     void shouldReturnCompleteWhenAllItemsDone() throws Exception {
+        when(challenge.supportedRuntimeEnvironments()).thenReturn(List.of(Environment.DOCKER));
         when(challenge.solved(anyString())).thenReturn(true);
+        when(scoreCard.getChallengeCompleted(any())).thenReturn(true);
         this.mvc.perform(post("/challenge/1")
                 .param("solution", "wrong")
                 .param("action", "submit"))

@@ -1,8 +1,11 @@
-package org.owasp.wrongsecrets;
+package org.owasp.wrongsecrets.ctftests;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.owasp.wrongsecrets.InMemoryScoreCard;
+import org.owasp.wrongsecrets.WrongSecretsApplication;
 import org.owasp.wrongsecrets.challenges.docker.Challenge1;
+import org.owasp.wrongsecrets.challenges.docker.Challenge8;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,6 +14,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.not;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -19,11 +23,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(
-    properties = {"ctf_enabled=true", "ctf_key=randomtextforkey"},
+    properties = {"ctf_enabled=true", "ctf_key=randomtextforkey", "CTF_SERVER_ADDRESS=https://www.google.nl", "challenge_acht_ctf_to_provide_to_host_value=workit"},
     classes = WrongSecretsApplication.class
 )
 @AutoConfigureMockMvc
-class ChallengesControllerCTFModeTest {
+class ChallengesControllerCTFClientModeTest {
 
     @Autowired
     private MockMvc mvc;
@@ -46,7 +50,7 @@ class ChallengesControllerCTFModeTest {
     }
 
     @Test
-    void shouldShowFlagWhenRespondingWithSuccessInCTFMode() throws Exception {
+    void shouldNotShowFlagButClientInstead() throws Exception {
         var spoil = new Challenge1(new InMemoryScoreCard(1)).spoiler().solution();
         mvc.perform(post("/challenge/1")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -54,13 +58,12 @@ class ChallengesControllerCTFModeTest {
                 .param("action", "submit")
                 .with(csrf()))
             .andExpect(status().isOk())
-            .andExpect(content().string(containsString("ba9a72ac7057576344856")));
-
+            .andExpect(content().string(not(containsString("ba9a72ac7057576344856"))))
+            .andExpect(content().string(containsString("https://www.google.nl")));
     }
 
-
     @Test
-    void shouldEnableK8sExercises() throws Exception{
+    void shouldEnableK8sExercises() throws Exception {
         mvc.perform(get("/"))
             .andExpect(status().isOk())
             .andExpect(content().string(containsString("class=\"disabled\">Challenge 5</a></td>")))

@@ -30,8 +30,13 @@ public class Challenge23 extends Challenge {
 
     @Override
     public boolean answerCorrect(String answer) {
-        log.info("challenge 23, actualdata: {}, answer: {}", getActualData(), answer);
+        //log.debug("challenge 23, actualdata: {}, answer: {}", getActualData(), answer);
         return getActualData().equals(answer);
+    }
+
+    @Override
+    public boolean canRunInCTFMode() {
+        return true;
     }
 
     @Override

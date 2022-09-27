@@ -25,6 +25,11 @@ public class Challenge7 extends Challenge {
         this.vaultPasswordString = vaultPasswordString;
     }
 
+    @Override
+    public boolean canRunInCTFMode() {
+        return true;
+    }
+
     private String getAnswer() {
         return vaultPassword != null && Strings.isNotEmpty(vaultPassword.getPasssword()) ? vaultPassword.getPasssword() : vaultPasswordString;
     }

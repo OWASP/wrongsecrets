@@ -1,7 +1,9 @@
-package org.owasp.wrongsecrets;
+package org.owasp.wrongsecrets.ctftests;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.owasp.wrongsecrets.InMemoryScoreCard;
+import org.owasp.wrongsecrets.WrongSecretsApplication;
 import org.owasp.wrongsecrets.challenges.kubernetes.Challenge5;
 import org.owasp.wrongsecrets.challenges.kubernetes.Challenge6;
 import org.owasp.wrongsecrets.challenges.kubernetes.Challenge7;
@@ -25,7 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
     classes = WrongSecretsApplication.class
 )
 @AutoConfigureMockMvc
-class ChallengesControllerCTFModeWithPresetK8sValuesTest {
+class ChallengesControllerCTFModeWithPresetK8sAndVaultValuesTest {
 
     @Autowired
     private MockMvc mvc;
@@ -76,7 +78,7 @@ class ChallengesControllerCTFModeWithPresetK8sValuesTest {
     }
 
     @Test
-    void shouldEnableK8sExercises() throws Exception{
+    void shouldEnableK8sAndVaultExercises() throws Exception{
         mvc.perform(get("/"))
             .andExpect(status().isOk())
             .andExpect(content().string(containsString("<td>&nbsp;<a href=\"/challenge/5\">Challenge 5</a></td>")))
