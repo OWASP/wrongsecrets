@@ -1,10 +1,14 @@
 You can solve this challenge by the following steps:
 
 Option 1:
+1. Look under the contract creation transaction on etherscan
+2. Go to state and look at storage
+
+Option 2:
 1. Create an infura key (https://infura.io/)
 2. Write a simple script with web3js to call the view function on the public string "secret"
 
-Option 2:
+Option 3:
 1. Create an infura key (https://infura.io/)
 2. Read the storage at position 0 for the contract like: 
 curl https://goerli.infura.io/v3/${your-infura-key} \
