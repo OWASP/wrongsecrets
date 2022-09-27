@@ -2,6 +2,7 @@ package org.owasp.wrongsecrets.challenges.docker;
 
 
 import lombok.extern.slf4j.Slf4j;
+import org.bouncycastle.util.encoders.Base64;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
@@ -12,11 +13,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Value;
 
 import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
 import javax.crypto.spec.GCMParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.Base64;
+import java.security.spec.AlgorithmParameterSpec;
 import java.util.List;
 
 @Slf4j
@@ -72,8 +73,7 @@ public class Challenge25 extends Challenge {
             SecretKey decryptKey = new SecretKeySpec("thiszthekeytoday".getBytes(StandardCharsets.UTF_8), "AES");
             AlgorithmParameterSpec gcmIv = new GCMParameterSpec(128, Base64.decode(cipherText), 0, 12);
             decryptor.init(Cipher.DECRYPT_MODE, decryptKey, gcmIv);
-            String newPlainText = new String(decryptor.doFinal(Base64.decode(cipherText), 12, Base64.decode(cipherText).length - 12));
-            return new String(newPlainText);
+            return new String(decryptor.doFinal(Base64.decode(cipherText), 12, Base64.decode(cipherText).length - 12));
         } catch (Exception e) {
             log.warn("Exception with Challenge 25", e);
             return "";
