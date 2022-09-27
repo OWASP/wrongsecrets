@@ -1,0 +1,13 @@
+You can solve this challenge by the following steps:
+
+Option 1:
+1. Create an infura key (https://infura.io/)
+2. Write a simple script with web3js to call the view function on the public string "secret"
+
+Option 2:
+1. Create an infura key (https://infura.io/)
+2. Read the storage at position 0 for the contract like: 
+curl https://goerli.infura.io/v3/${your-infura-key} \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc":"2.0", "method": "eth_getStorageAt", "params": ["0x8b72f7cbAD50620c46219ad676Ad9d3a5A273587", "0x0", "latest"], "id": 1}'

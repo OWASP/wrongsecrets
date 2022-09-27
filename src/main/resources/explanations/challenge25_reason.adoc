@@ -1,0 +1,3 @@
+*Why storing secrets on the blockchain is a bad idea*
+
+You should never commit any secret to the blockchain. All data is public. 
