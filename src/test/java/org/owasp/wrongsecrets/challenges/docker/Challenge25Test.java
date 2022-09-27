@@ -17,7 +17,7 @@ class Challenge25Test {
 
     @Test
     void rightAnswerShouldSolveChallenge() {
-        var challenge = new Challenge25(scoreCard);
+        var challenge = new Challenge25(scoreCard, "dQMhBe8oLxIdGLcxPanDLS++srED/x05P+Ph9PFZKlL2K42vXi7Vtbh3/N90sGT087W7ARURZg==");
         Assertions.assertThat(challenge.solved(challenge.spoiler().solution())).isTrue();
         Mockito.verify(scoreCard).completeChallenge(challenge);
     }
