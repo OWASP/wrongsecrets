@@ -54,7 +54,7 @@ public class Challenge25 extends Challenge {
 
     @Override
     public int difficulty() {
-        return 1;
+        return 2;
     }
 
     @Override
