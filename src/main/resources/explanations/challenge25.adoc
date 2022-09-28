@@ -1,0 +1,5 @@
+=== Secrets in smart contracts part 1
+
+On public blockchains, everything that is written on-chain is world-readable.
+
+In this challenge, you need to read the variable named secret from the contract `0x8b72f7cbAD50620c46219ad676Ad9d3a5A273587` on the Goerli EVM Testnet.

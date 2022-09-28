@@ -47,7 +47,7 @@ class ChallengesControllerCTFModeWithPresetCloudValuesTest {
 
     @Test
     void shouldShowFlagWhenRespondingWithSuccessInCTFModeChallenge9() throws Exception {
-        var spoil = new Challenge9(new InMemoryScoreCard(1), null, "ACTUAL_ANSWER_CHALLENGE9", new RuntimeEnvironment(RuntimeEnvironment.Environment.HEROKU_DOCKER)).spoiler().solution();
+        var spoil = new Challenge9(new InMemoryScoreCard(1), null, "ACTUAL_ANSWER_CHALLENGE9", "wrongsecret", new RuntimeEnvironment(RuntimeEnvironment.Environment.HEROKU_DOCKER)).spoiler().solution();
         mvc.perform(post("/challenge/9")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("solution", spoil)
@@ -59,7 +59,7 @@ class ChallengesControllerCTFModeWithPresetCloudValuesTest {
 
     @Test
     void shouldShowFlagWhenRespondingWithSuccessInCTFModeChallenge10() throws Exception {
-        var spoil = new Challenge10(new InMemoryScoreCard(1), null, "ACTUAL_ANSWER_CHALLENGE10", new RuntimeEnvironment(RuntimeEnvironment.Environment.HEROKU_DOCKER)).spoiler().solution();
+        var spoil = new Challenge10(new InMemoryScoreCard(1), null, "ACTUAL_ANSWER_CHALLENGE10", "wrongsecret-2", new RuntimeEnvironment(RuntimeEnvironment.Environment.HEROKU_DOCKER)).spoiler().solution();
         mvc.perform(post("/challenge/10")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("solution", spoil)
@@ -97,7 +97,7 @@ class ChallengesControllerCTFModeWithPresetCloudValuesTest {
     }
 
     @Test
-    void shouldEnableK8sExercises() throws Exception{
+    void shouldEnableK8sExercises() throws Exception {
         mvc.perform(get("/"))
             .andExpect(status().isOk())
             .andExpect(content().string(containsString("<td>&nbsp;<a href=\"/challenge/5\">Challenge 5</a></td>")))
