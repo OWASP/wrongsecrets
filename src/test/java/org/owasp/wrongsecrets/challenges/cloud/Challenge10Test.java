@@ -29,14 +29,14 @@ class Challenge10Test {
         var secret = "secretvalueWitFile";
         Files.writeString(testFile.toPath(), secret, StandardOpenOption.CREATE, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
 
-        var challenge = new Challenge10(scoreCard, dir.toString(), "test", runtimeEnvironment);
+        var challenge = new Challenge10(scoreCard, dir.toString(), "test", "wrongsecret-2", runtimeEnvironment);
 
         Assertions.assertThat(challenge.answerCorrect("secretvalueWitFile")).isTrue();
     }
 
     @Test
     void solveChallenge10WithoutAWSFile(@TempDir Path dir) {
-        var challenge = new Challenge10(scoreCard, dir.toString(), "test", runtimeEnvironment);
+        var challenge = new Challenge10(scoreCard, dir.toString(), "test", "wrongsecret-2", runtimeEnvironment);
 
         Assertions.assertThat(challenge.answerCorrect("secretvalueWitFile")).isFalse();
     }
@@ -45,7 +45,7 @@ class Challenge10Test {
     void whenGCPEnvGCPDocumentationShouldBeReturned() {
         Mockito.when(runtimeEnvironment.getRuntimeEnvironment()).thenReturn(RuntimeEnvironment.Environment.GCP);
 
-        var challenge = new Challenge10(scoreCard, "", "test", runtimeEnvironment);
+        var challenge = new Challenge10(scoreCard, "", "test", "wrongsecret-2", runtimeEnvironment);
 
         Assertions.assertThat(challenge.getExplanation()).isEqualTo("challenge10-gcp");
     }
@@ -54,7 +54,7 @@ class Challenge10Test {
     void whenAWSEnvAWSDocumentationShouldBeReturned() {
         Mockito.when(runtimeEnvironment.getRuntimeEnvironment()).thenReturn(RuntimeEnvironment.Environment.AWS);
 
-        var challenge = new Challenge10(scoreCard, "", "test", runtimeEnvironment);
+        var challenge = new Challenge10(scoreCard, "", "test", "wrongsecret-2", runtimeEnvironment);
 
         Assertions.assertThat(challenge.getExplanation()).isEqualTo("challenge10");
     }
