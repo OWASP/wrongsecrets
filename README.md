@@ -211,6 +211,7 @@ Top contributors:
 - [Joss Sparkes @remakingeden](https://github.com/remakingeden)
 - [Tibor Hercz @tiborhercz](https://github.com/tiborhercz)
 - [Filip Chyla @fchyla](https://github.com/fchyla)
+- [Chris Elbring Jr. @neatzsche](https://github.com/neatzsche)
 - [Dmitry Litosh @Dlitosh](https://github.com/Dlitosh)
 - [Josh Grossman @tghosth](https://github.com/tghosth)
 - [Spyros @northdpole](https://github.com/northdpole)
