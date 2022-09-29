@@ -1,5 +1,7 @@
 You can find the correct input to the guess method by:
-1. Looking up the contract on the etherscan explorer.
-2. Pulling the hash from the contract storage.
-3. Going through the transactions and then opening the inputs tab and decoding them as UTF-8.
-4. Comparing the the hashes of the inputs from the transactions with the stored hash value.
+
+1. Comparing hashes:
+- Look up the contract on the https://etherscan.io/[Etherscan] explorer.
+- Pull the hash from the contract storage.
+- Go through the transactions and then opening the inputs tab and decoding them as UTF-8.
+- Compare the hashes of the inputs from the transactions with the stored hash value.
