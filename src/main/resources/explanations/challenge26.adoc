@@ -1,0 +1,5 @@
+=== Secrets in smart contracts part 2
+
+Our smart contract developer realized he wrote a secret to the chain and went back and wrote over it.
+
+In this challenge, you need to read the variable named secret from the contract `0xCe793D588cd1Ee091290b4A1aE1D586B2a748eB4` on the Goerli EVM Testnet as it was before it got changed.
