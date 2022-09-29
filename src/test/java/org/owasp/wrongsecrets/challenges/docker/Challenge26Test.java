@@ -9,7 +9,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.owasp.wrongsecrets.ScoreCard;
 
 @ExtendWith(MockitoExtension.class)
-class Challenge25Test {
+class Challenge26Test {
 
     @Mock
     private ScoreCard scoreCard;
