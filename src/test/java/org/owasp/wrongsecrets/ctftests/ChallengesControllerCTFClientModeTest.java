@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.owasp.wrongsecrets.InMemoryScoreCard;
 import org.owasp.wrongsecrets.WrongSecretsApplication;
+import org.owasp.wrongsecrets.challenges.ChallengesController;
 import org.owasp.wrongsecrets.challenges.docker.Challenge1;
 import org.owasp.wrongsecrets.challenges.docker.Challenge8;
 import org.springframework.beans.factory.annotation.Autowired;
