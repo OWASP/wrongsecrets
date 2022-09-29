@@ -20,7 +20,7 @@ The WrongSecrets Desktop contains the following tools:
 - AWS-cli for AWS challenges (Use it with `aws` in the commandline)
 - KeepassXC for password manager related challenges (Use it with `keepassXC` in the commandline)
 - Firefox
-- Docker (disabled in clod env)
+- Docker (disabled in cloud env)
 - Kubectl
 - Geany to have a look at the code (use it with `geany` in the commandline)
 
