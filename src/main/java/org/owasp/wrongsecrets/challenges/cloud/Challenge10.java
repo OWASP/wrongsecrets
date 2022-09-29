@@ -29,10 +29,11 @@ public class Challenge10 extends CloudChallenge {
     public Challenge10(ScoreCard scoreCard,
                        @Value("${secretmountpath}") String filePath,
                        @Value("${default_aws_value_challenge_10}") String awsDefaultValue,
+                       @Value("${FILENAME_CHALLENGE10}") String fileName,
                        RuntimeEnvironment runtimeEnvironment) {
         super(scoreCard, runtimeEnvironment);
         this.awsDefaultValue = awsDefaultValue;
-        this.challengeAnswer = getCloudChallenge9and10Value(filePath, "wrongsecret-2");
+        this.challengeAnswer = getCloudChallenge9and10Value(filePath, fileName);
     }
 
     @Override

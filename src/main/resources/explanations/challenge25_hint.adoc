@@ -1,17 +1,21 @@
 You can solve this challenge by the following steps:
 
 Option 1:
-1. Look under the contract creation transaction on etherscan
-2. Go to state and look at storage
+1. Look under the contract creation transaction on https://goerli.etherscan.io/tx/0x497b71a1fd4c57509bfecc2114ec649387fe669c23a3a7e97961f389444d9561[Etherscan]
+2. Go to state and look at storage.
 
 Option 2:
-1. Create an infura key (https://infura.io/)
-2. Write a simple script with web3js to call the view function on the public string "secret"
+1. Look under the contract creation transaction on https://goerli.etherscan.io/tx/0x497b71a1fd4c57509bfecc2114ec649387fe669c23a3a7e97961f389444d9561[Etherscan]
+2. Have a look at the input data.
 
 Option 3:
-1. Create an infura key (https://infura.io/)
-2. Read the storage at position 0 for the contract like: 
-curl https://goerli.infura.io/v3/${your-infura-key} \
+1. Create an Infura key at https://infura.io/[Infura].
+2. Write a simple script with web3js to call the view function on the public string "secret"
+
+Option 2:
+1. Create an Infura key at https://infura.io/[Infura].
+2. Read the storage at position 0 for the contract like:
+curl https://goerli.infura.io/v3/${<your-infura-key>} \
     -X POST \
     -H "Content-Type: application/json" \
     -d '{"jsonrpc":"2.0", "method": "eth_getStorageAt", "params": ["0x8b72f7cbAD50620c46219ad676Ad9d3a5A273587", "0x0", "latest"], "id": 1}'
