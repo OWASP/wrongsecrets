@@ -1,0 +1,28 @@
+FROM jeroenwillemsen/bases-desktop:t2
+
+RUN \
+   echo "*** install kubectl ***" && \
+    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" &&\
+    sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl &&\
+    rm kubectl
+
+RUN \
+  echo "**** install packages ****" && \
+  apk add --no-cache shadow keepassxc radare2 aws-cli geany && \
+  echo "**** adding abc user to root for Docker ****" && \
+  usermod -aG root abc && \
+  touch /var/run/docker.sock && \
+  chown abc:abc /var/run/docker.sock && \
+  echo "**** cleanup ****" && \
+  rm -rf /tmp/*
+
+RUN mkdir /config/Desktop
+
+RUN echo "copying"
+COPY src/main/resources/executables/ /var/tmp/wrongsecrets
+COPY src/test/resources/alibabacreds.kdbx /var/tmp/wrongsecrets
+COPY wrongsecret-desktop-resources/welcome.md /var/tmp/wrongsecrets
+
+EXPOSE 3000
+
+WORKDIR /config/Desktop
