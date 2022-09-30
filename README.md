@@ -58,8 +58,8 @@ Now you can try to find the secrets by means of solving the challenge offered at
 - [localhost:8080/challenge/23](http://localhost:8080/challenge/23)
 - [localhost:8080/challenge/24](http://localhost:8080/challenge/24)
 - [localhost:8080/challenge/25](http://localhost:8080/challenge/25)
-- [localhost:8080/challenge/25](http://localhost:8080/challenge/26)
-- [localhost:8080/challenge/25](http://localhost:8080/challenge/27)
+- [localhost:8080/challenge/26](http://localhost:8080/challenge/26)
+- [localhost:8080/challenge/27](http://localhost:8080/challenge/27)
 
 Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look
 better ;-).
