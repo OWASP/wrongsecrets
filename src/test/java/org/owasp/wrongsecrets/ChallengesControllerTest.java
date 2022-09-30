@@ -45,19 +45,19 @@ class ChallengesControllerTest {
         when(challenge.solved(anyString())).thenReturn(false);
         when(challenge.supportedRuntimeEnvironments()).thenReturn(List.of(Environment.DOCKER));
 
-        this.mvc.perform(post("/challenge/1")
+        this.mvc.perform(post("/challenge/0")
                 .param("solution", "wrong")
                 .param("action", "submit"))
             .andExpect(status().isOk())
             .andExpect(model().attributeDoesNotExist("answerCorrect"))
             .andExpect(model().attributeExists("answerIncorrect"));
-        this.mvc.perform(get("/challenge/1"));
+        this.mvc.perform(get("/challenge/0s"));
     }
 
     @Test
     void shouldReturnSpoiler() throws Exception {
         when(challenge.spoiler()).thenReturn(new Spoiler("solution"));
-        this.mvc.perform(get("/spoil-1"))
+        this.mvc.perform(get("/spoil-0"))
             .andExpect(status().isOk())
             .andExpect(model().attribute("spoiler", new Spoiler("solution")));
     }
@@ -66,7 +66,7 @@ class ChallengesControllerTest {
     void shouldReturnIncorrectAnswerMessageWhenChallengeIsNotSolved() throws Exception {
         when(challenge.solved(anyString())).thenReturn(false);
         when(challenge.supportedRuntimeEnvironments()).thenReturn(List.of(Environment.DOCKER));
-        this.mvc.perform(post("/challenge/1")
+        this.mvc.perform(post("/challenge/0")
                 .param("solution", "wrong")
                 .param("action", "submit"))
             .andExpect(status().isOk())
@@ -78,7 +78,7 @@ class ChallengesControllerTest {
     void shouldReturnCorrectAnswerMessageWhenChallengeIsSolved() throws Exception {
         when(challenge.solved(anyString())).thenReturn(true);
         when(challenge.supportedRuntimeEnvironments()).thenReturn(List.of(Environment.DOCKER));
-        this.mvc.perform(post("/challenge/1")
+        this.mvc.perform(post("/challenge/0")
                 .param("solution", "right")
                 .param("action", "submit"))
             .andExpect(status().isOk())
@@ -91,7 +91,7 @@ class ChallengesControllerTest {
         when(challenge.supportedRuntimeEnvironments()).thenReturn(List.of(Environment.DOCKER));
         when(challenge.solved(anyString())).thenReturn(true);
         when(scoreCard.getChallengeCompleted(any())).thenReturn(true);
-        this.mvc.perform(post("/challenge/1")
+        this.mvc.perform(post("/challenge/0")
                 .param("solution", "wrong")
                 .param("action", "submit"))
             .andExpect(status().isOk())
