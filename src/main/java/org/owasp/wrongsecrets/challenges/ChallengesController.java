@@ -84,7 +84,7 @@ public class ChallengesController {
         }
         if (ctfModeEnabled && challenge.getChallenge() instanceof Challenge0) {
             if (!Strings.isNullOrEmpty(ctfServerAddress) && !ctfServerAddress.equals("not_set")) {
-                model.addAttribute("answerCorrect", "You are playing in CTF Mode where you need to give your answer once more to " + ctfServerAddress + " if it is correct");
+                model.addAttribute("answerCorrect", "You are playing in CTF Mode where you need to give your answer once more to " + ctfServerAddress + " if it is correct. We have to do this as you can otherwise reverse engineer our challenge flag generation process after completing the first 8 challenges");
             } else {
                 model.addAttribute("answerCorrect", "You are playing in CTF Mode, please submit the flag you receive after solving this challenge to your CTFD/Facebook CTF instance");
             }
