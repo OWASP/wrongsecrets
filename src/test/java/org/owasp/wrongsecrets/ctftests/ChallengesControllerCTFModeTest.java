@@ -13,6 +13,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.not;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -48,6 +49,13 @@ class ChallengesControllerCTFModeTest {
     }
 
     @Test
+    void challenge0SshouldNotShowTheAddressRightAnswersNeedToBeSsubmittedTo() throws Exception {
+        mvc.perform(get("/challenge/0"))
+            .andExpect(status().isOk())
+            .andExpect(content().string(not(containsString("https://www.google.nl"))));
+    }
+
+    @Test
     void shouldShowFlagWhenRespondingWithSuccessInCTFMode() throws Exception {
         var spoil = new Challenge1(new InMemoryScoreCard(1)).spoiler().solution();
         mvc.perform(post("/challenge/1")
@@ -62,7 +70,7 @@ class ChallengesControllerCTFModeTest {
 
 
     @Test
-    void shouldEnableK8sExercises() throws Exception{
+    void shouldEnableK8sExercises() throws Exception {
         mvc.perform(get("/"))
             .andExpect(status().isOk())
             .andExpect(content().string(containsString("class=\"disabled\">Challenge 5</a></td>")))

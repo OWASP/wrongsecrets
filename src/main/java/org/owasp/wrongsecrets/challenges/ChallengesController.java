@@ -3,6 +3,7 @@ package org.owasp.wrongsecrets.challenges;
 import com.google.common.base.Strings;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
+import org.owasp.wrongsecrets.challenges.docker.Challenge0;
 import org.owasp.wrongsecrets.challenges.docker.Challenge8;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.codec.Hex;
@@ -54,13 +55,13 @@ public class ChallengesController {
 
     @GetMapping
     public String explanation(@PathVariable Integer id) {
-        return challenges.get(id - 1).getExplanation();
+        return challenges.get(id).getExplanation();
     }
 
     @GetMapping("/spoil-{id}")
     public String spoiler(Model model, @PathVariable Integer id) {
         if (!ctfModeEnabled) {
-            var challenge = challenges.get(id - 1).getChallenge();
+            var challenge = challenges.get(id).getChallenge();
             model.addAttribute("spoiler", challenge.spoiler());
         } else {
             model.addAttribute("spoiler", new Spoiler("Spoils are disabled in CTF mode"));
@@ -70,7 +71,7 @@ public class ChallengesController {
 
     @GetMapping("/challenge/{id}")
     public String challenge(Model model, @PathVariable Integer id) {
-        var challenge = challenges.get(id - 1);
+        var challenge = challenges.get(id);
 
         model.addAttribute("challengeForm", new ChallengeForm(""));
         model.addAttribute("challenge", challenge);
@@ -81,6 +82,13 @@ public class ChallengesController {
         if (!challenge.isChallengeEnabled()) {
             model.addAttribute("answerIncorrect", "This challenge has been disabled.");
         }
+        if (ctfModeEnabled && challenge.getChallenge() instanceof Challenge0) {
+            if (!Strings.isNullOrEmpty(ctfServerAddress) && !ctfServerAddress.equals("not_set")) {
+                model.addAttribute("answerCorrect", "You are playing in CTF Mode where you need to give your answer once more to " + ctfServerAddress + " if it is correct");
+            } else {
+                model.addAttribute("answerCorrect", "You are playing in CTF Mode, please submit the flag you receive after solving this challenge to your CTFD/Facebook CTF instance");
+            }
+        }
         enrichWithHintsAndReasons(model);
         includeScoringStatus(model, challenge.getChallenge());
         addWarning(challenge.getChallenge(), model);
@@ -90,7 +98,7 @@ public class ChallengesController {
 
     @PostMapping(value = "/challenge/{id}", params = "action=reset")
     public String reset(@ModelAttribute ChallengeForm challengeForm, @PathVariable Integer id, Model model) {
-        var challenge = challenges.get(id - 1);
+        var challenge = challenges.get(id);
         scoreCard.reset(challenge.getChallenge());
 
         model.addAttribute("challenge", challenge);
@@ -102,7 +110,7 @@ public class ChallengesController {
 
     @PostMapping(value = "/challenge/{id}", params = "action=submit")
     public String postController(@ModelAttribute ChallengeForm challengeForm, Model model, @PathVariable Integer id) {
-        var challenge = challenges.get(id - 1);
+        var challenge = challenges.get(id);
 
         if (!challenge.isChallengeEnabled()) {
             model.addAttribute("answerIncorrect", "This challenge has been disabled.");

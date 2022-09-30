@@ -89,7 +89,7 @@ public class ChallengeUI {
     public static List<ChallengeUI> toUI(List<Challenge> challenges, RuntimeEnvironment environment) {
         return challenges.stream()
             .sorted(Comparator.comparingInt(challenge -> Integer.parseInt(challenge.getClass().getSimpleName().replace("Challenge", ""))))
-            .map(challenge -> new ChallengeUI(challenge, challenges.indexOf(challenge) + 1, environment))
+            .map(challenge -> new ChallengeUI(challenge, challenges.indexOf(challenge), environment))
             .toList();
     }
 }

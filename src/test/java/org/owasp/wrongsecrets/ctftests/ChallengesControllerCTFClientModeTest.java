@@ -51,6 +51,13 @@ class ChallengesControllerCTFClientModeTest {
     }
 
     @Test
+    void challenge0SshouldSShowTheAddressRightAnswersNeedToBeSsubmittedTo() throws Exception {
+        mvc.perform(get("/challenge/0"))
+            .andExpect(status().isOk())
+            .andExpect(content().string(containsString("https://www.google.nl")));
+    }
+
+    @Test
     void shouldNotShowFlagButClientInstead() throws Exception {
         var spoil = new Challenge1(new InMemoryScoreCard(1)).spoiler().solution();
         mvc.perform(post("/challenge/1")
