@@ -1,4 +1,5 @@
-FROM jeroenwillemsen/bases-desktop:t2
+FROM lscr.io/linuxserver/webtop:latest
+LABEL NAME="OWASP WrongSecrets Web Desktop" MAINTAINER="Jeroen Willemsen"
 
 RUN \
    echo "*** install kubectl ***" && \
@@ -16,13 +17,14 @@ RUN \
   echo "**** cleanup ****" && \
   rm -rf /tmp/*
 
-RUN mkdir /config/Desktop
+WORKDIR /config/Desktop
 
-RUN echo "copying"
 COPY src/main/resources/executables/ /var/tmp/wrongsecrets
+COPY src/test/resources/alibabacreds.kdbx /var/tmp/helpers
 COPY src/test/resources/alibabacreds.kdbx /var/tmp/wrongsecrets
 COPY wrongsecret-desktop-resources/welcome.md /var/tmp/wrongsecrets
+COPY wrongsecret-desktop-resources/welcome.md /var/tmp/wrongsecrets
 
-EXPOSE 3000
+RUN sudo chown abc /var/tmp/wrongsecrets
 
-WORKDIR /config/Desktop
+COPY wrongsecret-desktop-resources/startwm.sh /defaults/startwm.sh
