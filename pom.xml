@@ -39,8 +39,8 @@
 <!--    </distributionManagement>-->
 
     <properties>
-        <java.version>18</java.version>
-        <maven.compiler.target>18</maven.compiler.target>
+        <java.version>19</java.version>
+        <maven.compiler.target>19</maven.compiler.target>
         <spring.cloud-version>2021.0.4</spring.cloud-version>
         <lombok.version>1.18.24</lombok.version>
         <aws.sdk.version>2.17.285</aws.sdk.version>
