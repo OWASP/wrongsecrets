@@ -1,4 +1,4 @@
-FROM eclipse-temurin:18-jre-focal
+FROM eclipse-temurin:19-jre-focal
 
 ARG argBasedPassword="default"
 ARG argBasedVersion="0.0.0"
