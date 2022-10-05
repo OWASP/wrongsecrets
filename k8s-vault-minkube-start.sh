@@ -9,7 +9,7 @@ checkCommandsAvailable helm minikube jq vault sed grep docker grep cat
 
 echo "This is only a script for demoing purposes. You can comment out line 22 and work with your own k8s setup"
 echo "This script is based on the steps defined in https://learn.hashicorp.com/tutorials/vault/kubernetes-minikube . Vault is awesome!"
-minikube start --kubernetes-version=v1.22.5
+minikube start --kubernetes-version=v1.25.0
 
 kubectl get configmaps | grep 'secrets-file' &> /dev/null
 if [ $? == 0 ]; then
@@ -29,18 +29,18 @@ if [ $? == 0 ]; then
    echo "Consul is already installed"
 else
   helm repo add hashicorp https://helm.releases.hashicorp.com
-  helm install consul hashicorp/consul --version 0.30.0 --values k8s/helm-consul-values.yml
 fi
+helm upgrade --install consul hashicorp/consul --set global.name=consul --create-namespace -n consul --values k8s/helm-consul-values.yml
 
-while [[ $(kubectl get pods -l app=consul -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True True" ]]; do echo "waiting for Consul" && sleep 2; done
+while [[ $(kubectl get pods -n consul -l app=consul -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True True" ]]; do echo "waiting for Consul" && sleep 2; done
 
 helm list | grep 'vault' &> /dev/null
 if [ $? == 0 ]; then
    echo "Vault is already installed"
 else
   helm repo add hashicorp https://helm.releases.hashicorp.com
-  helm install vault hashicorp/vault --version 0.19.0 --values k8s/helm-vault-values.yml
 fi
+helm upgrade --install vault hashicorp/vault --version 0.22.0 --values k8s/helm-vault-values.yml
 
 isvaultrunning=$(kubectl get pods --field-selector=status.phase=Running)
 while [[ $isvaultrunning != *"vault-0"* ]]; do echo "waiting for Vault1" && sleep 2 && isvaultrunning=$(kubectl get pods --field-selector=status.phase=Running); done
@@ -52,9 +52,13 @@ echo "Unsealing Vault"
 kubectl exec vault-0 -- vault operator init -key-shares=1 -key-threshold=1 -format=json > cluster-keys.json
 cat cluster-keys.json | jq -r ".unseal_keys_b64[]"
 VAULT_UNSEAL_KEY=$(cat cluster-keys.json | jq -r ".unseal_keys_b64[]")
-kubectl exec vault-0 -- vault operator unseal $VAULT_UNSEAL_KEY
-kubectl exec vault-1 -- vault operator unseal $VAULT_UNSEAL_KEY
-kubectl exec vault-2 -- vault operator unseal $VAULT_UNSEAL_KEY
+
+echo "⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰"
+echo "PLEASE COPY PASTE THE FOLLOWING VALUE: ${VAULT_UNSEAL_KEY} , you will be asked for it 3 times to unseal the vaults"
+
+kubectl exec -it vault-0 -- vault operator unseal $VAULT_UNSEAL_KEY
+kubectl exec -it vault-1 -- vault operator unseal $VAULT_UNSEAL_KEY
+kubectl exec -it vault-2 -- vault operator unseal s$VAULT_UNSEAL_KEY
 
 
 echo "Obtaining root token"
