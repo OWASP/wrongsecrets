@@ -30,6 +30,8 @@ spec:
         fsGroup: 2000
       serviceAccountName: vault
       volumes:
+        - name: 'ephemeral'
+          emptyDir: {}
         - name: secrets-store-inline
           csi:
             driver: secrets-store.csi.k8s.io
@@ -39,11 +41,39 @@ spec:
       containers:
         - image: jeroenwillemsen/wrongsecrets:1.5.7-k8s-vault
           imagePullPolicy: IfNotPresent
+          name: secret-challenge
           ports:
             - containerPort: 8080
               protocol: TCP
-          name: secret-challenge
-          resources: {}
+          readinessProbe:
+            httpGet:
+              path: '/actuator/health/readiness'
+              port: 8080
+            initialDelaySeconds: 30
+            timeoutSeconds: 5
+            periodSeconds: 5
+            failureThreshold: 8
+          livenessProbe:
+            httpGet:
+              path: '/actuator/health/liveness'
+              port: 8080
+            initialDelaySeconds: 35
+            timeoutSeconds: 30
+            periodSeconds: 40
+            failureThreshold: 5
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+          resources:
+            requests:
+              memory: '512Mi'
+              cpu: '200m'
+              ephemeral-storage: '1Gi'
+            limits:
+              memory: '512Mi'
+              cpu: '1200m'
+              ephemeral-storage: '2Gi'
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
           env:
@@ -69,6 +99,8 @@ spec:
             - name: secrets-store-inline
               mountPath: "/mnt/secrets-store"
               readOnly: true
+            - name: 'ephemeral'
+              mountPath: '/tmp'
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
