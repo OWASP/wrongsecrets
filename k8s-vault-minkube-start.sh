@@ -58,7 +58,7 @@ echo "PLEASE COPY PASTE THE FOLLOWING VALUE: ${VAULT_UNSEAL_KEY} , you will be a
 
 kubectl exec -it vault-0 -- vault operator unseal $VAULT_UNSEAL_KEY
 kubectl exec -it vault-1 -- vault operator unseal $VAULT_UNSEAL_KEY
-kubectl exec -it vault-2 -- vault operator unseal s$VAULT_UNSEAL_KEY
+kubectl exec -it vault-2 -- vault operator unseal $VAULT_UNSEAL_KEY
 
 
 echo "Obtaining root token"
