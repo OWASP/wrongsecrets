@@ -137,8 +137,8 @@ No modules.
 
 ## Inputs
 
-| Name | Description | Type | Default                           | Required |
-|------|-------------|------|-----------------------------------|:--------:|
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | The AKS cluster name | `string` | `"wrongsecrets-exercise-cluster"` | no |
 | <a name="input_cluster_version"></a> [cluster\_version](#input\_cluster\_version) | The AKS cluster version to use | `string` | `"1.23.12"` | no |
 | <a name="input_region"></a> [region](#input\_region) | The Azure region to use | `string` | `"East US"`                       | no |
