@@ -7,4 +7,4 @@ else
   helm upgrade --install consul hashicorp/consul --set global.name=consul --create-namespace -n consul --values ../k8s/helm-consul-values.yml
 fi
 
-while [[ $(kubectl get pods -n consul -l app=consul -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True True" && $(kubectl get pods -l app=consul -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True True True True" ]]; do echo "waiting for Consul" && sleep 2; done
+while [[ $(kubectl get pods -n consul -l app=consul -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != *"True True"* && $(kubectl get pods -l app=consul -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != *"True True True True"* ]]; do echo "waiting for Consul" && sleep 2; done

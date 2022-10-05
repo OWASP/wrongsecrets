@@ -40,7 +40,7 @@ resource "google_container_cluster" "gke" {
   node_config {
     # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
     service_account = google_service_account.wrongsecrets_cluster.email
-    machine_type    = "e2-highcpu-2"
+    machine_type    = "e2-standard-2"
     oauth_scopes = [
       "https://www.googleapis.com/auth/cloud-platform"
     ]
