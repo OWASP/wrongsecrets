@@ -46,7 +46,7 @@ There are a few env-vars that you need to pay attention to when setting this up:
 
 If you are interested in setting up a Kubernetes based CTF, you might want to look at [WrongSecrets CTF party](https://github.com/commjoen/wrongsecrets-ctf-party) instead. Still want to take a different approach than using that? Please read the rest of the paragraph.
 
-When you want to enable the Kubernetes challenges in your CTF-environment, make sure your 'play-environment' is actually running in a Kubernetes environment where the K8ss Configmap, K8s secret, and optionally the Vault setup, are configured correctly. See  [our k8s folder](/k8s/) as an example, or have a look at our [Okteto](/okteto/) setup for just having the K8s & Configmap challenges supported. 
+When you want to enable the Kubernetes challenges in your CTF-environment, make sure your 'play-environment' is actually running in a Kubernetes environment where the K8ss Configmap, K8s secret, and optionally the Vault setup, are configured correctly. See [our k8s folder](/k8s/) as an example, or have a look at our [Okteto](/okteto/) setup for just having the K8s & Configmap challenges supported.
 When you take the 2-domain approach, make sure that the decoded K8S Secret entry and the Configmap value are stored correctly in the CTF-platform. If you take the standard HMAC approach instead, make sure that your CTF-scoring-environment has the following environment variables set:
 
 - `SPECIAL_K8S_SECRET` which should be set to the value stored in your K8S Configmap
@@ -57,7 +57,7 @@ When you take the 2-domain approach, make sure that the decoded K8S Secret entry
 
 If you are interested in setting up a Cloud-based CTF in AWS, you might want to look at [WrongSecrets CTF party](https://github.com/commjoen/wrongsecrets-ctf-party) instead. Still want to take a different approach than using that? Please read the rest of the paragraph.
 
-When you take the 2-domain approach, make sure that the decoded K8S Secret entry and the Configmap value are stored correctly in the CTF-platform, next: make sure that the values used for Challenge 9,10 & 11 are stored there correctly as well. 
+When you take the 2-domain approach, make sure that the decoded K8S Secret entry and the Configmap value are stored correctly in the CTF-platform, next: make sure that the values used for Challenge 9,10 & 11 are stored there correctly as well.
 
 Note: if you want to support challenge 11 at your CTF: make sure players don't share the same cloud-account together, or make sure that the privilege escalation path can only be done to the given account described in the challenge code and not to a role/user with more administrative access, as this would allow your players to wreak havoc to your CTF setup. We rather recommend disabling challenge 11 in your CTF setups.
 
