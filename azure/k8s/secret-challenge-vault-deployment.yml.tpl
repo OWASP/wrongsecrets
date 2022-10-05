@@ -74,7 +74,7 @@ spec:
               ephemeral-storage: '1Gi'
             limits:
               memory: '512Mi'
-              cpu: '500m'
+              cpu: '1200m'
               ephemeral-storage: '2Gi'
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
