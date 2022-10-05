@@ -20,7 +20,7 @@ cat cluster-keys.json | jq -r ".unseal_keys_b64[]"
 VAULT_UNSEAL_KEY=$(cat cluster-keys.json | jq -r ".unseal_keys_b64[]")
 
 echo "⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰"
-echo "PLEASE COPY PASTE THE FOLLOWING VALUE: ${VAULT_UNSEAL_KEY} , you will be asked for it 3 times to unseal the vaults"
+echo "PLEASE COPY PASTE THE FOLLOWING VALUE: $VAULT_UNSEAL_KEY, you will be asked for it 3 times to unseal the vaults"
 
 kubectl exec -it vault-0 -- vault operator unseal $VAULT_UNSEAL_KEY
 kubectl exec -it vault-1 -- vault operator unseal $VAULT_UNSEAL_KEY

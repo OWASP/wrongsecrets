@@ -69,7 +69,7 @@ spec:
             failureThreshold: 5
           resources:
             requests:
-              memory: '512Mi'
+              memory: '256Mi'
               cpu: '200m'
               ephemeral-storage: '1Gi'
             limits:
@@ -86,7 +86,7 @@ spec:
             - name: azure_keyvault_uri
               value: ${AZ_VAULT_URI}
             - name: management.health.azure-key-vault.enabled
-              value: true
+              value: "true"
             - name: SPECIAL_K8S_SECRET
               valueFrom:
                 configMapKeyRef:
