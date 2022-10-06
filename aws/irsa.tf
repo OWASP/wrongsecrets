@@ -13,8 +13,10 @@ resource "aws_iam_role" "irsa_role" {
 data "aws_iam_policy_document" "assume_role_with_oidc" {
   statement {
     principals {
-      type        = "Federated"
-      identifiers = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:oidc-provider/${replace(module.eks.cluster_oidc_issuer_url, "https://", "")}"]
+      type = "Federated"
+      identifiers = [
+        "arn:aws:iam::${data.aws_caller_identity.current.account_id}:oidc-provider/${replace(module.eks.cluster_oidc_issuer_url, "https://", "")}"
+      ]
     }
     effect  = "Allow"
     actions = ["sts:AssumeRoleWithWebIdentity"]
@@ -117,5 +119,19 @@ data "aws_iam_policy_document" "user_policy" {
       "sts:AssumeRole"
     ]
     resources = ["*"]
+  }
+}
+
+module "ebs_csi_irsa_role" {
+  source                = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
+  version               = "~> 4.12"
+  role_name             = "ebs-csi"
+  attach_ebs_csi_policy = true
+
+  oidc_providers = {
+    ex = {
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["consul:server", "kube-system:ebs-csi-controller-sa"]
+    }
   }
 }

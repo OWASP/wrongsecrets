@@ -26,6 +26,14 @@ else
   kubectl apply -f ../k8s/secrets-secret.yml
 fi
 
+kubectl get sa ebs-csi-controller-sa  -n kube-system | grep '1'  &>/dev/null
+if [ $? == 0 ]; then
+  echo "EBS CSI driver is installed, skipping (1 secret found)"
+else
+  echo "Installing the EBS CSI Driver from https://github.com/kubernetes-sigs/aws-ebs-csi-driver/blob/master/docs/install.md as AWS makes shit hard on us"
+  kubectl apply -k "github.com/kubernetes-sigs/aws-ebs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-1.12"
+fi
+
 source ../scripts/install-consul.sh
 
 source ../scripts/install-vault.sh
