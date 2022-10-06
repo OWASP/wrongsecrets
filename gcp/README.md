@@ -102,10 +102,10 @@ The documentation below is auto-generated to give insight on what's created via 
 
 | Name | Version |
 |------|---------|
-| <a name="provider_google"></a> [google](#provider\_google) | ~> 4.1 |
-| <a name="provider_google-beta"></a> [google-beta](#provider\_google-beta) | ~> 4.1 |
-| <a name="provider_http"></a> [http](#provider\_http) | ~> 3.1 |
-| <a name="provider_random"></a> [random](#provider\_random) | ~> 3.0 |
+| <a name="provider_google"></a> [google](#provider\_google) | 4.39.0 |
+| <a name="provider_google-beta"></a> [google-beta](#provider\_google-beta) | 4.39.0 |
+| <a name="provider_http"></a> [http](#provider\_http) | 3.1.0 |
+| <a name="provider_random"></a> [random](#provider\_random) | 3.4.3 |
 
 ## Modules
 
