@@ -79,9 +79,7 @@ to bring it down: you would be spoiling it for others that want to testdrive it.
 
 ### Running on Fly.io
 
-You can test them out at [https://wrongsecrets.fly.dev](https://wrongsecrets.fly.dev) as well! Please understand that we
-run on a free-tier instance, we cannot give any guarantees. Please do not fuzz and/or try to bring it down: you would be
-spoiling it for others that want to testdrive it.
+You can test them out at [https://wrongsecrets.fly.dev](https://wrongsecrets.fly.dev) as well! Please understand that we run on a free-tier instance, we cannot give any guarantees. Please do not fuzz and/or try to bring it down: you would be spoiling it for others that want to testdrive it.
 
 ## Basic K8s exercise
 
@@ -147,12 +145,10 @@ Make sure you have the following installed:
 - vault [Install from here](https://www.vaultproject.io/downloads),
 - grep, Cat, and Sed
 
-Run `./k8s-vault-minkube-start.sh`, when the script is done, then the challenges will wait for you
-at <http://localhost:8080> . This will allow you to run challenges 1-8, 12-22.
+Run `./k8s-vault-minkube-start.sh`, when the script is done, then the challenges will wait for you at <http://localhost:8080> . This will allow you to run challenges 1-8, 12-22.
 
-When you stopped the `k8s-vault-minikube-start.sh` script and want to resume the port forward
-run: `k8s-vault-minikube-resume.sh`. This is because if you run the start script again it will replace the secret in the
-vault and not update the secret-challenge application with the new secret.
+When you stopped the `k8s-vault-minikube-start.sh` script and want to resume the port forward run: `k8s-vault-minikube-resume.sh`.
+This is because if you run the start script again it will replace the secret in the vault and not update the secret-challenge application with the new secret.
 
 ## Cloud Challenges
 
@@ -179,22 +175,17 @@ Follow the steps in [the README in the Azure subfolder](azure/README.md).
 When you want to include your own Canarytokens for your cloud-deployment, do the following:
 
 1. Fork the project.
-2. Make sure you use the [GCP ingress](/gcp/k8s-vault-gcp-ingress-start.sh) or [AWS ingress](aws/k8s-aws-alb-script.sh)
-   scripts to generate an ingress for your project.
-3. Go to [canarytokens.org](https://canarytokens.org/generate) and select `AWS Keys`, in the webHook URL field
-   add `<your-domain-created-at-step1>/canaries/tokencallback`.
-4. Encrypt the received credentials so
-   that [Challenge15](/src/main/java/org/owasp/wrongsecrets/challenges/docker/Challenge15.java) can decrypt them again.
+2. Make sure you use the [GCP ingress](/gcp/k8s-vault-gcp-ingress-start.sh) or [AWS ingress](aws/k8s-aws-alb-script.sh) scripts to generate an ingress for your project.
+3. Go to [canarytokens.org](https://canarytokens.org/generate) and select `AWS Keys`, in the webHook URL field add `<your-domain-created-at-step1>/canaries/tokencallback`.
+4. Encrypt the received credentials so that [Challenge15](/src/main/java/org/owasp/wrongsecrets/challenges/docker/Challenge15.java) can decrypt them again.
 5. Commit the unencrypted and encrypted materials to Git and then commit again without the decrypted materials.
 6. Adapt the hints of Challenge 15 in your fork to point to your fork.
 7. Create a container and push it to your registry
-8. Override the K8s definition files for either [AWS](/aws/k8s/secret-challenge-vault-deployment.yml)
-   or [GCP](/gcp/k8s/secret-challenge-vault-deployment.yml.tpl).
+8. Override the K8s definition files for either [AWS](/aws/k8s/secret-challenge-vault-deployment.yml) or [GCP](/gcp/k8s/secret-challenge-vault-deployment.yml.tpl).
 
 ## Do you want to play without guidance?
 
-Each challenge has a `Show hints` button and a `What's wrong?` button. These buttons help to simplify the challenges and
-give explanation to the reader. Though, the explanations can spoil the fun if you want to do this as a hacking exercise.
+Each challenge has a `Show hints` button and a `What's wrong?` button. These buttons help to simplify the challenges and give explanation to the reader. Though, the explanations can spoil the fun if you want to do this as a hacking exercise.
 Therefore, you can manipulate them by overriding the following settings in your env:
 
 - `hints_enabled=false` will turn off the `Show hints` button.
@@ -242,32 +233,28 @@ You can help us by the following methods:
 
 - Star us
 - Share this app with others
-- Of course, we can always use your help [to get more flavors](https://github.com/commjoen/wrongsecrets/issues/37) of "
-  wrongly" configured secrets in to spread awareness! We would love to get some help with other cloudproiders, like
-  Alibabaor Tencent cloud for instance. Do you miss something else than a cloud provider as an example? File an issue or
-  create a PR! See [our guide on contributing for more details](CONTRIBUTING.md). Contributors will be listed in
-  releases, in the "Special thanks & Contributors"-section, and the web-app.
+- Of course, we can always use your help [to get more flavors](https://github.com/commjoen/wrongsecrets/issues/37) of "wrongly" configured secrets in to spread awareness! We would love to get some help with other cloudproiders, like Alibabaor Tencent cloud for instance. Do you miss something else than a cloud provider as an example? File an issue or create a PR! See [our guide on contributing for more details](CONTRIBUTING.md). Contributors will be listed in releases, in the "Special thanks & Contributors"-section, and the web-app.
 
 ## Use OWASP WrongSecrets as a secret detection benchmark
 
 As tons of secret detection tools are coming up for both Docker and Git, we are creating a Benchmark testbed for it.
-Want to know if your tool detects everything? We will keep track of the embedded secrets
-in [this issue](https://github.com/commjoen/wrongsecrets/issues/201) and have
-a [branch](https://github.com/commjoen/wrongsecrets/tree/experiment-bed) in which we put additional secrets for your
-tool to detect.
-The branch will contain a Docker container generation script using which you can eventually test your container secret
-scanning.
+Want to know if your tool detects everything? We will keep track of the embedded secrets in [this issue](https://github.com/commjoen/wrongsecrets/issues/201) and have a [branch](https://github.com/commjoen/wrongsecrets/tree/experiment-bed) in which we put additional secrets for your tool to detect.
+The branch will contain a Docker container generation script using which you can eventually test your container secret scanning.
 
 ## CTF
 
+We have 3 ways of playing CTFs:
+- The quick "let's play"-approach based on our own Heroku domain [https://wrongsecrets-ctf.herokuapp.com](https://wrongsecrets-ctf.herokuapp.com), which we documente for you here.
+- A more extended approach documented in [ctf-insstructions.md](/ctf-instructions.md).
+- A fully customizable CTF setup where every player gets its own virtual instance of WrongSecrets and a virtual instance of the wrongsecrets-desktop, so they all can play hassle-free. For this you have to use [the WrongSecrets CTF Party setup](https://github.com/commjoen/wrongsecrets-ctf-party).
+
 ### CTFD Support
 
-NOTE: CTFD support is experimental, and now works based on
-the [Juiceshop CTF CLI](https://github.com/juice-shop/juice-shop-ctf).
-NOTE-II:  https://wrongsecrets-ctf.herokuapp.com is based on a free heroku instance, which takes time to warm up.
-Initial creation of the zip file for CTFD requires you to
-visit [https://wrongsecrets-ctf.herokuapp.com/api/Challenges](https://wrongsecrets-ctf.herokuapp.com/api/Challenges)
-once before executing the steps below.
+Want to use CTFD to play a CTF based on the free Heroku wrongsecrets-ctf instance together with CTFD? You can!
+
+NOTE: CTFD support now works based on the [Juiceshop CTF CLI](https://github.com/juice-shop/juice-shop-ctf).
+NOTE-II: [https://wrongsecrets-ctf.herokuapp.com](https://wrongsecrets-ctf.herokuapp.com) is based on a free heroku instance, which takes time to warm up.
+Initial creation of the zip file for CTFD requires you to visit [https://wrongsecrets-ctf.herokuapp.com/api/Challenges](https://wrongsecrets-ctf.herokuapp.com/api/Challenges) once before executing the steps below.
 
 Follow the following steps:
 
@@ -277,21 +264,17 @@ Follow the following steps:
     docker run -p 8001:8000 -it ctfd/ctfd:3.4.3
 ```
 
-Now visit the CTFD instance at [http://localhost:8001](http://localhost:8001) and setup your CTF. Then use the
-administrative backup function to import the zipfile you created with the juice-shop-ctf command.
-Game on using [https://wrongsecrets-ctf.herokuapp.com](https://wrongsecrets-ctf.herokuapp.com) !
-Want to setup your own? You can! Watch out for people finding your key though, so secure it properly: make sure the
-running container with the actual ctf-key is not exposed to the audience, similar to our heroku container.
+Now visit the CTFD instance at [http://localhost:8001](http://localhost:8001) and setup your CTF.
+Then use the administrative backup function to import the zipfile you created with the juice-shop-ctf command.
+Game on using [https://wrongsecrets-ctf.herokuapp.com](https://wrongsecrets-ctf.herokuapp.com)!
+Want to setup your own? You can! Watch out for people finding your key though, so secure it properly: make sure the running container with the actual ctf-key is not exposed to the audience, similar to our heroku container.
 
 ## FBCTF Support (Experimental!)
 
 NOTE: FBCTF support is experimental.
 
-follow the same step as with CTFD, only now choose fbctfd and as a url for the countrymapping
-choose `https://raw.githubusercontent.com/commjoen/wrongsecrets/79a982558016c8ce70948a8106f9a2ee5b5b9eea/config/fbctf.yml`
-. Then
-follow [https://github.com/facebookarchive/fbctf/wiki/Quick-Setup-Guide](https://github.com/facebookarchive/fbctf/wiki/Quick-Setup-Guide)
-to run the FBCTF.
+Follow the same step as with CTFD, only now choose fbctfd and as a url for the countrymapping choose `https://raw.githubusercontent.com/commjoen/wrongsecrets/79a982558016c8ce70948a8106f9a2ee5b5b9eea/config/fbctf.yml`.
+Then follow [https://github.com/facebookarchive/fbctf/wiki/Quick-Setup-Guide](https://github.com/facebookarchive/fbctf/wiki/Quick-Setup-Guide) to run the FBCTF.
 
 ## Notes on development
 
@@ -326,46 +309,38 @@ If you want to dev without a Vault instance, use additionally the `without-vault
 ./mvnw spring-boot:run -Dspring-boot.run.profiles=local,without-vault
 ```
 
-Want to push a container? See `.github/scripts/docker-create-and-push.sh` for a script that generates and pushes all
-containers. Do not forget to rebuild the app before composing the container
+Want to push a container? See `.github/scripts/docker-create-and-push.sh` for a script that generates and pushes all containers. Do not forget to rebuild the app before composing the container
 
 ### Dependency management
 
 We have CycloneDX and OWASP Dependency-check integrated to check dependencies for vulnerabilities.
-You can use the OWASP Dependency-checker by calling `mvn dependency-check:aggregate` and `mvn cyclonedx:makeBom` to use
-CycloneDX to create an SBOM.
+You can use the OWASP Dependency-checker by calling `mvn dependency-check:aggregate` and `mvn cyclonedx:makeBom` to use CycloneDX to create an SBOM.
 
 ### Automatic reload during development
 
-To make changes made load faster we added `spring-dev-tools` to the Maven project. To enable this in IntelliJ
-automatically, make sure:
+To make changes made load faster we added `spring-dev-tools` to the Maven project.
+To enable this in IntelliJ automatically, make sure:
 
 - Under Compiler -> Automatically build project is enabled, and
 - Under Advanced settings -> Allow auto-make to start even if developed application is currently running.
 
-You can also manually invoke: Build -> Recompile the file you just changed, this will also force reloading of the
-application.
+You can also manually invoke: Build -> Recompile the file you just changed, this will also force reloading of the application.
 
 ### How to add a Challenge
 
 Follow the steps below on adding a challenge:
 
-1. First make sure that you have an [Issue](https://github.com/commjoen/wrongsecrets/issues) reported for which a
-   challenge is really wanted.
-2. Add the new challenge in the `org.owasp.wrongsecrets.challenges` folder. Make sure you add an explanation
-   in `src/main/resources/explanations` and refer to it from your new Challenge class.
+1. First make sure that you have an [Issue](https://github.com/commjoen/wrongsecrets/issues) reported for which a challenge is really wanted.
+2. Add the new challenge in the `org.owasp.wrongsecrets.challenges` folder. Make sure you add an explanation in `src/main/resources/explanations` and refer to it from your new Challenge class.
 3. Add a unit and integration test to show that your challenge is working.
 4. Don't forget to add `@Order` annotation to your challenge ;-).
 
-If you want to move existing cloud challenges to another cloud: extend Challenge classes in
-the `org.owasp.wrongsecrets.challenges.cloud` package and make sure you add the required Terraform in a folder with the
-separate cloud identified. Make sure that the environment is added to `org.owasp.wrongsecrets.RuntimeEnvironment`.
+If you want to move existing cloud challenges to another cloud: extend Challenge classes in the `org.owasp.wrongsecrets.challenges.cloud` package and make sure you add the required Terraform in a folder with the separate cloud identified. Make sure that the environment is added to `org.owasp.wrongsecrets.RuntimeEnvironment`.
 Collaborate with the others at the project to get your container running so you can test at the cloud account.
 
 ### Local testing
 
-If you have made some changes to the codebase or added a new challenge and would like to see exactly how the container
-will look after merge for testing, we have a script that makes this very easy. Follow the steps below:
+If you have made some changes to the codebase or added a new challenge and would like to see exactly how the container will look after merge for testing, we have a script that makes this very easy. Follow the steps below:
 
 1. Ensure you have bash installed and open.
 2. Navigate to .github/scripts.
@@ -375,8 +350,7 @@ will look after merge for testing, we have a script that makes this very easy. F
 
 ## Want to play, but are not allowed to install the tools?
 
-If you want to play the challenges, but cannot install tools like keepass, Radare, etc. But are allowed to run Docker
-containers, try the following:
+If you want to play the challenges, but cannot install tools like keepass, Radare, etc. But are allowed to run Docker containers, try the following:
 
 ```shell
 docker run -p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock jeroenwillemsen/wrongsecrets-desktop:latest
