@@ -3,13 +3,13 @@ terraform {
 
   required_providers {
     random = {
-      version = "~> 3.0"
+      version = "~> 3.4.3"
     }
     azurerm = {
-      version = "~> 3.9"
+      version = "~> 3.25.0"
     }
     http = {
-      version = "~> 3.1"
+      version = "~> 3.1.0"
     }
   }
 }

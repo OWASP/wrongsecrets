@@ -22,9 +22,9 @@ jobs:
       - name: Start minikube
         uses: medyagh/setup-minikube@master
         with:
-          minikube-version: 1.25.2
+          minikube-version: 1.27.0
           driver: docker
-          kubernetes-version: v1.22.5
+          kubernetes-version: v1.23.12
       - name: Setup helm
         uses: azure/setup-helm@v3.3
         id: install

@@ -89,7 +89,8 @@ module "eks" {
       "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy",
       "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
       "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore",
-      "arn:aws:iam::aws:policy/AmazonEKSVPCResourceController"
+      "arn:aws:iam::aws:policy/AmazonEKSVPCResourceController",
+      "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"
     ]
   }
 
@@ -97,8 +98,10 @@ module "eks" {
     bottlerocket_default = {
       create_launch_template = false
       launch_template_name   = ""
-
-      capacity_type = "SPOT"
+      min_size               = 1
+      max_size               = 3
+      desired_size           = 1
+      capacity_type          = "SPOT"
 
       ami_type = "BOTTLEROCKET_x86_64"
       platform = "bottlerocket"

@@ -45,8 +45,9 @@ The bucket name should be in the output. Please use that to configure the Terraf
 5. Run `terraform init` (if required, use tfenv to select TF 0.14.0 or higher )
 6. Run `terraform plan`
 7. Run `terraform apply`. Note: the apply will take 10 to 20 minutes depending on the speed of the GCP backplane.
-8. When creation is done, run `gcloud container clusters get-credentials wrongsecrets-exercise-cluster --region YOUR_REGION`. Note if it errors on a missing plugin to support `kubectl`, then run `gcloud components install gke-gcloud-auth-plugin` and `gcloud container clusters get-credentials wrongsecrets-exercise-cluster` .
-9. Run `./k8s-vault-gcp-start.sh`
+8. Run `export USE_GKE_GCLOUD_AUTH_PLUGIN=True`
+9When creation is done, run `gcloud container clusters get-credentials wrongsecrets-exercise-cluster --region YOUR_REGION`. Note if it errors on a missing plugin to support `kubectl`, then run `gcloud components install gke-gcloud-auth-plugin` and `gcloud container clusters get-credentials wrongsecrets-exercise-cluster` .
+10. Run `./k8s-vault-gcp-start.sh`
 
 ### GKE ingres for shared deployment
 
@@ -92,19 +93,19 @@ The documentation below is auto-generated to give insight on what's created via 
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.1 |
-| <a name="requirement_google"></a> [google](#requirement\_google) | ~> 4.1 |
-| <a name="requirement_google-beta"></a> [google-beta](#requirement\_google-beta) | ~> 4.1 |
-| <a name="requirement_http"></a> [http](#requirement\_http) | ~> 3.1 |
-| <a name="requirement_random"></a> [random](#requirement\_random) | ~> 3.0 |
+| <a name="requirement_google"></a> [google](#requirement\_google) | ~> 4.39.0 |
+| <a name="requirement_google-beta"></a> [google-beta](#requirement\_google-beta) | ~> 4.39.0 |
+| <a name="requirement_http"></a> [http](#requirement\_http) | ~> 3.1.0 |
+| <a name="requirement_random"></a> [random](#requirement\_random) | ~> 3.4.3 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_google"></a> [google](#provider\_google) | ~> 4.1 |
-| <a name="provider_google-beta"></a> [google-beta](#provider\_google-beta) | ~> 4.1 |
-| <a name="provider_http"></a> [http](#provider\_http) | ~> 3.1 |
-| <a name="provider_random"></a> [random](#provider\_random) | ~> 3.0 |
+| <a name="provider_google"></a> [google](#provider\_google) | ~> 4.39.0 |
+| <a name="provider_google-beta"></a> [google-beta](#provider\_google-beta) | ~> 4.39.0 |
+| <a name="provider_http"></a> [http](#provider\_http) | ~> 3.1.0 |
+| <a name="provider_random"></a> [random](#provider\_random) | ~> 3.4.3 |
 
 ## Modules
 
@@ -140,7 +141,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | The GKE cluster name | `string` | `"wrongsecrets-exercise-cluster"` | no |
-| <a name="input_cluster_version"></a> [cluster\_version](#input\_cluster\_version) | The GKE cluster version to use | `string` | `"1.22"` | no |
+| <a name="input_cluster_version"></a> [cluster\_version](#input\_cluster\_version) | The GKE cluster version to use | `string` | `"1.23"` | no |
 | <a name="input_project_id"></a> [project\_id](#input\_project\_id) | project id | `string` | n/a | yes |
 | <a name="input_region"></a> [region](#input\_region) | The GCP region to use | `string` | `"eu-west4"` | no |
 
