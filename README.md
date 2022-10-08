@@ -245,7 +245,7 @@ The branch will contain a Docker container generation script using which you can
 
 We have 3 ways of playing CTFs:
 - The quick "let's play"-approach based on our own Heroku domain [https://wrongsecrets-ctf.herokuapp.com](https://wrongsecrets-ctf.herokuapp.com), which we documente for you here.
-- A more extended approach documented in [ctf-insstructions.md](/ctf-instructions.md).
+- A more extended approach documented in [ctf-instructions.md](/ctf-instructions.md).
 - A fully customizable CTF setup where every player gets its own virtual instance of WrongSecrets and a virtual instance of the wrongsecrets-desktop, so they all can play hassle-free. For this you have to use [the WrongSecrets CTF Party setup](https://github.com/commjoen/wrongsecrets-ctf-party).
 
 ### CTFD Support
