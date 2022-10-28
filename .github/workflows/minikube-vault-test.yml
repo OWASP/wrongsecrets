@@ -26,7 +26,7 @@ jobs:
           driver: docker
           kubernetes-version: v1.23.12
       - name: Setup helm
-        uses: azure/setup-helm@v3.3
+        uses: azure/setup-helm@v3.4
         id: install
       - name: test script
         run: |
