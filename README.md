@@ -196,7 +196,7 @@ Therefore, you can manipulate them by overriding the following settings in your 
 Leaders:
 
 - [Ben de Haan @bendehaan](https://github.com/bendehaan)
-- [Jeroen willemsen @commjoen](https://github.com/commjoen)
+- [Jeroen Willemsen @commjoen](https://github.com/commjoen)
 
 Top contributors:
 
