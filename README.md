@@ -1,10 +1,10 @@
 <!-- CRE Link: [223-780](https://www.opencre.org/cre/223-780?register=true&type=tool&tool_type=training&tags=secrets,training&description=With%20this%20app%2C%20we%20have%20packed%20various%20ways%20of%20how%20to%20not%20store%20your%20secrets.%20These%20can%20help%20you%20to%20realize%20whether%20your%20secret%20management%20is%20ok.%20The%20challenge%20is%20to%20find%20all%20the%20different%20secrets%20by%20means%20of%20various%20tools%20and%20techniques.%20Can%20you%20solve%20all%20the%2015%20challenges%3F) -->
 
-# OWASP WrongSecrets [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Want%20to%20dive%20into%20secrets%20management%20and%20do%20some%20hunting?%20try%20this&url=https://github.com/commjoen/wrongsecrets&hashtags=secretsmanagement,secrets,hunting,p0wnableapp,OWASP,WrongSecrets)
+# OWASP WrongSecrets [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Want%20to%20dive%20into%20secrets%20management%20and%20do%20some%20hunting?%20try%20this&url=https://github.com/OWASP/wrongsecrets&hashtags=secretsmanagement,secrets,hunting,p0wnableapp,OWASP,WrongSecrets)
 
-[![Java checkstyle and testing](https://github.com/commjoen/wrongsecrets/actions/workflows/main.yml/badge.svg)](https://github.com/commjoen/wrongsecrets/actions/workflows/main.yml) [![Terraform FMT](https://github.com/commjoen/wrongsecrets/actions/workflows/terraform.yml/badge.svg)](https://github.com/commjoen/wrongsecrets/actions/workflows/terraform.yml) [![Test minikube script (k8s)](https://github.com/commjoen/wrongsecrets/actions/workflows/minikube-k8s-test.yml/badge.svg)](https://github.com/commjoen/wrongsecrets/actions/workflows/minikube-k8s-test.yml) [![Test minikube script (k8s&vault)](https://github.com/commjoen/wrongsecrets/actions/workflows/minikube-vault-test.yml/badge.svg)](https://github.com/commjoen/wrongsecrets/actions/workflows/minikube-vault-test.yml) [![Docker container test](https://github.com/commjoen/wrongsecrets/actions/workflows/container_test.yml/badge.svg)](https://github.com/commjoen/wrongsecrets/actions/workflows/container_test.yml)
+[![Java checkstyle and testing](https://github.com/OWASP/wrongsecrets/actions/workflows/main.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/main.yml) [![Terraform FMT](https://github.com/commjoen/wrongsecrets/actions/workflows/terraform.yml/badge.svg)](https://github.com/commjoen/wrongsecrets/actions/workflows/terraform.yml) [![Test minikube script (k8s)](https://github.com/commjoen/wrongsecrets/actions/workflows/minikube-k8s-test.yml/badge.svg)](https://github.com/commjoen/wrongsecrets/actions/workflows/minikube-k8s-test.yml) [![Test minikube script (k8s&vault)](https://github.com/commjoen/wrongsecrets/actions/workflows/minikube-vault-test.yml/badge.svg)](https://github.com/commjoen/wrongsecrets/actions/workflows/minikube-vault-test.yml) [![Docker container test](https://github.com/commjoen/wrongsecrets/actions/workflows/container_test.yml/badge.svg)](https://github.com/commjoen/wrongsecrets/actions/workflows/container_test.yml)
 [![OWASP Lab Project](https://img.shields.io/badge/OWASP-lab%20project-48A646.svg)](https://owasp.org/projects/)
-[![Discussions](https://img.shields.io/github/discussions/commjoen/wrongsecrets)](https://github.com/commjoen/wrongsecrets/discussions)
+[![Discussions](https://img.shields.io/github/discussions/OWASP/wrongsecrets)](https://github.com/OWASP/wrongsecrets/discussions)
 
 Welcome to the OWASP WrongSecrets p0wnable app. With this app, we have packed various ways of how to not store your
 secrets. These can help you to realize whether your secret management is ok. The challenge is to find all the different
@@ -17,9 +17,9 @@ Can you solve all the 27 challenges?
 
 Need support? Contact us
 via [OWASP Slack](https://owasp.slack.com/archives/C02KQ7D9XHR) [for which you sign up here](https://owasp.org/slack/invite)
-, file a [PR](https://github.com/commjoen/wrongsecrets/pulls), file
-an [issue](https://github.com/commjoen/wrongsecrets/issues) , or
-use [discussions](https://github.com/commjoen/wrongsecrets/discussions). Please note that this is an OWASP volunteer
+, file a [PR](https://github.com/OWASP/wrongsecrets/pulls), file
+an [issue](https://github.com/OWASP/wrongsecrets/issues) , or
+use [discussions](https://github.com/OWASP/wrongsecrets/discussions). Please note that this is an OWASP volunteer
 based project, so it might take a little while before we respond.
 
 ## Basic docker exercises
@@ -233,12 +233,12 @@ You can help us by the following methods:
 
 - Star us
 - Share this app with others
-- Of course, we can always use your help [to get more flavors](https://github.com/commjoen/wrongsecrets/issues/37) of "wrongly" configured secrets in to spread awareness! We would love to get some help with other cloudproiders, like Alibabaor Tencent cloud for instance. Do you miss something else than a cloud provider as an example? File an issue or create a PR! See [our guide on contributing for more details](CONTRIBUTING.md). Contributors will be listed in releases, in the "Special thanks & Contributors"-section, and the web-app.
+- Of course, we can always use your help [to get more flavors](https://github.com/OWASP/wrongsecrets/issues/37) of "wrongly" configured secrets in to spread awareness! We would love to get some help with other cloudproiders, like Alibabaor Tencent cloud for instance. Do you miss something else than a cloud provider as an example? File an issue or create a PR! See [our guide on contributing for more details](CONTRIBUTING.md). Contributors will be listed in releases, in the "Special thanks & Contributors"-section, and the web-app.
 
 ## Use OWASP WrongSecrets as a secret detection benchmark
 
 As tons of secret detection tools are coming up for both Docker and Git, we are creating a Benchmark testbed for it.
-Want to know if your tool detects everything? We will keep track of the embedded secrets in [this issue](https://github.com/commjoen/wrongsecrets/issues/201) and have a [branch](https://github.com/commjoen/wrongsecrets/tree/experiment-bed) in which we put additional secrets for your tool to detect.
+Want to know if your tool detects everything? We will keep track of the embedded secrets in [this issue](https://github.com/OWASP/wrongsecrets/issues/201) and have a [branch](https://github.com/OWASP/wrongsecrets/tree/experiment-bed) in which we put additional secrets for your tool to detect.
 The branch will contain a Docker container generation script using which you can eventually test your container secret scanning.
 
 ## CTF
@@ -246,7 +246,7 @@ The branch will contain a Docker container generation script using which you can
 We have 3 ways of playing CTFs:
 - The quick "let's play"-approach based on our own Heroku domain [https://wrongsecrets-ctf.herokuapp.com](https://wrongsecrets-ctf.herokuapp.com), which we documente for you here.
 - A more extended approach documented in [ctf-instructions.md](/ctf-instructions.md).
-- A fully customizable CTF setup where every player gets its own virtual instance of WrongSecrets and a virtual instance of the wrongsecrets-desktop, so they all can play hassle-free. For this you have to use [the WrongSecrets CTF Party setup](https://github.com/commjoen/wrongsecrets-ctf-party).
+- A fully customizable CTF setup where every player gets its own virtual instance of WrongSecrets and a virtual instance of the wrongsecrets-desktop, so they all can play hassle-free. For this you have to use [the WrongSecrets CTF Party setup](https://github.com/OWASP/wrongsecrets-ctf-party).
 
 ### CTFD Support
 
@@ -273,7 +273,7 @@ Want to setup your own? You can! Watch out for people finding your key though, s
 
 NOTE: FBCTF support is experimental.
 
-Follow the same step as with CTFD, only now choose fbctfd and as a url for the countrymapping choose `https://raw.githubusercontent.com/commjoen/wrongsecrets/79a982558016c8ce70948a8106f9a2ee5b5b9eea/config/fbctf.yml`.
+Follow the same step as with CTFD, only now choose fbctfd and as a url for the countrymapping choose `https://raw.githubusercontent.com/OWASP/wrongsecrets/79a982558016c8ce70948a8106f9a2ee5b5b9eea/config/fbctf.yml`.
 Then follow [https://github.com/facebookarchive/fbctf/wiki/Quick-Setup-Guide](https://github.com/facebookarchive/fbctf/wiki/Quick-Setup-Guide) to run the FBCTF.
 
 ## Notes on development
@@ -330,7 +330,7 @@ You can also manually invoke: Build -> Recompile the file you just changed, this
 
 Follow the steps below on adding a challenge:
 
-1. First make sure that you have an [Issue](https://github.com/commjoen/wrongsecrets/issues) reported for which a challenge is really wanted.
+1. First make sure that you have an [Issue](https://github.com/OWASP/wrongsecrets/issues) reported for which a challenge is really wanted.
 2. Add the new challenge in the `org.owasp.wrongsecrets.challenges` folder. Make sure you add an explanation in `src/main/resources/explanations` and refer to it from your new Challenge class.
 3. Add a unit and integration test to show that your challenge is working.
 4. Don't forget to add `@Order` annotation to your challenge ;-).

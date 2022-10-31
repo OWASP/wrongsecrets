@@ -14,11 +14,11 @@
     <description>Examples with how to not use secrets</description>
     <url>https://owasp.org/www-project-wrongsecrets/</url>
     <scm>
-        <url>https://github.com/commjoen/wrongsecrets</url>
+        <url>https://github.com/OWASP/wrongsecrets</url>
     </scm>
     <issueManagement>
         <system>GitHub Issue Tracking</system>
-        <url>https://github.com/commjoen/wrongsecrets/issues</url>
+        <url>https://github.com/OWASP/wrongsecrets/issues</url>
     </issueManagement>
     <licenses>
         <license>

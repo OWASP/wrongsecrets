@@ -2,4 +2,4 @@
 
 Similar like hiding secrets in an application written in C, you end up in a similar situation with C++. Can you find the secret in our binary?
 
-Let's debunk the "secrets are hard to find in native compiled applications" myth for C++: can you find the secret in https://github.com/commjoen/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-cplus[wrongsecrets-cplus] (or https://github.com/commjoen/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-cplus-arm[wrongsecrets-cplus-arm], https://github.com/commjoen/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-cplus-linux[wrongsecrets-cplus-linux])?
+Let's debunk the "secrets are hard to find in native compiled applications" myth for C++: can you find the secret in https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-cplus[wrongsecrets-cplus] (or https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-cplus-arm[wrongsecrets-cplus-arm], https://github.com/commjoen/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-cplus-linux[wrongsecrets-cplus-linux])?
