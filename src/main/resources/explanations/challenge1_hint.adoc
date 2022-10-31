@@ -4,12 +4,12 @@ You can solve this challenge by the following steps:
 
 1. When you have the source code available you can find hardcoded string simply by searching through the code. Grep can be used to help this process as it searches for patterns in large blocks of text. Use the below steps to find the answer:
 - Access a terminal with https://man7.org/linux/man-pages/man1/grep.1.html[*grep*] and https://git-scm.com/[*git*] installed.
-- Clone the repo with `git clone https://github.com/commjoen/wrongsecrets`.
+- Clone the repo with `git clone https://github.com/OWASP/wrongsecrets`.
 - Navigate to the Java code where the check for the right answer happens `cd src/main/java/org/owasp/wrongsecrets/`.
 - Use grep recursively to look for the password string `grep -r password`.
 
 2. An automated tool like https://github.com/awslabs/git-secrets[*Git-secrets*] can often help out. In this case it needs setting up with a specific rule:
-- Clone the repo with `git clone https://github.com/commjoen/wrongsecrets`.
+- Clone the repo with `git clone https://github.com/OWASP/wrongsecrets`.
 - Follow the instructions https://github.com/awslabs/git-secrets[here] to install Git secrets.
 - Add a new scan to look for the string `git secrets --add 'password\s*=\s*.+'`.
 - Now execute that scan `git secrets --scan`.

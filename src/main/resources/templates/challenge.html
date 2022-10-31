@@ -5,7 +5,7 @@
     <!--/*@thymesVar id="challenge" type="org.owasp.wrongsecrets.challenges.ChallengeUI"*/-->
     <p class="h1 mt-2"> <span th:text="${challenge.name}"/> <span th:block th:each="i: ${#numbers.sequence(1, challenge.difficulty)}"><span>☆</span></span></p>
     <p><span th:text="'Welcome to challenge ' + ${challenge.challengeNumber} + '.'"></span> You need to guess the secret
-        that is hidden in <a href="https://github.com/commjoen/wrongsecrets">Java</a>, <a
+        that is hidden in <a href="https://github.com/OWASP/wrongsecrets">Java</a>, <a
             href="https://hub.docker.com/r/jeroenwillemsen/wrongsecrets">Docker</a>, Kubernetes, Vault, AWS or GCP.</p>
     <div class="row">
         <div class="offset-lg-1 col-lg-10 col-md-12">
@@ -72,20 +72,20 @@
 
         <div th:if="${missingEnvWarning} eq 'DOCKER'" class="alert alert-danger" role="alert">
             We are running outside a docker container. Please run this in a container as explained in the <a
-            href="https://github.com/commjoen/wrongsecrets#basic-docker-exercises">README.md</a>.
+            href="https://github.com/OWASP/wrongsecrets#basic-docker-exercises">README.md</a>.
         </div>
         <div th:if="${missingEnvWarning} eq 'VAULT'" class="alert alert-danger" role="alert">
             We are running outside a K8s cluster with Vault. Please run this in the K8s cluster as explained in the
-            <a href="https://github.com/commjoen/wrongsecrets#vault-exercises-with-minikube">README.md</a>.
+            <a href="https://github.com/OWASP/wrongsecrets#vault-exercises-with-minikube">README.md</a>.
         </div>
         <div th:if="${missingEnvWarning} eq 'K8S'" class="alert alert-danger" role="alert">
             We are running outside a K8s cluster. Please run this in the K8s cluster as explained in the <a
-            href="https://github.com/commjoen/wrongsecrets#basic-k8s-exercise">README.md</a>.
+            href="https://github.com/OWASP/wrongsecrets#basic-k8s-exercise">README.md</a>.
         </div>
         <div th:if="${missingEnvWarning} eq 'AWS' or ${missingEnvWarning} eq 'GCP'" class="alert alert-danger"
              role="alert">
             We are running outside a properly configured Cloud environment. Please run this in an AWS/Azure/GCP environment as
-            explained in the <a href="https://github.com/commjoen/wrongsecrets#cloud-challenges">README.md</a>.
+            explained in the <a href="https://github.com/OWASP/wrongsecrets#cloud-challenges">README.md</a>.
         </div>
     </div>
     <div class="modal fade" id="finishedModal">

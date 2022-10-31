@@ -17,7 +17,7 @@ So make sure you host your actual scoring Dockerfile.web at a place where your c
 ## Want to get rid of the additional domain?
 
 Want to make sure you don't need to bug your users to copy paste values twice to get points? Here we describe the "2-domain setup". With the 2-domain setup you need to do a manual crafted approach instead of the HMAC based approach for platforms like CTFD. That way, you do not need the 'CTF-scoring-environment' to exchange answers for flags, for this you:
-- Follow the steps described at [instructions in the readme](https://github.com/commjoen/wrongsecrets#ctfd-support).
+- Follow the steps described at [instructions in the readme](https://github.com/OWASP/wrongsecrets#ctfd-support).
 - Then unzip the created zip file and update all the flags in flags.jsson with the actual values of the answers for your CTF.
 - Zip the json files again.
 - Upload your own crafted zipfile with the actual answers, instead of HMACs to CTFD.
@@ -32,7 +32,7 @@ There are 3 flavors of CTF to be setup: Docker/Heroku, K8S, Cloud based.
 
 ### Docker or Heroku CTF
 
-When doing a Docker or Heroku based CTF, you can follow the [instructions in the readme](https://github.com/commjoen/wrongsecrets#ctfd-support).
+When doing a Docker or Heroku based CTF, you can follow the [instructions in the readme](https://github.com/OWASP/wrongsecrets#ctfd-support).
 If you want to use your own CTF key, you can build a container with the following arguments `CTF_ENABLED=true,HINTS_ENABLED=false,CTF_KEY=<YOURNEWKEYHERE>`. Just make sure you provide the same key
 to `juice-shop-ctf` when you run it.
 Host the Docker container somewhere, where your users can not access the container variables directly, so they cannot extract the CTF key that easily.
@@ -44,7 +44,7 @@ There are a few env-vars that you need to pay attention to when setting this up:
 
 ### K8s based CTF
 
-If you are interested in setting up a Kubernetes based CTF, you might want to look at [WrongSecrets CTF party](https://github.com/commjoen/wrongsecrets-ctf-party) instead. Still want to take a different approach than using that? Please read the rest of the paragraph.
+If you are interested in setting up a Kubernetes based CTF, you might want to look at [WrongSecrets CTF party](https://github.com/OWASP/wrongsecrets-ctf-party) instead. Still want to take a different approach than using that? Please read the rest of the paragraph.
 
 When you want to enable the Kubernetes challenges in your CTF-environment, make sure your 'play-environment' is actually running in a Kubernetes environment where the K8ss Configmap, K8s secret, and optionally the Vault setup, are configured correctly. See [our k8s folder](/k8s/) as an example, or have a look at our [Okteto](/okteto/) setup for just having the K8s & Configmap challenges supported.
 When you take the 2-domain approach, make sure that the decoded K8S Secret entry and the Configmap value are stored correctly in the CTF-platform. If you take the standard HMAC approach instead, make sure that your CTF-scoring-environment has the following environment variables set:
@@ -55,7 +55,7 @@ When you take the 2-domain approach, make sure that the decoded K8S Secret entry
 
 ### Cloud based CTF
 
-If you are interested in setting up a Cloud-based CTF in AWS, you might want to look at [WrongSecrets CTF party](https://github.com/commjoen/wrongsecrets-ctf-party) instead. Still want to take a different approach than using that? Please read the rest of the paragraph.
+If you are interested in setting up a Cloud-based CTF in AWS, you might want to look at [WrongSecrets CTF party](https://github.com/OWASP/wrongsecrets-ctf-party) instead. Still want to take a different approach than using that? Please read the rest of the paragraph.
 
 When you take the 2-domain approach, make sure that the decoded K8S Secret entry and the Configmap value are stored correctly in the CTF-platform, next: make sure that the values used for Challenge 9,10 & 11 are stored there correctly as well.
 
