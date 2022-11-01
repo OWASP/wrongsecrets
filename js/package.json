@@ -11,6 +11,9 @@
   ],
   "author": "",
   "license": "MIT",
+  "dependencies": {
+    "minimatch": ">=3.0.5"
+  },
   "devDependencies": {
     "minimatch": ">=3.0.5",
     "javascript-obfuscator": "^4.0.0"
