@@ -124,7 +124,7 @@ data "aws_iam_policy_document" "user_policy" {
 
 module "ebs_csi_irsa_role" {
   source                = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
-  version               = "~> 4.12"
+  version               = "~> 5.5"
   role_name             = "ebs-csi"
   attach_ebs_csi_policy = true
 
