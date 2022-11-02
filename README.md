@@ -227,6 +227,15 @@ Special mentions for helping out:
 - [Björn Kimminich @bkimminich](https://github.com/bkimminich)
 - [Avinash Pancham @avinashpancham](https://github.com/avinashpancham)
 
+Sponsorships:
+
+We would like to thank the following parties for helping us out!
+
+- [Jetbrains](https://www.jetbrains.com/) for licensing an instance of Intellij IDEA Ultimate edition to the project leads. We could not have been this fast with the development without it!
+- [Docker](https://www.docker.com) for granting us their Docker Open Source Sponsored program.
+- [1Password](https://github.com/1Password/1password-teams-open-source/pull/552) for granting us an open source license to 1Password for the secret detection testbed.
+- [GitGuardian](https://blog.gitguardian.com/gitguardian-is-proud-sponsor-of-owasp/) for their large sponsorship which allows us to pay cloudbills and possibly get swag to share (free stickers?).
+
 ## Help Wanted
 
 You can help us by the following methods:
