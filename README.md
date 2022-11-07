@@ -228,7 +228,7 @@ Special mentions for helping out:
 - [Avinash Pancham @avinashpancham](https://github.com/avinashpancham)
 
 
-### Sponsorships:
+### Sponsorships
 
 We would like to thank the following parties for helping us out:
 
