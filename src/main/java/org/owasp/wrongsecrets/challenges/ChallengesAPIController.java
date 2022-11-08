@@ -51,7 +51,7 @@ public class ChallengesAPIController {
         }
         JSONObject json = new JSONObject();
         JSONArray jsonArray = new JSONArray();
-        for (int i = 0; i < challenges.size(); i++) {
+        for (int i = 1; i <= challenges.size(); i++) {
             JSONObject jsonChallenge = new JSONObject();
             jsonChallenge.put("id", i);
             jsonChallenge.put("name", challenges.get(i).getName());
