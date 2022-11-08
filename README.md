@@ -281,7 +281,7 @@ Initial creation of the zip file for CTFD requires you to visit [https://wrongse
 Follow the following steps:
 
 ```shell
-    npm install -g juice-shop-ctf-cli
+    npm install -g juice-shop-ctf-cli@9.1.0
     juice-shop-ctf #choose ctfd and https://wrongsecrets-ctf.herokuapp.com as domain. No trailing slash! The key is 'TRwzkRJnHOTckssAeyJbysWgP!Qc2T', feel free to enable hints. We do not support snippets or links/urls to code or hints.
     docker run -p 8001:8000 -it ctfd/ctfd:3.4.3
 ```
