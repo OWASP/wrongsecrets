@@ -53,7 +53,7 @@ public class ChallengesAPIController {
         JSONArray jsonArray = new JSONArray();
         for (int i = 0; i < challenges.size(); i++) {
             JSONObject jsonChallenge = new JSONObject();
-            jsonChallenge.put("id", i + 1 );
+            jsonChallenge.put("id", i + 1);
             jsonChallenge.put("name", challenges.get(i).getName());
             jsonChallenge.put("key", challenges.get(i).getExplanation());
             jsonChallenge.put("category", getCategory(challenges.get(i)) + " - " + challenges.get(i).getTech());
