@@ -234,7 +234,7 @@ We would like to thank the following parties for helping us out:
 
 [![gitguardian_logo.png](images/gitguardian_logo.jpeg)](https://blog.gitguardian.com/gitguardian-is-proud-sponsor-of-owasp/)
 
-[GitGuardian](https://blog.gitguardian.com/gitguardian-is-proud-sponsor-of-owasp/) for their sponsorship which allows us to pay the bills for our cloud-accounts.
+[GitGuardian](https://www.gitguardian.com/) for their sponsorship which allows us to pay the bills for our cloud-accounts.
 
 [![jetbrains_logo.png](images/jetbrains_logo.png)](https://www.jetbrains.com/)
 
@@ -246,7 +246,7 @@ We would like to thank the following parties for helping us out:
 
 [![1password_logo.png](images/1password_logo.png)](https://github.com/1Password/1password-teams-open-source/pull/552)
 
-[1Password](https://github.com/1Password/1password-teams-open-source/pull/552) for granting us an open source license to 1Password for the secret detection testbed.
+[1Password](https://1password.com/) for granting us an open source license to 1Password for the secret detection testbed.
 
 
 ## Help Wanted
