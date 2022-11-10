@@ -6,7 +6,7 @@ ARG spring_profile=""
 ENV SPRING_PROFILES_ACTIVE=$spring_profile
 ENV ARG_BASED_PASSWORD=$argBasedPassword
 ENV APP_VERSION=$argBasedVersion
-ENV DOCKER_ENV_PASSWORD="This is it"
+ENV DOCKER_ENV_PASSWORD="This is it at the beneluxdays only"
 ENV AZURE_KEY_VAULT_ENABLED=false
 
 RUN echo "2vars"
