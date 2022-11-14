@@ -43,7 +43,7 @@
         <maven.compiler.target>19</maven.compiler.target>
         <spring.cloud-version>2021.0.4</spring.cloud-version>
         <lombok.version>1.18.24</lombok.version>
-        <aws.sdk.version>2.18.7</aws.sdk.version>
+        <aws.sdk.version>2.18.11</aws.sdk.version>
         <asciidoctorj.version>2.5.7</asciidoctorj.version>
         <jruby.version>9.3.9.0</jruby.version>
         <bootstrap.version>5.2.2</bootstrap.version>
@@ -54,13 +54,13 @@
         <thymeleaf.layout>3.1.0</thymeleaf.layout>
         <asciidoctor.maven.plugin.version>2.2.2</asciidoctor.maven.plugin.version>
         <azure.keyvault.version>4.5.1</azure.keyvault.version>
-        <azure.identity.version>1.6.1</azure.identity.version>
+        <azure.identity.version>1.7.0</azure.identity.version>
         <azure.keyvault.spring.version>2.3.5</azure.keyvault.spring.version>
         <spring.security.version>5.7.5</spring.security.version>
         <cyclonedx.core.version>7.2.0</cyclonedx.core.version>
         <KeePassJava2.version>2.1.4</KeePassJava2.version>
         <system-stubs-jupiter.version>2.0.1</system-stubs-jupiter.version>
-        <dependency-check-maven.version>7.0.4</dependency-check-maven.version>
+        <dependency-check-maven.version>7.3.0</dependency-check-maven.version>
     </properties>
 
     <dependencies>
