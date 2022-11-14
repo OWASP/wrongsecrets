@@ -77,8 +77,8 @@ spec:
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
           env:
-            - name: GCP_PROJECT_ID
-              value: ${GCP_PROJECT}
+            - name: spring.cloud.gcp.project-id
+              value: ${spring.cloud.gcp.project-id}
             - name: K8S_ENV
               value: gcp
             - name: SPECIAL_K8S_SECRET
