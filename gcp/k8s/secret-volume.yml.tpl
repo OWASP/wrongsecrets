@@ -6,7 +6,7 @@ spec:
   provider: gcp
   parameters:
     secrets: |
-      - resourceName: "projects/${spring.cloud.gcp.project-id}/secrets/wrongsecret-1/versions/latest"
+      - resourceName: "projects/${GCP_PROJECT}/secrets/wrongsecret-1/versions/latest"
         fileName: "wrongsecret"
-      - resourceName: "projects/${spring.cloud.gcp.project-id}/secrets/wrongsecret-2/versions/latest"
+      - resourceName: "projects/${GCP_PROJECT}/secrets/wrongsecret-2/versions/latest"
         fileName: "wrongsecret-2"

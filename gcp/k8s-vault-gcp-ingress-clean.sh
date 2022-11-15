@@ -7,7 +7,7 @@ source ../scripts/check-available-commands.sh
 
 checkCommandsAvailable gcloud kubectl
 
-export spring.cloud.gcp.project-id=$(gcloud config list --format 'value(core.project)' 2>/dev/null)
+export GCP_PROJECT=$(gcloud config list --format 'value(core.project)' 2>/dev/null)
 
 kubectl delete -f ./k8s/k8s-gke-service.yaml
 kubectl delete -f ./k8s/k8s-gke-ingress.yaml

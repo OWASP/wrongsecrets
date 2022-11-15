@@ -10,7 +10,7 @@ checkCommandsAvailable helm jq vault sed grep cat gcloud envsubst
 echo "This is a script to bootstrap the configuration. You need to have installed: helm, kubectl, jq, vault, grep, cat, sed, envsubst, and google cloud cli, and is only tested on mac, Debian and Ubuntu"
 echo "This script is based on the steps defined in https://learn.hashicorp.com/tutorials/vault/kubernetes-minikube. Vault is awesome!"
 
-export spring.cloud.gcp.project-id=$(gcloud config list --format 'value(core.project)' 2>/dev/null)
+export GCP_PROJECT=$(gcloud config list --format 'value(core.project)' 2>/dev/null)
 
 kubectl get configmaps | grep 'secrets-file' &>/dev/null
 if [ $? == 0 ]; then
@@ -132,11 +132,11 @@ kubectl apply -f./k8s/secret-volume.yml
 echo "Annotate service accounts"
 kubectl annotate serviceaccount \
   --namespace default vault \
-  "iam.gke.io/gcp-service-account=wrongsecrets-workload-sa@${spring.cloud.gcp.project-id}.iam.gserviceaccount.com"
+  "iam.gke.io/gcp-service-account=wrongsecrets-workload-sa@${GCP_PROJECT}.iam.gserviceaccount.com"
 
 kubectl annotate serviceaccount \
   --namespace default default \
-  "iam.gke.io/gcp-service-account=wrongsecrets-workload-sa@${spring.cloud.gcp.project-id}.iam.gserviceaccount.com"
+  "iam.gke.io/gcp-service-account=wrongsecrets-workload-sa@${GCP_PROJECT}.iam.gserviceaccount.com"
 
 envsubst <./k8s/secret-challenge-vault-deployment.yml.tpl >./k8s/secret-challenge-vault-deployment.yml
 
