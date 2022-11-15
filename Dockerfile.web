@@ -1,8 +1,8 @@
 FROM jeroenwillemsen/wrongsecrets:1.5.10-no-vault
 ARG argBasedVersion="1.5.10"
 ARG CANARY_URLS="http://canarytokens.com/terms/about/s7cfbdakys13246ewd8ivuvku/post.jsp,http://canarytokens.com/terms/about/y0all60b627gzp19ahqh7rl6j/post.jsp"
-ARG CTF_ENABLED=false
-ARG HINTS_ENABLED=true
+ARG CTF_ENABLED=true
+ARG HINTS_ENABLED=false
 ARG CHALLENGE_ACHT_CTF_HOST_VALUE="not_set"
 #ONLY OVERRIDE THE ARGS BELOW WHEN YOU ARE SETTING UP A CTF!
 ARG CTF_KEY=TRwzkRJnHOTckssAeyJbysWgP!Qc2T
