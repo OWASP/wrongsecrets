@@ -39,7 +39,7 @@ spec:
             volumeAttributes:
               secretProviderClass: "wrongsecrets-gcp-secretsmanager"
       containers:
-        - image: jeroenwillemsen/wrongsecrets:1.5.10-k8s-vault
+        - image: jeroenwillemsen/wrongsecrets:gcp-287-2-k8s-vault
           imagePullPolicy: IfNotPresent
           name: secret-challenge
           ports:
@@ -77,7 +77,9 @@ spec:
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
           env:
-            - name: GCP_PROJECT_ID
+            - name: GCP_PROJECT
+              value: ${GCP_PROJECT}
+            - name: GOOGLE_CLOUD_PROJECT
               value: ${GCP_PROJECT}
             - name: K8S_ENV
               value: gcp

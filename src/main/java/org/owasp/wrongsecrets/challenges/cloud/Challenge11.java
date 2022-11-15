@@ -60,7 +60,7 @@ public class Challenge11 extends CloudChallenge {
                        @Value("${default_azure_value}") String azureDefaultValue,
                        @Value("${azure.keyvault.uri}") String azureVaultUri,
                        @Value("${wrongsecret-3}") String azureWrongSecret3, // Exclusively auto-wired for Azure
-                       @Value("${GCP_PROJECT_ID}") String projectId,
+                       @Value("${GOOGLE_CLOUD_PROJECT}") String projectId,
                        @Value("${default_aws_value_challenge_11}") String ctfValue,
                        @Value("${ctf_enabled}") boolean ctfEnabled,
                        RuntimeEnvironment runtimeEnvironment) {
