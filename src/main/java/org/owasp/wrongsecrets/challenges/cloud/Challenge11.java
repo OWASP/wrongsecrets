@@ -58,7 +58,7 @@ public class Challenge11 extends CloudChallenge {
                        @Value("${default_gcp_value}") String gcpDefaultValue,
                        @Value("${default_aws_value}") String awsDefaultValue,
                        @Value("${default_azure_value}") String azureDefaultValue,
-                       @Value("${azure.keyvault.uri}") String azureVaultUri,
+                       @Value("${spring.cloud.azure.keyvault.endpoint}") String azureVaultUri,
                        @Value("${wrongsecret-3}") String azureWrongSecret3, // Exclusively auto-wired for Azure
                        @Value("${GOOGLE_CLOUD_PROJECT}") String projectId,
                        @Value("${default_aws_value_challenge_11}") String ctfValue,
