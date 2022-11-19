@@ -123,6 +123,7 @@ public class Challenge11 extends CloudChallenge {
     }
 
     private String getAWSChallenge11Value() {
+        log.info("pre-checking AWS data");
         if (!"if_you_see_this_please_use_AWS_Setup".equals(awsRoleArn)) {
             log.info("Getting credentials from AWS");
             try { //based on https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javav2/example_code/sts/src/main/java/com/example/sts
@@ -167,6 +168,7 @@ public class Challenge11 extends CloudChallenge {
     }
 
     private String getGCPChallenge11Value() {
+        log.info("pre-checking GCP data");
         if (isGCP()) {
             log.info("Getting credentials from GCP");
             // Based on https://cloud.google.com/secret-manager/docs/reference/libraries
@@ -187,6 +189,7 @@ public class Challenge11 extends CloudChallenge {
     }
 
     private String getAzureChallenge11Value() {
+        log.info("pre-checking Azure data");
         if (isAzure()) {
             log.debug(String.format("Using Azure Key Vault URI: %s", azureVaultUri));
             return azureWrongSecret3;
