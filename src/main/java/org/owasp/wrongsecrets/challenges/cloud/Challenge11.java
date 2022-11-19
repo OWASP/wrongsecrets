@@ -191,7 +191,7 @@ public class Challenge11 extends CloudChallenge {
     private String getAzureChallenge11Value() {
         log.info("pre-checking Azure data");
         if (isAzure()) {
-            log.debug(String.format("Using Azure Key Vault URI: %s", azureVaultUri));
+            log.info(String.format("Using Azure Key Vault URI: %s", azureVaultUri));
             return azureWrongSecret3;
         }
         log.error("Fetching secret from Azure did not work, returning default");
