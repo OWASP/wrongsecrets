@@ -82,3 +82,13 @@
     background-color: var(--bs-indigo);
     border-color: var(--bs-indigo);
 }
+
+.dark-mode input {
+    background-color: var(--bs-gray-600);
+    color: var(--bs-body-color);
+}
+
+.dark-mode select {
+    background-color: var(--bs-gray-600);
+    color: var(--bs-body-color);
+}

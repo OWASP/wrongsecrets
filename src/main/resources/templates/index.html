@@ -6,8 +6,10 @@
     <title>OWASP WrongSecrets</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.2/css/bootstrap.min.css} " />
+    <link th:rel="stylesheet" th:href="@{/webjars/datatables/1.12.1/css/dataTables.bootstrap5.min.css} " />
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/dark.css}" />
+
 </head>
 
 <body>
@@ -18,6 +20,9 @@
 
     <script th:src="@{/webjars/bootstrap/5.2.2/js/bootstrap.bundle.min.js}"></script>
     <script th:src="@{/webjars/github-buttons/2.14.1/dist/buttons.js}"></script>
+    <script th:src="@{/webjars/jquery/3.6.1/jquery.js}"></script>
+    <script th:src="@{/webjars/datatables/1.12.1/js/jquery.dataTables.min.js}"></script>
+    <script th:src="@{/webjars/datatables/1.12.1/js/dataTables.bootstrap5.min.js}"></script>
     <script th:if="${allCompleted} eq 'party'">
         window.addEventListener("load", function () {
             new bootstrap.Modal(document.getElementById('finishedModal'), {}).toggle()
@@ -36,5 +41,19 @@
             + "&client_secret=" + encodeURIComponent(password));
     </script>
 </body>
+
+<script>
+
+    $.extend(true, $.fn.dataTable.defaults, {
+        searching: true,
+        ordering: true,
+    });
+    $(document).ready(function () {
+        $('#challenge_overview').DataTable({
+            lengthMenu: [ [20, 30, 50, -1], [20, 30, 50, "All"] ]
+        });
+    });
+</script>
+
 
 </html>
