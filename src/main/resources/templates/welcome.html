@@ -17,7 +17,7 @@
     <div class="container-fluid text-sm p-2 p-lg-3">
         <div class="row">
             <div class="col-12 col-lg-7">
-                <table class="table table-responsive">
+                <table class="table table-responsive" id="challenge_overview">
                     <thead>
                     <tr>
                         <th scope="col" class="d-none d-xl-table-cell">#</th>
@@ -38,6 +38,7 @@
                             th:text="${challenge.name}"
                             th:remove="tag"></span></a></td>
                         <td th:text="${challenge.tech}"></td>
+                            <td td:if="${{challenge.requiredEnv == 'USEDFORDEDUPLICATIONDONOTREMOVE'}}" class="d-sm-none"></td>
                         <td class="d-none d-md-table-cell">
                             <th:span th:each="i: ${#numbers.sequence(1, challenge.difficulty)}"><span>★ </span></th:span>
                             <th:span th:if="${challenge.difficulty<5}"
@@ -45,17 +46,17 @@
                             </th:span>
                         </td>
                         <th:block th:if="${challenge.requiredEnv} == 'DOCKER'">
-                            <td>Docker</td>
+                            <td class="d-none d-sm-table-cell" >Docker</td>
                         </th:block>
                         <th:block th:if="${challenge.requiredEnv} == 'K8S'">
-                            <td>K8s or Minikube</td>
+                            <td class="d-none d-sm-table-cell" >K8s or Minikube</td>
                         </th:block>
                         <th:block th:if="${challenge.requiredEnv} == 'VAULT'">
-                            <td>K8s or Minikube with Vault</td>
+                            <td class="d-none d-sm-table-cell" >K8s or Minikube with Vault</td>
                         </th:block>
                         <th:block
                             th:if="${challenge.requiredEnv} == 'AWS' or ${challenge.requiredEnv} == 'GCP' or ${challenge.requiredEnv} == 'AZURE'">
-                            <td>AWS, GCP, Azure</td>
+                            <td class="d-none d-sm-table-cell" >AWS, GCP, Azure</td>
                         </th:block>
 
                     </tr>
