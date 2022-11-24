@@ -83,17 +83,19 @@ spec:
               value: azure
             - name: spring_cloud_azure_keyvault_enable
               value: "true"
+            - name: spring_cloud_azure_keyvault_secret_endpoint
+              value: ${AZ_VAULT_URI}
             - name: spring_cloud_azure_keyvault_endpoint
               value: ${AZ_VAULT_URI}
             - name: management_health_azure-keyvault-secret_enabled
               value: "true"
-            - name: spring.cloud.azure.keyvault.secret.property-sources[0].credential.client-id
+            - name: spring_cloud_azure_keyvault_secret_credential_client-id
               value: ${AZ_POD_CLIENT_ID}
-            - name: spring.cloud.azure.keyvault.secret.property-sources[0].credential.managedIdentityEnabled
+            - name: spring_cloud_azure_credential_managed-identity-enabled
               value: "true"
-            - name: spring.cloud.azure.keyvault.secret.property-sources[0].endpoint
+            - name: spring_cloud_azure_keyvault_secret_endpoint
               value: ${AZ_VAULT_URI}
-            - name: spring.cloud.azure.keyvault.secret.property-sources[0].profile.tenant-id
+            - name: spring_cloud_azure_keyvault_secret_profile_tenant-id
               value: ${AZ_KEY_VAULT_TENANT_ID}
             - name: SPECIAL_K8S_SECRET
               valueFrom:
