@@ -41,7 +41,7 @@ spec:
             volumeAttributes:
               secretProviderClass: "azure-wrongsecrets-vault"
       containers:
-        - image: jeroenwillemsen/wrongsecrets:azure-490-4-k8s-vault
+        - image: jeroenwillemsen/wrongsecrets:azure-490-5-k8s-vault
           imagePullPolicy: IfNotPresent
           name: secret-challenge
           securityContext:
@@ -87,6 +87,14 @@ spec:
               value: ${AZ_VAULT_URI}
             - name: management_health_azure-keyvault-secret_enabled
               value: "true"
+            - name: spring.cloud.azure.keyvault.secret.property-sources[0].credential.client-id
+              value: ${AZ_POD_CLIENT_ID}
+            - name: spring.cloud.azure.keyvault.secret.property-sources[0].credential.managedIdentityEnabled
+              value: "true"
+            - name: spring.cloud.azure.keyvault.secret.property-sources[0].endpoint
+              value: ${AZ_VAULT_URI}
+            - name: spring.cloud.azure.keyvault.secret.property-sources[0].profile.tenant-id
+              value: ${AZ_KEY_VAULT_TENANT_ID}
             - name: SPECIAL_K8S_SECRET
               valueFrom:
                 configMapKeyRef:
