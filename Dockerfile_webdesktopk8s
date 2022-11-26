@@ -9,13 +9,19 @@ RUN \
 
 RUN \
   echo "**** install packages ****" && \
-  apk add --no-cache shadow keepassxc radare2 aws-cli geany && \
+  apk add --no-cache shadow keepassxc radare2 aws-cli geany git && \
   echo "**** adding abc user to root for Docker ****" && \
   usermod -aG root abc && \
   touch /var/run/docker.sock && \
   chown abc:abc /var/run/docker.sock && \
   echo "**** cleanup ****" && \
   rm -rf /tmp/*
+
+RUN echo "**** clone wrongsecrets.git for webtop in k8s ****" && \
+    mkdir /var/tmp/wrongsecrets && \
+    cd /var/tmp/wrongsecrets && \
+    git clone https://github.com/OWASP/wrongsecrets.git
+
 
 WORKDIR /config/Desktop
 
