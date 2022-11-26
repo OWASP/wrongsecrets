@@ -73,7 +73,7 @@ module "eks" {
 
   cluster_endpoint_private_access = true
 
-  cluster_endpoint_public_access_cidrs = ["${data.http.ip.request_body}/32"]
+  cluster_endpoint_public_access_cidrs = ["${data.http.ip.response_body}/32"]
 
   enable_irsa = true
 
