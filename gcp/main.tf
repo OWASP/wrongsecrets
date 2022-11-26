@@ -52,7 +52,7 @@ resource "google_container_cluster" "gke" {
 
   master_authorized_networks_config {
     cidr_blocks {
-      cidr_block   = "${data.http.ip.body}/32"
+      cidr_block   = "${data.http.ip.request_body}/32"
       display_name = "user origin"
     }
   }
