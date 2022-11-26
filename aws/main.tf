@@ -62,7 +62,7 @@ module "vpc" {
 
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
-  version = "18.30.2"
+  version = "18.31.2"
 
   cluster_name    = var.cluster_name
   cluster_version = var.cluster_version
@@ -73,7 +73,7 @@ module "eks" {
 
   cluster_endpoint_private_access = true
 
-  cluster_endpoint_public_access_cidrs = ["${data.http.ip.body}/32"]
+  cluster_endpoint_public_access_cidrs = ["${data.http.ip.response_body}/32"]
 
   enable_irsa = true
 
