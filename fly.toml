@@ -14,8 +14,6 @@ processes = []
 
 [env]
   K8S_ENV="Fly(Docker)"
-  CTF_ENABLED=true
-  HINTS_ENABLED=false
 
 [experimental]
   allowed_public_ports = []
