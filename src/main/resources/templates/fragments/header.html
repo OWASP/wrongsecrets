@@ -15,12 +15,12 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a th:class="'nav-link '+${#httpServletRequest.requestURI == '/' ? 'active' : ''}"
+                        <a th:class="'nav-link '+${requestURI == '/' ? 'active' : ''}"
                            href="/">Home</a>
                     </li>
                     </li>
                     <li class="nav-item dropdown">
-                        <a th:class="'nav-link dropdown-toggle '+${#httpServletRequest.requestURI.contains('challenge') ? 'active' : ''}"
+                        <a th:class="'nav-link dropdown-toggle '+${requestURI.contains('challenge') ? 'active' : ''}"
                            href="#" id="navbarDropdown" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false">
                             Challenges
@@ -38,7 +38,7 @@
                            class="nav-link" target="_blank">Github</a>
                     </li>
                     <li class="nav-item">
-                        <a th:class="'nav-link '+${#httpServletRequest.requestURI == '/stats' ? 'active' : ''}"
+                        <a th:class="'nav-link '+${requestURI == '/stats' ? 'active' : ''}"
                            href="/stats">Stats</a>
                     </li>
                     <div class="theme-toggle navbar-text">

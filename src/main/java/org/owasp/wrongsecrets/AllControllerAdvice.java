@@ -1,5 +1,6 @@
 package org.owasp.wrongsecrets;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.ChallengeUI;
 import org.springframework.beans.factory.annotation.Value;
@@ -35,6 +36,11 @@ public class AllControllerAdvice {
     @ModelAttribute
     public void addVersion(Model model) {
         model.addAttribute("version", version);
+    }
+
+    @ModelAttribute
+    public void addRequest(Model model, HttpServletRequest request) {
+        model.addAttribute("requestURI", request.getRequestURI());
     }
 
     @ModelAttribute

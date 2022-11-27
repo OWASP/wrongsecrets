@@ -3,8 +3,8 @@ package org.owasp.wrongsecrets.canaries;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.client.RestClientResponseException;
 
@@ -25,13 +25,13 @@ public class CanaryCallbackTest {
         var additonalCanaryData = new AdditionalCanaryData("soruce", "agent", "referer", "locatoin");
         CanaryToken token = new CanaryToken("url", "memo", "channel", "time", additonalCanaryData);
 
-        var callbackAdress = "http://localhost:"+port+"/canaries/tokencallback";
+        var callbackAdress = "http://localhost:" + port + "/canaries/tokencallback";
 
         try {
             var response = restTemplate.postForEntity(callbackAdress, token, String.class);
             assertThat(response.getStatusCode()).isEqualTo(HttpStatus.ACCEPTED);
         } catch (RestClientResponseException e) {
-           fail(e);
+            fail(e);
         }
     }
 }
