@@ -178,20 +178,9 @@
             <artifactId>google-cloud-secretmanager</artifactId>
         </dependency>
 
-
         <dependency>
             <groupId>com.azure.spring</groupId>
-            <artifactId>spring-cloud-azure-dependencies</artifactId>
-            <version>${com.azure.spring.version}</version>
-            <type>pom</type>
-            <scope>import</scope>
-        </dependency>
-
-
-        <dependency>
-            <groupId>com.azure.spring</groupId>
-            <artifactId>spring-cloud-azure-starter-keyvault</artifactId>
-            <version>${com.azure.spring.version}</version>
+            <artifactId>spring-cloud-azure-starter-keyvault-secrets</artifactId>
         </dependency>
 
         <dependency>
@@ -239,6 +228,13 @@
                 <groupId>com.google.cloud</groupId>
                 <artifactId>spring-cloud-gcp-dependencies</artifactId>
                 <version>${gcp.sdk.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.azure.spring</groupId>
+                <artifactId>spring-cloud-azure-dependencies</artifactId>
+                <version>${com.azure.spring.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
