@@ -95,8 +95,6 @@ spec:
               value: ${AZ_POD_CLIENT_ID}
             - name: spring_cloud_azure_credential_managed-identity-enabled
               value: "true"
-            - name: spring_cloud_azure_keyvault_secret_endpoint
-              value: ${AZ_VAULT_URI}
             - name: spring_cloud_azure_keyvault_secret_profile_tenant-id
               value: ${AZ_KEY_VAULT_TENANT_ID}
             - name: SPECIAL_K8S_SECRET
