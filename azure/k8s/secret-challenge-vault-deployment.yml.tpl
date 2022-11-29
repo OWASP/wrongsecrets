@@ -41,7 +41,7 @@ spec:
             volumeAttributes:
               secretProviderClass: "azure-wrongsecrets-vault"
       containers:
-        - image: jeroenwillemsen/wrongsecrets:azure-490-6-k8s-vault
+        - image: jeroenwillemsen/wrongsecrets:azure-490-7-k8s-vault
           imagePullPolicy: IfNotPresent
           name: secret-challenge
           securityContext:
@@ -83,6 +83,8 @@ spec:
               value: azure
             - name: spring_cloud_azure_keyvault_enable
               value: "true"
+            - name: AZURE_KV_ENDPOINT_1
+              value: ${AZ_VAULT_URI}
             - name: spring_cloud_azure_keyvault_secret_endpoint
               value: ${AZ_VAULT_URI}
             - name: spring_cloud_azure_keyvault_endpoint
