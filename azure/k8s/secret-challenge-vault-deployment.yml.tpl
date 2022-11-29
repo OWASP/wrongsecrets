@@ -81,6 +81,16 @@ spec:
           env:
             - name: K8S_ENV
               value: azure
+            - name: SPRING_CLOUD_AZURE_KEYVAULT_SECRET_PROPERTYSOURCEENABLED
+              value: "true"
+            - name: SPRING_CLOUD_AZURE_KEYVAULT_SECRET_PROPERTYSOURCES_0_NAME
+              value: wrongsecret-3
+            - name: SPRING_CLOUD_AZURE_KEYVAULT_SECRET_PROPERTYSOURCES_0_ENDPOINT
+              value: ${AZ_VAULT_URI}
+            - name: SPRING_CLOUD_AZURE_KEYVAULT_SECRET_PROPERTYSOURCES_0_CREDENTIAL_CLIENTID
+              value: ${AZ_POD_CLIENT_ID}
+            - name: SPRING_CLOUD_AZURE_KEYVAULT_SECRET_PROPERTYSOURCES_0_CREDENTIAL_MANAGEDIDENTITYENABLED
+              value: "true"
             - name: spring_cloud_azure_keyvault_enable
               value: "true"
             - name: AZURE_KV_ENDPOINT_1
