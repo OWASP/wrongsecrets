@@ -41,7 +41,7 @@ spec:
             volumeAttributes:
               secretProviderClass: "azure-wrongsecrets-vault"
       containers:
-        - image: jeroenwillemsen/wrongsecrets:1.5.11-k8s-vault
+        - image: jeroenwillemsen/wrongsecrets:azure-490-9-k8s-vault
           imagePullPolicy: IfNotPresent
           name: secret-challenge
           securityContext:
@@ -81,11 +81,15 @@ spec:
           env:
             - name: K8S_ENV
               value: azure
-            - name: azure_keyvault_enabled
+            - name: SPRING_CLOUD_AZURE_KEYVAULT_SECRET_PROPERTYSOURCEENABLED
               value: "true"
-            - name: azure_keyvault_uri
+            - name: SPRING_CLOUD_AZURE_KEYVAULT_SECRET_PROPERTYSOURCES_0_NAME
+              value: wrongsecret-3
+            - name: SPRING_CLOUD_AZURE_KEYVAULT_SECRET_PROPERTYSOURCES_0_ENDPOINT
               value: ${AZ_VAULT_URI}
-            - name: management.health.azure-key-vault.enabled
+            - name: SPRING_CLOUD_AZURE_KEYVAULT_SECRET_PROPERTYSOURCES_0_CREDENTIAL_CLIENTID
+              value: ${AZ_POD_CLIENT_ID}
+            - name: SPRING_CLOUD_AZURE_KEYVAULT_SECRET_PROPERTYSOURCES_0_CREDENTIAL_MANAGEDIDENTITYENABLED
               value: "true"
             - name: SPECIAL_K8S_SECRET
               valueFrom:

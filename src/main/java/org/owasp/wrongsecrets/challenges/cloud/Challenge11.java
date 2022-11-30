@@ -58,7 +58,7 @@ public class Challenge11 extends CloudChallenge {
                        @Value("${default_gcp_value}") String gcpDefaultValue,
                        @Value("${default_aws_value}") String awsDefaultValue,
                        @Value("${default_azure_value}") String azureDefaultValue,
-                       @Value("${azure.keyvault.uri}") String azureVaultUri,
+                       @Value("${spring.cloud.azure.keyvault.secret.property-sources[0].endpoint}") String azureVaultUri,
                        @Value("${wrongsecret-3}") String azureWrongSecret3, // Exclusively auto-wired for Azure
                        @Value("${GOOGLE_CLOUD_PROJECT}") String projectId,
                        @Value("${default_aws_value_challenge_11}") String ctfValue,
@@ -123,6 +123,7 @@ public class Challenge11 extends CloudChallenge {
     }
 
     private String getAWSChallenge11Value() {
+        log.info("pre-checking AWS data");
         if (!"if_you_see_this_please_use_AWS_Setup".equals(awsRoleArn)) {
             log.info("Getting credentials from AWS");
             try { //based on https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javav2/example_code/sts/src/main/java/com/example/sts
@@ -167,6 +168,7 @@ public class Challenge11 extends CloudChallenge {
     }
 
     private String getGCPChallenge11Value() {
+        log.info("pre-checking GCP data");
         if (isGCP()) {
             log.info("Getting credentials from GCP");
             // Based on https://cloud.google.com/secret-manager/docs/reference/libraries
@@ -187,8 +189,9 @@ public class Challenge11 extends CloudChallenge {
     }
 
     private String getAzureChallenge11Value() {
+        log.info("pre-checking Azure data");
         if (isAzure()) {
-            //log.debug(String.format("Using Azure Key Vault URI: %s", azureVaultUri));
+            log.info(String.format("Using Azure Key Vault URI: %s", azureVaultUri));
             return azureWrongSecret3;
         }
         log.error("Fetching secret from Azure did not work, returning default");
