@@ -228,7 +228,6 @@ Special mentions for helping out:
 - [Björn Kimminich @bkimminich](https://github.com/bkimminich)
 - [Xiaolu Dai @saragluna](https://github.com/saragluna)
 - [Jonathan Giles @jonathanGiles](https://github.com/JonathanGiles)
-- [Avinash Pancham @avinashpancham](https://github.com/avinashpancham)
 
 
 ### Sponsorships
