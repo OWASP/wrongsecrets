@@ -60,7 +60,7 @@ if [ $? == 0 ]; then
   echo "CSI driver is already installed"
 else
   echo "Installing CSI driver"
-  helm install csi csi-secrets-store-provider-azure/csi-secrets-store-provider-azure
+  helm install csi csi-secrets-store-provider-azure/csi-secrets-store-provider-azure --namespace kube-system
 fi
 
 echo "Add Azure pod identity to repo"

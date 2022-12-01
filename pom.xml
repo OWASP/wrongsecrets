@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.7.5</version>
-        <relativePath /> <!-- lookup parent from repository -->
+        <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>org.owasp</groupId>
     <artifactId>wrongsecrets</artifactId>
@@ -43,9 +44,9 @@
         <maven.compiler.target>19</maven.compiler.target>
         <spring.cloud-version>2021.0.4</spring.cloud-version>
         <lombok.version>1.18.24</lombok.version>
-        <aws.sdk.version>2.18.24</aws.sdk.version>
+        <aws.sdk.version>2.18.28</aws.sdk.version>
         <asciidoctorj.version>2.5.7</asciidoctorj.version>
-        <jruby.version>9.3.9.0</jruby.version>
+        <jruby.version>9.4.0.0</jruby.version>
         <bootstrap.version>5.2.2</bootstrap.version>
         <github.button.version>2.14.1</github.button.version>
         <gcp.sdk.version>3.4.0</gcp.sdk.version>
@@ -55,10 +56,8 @@
         <thymeleaf.version>3.0.15.RELEASE</thymeleaf.version>
         <thymeleaf.layout>3.1.0</thymeleaf.layout>
         <asciidoctor.maven.plugin.version>2.2.2</asciidoctor.maven.plugin.version>
-        <azure.keyvault.version>4.5.2</azure.keyvault.version>
-        <azure.identity.version>1.7.0</azure.identity.version>
-        <azure.keyvault.spring.version>2.3.5</azure.keyvault.spring.version>
         <spring.security.version>5.7.5</spring.security.version>
+        <com.azure.spring.version>4.4.1</com.azure.spring.version>
         <cyclonedx.core.version>7.2.0</cyclonedx.core.version>
         <KeePassJava2.version>2.1.4</KeePassJava2.version>
         <system-stubs-jupiter.version>2.0.1</system-stubs-jupiter.version>
@@ -179,21 +178,8 @@
         </dependency>
 
         <dependency>
-            <groupId>com.azure</groupId>
-            <artifactId>azure-security-keyvault-secrets</artifactId>
-            <version>${azure.keyvault.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.azure</groupId>
-            <artifactId>azure-identity</artifactId>
-            <version>${azure.identity.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.microsoft.azure</groupId>
-            <artifactId>azure-keyvault-secrets-spring-boot-starter</artifactId>
-            <version>${azure.keyvault.spring.version}</version>
+            <groupId>com.azure.spring</groupId>
+            <artifactId>spring-cloud-azure-starter-keyvault-secrets</artifactId>
         </dependency>
 
         <dependency>
@@ -221,11 +207,11 @@
             <version>${dependency-check-maven.version}</version>
             <type>maven-plugin</type>
         </dependency>
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>2.1.214</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.h2database</groupId>-->
+<!--            <artifactId>h2</artifactId>-->
+<!--            <version>2.1.214</version>-->
+<!--        </dependency>-->
     </dependencies>
 
     <dependencyManagement>
@@ -241,6 +227,13 @@
                 <groupId>com.google.cloud</groupId>
                 <artifactId>spring-cloud-gcp-dependencies</artifactId>
                 <version>${gcp.sdk.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.azure.spring</groupId>
+                <artifactId>spring-cloud-azure-dependencies</artifactId>
+                <version>${com.azure.spring.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -268,7 +261,7 @@
                 </os>
             </activation>
             <properties>
-                <script.extension />
+                <script.extension/>
             </properties>
         </profile>
     </profiles>
@@ -284,7 +277,7 @@
                         <dependency>
                             <groupId>com.puppycrawl.tools</groupId>
                             <artifactId>checkstyle</artifactId>
-                            <version>10.4</version>
+                            <version>10.5.0</version>
                         </dependency>
                     </dependencies>
                 </plugin>

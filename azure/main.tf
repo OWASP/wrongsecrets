@@ -52,7 +52,7 @@ resource "azurerm_kubernetes_cluster" "cluster" {
   default_node_pool {
     name       = "default"
     node_count = 1
-    vm_size    = "Standard_A2_v2"
+    vm_size    = "Standard_A2m_v2"
   }
 
   identity {
