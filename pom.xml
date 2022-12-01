@@ -46,7 +46,7 @@
         <lombok.version>1.18.24</lombok.version>
         <aws.sdk.version>2.18.28</aws.sdk.version>
         <asciidoctorj.version>2.5.7</asciidoctorj.version>
-        <jruby.version>9.3.9.0</jruby.version>
+        <jruby.version>9.4.0.0</jruby.version>
         <bootstrap.version>5.2.2</bootstrap.version>
         <github.button.version>2.14.1</github.button.version>
         <gcp.sdk.version>3.4.0</gcp.sdk.version>
