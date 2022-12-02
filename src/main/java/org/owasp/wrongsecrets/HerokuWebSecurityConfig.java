@@ -1,18 +1,20 @@
 package org.owasp.wrongsecrets;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-@Order(1)
-public class HerokuWebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class HerokuWebSecurityConfig {
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    @Bean
+    @Order(1)
+    public SecurityFilterChain configureHerokuWebSecurity(HttpSecurity http) throws Exception {
         http.requiresChannel()
             .requestMatchers(r -> r.getRequestURL().toString().contains("heroku") && (r.getHeader("x-forwarded-proto") != null || r.getHeader("X-Forwarded-Proto") != null))
             .requiresSecure();
+        return http.build();
     }
 }
