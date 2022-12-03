@@ -202,8 +202,8 @@ Leaders:
 Top contributors:
 
 - [Nanne Baars @nbaars](https://github.com/nbaars)
-- [Marcin Nowak @MarcinNowak-codes](https://github.com/MarcinNowak-codes)
 - [Joss Sparkes @remakingeden](https://github.com/remakingeden)
+- [Marcin Nowak @MarcinNowak-codes](https://github.com/MarcinNowak-codes)
 - [Tibor Hercz @tiborhercz](https://github.com/tiborhercz)
 - [Chris Elbring Jr. @neatzsche](https://github.com/neatzsche)
 - [Filip Chyla @fchyla](https://github.com/fchyla)
@@ -212,6 +212,7 @@ Top contributors:
 - [Spyros @northdpole](https://github.com/northdpole)
 - [Mike Woudenberg @mikewoudenberg](https://github.com/mikewoudenberg)
 - [Ruben Kruiver @RubenAtBinx](https://github.com/RubenAtBinx)
+- [Nicolas Humblot @nhumblot](https://github.com/nhumblot)
 - [Finn @f3rn0s](https://github.com/f3rn0s)
 - [Alex Bender @alex-bender](https://github.com/alex-bender)
 - [Rick M @kingthorin](https://github.com/kingthorin)
