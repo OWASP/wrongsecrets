@@ -12,7 +12,7 @@ public class ActuatorSecurityConfiguration {
     @Bean
     @Order(2)
     public SecurityFilterChain configureActuatorSecurity(HttpSecurity http) throws Exception {
-        http.requestMatcher(r ->
+        http.securityMatcher(r ->
                 r.getRequestURL().toString().contains("/actuator/health"))
             .csrf().disable();
         return http.build();
