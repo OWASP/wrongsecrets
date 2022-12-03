@@ -1,12 +1,12 @@
 package org.owasp.wrongsecrets.asciidoc;
 
 import org.asciidoctor.Asciidoctor;
+import org.asciidoctor.Options;
 import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
-import java.util.Map;
 
 import static org.asciidoctor.Asciidoctor.Factory.create;
 
@@ -19,7 +19,7 @@ public class AsciiDocGenerator implements TemplateGenerator {
         var templateFile = name + ".adoc";
         try (var is = new ClassPathResource(templateFile).getInputStream()) {
             var writer = new StringWriter();
-            asciidoctor.convert(new InputStreamReader(is), writer, Map.of());
+            asciidoctor.convert(new InputStreamReader(is), writer, Options.builder().build());
             return writer.toString();
         }
     }
