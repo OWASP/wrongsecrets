@@ -9,7 +9,7 @@ processes = []
   dockerfile = "Dockerfile"
 
 [build.args]
-  argBasedVersion="1.5.11"
+  argBasedVersion="1.5.12"
   spring_profile="without-vault"
 
 [env]
