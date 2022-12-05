@@ -4,7 +4,7 @@ import com.nimbusds.jose.shaded.json.JSONArray;
 import com.nimbusds.jose.shaded.json.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.asciidoctor.Asciidoctor;
-import org.asciidoctor.OptionsBuilder;
+import org.asciidoctor.Options;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.asciidoc.TemplateGenerator;
@@ -90,10 +90,10 @@ public class ChallengesAPIController {
                 descriptions.add(description);
             } catch (IOException e) {
                 String rawHint = extractResource("classpath:explanations/" + challengeUI.getExplanation() + "_hint.adoc");
-                String hint = Asciidoctor.Factory.create().convert(rawHint, OptionsBuilder.options().build());
+                String hint = Asciidoctor.Factory.create().convert(rawHint, Options.builder().build());
                 hints.add(hint);
                 String rawDescription = extractResource("classpath:explanations/" + challengeUI.getExplanation() + ".adoc");
-                String description = Asciidoctor.Factory.create().convert(rawDescription, OptionsBuilder.options().build());
+                String description = Asciidoctor.Factory.create().convert(rawDescription, Options.builder().build());
                 descriptions.add(description);
                 throw new RuntimeException(e);
             }
