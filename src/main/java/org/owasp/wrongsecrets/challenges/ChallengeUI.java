@@ -2,9 +2,7 @@ package org.owasp.wrongsecrets.challenges;
 
 import lombok.Getter;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
-import org.owasp.wrongsecrets.challenges.cloud.Challenge11;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.regex.Pattern;

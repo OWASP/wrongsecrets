@@ -5,8 +5,8 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.6</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <version>3.0.0</version>
+        <relativePath /> <!-- lookup parent from repository -->
     </parent>
     <groupId>org.owasp</groupId>
     <artifactId>wrongsecrets</artifactId>
@@ -52,11 +52,9 @@
         <gcp.sdk.version>3.4.0</gcp.sdk.version>
         <datatables.version>1.12.1</datatables.version>
         <jquery.version>3.6.1</jquery.version>
-        <thymeleaf-spring5.version>3.0.15.RELEASE</thymeleaf-spring5.version>
-        <thymeleaf.version>3.0.15.RELEASE</thymeleaf.version>
         <thymeleaf.layout>3.1.0</thymeleaf.layout>
         <asciidoctor.maven.plugin.version>2.2.2</asciidoctor.maven.plugin.version>
-        <spring-security.version>5.8.0</spring-security.version>
+        <spring.security.version>6.0.0</spring.security.version>
         <com.azure.spring.version>4.4.1</com.azure.spring.version>
         <cyclonedx.core.version>7.2.0</cyclonedx.core.version>
         <KeePassJava2.version>2.1.4</KeePassJava2.version>
@@ -80,6 +78,11 @@
             <groupId>nz.net.ultraq.thymeleaf</groupId>
             <artifactId>thymeleaf-layout-dialect</artifactId>
             <version>${thymeleaf.layout}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-springsecurity6</artifactId>
+            <version>3.1.0.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
