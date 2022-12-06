@@ -1,4 +1,4 @@
-name: Leaked Secrets Scan
+name: Leaked Secrets Scan With Trufflehog
 on:
   workflow_dispatch:
 permissions:
