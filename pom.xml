@@ -50,7 +50,7 @@
         <bootstrap.version>5.2.2</bootstrap.version>
         <github.button.version>2.14.1</github.button.version>
         <gcp.sdk.version>3.4.0</gcp.sdk.version>
-        <datatables.version>1.12.1</datatables.version>
+        <datatables.version>1.13.1</datatables.version>
         <jquery.version>3.6.1</jquery.version>
         <thymeleaf.layout>3.1.0</thymeleaf.layout>
         <asciidoctor.maven.plugin.version>2.2.2</asciidoctor.maven.plugin.version>
