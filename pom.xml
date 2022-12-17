@@ -44,7 +44,7 @@
         <maven.compiler.target>19</maven.compiler.target>
         <spring.cloud-version>2021.0.4</spring.cloud-version>
         <lombok.version>1.18.24</lombok.version>
-        <aws.sdk.version>2.18.28</aws.sdk.version>
+        <aws.sdk.version>2.18.41</aws.sdk.version>
         <asciidoctorj.version>2.5.7</asciidoctorj.version>
         <jruby.version>9.4.0.0</jruby.version>
         <bootstrap.version>5.2.2</bootstrap.version>
