@@ -55,7 +55,7 @@
         <thymeleaf.layout>3.1.0</thymeleaf.layout>
         <asciidoctor.maven.plugin.version>2.2.2</asciidoctor.maven.plugin.version>
         <spring.security.version>6.0.0</spring.security.version>
-        <com.azure.spring.version>4.4.1</com.azure.spring.version>
+        <com.azure.spring.version>4.5.0</com.azure.spring.version>
         <cyclonedx.core.version>7.2.0</cyclonedx.core.version>
         <KeePassJava2.version>2.1.4</KeePassJava2.version>
         <system-stubs-jupiter.version>2.0.1</system-stubs-jupiter.version>
