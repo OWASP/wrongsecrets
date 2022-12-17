@@ -131,6 +131,9 @@ now you can use the provided IP address and port to further play with the K8s va
 
 ### Okteto based
 
+[![Develop on Okteto](https://okteto.com/develop-okteto.svg)](https://cloud.okteto.com/deploy?repository=https://github.com/workspace/wrongsecrets&branch=master&filename=okteto)
+
+
 Don't want to go over the hassle of setting up K8S yourself? visit [https://wrongsecrets-commjoen.cloud.okteto.net](https://wrongsecrets-commjoen.cloud.okteto.net/). Please note that we are using the free Developer version here, so it might take a while for it to respond at first (e.g. "development environment not ready" and then a 50x for a minute). Please: do not try to hack/Fuzz the application as this might bring it down and spoil the fun for others.
 
 ## Vault exercises with minikube
