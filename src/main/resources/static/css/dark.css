@@ -83,6 +83,16 @@
     border-color: var(--bs-indigo);
 }
 
+.dark-mode .paginate_button {
+    background-color: var(--bs-primary);
+    border-color: var(--bs-primary);
+    color: #7e7e7e;
+}
+.dark-mode .paginate_button:hover {
+    background-color: var(--bs-indigo);
+    border-color: var(--bs-indigo);
+}
+
 .dark-mode input {
     background-color: var(--bs-gray-600);
     color: var(--bs-body-color);
