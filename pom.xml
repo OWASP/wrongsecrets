@@ -47,10 +47,10 @@
         <aws.sdk.version>2.18.41</aws.sdk.version>
         <asciidoctorj.version>2.5.7</asciidoctorj.version>
         <jruby.version>9.4.0.0</jruby.version>
-        <bootstrap.version>5.2.2</bootstrap.version>
+        <bootstrap.version>5.2.3</bootstrap.version>
         <github.button.version>2.14.1</github.button.version>
-        <gcp.sdk.version>3.4.0</gcp.sdk.version>
         <datatables.version>1.13.1</datatables.version>
+        <gcp.sdk.version>3.4.1</gcp.sdk.version>
         <jquery.version>3.6.1</jquery.version>
         <thymeleaf.layout>3.1.0</thymeleaf.layout>
         <asciidoctor.maven.plugin.version>2.2.2</asciidoctor.maven.plugin.version>
