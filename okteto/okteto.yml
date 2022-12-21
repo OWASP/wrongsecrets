@@ -9,7 +9,7 @@ name: okteto
 # The deploy section defines how to deploy your development environment
 # More info: https://www.okteto.com/docs/reference/manifest/#deploy
 deploy:
-  - envsubst < k8s/*.yml | kubectl apply -f -
+  - envsubst < <(cat k8s/*.yml) | kubectl apply -f -
 
 dev:
 # The dependencies section defines other git repositories to be deployed as part of your development environment
