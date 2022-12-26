@@ -52,7 +52,8 @@
         <datatables.version>1.13.1</datatables.version>
         <gcp.sdk.version>3.4.1</gcp.sdk.version>
         <jquery.version>3.6.1</jquery.version>
-        <thymeleaf.layout>3.1.0</thymeleaf.layout>
+        <thymeleaf.layout.version>3.1.0</thymeleaf.layout.version>
+        <thymeleaf-extras-springsecurity6.version>3.1.0.RELEASE</thymeleaf-extras-springsecurity6.version>
         <asciidoctor.maven.plugin.version>2.2.2</asciidoctor.maven.plugin.version>
         <spring.security.version>6.0.0</spring.security.version>
         <com.azure.spring.version>4.5.0</com.azure.spring.version>
@@ -77,12 +78,12 @@
         <dependency>
             <groupId>nz.net.ultraq.thymeleaf</groupId>
             <artifactId>thymeleaf-layout-dialect</artifactId>
-            <version>${thymeleaf.layout}</version>
+            <version>${thymeleaf.layout.version}</version>
         </dependency>
         <dependency>
             <groupId>org.thymeleaf.extras</groupId>
             <artifactId>thymeleaf-extras-springsecurity6</artifactId>
-            <version>3.1.0.RELEASE</version>
+            <version>${thymeleaf-extras-springsecurity6.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
