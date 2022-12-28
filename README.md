@@ -357,7 +357,7 @@ Requirements: make sure you have the following tools installed: Docker, Java19, 
 7. Now go to the run configuration of the app and make sure you have the active profile `without-vault`. Set `K8S_ENV=docker` as environment argument.
 8. Repeat step 6: run the app again, you should have a properly running application.
 
-Feel free to start modifying whatever you want to propose as a change, just follow our guidance in the [documentation](https://github.com/OWASP/wrongsecrets/blob/master/CONTRIBUTING.md) to get your work accepted.
+Feel free to edit and propose changes via pull requests. Be sure to follow our guidance in the [documentation](https://github.com/OWASP/wrongsecrets/blob/master/CONTRIBUTING.md) to get your work accepted.
 
 
 ### Automatic reload during development
