@@ -261,7 +261,7 @@ You can help us by the following methods:
 
 - Star us
 - Share this app with others
-- Of course, we can always use your help [to get more flavors](https://github.com/OWASP/wrongsecrets/issues/37) of "wrongly" configured secrets in to spread awareness! We would love to get some help with other cloudproiders, like Alibabaor Tencent cloud for instance. Do you miss something else than a cloud provider as an example? File an issue or create a PR! See [our guide on contributing for more details](CONTRIBUTING.md). Contributors will be listed in releases, in the "Special thanks & Contributors"-section, and the web-app.
+- Of course, we can always use your help [to get more flavors](https://github.com/OWASP/wrongsecrets/issues/37) of "wrongly" configured secrets in to spread awareness! We would love to get some help with other cloud providers, like Alibabaor Tencent cloud for instance. Do you miss something else than a cloud provider as an example? File an issue or create a PR! See [our guide on contributing for more details](CONTRIBUTING.md). Contributors will be listed in releases, in the "Special thanks & Contributors"-section, and the web-app.
 
 ## Use OWASP WrongSecrets as a secret detection benchmark
 
