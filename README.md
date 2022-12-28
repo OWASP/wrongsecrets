@@ -344,6 +344,22 @@ Want to push a container? See `.github/scripts/docker-create-and-push.sh` for a 
 We have CycloneDX and OWASP Dependency-check integrated to check dependencies for vulnerabilities.
 You can use the OWASP Dependency-checker by calling `mvn dependency-check:aggregate` and `mvn cyclonedx:makeBom` to use CycloneDX to create an SBOM.
 
+### Get the project started in IntelliJ IDEA
+
+Requirements: make sure you have the following tools installed: Docker, Java19, and IntelliJ IDEA.
+
+1. Fork and clone the project as described in the [documentation](https://github.com/OWASP/wrongsecrets/blob/master/CONTRIBUTING.md).
+2. Import the project in IntelliJ (e.g. import as mvn project / local sources)
+3. Go to the project settings and make sure it uses Java19 (And that the JDK can be found)
+4. Go to the IDE settings>Language & Frameworks > Lombok and make sure Lombok processing is enabled
+5. Open the Maven Tab in your IDEA and run "Reload All Maven Projects" to make the system sync and download everything.
+6. Now run the `main` method in `org.owasp.wrongsecrets.WrongSecretsApplication.java`. This should fail with a stack trace.
+7. Now go to the run configuration of the app and make sure you have the active profile `without-vault`. Set `K8S_ENV=docker` as environment argument.
+8. Repeat step 6: run the app again, you should have a properly running application.
+
+Feel free to edit and propose changes via pull requests. Be sure to follow our guidance in the [documentation](https://github.com/OWASP/wrongsecrets/blob/master/CONTRIBUTING.md) to get your work accepted.
+
+
 ### Automatic reload during development
 
 To make changes made load faster we added `spring-dev-tools` to the Maven project.
