@@ -53,7 +53,7 @@
         <gcp.sdk.version>3.4.1</gcp.sdk.version>
         <jquery.version>3.6.1</jquery.version>
         <thymeleaf.layout.version>3.1.0</thymeleaf.layout.version>
-        <thymeleaf-extras-springsecurity6.version>3.1.0.RELEASE</thymeleaf-extras-springsecurity6.version>
+        <thymeleaf-extras-springsecurity6.version>3.1.1.RELEASE</thymeleaf-extras-springsecurity6.version>
         <asciidoctor.maven.plugin.version>2.2.2</asciidoctor.maven.plugin.version>
         <spring.security.version>6.0.0</spring.security.version>
         <com.azure.spring.version>4.5.0</com.azure.spring.version>
