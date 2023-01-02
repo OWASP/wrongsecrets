@@ -26,7 +26,7 @@ First, create an storage bucket:
 1. Navigate to the 'shared-state' directory `cd shared-state`
 2. Change the `project_id` in the `terraform.tfvars` file to your project id
 3. Run `terraform init`
-4. Run `terraform apply`
+4. Run `terraform apply`.
 
 The bucket name should be in the output. Please use that to configure the Terraform backend in `main.tf`.
 
@@ -93,8 +93,8 @@ The documentation below is auto-generated to give insight on what's created via 
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.1 |
-| <a name="requirement_google"></a> [google](#requirement\_google) | ~> 4.44.1 |
-| <a name="requirement_google-beta"></a> [google-beta](#requirement\_google-beta) | ~> 4.44.1 |
+| <a name="requirement_google"></a> [google](#requirement\_google) | ~> 4.47.0 |
+| <a name="requirement_google-beta"></a> [google-beta](#requirement\_google-beta) | ~> 4.47.0 |
 | <a name="requirement_http"></a> [http](#requirement\_http) | ~> 3.2.0 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | ~> 3.4.3 |
 
@@ -102,8 +102,8 @@ The documentation below is auto-generated to give insight on what's created via 
 
 | Name | Version |
 |------|---------|
-| <a name="provider_google"></a> [google](#provider\_google) | ~> 4.44.1 |
-| <a name="provider_google-beta"></a> [google-beta](#provider\_google-beta) | ~> 4.44.1 |
+| <a name="provider_google"></a> [google](#provider\_google) | ~> 4.47.0 |
+| <a name="provider_google-beta"></a> [google-beta](#provider\_google-beta) | ~> 4.47.0 |
 | <a name="provider_http"></a> [http](#provider\_http) | ~> 3.2.0 |
 | <a name="provider_random"></a> [random](#provider\_random) | ~> 3.4.3 |
 
