@@ -102,7 +102,7 @@ The documentation below is auto-generated to give insight on what's created via 
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.1 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 4.48.0 |
-| <a name="requirement_http"></a> [http](#requirement\_http) | ~> 3.1 |
+| <a name="requirement_http"></a> [http](#requirement\_http) | ~> 3.2.1 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | ~> 3.4.3 |
 
 ## Providers
@@ -110,7 +110,7 @@ The documentation below is auto-generated to give insight on what's created via 
 | Name | Version |
 |------|---------|
 | <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 4.48.0 |
-| <a name="provider_http"></a> [http](#provider\_http) | ~> 3.1 |
+| <a name="provider_http"></a> [http](#provider\_http) | ~> 3.2.1 |
 | <a name="provider_random"></a> [random](#provider\_random) | ~> 3.4.3 |
 
 ## Modules
@@ -160,6 +160,7 @@ The documentation below is auto-generated to give insight on what's created via 
 | Name | Description |
 |------|-------------|
 | <a name="output_cluster_endpoint"></a> [cluster\_endpoint](#output\_cluster\_endpoint) | Endpoint for EKS control plane. |
+| <a name="output_cluster_id"></a> [cluster\_id](#output\_cluster\_id) | The id of the cluster |
 | <a name="output_cluster_security_group_id"></a> [cluster\_security\_group\_id](#output\_cluster\_security\_group\_id) | Security group ids attached to the cluster control plane. |
 | <a name="output_irsa_role"></a> [irsa\_role](#output\_irsa\_role) | The role ARN used in the IRSA setup |
 | <a name="output_secrets_manager_secret_name"></a> [secrets\_manager\_secret\_name](#output\_secrets\_manager\_secret\_name) | The name of the secrets manager secret |

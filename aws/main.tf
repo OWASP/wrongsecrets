@@ -72,6 +72,7 @@ module "eks" {
 
 
   cluster_endpoint_private_access = true
+  cluster_endpoint_public_access  = true
 
   cluster_endpoint_public_access_cidrs = ["${data.http.ip.response_body}/32"]
 
@@ -84,24 +85,23 @@ module "eks" {
     disk_iops       = 3000
     instance_types  = ["t3a.large"]
 
-    iam_role_additional_policies = [
-      "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy",
-      "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy",
-      "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
-      "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore",
-      "arn:aws:iam::aws:policy/AmazonEKSVPCResourceController",
-      "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"
-    ]
+    iam_role_additional_policies = {
+      AmazonEKSWorkerNodePolicy : "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy",
+      AmazonEKS_CNI_Policy : "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy",
+      AmazonEC2ContainerRegistryReadOnly : "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
+      AmazonSSMManagedInstanceCore : "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore",
+      AmazonEKSVPCResourceController : "arn:aws:iam::aws:policy/AmazonEKSVPCResourceController",
+      AmazonEBSCSIDriverPolicy : "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"
+    }
   }
 
   eks_managed_node_groups = {
     bottlerocket_default = {
-      create_launch_template = false
-      launch_template_name   = ""
-      min_size               = 1
-      max_size               = 3
-      desired_size           = 1
-      capacity_type          = "SPOT"
+      use_custom_launch_template = false
+      min_size                   = 1
+      max_size                   = 3
+      desired_size               = 1
+      capacity_type              = "SPOT"
 
       ami_type = "BOTTLEROCKET_x86_64"
       platform = "bottlerocket"
