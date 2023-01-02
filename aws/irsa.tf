@@ -39,7 +39,7 @@ resource "aws_iam_role_policy_attachment" "irsa_role_attachment" {
 
 resource "aws_iam_policy" "secret_manager" {
   name_prefix = "secret-manager"
-  description = "EKS secret manager policy for cluster ${module.eks.cluster_id}"
+  description = "EKS secret manager policy for cluster ${module.eks.cluster_name}"
   policy      = data.aws_iam_policy_document.secret_manager.json
 }
 
