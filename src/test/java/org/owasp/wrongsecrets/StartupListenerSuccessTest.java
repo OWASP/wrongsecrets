@@ -8,17 +8,19 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.context.event.ApplicationEnvironmentPreparedEvent;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Import;
 
 @SpringBootTest(
     properties = { "spring.application.name=example", "K8S_ENV=DOCKER" }
 )
-public class StartupListenerSuccessTest {
+@Import(ConventionPortMapper.class)
+class StartupListenerSuccessTest {
 
     @Autowired
     ConfigurableApplicationContext configurableApplicationContext;
 
     @Test
-    public void testWithK8S_ENVsetPropperly()  {
+    void testWithK8S_ENVsetPropperly()  {
         var ape = new ApplicationEnvironmentPreparedEvent(new DefaultBootstrapContext(), new SpringApplication(), new String[0], configurableApplicationContext.getEnvironment());
         var startupListener = new StartupListener();
         startupListener.onApplicationEvent(ape);
