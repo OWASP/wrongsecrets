@@ -11,7 +11,7 @@ secrets. These can help you to realize whether your secret management is ok. The
 secrets by means of various tools and techniques.
 
 Can you solve all the 27 challenges?
-![screenshot.png](images/screenshot.png)
+![screenshotOfChallenge1](/images/screenshot.png)
 
 <a href="https://github.com/vshymanskyy/StandWithUkraine/blob/main/README.md"><img src="https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/banner2-no-action.svg" /></a>
 ## Support
@@ -346,7 +346,7 @@ You can use the OWASP Dependency-checker by calling `mvn dependency-check:aggreg
 
 ### Get the project started in IntelliJ IDEA
 
-Requirements: make sure you have the following tools installed: [Docker](https://www.docker.com/products/docker-desktop/), [Java19 NDK](https://jdk.java.net/19/), [NodeJS 18](https://nodejs.org/dist/v18.12.1/node-v18.12.1-x86.msi) and [IntelliJ IDEA](https://www.jetbrains.com/idea/download).
+Requirements: make sure you have the following tools installed: [Docker](https://www.docker.com/products/docker-desktop/), [Java19 JDK](https://jdk.java.net/19/), [NodeJS 18](https://nodejs.org/dist/v18.12.1/node-v18.12.1-x86.msi) and [IntelliJ IDEA](https://www.jetbrains.com/idea/download).
 
 1. Fork and clone the project as described in the [documentation](https://github.com/OWASP/wrongsecrets/blob/master/CONTRIBUTING.md).
 2. Import the project in IntelliJ (e.g. import as mvn project / local sources)
