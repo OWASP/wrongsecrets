@@ -108,7 +108,7 @@ public class BinaryExecutionHelper {
         if (useLinux()) {
             fileName = fileName + "-linux";
         }
-        if (useWindows()){
+        if (useWindows()) {
             fileName = fileName + "-windows.exe";
         }
         if (!useX86()) {
