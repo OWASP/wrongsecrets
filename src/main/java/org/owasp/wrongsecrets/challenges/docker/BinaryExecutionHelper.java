@@ -86,7 +86,11 @@ public class BinaryExecutionHelper {
     }
 
     private boolean useWindows() {
-        return false; //BOEHAHAHA! No I will fix this later ;-)
+        String systemARch = System.getProperty("os.arch");
+        log.info("System arch detected: {}", systemARch);
+        String osName = System.getProperty("os.name");
+        log.info("OS Name detected: {}", osName);
+        return systemARch.contains("amd64") && osName.toLowerCase().contains("windows");
     }
 
     private File retrieveFile(String location) {
@@ -103,6 +107,9 @@ public class BinaryExecutionHelper {
     private File createTempExecutable(String fileName) throws IOException {
         if (useLinux()) {
             fileName = fileName + "-linux";
+        }
+        if (useWindows()){
+            fileName = fileName + "-windows.exe";
         }
         if (!useX86()) {
             fileName = fileName + "-arm";
