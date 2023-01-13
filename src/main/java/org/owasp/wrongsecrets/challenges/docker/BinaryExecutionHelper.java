@@ -85,6 +85,10 @@ public class BinaryExecutionHelper {
         return systemARch.contains("amd64");
     }
 
+    private boolean useWindows() {
+        return false; //BOEHAHAHA! No I will fix this later ;-)
+    }
+
     private File retrieveFile(String location) {
         try {
             log.info("First looking at location:'classpath:executables/{}'", location);
