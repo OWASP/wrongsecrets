@@ -11,7 +11,7 @@ secrets. These can help you to realize whether your secret management is ok. The
 secrets by means of various tools and techniques.
 
 Can you solve all the 27 challenges?
-![screenshot.png](images/screenshot.png)
+![screenshot.png](/images/screenshot.png)
 
 <a href="https://github.com/vshymanskyy/StandWithUkraine/blob/main/README.md"><img src="https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/banner2-no-action.svg" /></a>
 ## Support
