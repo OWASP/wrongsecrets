@@ -9,11 +9,11 @@ import org.springframework.security.web.PortMapper;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-public class HerokuWebSecurityConfig {
-
+public class PortConfiguration {
     @Bean
     @Order(1)
-    public SecurityFilterChain configureHerokuWebSecurity(HttpSecurity http, ObjectProvider<PortMapper> portMapper) throws Exception {
+    public SecurityFilterChain configureHerokuWebSecurityTest(HttpSecurity http,
+                                                          ObjectProvider<PortMapper> portMapper) throws Exception {
         portMapper.ifAvailable(http.portMapper()::portMapper);
         http.requiresChannel()
             .requestMatchers(r ->
@@ -23,4 +23,5 @@ public class HerokuWebSecurityConfig {
             .requiresSecure();
         return http.build();
     }
+
 }
