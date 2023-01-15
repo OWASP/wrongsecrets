@@ -105,11 +105,10 @@ public class BinaryExecutionHelper {
     }
 
     private File createTempExecutable(String fileName) throws IOException {
-        if (useLinux()) {
-            fileName = fileName + "-linux";
-        }
         if (useWindows()) {
             fileName = fileName + "-windows.exe";
+        }else if (useLinux()) {
+            fileName = fileName + "-linux";
         }
         if (!useX86()) {
             fileName = fileName + "-arm";
