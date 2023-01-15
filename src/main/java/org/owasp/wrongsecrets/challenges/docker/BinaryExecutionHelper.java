@@ -107,7 +107,7 @@ public class BinaryExecutionHelper {
     private File createTempExecutable(String fileName) throws IOException {
         if (useWindows()) {
             fileName = fileName + "-windows.exe";
-        }else if (useLinux()) {
+        } else if (useLinux()) {
             fileName = fileName + "-linux";
         }
         if (!useX86()) {
