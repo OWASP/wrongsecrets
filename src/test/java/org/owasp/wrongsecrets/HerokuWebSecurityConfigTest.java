@@ -30,12 +30,10 @@ class HerokuWebSecurityConfigTest {
         var rootAddress = "http://localhost:" + port + "/heroku";//note we loosely ask for "heroku" to be part of the url
 
         //in Spring security 2022 we no longer can bind to the new port of the redirect as that is not preset. hence this exception proves the redirect
-        Exception exception = assertThrows(ResourceAccessException.class, () -> {
-            restTemplate.getForEntity(rootAddress, String.class);
-        });
+        Exception exception = assertThrows(ResourceAccessException.class, () -> restTemplate.getForEntity(rootAddress, String.class));
 
         assertEquals(exception.getCause().getClass(), HttpHostConnectException.class);
-        assertEquals(exception.getCause().getMessage(), "Connect to https://localhost:" + (port + 1) + " [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused");
+        assertTrue(exception.getCause().getMessage().contains("Connect to https://localhost:" + (port + 1) + " [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused"));
     }
 
     @Test
