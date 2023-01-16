@@ -14,7 +14,6 @@ public class HerokuWebSecurityConfig {
     @Bean
     @Order(1)
     public SecurityFilterChain configureHerokuWebSecurity(HttpSecurity http, ObjectProvider<PortMapper> portMapper) throws Exception {
-        portMapper.ifAvailable(http.portMapper()::portMapper);
         http.requiresChannel()
             .requestMatchers(r ->
                 r.getRequestURL().toString().contains("heroku")

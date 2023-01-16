@@ -13,7 +13,7 @@ import org.springframework.web.client.ResourceAccessException;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@Import(ConventionPortMapper.class)
+@Import({ConventionPortMapper.class, PortConfiguration.class})
 class HerokuWebSecurityConfigTest {
 
     @LocalServerPort

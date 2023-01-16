@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
@@ -27,7 +26,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 @ExtendWith({SpringExtension.class})
 @ActiveProfiles("test")
 @AutoConfigureWebTestClient
-@Import(ConventionPortMapper.class)
 class SecretLeakageControllerTest {
 
     @Autowired
