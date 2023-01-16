@@ -2,7 +2,6 @@ package org.owasp.wrongsecrets.ctftests;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.owasp.wrongsecrets.ConventionPortMapper;
 import org.owasp.wrongsecrets.InMemoryScoreCard;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.WrongSecretsApplication;
@@ -12,7 +11,6 @@ import org.owasp.wrongsecrets.challenges.cloud.Challenge9;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
@@ -33,7 +31,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
     classes = WrongSecretsApplication.class
 )
 @AutoConfigureMockMvc
-@Import(ConventionPortMapper.class)
 class ChallengesControllerCTFModeWithPresetCloudValuesTest {
 
     @Autowired

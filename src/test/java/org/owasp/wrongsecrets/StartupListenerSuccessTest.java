@@ -8,12 +8,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.context.event.ApplicationEnvironmentPreparedEvent;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.Import;
 
 @SpringBootTest(
     properties = { "spring.application.name=example", "K8S_ENV=DOCKER" }
 )
-@Import(ConventionPortMapper.class)
 class StartupListenerSuccessTest {
 
     @Autowired
