@@ -85,6 +85,14 @@ public class BinaryExecutionHelper {
         return systemARch.contains("amd64");
     }
 
+    private boolean useWindows() {
+        String systemARch = System.getProperty("os.arch");
+        log.info("System arch detected: {}", systemARch);
+        String osName = System.getProperty("os.name");
+        log.info("OS Name detected: {}", osName);
+        return systemARch.contains("amd64") && osName.toLowerCase().contains("windows");
+    }
+
     private File retrieveFile(String location) {
         try {
             log.info("First looking at location:'classpath:executables/{}'", location);
@@ -97,7 +105,9 @@ public class BinaryExecutionHelper {
     }
 
     private File createTempExecutable(String fileName) throws IOException {
-        if (useLinux()) {
+        if (useWindows()) {
+            fileName = fileName + "-windows.exe";
+        } else if (useLinux()) {
             fileName = fileName + "-linux";
         }
         if (!useX86()) {
