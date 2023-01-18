@@ -17,6 +17,8 @@ Have the following tools installed:
 
 Make sure you have an active subscription at Azure for which you have configured the credentials on the system where you will execute the steps below.
 
+Please note that this setup relies on bash scripts that have been tested in MacOS and Linux. We have no intention of supporting vanilla Windows at the moment.
+
 ## Installation
 
 **Note-I**: We create resources in `east us` by default. You can set the region by editing `terraform.tfvars`.
@@ -44,6 +46,7 @@ terraform apply
 The storage account name should be in the output. Please use that to configure the Terraform backend in `main.tf` by uncommenting the part on the `backend "azurerm"`.
 
 **Note**: You'll need to follow the description below for the "existing resource group" i.e., use the `data.azurerm_resource_group.default` resource.
+
 
 ### WrongSecrets
 
