@@ -354,11 +354,12 @@ Requirements: make sure you have the following tools installed: [Docker](https:/
 4. Go to the IDE settings>Language & Frameworks > Lombok and make sure Lombok processing is enabled
 5. Open the Maven Tab in your IDEA and run "Reload All Maven Projects" to make the system sync and download everything.
 6. Now run the `main` method in `org.owasp.wrongsecrets.WrongSecretsApplication.java`. This should fail with a stack trace.
-7. Now go to the run configuration of the app and make sure you have the active profile `without-vault`. Set `K8S_ENV=docker` as environment argument.
-8. Repeat step 6: run the app again, you should have a properly running application.
+7. Now go to the run configuration of the app and make sure you have the active profile `without-vault`. This is done by setting the VM options arguments to `-Dserver.port=8080 -Dspring.profiles.active=local,without-vault`. Set `K8S_ENV=docker` as environment argument.
+8. Repeat step 6: run the app again, you should have a properly running application which is visitable in your browser at http://localhost:8080.
 
 Feel free to edit and propose changes via pull requests. Be sure to follow our guidance in the [documentation](https://github.com/OWASP/wrongsecrets/blob/master/CONTRIBUTING.md) to get your work accepted.
 
+Please note that we officially only support Linux and MacOS for development. If you want to develop using a Windows machine, use WSL2 or a LinuxVM. We did include windows detection & a bunch of `exe` files for a first experiment, but are looking for active maintainers of then.
 
 ### Automatic reload during development
 
