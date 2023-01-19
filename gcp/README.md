@@ -17,6 +17,9 @@ Have the following tools installed:
 
 Make sure you have an active account at GCP for which you have configured the credentials on the system where you will execute the steps below.
 
+Please note that this setup relies on bash scripts that have been tested in MacOS and Linux. We have no intention of supporting vanilla Windows at the moment.
+
+
 ### Multi-user setup: shared state
 
 If you want to host a multi-user setup, you will probably want to share the state file so that everyone can try related challenges. We have provided a starter to easily do so using a Terraform gcs backend.
