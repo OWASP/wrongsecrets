@@ -10,6 +10,10 @@ This document describes how you can contribute to WrongSecrets. Please read it c
 -   [How to Contribute to the Project](#how-to-contribute-to-the-project)
 -   [How to set up your Contributor Environment](#how-to-set-up-your-contributor-environment)
 -   [How to get your PR Accepted](#how-to-get-your-pr-accepted)
+-   [Beginner Guide](#beginner-guide)
+    -   [About the Project](#OWASP-WrongSecrets)
+    -   [Prerequisites](#Prerequisites)
+    -   [Pictorial Guide on how to get started with the project in IntelliJ IDEA](#How-to-get-started-with-the-project-in-IntelliJ-IDEA)
 
 ## How to Contribute to the project
 
@@ -67,7 +71,7 @@ Pull requests should be as small/atomic as possible. Large, wide-sweeping change
     upstream git@github.com:OWASP/wrongsecrets.git (push)
     ```
 
-    See also the GitHub documentation on "[Configuring a remote for a fork](https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/configuring-a-remote-for-a-fork "Configuring a remote for a fork")".
+   See also the GitHub documentation on "[Configuring a remote for a fork](https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/configuring-a-remote-for-a-fork "Configuring a remote for a fork")".
 
 5. Choose what to work on, based on any of the outstanding [issues](https://github.com/OWASP/wrongsecrets/issues "WrongSecrets Issues").
 6. Create a branch so that you can cleanly work on the chosen issue: `git checkout -b FixingIssue66`
@@ -96,3 +100,100 @@ Although we greatly appreciate any and all contributions to the project, there a
 -   Unnecessary self-promotion of tools or blog posts is frowned upon. If you have a relation with on of the URLs or tools you are referencing, please state so in the PR so that we can verify that the reference is in line with the rest of the guide.
 
 Please be sure to take a careful look at our [Code of Conduct](https://github.com/OWASP/wrongsecrets/blob/master/CODE_OF_CONDUCT.md) for all the details.
+
+---
+# Beginner guide
+## OWASP WrongSecrets
+
+Basically, [*WrongSecrets*](https://owasp.org/www-project-wrongsecrets/) is an application which teaches how to not store secrets by offering challenges to the user, which helps the user to Self-reflect and correct those mistakes.
+
+## Prerequisites
+
+1. **Docker**  
+   [*Docker*](https://www.docker.com/) is a software platform that allows you to build, test, and deploy applications quickly and in a more efficient manner.
+
+
+2. **Node.Js**  
+   [*Node.Js*](https://nodejs.org/en/) is an open-source library and a cross-platform JavaScript **runtime environment** specifically for running web applications outside one's browser.
+
+
+3. **JDK-19**  
+   [*JDK*](https://www.oracle.com/java/technologies/javase/jdk19-archive-downloads.html) is a tool used in development and testing programs written in the Java programming language.
+
+
+3. **IntelliJ IDEA**  
+   [*IntelliJ IDEA*](https://www.jetbrains.com/idea/download/#section=windows) is an integrated development environment basically an **IDE** written in Java for developing software written in Java, Kotlin, Groovy etc.
+
+
+4. **GitHub Desktop**  
+   [*GitHub Desktop*](https://desktop.github.com/) is an application that enables you to interact with GitHub using a **GUI** instead of the command line or a web browser.     
+   (*Not Mandatory but is recommended for beginners*)
+
+---
+
+
+## How to get started with the project in IntelliJ IDEA
+
+- ### Step 1: Fork the Project.
+  Navigate to the landing page of the repository in your web browser and click on the ***Fork*** button on the repository’s home page.  
+  A forked copy of that Git repository will be added to your personal GitHub.  
+  ![](images/fork-project-1.png)
+
+- ### Step 2: Clone the Project.
+  A **clone** is a full copy of a repository, including all logging and versions of files.  
+  To ***clone*** the Project to your local desktop by clicking on the button as shown below.  
+  ![](images/clone-project-2.png)
+
+- ### Step 3: Open the Project using IntelliJ IDEA
+    - ***Open*** the Cloned Project using IntelliJ IDEA by clicking on the button as shown below.  
+      ![](images/open-project-3.1.png)
+
+    - **Wait** till the Project Loads.  
+      ![](images/wait-3.2.png)
+
+- ### Step 4: Setup.
+    - Open Settings by pressing ***Ctrl+Alt+S***  
+      ![](images/open-settings-4.1.png)
+
+    - Follow the path ***IDE settings>Language & Frameworks > Lombok*** and then click on ***Lombok.***  
+      ![](images/lombok-setup-4.2.png)
+
+    - Make sure that the ***Lombok processing*** is enabled.  
+      ![](images/lombok-processing-4.3.png)
+
+- ### Step 5: Reload the project
+    - Open the ***Maven*** Tab  
+      ![](images/open-maven-5.1.png)
+
+    - Press the ***Reload*** button as shown below and allow the project to Reload.   
+      ![](images/reload-maven-5.2.png)
+
+- ### Step 6: Running the Project.
+    - Open the ***WrongSecretsApplication*** by following the path ***main>java>org.owasp.wrongsecrets>WrongSecretApplication***.  
+      ![](images/open-application-6.1.png)
+    - Press ***Shift+F10*** to run the application, this will open up the ***Run/Debug Configurations Menu.***  
+      ![](images/run-application-6.2.png)
+
+- ### Step 7: Setting up Configurations.
+    -  Select ***Edit configuration templates*** then select ***Application*** section.  
+       ![](images/edit-config-7.1.png)
+    - There under the ***Application*** section click on the button shown below.  
+      ![](images/modify-options-7.2.png)
+    - ***Select*** all the fields that are Selected in the below picture.  
+      ![](images/select-options-7.3.png)
+    - ***Fill*** all the fields as shown below.   
+      ![](images/fill-fields-7.4.png)
+    - Again press ***Shift+F10*** which runs the Application.  
+      ![](images/run-application-6.2.png)
+
+- ### There you have it, ***WrongSecrets*** running successfully.
+    - Here is a *preview* on how does it look after successfully running the Application.  
+      **Note:** Running the Application doesn't open any kind of ***GUI***, it only initializes the ***local webserver*** that you can open via a ***browser.***  
+      ![](images/final-output-8.png)
+
+    - Here is the preview of the **web server**,  you can try to find the secrets by means of solving the challenge offered at:
+      [**Challenges**](https://github.com/OWASP/wrongsecrets#basic-docker-exercises)
+      ![](images/screenshot.png)
+      ### Since, now you have a running application, you can try [*Contributing*](https://github.com/OWASP/wrongsecrets/blob/master/CONTRIBUTING.md) and try adding [*New challenges.*](https://github.com/OWASP/wrongsecrets#how-to-add-a-challenge)
+
+---
