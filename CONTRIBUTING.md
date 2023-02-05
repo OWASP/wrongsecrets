@@ -109,24 +109,24 @@ Basically, [*WrongSecrets*](https://owasp.org/www-project-wrongsecrets/) is an a
 
 ## Prerequisites
 
-1. **Docker**  
+1. **Docker**
    [*Docker*](https://www.docker.com/) is a software platform that allows you to build, test, and deploy applications quickly and in a more efficient manner.
 
 
-2. **Node.Js**  
+2. **Node.Js**
    [*Node.Js*](https://nodejs.org/en/) is an open-source library and a cross-platform JavaScript **runtime environment** specifically for running web applications outside one's browser.
 
 
-3. **JDK-19**  
+3. **JDK-19**
    [*JDK*](https://www.oracle.com/java/technologies/javase/jdk19-archive-downloads.html) is a tool used in development and testing programs written in the Java programming language.
 
 
-3. **IntelliJ IDEA**  
+3. **IntelliJ IDEA**
    [*IntelliJ IDEA*](https://www.jetbrains.com/idea/download/#section=windows) is an integrated development environment basically an **IDE** written in Java for developing software written in Java, Kotlin, Groovy etc.
 
 
-4. **GitHub Desktop**  
-   [*GitHub Desktop*](https://desktop.github.com/) is an application that enables you to interact with GitHub using a **GUI** instead of the command line or a web browser.     
+4. **GitHub Desktop**
+   [*GitHub Desktop*](https://desktop.github.com/) is an application that enables you to interact with GitHub using a **GUI** instead of the command line or a web browser.
    (*Not Mandatory but is recommended for beginners*)
 
 ---
@@ -135,60 +135,60 @@ Basically, [*WrongSecrets*](https://owasp.org/www-project-wrongsecrets/) is an a
 ## How to get started with the project in IntelliJ IDEA
 
 - ### Step 1: Fork the Project.
-  Navigate to the landing page of the repository in your web browser and click on the ***Fork*** button on the repository’s home page.  
-  A forked copy of that Git repository will be added to your personal GitHub.  
+  Navigate to the landing page of the repository in your web browser and click on the ***Fork*** button on the repository’s home page.
+  A forked copy of that Git repository will be added to your personal GitHub.
   ![](images/fork-project-1.png)
 
 - ### Step 2: Clone the Project.
-  A **clone** is a full copy of a repository, including all logging and versions of files.  
-  To ***clone*** the Project to your local desktop by clicking on the button as shown below.  
+  A **clone** is a full copy of a repository, including all logging and versions of files.
+  To ***clone*** the Project to your local desktop by clicking on the button as shown below.
   ![](images/clone-project-2.png)
 
 - ### Step 3: Open the Project using IntelliJ IDEA
-    - ***Open*** the Cloned Project using IntelliJ IDEA by clicking on the button as shown below.  
+    - ***Open*** the Cloned Project using IntelliJ IDEA by clicking on the button as shown below.
       ![](images/open-project-3.1.png)
 
-    - **Wait** till the Project Loads.  
+    - **Wait** till the Project Loads.
       ![](images/wait-3.2.png)
 
 - ### Step 4: Setup.
-    - Open Settings by pressing ***Ctrl+Alt+S***  
+    - Open Settings by pressing ***Ctrl+Alt+S***
       ![](images/open-settings-4.1.png)
 
-    - Follow the path ***IDE settings>Language & Frameworks > Lombok*** and then click on ***Lombok.***  
+    - Follow the path ***IDE settings>Language & Frameworks > Lombok*** and then click on ***Lombok.***
       ![](images/lombok-setup-4.2.png)
 
-    - Make sure that the ***Lombok processing*** is enabled.  
+    - Make sure that the ***Lombok processing*** is enabled.
       ![](images/lombok-processing-4.3.png)
 
 - ### Step 5: Reload the project
-    - Open the ***Maven*** Tab  
+    - Open the ***Maven*** Tab
       ![](images/open-maven-5.1.png)
 
-    - Press the ***Reload*** button as shown below and allow the project to Reload.   
+    - Press the ***Reload*** button as shown below and allow the project to Reload.
       ![](images/reload-maven-5.2.png)
 
 - ### Step 6: Running the Project.
-    - Open the ***WrongSecretsApplication*** by following the path ***main>java>org.owasp.wrongsecrets>WrongSecretApplication***.  
+    - Open the ***WrongSecretsApplication*** by following the path ***main>java>org.owasp.wrongsecrets>WrongSecretApplication***.
       ![](images/open-application-6.1.png)
-    - Press ***Shift+F10*** to run the application, this will open up the ***Run/Debug Configurations Menu.***  
+    - Press ***Shift+F10*** to run the application, this will open up the ***Run/Debug Configurations Menu.***
       ![](images/run-application-6.2.png)
 
 - ### Step 7: Setting up Configurations.
-    -  Select ***Edit configuration templates*** then select ***Application*** section.  
+    -  Select ***Edit configuration templates*** then select ***Application*** section.
        ![](images/edit-config-7.1.png)
-    - There under the ***Application*** section click on the button shown below.  
+    - There under the ***Application*** section click on the button shown below.
       ![](images/modify-options-7.2.png)
-    - ***Select*** all the fields that are Selected in the below picture.  
+    - ***Select*** all the fields that are Selected in the below picture.
       ![](images/select-options-7.3.png)
-    - ***Fill*** all the fields as shown below.   
+    - ***Fill*** all the fields as shown below.
       ![](images/fill-fields-7.4.png)
-    - Again press ***Shift+F10*** which runs the Application.  
+    - Again press ***Shift+F10*** which runs the Application.
       ![](images/run-application-6.2.png)
 
 - ### There you have it, ***WrongSecrets*** running successfully.
-    - Here is a *preview* on how does it look after successfully running the Application.  
-      **Note:** Running the Application doesn't open any kind of ***GUI***, it only initializes the ***local webserver*** that you can open via a ***browser.***  
+    - Here is a *preview* on how does it look after successfully running the Application.
+      **Note:** Running the Application doesn't open any kind of ***GUI***, it only initializes the ***local webserver*** that you can open via a ***browser.***
       ![](images/final-output-8.png)
 
     - Here is the preview of the **web server**,  you can try to find the secrets by means of solving the challenge offered at:
