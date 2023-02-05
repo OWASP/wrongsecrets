@@ -194,6 +194,6 @@ Basically, [*WrongSecrets*](https://owasp.org/www-project-wrongsecrets/) is an a
     - Here is the preview of the **web server**,  you can try to find the secrets by means of solving the challenge offered at:
       [**Challenges**](https://github.com/OWASP/wrongsecrets#basic-docker-exercises)
       ![](images/screenshot.png)
-      ### Since, now you have a running application, you can try [*Contributing*](https://github.com/OWASP/wrongsecrets/blob/master/CONTRIBUTING.md) and try adding [*New challenges.*](https://github.com/OWASP/wrongsecrets#how-to-add-a-challenge)
+      ### Since, now you have a running application, you can try adding [*New challenges.*](https://github.com/OWASP/wrongsecrets#how-to-add-a-challenge)
 
 ---
