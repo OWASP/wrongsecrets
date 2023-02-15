@@ -17,6 +17,9 @@ Have the following tools installed:
 
 Make sure you have an active account at GCP for which you have configured the credentials on the system where you will execute the steps below.
 
+Please note that this setup relies on bash scripts that have been tested in MacOS and Linux. We have no intention of supporting vanilla Windows at the moment.
+
+
 ### Multi-user setup: shared state
 
 If you want to host a multi-user setup, you will probably want to share the state file so that everyone can try related challenges. We have provided a starter to easily do so using a Terraform gcs backend.
@@ -26,7 +29,7 @@ First, create an storage bucket:
 1. Navigate to the 'shared-state' directory `cd shared-state`
 2. Change the `project_id` in the `terraform.tfvars` file to your project id
 3. Run `terraform init`
-4. Run `terraform apply`
+4. Run `terraform apply`.
 
 The bucket name should be in the output. Please use that to configure the Terraform backend in `main.tf`.
 
@@ -93,8 +96,8 @@ The documentation below is auto-generated to give insight on what's created via 
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.1 |
-| <a name="requirement_google"></a> [google](#requirement\_google) | ~> 4.44.1 |
-| <a name="requirement_google-beta"></a> [google-beta](#requirement\_google-beta) | ~> 4.44.1 |
+| <a name="requirement_google"></a> [google](#requirement\_google) | ~> 4.52.0 |
+| <a name="requirement_google-beta"></a> [google-beta](#requirement\_google-beta) | ~> 4.52.0 |
 | <a name="requirement_http"></a> [http](#requirement\_http) | ~> 3.2.0 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | ~> 3.4.3 |
 
@@ -102,8 +105,8 @@ The documentation below is auto-generated to give insight on what's created via 
 
 | Name | Version |
 |------|---------|
-| <a name="provider_google"></a> [google](#provider\_google) | ~> 4.44.1 |
-| <a name="provider_google-beta"></a> [google-beta](#provider\_google-beta) | ~> 4.44.1 |
+| <a name="provider_google"></a> [google](#provider\_google) | ~> 4.52.0 |
+| <a name="provider_google-beta"></a> [google-beta](#provider\_google-beta) | ~> 4.52.0 |
 | <a name="provider_http"></a> [http](#provider\_http) | ~> 3.2.0 |
 | <a name="provider_random"></a> [random](#provider\_random) | ~> 3.4.3 |
 

@@ -12,13 +12,13 @@ import org.springframework.context.ConfigurableApplicationContext;
 @SpringBootTest(
     properties = { "spring.application.name=example", "K8S_ENV=DOCKER" }
 )
-public class StartupListenerSuccessTest {
+class StartupListenerSuccessTest {
 
     @Autowired
     ConfigurableApplicationContext configurableApplicationContext;
 
     @Test
-    public void testWithK8S_ENVsetPropperly()  {
+    void testWithK8S_ENVsetPropperly()  {
         var ape = new ApplicationEnvironmentPreparedEvent(new DefaultBootstrapContext(), new SpringApplication(), new String[0], configurableApplicationContext.getEnvironment());
         var startupListener = new StartupListener();
         startupListener.onApplicationEvent(ape);

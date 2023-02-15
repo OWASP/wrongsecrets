@@ -17,3 +17,8 @@ output "secrets_manager_secret_name" {
   description = "The name of the secrets manager secret"
   value       = aws_secretsmanager_secret.secret.name
 }
+
+output "cluster_id" {
+  description = "The id of the cluster"
+  value       = module.eks.cluster_id
+}

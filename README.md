@@ -11,7 +11,7 @@ secrets. These can help you to realize whether your secret management is ok. The
 secrets by means of various tools and techniques.
 
 Can you solve all the 27 challenges?
-![screenshot.png](images/screenshot.png)
+![screenshotOfChallenge1](/images/screenshot.png)
 
 <a href="https://github.com/vshymanskyy/StandWithUkraine/blob/main/README.md"><img src="https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/banner2-no-action.svg" /></a>
 ## Support
@@ -346,7 +346,7 @@ You can use the OWASP Dependency-checker by calling `mvn dependency-check:aggreg
 
 ### Get the project started in IntelliJ IDEA
 
-Requirements: make sure you have the following tools installed: Docker, Java19, and IntelliJ IDEA.
+Requirements: make sure you have the following tools installed: [Docker](https://www.docker.com/products/docker-desktop/), [Java19 JDK](https://jdk.java.net/19/), [NodeJS 18](https://nodejs.org/dist/v18.12.1/node-v18.12.1-x86.msi) and [IntelliJ IDEA](https://www.jetbrains.com/idea/download).
 
 1. Fork and clone the project as described in the [documentation](https://github.com/OWASP/wrongsecrets/blob/master/CONTRIBUTING.md).
 2. Import the project in IntelliJ (e.g. import as mvn project / local sources)
@@ -354,11 +354,12 @@ Requirements: make sure you have the following tools installed: Docker, Java19, 
 4. Go to the IDE settings>Language & Frameworks > Lombok and make sure Lombok processing is enabled
 5. Open the Maven Tab in your IDEA and run "Reload All Maven Projects" to make the system sync and download everything.
 6. Now run the `main` method in `org.owasp.wrongsecrets.WrongSecretsApplication.java`. This should fail with a stack trace.
-7. Now go to the run configuration of the app and make sure you have the active profile `without-vault`. Set `K8S_ENV=docker` as environment argument.
-8. Repeat step 6: run the app again, you should have a properly running application.
+7. Now go to the run configuration of the app and make sure you have the active profile `without-vault`. This is done by setting the VM options arguments to `-Dserver.port=8080 -Dspring.profiles.active=local,without-vault`. Set `K8S_ENV=docker` as environment argument.
+8. Repeat step 6: run the app again, you should have a properly running application which is visitable in your browser at http://localhost:8080.
 
 Feel free to edit and propose changes via pull requests. Be sure to follow our guidance in the [documentation](https://github.com/OWASP/wrongsecrets/blob/master/CONTRIBUTING.md) to get your work accepted.
 
+Please note that we officially only support Linux and MacOS for development. If you want to develop using a Windows machine, use WSL2 or a virtual machine running Linux. We did include Windows detection & a bunch of `exe` files for a first experiment, but are looking for active maintainers of them. Want to make sure it runs on Windows? Create PRs ;-).
 
 ### Automatic reload during development
 

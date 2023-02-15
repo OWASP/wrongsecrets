@@ -19,6 +19,8 @@ Have the following tools installed:
 
 Make sure you have an active account at AWS for which you have configured the credentials on the system where you will execute the steps below. In this example we stored the credentials under an aws profile as `awsuser`.
 
+Please note that this setup relies on bash scripts that have been tested in MacOS and Linux. We have no intention of supporting vanilla Windows at the moment.
+
 ### Multi-user setup: shared state
 
 If you want to host a multi-user setup, you will probably want to share the state file so that everyone can try related challenges. We have provided a starter to easily do so using a Terraform S3 backend.
@@ -101,16 +103,16 @@ The documentation below is auto-generated to give insight on what's created via 
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.1 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 4.45.0 |
-| <a name="requirement_http"></a> [http](#requirement\_http) | ~> 3.1 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 4.53.0 |
+| <a name="requirement_http"></a> [http](#requirement\_http) | ~> 3.2.1 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | ~> 3.4.3 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 4.45.0 |
-| <a name="provider_http"></a> [http](#provider\_http) | ~> 3.1 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 4.53.0 |
+| <a name="provider_http"></a> [http](#provider\_http) | ~> 3.2.1 |
 | <a name="provider_random"></a> [random](#provider\_random) | ~> 3.4.3 |
 
 ## Modules
@@ -118,8 +120,8 @@ The documentation below is auto-generated to give insight on what's created via 
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_ebs_csi_irsa_role"></a> [ebs\_csi\_irsa\_role](#module\_ebs\_csi\_irsa\_role) | terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks | ~> 5.5 |
-| <a name="module_eks"></a> [eks](#module\_eks) | terraform-aws-modules/eks/aws | 18.31.2 |
-| <a name="module_vpc"></a> [vpc](#module\_vpc) | terraform-aws-modules/vpc/aws | ~> 3.18.1 |
+| <a name="module_eks"></a> [eks](#module\_eks) | terraform-aws-modules/eks/aws | 19.7.0 |
+| <a name="module_vpc"></a> [vpc](#module\_vpc) | terraform-aws-modules/vpc/aws | ~> 3.19.0 |
 
 ## Resources
 
@@ -160,6 +162,7 @@ The documentation below is auto-generated to give insight on what's created via 
 | Name | Description |
 |------|-------------|
 | <a name="output_cluster_endpoint"></a> [cluster\_endpoint](#output\_cluster\_endpoint) | Endpoint for EKS control plane. |
+| <a name="output_cluster_id"></a> [cluster\_id](#output\_cluster\_id) | The id of the cluster |
 | <a name="output_cluster_security_group_id"></a> [cluster\_security\_group\_id](#output\_cluster\_security\_group\_id) | Security group ids attached to the cluster control plane. |
 | <a name="output_irsa_role"></a> [irsa\_role](#output\_irsa\_role) | The role ARN used in the IRSA setup |
 | <a name="output_secrets_manager_secret_name"></a> [secrets\_manager\_secret\_name](#output\_secrets\_manager\_secret\_name) | The name of the secrets manager secret |
