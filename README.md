@@ -18,7 +18,7 @@ Can you solve all the 27 challenges?
 ## Support
 
 Need support? Contact us
-via [OWASP Slack](https://owasp.slack.com/archives/C02KQ7D9XHR) [for which you sign up here](https://owasp.org/slack/invite)
+via [OWASP Slack](https://owasp.slack.com/archives/C02KQ7D9XHR) for which you sign up [here](https://owasp.org/slack/invite)
 , file a [PR](https://github.com/OWASP/wrongsecrets/pulls), file
 an [issue](https://github.com/OWASP/wrongsecrets/issues) , or
 use [discussions](https://github.com/OWASP/wrongsecrets/discussions). Please note that this is an OWASP volunteer
