@@ -27,3 +27,8 @@ repos:
           - "--args=--only=terraform_standard_module_structure"
           - "--args=--only=terraform_workspace_remote"
       - id: terraform_docs
+  - repo: https://github.com/alessandrojcm/commitlint-pre-commit-hook
+    rev: v9.4.0
+    hooks:
+      - id: commitlint
+        stages: [commit-msg]
