@@ -24,6 +24,8 @@ an [issue](https://github.com/OWASP/wrongsecrets/issues) , or
 use [discussions](https://github.com/OWASP/wrongsecrets/discussions). Please note that this is an OWASP volunteer
 based project, so it might take a little while before we respond.
 
+Copyright (c) 2020-2023 Jeroen Willemsen and WrongSecrets contributors.
+
 ## Basic docker exercises
 
 _Can be used for challenges 1-4, 8, 12-27_
