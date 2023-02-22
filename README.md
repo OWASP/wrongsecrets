@@ -426,6 +426,37 @@ And then at [http://localhost:3000](http://localhost:3000).
 
 Note: be careful with trying to deploy the `jeroenwillemsen/wrongsecrets-desktop` container to Heroku ;-).
 
+## Docker on macOS with M1 and Colima
+
+Running docker image on [Colima](https://github.com/abiosoft/colima) (version 0.5.2 when written) container runtimes on macOS Ventura with M1 CPU can run very slowly or can hang at some point.
+
+In terminal run:
+
+```shell
+docker context ls
+```
+
+you should see context default `colima *`:
+
+```
+NAME                TYPE                DESCRIPTION                               DOCKER ENDPOINT                                    KUBERNETES ENDPOINT                ORCHESTRATOR
+colima *            moby                colima                                    unix:///Users/YOUR_USER_NAME/.colima/default/docker.sock                                      
+default             moby                Current DOCKER_HOST based configuration   unix:///var/run/docker.sock                        https://127.0.0.1:6443 (default)   swarm
+desktop-linux       moby                                                          unix:///Users/YOUR_USER_NAME/.docker/run/docker.sock
+```
+
+To switch to `desktop-linux` context run:
+
+```shell
+docker context use desktop-linux
+```
+
+and now you should be able to run one of above Docker command e.g.:
+
+```bash
+docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:latest-no-vault
+```
+
 ## Further reading on secrets management
 
 Want to learn more? Checkout the sources below:
