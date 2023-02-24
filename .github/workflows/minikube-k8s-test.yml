@@ -21,9 +21,9 @@ jobs:
       - name: Start minikube
         uses: medyagh/setup-minikube@master
         with:
-          minikube-version: 1.28.0
+          minikube-version: 1.29.0
           driver: docker
-          kubernetes-version: v1.25
+          kubernetes-version: v1.25.6
       - name: test script
         run: |
           kubectl apply -f k8s/secrets-config.yml
