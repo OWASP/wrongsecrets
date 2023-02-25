@@ -109,6 +109,7 @@ kubectl exec vault-0 -n vault -- vault write auth/kubernetes/role/secret-challen
  && vault kv put secret/secret-challenge vaultpassword.password="$(openssl rand -base64 16)" \
  && vault kv put secret/application vaultpassword.password="$(openssl rand -base64 16)" \
 
+kubectl create serviceaccount vault
 echo "Deploy secret challenge app"
 kubectl apply -f k8s/secret-challenge-vault-deployment.yml
 while [[ $(kubectl get pods -l app=secret-challenge -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do echo "waiting for secret-challenge" && sleep 2; done
