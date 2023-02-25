@@ -26,6 +26,7 @@ jobs:
           kubernetes-version: v1.25.6
       - name: test script
         run: |
+          kubectl apply -f k8s/workspace-psa.yml
           kubectl apply -f k8s/secrets-config.yml
           kubectl apply -f k8s/secrets-secret.yml
           kubectl apply -f k8s/secret-challenge-deployment.yml

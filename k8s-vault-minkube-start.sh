@@ -11,6 +11,9 @@ echo "This is only a script for demoing purposes. You can comment out line 22 an
 echo "This script is based on the steps defined in https://learn.hashicorp.com/tutorials/vault/kubernetes-minikube . Vault is awesome!"
 minikube start --kubernetes-version=v1.23.12
 
+echo "Patching default ns with new PSA; we should run as restricted!"
+kubectl apply -f k8s/workspace-psa.yml
+
 kubectl get configmaps | grep 'secrets-file' &> /dev/null
 if [ $? == 0 ]; then
   echo "secrets config is already installed"
