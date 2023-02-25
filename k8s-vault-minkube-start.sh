@@ -47,9 +47,9 @@ kubectl create ns vault
 helm upgrade --install vault hashicorp/vault --version 0.23.0 --namespace vault --values k8s/helm-vault-values.yml
 
 isvaultrunning=$(kubectl get pods -n vault --field-selector=status.phase=Running)
-while [[ $isvaultrunning != *"vault-0"* ]]; do echo "waiting for Vault1" && sleep 2 ; done
-while [[ $isvaultrunning != *"vault-1"* ]]; do echo "waiting for Vault2" && sleep 2 ; done
-while [[ $isvaultrunning != *"vault-2"* ]]; do echo "waiting for Vault3" && sleep 2 ; done
+while [[ $isvaultrunning != *"vault-0"* ]]; do echo "waiting for Vault1" && sleep 2 && isvaultrunning=$(kubectl get pods -n vault --field-selector=status.phase=Running); done
+while [[ $isvaultrunning != *"vault-1"* ]]; do echo "waiting for Vault2" && sleep 2 && isvaultrunning=$(kubectl get pods -n vault --field-selector=status.phase=Running); done
+while [[ $isvaultrunning != *"vault-2"* ]]; do echo "waiting for Vault3" && sleep 2 && isvaultrunning=$(kubectl get pods -n vault --field-selector=status.phase=Running); done
 echo "Setting up port forwarding"
 kubectl port-forward vault-0 8200:8200 -n vault &
 echo "Unsealing Vault"
