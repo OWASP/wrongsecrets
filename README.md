@@ -313,7 +313,7 @@ For development on local machine use the `local` profile `./mvnw spring-boot:run
 If you want to test against vault without K8s: start vault locally with
 
 ```shell
- export VAULT_ADDR='http://127.0.0.1:8200'
+ export SPRING_CLOUD_VAULT_URI='http://127.0.0.1:8200'
  export VAULT_API_ADDR='http://127.0.0.1:8200'
  vault server -dev
 ```
@@ -321,8 +321,8 @@ If you want to test against vault without K8s: start vault locally with
 and in your next terminal, do (with the token from the previous commands):
 
 ```shell
-export VAULT_ADDR='http://127.0.0.1:8200'
-export VAULT_TOKEN='<TOKENHERE>'
+export SPRING_CLOUD_VAULT_URI='http://127.0.0.1:8200'
+export SPRING_CLOUD_VAULT_TOKEN='<TOKENHERE>'
 vault token create -id="00000000-0000-0000-0000-000000000000" -policy="root"
 vault kv put secret/secret-challenge vaultpassword.password="$(openssl rand -base64 16)"
 ```

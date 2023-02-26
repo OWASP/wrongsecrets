@@ -34,6 +34,9 @@ export AZ_KEY_VAULT_NAME="$(terraform output -raw vault_name)"
 # Set the kubeconfig
 az aks get-credentials --resource-group $RESOURCE_GROUP --name $CLUSTER_NAME
 
+echo "Setting up workspace PSA to restricted for default"
+kubectl apply -f ../k8s/workspace-psa.yml
+
 kubectl get configmaps | grep 'secrets-file' &>/dev/null
 if [ $? == 0 ]; then
   echo "secrets config is already installed"
