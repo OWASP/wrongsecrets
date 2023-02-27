@@ -1,0 +1,5 @@
+Your secret is `Hello World`
+
+Copy this and paste it in the box provided and press "Submit" and you are good to go.
+
+This challenge is only meant for helping new contributors to add new challenges. Please, have fun with trying more difficult challenges;-).
