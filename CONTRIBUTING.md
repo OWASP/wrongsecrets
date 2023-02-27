@@ -203,26 +203,26 @@ Basically, [*WrongSecrets*](https://owasp.org/www-project-wrongsecrets/) is an a
   First make sure that you have an [Issue](https://github.com/OWASP/wrongsecrets/issues/new) reported for which a challenge is really wanted.
 
 - ### Step 2: Adding the challenge.
-  Add the **new challenge** in this folder `wrongsecrets/src/main/java/org/owasp/wrongsecrets/challenges/`.  
+  Add the **new challenge** in this folder `wrongsecrets/src/main/java/org/owasp/wrongsecrets/challenges/`.
   These are the things that you have to keep in mind.
     - First and foremost make sure your challenge is coded in **Java**.
     - Don't forget to add your challenge number in `@Order(28)` annotation, ***28*** in my case.
     - For further reference please refer [*Challenge28.java*]()
 
 - ### Step 3: Adding Test File.
-  Add the **new TestFile** in this folder `wrongsecrets/src/test/java/org/owasp/wrongsecrets/challenges/`. TestFile is required to do **unit testing.**   
+  Add the **new TestFile** in this folder `wrongsecrets/src/test/java/org/owasp/wrongsecrets/challenges/`. TestFile is required to do **unit testing.**
   These are the things that you have to keep in mind.
     - Make sure that this file is also of **Java** type.
     - You can use [*Challenge28Test.java*]() for reference.
 
 - ### Step 4: Adding explanations, reasons and hints.
-  Add the explanation for your challenge along with the hints that will help in finding the secret in this folder `wrongsecrets/src/main/resources/explanations/`.  
+  Add the explanation for your challenge along with the hints that will help in finding the secret in this folder `wrongsecrets/src/main/resources/explanations/`.
   Things to be noted.
     - All the possible explanations for your challenge, included with all the hints and reasons should be provided.
     - Every thing must be in a separate **AsciiDoc files**.
     -  Follow this fashion in naming the file.
         - Name the explanation in ths manner `challenge28.adoc`.
-        - Reasons file as `challenge28_reason.adoc` and hints file as `challenge28_hint.adoc`.  
+        - Reasons file as `challenge28_reason.adoc` and hints file as `challenge28_hint.adoc`.
           **Note:** Please use your challenge number instead of 28 mentioned above.
 
 - ### Step 5: Submitting your PR.
