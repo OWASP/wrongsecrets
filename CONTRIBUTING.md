@@ -16,6 +16,7 @@ This document describes how you can contribute to WrongSecrets. Please read it c
     -   [Pictorial Guide on how to get started with the project in IntelliJ IDEA](#How-to-get-started-with-the-project-in-IntelliJ-IDEA)
 -   [How to add a Challenge](#how-to-add-challenge)
 
+
 ## How to Contribute to the project
 
 There are a couple of ways on how you can contribute to the project:
