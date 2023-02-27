@@ -1,0 +1,2 @@
+==== What's the purpose of this specific challenge?
+With this challenge, we basically aim to help new contributors to better understand the code and encourage them to add new challenges for our end-user.

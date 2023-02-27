@@ -14,6 +14,8 @@ This document describes how you can contribute to WrongSecrets. Please read it c
     -   [About the Project](#OWASP-WrongSecrets)
     -   [Prerequisites](#Prerequisites)
     -   [Pictorial Guide on how to get started with the project in IntelliJ IDEA](#How-to-get-started-with-the-project-in-IntelliJ-IDEA)
+-   [How to add a Challenge](#how-to-add-challenge)
+
 
 ## How to Contribute to the project
 
@@ -44,8 +46,8 @@ Pull requests should be as small/atomic as possible. Large, wide-sweeping change
 
 ### Write a good commit message
 
--   Make sure your commit message passes the [conventional commit standards](https://www.conventionalcommits.org/en/v1.0.0/)
--   Explain why you make the changes. [More info about a good commit message.](https://betterprogramming.pub/stop-writing-bad-commit-messages-8df79517177d)
+-   Explain why you make the changes. [More infos about a good commit message.](https://betterprogramming.pub/stop-writing-bad-commit-messages-8df79517177d)
+
 -   If you fix an issue with your commit, please close the issue by [adding one of the keywords and the issue number](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue) to your commit message.
 
     For example: `Fix #545` or `Closes #10`
@@ -74,15 +76,12 @@ Pull requests should be as small/atomic as possible. Large, wide-sweeping change
    See also the GitHub documentation on "[Configuring a remote for a fork](https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/configuring-a-remote-for-a-fork "Configuring a remote for a fork")".
 
 5. Choose what to work on, based on any of the outstanding [issues](https://github.com/OWASP/wrongsecrets/issues "WrongSecrets Issues").
-6. Create a branch so that you can cleanly work on the chosen issue: `git checkout -b fix/Issue66`
+6. Create a branch so that you can cleanly work on the chosen issue: `git checkout -b FixingIssue66`
 7. Open your favorite editor and start making modifications. We recommend using the [IntelliJ Idea](https://www.jetbrains.com/idea/).
-8. Install [pre-commit](https://pre-commit.com/#install) the dependencies for our pre-commit configuration to make sure your code complies with standards used in the project. This requires terraform, [terraform-docs](https://github.com/terraform-docs/terraform-docs#installation), [tflint](https://github.com/terraform-linters/tflint#installation), and [commitlint](https://commitlint.js.org/#/guides-local-setup). For commitlint, you need [NodeJS](https://nodejs.org/en/download/) installed, after which you you can use `npm install` in the root folder of this project.
-9. Install the pre-commit hook using `pre-commit install --hook-type commit-msg`. We recommend to run `pre-commit run -a` every so often if you're working on a bigger change.
-10. After your modifications are done, push them to your forked repository. This can be done by executing the command `git add MYFILE` for every file you have modified, followed by `git commit -m 'your commit message here'` to commit the modifications and `git push` to push your modifications to GitHub.
-11. Create a Pull Request (PR) by going to your fork, <https://github.com/Your_Github_Handle/wrongsecrets> and click on the "New Pull Request" button. The target branch should typically be the Master branch. When submitting a PR, be sure to follow the checklist that is provided in the PR template. The checklist itself will be filled out by the reviewer.
-12. If something in your git workflow went wrong (and e.g., the precommit hook CI run failed), check out ["O Shit, Git!?!"](https://ohshitgit.com/) to view tips on editing your historical commit message(s), among others.
-13. Your PR will be reviewed and comments may be given. In order to process a comment, simply make modifications to the same branch as before and push them to your repository. GitHub will automatically detect these changes and add them to your existing PR.
-14. When starting on a new PR in the future, make sure to always keep your local repo up to date:
+8. After your modifications are done, push them to your forked repository. This can be done by executing the command `git add MYFILE` for every file you have modified, followed by `git commit -m 'your commit message here'` to commit the modifications and `git push` to push your modifications to GitHub.
+9. Create a Pull Request (PR) by going to your fork, <https://github.com/Your_Github_Handle/wrongsecrets> and click on the "New Pull Request" button. The target branch should typically be the Master branch. When submitting a PR, be sure to follow the checklist that is provided in the PR template. The checklist itself will be filled out by the reviewer.
+10. Your PR will be reviewed and comments may be given. In order to process a comment, simply make modifications to the same branch as before and push them to your repository. GitHub will automatically detect these changes and add them to your existing PR.
+11. When starting on a new PR in the future, make sure to always keep your local repo up to date:
 
     ```bash
     git fetch upstream
@@ -139,64 +138,105 @@ Basically, [*WrongSecrets*](https://owasp.org/www-project-wrongsecrets/) is an a
 
 - ### Step 1: Fork the Project.
   Navigate to the landing page of the repository in your web browser and click on the ***Fork*** button on the repository’s home page.
-  A forked copy of that Git repository will be added to your personal GitHub.  
+  A forked copy of that Git repository will be added to your personal GitHub.
+ 
   ![](images/fork-project-1.png)
 
 - ### Step 2: Clone the Project.
-  A **clone** is a full copy of a repository, including all logging and versions of files.  
-  To ***clone*** the Project to your local desktop by clicking on the button as shown below.  
+  A **clone** is a full copy of a repository, including all logging and versions of files.
+  To ***clone*** the Project to your local desktop by clicking on the button as shown below.
+  
   ![](images/clone-project-2.png)
 
 - ### Step 3: Open the Project using IntelliJ IDEA
-    - ***Open*** the Cloned Project using IntelliJ IDEA by clicking on the button as shown below.  
+    - ***Open*** the Cloned Project using IntelliJ IDEA by clicking on the button as shown below.
+    
       ![](images/open-project-3.1.png)
 
-    - **Wait** till the Project Loads.  
+    - **Wait** till the Project Loads.
+    
       ![](images/wait-3.2.png)
 
 - ### Step 4: Setup.
-    - Open Settings by pressing ***Ctrl+Alt+S***  
+    - Open Settings by pressing ***Ctrl+Alt+S***
       ![](images/open-settings-4.1.png)
 
-    - Follow the path ***IDE settings>Language & Frameworks > Lombok*** and then click on ***Lombok.***  
+    - Follow the path ***IDE settings>Language & Frameworks > Lombok*** and then click on ***Lombok.***
       ![](images/lombok-setup-4.2.png)
 
-    - Make sure that the ***Lombok processing*** is enabled.  
+    - Make sure that the ***Lombok processing*** is enabled.
       ![](images/lombok-processing-4.3.png)
 
 - ### Step 5: Reload the project
-    - Open the ***Maven*** Tab  
+    - Open the ***Maven*** Tab
+    
       ![](images/open-maven-5.1.png)
 
-    - Press the ***Reload*** button as shown below and allow the project to Reload.  
+    - Press the ***Reload*** button as shown below and allow the project to Reload.
+    
       ![](images/reload-maven-5.2.png)
 
 - ### Step 6: Running the Project.
-    - Open the ***WrongSecretsApplication*** by following the path ***main>java>org.owasp.wrongsecrets>WrongSecretApplication***.  
+    - Open the ***WrongSecretsApplication*** by following the path ***main>java>org.owasp.wrongsecrets>WrongSecretApplication***.
       ![](images/open-application-6.1.png)
-    - Press ***Shift+F10*** to run the application, this will open up the ***Run/Debug Configurations Menu.***  
+    - Press ***Shift+F10*** to run the application, this will open up the ***Run/Debug Configurations Menu.***
       ![](images/run-application-6.2.png)
 
 - ### Step 7: Setting up Configurations.
-    -  Select ***Edit configuration templates*** then select ***Application*** section.  
+    -  Select ***Edit configuration templates*** then select ***Application*** section.
+    
        ![](images/edit-config-7.1.png)
-    - There under the ***Application*** section click on the button shown below.  
+    - There under the ***Application*** section click on the button shown below.
+    
       ![](images/modify-options-7.2.png)
-    - ***Select*** all the fields that are Selected in the below picture.  
+    - ***Select*** all the fields that are Selected in the below picture.
+    
       ![](images/select-options-7.3.png)
-    - ***Fill*** all the fields as shown below.  
+    - ***Fill*** all the fields as shown below.
+    
       ![](images/fill-fields-7.4.png)
-    - Again press ***Shift+F10*** which runs the Application.  
+    - Again press ***Shift+F10*** which runs the Application.
+    
       ![](images/run-application-6.2.png)
 
-- ### There you have it, ***WrongSecrets*** running successfully.  
-    - Here is a *preview* on how does it look after successfully running the Application.  
-      **Note:** Running the Application doesn't open any kind of ***GUI***, it only initializes the ***local webserver*** that you can open via a ***browser.***  
+- ### There you have it, ***WrongSecrets*** running successfully.
+    - Here is a *preview* on how does it look after successfully running the Application.
+      **Note:** Running the Application doesn't open any kind of ***GUI***, it only initializes the ***local webserver*** that you can open via a ***browser.***
       ![](images/final-output-8.png)
 
     - Here is the preview of the **web server**,  you can try to find the secrets by means of solving the challenge offered at:
-      [**Challenges**](https://github.com/OWASP/wrongsecrets#basic-docker-exercises)  
-      ![](images/screenshot.png)
-      ### Since, now you have a running application, you can try adding [*New challenges.*](https://github.com/OWASP/wrongsecrets#how-to-add-a-challenge)  
+      [**Challenges**](https://github.com/OWASP/wrongsecrets#basic-docker-exercises)
+        ![](images/screenshot.png)
+
+---
+## How to add challenge
+- ### Step 1: Creating a new issue.
+  First make sure that you have an [Issue](https://github.com/OWASP/wrongsecrets/issues/new) reported for which a challenge is really wanted.
+
+- ### Step 2: Adding the challenge.
+  Add the **new challenge** in this folder `wrongsecrets/src/main/java/org/owasp/wrongsecrets/challenges/`.
+  These are the things that you have to keep in mind.
+    - First and foremost make sure your challenge is coded in **Java**.
+    - Don't forget to add your challenge number in `@Order(28)` annotation, ***28*** in my case.
+    - For further reference please refer [*Challenge28.java*](https://github.com/puneeth072003/wrongsecrets/blob/Readme-updation/src/main/java/org/owasp/wrongsecrets/challenges/docker/Challlenge28.java)
+
+- ### Step 3: Adding Test File.
+  Add the **new TestFile** in this folder `wrongsecrets/src/test/java/org/owasp/wrongsecrets/challenges/`. TestFile is required to do **unit testing.**
+  These are the things that you have to keep in mind.
+    - Make sure that this file is also of **Java** type.
+    - You can use [*Challenge28Test.java*](https://github.com/puneeth072003/wrongsecrets/blob/Readme-updation/src/test/java/org/owasp/wrongsecrets/challenges/docker/Challenge28Test.java) for reference.
+
+- ### Step 4: Adding explanations, reasons and hints.
+  Add the explanation for your challenge along with the hints that will help in finding the secret in this folder `wrongsecrets/src/main/resources/explanations/`.
+  Things to be noted.
+    - All the possible explanations for your challenge, included with all the hints and reasons should be provided.
+    - Every thing must be in a separate **AsciiDoc files**.
+    -  Follow this fashion in naming the file.
+        - Name the explanation in ths manner `challenge28.adoc`.
+        - Reasons file as `challenge28_reason.adoc` and hints file as `challenge28_hint.adoc`.
+          **Note:** Please use your challenge number instead of 28 mentioned above.
+
+- ### Step 5: Submitting your PR.
+  After completing all the above steps, final step is to submit the PR and refer [**Contributing.md**](https://github.com/OWASP/wrongsecrets/blob/master/CONTRIBUTING.md#how-to-get-your-pr-accepted) on how to get your PR accepted.
 
 ---

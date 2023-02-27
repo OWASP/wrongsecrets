@@ -1,0 +1,5 @@
+=== Hello world challenge
+
+Welcome to OWASP WrongSecrets Beginner guide Challenge
+
+Basically this challenge is there only to demonstrate how to add a challenge in our project and to give you a basic idea on how does things work.
