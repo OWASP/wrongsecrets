@@ -19,7 +19,7 @@ jobs:
 
       - name: Link Checker
         id: lychee
-        uses: lycheeverse/lychee-action@v1.5.4
+        uses: lycheeverse/lychee-action@v1.6.1
         with:
           args: --exclude-all-private --exclude-file "config/.lycheeignore" -r 2 './**/*.md' './**/*.html'
           fail: true

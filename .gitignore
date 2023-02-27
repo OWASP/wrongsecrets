@@ -69,3 +69,5 @@ azure/k8s/pod-id.yml
 # Node JS
 js/node/
 js/node_modules/
+node_modules
+.npm

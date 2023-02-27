@@ -18,9 +18,15 @@ updates:
     schedule:
       interval: "monthly"
 
-  # check our npm
+  # check our npm in project
   - package-ecosystem: "npm"
     directory: "/js"
+    schedule:
+      interval: "monthly"
+
+  # check our npm for dev
+  - package-ecosystem: "npm"
+    directory: "/"
     schedule:
       interval: "monthly"
 
