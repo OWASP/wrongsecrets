@@ -138,18 +138,22 @@ Basically, [*WrongSecrets*](https://owasp.org/www-project-wrongsecrets/) is an a
 - ### Step 1: Fork the Project.
   Navigate to the landing page of the repository in your web browser and click on the ***Fork*** button on the repository’s home page.
   A forked copy of that Git repository will be added to your personal GitHub.
+ 
   ![](images/fork-project-1.png)
 
 - ### Step 2: Clone the Project.
   A **clone** is a full copy of a repository, including all logging and versions of files.
   To ***clone*** the Project to your local desktop by clicking on the button as shown below.
+  
   ![](images/clone-project-2.png)
 
 - ### Step 3: Open the Project using IntelliJ IDEA
     - ***Open*** the Cloned Project using IntelliJ IDEA by clicking on the button as shown below.
+    
       ![](images/open-project-3.1.png)
 
     - **Wait** till the Project Loads.
+    
       ![](images/wait-3.2.png)
 
 - ### Step 4: Setup.
@@ -164,9 +168,11 @@ Basically, [*WrongSecrets*](https://owasp.org/www-project-wrongsecrets/) is an a
 
 - ### Step 5: Reload the project
     - Open the ***Maven*** Tab
+    
       ![](images/open-maven-5.1.png)
 
     - Press the ***Reload*** button as shown below and allow the project to Reload.
+    
       ![](images/reload-maven-5.2.png)
 
 - ### Step 6: Running the Project.
@@ -177,14 +183,19 @@ Basically, [*WrongSecrets*](https://owasp.org/www-project-wrongsecrets/) is an a
 
 - ### Step 7: Setting up Configurations.
     -  Select ***Edit configuration templates*** then select ***Application*** section.
+    
        ![](images/edit-config-7.1.png)
     - There under the ***Application*** section click on the button shown below.
+    
       ![](images/modify-options-7.2.png)
     - ***Select*** all the fields that are Selected in the below picture.
+    
       ![](images/select-options-7.3.png)
     - ***Fill*** all the fields as shown below.
+    
       ![](images/fill-fields-7.4.png)
     - Again press ***Shift+F10*** which runs the Application.
+    
       ![](images/run-application-6.2.png)
 
 - ### There you have it, ***WrongSecrets*** running successfully.
@@ -194,8 +205,7 @@ Basically, [*WrongSecrets*](https://owasp.org/www-project-wrongsecrets/) is an a
 
     - Here is the preview of the **web server**,  you can try to find the secrets by means of solving the challenge offered at:
       [**Challenges**](https://github.com/OWASP/wrongsecrets#basic-docker-exercises)
-      ![](images/screenshot.png)
-      ### Since, now you have a running application, you can try adding [*New challenges.*](https://github.com/OWASP/wrongsecrets#how-to-add-a-challenge)
+        ![](images/screenshot.png)
 
 ---
 ## How to add challenge
@@ -207,13 +217,13 @@ Basically, [*WrongSecrets*](https://owasp.org/www-project-wrongsecrets/) is an a
   These are the things that you have to keep in mind.
     - First and foremost make sure your challenge is coded in **Java**.
     - Don't forget to add your challenge number in `@Order(28)` annotation, ***28*** in my case.
-    - For further reference please refer [*Challenge28.java*]()
+    - For further reference please refer [*Challenge28.java*](https://github.com/puneeth072003/wrongsecrets/blob/Readme-updation/src/main/java/org/owasp/wrongsecrets/challenges/docker/Challlenge28.java)
 
 - ### Step 3: Adding Test File.
   Add the **new TestFile** in this folder `wrongsecrets/src/test/java/org/owasp/wrongsecrets/challenges/`. TestFile is required to do **unit testing.**
   These are the things that you have to keep in mind.
     - Make sure that this file is also of **Java** type.
-    - You can use [*Challenge28Test.java*]() for reference.
+    - You can use [*Challenge28Test.java*](https://github.com/puneeth072003/wrongsecrets/blob/Readme-updation/src/test/java/org/owasp/wrongsecrets/challenges/docker/Challenge28Test.java) for reference.
 
 - ### Step 4: Adding explanations, reasons and hints.
   Add the explanation for your challenge along with the hints that will help in finding the secret in this folder `wrongsecrets/src/main/resources/explanations/`.
