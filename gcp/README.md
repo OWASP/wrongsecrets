@@ -98,17 +98,17 @@ The documentation below is auto-generated to give insight on what's created via 
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.1 |
 | <a name="requirement_google"></a> [google](#requirement\_google) | ~> 4.52.0 |
 | <a name="requirement_google-beta"></a> [google-beta](#requirement\_google-beta) | ~> 4.52.0 |
-| <a name="requirement_http"></a> [http](#requirement\_http) | ~> 3.2.0 |
+| <a name="requirement_http"></a> [http](#requirement\_http) | ~> 3.2.1 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | ~> 3.4.3 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_google"></a> [google](#provider\_google) | ~> 4.52.0 |
-| <a name="provider_google-beta"></a> [google-beta](#provider\_google-beta) | ~> 4.52.0 |
-| <a name="provider_http"></a> [http](#provider\_http) | ~> 3.2.1 |
-| <a name="provider_random"></a> [random](#provider\_random) | ~> 3.4.3 |
+| <a name="provider_google"></a> [google](#provider\_google) | 4.52.0 |
+| <a name="provider_google-beta"></a> [google-beta](#provider\_google-beta) | 4.52.0 |
+| <a name="provider_http"></a> [http](#provider\_http) | 3.2.1 |
+| <a name="provider_random"></a> [random](#provider\_random) | 3.4.3 |
 
 ## Modules
 
