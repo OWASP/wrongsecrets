@@ -15,7 +15,8 @@ jobs:
       - uses: actions/checkout@v3
       - name: run container
         run: |
-          podman run docker.io/jeroenwillemsen/wrongsecrets:latest-no-vault
+          podman run -dt -p 8080:8080 docker.io/jeroenwillemsen/wrongsecrets:latest-no-vault && \
+          curl localhost:8080
   test-colima:
     name: Test with Colima
     runs-on: macos-latest
@@ -27,4 +28,5 @@ jobs:
         echo "Colima version: ${{ steps.docker.outputs.colima-version }}"
     - name: test if container comes up
       run: |
-        docker run jeroenwillemsen/wrongsecrets:latest-no-vault
+        docker run -d -p 8080:8080 jeroenwillemsen/wrongsecrets:latest-no-vault && \
+        curl localhost:8080
