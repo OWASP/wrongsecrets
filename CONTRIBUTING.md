@@ -307,8 +307,7 @@ Basically, [*WrongSecrets*](https://owasp.org/www-project-wrongsecrets/) is an a
     - Every thing must be in a separate **AsciiDoc files**.
     -  Follow this fashion in naming the file.
         - Here is a Explanation for reference:
-        ```adoc
-                
+        ```adoc  
             === Hello world challenge
 
             Welcome to OWASP WrongSecrets Beginner guide Challenge
