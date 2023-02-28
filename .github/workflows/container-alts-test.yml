@@ -16,6 +16,7 @@ jobs:
       - name: run container
         run: |
           podman run -dt -p 8080:8080 docker.io/jeroenwillemsen/wrongsecrets:latest-no-vault && \
+          echo "waith 20 seconds for container to come up" && sleep 20 && \
           curl localhost:8080
   test-colima:
     name: Test with Colima
@@ -29,4 +30,5 @@ jobs:
     - name: test if container comes up
       run: |
         docker run -d -p 8080:8080 jeroenwillemsen/wrongsecrets:latest-no-vault && \
+        echo "waith 20 seconds for container to come up" && sleep 20 && \
         curl localhost:8080
