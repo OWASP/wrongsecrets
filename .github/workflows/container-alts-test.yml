@@ -1,0 +1,30 @@
+name: Test container on podman and Colima
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test-podman:
+    name: Test with podman
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: run container
+        run: |
+          podman run jeroenwillemsen/wrongsecrets:latest-no-vault
+  test-colima:
+    name: Test with Colima
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: douglascamata/setup-docker-macos-action@v1-alpha
+    - name: setup colima
+      run: |
+        echo "Colima version: ${{ steps.docker.outputs.colima-version }}"
+    - name: test if container comes up
+      run: |
+        docker run jeroenwillemsen/wrongsecrets:latest-no-vault
