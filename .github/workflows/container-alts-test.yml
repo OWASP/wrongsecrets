@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: run container
         run: |
-          podman run jeroenwillemsen/wrongsecrets:latest-no-vault
+          podman run docker.io/jeroenwillemsen/wrongsecrets:latest-no-vault
   test-colima:
     name: Test with Colima
     runs-on: macos-latest
