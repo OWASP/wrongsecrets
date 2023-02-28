@@ -1,0 +1,24 @@
+name: Test container on podman
+
+# Controls when the workflow will run
+on:
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test-minikube:
+    name: Test with podman
+    runs-on: macos-12
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install CLI deps
+        run: |
+          brew install podman
+      - name: run container
+        run: |
+          podman run jeroenwillemsen/wrongsecrets:1.5.14-k8s-vault
