@@ -44,13 +44,13 @@
         <maven.compiler.target>19</maven.compiler.target>
         <spring.cloud-version>2022.0.1</spring.cloud-version>
         <lombok.version>1.18.26</lombok.version>
-        <aws.sdk.version>2.19.33</aws.sdk.version>
+        <aws.sdk.version>2.20.12</aws.sdk.version>
         <asciidoctorj.version>2.5.7</asciidoctorj.version>
         <jruby.version>9.4.1.0</jruby.version>
         <bootstrap.version>5.2.3</bootstrap.version>
         <github.button.version>2.14.1</github.button.version>
-        <datatables.version>1.13.1</datatables.version>
-        <gcp.sdk.version>4.0.0</gcp.sdk.version>
+        <datatables.version>1.13.2</datatables.version>
+        <gcp.sdk.version>4.1.1</gcp.sdk.version>
         <jquery.version>3.6.3</jquery.version>
         <thymeleaf.layout.version>3.2.0</thymeleaf.layout.version>
         <thymeleaf-extras-springsecurity6.version>3.1.1.RELEASE</thymeleaf-extras-springsecurity6.version>
