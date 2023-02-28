@@ -90,7 +90,6 @@ Pull requests should be as small/atomic as possible. Large, wide-sweeping change
     git fetch upstream
     git merge upstream/develop
     ```
-    
     See also the following article for further explanation on "[How to Keep a Downstream git Repository Current with Upstream Repository Changes](https://medium.com/sweetmeat/how-to-keep-a-downstream-git-repository-current-with-upstream-repository-changes-10b76fad6d97 "How to Keep a Downstream git Repository Current with Upstream Repository Changes")".
 
 If at any time you want to work on a different issue, you can simply switch to a different branch, as explained in step 5.
