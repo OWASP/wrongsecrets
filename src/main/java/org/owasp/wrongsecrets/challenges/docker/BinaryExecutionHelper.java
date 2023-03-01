@@ -79,10 +79,16 @@ public class BinaryExecutionHelper {
         return systemARch.contains("amd64") || systemARch.contains("x86");
     }
 
-    private boolean useLinux() {
+    private boolean useArm() {
         String systemARch = System.getProperty("os.arch");
         log.info("System arch detected: {}", systemARch);
-        return systemARch.contains("amd64");
+        return systemARch.contains("aarch64");
+    }
+
+    private boolean useLinux() {
+        String osName = System.getProperty("os.name").toLowerCase();
+        log.info("System arch detected: {}", osName);
+        return osName.contains("nix") || osName.contains("nux") || osName.contains("aix");
     }
 
     private boolean useWindows() {
@@ -111,6 +117,9 @@ public class BinaryExecutionHelper {
             fileName = fileName + "-linux";
         }
         if (!useX86()) {
+            if (!useArm()) {
+                log.info("We found a different system architecture than x86-amd64 or aarch64. Will default to aarch64.");
+            }
             fileName = fileName + "-arm";
         }
         File challengeFile = retrieveFile(fileName);
