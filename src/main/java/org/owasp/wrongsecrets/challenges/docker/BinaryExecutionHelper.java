@@ -110,7 +110,7 @@ public class BinaryExecutionHelper {
         }
     }
 
-    private boolean useMusl(){
+    private boolean useMusl() {
         ProcessBuilder ps = new ProcessBuilder("ldd", "/bin/ls");
         ps.redirectErrorStream(true);
         try {
@@ -129,7 +129,7 @@ public class BinaryExecutionHelper {
             fileName = fileName + "-windows.exe";
         } else if (useLinux()) {
             fileName = fileName + "-linux";
-            if( useMusl()){
+            if (useMusl()) {
                 fileName = fileName + "-musl";
             }
         }
