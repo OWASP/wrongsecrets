@@ -127,6 +127,7 @@ public class BinaryExecutionHelper {
     private File createTempExecutable(String fileName) throws IOException {
         if (useWindows()) {
             fileName = fileName + "-windows.exe";
+            log.info("While we detected windows, please note that it is officially not supported.");
         } else if (useLinux()) {
             fileName = fileName + "-linux";
             if (useMusl()) {
