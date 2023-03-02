@@ -14,7 +14,7 @@ This document describes how you can contribute to WrongSecrets. Please read it c
     -   [About the Project](#OWASP-WrongSecrets)
     -   [Prerequisites](#Prerequisites)
     -   [Pictorial Guide on how to get started with the project in IntelliJ IDEA](#How-to-get-started-with-the-project-in-IntelliJ-IDEA)
--   [How to add a Challenge](#how-to-add-challenge)
+-   [How to add a Challenge](#how-to-add-a-challenge)
 
 
 ## How to Contribute to the project
@@ -211,7 +211,7 @@ Please be sure to take a careful look at our [Code of Conduct](https://github.co
         ![](images/screenshot.png)
 
 ---
-## How to add challenge
+## How to add a challenge
 - ### Step 1: Creating a new issue.
   First make sure that you have an [Issue](https://github.com/OWASP/wrongsecrets/issues/new) reported for which a challenge is really wanted, And make sure the challenge is assigned to you, as others might be working on the challenge.
 
