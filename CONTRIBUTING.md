@@ -109,7 +109,7 @@ Please be sure to take a careful look at our [Code of Conduct](https://github.co
 # Beginner guide
 ## OWASP WrongSecrets
 
-Basically, [*WrongSecrets*](https://owasp.org/www-project-wrongsecrets/) is an application which teaches how to not store secrets by offering challenges to the user, which helps the user to Self-reflect and correct those mistakes.
+[*WrongSecrets*](https://owasp.org/www-project-wrongsecrets/) is an application teaching how to *not* store secrets by offering challenges to the user, helping the user to Self-reflect and correct those mistakes.
 
 ## Prerequisites
 
@@ -194,7 +194,7 @@ Basically, [*WrongSecrets*](https://owasp.org/www-project-wrongsecrets/) is an a
     - ***Select*** all the fields that are Selected in the below picture.
     
       ![](images/select-options-7.3.png)
-    - ***Fill*** all the fields as shown below.
+    - ***Fill out*** all the fields as shown below.
     
       ![](images/fill-fields-7.4.png)
     - Again press ***Shift+F10*** which runs the Application.
@@ -213,7 +213,7 @@ Basically, [*WrongSecrets*](https://owasp.org/www-project-wrongsecrets/) is an a
 ---
 ## How to add challenge
 - ### Step 1: Creating a new issue.
-  First make sure that you have an [Issue](https://github.com/OWASP/wrongsecrets/issues/new) reported for which a challenge is really wanted, And make sure the challenge is assigned to you, as others might be working at the challenge.
+  First make sure that you have an [Issue](https://github.com/OWASP/wrongsecrets/issues/new) reported for which a challenge is really wanted, And make sure the challenge is assigned to you, as others might be working on the challenge.
 
 - ### Step 2: Adding the challenge.
   Add the **new challenge** in this folder `wrongsecrets/src/main/java/org/owasp/wrongsecrets/challenges/`.
@@ -304,13 +304,13 @@ Basically, [*WrongSecrets*](https://owasp.org/www-project-wrongsecrets/) is an a
             }
         }
         ``` 
-  Please note that PRs for new challenges are only excepted when unit tests are added to prove that the challenge works. Normally tests should not immediately leak the actual secret, so leverage the `.spoil()` functionality of your test implementation for this.
+  Please note that PRs for new challenges are only accepted when unit tests are added to prove that the challenge works. Normally tests should not immediately leak the actual secret, so leverage the `.spoil()` functionality of your test implementation for this.
 
 - ### Step 4: Adding explanations, reasons and hints.
   Add the explanation for your challenge along with the hints that will help in finding the secret in this folder `wrongsecrets/src/main/resources/explanations/`.
   Things to be noted.
     - All the possible explanations for your challenge, included with all the hints and reasons should be provided.
-    - Every thing must be in a separate **AsciiDoc files**.
+    - Everything must be in separate **AsciiDoc files**.
     -  Follow this fashion in naming the file.
         - Here is a Explanation for reference:
         ```adoc  
