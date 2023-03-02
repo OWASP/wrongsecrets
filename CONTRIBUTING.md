@@ -141,22 +141,22 @@ Please be sure to take a careful look at our [Code of Conduct](https://github.co
 - ### Step 1: Fork the Project.
   Navigate to the landing page of the repository in your web browser and click on the ***Fork*** button on the repository’s home page.
   A forked copy of that Git repository will be added to your personal GitHub.
- 
+
   ![](images/fork-project-1.png)
 
 - ### Step 2: Clone the Project.
   A **clone** is a full copy of a repository, including all logging and versions of files.
   To ***clone*** the Project to your local desktop by clicking on the button as shown below.
-  
+
   ![](images/clone-project-2.png)
 
 - ### Step 3: Open the Project using IntelliJ IDEA
     - ***Open*** the Cloned Project using IntelliJ IDEA by clicking on the button as shown below.
-    
+
       ![](images/open-project-3.1.png)
 
     - **Wait** till the Project Loads.
-    
+
       ![](images/wait-3.2.png)
 
 - ### Step 4: Setup.
@@ -171,11 +171,11 @@ Please be sure to take a careful look at our [Code of Conduct](https://github.co
 
 - ### Step 5: Reload the project
     - Open the ***Maven*** Tab
-    
+
       ![](images/open-maven-5.1.png)
 
     - Press the ***Reload*** button as shown below and allow the project to Reload.
-    
+
       ![](images/reload-maven-5.2.png)
 
 - ### Step 6: Running the Project.
@@ -186,19 +186,19 @@ Please be sure to take a careful look at our [Code of Conduct](https://github.co
 
 - ### Step 7: Setting up Configurations.
     -  Select ***Edit configuration templates*** then select ***Application*** section.
-    
+
        ![](images/edit-config-7.1.png)
     - There under the ***Application*** section click on the button shown below.
-    
+
       ![](images/modify-options-7.2.png)
     - ***Select*** all the fields that are Selected in the below picture.
-    
+
       ![](images/select-options-7.3.png)
     - ***Fill out*** all the fields as shown below.
-    
+
       ![](images/fill-fields-7.4.png)
     - Again press ***Shift+F10*** which runs the Application.
-    
+
       ![](images/run-application-6.2.png)
 
 - ### There you have it, ***WrongSecrets*** running successfully.
@@ -303,7 +303,7 @@ Please be sure to take a careful look at our [Code of Conduct](https://github.co
                 Assertions.assertThat(challenge.solved(challenge.spoiler().solution())).isTrue();
             }
         }
-        ``` 
+        ```
   Please note that PRs for new challenges are only accepted when unit tests are added to prove that the challenge works. Normally tests should not immediately leak the actual secret, so leverage the `.spoil()` functionality of your test implementation for this.
 
 - ### Step 4: Adding explanations, reasons and hints.
@@ -313,7 +313,7 @@ Please be sure to take a careful look at our [Code of Conduct](https://github.co
     - Everything must be in separate **AsciiDoc files**.
     -  Follow this fashion in naming the file.
         - Here is a Explanation for reference:
-        ```adoc  
+        ```adoc
             === Hello world challenge
 
             Welcome to OWASP WrongSecrets Beginner guide Challenge
@@ -334,7 +334,7 @@ Please be sure to take a careful look at our [Code of Conduct](https://github.co
 
             This challenge is only meant for helping new contributors to add new challenges. Please, have fun with trying more difficult challenges;-).
         ```
-         
+
 
 - ### Step 5: Submitting your PR.
   After completing all the above steps, final step is to submit the PR and refer [**Contributing.md**](https://github.com/OWASP/wrongsecrets/blob/master/CONTRIBUTING.md#how-to-get-your-pr-accepted) on how to get your PR accepted.
