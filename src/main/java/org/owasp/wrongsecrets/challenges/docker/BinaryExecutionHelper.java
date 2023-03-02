@@ -110,11 +110,28 @@ public class BinaryExecutionHelper {
         }
     }
 
+    private boolean useMusl(){
+        ProcessBuilder ps = new ProcessBuilder("ldd", "/bin/ls");
+        ps.redirectErrorStream(true);
+        try {
+            Process pr = ps.start();
+            BufferedReader in = new BufferedReader(new InputStreamReader(pr.getInputStream()));
+            String result = in.readLine();
+            return result.contains("musl");
+        } catch (IOException e) {
+            log.error("Could not detect musl due to: ", e);
+            return false;
+        }
+    }
+
     private File createTempExecutable(String fileName) throws IOException {
         if (useWindows()) {
             fileName = fileName + "-windows.exe";
         } else if (useLinux()) {
             fileName = fileName + "-linux";
+            if( useMusl()){
+                fileName = fileName + "-musl";
+            }
         }
         if (!useX86()) {
             if (!useArm()) {
