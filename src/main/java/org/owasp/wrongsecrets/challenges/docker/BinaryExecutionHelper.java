@@ -1,5 +1,6 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
@@ -13,6 +14,8 @@ public class BinaryExecutionHelper {
 
     public static final String ERROR_EXECUTION = "Error with executing";
     private final int challengeNumber;
+
+    private Exception executionException;
 
     public BinaryExecutionHelper(int challengeNumber) {
         this.challengeNumber = challengeNumber;
@@ -49,9 +52,15 @@ public class BinaryExecutionHelper {
             return result;
         } catch (IOException | NullPointerException | InterruptedException e) {
             log.warn("Error executing:", e);
+            executionException = e;
             return ERROR_EXECUTION;
         }
 
+    }
+
+    @VisibleForTesting
+    public Exception getExecutionException() {
+        return executionException;
     }
 
     private String executeCommand(File execFile, String argument, String argument2) throws IOException, InterruptedException {
