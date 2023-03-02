@@ -7,6 +7,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Spoiler;
+import org.owasp.wrongsecrets.challenges.docker.binaryexecution.BinaryExecutionHelper;
 
 @ExtendWith(MockitoExtension.class)
 class Challenge21Test {

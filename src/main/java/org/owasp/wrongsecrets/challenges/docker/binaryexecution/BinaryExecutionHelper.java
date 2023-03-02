@@ -1,4 +1,4 @@
-package org.owasp.wrongsecrets.challenges.docker;
+package org.owasp.wrongsecrets.challenges.docker.binaryexecution;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Strings;
@@ -17,8 +17,11 @@ public class BinaryExecutionHelper {
 
     private Exception executionException;
 
-    public BinaryExecutionHelper(int challengeNumber) {
+    private MuslDetector muslDetector;
+
+    public BinaryExecutionHelper(int challengeNumber, MuslDetector muslDetector) {
         this.challengeNumber = challengeNumber;
+        this.muslDetector = muslDetector;
     }
 
     public String executeGoCommand(String guess) {
@@ -120,17 +123,7 @@ public class BinaryExecutionHelper {
     }
 
     private boolean useMusl() {
-        ProcessBuilder ps = new ProcessBuilder("ldd", "/bin/ls");
-        ps.redirectErrorStream(true);
-        try {
-            Process pr = ps.start();
-            BufferedReader in = new BufferedReader(new InputStreamReader(pr.getInputStream()));
-            String result = in.readLine();
-            return result.contains("musl");
-        } catch (IOException e) {
-            log.error("Could not detect musl due to: ", e);
-            return false;
-        }
+        return muslDetector.isMusl();
     }
 
     private File createTempExecutable(String fileName) throws IOException {
