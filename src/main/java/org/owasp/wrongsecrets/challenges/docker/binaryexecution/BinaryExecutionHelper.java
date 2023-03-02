@@ -8,6 +8,7 @@ import org.springframework.util.ResourceUtils;
 
 import java.io.*;
 
+
 @Slf4j
 public class BinaryExecutionHelper {
 
@@ -17,7 +18,7 @@ public class BinaryExecutionHelper {
 
     private Exception executionException;
 
-    private MuslDetector muslDetector;
+    private final MuslDetector muslDetector;
 
     public BinaryExecutionHelper(int challengeNumber, MuslDetector muslDetector) {
         this.challengeNumber = challengeNumber;
@@ -61,11 +62,6 @@ public class BinaryExecutionHelper {
 
     }
 
-    @VisibleForTesting
-    public Exception getExecutionException() {
-        return executionException;
-    }
-
     private String executeCommand(File execFile, String argument, String argument2) throws IOException, InterruptedException {
         ProcessBuilder ps;
         if (Strings.isNullOrEmpty(argument2)) {
@@ -83,6 +79,11 @@ public class BinaryExecutionHelper {
 
     private String executeCommand(File execFile, String argument) throws IOException, InterruptedException {
         return executeCommand(execFile, argument, "");
+    }
+
+    @VisibleForTesting
+    public Exception getExecutionException() {
+        return executionException;
     }
 
     private boolean useX86() {
