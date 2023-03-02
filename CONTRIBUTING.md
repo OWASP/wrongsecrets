@@ -10,6 +10,12 @@ This document describes how you can contribute to WrongSecrets. Please read it c
 -   [How to Contribute to the Project](#how-to-contribute-to-the-project)
 -   [How to set up your Contributor Environment](#how-to-set-up-your-contributor-environment)
 -   [How to get your PR Accepted](#how-to-get-your-pr-accepted)
+-   [Beginner Guide](#beginner-guide)
+    -   [About the Project](#OWASP-WrongSecrets)
+    -   [Prerequisites](#Prerequisites)
+    -   [Pictorial Guide on how to get started with the project in IntelliJ IDEA](#How-to-get-started-with-the-project-in-IntelliJ-IDEA)
+-   [How to add a Challenge](#how-to-add-a-challenge)
+
 
 ## How to Contribute to the project
 
@@ -84,7 +90,6 @@ Pull requests should be as small/atomic as possible. Large, wide-sweeping change
     git fetch upstream
     git merge upstream/develop
     ```
-
     See also the following article for further explanation on "[How to Keep a Downstream git Repository Current with Upstream Repository Changes](https://medium.com/sweetmeat/how-to-keep-a-downstream-git-repository-current-with-upstream-repository-changes-10b76fad6d97 "How to Keep a Downstream git Repository Current with Upstream Repository Changes")".
 
 If at any time you want to work on a different issue, you can simply switch to a different branch, as explained in step 5.
@@ -99,3 +104,239 @@ Although we greatly appreciate any and all contributions to the project, there a
 -   Unnecessary self-promotion of tools or blog posts is frowned upon. If you have a relation with on of the URLs or tools you are referencing, please state so in the PR so that we can verify that the reference is in line with the rest of the guide.
 
 Please be sure to take a careful look at our [Code of Conduct](https://github.com/OWASP/wrongsecrets/blob/master/CODE_OF_CONDUCT.md) for all the details.
+
+---
+# Beginner guide
+## OWASP WrongSecrets
+
+[*WrongSecrets*](https://owasp.org/www-project-wrongsecrets/) is an application teaching how to *not* store secrets by offering challenges to the user, helping the user to Self-reflect and correct those mistakes.
+
+## Prerequisites
+
+1. **Docker**
+   [*Docker*](https://www.docker.com/) is a software platform that allows you to build, test, and deploy applications quickly and in a more efficient manner.
+
+
+2. **Node.Js**
+   [*Node.Js*](https://nodejs.org/en/) is an open-source library and a cross-platform JavaScript **runtime environment** specifically for running web applications outside one's browser.
+
+
+3. **JDK-19**
+   [*JDK*](https://www.oracle.com/java/technologies/javase/jdk19-archive-downloads.html) is a tool used in development and testing programs written in the Java programming language.
+
+
+3. **IntelliJ IDEA**
+   [*IntelliJ IDEA*](https://www.jetbrains.com/idea/download/#section=windows) is an integrated development environment basically an **IDE** written in Java for developing software written in Java, Kotlin, Groovy etc.
+
+
+4. **GitHub Desktop**
+   [*GitHub Desktop*](https://desktop.github.com/) is an application that enables you to interact with GitHub using a **GUI** instead of the command line or a web browser.
+   (*Not Mandatory but is recommended for beginners*)
+
+---
+
+
+## How to get started with the project in IntelliJ IDEA
+
+- ### Step 1: Fork the Project.
+  Navigate to the landing page of the repository in your web browser and click on the ***Fork*** button on the repository’s home page.
+  A forked copy of that Git repository will be added to your personal GitHub.
+
+  ![](images/fork-project-1.png)
+
+- ### Step 2: Clone the Project.
+  A **clone** is a full copy of a repository, including all logging and versions of files.
+  To ***clone*** the Project to your local desktop by clicking on the button as shown below.
+
+  ![](images/clone-project-2.png)
+
+- ### Step 3: Open the Project using IntelliJ IDEA
+    - ***Open*** the Cloned Project using IntelliJ IDEA by clicking on the button as shown below.
+
+      ![](images/open-project-3.1.png)
+
+    - **Wait** till the Project Loads.
+
+      ![](images/wait-3.2.png)
+
+- ### Step 4: Setup.
+    - Open Settings by pressing ***Ctrl+Alt+S***
+      ![](images/open-settings-4.1.png)
+
+    - Follow the path ***IDE settings>Language & Frameworks > Lombok*** and then click on ***Lombok.***
+      ![](images/lombok-setup-4.2.png)
+
+    - Make sure that the ***Lombok processing*** is enabled.
+      ![](images/lombok-processing-4.3.png)
+
+- ### Step 5: Reload the project
+    - Open the ***Maven*** Tab
+
+      ![](images/open-maven-5.1.png)
+
+    - Press the ***Reload*** button as shown below and allow the project to Reload.
+
+      ![](images/reload-maven-5.2.png)
+
+- ### Step 6: Running the Project.
+    - Open the ***WrongSecretsApplication*** by following the path ***main>java>org.owasp.wrongsecrets>WrongSecretApplication***.
+      ![](images/open-application-6.1.png)
+    - Press ***Shift+F10*** to run the application, this will open up the ***Run/Debug Configurations Menu.***
+      ![](images/run-application-6.2.png)
+
+- ### Step 7: Setting up Configurations.
+    -  Select ***Edit configuration templates*** then select ***Application*** section.
+
+       ![](images/edit-config-7.1.png)
+    - There under the ***Application*** section click on the button shown below.
+
+      ![](images/modify-options-7.2.png)
+    - ***Select*** all the fields that are Selected in the below picture.
+
+      ![](images/select-options-7.3.png)
+    - ***Fill out*** all the fields as shown below.
+
+      ![](images/fill-fields-7.4.png)
+    - Again press ***Shift+F10*** which runs the Application.
+
+      ![](images/run-application-6.2.png)
+
+- ### There you have it, ***WrongSecrets*** running successfully.
+    - Here is a *preview* on how does it look after successfully running the Application.
+      **Note:** Running the Application doesn't open any kind of ***GUI***, it only initializes the ***local webserver*** that you can open via a ***browser.***
+      ![](images/final-output-8.png)
+
+    - Here is the preview of the **web server**,  you can try to find the secrets by means of solving the challenge offered at:
+      [**Challenges**](https://github.com/OWASP/wrongsecrets#basic-docker-exercises)
+        ![](images/screenshot.png)
+
+---
+## How to add a challenge
+- ### Step 1: Creating a new issue.
+  First make sure that you have an [Issue](https://github.com/OWASP/wrongsecrets/issues/new) reported for which a challenge is really wanted, And make sure the challenge is assigned to you, as others might be working on the challenge.
+
+- ### Step 2: Adding the challenge.
+  Add the **new challenge** in this folder `wrongsecrets/src/main/java/org/owasp/wrongsecrets/challenges/`.
+  These are the things that you have to keep in mind.
+    - First and foremost make sure your challenge is coded in **Java**.
+    - Don't forget to add your challenge number in `@Order(28)` annotation, ***28*** in my case.
+    - Here is an example of a possible Challenge 28:
+        ```java
+        package org.owasp.wrongsecrets.challenges.docker;
+        import lombok.extern.slf4j.Slf4j;
+        import org.owasp.wrongsecrets.RuntimeEnvironment;
+        import org.owasp.wrongsecrets.ScoreCard;
+        import org.owasp.wrongsecrets.challenges.Challenge;
+        import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
+        import org.owasp.wrongsecrets.challenges.Spoiler;
+        import org.springframework.core.annotation.Order;
+        import org.springframework.stereotype.Component;
+        import java.util.List;
+        @Slf4j
+        @Component
+        @Order(28) //make sure this number is the same as your challenge
+        public class Challenge28 extends Challenge {
+            private final String secret;
+            public Challenge28(ScoreCard scoreCard) {
+                super(scoreCard);
+                secret = "hello world";
+            }
+            //is this challenge usable in CTF mode?
+            @Override
+            public boolean canRunInCTFMode() {
+                return true;
+            }
+            //return the plain text secret here
+            @Override
+            public Spoiler spoiler() {
+                return new Spoiler(secret);
+            }
+            //here you validate if your answer matches the secret
+            @Override
+            public boolean answerCorrect(String answer) {
+                return secret.equals(answer);
+            }
+            //which runtime can you use to run the challenge on ? (You can just use Docker here)
+            @Override
+            public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
+                return List.of(RuntimeEnvironment.Environment.DOCKER);
+            }
+            //set the difficulty: 1=low, 5=very hard
+            @Override
+            public int difficulty() {
+                return 1;
+            }
+            //on which tech is this challenge? See ChallengeTechnology.Tech for categories
+            @Override
+            public String getTech() {
+                return ChallengeTechnology.Tech.SECRETS.id;
+            }
+            //if you use this in a shared environment and need to adapt it, then return true here.
+            @Override
+            public boolean isLimittedWhenOnlineHosted() {
+                return false;
+            }
+        }
+        ```
+- ### Step 3: Adding Test File.
+  Add the **new TestFile** in this folder `wrongsecrets/src/test/java/org/owasp/wrongsecrets/challenges/`. TestFile is required to do **unit testing.**
+  These are the things that you have to keep in mind.
+    - Make sure that this file is also of **Java** type.
+    - Here is a unit test for reference:
+        ```java
+        package org.owasp.wrongsecrets.challenges.docker;
+        import org.assertj.core.api.Assertions;
+        import org.junit.jupiter.api.Test;
+        import org.junit.jupiter.api.extension.ExtendWith;
+        import org.mockito.Mock;
+        import org.mockito.Mockito;
+        import org.mockito.junit.jupiter.MockitoExtension;
+        import org.owasp.wrongsecrets.ScoreCard;
+        @ExtendWith(MockitoExtension.class)
+        class Challenge28Test {
+            @Mock
+            private ScoreCard scoreCard;
+            @Test
+            void rightAnswerShouldSolveChallenge() {
+                var challenge = new Challenge28(scoreCard);
+                Assertions.assertThat(challenge.solved("wrong answer")).isFalse();
+                Assertions.assertThat(challenge.solved(challenge.spoiler().solution())).isTrue();
+            }
+        }
+        ```
+  Please note that PRs for new challenges are only accepted when unit tests are added to prove that the challenge works. Normally tests should not immediately leak the actual secret, so leverage the `.spoil()` functionality of your test implementation for this.
+
+- ### Step 4: Adding explanations, reasons and hints.
+  Add the explanation for your challenge along with the hints that will help in finding the secret in this folder `wrongsecrets/src/main/resources/explanations/`.
+  Things to be noted.
+    - All the possible explanations for your challenge, included with all the hints and reasons should be provided.
+    - Everything must be in separate **AsciiDoc files**.
+    -  Follow this fashion in naming the file.
+        - Here is a Explanation for reference:
+        ```adoc
+            === Hello world challenge
+
+            Welcome to OWASP WrongSecrets Beginner guide Challenge
+
+            Basically this challenge is there only to demonstrate how to add a challenge in our project and to give you a basic idea on how does things work.
+
+        ```
+        - refer this block for reasons:
+        ```adoc
+            ==== What’s the purpose of this specific challenge?
+            With this challenge, we basically aim to help new contributors to better understand the code and encourage them to add new challenges for our end-user.
+        ```
+        - Use this block as refrence for hints:
+        ```adoc
+            Your secret is `Hello World`
+
+            Copy this and paste it in the box provided and press "Submit" and you are good to go.
+
+            This challenge is only meant for helping new contributors to add new challenges. Please, have fun with trying more difficult challenges;-).
+        ```
+
+
+- ### Step 5: Submitting your PR.
+  After completing all the above steps, final step is to submit the PR and refer [**Contributing.md**](https://github.com/OWASP/wrongsecrets/blob/master/CONTRIBUTING.md#how-to-get-your-pr-accepted) on how to get your PR accepted.
+
+---
