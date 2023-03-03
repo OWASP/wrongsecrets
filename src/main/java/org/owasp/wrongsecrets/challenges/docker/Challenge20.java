@@ -7,6 +7,8 @@ import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
 import org.owasp.wrongsecrets.challenges.Spoiler;
+import org.owasp.wrongsecrets.challenges.docker.binaryexecution.BinaryExecutionHelper;
+import org.owasp.wrongsecrets.challenges.docker.binaryexecution.MuslDetectorImpl;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -23,7 +25,7 @@ public class Challenge20 extends Challenge {
 
     public Challenge20(ScoreCard scoreCard) {
         super(scoreCard);
-        this.binaryExecutionHelper = new BinaryExecutionHelper(20);
+        this.binaryExecutionHelper = new BinaryExecutionHelper(20, new MuslDetectorImpl());
     }
 
     @Override
