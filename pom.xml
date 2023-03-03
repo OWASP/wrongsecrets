@@ -44,7 +44,7 @@
         <maven.compiler.target>19</maven.compiler.target>
         <spring.cloud-version>2022.0.1</spring.cloud-version>
         <lombok.version>1.18.26</lombok.version>
-        <aws.sdk.version>2.20.12</aws.sdk.version>
+        <aws.sdk.version>2.20.14</aws.sdk.version>
         <asciidoctorj.version>2.5.7</asciidoctorj.version>
         <jruby.version>9.4.1.0</jruby.version>
         <bootstrap.version>5.2.3</bootstrap.version>
@@ -57,7 +57,7 @@
         <asciidoctor.maven.plugin.version>2.2.2</asciidoctor.maven.plugin.version>
         <spring.security.version>6.0.0</spring.security.version>
         <com.azure.spring.version>5.0.0</com.azure.spring.version>
-        <cyclonedx.core.version>7.3.1</cyclonedx.core.version>
+        <cyclonedx.core.version>7.3.2</cyclonedx.core.version>
         <KeePassJava2.version>2.1.4</KeePassJava2.version>
         <system-stubs-jupiter.version>2.0.2</system-stubs-jupiter.version>
         <dependency-check-maven.version>7.3.0</dependency-check-maven.version>
@@ -281,7 +281,7 @@
                         <dependency>
                             <groupId>com.puppycrawl.tools</groupId>
                             <artifactId>checkstyle</artifactId>
-                            <version>10.7.0</version>
+                            <version>10.8.0</version>
                         </dependency>
                     </dependencies>
                 </plugin>
