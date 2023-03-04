@@ -49,7 +49,7 @@ The bucket name should be in the output. Please use that to configure the Terraf
 6. Run `terraform plan`
 7. Run `terraform apply`. Note: the apply will take 10 to 20 minutes depending on the speed of the GCP backplane.
 8. Run `export USE_GKE_GCLOUD_AUTH_PLUGIN=True`
-9When creation is done, run `gcloud container clusters get-credentials wrongsecrets-exercise-cluster --region YOUR_REGION`. Note if it errors on a missing plugin to support `kubectl`, then run `gcloud components install gke-gcloud-auth-plugin` and `gcloud container clusters get-credentials wrongsecrets-exercise-cluster` .
+9. When creation is done, run `gcloud container clusters get-credentials wrongsecrets-exercise-cluster --region YOUR_REGION`. Note if it errors on a missing plugin to support `kubectl`, then run `gcloud components install gke-gcloud-auth-plugin` and `gcloud container clusters get-credentials wrongsecrets-exercise-cluster` .
 10. Run `./k8s-vault-gcp-start.sh`
 
 ### GKE ingres for shared deployment

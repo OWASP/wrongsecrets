@@ -4,9 +4,16 @@ if [ $? == 0 ]; then
 else
   helm repo add hashicorp https://helm.releases.hashicorp.com
   helm repo update hashicorp
+fi
+
+kubectl get ns | grep 'vault' $>/dev/null
+if [ $? == 0 ]; then
+  echo "Vault ns is already there"
+else
   kubectl create ns vault
   helm upgrade --install vault hashicorp/vault --version 0.23.0 --namespace vault --values ../k8s/helm-vault-values.yml
 fi
+
 
 isvaultrunning=$(kubectl get pods -n vault --field-selector=status.phase=Running)
 while [[ $isvaultrunning != *"vault-0"* ]]; do echo "waiting for Vault0" && sleep 2 && isvaultrunning=$(kubectl get pods -n vault --field-selector=status.phase=Running); done
@@ -25,7 +32,7 @@ echo "PLEASE COPY PASTE THE FOLLOWING VALUE: $VAULT_UNSEAL_KEY, you will be aske
 
 kubectl exec -it vault-0 -n vault  -- vault operator unseal $VAULT_UNSEAL_KEY
 kubectl exec -it vault-1 -n vault  -- vault operator unseal $VAULT_UNSEAL_KEY
-kubectl exec -it vault-2 -n vault -- vault operator unseal $VAULT_UNSEAL_KEY
+kubectl exec -it vault-2 -n vault  -- vault operator unseal $VAULT_UNSEAL_KEY
 
 echo "Obtaining root token"
 jq .root_token cluster-keys.json >commentedroottoken
@@ -70,3 +77,5 @@ kubectl exec vault-0 -n vault -- vault write auth/kubernetes/role/secret-challen
   ttl=24h &&
   vault kv put secret/secret-challenge vaultpassword.password="$(openssl rand -base64 16)" &&
   vault kv put secret/application vaultpassword.password="$(openssl rand -base64 16)"
+
+kubectl create serviceaccount vault
