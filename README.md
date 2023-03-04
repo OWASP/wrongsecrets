@@ -246,6 +246,7 @@ Top contributors:
 -   [Marcin Nowak @MarcinNowak-codes](https://github.com/MarcinNowak-codes)
 -   [Tibor Hercz @tiborhercz](https://github.com/tiborhercz)
 -   [Chris Elbring Jr. @neatzsche](https://github.com/neatzsche)
+-   [Puneeth Y](https://github.com/puneeth072003)
 -   [Filip Chyla @fchyla](https://github.com/fchyla)
 -   [Dmitry Litosh @Dlitosh](https://github.com/Dlitosh)
 -   [Josh Grossman @tghosth](https://github.com/tghosth)
