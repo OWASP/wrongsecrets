@@ -16,6 +16,40 @@ Can you solve all the 27 challenges?
 
 <a href="https://github.com/vshymanskyy/StandWithUkraine/blob/main/README.md"><img src="https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/banner2-no-action.svg" /></a>
 
+
+## Table of contents
+- [Support](#support)
+- [Basic docker exercises](#basic-docker-exercises)
+  - [Running these on Heroku](#running-these-on-heroku)
+  - [Deploying the app under your own heroku account](#deploying-the-app-under-your-own-heroku-account)
+  - [Running on Fly.io](#running-on-flyio)
+- [Basic K8s exercise](#basic-k8s-exercise)
+  - [Minikube based](#minikube-based)
+  - [k8s based](#k8s-based)
+  - [Okteto based](#okteto-based)
+  - [Vault exercises with minikube](#vault-exercises-with-minikube)
+- [Cloud Challenges](#cloud-challenges)
+  - [Running WrongSecrets in AWS](#running-wrongsecrets-in-aws)
+  - [Running WrongSecrets in GCP](#running-wrongsecrets-in-gcp)
+  - [Running WrongSecrets in Azure](#running-wrongsecrets-in-azure)
+  - [Running Challenge15 in your own cloud only](#running-challenge15-in-your-own-cloud-only)
+- [Do you want to play without guidance?](#do-you-want-to-play-without-guidance)
+- [Special thanks & Contributors](#special-thanks--contributors)
+- [Sponsorships](#sponsorships)
+- [Help Wanted](#help-wanted)
+- [Use OWASP WrongSecrets as a secret detection benchmark](#use-owasp-wrongsecrets-as-a-secret-detection-benchmark)
+- [CTF](#ctf)
+  - [CTFD Support](#ctfd-support)
+  - [FBCTF Support](#fbctf-support--experimental--)
+- [Notes on development](#notes-on-development)
+  - [Dependency management](#dependency-management)
+  - [Get the project started in IntelliJ IDEA](#get-the-project-started-in-intellij-idea)
+  - [Automatic reload during development](#automatic-reload-during-development)
+  - [How to add a Challenge](#how-to-add-a-challenge)
+  - [Local testing](#local-testing)
+- [Want to play, but are not allowed to install the tools?](#want-to-play-but-are-not-allowed-to-install-the-tools)
+- [Further reading on secrets management](#further-reading-on-secrets-management)
+
 ## Support
 
 Need support? Contact us
@@ -359,6 +393,8 @@ Requirements: make sure you have the following tools installed: [Docker](https:/
 7. Now go to the run configuration of the app and make sure you have the active profile `without-vault`. This is done by setting the VM options arguments to `-Dserver.port=8080 -Dspring.profiles.active=local,without-vault`. Set `K8S_ENV=docker` as environment argument.
 8. Repeat step 6: run the app again, you should have a properly running application which is visitable in your browser at http://localhost:8080.
 
+**Pictorial Guide** on how to get the project started in IntelliJ IDEA is available at [*Contributing.md*](https://github.com/OWASP/wrongsecrets/blob/master/CONTRIBUTING.md#how-to-get-started-with-the-project-in-intellij-idea).
+
 Feel free to edit and propose changes via pull requests. Be sure to follow our guidance in the [documentation](https://github.com/OWASP/wrongsecrets/blob/master/CONTRIBUTING.md) to get your work accepted.
 
 Please note that we officially only support Linux and MacOS for development. If you want to develop using a Windows machine, use WSL2 or a virtual machine running Linux. We did include Windows detection & a bunch of `exe` files for a first experiment, but are looking for active maintainers of them. Want to make sure it runs on Windows? Create PRs ;-).
@@ -384,6 +420,8 @@ Follow the steps below on adding a challenge:
 3. Add a unit and integration test to show that your challenge is working.
 4. Don't forget to add `@Order` annotation to your challenge ;-).
 5. Review the [CONTRIBUTING guide](CONTRIBUTING.md) for setting up your contributing environment and writing good commit messages.
+
+For more details please refer [*Contributing.md*](https://github.com/OWASP/wrongsecrets/blob/master/CONTRIBUTING.md#how-to-add-a-challenge).
 
 If you want to move existing cloud challenges to another cloud: extend Challenge classes in the `org.owasp.wrongsecrets.challenges.cloud` package and make sure you add the required Terraform in a folder with the separate cloud identified. Make sure that the environment is added to `org.owasp.wrongsecrets.RuntimeEnvironment`.
 Collaborate with the others at the project to get your container running so you can test at the cloud account.
