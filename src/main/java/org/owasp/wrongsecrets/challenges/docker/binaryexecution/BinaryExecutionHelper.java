@@ -1,11 +1,13 @@
-package org.owasp.wrongsecrets.challenges.docker;
+package org.owasp.wrongsecrets.challenges.docker.binaryexecution;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.springframework.util.ResourceUtils;
 
 import java.io.*;
+
 
 @Slf4j
 public class BinaryExecutionHelper {
@@ -14,8 +16,13 @@ public class BinaryExecutionHelper {
     public static final String ERROR_EXECUTION = "Error with executing";
     private final int challengeNumber;
 
-    public BinaryExecutionHelper(int challengeNumber) {
+    private Exception executionException;
+
+    private final MuslDetector muslDetector;
+
+    public BinaryExecutionHelper(int challengeNumber, MuslDetector muslDetector) {
         this.challengeNumber = challengeNumber;
+        this.muslDetector = muslDetector;
     }
 
     public String executeGoCommand(String guess) {
@@ -49,6 +56,7 @@ public class BinaryExecutionHelper {
             return result;
         } catch (IOException | NullPointerException | InterruptedException e) {
             log.warn("Error executing:", e);
+            executionException = e;
             return ERROR_EXECUTION;
         }
 
@@ -73,16 +81,27 @@ public class BinaryExecutionHelper {
         return executeCommand(execFile, argument, "");
     }
 
+    @VisibleForTesting
+    public Exception getExecutionException() {
+        return executionException;
+    }
+
     private boolean useX86() {
         String systemARch = System.getProperty("os.arch");
         log.info("System arch detected: {}", systemARch);
         return systemARch.contains("amd64") || systemARch.contains("x86");
     }
 
-    private boolean useLinux() {
+    private boolean useArm() {
         String systemARch = System.getProperty("os.arch");
         log.info("System arch detected: {}", systemARch);
-        return systemARch.contains("amd64");
+        return systemARch.contains("aarch64");
+    }
+
+    private boolean useLinux() {
+        String osName = System.getProperty("os.name").toLowerCase();
+        log.info("System arch detected: {}", osName);
+        return osName.contains("nix") || osName.contains("nux") || osName.contains("aix");
     }
 
     private boolean useWindows() {
@@ -104,13 +123,24 @@ public class BinaryExecutionHelper {
         }
     }
 
+    private boolean useMusl() {
+        return muslDetector.isMusl();
+    }
+
     private File createTempExecutable(String fileName) throws IOException {
         if (useWindows()) {
             fileName = fileName + "-windows.exe";
+            log.info("While we detected windows, please note that it is officially not supported.");
         } else if (useLinux()) {
             fileName = fileName + "-linux";
+            if (useMusl()) {
+                fileName = fileName + "-musl";
+            }
         }
         if (!useX86()) {
+            if (!useArm()) {
+                log.info("We found a different system architecture than x86-amd64 or aarch64. Will default to aarch64.");
+            }
             fileName = fileName + "-arm";
         }
         File challengeFile = retrieveFile(fileName);

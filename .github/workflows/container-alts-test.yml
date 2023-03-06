@@ -1,0 +1,34 @@
+name: Test container on podman and Colima
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test-podman:
+    name: Test with podman
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: run container
+        run: |
+          podman run -dt -p 8080:8080 docker.io/jeroenwillemsen/wrongsecrets:latest-no-vault && \
+          echo "wait 20 seconds for container to come up" && sleep 20 && \
+          curl localhost:8080
+  test-colima:
+    name: Test with Colima
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: douglascamata/setup-docker-macos-action@v1-alpha
+    - name: setup colima
+      run: |
+        echo "Colima version: ${{ steps.docker.outputs.colima-version }}"
+    - name: test if container comes up
+      run: |
+        docker run -d -p 8080:8080 jeroenwillemsen/wrongsecrets:latest-no-vault && \
+        echo "wait 40 seconds for container to come up" && sleep 40 && \
+        curl localhost:8080
