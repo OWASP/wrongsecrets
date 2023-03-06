@@ -43,7 +43,9 @@ resource "azurerm_kubernetes_cluster" "cluster" {
 
   kubernetes_version = var.cluster_version
 
-  api_server_authorized_ip_ranges = ["${data.http.ip.response_body}/32"]
+  api_server_access_profile {
+    authorized_ip_ranges = ["${data.http.ip.response_body}/32"]
+  }
 
   network_profile {
     network_plugin = "azure"

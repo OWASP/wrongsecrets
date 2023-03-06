@@ -25,7 +25,7 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
-.DS_STORE
+.DS_Store
 target
 
 .vscode
@@ -43,8 +43,7 @@ root_token
 # Terraform
 kubeconfig_wrongsecrets-exercise-cluster
 .terraform
-.terraform.lock.hcl
-.terraform*
+.terraform
 terraform.tfstate*
 aws/terraform.tfstate.*
 aws/terraform.tfstate.backup
@@ -65,6 +64,8 @@ azure/k8s/pod-id.yml
 
 # Challenge 17
 .github/scripts/thirdkey.txt
+
+yourkey.txt
 
 # Node JS
 js/node/

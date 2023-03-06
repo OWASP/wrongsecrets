@@ -99,16 +99,16 @@ The documentation below is auto-generated to give insight on what's created via 
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.1 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | ~> 3.45.0 |
-| <a name="requirement_http"></a> [http](#requirement\_http) | ~> 3.2.0 |
+| <a name="requirement_http"></a> [http](#requirement\_http) | ~> 3.2.1 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | ~> 3.4.3 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | ~> 3.45.0 |
-| <a name="provider_http"></a> [http](#provider\_http) | ~> 3.2.0 |
-| <a name="provider_random"></a> [random](#provider\_random) | ~> 3.4.3 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.45.0 |
+| <a name="provider_http"></a> [http](#provider\_http) | 3.2.1 |
+| <a name="provider_random"></a> [random](#provider\_random) | 3.4.3 |
 
 ## Modules
 
@@ -143,7 +143,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | The AKS cluster name | `string` | `"wrongsecrets-exercise-cluster"` | no |
-| <a name="input_cluster_version"></a> [cluster\_version](#input\_cluster\_version) | The AKS cluster version to use | `string` | `"1.23.12"` | no |
+| <a name="input_cluster_version"></a> [cluster\_version](#input\_cluster\_version) | The AKS cluster version to use | `string` | `"1.25"` | no |
 | <a name="input_region"></a> [region](#input\_region) | The Azure region to use | `string` | `"East US"` | no |
 
 ## Outputs
