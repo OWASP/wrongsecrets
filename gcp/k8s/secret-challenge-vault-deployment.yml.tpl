@@ -65,6 +65,11 @@ spec:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
             runAsNonRoot: true
+            capabilities:
+              drop:
+                - ALL
+            seccompProfile:
+              type: RuntimeDefault
           resources:
             requests:
               memory: '512Mi'
@@ -93,8 +98,8 @@ spec:
                 secretKeyRef:
                   name: funnystuff
                   key: funnier
-            - name: VAULT_ADDR
-              value: "http://vault:8200"
+            - name: SPRING_CLOUD_VAULT_URI
+              value: "http://vault.vault.svc.cluster.local:8200"
             - name: JWT_PATH
               value: "/var/run/secrets/kubernetes.io/serviceaccount/token"
           volumeMounts:
