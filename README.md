@@ -318,7 +318,7 @@ We have 3 ways of playing CTFs:
 Want to use CTFD to play a CTF based on the free Heroku wrongsecrets-ctf instance together with CTFD? You can!
 
 NOTE: CTFD support now works based on the [Juiceshop CTF CLI](https://github.com/juice-shop/juice-shop-ctf).
-NOTE-II: [https://wrongsecrets-ctf.herokuapp.com](https://wrongsecrets-ctf.herokuapp.com) is based on a free heroku instance, which takes time to warm up.
+NOTE-II: [https://wrongsecrets-ctf.herokuapp.com](https://wrongsecrets-ctf.herokuapp.com) (temporary down based on lack of oss credits) is based on a free heroku instance, which takes time to warm up.
 Initial creation of the zip file for CTFD requires you to visit [https://wrongsecrets-ctf.herokuapp.com/api/Challenges](https://wrongsecrets-ctf.herokuapp.com/api/Challenges) once before executing the steps below.
 
 Follow the following steps:
