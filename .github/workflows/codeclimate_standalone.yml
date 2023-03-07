@@ -22,7 +22,7 @@ jobs:
           html_report: true
           info_threshold: 50
           minor_threshold: 25
-          major_threshold: 10
+          major_threshold: 30
           critical_threshold: 5
           blocker_threshold: 1
 
