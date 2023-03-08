@@ -343,7 +343,7 @@ Then follow [https://github.com/facebookarchive/fbctf/wiki/Quick-Setup-Guide](ht
 
 ## Notes on development
 
-For development on local machine use the `local` profile `./mvnw spring-boot:run -Dspring-boot.run.profiles=local`
+For development on local machine use the `local` profile `./mvnw spring-boot:run -Dspring-boot.run.profiles=local,without-vault`
 
 If you want to test against vault without K8s: start vault locally with
 
