@@ -1,5 +1,6 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
+import autovalue.shaded.com.google.common.base.Strings;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,7 +25,7 @@ public class BinaryExectionHelperTest {
 
     @Test
     void executeOnWindows() {
-        if ("windows".equals(osName.toLowerCase())) {
+        if (!Strings.isNullOrEmpty(osName) && osName.toLowerCase().contains("windows")){
             return; // no need to test this here as you are running on windows ;-).
         }
         executionHelper("Windows", "amd64", "/test-windows.exe", new MuslDetectorImpl());
