@@ -9,7 +9,7 @@
             href="https://hub.docker.com/r/jeroenwillemsen/wrongsecrets">Docker</a>, Kubernetes, Vault, AWS or GCP.</p>
     <div class="row">
         <div class="offset-lg-1 col-lg-10 col-md-12">
-            <div th:replace="doc:__${challenge.explanation}__.adoc"></div>
+            <div th:replace="~{doc:__${challenge.explanation}__.adoc}"></div>
         </div>
 
 
@@ -50,19 +50,19 @@
             <div th:if="${hintsEnabled==true}" class="offset-lg-1 col-lg-10 col-md-12 collapse mt-2 mb-2"
                  id="collapseHint">
                 <div class="card card-body">
-                    <div th:replace="doc:__${challenge.hint}__.adoc"></div>
+                    <div th:replace="~{doc:__${challenge.hint}__.adoc}"></div>
                 </div>
             </div>
             <div th:if="${reasonEnabled==true}" class="offset-lg-1 col-lg-10 col-md-12 collapse mt-2 mb-2"
                  id="collapseExplain">
                 <div class="card card-body">
-                    <div th:replace="doc:__${challenge.reason}__.adoc"></div>
+                    <div th:replace="~{doc:__${challenge.reason}__.adoc}"></div>
                 </div>
             </div>
         </form>
     </div>
     <div class="row">
-        <div th:replace="fragments/navigation :: navigation"></div>
+        <div th:replace="~{fragments/navigation :: navigation}"></div>
 
         <div class="progress">
             <div class="progress-bar" role="progressbar" th:style="'width:'+${progress}+'%;'"
