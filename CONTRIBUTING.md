@@ -175,9 +175,9 @@ Please be sure to take a careful look at our [Code of Conduct](https://github.co
       ![](images/open-maven-5.1.png)
 
     - Press the ***Reload*** button as shown below and allow the project to Reload.
-    
+
         ![](images/reload-maven-5.2.png)
-    
+
     - Further use the ***OWASP WrongSecrets --> Lifecycle --> install*** step to load all the depedencies
 
 **NOTE:** Indians and other Asia-Pacific countries users may have to use **VPN** if you enounter this exception `org.owasp.dependencycheck.utils.DownloadFailedException: TLS Connection Reset`.
