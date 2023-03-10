@@ -1,0 +1,6 @@
+=== Secret In a closed github issue
+User reveals his `AWS Secret key` by mistake while describing conversation between him and his friend while discussing about his plans for upcoming days in a `GitHub issue` then realizes it and closes that issue.
+
+Can you spot the secret we are looking for in our GitHub?
+
+You can easily spot the secret just by looking for it in issues section of our https://github.com/OWASP/wrongsecrets/issues[GitHub].
