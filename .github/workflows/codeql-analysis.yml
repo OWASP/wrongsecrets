@@ -13,6 +13,8 @@ name: "CodeQL"
 
 on:
   workflow_dispatch:
+  pull_request:
+    branches: [ master ]
 permissions:
   contents: read
 jobs:
