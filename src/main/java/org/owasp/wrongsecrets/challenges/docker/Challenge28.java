@@ -1,6 +1,7 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
 
+import org.bouncycastle.util.encoders.Base64;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
