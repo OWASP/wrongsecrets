@@ -31,7 +31,7 @@ public class Challenge28 extends Challenge {
 
     @Override
     public Spoiler spoiler() {
-        return new Spoiler(SecretKey);
+        return new Spoiler(secretKey);
     }
 
     @Override
