@@ -14,7 +14,7 @@ class Challenge28Test {
 
     @Mock
     private ScoreCard scoreCard;
-    private String SecretKey="asdfdpuYUIadbaoasdpa07kj2003";
+    private String secretKey=new String(Hex.decode("61736466647075595549616462616f617364706130376b6a32303033"));
     @Test
     void spoilerShouldRevealAnswer() {
         var challenge = new Challenge28(scoreCard);
