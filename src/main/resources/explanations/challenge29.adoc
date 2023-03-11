@@ -1,0 +1,7 @@
+=== Secret in a screenshot of a Github issue
+
+A user unknowingly files an issue with a `screenshot` of an actual secret while reporting a bug then realizes it and closes that issue.
+
+Can you spot the secret we are looking for in our GitHub?
+
+You can easily spot the secret just by looking for it in issues section of our https://github.com/OWASP/wrongsecrets/issues[GitHub].
