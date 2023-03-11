@@ -36,7 +36,7 @@ public class Challenge28 extends Challenge {
 
     @Override
     public boolean answerCorrect(String answer) {
-        return SecretKey.equals(answer);
+        return secretKey.equals(answer);
     }
 
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
