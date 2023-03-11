@@ -19,7 +19,7 @@ class Challenge28Test {
     void spoilerShouldRevealAnswer() {
         var challenge = new Challenge28(scoreCard);
 
-        Assertions.assertThat(challenge.spoiler()).isEqualTo(new Spoiler(SecretKey));
+        Assertions.assertThat(challenge.spoiler()).isEqualTo(new Spoiler(secretKey));
     }
 
     @Test
