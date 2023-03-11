@@ -18,7 +18,7 @@ import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 @Order(28)
 public class Challenge28 extends Challenge {
 
-    private String secretKey = new String(Base64.decode(new String(Base64.decode("WVhOa1ptUndkVmxWU1dGa1ltRnZZWE5rY0dFd04ydHFNakF3TXc9PQ=="))));;
+    private String secretKey = new String(Base64.decode(new String(Base64.decode("WVhOa1ptUndkVmxWU1dGa1ltRnZZWE5rY0dFd04ydHFNakF3TXc9PQ=="))));
 
     public Challenge28(ScoreCard scoreCard) {
         super(scoreCard);
