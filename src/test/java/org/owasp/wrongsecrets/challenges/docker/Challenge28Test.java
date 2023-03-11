@@ -26,7 +26,7 @@ class Challenge28Test {
     void rightAnswerShouldSolveChallenge() {
         var challenge = new Challenge28(scoreCard);
 
-        Assertions.assertThat(challenge.solved(SecretKey)).isTrue();
+        Assertions.assertThat(challenge.solved(secretKey)).isTrue();
         Mockito.verify(scoreCard).completeChallenge(challenge);
     }
 
