@@ -21,7 +21,6 @@ public class Challenge28 extends Challenge {
 
     public Challenge28(ScoreCard scoreCard) {
         super(scoreCard);
-        this.SecretKey = SecretKey;
     }
 
     @Override
