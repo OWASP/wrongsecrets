@@ -13,6 +13,7 @@ name: "CodeQL"
 
 on:
   workflow_dispatch:
+  push:
   pull_request:
     branches: [ master ]
 permissions:
@@ -67,7 +68,7 @@ jobs:
       with:
         java-version: 19
         maven-version: 3.8.5
-    - name: run mvn clean install
+    - name: run mvn clean package
       run: mvn clean install
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
