@@ -49,10 +49,10 @@
                             <td class="d-none d-sm-table-cell" >Docker</td>
                         </th:block>
                         <th:block th:if="${challenge.requiredEnv} == 'K8S'">
-                            <td class="d-none d-sm-table-cell" >K8s or Minikube</td>
+                            <td class="d-none d-sm-table-cell" >K8S</td>
                         </th:block>
                         <th:block th:if="${challenge.requiredEnv} == 'VAULT'">
-                            <td class="d-none d-sm-table-cell" >K8s or Minikube with Vault</td>
+                            <td class="d-none d-sm-table-cell" >K8S with Vault</td>
                         </th:block>
                         <th:block
                             th:if="${challenge.requiredEnv} == 'AWS' or ${challenge.requiredEnv} == 'GCP' or ${challenge.requiredEnv} == 'AZURE'">
@@ -118,6 +118,10 @@
                         <li><a href="https://github.com/saragluna">Xiaolu Dai @saragluna</a></li>
                         <li><a href="https://github.com/JonathanGiles">Jonathan Giles @jonathanGiles</a></li>
                     </ul>
+                </div>
+                <div class="border border-dark thank-you text-center">
+                    Developing our solution in 3 clouds cost money. Want to help us to cover our cloud bills?
+                    <a href="https://owasp.org/donate/?reponame=www-project-wrongsecrets&title=OWASP+wrongsecrets" target="_blank">Donate</a>.
                 </div>
             </div>
             <div class="col-12 col-lg-7">
