@@ -32,3 +32,9 @@ repos:
     hooks:
       - id: commitlint
         stages: [commit-msg]
+  - repo: https://github.com/eslint/eslint
+    rev: v8.35.0
+    hooks:
+      - id: eslint
+        args:
+          - "--fix"
