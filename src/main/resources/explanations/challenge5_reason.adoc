@@ -15,3 +15,52 @@ Last but not least: we could easily exec into the container, to grep the ENV var
 - we are allowed to do so by means of RBAC, which should not be your normal case in PRD: otherwise everybody of your organization can poke around in the container.
 - we have executables within the container (sh/openssl/etc) which we can execute to setup a shell. Stripping your container from any non-necessary binary can help to reduce attack-surface and make it harder for any attacker that did an RCE at your container to jump to other places within the container to further gain execution.
 - we have exposed the configmap as an ENV. This means that anybody who got to the container runtime within the pod can now dump the secret. We brought the secret close to the consumer, but maybe not close enough yet (e.g. the app only).
+
+
+*Detailed explanation of why RBAC is important and example*
+
+- Let's assume we have a `secure-middleware` namespace and we have two deployments running inside `redis` and `ngrok`
+- Let's assume we have 4 secrets in the `secure-middleware` namespace, and 1 of them is `redis-master-secret` which only should be accessed by `redis` deployment, and 2 others (`defualt`, `xyz`). Then we have the `ngrok-api-key` secret which only should be accessed by the `ngrok` service.
+- But due to poorly granular access the user was given following RBAC role for `ServiceAccount`
+
+```yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: secure-middleware
+  name: ngrok-api-key
+rules:
+- apiGroups: [""]
+  resources: ["secrets"]
+  verbs: ["get", "watch", "list"]
+```
+
+- So if the attacker compromised `ngrok` service or someone who doesn’t have redis access within that team can still steal other stuff.
+
+- As the resources: `["secrets"]` gives access to all the namespace level secrets which means they can read 4 secrets from this pod ServiceAccount.
+
+```bash
+export APISERVER=https://${KUBERNETES_SERVICE_HOST}
+export SERVICEACCOUNT=/var/run/secrets/kubernetes.io/serviceaccount
+export NAMESPACE=$(cat ${SERVICEACCOUNT}/namespace)
+export TOKEN=$(cat ${SERVICEACCOUNT}/token)
+export CACERT=${SERVICEACCOUNT}/ca.crt
+curl --cacert ${CACERT} --header "Authorization: Bearer ${TOKEN}" -X GET ${APISERVER}/api/v1/namespaces/${NAMESPACE}/secrets/redis-master-secret
+```
+
+- So the RBAC policy ideally should as be below
+
+```yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: secure-middleware
+  name: ngrok-api-key
+rules:
+- apiGroups: [""]
+  resourceNames: ["ngrok-api-key"]
+  verbs: ["get", "watch", "list"]
+```
+
+- Refer to [RBAC least privileges misconfiguration](https://madhuakula.com/kubernetes-goat/docs/scenarios/scenario-16) for more details
+- The official Kubernetes docs reference about RBAC [https://kubernetes.io/docs/reference/access-authn-authz/rbac/](https://kubernetes.io/docs/reference/access-authn-authz/rbac/)
