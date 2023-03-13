@@ -38,6 +38,6 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           docker_name: "owasp/zap2docker-stable"
-          target: "https://localhost:8080"
+          target: "http://localhost:8080"
       - name: Teardown
         run: minikube delete
