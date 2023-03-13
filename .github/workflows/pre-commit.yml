@@ -53,5 +53,6 @@ jobs:
           curl --output tfsec https://github.com/aquasecurity/tfsec/releases/download/${{env.TFSEC_VERSION}}/tfsec-linux-amd64
           chmod +x tfsec
           mv tfsec /usr/local/bin/
-      - name: Pre-commit checks
-        uses: pre-commit/action@v3.0.0
+      - name: pre-commit-ci-lite
+        uses: pre-commit-ci/lite-action@v1.0.1
+        if: always()
