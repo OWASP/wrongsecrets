@@ -53,4 +53,4 @@ jobs:
           java-version: '19'
           distribution: 'temurin'
       - name: spotbugs with Maven
-        run: mvn --no-transfer-progress spotbugs:check
+        run: mvn --no-transfer-progress package spotbugs:check -DskipTests

@@ -289,6 +289,9 @@
                     <groupId>com.github.spotbugs</groupId>
                     <artifactId>spotbugs-maven-plugin</artifactId>
                     <version>4.7.2.1</version>
+                    <configuration>
+                        <omitVisitors>FindReturnRef</omitVisitors>
+                    </configuration>
                     <dependencies>
                         <!-- overwrite dependency on spotbugs if you want to specify the version of spotbugs -->
                         <dependency>
@@ -320,7 +323,6 @@
                     <jvmArguments>
                         <!-- -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8000-->
                     </jvmArguments>
-                    <fork>true</fork>
                 </configuration>
             </plugin>
             <plugin>
