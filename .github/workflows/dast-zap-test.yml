@@ -9,8 +9,8 @@ permissions:
   contents: read
 
 jobs:
-  test-minikube:
-    name: DAST test with minikube and ZAP
+  test-dast:
+    name: DAST test with ZAP
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
