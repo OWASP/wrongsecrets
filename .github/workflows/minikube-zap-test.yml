@@ -37,6 +37,7 @@ jobs:
         uses: zaproxy/action-baseline@v0.7.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          issue_title: ZAP DAST scan findings
           docker_name: "owasp/zap2docker-stable"
           target: "http://localhost:8080"
       - name: Teardown
