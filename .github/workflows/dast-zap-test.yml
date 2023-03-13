@@ -29,3 +29,5 @@ jobs:
           allow_issue_writing: false
           docker_name: "owasp/zap2docker-stable"
           target: "http://localhost:8080"
+          rules_file_name: .zap/rule-config.tsv
+          fail_action: true
