@@ -291,6 +291,13 @@
                     <version>4.7.2.1</version>
                     <configuration>
                         <omitVisitors>FindReturnRef</omitVisitors>
+                        <plugins>
+                            <plugin>
+                                <groupId>com.h3xstream.findsecbugs</groupId>
+                                <artifactId>findsecbugs-plugin</artifactId>
+                                <version>1.12.0</version>
+                            </plugin>
+                        </plugins>
                     </configuration>
                     <dependencies>
                         <!-- overwrite dependency on spotbugs if you want to specify the version of spotbugs -->
