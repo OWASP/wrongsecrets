@@ -6,6 +6,7 @@ import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.docker.Challenge0;
 import org.owasp.wrongsecrets.challenges.docker.Challenge8;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.codec.Hex;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
@@ -53,6 +55,14 @@ public class ChallengesController {
         this.runtimeEnvironment = runtimeEnvironment;
     }
 
+    private boolean checkId(int id) {
+        // If the id is either negative or larger than the amount of challenges, return false.
+        if (id < 0 || id >= challenges.size()) {
+            return false;
+        }
+        return true;
+    }
+
     @GetMapping
     public String explanation(@PathVariable Integer id) {
         return challenges.get(id).getExplanation();
@@ -71,6 +81,11 @@ public class ChallengesController {
 
     @GetMapping("/challenge/{id}")
     public String challenge(Model model, @PathVariable Integer id) {
+        if (!checkId(id)) {
+            throw new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "challenge not found"
+            );
+        }
         var challenge = challenges.get(id);
 
         model.addAttribute("challengeForm", new ChallengeForm(""));
@@ -98,6 +113,11 @@ public class ChallengesController {
 
     @PostMapping(value = "/challenge/{id}", params = "action=reset")
     public String reset(@ModelAttribute ChallengeForm challengeForm, @PathVariable Integer id, Model model) {
+        if (!checkId(id)) {
+            throw new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "challenge not found"
+            );
+        }
         var challenge = challenges.get(id);
         scoreCard.reset(challenge.getChallenge());
 
@@ -110,6 +130,11 @@ public class ChallengesController {
 
     @PostMapping(value = "/challenge/{id}", params = "action=submit")
     public String postController(@ModelAttribute ChallengeForm challengeForm, Model model, @PathVariable Integer id) {
+        if (!checkId(id)) {
+            throw new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "challenge not found"
+            );
+        }
         var challenge = challenges.get(id);
 
         if (!challenge.isChallengeEnabled()) {
