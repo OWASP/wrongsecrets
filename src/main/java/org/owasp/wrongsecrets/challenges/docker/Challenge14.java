@@ -18,6 +18,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
@@ -80,7 +81,7 @@ public class Challenge14 extends Challenge {
             //log.debug("Checking secret with values {}", keepassxPassword);
             return defaultKeepassValue;
         }
-        KdbxCreds creds = new KdbxCreds(keepassxPassword.getBytes());
+        KdbxCreds creds = new KdbxCreds(keepassxPassword.getBytes(StandardCharsets.UTF_8));
         Database<SimpleDatabase, SimpleGroup, SimpleEntry, SimpleIcon> database;
 
 

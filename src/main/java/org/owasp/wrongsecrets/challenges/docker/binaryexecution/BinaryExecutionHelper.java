@@ -7,6 +7,7 @@ import org.apache.commons.io.FileUtils;
 import org.springframework.util.ResourceUtils;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 
 @Slf4j
@@ -71,10 +72,11 @@ public class BinaryExecutionHelper {
         }
         ps.redirectErrorStream(true);
         Process pr = ps.start();
-        BufferedReader in = new BufferedReader(new InputStreamReader(pr.getInputStream()));
-        String result = in.readLine();
-        pr.waitFor();
-        return result;
+        try (BufferedReader in = new BufferedReader(new InputStreamReader(pr.getInputStream(), StandardCharsets.UTF_8))) {
+            String result = in.readLine();
+            pr.waitFor();
+            return result;
+        }
     }
 
     private String executeCommand(File execFile, String argument) throws IOException, InterruptedException {

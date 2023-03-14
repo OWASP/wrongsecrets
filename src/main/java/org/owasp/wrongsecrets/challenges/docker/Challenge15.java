@@ -85,7 +85,7 @@ public class Challenge15 extends Challenge {
             GCMParameterSpec gcmParameterSpec = new GCMParameterSpec(gcmTagLengthInBytes * 8, initializationVector);
             cipher.init(Cipher.DECRYPT_MODE, keySpec, gcmParameterSpec);
             byte[] plainTextBytes = cipher.doFinal(Base64.getDecoder().decode(cipherText.getBytes(StandardCharsets.UTF_8)));
-            return new String(plainTextBytes);
+            return new String(plainTextBytes, StandardCharsets.UTF_8);
         } catch (Exception e) {
             log.warn("Exception with Challenge 15", e);
             return "";
