@@ -1,0 +1,7 @@
+We are looking for the secret in a `closed GitHub issue` in our GitHub repository. But how do we find it?
+
+You can solve this challenge by the following steps:
+
+1. When you land on the issues tab of our https://github.com/OWASP/wrongsecrets/issues[GitHub], click on the `Closed` option to get all the closed issues up to this day
+
+2. Go through all the issues that seem fishy for you and you can spot the Secret.

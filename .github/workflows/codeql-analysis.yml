@@ -13,6 +13,9 @@ name: "CodeQL"
 
 on:
   workflow_dispatch:
+  push:
+  pull_request:
+    branches: [ master ]
 permissions:
   contents: read
 jobs:
@@ -47,8 +50,8 @@ jobs:
 
     # Autobuild attempts to build any compiled languages  (C/C++, C#, or Java).
     # If this step fails, then you should remove it and run the build manually (see below)
-    - name: Autobuild
-      uses: github/codeql-action/autobuild@v2
+    #- name: Autobuild
+    #  uses: github/codeql-action/autobuild@v2
 
     # ℹ️ Command-line programs to run using the OS shell.
     # 📚 https://git.io/JvXDl
@@ -60,6 +63,12 @@ jobs:
     #- run: |
     #   make bootstrap
     #   make release
-
+    - name: Setup Maven Action
+      uses: "s4u/setup-maven-action@v1.7.0"
+      with:
+        java-version: 19
+        maven-version: 3.8.5
+    - name: run mvn clean package
+      run: mvn clean package -Ddependency-check.skip=true -Dmaven.test.skip=true
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
