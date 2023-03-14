@@ -1,4 +1,5 @@
 10027	IGNORE	(Information Disclosure - Suspicious Comments)
+10031	IGNORE	(Informational User Controllable HTML Element Attribute (Potential XSS))
 10049	IGNORE	(Non-Storable Content)
 10054	IGNORE	(Cookie without SameSite Attribute)
 10055	IGNORE	(CSP: Wildcard Directive)
