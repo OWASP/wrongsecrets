@@ -2,6 +2,7 @@ package org.owasp.wrongsecrets.challenges.docker;
 
 
 import java.nio.charset.StandardCharsets;
+
 import org.bouncycastle.util.encoders.Base64;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
@@ -20,7 +21,7 @@ import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 @Order(28)
 public class Challenge28 extends Challenge {
 
-    private String secretKey = new String(Base64.decode(new String(Base64.decode("WVhOa1ptUndkVmxWU1dGa1ltRnZZWE5rY0dFd04ydHFNakF3TXc9PQ=="), UTF_8)), UTF_8        );
+    private String secretKey = new String(Base64.decode(new String(Base64.decode("WVhOa1ptUndkVmxWU1dGa1ltRnZZWE5rY0dFd04ydHFNakF3TXc9PQ=="), UTF_8)), UTF_8);
 
     public Challenge28(ScoreCard scoreCard) {
         super(scoreCard);
