@@ -2,6 +2,13 @@ package org.owasp.wrongsecrets.challenges;
 
 import com.nimbusds.jose.shaded.json.JSONArray;
 import com.nimbusds.jose.shaded.json.JSONObject;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.asciidoctor.Asciidoctor;
 import org.asciidoctor.Options;
@@ -12,13 +19,6 @@ import org.springframework.http.MediaType;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
 
 @Slf4j
 @RestController
@@ -102,6 +102,8 @@ public class ChallengesAPIController {
         });
     }
 
+    @SuppressFBWarnings(value = "URLCONNECTION_SSRF_FD",
+        justification = "Read from specific classpath")
     private String extractResource(String resourceName) {
         try {
             var resource = ResourceUtils.getURL(resourceName);

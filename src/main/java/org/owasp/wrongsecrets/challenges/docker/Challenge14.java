@@ -1,5 +1,6 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
 import org.linguafranca.pwdb.Database;
@@ -76,6 +77,7 @@ public class Challenge14 extends Challenge {
         return false;
     }
 
+    @SuppressFBWarnings("PATH_TRAVERSAL_IN")
     private String findAnswer() {
         if (Strings.isEmpty(keepassxPassword)) {
             //log.debug("Checking secret with values {}", keepassxPassword);

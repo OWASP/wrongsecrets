@@ -2,12 +2,18 @@ package org.owasp.wrongsecrets.challenges.docker.binaryexecution;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Strings;
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.springframework.util.ResourceUtils;
-
-import java.io.*;
-import java.nio.charset.StandardCharsets;
 
 
 @Slf4j
@@ -39,7 +45,7 @@ public class BinaryExecutionHelper {
 
             deleteFile(execFile);
             return result;
-        } catch (IOException | NullPointerException | InterruptedException e) {
+        } catch (Exception e) {
             log.warn("Error executing:", e);
             return ERROR_EXECUTION;
         }
@@ -55,7 +61,7 @@ public class BinaryExecutionHelper {
             deleteFile(execFile);
             log.info("stdout challenge {}: {}", challengeNumber, result);
             return result;
-        } catch (IOException | NullPointerException | InterruptedException e) {
+        } catch (Exception e) {
             log.warn("Error executing:", e);
             executionException = e;
             return ERROR_EXECUTION;
@@ -151,16 +157,7 @@ public class BinaryExecutionHelper {
         if (!execFile.setExecutable(true)) {
             log.info("setting the file {} executable failed... rest can be ignored", execFile.getPath());
         }
-        OutputStream os = new FileOutputStream(execFile.getPath());
-        ByteArrayInputStream is = new ByteArrayInputStream(FileUtils.readFileToByteArray(challengeFile));
-        byte[] b = new byte[2048];
-        int length;
-        while ((length = is.read(b)) != -1) {
-            os.write(b, 0, length);
-        }
-        is.close();
-        os.close();
-
+        FileUtils.copyFile(challengeFile, execFile);
         return execFile;
     }
 
