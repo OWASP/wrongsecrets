@@ -286,7 +286,7 @@ generate_test_data() {
 
 build_update_pom() {
     echo "Building new license overview"
-    cd ../.. && mvn license:add-third-party
+    cd ../.. && mvn license:add-third-party -Dlicense.excludedScopes=test
     cd .github/scripts
     echo "preprocessing third party file"
     sed '/^$/d' ../../target/generated-sources/license/THIRD-PARTY.txt  > temp1a.txt
