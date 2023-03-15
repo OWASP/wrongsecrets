@@ -113,12 +113,12 @@ public class Challenge11 extends CloudChallenge {
                     default -> "please_use_supported_cloud_env";
                 };
             }
-        } else {
-            if (!Strings.isNullOrEmpty(ctfValue) && !Strings.isNullOrEmpty(awsDefaultValue) && !ctfValue.equals(awsDefaultValue)) {
-                return ctfValue;
-            }
-            log.info("CTF enabled, skipping challenge11");
+        } else if (!Strings.isNullOrEmpty(ctfValue) && !Strings.isNullOrEmpty(awsDefaultValue)
+            && !ctfValue.equals(awsDefaultValue)) {
+            return ctfValue;
         }
+
+        log.info("CTF enabled, skipping challenge11");
         return "please_use_supported_cloud_env";
     }
 

@@ -51,7 +51,7 @@ public class Challenge28 extends Challenge {
 
     @Override
     public String getTech() {
-        return ChallengeTechnology.Tech.GIT.id;
+        return ChallengeTechnology.Tech.DOCUMENTATION.id;
     }
 
     @Override
