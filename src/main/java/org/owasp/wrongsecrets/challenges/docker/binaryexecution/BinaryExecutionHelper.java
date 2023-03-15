@@ -71,18 +71,6 @@ public class BinaryExecutionHelper {
 
     }
 
-    private boolean stringContainsCommandChainToken(String testString) {
-        String[] tokens = {"!", "&", "|", "<", ">", ";"};
-        boolean found = false;
-        for (String item : tokens) {
-            if (testString.contains(item)) {
-                found = true;
-                break;
-            }
-        }
-        return found;
-    }
-
     @SuppressFBWarnings(value = "COMMAND_INJECTION", justification = "We check for various injection methods and counter those")
     private String executeCommand(File execFile, Operation operation, String guess) throws IOException, InterruptedException {
         ProcessBuilder ps;
@@ -108,6 +96,18 @@ public class BinaryExecutionHelper {
             pr.waitFor();
             return result;
         }
+    }
+
+    private boolean stringContainsCommandChainToken(String testString) {
+        String[] tokens = {"!", "&", "|", "<", ">", ";"};
+        boolean found = false;
+        for (String item : tokens) {
+            if (testString.contains(item)) {
+                found = true;
+                break;
+            }
+        }
+        return found;
     }
 
     @VisibleForTesting
