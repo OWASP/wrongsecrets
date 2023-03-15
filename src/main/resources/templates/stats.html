@@ -8,31 +8,31 @@
     <br/><br/>
 
     <div class="row">
-        <div class="col-12 col-lg-7">
+        <div class="col-12 col-lg-6">
             <div class="border border-dark thank-you">
-                <p class="h2 mt-2">Stats</p>
+                <p class="h2 mt-2 text-center">Stats</p>
                 <p>
                     Number of active sessions: <span th:text="${sessioncounter}"></span><br/>
                     Number of canary callbacks since boot: <span th:text="${canaryCounter}"></span><br/>
-                    Please note that sessions only include currently active visitors to challenges.
+                    Active sessions are currently active visitors to challenges.
                 </p>
 
             </div>
         </div>
-        <div class="col-12 col-lg-4 offset-lg-1">
+        <div class="col-12 col-lg-6">
             <div class="border border-dark thank-you">
-                <p class="h2 mt-2">Config</p>
+                <p class="h2 mt-2 text-center">Config</p>
                 <p>
-                    Hints enabled:<span th:text="${hintsEnabled}"></span> <br/>
-                    Reason enabled:<span th:text="${reasonEnabled}"></span><br/>
-                    CTF-mode enabled:<span th:text="${ctfModeEnabled}"></span>
+                    Hints enabled: <span th:text="${hintsEnabled}"></span> <br/>
+                    Reason enabled: <span th:text="${reasonEnabled}"></span><br/>
+                    CTF-mode enabled: <span th:text="${ctfModeEnabled}"></span>
                 </p>
             </div>
         </div>
         <div class="col-12">
             <br/>
             <div class="border border-dark thank-you">
-                <p class="h2 mt-2">Canary callbacks</p>
+                <p class="h2 mt-2 text-center">Canary callbacks</p>
                 <p>Number of canary callbacks since boot: <span th:text="${canaryCounter}"></span></p>
                 <p>Last canary token received:</p>
                 <p th:text="${lastCanaryToken}"></p>

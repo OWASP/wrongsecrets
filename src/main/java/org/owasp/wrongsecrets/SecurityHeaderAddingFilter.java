@@ -15,7 +15,7 @@ public class SecurityHeaderAddingFilter implements Filter {
         res.addHeader("Server", "WrongSecrets - Star us!");
         res.addHeader("X-Frame-Options", "SAMEORIGIN");
         res.addHeader("X-Content-Type-Options", "nosniff");
-        res.addHeader("Content-Security-Policy", "default-src * 'self'; script-src  * 'self' 'unsafe-inline'; style-src * 'self' 'unsafe-inline'; img-src data 'self':");
+        res.addHeader("Content-Security-Policy", "default-src * 'self'; script-src  * 'self' 'unsafe-inline'; style-src * 'self' 'unsafe-inline'; img-src data:");
         chain.doFilter(request, res);
     }
 }
