@@ -22,7 +22,7 @@ class CanaryCallbackTest {
     @Test
     void shouldAcceptPostOfMessage() {
         var restTemplate = builder.build();
-        var additonalCanaryData = new AdditionalCanaryData("soruce", "agent", "referer", "locatoin");
+        var additonalCanaryData = new AdditionalCanaryData("source", "agent", "referer", "location");
         CanaryToken token = new CanaryToken("url", "memo", "channel", "time", additonalCanaryData);
 
         var callbackAdress = "http://localhost:" + port + "/canaries/tokencallback";
@@ -37,5 +37,5 @@ class CanaryCallbackTest {
 }
 
 /*
-"manageUrl" : "url", "memo" : "memo", "channel" : "channel", "time" : "time", "additionalData" : { "srcIp" : "soruce", "useragent" : "agent", "referer" : "referer", "location" : "locatoin"}}
+"manageUrl" : "url", "memo" : "memo", "channel" : "channel", "time" : "time", "additionalData" : { "srcIp" : "source", "useragent" : "agent", "referer" : "referer", "location" : "location"}}
  */
