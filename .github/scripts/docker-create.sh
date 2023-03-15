@@ -285,6 +285,14 @@ generate_test_data() {
 }
 
 build_update_pom() {
+    echo "Building new license overview"
+    mvn license:add-third-party
+    echo "preprocessing third party file"
+    sed 's/^     /<li>/' ../../target/generated-sources/license/THIRD-PARTY.txt > temp.txt
+    sed 's/$/<\/li>/' temp.txt > temp2.txt
+    echo "refreshing licenses into the file"
+    sed -n '1,/MARKER-start/p;/MARKER-end/,$p' ../../src/main/resources/templates/about.html | gsed '/MARKER-end-->/e cat temp2.txt ' > ../../src/main/resources/templates/about.html
+    rm tem*.txt
     echo "Building and updating pom.xml file so we can use it in our docker"
     cd ../.. && mvn clean && mvn --batch-mode release:update-versions -DdevelopmentVersion=${tag}-SNAPSHOT && mvn install -DskipTests
     cd .github/scripts
