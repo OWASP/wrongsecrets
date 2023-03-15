@@ -63,6 +63,16 @@ class ChallengesControllerTest {
     }
 
     @Test
+    void shouldReturnNotFound() throws Exception {
+        // when(challenge.solved(anyString())).thenReturn(false);
+        // when(challenge.supportedRuntimeEnvironments()).thenReturn(List.of(Environment.DOCKER));
+        this.mvc.perform(get("/challenge/-1"))
+            .andExpect(status().isNotFound());
+        this.mvc.perform(get("/challenge/99999999"))
+            .andExpect(status().isNotFound());
+    }
+
+    @Test
     void shouldReturnIncorrectAnswerMessageWhenChallengeIsNotSolved() throws Exception {
         when(challenge.solved(anyString())).thenReturn(false);
         when(challenge.supportedRuntimeEnvironments()).thenReturn(List.of(Environment.DOCKER));
