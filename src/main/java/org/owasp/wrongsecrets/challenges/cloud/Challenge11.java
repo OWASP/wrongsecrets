@@ -6,6 +6,7 @@ import com.google.cloud.secretmanager.v1.AccessSecretVersionResponse;
 import com.google.cloud.secretmanager.v1.SecretManagerServiceClient;
 import com.google.cloud.secretmanager.v1.SecretVersionName;
 import com.google.common.base.Strings;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.extern.slf4j.Slf4j;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
@@ -122,11 +123,13 @@ public class Challenge11 extends CloudChallenge {
         return "please_use_supported_cloud_env";
     }
 
+    @SuppressFBWarnings(value = "PATH_TRAVERSAL_IN", justification = "The location of the tokenFileLocation is based on an Env Var")
     private String getAWSChallenge11Value() {
         log.info("pre-checking AWS data");
         if (!"if_you_see_this_please_use_AWS_Setup".equals(awsRoleArn)) {
             log.info("Getting credentials from AWS");
             try { //based on https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javav2/example_code/sts/src/main/java/com/example/sts
+
                 String webIDentityToken = Files.readString(Paths.get(tokenFileLocation));
                 StsClient stsClient = StsClient.builder()
                     .region(Region.of(awsRegion))
