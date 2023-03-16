@@ -1,6 +1,7 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.extern.slf4j.Slf4j;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
@@ -63,6 +64,7 @@ public class Challenge12 extends Challenge {
         return false;
     }
 
+    @SuppressFBWarnings(value = "PATH_TRAVERSAL_IN", justification = "The location of the dockerMountPath is based on an Env Var")
     private String getActualData() {
         try {
             return Files.readString(Paths.get(dockerMountPath, "yourkey.txt"));

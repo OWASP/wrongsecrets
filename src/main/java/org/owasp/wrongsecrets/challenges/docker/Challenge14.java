@@ -1,5 +1,6 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
 import org.linguafranca.pwdb.Database;
@@ -18,6 +19,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
@@ -75,12 +77,13 @@ public class Challenge14 extends Challenge {
         return false;
     }
 
+    @SuppressFBWarnings("PATH_TRAVERSAL_IN")
     private String findAnswer() {
         if (Strings.isEmpty(keepassxPassword)) {
             //log.debug("Checking secret with values {}", keepassxPassword);
             return defaultKeepassValue;
         }
-        KdbxCreds creds = new KdbxCreds(keepassxPassword.getBytes());
+        KdbxCreds creds = new KdbxCreds(keepassxPassword.getBytes(StandardCharsets.UTF_8));
         Database<SimpleDatabase, SimpleGroup, SimpleEntry, SimpleIcon> database;
 
 
