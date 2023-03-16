@@ -41,7 +41,7 @@ public class Challenge18 extends Challenge {
 
     private String base64Decode(String base64) {
         byte[] decodedBytes = Base64.getDecoder().decode(base64);
-        return new String(decodedBytes);
+        return new String(decodedBytes, StandardCharsets.UTF_8);
     }
 
 
