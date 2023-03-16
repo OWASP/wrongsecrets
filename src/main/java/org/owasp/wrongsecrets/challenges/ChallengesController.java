@@ -1,6 +1,7 @@
 package org.owasp.wrongsecrets.challenges;
 
 import com.google.common.base.Strings;
+import io.swagger.v3.oas.annotations.Hidden;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.docker.Challenge0;
@@ -69,6 +70,7 @@ public class ChallengesController {
     }
 
     @GetMapping("/spoil-{id}")
+    @Hidden
     public String spoiler(Model model, @PathVariable Integer id) {
         if (!ctfModeEnabled) {
             var challenge = challenges.get(id).getChallenge();
