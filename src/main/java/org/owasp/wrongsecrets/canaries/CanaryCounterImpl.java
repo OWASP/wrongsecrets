@@ -10,7 +10,7 @@ public class CanaryCounterImpl implements CanaryCounter {
 
     private static final AtomicInteger numberofCanaryCalls = new AtomicInteger(0);
 
-    private static String lastToken;
+    private String lastToken;
 
 
     @Override
