@@ -23,11 +23,9 @@
                         <th scope="col" class="d-none d-xl-table-cell">#</th>
                         <th scope="col">&nbsp;Challenge&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                         <th scope="col">Focus&nbsp;&nbsp;&nbsp;</th>
-                        <th scope="col" class="d-sm-none"
-                            th:text="'Runs on environment (current: '+${#strings.replace(environment,'_',' _')}+')'"></th>
                         <th scope="col" class="d-none d-md-table-cell">Difficulty&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                        <th scope="col" class="d-none d-sm-table-cell"
-                            th:text="'Runs on environment (current: '+${environment}+')'"></th>
+                        <th scope="col"
+                            th:text="'Runs on environment (current: '+${#strings.replace(environment,'_',' _')}+')'"></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -38,7 +36,6 @@
                             th:text="${challenge.name}"
                             th:remove="tag"></span></a></td>
                         <td th:text="${challenge.tech}"></td>
-                            <td td:if="${{challenge.requiredEnv == 'USEDFORDEDUPLICATIONDONOTREMOVE'}}" class="d-sm-none"></td>
                         <td class="d-none d-md-table-cell">
                             <th:span th:each="i: ${#numbers.sequence(1, challenge.difficulty)}"><span>★ </span></th:span>
                             <th:span th:if="${challenge.difficulty<5}"
@@ -46,19 +43,18 @@
                             </th:span>
                         </td>
                         <th:block th:if="${challenge.requiredEnv} == 'DOCKER'">
-                            <td class="d-none d-sm-table-cell" >Docker</td>
+                            <td class="" >Docker</td>
                         </th:block>
                         <th:block th:if="${challenge.requiredEnv} == 'K8S'">
-                            <td class="d-none d-sm-table-cell" >K8s or Minikube</td>
+                            <td class="" >K8S</td>
                         </th:block>
                         <th:block th:if="${challenge.requiredEnv} == 'VAULT'">
-                            <td class="d-none d-sm-table-cell" >K8s or Minikube with Vault</td>
+                            <td class="" >K8S with Vault</td>
                         </th:block>
                         <th:block
                             th:if="${challenge.requiredEnv} == 'AWS' or ${challenge.requiredEnv} == 'GCP' or ${challenge.requiredEnv} == 'AZURE'">
-                            <td class="d-none d-sm-table-cell" >AWS, GCP, Azure</td>
+                            <td class="" >AWS, GCP, Azure</td>
                         </th:block>
-
                     </tr>
                     </tbody>
                 </table>
@@ -118,6 +114,10 @@
                         <li><a href="https://github.com/saragluna">Xiaolu Dai @saragluna</a></li>
                         <li><a href="https://github.com/JonathanGiles">Jonathan Giles @jonathanGiles</a></li>
                     </ul>
+                </div>
+                <div class="border border-dark thank-you text-center">
+                    Developing our solution in 3 clouds cost money. Want to help us to cover our cloud bills?
+                    <a href="https://owasp.org/donate/?reponame=www-project-wrongsecrets&title=OWASP+wrongsecrets" target="_blank">Donate</a>.
                 </div>
             </div>
             <div class="col-12 col-lg-7">

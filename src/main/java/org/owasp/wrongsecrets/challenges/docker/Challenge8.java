@@ -33,7 +33,7 @@ public class Challenge8 extends Challenge {
         if (!Strings.isNullOrEmpty(serverCode) && !serverCode.equals("not_set")) {
             randomValue = serverCode;
         } else {
-            randomValue = generateRandomString(10);
+            randomValue = generateRandomString();
         }
         log.info("Initializing challenge 8 with random value {}", randomValue);
     }
@@ -72,7 +72,8 @@ public class Challenge8 extends Challenge {
         return true;
     }
 
-    private String generateRandomString(int length) {
+    private String generateRandomString() {
+        final int length = 10;
         StringBuilder builder = new StringBuilder(length);
         for (int i = 0; i < length; i++) {
             builder.append(alphabet.charAt(secureRandom.nextInt(alphabet.length())));

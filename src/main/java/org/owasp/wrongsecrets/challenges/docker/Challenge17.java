@@ -1,6 +1,7 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.extern.slf4j.Slf4j;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
@@ -39,7 +40,6 @@ public class Challenge17 extends Challenge {
 
     @Override
     public boolean answerCorrect(String answer) {
-        //log.debug("challenge 17, actualdata: {}, answer: {}", getActualData(), answer);
         return getActualData().equals(answer);
     }
 
@@ -63,6 +63,7 @@ public class Challenge17 extends Challenge {
         return false;
     }
 
+    @SuppressFBWarnings(value = "PATH_TRAVERSAL_IN", justification = "The location of the dockerMountPath is based on an Env Var")
     public String getActualData() {
         try {
             return Files.readString(Paths.get(dockerMountPath, "thirdkey.txt"));

@@ -12,6 +12,7 @@ import org.spongycastle.util.encoders.Hex;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @Slf4j
@@ -60,7 +61,7 @@ public class Challenge23 extends Challenge {
     }
 
     public String getActualData() {
-        return new String(Base64.decode(Hex.decode(Base64.decode("NTYzMjY4MzU1MTMyMzk3NDYyNTc1Njc1NjQ0ODRlNDI2MzMxNDI2ODYzMzM0ZTdhNjQzMjM5Nzk1YTQ1NDY3OTVhNTU0YTY4NWE0NDRkMzA0ZTU2Mzg2Yg=="))));
+        return new String(Base64.decode(Hex.decode(Base64.decode("NTYzMjY4MzU1MTMyMzk3NDYyNTc1Njc1NjQ0ODRlNDI2MzMxNDI2ODYzMzM0ZTdhNjQzMjM5Nzk1YTQ1NDY3OTVhNTU0YTY4NWE0NDRkMzA0ZTU2Mzg2Yg=="))), StandardCharsets.UTF_8);
 
     }
 }

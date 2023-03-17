@@ -1,6 +1,7 @@
 package org.owasp.wrongsecrets.challenges.cloud;
 
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.extern.slf4j.Slf4j;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
@@ -46,6 +47,7 @@ public class Challenge9 extends CloudChallenge {
         return challengeAnswer.equals(answer);
     }
 
+    @SuppressFBWarnings(value = "PATH_TRAVERSAL_IN", justification = "The location of the fileName and filePath is based on an Env Var")
     private String getCloudChallenge9and10Value(String filePath, String fileName) {
         try {
             return Files.readString(Paths.get(filePath, fileName));

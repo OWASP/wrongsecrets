@@ -73,7 +73,7 @@ public class Challenge27 extends Challenge {
             SecretKey decryptKey = new SecretKeySpec("thiszthekeytoday".getBytes(StandardCharsets.UTF_8), "AES");
             AlgorithmParameterSpec gcmIv = new GCMParameterSpec(128, Base64.decode(cipherText), 0, 12);
             decryptor.init(Cipher.DECRYPT_MODE, decryptKey, gcmIv);
-            return new String(decryptor.doFinal(Base64.decode(cipherText), 12, Base64.decode(cipherText).length - 12));
+            return new String(decryptor.doFinal(Base64.decode(cipherText), 12, Base64.decode(cipherText).length - 12), StandardCharsets.UTF_8);
         } catch (Exception e) {
             log.warn("Exception with Challenge 27", e);
             return "";

@@ -2,6 +2,15 @@ package org.owasp.wrongsecrets.challenges;
 
 import com.nimbusds.jose.shaded.json.JSONArray;
 import com.nimbusds.jose.shaded.json.JSONObject;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
+
 import lombok.extern.slf4j.Slf4j;
 import org.asciidoctor.Asciidoctor;
 import org.asciidoctor.Options;
@@ -12,12 +21,6 @@ import org.springframework.http.MediaType;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
 
 @Slf4j
 @RestController
@@ -90,25 +93,34 @@ public class ChallengesAPIController {
                 descriptions.add(description);
             } catch (IOException e) {
                 String rawHint = extractResource("classpath:explanations/" + challengeUI.getExplanation() + "_hint.adoc");
-                String hint = Asciidoctor.Factory.create().convert(rawHint, Options.builder().build());
-                hints.add(hint);
+                try (Asciidoctor asciidoctor = Asciidoctor.Factory.create()) {
+                    String hint = asciidoctor.convert(rawHint, Options.builder().build());
+                    hints.add(hint);
+                }
                 String rawDescription = extractResource("classpath:explanations/" + challengeUI.getExplanation() + ".adoc");
-                String description = Asciidoctor.Factory.create().convert(rawDescription, Options.builder().build());
-                descriptions.add(description);
+                try (Asciidoctor asciidoctor = Asciidoctor.Factory.create()) {
+                    String description = asciidoctor.convert(rawDescription, Options.builder().build());
+                    descriptions.add(description);
+
+                }
                 throw new RuntimeException(e);
             }
 
         });
     }
 
+    @SuppressFBWarnings(value = "URLCONNECTION_SSRF_FD",
+        justification = "Read from specific classpath")
     private String extractResource(String resourceName) {
         try {
             var resource = ResourceUtils.getURL(resourceName);
             final StringBuilder resourceStringbuilder = new StringBuilder();
-            new BufferedReader(
-                new InputStreamReader(resource.openStream())
-            ).lines().forEach(resourceStringbuilder::append);
-            return resourceStringbuilder.toString();
+            try (BufferedReader bufferedReader = new BufferedReader(
+                new InputStreamReader(resource.openStream(), StandardCharsets.UTF_8))) {
+                bufferedReader.lines().forEach(resourceStringbuilder::append);
+                return resourceStringbuilder.toString();
+            }
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
