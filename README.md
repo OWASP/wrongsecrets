@@ -428,7 +428,7 @@ Note: be careful with trying to deploy the `jeroenwillemsen/wrongsecrets-desktop
 
 ## Docker on macOS with M1 and Colima
 
-Using [Colima](https://github.com/abiosoft/colima) (version 0.5.2 when written) you your macOS with Apple Silicon M1 
+Using [Colima](https://github.com/abiosoft/colima) (version 0.5.2 when written) you your macOS with Apple Silicon M1
 to run Docker image `jeroenwillemsen/wrongsecrets` you try one of:
 
 - switch off Colima
@@ -445,7 +445,7 @@ and run Docker image `jeroenwillemsen/wrongsecrets`.
 ### Change Docker context
 
 Running docker image on Colima container runtimes on macOS Ventura with M1 CPU can run very slowly or can hang at some point.
-Wrong Secrets provide `arm64` Docker's image and switching to `desktop-linux` context will use `arm64` image. 
+Wrong Secrets provide `arm64` Docker's image and switching to `desktop-linux` context will use `arm64` image.
 To do that in terminal run:
 
 ```shell
@@ -456,7 +456,7 @@ you should see context default `colima *`:
 
 ```
 NAME                TYPE                DESCRIPTION                               DOCKER ENDPOINT                                    KUBERNETES ENDPOINT                ORCHESTRATOR
-colima *            moby                colima                                    unix:///Users/YOUR_USER_NAME/.colima/default/docker.sock                                      
+colima *            moby                colima                                    unix:///Users/YOUR_USER_NAME/.colima/default/docker.sock
 default             moby                Current DOCKER_HOST based configuration   unix:///var/run/docker.sock                        https://127.0.0.1:6443 (default)   swarm
 desktop-linux       moby                                                          unix:///Users/YOUR_USER_NAME/.docker/run/docker.sock
 ```
@@ -475,7 +475,7 @@ docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:latest-no-vault
 
 ### Run Colima with 1 CPU
 
-Colima is using QEMU behind and for QEMU on Apple Silicon M1 is recommended to use 1 CPU core: 
+Colima is using QEMU behind and for QEMU on Apple Silicon M1 is recommended to use 1 CPU core:
 
 ```shell
 colima start -m 8 -c 1 --arch x86_64
