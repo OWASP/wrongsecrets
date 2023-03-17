@@ -428,9 +428,25 @@ Note: be careful with trying to deploy the `jeroenwillemsen/wrongsecrets-desktop
 
 ## Docker on macOS with M1 and Colima
 
-Running docker image on [Colima](https://github.com/abiosoft/colima) (version 0.5.2 when written) container runtimes on macOS Ventura with M1 CPU can run very slowly or can hang at some point.
+Using [Colima](https://github.com/abiosoft/colima) (version 0.5.2 when written) you your macOS with Apple Silicon M1 
+to run Docker image `jeroenwillemsen/wrongsecrets` you try one of:
 
-In terminal run:
+- switch off Colima
+- Change Docker context
+- Run Colima with 1 CPU
+
+### Switch off Colima
+
+```shell
+colima stop
+```
+and run Docker image `jeroenwillemsen/wrongsecrets`.
+
+### Change Docker context
+
+Running docker image on Colima container runtimes on macOS Ventura with M1 CPU can run very slowly or can hang at some point.
+Wrong Secrets provide `arm64` Docker's image and switching to `desktop-linux` context will use `arm64` image. 
+To do that in terminal run:
 
 ```shell
 docker context ls
@@ -452,6 +468,20 @@ docker context use desktop-linux
 ```
 
 and now you should be able to run one of above Docker command e.g.:
+
+```bash
+docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:latest-no-vault
+```
+
+### Run Colima with 1 CPU
+
+Colima is using QEMU behind and for QEMU on Apple Silicon M1 is recommended to use 1 CPU core: 
+
+```shell
+colima start -m 8 -c 1 --arch x86_64
+```
+
+and run e.g.:
 
 ```bash
 docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:latest-no-vault
