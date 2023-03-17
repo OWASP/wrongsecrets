@@ -440,12 +440,12 @@ to run Docker image `jeroenwillemsen/wrongsecrets` you try one of:
 ```shell
 colima stop
 ```
-and run Docker image `jeroenwillemsen/wrongsecrets`.
+and run natively Docker image `jeroenwillemsen/wrongsecrets` on ARM.
 
 ### Change Docker context
 
 Running docker image on Colima container runtimes on macOS Ventura with M1 CPU can run very slowly or can hang at some point.
-Wrong Secrets provide `arm64` Docker's image and switching to `desktop-linux` context will use `arm64` image. 
+Wrong Secrets provide `arm64` Docker's image and switching to `desktop-linux` context will use native `arm64` image. 
 To do that in terminal run:
 
 ```shell
@@ -481,7 +481,7 @@ Colima is using QEMU behind and for QEMU on Apple Silicon M1 is recommended to u
 colima start -m 8 -c 1 --arch x86_64
 ```
 
-and run e.g.:
+and run with AMD x64 emulation e.g.:
 
 ```bash
 docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:latest-no-vault
