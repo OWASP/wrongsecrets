@@ -321,7 +321,7 @@ Please be sure to take a careful look at our [Code of Conduct](https://github.co
                   Assertions.assertThat(challenge.solved(challenge.spoiler().solution())).isTrue();
               }
           }
-      ```
+          ```
 Please note that PRs for new challenges are only accepted when unit tests are added to prove that the challenge works. Normally tests should not immediately leak the actual secret, so leverage the `.spoil()` functionality of your test implementation for this.
 
 -   ### Step 4: Adding explanations, reasons and hints.
