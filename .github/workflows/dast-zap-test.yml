@@ -20,7 +20,7 @@ jobs:
           java-version: "19"
           distribution: "temurin"
       - name: Clean install
-        run: ./mvnw clean install -DskipTests -D dependency-check.skip
+        run: ./mvnw clean install -DskipTests -Ddependency-check.skip -Dcyclonedx.skip=true
       - name: Start wrongsecrets
         run: nohup ./mvnw spring-boot:run -Dspring-boot.run.profiles=without-vault &
       - name: ZAP Scan
