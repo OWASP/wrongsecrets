@@ -37,6 +37,12 @@ public class TokenController {
             .build();
     }
 
+    /**
+     * Tokenrequest
+     * @param grant_type ew
+     * @param client_id we
+     * @param client_secret we
+     */
     public record TokenRequest(String grant_type,
                                String client_id,
                                String client_secret) {
