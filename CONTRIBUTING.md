@@ -301,28 +301,28 @@ Please be sure to take a careful look at our [Code of Conduct](https://github.co
 
     -   Make sure that this file is also of **Java** type.
     -   Here is a unit test for reference:
-        `java
-      package org.owasp.wrongsecrets.challenges.docker;
-      import org.assertj.core.api.Assertions;
-      import org.junit.jupiter.api.Test;
-      import org.junit.jupiter.api.extension.ExtendWith;
-      import org.mockito.Mock;
-      import org.mockito.Mockito;
-      import org.mockito.junit.jupiter.MockitoExtension;
-      import org.owasp.wrongsecrets.ScoreCard;
-      @ExtendWith(MockitoExtension.class)
-      class Challenge28Test {
-          @Mock
-          private ScoreCard scoreCard;
-          @Test
-          void rightAnswerShouldSolveChallenge() {
-              var challenge = new Challenge28(scoreCard);
-              Assertions.assertThat(challenge.solved("wrong answer")).isFalse();
-              Assertions.assertThat(challenge.solved(challenge.spoiler().solution())).isTrue();
+        ```java
+          package org.owasp.wrongsecrets.challenges.docker;
+          import org.assertj.core.api.Assertions;
+          import org.junit.jupiter.api.Test;
+          import org.junit.jupiter.api.extension.ExtendWith;
+          import org.mockito.Mock;
+          import org.mockito.Mockito;
+          import org.mockito.junit.jupiter.MockitoExtension;
+          import org.owasp.wrongsecrets.ScoreCard;
+          @ExtendWith(MockitoExtension.class)
+          class Challenge28Test {
+              @Mock
+              private ScoreCard scoreCard;
+              @Test
+              void rightAnswerShouldSolveChallenge() {
+                  var challenge = new Challenge28(scoreCard);
+                  Assertions.assertThat(challenge.solved("wrong answer")).isFalse();
+                  Assertions.assertThat(challenge.solved(challenge.spoiler().solution())).isTrue();
+              }
           }
-      }
-      `
-        Please note that PRs for new challenges are only accepted when unit tests are added to prove that the challenge works. Normally tests should not immediately leak the actual secret, so leverage the `.spoil()` functionality of your test implementation for this.
+          ```
+Please note that PRs for new challenges are only accepted when unit tests are added to prove that the challenge works. Normally tests should not immediately leak the actual secret, so leverage the `.spoil()` functionality of your test implementation for this.
 
 -   ### Step 4: Adding explanations, reasons and hints.
 

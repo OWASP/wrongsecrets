@@ -2,7 +2,7 @@
 
 # OWASP WrongSecrets [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Want%20to%20dive%20into%20secrets%20management%20and%20do%20some%20hunting?%20try%20this&url=https://github.com/OWASP/wrongsecrets&hashtags=secretsmanagement,secrets,hunting,p0wnableapp,OWASP,WrongSecrets)[<img src="https://raw.githubusercontent.com/mastodon/mastodon/main/app/javascript/images/app-icon.svg" width=16>](https://tootpick.org/#text=Want%20to%20dive%20into%20secrets%20management%20and%20do%20some%20hunting?%20try%20this%0A%0Ahttps://github.com/OWASP/wrongsecrets%20%23secretsmanagement,%20%23secrets,%20%23hunting,%20%23p0wnableapp,%20%23OWASP,%20%23WrongSecrets)
 
-[![Java checkstyle and testing](https://github.com/OWASP/wrongsecrets/actions/workflows/main.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/main.yml) [![Pre-commit](https://github.com/OWASP/wrongsecrets/actions/workflows/pre-commit.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/terraform.yml) [![Terraform FMT](https://github.com/OWASP/wrongsecrets/actions/workflows/terraform.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/terraform.yml) [![Test minikube script (k8s)](https://github.com/OWASP/wrongsecrets/actions/workflows/minikube-k8s-test.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/minikube-k8s-test.yml) [![Test minikube script (k8s&vault)](https://github.com/OWASP/wrongsecrets/actions/workflows/minikube-vault-test.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/minikube-vault-test.yml) [![Docker container test](https://github.com/OWASP/wrongsecrets/actions/workflows/container_test.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/container_test.yml)
+[![Java checkstyle and testing](https://github.com/OWASP/wrongsecrets/actions/workflows/main.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/main.yml) ![Pre-commit](https://github.com/OWASP/wrongsecrets/actions/workflows/pre-commit.yml/badge.svg)[![Terraform FMT](https://github.com/OWASP/wrongsecrets/actions/workflows/terraform.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/terraform.yml) [![Test minikube script (k8s)](https://github.com/OWASP/wrongsecrets/actions/workflows/minikube-k8s-test.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/minikube-k8s-test.yml) [![Test minikube script (k8s&vault)](https://github.com/OWASP/wrongsecrets/actions/workflows/minikube-vault-test.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/minikube-vault-test.yml) [![Docker container test](https://github.com/OWASP/wrongsecrets/actions/workflows/container_test.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/container_test.yml)
 [![OWASP Lab Project](https://img.shields.io/badge/OWASP-lab%20project-48A646.svg)](https://owasp.org/projects/)
 [![OpenSSF Best Practices](https://bestpractices.coreinfrastructure.org/projects/7024/badge)](https://bestpractices.coreinfrastructure.org/projects/7024)
 [![Discussions](https://img.shields.io/github/discussions/OWASP/wrongsecrets)](https://github.com/OWASP/wrongsecrets/discussions)
@@ -63,7 +63,7 @@ Copyright (c) 2020-2023 Jeroen Willemsen and WrongSecrets contributors.
 
 ## Basic docker exercises
 
-_Can be used for challenges 1-4, 8, 12-27_
+_Can be used for challenges 1-4, 8, 12-28_
 
 For the basic docker exercises you currently require:
 
@@ -99,6 +99,7 @@ Now you can try to find the secrets by means of solving the challenge offered at
 -   [localhost:8080/challenge/25](http://localhost:8080/challenge/25)
 -   [localhost:8080/challenge/26](http://localhost:8080/challenge/26)
 -   [localhost:8080/challenge/27](http://localhost:8080/challenge/27)
+-   [localhost:8080/challenge/28](http://localhost:8080/challenge/28)
 
 Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look
 better ;-).
@@ -122,7 +123,7 @@ You can test them out at [https://wrongsecrets.fly.dev](https://wrongsecrets.fly
 
 ## Basic K8s exercise
 
-_Can be used for challenges 1-6, 8, 12-27_
+_Can be used for challenges 1-6, 8, 12-28_
 
 ### Minikube based
 
@@ -175,7 +176,7 @@ Don't want to go over the hassle of setting up K8S yourself? visit [https://wron
 
 ## Vault exercises with minikube
 
-_Can be used for challenges 1-8, 12-27_
+_Can be used for challenges 1-8, 12-28_
 Make sure you have the following installed:
 
 -   minikube with docker (or comment out line 8 and work at your own k8s setup),
@@ -193,7 +194,7 @@ This is because if you run the start script again it will replace the secret in 
 
 ## Cloud Challenges
 
-_Can be used for challenges 1-27_
+_Can be used for challenges 1-28_
 
 **READ THIS**: Given that the exercises below contain IAM privilege escalation exercises,
 never run this on an account which is related to your production environment or can influence your account-over-arching

@@ -38,12 +38,18 @@
                            class="nav-link" target="_blank">Github</a>
                     </li>
                     <li class="nav-item">
-                        <a href="https://owasp.org/www-project-wrongsecrets/"
-                           class="nav-link" target="_blank">OWASP</a>
-                    </li>
-                    <li class="nav-item">
                         <a th:class="'nav-link '+${requestURI == '/stats' ? 'active' : ''}"
                            href="/stats">Stats</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a th:class="'nav-link '+${requestURI == '/about' ? 'active' : ''}"
+                           href="/stats" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">About</a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="https://owasp.org/www-project-wrongsecrets/"
+                               target="_blank">OWASP</a>
+                            <a class="dropdown-item" href="/about">About</a>
+                        </ul>
                     </li>
                     <div class="theme-toggle navbar-text">
                         <label>
@@ -60,7 +66,8 @@
 
 
                 </ul>
-                <a th:if="${ctf_enabled != null && ctf_enabled == true}" class="nav-link disabled me-2" href="#" tabindex="-1" aria-disabled="true">In CTF-mode</a>
+                <a th:if="${ctf_enabled != null && ctf_enabled == true}" class="nav-link disabled me-2" href="#"
+                   tabindex="-1" aria-disabled="true">In CTF-mode</a>
                 <a class="nav-link disabled me-2" href="#" tabindex="-1" aria-disabled="true"
                    th:text="'Environment:'+${environment}"></a>
                 <a class="nav-link disabled me-2" href="#" tabindex="-1" aria-disabled="true"
