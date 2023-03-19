@@ -26,7 +26,7 @@ public class WrongSecretsApplication {
     }
 
     static {
-        SpringDocUtils.getConfig().addRestControllers(TokenController.class,IndexController.class, ChallengesController.class);
+        SpringDocUtils.getConfig().addRestControllers(AboutController.class, ChallengesController.class, IndexController.class, StatsController.class, TokenController.class);
     }
 
 }

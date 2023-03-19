@@ -2,6 +2,7 @@ package org.owasp.wrongsecrets.challenges;
 
 import com.google.common.base.Strings;
 import io.swagger.v3.oas.annotations.Hidden;
+import io.swagger.v3.oas.annotations.Operation;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.docker.Challenge0;
@@ -65,6 +66,7 @@ public class ChallengesController {
     }
 
     @GetMapping
+    @Operation(description = "Returns the given expalantion text for a challenge")
     public String explanation(@PathVariable Integer id) {
         return challenges.get(id).getExplanation();
     }
@@ -82,6 +84,7 @@ public class ChallengesController {
     }
 
     @GetMapping("/challenge/{id}")
+    @Operation(description = "Returns the data for a given challenge form interaction")
     public String challenge(Model model, @PathVariable Integer id) {
         if (!checkId(id)) {
             throw new ResponseStatusException(
@@ -114,6 +117,7 @@ public class ChallengesController {
     }
 
     @PostMapping(value = "/challenge/{id}", params = "action=reset")
+    @Operation(description = "Resets the state of a given challenge")
     public String reset(@ModelAttribute ChallengeForm challengeForm, @PathVariable Integer id, Model model) {
         if (!checkId(id)) {
             throw new ResponseStatusException(
@@ -131,6 +135,7 @@ public class ChallengesController {
     }
 
     @PostMapping(value = "/challenge/{id}", params = "action=submit")
+    @Operation(description = "Post your answer to the challenge for a given challenge ID")
     public String postController(@ModelAttribute ChallengeForm challengeForm, Model model, @PathVariable Integer id) {
         if (!checkId(id)) {
             throw new ResponseStatusException(

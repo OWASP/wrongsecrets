@@ -1,5 +1,6 @@
 package org.owasp.wrongsecrets;
 
+import io.swagger.v3.oas.annotations.Operation;
 import org.owasp.wrongsecrets.canaries.CanaryCounter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -32,6 +33,7 @@ public class StatsController {
     private String swaggerURI;
 
     @GetMapping("/stats")
+    @Operation(description = "Returns all dynamic data for the stats screen")
     public String getStats(Model model) {
         model.addAttribute("canaryCounter", canaryCounter.getTotalCount());
         model.addAttribute("sessioncounter", sessionConfiguration.getCounter());
