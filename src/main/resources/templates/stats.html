@@ -14,7 +14,7 @@
                     Number of active sessions: <span th:text="${sessioncounter}"></span><br/>
                     Number of canary callbacks since boot: <span th:text="${canaryCounter}"></span><br/>
                     Active sessions are currently active visitors to challenges.<br/>
-                    <span th:if="${swaggerEnabled==true}" ><br/><br/></span>
+                    <span class="d-none d-lg-block" th:if="${swaggerEnabled==true}" ><br/><br/></span>
                 </p>
 
             </div>
