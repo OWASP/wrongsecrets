@@ -27,8 +27,7 @@
                     Reason enabled: <span th:text="${reasonEnabled}"></span><br/>
                     CTF-mode enabled: <span th:text="${ctfModeEnabled}"></span><br/>
                     Swagger enabled: <span th:text="${swaggerEnabled}"></span>
-                    <span th:if="${swaggerEnabled==true}" ><br/></span>
-                    <span th:if="${swaggerEnabled==true}" th:text="'SwaggerURI: '+${swaggerURI}"></span>
+                    <span th:if="${swaggerEnabled==true}" ><br/>Swagger uri: <a th:href="${swaggerURI}" target="_blank" th:text="${swaggerURI}"></a></span>
                 </p>
             </div>
         </div>
