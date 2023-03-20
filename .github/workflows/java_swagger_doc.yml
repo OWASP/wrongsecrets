@@ -25,8 +25,8 @@ jobs:
         run: ./mvnw compile javadoc:javadoc
       - name: Start wrongsecrets
         run: nohup ./mvnw spring-boot:run -Dspring-boot.run.profiles=without-vault &
-      - name: Clean compile docs
-        run: ./mvnw clean compile javadoc:javadoc
+      - name: Compile javadocs
+        run: ./mvnw compile javadoc:javadoc
       - name: Generate swaggerdoc
         run: ./mvnw springdoc-openapi:generate
       - name: Upload swagger api doc
