@@ -4,5 +4,3 @@ A user enters some data in some mandatory field in a form, Now he/she didn't rea
 in compromised.
 
 Can you crack this using your local machine and web browser ?
-
-

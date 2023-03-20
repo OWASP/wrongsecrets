@@ -3,5 +3,3 @@
 Some of the data or secret of yours can be stored in localstorage if server has no need of that data.
 
 So always clear your local storage or atleast beware of what contents it has.
-
-
