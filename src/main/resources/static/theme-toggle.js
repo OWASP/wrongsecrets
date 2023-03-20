@@ -22,4 +22,4 @@
       updateToggle(false)
     }
   })
-})();
+})()
