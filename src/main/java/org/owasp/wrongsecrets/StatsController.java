@@ -24,7 +24,10 @@ public class StatsController {
     private boolean ctfModeEnabled;
 
     @Value("${springdoc.swagger-ui.enabled}")
-    private boolean swaggerEnabled;
+    private boolean swaggerUIEnabled;
+
+    @Value("${springdoc.api-docs.enabled}")
+    private boolean springdockenabled;
 
     @Value("${canarytokenURLs}")
     private String[] canaryTokenURLs;
@@ -42,7 +45,8 @@ public class StatsController {
         model.addAttribute("hintsEnabled", hintsEnabled);
         model.addAttribute("reasonEnabled", reasonEnabled);
         model.addAttribute("ctfModeEnabled", ctfModeEnabled);
-        model.addAttribute("swaggerEnabled", swaggerEnabled);
+        model.addAttribute("swaggerUIEnabled", swaggerUIEnabled);
+        model.addAttribute("springdockenabled", springdockenabled);
         model.addAttribute("swaggerURI", swaggerURI);
         return "stats";
     }
