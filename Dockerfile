@@ -8,6 +8,8 @@ ENV ARG_BASED_PASSWORD=$argBasedPassword
 ENV APP_VERSION=$argBasedVersion
 ENV DOCKER_ENV_PASSWORD="This is it"
 ENV AZURE_KEY_VAULT_ENABLED=false
+ENV springdoc_swagger-ui_enabled=false
+ENV springdoc_api-docs_enabled=false
 
 RUN echo "2vars"
 RUN echo "$ARG_BASED_PASSWORD"
