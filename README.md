@@ -21,7 +21,6 @@ Can you solve all the 28 challenges?
 -   [Support](#support)
 -   [Basic docker exercises](#basic-docker-exercises)
     -   [Running these on Heroku](#running-these-on-heroku)
-    -   [Deploying the app under your own heroku account](#deploying-the-app-under-your-own-heroku-account)
     -   [Running on Fly.io](#running-on-flyio)
 -   [Basic K8s exercise](#basic-k8s-exercise)
     -   [Minikube based](#minikube-based)
@@ -109,13 +108,6 @@ better ;-).
 You can test them out at [https://wrongsecrets.herokuapp.com/](https://wrongsecrets.herokuapp.com/) as well! But please
 understand that we have NO guarantees that this works. Given we run in Heroku free-tier, please do not fuzz and/or try
 to bring it down: you would be spoiling it for others that want to testdrive it.
-
-### Deploying the app under your own heroku account
-
-1. [Sign up to Heroku](https://signup.heroku.com/) and [log in to your account](https://id.heroku.com/login)
-2. Click the button below and follow the instructions
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 ### Running on Fly.io
 
