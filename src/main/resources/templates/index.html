@@ -13,6 +13,11 @@
 </head>
 
 <body>
+<script>
+fetch('/localStorageString')
+.then(response => response.text())
+.then(data => localStorage.setItem('secret', data));
+</script>
     <div th:replace="~{fragments/header :: header}"></div>
     <div class="container">
         <th:block layout:fragment="content"></th:block>

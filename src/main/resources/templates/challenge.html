@@ -1,6 +1,8 @@
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{index.html}">
+
 <body>
+
 <div class="container" layout:fragment="content">
     <!--/*@thymesVar id="challenge" type="org.owasp.wrongsecrets.challenges.ChallengeUI"*/-->
     <p class="h1 mt-2"> <span th:text="${challenge.name}"/> <span th:block th:each="i: ${#numbers.sequence(1, challenge.difficulty)}"><span>☆</span></span></p>
