@@ -11,6 +11,8 @@ processes = []
 [build.args]
   argBasedVersion="1.6.1"
   spring_profile="without-vault"
+  springdoc_api-docs_enabled="false"
+  springdoc_swagger-ui_enabled="false"
 
 [env]
   K8S_ENV="Fly(Docker)"

@@ -11,6 +11,9 @@ import java.nio.charset.StandardCharsets;
 
 import static org.asciidoctor.Asciidoctor.Factory.create;
 
+/**
+ * Used for generating HTML out of asciidoc. Used for all Challenges' challenge texts, tips, and explanations.
+ */
 public class AsciiDocGenerator implements TemplateGenerator {
 
     private static final Asciidoctor asciidoctor = create();

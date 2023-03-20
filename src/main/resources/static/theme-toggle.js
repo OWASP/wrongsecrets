@@ -26,4 +26,4 @@
 
     updateToggle(initialTheme)
   })
-})()
+})();
