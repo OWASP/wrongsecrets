@@ -2,25 +2,55 @@
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
       layout:decorate="~{index.html}">
 <body>
-<div class="container">
-    <div class="container-fluid mt-3 text-sm p-5 bg-light" layout:fragment="content">
-        <h1>Current Stats</h1>
-        <p>Number of active sessions:</p>
-        <p th:text="${sessioncounter}"></p>
-        <p>Hints enabled:<span th:text="${hintsEnabled}"></span></p>
-        <p>Reason enabled:<span th:text="${reasonEnabled}"></span></p>
-        <p>CTF-mode enabled:<span th:text="${ctfModeEnabled}"></span></p>
+<div class="container" layout:fragment="content">
+    <p class="h1 mt-2">Current Stats & Config</p>
+    <br/><br/>
 
-        <p>Number of canary callbacks since boot:</p>
-        <p th:text="${canaryCounter}"></p>
-        <p>Last canary token received:</p>
-        <p th:text="${lastCanaryToken}"></p>
-        <p>CanaryTokenUrlwebtoken in use:</p>
-        <ul th:each="canarytokenURL : ${canarytokenURLs}">
-            <li th:text="${canarytokenURL}"></li>
-        </ul>
-        <p>Note that, when accessing the URLs of the CanaryTokens, some of your data is being logged by the Canarytoken service.</p>
+    <div class="row">
+        <div class="col-12 col-lg-6">
+            <div class="border border-dark thank-you">
+                <p class="h2 mt-2 text-center">Stats</p>
+                <p>
+                    Number of active sessions: <span th:text="${sessioncounter}"></span><br/>
+                    Number of canary callbacks since boot: <span th:text="${canaryCounter}"></span><br/>
+                    Active sessions are currently active visitors to challenges.<br/>
+                    <span class="d-none d-lg-block" th:if="${swaggerEnabled==true}" ><br/><br/><br/></span>
+                </p>
+
+            </div>
+        </div>
+        <div class="col-12 col-lg-6">
+            <div class="border border-dark thank-you">
+                <p class="h2 mt-2 text-center">Config</p>
+                <p>
+                    Hints enabled: <span th:text="${hintsEnabled}"></span> <br/>
+                    Reason enabled: <span th:text="${reasonEnabled}"></span><br/>
+                    CTF-mode enabled: <span th:text="${ctfModeEnabled}"></span><br/>
+                    Springdoc enabled: <span th:text="${springdockenabled}"></span><br/>
+                    Swagger enabled: <span th:text="${swaggerEnabled}"></span>
+                    <span th:if="${swaggerEnabled==true}" ><br/>Swagger uri: <a th:href="${swaggerURI}" target="_blank" th:text="${swaggerURI}"></a></span>
+                </p>
+            </div>
+        </div>
+        <div class="col-12">
+            <br/>
+            <div class="border border-dark thank-you">
+                <p class="h2 mt-2 text-center">Canary callbacks</p>
+                <p>Number of canary callbacks since boot: <span th:text="${canaryCounter}"></span></p>
+                <p>Last canary token received:</p>
+                <p th:text="${lastCanaryToken}"></p>
+                <p>CanaryTokenUrlwebtoken in use:</p>
+                <ul style="word-wrap: break-word" th:each="canarytokenURL : ${canarytokenURLs}">
+                    <li th:text="${canarytokenURL}"></li>
+                </ul>
+                <p>Note that, when accessing the URLs of the CanaryTokens, some of your data is being logged by the
+                    Canarytoken service.</p>
+            </div>
+        </div>
     </div>
+
+
+</div>
 </div>
 </body>
 </html>

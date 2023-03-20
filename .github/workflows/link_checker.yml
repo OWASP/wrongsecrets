@@ -1,4 +1,3 @@
-# This is a basic workflow to help you get started with Actions
 
 name: Dead Link Checker
 
@@ -21,7 +20,7 @@ jobs:
         id: lychee
         uses: lycheeverse/lychee-action@v1.6.1
         with:
-          args: --exclude-all-private --exclude-file "config/.lycheeignore" -r 2 './**/*.md' './**/*.html'
+          args: --exclude-all-private --exclude-path "src/main/resources/templates/about.html" --exclude-file "config/.lycheeignore" -r 2 './**/*.md' './**/*.html'
           fail: true
 
       - name: Create Issue From File

@@ -5,12 +5,12 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.0.3</version>
-        <relativePath /> <!-- lookup parent from repository -->
+        <version>3.0.4</version>
+        <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>org.owasp</groupId>
     <artifactId>wrongsecrets</artifactId>
-    <version>jre18test2-SNAPSHOT</version>
+    <version>1.6.1-SNAPSHOT</version>
     <name>OWASP WrongSecrets</name>
     <description>Examples with how to not use secrets</description>
     <url>https://owasp.org/www-project-wrongsecrets/</url>
@@ -23,8 +23,8 @@
     </issueManagement>
     <licenses>
         <license>
-            <name>MIT License</name>
-            <url>https://opensource.org/licenses/MIT</url>
+            <name>AGPLv3 License</name>
+            <url>https://opensource.org/license/agpl-v3/</url>
             <distribution>repo</distribution>
         </license>
     </licenses>
@@ -44,7 +44,7 @@
         <maven.compiler.target>19</maven.compiler.target>
         <spring.cloud-version>2022.0.1</spring.cloud-version>
         <lombok.version>1.18.26</lombok.version>
-        <aws.sdk.version>2.20.14</aws.sdk.version>
+        <aws.sdk.version>2.20.23</aws.sdk.version>
         <asciidoctorj.version>2.5.7</asciidoctorj.version>
         <jruby.version>9.4.1.0</jruby.version>
         <bootstrap.version>5.2.3</bootstrap.version>
@@ -55,12 +55,12 @@
         <thymeleaf.layout.version>3.2.0</thymeleaf.layout.version>
         <thymeleaf-extras-springsecurity6.version>3.1.1.RELEASE</thymeleaf-extras-springsecurity6.version>
         <asciidoctor.maven.plugin.version>2.2.2</asciidoctor.maven.plugin.version>
-        <spring.security.version>6.0.0</spring.security.version>
+        <spring.security.version>6.0.2</spring.security.version>
         <com.azure.spring.version>5.0.0</com.azure.spring.version>
         <cyclonedx.core.version>7.3.2</cyclonedx.core.version>
         <KeePassJava2.version>2.1.4</KeePassJava2.version>
         <system-stubs-jupiter.version>2.0.2</system-stubs-jupiter.version>
-        <dependency-check-maven.version>7.3.0</dependency-check-maven.version>
+        <dependency-check-maven.version>8.1.2</dependency-check-maven.version>
     </properties>
 
     <dependencies>
@@ -180,7 +180,11 @@
             <groupId>com.google.cloud</groupId>
             <artifactId>google-cloud-secretmanager</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>2.0.4</version>
+        </dependency>
         <dependency>
             <groupId>com.azure.spring</groupId>
             <artifactId>spring-cloud-azure-starter-keyvault-secrets</artifactId>
@@ -211,11 +215,16 @@
             <version>${dependency-check-maven.version}</version>
             <type>maven-plugin</type>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.h2database</groupId>-->
-<!--            <artifactId>h2</artifactId>-->
-<!--            <version>2.1.214</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>com.github.spotbugs</groupId>
+            <artifactId>spotbugs-annotations</artifactId>
+            <version>4.6.0</version>
+        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>com.h2database</groupId>-->
+        <!--            <artifactId>h2</artifactId>-->
+        <!--            <version>2.1.214</version>-->
+        <!--        </dependency>-->
     </dependencies>
 
     <dependencyManagement>
@@ -285,6 +294,29 @@
                         </dependency>
                     </dependencies>
                 </plugin>
+                <plugin>
+                    <groupId>com.github.spotbugs</groupId>
+                    <artifactId>spotbugs-maven-plugin</artifactId>
+                    <version>4.7.3.2</version>
+                    <configuration>
+                        <omitVisitors>FindReturnRef</omitVisitors>
+                        <plugins>
+                            <plugin>
+                                <groupId>com.h3xstream.findsecbugs</groupId>
+                                <artifactId>findsecbugs-plugin</artifactId>
+                                <version>1.12.0</version>
+                            </plugin>
+                        </plugins>
+                    </configuration>
+                    <dependencies>
+                        <!-- overwrite dependency on spotbugs if you want to specify the version of spotbugs -->
+                        <dependency>
+                            <groupId>com.github.spotbugs</groupId>
+                            <artifactId>spotbugs</artifactId>
+                            <version>4.7.3</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
             </plugins>
         </pluginManagement>
         <plugins>
@@ -307,7 +339,6 @@
                     <jvmArguments>
                         <!-- -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8000-->
                     </jvmArguments>
-                    <fork>true</fork>
                 </configuration>
             </plugin>
             <plugin>
@@ -377,7 +408,7 @@
             <plugin>
                 <groupId>org.owasp</groupId>
                 <artifactId>dependency-check-maven</artifactId>
-                <version>7.0.4</version>
+                <version>${dependency-check-maven.version}</version>
                 <executions>
                     <execution>
                         <goals>
@@ -415,6 +446,11 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-maven-plugin</artifactId>
+                <version>1.4</version>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>

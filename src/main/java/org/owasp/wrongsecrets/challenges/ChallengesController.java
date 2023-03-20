@@ -1,11 +1,14 @@
 package org.owasp.wrongsecrets.challenges;
 
 import com.google.common.base.Strings;
+import io.swagger.v3.oas.annotations.Hidden;
+import io.swagger.v3.oas.annotations.Operation;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.docker.Challenge0;
 import org.owasp.wrongsecrets.challenges.docker.Challenge8;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.codec.Hex;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
@@ -53,12 +57,22 @@ public class ChallengesController {
         this.runtimeEnvironment = runtimeEnvironment;
     }
 
+    private boolean checkId(int id) {
+        // If the id is either negative or larger than the amount of challenges, return false.
+        if (id < 0 || id >= challenges.size()) {
+            return false;
+        }
+        return true;
+    }
+
     @GetMapping
+    @Operation(description = "Returns the given expalantion text for a challenge")
     public String explanation(@PathVariable Integer id) {
         return challenges.get(id).getExplanation();
     }
 
     @GetMapping("/spoil-{id}")
+    @Hidden
     public String spoiler(Model model, @PathVariable Integer id) {
         if (!ctfModeEnabled) {
             var challenge = challenges.get(id).getChallenge();
@@ -70,7 +84,13 @@ public class ChallengesController {
     }
 
     @GetMapping("/challenge/{id}")
+    @Operation(description = "Returns the data for a given challenge's form interaction")
     public String challenge(Model model, @PathVariable Integer id) {
+        if (!checkId(id)) {
+            throw new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "challenge not found"
+            );
+        }
         var challenge = challenges.get(id);
 
         model.addAttribute("challengeForm", new ChallengeForm(""));
@@ -97,7 +117,13 @@ public class ChallengesController {
     }
 
     @PostMapping(value = "/challenge/{id}", params = "action=reset")
+    @Operation(description = "Resets the state of a given challenge")
     public String reset(@ModelAttribute ChallengeForm challengeForm, @PathVariable Integer id, Model model) {
+        if (!checkId(id)) {
+            throw new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "challenge not found"
+            );
+        }
         var challenge = challenges.get(id);
         scoreCard.reset(challenge.getChallenge());
 
@@ -109,7 +135,13 @@ public class ChallengesController {
     }
 
     @PostMapping(value = "/challenge/{id}", params = "action=submit")
+    @Operation(description = "Post your answer to the challenge for a given challenge ID")
     public String postController(@ModelAttribute ChallengeForm challengeForm, Model model, @PathVariable Integer id) {
+        if (!checkId(id)) {
+            throw new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "challenge not found"
+            );
+        }
         var challenge = challenges.get(id);
 
         if (!challenge.isChallengeEnabled()) {

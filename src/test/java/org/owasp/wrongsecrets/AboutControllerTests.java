@@ -1,4 +1,4 @@
-package org.owasp.wrongsecrets.canaries;
+package org.owasp.wrongsecrets;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,30 +12,26 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.fail;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class CanaryCallbackTest {
+class AboutControllerTests {
     @LocalServerPort
     private int port;
 
     @Autowired
     private RestTemplateBuilder builder;
 
+    public AboutControllerTests() {
+    }
     @Test
-    void shouldAcceptPostOfMessage() {
+    void shouldGetAbout(){
         var restTemplate = builder.build();
-        var additonalCanaryData = new AdditionalCanaryData("source", "agent", "referer", "location");
-        CanaryToken token = new CanaryToken("url", "memo", "channel", "time", additonalCanaryData);
 
-        var callbackAdress = "http://localhost:" + port + "/canaries/tokencallback";
-
+        var callbackAdress = "http://localhost:" + port + "/about";
         try {
-            var response = restTemplate.postForEntity(callbackAdress, token, String.class);
-            assertThat(response.getStatusCode()).isEqualTo(HttpStatus.ACCEPTED);
+            var response = restTemplate.getForEntity(callbackAdress, String.class);
+            assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+            assertThat(response.getBody()).contains("About");
         } catch (RestClientResponseException e) {
             fail(e);
         }
     }
 }
-
-/*
-"manageUrl" : "url", "memo" : "memo", "channel" : "channel", "time" : "time", "additionalData" : { "srcIp" : "source", "useragent" : "agent", "referer" : "referer", "location" : "location"}}
- */

@@ -4,8 +4,11 @@ name: Test minikube script (k8s)
 
 # Controls when the workflow will run
 on:
+  push:
+    branches:
+      - master
   pull_request:
-    branches: [ master ]
+    branches: [master]
   workflow_dispatch:
 
 permissions:

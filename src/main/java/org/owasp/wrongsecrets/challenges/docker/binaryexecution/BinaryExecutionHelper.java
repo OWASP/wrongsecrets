@@ -2,16 +2,22 @@ package org.owasp.wrongsecrets.challenges.docker.binaryexecution;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Strings;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.springframework.util.ResourceUtils;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.util.stream.Collectors;
 
 
 @Slf4j
 public class BinaryExecutionHelper {
 
+    private enum Operation {
+        Spoil, Guess
+    }
 
     public static final String ERROR_EXECUTION = "Error with executing";
     private final int challengeNumber;
@@ -30,31 +36,34 @@ public class BinaryExecutionHelper {
             File execFile = createTempExecutable("wrongsecrets-golang");
             String result;
             if (Strings.isNullOrEmpty(guess)) {
-                result = executeCommand(execFile, "spoil");
+                result = executeCommand(execFile, Operation.Spoil, "");
             } else {
-                result = executeCommand(execFile, "guess", guess);
+                result = executeCommand(execFile, Operation.Guess, guess);
             }
-            log.info("stdout challenge {}: {}", challengeNumber, result);
+            log.info("stdout challenge {}: {}", challengeNumber, result.lines().collect(Collectors.joining("")));
 
             deleteFile(execFile);
             return result;
-        } catch (IOException | NullPointerException | InterruptedException e) {
+        } catch (Exception e) {
             log.warn("Error executing:", e);
             return ERROR_EXECUTION;
         }
     }
 
     public String executeCommand(String guess, String fileName) {
-        if (Strings.isNullOrEmpty((guess))) {
-            guess = "spoil";
+        Operation operation;
+        if (Strings.isNullOrEmpty(guess)) {
+            operation = Operation.Spoil;
+        } else {
+            operation = Operation.Guess;
         }
         try {
             File execFile = createTempExecutable(fileName);
-            String result = executeCommand(execFile, guess);
+            String result = executeCommand(execFile, operation, guess);
             deleteFile(execFile);
-            log.info("stdout challenge {}: {}", challengeNumber, result);
+            log.info("stdout challenge {}: {}", challengeNumber, result.lines().collect(Collectors.joining("")));
             return result;
-        } catch (IOException | NullPointerException | InterruptedException e) {
+        } catch (Exception e) {
             log.warn("Error executing:", e);
             executionException = e;
             return ERROR_EXECUTION;
@@ -62,23 +71,43 @@ public class BinaryExecutionHelper {
 
     }
 
-    private String executeCommand(File execFile, String argument, String argument2) throws IOException, InterruptedException {
+    @SuppressFBWarnings(value = "COMMAND_INJECTION", justification = "We check for various injection methods and counter those")
+    private String executeCommand(File execFile, Operation operation, String guess) throws IOException, InterruptedException {
         ProcessBuilder ps;
-        if (Strings.isNullOrEmpty(argument2)) {
-            ps = new ProcessBuilder(execFile.getPath(), argument);
+
+        if (!execFile.getPath().contains("wrongsecrets") || stringContainsCommandChainToken(execFile.getPath())
+            || stringContainsCommandChainToken(guess)) {
+            return BinaryExecutionHelper.ERROR_EXECUTION;
+        }
+        if (operation.equals(Operation.Spoil)) {
+            ps = new ProcessBuilder(execFile.getPath(), "spoil");
         } else {
-            ps = new ProcessBuilder(execFile.getPath(), argument, argument2);
+            if (execFile.getPath().contains("golang")) {
+                ps = new ProcessBuilder(execFile.getPath(), "guess", guess);
+            } else {
+                ps = new ProcessBuilder(execFile.getPath(), guess);
+            }
+
         }
         ps.redirectErrorStream(true);
         Process pr = ps.start();
-        BufferedReader in = new BufferedReader(new InputStreamReader(pr.getInputStream()));
-        String result = in.readLine();
-        pr.waitFor();
-        return result;
+        try (BufferedReader in = new BufferedReader(new InputStreamReader(pr.getInputStream(), StandardCharsets.UTF_8))) {
+            String result = in.readLine();
+            pr.waitFor();
+            return result;
+        }
     }
 
-    private String executeCommand(File execFile, String argument) throws IOException, InterruptedException {
-        return executeCommand(execFile, argument, "");
+    private boolean stringContainsCommandChainToken(String testString) {
+        String[] tokens = {"!", "&", "|", "<", ">", ";"};
+        boolean found = false;
+        for (String item : tokens) {
+            if (testString.contains(item)) {
+                found = true;
+                break;
+            }
+        }
+        return found;
     }
 
     @VisibleForTesting
@@ -112,6 +141,7 @@ public class BinaryExecutionHelper {
         return systemARch.contains("amd64") && osName.toLowerCase().contains("windows");
     }
 
+    @SuppressFBWarnings(value = "PATH_TRAVERSAL_IN", justification = "The location of the file is hardcoded at the caller level")
     private File retrieveFile(String location) {
         try {
             log.info("First looking at location:'classpath:executables/{}'", location);
@@ -127,6 +157,7 @@ public class BinaryExecutionHelper {
         return muslDetector.isMusl();
     }
 
+    @SuppressFBWarnings(value = "PATH_TRAVERSAL_IN", justification = "The location of the fileName is hardcoded at the caller level")
     private File createTempExecutable(String fileName) throws IOException {
         if (useWindows()) {
             fileName = fileName + "-windows.exe";
@@ -149,16 +180,7 @@ public class BinaryExecutionHelper {
         if (!execFile.setExecutable(true)) {
             log.info("setting the file {} executable failed... rest can be ignored", execFile.getPath());
         }
-        OutputStream os = new FileOutputStream(execFile.getPath());
-        ByteArrayInputStream is = new ByteArrayInputStream(FileUtils.readFileToByteArray(challengeFile));
-        byte[] b = new byte[2048];
-        int length;
-        while ((length = is.read(b)) != -1) {
-            os.write(b, 0, length);
-        }
-        is.close();
-        os.close();
-
+        FileUtils.copyFile(challengeFile, execFile);
         return execFile;
     }
 

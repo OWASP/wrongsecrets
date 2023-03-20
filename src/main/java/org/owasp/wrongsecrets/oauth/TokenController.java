@@ -1,7 +1,11 @@
 package org.owasp.wrongsecrets.oauth;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
+import org.springdoc.core.annotations.RouterOperation;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -23,6 +27,8 @@ public class TokenController {
         this.dockerMountPath = dockerMountPath;
     }
 
+
+    @Operation(summary = "Endpoint for interaction at challenge 16")
     @PostMapping(path = "/token", consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
     public ResponseEntity<?> clientCredentialToken(TokenRequest tokenRequest) {
         if ("client_credentials".equals(tokenRequest.grant_type())
@@ -36,6 +42,13 @@ public class TokenController {
             .build();
     }
 
+    /**
+     * Tokenrequest
+     *
+     * @param grant_type    ew
+     * @param client_id     we
+     * @param client_secret we
+     */
     public record TokenRequest(String grant_type,
                                String client_id,
                                String client_secret) {
@@ -47,6 +60,7 @@ public class TokenController {
                                 String scope) {
     }
 
+    @SuppressFBWarnings(value = "PATH_TRAVERSAL_IN", justification = "The location of the dockerMountPath is based on an Env Var")
     public String getActualData() {
         try {
             return Files.readString(Paths.get(dockerMountPath, "secondkey.txt"));
