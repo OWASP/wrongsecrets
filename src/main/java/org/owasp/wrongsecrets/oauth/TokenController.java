@@ -28,7 +28,7 @@ public class TokenController {
     }
 
 
-    @Operation(summary="Endpoint for interaction at challenge 16" )
+    @Operation(summary="Endpoint for interaction in challenge 16" )
     @PostMapping(path = "/token", consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
     public ResponseEntity<?> clientCredentialToken(TokenRequest tokenRequest) {
         if ("client_credentials".equals(tokenRequest.grant_type())

@@ -84,7 +84,7 @@ public class ChallengesController {
     }
 
     @GetMapping("/challenge/{id}")
-    @Operation(description = "Returns the data for a given challenge form interaction")
+    @Operation(description = "Returns the data for a given challenge's form interaction")
     public String challenge(Model model, @PathVariable Integer id) {
         if (!checkId(id)) {
             throw new ResponseStatusException(

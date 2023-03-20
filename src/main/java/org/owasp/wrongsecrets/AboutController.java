@@ -14,7 +14,7 @@ public class AboutController {
 
 
     @GetMapping("/about")
-    @Operation(description = "Endpoint to get about dynamic data")
+    @Operation(description = "Endpoint to get dynamic data on about")
     public String getStats(Model model) {
         return "about";
     }
