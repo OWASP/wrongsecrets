@@ -20,7 +20,7 @@ jobs:
           java-version: "19"
           distribution: "temurin"
       - name: Clean install
-        run: ./mvnw clean install
+        run: ./mvnw clean install -DskipTests -Ddependency-check.skip -Dcyclonedx.skip=true
       - name: Start wrongsecrets
         run: nohup ./mvnw spring-boot:run -Dspring-boot.run.profiles=without-vault &
       - name: ZAP Scan
@@ -29,5 +29,5 @@ jobs:
           allow_issue_writing: false
           docker_name: "owasp/zap2docker-stable"
           target: "http://localhost:8080"
-          rules_file_name: .zap/rule-config.tsv
+          rules_file_name: config/zap/rule-config.tsv
           fail_action: true
