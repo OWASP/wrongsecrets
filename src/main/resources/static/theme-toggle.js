@@ -1,7 +1,7 @@
 (function () {
-  const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+  const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
 
-  const initialTheme = darkModeMediaQuery.matches || localStorage.getItem('darkMode') === 'true';
+  const initialTheme = darkModeMediaQuery.matches || localStorage.getItem('darkMode') === 'true'
 
   function updateToggle (darkMode) {
     document.querySelector(".theme-toggle input[type=radio][value='dark']").checked = darkMode
@@ -26,4 +26,4 @@
 
     updateToggle(initialTheme)
   })
-})();
+})()
