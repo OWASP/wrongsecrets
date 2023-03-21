@@ -9,17 +9,18 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.codec.Hex;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+//import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 @Controller
@@ -51,6 +52,28 @@ public class ChallengesController {
         this.scoreCard = scoreCard;
         this.challenges = challenges;
         this.runtimeEnvironment = runtimeEnvironment;
+    }
+
+    private final Random secureRandom = new SecureRandom();
+    private static final String alphabet = "0123456789QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm";
+
+    @RestController
+    public class secretKey
+    {
+        @GetMapping("/getSpecialSecret")
+        public String getMyString () {
+        String randomValue = generateRandomString(10);
+        return randomValue;
+    }
+        private String generateRandomString ( int length){
+        StringBuilder builder = new StringBuilder(length);
+        for (int i = 0; i < length; i++) {
+            builder.append(alphabet.charAt(secureRandom.nextInt(alphabet.length())));
+        }
+        return new String(builder);
+    }
+
+
     }
 
     @GetMapping
