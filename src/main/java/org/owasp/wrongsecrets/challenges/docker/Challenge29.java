@@ -1,30 +1,40 @@
 package org.owasp.wrongsecrets.challenges.docker;
-
-
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
-import org.owasp.wrongsecrets.challenges.Challenge;
-import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
-import org.owasp.wrongsecrets.challenges.Spoiler;
+import org.owasp.wrongsecrets.challenges.*;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import java.util.List;
-
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Scanner;
 
 @Component
 @Order(29)
-@RestController
 public class Challenge29 extends Challenge {
 
-    @GetMapping("/localStorageString")
+
     public String getMyString() {
-        return "ThisIsYourPasswordOfChallenge30";
+        String response = null;
+        try {
+            // Creating a URL object for the endpoint
+            URL url = new URL("http://localhost:8080/getSpecialSecret");
+
+            // Opening an HTTP connection to the endpoint
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+
+            // Reading the response from the endpoint
+            Scanner scanner = new Scanner(connection.getInputStream());
+            response = scanner.nextLine();
+            scanner.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return response;
     }
 
-    public String solution="ThisIsYourPasswordOfChallenge30";
 
     public Challenge29(ScoreCard scoreCard) {
         super(scoreCard);
@@ -38,12 +48,12 @@ public class Challenge29 extends Challenge {
 
     @Override
     public Spoiler spoiler() {
-        return new Spoiler(solution);
+        return new Spoiler(getMyString());
     }
 
     @Override
     public boolean answerCorrect(String answer) {
-        return solution.equals(answer);
+        return getMyString().equals(answer);
     }
 
 
@@ -62,7 +72,6 @@ public class Challenge29 extends Challenge {
     public boolean isLimittedWhenOnlineHosted() {
         return false;
     }
-
 
 
     @Override
