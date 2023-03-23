@@ -6,11 +6,11 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.0.4</version>
-        <relativePath /> <!-- lookup parent from repository -->
+        <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>org.owasp</groupId>
     <artifactId>wrongsecrets</artifactId>
-    <version>jre18test2-SNAPSHOT</version>
+    <version>1.6.1-SNAPSHOT</version>
     <name>OWASP WrongSecrets</name>
     <description>Examples with how to not use secrets</description>
     <url>https://owasp.org/www-project-wrongsecrets/</url>
@@ -23,8 +23,8 @@
     </issueManagement>
     <licenses>
         <license>
-            <name>MIT License</name>
-            <url>https://opensource.org/licenses/MIT</url>
+            <name>AGPLv3 License</name>
+            <url>https://opensource.org/license/agpl-v3/</url>
             <distribution>repo</distribution>
         </license>
     </licenses>
@@ -180,7 +180,11 @@
             <groupId>com.google.cloud</groupId>
             <artifactId>google-cloud-secretmanager</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>2.0.4</version>
+        </dependency>
         <dependency>
             <groupId>com.azure.spring</groupId>
             <artifactId>spring-cloud-azure-starter-keyvault-secrets</artifactId>
@@ -217,10 +221,10 @@
             <version>4.6.0</version>
         </dependency>
         <!--        <dependency>-->
-<!--            <groupId>com.h2database</groupId>-->
-<!--            <artifactId>h2</artifactId>-->
-<!--            <version>2.1.214</version>-->
-<!--        </dependency>-->
+        <!--            <groupId>com.h2database</groupId>-->
+        <!--            <artifactId>h2</artifactId>-->
+        <!--            <version>2.1.214</version>-->
+        <!--        </dependency>-->
     </dependencies>
 
     <dependencyManagement>
@@ -442,6 +446,11 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-maven-plugin</artifactId>
+                <version>1.4</version>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
