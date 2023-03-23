@@ -1,10 +1,9 @@
+You can solve this challenge by the following steps:
 
-So we are looking for a secret that only you can see!
+1. Navigate to "localhost:8080" in your web browser.
 
-You can crack this by remembering some of these, maybe!
+2. Open developer console by inspecting.
 
-1. You are "client" !
+3. Navigate to Applications section of developer console.
 
-2. Your developer console is your best friend !
-
-3. LocalStorage can help you !!
+4. The value associated with the key "secret" is your answer!

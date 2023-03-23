@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.docker.Challenge0;
+import org.owasp.wrongsecrets.challenges.docker.Challenge29;
 import org.owasp.wrongsecrets.challenges.docker.Challenge8;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -70,27 +71,20 @@ public class ChallengesController {
         }
         return true;
     }
-    private final Random secureRandom = new SecureRandom();
-    private static final String alphabet = "0123456789QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm";
 
     @RestController
-    public class secretKey
-    {
-        @GetMapping("/getSpecialSecret")
-        public String getMyString () {
-            String randomValue = generateRandomString(10);
-            return randomValue;
-        }
-        private String generateRandomString ( int length){
-            StringBuilder builder = new StringBuilder(length);
-            for (int i = 0; i < length; i++) {
-                builder.append(alphabet.charAt(secureRandom.nextInt(alphabet.length())));
-            }
-            return new String(builder);
-        }
+    public class secretKey {
 
+        @GetMapping("/challenge/{id}/secret")
+        public String getChallengeSecret(@PathVariable Integer id) {
+            var challenge = challenges.get(id).getChallenge();
+            var challenge29 = (Challenge29) challenge;
+            return challenge29.Challenge29Secret;
 
+        }
     }
+
+
 
     @GetMapping
     @Operation(description = "Returns the given expalantion text for a challenge")

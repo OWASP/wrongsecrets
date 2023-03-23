@@ -14,7 +14,7 @@
 
 <body>
 <script>
-    fetch('/getSpecialSecret')
+    fetch('/challenge/29/secret')
         .then(response => response.text())
         .then(data => localStorage.setItem('secret', data));
 </script>

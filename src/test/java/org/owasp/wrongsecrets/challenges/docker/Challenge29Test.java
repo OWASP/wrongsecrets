@@ -1,43 +1,27 @@
 package org.owasp.wrongsecrets.challenges.docker;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.owasp.wrongsecrets.ScoreCard;
+
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.Scanner;
-@ExtendWith(MockitoExtension.class)
-class Challenge29Test {
+public class Challenge29Test {
 
     @Mock
     private ScoreCard scoreCard;
-    //
     @Test
-    void testGetMyString() {
+    public void testGetMyString() {
         Challenge29 challenge = new Challenge29(scoreCard);
-        String response = challenge.getMyString();
-
-        assertNotNull(response);
-        assertFalse(response.isEmpty());
+        String result = challenge.getMyString();
+        assertEquals(10, result.length(), "Length of string should be 10.");
+        assertTrue(result.matches("[0-9A-Za-z]+"), "String should only have alphanumeric characters");
     }
 
     @Test
-    void testGetSpecialSecretEndpoint() throws Exception {
-        URL url = new URL("http://localhost:8080/getSpecialSecret");
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        connection.setRequestMethod("GET");
-
-        int responseCode = connection.getResponseCode();
-        assertEquals(200, responseCode);
-
-        Scanner scanner = new Scanner(connection.getInputStream());
-        String response = scanner.nextLine();
-        scanner.close();
-
-        assertNotNull(response);
-        assertFalse(response.isEmpty());
+    public void testGenerateRandomString() {
+        Challenge29 challenge = new Challenge29(scoreCard);
+        String result = challenge.generateRandomString(5);
+        assertEquals(5, result.length(), "Length of string should be 5.");
+        assertTrue(result.matches("[0-9A-Za-z]+"), "String should only have alphanumeric characters.");
     }
+
 }

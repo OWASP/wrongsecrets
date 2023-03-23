@@ -4,41 +4,45 @@ import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.*;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.security.SecureRandom;
 import java.util.List;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.Scanner;
+//import java.net.HttpURLConnection;
+//import java.net.URL;
+import java.util.Random;
+//import java.util.Scanner;
 
 @Component
 @Order(29)
-public class Challenge29 extends Challenge {
 
+
+public class Challenge29 extends Challenge {
+    private final Random secureRandom = new SecureRandom();
+    private static final String alphabet = "0123456789QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm";
+    public String sol = getMyString();
 
     public String getMyString() {
-        String response = null;
-        try {
-            // Creating a URL object for the endpoint
-            URL url = new URL("http://localhost:8080/getSpecialSecret");
+        String randomValue = generateRandomString(10);
+        return randomValue;
+    }
 
-            // Opening an HTTP connection to the endpoint
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
-
-            // Reading the response from the endpoint
-            Scanner scanner = new Scanner(connection.getInputStream());
-            response = scanner.nextLine();
-            scanner.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
+    public String generateRandomString(int length) {
+        StringBuilder builder = new StringBuilder(length);
+        for (int i = 0; i < length; i++) {
+            builder.append(alphabet.charAt(secureRandom.nextInt(alphabet.length())));
         }
-        return response;
+        return new String(builder);
     }
 
 
     public Challenge29(ScoreCard scoreCard) {
+
         super(scoreCard);
+        this.Challenge29Secret = sol;
     }
+
 
     @Override
     public boolean canRunInCTFMode() {
@@ -48,12 +52,12 @@ public class Challenge29 extends Challenge {
 
     @Override
     public Spoiler spoiler() {
-        return new Spoiler(getMyString());
+        return new Spoiler(sol);
     }
 
     @Override
     public boolean answerCorrect(String answer) {
-        return getMyString().equals(answer);
+        return sol.equals(answer);
     }
 
 

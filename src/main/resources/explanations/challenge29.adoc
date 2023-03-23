@@ -1,6 +1,5 @@
 === The Client Secret
 
-A user enters some data in some mandatory field in a form, Now he/she didn't read the policies carefully and now his/her secret
-in compromised.
-
-Can you crack this using your local machine and web browser ?
+The client requires a random value of the server as a secret.
+Given it is random and not shown at startup you cannot "eavesdrop" it at the server.
+But what if we store it wrongly at the client?
