@@ -72,17 +72,17 @@ public class ChallengesController {
         return true;
     }
 
-    @RestController
-    public class secretKey {
-
-        @GetMapping("/challenge/{id}/secret")
-        public String getChallengeSecret(@PathVariable Integer id) {
-            var challenge = challenges.get(id).getChallenge();
-            var challenge29 = (Challenge29) challenge;
-            return challenge29.Challenge29Secret;
-
-        }
-    }
+//    @RestController
+//    public class secretKey {
+//
+//        @GetMapping("/challenge/{id}/secret")
+//        public String getChallengeSecret(@PathVariable Integer id) {
+//            var challenge = challenges.get(id).getChallenge();
+//            var challenge29 = (Challenge29) challenge;
+//            return challenge29.Challenge29Secret;
+//
+//        }
+//    }
 
 
 
