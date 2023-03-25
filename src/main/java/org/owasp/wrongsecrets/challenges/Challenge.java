@@ -27,7 +27,6 @@ public abstract class Challenge {
 
     public abstract boolean canRunInCTFMode();
 
-    public String Challenge29Secret;
 
     public boolean solved(String answer) {
         var correctAnswer = answerCorrect(answer);

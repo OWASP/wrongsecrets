@@ -40,7 +40,6 @@ public class Challenge29 extends Challenge {
     public Challenge29(ScoreCard scoreCard) {
 
         super(scoreCard);
-        this.Challenge29Secret = sol;
     }
 
 
