@@ -29,11 +29,14 @@ public class StatsController {
     @Value("${springdoc.api-docs.enabled}")
     private boolean springdockenabled;
 
+
     @Value("${canarytokenURLs}")
     private String[] canaryTokenURLs;
 
     @Value("${springdoc.swagger-ui.path}")
     private String swaggerURI;
+
+
 
     @GetMapping("/stats")
     @Operation(description = "Returns all dynamic data for the stats screen")

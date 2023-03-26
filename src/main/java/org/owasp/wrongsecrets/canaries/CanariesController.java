@@ -2,6 +2,7 @@ package org.owasp.wrongsecrets.canaries;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- *
+ * Restcontroller used 
  */
 @Slf4j
 @RestController
@@ -22,6 +23,7 @@ public class CanariesController {
     CanaryCounter canaryCounter;
 
     @PostMapping(path = "/canaries/tokencallback", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Callback method for canarytokens.com")
     public ResponseEntity<String> processCanaryToken(@RequestBody CanaryToken canaryToken) {
         try {
             String canarytokenContents = new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(canaryToken);
@@ -37,6 +39,7 @@ public class CanariesController {
     }
 
     @PostMapping(path = "/canaries/tokencallbackdebug", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Callback method for canarytokens.com using unstructed data")
     public ResponseEntity<String> processCanaryTokendebug(@RequestBody String canarytokenContents) {
         canaryCounter.upCallBackCounter();
         canaryCounter.setLastCanaryToken(canarytokenContents);
