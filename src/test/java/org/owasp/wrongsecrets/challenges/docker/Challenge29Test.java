@@ -1,27 +1,22 @@
 package org.owasp.wrongsecrets.challenges.docker;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.owasp.wrongsecrets.ScoreCard;
+import org.owasp.wrongsecrets.challenges.Spoiler;
 
-import static org.junit.jupiter.api.Assertions.*;
+
 public class Challenge29Test {
 
-    @Mock
-    private ScoreCard scoreCard;
     @Test
-    public void testGetMyString() {
+    public void testSpoiler() {
+        ScoreCard scoreCard = Mockito.mock(ScoreCard.class);
         Challenge29 challenge = new Challenge29(scoreCard);
-        String result = challenge.getMyString();
-        assertEquals(10, result.length(), "Length of string should be 10.");
-        assertTrue(result.matches("[0-9A-Za-z]+"), "String should only have alphanumeric characters");
-    }
 
-    @Test
-    public void testGenerateRandomString() {
-        Challenge29 challenge = new Challenge29(scoreCard);
-        String result = challenge.generateRandomString(5);
-        assertEquals(5, result.length(), "Length of string should be 5.");
-        assertTrue(result.matches("[0-9A-Za-z]+"), "String should only have alphanumeric characters.");
-    }
+        Spoiler spoiler = challenge.spoiler();
 
+        Assertions.assertNotNull(spoiler);
+        Assertions.assertNotNull(spoiler.solution());
+        Assertions.assertEquals(12, spoiler.solution().length());
+    }
 }
