@@ -1,7 +1,7 @@
 ---
 name: 🧩 Challenge idea
 about: If you have a challenge idea 💡
-labels: "New Challenge" 
+labels: "New Challenge"
 ---
 
 ### Context
