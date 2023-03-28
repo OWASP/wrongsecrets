@@ -7,6 +7,7 @@ import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.docker.Challenge0;
 import org.owasp.wrongsecrets.challenges.docker.Challenge8;
+import org.owasp.wrongsecrets.challenges.docker.Challenge29;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.codec.Hex;
@@ -47,6 +48,9 @@ public class ChallengesController {
 
     @Value("${challenge_acht_ctf_to_provide_to_host_value}")
     private String keyToProvideToHost;
+
+    @Value("${challenge_twentynine_ctf_to_provide_to_host_value}")
+    private String keyToProvideToHostForChallenge29;
 
     @Value("${CTF_SERVER_ADDRESS}")
     private String ctfServerAddress;
@@ -158,7 +162,11 @@ public class ChallengesController {
                             if (!Strings.isNullOrEmpty(keyToProvideToHost) && !keyToProvideToHost.equals("not_set")) { //this means that it was overriden with a code that needs to be returned to the ctf key exchange host.
                                 model.addAttribute("answerCorrect", "Your answer is correct! " + "fill in the following answer in the CTF instance at " + ctfServerAddress + "for which you get your code: " + keyToProvideToHost);
                             }
-                        } else {
+                        } else if(challenge.getChallenge() instanceof Challenge29) {
+                            if (!Strings.isNullOrEmpty(keyToProvideToHostForChallenge29) && !keyToProvideToHostForChallenge29.equals("not_set")) { //this means that it was overriden with a code that needs to be returned to the ctf key exchange host.
+                                model.addAttribute("answerCorrect", "Your answer is correct! " + "fill in the following answer in the CTF instance at " + ctfServerAddress + "for which you get your code: " + keyToProvideToHostForChallenge29);
+                            }
+                        }else{
                             model.addAttribute("answerCorrect", "Your answer is correct! " + "fill in the same answer in the ctf-instance of the app: " + ctfServerAddress);
                         }
                     } else {
