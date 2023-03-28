@@ -7,6 +7,9 @@ import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
+/**
+ * Security configuration for the CanariesController: so that a CSRF token is not required for canarytokens.com
+ */
 @Configuration
 public class TokenCallbackSecurityConfiguration {
 

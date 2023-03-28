@@ -30,7 +30,6 @@ public class CanariesController {
         requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Required token",
             content = @Content(schema = @Schema(implementation = CanaryToken.class)), required = true)
     )
-    //TODO: CONTINUE HERE!
     public ResponseEntity<String> processCanaryToken(@RequestBody @Valid CanaryToken canaryToken) {
         try {
             String canarytokenContents = new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(canaryToken);
@@ -46,7 +45,9 @@ public class CanariesController {
     }
 
     @PostMapping(path = "/canaries/tokencallbackdebug", consumes = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(summary = "Callback method for canarytokens.com using unstructed data")
+    @Operation(summary = "Callback method for canarytokens.com using unstructed data",
+        requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Required data",
+        content = @Content(schema = @Schema(implementation = String.class)), required = true))
     public ResponseEntity<String> processCanaryTokendebug(@RequestBody String canarytokenContents) {
         canaryCounter.upCallBackCounter();
         canaryCounter.setLastCanaryToken(canarytokenContents);
