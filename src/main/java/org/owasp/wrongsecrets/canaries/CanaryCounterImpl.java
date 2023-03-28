@@ -19,7 +19,7 @@ public class CanaryCounterImpl implements CanaryCounter {
     public void upCallBackCounter() {
         numberofCanaryCalls.incrementAndGet();
     }
-    
+
     @Override
     public int getTotalCount() {
         return numberofCanaryCalls.get();
