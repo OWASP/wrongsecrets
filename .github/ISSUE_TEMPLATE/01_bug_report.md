@@ -1,7 +1,10 @@
 ---
 name: 🐜 Bug report
 about: If something isn't working 🔧
+labels: bug
 ---
+
+<!-- Note: not all sections may be necessary. Strip out what you don't need. -->
 
 ### Please describe your environment
 
