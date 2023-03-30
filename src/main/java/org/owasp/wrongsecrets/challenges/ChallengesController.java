@@ -41,7 +41,6 @@ public class ChallengesController {
     @Value("${ctf_enabled}")
     private boolean ctfModeEnabled;
 
-    @Value("${spoiling_enabled}")
     private boolean spoilingEnabled;
 
     @Value("${ctf_key}")
@@ -54,10 +53,11 @@ public class ChallengesController {
     private String ctfServerAddress;
 
 
-    public ChallengesController(ScoreCard scoreCard, List<ChallengeUI> challenges, RuntimeEnvironment runtimeEnvironment) {
+    public ChallengesController(ScoreCard scoreCard, List<ChallengeUI> challenges, RuntimeEnvironment runtimeEnvironment, @Value("${spoiling_enabled}") boolean spoilingEnabled) {
         this.scoreCard = scoreCard;
         this.challenges = challenges;
         this.runtimeEnvironment = runtimeEnvironment;
+        this.spoilingEnabled = spoilingEnabled;
     }
 
     private boolean checkId(int id) {
