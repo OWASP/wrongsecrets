@@ -4,6 +4,9 @@ import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
 
+/**
+ * Abstract class used to provide convinient wrapper helpers for cloud type detection for the cloud challenges
+ */
 public abstract class CloudChallenge extends Challenge {
 
     private final RuntimeEnvironment runtimeEnvironment;
