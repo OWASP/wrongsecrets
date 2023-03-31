@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(
-    properties = {"ctf_enabled=true", "ctf_key=randomtextforkey", "CTF_SERVER_ADDRESS=https://www.google.nl", "challenge_acht_ctf_to_provide_to_host_value=workit"},
+    properties = {"ctf_enabled=true", "spoiling_enabled=true", "ctf_key=randomtextforkey", "CTF_SERVER_ADDRESS=https://www.google.nl", "challenge_acht_ctf_to_provide_to_host_value=workit"},
     classes = WrongSecretsApplication.class
 )
 @AutoConfigureMockMvc

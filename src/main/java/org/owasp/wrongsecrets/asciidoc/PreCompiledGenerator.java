@@ -8,6 +8,11 @@ import org.springframework.util.FileCopyUtils;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * Default enabled template rendering class which uses the HTML files
+ * Note that Ascidoc files need to be converted to HTML,
+ * use `mvn package` or `mvn install` to make sure they are generated.
+ */
 @Slf4j
 public class PreCompiledGenerator implements TemplateGenerator {
 

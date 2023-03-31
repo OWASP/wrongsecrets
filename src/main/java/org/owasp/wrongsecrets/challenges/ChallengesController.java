@@ -41,6 +41,8 @@ public class ChallengesController {
     @Value("${ctf_enabled}")
     private boolean ctfModeEnabled;
 
+    private boolean spoilingEnabled;
+
     @Value("${ctf_key}")
     private String ctfKey;
 
@@ -51,10 +53,11 @@ public class ChallengesController {
     private String ctfServerAddress;
 
 
-    public ChallengesController(ScoreCard scoreCard, List<ChallengeUI> challenges, RuntimeEnvironment runtimeEnvironment) {
+    public ChallengesController(ScoreCard scoreCard, List<ChallengeUI> challenges, RuntimeEnvironment runtimeEnvironment, @Value("${spoiling_enabled}") boolean spoilingEnabled) {
         this.scoreCard = scoreCard;
         this.challenges = challenges;
         this.runtimeEnvironment = runtimeEnvironment;
+        this.spoilingEnabled = spoilingEnabled;
     }
 
     private boolean checkId(int id) {
@@ -71,14 +74,25 @@ public class ChallengesController {
         return challenges.get(id).getExplanation();
     }
 
+    /**
+     * return a spoil of the secret
+     * Please note that there is no way to enable this in ctfMode: spoils can never be returned during a CTF
+     * By default, in normal operations, spoils are enabled, unless `spoilingEnabled` is set to false.
+     *
+     * @param model exchanged with the FE
+     * @param id    id of the challenge
+     * @return either a notification or a spoil
+     */
     @GetMapping("/spoil-{id}")
     @Hidden
     public String spoiler(Model model, @PathVariable Integer id) {
-        if (!ctfModeEnabled) {
+        if (ctfModeEnabled) {
+            model.addAttribute("spoiler", new Spoiler("Spoils are disabled in CTF mode"));
+        } else if (!spoilingEnabled) {
+            model.addAttribute("spoiler", new Spoiler("Spoils are disabled in the configuration"));
+        } else {
             var challenge = challenges.get(id).getChallenge();
             model.addAttribute("spoiler", challenge.spoiler());
-        } else {
-            model.addAttribute("spoiler", new Spoiler("Spoils are disabled in CTF mode"));
         }
         return "spoil";
     }

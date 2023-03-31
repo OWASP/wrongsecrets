@@ -4,7 +4,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-
+/**
+ * Implementation of CanaryCounter using an Atomic integer for actual implementation
+ */
 @Service
 public class CanaryCounterImpl implements CanaryCounter {
 
@@ -18,7 +20,6 @@ public class CanaryCounterImpl implements CanaryCounter {
         numberofCanaryCalls.incrementAndGet();
     }
 
-    // accessed via ajax loop (and controller), if value changes update display
     @Override
     public int getTotalCount() {
         return numberofCanaryCalls.get();
