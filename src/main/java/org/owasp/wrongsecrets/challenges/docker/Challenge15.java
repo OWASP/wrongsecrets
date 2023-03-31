@@ -1,5 +1,6 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
+import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
@@ -46,8 +47,7 @@ public class Challenge15 extends Challenge {
     @Override
     protected boolean answerCorrect(String answer) {
         String correctString = quickDecrypt(ciphterText);
-        String minimumKey = correctString.substring(75, 115);
-        return answer.equals(correctString) || answer.equals(minimumKey);
+        return answer.equals(correctString) || minimummatch_found(answer);
     }
 
     @Override
@@ -67,6 +67,16 @@ public class Challenge15 extends Challenge {
 
     @Override
     public boolean isLimittedWhenOnlineHosted() {
+        return false;
+    }
+
+    private boolean minimummatch_found(String answer) {
+        if (!Strings.isNullOrEmpty(answer)) {
+            if (answer.length() < 19) {
+                return false;
+            }
+            return quickDecrypt(ciphterText).contains(answer);
+        }
         return false;
     }
 
