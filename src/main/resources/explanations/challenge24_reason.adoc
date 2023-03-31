@@ -7,4 +7,4 @@ Please note that copying keys from specs/examples does not only hold for HMACs, 
 
 Still need to generate a key? Make sure you use a Secure Random generator and the right library for your runtime to generate the key instead.
 
-To make it even safer: make sure you use a key generation and/or derivation setup in which every new message has a different key. That way you have "Perfect Forward secrecy". This will ensure that older messages cannot be decrypted when one key is compromised.
+To make it even safer, use a key generation and/or derivation setup in which every new message has a different key. That way, you have "Perfect Forward secrecy". This will ensure that older messages cannot be decrypted when one key is compromised.
