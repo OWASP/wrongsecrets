@@ -15,7 +15,7 @@
                     Number of canary callbacks since boot: <span th:text="${canaryCounter}"></span><br/>
                     Active sessions are currently active visitors to challenges.<br/>
                     <span class="d-none d-lg-block"><br/></span>
-                    <span class="d-none d-lg-block" th:if="${springdockenabled==true}"><br/><br/><br/></span>
+                    <span class="d-none d-lg-block" th:if="${springdocenabled==true}"><br/><br/><br/></span>
                 </p>
 
             </div>
@@ -28,8 +28,8 @@
                     Reason enabled: <span th:text="${reasonEnabled}"></span><br/>
                     CTF-mode enabled: <span th:text="${ctfModeEnabled}"></span><br/>
                     Spoilers enabled: <span th:text="${spoilingEnabled}"></span><br/>
-                    Springdoc enabled: <span th:text="${springdockenabled}"></span>
-                    <span th:if="${springdockenabled==true}">
+                    Springdoc enabled: <span th:text="${springdocenabled}"></span>
+                    <span th:if="${springdocenabled==true}">
                         <br/>Swagger UI enabled: <span th:text="${swaggerUIEnabled}"></span>
                         <br/>Swagger uri: <a th:href="${swaggerURI}" target="_blank" th:text="${swaggerURI}"></a>
                     </span>

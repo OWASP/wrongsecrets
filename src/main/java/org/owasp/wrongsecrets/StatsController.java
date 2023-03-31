@@ -30,7 +30,7 @@ public class StatsController {
     private boolean swaggerUIEnabled;
 
     @Value("${springdoc.api-docs.enabled}")
-    private boolean springdockenabled;
+    private boolean springdocenabled;
 
 
     @Value("${canarytokenURLs}")
@@ -52,7 +52,7 @@ public class StatsController {
         model.addAttribute("ctfModeEnabled", ctfModeEnabled);
         model.addAttribute("spoilingEnabled", spoilingEnabled);
         model.addAttribute("swaggerUIEnabled", swaggerUIEnabled);
-        model.addAttribute("springdockenabled", springdockenabled);
+        model.addAttribute("springdockenabled", springdocenabled);
         model.addAttribute("swaggerURI", swaggerURI);
         return "stats";
     }
