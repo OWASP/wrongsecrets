@@ -52,7 +52,7 @@ public class StatsController {
         model.addAttribute("ctfModeEnabled", ctfModeEnabled);
         model.addAttribute("spoilingEnabled", spoilingEnabled);
         model.addAttribute("swaggerUIEnabled", swaggerUIEnabled);
-        model.addAttribute("springdockenabled", springdocenabled);
+        model.addAttribute("springdocenabled", springdocenabled);
         model.addAttribute("swaggerURI", swaggerURI);
         return "stats";
     }
