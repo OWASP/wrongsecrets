@@ -19,6 +19,9 @@ import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.AWS;
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.GCP;
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.AZURE;
 
+/**
+ * Cloud challenge that leverages the CSI secrets driver of the cloud you are running in.
+ */
 @Component
 @Slf4j
 @Order(10)

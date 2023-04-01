@@ -11,6 +11,9 @@ import java.util.List;
 
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 
+/**
+ * Introductionary challenge to get acquinted with the setup
+ */
 @Component
 @Order(0)
 public class Challenge0 extends Challenge {

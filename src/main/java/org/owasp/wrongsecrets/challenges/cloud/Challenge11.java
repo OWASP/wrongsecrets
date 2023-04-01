@@ -32,6 +32,9 @@ import java.util.List;
 
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.*;
 
+/**
+ * Cloud challenge which uses IAM privilelge escalation (differentiating per cloud).
+ */
 @Component
 @Slf4j
 @Order(11)

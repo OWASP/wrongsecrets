@@ -16,6 +16,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
+/**
+ * Challenge focused on filesystem issues in docker container due to workdir copying.
+ */
 @Slf4j
 @Component
 @Order(12)

@@ -5,7 +5,7 @@ import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
 
 /**
- * Abstract class used to provide convinient wrapper helpers for cloud type detection for the cloud challenges
+ * Abstract class used to provide convinient wrapper helpers for cloud type detection for the cloud challenges.
  */
 public abstract class CloudChallenge extends Challenge {
 
@@ -17,7 +17,7 @@ public abstract class CloudChallenge extends Challenge {
     }
 
     /**
-     * boolean showing whether we run in AWS
+     * boolean showing whether we run in AWS.
      * @return true if we are on AWS
      */
     public boolean isAWS() {
@@ -25,16 +25,16 @@ public abstract class CloudChallenge extends Challenge {
     }
 
     /**
-     * boolean showing whether we run in AWS
-     * @return true if we are on AWS
+     * boolean showing whether we run in GCP.
+     * @return true if we are on GCP
      */
     public boolean isGCP() {
         return this.runtimeEnvironment.getRuntimeEnvironment() == RuntimeEnvironment.Environment.GCP;
     }
 
     /**
-     * boolean showing whether we run in AWS
-     * @return true if we are on AWS
+     * boolean showing whether we run in Azure.
+     * @return true if we are on Azure
      */
     public boolean isAzure() {
         return this.runtimeEnvironment.getRuntimeEnvironment() == RuntimeEnvironment.Environment.AZURE;

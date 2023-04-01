@@ -5,8 +5,8 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 /**
- * Canarytokens used to communicate with <a href="http://canarytokens.com/">canarytokens.com</a>
- * will send a CanaryToken with this AdditionalCanaryData
+ * Canarytokens used to communicate with <a href="http://canarytokens.com/">canarytokens.com</a>.
+ * canarytokens.com will send a CanaryToken with this AdditionalCanaryData.
  * @see org.owasp.wrongsecrets.canaries.CanaryToken
  */
 @RequiredArgsConstructor

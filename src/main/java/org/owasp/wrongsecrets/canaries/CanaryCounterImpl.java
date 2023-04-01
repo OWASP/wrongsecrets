@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Implementation of CanaryCounter using an Atomic integer for actual implementation
+ * Implementation of CanaryCounter using an Atomic integer for actual implementation.
  */
 @Service
 public class CanaryCounterImpl implements CanaryCounter {

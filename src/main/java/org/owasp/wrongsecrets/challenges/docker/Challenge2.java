@@ -17,6 +17,7 @@ import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 /**
  * This challenge requires the participant to provide a hardcoded password to pass the challenge.
  * This challenge can be run in CTF mode and is limited to using Docker as a runtime environment.
+ * The javadoc is generated using ChatGPT.
  */
 @Component
 @Order(2)

@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
- * This challenge is about having a secrets stored in a misconfigured Hashicorp Vault
+ * This challenge is about having a secrets stored in a misconfigured Hashicorp Vault.
  */
 @Component
 @Order(7)

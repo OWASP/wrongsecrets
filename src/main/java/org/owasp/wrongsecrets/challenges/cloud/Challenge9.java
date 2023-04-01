@@ -20,7 +20,7 @@ import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.GCP;
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.AZURE;
 
 /**
- * Cloud challenge which focuses on Terraform and secrets
+ * Cloud challenge which focuses on Terraform and secrets.
  */
 @Component
 @Slf4j
@@ -31,7 +31,7 @@ public class Challenge9 extends CloudChallenge {
     private final String challengeAnswer;
 
     /**
-     * Cloud challenge which focuses on Terraform and secrets
+     * Cloud challenge which focuses on Terraform and secrets.
      * @param scoreCard required for score keeping
      * @param filePath used to mount in the secrets store where teh actual secret lands in from the cloud
      * @param awsDefaultValue used to indicate whether a cloud setup is enabled.

@@ -24,34 +24,33 @@ public abstract class Challenge {
     public abstract Spoiler spoiler();
 
     /**
-     * method that needs to be overwritten by the Challenge implementation class to do the actual
-     * evaluation of the answer
+     * method that needs to be overwritten by the Challenge implementation class to do the actual evaluation of the answer.
      * @param answer String provided by the user
      * @return true if answer is Correct
      */
     protected abstract boolean answerCorrect(String answer);
 
     /**
-     * Gives the supported runtime envs in which the class can run
+     * Gives the supported runtime envs in which the class can run.
      * @return a list of Environment objects representing supported envs for the class
      */
     public abstract List<Environment> supportedRuntimeEnvironments();
 
     /**
-     * returns the difficulty (1-5)
+     * returns the difficulty (1-5).
      * @return int with difficulty
      */
     public abstract int difficulty();
 
     /**
-     * returns the technology used
+     * returns the technology used.
      * @see ChallengeTechnology.Tech
      * @return a string from Tech.id
      */
     public abstract String getTech();
 
     /**
-     * boolean indicating a challenge needs to be run differently with a different explanation/steps when running on a shared platform
+     * boolean indicating a challenge needs to be run differently with a different explanation/steps when running on a shared platform.
      * @return boolean with true if a different explanation is required when running on a shared platform
      */
     public abstract boolean isLimittedWhenOnlineHosted();
@@ -64,7 +63,7 @@ public abstract class Challenge {
     public abstract boolean canRunInCTFMode();
 
     /**
-     * Solving method which, if the correct answer is provided, will mark the challenge as solved in the scorecard
+     * Solving method which, if the correct answer is provided, will mark the challenge as solved in the scorecard.
      * @param answer String provided by the user to validate.
      * @return true if answer was correct.
      */
@@ -77,7 +76,7 @@ public abstract class Challenge {
     }
 
     /**
-     * Returns the name of the explanation file for adoc rendering
+     * Returns the name of the explanation file for adoc rendering.
      * @return String with name of file for explanation
      */
     public String getExplanation() {
@@ -85,7 +84,7 @@ public abstract class Challenge {
     }
 
     /**
-     * Returns the name of the hints file for adoc rendering
+     * Returns the name of the hints file for adoc rendering.
      * @return String with name of file for hints
      */
     public String getHint() {
@@ -93,7 +92,7 @@ public abstract class Challenge {
     }
 
     /**
-     * Returns the name of the reason file for adoc rendering
+     * Returns the name of the reason file for adoc rendering.
      * @return String with name of file for reason
      */
     public String getReason() {

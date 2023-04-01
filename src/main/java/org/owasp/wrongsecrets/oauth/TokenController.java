@@ -2,10 +2,8 @@ package org.owasp.wrongsecrets.oauth;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
-import org.springdoc.core.annotations.RouterOperation;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -43,11 +41,10 @@ public class TokenController {
     }
 
     /**
-     * Tokenrequest
-     *
-     * @param grant_type    ew
-     * @param client_id     we
-     * @param client_secret we
+     * Tokenrequest used to call tokencontroller.
+     * @param grant_type string for grant type
+     * @param client_id string for the clientid
+     * @param client_secret holding the client secret for auth. target of challenge.
      */
     public record TokenRequest(String grant_type,
                                String client_id,
