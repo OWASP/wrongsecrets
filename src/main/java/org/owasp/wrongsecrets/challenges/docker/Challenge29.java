@@ -1,12 +1,11 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
-
+import lombok.extern.slf4j.Slf4j;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
 import org.owasp.wrongsecrets.challenges.Spoiler;
-import org.spongycastle.util.encoders.Hex;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -22,6 +21,7 @@ import java.util.List;
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 
 @Component
+@Slf4j
 @Order(29)
 public class Challenge29 extends Challenge {
 
@@ -36,7 +36,7 @@ public class Challenge29 extends Challenge {
 
 
     @Override
-    public Spoiler spoiler() throws Exception {
+    public Spoiler spoiler(){
         return new Spoiler(decrypt());
     }
 
@@ -56,7 +56,7 @@ public class Challenge29 extends Challenge {
 
     @Override
     public String getTech() {
-        return ChallengeTechnology.Tech.GIT.id;
+        return ChallengeTechnology.Tech.DOCUMENTATION.id;
     }
 
     @Override
@@ -64,25 +64,30 @@ public class Challenge29 extends Challenge {
         return false;
     }
 
-    public String decrypt() throws Exception {
-        String privateKeyFilePath = "src/test/resources/RSAprivatekey.pem";
-        String privateKeyContent = new String(Files.readAllBytes(Paths.get(privateKeyFilePath)), StandardCharsets.UTF_8);
-        privateKeyContent = privateKeyContent.replace("-----BEGIN PRIVATE KEY-----", "");
-        privateKeyContent = privateKeyContent.replace("-----END PRIVATE KEY-----", "");
-        privateKeyContent = privateKeyContent.replaceAll("\\s", "");
-        byte[] privateKeyBytes = java.util.Base64.getDecoder().decode(privateKeyContent);
-        PKCS8EncodedKeySpec spec = new PKCS8EncodedKeySpec(privateKeyBytes);
-        KeyFactory kf = KeyFactory.getInstance("RSA");
-        PrivateKey privateKey = kf.generatePrivate(spec);
+    public String decrypt() {
+        try {
+            String privateKeyFilePath = "src/test/resources/RSAprivatekey.pem";
+            String privateKeyContent = new String(Files.readAllBytes(Paths.get(privateKeyFilePath)), StandardCharsets.UTF_8);
+            privateKeyContent = privateKeyContent.replace("-----BEGIN PRIVATE KEY-----", "");
+            privateKeyContent = privateKeyContent.replace("-----END PRIVATE KEY-----", "");
+            privateKeyContent = privateKeyContent.replaceAll("\\s", "");
+            byte[] privateKeyBytes = java.util.Base64.getDecoder().decode(privateKeyContent);
+            PKCS8EncodedKeySpec spec = new PKCS8EncodedKeySpec(privateKeyBytes);
+            KeyFactory kf = KeyFactory.getInstance("RSA");
+            PrivateKey privateKey = kf.generatePrivate(spec);
 
-        byte[] encoded = java.util.Base64.getDecoder().decode("jA5Y9UJAgXa/En5wOAgnP5E9VCw6IZ/snbm20iGW0NKjxVzdIPvCeJoYyyI5KZ3snhRCRzD0SAoKO5FUyz8Rniw/tWVTzNEh76wLMVZ3STDAO5gF78qAp3/dfseWgVEAL4Y/B9ESNWftglTop12y1DIc3luOK8VEZjRC7eVDAP4kA72eTl2M2AvGqFEKVOjnQFh5My3nazUkWMjy5wrLdRjthDlyMB4NEatkfU5EE7dDyvblJTqz2/dEzuDtWpO1RRim0UoxnSqsKCMAyhKwObS5uGS4kkStLLZijdvsrvB63/LlbksFGPEexVJvplJOzG6g9buTdKDf0IoUKCyimw==".getBytes(StandardCharsets.UTF_8));
-        byte[] decoded = decode(encoded, privateKey);
-        String message = new String(decoded, StandardCharsets.UTF_8);
-        return message;
+            byte[] encoded = java.util.Base64.getDecoder().decode("aUb8RPnocWk17xXj0Xag8AOA8K0S4OD/jdqnIzMi5ItpEwPVLZUghYTGx53CHHb2LWRR+WH+Gx41Cr9522FbQDKbDMRaCd7GIMDApwUrFScevI/+usF0bmrw3tH9RUvCtxRZCDtsl038yNn90llsQM1e9OORMIvpzN1Ut0nDKErDvgv4pkUZXqGcybVKEGrULVWiIt8UYzd6lLNrRiRYrbcKrHNveyBhFExLpI/PsWS2NIcqyV7vXIib/PUBH0UdhSVnd+CJhNnFPBxQdScEDK7pYnhctr0I1Vl10Uk86uYsmMzqDSbt+TpCZeofcnd3tPdBB7z3c9ewVS+/fAVwlQ==".getBytes(StandardCharsets.UTF_8));
+            byte[] decoded = decode(encoded, privateKey);
+            String message = new String(decoded, StandardCharsets.UTF_8);
+            return message;
+        }catch (Exception e) {
+            log.warn("Exception when decrypting: {}", e.getMessage());
+            return "wrong_answer";
+        }
     }
 
     private static byte[] decode(byte[] encoded, PrivateKey privateKey) throws Exception {
-        Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+        Cipher cipher = Cipher.getInstance("RSA/ECB/OAEPWithSHA-256AndMGF1Padding");
         cipher.init(Cipher.DECRYPT_MODE, privateKey);
         return cipher.doFinal(encoded);
     }

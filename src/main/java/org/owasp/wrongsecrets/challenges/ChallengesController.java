@@ -86,7 +86,7 @@ public class ChallengesController {
     @GetMapping("/spoil-{id}")
 
     @Hidden
-    public String spoiler(Model model, @PathVariable Integer id) throws Exception {
+    public String spoiler(Model model, @PathVariable Integer id) {
         if (ctfModeEnabled) {
             model.addAttribute("spoiler", new Spoiler("Spoils are disabled in CTF mode"));
         } else if (!spoilingEnabled) {

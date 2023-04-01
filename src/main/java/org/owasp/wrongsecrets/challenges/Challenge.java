@@ -17,7 +17,7 @@ public abstract class Challenge {
 
     private final ScoreCard scoreCard;
 
-    public abstract Spoiler spoiler() throws Exception;
+    public abstract Spoiler spoiler();
 
     protected abstract boolean answerCorrect(String answer) throws Exception;
 
