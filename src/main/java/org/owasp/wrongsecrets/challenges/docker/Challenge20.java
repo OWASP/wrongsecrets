@@ -34,11 +34,17 @@ public class Challenge20 extends Challenge {
     }
 
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Spoiler spoiler() {
         return new Spoiler(binaryExecutionHelper.executeCommand("", "wrongsecrets-cplus"));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean answerCorrect(String answer) {
         return binaryExecutionHelper.executeCommand(answer, "wrongsecrets-cplus").equals("This is correct! Congrats!");

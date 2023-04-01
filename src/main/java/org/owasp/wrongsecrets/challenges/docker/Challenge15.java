@@ -39,11 +39,17 @@ public class Challenge15 extends Challenge {
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Spoiler spoiler() {
         return new Spoiler(quickDecrypt(ciphterText));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected boolean answerCorrect(String answer) {
         String correctString = quickDecrypt(ciphterText);

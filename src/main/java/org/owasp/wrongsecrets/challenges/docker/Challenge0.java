@@ -19,11 +19,17 @@ public class Challenge0 extends Challenge {
         super(scoreCard);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Spoiler spoiler() {
         return new Spoiler(getData());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected boolean answerCorrect(String answer) {
         return getData().equals(answer);

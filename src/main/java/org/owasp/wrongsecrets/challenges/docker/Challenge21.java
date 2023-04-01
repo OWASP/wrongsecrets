@@ -33,11 +33,17 @@ public class Challenge21 extends Challenge {
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Spoiler spoiler() {
         return new Spoiler(binaryExecutionHelper.executeGoCommand(""));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean answerCorrect(String answer) {
         return binaryExecutionHelper.executeGoCommand(answer).equals("This is correct! Congrats!");

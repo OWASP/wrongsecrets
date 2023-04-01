@@ -33,11 +33,17 @@ public class Challenge22 extends Challenge {
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Spoiler spoiler() {
         return new Spoiler(binaryExecutionHelper.executeCommand("", "wrongsecrets-rust"));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean answerCorrect(String answer) {
         return binaryExecutionHelper.executeCommand(answer, "wrongsecrets-rust").equals("This is correct! Congrats!");

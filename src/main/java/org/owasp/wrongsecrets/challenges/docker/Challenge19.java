@@ -34,11 +34,17 @@ public class Challenge19 extends Challenge {
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Spoiler spoiler() {
         return new Spoiler(binaryExecutionHelper.executeCommand("", "wrongsecrets-c"));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean answerCorrect(String answer) {
         return binaryExecutionHelper.executeCommand(answer, "wrongsecrets-c").equals("This is correct! Congrats!");

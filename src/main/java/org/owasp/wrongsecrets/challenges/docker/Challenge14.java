@@ -47,11 +47,17 @@ public class Challenge14 extends Challenge {
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Spoiler spoiler() {
         return new Spoiler(findAnswer());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected boolean answerCorrect(String answer) {
         return isanswerCorrectInKeeyPassx(answer);

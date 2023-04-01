@@ -30,11 +30,18 @@ public class Challenge4 extends Challenge {
         return true;
     }
 
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Spoiler spoiler() {
         return new Spoiler(argBasedPassword);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean answerCorrect(String answer) {
         return argBasedPassword.equals(answer)

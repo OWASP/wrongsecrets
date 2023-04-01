@@ -27,6 +27,9 @@ public class Challenge13 extends Challenge {
     private final String plainText;
     private final String cipherText;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Spoiler spoiler() {
         String answer = Base64.getEncoder().encodeToString("This is our first key as github secret".getBytes(StandardCharsets.UTF_8));
@@ -44,6 +47,9 @@ public class Challenge13 extends Challenge {
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected boolean answerCorrect(String answer) {
         return isKeyCorrect(answer);

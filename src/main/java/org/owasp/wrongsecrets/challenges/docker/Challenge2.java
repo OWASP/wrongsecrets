@@ -46,7 +46,6 @@ public class Challenge2 extends Challenge {
 
     /**
      * {@inheritDoc}
-     * Returns a Spoiler object containing the hardcoded password for the challenge.
      */
     @Override
     public Spoiler spoiler() {
@@ -59,6 +58,9 @@ public class Challenge2 extends Challenge {
      *
      * @param answer The answer provided by the participant.
      * @return True if the answer matches the hardcoded password, false otherwise.
+     */
+    /**
+     * {@inheritDoc}
      */
     @Override
     public boolean answerCorrect(String answer) {

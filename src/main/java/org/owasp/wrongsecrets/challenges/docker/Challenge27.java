@@ -36,11 +36,17 @@ public class Challenge27 extends Challenge {
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Spoiler spoiler() {
         return new Spoiler(quickDecrypt(cipherText));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean answerCorrect(String answer) {
         String correctString = quickDecrypt(cipherText);

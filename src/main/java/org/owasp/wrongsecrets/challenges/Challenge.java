@@ -17,6 +17,10 @@ public abstract class Challenge {
 
     private final ScoreCard scoreCard;
 
+    /**
+     * Returns a Spoiler object containing the secret for the challenge.
+     * @return Spoiler with anser
+     */
     public abstract Spoiler spoiler();
 
     /**
@@ -28,7 +32,7 @@ public abstract class Challenge {
     protected abstract boolean answerCorrect(String answer);
 
     /**
-     * Gives the supported runtine envs in which the class can run
+     * Gives the supported runtime envs in which the class can run
      * @return a list of Environment objects representing supported envs for the class
      */
     public abstract List<Environment> supportedRuntimeEnvironments();
@@ -55,7 +59,7 @@ public abstract class Challenge {
     /**
      * boolean indicating if the challenge can be enabled when running in CTF mode.
      * Note: All challenges should be able to run in non-CTF mode.
-     * @return true if th echallenge can be run in CTF mode.
+     * @return true if the challenge can be run in CTF mode.
      */
     public abstract boolean canRunInCTFMode();
 

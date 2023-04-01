@@ -24,11 +24,17 @@ public class Challenge23 extends Challenge {
         super(scoreCard);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Spoiler spoiler() {
         return new Spoiler(getActualData());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean answerCorrect(String answer) {
         //log.debug("challenge 23, actualdata: {}, answer: {}", getActualData(), answer);

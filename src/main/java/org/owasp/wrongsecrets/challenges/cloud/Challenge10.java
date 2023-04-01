@@ -37,11 +37,17 @@ public class Challenge10 extends CloudChallenge {
         this.challengeAnswer = getCloudChallenge9and10Value(filePath, fileName);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Spoiler spoiler() {
         return new Spoiler(challengeAnswer);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean answerCorrect(String answer) {
         return challengeAnswer.equals(answer);

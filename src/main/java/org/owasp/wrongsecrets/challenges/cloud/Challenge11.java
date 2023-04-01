@@ -80,11 +80,17 @@ public class Challenge11 extends CloudChallenge {
         this.challengeAnswer = getChallenge11Value(runtimeEnvironment);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Spoiler spoiler() {
         return new Spoiler(challengeAnswer);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean answerCorrect(String answer) {
         return challengeAnswer.equals(answer);

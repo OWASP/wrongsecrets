@@ -33,11 +33,17 @@ public class Challenge28 extends Challenge {
     }
 
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Spoiler spoiler() {
         return new Spoiler(secretKey);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean answerCorrect(String answer) {
         return secretKey.equals(answer);

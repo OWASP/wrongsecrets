@@ -14,6 +14,10 @@ import java.util.List;
 
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 
+/**
+ * This challenge requires the participant to provide a a hardcoded docker env var as password
+ * This challenge can be run in CTF mode and is limited to using Docker as a runtime environment.
+ */
 @Component
 @Order(3)
 public class Challenge3 extends Challenge {
@@ -25,16 +29,26 @@ public class Challenge3 extends Challenge {
         this.hardcodedEnvPassword = hardcodedEnvPassword;
     }
 
+    /**
+     * {@inheritDoc}
+     * This challenge can always run in CTF mode.
+     */
     @Override
     public boolean canRunInCTFMode() {
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Spoiler spoiler() {
         return new Spoiler(hardcodedEnvPassword);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean answerCorrect(String answer) {
         return hardcodedEnvPassword.equals(answer);
