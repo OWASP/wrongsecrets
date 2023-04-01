@@ -1,8 +1,8 @@
 <!-- CRE Link: [223-780](https://www.opencre.org/cre/223-780?register=true&type=tool&tool_type=training&tags=secrets,training&description=With%20this%20app%2C%20we%20have%20packed%20various%20ways%20of%20how%20to%20not%20store%20your%20secrets.%20These%20can%20help%20you%20to%20realize%20whether%20your%20secret%20management%20is%20ok.%20The%20challenge%20is%20to%20find%20all%20the%20different%20secrets%20by%20means%20of%20various%20tools%20and%20techniques.%20Can%20you%20solve%20all%20the%2015%20challenges%3F) -->
 
-# OWASP WrongSecrets [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Want%20to%20dive%20into%20secrets%20management%20and%20do%20some%20hunting?%20try%20this&url=https://github.com/OWASP/wrongsecrets&hashtags=secretsmanagement,secrets,hunting,p0wnableapp,OWASP,WrongSecrets)[<img src="https://raw.githubusercontent.com/mastodon/mastodon/main/app/javascript/images/app-icon.svg" width=16>](https://tootpick.org/#text=Want%20to%20dive%20into%20secrets%20management%20and%20do%20some%20hunting?%20try%20this%0A%0Ahttps://github.com/OWASP/wrongsecrets%20%23secretsmanagement,%20%23secrets,%20%23hunting,%20%23p0wnableapp,%20%23OWASP,%20%23WrongSecrets)
+# OWASP WrongSecrets [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Want%20to%20dive%20into%20secrets%20management%20and%20do%20some%20hunting?%20try%20this&url=https://github.com/OWASP/wrongsecrets&hashtags=secretsmanagement,secrets,hunting,p0wnableapp,OWASP,WrongSecrets) [<img src="https://img.shields.io/badge/-MASTODON-%232B90D9?style=for-the-badge&logo=mastodon&logoColor=white" width=86>](https://tootpick.org/#text=Want%20to%20dive%20into%20secrets%20management%20and%20do%20some%20hunting?%20try%20this%0A%0Ahttps://github.com/OWASP/wrongsecrets%20%23secretsmanagement,%20%23secrets,%20%23hunting,%20%23p0wnableapp,%20%23OWASP,%20%23WrongSecrets)
 
-[![Java checkstyle and testing](https://github.com/OWASP/wrongsecrets/actions/workflows/main.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/main.yml) ![Pre-commit](https://github.com/OWASP/wrongsecrets/actions/workflows/pre-commit.yml/badge.svg)[![Terraform FMT](https://github.com/OWASP/wrongsecrets/actions/workflows/terraform.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/terraform.yml) [![Test minikube script (k8s)](https://github.com/OWASP/wrongsecrets/actions/workflows/minikube-k8s-test.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/minikube-k8s-test.yml) [![Test minikube script (k8s&vault)](https://github.com/OWASP/wrongsecrets/actions/workflows/minikube-vault-test.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/minikube-vault-test.yml) [![Docker container test](https://github.com/OWASP/wrongsecrets/actions/workflows/container_test.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/container_test.yml)
+[![Java checkstyle and testing](https://github.com/OWASP/wrongsecrets/actions/workflows/main.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/main.yml) [![Pre-commit](https://github.com/OWASP/wrongsecrets/actions/workflows/pre-commit.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/pre-commit.yml) [![Terraform FMT](https://github.com/OWASP/wrongsecrets/actions/workflows/terraform.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/terraform.yml) [![Test minikube script (k8s)](https://github.com/OWASP/wrongsecrets/actions/workflows/minikube-k8s-test.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/minikube-k8s-test.yml) [![Test minikube script (k8s&vault)](https://github.com/OWASP/wrongsecrets/actions/workflows/minikube-vault-test.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/minikube-vault-test.yml) [![Docker container test](https://github.com/OWASP/wrongsecrets/actions/workflows/container_test.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/container_test.yml)
 [![OWASP Lab Project](https://img.shields.io/badge/OWASP-lab%20project-48A646.svg)](https://owasp.org/projects/)
 [![OpenSSF Best Practices](https://bestpractices.coreinfrastructure.org/projects/7024/badge)](https://bestpractices.coreinfrastructure.org/projects/7024)
 [![Discussions](https://img.shields.io/github/discussions/OWASP/wrongsecrets)](https://github.com/OWASP/wrongsecrets/discussions)
@@ -21,7 +21,6 @@ Can you solve all the 28 challenges?
 -   [Support](#support)
 -   [Basic docker exercises](#basic-docker-exercises)
     -   [Running these on Heroku](#running-these-on-heroku)
-    -   [Deploying the app under your own heroku account](#deploying-the-app-under-your-own-heroku-account)
     -   [Running on Fly.io](#running-on-flyio)
 -   [Basic K8s exercise](#basic-k8s-exercise)
     -   [Minikube based](#minikube-based)
@@ -109,13 +108,6 @@ better ;-).
 You can test them out at [https://wrongsecrets.herokuapp.com/](https://wrongsecrets.herokuapp.com/) as well! But please
 understand that we have NO guarantees that this works. Given we run in Heroku free-tier, please do not fuzz and/or try
 to bring it down: you would be spoiling it for others that want to testdrive it.
-
-### Deploying the app under your own heroku account
-
-1. [Sign up to Heroku](https://signup.heroku.com/) and [log in to your account](https://id.heroku.com/login)
-2. Click the button below and follow the instructions
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 ### Running on Fly.io
 
@@ -291,6 +283,11 @@ We would like to thank the following parties for helping us out:
 [![1password_logo.png](images/1password_logo.png)](https://github.com/1Password/1password-teams-open-source/pull/552)
 
 [1Password](https://1password.com/) for granting us an open source license to 1Password for the secret detection testbed.
+
+
+[![AWS Open Source](images/aws-white_48x29.png)](https://aws.amazon.com/)
+
+[AWS](https://aws.amazon.com/) for granting us AWS Open Source credits which we use to test our project and the [Wrongsecrets CTF Party](https://github.com/OWASP/wrongsecrets-ctf-party) setup on AWS.
 
 ## Help Wanted
 

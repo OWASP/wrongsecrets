@@ -12,6 +12,7 @@ import java.util.Set;
 
 /**
  * Thymeleaf resolver for AsciiDoc used in the lesson, can be used as follows inside a lesson file.
+ * See <a href="https://github.com/OWASP/wrongsecrets#automatic-reload-during-development">The repo readme</a> for more details on how to use it
  */
 @Slf4j
 public class AsciiDoctorTemplateResolver extends FileTemplateResolver {

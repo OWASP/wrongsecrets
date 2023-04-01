@@ -1,6 +1,8 @@
 package org.owasp.wrongsecrets.challenges;
 
 import com.google.common.base.Strings;
+import io.swagger.v3.oas.annotations.Hidden;
+import io.swagger.v3.oas.annotations.Operation;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.docker.Challenge0;
@@ -39,6 +41,8 @@ public class ChallengesController {
     @Value("${ctf_enabled}")
     private boolean ctfModeEnabled;
 
+    private boolean spoilingEnabled;
+
     @Value("${ctf_key}")
     private String ctfKey;
 
@@ -49,10 +53,11 @@ public class ChallengesController {
     private String ctfServerAddress;
 
 
-    public ChallengesController(ScoreCard scoreCard, List<ChallengeUI> challenges, RuntimeEnvironment runtimeEnvironment) {
+    public ChallengesController(ScoreCard scoreCard, List<ChallengeUI> challenges, RuntimeEnvironment runtimeEnvironment, @Value("${spoiling_enabled}") boolean spoilingEnabled) {
         this.scoreCard = scoreCard;
         this.challenges = challenges;
         this.runtimeEnvironment = runtimeEnvironment;
+        this.spoilingEnabled = spoilingEnabled;
     }
 
     private boolean checkId(int id) {
@@ -64,22 +69,37 @@ public class ChallengesController {
     }
 
     @GetMapping
+    @Operation(description = "Returns the given expalantion text for a challenge")
     public String explanation(@PathVariable Integer id) {
         return challenges.get(id).getExplanation();
     }
 
+    /**
+     * return a spoil of the secret
+     * Please note that there is no way to enable this in ctfMode: spoils can never be returned during a CTF
+     * By default, in normal operations, spoils are enabled, unless `spoilingEnabled` is set to false.
+     *
+     * @param model exchanged with the FE
+     * @param id    id of the challenge
+     * @return either a notification or a spoil
+     */
     @GetMapping("/spoil-{id}")
+
+    @Hidden
     public String spoiler(Model model, @PathVariable Integer id) throws Exception {
-        if (!ctfModeEnabled) {
+        if (ctfModeEnabled) {
+            model.addAttribute("spoiler", new Spoiler("Spoils are disabled in CTF mode"));
+        } else if (!spoilingEnabled) {
+            model.addAttribute("spoiler", new Spoiler("Spoils are disabled in the configuration"));
+        } else {
             var challenge = challenges.get(id).getChallenge();
             model.addAttribute("spoiler", challenge.spoiler());
-        } else {
-            model.addAttribute("spoiler", new Spoiler("Spoils are disabled in CTF mode"));
         }
         return "spoil";
     }
 
     @GetMapping("/challenge/{id}")
+    @Operation(description = "Returns the data for a given challenge's form interaction")
     public String challenge(Model model, @PathVariable Integer id) {
         if (!checkId(id)) {
             throw new ResponseStatusException(
@@ -112,6 +132,7 @@ public class ChallengesController {
     }
 
     @PostMapping(value = "/challenge/{id}", params = "action=reset")
+    @Operation(description = "Resets the state of a given challenge")
     public String reset(@ModelAttribute ChallengeForm challengeForm, @PathVariable Integer id, Model model) {
         if (!checkId(id)) {
             throw new ResponseStatusException(
@@ -129,6 +150,7 @@ public class ChallengesController {
     }
 
     @PostMapping(value = "/challenge/{id}", params = "action=submit")
+    @Operation(description = "Post your answer to the challenge for a given challenge ID")
     public String postController(@ModelAttribute ChallengeForm challengeForm, Model model, @PathVariable Integer id) {
         if (!checkId(id)) {
             throw new ResponseStatusException(
