@@ -80,7 +80,7 @@ public class Challenge29 extends Challenge {
             byte[] decoded = decode(encoded, privateKey);
             String message = new String(decoded, StandardCharsets.UTF_8);
             return message;
-        }catch (Exception e) {
+        }catch(Exception e){
             log.warn("Exception when decrypting: {}", e.getMessage());
             return "wrong_answer";
         }
