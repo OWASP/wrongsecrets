@@ -106,12 +106,9 @@ public class ChallengesController {
 
     @GetMapping("/challenge/{id}")
     @Operation(description = "Returns the data for a given challenge's form interaction")
-    public String challenge(Model model, @PathVariable Integer id)
-    {
+    public String challenge(Model model, @PathVariable Integer id) {
         if (!checkId(id)) {
-            throw new ResponseStatusException(
-                HttpStatus.NOT_FOUND, "challenge not found"
-            );
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "challenge not found");
         }
         var challenge = challenges.get(id);
 
@@ -142,9 +139,7 @@ public class ChallengesController {
     @Operation(description = "Resets the state of a given challenge")
     public String reset(@ModelAttribute ChallengeForm challengeForm, @PathVariable Integer id, Model model) {
         if (!checkId(id)) {
-            throw new ResponseStatusException(
-                HttpStatus.NOT_FOUND, "challenge not found"
-            );
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "challenge not found");
         }
         var challenge = challenges.get(id);
         scoreCard.reset(challenge.getChallenge());
@@ -160,9 +155,7 @@ public class ChallengesController {
     @Operation(description = "Post your answer to the challenge for a given challenge ID")
     public String postController(@ModelAttribute ChallengeForm challengeForm, Model model, @PathVariable Integer id) {
         if (!checkId(id)) {
-            throw new ResponseStatusException(
-                HttpStatus.NOT_FOUND, "challenge not found"
-            );
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "challenge not found");
         }
         var challenge = challenges.get(id);
 
@@ -176,11 +169,11 @@ public class ChallengesController {
                             if (!Strings.isNullOrEmpty(keyToProvideToHost) && !keyToProvideToHost.equals("not_set")) { //this means that it was overriden with a code that needs to be returned to the ctf key exchange host.
                                 model.addAttribute("answerCorrect", "Your answer is correct! " + "fill in the following answer in the CTF instance at " + ctfServerAddress + "for which you get your code: " + keyToProvideToHost);
                             }
-                        } else if(challenge.getChallenge() instanceof Challenge29) {
+                        } else if (challenge.getChallenge() instanceof Challenge29) {
                             if (!Strings.isNullOrEmpty(keyToProvideToHostForChallenge29) && !keyToProvideToHostForChallenge29.equals("not_set")) { //this means that it was overriden with a code that needs to be returned to the ctf key exchange host.
                                 model.addAttribute("answerCorrect", "Your answer is correct! " + "fill in the following answer in the CTF instance at " + ctfServerAddress + "for which you get your code: " + keyToProvideToHostForChallenge29);
                             }
-                        }else{
+                        } else {
                             model.addAttribute("answerCorrect", "Your answer is correct! " + "fill in the same answer in the ctf-instance of the app: " + ctfServerAddress);
                         }
                     } else {
@@ -228,10 +221,7 @@ public class ChallengesController {
 
     private void addWarning(Challenge challenge, Model model) {
         if (!runtimeEnvironment.canRun(challenge)) {
-            var warning = challenge.supportedRuntimeEnvironments().stream()
-                .map(Enum::name)
-                .limit(1)
-                .collect(Collectors.joining());
+            var warning = challenge.supportedRuntimeEnvironments().stream().map(Enum::name).limit(1).collect(Collectors.joining());
             model.addAttribute("missingEnvWarning", warning);
         }
     }
@@ -242,11 +232,7 @@ public class ChallengesController {
     }
 
     private void fireEnding(Model model) {
-        var notCompleted = challenges.stream()
-            .filter(ChallengeUI::isChallengeEnabled)
-            .map(ChallengeUI::getChallenge)
-            .filter(this::challengeNotCompleted)
-            .count();
+        var notCompleted = challenges.stream().filter(ChallengeUI::isChallengeEnabled).map(ChallengeUI::getChallenge).filter(this::challengeNotCompleted).count();
         if (notCompleted == 0) {
             model.addAttribute("allCompleted", "party");
         }

@@ -1,4 +1,5 @@
 package org.owasp.wrongsecrets.challenges;
+
 import io.swagger.v3.oas.annotations.Hidden;
 import org.owasp.wrongsecrets.challenges.docker.Challenge29;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,8 @@ public class ChallengeRestController {
 
     @GetMapping("/hidden")
     @Hidden
-    public String getChallengeSecret(){return challenge29.spoiler().solution();}
+    public String getChallengeSecret() {
+        return challenge29.spoiler().solution();
+    }
 
 }
