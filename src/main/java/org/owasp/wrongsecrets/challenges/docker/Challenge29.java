@@ -75,14 +75,14 @@ public class Challenge29 extends Challenge {
         KeyFactory kf = KeyFactory.getInstance("RSA");
         PrivateKey privateKey = kf.generatePrivate(spec);
 
-        byte[] encoded = java.util.Base64.getDecoder().decode("mkS14oW+jxi30ix3YSGjY/roIszGrH5VG2ZBlWzKIQEWiNRZ0C7OtydLk1j0RaQTpt7ZIdUNToAkBkX+GViF8EyGyAf0zfncOf0eDynN8+meA5jajXjDYvooYKqSIcIFycpIiPuvAZqm3Oo7Th6FMqD1ImrdSaNSiooKWNQKbWcMwRxAZlIvnbDBrPXCEHWNSy8RcpwufHXbxqWRsTIxnJsS5NRKcZKBTjRahiHkiwuK7gilrJIQ0rLh+KT4WwroRZ3BvmQytuyIeMbGiQEuQkE9SLVyUX6tmNgLAOITl8QiZ5W8cimmE3KnZBR1klQbxyZc2Xt+YFuEiYMmqa/akg==".getBytes(StandardCharsets.UTF_8));
+        byte[] encoded = java.util.Base64.getDecoder().decode("jA5Y9UJAgXa/En5wOAgnP5E9VCw6IZ/snbm20iGW0NKjxVzdIPvCeJoYyyI5KZ3snhRCRzD0SAoKO5FUyz8Rniw/tWVTzNEh76wLMVZ3STDAO5gF78qAp3/dfseWgVEAL4Y/B9ESNWftglTop12y1DIc3luOK8VEZjRC7eVDAP4kA72eTl2M2AvGqFEKVOjnQFh5My3nazUkWMjy5wrLdRjthDlyMB4NEatkfU5EE7dDyvblJTqz2/dEzuDtWpO1RRim0UoxnSqsKCMAyhKwObS5uGS4kkStLLZijdvsrvB63/LlbksFGPEexVJvplJOzG6g9buTdKDf0IoUKCyimw==".getBytes(StandardCharsets.UTF_8));
         byte[] decoded = decode(encoded, privateKey);
         String message = new String(decoded, StandardCharsets.UTF_8);
         return message;
     }
 
     private static byte[] decode(byte[] encoded, PrivateKey privateKey) throws Exception {
-        Cipher cipher = Cipher.getInstance("RSA/ECB/OAEPWithSHA-256AndMGF1Padding");
+        Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
         cipher.init(Cipher.DECRYPT_MODE, privateKey);
         return cipher.doFinal(encoded);
     }

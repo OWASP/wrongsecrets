@@ -9,7 +9,6 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Spoiler;
-import org.spongycastle.util.encoders.Hex;
 
 @ExtendWith(MockitoExtension.class)
 class Challenge29Test {
