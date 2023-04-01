@@ -68,13 +68,8 @@ public class Challenge2 extends Challenge {
     }
 
     /**
-     * Returns a list of supported runtime environments for the challenge.
-     * This challenge supports the Docker runtime environment.
-     *
-     * @return A list of supported runtime environments.
-     */
-    /**
      * {@inheritDoc}
+     * This challenge supports the Docker runtime environment.
      */
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
         return List.of(DOCKER);
@@ -82,7 +77,7 @@ public class Challenge2 extends Challenge {
 
     /**
      * {@inheritDoc}
-     * Returns the difficulty level of the challenge as 1.
+     * Difficulty: 1
      */
     @Override
     public int difficulty() {
@@ -91,7 +86,7 @@ public class Challenge2 extends Challenge {
 
     /**
      * {@inheritDoc}
-     * Returns the technology used for the challenge as GIT.
+     * Technology is GIT for this challenge.
      */
     @Override
     public String getTech() {

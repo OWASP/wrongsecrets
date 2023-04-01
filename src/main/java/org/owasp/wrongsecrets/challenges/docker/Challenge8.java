@@ -66,6 +66,10 @@ public class Challenge8 extends Challenge {
         return List.of(DOCKER);
     }
 
+    /**
+     * {@inheritDoc}
+     * Difficulty: 3
+     */
     @Override
     public int difficulty() {
         return 2;

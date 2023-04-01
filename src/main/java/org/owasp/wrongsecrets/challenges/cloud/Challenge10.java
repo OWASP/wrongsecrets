@@ -70,6 +70,10 @@ public class Challenge10 extends CloudChallenge {
         return List.of(GCP, AWS, AZURE);
     }
 
+    /**
+     * {@inheritDoc}
+     * Difficulty: 4
+     */
     @Override
     public int difficulty() {
         return 4;

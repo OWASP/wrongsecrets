@@ -5,6 +5,7 @@ import org.apache.logging.log4j.util.Strings;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
+import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
@@ -12,6 +13,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * This challenge is about having a secrets stored in a misconfigured Hashicorp Vault
+ */
 @Component
 @Order(7)
 public class Challenge7 extends Challenge {
@@ -57,6 +61,10 @@ public class Challenge7 extends Challenge {
         return List.of(RuntimeEnvironment.Environment.VAULT);
     }
 
+    /**
+     * {@inheritDoc}
+     * Difficulty: 4
+     */
     @Override
     public int difficulty() {
         return 4;
@@ -64,7 +72,7 @@ public class Challenge7 extends Challenge {
 
     @Override
     public String getTech() {
-        return "Vault";
+        return ChallengeTechnology.Tech.VAULT.id;
     }
 
     @Override

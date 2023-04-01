@@ -14,6 +14,9 @@ import java.util.List;
 
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 
+/**
+ * This challenge is about having a secrets stored as a Docker ARG var.
+ */
 @Component
 @Order(4)
 public class Challenge4 extends Challenge {
@@ -55,11 +58,19 @@ public class Challenge4 extends Challenge {
         return List.of(DOCKER);
     }
 
+    /**
+     * {@inheritDoc}
+     * Difficulty: 2
+     */
     @Override
     public int difficulty() {
         return 2;
     }
 
+    /**
+     * {@inheritDoc}
+     * Technology is Docker for this challenge.
+     */
     @Override
     public String getTech() {
         return ChallengeTechnology.Tech.DOCKER.id;
