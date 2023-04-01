@@ -22,6 +22,7 @@ import java.util.List;
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 
 @Component
+@Slf4j
 @Order(29)
 public class Challenge29 extends Challenge {
 
