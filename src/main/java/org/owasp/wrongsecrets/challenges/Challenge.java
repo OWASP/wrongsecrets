@@ -13,9 +13,9 @@ public abstract class Challenge {
 
     private final ScoreCard scoreCard;
 
-    public abstract Spoiler spoiler();
+    public abstract Spoiler spoiler() throws Exception;
 
-    protected abstract boolean answerCorrect(String answer);
+    protected abstract boolean answerCorrect(String answer) throws Exception;
 
     public abstract List<Environment> supportedRuntimeEnvironments();
 
@@ -28,7 +28,12 @@ public abstract class Challenge {
     public abstract boolean canRunInCTFMode();
 
     public boolean solved(String answer) {
-        var correctAnswer = answerCorrect(answer);
+        boolean correctAnswer = false;
+        try {
+            correctAnswer = answerCorrect(answer);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         if (correctAnswer) {
             scoreCard.completeChallenge(this);
         }

@@ -69,7 +69,7 @@ public class ChallengesController {
     }
 
     @GetMapping("/spoil-{id}")
-    public String spoiler(Model model, @PathVariable Integer id) {
+    public String spoiler(Model model, @PathVariable Integer id) throws Exception {
         if (!ctfModeEnabled) {
             var challenge = challenges.get(id).getChallenge();
             model.addAttribute("spoiler", challenge.spoiler());
