@@ -48,6 +48,9 @@ public class Challenge4 extends Challenge {
         || argBasedPassword.equals("'" + answer + "'");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
         return List.of(DOCKER);
     }

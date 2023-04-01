@@ -16,14 +16,26 @@ public abstract class CloudChallenge extends Challenge {
         this.runtimeEnvironment = runtimeEnvironment;
     }
 
+    /**
+     * boolean showing whether we run in AWS
+     * @return true if we are on AWS
+     */
     public boolean isAWS() {
         return this.runtimeEnvironment.getRuntimeEnvironment() == RuntimeEnvironment.Environment.AWS;
     }
 
+    /**
+     * boolean showing whether we run in AWS
+     * @return true if we are on AWS
+     */
     public boolean isGCP() {
         return this.runtimeEnvironment.getRuntimeEnvironment() == RuntimeEnvironment.Environment.GCP;
     }
 
+    /**
+     * boolean showing whether we run in AWS
+     * @return true if we are on AWS
+     */
     public boolean isAzure() {
         return this.runtimeEnvironment.getRuntimeEnvironment() == RuntimeEnvironment.Environment.AZURE;
     }

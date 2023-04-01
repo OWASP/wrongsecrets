@@ -59,6 +59,9 @@ public class Challenge8 extends Challenge {
         return randomValue.equals(answer);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
         return List.of(DOCKER);
     }

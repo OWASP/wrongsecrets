@@ -96,6 +96,9 @@ public class Challenge11 extends CloudChallenge {
         return challengeAnswer.equals(answer);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
         return List.of(AWS, GCP, AZURE);
     }

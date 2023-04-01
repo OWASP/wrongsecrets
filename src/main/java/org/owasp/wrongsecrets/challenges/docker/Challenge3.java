@@ -31,6 +31,7 @@ public class Challenge3 extends Challenge {
 
     /**
      * {@inheritDoc}
+     *
      * This challenge can always run in CTF mode.
      */
     @Override
@@ -54,6 +55,9 @@ public class Challenge3 extends Challenge {
         return hardcodedEnvPassword.equals(answer);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
         return List.of(DOCKER);
     }

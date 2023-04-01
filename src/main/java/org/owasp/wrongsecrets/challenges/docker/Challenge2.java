@@ -73,6 +73,9 @@ public class Challenge2 extends Challenge {
      *
      * @return A list of supported runtime environments.
      */
+    /**
+     * {@inheritDoc}
+     */
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
         return List.of(DOCKER);
     }

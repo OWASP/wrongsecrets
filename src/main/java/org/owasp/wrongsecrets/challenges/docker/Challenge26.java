@@ -35,6 +35,7 @@ public class Challenge26 extends Challenge {
     public boolean canRunInCTFMode() {
         return true;
     }
+
     /**
      * {@inheritDoc}
      */
@@ -52,6 +53,9 @@ public class Challenge26 extends Challenge {
         return answer.equals(correctString);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
         return List.of(RuntimeEnvironment.Environment.DOCKER);

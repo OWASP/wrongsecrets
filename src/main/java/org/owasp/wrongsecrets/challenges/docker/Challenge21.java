@@ -49,6 +49,9 @@ public class Challenge21 extends Challenge {
         return binaryExecutionHelper.executeGoCommand(answer).equals("This is correct! Congrats!");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
         return List.of(DOCKER);
     }

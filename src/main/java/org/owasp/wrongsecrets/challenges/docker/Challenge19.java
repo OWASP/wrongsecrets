@@ -50,6 +50,9 @@ public class Challenge19 extends Challenge {
         return binaryExecutionHelper.executeCommand(answer, "wrongsecrets-c").equals("This is correct! Congrats!");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
         return List.of(DOCKER);
     }

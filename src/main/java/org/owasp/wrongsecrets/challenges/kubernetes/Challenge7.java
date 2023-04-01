@@ -50,6 +50,9 @@ public class Challenge7 extends Challenge {
         return getAnswer().equals(answer);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
         return List.of(RuntimeEnvironment.Environment.VAULT);
     }

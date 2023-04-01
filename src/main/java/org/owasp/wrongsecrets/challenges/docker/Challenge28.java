@@ -49,6 +49,9 @@ public class Challenge28 extends Challenge {
         return secretKey.equals(answer);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
         return List.of(DOCKER);
     }

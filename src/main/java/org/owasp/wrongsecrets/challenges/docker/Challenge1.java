@@ -42,6 +42,9 @@ public class Challenge1 extends Challenge {
         return Constants.password.equals(answer);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
         return List.of(DOCKER);
     }

@@ -63,6 +63,9 @@ public class Challenge10 extends CloudChallenge {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
         return List.of(GCP, AWS, AZURE);
     }

@@ -45,6 +45,9 @@ public class Challenge5 extends Challenge {
         return configmapK8sSecret.equals(answer);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
         return List.of(K8S);
     }

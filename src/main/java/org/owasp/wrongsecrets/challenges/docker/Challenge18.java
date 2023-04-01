@@ -74,6 +74,9 @@ public class Challenge18 extends Challenge {
             || calculateHash(sha1Hash, base64Decode(hashPassword)).equals(calculateHash(sha1Hash, answer));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
         return List.of(DOCKER);
     }
