@@ -1,5 +1,7 @@
-*Why posting Screenshots of logs and outputs in a GitHub issue  is a bad idea?*
+*Why posting screenshots of logs in a GitHub issue is a bad idea*
 
-You should never post Screenshots of logs and outputs in a GitHub issue because even when the issue is closed all data is public,  is very easy to spot and screenshots cannot be edited like normal text.
+You shouldn't post screenshots of logs in a GitHub issue because:
+1. Data is public (even on a private repository, often more public than you'd hope)
+2. Screenshots can't be redacted like text. Even when the secret is blurred, this can be reversible. 
 
-Check for any generated passcodes in the output and make sure it is blurred out after taking its screenshot before posting it in GitHub issue.
+Check for any secret leaks in the output and leverage code block markdown to post logs in a GitHub issue. This is also much nicer for the maintainers trying to help you debug :).

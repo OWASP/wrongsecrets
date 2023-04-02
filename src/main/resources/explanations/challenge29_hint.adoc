@@ -1,7 +1,7 @@
-As the text of the challenge says, we are looking for the secret in a `Screenshot` of a  `closed GitHub issue` our GitHub. But how do we find it?
+As the text of the challenge says, we are looking for the secret in a `screenshot` of a `closed GitHub issue` on our GitHub repository. But how do we find it?
 
 You can solve this challenge by the following steps:
 
-1.Go to the `issues` tab of our GitHub and then to the closed section to get all the closed issues up to this day.
+1. Go to our GitHub's `issues` tab, then the closed section, to get all the closed issues.
 
-2.Go through all the Bug reports and look specifically in `screenshots` posted by users.
+2. Go through all the Bug reports and look specifically at `screenshots` posted by users.
