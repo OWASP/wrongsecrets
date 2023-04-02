@@ -29,14 +29,19 @@ public class Challenge29 extends Challenge {
         super(scoreCard);
     }
 
+    private static byte[] decode(byte[] encoded, PrivateKey privateKey) throws Exception {
+        Cipher cipher = Cipher.getInstance("RSA/ECB/OAEPWithSHA-256AndMGF1Padding");
+        cipher.init(Cipher.DECRYPT_MODE, privateKey);
+        return cipher.doFinal(encoded);
+    }
+
     @Override
     public boolean canRunInCTFMode() {
         return true;
     }
 
-
     @Override
-    public Spoiler spoiler(){
+    public Spoiler spoiler() {
         return new Spoiler(decrypt());
     }
 
@@ -80,15 +85,9 @@ public class Challenge29 extends Challenge {
             byte[] decoded = decode(encoded, privateKey);
             String message = new String(decoded, StandardCharsets.UTF_8);
             return message;
-        }catch(Exception e){
+        } catch (Exception e) {
             log.warn("Exception when decrypting: {}", e.getMessage());
             return "wrong_answer";
         }
-    }
-
-    private static byte[] decode(byte[] encoded, PrivateKey privateKey) throws Exception {
-        Cipher cipher = Cipher.getInstance("RSA/ECB/OAEPWithSHA-256AndMGF1Padding");
-        cipher.init(Cipher.DECRYPT_MODE, privateKey);
-        return cipher.doFinal(encoded);
     }
 }
