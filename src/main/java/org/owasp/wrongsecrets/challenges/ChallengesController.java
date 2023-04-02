@@ -84,7 +84,6 @@ public class ChallengesController {
      * @return either a notification or a spoil
      */
     @GetMapping("/spoil-{id}")
-
     @Hidden
     public String spoiler(Model model, @PathVariable Integer id) {
         if (ctfModeEnabled) {

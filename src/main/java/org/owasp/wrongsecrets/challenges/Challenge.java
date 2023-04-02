@@ -19,7 +19,13 @@ public abstract class Challenge {
 
     public abstract Spoiler spoiler();
 
-    protected abstract boolean answerCorrect(String answer) throws Exception;
+    /**
+     * method that needs to be overwritten by the Challenge implementation class to do the actual
+     * evaluation of the answer
+     * @param answer String provided by the user
+     * @return true if answer is Correct
+     */
+    protected abstract boolean answerCorrect(String answer);
 
     /**
      * Gives the supported runtine envs in which the class can run
@@ -59,12 +65,7 @@ public abstract class Challenge {
      * @return true if answer was correct.
      */
     public boolean solved(String answer) {
-        boolean correctAnswer = false;
-        try {
-            correctAnswer = answerCorrect(answer);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        var correctAnswer = answerCorrect(answer);
         if (correctAnswer) {
             scoreCard.completeChallenge(this);
         }
