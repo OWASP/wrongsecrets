@@ -12,22 +12,22 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.fail;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class Challenge29IntegrationTest {
+class Challenge30IntegrationTest {
     @LocalServerPort
     private int port;
 
     @Autowired
     private RestTemplateBuilder builder;
 
-    public Challenge29IntegrationTest() {
+    public Challenge30IntegrationTest() {
     }
 
     @Test
-    void shouldGetFullintegratedStepsForChallenge29() {
+    void shouldGetFullintegratedStepsForChallenge30() {
         var restTemplate = builder.build();
 
         var secretLoadingAdres = "http://localhost:" + port + "/hidden";
-        var spoilAddress = "http://localhost:" + port + "/spoil-29";
+        var spoilAddress = "http://localhost:" + port + "/spoil-30";
         try {
             var response = restTemplate.getForEntity(secretLoadingAdres, String.class);
             assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);

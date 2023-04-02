@@ -14,8 +14,8 @@ import java.util.List;
 import java.util.Random;
 
 @Component
-@Order(29)
-public class Challenge29 extends Challenge {
+@Order(30)
+public class Challenge30 extends Challenge {
     private final Random secureRandom = new SecureRandom();
     private static final String alphabet = "0123456789QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm";
     private String solution;
@@ -29,7 +29,7 @@ public class Challenge29 extends Challenge {
     }
 
 
-    public Challenge29(ScoreCard scoreCard) {
+    public Challenge30(ScoreCard scoreCard) {
         super(scoreCard);
     }
 

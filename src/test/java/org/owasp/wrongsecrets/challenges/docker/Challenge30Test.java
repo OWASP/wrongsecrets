@@ -6,12 +6,12 @@ import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 
 
-public class Challenge29Test {
+public class Challenge30Test {
 
     @Test
     public void testSpoiler() {
         ScoreCard scoreCard = Mockito.mock(ScoreCard.class);
-        Challenge29 challenge = new Challenge29(scoreCard);
+        Challenge30 challenge = new Challenge30(scoreCard);
 
         Spoiler spoiler = challenge.spoiler();
 
