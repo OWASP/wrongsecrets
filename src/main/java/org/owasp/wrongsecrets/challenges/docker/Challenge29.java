@@ -46,7 +46,7 @@ public class Challenge29 extends Challenge {
     }
 
     @Override
-    public boolean answerCorrect(String answer) throws Exception {
+    public boolean answerCorrect(String answer) {
         return decrypt().equals(answer);
     }
 
