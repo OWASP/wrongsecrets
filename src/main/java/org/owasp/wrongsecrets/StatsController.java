@@ -23,17 +23,22 @@ public class StatsController {
     @Value("${ctf_enabled}")
     private boolean ctfModeEnabled;
 
+    @Value("${spoiling_enabled}")
+    private boolean spoilingEnabled;
+
     @Value("${springdoc.swagger-ui.enabled}")
     private boolean swaggerUIEnabled;
 
     @Value("${springdoc.api-docs.enabled}")
-    private boolean springdockenabled;
+    private boolean springdocenabled;
+
 
     @Value("${canarytokenURLs}")
     private String[] canaryTokenURLs;
 
     @Value("${springdoc.swagger-ui.path}")
     private String swaggerURI;
+
 
     @GetMapping("/stats")
     @Operation(description = "Returns all dynamic data for the stats screen")
@@ -45,8 +50,9 @@ public class StatsController {
         model.addAttribute("hintsEnabled", hintsEnabled);
         model.addAttribute("reasonEnabled", reasonEnabled);
         model.addAttribute("ctfModeEnabled", ctfModeEnabled);
+        model.addAttribute("spoilingEnabled", spoilingEnabled);
         model.addAttribute("swaggerUIEnabled", swaggerUIEnabled);
-        model.addAttribute("springdockenabled", springdockenabled);
+        model.addAttribute("springdocenabled", springdocenabled);
         model.addAttribute("swaggerURI", swaggerURI);
         return "stats";
     }
