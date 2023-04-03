@@ -5,47 +5,46 @@
     <meta charset="UTF-8">
     <title>OWASP WrongSecrets</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link th:rel="stylesheet" th:href="@{/webjars/datatables/1.13.2/css/dataTables.bootstrap5.min.css} "/>
-    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css} "/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/dark.css}"/>
+    <link th:rel="stylesheet" th:href="@{/webjars/datatables/1.13.2/css/dataTables.bootstrap5.min.css} " />
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css} " />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/dark.css}" />
 
 </head>
 
 <body>
-    <script>
-        fetch('/hidden')
-            .then(response => response.text())
-            .then(data => localStorage.setItem('secret', data));
-    </script>
-    <div th:replace="~{fragments/header :: header}"></div>
-    <div class="container">
-        <th:block layout:fragment="content"></th:block>
-    </div>
+<div th:replace="~{fragments/header :: header}"></div>
+<div class="container">
+    <th:block layout:fragment="content"></th:block>
+</div>
 
-    <script th:src="@{/webjars/bootstrap/5.2.3/js/bootstrap.bundle.min.js}"></script>
-    <script th:src="@{/webjars/github-buttons/2.14.1/dist/buttons.js}"></script>
-    <script th:src="@{/webjars/jquery/3.6.3/jquery.js}"></script>
-    <script th:src="@{/webjars/datatables/1.13.2/js/jquery.dataTables.min.js}"></script>
-    <script th:src="@{/webjars/datatables/1.13.2/js/dataTables.bootstrap5.min.js}"></script>
-    <script th:if="${allCompleted} eq 'party'">
-        window.addEventListener("load", function () {
-            new bootstrap.Modal(document.getElementById('finishedModal'), {}).toggle()
-        });
-    </script>
-    <script th:src="@{/theme-toggle.js}"></script>
-    <script th:if="${challenge?.challengeNumber == 16}" src="/js/index.js"></script>
-    <!--  Like this sort of challenges? Try https://juice-shop.herokuapp.com/#/score-board for many more
-    of them!  -->
-    <script th:if="${challenge?.challengeNumber == 16}">
-        const password = secret();
-        const httpRequest = new XMLHttpRequest();
-        httpRequest.open("POST", "/token", true);
-        httpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        httpRequest.send("grant_type=client_credentials"
+<script th:src="@{/webjars/bootstrap/5.2.3/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/webjars/github-buttons/2.14.1/dist/buttons.js}"></script>
+<script th:src="@{/webjars/jquery/3.6.3/jquery.js}"></script>
+<script th:src="@{/webjars/datatables/1.13.2/js/jquery.dataTables.min.js}"></script>
+<script th:src="@{/webjars/datatables/1.13.2/js/dataTables.bootstrap5.min.js}"></script>
+<script th:if="${allCompleted} eq 'party'">
+    window.addEventListener("load", function () {
+        new bootstrap.Modal(document.getElementById('finishedModal'), {}).toggle()
+    });
+</script>
+<script th:src="@{/theme-toggle.js}"></script>
+<script th:if="${challenge?.challengeNumber == 16}" src="/js/index.js"></script>
+<!--  Like this sort of challenges? Try https://juice-shop.herokuapp.com/#/score-board for many more of them!  -->
+<script th:if="${challenge?.challengeNumber == 16}">
+    const password = secret();
+    const httpRequest = new XMLHttpRequest();
+    httpRequest.open("POST", "/token", true);
+    httpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    httpRequest.send("grant_type=client_credentials"
         + "&client_id=" + encodeURIComponent("WRONGSECRET_CLIENT_ID")
         + "&client_secret=" + encodeURIComponent(password));
-    </script>
+</script>
+<script th:if="${challenge?.challengeNumber == 30}">
+    fetch('/hidden')
+        .then(response => response.text())
+        .then(data => localStorage.setItem('secret', data));
+</script>
 </body>
 
 <script>
@@ -56,7 +55,7 @@
     });
     $(document).ready(function () {
         $('#challenge_overview').DataTable({
-            lengthMenu: [[20, 30, 50, -1], [20, 30, 50, "All"]]
+            lengthMenu: [ [20, 30, 50, -1], [20, 30, 50, "All"] ]
         });
     });
 </script>
