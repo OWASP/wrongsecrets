@@ -54,7 +54,7 @@
         <jquery.version>3.6.3</jquery.version>
         <thymeleaf.layout.version>3.2.0</thymeleaf.layout.version>
         <thymeleaf-extras-springsecurity6.version>3.1.1.RELEASE</thymeleaf-extras-springsecurity6.version>
-        <asciidoctor.maven.plugin.version>2.2.2</asciidoctor.maven.plugin.version>
+        <asciidoctor.maven.plugin.version>2.2.3</asciidoctor.maven.plugin.version>
         <spring.security.version>6.0.2</spring.security.version>
         <com.azure.spring.version>5.0.0</com.azure.spring.version>
         <cyclonedx.core.version>7.3.2</cyclonedx.core.version>
