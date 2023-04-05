@@ -73,30 +73,22 @@ public class BinaryExecutionHelper {
 
     @SuppressFBWarnings(value = "COMMAND_INJECTION", justification = "We check for various injection methods and counter those")
     private String executeCommand(File execFile, Operation operation, String guess) throws IOException, InterruptedException {
-        ProcessBuilder ps;
+
 
         if (isInvalidInput(execFile, guess)) {
             return BinaryExecutionHelper.ERROR_EXECUTION;
         }
 
-        if (operation.equals(Operation.Spoil)) {
-            ps = new ProcessBuilder(execFile.getPath(), "spoil");
-        } else {
-            if (execFile.getPath().contains("golang")) {
-                ps = new ProcessBuilder(execFile.getPath(), "guess", guess);
-            } else {
-                ps = new ProcessBuilder(execFile.getPath(), guess);
-            }
+        CommandExecutor commandExecutor;
 
+        if (operation.equals(Operation.Spoil)) {
+            commandExecutor = new SpoilCommandExecutor(execFile);
+        } else {
+            commandExecutor = new GuessCommandExecutor(execFile, guess);
         }
-        ps.redirectErrorStream(true);
-        Process pr = ps.start();
-        try (BufferedReader in = new BufferedReader(new InputStreamReader(pr.getInputStream(), StandardCharsets.UTF_8))) {
-            String result = in.readLine();
-            pr.waitFor();
-            return result;
-        }
+        return commandExecutor.executeCommand(guess);
     }
+
     private boolean isInvalidInput(File execFile, String guess) {
         return isNotWrongSecretsFile(execFile) && !isCommandChainTokenInExecFile(execFile) && !isCommandChainTokenInGuess(guess);
     }
@@ -111,6 +103,7 @@ public class BinaryExecutionHelper {
     private boolean isCommandChainTokenInGuess(String guess) {
         return stringContainsCommandChainToken(guess);
     }
+
 
     private boolean stringContainsCommandChainToken(String testString) {
         String[] tokens = {"!", "&", "|", "<", ">", ";"};
