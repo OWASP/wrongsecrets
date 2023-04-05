@@ -13,4 +13,3 @@ public abstract class CommandExecutor {
 
     public abstract String executeCommand(String guess) throws IOException, InterruptedException;
 }
-
