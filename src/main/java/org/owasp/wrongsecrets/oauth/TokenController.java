@@ -31,9 +31,16 @@ public class TokenController {
     @Operation(summary = "Endpoint for interaction at challenge 16")
     @PostMapping(path = "/token", consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
     public ResponseEntity<?> clientCredentialToken(TokenRequest tokenRequest) {
-        if ("client_credentials".equals(tokenRequest.grant_type())
-            && "WRONGSECRET_CLIENT_ID".equals(tokenRequest.client_id())
-            && getActualData().equals(tokenRequest.client_secret())) {
+
+        String grantType = tokenRequest.grant_type();
+        boolean isCredentialsMatching = "client_credentials".equals(grantType);
+
+        String clientId = tokenRequest.client_id();
+        String clientSecret = tokenRequest.client_secret();
+        boolean isClientIdMatching = "WRONGSECRET_CLIENT_ID".equals(clientId);
+        boolean isClientSecretMatching = getActualData().equals(clientSecret);
+
+        if (isCredentialsMatching && isClientIdMatching && isClientSecretMatching) {
             return ResponseEntity.ok(
                 new TokenResponse(UUID.randomUUID().toString(), "bearer", 54321L, "user_info")
             );
