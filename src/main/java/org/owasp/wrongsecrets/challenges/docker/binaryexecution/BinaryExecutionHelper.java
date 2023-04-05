@@ -75,10 +75,10 @@ public class BinaryExecutionHelper {
     private String executeCommand(File execFile, Operation operation, String guess) throws IOException, InterruptedException {
         ProcessBuilder ps;
 
-        if (!execFile.getPath().contains("wrongsecrets") || stringContainsCommandChainToken(execFile.getPath())
-            || stringContainsCommandChainToken(guess)) {
+        if (isInvalidInput(execFile, guess)) {
             return BinaryExecutionHelper.ERROR_EXECUTION;
         }
+
         if (operation.equals(Operation.Spoil)) {
             ps = new ProcessBuilder(execFile.getPath(), "spoil");
         } else {
@@ -96,6 +96,20 @@ public class BinaryExecutionHelper {
             pr.waitFor();
             return result;
         }
+    }
+    private boolean isInvalidInput(File execFile, String guess) {
+        return isNotWrongSecretsFile(execFile) && !isCommandChainTokenInExecFile(execFile) && !isCommandChainTokenInGuess(guess);
+    }
+
+    private boolean isNotWrongSecretsFile(File execFile) {
+        return !execFile.getPath().contains("wrongsecrets");
+    }
+    private boolean isCommandChainTokenInExecFile(File execFile) {
+        return stringContainsCommandChainToken(execFile.getPath());
+    }
+
+    private boolean isCommandChainTokenInGuess(String guess) {
+        return stringContainsCommandChainToken(guess);
     }
 
     private boolean stringContainsCommandChainToken(String testString) {
