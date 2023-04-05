@@ -57,8 +57,10 @@ public abstract class Challenge {
      * Note: All challenges should be able to run in non-CTF mode.
      * @return true if th echallenge can be run in CTF mode.
      */
-    public abstract boolean canRunInCTFMode();
 
+    public boolean canRunInCTFMode() {
+        return true;
+    }
     /**
      * Solving method which, if the correct answer is provided, will mark the challenge as solved in the scorecard
      * @param answer String provided by the user to validate.

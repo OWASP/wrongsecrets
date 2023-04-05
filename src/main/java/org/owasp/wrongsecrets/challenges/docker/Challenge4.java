@@ -25,10 +25,6 @@ public class Challenge4 extends Challenge {
         this.argBasedPassword = argBasedPassword;
     }
 
-    @Override
-    public boolean canRunInCTFMode() {
-        return true;
-    }
 
     @Override
     public Spoiler spoiler() {

@@ -28,10 +28,6 @@ public class Challenge21 extends Challenge {
         this.binaryExecutionHelper = new BinaryExecutionHelper(21, new MuslDetectorImpl());
     }
 
-    @Override
-    public boolean canRunInCTFMode() {
-        return true;
-    }
 
     @Override
     public Spoiler spoiler() {

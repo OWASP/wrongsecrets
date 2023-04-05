@@ -21,10 +21,7 @@ public class Challenge1 extends Challenge {
         super(scoreCard);
     }
 
-    @Override
-    public boolean canRunInCTFMode() {
-        return true;
-    }
+
 
     @Override
     public Spoiler spoiler() {

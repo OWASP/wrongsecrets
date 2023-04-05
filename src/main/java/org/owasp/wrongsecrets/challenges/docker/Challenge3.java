@@ -25,10 +25,6 @@ public class Challenge3 extends Challenge {
         this.hardcodedEnvPassword = hardcodedEnvPassword;
     }
 
-    @Override
-    public boolean canRunInCTFMode() {
-        return true;
-    }
 
     @Override
     public Spoiler spoiler() {

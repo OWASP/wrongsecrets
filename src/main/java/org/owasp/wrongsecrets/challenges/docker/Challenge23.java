@@ -35,10 +35,6 @@ public class Challenge23 extends Challenge {
         return getActualData().equals(answer);
     }
 
-    @Override
-    public boolean canRunInCTFMode() {
-        return true;
-    }
 
     @Override
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {

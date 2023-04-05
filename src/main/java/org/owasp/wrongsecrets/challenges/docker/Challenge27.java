@@ -31,10 +31,6 @@ public class Challenge27 extends Challenge {
         this.cipherText = cipherText;
     }
 
-    @Override
-    public boolean canRunInCTFMode() {
-        return true;
-    }
 
     @Override
     public Spoiler spoiler() {

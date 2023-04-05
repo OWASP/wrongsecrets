@@ -34,10 +34,6 @@ public class Challenge15 extends Challenge {
         encryptionKey = Base64.getEncoder().encodeToString("this is it for now".getBytes(StandardCharsets.UTF_8));
     }
 
-    @Override
-    public boolean canRunInCTFMode() {
-        return true;
-    }
 
     @Override
     public Spoiler spoiler() {

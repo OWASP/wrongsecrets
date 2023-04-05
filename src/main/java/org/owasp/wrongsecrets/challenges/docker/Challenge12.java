@@ -28,10 +28,6 @@ public class Challenge12 extends Challenge {
         this.dockerMountPath = dockerMountPath;
     }
 
-    @Override
-    public boolean canRunInCTFMode() {
-        return true;
-    }
 
     @Override
     public Spoiler spoiler() {

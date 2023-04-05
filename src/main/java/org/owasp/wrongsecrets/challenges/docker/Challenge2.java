@@ -39,10 +39,7 @@ public class Challenge2 extends Challenge {
      * {@inheritDoc}
      * This challenge can always run in CTF mode.
      */
-    @Override
-    public boolean canRunInCTFMode() {
-        return true;
-    }
+
 
     /**
      * {@inheritDoc}

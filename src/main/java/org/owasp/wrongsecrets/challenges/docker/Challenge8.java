@@ -38,10 +38,6 @@ public class Challenge8 extends Challenge {
         log.info("Initializing challenge 8 with random value {}", randomValue);
     }
 
-    @Override
-    public boolean canRunInCTFMode() {
-        return true;
-    }
 
     @Override
     public Spoiler spoiler() {

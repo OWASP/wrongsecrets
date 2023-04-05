@@ -39,10 +39,6 @@ public class Challenge13 extends Challenge {
         this.cipherText = cipherText;
     }
 
-    @Override
-    public boolean canRunInCTFMode() {
-        return true;
-    }
 
     @Override
     protected boolean answerCorrect(String answer) {

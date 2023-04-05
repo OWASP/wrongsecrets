@@ -42,10 +42,6 @@ public class Challenge14 extends Challenge {
         this.filePath = filePath;
     }
 
-    @Override
-    public boolean canRunInCTFMode() {
-        return true;
-    }
 
     @Override
     public Spoiler spoiler() {

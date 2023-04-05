@@ -71,8 +71,5 @@ public class Challenge10 extends CloudChallenge {
         return ChallengeTechnology.Tech.CSI.id;
     }
 
-    @Override
-    public boolean canRunInCTFMode() {
-        return true;
-    }
+
 }

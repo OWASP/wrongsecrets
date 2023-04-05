@@ -35,10 +35,6 @@ public class Challenge29 extends Challenge {
         return cipher.doFinal(encoded);
     }
 
-    @Override
-    public boolean canRunInCTFMode() {
-        return true;
-    }
 
     @Override
     public Spoiler spoiler() {

@@ -49,10 +49,7 @@ public class Challenge0 extends Challenge {
         return false;
     }
 
-    @Override
-    public boolean canRunInCTFMode() {
-        return true;
-    }
+
 
     private String getData() {
         return "The first answer";

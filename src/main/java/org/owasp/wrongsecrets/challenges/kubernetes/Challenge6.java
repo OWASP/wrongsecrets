@@ -24,10 +24,7 @@ public class Challenge6 extends Challenge {
         this.secretK8sSecret = secretK8sSecret;
     }
 
-    @Override
-    public boolean canRunInCTFMode() {
-        return true;
-    }
+
 
     @Override
     public Spoiler spoiler() {
