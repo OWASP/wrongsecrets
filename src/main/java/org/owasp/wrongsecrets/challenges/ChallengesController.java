@@ -161,26 +161,8 @@ public class ChallengesController {
         if (!challenge.isChallengeEnabled()) {
             model.addAttribute("answerIncorrect", "This challenge has been disabled.");
         } else {
-            if (challenge.getChallenge().solved(challengeForm.solution())) {
-                if (ctfModeEnabled) {
-                    if (!Strings.isNullOrEmpty(ctfServerAddress) && !ctfServerAddress.equals("not_set")) {
-                        if (challenge.getChallenge() instanceof Challenge8) {
-                            if (!Strings.isNullOrEmpty(keyToProvideToHost) && !keyToProvideToHost.equals("not_set")) { //this means that it was overriden with a code that needs to be returned to the ctf key exchange host.
-                                model.addAttribute("answerCorrect", "Your answer is correct! " + "fill in the following answer in the CTF instance at " + ctfServerAddress + "for which you get your code: " + keyToProvideToHost);
-                            }
-                        } else {
-                            model.addAttribute("answerCorrect", "Your answer is correct! " + "fill in the same answer in the ctf-instance of the app: " + ctfServerAddress);
-                        }
-                    } else {
-                        String code = generateCode(challenge);
-                        model.addAttribute("answerCorrect", "Your answer is correct! " + "fill in the following code in CTF scoring: " + code);
-                    }
-                } else {
-                    model.addAttribute("answerCorrect", "Your answer is correct!");
-                }
-            } else {
-                model.addAttribute("answerIncorrect", "Your answer is incorrect, try harder ;-)");
-            }
+            ChallengeSolver challengeSolver = new ChallengeSolver(ctfModeEnabled, ctfServerAddress, keyToProvideToHost);
+            challengeSolver.solve(challengeForm, challenge, model,ctfKey);
         }
 
         model.addAttribute("challenge", challenge);
@@ -193,17 +175,6 @@ public class ChallengesController {
         return "challenge";
     }
 
-    private String generateCode(ChallengeUI challenge) {
-        SecretKeySpec secretKeySpec = new SecretKeySpec(ctfKey.getBytes(StandardCharsets.UTF_8), "HmacSHA1");
-        try {
-            Mac mac = Mac.getInstance("HmacSHA1");
-            mac.init(secretKeySpec);
-            byte[] result = mac.doFinal(challenge.getName().getBytes(StandardCharsets.UTF_8));
-            return new String(Hex.encode(result));
-        } catch (NoSuchAlgorithmException | InvalidKeyException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     private void includeScoringStatus(Model model, Challenge challenge) {
         model.addAttribute("totalPoints", scoreCard.getTotalReceivedPoints());
