@@ -128,33 +128,9 @@ public class Challenge11 extends CloudChallenge {
         log.info("pre-checking AWS data");
         if (!"if_you_see_this_please_use_AWS_Setup".equals(awsRoleArn)) {
             log.info("Getting credentials from AWS");
-            try { //based on https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javav2/example_code/sts/src/main/java/com/example/sts
-
-                String webIDentityToken = Files.readString(Paths.get(tokenFileLocation));
-                StsClient stsClient = StsClient.builder()
-                    .region(Region.of(awsRegion))
-                    .build();
-                AssumeRoleWithWebIdentityRequest webIdentityRequest = AssumeRoleWithWebIdentityRequest.builder()
-                    .roleArn(awsRoleArn)
-                    .roleSessionName("WrongsecretsApp")
-                    .webIdentityToken(webIDentityToken)
-                    .build();
-                stsClient.assumeRoleWithWebIdentity(webIdentityRequest); //returns a AssumeRoleWithWebIdentityResponse which you can debug with //log.debug("The token value is " + tokenResponse.credentials().sessionToken());
-                SsmClient ssmClient = SsmClient.builder()
-                    .region(Region.of(awsRegion))
-                    .credentialsProvider(StsAssumeRoleWithWebIdentityCredentialsProvider.builder()
-                        .stsClient(stsClient)
-                        .refreshRequest(webIdentityRequest)
-                        .build())
-                    .build();
-                GetParameterRequest parameterRequest = GetParameterRequest.builder()
-                    .name("wrongsecretvalue")
-                    .withDecryption(true)
-                    .build();
-                GetParameterResponse parameterResponse = ssmClient.getParameter(parameterRequest);
-                //log.debug("The parameter value is " + parameterResponse.parameter().value());
-                ssmClient.close();
-                return parameterResponse.parameter().value();
+            try {  //based on https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javav2/example_code/sts/src/main/java/com/example/sts
+                String parameterValue = getSSMParameterValue();
+                return parameterValue;
             } catch (StsException e) {
                 log.error("Exception with getting credentials", e);
             } catch (SsmException e) {
@@ -166,6 +142,33 @@ public class Challenge11 extends CloudChallenge {
             log.info("Skipping credentials from AWS");
         }
         return awsDefaultValue;
+    }
+
+    private String getSSMParameterValue() throws StsException, SsmException, IOException {
+        String webIDentityToken = Files.readString(Paths.get(tokenFileLocation));
+        StsClient stsClient = StsClient.builder()
+            .region(Region.of(awsRegion))
+            .build();
+        AssumeRoleWithWebIdentityRequest webIdentityRequest = AssumeRoleWithWebIdentityRequest.builder()
+            .roleArn(awsRoleArn)
+            .roleSessionName("WrongsecretsApp")
+            .webIdentityToken(webIDentityToken)
+            .build();
+        stsClient.assumeRoleWithWebIdentity(webIdentityRequest); //returns a AssumeRoleWithWebIdentityResponse which you can debug with //log.debug("The token value is " + tokenResponse.credentials().sessionToken());
+        SsmClient ssmClient = SsmClient.builder()
+            .region(Region.of(awsRegion))
+            .credentialsProvider(StsAssumeRoleWithWebIdentityCredentialsProvider.builder()
+                .stsClient(stsClient)
+                .refreshRequest(webIdentityRequest)
+                .build())
+            .build();
+        GetParameterRequest parameterRequest = GetParameterRequest.builder()
+            .name("wrongsecretvalue")
+            .withDecryption(true)
+            .build();
+        GetParameterResponse parameterResponse = ssmClient.getParameter(parameterRequest);
+        ssmClient.close();
+        return parameterResponse.parameter().value();
     }
 
     private String getGCPChallenge11Value() {
