@@ -50,7 +50,7 @@ public class ChallengesAPIController {
     @GetMapping(value = {"/api/Challenges", "/api/challenges"}, produces = MediaType.APPLICATION_JSON_VALUE)
     public String getChallenges() {
         if (descriptions.size() == 0) {
-            initiaLizeHintsAndDescriptions();
+            initializeHintsAndDescriptions();
         }
         JSONObject json = new JSONObject();
         JSONArray jsonArray = new JSONArray();
@@ -83,7 +83,7 @@ public class ChallengesAPIController {
         };
     }
 
-    private void initiaLizeHintsAndDescriptions() {
+    private void initializeHintsAndDescriptions() {
         log.info("Initialize hints and descriptions");
         challenges.forEach(challengeUI -> { //note requires mvn install to generate the html files!
             try {
