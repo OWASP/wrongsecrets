@@ -1,0 +1,7 @@
+We are looking for the secret in the `Web-page` of our GitHub repository. But how do we find it?
+
+You can solve this challenge by the following steps:
+
+1. Go to our https://owasp.org/www-project-wrongsecrets/[Website].
+
+2. Go through all the tabs and you can spot the Secret.
