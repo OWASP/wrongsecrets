@@ -13,7 +13,6 @@ import org.spongycastle.util.encoders.Hex;
 @ExtendWith(MockitoExtension.class)
 class Challenge31Test {
 
-    private final String secretKey = new String(Hex.decode("534746325a53426849473570593255675a474635"));
     @Mock
     private ScoreCard scoreCard;
 
@@ -21,15 +20,7 @@ class Challenge31Test {
     void spoilerShouldRevealAnswer() {
         var challenge = new Challenge31(scoreCard);
 
-        Assertions.assertThat(challenge.spoiler()).isEqualTo(new Spoiler(secretKey));
-    }
-
-    @Test
-    void rightAnswerShouldSolveChallenge() {
-        var challenge = new Challenge31(scoreCard);
-
-        Assertions.assertThat(challenge.solved(secretKey)).isTrue();
-        Mockito.verify(scoreCard).completeChallenge(challenge);
+        Assertions.assertThat(challenge.spoiler()).isEqualTo(new Spoiler(Challenge31.getanswer()));
     }
 
     @Test

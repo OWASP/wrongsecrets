@@ -35,12 +35,12 @@ public class Challenge31 extends Challenge {
 
     @Override
     public Spoiler spoiler() {
-        return new Spoiler(decode());
+        return new Spoiler(getanswer());
     }
 
     @Override
     public boolean answerCorrect(String answer) {
-        return decode().equals(answer);
+        return getanswer().equals(answer);
     }
 
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
@@ -62,7 +62,7 @@ public class Challenge31 extends Challenge {
         return false;
     }
 
-    public String decode() {
+    public static String getanswer() {
         String str = "vozvtbeY6++kjJz3tPn84LeM77I=";
         byte[] arr = Base64.getDecoder().decode(str);
 
@@ -85,8 +85,7 @@ public class Challenge31 extends Challenge {
             xoredBytes[i] = (byte) (invertedBytes[i] ^ uuidBytes[i % uuidBytes.length]);
         }
 
-        String ans = new String(xoredBytes, StandardCharsets.UTF_8);
-        return ans;
+        return new String(xoredBytes, StandardCharsets.UTF_8);
     }
 
 }
