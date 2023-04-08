@@ -1,0 +1,5 @@
+There are several reasons why hiding secrets in a Web-Page is not a good idea:
+
+1. Websites are often accessible to a **variety of parties**, including employees, contractors and vendors. Keeping secrets on a website increases the risk that unauthorized parties will gain access to them..
+2. Websites are **often updated or changed over time** and tracking changes can be challenging. Secrets stored on a website can be hard to manage and update.
+3. Websites can be **vulnerable to attacks** that could let attackers access sensitive information. A hacked website could compromise secrets stored on it.
