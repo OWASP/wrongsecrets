@@ -22,7 +22,7 @@ public class WrongSecretsApplication {
     @Bean
     @Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
     public InMemoryScoreCard scoreCard() {
-        return new InMemoryScoreCard(28);
+        return new InMemoryScoreCard(31);
     }
 
     static {

@@ -27,7 +27,7 @@ public class Challenge31 extends Challenge {
         super(scoreCard);
     }
 
-    public static String getanswer() {
+    static String getanswer() {
         String str = "vozvtbeY6++kjJz3tPn84LeM77I=";
         byte[] arr = Base64.getDecoder().decode(str);
 
