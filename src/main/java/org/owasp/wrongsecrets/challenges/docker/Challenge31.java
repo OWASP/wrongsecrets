@@ -62,7 +62,7 @@ public class Challenge31 extends Challenge {
         return false;
     }
 
-    public String decode() {
+    private String getAnswer() {
         String str = "vozvtbeY6++kjJz3tPn84LeM77I=";
         byte[] arr = Base64.getDecoder().decode(str);
 
