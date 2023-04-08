@@ -85,8 +85,7 @@ public class Challenge31 extends Challenge {
             xoredBytes[i] = (byte) (invertedBytes[i] ^ uuidBytes[i % uuidBytes.length]);
         }
 
-        String ans = new String(xoredBytes, StandardCharsets.UTF_8);
-        return ans;
+        return new String(xoredBytes, StandardCharsets.UTF_8);
     }
 
 }
