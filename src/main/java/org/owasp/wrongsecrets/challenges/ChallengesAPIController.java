@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Used to request and generate the required json for setting up a CTF through juiceshop CTF CLI
+ * Used to request and generate the required json for setting up a CTF through juiceshop CTF CLI.
  */
 @Slf4j
 @RestController

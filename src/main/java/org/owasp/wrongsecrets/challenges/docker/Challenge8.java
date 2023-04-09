@@ -19,7 +19,7 @@ import java.util.Random;
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 
 /**
- * Challenge which leaks the data in the logs instead of anywhere else
+ * Challenge which leaks the data in the logs instead of anywhere else.
  */
 @Slf4j
 @Component

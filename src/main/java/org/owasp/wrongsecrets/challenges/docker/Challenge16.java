@@ -17,7 +17,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 /**
- * This challenge is about having a secret obfuscated in the front-end code
+ * This challenge is about having a secret obfuscated in the front-end code.
  */
 @Slf4j
 @Component

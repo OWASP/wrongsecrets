@@ -21,7 +21,7 @@ import java.security.spec.AlgorithmParameterSpec;
 import java.util.List;
 
 /**
- * This challenge is about finding a secret hardcoded in a web3 contract
+ * This challenge is about finding a secret hardcoded in a web3 contract.
  */
 @Slf4j
 @Component

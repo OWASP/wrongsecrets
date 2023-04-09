@@ -16,7 +16,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 
 /**
- * This challenge is about finding a secret in a Github issue
+ * This challenge is about finding a secret in a Github issue.
  */
 @Component
 @Order(28)
@@ -58,7 +58,7 @@ public class Challenge28 extends Challenge {
 
     /**
      * {@inheritDoc}
-     * Difficulty: 1
+     * Difficulty: 1.
      */
     @Override
     public int difficulty() {
@@ -79,7 +79,7 @@ public class Challenge28 extends Challenge {
         return false;
     }
 
-    private String getSecretKey(){
+    private String getSecretKey() {
         return new String(Base64.decode(new String(Base64.decode("WVhOa1ptUndkVmxWU1dGa1ltRnZZWE5rY0dFd04ydHFNakF3TXc9PQ=="), UTF_8)), UTF_8);
     }
 

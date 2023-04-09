@@ -25,7 +25,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 /**
- * This challenge is about having a weak password for your password manager
+ * This challenge is about having a weak password for your password manager.
  */
 @Slf4j
 @Component

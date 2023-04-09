@@ -21,7 +21,7 @@ import java.util.List;
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 
 /**
- * This challenge is about finding the value of a secret through weak hash mechanisms
+ * This challenge is about finding the value of a secret through weak hash mechanisms.
  */
 @Component
 @Order(18)

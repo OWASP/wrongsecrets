@@ -17,7 +17,7 @@ import java.util.List;
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 
 /**
- * This challenge is about finding a secret hardcoded in a C binary
+ * This challenge is about finding a secret hardcoded in a C binary.
  */
 @Component
 @Order(19)

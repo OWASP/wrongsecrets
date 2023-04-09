@@ -3,12 +3,12 @@ package org.owasp.wrongsecrets.challenges;
 import java.util.Arrays;
 
 /**
- * provides the technology used within a challenge
+ * provides the technology used within a challenge.
  */
 public class ChallengeTechnology {
 
     /**
-     * enum from which you can choose the tech to have consistent naming
+     * enum from which you can choose the tech to have consistent naming.
      */
     public enum Tech {
 

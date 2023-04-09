@@ -16,7 +16,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 /**
- * This challenge is about finding a secret hardcoded in comments in a front-end
+ * This challenge is about finding a secret hardcoded in comments in a front-end.
  */
 @Slf4j
 @Component
@@ -59,7 +59,7 @@ public class Challenge23 extends Challenge {
 
     /**
      * {@inheritDoc}
-     * Difficulty: 1
+     * Difficulty: 1.
      */
     @Override
     public int difficulty() {

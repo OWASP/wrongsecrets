@@ -21,7 +21,7 @@ import java.util.List;
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 
 /**
- * This challenge is about finding a secret in a Github issue (screenshot)
+ * This challenge is about finding a secret in a Github issue (screenshot).
  */
 @Component
 @Slf4j
@@ -59,7 +59,7 @@ public class Challenge29 extends Challenge {
 
     /**
      * {@inheritDoc}
-     * Difficulty: 1
+     * Difficulty: 1.
      */
     @Override
     public int difficulty() {

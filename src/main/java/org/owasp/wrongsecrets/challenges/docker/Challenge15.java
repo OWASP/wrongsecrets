@@ -20,7 +20,7 @@ import java.util.Base64;
 import java.util.List;
 
 /**
- * This challenge is about AWS keys in git history, with actual canarytokens
+ * This challenge is about AWS keys in git history, with actual canarytokens.
  */
 @Slf4j
 @Component
@@ -69,7 +69,7 @@ public class Challenge15 extends Challenge {
 
     /**
      * {@inheritDoc}
-     * Difficulty: 2
+     * Difficulty: 2.
      */
     @Override
     public int difficulty() {

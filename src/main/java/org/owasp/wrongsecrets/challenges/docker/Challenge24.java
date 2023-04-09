@@ -15,7 +15,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 /**
- * This challenge is about using a publicly specified key to safeguard data
+ * This challenge is about using a publicly specified key to safeguard data.
  */
 @Slf4j
 @Component

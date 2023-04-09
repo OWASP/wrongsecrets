@@ -27,7 +27,7 @@ public class ChallengeUI {
     }
 
     /**
-     * Converts the name of the class into the challenge name
+     * Converts the name of the class into the challenge name.
      * @return String with name of the challenge.
      */
     public String getName() {
@@ -118,8 +118,8 @@ public class ChallengeUI {
     }
 
     /**
-     * checks whether challenge is enabled based on used runtimemode and CTF enablement
-     * @return boolean true if the challenge can run
+     * checks whether challenge is enabled based on used runtimemode and CTF enablement.
+     * @return boolean true if the challenge can run.
      */
     public boolean isChallengeEnabled() {
         if (runtimeEnvironment.runtimeInCTFMode()) {
@@ -129,10 +129,10 @@ public class ChallengeUI {
     }
 
     /**
-     * returns the list of challengeUIs based on the status sof the runtime
-     * @param challenges actual challenges to be used in app
-     * @param environment the runtime env we are running on as an app
-     * @return list of ChallengeUIs
+     * returns the list of challengeUIs based on the status sof the runtime.
+     * @param challenges actual challenges to be used in app.
+     * @param environment the runtime env we are running on as an app.
+     * @return list of ChallengeUIs.
      */
     public static List<ChallengeUI> toUI(List<Challenge> challenges, RuntimeEnvironment environment) {
         return challenges.stream()

@@ -17,7 +17,7 @@ import java.util.List;
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 
 /**
- * This challenge is about finding a secret hardcoded in a Rust binary
+ * This challenge is about finding a secret hardcoded in a Rust binary.
  */
 @Component
 @Order(22)
@@ -61,7 +61,7 @@ public class Challenge22 extends Challenge {
 
     /**
      * {@inheritDoc}
-     * Difficulty: 5
+     * Difficulty: 5.
      */
     @Override
     public int difficulty() {
