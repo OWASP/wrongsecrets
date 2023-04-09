@@ -22,7 +22,7 @@ import org.thymeleaf.templateresolver.ITemplateResolver;
 import java.util.Set;
 
 /**
- * Used to generate and return all the html in thymeleaf and convert asciidoc to html
+ * Used to generate and return all the html in thymeleaf and convert asciidoc to html.
  */
 @Configuration
 @Slf4j

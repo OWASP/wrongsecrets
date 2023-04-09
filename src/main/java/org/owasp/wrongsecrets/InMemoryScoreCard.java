@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * In memory implementation of the scorecard (E.g. no persistence).
+ * In memory implementation of the ScoreCard (E.g. no persistence).
  */
 public class InMemoryScoreCard implements ScoreCard {
 
