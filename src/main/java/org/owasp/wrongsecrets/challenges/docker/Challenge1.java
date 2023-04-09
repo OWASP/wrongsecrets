@@ -14,7 +14,7 @@ import java.util.List;
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 
 /**
- * Challenge to find the hardcoded password in code
+ * Challenge to find the hardcoded password in code.
  */
 @Component
 @Order(1)

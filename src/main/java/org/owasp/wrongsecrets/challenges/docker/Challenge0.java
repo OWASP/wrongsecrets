@@ -12,7 +12,7 @@ import java.util.List;
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 
 /**
- * Introductionary challenge to get acquinted with the setup
+ * Introduction challenge to get a user introduced with the setup.
  */
 @Component
 @Order(0)

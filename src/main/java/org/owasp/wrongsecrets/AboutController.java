@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
- * About controler hosting /about endpoint
+ * About controler hosting /about endpoint.
  */
 @Controller
 public class AboutController {

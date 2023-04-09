@@ -16,7 +16,7 @@ import java.nio.file.Paths;
 import java.util.UUID;
 
 /**
- * Controller used for one of the front-end challenges
+ * Controller used for one of the front-end challenges.
  */
 @Slf4j
 @Controller
@@ -44,7 +44,7 @@ public class TokenController {
     }
 
     /**
-     * Tokenrequest used to call tokencontroller.
+     * TokenRequest used to call tokenController.
      * @param grant_type string for grant type
      * @param client_id string for the clientid
      * @param client_secret holding the client secret for auth. target of challenge.
@@ -55,7 +55,7 @@ public class TokenController {
     }
 
     /**
-     * TokenResponse returned by Tokencontroller
+     * TokenResponse returned by TokenController.
      * @param accessToken string with the token retrieved through oauth
      * @param tokenType string with the tokentype retrieved through oauth
      * @param expiresIn long with the token expiration moment
