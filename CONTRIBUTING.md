@@ -273,19 +273,27 @@ Please be sure to take a careful look at our [Code of Conduct](https://github.co
                 return secret.equals(answer);
             }
             //which runtime can you use to run the challenge on ? (You can just use Docker here)
-            @Override
             /**
             * {@inheritDoc}
             */
+            @Override
             public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
                 return List.of(RuntimeEnvironment.Environment.DOCKER);
             }
             //set the difficulty: 1=low, 5=very hard
+            /**
+            * {@inheritDoc}
+            * Difficulty: 1.
+            */
             @Override
             public int difficulty() {
                 return 1;
             }
             //on which tech is this challenge? See ChallengeTechnology.Tech for categories
+            /**
+            * {@inheritDoc}
+            * Secrets based.
+            */
             @Override
             public String getTech() {
                 return ChallengeTechnology.Tech.SECRETS.id;
