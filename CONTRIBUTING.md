@@ -275,9 +275,9 @@ Please be sure to take a careful look at our [Code of Conduct](https://github.co
             //which runtime can you use to run the challenge on ? (You can just use Docker here)
             @Override
             /**
-     * {@inheritDoc}
-     */
-    public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
+            * {@inheritDoc}
+            */
+            public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
                 return List.of(RuntimeEnvironment.Environment.DOCKER);
             }
             //set the difficulty: 1=low, 5=very hard
