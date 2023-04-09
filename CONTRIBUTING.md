@@ -250,7 +250,7 @@ Please be sure to take a careful look at our [Code of Conduct](https://github.co
         import java.util.List;
         /**
          * Describe what your challenge does
-         */ 
+         */
         @Slf4j
         @Component
         @Order(28) //make sure this number is the same as your challenge
