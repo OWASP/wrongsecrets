@@ -14,7 +14,7 @@ import java.util.Map;
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.*;
 
 /**
- * Class establishing whether a challenge can run or not depending on the given RuntimeEnvironment and whether components are configured & the CTFmode is enabled or not.
+ * Class establishing whether a challenge can run or not depending on the given RuntimeEnvironment and whether components are configured and the CTFmode is enabled or not.
  */
 @Component
 public class RuntimeEnvironment {
