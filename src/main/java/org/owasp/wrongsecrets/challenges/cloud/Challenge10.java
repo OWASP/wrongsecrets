@@ -82,6 +82,10 @@ public class Challenge10 extends CloudChallenge {
         return 4;
     }
 
+    /**
+     * {@inheritDoc}
+     * Uses CSI Driver
+     */
     @Override
     public String getTech() {
         return ChallengeTechnology.Tech.CSI.id;

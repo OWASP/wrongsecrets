@@ -16,6 +16,9 @@ import java.util.List;
 
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 
+/**
+ * This challenge is about finding a secret hardcoded in a C binary
+ */
 @Component
 @Order(19)
 @Slf4j
@@ -59,13 +62,17 @@ public class Challenge19 extends Challenge {
 
     /**
      * {@inheritDoc}
-     * Difficulty: 3
+     * Difficulty: 4
      */
     @Override
     public int difficulty() {
         return 4;
     }
 
+    /**
+     * {@inheritDoc}
+     * Binary based.
+     */
     @Override
     public String getTech() {
         return ChallengeTechnology.Tech.BINARY.id;

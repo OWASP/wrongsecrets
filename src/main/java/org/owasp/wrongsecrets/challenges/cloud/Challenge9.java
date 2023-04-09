@@ -90,6 +90,10 @@ public class Challenge9 extends CloudChallenge {
         return 3;
     }
 
+    /**
+     * {@inheritDoc}
+     * Uses Terraform
+     */
     @Override
     public String getTech() {
         return ChallengeTechnology.Tech.TERRAFORM.id;

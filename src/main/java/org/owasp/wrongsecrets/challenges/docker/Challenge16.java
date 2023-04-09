@@ -16,6 +16,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
+/**
+ * This challenge is about having a secret obfuscated in the front-end code
+ */
 @Slf4j
 @Component
 @Order(16)
@@ -67,6 +70,10 @@ public class Challenge16 extends Challenge {
         return 3;
     }
 
+    /**
+     * {@inheritDoc}
+     * Frontend based.
+     */
     @Override
     public String getTech() {
         return ChallengeTechnology.Tech.FRONTEND.id;

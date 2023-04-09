@@ -115,6 +115,10 @@ public class Challenge11 extends CloudChallenge {
         return 4;
     }
 
+    /**
+     * {@inheritDoc}
+     * Uses IAM Privilege escalation
+     */
     @Override
     public String getTech() {
         return ChallengeTechnology.Tech.IAM.id;

@@ -1,8 +1,6 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
 
-import java.nio.charset.StandardCharsets;
-
 import org.bouncycastle.util.encoders.Base64;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
@@ -17,11 +15,13 @@ import java.util.List;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 
+/**
+ * This challenge is about finding a secret in a Github issue
+ */
 @Component
 @Order(28)
 public class Challenge28 extends Challenge {
 
-    private String secretKey = new String(Base64.decode(new String(Base64.decode("WVhOa1ptUndkVmxWU1dGa1ltRnZZWE5rY0dFd04ydHFNakF3TXc9PQ=="), UTF_8)), UTF_8);
 
     public Challenge28(ScoreCard scoreCard) {
         super(scoreCard);
@@ -38,7 +38,7 @@ public class Challenge28 extends Challenge {
      */
     @Override
     public Spoiler spoiler() {
-        return new Spoiler(secretKey);
+        return new Spoiler(getSecretKey());
     }
 
     /**
@@ -46,7 +46,7 @@ public class Challenge28 extends Challenge {
      */
     @Override
     public boolean answerCorrect(String answer) {
-        return secretKey.equals(answer);
+        return getSecretKey().equals(answer);
     }
 
     /**
@@ -58,13 +58,17 @@ public class Challenge28 extends Challenge {
 
     /**
      * {@inheritDoc}
-     * Difficulty: 3
+     * Difficulty: 1
      */
     @Override
     public int difficulty() {
         return 1;
     }
 
+    /**
+     * {@inheritDoc}
+     * Documentation based.
+     */
     @Override
     public String getTech() {
         return ChallengeTechnology.Tech.DOCUMENTATION.id;
@@ -73,6 +77,10 @@ public class Challenge28 extends Challenge {
     @Override
     public boolean isLimittedWhenOnlineHosted() {
         return false;
+    }
+
+    private String getSecretKey(){
+        return new String(Base64.decode(new String(Base64.decode("WVhOa1ptUndkVmxWU1dGa1ltRnZZWE5rY0dFd04ydHFNakF3TXc9PQ=="), UTF_8)), UTF_8);
     }
 
 }

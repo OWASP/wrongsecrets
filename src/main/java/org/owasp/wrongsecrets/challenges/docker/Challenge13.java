@@ -19,6 +19,9 @@ import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
 
+/**
+ * Challenge focused on showing CI/CD issues through Github Actions
+ */
 @Slf4j
 @Component
 @Order(13)
@@ -72,6 +75,10 @@ public class Challenge13 extends Challenge {
         return 3;
     }
 
+    /**
+     * {@inheritDoc}
+     * CI/CD based.
+     */
     @Override
     public String getTech() {
         return ChallengeTechnology.Tech.CICD.id;

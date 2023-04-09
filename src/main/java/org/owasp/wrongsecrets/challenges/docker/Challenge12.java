@@ -70,6 +70,10 @@ public class Challenge12 extends Challenge {
         return 3;
     }
 
+    /**
+     * {@inheritDoc}
+     * Docker based.
+     */
     @Override
     public String getTech() {
         return ChallengeTechnology.Tech.DOCKER.id;

@@ -65,6 +65,10 @@ public class Challenge6 extends Challenge {
         return 2;
     }
 
+    /**
+     * {@inheritDoc}
+     * K8s secrets based.
+     */
     @Override
     public String getTech() {
         return ChallengeTechnology.Tech.SECRETS.id;

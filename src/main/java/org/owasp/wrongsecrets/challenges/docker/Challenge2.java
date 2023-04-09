@@ -87,7 +87,7 @@ public class Challenge2 extends Challenge {
 
     /**
      * {@inheritDoc}
-     * Technology is GIT for this challenge.
+     * Git based.
      */
     @Override
     public String getTech() {

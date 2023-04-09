@@ -70,6 +70,10 @@ public class Challenge7 extends Challenge {
         return 4;
     }
 
+    /**
+     * {@inheritDoc}
+     * Vault based.
+     */
     @Override
     public String getTech() {
         return ChallengeTechnology.Tech.VAULT.id;

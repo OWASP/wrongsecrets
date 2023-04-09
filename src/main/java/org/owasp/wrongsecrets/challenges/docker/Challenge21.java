@@ -16,6 +16,9 @@ import java.util.List;
 
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 
+/**
+ * This challenge is about finding a secret hardcoded in a Golang binary
+ */
 @Component
 @Order(21)
 @Slf4j
@@ -58,13 +61,17 @@ public class Challenge21 extends Challenge {
 
     /**
      * {@inheritDoc}
-     * Difficulty: 3
+     * Difficulty: 5
      */
     @Override
     public int difficulty() {
         return 5;
     }
 
+    /**
+     * {@inheritDoc}
+     * Binary based.
+     */
     @Override
     public String getTech() {
         return ChallengeTechnology.Tech.BINARY.id;

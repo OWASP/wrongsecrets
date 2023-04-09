@@ -14,6 +14,9 @@ import org.springframework.stereotype.Component;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
+/**
+ * This challenge is about using a publicly specified key to safeguard data
+ */
 @Slf4j
 @Component
 @Order(24)
@@ -41,7 +44,6 @@ public class Challenge24 extends Challenge {
      */
     @Override
     public boolean answerCorrect(String answer) {
-        //log.debug("challenge 24, actualdata: {}, answer: {}", getActualData(), answer);
         return getActualData().equals(answer);
     }
 
@@ -55,13 +57,17 @@ public class Challenge24 extends Challenge {
 
     /**
      * {@inheritDoc}
-     * Difficulty: 3
+     * Difficulty: 2
      */
     @Override
     public int difficulty() {
         return 2;
     }
 
+    /**
+     * {@inheritDoc}
+     * Cryptography based.
+     */
     @Override
     public String getTech() {
         return ChallengeTechnology.Tech.CRYPTOGRAPHY.id;

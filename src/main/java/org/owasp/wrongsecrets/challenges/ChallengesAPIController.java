@@ -11,6 +11,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
 import org.asciidoctor.Asciidoctor;
 import org.asciidoctor.Options;
@@ -22,6 +23,9 @@ import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Used to request and generate the required json for setting up a CTF through juiceshop CTF CLI
+ */
 @Slf4j
 @RestController
 public class ChallengesAPIController {
@@ -48,6 +52,7 @@ public class ChallengesAPIController {
 
 
     @GetMapping(value = {"/api/Challenges", "/api/challenges"}, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Gives all challenges back in a jsonArray, to be used with the Juiceshop CTF cli")
     public String getChallenges() {
         if (descriptions.size() == 0) {
             initiaLizeHintsAndDescriptions();

@@ -24,6 +24,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
+/**
+ * This challenge is about having a weak password for your password manager
+ */
 @Slf4j
 @Component
 @Order(14)
@@ -73,13 +76,17 @@ public class Challenge14 extends Challenge {
 
     /**
      * {@inheritDoc}
-     * Difficulty: 3
+     * Difficulty: 4
      */
     @Override
     public int difficulty() {
         return 4;
     }
 
+    /**
+     * {@inheritDoc}
+     * Password manager based.
+     */
     @Override
     public String getTech() {
         return ChallengeTechnology.Tech.PASSWORD_MANAGER.id;

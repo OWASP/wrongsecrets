@@ -15,6 +15,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.UUID;
 
+/**
+ * Controller used for one of the front-end challenges
+ */
 @Slf4j
 @Controller
 public class TokenController {
@@ -51,6 +54,13 @@ public class TokenController {
                                String client_secret) {
     }
 
+    /**
+     * TokenResponse returned by Tokencontroller
+     * @param accessToken string with the token retrieved through oauth
+     * @param tokenType string with the tokentype retrieved through oauth
+     * @param expiresIn long with the token expiration moment
+     * @param scope string with the token scope
+     */
     public record TokenResponse(@JsonProperty("access_token") String accessToken,
                                 @JsonProperty("token_type") String tokenType,
                                 @JsonProperty("expires_in") Long expiresIn,
@@ -58,7 +68,7 @@ public class TokenController {
     }
 
     @SuppressFBWarnings(value = "PATH_TRAVERSAL_IN", justification = "The location of the dockerMountPath is based on an Env Var")
-    public String getActualData() {
+    private String getActualData() {
         try {
             return Files.readString(Paths.get(dockerMountPath, "secondkey.txt"));
         } catch (Exception e) {

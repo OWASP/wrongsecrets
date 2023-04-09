@@ -20,6 +20,9 @@ import java.util.List;
 
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 
+/**
+ * This challenge is about finding the value of a secret through weak hash mechanisms
+ */
 @Component
 @Order(18)
 @Slf4j
@@ -83,13 +86,17 @@ public class Challenge18 extends Challenge {
 
     /**
      * {@inheritDoc}
-     * Difficulty: 3
+     * Difficulty: 5
      */
     @Override
     public int difficulty() {
         return 5;
     }
 
+    /**
+     * {@inheritDoc}
+     * Cryptography based.
+     */
     @Override
     public String getTech() {
         return ChallengeTechnology.Tech.CRYPTOGRAPHY.id;

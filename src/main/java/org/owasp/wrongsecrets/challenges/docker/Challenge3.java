@@ -70,7 +70,7 @@ public class Challenge3 extends Challenge {
 
     /**
      * {@inheritDoc}
-     * Technology is Docker for this challenge.
+     * Docker based.
      */
     @Override
     public String getTech() {

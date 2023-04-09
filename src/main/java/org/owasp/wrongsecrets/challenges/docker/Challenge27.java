@@ -20,6 +20,9 @@ import java.nio.charset.StandardCharsets;
 import java.security.spec.AlgorithmParameterSpec;
 import java.util.List;
 
+/**
+ * This challenge is about finding a secret hardcoded in a web3 contract based on hashing
+ */
 @Slf4j
 @Component
 @Order(26)
@@ -63,13 +66,17 @@ public class Challenge27 extends Challenge {
 
     /**
      * {@inheritDoc}
-     * Difficulty: 3
+     * Difficulty: 2
      */
     @Override
     public int difficulty() {
         return 2;
     }
 
+    /**
+     * {@inheritDoc}
+     * Web3 based.
+     */
     @Override
     public String getTech() {
         return ChallengeTechnology.Tech.WEB3.id;

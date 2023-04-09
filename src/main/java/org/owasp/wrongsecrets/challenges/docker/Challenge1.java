@@ -61,6 +61,10 @@ public class Challenge1 extends Challenge {
         return 1;
     }
 
+    /**
+     * {@inheritDoc}
+     * Git based.
+     */
     @Override
     public String getTech() {
         return ChallengeTechnology.Tech.GIT.id;

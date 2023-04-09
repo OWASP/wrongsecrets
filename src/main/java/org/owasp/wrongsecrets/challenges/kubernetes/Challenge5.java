@@ -65,6 +65,10 @@ public class Challenge5 extends Challenge {
         return 2;
     }
 
+    /**
+     * {@inheritDoc}
+     * Configmaps based.
+     */
     @Override
     public String getTech() {
         return ChallengeTechnology.Tech.CONFIGMAPS.id;
