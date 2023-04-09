@@ -5,6 +5,9 @@ import org.owasp.wrongsecrets.challenges.Challenge;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * In memory implementation of the scorecard (E.g. no persistence).
+ */
 public class InMemoryScoreCard implements ScoreCard {
 
     private final int maxNumberOfChallenges;
