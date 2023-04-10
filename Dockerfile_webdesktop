@@ -1,4 +1,5 @@
-FROM lscr.io/linuxserver/webtop:4.16-r0-ls72
+# FROM lscr.io/linuxserver/webtop:4.16-r0-ls72
+FROM linuxserver/webtop:alpine-icewm-version-b14a106e
 LABEL NAME="OWASP WrongSecrets Web Desktop" MAINTAINER="Jeroen Willemsen"
 
 RUN \
@@ -9,13 +10,23 @@ RUN \
 
 RUN \
   echo "**** install packages ****" && \
-  apk add --no-cache shadow keepassxc radare2 aws-cli geany git && \
+  apk add --no-cache shadow keepassxc radare2 aws-cli geany git podman openrc && \
   echo "**** adding abc user to root for Docker ****" && \
   usermod -aG root abc && \
   touch /var/run/docker.sock && \
   chown abc:abc /var/run/docker.sock && \
   echo "**** cleanup ****" && \
   rm -rf /tmp/*
+
+RUN \
+  echo "***config podman***" && \
+  rc-update add cgroups
+
+RUN \
+#  modprobe tun && \
+  echo tun >>/etc/modules &&\
+  sudo echo abc:100000:65536 >/etc/subuid &&\
+  sudo echo abc:100000:65536 >/etc/subgid
 
 WORKDIR /config/Desktop
 
