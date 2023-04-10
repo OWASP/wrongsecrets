@@ -26,4 +26,3 @@ COPY wrongsecret-desktop-resources/welcome.md /var/tmp/wrongsecrets/
 
 
 RUN echo -e "sudo chown abc /config/Desktop && cp -r /var/tmp/wrongsecrets /var/tmp/wrongsecrets/welcome.md /config/Desktop/\n$(cat /defaults/startwm.sh)" > /defaults/startwm.sh
-
