@@ -1,5 +1,5 @@
 # FROM lscr.io/linuxserver/webtop:4.16-r0-ls72
-FROM linuxserver/webtop:alpine-icewm-version-b14a106e
+FROM linuxserver/webtop:alpine-kde-version-c211f7df
 LABEL NAME="OWASP WrongSecrets Web Desktop" MAINTAINER="Jeroen Willemsen"
 
 RUN \
@@ -37,4 +37,5 @@ COPY wrongsecret-desktop-resources/welcome.md /var/tmp/wrongsecrets/
 
 RUN sudo chown abc /var/tmp/wrongsecrets
 
-COPY wrongsecret-desktop-resources/startwm.sh /defaults/startwm.sh
+
+RUN echo "sudo cp -r /var/tmp/wrongsecrets /config/Desktop/wrongsecrets && sudo cp -r /var/tmp/wrongsecrets/welcome.md /config/Desktop" >> /defaults/startwm.sh
