@@ -1,5 +1,4 @@
-# FROM lscr.io/linuxserver/webtop:4.16-r0-ls72
-FROM linuxserver/webtop:alpine-kde-version-c211f7df
+FROM linuxserver/webtop:latest
 LABEL NAME="OWASP WrongSecrets Web Desktop" MAINTAINER="Jeroen Willemsen"
 
 RUN \
@@ -10,23 +9,13 @@ RUN \
 
 RUN \
   echo "**** install packages ****" && \
-  apk add --no-cache shadow keepassxc radare2 aws-cli geany git podman openrc && \
+  apk add --no-cache shadow keepassxc radare2 aws-cli geany git && \
   echo "**** adding abc user to root for Docker ****" && \
   usermod -aG root abc && \
   touch /var/run/docker.sock && \
   chown abc:abc /var/run/docker.sock && \
   echo "**** cleanup ****" && \
   rm -rf /tmp/*
-
-RUN \
-  echo "***config podman***" && \
-  rc-update add cgroups
-
-RUN \
-#  modprobe tun && \
-  echo tun >>/etc/modules &&\
-  sudo echo abc:100000:65536 >/etc/subuid &&\
-  sudo echo abc:100000:65536 >/etc/subgid
 
 WORKDIR /config/Desktop
 
@@ -35,7 +24,6 @@ COPY src/test/resources/alibabacreds.kdbx /var/tmp/helpers/
 COPY src/test/resources/alibabacreds.kdbx /var/tmp/wrongsecrets/
 COPY wrongsecret-desktop-resources/welcome.md /var/tmp/wrongsecrets/
 
-RUN sudo chown abc /var/tmp/wrongsecrets
 
+RUN echo -e "sudo chown abc /config/Desktop && cp -r /var/tmp/wrongsecrets /var/tmp/wrongsecrets/welcome.md /config/Desktop/\n$(cat /defaults/startwm.sh)" > /defaults/startwm.sh
 
-RUN echo "sudo cp -r /var/tmp/wrongsecrets /config/Desktop/wrongsecrets && sudo cp -r /var/tmp/wrongsecrets/welcome.md /config/Desktop" >> /defaults/startwm.sh
