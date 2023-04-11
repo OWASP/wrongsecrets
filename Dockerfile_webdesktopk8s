@@ -1,4 +1,4 @@
-FROM lscr.io/linuxserver/webtop:4.16-r0-ls72
+FROM linuxserver/webtop:latest
 LABEL NAME="OWASP WrongSecrets Web Desktop" MAINTAINER="Jeroen Willemsen"
 
 RUN \
@@ -31,6 +31,4 @@ COPY src/test/resources/alibabacreds.kdbx /var/tmp/wrongsecrets/
 COPY wrongsecret-desktop-resources/welcome.md /var/tmp/wrongsecrets/
 
 
-RUN sudo chown abc /var/tmp/wrongsecrets
-
-COPY wrongsecret-desktop-resources/startwm.sh /defaults/startwm.sh
+RUN echo -e "sudo chown abc /config/Desktop && cp -r /var/tmp/wrongsecrets /var/tmp/wrongsecrets/welcome.md /config/Desktop/\n$(cat /defaults/startwm.sh)" > /defaults/startwm.sh
