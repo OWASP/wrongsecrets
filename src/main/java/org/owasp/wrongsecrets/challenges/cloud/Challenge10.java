@@ -19,6 +19,9 @@ import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.AWS;
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.GCP;
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.AZURE;
 
+/**
+ * Cloud challenge that leverages the CSI secrets driver of the cloud you are running in.
+ */
 @Component
 @Slf4j
 @Order(10)
@@ -37,11 +40,17 @@ public class Challenge10 extends CloudChallenge {
         this.challengeAnswer = getCloudChallenge9and10Value(filePath, fileName);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Spoiler spoiler() {
         return new Spoiler(challengeAnswer);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean answerCorrect(String answer) {
         return challengeAnswer.equals(answer);
@@ -57,15 +66,26 @@ public class Challenge10 extends CloudChallenge {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
         return List.of(GCP, AWS, AZURE);
     }
 
+    /**
+     * {@inheritDoc}
+     * Difficulty: 4
+     */
     @Override
     public int difficulty() {
         return 4;
     }
 
+    /**
+     * {@inheritDoc}
+     * Uses CSI Driver
+     */
     @Override
     public String getTech() {
         return ChallengeTechnology.Tech.CSI.id;

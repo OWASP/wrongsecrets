@@ -9,6 +9,9 @@ import org.springframework.context.ApplicationListener;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
+/**
+ * Helps handling application startup and breaks nicely if K8S_ENV is wrong.
+ */
 @Slf4j
 public class StartupListener implements ApplicationListener<ApplicationEvent> {
 

@@ -18,6 +18,9 @@ import java.util.Random;
 
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 
+/**
+ * Challenge which leaks the data in the logs instead of anywhere else.
+ */
 @Slf4j
 @Component
 @Order(8)
@@ -43,25 +46,42 @@ public class Challenge8 extends Challenge {
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Spoiler spoiler() {
         return new Spoiler(randomValue);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean answerCorrect(String answer) {
         return randomValue.equals(answer);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
         return List.of(DOCKER);
     }
 
+    /**
+     * {@inheritDoc}
+     * Difficulty: 2
+     */
     @Override
     public int difficulty() {
         return 2;
     }
 
+    /**
+     * {@inheritDoc}
+     * Challenge is wrapped around logging
+     */
     @Override
     public String getTech() {
         return ChallengeTechnology.Tech.LOGGING.id;

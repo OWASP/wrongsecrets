@@ -16,6 +16,9 @@ import java.util.List;
 
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 
+/**
+ * This challenge is about finding a secret hardcoded in a C++ binary.
+ */
 @Component
 @Order(20)
 @Slf4j
@@ -34,25 +37,42 @@ public class Challenge20 extends Challenge {
     }
 
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Spoiler spoiler() {
         return new Spoiler(binaryExecutionHelper.executeCommand("", "wrongsecrets-cplus"));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean answerCorrect(String answer) {
         return binaryExecutionHelper.executeCommand(answer, "wrongsecrets-cplus").equals("This is correct! Congrats!");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
         return List.of(DOCKER);
     }
 
+    /**
+     * {@inheritDoc}
+     * Difficulty: 4
+     */
     @Override
     public int difficulty() {
         return 4;
     }
 
+    /**
+     * {@inheritDoc}
+     * Binary based.
+     */
     @Override
     public String getTech() {
         return ChallengeTechnology.Tech.BINARY.id;

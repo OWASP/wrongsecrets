@@ -4,6 +4,7 @@ package org.owasp.wrongsecrets.challenges.kubernetes;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
+import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
@@ -13,6 +14,9 @@ import java.util.List;
 
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.K8S;
 
+/**
+ * This challenge is about having a secrets stored as a K8s Configmap.
+ */
 @Component
 @Order(5)
 public class Challenge5 extends Challenge {
@@ -29,28 +33,45 @@ public class Challenge5 extends Challenge {
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Spoiler spoiler() {
         return new Spoiler(configmapK8sSecret);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean answerCorrect(String answer) {
         return configmapK8sSecret.equals(answer);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
         return List.of(K8S);
     }
 
+    /**
+     * {@inheritDoc}
+     * Difficulty: 2
+     */
     @Override
     public int difficulty() {
         return 2;
     }
 
+    /**
+     * {@inheritDoc}
+     * Configmaps based.
+     */
     @Override
     public String getTech() {
-        return "Configmaps";
+        return ChallengeTechnology.Tech.CONFIGMAPS.id;
     }
 
     @Override

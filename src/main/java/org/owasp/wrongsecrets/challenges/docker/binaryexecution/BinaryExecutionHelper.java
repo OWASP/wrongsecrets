@@ -11,7 +11,9 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.stream.Collectors;
 
-
+/**
+ * Helper for classes to execute binaries as part of the Binary challenges.
+ */
 @Slf4j
 public class BinaryExecutionHelper {
 
@@ -31,6 +33,11 @@ public class BinaryExecutionHelper {
         this.muslDetector = muslDetector;
     }
 
+    /**
+     * Execute the command for the given binary with the actual guess for Golang only.
+     * @param guess containing the guess
+     * @return the actual answer
+     */
     public String executeGoCommand(String guess) {
         try {
             File execFile = createTempExecutable("wrongsecrets-golang");
@@ -50,6 +57,13 @@ public class BinaryExecutionHelper {
         }
     }
 
+
+    /**
+     * Execute the command for the given binary with the actual guess.
+     * @param guess containing the guess
+     * @param fileName of the executable to be used (pre-defined, make sure it is never user input controlled)
+     * @return the actual answer
+     */
     public String executeCommand(String guess, String fileName) {
         Operation operation;
         if (Strings.isNullOrEmpty(guess)) {

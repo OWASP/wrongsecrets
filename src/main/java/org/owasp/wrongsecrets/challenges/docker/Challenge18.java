@@ -20,6 +20,9 @@ import java.util.List;
 
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 
+/**
+ * This challenge is about finding the value of a secret through weak hash mechanisms.
+ */
 @Component
 @Order(18)
 @Slf4j
@@ -57,26 +60,43 @@ public class Challenge18 extends Challenge {
         return "No Hash Selected";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Spoiler spoiler() {
         return new Spoiler(base64Decode(hashPassword));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean answerCorrect(String answer) {
         return calculateHash(md5Hash, base64Decode(hashPassword)).equals(calculateHash(md5Hash, answer))
             || calculateHash(sha1Hash, base64Decode(hashPassword)).equals(calculateHash(sha1Hash, answer));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
         return List.of(DOCKER);
     }
 
+    /**
+     * {@inheritDoc}
+     * Difficulty: 5
+     */
     @Override
     public int difficulty() {
         return 5;
     }
 
+    /**
+     * {@inheritDoc}
+     * Cryptography based.
+     */
     @Override
     public String getTech() {
         return ChallengeTechnology.Tech.CRYPTOGRAPHY.id;
