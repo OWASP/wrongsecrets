@@ -9,7 +9,7 @@ import org.springframework.security.web.PortMapper;
 import org.springframework.security.web.SecurityFilterChain;
 
 /**
- * Used to implement to https redirect for our Heroku hosted workload.
+ * Used to implement https redirect for our Heroku-hosted workload.
  */
 @Configuration
 public class HerokuWebSecurityConfig {

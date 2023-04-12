@@ -3,7 +3,7 @@ package org.owasp.wrongsecrets;
 import org.owasp.wrongsecrets.challenges.Challenge;
 
 /**
- * Interface of a scorecard where progress of a player is stored into.
+ * Interface of a scorecard where a player's progress is stored into.
  */
 public interface ScoreCard {
 

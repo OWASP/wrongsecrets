@@ -275,7 +275,7 @@ Please be sure to take a careful look at our [Code of Conduct](https://github.co
             public boolean answerCorrect(String answer) {
                 return secret.equals(answer);
             }
-            //which runtime can you use to run the challenge on ? (You can just use Docker here)
+            //which runtime can you use to run the challenge on? (You can just use Docker here)
             /**
             * {@inheritDoc}
             */
