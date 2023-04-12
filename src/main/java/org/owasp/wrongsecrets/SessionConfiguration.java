@@ -8,6 +8,9 @@ import jakarta.servlet.http.HttpSessionEvent;
 import jakarta.servlet.http.HttpSessionListener;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * HTTPSessionListener with decorator: adds logging on new sessions started so we can keep track somewhat.
+ */
 @Configuration
 @Slf4j
 public class SessionConfiguration {

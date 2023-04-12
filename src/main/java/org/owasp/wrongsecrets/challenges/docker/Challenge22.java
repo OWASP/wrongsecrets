@@ -16,6 +16,9 @@ import java.util.List;
 
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 
+/**
+ * This challenge is about finding a secret hardcoded in a Rust binary.
+ */
 @Component
 @Order(22)
 @Slf4j
@@ -33,25 +36,42 @@ public class Challenge22 extends Challenge {
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Spoiler spoiler() {
         return new Spoiler(binaryExecutionHelper.executeCommand("", "wrongsecrets-rust"));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean answerCorrect(String answer) {
         return binaryExecutionHelper.executeCommand(answer, "wrongsecrets-rust").equals("This is correct! Congrats!");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
         return List.of(DOCKER);
     }
 
+    /**
+     * {@inheritDoc}
+     * Difficulty: 5.
+     */
     @Override
     public int difficulty() {
         return 5;
     }
 
+    /**
+     * {@inheritDoc}
+     * Binary based.
+     */
     @Override
     public String getTech() {
         return ChallengeTechnology.Tech.BINARY.id;

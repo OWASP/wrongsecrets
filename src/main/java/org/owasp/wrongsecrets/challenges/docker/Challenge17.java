@@ -16,6 +16,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
+/**
+ * This challenge is about having secrets in copied in bash history as part of a container.
+ */
 @Slf4j
 @Component
 @Order(17)
@@ -33,26 +36,43 @@ public class Challenge17 extends Challenge {
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Spoiler spoiler() {
         return new Spoiler(getActualData());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean answerCorrect(String answer) {
         return getActualData().equals(answer);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
         return List.of(RuntimeEnvironment.Environment.DOCKER);
     }
 
+    /**
+     * {@inheritDoc}
+     * Difficulty: 3.
+     */
     @Override
     public int difficulty() {
         return 3;
     }
 
+    /**
+     * {@inheritDoc}
+     * Docker based.
+     */
     @Override
     public String getTech() {
         return ChallengeTechnology.Tech.DOCKER.id;

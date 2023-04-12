@@ -7,6 +7,9 @@ import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
+/**
+ * Configuration used to disable CSRF on the actuator health endpoint otherwise it does not work for health-checks.
+ */
 @Configuration
 public class ActuatorSecurityConfiguration {
 

@@ -14,6 +14,9 @@ import java.util.List;
 
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 
+/**
+ * This challenge can be run in CTF mode and is limited to using Docker as a runtime environment.
+ */
 @Component
 @Order(3)
 public class Challenge3 extends Challenge {
@@ -25,30 +28,50 @@ public class Challenge3 extends Challenge {
         this.hardcodedEnvPassword = hardcodedEnvPassword;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean canRunInCTFMode() {
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Spoiler spoiler() {
         return new Spoiler(hardcodedEnvPassword);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean answerCorrect(String answer) {
         return hardcodedEnvPassword.equals(answer);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
         return List.of(DOCKER);
     }
 
+    /**
+     * {@inheritDoc}
+     * Difficulty: 1
+     */
     @Override
     public int difficulty() {
         return 1;
     }
 
+    /**
+     * {@inheritDoc}
+     * Docker based.
+     */
     @Override
     public String getTech() {
         return ChallengeTechnology.Tech.DOCKER.id;
