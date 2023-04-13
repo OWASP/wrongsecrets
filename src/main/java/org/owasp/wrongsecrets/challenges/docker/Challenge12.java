@@ -16,6 +16,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
+/**
+ * Challenge focused on filesystem issues in docker container due to workdir copying.
+ */
 @Slf4j
 @Component
 @Order(12)
@@ -33,11 +36,17 @@ public class Challenge12 extends Challenge {
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Spoiler spoiler() {
         return new Spoiler(getActualData());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean answerCorrect(String answer) {
         //log.debug("challenge 12, actualdata: {}, answer: {}", getActualData(), answer);
@@ -45,15 +54,26 @@ public class Challenge12 extends Challenge {
     }
 
     @Override
+    /**
+     * {@inheritDoc}
+     */
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
         return List.of(RuntimeEnvironment.Environment.DOCKER);
     }
 
+    /**
+     * {@inheritDoc}
+     * Difficulty: 3
+     */
     @Override
     public int difficulty() {
         return 3;
     }
 
+    /**
+     * {@inheritDoc}
+     * Docker based.
+     */
     @Override
     public String getTech() {
         return ChallengeTechnology.Tech.DOCKER.id;

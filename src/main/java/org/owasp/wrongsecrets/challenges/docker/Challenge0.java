@@ -11,6 +11,9 @@ import java.util.List;
 
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 
+/**
+ * Introduction challenge to get a user introduced with the setup.
+ */
 @Component
 @Order(0)
 public class Challenge0 extends Challenge {
@@ -19,21 +22,34 @@ public class Challenge0 extends Challenge {
         super(scoreCard);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Spoiler spoiler() {
         return new Spoiler(getData());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected boolean answerCorrect(String answer) {
         return getData().equals(answer);
     }
 
     @Override
+    /**
+     * {@inheritDoc}
+     */
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
         return List.of(DOCKER);
     }
 
+    /**
+     * {@inheritDoc}
+     * Difficulty: 1
+     */
     @Override
     public int difficulty() {
         return 1;

@@ -15,6 +15,9 @@ import org.springframework.stereotype.Component;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
+/**
+ * This challenge is about finding a secret hardcoded in comments in a front-end.
+ */
 @Slf4j
 @Component
 @Order(23)
@@ -24,11 +27,17 @@ public class Challenge23 extends Challenge {
         super(scoreCard);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Spoiler spoiler() {
         return new Spoiler(getActualData());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean answerCorrect(String answer) {
         //log.debug("challenge 23, actualdata: {}, answer: {}", getActualData(), answer);
@@ -41,15 +50,26 @@ public class Challenge23 extends Challenge {
     }
 
     @Override
+    /**
+     * {@inheritDoc}
+     */
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
         return List.of(RuntimeEnvironment.Environment.DOCKER);
     }
 
+    /**
+     * {@inheritDoc}
+     * Difficulty: 1.
+     */
     @Override
     public int difficulty() {
         return 1;
     }
 
+    /**
+     * {@inheritDoc}
+     * Frontend based.
+     */
     @Override
     public String getTech() {
         return ChallengeTechnology.Tech.FRONTEND.id;

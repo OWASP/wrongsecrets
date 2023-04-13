@@ -13,6 +13,9 @@ import java.util.List;
 
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 
+/**
+ * Challenge to find the hardcoded password in code.
+ */
 @Component
 @Order(1)
 public class Challenge1 extends Challenge {
@@ -26,25 +29,42 @@ public class Challenge1 extends Challenge {
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Spoiler spoiler() {
         return new Spoiler(Constants.password);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean answerCorrect(String answer) {
         return Constants.password.equals(answer);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
         return List.of(DOCKER);
     }
 
+    /**
+     * {@inheritDoc}
+     * Difficulty: 1
+     */
     @Override
     public int difficulty() {
         return 1;
     }
 
+    /**
+     * {@inheritDoc}
+     * Git based.
+     */
     @Override
     public String getTech() {
         return ChallengeTechnology.Tech.GIT.id;

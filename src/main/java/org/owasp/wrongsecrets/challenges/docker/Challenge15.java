@@ -19,6 +19,9 @@ import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
 
+/**
+ * This challenge is about AWS keys in git history, with actual canarytokens.
+ */
 @Slf4j
 @Component
 @Order(15)
@@ -39,11 +42,17 @@ public class Challenge15 extends Challenge {
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Spoiler spoiler() {
         return new Spoiler(quickDecrypt(ciphterText));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected boolean answerCorrect(String answer) {
         String correctString = quickDecrypt(ciphterText);
@@ -51,15 +60,26 @@ public class Challenge15 extends Challenge {
     }
 
     @Override
+    /**
+     * {@inheritDoc}
+     */
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
         return List.of(RuntimeEnvironment.Environment.DOCKER);
     }
 
+    /**
+     * {@inheritDoc}
+     * Difficulty: 2.
+     */
     @Override
     public int difficulty() {
         return 2;
     }
 
+    /**
+     * {@inheritDoc}
+     * Git based.
+     */
     @Override
     public String getTech() {
         return ChallengeTechnology.Tech.GIT.id;
