@@ -9,13 +9,13 @@
 [![OpenSSF Best Practices](https://bestpractices.coreinfrastructure.org/projects/7024/badge)](https://bestpractices.coreinfrastructure.org/projects/7024)
 [![Discussions](https://img.shields.io/github/discussions/OWASP/wrongsecrets)](https://github.com/OWASP/wrongsecrets/discussions)
 
-Welcome to the OWASP WrongSecrets game! The game is packed with real life examples of how to not store your secrets in your software. Each of these examples is captured in a challenge, which you need to solve using different tools and techniques. Solving these challenges will help you to recognize mistakes often made & can help you to reflect on your own secrets management strategy.
+Welcome to the OWASP WrongSecrets game! The game is packed with real life examples of how to _not_ store secrets in your software. Each of these examples is captured in a challenge, which you need to solve using various tools and techniques. Solving these challenges will help you recognize common mistakes & can help you to reflect on your own secrets management strategy.
 
 Can you solve all the 29 challenges?
 
-Try a few of them at [our Heroku demo environment](https://wrongsecrets.herokuapp.com/).
+Try some of them on [our Heroku demo environment](https://wrongsecrets.herokuapp.com/).
 
-Want to play the other challenges? Read the instructions below on how to set them up.
+Want to play the other challenges? Read the instructions on how to set them up below.
 
 ![screenshotOfChallenge1](/images/screenshot.png)
 
