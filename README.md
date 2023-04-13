@@ -13,7 +13,7 @@ Welcome to the OWASP WrongSecrets game! The game is packed with real life exampl
 
 Can you solve all the 29 challenges?
 
-Try a few of them at [Our Heroku website](https://wrongsecrets.herokuapp.com/) .
+Try a few of them at [our Heroku demo environment](https://wrongsecrets.herokuapp.com/) .
 
 Want to know more? Scroll down ;-)
 
