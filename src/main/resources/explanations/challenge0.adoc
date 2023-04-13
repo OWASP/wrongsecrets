@@ -4,7 +4,7 @@ Welcome to OWASP WrongSecrets its opening challenge!
 
 In this challenge, we explain you everything you need to know to play OWASP WrongSecrets.
 
-Every challenge is about finding a secret that has not been well hidden and/or configured inside our application code, Docker container, or in one of the related parts of the system.
+Every challenge is about finding a secret that has not been well hidden and/or configured inside our https://github.com/OWASP/wrongsecrets[application code], https://hub.docker.com/r/jeroenwillemsen/wrongsecrets[Docker container], or in one of the related parts of the https://github.com/OWASP/wrongsecrets#table-of-contents[system].
 
 Once you found the secret, you can put it in the box below and press "Submit". The "Clear" button will clean the input box.
 Want to play the challenge again? Press the "Reset button".
