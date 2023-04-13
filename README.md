@@ -13,7 +13,7 @@ Welcome to the OWASP WrongSecrets game! The game is packed with real life exampl
 
 Can you solve all the 29 challenges?
 
-Want to play it? You can just visit [our Heroku demo environment](https://wrongsecrets.herokuapp.com/) to have fun with them! Want to play the other challenges: read the instructions below on how to setup the system to run them.
+Want to play it? You can just visit [our Heroku demo environment](https://wrongsecrets.herokuapp.com/) to have fun with them! Want to play the other challenges? Read the instructions below on how to setup the system to run them.
 
 ![screenshotOfChallenge1](/images/screenshot.png)
 
