@@ -222,7 +222,7 @@ When you want to include your own Canarytokens for your cloud-deployment, do the
 7. Create a container and push it to your registry
 8. Override the K8s definition files for either [AWS](/aws/k8s/secret-challenge-vault-deployment.yml) or [GCP](/gcp/k8s/secret-challenge-vault-deployment.yml.tpl).
 
-## Do you want to play without guidance?
+## Do you want to play without guidance or spoils?
 
 Each challenge has a `Show hints` button and a `What's wrong?` button. These buttons help to simplify the challenges and give explanation to the reader. Though, the explanations can spoil the fun if you want to do this as a hacking exercise.
 Therefore, you can manipulate them by overriding the following settings in your env:
@@ -230,6 +230,10 @@ Therefore, you can manipulate them by overriding the following settings in your 
 -   `hints_enabled=false` will turn off the `Show hints` button.
 -   `reason_enabled=false` will turn of the `What's wrong?` explanation button.
 -   `spoiling_enabled=false` will turn off the `/spoil-x` endpoint (where `x` is the number of the challenge).
+
+## Enabling Swaggerdocs and UI
+
+You can enable Swagger documentation and the Swagger UI by overriding the `SPRINGDOC_UI` and `SPRINGDOC_DOC` when running the Docker container. See our [Okteto Deployment](https://github.com/OWASP/wrongsecrets/blob/master/okteto/k8s/secret-challenge-deployment.yml) for more details.
 
 ## Special thanks & Contributors
 
