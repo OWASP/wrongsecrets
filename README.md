@@ -229,6 +229,7 @@ Therefore, you can manipulate them by overriding the following settings in your 
 
 -   `hints_enabled=false` will turn off the `Show hints` button.
 -   `reason_enabled=false` will turn of the `What's wrong?` explanation button.
+-   `spoiling_enabled=false` will turn off the `/spoil-x` endpoint (where `x` is the number of the challenge).
 
 ## Special thanks & Contributors
 
@@ -248,10 +249,13 @@ Top contributors:
 -   [Filip Chyla @fchyla](https://github.com/fchyla)
 -   [Dmitry Litosh @Dlitosh](https://github.com/Dlitosh)
 -   [Josh Grossman @tghosth](https://github.com/tghosth)
+-   [Turjo Chowdhury @turjoc120](https://github.com/turjoc120)
 -   [Spyros @northdpole](https://github.com/northdpole)
 -   [Mike Woudenberg @mikewoudenberg](https://github.com/mikewoudenberg)
 -   [Ruben Kruiver @RubenAtBinx](https://github.com/RubenAtBinx)
+-   [Shlomo Zalman Heigh @szh](https://github.com/szh)
 -   [Nicolas Humblot @nhumblot](https://github.com/nhumblot)
+-   [Madhu Akula @madhuakula](https://github.com/madhuakula)
 -   [Finn @f3rn0s](https://github.com/f3rn0s)
 -   [Alex Bender @alex-bender](https://github.com/alex-bender)
 -   [Rick M @kingthorin](https://github.com/kingthorin)
