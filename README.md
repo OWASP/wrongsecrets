@@ -67,7 +67,7 @@ Copyright (c) 2020-2023 Jeroen Willemsen and WrongSecrets contributors.
 
 ## Basic docker exercises
 
-_Can be used for challenges 1-4, 8, 12-28_
+_Can be used for challenges 1-4, 8, 12-29_
 
 For the basic docker exercises you currently require:
 
@@ -104,6 +104,7 @@ Now you can try to find the secrets by means of solving the challenge offered at
 -   [localhost:8080/challenge/26](http://localhost:8080/challenge/26)
 -   [localhost:8080/challenge/27](http://localhost:8080/challenge/27)
 -   [localhost:8080/challenge/28](http://localhost:8080/challenge/28)
+-   [localhost:8080/challenge/28](http://localhost:8080/challenge/29)
 
 Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look
 better ;-).
@@ -120,7 +121,7 @@ You can test them out at [https://wrongsecrets.fly.dev](https://wrongsecrets.fly
 
 ## Basic K8s exercise
 
-_Can be used for challenges 1-6, 8, 12-28_
+_Can be used for challenges 1-6, 8, 12-29_
 
 ### Minikube based
 
@@ -173,7 +174,7 @@ Don't want to go over the hassle of setting up K8S yourself? visit [https://wron
 
 ## Vault exercises with minikube
 
-_Can be used for challenges 1-8, 12-28_
+_Can be used for challenges 1-8, 12-29_
 Make sure you have the following installed:
 
 -   minikube with docker (or comment out line 8 and work at your own k8s setup),
@@ -191,7 +192,7 @@ This is because if you run the start script again it will replace the secret in 
 
 ## Cloud Challenges
 
-_Can be used for challenges 1-28_
+_Can be used for challenges 1-29_
 
 **READ THIS**: Given that the exercises below contain IAM privilege escalation exercises,
 never run this on an account which is related to your production environment or can influence your account-over-arching
@@ -222,13 +223,18 @@ When you want to include your own Canarytokens for your cloud-deployment, do the
 7. Create a container and push it to your registry
 8. Override the K8s definition files for either [AWS](/aws/k8s/secret-challenge-vault-deployment.yml) or [GCP](/gcp/k8s/secret-challenge-vault-deployment.yml.tpl).
 
-## Do you want to play without guidance?
+## Do you want to play without guidance or spoils?
 
 Each challenge has a `Show hints` button and a `What's wrong?` button. These buttons help to simplify the challenges and give explanation to the reader. Though, the explanations can spoil the fun if you want to do this as a hacking exercise.
 Therefore, you can manipulate them by overriding the following settings in your env:
 
 -   `hints_enabled=false` will turn off the `Show hints` button.
 -   `reason_enabled=false` will turn of the `What's wrong?` explanation button.
+-   `spoiling_enabled=false` will turn off the `/spoil-x` endpoint (where `x` is the number of the challenge).
+
+## Enabling Swaggerdocs and UI
+
+You can enable Swagger documentation and the Swagger UI by overriding the `SPRINGDOC_UI` and `SPRINGDOC_DOC` when running the Docker container. See our [Okteto Deployment](https://github.com/OWASP/wrongsecrets/blob/master/okteto/k8s/secret-challenge-deployment.yml) for more details.
 
 ## Special thanks & Contributors
 
@@ -248,10 +254,13 @@ Top contributors:
 -   [Filip Chyla @fchyla](https://github.com/fchyla)
 -   [Dmitry Litosh @Dlitosh](https://github.com/Dlitosh)
 -   [Josh Grossman @tghosth](https://github.com/tghosth)
+-   [Turjo Chowdhury @turjoc120](https://github.com/turjoc120)
 -   [Spyros @northdpole](https://github.com/northdpole)
 -   [Mike Woudenberg @mikewoudenberg](https://github.com/mikewoudenberg)
 -   [Ruben Kruiver @RubenAtBinx](https://github.com/RubenAtBinx)
+-   [Shlomo Zalman Heigh @szh](https://github.com/szh)
 -   [Nicolas Humblot @nhumblot](https://github.com/nhumblot)
+-   [Madhu Akula @madhuakula](https://github.com/madhuakula)
 -   [Finn @f3rn0s](https://github.com/f3rn0s)
 -   [Alex Bender @alex-bender](https://github.com/alex-bender)
 -   [Rick M @kingthorin](https://github.com/kingthorin)

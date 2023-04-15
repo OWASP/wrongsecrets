@@ -60,7 +60,7 @@
         <cyclonedx.core.version>7.3.2</cyclonedx.core.version>
         <KeePassJava2.version>2.1.4</KeePassJava2.version>
         <system-stubs-jupiter.version>2.0.2</system-stubs-jupiter.version>
-        <dependency-check-maven.version>8.1.2</dependency-check-maven.version>
+        <dependency-check-maven.version>8.2.1</dependency-check-maven.version>
     </properties>
 
     <dependencies>
