@@ -32,6 +32,9 @@ import java.util.List;
 
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.*;
 
+/**
+ * Cloud challenge which uses IAM privilelge escalation (differentiating per cloud).
+ */
 @Component
 @Slf4j
 @Order(11)
@@ -80,25 +83,42 @@ public class Challenge11 extends CloudChallenge {
         this.challengeAnswer = getChallenge11Value(runtimeEnvironment);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Spoiler spoiler() {
         return new Spoiler(challengeAnswer);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean answerCorrect(String answer) {
         return challengeAnswer.equals(answer);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
         return List.of(AWS, GCP, AZURE);
     }
 
+    /**
+     * {@inheritDoc}
+     * Difficulty: 4
+     */
     @Override
     public int difficulty() {
         return 4;
     }
 
+    /**
+     * {@inheritDoc}
+     * Uses IAM Privilege escalation
+     */
     @Override
     public String getTech() {
         return ChallengeTechnology.Tech.IAM.id;

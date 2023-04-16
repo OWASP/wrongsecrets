@@ -1,5 +1,5 @@
-FROM jeroenwillemsen/wrongsecrets:1.6.1-no-vault
-ARG argBasedVersion="1.6.1-no-vault"
+FROM jeroenwillemsen/wrongsecrets:1.6.2-no-vault
+ARG argBasedVersion="1.6.2-no-vault"
 ARG CANARY_URLS="http://canarytokens.com/terms/about/s7cfbdakys13246ewd8ivuvku/post.jsp,http://canarytokens.com/terms/about/y0all60b627gzp19ahqh7rl6j/post.jsp"
 ARG CTF_ENABLED=false
 ARG HINTS_ENABLED=true
@@ -29,4 +29,4 @@ ENV default_aws_value_challenge_10=$CHALLENGE_10_VALUE
 ENV default_aws_value_challenge_11=$CHALLENGE_11_VALUE
 COPY .github/scripts/ /var/helpers
 COPY src/test/resources/alibabacreds.kdbx /var/helpers
-CMD java -Xms128m -Xmx128m -Xss512k -jar -Dserver.port=$PORT -XX:MaxRAMPercentage=75 -XX:MinRAMPercentage=25 -Dspring.profiles.active=without-vault application.jar
+CMD java -Xms128m -Xmx128m -Xss512k -jar -Dserver.port=$PORT -XX:MaxRAMPercentage=75 -XX:MinRAMPercentage=25 -Dspring.profiles.active=without-vault -Dspringdoc.swagger-ui.enabled=${SPRINGDOC_UI} -Dspringdoc.api-docs.enabled=${SPRINGDOC_DOC} application.jar

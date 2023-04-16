@@ -20,6 +20,9 @@ import java.nio.charset.StandardCharsets;
 import java.security.spec.AlgorithmParameterSpec;
 import java.util.List;
 
+/**
+ * This challenge is about finding a secret hardcoded in a web3 contract.
+ */
 @Slf4j
 @Component
 @Order(26)
@@ -36,27 +39,44 @@ public class Challenge26 extends Challenge {
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Spoiler spoiler() {
         return new Spoiler(quickDecrypt(cipherText));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean answerCorrect(String answer) {
         String correctString = quickDecrypt(cipherText);
         return answer.equals(correctString);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
         return List.of(RuntimeEnvironment.Environment.DOCKER);
     }
 
+    /**
+     * {@inheritDoc}
+     * Difficulty: 2
+     */
     @Override
     public int difficulty() {
         return 2;
     }
 
+    /**
+     * {@inheritDoc}
+     * Web3 based.
+     */
     @Override
     public String getTech() {
         return ChallengeTechnology.Tech.WEB3.id;

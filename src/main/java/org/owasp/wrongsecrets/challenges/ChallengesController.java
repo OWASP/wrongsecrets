@@ -28,6 +28,9 @@ import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Controller used to host the Challenges UI.
+ */
 @Controller
 public class ChallengesController {
 

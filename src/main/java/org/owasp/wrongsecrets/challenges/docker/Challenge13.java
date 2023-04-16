@@ -19,6 +19,9 @@ import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
 
+/**
+ * Challenge focused on showing CI/CD issues through Github Actions.
+ */
 @Slf4j
 @Component
 @Order(13)
@@ -27,6 +30,9 @@ public class Challenge13 extends Challenge {
     private final String plainText;
     private final String cipherText;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Spoiler spoiler() {
         String answer = Base64.getEncoder().encodeToString("This is our first key as github secret".getBytes(StandardCharsets.UTF_8));
@@ -44,21 +50,35 @@ public class Challenge13 extends Challenge {
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected boolean answerCorrect(String answer) {
         return isKeyCorrect(answer);
     }
 
     @Override
+    /**
+     * {@inheritDoc}
+     */
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
         return List.of(RuntimeEnvironment.Environment.DOCKER);
     }
 
+    /**
+     * {@inheritDoc}
+     * Difficulty: 3
+     */
     @Override
     public int difficulty() {
         return 3;
     }
 
+    /**
+     * {@inheritDoc}
+     * CI/CD based.
+     */
     @Override
     public String getTech() {
         return ChallengeTechnology.Tech.CICD.id;

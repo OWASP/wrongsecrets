@@ -3,7 +3,7 @@ package org.owasp.wrongsecrets.asciidoc;
 import java.io.IOException;
 
 /**
- * Template generagor used for Asciidoc to HTMLK conversion
+ * Template generator used for Asciidoc to HTML conversion.
  */
 public interface TemplateGenerator {
 

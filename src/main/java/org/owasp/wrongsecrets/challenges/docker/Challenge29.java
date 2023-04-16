@@ -20,6 +20,9 @@ import java.util.List;
 
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 
+/**
+ * This challenge is about finding a secret in a Github issue (screenshot).
+ */
 @Component
 @Slf4j
 @Order(29)
@@ -42,23 +45,31 @@ public class Challenge29 extends Challenge {
 
     @Override
     public Spoiler spoiler() {
-        return new Spoiler(decrypt());
+        return new Spoiler(decryptActualAnswer());
     }
 
     @Override
     public boolean answerCorrect(String answer) {
-        return decrypt().equals(answer);
+        return decryptActualAnswer().equals(answer);
     }
 
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
         return List.of(DOCKER);
     }
 
+    /**
+     * {@inheritDoc}
+     * Difficulty: 1.
+     */
     @Override
     public int difficulty() {
         return 1;
     }
 
+    /**
+     * {@inheritDoc}
+     * Documentation based.
+     */
     @Override
     public String getTech() {
         return ChallengeTechnology.Tech.DOCUMENTATION.id;
@@ -69,7 +80,7 @@ public class Challenge29 extends Challenge {
         return false;
     }
 
-    public String decrypt() {
+    private String decryptActualAnswer() {
         try {
             String privateKeyFilePath = "src/test/resources/RSAprivatekey.pem";
             String privateKeyContent = new String(Files.readAllBytes(Paths.get(privateKeyFilePath)), StandardCharsets.UTF_8);
