@@ -29,4 +29,4 @@ ENV default_aws_value_challenge_10=$CHALLENGE_10_VALUE
 ENV default_aws_value_challenge_11=$CHALLENGE_11_VALUE
 COPY .github/scripts/ /var/helpers
 COPY src/test/resources/alibabacreds.kdbx /var/helpers
-CMD java -Xms128m -Xmx128m -Xss512k -jar -Dserver.port=$PORT -XX:MaxRAMPercentage=75 -XX:MinRAMPercentage=25 -Dspring.profiles.active=without-vault application.jar
+CMD java -Xms128m -Xmx128m -Xss512k -jar -Dserver.port=$PORT -XX:MaxRAMPercentage=75 -XX:MinRAMPercentage=25 -Dspring.profiles.active=without-vault -Dspringdoc.swagger-ui.enabled=${SPRINGDOC_UI} -Dspringdoc.api-docs.enabled=${SPRINGDOC_DOC} application.jar
