@@ -1,5 +1,6 @@
 package org.owasp.wrongsecrets;
 
+import java.util.Set;
 import lombok.extern.slf4j.Slf4j;
 import nz.net.ultraq.thymeleaf.layoutdialect.LayoutDialect;
 import org.owasp.wrongsecrets.asciidoc.AsciiDocGenerator;
@@ -10,12 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.CacheControl;
-import org.springframework.security.config.web.server.ServerHttpSecurity;
-import org.springframework.security.web.server.SecurityWebFilterChain;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.resource.PathResourceResolver;
 import org.thymeleaf.extras.springsecurity6.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 import org.thymeleaf.spring6.templateresolver.SpringResourceTemplateResolver;
@@ -23,9 +19,6 @@ import org.thymeleaf.spring6.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.FileTemplateResolver;
 import org.thymeleaf.templateresolver.ITemplateResolver;
-
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Used to generate and return all the html in thymeleaf and convert asciidoc to html.
@@ -85,16 +78,5 @@ public class MvcConfiguration implements WebMvcConfigurer {
         engine.setTemplateResolvers(
             Set.of(asciiDoctorTemplateResolver, springThymeleafTemplateResolver));
         return engine;
-    }
-
-
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("*/*.js", "*/*.css", "*/*.svg", "*/*.jpeg", "*/*.jpg")
-//            .addResourceLocations("classpath:/webjars/")
-            .setCacheControl(CacheControl.maxAge(2, TimeUnit.HOURS)
-                .cachePrivate()
-                .mustRevalidate())
-            .resourceChain(true)
-            .addResolver(new PathResourceResolver());
     }
 }
