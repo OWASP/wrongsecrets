@@ -1,4 +1,4 @@
-package org.owasp.wrongsecrets;
+package org.owasp.wrongsecrets.securityconfig;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.springframework.context.annotation.Bean;
