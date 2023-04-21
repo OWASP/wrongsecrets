@@ -1,6 +1,7 @@
 package org.owasp.wrongsecrets;
 
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 import lombok.extern.slf4j.Slf4j;
 import nz.net.ultraq.thymeleaf.layoutdialect.LayoutDialect;
 import org.owasp.wrongsecrets.asciidoc.AsciiDocGenerator;
@@ -11,6 +12,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.CacheControl;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.thymeleaf.extras.springsecurity6.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring6.SpringTemplateEngine;
@@ -78,5 +81,12 @@ public class MvcConfiguration implements WebMvcConfigurer {
         engine.setTemplateResolvers(
             Set.of(asciiDoctorTemplateResolver, springThymeleafTemplateResolver));
         return engine;
+    }
+
+
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/webjars/**")
+            .addResourceLocations("classpath:/META-INF/resources/webjars/")
+            .setCacheControl(CacheControl.maxAge(3, TimeUnit.HOURS));
     }
 }
