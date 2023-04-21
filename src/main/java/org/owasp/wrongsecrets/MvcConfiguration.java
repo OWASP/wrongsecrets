@@ -82,11 +82,4 @@ public class MvcConfiguration implements WebMvcConfigurer {
             Set.of(asciiDoctorTemplateResolver, springThymeleafTemplateResolver));
         return engine;
     }
-
-
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/webjars/**")
-            .addResourceLocations("classpath:/META-INF/resources/webjars/")
-            .setCacheControl(CacheControl.maxAge(3, TimeUnit.HOURS));
-    }
 }
