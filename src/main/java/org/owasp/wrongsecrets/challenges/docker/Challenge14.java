@@ -1,8 +1,8 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
+import com.google.common.base.Strings;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.logging.log4j.util.Strings;
 import org.linguafranca.pwdb.Database;
 import org.linguafranca.pwdb.kdbx.KdbxCreds;
 import org.linguafranca.pwdb.kdbx.simple.SimpleDatabase;
@@ -66,10 +66,11 @@ public class Challenge14 extends Challenge {
         return isanswerCorrectInKeeyPassx(answer);
     }
 
-    @Override
+
     /**
      * {@inheritDoc}
      */
+    @Override
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
         return List.of(RuntimeEnvironment.Environment.DOCKER);
     }
@@ -99,7 +100,7 @@ public class Challenge14 extends Challenge {
 
     @SuppressFBWarnings("PATH_TRAVERSAL_IN")
     private String findAnswer() {
-        if (Strings.isEmpty(keepassxPassword)) {
+        if (Strings.isNullOrEmpty(keepassxPassword)) {
             //log.debug("Checking secret with values {}", keepassxPassword);
             return defaultKeepassValue;
         }
@@ -117,7 +118,7 @@ public class Challenge14 extends Challenge {
     }
 
     private boolean isanswerCorrectInKeeyPassx(String answer) {
-        if (Strings.isEmpty(keepassxPassword) || Strings.isEmpty(answer)) {
+        if (Strings.isNullOrEmpty(keepassxPassword) || Strings.isNullOrEmpty(answer)) {
             //log.debug("Checking secret with values {}, {}", keepassxPassword, answer);
             return false;
         }
