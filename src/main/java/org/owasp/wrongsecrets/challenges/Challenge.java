@@ -40,7 +40,7 @@ public abstract class Challenge {
      * returns the difficulty (1-5).
      * @return int with difficulty
      */
-    public abstract int difficulty();
+    public abstract Difficulty difficulty();
 
     /**
      * returns the technology used.

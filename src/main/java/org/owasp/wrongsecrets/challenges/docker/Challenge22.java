@@ -6,6 +6,7 @@ import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
+import org.owasp.wrongsecrets.challenges.Difficulty;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.owasp.wrongsecrets.challenges.docker.binaryexecution.BinaryExecutionHelper;
 import org.owasp.wrongsecrets.challenges.docker.binaryexecution.MuslDetectorImpl;
@@ -64,8 +65,8 @@ public class Challenge22 extends Challenge {
      * Difficulty: 5.
      */
     @Override
-    public int difficulty() {
-        return 5;
+    public Difficulty difficulty() {
+        return Difficulty.MASTER;
     }
 
     /**

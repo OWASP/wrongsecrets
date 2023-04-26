@@ -2,19 +2,19 @@ package org.owasp.wrongsecrets.challenges.docker;
 
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
+import org.owasp.wrongsecrets.challenges.Difficulty;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
 
 /**
  * Challenge focused on filesystem issues in docker container due to workdir copying.
@@ -66,8 +66,8 @@ public class Challenge12 extends Challenge {
      * Difficulty: 3
      */
     @Override
-    public int difficulty() {
-        return 3;
+    public Difficulty difficulty() {
+        return Difficulty.HARD;
     }
 
     /**

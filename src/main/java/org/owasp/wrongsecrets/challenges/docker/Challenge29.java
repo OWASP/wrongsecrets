@@ -1,15 +1,7 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
-import lombok.extern.slf4j.Slf4j;
-import org.owasp.wrongsecrets.RuntimeEnvironment;
-import org.owasp.wrongsecrets.ScoreCard;
-import org.owasp.wrongsecrets.challenges.Challenge;
-import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
-import org.owasp.wrongsecrets.challenges.Spoiler;
-import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
+import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 
-import javax.crypto.Cipher;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -17,8 +9,16 @@ import java.security.KeyFactory;
 import java.security.PrivateKey;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.util.List;
-
-import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
+import javax.crypto.Cipher;
+import lombok.extern.slf4j.Slf4j;
+import org.owasp.wrongsecrets.RuntimeEnvironment;
+import org.owasp.wrongsecrets.ScoreCard;
+import org.owasp.wrongsecrets.challenges.Challenge;
+import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
+import org.owasp.wrongsecrets.challenges.Difficulty;
+import org.owasp.wrongsecrets.challenges.Spoiler;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
 
 /**
  * This challenge is about finding a secret in a Github issue (screenshot).
@@ -62,8 +62,8 @@ public class Challenge29 extends Challenge {
      * Difficulty: 1.
      */
     @Override
-    public int difficulty() {
-        return 1;
+    public Difficulty difficulty() {
+        return Difficulty.EASY;
     }
 
     /**
@@ -92,7 +92,7 @@ public class Challenge29 extends Challenge {
             KeyFactory kf = KeyFactory.getInstance("RSA");
             PrivateKey privateKey = kf.generatePrivate(spec);
 
-            byte[] encoded = java.util.Base64.getDecoder().decode("aUb8RPnocWk17xXj0Xag8AOA8K0S4OD/jdqnIzMi5ItpEwPVLZUghYTGx53CHHb2LWRR+WH+Gx41Cr9522FbQDKbDMRaCd7GIMDApwUrFScevI/+usF0bmrw3tH9RUvCtxRZCDtsl038yNn90llsQM1e9OORMIvpzN1Ut0nDKErDvgv4pkUZXqGcybVKEGrULVWiIt8UYzd6lLNrRiRYrbcKrHNveyBhFExLpI/PsWS2NIcqyV7vXIib/PUBH0UdhSVnd+CJhNnFPBxQdScEDK7pYnhctr0I1Vl10Uk86uYsmMzqDSbt+TpCZeofcnd3tPdBB7z3c9ewVS+/fAVwlQ==".getBytes(StandardCharsets.UTF_8));
+            byte[] encoded = java.util.Base64.getDecoder().decode("aUb8RPnocWk17xXj0Xag8AOA8K0S4OD/jdqnIzMi5ItpEwPVLZUghYTGx53CHHb2LWRR+WH+Gx41Cr9522FbQDKbDMRaCd7GIMDApwUrFScevI/+usF0bmrw3tH9RUvCtxRZCDtsl038yNn90llsQM1e9OORMIvpzN1Ut0nDKErDvgv4pkUZXqGcybVKEGrULVWiIt8UYzd6lLNrRiRYrbcKrHNveyBhFExLpI/PsWS2NIcqyV7vXIib/PUBH0UdhSVnd+CJhNnFPBxQdScEDK7pYnhctr0I1Vl10Uk86uYsmMzqDSbt+TpCZeofcnd3tPdBB7z3c9ewVS+/fAVwlQ==" .getBytes(StandardCharsets.UTF_8));
             byte[] decoded = decode(encoded, privateKey);
             String message = new String(decoded, StandardCharsets.UTF_8);
             return message;

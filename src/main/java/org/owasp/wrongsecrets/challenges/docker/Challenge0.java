@@ -3,6 +3,7 @@ package org.owasp.wrongsecrets.challenges.docker;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
+import org.owasp.wrongsecrets.challenges.Difficulty;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -51,8 +52,8 @@ public class Challenge0 extends Challenge {
      * Difficulty: 1
      */
     @Override
-    public int difficulty() {
-        return 1;
+    public Difficulty difficulty() {
+        return Difficulty.EASY;
     }
 
     @Override

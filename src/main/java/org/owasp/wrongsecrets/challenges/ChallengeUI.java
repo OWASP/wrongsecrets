@@ -1,18 +1,30 @@
 package org.owasp.wrongsecrets.challenges;
 
-import lombok.Getter;
-import org.owasp.wrongsecrets.RuntimeEnvironment;
-
 import java.util.Comparator;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import lombok.Getter;
+import org.owasp.wrongsecrets.RuntimeEnvironment;
 
 /**
  * Wrapper class to move logic from Thymeleaf to keep logic in code instead of the html file.
  */
 @Getter
 public class ChallengeUI {
+
+    private record DifficultyUI(Difficulty difficulty) {
+
+        public String minimal() {
+            return "☆" .repeat(difficulty.toInt());
+        }
+
+        public String scale() {
+            int numberOfDifficultyLevels = Difficulty.totalOfDifficultyLevels();
+            String fullScale = "★" .repeat(difficulty.toInt()) + "☆" .repeat(numberOfDifficultyLevels);
+            return fullScale.substring(0, numberOfDifficultyLevels);
+        }
+    }
 
     private static final Pattern challengePattern = Pattern.compile("(\\D+)(\\d+)");
 
@@ -28,6 +40,7 @@ public class ChallengeUI {
 
     /**
      * Converts the name of the class into the challenge name.
+     *
      * @return String with name of the challenge.
      */
     public String getName() {
@@ -40,6 +53,7 @@ public class ChallengeUI {
 
     /**
      * gives back the number of the challenge.
+     *
      * @return int with challenge number.
      */
     public Integer getLink() {
@@ -48,6 +62,7 @@ public class ChallengeUI {
 
     /**
      * Returns the tech used for a challenge.
+     *
      * @return string with tech.
      */
     public String getTech() {
@@ -56,6 +71,7 @@ public class ChallengeUI {
 
     /**
      * Returns the number of the next challenge (e.g current+1).
+     *
      * @return int with next challenge number.
      */
     public Integer next() {
@@ -64,6 +80,7 @@ public class ChallengeUI {
 
     /**
      * Returns the number of the previous challenge (e.g current-1).
+     *
      * @return int with previous challenge number.
      */
     public Integer previous() {
@@ -72,6 +89,7 @@ public class ChallengeUI {
 
     /**
      * Returns filename of the explanation of the challenge.
+     *
      * @return String with filename.
      */
     public String getExplanation() {
@@ -80,6 +98,7 @@ public class ChallengeUI {
 
     /**
      * Returns filename of the hints for the challenge.
+     *
      * @return String with filename.
      */
     public String getHint() {
@@ -92,6 +111,7 @@ public class ChallengeUI {
 
     /**
      * Returns filename of the reasons of the challenge.
+     *
      * @return String with filename.
      */
     public String getReason() {
@@ -100,6 +120,7 @@ public class ChallengeUI {
 
     /**
      * String providing the minimal required env. Used in homescreen.
+     *
      * @return String with required env.
      */
     public String requiredEnv() {
@@ -111,14 +132,29 @@ public class ChallengeUI {
 
     /**
      * returns integer with difficulty of the challenge.
+     *
      * @return int
      */
-    public int difficulty() {
-        return challenge.difficulty();
+    public int difficultyAsStars() {
+        return challenge.difficulty().toInt();
+    }
+
+    /**
+     * Returns the stars
+     *
+     * @return
+     */
+    public String getStarsOnScale() {
+        return new DifficultyUI(challenge.difficulty()).scale();
+    }
+
+    public String getStars() {
+        return new DifficultyUI(challenge.difficulty()).minimal();
     }
 
     /**
      * checks whether challenge is enabled based on used runtimemode and CTF enablement.
+     *
      * @return boolean true if the challenge can run.
      */
     public boolean isChallengeEnabled() {
@@ -130,7 +166,8 @@ public class ChallengeUI {
 
     /**
      * returns the list of challengeUIs based on the status sof the runtime.
-     * @param challenges actual challenges to be used in app.
+     *
+     * @param challenges  actual challenges to be used in app.
      * @param environment the runtime env we are running on as an app.
      * @return list of ChallengeUIs.
      */

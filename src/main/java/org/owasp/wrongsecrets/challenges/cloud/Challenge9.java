@@ -1,23 +1,23 @@
 package org.owasp.wrongsecrets.challenges.cloud;
 
 
+import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.AWS;
+import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.AZURE;
+import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.GCP;
+
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
+import org.owasp.wrongsecrets.challenges.Difficulty;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
-
-import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.AWS;
-import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.GCP;
-import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.AZURE;
 
 /**
  * Cloud challenge which focuses on Terraform and secrets.
@@ -32,10 +32,11 @@ public class Challenge9 extends CloudChallenge {
 
     /**
      * Cloud challenge which focuses on Terraform and secrets.
-     * @param scoreCard required for score keeping
-     * @param filePath used to mount in the secrets store where teh actual secret lands in from the cloud
-     * @param awsDefaultValue used to indicate whether a cloud setup is enabled.
-     * @param fileName name of the actual secret file mounted on the filePath
+     *
+     * @param scoreCard          required for score keeping
+     * @param filePath           used to mount in the secrets store where teh actual secret lands in from the cloud
+     * @param awsDefaultValue    used to indicate whether a cloud setup is enabled.
+     * @param fileName           name of the actual secret file mounted on the filePath
      * @param runtimeEnvironment runtime env required to run this in.
      */
     public Challenge9(ScoreCard scoreCard,
@@ -86,8 +87,8 @@ public class Challenge9 extends CloudChallenge {
      * Difficulty: 3
      */
     @Override
-    public int difficulty() {
-        return 3;
+    public Difficulty difficulty() {
+        return Difficulty.HARD;
     }
 
     /**

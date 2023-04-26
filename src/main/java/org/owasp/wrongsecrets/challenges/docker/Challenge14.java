@@ -2,6 +2,11 @@ package org.owasp.wrongsecrets.challenges.docker;
 
 import com.google.common.base.Strings;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.linguafranca.pwdb.Database;
 import org.linguafranca.pwdb.kdbx.KdbxCreds;
@@ -13,16 +18,11 @@ import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
+import org.owasp.wrongsecrets.challenges.Difficulty;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
 
 /**
  * This challenge is about having a weak password for your password manager.
@@ -80,8 +80,8 @@ public class Challenge14 extends Challenge {
      * Difficulty: 4
      */
     @Override
-    public int difficulty() {
-        return 4;
+    public Difficulty difficulty() {
+        return Difficulty.EXPERT;
     }
 
     /**

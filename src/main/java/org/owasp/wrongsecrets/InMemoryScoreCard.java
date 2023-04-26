@@ -34,7 +34,7 @@ public class InMemoryScoreCard implements ScoreCard {
 
     @Override
     public int getTotalReceivedPoints() {
-        return solvedChallenges.stream().map(challenge -> challenge.difficulty() * (100 + (challenge.difficulty() - 1) * 25)).reduce(0, Integer::sum);
+        return solvedChallenges.stream().map(challenge -> challenge.difficulty().toInt() * (100 + (challenge.difficulty().toInt() - 1) * 25)).reduce(0, Integer::sum);
     }
 
     @Override

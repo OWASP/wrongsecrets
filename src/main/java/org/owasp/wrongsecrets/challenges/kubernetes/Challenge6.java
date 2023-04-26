@@ -1,18 +1,18 @@
 package org.owasp.wrongsecrets.challenges.kubernetes;
 
 
+import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.K8S;
+
+import java.util.List;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
+import org.owasp.wrongsecrets.challenges.Difficulty;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
-
-import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.K8S;
 
 /**
  * This challenge is about having a secrets stored as a K8s Secret.
@@ -61,8 +61,8 @@ public class Challenge6 extends Challenge {
      * Difficulty: 3
      */
     @Override
-    public int difficulty() {
-        return 2;
+    public Difficulty difficulty() {
+        return Difficulty.NORMAL;
     }
 
     /**

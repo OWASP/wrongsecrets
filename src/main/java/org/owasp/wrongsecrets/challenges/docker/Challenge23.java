@@ -6,6 +6,7 @@ import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
+import org.owasp.wrongsecrets.challenges.Difficulty;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.spongycastle.util.encoders.Base64;
 import org.spongycastle.util.encoders.Hex;
@@ -62,8 +63,8 @@ public class Challenge23 extends Challenge {
      * Difficulty: 1.
      */
     @Override
-    public int difficulty() {
-        return 1;
+    public Difficulty difficulty() {
+        return Difficulty.EASY;
     }
 
     /**

@@ -3,15 +3,13 @@ package org.owasp.wrongsecrets.challenges;
 import com.nimbusds.jose.shaded.json.JSONArray;
 import com.nimbusds.jose.shaded.json.JSONObject;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-
+import io.swagger.v3.oas.annotations.Operation;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-
-import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
 import org.asciidoctor.Asciidoctor;
 import org.asciidoctor.Options;
@@ -69,7 +67,7 @@ public class ChallengesAPIController {
             jsonChallenge.put("hint", hints.get(i));
             jsonChallenge.put("solved", scoreCard.getChallengeCompleted(challenges.get(i).getChallenge()));
             jsonChallenge.put("disabledEnv", getDisabledEnv(challenges.get(i)));
-            jsonChallenge.put("difficulty", challenges.get(i).getChallenge().difficulty());
+            jsonChallenge.put("difficulty", challenges.get(i).getChallenge().difficulty().toInt());
             jsonArray.add(jsonChallenge);
         }
         json.put("status", "success");
