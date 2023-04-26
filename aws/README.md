@@ -120,7 +120,7 @@ The documentation below is auto-generated to give insight on what's created via 
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_ebs_csi_irsa_role"></a> [ebs\_csi\_irsa\_role](#module\_ebs\_csi\_irsa\_role) | terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks | ~> 5.5 |
-| <a name="module_eks"></a> [eks](#module\_eks) | terraform-aws-modules/eks/aws | 19.12.0 |
+| <a name="module_eks"></a> [eks](#module\_eks) | terraform-aws-modules/eks/aws | 19.13.1 |
 | <a name="module_vpc"></a> [vpc](#module\_vpc) | terraform-aws-modules/vpc/aws | ~> 4.0.1 |
 
 ## Resources
