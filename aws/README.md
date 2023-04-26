@@ -103,7 +103,7 @@ The documentation below is auto-generated to give insight on what's created via 
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.1 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 4.61.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 4.64.0 |
 | <a name="requirement_http"></a> [http](#requirement\_http) | ~> 3.2.1 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | ~> 3.4.3 |
 
@@ -111,7 +111,7 @@ The documentation below is auto-generated to give insight on what's created via 
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.61.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.64.0 |
 | <a name="provider_http"></a> [http](#provider\_http) | 3.2.1 |
 | <a name="provider_random"></a> [random](#provider\_random) | 3.4.3 |
 
