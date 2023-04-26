@@ -99,7 +99,7 @@ public class Challenge2 extends Challenge {
      * This challenge is not limited when hosted online.
      */
     @Override
-    public boolean isLimittedWhenOnlineHosted() {
+    public boolean isLimitedWhenOnlineHosted() {
         return false;
     }
 

@@ -84,8 +84,8 @@ public class ChallengeUI {
      */
     public String getHint() {
         List<RuntimeEnvironment.Environment> limitedOnlineEnvs = List.of(RuntimeEnvironment.Environment.HEROKU_DOCKER, RuntimeEnvironment.Environment.FLY_DOCKER, RuntimeEnvironment.Environment.OKTETO_K8S);
-        if (limitedOnlineEnvs.contains(runtimeEnvironment.getRuntimeEnvironment()) && challenge.isLimittedWhenOnlineHosted()) {
-            return challenge.getHint() + "_limitted";
+        if (limitedOnlineEnvs.contains(runtimeEnvironment.getRuntimeEnvironment()) && challenge.isLimitedWhenOnlineHosted()) {
+            return challenge.getHint() + "_limited";
         }
         return challenge.getHint();
     }

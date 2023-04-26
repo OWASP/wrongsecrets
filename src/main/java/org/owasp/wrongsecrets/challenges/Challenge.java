@@ -53,7 +53,7 @@ public abstract class Challenge {
      * boolean indicating a challenge needs to be run differently with a different explanation/steps when running on a shared platform.
      * @return boolean with true if a different explanation is required when running on a shared platform
      */
-    public abstract boolean isLimittedWhenOnlineHosted();
+    public abstract boolean isLimitedWhenOnlineHosted();
 
     /**
      * boolean indicating if the challenge can be enabled when running in CTF mode.

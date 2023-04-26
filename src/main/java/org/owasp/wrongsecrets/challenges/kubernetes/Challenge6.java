@@ -75,7 +75,7 @@ public class Challenge6 extends Challenge {
     }
 
     @Override
-    public boolean isLimittedWhenOnlineHosted() {
+    public boolean isLimitedWhenOnlineHosted() {
         return true;
     }
 }

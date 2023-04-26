@@ -55,7 +55,7 @@ public class ChallengesAPIController {
     @Operation(summary = "Gives all challenges back in a jsonArray, to be used with the Juiceshop CTF cli")
     public String getChallenges() {
         if (descriptions.size() == 0) {
-            initiaLizeHintsAndDescriptions();
+            initializeHintsAndDescriptions();
         }
         JSONObject json = new JSONObject();
         JSONArray jsonArray = new JSONArray();
@@ -88,7 +88,7 @@ public class ChallengesAPIController {
         };
     }
 
-    private void initiaLizeHintsAndDescriptions() {
+    private void initializeHintsAndDescriptions() {
         log.info("Initialize hints and descriptions");
         challenges.forEach(challengeUI -> { //note requires mvn install to generate the html files!
             try {
