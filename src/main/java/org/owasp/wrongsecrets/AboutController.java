@@ -11,11 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class AboutController {
 
-
-
     @GetMapping("/about")
     @Operation(description = "Endpoint to get dynamic data on about")
-    public String getStats(Model model) {
+    public String getStats() {
         return "about";
     }
 }
