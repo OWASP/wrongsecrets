@@ -1,7 +1,7 @@
 package org.owasp.wrongsecrets.challenges.kubernetes;
 
 
-import org.apache.logging.log4j.util.Strings;
+import com.google.common.base.Strings;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
@@ -35,7 +35,7 @@ public class Challenge7 extends Challenge {
     }
 
     private String getAnswer() {
-        return vaultPassword != null && Strings.isNotEmpty(vaultPassword.getPasssword()) ? vaultPassword.getPasssword() : vaultPasswordString;
+        return vaultPassword != null && !Strings.isNullOrEmpty(vaultPassword.getPasssword()) ? vaultPassword.getPasssword() : vaultPasswordString;
     }
 
     /**
