@@ -16,12 +16,12 @@ public class ChallengeUI {
     private record DifficultyUI(Difficulty difficulty) {
 
         public String minimal() {
-            return "☆" .repeat(difficulty.toInt());
+            return "☆".repeat(difficulty.toInt());
         }
 
         public String scale() {
             int numberOfDifficultyLevels = Difficulty.totalOfDifficultyLevels();
-            String fullScale = "★" .repeat(difficulty.toInt()) + "☆" .repeat(numberOfDifficultyLevels);
+            String fullScale = "★".repeat(difficulty.toInt()) + "☆".repeat(numberOfDifficultyLevels);
             return fullScale.substring(0, numberOfDifficultyLevels);
         }
     }
@@ -140,14 +140,19 @@ public class ChallengeUI {
     }
 
     /**
-     * Returns the stars
+     * Returns the difficulty level in stars on a full scale, for example for level NORMAL it will return "★★☆☆☆".
      *
-     * @return
+     * @return stars
      */
     public String getStarsOnScale() {
         return new DifficultyUI(challenge.difficulty()).scale();
     }
 
+    /**
+     * Returns the difficulty level in stars, for example for level NORMAL it will return "☆☆".
+     *
+     * @return stars
+     */
     public String getStars() {
         return new DifficultyUI(challenge.difficulty()).minimal();
     }

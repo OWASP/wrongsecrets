@@ -148,7 +148,7 @@ public class Challenge11 extends CloudChallenge {
     @SuppressFBWarnings(value = "PATH_TRAVERSAL_IN", justification = "The location of the tokenFileLocation is based on an Env Var")
     private String getAWSChallenge11Value() {
         log.info("pre-checking AWS data");
-        if (!"if_you_see_this_please_use_AWS_Setup" .equals(awsRoleArn)) {
+        if (!"if_you_see_this_please_use_AWS_Setup".equals(awsRoleArn)) {
             log.info("Getting credentials from AWS");
             try { //based on https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javav2/example_code/sts/src/main/java/com/example/sts
 
