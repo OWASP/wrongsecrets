@@ -1,6 +1,6 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
-import autovalue.shaded.com.google.common.base.Strings;
+import org.assertj.core.util.Strings;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
