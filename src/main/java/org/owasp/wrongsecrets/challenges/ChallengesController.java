@@ -71,12 +71,6 @@ public class ChallengesController {
         return true;
     }
 
-    @GetMapping
-    @Operation(description = "Returns the given expalantion text for a challenge")
-    public String explanation(@PathVariable Integer id) {
-        return challenges.get(id).getExplanation();
-    }
-
     /**
      * return a spoil of the secret
      * Please note that there is no way to enable this in ctfMode: spoils can never be returned during a CTF
