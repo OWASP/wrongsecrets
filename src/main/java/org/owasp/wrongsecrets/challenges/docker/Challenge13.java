@@ -70,10 +70,9 @@ public class Challenge13 extends Challenge {
 
     /**
      * {@inheritDoc}
-     * Difficulty: 3
      */
     @Override
-    public Difficulty difficulty() {
+    public int difficulty() {
         return Difficulty.HARD;
     }
 

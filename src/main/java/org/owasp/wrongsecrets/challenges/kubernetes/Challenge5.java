@@ -59,10 +59,9 @@ public class Challenge5 extends Challenge {
 
     /**
      * {@inheritDoc}
-     * Difficulty: 2
      */
     @Override
-    public Difficulty difficulty() {
+    public int difficulty() {
         return Difficulty.NORMAL;
     }
 

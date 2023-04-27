@@ -16,15 +16,15 @@ public class ChallengeUI {
     /**
      * Wrapper class to express the difficulty level into a UI representation.
      */
-    private record DifficultyUI(Difficulty difficulty) {
+    private record DifficultyUI(int difficulty) {
 
         public String minimal() {
-            return "☆".repeat(difficulty.toInt());
+            return "☆".repeat(difficulty);
         }
 
         public String scale() {
             int numberOfDifficultyLevels = Difficulty.totalOfDifficultyLevels();
-            String fullScale = "★".repeat(difficulty.toInt()) + "☆".repeat(numberOfDifficultyLevels);
+            String fullScale = "★".repeat(difficulty) + "☆".repeat(numberOfDifficultyLevels);
             return fullScale.substring(0, numberOfDifficultyLevels);
         }
     }
@@ -131,15 +131,6 @@ public class ChallengeUI {
             .map(Enum::name)
             .limit(1)
             .collect(Collectors.joining());
-    }
-
-    /**
-     * returns integer with difficulty of the challenge.
-     *
-     * @return int
-     */
-    public int difficultyAsStars() {
-        return challenge.difficulty().toInt();
     }
 
     /**

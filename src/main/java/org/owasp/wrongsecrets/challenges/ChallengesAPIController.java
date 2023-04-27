@@ -67,7 +67,7 @@ public class ChallengesAPIController {
             jsonChallenge.put("hint", hints.get(i));
             jsonChallenge.put("solved", scoreCard.getChallengeCompleted(challenges.get(i).getChallenge()));
             jsonChallenge.put("disabledEnv", getDisabledEnv(challenges.get(i)));
-            jsonChallenge.put("difficulty", challenges.get(i).getChallenge().difficulty().toInt());
+            jsonChallenge.put("difficulty", challenges.get(i).getChallenge().difficulty());
             jsonArray.add(jsonChallenge);
         }
         json.put("status", "success");

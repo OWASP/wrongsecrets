@@ -1,14 +1,19 @@
 package org.owasp.wrongsecrets.challenges;
 
-public enum Difficulty {
+/**
+ * Representation of the difficulty levels.
+ */
+public class Difficulty {
 
-    EASY, NORMAL, HARD, EXPERT, MASTER;
+    public static int EASY = 1;
+    public static int NORMAL = 2;
+    public static int HARD = 3;
+    public static int EXPERT = 4;
+    public static int MASTER = 5;
 
-    public int toInt() {
-        return ordinal() + 1;
-    }
+    private static final int[] allLevels = new int[] { EASY, NORMAL, HARD, EXPERT, MASTER};
 
     public static int totalOfDifficultyLevels() {
-        return values().length;
+        return allLevels.length;
     }
 }

@@ -84,10 +84,9 @@ public class Challenge9 extends CloudChallenge {
 
     /**
      * {@inheritDoc}
-     * Difficulty: 3
      */
     @Override
-    public Difficulty difficulty() {
+    public int difficulty() {
         return Difficulty.HARD;
     }
 

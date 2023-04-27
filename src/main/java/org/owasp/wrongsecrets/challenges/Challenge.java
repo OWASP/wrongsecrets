@@ -37,10 +37,10 @@ public abstract class Challenge {
     public abstract List<Environment> supportedRuntimeEnvironments();
 
     /**
-     * returns the difficulty (1-5).
+     * returns the difficulty level.
      * @return int with difficulty
      */
-    public abstract Difficulty difficulty();
+    public abstract int difficulty();
 
     /**
      * returns the technology used.
