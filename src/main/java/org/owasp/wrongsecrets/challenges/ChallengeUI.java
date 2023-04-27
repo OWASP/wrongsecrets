@@ -13,6 +13,9 @@ import org.owasp.wrongsecrets.RuntimeEnvironment;
 @Getter
 public class ChallengeUI {
 
+    /**
+     * Wrapper class to express the difficulty level into a UI representation.
+     */
     private record DifficultyUI(Difficulty difficulty) {
 
         public String minimal() {
