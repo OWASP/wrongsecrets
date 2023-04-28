@@ -1,15 +1,7 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
-import lombok.extern.slf4j.Slf4j;
-import org.owasp.wrongsecrets.RuntimeEnvironment;
-import org.owasp.wrongsecrets.ScoreCard;
-import org.owasp.wrongsecrets.challenges.Challenge;
-import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
-import org.owasp.wrongsecrets.challenges.Spoiler;
-import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
+import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 
-import javax.crypto.Cipher;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -17,8 +9,16 @@ import java.security.KeyFactory;
 import java.security.PrivateKey;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.util.List;
-
-import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
+import javax.crypto.Cipher;
+import lombok.extern.slf4j.Slf4j;
+import org.owasp.wrongsecrets.RuntimeEnvironment;
+import org.owasp.wrongsecrets.ScoreCard;
+import org.owasp.wrongsecrets.challenges.Challenge;
+import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
+import org.owasp.wrongsecrets.challenges.Difficulty;
+import org.owasp.wrongsecrets.challenges.Spoiler;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
 
 /**
  * This challenge is about finding a secret in a Github issue (screenshot).
@@ -59,11 +59,10 @@ public class Challenge29 extends Challenge {
 
     /**
      * {@inheritDoc}
-     * Difficulty: 1.
      */
     @Override
     public int difficulty() {
-        return 1;
+        return Difficulty.EASY;
     }
 
     /**
@@ -76,7 +75,7 @@ public class Challenge29 extends Challenge {
     }
 
     @Override
-    public boolean isLimittedWhenOnlineHosted() {
+    public boolean isLimitedWhenOnlineHosted() {
         return false;
     }
 

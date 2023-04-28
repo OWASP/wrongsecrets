@@ -1,16 +1,25 @@
 package org.owasp.wrongsecrets.challenges.cloud;
 
 
+import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.AWS;
+import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.AZURE;
+import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.GCP;
+
 import com.google.api.gax.rpc.ApiException;
 import com.google.cloud.secretmanager.v1.AccessSecretVersionResponse;
 import com.google.cloud.secretmanager.v1.SecretManagerServiceClient;
 import com.google.cloud.secretmanager.v1.SecretVersionName;
 import com.google.common.base.Strings;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
+import org.owasp.wrongsecrets.challenges.Difficulty;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
@@ -24,13 +33,6 @@ import software.amazon.awssdk.services.sts.StsClient;
 import software.amazon.awssdk.services.sts.auth.StsAssumeRoleWithWebIdentityCredentialsProvider;
 import software.amazon.awssdk.services.sts.model.AssumeRoleWithWebIdentityRequest;
 import software.amazon.awssdk.services.sts.model.StsException;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
-
-import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.*;
 
 /**
  * Cloud challenge which uses IAM privilelge escalation (differentiating per cloud).
@@ -108,11 +110,10 @@ public class Challenge11 extends CloudChallenge {
 
     /**
      * {@inheritDoc}
-     * Difficulty: 4
      */
     @Override
     public int difficulty() {
-        return 4;
+        return Difficulty.EXPERT;
     }
 
     /**

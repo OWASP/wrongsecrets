@@ -3,15 +3,13 @@ package org.owasp.wrongsecrets.challenges;
 import com.nimbusds.jose.shaded.json.JSONArray;
 import com.nimbusds.jose.shaded.json.JSONObject;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-
+import io.swagger.v3.oas.annotations.Operation;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-
-import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
 import org.asciidoctor.Asciidoctor;
 import org.asciidoctor.Options;
@@ -55,7 +53,7 @@ public class ChallengesAPIController {
     @Operation(summary = "Gives all challenges back in a jsonArray, to be used with the Juiceshop CTF cli")
     public String getChallenges() {
         if (descriptions.size() == 0) {
-            initiaLizeHintsAndDescriptions();
+            initializeHintsAndDescriptions();
         }
         JSONObject json = new JSONObject();
         JSONArray jsonArray = new JSONArray();
@@ -88,7 +86,7 @@ public class ChallengesAPIController {
         };
     }
 
-    private void initiaLizeHintsAndDescriptions() {
+    private void initializeHintsAndDescriptions() {
         log.info("Initialize hints and descriptions");
         challenges.forEach(challengeUI -> { //note requires mvn install to generate the html files!
             try {

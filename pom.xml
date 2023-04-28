@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.0.6</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
+        <!-- lookup parent from repository -->
     </parent>
+
     <groupId>org.owasp</groupId>
     <artifactId>wrongsecrets</artifactId>
     <version>1.6.1-SNAPSHOT</version>
+
     <name>OWASP WrongSecrets</name>
     <description>Examples with how to not use secrets</description>
     <url>https://owasp.org/www-project-wrongsecrets/</url>
-    <scm>
-        <url>https://github.com/OWASP/wrongsecrets</url>
-    </scm>
-    <issueManagement>
-        <system>GitHub Issue Tracking</system>
-        <url>https://github.com/OWASP/wrongsecrets/issues</url>
-    </issueManagement>
+    <organization>
+        <name>The Open Web Application Security Project (OWASP)</name>
+        <url>https://owasp.org/</url>
+    </organization>
     <licenses>
         <license>
             <name>AGPLv3 License</name>
@@ -28,17 +28,21 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
-    <organization>
-        <name>The Open Web Application Security Project (OWASP)</name>
-        <url>https://owasp.org/</url>
-    </organization>
+
+    <scm>
+        <url>https://github.com/OWASP/wrongsecrets</url>
+    </scm>
+    <issueManagement>
+        <system>GitHub Issue Tracking</system>
+        <url>https://github.com/OWASP/wrongsecrets/issues</url>
+    </issueManagement>
+
     <!--    <distributionManagement>-->
     <!--        <snapshotRepository>-->
     <!--            <id>ossrh</id>-->
     <!--            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>-->
     <!--        </snapshotRepository>-->
     <!--    </distributionManagement>-->
-
     <properties>
         <java.version>19</java.version>
         <maven.compiler.target>19</maven.compiler.target>
@@ -63,6 +67,31 @@
         <dependency-check-maven.version>8.2.1</dependency-check-maven.version>
     </properties>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring.cloud-version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.google.cloud</groupId>
+                <artifactId>spring-cloud-gcp-dependencies</artifactId>
+                <version>${gcp.sdk.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.azure.spring</groupId>
+                <artifactId>spring-cloud-azure-dependencies</artifactId>
+                <version>${com.azure.spring.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     <dependencies>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -227,58 +256,6 @@
         <!--        </dependency>-->
     </dependencies>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring.cloud-version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.google.cloud</groupId>
-                <artifactId>spring-cloud-gcp-dependencies</artifactId>
-                <version>${gcp.sdk.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.azure.spring</groupId>
-                <artifactId>spring-cloud-azure-dependencies</artifactId>
-                <version>${com.azure.spring.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
-    <!-- Required by exec-maven-plugin to run NPM *.CMD script on Windows  -->
-    <profiles>
-        <profile>
-            <id>Windows</id>
-            <activation>
-                <os>
-                    <family>Windows</family>
-                </os>
-            </activation>
-            <properties>
-                <script.extension>.cmd</script.extension>
-            </properties>
-        </profile>
-        <profile>
-            <id>unix</id>
-            <activation>
-                <os>
-                    <family>unix</family>
-                </os>
-            </activation>
-            <properties>
-                <script.extension/>
-            </properties>
-        </profile>
-    </profiles>
-
     <build>
         <pluginManagement>
             <plugins>
@@ -353,8 +330,7 @@
                     <suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>
                 </configuration>
             </plugin>
-            <plugin>
-                <!-- https://github.com/asciidoctor/asciidoctor-maven-examples/blob/main/asciidoc-to-html-example/pom.xml -->
+            <plugin><!-- https://github.com/asciidoctor/asciidoctor-maven-examples/blob/main/asciidoc-to-html-example/pom.xml -->
                 <groupId>org.asciidoctor</groupId>
                 <artifactId>asciidoctor-maven-plugin</artifactId>
                 <version>${asciidoctor.maven.plugin.version}</version>
@@ -405,18 +381,18 @@
                     <outputName>bom</outputName>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.owasp</groupId>
-                <artifactId>dependency-check-maven</artifactId>
-                <version>${dependency-check-maven.version}</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+                        <plugin>
+                            <groupId>org.owasp</groupId>
+                            <artifactId>dependency-check-maven</artifactId>
+                            <version>${dependency-check-maven.version}</version>
+                            <executions>
+                                <execution>
+                                    <goals>
+                                        <goal>check</goal>
+                                    </goals>
+                                </execution>
+                            </executions>
+                        </plugin>
             <!-- todo: #178 add the missing plugins and profiles from https://central.sonatype.org/publish/publish-maven/-->
             <plugin>
                 <groupId>com.github.eirslett</groupId>
@@ -482,8 +458,46 @@
                     <target>19</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>tidy-maven-plugin</artifactId>
+                <version>1.2.0</version>
+                <executions>
+                    <execution>
+                        <id>validate</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
-
+    <!-- Required by exec-maven-plugin to run NPM *.CMD script on Windows  -->
+    <profiles>
+        <profile>
+            <id>Windows</id>
+            <activation>
+                <os>
+                    <family>Windows</family>
+                </os>
+            </activation>
+            <properties>
+                <script.extension>.cmd</script.extension>
+            </properties>
+        </profile>
+        <profile>
+            <id>unix</id>
+            <activation>
+                <os>
+                    <family>unix</family>
+                </os>
+            </activation>
+            <properties>
+                <script.extension/>
+            </properties>
+        </profile>
+    </profiles>
 </project>

@@ -6,6 +6,7 @@ import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
+import org.owasp.wrongsecrets.challenges.Difficulty;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -58,11 +59,10 @@ public class Challenge28 extends Challenge {
 
     /**
      * {@inheritDoc}
-     * Difficulty: 1.
      */
     @Override
     public int difficulty() {
-        return 1;
+        return Difficulty.EASY;
     }
 
     /**
@@ -75,7 +75,7 @@ public class Challenge28 extends Challenge {
     }
 
     @Override
-    public boolean isLimittedWhenOnlineHosted() {
+    public boolean isLimitedWhenOnlineHosted() {
         return false;
     }
 

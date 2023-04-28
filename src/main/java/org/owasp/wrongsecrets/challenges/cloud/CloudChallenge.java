@@ -56,7 +56,7 @@ public abstract class CloudChallenge extends Challenge {
     }
 
     @Override
-    public boolean isLimittedWhenOnlineHosted() {
+    public boolean isLimitedWhenOnlineHosted() {
         return false;
     }
 

@@ -2,16 +2,16 @@ package org.owasp.wrongsecrets.challenges.kubernetes;
 
 
 import com.google.common.base.Strings;
+import java.util.List;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
+import org.owasp.wrongsecrets.challenges.Difficulty;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 /**
  * This challenge is about having a secrets stored in a misconfigured Hashicorp Vault.
@@ -63,11 +63,10 @@ public class Challenge7 extends Challenge {
 
     /**
      * {@inheritDoc}
-     * Difficulty: 4
      */
     @Override
     public int difficulty() {
-        return 4;
+        return Difficulty.EXPERT;
     }
 
     /**
@@ -80,7 +79,7 @@ public class Challenge7 extends Challenge {
     }
 
     @Override
-    public boolean isLimittedWhenOnlineHosted() {
+    public boolean isLimitedWhenOnlineHosted() {
         return false;
     }
 }

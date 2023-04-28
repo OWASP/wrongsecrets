@@ -6,6 +6,7 @@ import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
+import org.owasp.wrongsecrets.challenges.Difficulty;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.owasp.wrongsecrets.challenges.docker.binaryexecution.BinaryExecutionHelper;
 import org.owasp.wrongsecrets.challenges.docker.binaryexecution.MuslDetectorImpl;
@@ -62,11 +63,10 @@ public class Challenge19 extends Challenge {
 
     /**
      * {@inheritDoc}
-     * Difficulty: 4
      */
     @Override
     public int difficulty() {
-        return 4;
+        return Difficulty.EXPERT;
     }
 
     /**
@@ -79,7 +79,7 @@ public class Challenge19 extends Challenge {
     }
 
     @Override
-    public boolean isLimittedWhenOnlineHosted() {
+    public boolean isLimitedWhenOnlineHosted() {
         return false;
     }
 }
