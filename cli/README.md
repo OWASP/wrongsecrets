@@ -7,7 +7,7 @@ At the moment the CLI only serves one purpose: creating a new challenge. In the 
 ## Usage
 
 ```shell
-./challenge-cli 
+./challenge-cli
 ```
 
 will print:

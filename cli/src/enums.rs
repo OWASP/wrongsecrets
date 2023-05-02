@@ -47,4 +47,3 @@ impl fmt::Display for Technology {
         write!(f, "{:?}", self)
     }
 }
-
