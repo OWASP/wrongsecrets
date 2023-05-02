@@ -16,17 +16,17 @@
 
         <div class="col-12" th:text="${challengeCompletedAlready}"></div>
         <div class="col-12 feedback alert alert-success" role="alert" th:if="${answerCorrect!=null}"
-             th:text="${answerCorrect}"></div>
+             th:text="${answerCorrect}" th:attr="data-cy='success-alert'"></div>
         <div class="col-12 feedback alert alert-danger" role="alert" th:if="${answerIncorrect!=null}"
-             th:text="${answerIncorrect}"></div>
+             th:text="${answerIncorrect}" th:attr="data-cy='incorrect-alert'"></div>
         <form action="#" th:action="'/challenge/'+${challenge.link}" th:object="${challengeForm}" method="post">
             <div class="d-inline">
-                Answer to solution : <input type="text" id="answerfield" th:field="*{solution}"/>
+                Answer to solution : <input type="text" id="answerfield" th:field="*{solution}" th:attr="data-cy='answer-textbox'"/>
             </div>
             <div class="d-none d-lg-inline">
-                <button class="btn btn-primary" type="submit" name="action" value="submit">Submit</button>
+                <button class="btn btn-primary" type="submit" name="action" value="submit" th:attr="data-cy='submit-textbox-btn'">Submit</button>
                 <button class="btn btn-secondary"
-                        onclick="document.getElementById('answerfield').value='';event.preventDefault();">Clear
+                        onclick="document.getElementById('answerfield').value='';event.preventDefault();" th:attr="data-cy='clear-textbox-btn'">Clear
                 </button>
             </div>
             <div class="d-lg-none mt-2">
@@ -36,7 +36,7 @@
                 </button>
             </div>
             <div class="col-12 mt-3">
-                <button class="btn btn-secondary" type="submit" name="action" value="reset">Reset</button>
+                <button class="btn btn-secondary" type="submit" name="action" value="reset" th:attr="data-cy='reset-btn'">Reset</button>
                 <a th:if="${hintsEnabled==true}" th:attr="data-cy='show-hints-btn'" class="btn btn-secondary" data-bs-toggle="collapse"
                    href="#collapseHint" role="button"
                    aria-expanded="false" aria-controls="collapseHint">
@@ -67,7 +67,7 @@
 
         <div class="progress">
             <div class="progress-bar" role="progressbar" th:style="'width:'+${progress}+'%;'"
-                 th:attr="aria-valuenow=${progress}" aria-valuemin="0" aria-valuemax="100"
+                 th:attr="aria-valuenow=${progress}, data-cy='progress-bar'" aria-valuemin="0" aria-valuemax="100"
                  th:text="${totalPoints}"></div>
         </div>
 
