@@ -15,6 +15,7 @@ import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.docker.Challenge0;
 import org.owasp.wrongsecrets.challenges.docker.Challenge8;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.codec.Hex;
 import org.springframework.stereotype.Controller;
@@ -82,6 +83,7 @@ public class ChallengesController {
      */
     @GetMapping("/spoil-{id}")
     @Hidden
+    @Cacheable("spoilers")
     public String spoiler(Model model, @PathVariable Integer id) {
         if (ctfModeEnabled) {
             model.addAttribute("spoiler", new Spoiler("Spoils are disabled in CTF mode"));
