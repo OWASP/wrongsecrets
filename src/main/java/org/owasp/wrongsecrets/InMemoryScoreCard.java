@@ -1,8 +1,11 @@
 package org.owasp.wrongsecrets;
 
+import jnr.ffi.annotations.In;
 import org.owasp.wrongsecrets.challenges.Challenge;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -12,6 +15,7 @@ public class InMemoryScoreCard implements ScoreCard {
 
     private final int maxNumberOfChallenges;
     private final Set<Challenge> solvedChallenges = new HashSet<>();
+
 
     public InMemoryScoreCard(int numberOfChallenge) {
         maxNumberOfChallenges = numberOfChallenge;
@@ -35,6 +39,15 @@ public class InMemoryScoreCard implements ScoreCard {
     @Override
     public int getTotalReceivedPoints() {
         return solvedChallenges.stream().map(challenge -> challenge.difficulty() * (100 + (challenge.difficulty() - 1) * 25)).reduce(0, Integer::sum);
+    }
+
+    @Override
+    public List<String> getCompletedChallenges() {
+        List<String> completed = new ArrayList<>();
+        for (Challenge challenge : solvedChallenges) {
+            completed.add(challenge.getNumber());
+        }
+        return completed;
     }
 
     @Override

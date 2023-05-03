@@ -26,12 +26,13 @@
                         <th scope="col" class="d-none d-md-table-cell">Difficulty&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                         <th scope="col"
                             th:text="'Runs on environment (current: '+${#strings.replace(environment,'_',' _')}+')'"></th>
+                        <th scope="col" class="d-none d-xl-table-cell">Solved</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="challenge: ${challenges}">
                         <th scope="row" class="d-none d-xl-table-cell" th:text="${challenge.link}"></th>
-                        <td>&nbsp;<a th:href="@{/challenge} + '/' + ${challenge.link}"
+                        <td>&nbsp;<span class="d-xl-none" th:if="${compledtedChallenges != null && #lists.contains(compledtedChallenges, '' + challenge.link)}">&#9745; </span><a th:href="@{/challenge} + '/' + ${challenge.link}"
                                      th:class="${challenge.isChallengeEnabled} ? '' : 'disabled'"><span
                             th:text="${challenge.name}"
                             th:remove="tag"></span></a></td>
@@ -39,23 +40,25 @@
                         <td class="d-none d-md-table-cell" th:text="${challenge.starsOnScale}">
                         </td>
                         <th:block th:if="${challenge.requiredEnv} == 'DOCKER'">
-                            <td class="" >Docker</td>
+                            <td class="">Docker</td>
                         </th:block>
                         <th:block th:if="${challenge.requiredEnv} == 'K8S'">
-                            <td class="" >K8S</td>
+                            <td class="">K8S</td>
                         </th:block>
                         <th:block th:if="${challenge.requiredEnv} == 'VAULT'">
-                            <td class="" >K8S with Vault</td>
+                            <td class="">K8S with Vault</td>
                         </th:block>
                         <th:block
                             th:if="${challenge.requiredEnv} == 'AWS' or ${challenge.requiredEnv} == 'GCP' or ${challenge.requiredEnv} == 'AZURE'">
-                            <td class="" >AWS, GCP, Azure</td>
+                            <td class="">AWS, GCP, Azure</td>
                         </th:block>
+                        <td class="d-none d-xl-table-cell"><span th:if="${compledtedChallenges != null && #lists.contains(compledtedChallenges, '' + challenge.link)}">&#9745;</span></td>
                     </tr>
                     </tbody>
                 </table>
-
-
+                <p th:if="${ctfServerAddress == null}" th:text="'Total score: '+${totalScore}"></p>
+                <p th:if="${ctfServerAddress != null}"
+                   th:text="'Scoring and progress keeping is disabled in CTF mode, have a look at '+${ctfServerAddress}+' for your actual score and progress'"></p>
                 <!--                <p th:text="'You are currently running on the following environment: '+${environment}"></p>-->
                 <p>Hasty? Here is the Vault <a href="spoil-7">secret;-)</a></p>
 
@@ -116,7 +119,8 @@
                 </div>
                 <div class="border border-dark thank-you text-center">
                     Developing our solution in 3 clouds costs money. Want to help us to cover our cloud bills?
-                    <a href="https://owasp.org/donate/?reponame=www-project-wrongsecrets&title=OWASP+wrongsecrets" target="_blank">Donate</a>.
+                    <a href="https://owasp.org/donate/?reponame=www-project-wrongsecrets&title=OWASP+wrongsecrets"
+                       target="_blank">Donate</a>.
                 </div>
             </div>
             <div class="col-12 col-lg-7">
