@@ -1,5 +1,3 @@
-=== The Client Secret
+=== Another Client Secret
 
-The client requires a random value of the server as a secret.
-Given it is random and not shown at startup you cannot "eavesdrop" it at the server.
-But what if we store it wrongly at the client?
+The client receives a random value from the server and needs to return it as the answer to prove it is the server. This often happens when, for instance, you need to provide a session token. The token is generated randomly at server startup, so you cannot find it in code. But what if we store it insecurely with the client?
