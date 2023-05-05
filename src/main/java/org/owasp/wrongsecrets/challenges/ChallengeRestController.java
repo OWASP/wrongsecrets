@@ -6,7 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.stereotype.Controller;
 
-
+/**
+ * This is a controller used in challenge 30 to retrieve data that can be put into localstorage by the frontend.
+ */
 @Controller
 @RestController
 public class ChallengeRestController {
