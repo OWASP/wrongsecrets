@@ -1,11 +1,12 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
+import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.logging.log4j.util.Strings;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
+import org.owasp.wrongsecrets.challenges.Difficulty;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
@@ -58,21 +59,21 @@ public class Challenge13 extends Challenge {
         return isKeyCorrect(answer);
     }
 
-    @Override
+
     /**
      * {@inheritDoc}
      */
+    @Override
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
         return List.of(RuntimeEnvironment.Environment.DOCKER);
     }
 
     /**
      * {@inheritDoc}
-     * Difficulty: 3
      */
     @Override
     public int difficulty() {
-        return 3;
+        return Difficulty.HARD;
     }
 
     /**
@@ -85,12 +86,12 @@ public class Challenge13 extends Challenge {
     }
 
     @Override
-    public boolean isLimittedWhenOnlineHosted() {
+    public boolean isLimitedWhenOnlineHosted() {
         return false;
     }
 
     private boolean isKeyCorrect(String base64EncodedKey) {
-        if (Strings.isEmpty(base64EncodedKey) || Strings.isEmpty(plainText) || Strings.isEmpty(cipherText)) {
+        if (Strings.isNullOrEmpty(base64EncodedKey) || Strings.isNullOrEmpty(plainText) || Strings.isNullOrEmpty(cipherText)) {
             //log.debug("Checking secret with values {}, {}, {}", base64EncodedKey, plainText, cipherText);
             return false;
         }

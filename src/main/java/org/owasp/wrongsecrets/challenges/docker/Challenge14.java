@@ -1,8 +1,13 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
+import com.google.common.base.Strings;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.logging.log4j.util.Strings;
 import org.linguafranca.pwdb.Database;
 import org.linguafranca.pwdb.kdbx.KdbxCreds;
 import org.linguafranca.pwdb.kdbx.simple.SimpleDatabase;
@@ -13,16 +18,11 @@ import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
+import org.owasp.wrongsecrets.challenges.Difficulty;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
 
 /**
  * This challenge is about having a weak password for your password manager.
@@ -66,21 +66,21 @@ public class Challenge14 extends Challenge {
         return isanswerCorrectInKeeyPassx(answer);
     }
 
-    @Override
+
     /**
      * {@inheritDoc}
      */
+    @Override
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
         return List.of(RuntimeEnvironment.Environment.DOCKER);
     }
 
     /**
      * {@inheritDoc}
-     * Difficulty: 4
      */
     @Override
     public int difficulty() {
-        return 4;
+        return Difficulty.EXPERT;
     }
 
     /**
@@ -93,13 +93,13 @@ public class Challenge14 extends Challenge {
     }
 
     @Override
-    public boolean isLimittedWhenOnlineHosted() {
+    public boolean isLimitedWhenOnlineHosted() {
         return false;
     }
 
     @SuppressFBWarnings("PATH_TRAVERSAL_IN")
     private String findAnswer() {
-        if (Strings.isEmpty(keepassxPassword)) {
+        if (Strings.isNullOrEmpty(keepassxPassword)) {
             //log.debug("Checking secret with values {}", keepassxPassword);
             return defaultKeepassValue;
         }
@@ -117,7 +117,7 @@ public class Challenge14 extends Challenge {
     }
 
     private boolean isanswerCorrectInKeeyPassx(String answer) {
-        if (Strings.isEmpty(keepassxPassword) || Strings.isEmpty(answer)) {
+        if (Strings.isNullOrEmpty(keepassxPassword) || Strings.isNullOrEmpty(answer)) {
             //log.debug("Checking secret with values {}, {}", keepassxPassword, answer);
             return false;
         }

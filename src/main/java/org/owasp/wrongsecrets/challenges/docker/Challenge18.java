@@ -1,24 +1,24 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
 
-import lombok.extern.slf4j.Slf4j;
-import org.owasp.wrongsecrets.RuntimeEnvironment;
-import org.owasp.wrongsecrets.ScoreCard;
-import org.owasp.wrongsecrets.challenges.Challenge;
-import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
-import org.owasp.wrongsecrets.challenges.Spoiler;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.annotation.Order;
-import org.springframework.security.crypto.codec.Hex;
-import org.springframework.stereotype.Component;
+import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 import java.util.List;
-
-import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
+import lombok.extern.slf4j.Slf4j;
+import org.owasp.wrongsecrets.RuntimeEnvironment;
+import org.owasp.wrongsecrets.ScoreCard;
+import org.owasp.wrongsecrets.challenges.Challenge;
+import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
+import org.owasp.wrongsecrets.challenges.Difficulty;
+import org.owasp.wrongsecrets.challenges.Spoiler;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.annotation.Order;
+import org.springframework.security.crypto.codec.Hex;
+import org.springframework.stereotype.Component;
 
 /**
  * This challenge is about finding the value of a secret through weak hash mechanisms.
@@ -86,11 +86,10 @@ public class Challenge18 extends Challenge {
 
     /**
      * {@inheritDoc}
-     * Difficulty: 5
      */
     @Override
     public int difficulty() {
-        return 5;
+        return Difficulty.MASTER;
     }
 
     /**
@@ -103,7 +102,7 @@ public class Challenge18 extends Challenge {
     }
 
     @Override
-    public boolean isLimittedWhenOnlineHosted() {
+    public boolean isLimitedWhenOnlineHosted() {
         return false;
     }
 }

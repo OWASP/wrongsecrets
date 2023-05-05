@@ -104,7 +104,7 @@ Now you can try to find the secrets by means of solving the challenge offered at
 -   [localhost:8080/challenge/26](http://localhost:8080/challenge/26)
 -   [localhost:8080/challenge/27](http://localhost:8080/challenge/27)
 -   [localhost:8080/challenge/28](http://localhost:8080/challenge/28)
--   [localhost:8080/challenge/28](http://localhost:8080/challenge/29)
+-   [localhost:8080/challenge/29](http://localhost:8080/challenge/29)
 
 Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look
 better ;-).
