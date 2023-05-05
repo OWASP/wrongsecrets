@@ -52,7 +52,7 @@ public class ChallengesController {
     @Value("${challenge_acht_ctf_to_provide_to_host_value}")
     private String keyToProvideToHost;
 
-    @Value("${challenge_twentynine_ctf_to_provide_to_host_value}")
+    @Value("${challenge_thirty_ctf_to_provide_to_host_value}")
     private String keyToProvideToHostForChallenge30;
 
     @Value("${CTF_SERVER_ADDRESS}")
