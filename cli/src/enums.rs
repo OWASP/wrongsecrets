@@ -27,13 +27,20 @@ pub enum Technology {
     Documentation,
 }
 
-#[derive(clap::ValueEnum, Clone, Debug)]
+#[derive(clap::ValueEnum, Copy, Clone, Debug, PartialEq, Eq)]
 pub enum Difficulty {
     Easy,
     Normal,
     Hard,
     Expert,
     Master,
+}
+
+#[derive(clap::ValueEnum, Copy, Clone, Debug, PartialEq, Eq)]
+pub enum Platform {
+    Cloud,
+    Docker,
+    Kubernetes
 }
 
 impl fmt::Display for Difficulty {
@@ -43,6 +50,12 @@ impl fmt::Display for Difficulty {
 }
 
 impl fmt::Display for Technology {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "{:?}", self)
+    }
+}
+
+impl fmt::Display for Platform {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "{:?}", self)
     }

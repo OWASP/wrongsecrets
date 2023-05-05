@@ -35,8 +35,16 @@ cargo build
 target/debug/challenge-cli
 ```
 
+## Running in IntelliJ
+
+On `main.rs` right click and select `Run 'main'`. This will run the CLI in the terminal window of IntelliJ.
+When passing command line arguments you need to add them to the run configuration. In IntelliJ go to `Run` -> `Edit Configurations...` and add the arguments to the `Command` field. You need to add `--` before the arguments. For example:
+
+```shell
+run --package challenge-cli --bin challenge-cli -- challenge -d easy -t git ../
+```
+
 ## Todo
 
-- Add option to pass in the project directory
-- Create the directory structure for a new challenge
+- Fix templating (not everything is present yet)
 - Add GitHub actions to build binary for the different platforms

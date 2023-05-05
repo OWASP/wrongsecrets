@@ -72,3 +72,4 @@ js/node/
 js/node_modules/
 node_modules
 .npm
+/cli/Cargo.lock
