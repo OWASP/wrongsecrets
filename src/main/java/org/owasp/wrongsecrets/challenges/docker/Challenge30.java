@@ -5,6 +5,7 @@ import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
+import org.owasp.wrongsecrets.challenges.Difficulty;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -13,6 +14,9 @@ import java.security.SecureRandom;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * This is a localstorage based challenge to educate people on the use of localstorage and secrets
+ */
 @Component
 @Order(30)
 public class Challenge30 extends Challenge {
@@ -57,11 +61,18 @@ public class Challenge30 extends Challenge {
     }
 
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int difficulty() {
-        return 2;
+        return Difficulty.NORMAL;
     }
 
+    /**
+     * {@inheritDoc}
+     * This is a front-end / web type of challenge
+     */
     @Override
     public String getTech() {
         return ChallengeTechnology.Tech.FRONTEND.id;

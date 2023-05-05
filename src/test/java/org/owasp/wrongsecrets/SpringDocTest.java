@@ -11,7 +11,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import io.swagger.v3.core.util.Yaml;
 import io.swagger.v3.oas.models.OpenAPI;
+
 import java.util.List;
+
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -74,7 +76,7 @@ public class SpringDocTest {
 
         Assertions.assertThat(ownEndpoints).hasSizeGreaterThan(1);
         ownEndpoints.forEach(path -> {
-                if (!path.equals("/spoil-{id}")) { //this one is hidden
+                if (!path.equals("/spoil-{id}") && !path.equals("/hidden")) { //this one is hidden
                     log.info("Checking for path to be present in OpenAPI spec: {}", path);
                     Assertions.assertThat(openAPI.getPaths().get(path)).isNotNull();
                 }
