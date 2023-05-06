@@ -3,13 +3,13 @@
 <body>
 <div class="container" layout:fragment="content">
     <!--/*@thymesVar id="challenge" type="org.owasp.wrongsecrets.challenges.ChallengeUI"*/-->
-    <p class="h1 mt-2"> <span th:text="${challenge.name}" th:attr="data-cy=${#strings.toLowerCase(challenge.name)} + '-title'"/> <span th:block th:text="${challenge.stars}"></span></p>
+    <p class="h1 mt-2"> <span th:text="${challenge.name}" th:attr="data-cy=challenge-title"/> <span th:block th:text="${challenge.stars}"></span></p>
 
     <p><span th:text="'Welcome to challenge ' + ${challenge.challengeNumber} + '.'"></span> You need to guess the secret
         that is hidden in <a href="https://github.com/OWASP/wrongsecrets">Java</a>, <a
             href="https://hub.docker.com/r/jeroenwillemsen/wrongsecrets">Docker</a>, Kubernetes, Vault, AWS or GCP.</p>
     <div class="row">
-        <div class="offset-lg-1 col-lg-10 col-md-12">
+        <div class="offset-lg-1 col-lg-10 col-md-12" th:attr="data-cy=challenge-description">
             <div th:replace="~{doc:__${challenge.explanation}__.adoc}"></div>
         </div>
 
