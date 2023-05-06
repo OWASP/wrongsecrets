@@ -252,7 +252,7 @@ Top contributors:
 -   [Chris Elbring Jr. @neatzsche](https://github.com/neatzsche)
 -   [Puneeth Y @puneeth072003](https://github.com/puneeth072003)
 -   [Mike Woudenberg @mikewoudenberg](https://github.com/mikewoudenberg)
--   [Divyanchu Dev @Novice-expert](https://github.com/Novice-expert)
+-   [Divyanshu Dev @Novice-expert](https://github.com/Novice-expert)
 -   [Filip Chyla @fchyla](https://github.com/fchyla)
 -   [Dmitry Litosh @Dlitosh](https://github.com/Dlitosh)
 -   [Josh Grossman @tghosth](https://github.com/tghosth)
