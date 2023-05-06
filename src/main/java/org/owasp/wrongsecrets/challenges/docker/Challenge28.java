@@ -59,6 +59,7 @@ public class Challenge28 extends Challenge {
 
     /**
      * {@inheritDoc}
+     * This is an easy challenge
      */
     @Override
     public int difficulty() {
