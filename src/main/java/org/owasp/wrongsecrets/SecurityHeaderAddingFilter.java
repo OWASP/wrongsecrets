@@ -6,6 +6,9 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Filter used to provide basic security headers in all cases.
+ */
 @Component
 public class SecurityHeaderAddingFilter implements Filter {
 

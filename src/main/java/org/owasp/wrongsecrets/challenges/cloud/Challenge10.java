@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
+import org.owasp.wrongsecrets.challenges.Difficulty;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
@@ -19,6 +20,9 @@ import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.AWS;
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.GCP;
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.AZURE;
 
+/**
+ * Cloud challenge that leverages the CSI secrets driver of the cloud you are running in.
+ */
 @Component
 @Slf4j
 @Order(10)
@@ -37,11 +41,17 @@ public class Challenge10 extends CloudChallenge {
         this.challengeAnswer = getCloudChallenge9and10Value(filePath, fileName);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Spoiler spoiler() {
         return new Spoiler(challengeAnswer);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean answerCorrect(String answer) {
         return challengeAnswer.equals(answer);
@@ -57,15 +67,25 @@ public class Challenge10 extends CloudChallenge {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
         return List.of(GCP, AWS, AZURE);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int difficulty() {
-        return 4;
+        return Difficulty.EXPERT;
     }
 
+    /**
+     * {@inheritDoc}
+     * Uses CSI Driver
+     */
     @Override
     public String getTech() {
         return ChallengeTechnology.Tech.CSI.id;

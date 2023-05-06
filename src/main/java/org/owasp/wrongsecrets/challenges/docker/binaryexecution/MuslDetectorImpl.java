@@ -7,6 +7,9 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * Primary implementation of MuslDetector.
+ */
 @Slf4j
 public class MuslDetectorImpl implements MuslDetector {
 

@@ -1,11 +1,12 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
+import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.logging.log4j.util.Strings;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
+import org.owasp.wrongsecrets.challenges.Difficulty;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
@@ -19,6 +20,9 @@ import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
 
+/**
+ * Challenge focused on showing CI/CD issues through Github Actions.
+ */
 @Slf4j
 @Component
 @Order(13)
@@ -27,6 +31,9 @@ public class Challenge13 extends Challenge {
     private final String plainText;
     private final String cipherText;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Spoiler spoiler() {
         String answer = Base64.getEncoder().encodeToString("This is our first key as github secret".getBytes(StandardCharsets.UTF_8));
@@ -44,33 +51,47 @@ public class Challenge13 extends Challenge {
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected boolean answerCorrect(String answer) {
         return isKeyCorrect(answer);
     }
 
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
         return List.of(RuntimeEnvironment.Environment.DOCKER);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int difficulty() {
-        return 3;
+        return Difficulty.HARD;
     }
 
+    /**
+     * {@inheritDoc}
+     * CI/CD based.
+     */
     @Override
     public String getTech() {
         return ChallengeTechnology.Tech.CICD.id;
     }
 
     @Override
-    public boolean isLimittedWhenOnlineHosted() {
+    public boolean isLimitedWhenOnlineHosted() {
         return false;
     }
 
     private boolean isKeyCorrect(String base64EncodedKey) {
-        if (Strings.isEmpty(base64EncodedKey) || Strings.isEmpty(plainText) || Strings.isEmpty(cipherText)) {
+        if (Strings.isNullOrEmpty(base64EncodedKey) || Strings.isNullOrEmpty(plainText) || Strings.isNullOrEmpty(cipherText)) {
             //log.debug("Checking secret with values {}, {}, {}", base64EncodedKey, plainText, cipherText);
             return false;
         }

@@ -5,6 +5,7 @@ import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
+import org.owasp.wrongsecrets.challenges.Difficulty;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
@@ -17,6 +18,7 @@ import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 /**
  * This challenge requires the participant to provide a hardcoded password to pass the challenge.
  * This challenge can be run in CTF mode and is limited to using Docker as a runtime environment.
+ * The javadoc is generated using ChatGPT.
  */
 @Component
 @Order(2)
@@ -46,7 +48,6 @@ public class Challenge2 extends Challenge {
 
     /**
      * {@inheritDoc}
-     * Returns a Spoiler object containing the hardcoded password for the challenge.
      */
     @Override
     public Spoiler spoiler() {
@@ -60,16 +61,17 @@ public class Challenge2 extends Challenge {
      * @param answer The answer provided by the participant.
      * @return True if the answer matches the hardcoded password, false otherwise.
      */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean answerCorrect(String answer) {
         return hardcodedPassword.equals(answer);
     }
 
     /**
-     * Returns a list of supported runtime environments for the challenge.
+     * {@inheritDoc}
      * This challenge supports the Docker runtime environment.
-     *
-     * @return A list of supported runtime environments.
      */
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
         return List.of(DOCKER);
@@ -77,16 +79,15 @@ public class Challenge2 extends Challenge {
 
     /**
      * {@inheritDoc}
-     * Returns the difficulty level of the challenge as 1.
      */
     @Override
     public int difficulty() {
-        return 1;
+        return Difficulty.EASY;
     }
 
     /**
      * {@inheritDoc}
-     * Returns the technology used for the challenge as GIT.
+     * Git based.
      */
     @Override
     public String getTech() {
@@ -98,7 +99,7 @@ public class Challenge2 extends Challenge {
      * This challenge is not limited when hosted online.
      */
     @Override
-    public boolean isLimittedWhenOnlineHosted() {
+    public boolean isLimitedWhenOnlineHosted() {
         return false;
     }
 

@@ -1,0 +1,3 @@
+=== Another Client Secret
+
+The client receives a random value from the server and needs to return it as the answer to prove it is the server. This often happens when, for instance, you need to provide a session token. The token is generated randomly at server startup, so you cannot find it in code. But what if we store it insecurely with the client?

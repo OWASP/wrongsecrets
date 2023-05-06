@@ -8,6 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+/**
+ * Controller that is used to render data in the stats page.
+ */
 @Controller
 public class StatsController {
 
@@ -50,10 +53,14 @@ public class StatsController {
         model.addAttribute("hintsEnabled", hintsEnabled);
         model.addAttribute("reasonEnabled", reasonEnabled);
         model.addAttribute("ctfModeEnabled", ctfModeEnabled);
-        model.addAttribute("spoilingEnabled", spoilingEnabled);
+        model.addAttribute("spoilingEnabled", spoilsEnabled());
         model.addAttribute("swaggerUIEnabled", swaggerUIEnabled);
         model.addAttribute("springdocenabled", springdocenabled);
         model.addAttribute("swaggerURI", swaggerURI);
         return "stats";
+    }
+
+    private boolean spoilsEnabled() {
+        return spoilingEnabled && !ctfModeEnabled;
     }
 }

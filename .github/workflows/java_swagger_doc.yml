@@ -20,15 +20,15 @@ jobs:
           java-version: "19"
           distribution: "temurin"
       - name: Clean install
-        run: ./mvnw clean install -DskipTests -Ddependency-check.skip -Dcyclonedx.skip=true
+        run: ./mvnw --no-transfer-progress clean install -DskipTests -Ddependency-check.skip -Dcyclonedx.skip=true
       - name: Compile javadoc
-        run: ./mvnw compile javadoc:javadoc
+        run: ./mvnw --no-transfer-progress compile javadoc:javadoc
       - name: Start wrongsecrets
-        run: nohup ./mvnw spring-boot:run -Dspring-boot.run.profiles=without-vault &
+        run: nohup ./mvnw --no-transfer-progress spring-boot:run -Dspring-boot.run.profiles=without-vault &
       - name: Compile javadocs
-        run: ./mvnw compile javadoc:javadoc
+        run: ./mvnw --no-transfer-progress compile javadoc:javadoc
       - name: Generate swaggerdoc
-        run: ./mvnw springdoc-openapi:generate
+        run: ./mvnw --no-transfer-progress springdoc-openapi:generate
       - name: Upload swagger api doc
         uses: actions/upload-artifact@v3
         with:

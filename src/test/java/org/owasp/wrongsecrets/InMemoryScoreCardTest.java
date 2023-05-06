@@ -1,14 +1,14 @@
 package org.owasp.wrongsecrets;
 
+import static org.mockito.Mockito.when;
+
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.owasp.wrongsecrets.challenges.Challenge;
-
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.when;
+import org.owasp.wrongsecrets.challenges.Difficulty;
 
 @ExtendWith(MockitoExtension.class)
 class InMemoryScoreCardTest {
@@ -21,7 +21,7 @@ class InMemoryScoreCardTest {
 
     @Test
     void whenOneChallengeSolvedPointsShouldBeCalculatedCorrectly() {
-        when(challenge1.difficulty()).thenReturn(2);
+        when(challenge1.difficulty()).thenReturn(Difficulty.NORMAL);
         var scoring = new InMemoryScoreCard(2);
         scoring.completeChallenge(challenge1);
 
@@ -30,8 +30,8 @@ class InMemoryScoreCardTest {
 
     @Test
     void solvingAllChallengesShouldCalculateMaxPoints() {
-        when(challenge1.difficulty()).thenReturn(1);
-        when(challenge2.difficulty()).thenReturn(3);
+        when(challenge1.difficulty()).thenReturn(Difficulty.EASY);
+        when(challenge2.difficulty()).thenReturn(Difficulty.HARD);
         var scoring = new InMemoryScoreCard(2);
         scoring.completeChallenge(challenge1);
         scoring.completeChallenge(challenge2);

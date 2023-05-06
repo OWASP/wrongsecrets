@@ -1,15 +1,7 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
-import lombok.extern.slf4j.Slf4j;
-import org.owasp.wrongsecrets.RuntimeEnvironment;
-import org.owasp.wrongsecrets.ScoreCard;
-import org.owasp.wrongsecrets.challenges.Challenge;
-import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
-import org.owasp.wrongsecrets.challenges.Spoiler;
-import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
+import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 
-import javax.crypto.Cipher;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -17,9 +9,20 @@ import java.security.KeyFactory;
 import java.security.PrivateKey;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.util.List;
+import javax.crypto.Cipher;
+import lombok.extern.slf4j.Slf4j;
+import org.owasp.wrongsecrets.RuntimeEnvironment;
+import org.owasp.wrongsecrets.ScoreCard;
+import org.owasp.wrongsecrets.challenges.Challenge;
+import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
+import org.owasp.wrongsecrets.challenges.Difficulty;
+import org.owasp.wrongsecrets.challenges.Spoiler;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
 
-import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
-
+/**
+ * This challenge is about finding a secret in a Github issue (screenshot).
+ */
 @Component
 @Slf4j
 @Order(29)
@@ -42,34 +45,41 @@ public class Challenge29 extends Challenge {
 
     @Override
     public Spoiler spoiler() {
-        return new Spoiler(decrypt());
+        return new Spoiler(decryptActualAnswer());
     }
 
     @Override
     public boolean answerCorrect(String answer) {
-        return decrypt().equals(answer);
+        return decryptActualAnswer().equals(answer);
     }
 
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
         return List.of(DOCKER);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int difficulty() {
-        return 1;
+        return Difficulty.EASY;
     }
 
+    /**
+     * {@inheritDoc}
+     * Documentation based.
+     */
     @Override
     public String getTech() {
         return ChallengeTechnology.Tech.DOCUMENTATION.id;
     }
 
     @Override
-    public boolean isLimittedWhenOnlineHosted() {
+    public boolean isLimitedWhenOnlineHosted() {
         return false;
     }
 
-    public String decrypt() {
+    private String decryptActualAnswer() {
         try {
             String privateKeyFilePath = "src/test/resources/RSAprivatekey.pem";
             String privateKeyContent = new String(Files.readAllBytes(Paths.get(privateKeyFilePath)), StandardCharsets.UTF_8);
