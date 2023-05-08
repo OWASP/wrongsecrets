@@ -285,6 +285,18 @@ generate_test_data() {
 }
 
 build_update_pom() {
+    echo "Building new license overview"
+    cd ../.. && mvn license:add-third-party -Dlicense.excludedScopes=test
+    cd .github/scripts
+    echo "preprocessing third party file"
+    sed '/^$/d' ../../target/generated-sources/license/THIRD-PARTY.txt  > temp1a.txt
+    sed '/^Lists/ s/./                        &/' temp1a.txt  > temp1.txt
+    sed 's/^     /                        <li>/' temp1.txt > temp2.txt
+    sed 's/$/<\/li>/' temp2.txt > temp3.txt
+    echo "refreshing licenses into the file"
+    sed -n '1,/MARKER-start/p;/MARKER-end/,$p' ../../src/main/resources/templates/about.html | gsed '/MARKER-end-->/e cat temp3.txt ' > temp4.txt
+    mv temp4.txt ../../src/main/resources/templates/about.html
+    rm tem*.txt
     echo "Building and updating pom.xml file so we can use it in our docker"
     cd ../.. && mvn clean && mvn --batch-mode release:update-versions -DdevelopmentVersion=${tag}-SNAPSHOT && mvn install -DskipTests
     cd .github/scripts
@@ -381,6 +393,8 @@ test() {
         else
             log_failure "The container test has failed, this means that when we built your changes and ran a basic sanity test on the homepage it failed. Please build the container locally and double check the container is running correctly."
         fi
+        echo "testing curl for webjar caching"
+        curl -I  'http://localhost:8080/webjars/bootstrap/5.2.3/css/bootstrap.min.css'
         echo "Testing complete"
     else
         return

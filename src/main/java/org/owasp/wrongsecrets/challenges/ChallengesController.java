@@ -1,11 +1,22 @@
 package org.owasp.wrongsecrets.challenges;
 
 import com.google.common.base.Strings;
+import io.swagger.v3.oas.annotations.Hidden;
+import io.swagger.v3.oas.annotations.Operation;
+import java.nio.charset.StandardCharsets;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.util.List;
+import java.util.stream.Collectors;
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.docker.Challenge0;
 import org.owasp.wrongsecrets.challenges.docker.Challenge8;
+import org.owasp.wrongsecrets.challenges.docker.Challenge30;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.codec.Hex;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,15 +24,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.server.ResponseStatusException;
 
-import javax.crypto.Mac;
-import javax.crypto.spec.SecretKeySpec;
-import java.nio.charset.StandardCharsets;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.util.List;
-import java.util.stream.Collectors;
-
+/**
+ * Controller used to host the Challenges UI.
+ */
 @Controller
 public class ChallengesController {
 
@@ -37,40 +44,64 @@ public class ChallengesController {
     @Value("${ctf_enabled}")
     private boolean ctfModeEnabled;
 
+    private boolean spoilingEnabled;
+
     @Value("${ctf_key}")
     private String ctfKey;
 
     @Value("${challenge_acht_ctf_to_provide_to_host_value}")
     private String keyToProvideToHost;
 
+    @Value("${challenge_thirty_ctf_to_provide_to_host_value}")
+    private String keyToProvideToHostForChallenge30;
+
     @Value("${CTF_SERVER_ADDRESS}")
     private String ctfServerAddress;
 
 
-    public ChallengesController(ScoreCard scoreCard, List<ChallengeUI> challenges, RuntimeEnvironment runtimeEnvironment) {
+    public ChallengesController(ScoreCard scoreCard, List<ChallengeUI> challenges, RuntimeEnvironment runtimeEnvironment, @Value("${spoiling_enabled}") boolean spoilingEnabled) {
         this.scoreCard = scoreCard;
         this.challenges = challenges;
         this.runtimeEnvironment = runtimeEnvironment;
+        this.spoilingEnabled = spoilingEnabled;
     }
 
-    @GetMapping
-    public String explanation(@PathVariable Integer id) {
-        return challenges.get(id).getExplanation();
+    private void checkValidChallengeNumber(int id) {
+        // If the id is either negative or larger than the amount of challenges, return false.
+        if (id < 0 || id >= challenges.size()) {
+            throw new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "challenge not found"
+            );
+        }
     }
 
+    /**
+     * return a spoil of the secret
+     * Please note that there is no way to enable this in ctfMode: spoils can never be returned during a CTF
+     * By default, in normal operations, spoils are enabled, unless `spoilingEnabled` is set to false.
+     *
+     * @param model exchanged with the FE
+     * @param id    id of the challenge
+     * @return either a notification or a spoil
+     */
     @GetMapping("/spoil-{id}")
+    @Hidden
     public String spoiler(Model model, @PathVariable Integer id) {
-        if (!ctfModeEnabled) {
+        if (ctfModeEnabled) {
+            model.addAttribute("spoiler", new Spoiler("Spoils are disabled in CTF mode"));
+        } else if (!spoilingEnabled) {
+            model.addAttribute("spoiler", new Spoiler("Spoils are disabled in the configuration"));
+        } else {
             var challenge = challenges.get(id).getChallenge();
             model.addAttribute("spoiler", challenge.spoiler());
-        } else {
-            model.addAttribute("spoiler", new Spoiler("Spoils are disabled in CTF mode"));
         }
         return "spoil";
     }
 
     @GetMapping("/challenge/{id}")
+    @Operation(description = "Returns the data for a given challenge's form interaction")
     public String challenge(Model model, @PathVariable Integer id) {
+        checkValidChallengeNumber(id);
         var challenge = challenges.get(id);
 
         model.addAttribute("challengeForm", new ChallengeForm(""));
@@ -97,7 +128,9 @@ public class ChallengesController {
     }
 
     @PostMapping(value = "/challenge/{id}", params = "action=reset")
+    @Operation(description = "Resets the state of a given challenge")
     public String reset(@ModelAttribute ChallengeForm challengeForm, @PathVariable Integer id, Model model) {
+        checkValidChallengeNumber(id);
         var challenge = challenges.get(id);
         scoreCard.reset(challenge.getChallenge());
 
@@ -109,7 +142,9 @@ public class ChallengesController {
     }
 
     @PostMapping(value = "/challenge/{id}", params = "action=submit")
+    @Operation(description = "Post your answer to the challenge for a given challenge ID")
     public String postController(@ModelAttribute ChallengeForm challengeForm, Model model, @PathVariable Integer id) {
+        checkValidChallengeNumber(id);
         var challenge = challenges.get(id);
 
         if (!challenge.isChallengeEnabled()) {
@@ -121,6 +156,10 @@ public class ChallengesController {
                         if (challenge.getChallenge() instanceof Challenge8) {
                             if (!Strings.isNullOrEmpty(keyToProvideToHost) && !keyToProvideToHost.equals("not_set")) { //this means that it was overriden with a code that needs to be returned to the ctf key exchange host.
                                 model.addAttribute("answerCorrect", "Your answer is correct! " + "fill in the following answer in the CTF instance at " + ctfServerAddress + "for which you get your code: " + keyToProvideToHost);
+                            }
+                        } else if (challenge.getChallenge() instanceof Challenge30) {
+                            if (!Strings.isNullOrEmpty(keyToProvideToHostForChallenge30) && !keyToProvideToHostForChallenge30.equals("not_set")) { //this means that it was overriden with a code that needs to be returned to the ctf key exchange host.
+                                model.addAttribute("answerCorrect", "Your answer is correct! " + "fill in the following answer in the CTF instance at " + ctfServerAddress + "for which you get your code: " + keyToProvideToHostForChallenge30);
                             }
                         } else {
                             model.addAttribute("answerCorrect", "Your answer is correct! " + "fill in the same answer in the ctf-instance of the app: " + ctfServerAddress);
@@ -170,10 +209,7 @@ public class ChallengesController {
 
     private void addWarning(Challenge challenge, Model model) {
         if (!runtimeEnvironment.canRun(challenge)) {
-            var warning = challenge.supportedRuntimeEnvironments().stream()
-                .map(Enum::name)
-                .limit(1)
-                .collect(Collectors.joining());
+            var warning = challenge.supportedRuntimeEnvironments().stream().map(Enum::name).limit(1).collect(Collectors.joining());
             model.addAttribute("missingEnvWarning", warning);
         }
     }
@@ -184,11 +220,7 @@ public class ChallengesController {
     }
 
     private void fireEnding(Model model) {
-        var notCompleted = challenges.stream()
-            .filter(ChallengeUI::isChallengeEnabled)
-            .map(ChallengeUI::getChallenge)
-            .filter(this::challengeNotCompleted)
-            .count();
+        var notCompleted = challenges.stream().filter(ChallengeUI::isChallengeEnabled).map(ChallengeUI::getChallenge).filter(this::challengeNotCompleted).count();
         if (notCompleted == 0) {
             model.addAttribute("allCompleted", "party");
         }

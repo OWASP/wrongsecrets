@@ -1,14 +1,25 @@
 package org.owasp.wrongsecrets.challenges.cloud;
 
 
+import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.AWS;
+import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.AZURE;
+import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.GCP;
+
 import com.google.api.gax.rpc.ApiException;
 import com.google.cloud.secretmanager.v1.AccessSecretVersionResponse;
 import com.google.cloud.secretmanager.v1.SecretManagerServiceClient;
 import com.google.cloud.secretmanager.v1.SecretVersionName;
+import com.google.common.base.Strings;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
+import org.owasp.wrongsecrets.challenges.Difficulty;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
@@ -21,16 +32,11 @@ import software.amazon.awssdk.services.ssm.model.SsmException;
 import software.amazon.awssdk.services.sts.StsClient;
 import software.amazon.awssdk.services.sts.auth.StsAssumeRoleWithWebIdentityCredentialsProvider;
 import software.amazon.awssdk.services.sts.model.AssumeRoleWithWebIdentityRequest;
-import software.amazon.awssdk.services.sts.model.AssumeRoleWithWebIdentityResponse;
 import software.amazon.awssdk.services.sts.model.StsException;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
-
-import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.*;
-
+/**
+ * Cloud challenge which uses IAM privilelge escalation (differentiating per cloud).
+ */
 @Component
 @Slf4j
 @Order(11)
@@ -79,25 +85,41 @@ public class Challenge11 extends CloudChallenge {
         this.challengeAnswer = getChallenge11Value(runtimeEnvironment);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Spoiler spoiler() {
         return new Spoiler(challengeAnswer);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean answerCorrect(String answer) {
         return challengeAnswer.equals(answer);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
         return List.of(AWS, GCP, AZURE);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int difficulty() {
-        return 4;
+        return Difficulty.EXPERT;
     }
 
+    /**
+     * {@inheritDoc}
+     * Uses IAM Privilege escalation
+     */
     @Override
     public String getTech() {
         return ChallengeTechnology.Tech.IAM.id;
@@ -106,9 +128,6 @@ public class Challenge11 extends CloudChallenge {
     private String getChallenge11Value(RuntimeEnvironment runtimeEnvironment) {
         if (!ctfEnabled) {
             if (runtimeEnvironment != null && runtimeEnvironment.getRuntimeEnvironment() != null) {
-                if (ctfEnabled && ctfValue != awsDefaultValue) {
-                    return ctfValue;
-                }
                 return switch (runtimeEnvironment.getRuntimeEnvironment()) {
                     case AWS -> getAWSChallenge11Value();
                     case GCP -> getGCPChallenge11Value();
@@ -116,17 +135,22 @@ public class Challenge11 extends CloudChallenge {
                     default -> "please_use_supported_cloud_env";
                 };
             }
-        } else {
-            log.info("CTF enabled, skipping challenge11");
+        } else if (!Strings.isNullOrEmpty(ctfValue) && !Strings.isNullOrEmpty(awsDefaultValue)
+            && !ctfValue.equals(awsDefaultValue)) {
+            return ctfValue;
         }
+
+        log.info("CTF enabled, skipping challenge11");
         return "please_use_supported_cloud_env";
     }
 
+    @SuppressFBWarnings(value = "PATH_TRAVERSAL_IN", justification = "The location of the tokenFileLocation is based on an Env Var")
     private String getAWSChallenge11Value() {
         log.info("pre-checking AWS data");
         if (!"if_you_see_this_please_use_AWS_Setup".equals(awsRoleArn)) {
             log.info("Getting credentials from AWS");
             try { //based on https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javav2/example_code/sts/src/main/java/com/example/sts
+
                 String webIDentityToken = Files.readString(Paths.get(tokenFileLocation));
                 StsClient stsClient = StsClient.builder()
                     .region(Region.of(awsRegion))
@@ -136,9 +160,7 @@ public class Challenge11 extends CloudChallenge {
                     .roleSessionName("WrongsecretsApp")
                     .webIdentityToken(webIDentityToken)
                     .build();
-
-                AssumeRoleWithWebIdentityResponse tokenResponse = stsClient.assumeRoleWithWebIdentity(webIdentityRequest);
-                //log.debug("The token value is " + tokenResponse.credentials().sessionToken());
+                stsClient.assumeRoleWithWebIdentity(webIdentityRequest); //returns a AssumeRoleWithWebIdentityResponse which you can debug with //log.debug("The token value is " + tokenResponse.credentials().sessionToken());
                 SsmClient ssmClient = SsmClient.builder()
                     .region(Region.of(awsRegion))
                     .credentialsProvider(StsAssumeRoleWithWebIdentityCredentialsProvider.builder()

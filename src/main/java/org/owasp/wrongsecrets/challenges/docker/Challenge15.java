@@ -1,10 +1,12 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
+import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
+import org.owasp.wrongsecrets.challenges.Difficulty;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
@@ -18,6 +20,9 @@ import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
 
+/**
+ * This challenge is about AWS keys in git history, with actual canarytokens.
+ */
 @Slf4j
 @Component
 @Order(15)
@@ -38,35 +43,60 @@ public class Challenge15 extends Challenge {
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Spoiler spoiler() {
         return new Spoiler(quickDecrypt(ciphterText));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected boolean answerCorrect(String answer) {
         String correctString = quickDecrypt(ciphterText);
-        String minimumKey = correctString.substring(75, 115);
-        return answer.equals(correctString) || answer.equals(minimumKey);
+        return answer.equals(correctString) || minimummatch_found(answer);
     }
 
     @Override
+    /**
+     * {@inheritDoc}
+     */
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
         return List.of(RuntimeEnvironment.Environment.DOCKER);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int difficulty() {
-        return 2;
+        return Difficulty.NORMAL;
     }
 
+    /**
+     * {@inheritDoc}
+     * Git based.
+     */
     @Override
     public String getTech() {
         return ChallengeTechnology.Tech.GIT.id;
     }
 
     @Override
-    public boolean isLimittedWhenOnlineHosted() {
+    public boolean isLimitedWhenOnlineHosted() {
+        return false;
+    }
+
+    private boolean minimummatch_found(String answer) {
+        if (!Strings.isNullOrEmpty(answer)) {
+            if (answer.length() < 19) {
+                return false;
+            }
+            return quickDecrypt(ciphterText).contains(answer);
+        }
         return false;
     }
 
@@ -85,7 +115,7 @@ public class Challenge15 extends Challenge {
             GCMParameterSpec gcmParameterSpec = new GCMParameterSpec(gcmTagLengthInBytes * 8, initializationVector);
             cipher.init(Cipher.DECRYPT_MODE, keySpec, gcmParameterSpec);
             byte[] plainTextBytes = cipher.doFinal(Base64.getDecoder().decode(cipherText.getBytes(StandardCharsets.UTF_8)));
-            return new String(plainTextBytes);
+            return new String(plainTextBytes, StandardCharsets.UTF_8);
         } catch (Exception e) {
             log.warn("Exception with Challenge 15", e);
             return "";

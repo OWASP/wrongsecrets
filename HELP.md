@@ -1,5 +1,7 @@
 # Getting Started
 
+Please consult the [readme](./README.md), [Contributing](./CONTRIBUTING.md), [Code of Conduct](./CODE_OF_CONDUCT.md), our [ctf instructions](./ctf-instructions.md) and our [Wiki](https://github.com/OWASP/wrongsecrets/wiki) when you are getting started.
+
 ### Reference Documentation
 For further reference, please consider the following sections:
 

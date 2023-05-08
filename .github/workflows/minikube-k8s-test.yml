@@ -4,8 +4,11 @@ name: Test minikube script (k8s)
 
 # Controls when the workflow will run
 on:
+  push:
+    branches:
+      - master
   pull_request:
-    branches: [ master ]
+    branches: [master]
   workflow_dispatch:
 
 permissions:
@@ -21,11 +24,12 @@ jobs:
       - name: Start minikube
         uses: medyagh/setup-minikube@master
         with:
-          minikube-version: 1.28.0
+          minikube-version: 1.29.0
           driver: docker
-          kubernetes-version: v1.23.12
+          kubernetes-version: v1.25.6
       - name: test script
         run: |
+          kubectl apply -f k8s/workspace-psa.yml
           kubectl apply -f k8s/secrets-config.yml
           kubectl apply -f k8s/secrets-secret.yml
           kubectl apply -f k8s/secret-challenge-deployment.yml

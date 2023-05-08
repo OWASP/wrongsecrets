@@ -19,9 +19,6 @@ public class WrongSecretsApplication {
     @Bean
     @Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
     public InMemoryScoreCard scoreCard() {
-        return new InMemoryScoreCard(27);
+        return new InMemoryScoreCard(28);
     }
-
-
-
 }

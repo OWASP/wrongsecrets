@@ -7,7 +7,7 @@
         <div class="display-5">Welcome</div>
         <p class="lead">Welcome to OWASP WrongSecrets. With this app, we hope you will re-evaluate your secrets
             management
-            strategy</p>
+            strategy.</p>
         <hr class="my-2 my-lg-3">
         <p>For each of the challenges below: try to find the secret! Enter it in the `Answer to solution` box and
             score points! Note that some challenges require this app to run on additional infrastructure (see in the
@@ -23,11 +23,9 @@
                         <th scope="col" class="d-none d-xl-table-cell">#</th>
                         <th scope="col">&nbsp;Challenge&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                         <th scope="col">Focus&nbsp;&nbsp;&nbsp;</th>
-                        <th scope="col" class="d-sm-none"
-                            th:text="'Runs on environment (current: '+${#strings.replace(environment,'_',' _')}+')'"></th>
                         <th scope="col" class="d-none d-md-table-cell">Difficulty&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                        <th scope="col" class="d-none d-sm-table-cell"
-                            th:text="'Runs on environment (current: '+${environment}+')'"></th>
+                        <th scope="col"
+                            th:text="'Runs on environment (current: '+${#strings.replace(environment,'_',' _')}+')'"></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -38,27 +36,21 @@
                             th:text="${challenge.name}"
                             th:remove="tag"></span></a></td>
                         <td th:text="${challenge.tech}"></td>
-                            <td td:if="${{challenge.requiredEnv == 'USEDFORDEDUPLICATIONDONOTREMOVE'}}" class="d-sm-none"></td>
-                        <td class="d-none d-md-table-cell">
-                            <th:span th:each="i: ${#numbers.sequence(1, challenge.difficulty)}"><span>★ </span></th:span>
-                            <th:span th:if="${challenge.difficulty<5}"
-                                     th:each="i: ${#numbers.sequence(challenge.difficulty+1, 5)}"><span>☆</span>
-                            </th:span>
+                        <td class="d-none d-md-table-cell" th:text="${challenge.starsOnScale}">
                         </td>
                         <th:block th:if="${challenge.requiredEnv} == 'DOCKER'">
-                            <td class="d-none d-sm-table-cell" >Docker</td>
+                            <td class="" >Docker</td>
                         </th:block>
                         <th:block th:if="${challenge.requiredEnv} == 'K8S'">
-                            <td class="d-none d-sm-table-cell" >K8s or Minikube</td>
+                            <td class="" >K8S</td>
                         </th:block>
                         <th:block th:if="${challenge.requiredEnv} == 'VAULT'">
-                            <td class="d-none d-sm-table-cell" >K8s or Minikube with Vault</td>
+                            <td class="" >K8S with Vault</td>
                         </th:block>
                         <th:block
                             th:if="${challenge.requiredEnv} == 'AWS' or ${challenge.requiredEnv} == 'GCP' or ${challenge.requiredEnv} == 'AZURE'">
-                            <td class="d-none d-sm-table-cell" >AWS, GCP, Azure</td>
+                            <td class="" >AWS, GCP, Azure</td>
                         </th:block>
-
                     </tr>
                     </tbody>
                 </table>
@@ -93,13 +85,18 @@
                         <li><a href="https://github.com/remakingeden">Joss Sparkes @remakingeden</a></li>
                         <li><a href="https://github.com/tiborhercz">Tibor Hercz @tiborhercz</a></li>
                         <li><a href="https://github.com/neatzsche">Chris Elbring Jr. @neatzsche</a>
+                        <li><a href="https://github.com/puneeth072003">Puneeth Y @puneeth072003</a>
+                        <li><a href="https://github.com/mikewoudenberg">Mike Woudenberg @mikewoudenberg</a></li>
+                        <li><a href="https://github.com/Novice-expert">Divyanshu Dev @Novice-expert</a></li>
                         <li><a href="https://github.com/fchyla">Filip Chyla @fchyla</a></li>
                         <li><a href="https://github.com/Dlitosh">Dmitry Litosh @Dlitosh</a></li>
                         <li><a href="https://github.com/tghosth">Josh Grossman @tghosth</a></li>
+                        <li><a href="https://github.com/turjoc120">Turjo Chowdhury @turjoc120</a></li>
                         <li><a href="https://github.com/northdpole">Spyros @northdpole</a></li>
-                        <li><a href="https://github.com/mikewoudenberg">Mike Woudenberg @mikewoudenberg</a></li>
                         <li><a href="https://github.com/RubenAtBinx">Ruben Kruiver @RubenAtBinx</a></li>
+                        <li><a href="https://github.com/szh">Shlomo Zalman Heigh @szhx</a></li>
                         <li><a href="https://github.com/nhumblot">Nicolas Humblot @nhumblot</a></li>
+                        <li><a href="https://github.com/madhuakula">Madhu Akula @madhuakula</a></li>
                         <li><a href="https://github.com/alex-bender">Alex Bender @alex-bender</a></li>
                         <li><a href="https://github.com/f3rn0s">Finn @f3rn0s</a></li>
                         <li><a href="https://github.com/kingthorin">Rick M @kingthorin</a></li>
@@ -117,6 +114,10 @@
                         <li><a href="https://github.com/saragluna">Xiaolu Dai @saragluna</a></li>
                         <li><a href="https://github.com/JonathanGiles">Jonathan Giles @jonathanGiles</a></li>
                     </ul>
+                </div>
+                <div class="border border-dark thank-you text-center">
+                    Developing our solution in 3 clouds costs money. Want to help us to cover our cloud bills?
+                    <a href="https://owasp.org/donate/?reponame=www-project-wrongsecrets&title=OWASP+wrongsecrets" target="_blank">Donate</a>.
                 </div>
             </div>
             <div class="col-12 col-lg-7">

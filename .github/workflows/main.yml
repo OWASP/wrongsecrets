@@ -1,13 +1,15 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Java checkstyle and testing
+name: Java spotbugs, checkstyle and testing
 
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
+    branches:
+      - master
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -24,8 +26,8 @@ jobs:
       - name: Set up JDK 19
         uses: actions/setup-java@v3
         with:
-          java-version: '19'
-          distribution: 'temurin'
+          java-version: "19"
+          distribution: "temurin"
       - name: Test with Maven
         run: mvn --no-transfer-progress test
 
@@ -37,7 +39,20 @@ jobs:
       - name: Set up JDK 19
         uses: actions/setup-java@v3
         with:
-          java-version: '19'
-          distribution: 'temurin'
+          java-version: "19"
+          distribution: "temurin"
       - name: checkstyle with Maven
         run: mvn --no-transfer-progress checkstyle:check
+
+  spotbugs:
+    name: execute java spotbugs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 19
+        uses: actions/setup-java@v3
+        with:
+          java-version: "19"
+          distribution: "temurin"
+      - name: spotbugs with Maven
+        run: mvn --no-transfer-progress package -DskipTests spotbugs:check

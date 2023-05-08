@@ -6,6 +6,9 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Filter used to provide basic security headers in all cases.
+ */
 @Component
 public class SecurityHeaderAddingFilter implements Filter {
 
@@ -15,7 +18,7 @@ public class SecurityHeaderAddingFilter implements Filter {
         res.addHeader("Server", "WrongSecrets - Star us!");
         res.addHeader("X-Frame-Options", "SAMEORIGIN");
         res.addHeader("X-Content-Type-Options", "nosniff");
-        res.addHeader("Content-Security-Policy", "default-src * 'self' https://wrongsecrets.herokuapp.com/; script-src  * 'self' 'unsafe-inline'; style-src * 'self' 'unsafe-inline'; img-src data:");
+        res.addHeader("Content-Security-Policy", "default-src * 'self'; script-src  * 'self' 'unsafe-inline'; style-src * 'self' 'unsafe-inline'; img-src data:");
         chain.doFilter(request, res);
     }
 }

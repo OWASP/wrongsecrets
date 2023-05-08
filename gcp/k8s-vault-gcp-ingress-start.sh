@@ -50,7 +50,7 @@ while [[ $isvaultrunning != *"vault-1"* ]]; do echo "waiting for Vaul1" && sleep
 while [[ $isvaultrunning != *"vault-2"* ]]; do echo "waiting for Vaul2" && sleep 2 && isvaultrunning=$(kubectl get pods --field-selector=status.phase=Running); done
 
 echo "Setting up port forwarding"
-kubectl port-forward vault-0 8200:8200 &
+kubectl port-forward vault-0 -n vault 8200:8200 &
 echo "Unsealing Vault"
 kubectl exec vault-0 -- vault operator init -key-shares=1 -key-threshold=1 -format=json >cluster-keys.json
 cat cluster-keys.json | jq -r ".unseal_keys_b64[]"

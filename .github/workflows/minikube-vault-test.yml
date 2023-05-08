@@ -4,8 +4,11 @@ name: Test minikube script (k8s&vault)
 
 # Controls when the workflow will run
 on:
+  push:
+    branches:
+      - master
   pull_request:
-    branches: [ master ]
+    branches: [master]
   workflow_dispatch:
 
 permissions:
@@ -18,13 +21,13 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - uses: actions/checkout@v3
-      - uses: eLco/setup-vault@v1
+      - uses: eLco/setup-vault@v1.0.2
       - name: Start minikube
         uses: medyagh/setup-minikube@master
         with:
-          minikube-version: 1.28.0
+          minikube-version: 1.29.0
           driver: docker
-          kubernetes-version: v1.23.12
+          kubernetes-version: v1.25.6
       - name: Setup helm
         uses: azure/setup-helm@v3.5
         id: install

@@ -10,6 +10,7 @@ import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.ChallengeUI;
 import org.owasp.wrongsecrets.challenges.ChallengesController;
 import org.owasp.wrongsecrets.challenges.Spoiler;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -36,7 +37,7 @@ class ChallengesControllerTest {
     @BeforeEach
     void setup() {
         var env = new RuntimeEnvironment(Environment.GCP);
-        var controller = new ChallengesController(scoreCard, ChallengeUI.toUI(List.of(challenge), env), env);
+        var controller = new ChallengesController(scoreCard, ChallengeUI.toUI(List.of(challenge), env), env, true);
         mvc = MockMvcBuilders.standaloneSetup(controller).build();
     }
 
@@ -60,6 +61,16 @@ class ChallengesControllerTest {
         this.mvc.perform(get("/spoil-0"))
             .andExpect(status().isOk())
             .andExpect(model().attribute("spoiler", new Spoiler("solution")));
+    }
+
+    @Test
+    void shouldReturnNotFound() throws Exception {
+        // when(challenge.solved(anyString())).thenReturn(false);
+        // when(challenge.supportedRuntimeEnvironments()).thenReturn(List.of(Environment.DOCKER));
+        this.mvc.perform(get("/challenge/-1"))
+            .andExpect(status().isNotFound());
+        this.mvc.perform(get("/challenge/99999999"))
+            .andExpect(status().isNotFound());
     }
 
     @Test

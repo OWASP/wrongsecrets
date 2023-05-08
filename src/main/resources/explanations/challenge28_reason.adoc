@@ -1,0 +1,5 @@
+*Why storing secrets in closed GitHub issue is a bad idea?*
+
+You should never reveal any secret in a GitHub issue because even when the issue is closed all data is public and is very easy to spot.
+
+So go through the issue twice before posting it on any repository.

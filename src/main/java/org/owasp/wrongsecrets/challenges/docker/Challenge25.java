@@ -7,6 +7,7 @@ import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
+import org.owasp.wrongsecrets.challenges.Difficulty;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -20,6 +21,9 @@ import java.nio.charset.StandardCharsets;
 import java.security.spec.AlgorithmParameterSpec;
 import java.util.List;
 
+/**
+ * This challenge is about finding a secret hardcoded in a web3 contract.
+ */
 @Slf4j
 @Component
 @Order(25)
@@ -36,11 +40,17 @@ public class Challenge25 extends Challenge {
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Spoiler spoiler() {
         return new Spoiler(quickDecrypt(cipherText));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean answerCorrect(String answer) {
         String correctString = quickDecrypt(cipherText);
@@ -48,22 +58,32 @@ public class Challenge25 extends Challenge {
     }
 
     @Override
+    /**
+     * {@inheritDoc}
+     */
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
         return List.of(RuntimeEnvironment.Environment.DOCKER);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int difficulty() {
-        return 2;
+        return Difficulty.NORMAL;
     }
 
+    /**
+     * {@inheritDoc}
+     * Web3 based.
+     */
     @Override
     public String getTech() {
         return ChallengeTechnology.Tech.WEB3.id;
     }
 
     @Override
-    public boolean isLimittedWhenOnlineHosted() {
+    public boolean isLimitedWhenOnlineHosted() {
         return false;
     }
 
@@ -73,7 +93,7 @@ public class Challenge25 extends Challenge {
             SecretKey decryptKey = new SecretKeySpec("thiszthekeytoday".getBytes(StandardCharsets.UTF_8), "AES");
             AlgorithmParameterSpec gcmIv = new GCMParameterSpec(128, Base64.decode(cipherText), 0, 12);
             decryptor.init(Cipher.DECRYPT_MODE, decryptKey, gcmIv);
-            return new String(decryptor.doFinal(Base64.decode(cipherText), 12, Base64.decode(cipherText).length - 12));
+            return new String(decryptor.doFinal(Base64.decode(cipherText), 12, Base64.decode(cipherText).length - 12), StandardCharsets.UTF_8);
         } catch (Exception e) {
             log.warn("Exception with Challenge 25", e);
             return "";
