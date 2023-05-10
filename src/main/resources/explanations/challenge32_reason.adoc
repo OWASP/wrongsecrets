@@ -1,2 +1,1 @@
 *Why you should be careful with AI (and LLM) and secrets*
-
