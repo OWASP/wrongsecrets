@@ -18,6 +18,9 @@ import java.util.UUID;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
+/**
+ * This challenge is about finding a secret in website
+ */
 
 @Component
 @Order(31)
@@ -58,24 +61,43 @@ public class Challenge31 extends Challenge {
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+
     @Override
     public Spoiler spoiler() {
         return new Spoiler(getanswer());
     }
 
+    /**
+     * {@inheritDoc}
+     */
+
     @Override
     public boolean answerCorrect(String answer) {
         return getanswer().equals(answer);
     }
+    /**
+     * {@inheritDoc}
+     */
 
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
         return List.of(DOCKER);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int difficulty() {
         return 1;
     }
+
+    /**
+     * {@inheritDoc}
+     * Documentation based.
+     */
 
     @Override
     public String getTech() {
