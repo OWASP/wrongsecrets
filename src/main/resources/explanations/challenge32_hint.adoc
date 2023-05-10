@@ -1,0 +1,5 @@
+There are multiple ways to solve this challenge. In all cases it is about tricking the AI in overriding its rules:
+
+
+1. Simply ask for the key
+2. Make the AI pretend
