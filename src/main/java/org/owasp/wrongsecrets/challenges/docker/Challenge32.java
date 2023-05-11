@@ -90,7 +90,7 @@ public class Challenge32 extends Challenge {
             SecretKey decryptKey = new SecretKeySpec("AIKnowsThisKey12".getBytes(StandardCharsets.UTF_8), "AES");
             AlgorithmParameterSpec gcmIv = new GCMParameterSpec(128, Base64.decode(cipherTextString), 0, 12);
             decryptor.init(Cipher.DECRYPT_MODE, decryptKey, gcmIv);
-            return new String(decryptor.doFinal(Base64.decode(cipherTextString), 12, Base64.decode(cipherTextString).length - 12));
+            return new String(decryptor.doFinal(Base64.decode(cipherTextString.getBytes(StandardCharsets.UTF_8)), 12, Base64.decode(cipherTextString.getBytes(StandardCharsets.UTF_8)).length - 12));
         } catch (Exception e) {
             log.warn("Exception in Challenge32", e);
             return "";

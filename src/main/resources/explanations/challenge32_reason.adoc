@@ -1,1 +1,10 @@
-*Why you should be careful with AI (and LLM) and secrets*
+*Why you should be careful with AI (or ML) and secrets*
+
+Any AI/ML solution that relies on your input, might use that input for further improvement. This is sometimes referred to as "Reinforcement learning from human feedback". There are various applications in the world, such such as Co-Pilot, ChatGPT, and many others, which are based on this mechanism.
+This means that when you use those and give them feedback or agree on sending them data to be more effective in helping you, then this data resides with them and might be queryable by others.
+
+Hence: make sure that these applications can never reach your secrets!
+
+References:
+- Hacking prompts, as covered by LiveOverflow on https://www.youtube.com/watch?v=h74oXb4Kk8k[Youtube].
+- https://owasp.org/www-project-ai-security-and-privacy-guide/[OWASP AI Security and Privacy Guide].
