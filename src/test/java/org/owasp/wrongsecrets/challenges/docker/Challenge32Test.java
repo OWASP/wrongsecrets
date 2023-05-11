@@ -29,7 +29,7 @@ public class Challenge32Test {
 
     @Test
     void incorrectAnswerShouldNotSolveChallenge() {
-        var challenge = new Challenge29(scoreCard);
+        var challenge = new Challenge32(scoreCard);
         Assertions.assertThat(challenge.solved("wrong answer")).isFalse();
     }
 
