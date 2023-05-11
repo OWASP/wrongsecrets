@@ -11,13 +11,11 @@ import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import javax.crypto.*;
+import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
 import javax.crypto.spec.GCMParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
 import java.security.spec.AlgorithmParameterSpec;
 import java.util.List;
 
@@ -90,7 +88,8 @@ public class Challenge32 extends Challenge {
             SecretKey decryptKey = new SecretKeySpec("AIKnowsThisKey12".getBytes(StandardCharsets.UTF_8), "AES");
             AlgorithmParameterSpec gcmIv = new GCMParameterSpec(128, Base64.decode(cipherTextString), 0, 12);
             decryptor.init(Cipher.DECRYPT_MODE, decryptKey, gcmIv);
-            return new String(decryptor.doFinal(Base64.decode(cipherTextString.getBytes(StandardCharsets.UTF_8)), 12, Base64.decode(cipherTextString.getBytes(StandardCharsets.UTF_8)).length - 12));
+            byte[] cipherTextBytes = Base64.decode(cipherTextString.getBytes(StandardCharsets.UTF_8));
+            return new String(decryptor.doFinal(cipherTextBytes), 12, cipherTextBytes.length - 12, StandardCharsets.UTF_8);
         } catch (Exception e) {
             log.warn("Exception in Challenge32", e);
             return "";
