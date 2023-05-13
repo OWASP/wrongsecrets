@@ -1,7 +1,7 @@
 === A Secret uploaded to an LLM (Large Language Model) application
 
-AI is here to stay. AI can help with loads of things: whether it comes to complicated problem-solving, generating possible codes, or giving advice on security.
-But what if you uploaded a password as part of sharing some code to look for a security issue. Can this secret be extracted, even when it has been protected by rules of the LLM not to share that secret with you?
+AI is here to stay. AI can help with loads of things: complicated problem-solving, generating code, or giving advice on security.
+Imagine you've uploaded code to look for security issues. What if that included a password? Rules should limit the LLM model to prevent it from leaking the password. Can this secret be extracted nonetheless?
 
-Try to find out through https://gpa.43z.one/[this prompting game] its first exercise.
-(Build by https://twitter.com/h43z[h43z])
+Try to find it through https://gpa.43z.one/[this prompting game's] first exercise.
+(Built by https://twitter.com/h43z[h43z])
