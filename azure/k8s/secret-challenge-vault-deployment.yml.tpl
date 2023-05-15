@@ -106,6 +106,11 @@ spec:
                 secretKeyRef:
                   name: funnystuff
                   key: funnier
+            - name: CHALLENGE33
+              valueFrom:
+                secretKeyRef:
+                  name: challenge33
+                  key: answer
             - name: SPRING_CLOUD_VAULT_URI
               value: "http://vault.vault.svc.cluster.local:8200"
             - name: JWT_PATH
