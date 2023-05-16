@@ -30,8 +30,8 @@ Cypress.Commands.add('getDisabledChallenges', () => {
 
 Cypress.Commands.add('getAllChallenges', () => {
   cy.request('http://localhost:8080/api/challenges').then((response) => {
-    const numChallenges = response.body.data.length - 1
-    const allChallengeIds = Array.from({ length: numChallenges }, (v, i) => i)
-    cy.wrap(allChallengeIds).as('allChallengeIds')
-  })
-})
+  const numChallenges = response.body.data.length;
+  const allChallengeIds = Array.from({length: numChallenges}, (v, i) => i)
+  cy.wrap(allChallengeIds).as('allChallengeIds');
+  });
+});
