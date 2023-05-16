@@ -1,52 +1,52 @@
-import ChallengesPage from '../pages/challengesPage';
-const challengesPage = new ChallengesPage();
+import ChallengesPage from '../pages/challengesPage'
+const challengesPage = new ChallengesPage()
 
 describe('example to-do app', () => {
   beforeEach(() => {
-    cy.getEnabledChallenges();
-    cy.getDisabledChallenges();
+    cy.getEnabledChallenges()
+    cy.getDisabledChallenges()
   })
 
-  it("Check all enabled challenges load correctly", () => {
+  it('Check all enabled challenges load correctly', () => {
     cy.get('@enabledChallengeIds').then((enabledChallengeIds) => {
       cy.wrap(enabledChallengeIds).each((challengeNum) => {
         cy.visit('/')
         challengesPage.selectChallenge(challengeNum)
         challengesPage.assertEnabledChallengePage(challengeNum)
       })
-    });
+    })
   })
 
-  it("Check all disabled challenges load correctly", () => {
+  it('Check all disabled challenges load correctly', () => {
     cy.get('@disabledChallengeIds').then((disabledChallengeIds) => {
       cy.wrap(disabledChallengeIds).each((challengeNum) => {
         cy.visit(`/challenge/${challengeNum}`)
         challengesPage.assertDisabledChallengePage(challengeNum)
       })
-    });
+    })
   })
 
-  it("Check all hints load correctly", () => {
+  it('Check all hints load correctly', () => {
     cy.get('@enabledChallengeIds').then((enabledChallengeIds) => {
       cy.wrap(enabledChallengeIds).each((challengeNum) => {
         cy.visit(`/challenge/${challengeNum}`)
         cy.dataCy(ChallengesPage.SHOW_HINTS_BTN).click()
         cy.dataCy(ChallengesPage.HINT_PARAGRAPH).should('be.visible')
       })
-    });
+    })
   })
 
-  it("Check whats wrong section load correctly", () => {
+  it('Check whats wrong section load correctly', () => {
     cy.get('@enabledChallengeIds').then((enabledChallengeIds) => {
       cy.wrap(enabledChallengeIds).each((challengeNum) => {
         cy.visit(`/challenge/${challengeNum}`)
         cy.dataCy(ChallengesPage.WHATS_WRONG_BTN).click()
         cy.dataCy(ChallengesPage.WHATS_WRONG_PARAGRAPH).should('be.visible')
       })
-    });
+    })
   })
 
-  it("Check reset button clears page", () => {
+  it('Check reset button clears page', () => {
     cy.get('@enabledChallengeIds').then((enabledChallengeIds) => {
       cy.wrap(enabledChallengeIds).each((challengeNum) => {
         cy.visit(`/challenge/${challengeNum}`)
@@ -56,36 +56,36 @@ describe('example to-do app', () => {
         cy.dataCy(ChallengesPage.WHATS_WRONG_PARAGRAPH).should('not.be.visible')
         cy.dataCy(ChallengesPage.HINT_PARAGRAPH).should('not.be.visible')
       })
-    });
+    })
   })
 
-  it("Clear button clears answer box", () => {
+  it('Clear button clears answer box', () => {
     cy.get('@enabledChallengeIds').then((enabledChallengeIds) => {
       cy.wrap(enabledChallengeIds).each((challengeNum) => {
         cy.visit(`/challenge/${challengeNum}`)
-        cy.dataCy(ChallengesPage.ANSWER_TEXTBOX).type("Tst")
+        cy.dataCy(ChallengesPage.ANSWER_TEXTBOX).type('Tst')
         cy.dataCy(ChallengesPage.CLEAR_TEXTBOX_BTN).click()
-        cy.dataCy(ChallengesPage.ANSWER_TEXTBOX).should("be.empty")    
+        cy.dataCy(ChallengesPage.ANSWER_TEXTBOX).should('be.empty')
       })
-    });
+    })
   })
 
-  it("Submitting wrong answer gives warning", () => {
+  it('Submitting wrong answer gives warning', () => {
     cy.get('@enabledChallengeIds').then((enabledChallengeIds) => {
       cy.wrap(enabledChallengeIds).each((challengeNum) => {
         cy.visit(`/challenge/${challengeNum}`)
-        cy.dataCy(ChallengesPage.ANSWER_TEXTBOX).type("X")
+        cy.dataCy(ChallengesPage.ANSWER_TEXTBOX).type('X')
         cy.dataCy(ChallengesPage.SUBMIT_TEXTBOX_BTN).click()
-        cy.dataCy(ChallengesPage.INCORRECT_ALERT).should("contain", "Your answer is incorrect, try harder ;-)")    
+        cy.dataCy(ChallengesPage.INCORRECT_ALERT).should('contain', 'Your answer is incorrect, try harder ;-)')
       })
-    });
+    })
   })
 
-  it("Submitting right answer gives success notification and progress bar", () => {
-    cy.visit(`/challenge/0`)
-    cy.dataCy(ChallengesPage.ANSWER_TEXTBOX).type("The first answer")
+  it('Submitting right answer gives success notification and progress bar', () => {
+    cy.visit('/challenge/0')
+    cy.dataCy(ChallengesPage.ANSWER_TEXTBOX).type('The first answer')
     cy.dataCy(ChallengesPage.SUBMIT_TEXTBOX_BTN).click()
-    cy.dataCy(ChallengesPage.SUCCESS_ALERT).should("contain", "Your answer is correct!")  
-    cy.dataCy(ChallengesPage.PROGRESS_BAR).should('be.visible').should('not.have.attr', 'aria-valuenow', '0')  
+    cy.dataCy(ChallengesPage.SUCCESS_ALERT).should('contain', 'Your answer is correct!')
+    cy.dataCy(ChallengesPage.PROGRESS_BAR).should('be.visible').should('not.have.attr', 'aria-valuenow', '0')
   })
 })

@@ -1,12 +1,12 @@
-import SpoilersPage from '../pages/spoilersPage';
-const spoilersPage = new SpoilersPage();
+import SpoilersPage from '../pages/spoilersPage'
+const spoilersPage = new SpoilersPage()
 
 describe('example to-do app', () => {
   beforeEach(() => {
-    cy.getAllChallenges();
+    cy.getAllChallenges()
   })
 
-  it("Check all hints load correctly", () => {
+  it('Check all hints load correctly', () => {
     cy.get('@allChallengeIds').then((allChallengeIds) => {
       cy.wrap(allChallengeIds).each((challengeNum) => {
         cy.visit(`/spoil-${challengeNum}`)
@@ -15,6 +15,6 @@ describe('example to-do app', () => {
         cy.dataCy(SpoilersPage.SPOILER_ANSWER).should('be.visible')
         cy.dataCy(SpoilersPage.SPOILER_ANSWER).should('not.be.empty')
       })
-    });
+    })
   })
 })
