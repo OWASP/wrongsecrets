@@ -1,0 +1,7 @@
+=== A Secret uploaded to an LLM (Large Language Model) application
+
+AI is here to stay. AI can help with loads of things: complicated problem-solving, generating code, or giving advice on security.
+Imagine you've uploaded code to look for security issues. What if that included a password? Rules should limit the LLM model to prevent it from leaking the password. Can this secret be extracted nonetheless?
+
+Try to find it through https://gpa.43z.one/[this prompting game's] first exercise.
+(Built by https://twitter.com/h43z[h43z])
