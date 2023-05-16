@@ -11,5 +11,8 @@
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-n": "^15.7.0",
     "eslint-plugin-promise": "^6.1.1"
+  },
+  "dependencies": {
+    "test": "^3.3.0"
   }
 }

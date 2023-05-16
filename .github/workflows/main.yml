@@ -31,6 +31,7 @@ jobs:
       - name: Test with Maven
         run: mvn --no-transfer-progress test
   ui-test:
+    name: UI test with Cypress
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo

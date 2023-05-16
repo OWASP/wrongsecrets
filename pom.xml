@@ -459,6 +459,19 @@
                         </goals>
                     </execution>
                     <execution>
+                        <id>npm-install</id>
+                        <phase>integration-test</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>npm</executable>
+                            <arguments>
+                                <argument>install</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
                         <id>cypress-test</id>
                         <phase>integration-test</phase>
                         <goals>
