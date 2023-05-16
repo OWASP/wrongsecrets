@@ -30,7 +30,34 @@ jobs:
           distribution: "temurin"
       - name: Test with Maven
         run: mvn --no-transfer-progress test
-
+  ui-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Install node
+        uses: actions/setup-node@v3
+      - name: Set up JDK 19
+        uses: actions/setup-java@v3
+        with:
+          java-version: "19"
+          distribution: "temurin"
+      - name: Test with Cypress
+        run: mvn verify -Dexec.id=cypress-test -DskipTests
+      - name: Upload videos
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: videos
+          path: cypress/videos
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: screenshots
+          path: cypress/screenshots
   lint:
     name: lint javacode
     runs-on: ubuntu-latest

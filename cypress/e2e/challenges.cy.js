@@ -1,7 +1,7 @@
 import ChallengesPage from '../pages/challengesPage'
 const challengesPage = new ChallengesPage()
 
-describe('example to-do app', () => {
+describe('Challenge Tests', () => {
   beforeEach(() => {
     cy.getEnabledChallenges()
     cy.getDisabledChallenges()

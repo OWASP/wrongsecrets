@@ -1,7 +1,7 @@
 import ThemeSwitchPage from '../pages/themeSwitchPage'
 const themeSwitchPage = new ThemeSwitchPage()
 
-describe('Theme switching', () => {
+describe('Theme Switching Tests', () => {
   it('A user can switch the theme to dark on each page', () => {
     cy.wrap(['', 'challenge/0', 'stats', 'about']).each((endpoint) => {
       cy.visit(`/${endpoint}`)

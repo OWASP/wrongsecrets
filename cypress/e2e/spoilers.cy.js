@@ -1,7 +1,7 @@
 import SpoilersPage from '../pages/spoilersPage'
 const spoilersPage = new SpoilersPage()
 
-describe('example to-do app', () => {
+describe('Spoiler Tests', () => {
   beforeEach(() => {
     cy.getAllChallenges()
   })
