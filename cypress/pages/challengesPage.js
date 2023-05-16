@@ -12,9 +12,11 @@ export default class ChallengesPage {
     static SUBMIT_TEXTBOX_BTN = 'submit-textbox-btn'
     static INCORRECT_ALERT = 'incorrect-alert'
     static SUCCESS_ALERT = 'success-alert'
+    static DISABLED_alert = 'disabled-alert'
     static PROGRESS_BAR = 'progress-bar'
 
-    assertChallengePage() {
+    assertEnabledChallengePage(challengeNum) {
+        cy.url().should('contain', `challenge/${challengeNum}`)
         cy.dataCy(ChallengesPage.CHALLENGE_TITLE).should('be.visible')
         cy.dataCy(ChallengesPage.CHALLENGE_DESCRIPTION).should('be.visible')
         cy.dataCy(ChallengesPage.SHOW_HINTS_BTN).should('be.visible')
@@ -22,5 +24,21 @@ export default class ChallengesPage {
         cy.dataCy(ChallengesPage.RESET_BTN).should('be.visible')
         cy.dataCy(ChallengesPage.SUBMIT_TEXTBOX_BTN).should('be.visible')
         cy.dataCy(ChallengesPage.CLEAR_TEXTBOX_BTN).should('be.visible')
+    }
+    assertDisabledChallengePage(challengeNum) {
+        cy.url().should('contain', `challenge/${challengeNum}`)
+        cy.dataCy(ChallengesPage.CHALLENGE_TITLE).should('be.visible')
+        cy.dataCy(ChallengesPage.CHALLENGE_DESCRIPTION).should('be.visible')
+        cy.dataCy(ChallengesPage.SHOW_HINTS_BTN).should('be.visible')
+        cy.dataCy(ChallengesPage.WHATS_WRONG_BTN).should('be.visible')
+        cy.dataCy(ChallengesPage.RESET_BTN).should('be.visible')
+        cy.dataCy(ChallengesPage.SUBMIT_TEXTBOX_BTN).should('be.visible')
+        cy.dataCy(ChallengesPage.CLEAR_TEXTBOX_BTN).should('be.visible')
+        cy.dataCy(ChallengesPage.INCORRECT_ALERT).should('be.visible')
+        cy.dataCy(ChallengesPage.DISABLED_alert).should('be.visible')
+    }
+    selectChallenge(challengeNum) {
+        cy.get('.form-select').select('All')
+        cy.dataCy(`"challenge ${challengeNum}-link"`).click()
     }
 }

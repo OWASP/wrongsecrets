@@ -71,20 +71,20 @@
                  th:text="${totalPoints}"></div>
         </div>
 
-        <div th:if="${missingEnvWarning} eq 'DOCKER'" class="alert alert-danger" role="alert">
+        <div th:if="${missingEnvWarning} eq 'DOCKER'" class="alert alert-danger" role="alert" th:attr="data-cy='disabled-alert'">
             We are running outside a docker container. Please run this in a container as explained in the <a
             href="https://github.com/OWASP/wrongsecrets#basic-docker-exercises">README.md</a>.
         </div>
-        <div th:if="${missingEnvWarning} eq 'VAULT'" class="alert alert-danger" role="alert">
+        <div th:if="${missingEnvWarning} eq 'VAULT'" class="alert alert-danger" role="alert" th:attr="data-cy='disabled-alert'">
             We are running outside a K8s cluster with Vault. Please run this in the K8s cluster as explained in the
             <a href="https://github.com/OWASP/wrongsecrets#vault-exercises-with-minikube">README.md</a>.
         </div>
-        <div th:if="${missingEnvWarning} eq 'K8S'" class="alert alert-danger" role="alert">
+        <div th:if="${missingEnvWarning} eq 'K8S'" class="alert alert-danger" role="alert" th:attr="data-cy='disabled-alert'">
             We are running outside a K8s cluster. Please run this in the K8s cluster as explained in the <a
             href="https://github.com/OWASP/wrongsecrets#basic-k8s-exercise">README.md</a>.
         </div>
         <div th:if="${missingEnvWarning} eq 'AWS' or ${missingEnvWarning} eq 'GCP'" class="alert alert-danger"
-             role="alert">
+             role="alert" th:attr="data-cy='disabled-alert'">
             We are running outside a properly configured Cloud environment. Please run this in an AWS/Azure/GCP environment as
             explained in the <a href="https://github.com/OWASP/wrongsecrets#cloud-challenges">README.md</a>.
         </div>
