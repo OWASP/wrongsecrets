@@ -482,14 +482,16 @@ And then at [http://localhost:3000](http://localhost:3000).
 
 Note: be careful with trying to deploy the `jeroenwillemsen/wrongsecrets-desktop` container to Heroku ;-).
 
-## Docker on macOS with M1 and Colima
+## Docker on macOS with M1 and Colima (Experimental!)
+
+NOTE: Colima support is experimental.
 
 Using [Colima](https://github.com/abiosoft/colima) (version 0.5.2 when written) you your macOS with Apple Silicon M1
 to run Docker image `jeroenwillemsen/wrongsecrets` you try one of:
 
 - switch off Colima
-- Change Docker context
-- Run Colima with 1 CPU
+- change Docker context
+- run Colima with 1 CPU
 
 ### Switch off Colima
 
@@ -501,8 +503,8 @@ and run natively Docker image `jeroenwillemsen/wrongsecrets` on ARM.
 ### Change Docker context
 
 Running docker image on Colima container runtimes on macOS Ventura with M1 CPU can run very slowly or can hang at some point.
-Wrong Secrets provide `arm64` Docker's image and switching to `desktop-linux` context will use native `arm64` image.
-To do that in terminal run:
+Wrong Secrets provide `arm64` Docker image and switching to `desktop-linux` context will use the native `arm64` image.
+To do that in the terminal run:
 
 ```shell
 docker context ls
@@ -517,16 +519,10 @@ default             moby                Current DOCKER_HOST based configuration 
 desktop-linux       moby                                                          unix:///Users/YOUR_USER_NAME/.docker/run/docker.sock
 ```
 
-To switch to `desktop-linux` context run:
-
-```shell
-docker context use desktop-linux
-```
-
-and now you should be able to run one of above Docker command e.g.:
+Now run one of the above Docker commands together with `--context` switch e.g.:
 
 ```bash
-docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:latest-no-vault
+docker --context desktop-linux run -p 8080:8080 jeroenwillemsen/wrongsecrets:latest-no-vault
 ```
 
 ### Run Colima with 1 CPU
