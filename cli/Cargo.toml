@@ -7,4 +7,3 @@ edition = "2021"
 clap = { version = "4.2.5", features = ["derive"] }
 walkdir = "2"
 handlebars = "3"
-
