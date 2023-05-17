@@ -1,0 +1,5 @@
+=== Secret in a web page
+
+A user accidentally spills the `secret sauce` while adding content to our website.
+
+Can you spot the secret in our https://owasp.org/www-project-wrongsecrets/[Website]?
