@@ -331,7 +331,6 @@
         </configuration>
       </plugin>
       <plugin>
-        <!-- https://github.com/asciidoctor/asciidoctor-maven-examples/blob/main/asciidoc-to-html-example/pom.xml -->
         <groupId>org.asciidoctor</groupId>
         <artifactId>asciidoctor-maven-plugin</artifactId>
         <version>${asciidoctor.maven.plugin.version}</version>
@@ -339,6 +338,7 @@
           <baseDir>${project.basedir}</baseDir>
           <sourceDirectory>src/main/resources/explanations</sourceDirectory>
           <outputDirectory>${project.build.outputDirectory}/explanations</outputDirectory>
+          <!-- https://github.com/asciidoctor/asciidoctor-maven-examples/blob/main/asciidoc-to-html-example/pom.xml -->
         </configuration>
         <executions>
           <execution>
