@@ -165,18 +165,25 @@ Please be sure to take a careful look at our [Code of Conduct](https://github.co
 
         ![](images/wait-3.2.png)
 
--
 
 ### Step 4: Setup.
 
-    -   Open Settings by pressing **_Ctrl+Alt+S_**
-        ![](images/open-settings-4.1.png)
+- Open Settings by pressing **_Ctrl+Alt+S_**
+  ![](images/open-settings-4.1.png)
 
-    -   Follow the path **_IDE settings>Language & Frameworks > Lombok_** and then click on **_Lombok._**
-        ![](images/lombok-setup-4.2.png)
+- Follow the path **_IDE settings>Language & Frameworks > Lombok_** and then click on **_Lombok._**
+  ![](images/lombok-setup-4.2.png)
 
-    -   Make sure that the **_Lombok processing_** is enabled.
-        ![](images/lombok-processing-4.3.png)
+- Make sure that the **_Lombok processing_** is enabled.
+  ![](images/lombok-processing-4.3.png)
+
+- Select **_Plugins > Marketplace_** and type 'google-java-format' and restart IntelliJ to install the plugin.
+
+- Open Settings by pressing **_Ctrl+Alt+S_**
+  ![](images/open-settings-4.1.png)
+
+- Select **_google-java-format Settings_** and click enable.
+  ![](images/open-settings-4.4.png)
 
 -   ### Step 5: Reload the project
 
