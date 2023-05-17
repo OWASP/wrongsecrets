@@ -1,13 +1,13 @@
 use std::path::PathBuf;
 
-use clap::arg;
 use clap::{Parser, Subcommand};
+use clap::arg;
 
 use crate::challenge::Challenge;
 use crate::enums::{Difficulty, Platform, Technology};
 
-mod enums;
 mod challenge;
+mod enums;
 
 #[derive(Debug, Parser)]
 #[command(name = "cli")]
@@ -19,13 +19,14 @@ struct Cli {
 
 #[derive(Debug, Subcommand)]
 enum Commands {
-    #[command(arg_required_else_help = true, name = "challenge", about = "Create a new challenge")]
+    #[command(
+    arg_required_else_help = true,
+    name = "challenge",
+    about = "Create a new challenge"
+    )]
     ChallengeCommand {
         //We could infer this from the directory structure but another PR could already have added the challenge with this number
-        #[arg(
-        long,
-        short,
-        value_name = "NUMBER")]
+        #[arg(long, short, value_name = "NUMBER")]
         number: u8,
         #[arg(
         long,
@@ -57,7 +58,7 @@ enum Commands {
         platform: Platform,
         #[arg(required = true)]
         project_directory: PathBuf,
-    }
+    },
 }
 
 fn main() {
@@ -68,11 +69,18 @@ fn main() {
             difficulty,
             technology,
             platform,
-            project_directory
+            project_directory,
         } => {
-            project_directory.try_exists().expect("Unable to find project directory");
-            let challenge = Challenge { number, difficulty, technology, platform, project_directory };
-            challenge::create_challenge(&challenge);
+            project_directory
+                .try_exists()
+                .expect("Unable to find project directory");
+            let challenge = Challenge {
+                number,
+                difficulty,
+                technology,
+                platform,
+            };
+            challenge::create_challenge(&challenge, &project_directory);
         }
     }
 }

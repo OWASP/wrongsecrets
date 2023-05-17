@@ -3,6 +3,7 @@ package org.owasp.wrongsecrets.challenges.{{platform}};
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
+import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
 import org.owasp.wrongsecrets.challenges.Difficulty;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.core.annotation.Order;
@@ -43,7 +44,7 @@ public class Challenge{{challenge_number}} extends Challenge {
      * {@inheritDoc}
      */
     public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
-        return List.of(DOCKER);
+        return List.of(RuntimeEnvironment.Environment.{{environment}});
     }
 
     /**
@@ -56,7 +57,7 @@ public class Challenge{{challenge_number}} extends Challenge {
 
     @Override
     public String getTech() {
-        return ChallengeTechnology.Tech{{technology}}.id;
+        return ChallengeTechnology.Tech.{{technology}}.id;
     }
 
     @Override

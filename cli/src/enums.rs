@@ -40,7 +40,7 @@ pub enum Difficulty {
 pub enum Platform {
     Cloud,
     Docker,
-    Kubernetes
+    Kubernetes,
 }
 
 impl fmt::Display for Difficulty {
