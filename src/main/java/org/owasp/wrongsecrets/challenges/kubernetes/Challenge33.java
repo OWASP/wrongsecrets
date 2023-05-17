@@ -24,7 +24,7 @@ import java.util.List;
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.K8S;
 
 /**
- * Challenge that teaches something about overwriting a secret while opening the metadata
+ * Challenge that teaches something about converting/migrating a secret while opening the metadata
  */
 @Slf4j
 @Component
