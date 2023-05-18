@@ -1,7 +1,7 @@
 module.exports = {
   env: {
     jest: true,
-    "cypress/globals": true,
+    'cypress/globals': true,
     browser: true,
     commonjs: true,
     es2021: true
@@ -14,5 +14,5 @@ module.exports = {
   },
   rules: {
   },
-  plugins: ["cypress"]
+  plugins: ['cypress']
 }
