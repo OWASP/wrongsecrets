@@ -3,7 +3,7 @@ Cypress.Commands.add('dataCy', (value) => {
 })
 
 Cypress.Commands.add('getEnabledChallenges', () => {
-  cy.request('http://localhost:8080/api/challenges').then((response) => {
+  cy.request('/api/challenges').then((response) => {
     const numChallenges = response.body.data.length
     const enabledChallengeIds = []
     for (let i = 0; i < numChallenges; i++) {
@@ -16,7 +16,7 @@ Cypress.Commands.add('getEnabledChallenges', () => {
 })
 
 Cypress.Commands.add('getDisabledChallenges', () => {
-  cy.request('http://localhost:8080/api/challenges').then((response) => {
+  cy.request('/api/challenges').then((response) => {
     const numChallenges = response.body.data.length
     const disabledChallengeIds = []
     for (let i = 0; i < numChallenges; i++) {
@@ -29,7 +29,7 @@ Cypress.Commands.add('getDisabledChallenges', () => {
 })
 
 Cypress.Commands.add('getAllChallenges', () => {
-  cy.request('http://localhost:8080/api/challenges').then((response) => {
+  cy.request('/api/challenges').then((response) => {
     const numChallenges = response.body.data.length
     const allChallengeIds = Array.from({ length: numChallenges }, (v, i) => i)
     cy.wrap(allChallengeIds).as('allChallengeIds')
