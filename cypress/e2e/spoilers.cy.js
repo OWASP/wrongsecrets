@@ -1,5 +1,4 @@
 import SpoilersPage from '../pages/spoilersPage'
-const spoilersPage = new SpoilersPage()
 
 describe('Spoiler Tests', () => {
   beforeEach(() => {

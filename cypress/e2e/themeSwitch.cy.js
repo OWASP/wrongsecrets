@@ -1,5 +1,4 @@
 import ThemeSwitchPage from '../pages/themeSwitchPage'
-const themeSwitchPage = new ThemeSwitchPage()
 
 describe('Theme Switching Tests', () => {
   it('A user can switch the theme to dark on each page', () => {

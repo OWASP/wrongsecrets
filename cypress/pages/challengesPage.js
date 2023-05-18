@@ -8,7 +8,6 @@ export default class ChallengesPage {
   static RESET_BTN = 'reset-btn'
   static ANSWER_TEXTBOX = 'answer-textbox'
   static CLEAR_TEXTBOX_BTN = 'clear-textbox-btn'
-  static ANSWER_TEXTBOX = 'answer-textbox'
   static SUBMIT_TEXTBOX_BTN = 'submit-textbox-btn'
   static INCORRECT_ALERT = 'incorrect-alert'
   static SUCCESS_ALERT = 'success-alert'
