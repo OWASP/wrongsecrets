@@ -1,6 +1,6 @@
 module.exports = {
   env: {
-    "jest": true,
+    jest: true,
     "cypress/globals": true,
     browser: true,
     commonjs: true,
@@ -13,5 +13,6 @@ module.exports = {
     ecmaVersion: 'latest'
   },
   rules: {
-  }
+  },
+  plugins: ["cypress"]
 }
