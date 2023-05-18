@@ -47,15 +47,9 @@ jobs:
           distribution: "temurin"
       - name: Test with Cypress
         run: mvn verify -Dexec.id=cypress-test -DskipTests
-      - name: Upload videos
+      - name: Uploading screenshots
         uses: actions/upload-artifact@v3
-        if: always()
-        with:
-          name: videos
-          path: cypress/videos
-      - name: Upload screenshots
-        uses: actions/upload-artifact@v3
-        if: always()
+        if: failure()
         with:
           name: screenshots
           path: cypress/screenshots
