@@ -411,6 +411,9 @@
                                     </goals>
                                 </execution>
                             </executions>
+                            <configuration>
+                                <skip>${skipCheck}</skip>
+                            </configuration>
                         </plugin>
             <!-- todo: #178 add the missing plugins and profiles from https://central.sonatype.org/publish/publish-maven/-->
             <plugin>
