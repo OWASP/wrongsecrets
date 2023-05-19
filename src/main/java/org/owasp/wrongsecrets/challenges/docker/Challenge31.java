@@ -65,6 +65,7 @@ public class Challenge31 extends Challenge {
   public boolean answerCorrect(String answer) {
     return getanswer().equals(answer);
   }
+
   /** {@inheritDoc} */
   public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
     return List.of(DOCKER);
