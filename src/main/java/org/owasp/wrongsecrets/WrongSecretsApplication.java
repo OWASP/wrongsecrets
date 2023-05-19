@@ -16,14 +16,14 @@ import org.springframework.context.annotation.ScopedProxyMode;
 @Slf4j
 public class WrongSecretsApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(WrongSecretsApplication.class, args);
-    }
+  public static void main(String[] args) {
+    SpringApplication.run(WrongSecretsApplication.class, args);
+  }
 
-    @Bean
-    @Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
-    public InMemoryScoreCard scoreCard(List<Challenge> challenges) {
-        log.info("Initializing scorecard with {} challenges", challenges.size());
-        return new InMemoryScoreCard(challenges.size());
-    }
+  @Bean
+  @Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
+  public InMemoryScoreCard scoreCard(List<Challenge> challenges) {
+    log.info("Initializing scorecard with {} challenges", challenges.size());
+    return new InMemoryScoreCard(challenges.size());
+  }
 }
