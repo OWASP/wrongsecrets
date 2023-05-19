@@ -40,6 +40,10 @@ repos:
     hooks:
       - id: commitlint
         stages: [commit-msg]
+  - repo: https://github.com/ejba/pre-commit-maven
+    rev: v0.3.3
+    hooks:
+      - id: maven-spotless-apply
   - repo: https://github.com/eslint/eslint
     rev: v8.35.0
     hooks:
