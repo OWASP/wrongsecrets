@@ -21,6 +21,7 @@ jobs:
           distribution: "temurin"
       - name: Clean install
         run: ./mvnw --no-transfer-progress clean install -DskipTests -Ddependency-check.skip -Dcyclonedx.skip=true -Dexec.skip
+      - name: Compile javadoc
         run: ./mvnw --no-transfer-progress compile javadoc:javadoc
       - name: Start wrongsecrets
         run: nohup ./mvnw --no-transfer-progress spring-boot:run -Dspring-boot.run.profiles=without-vault &
