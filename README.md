@@ -11,7 +11,7 @@
 
 Welcome to the OWASP WrongSecrets game! The game is packed with real life examples of how to _not_ store secrets in your software. Each of these examples is captured in a challenge, which you need to solve using various tools and techniques. Solving these challenges will help you recognize common mistakes & can help you to reflect on your own secrets management strategy.
 
-Can you solve all the 29 challenges?
+Can you solve all the 32 challenges?
 
 Try some of them on [our Heroku demo environment](https://wrongsecrets.herokuapp.com/).
 
@@ -67,7 +67,7 @@ Copyright (c) 2020-2023 Jeroen Willemsen and WrongSecrets contributors.
 
 ## Basic docker exercises
 
-_Can be used for challenges 1-4, 8, 12-29_
+_Can be used for challenges 1-4, 8, 12-32_
 
 For the basic docker exercises you currently require:
 
@@ -105,6 +105,9 @@ Now you can try to find the secrets by means of solving the challenge offered at
 -   [localhost:8080/challenge/27](http://localhost:8080/challenge/27)
 -   [localhost:8080/challenge/28](http://localhost:8080/challenge/28)
 -   [localhost:8080/challenge/29](http://localhost:8080/challenge/29)
+-   [localhost:8080/challenge/30](http://localhost:8080/challenge/30)
+-   [localhost:8080/challenge/31](http://localhost:8080/challenge/31)
+-   [localhost:8080/challenge/32](http://localhost:8080/challenge/32)
 
 Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look
 better ;-).
@@ -121,7 +124,7 @@ You can test them out at [https://wrongsecrets.fly.dev](https://wrongsecrets.fly
 
 ## Basic K8s exercise
 
-_Can be used for challenges 1-6, 8, 12-29_
+_Can be used for challenges 1-6, 8, 12-32_
 
 ### Minikube based
 
@@ -185,14 +188,14 @@ Make sure you have the following installed:
 -   vault [Install from here](https://www.vaultproject.io/downloads),
 -   grep, Cat, and Sed
 
-Run `./k8s-vault-minkube-start.sh`, when the script is done, then the challenges will wait for you at <http://localhost:8080> . This will allow you to run challenges 1-8, 12-22.
+Run `./k8s-vault-minkube-start.sh`, when the script is done, then the challenges will wait for you at <http://localhost:8080> . This will allow you to run challenges 1-8, 12-32.
 
 When you stopped the `k8s-vault-minikube-start.sh` script and want to resume the port forward run: `k8s-vault-minikube-resume.sh`.
 This is because if you run the start script again it will replace the secret in the vault and not update the secret-challenge application with the new secret.
 
 ## Cloud Challenges
 
-_Can be used for challenges 1-29_
+_Can be used for challenges 1-32_
 
 **READ THIS**: Given that the exercises below contain IAM privilege escalation exercises,
 never run this on an account which is related to your production environment or can influence your account-over-arching
@@ -481,6 +484,63 @@ docker run -d \
 And then at [http://localhost:3000](http://localhost:3000).
 
 Note: be careful with trying to deploy the `jeroenwillemsen/wrongsecrets-desktop` container to Heroku ;-).
+
+## Docker on macOS with M1 and Colima (Experimental!)
+
+NOTE: Colima support is experimental.
+
+Using [Colima](https://github.com/abiosoft/colima) (version 0.5.2 when written) you your macOS with Apple Silicon M1
+to run Docker image `jeroenwillemsen/wrongsecrets` you try one of:
+
+- switch off Colima
+- change Docker context
+- run Colima with 1 CPU
+
+### Switch off Colima
+
+```shell
+colima stop
+```
+and run natively Docker image `jeroenwillemsen/wrongsecrets` on ARM.
+
+### Change Docker context
+
+Running docker image on Colima container runtimes on macOS Ventura with M1 CPU can run very slowly or can hang at some point.
+Wrong Secrets provide `arm64` Docker image and switching to `desktop-linux` context will use the native `arm64` image.
+To do that in the terminal run:
+
+```shell
+docker context ls
+```
+
+you should see context default `colima *`:
+
+```
+NAME                TYPE                DESCRIPTION                               DOCKER ENDPOINT                                    KUBERNETES ENDPOINT                ORCHESTRATOR
+colima *            moby                colima                                    unix:///Users/YOUR_USER_NAME/.colima/default/docker.sock
+default             moby                Current DOCKER_HOST based configuration   unix:///var/run/docker.sock                        https://127.0.0.1:6443 (default)   swarm
+desktop-linux       moby                                                          unix:///Users/YOUR_USER_NAME/.docker/run/docker.sock
+```
+
+Now run one of the above Docker commands together with `--context` switch e.g.:
+
+```bash
+docker --context desktop-linux run -p 8080:8080 jeroenwillemsen/wrongsecrets:latest-no-vault
+```
+
+### Run Colima with 1 CPU
+
+Colima is using QEMU behind and for QEMU on Apple Silicon M1 is recommended to use 1 CPU core:
+
+```shell
+colima start -m 8 -c 1 --arch x86_64
+```
+
+and run with AMD x64 emulation e.g.:
+
+```bash
+docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:latest-no-vault
+```
 
 ## Further reading on secrets management
 

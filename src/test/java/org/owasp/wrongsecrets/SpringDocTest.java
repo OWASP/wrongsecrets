@@ -11,9 +11,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import io.swagger.v3.core.util.Yaml;
 import io.swagger.v3.oas.models.OpenAPI;
-
 import java.util.List;
-
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -30,28 +28,30 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 @Slf4j
 public class SpringDocTest {
 
-    @Autowired
-    protected MockMvc mockMvc;
-    @Autowired
-    RequestMappingHandlerMapping requestMappingHandlerMapping;
+  @Autowired protected MockMvc mockMvc;
+  @Autowired RequestMappingHandlerMapping requestMappingHandlerMapping;
 
-    @Test
-    void shouldRedirectToSwaggerUiPage() throws Exception {
-        mockMvc.perform(get("/swagger-ui.html"))
-            .andExpect(status().is3xxRedirection())
-            .andExpect(redirectedUrl("/swagger-ui/index.html"));
-    }
+  @Test
+  void shouldRedirectToSwaggerUiPage() throws Exception {
+    mockMvc
+        .perform(get("/swagger-ui.html"))
+        .andExpect(status().is3xxRedirection())
+        .andExpect(redirectedUrl("/swagger-ui/index.html"));
+  }
 
-    @Test
-    void shouldDisplaySwaggerUiPage() throws Exception {
-        mockMvc.perform(get("/swagger-ui/index.html"))
-            .andExpect(status().isOk())
-            .andExpect(content().string(containsString("Swagger UI")));
-    }
+  @Test
+  void shouldDisplaySwaggerUiPage() throws Exception {
+    mockMvc
+        .perform(get("/swagger-ui/index.html"))
+        .andExpect(status().isOk())
+        .andExpect(content().string(containsString("Swagger UI")));
+  }
 
-    @Test
-    public void getApiDocs() throws Exception {
-        MvcResult result = mockMvc.perform(get("/v3/api-docs"))
+  @Test
+  public void getApiDocs() throws Exception {
+    MvcResult result =
+        mockMvc
+            .perform(get("/v3/api-docs"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.openapi", is("3.0.1")))
@@ -60,27 +60,38 @@ public class SpringDocTest {
             .andExpect(jsonPath("$.paths", isA(Object.class)))
             .andExpect(jsonPath("$.components", isA(Object.class)))
             .andReturn();
-    }
+  }
 
-    @Test
-    public void endpointsPresent() throws Exception {
-        String json = mockMvc.perform(get("/v3/api-docs"))
-            .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
-        OpenAPI openAPI = Yaml.mapper().readValue(json, OpenAPI.class);
-        List<String> ownEndpoints = requestMappingHandlerMapping.getHandlerMethods()
-            .entrySet().stream()
-            .filter(entry -> entry.getValue().getBeanType().getPackageName().startsWith("org.owasp.wrongsecrets"))
+  @Test
+  public void endpointsPresent() throws Exception {
+    String json =
+        mockMvc
+            .perform(get("/v3/api-docs"))
+            .andExpect(status().isOk())
+            .andReturn()
+            .getResponse()
+            .getContentAsString();
+    OpenAPI openAPI = Yaml.mapper().readValue(json, OpenAPI.class);
+    List<String> ownEndpoints =
+        requestMappingHandlerMapping.getHandlerMethods().entrySet().stream()
+            .filter(
+                entry ->
+                    entry
+                        .getValue()
+                        .getBeanType()
+                        .getPackageName()
+                        .startsWith("org.owasp.wrongsecrets"))
             .map(e -> e.getKey())
             .map(r -> r.getPathPatternsCondition().getFirstPattern().getPatternString())
             .toList();
 
-        Assertions.assertThat(ownEndpoints).hasSizeGreaterThan(1);
-        ownEndpoints.forEach(path -> {
-                if (!path.equals("/spoil-{id}") && !path.equals("/hidden")) { //this one is hidden
-                    log.info("Checking for path to be present in OpenAPI spec: {}", path);
-                    Assertions.assertThat(openAPI.getPaths().get(path)).isNotNull();
-                }
-            }
-        );
-    }
+    Assertions.assertThat(ownEndpoints).hasSizeGreaterThan(1);
+    ownEndpoints.forEach(
+        path -> {
+          if (!path.equals("/spoil-{id}") && !path.equals("/hidden")) { // this one is hidden
+            log.info("Checking for path to be present in OpenAPI spec: {}", path);
+            Assertions.assertThat(openAPI.getPaths().get(path)).isNotNull();
+          }
+        });
+  }
 }
