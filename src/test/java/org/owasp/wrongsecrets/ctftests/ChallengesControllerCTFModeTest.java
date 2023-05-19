@@ -63,14 +63,26 @@ class ChallengesControllerCTFModeTest {
         .andExpect(content().string(containsString("ba9a72ac7057576344856")));
   }
 
-    @Test
-    void shouldEnableK8sExercises() throws Exception {
-        mvc.perform(get("/"))
-            .andExpect(status().isOk())
-            .andExpect(content().string(containsString("class=\"disabled\" data-cy=\"challenge 5-link\">Challenge 5</a></td>")))
-            .andExpect(content().string(containsString("class=\"disabled\" data-cy=\"challenge 6-link\">Challenge 6</a></td>")))
-            .andExpect(content().string(containsString("class=\"disabled\" data-cy=\"challenge 7-link\">Challenge 7</a></td>")));
-    }
+  @Test
+  void shouldEnableK8sExercises() throws Exception {
+    mvc.perform(get("/"))
+        .andExpect(status().isOk())
+        .andExpect(
+            content()
+                .string(
+                    containsString(
+                        "class=\"disabled\" data-cy=\"challenge 5-link\">Challenge 5</a></td>")))
+        .andExpect(
+            content()
+                .string(
+                    containsString(
+                        "class=\"disabled\" data-cy=\"challenge 6-link\">Challenge 6</a></td>")))
+        .andExpect(
+            content()
+                .string(
+                    containsString(
+                        "class=\"disabled\" data-cy=\"challenge 7-link\">Challenge 7</a></td>")));
+  }
 
   @Test
   void shouldStillDissableTestsIfNotPreconfigured() throws Exception {

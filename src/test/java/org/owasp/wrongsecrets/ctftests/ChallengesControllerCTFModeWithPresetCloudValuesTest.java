@@ -1,5 +1,6 @@
 package org.owasp.wrongsecrets.ctftests;
 
+import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.Matchers.containsString;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -21,14 +22,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.CoreMatchers.not;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(
@@ -128,22 +121,55 @@ class ChallengesControllerCTFModeWithPresetCloudValuesTest {
         .andExpect(content().string(containsString("This challenge has been disabled.")));
   }
 
-    @Test
-    void shouldEnableCloudExerciseBut11() throws Exception {
-        mvc.perform(get("/"))
-            .andExpect(status().isOk())
-            .andExpect(content().string(not(containsString("class=\"disabled\" data-cy=\"challenge 9-link\">Challenge 9</a></td>"))))
-            .andExpect(content().string(not(containsString("class=\"disabled\" data-cy=\"challenge 10-link\">Challenge 10</a></td>"))))
-            .andExpect(content().string(containsString("class=\"disabled\" data-cy=\"challenge 11-link\">Challenge 11</a></td>")));
-    }
+  @Test
+  void shouldEnableCloudExerciseBut11() throws Exception {
+    mvc.perform(get("/"))
+        .andExpect(status().isOk())
+        .andExpect(
+            content()
+                .string(
+                    not(
+                        containsString(
+                            "class=\"disabled\" data-cy=\"challenge 9-link\">Challenge"
+                                + " 9</a></td>"))))
+        .andExpect(
+            content()
+                .string(
+                    not(
+                        containsString(
+                            "class=\"disabled\" data-cy=\"challenge 10-link\">Challenge"
+                                + " 10</a></td>"))))
+        .andExpect(
+            content()
+                .string(
+                    containsString(
+                        "class=\"disabled\" data-cy=\"challenge 11-link\">Challenge 11</a></td>")));
+  }
 
-    @Test
-    void shouldEnableK8sExercises() throws Exception {
-        mvc.perform(get("/"))
-            .andExpect(status().isOk())
-            .andExpect(content().string(not(containsString("class=\"disabled\" data-cy=\"challenge 5-link\">Challenge 5</a></td>"))))
-            .andExpect(content().string(not(containsString("class=\"disabled\" data-cy=\"challenge 6-link\">Challenge 6</a></td>"))))
-            .andExpect(content().string(not(containsString("class=\"disabled\" data-cy=\"challenge 7-link\">Challenge 7</a></td>"))));
-    }
-
+  @Test
+  void shouldEnableK8sExercises() throws Exception {
+    mvc.perform(get("/"))
+        .andExpect(status().isOk())
+        .andExpect(
+            content()
+                .string(
+                    not(
+                        containsString(
+                            "class=\"disabled\" data-cy=\"challenge 5-link\">Challenge"
+                                + " 5</a></td>"))))
+        .andExpect(
+            content()
+                .string(
+                    not(
+                        containsString(
+                            "class=\"disabled\" data-cy=\"challenge 6-link\">Challenge"
+                                + " 6</a></td>"))))
+        .andExpect(
+            content()
+                .string(
+                    not(
+                        containsString(
+                            "class=\"disabled\" data-cy=\"challenge 7-link\">Challenge"
+                                + " 7</a></td>"))));
+  }
 }
