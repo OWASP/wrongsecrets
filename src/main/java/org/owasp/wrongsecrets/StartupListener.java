@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.boot.context.event.ApplicationEnvironmentPreparedEvent;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
@@ -13,7 +14,7 @@ import org.springframework.context.ApplicationListener;
 public class StartupListener implements ApplicationListener<ApplicationEvent> {
 
   @Override
-  public void onApplicationEvent(final ApplicationEvent event) {
+  public void onApplicationEvent(final @NotNull ApplicationEvent event) {
     if (event instanceof ApplicationEnvironmentPreparedEvent envEvent) {
       if (!StartupHelper.passedCorrectEnv(envEvent.getEnvironment().getProperty("K8S_ENV"))) {
         log.error(
