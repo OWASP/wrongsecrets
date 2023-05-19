@@ -33,7 +33,8 @@
                     <tr th:each="challenge: ${challenges}">
                         <th scope="row" class="d-none d-xl-table-cell" th:text="${challenge.link}"></th>
                         <td>&nbsp;<span class="d-xl-none" th:if="${compledtedChallenges != null && #lists.contains(compledtedChallenges, '' + challenge.link)}">&#9745; </span><a th:href="@{/challenge} + '/' + ${challenge.link}"
-                                     th:class="${challenge.isChallengeEnabled} ? '' : 'disabled'"><span
+                                     th:class="${challenge.isChallengeEnabled} ? '' : 'disabled'"
+                                     th:attr="data-cy=${#strings.toLowerCase(challenge.name)} + '-link'><span
                             th:text="${challenge.name}"
                             th:remove="tag"></span></a></td>
                         <td th:text="${challenge.tech}"></td>

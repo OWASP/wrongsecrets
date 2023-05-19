@@ -1,5 +1,8 @@
 package org.owasp.wrongsecrets;
 
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+
 import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,53 +22,52 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.vault.core.VaultTemplate;
 import org.springframework.web.context.WebApplicationContext;
 
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ExtendWith({SpringExtension.class})
 @ActiveProfiles("test")
 @AutoConfigureWebTestClient
 class SecretLeakageControllerTest {
 
-    @Autowired
-    private WebApplicationContext webApplicationContext;
-    private MockMvc mockMvc;
-    @MockBean
-    VaultTemplate vaultTemplate;
-    @MockBean
-    RuntimeEnvironment runtimeEnvironment;
+  @Autowired private WebApplicationContext webApplicationContext;
+  private MockMvc mockMvc;
+  @MockBean VaultTemplate vaultTemplate;
+  @MockBean RuntimeEnvironment runtimeEnvironment;
 
-    @BeforeEach
-    public void setup() {
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
-        when(runtimeEnvironment.getRuntimeEnvironment()).thenReturn(RuntimeEnvironment.Environment.DOCKER);
-        when(runtimeEnvironment.canRun(ArgumentMatchers.any())).thenReturn(true);
-    }
+  @BeforeEach
+  public void setup() {
+    this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
+    when(runtimeEnvironment.getRuntimeEnvironment())
+        .thenReturn(RuntimeEnvironment.Environment.DOCKER);
+    when(runtimeEnvironment.canRun(ArgumentMatchers.any())).thenReturn(true);
+  }
 
-    @Test
-    void spoil1() throws Exception {
-        testSpoil("/spoil-1", Constants.password);
-    }
+  @Test
+  void spoil1() throws Exception {
+    testSpoil("/spoil-1", Constants.password);
+  }
 
-    @Test
-    void solveChallenge1() throws Exception {
-        solveChallenge("/challenge/1", Constants.password);
-    }
+  @Test
+  void solveChallenge1() throws Exception {
+    solveChallenge("/challenge/1", Constants.password);
+  }
 
-    private void solveChallenge(String endpoint, String solution) throws Exception {
-        this.mockMvc.perform(MockMvcRequestBuilders.post(endpoint)
-                        .param("solution", solution)
-                        .param("action", "submit"))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().string(CoreMatchers.containsString("Your answer is correct!")));
-    }
+  private void solveChallenge(String endpoint, String solution) throws Exception {
+    this.mockMvc
+        .perform(
+            MockMvcRequestBuilders.post(endpoint)
+                .param("solution", solution)
+                .param("action", "submit"))
+        .andExpect(MockMvcResultMatchers.status().isOk())
+        .andExpect(
+            MockMvcResultMatchers.content()
+                .string(CoreMatchers.containsString("Your answer is correct!")));
+  }
 
-    private void testSpoil(String endpoint, String solution) throws Exception {
-        this.mockMvc.perform(MockMvcRequestBuilders.get(endpoint))
-                .andDo(print())
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().string(CoreMatchers.containsString(solution)));
-    }
-
+  private void testSpoil(String endpoint, String solution) throws Exception {
+    this.mockMvc
+        .perform(MockMvcRequestBuilders.get(endpoint))
+        .andDo(print())
+        .andExpect(MockMvcResultMatchers.status().isOk())
+        .andExpect(MockMvcResultMatchers.content().string(CoreMatchers.containsString(solution)));
+  }
 }

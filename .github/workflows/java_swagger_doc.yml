@@ -20,7 +20,7 @@ jobs:
           java-version: "19"
           distribution: "temurin"
       - name: Clean install
-        run: ./mvnw --no-transfer-progress clean install -DskipTests -Ddependency-check.skip -Dcyclonedx.skip=true
+        run: ./mvnw --no-transfer-progress clean install -DskipTests -Ddependency-check.skip -Dcyclonedx.skip=true -Dexec.skip
       - name: Compile javadoc
         run: ./mvnw --no-transfer-progress compile javadoc:javadoc
       - name: Start wrongsecrets

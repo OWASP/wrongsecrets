@@ -10,18 +10,18 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @TestConfiguration
 public class PortConfiguration {
-    @Bean
-    @Order(1)
-    public SecurityFilterChain configureHerokuWebSecurityTest(HttpSecurity http,
-                                                              ObjectProvider<PortMapper> portMapper) throws Exception {
-        portMapper.ifAvailable(http.portMapper()::portMapper);
-        http.requiresChannel()
-            .requestMatchers(r ->
+  @Bean
+  @Order(1)
+  public SecurityFilterChain configureHerokuWebSecurityTest(
+      HttpSecurity http, ObjectProvider<PortMapper> portMapper) throws Exception {
+    portMapper.ifAvailable(http.portMapper()::portMapper);
+    http.requiresChannel()
+        .requestMatchers(
+            r ->
                 r.getRequestURL().toString().contains("heroku")
-                    && (r.getHeader("x-forwarded-proto") != null || r.getHeader("X-Forwarded-Proto") != null)
-            )
-            .requiresSecure();
-        return http.build();
-    }
-
+                    && (r.getHeader("x-forwarded-proto") != null
+                        || r.getHeader("X-Forwarded-Proto") != null))
+        .requiresSecure();
+    return http.build();
+  }
 }

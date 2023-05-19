@@ -12,30 +12,28 @@ import org.owasp.wrongsecrets.challenges.Spoiler;
 @ExtendWith(MockitoExtension.class)
 class Challenge1Test {
 
-    @Mock
-    private ScoreCard scoreCard;
+  @Mock private ScoreCard scoreCard;
 
-    @Test
-    void spoilerShouldRevealAnswer() {
-        var challenge = new Challenge1(scoreCard);
+  @Test
+  void spoilerShouldRevealAnswer() {
+    var challenge = new Challenge1(scoreCard);
 
-        Assertions.assertThat(challenge.spoiler()).isEqualTo(new Spoiler(Constants.password));
-    }
+    Assertions.assertThat(challenge.spoiler()).isEqualTo(new Spoiler(Constants.password));
+  }
 
-    @Test
-    void rightAnswerShouldSolveChallenge() {
-        var challenge = new Challenge1(scoreCard);
+  @Test
+  void rightAnswerShouldSolveChallenge() {
+    var challenge = new Challenge1(scoreCard);
 
-        Assertions.assertThat(challenge.solved(Constants.password)).isTrue();
-        Mockito.verify(scoreCard).completeChallenge(challenge);
-    }
+    Assertions.assertThat(challenge.solved(Constants.password)).isTrue();
+    Mockito.verify(scoreCard).completeChallenge(challenge);
+  }
 
-    @Test
-    void incorrectAnswerShouldNotSolveChallenge() {
-        var challenge = new Challenge1(scoreCard);
+  @Test
+  void incorrectAnswerShouldNotSolveChallenge() {
+    var challenge = new Challenge1(scoreCard);
 
-        Assertions.assertThat(challenge.solved("wrong answer")).isFalse();
-        Mockito.verifyNoInteractions(scoreCard);
-    }
-
+    Assertions.assertThat(challenge.solved("wrong answer")).isFalse();
+    Mockito.verifyNoInteractions(scoreCard);
+  }
 }

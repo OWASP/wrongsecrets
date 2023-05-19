@@ -24,7 +24,7 @@ Want to make sure you don't need to bug your users to copy paste values twice to
 
 Now users can directly use your Wrongsecrets setup together with the CTF-platform to play challenges without having to copy answers and flags twice!
 
-Note: make sure that you do set `CTF_SERVER_ADDRESS` to point to the address where you are running your CTF-platform (E.g. CTFD/Facebook CTF) and that you set `challenge_acht_ctf_to_provide_to_host_value` to the flag you store in your CTF-platform.
+Note: make sure that you do set `CTF_SERVER_ADDRESS` to point to the address where you are running your CTF-platform (E.g. CTFD/Facebook CTF) and that you set `challenge_acht_ctf_to_provide_to_host_value` and `challenge_thirty_ctf_to_provide_to_host_value` to the flag you store in your CTF-platform.
 
 ## Setting up CTFs
 
@@ -39,7 +39,7 @@ Host the Docker container somewhere, where your users can not access the contain
 Want to make it a little more exciting? Create your own custom Docker image for both the 'play-environment' and the 'CTF-scoring-environment', where you override certain values (e.g. the ARG, the docker ENV, etc.) with your preferred values, so that copying from any existing online solution no longer works!
 There are a few env-vars that you need to pay attention to when setting this up:
 - `CTF_SERVER_ADDRESS` in the 'play-environment' to be set to the URL of the 'CTF-scoring-environment' (e.g. your instance of wrongsecrets-ctf.herokuapp.com), and in the 2-domain approach that would be your CTF-platform. Note that in the domain where your users exchange answers for flags for your CTF-platform, you can set it to the URL where your CTF-platform lives.
-- `challenge_acht_ctf_to_provide_to_host_value` needs to be set to a sufficiently long value at the 'play-environment' where your players interact with WrongSecrets to hack around. The value of this entry is returned to the players when they have found the randomly generated value in the logs. If you have the 2-domain approach: make sure that this value is actually the flag-entry for challenge 8 in your CTF-platform, if you have the normal setup, make sure that your 'CTF-scoring-environment' where people provide answers in exchange for flags has the same value stored under `challenge_acht_ctf_host_value`.
+- `challenge_acht_ctf_to_provide_to_host_value` and `challenge_thirty_ctf_to_provide_to_host_value` need to be set to a sufficiently long value at the 'play-environment' where your players interact with WrongSecrets to hack around. The value of this entry is returned to the players when they have found the randomly generated value in the logs. If you have the 2-domain approach: make sure that this value is actually the flag-entry for challenge 8 in your CTF-platform, if you have the normal setup, make sure that your 'CTF-scoring-environment' where people provide answers in exchange for flags has the same value stored under `challenge_acht_ctf_host_value`.
 - `challenge_acht_ctf_host_value` needs to be set in your 'ctf scoring environment' where players exchange answers for CTF flags to the same value as `challenge_acht_ctf_to_provide_to_host_value` in the environment players play around. Note that this value is not required in a 2-domain approach.
 
 ### K8s based CTF

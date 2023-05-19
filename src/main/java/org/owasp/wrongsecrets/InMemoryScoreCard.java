@@ -4,13 +4,13 @@ import jnr.ffi.annotations.In;
 import org.owasp.wrongsecrets.challenges.Challenge;
 
 import java.util.ArrayList;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import org.owasp.wrongsecrets.challenges.Challenge;
 
-/**
- * In-memory implementation of the ScoreCard (E.g. no persistence).
- */
+/** In-memory implementation of the ScoreCard (E.g. no persistence). */
 public class InMemoryScoreCard implements ScoreCard {
 
     private final int maxNumberOfChallenges;
