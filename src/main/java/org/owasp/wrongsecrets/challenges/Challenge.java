@@ -119,6 +119,6 @@ public abstract class Challenge {
    * @return int of the challenge
    */
   public String getNumber() {
-      return this.getClass().getSimpleName().replaceAll("[^0-9]", "");
+    return this.getClass().getSimpleName().replaceAll("[^0-9]", "");
   }
 }

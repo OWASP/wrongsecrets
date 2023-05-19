@@ -64,24 +64,24 @@ class ChallengesControllerCTFModeTest {
   }
 
   @Test
-  void shouldEnableK8sExercises() throws Exception {
+  void shouldNotEnableK8sExercises() throws Exception {
     mvc.perform(get("/"))
         .andExpect(status().isOk())
         .andExpect(
             content()
                 .string(
                     containsString(
-                        "class=\"disabled\" data-cy=\"challenge 5-link\">Challenge 5</a></td>")))
+                        "class=\"disabled\"><span data-cy=\"challenge 5-link\">Challenge 5</span>")))
         .andExpect(
             content()
                 .string(
                     containsString(
-                        "class=\"disabled\" data-cy=\"challenge 6-link\">Challenge 6</a></td>")))
+                        "class=\"disabled\"><span data-cy=\"challenge 6-link\">Challenge 6</span>")))
         .andExpect(
             content()
                 .string(
                     containsString(
-                        "class=\"disabled\" data-cy=\"challenge 7-link\">Challenge 7</a></td>")));
+                        "class=\"disabled\"><span data-cy=\"challenge 7-link\">Challenge 7</span>")));
   }
 
   @Test

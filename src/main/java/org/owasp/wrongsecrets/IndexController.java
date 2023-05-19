@@ -13,25 +13,26 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Slf4j
 public class IndexController {
 
-    private final ScoreCard scoreCard;
+  private final ScoreCard scoreCard;
 
-    private final String ctfServerAddress;
+  private final String ctfServerAddress;
 
-    public IndexController(ScoreCard scoreCard, @Value("${CTF_SERVER_ADDRESS}") String ctfServerAddress) {
-        this.scoreCard = scoreCard;
-        this.ctfServerAddress = ctfServerAddress;
+  public IndexController(
+      ScoreCard scoreCard, @Value("${CTF_SERVER_ADDRESS}") String ctfServerAddress) {
+    this.scoreCard = scoreCard;
+    this.ctfServerAddress = ctfServerAddress;
+  }
+
+  @GetMapping("/")
+  @Operation(description = "Returns all dynamic data for the welcome screen")
+  public String index(Model model) {
+    if ((!"not_set".equals(ctfServerAddress)) && !Strings.isNullOrEmpty(ctfServerAddress)) {
+      model.addAttribute("ctfServerAddress", ctfServerAddress);
+    } else {
+      model.addAttribute("compledtedChallenges", scoreCard.getCompletedChallenges());
+      model.addAttribute("totalScore", scoreCard.getTotalReceivedPoints());
     }
 
-    @GetMapping("/")
-    @Operation(description = "Returns all dynamic data for the welcome screen")
-    public String index(Model model) {
-        if ((!"not_set".equals(ctfServerAddress)) && !Strings.isNullOrEmpty(ctfServerAddress)) {
-            model.addAttribute("ctfServerAddress", ctfServerAddress);
-        } else {
-            model.addAttribute("compledtedChallenges", scoreCard.getCompletedChallenges());
-            model.addAttribute("totalScore", scoreCard.getTotalReceivedPoints());
-        }
-
-        return "welcome";
-    }
+    return "welcome";
+  }
 }

@@ -32,11 +32,11 @@
                     <tbody>
                     <tr th:each="challenge: ${challenges}">
                         <th scope="row" class="d-none d-xl-table-cell" th:text="${challenge.link}"></th>
-                        <td>&nbsp;<span class="d-xl-none" th:if="${compledtedChallenges != null && #lists.contains(compledtedChallenges, '' + challenge.link)}">&#9745; </span><a th:href="@{/challenge} + '/' + ${challenge.link}"
-                                     th:class="${challenge.isChallengeEnabled} ? '' : 'disabled'"
-                                     th:attr="data-cy=${#strings.toLowerCase(challenge.name)} + '-link'><span
-                            th:text="${challenge.name}"
-                            th:remove="tag"></span></a></td>
+                        <td>&nbsp;<span class="d-xl-none"
+                                        th:if="${compledtedChallenges != null && #lists.contains(compledtedChallenges, '' + challenge.link)}">&#9745; </span><a
+                            th:href="'/challenge/' + ${challenge.link}"
+                            th:class="${challenge.isChallengeEnabled} ? '' : 'disabled'"><span th:text="${challenge.name}" th:attr="data-cy=${#strings.toLowerCase(challenge.name)} + '-link'"></span>
+                        </a></td>
                         <td th:text="${challenge.tech}"></td>
                         <td class="d-none d-md-table-cell" th:text="${challenge.starsOnScale}">
                         </td>
@@ -53,7 +53,9 @@
                             th:if="${challenge.requiredEnv} == 'AWS' or ${challenge.requiredEnv} == 'GCP' or ${challenge.requiredEnv} == 'AZURE'">
                             <td class="">AWS, GCP, Azure</td>
                         </th:block>
-                        <td class="d-none d-xl-table-cell"><span th:if="${compledtedChallenges != null && #lists.contains(compledtedChallenges, '' + challenge.link)}">&#9745;</span></td>
+                        <td class="d-none d-xl-table-cell"><span
+                            th:if="${compledtedChallenges != null && #lists.contains(compledtedChallenges, '' + challenge.link)}">&#9745;</span>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
