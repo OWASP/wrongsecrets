@@ -1,0 +1,4 @@
+*Why you should be careful with migrating secrets*
+
+When you update a Kubernetes secret and migrate to another format, the original data is part of the metadata captured in the original configuration.
+Migration of secrets to "something else" should also include a rotation step to ensure the older (less well-protected) value is now useless.

@@ -72,3 +72,7 @@ js/node/
 js/node_modules/
 node_modules
 .npm
+
+# Cypress
+cypress/videos
+cypress/screenshots

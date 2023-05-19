@@ -1,0 +1,7 @@
+=== Kubernetes StringData or Data?
+
+Kubernetes has 2 types of fields for data in a secret. The `StringData` contains the plaintext data, while the `Data` contains the base64 encoded value.
+So what if you want to swap the StringData value to a Data value in order to secure it further?
+You don't have to, as long as you have set up RBAC correctly. After all: both values should not be visible when a secret is listed or described. But what if you move from standard to sealed secrets but don't migrate all of them?
+Then it might be good to know that the metadata might contain the actual value of the StringData.
+Can you find the secret?
