@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 @ControllerAdvice
 public class AllControllerAdvice {
 
-  private final List<ChallengeUI>     challenges;
+  private final List<ChallengeUI> challenges;
   private final String version;
   private final RuntimeEnvironment runtimeEnvironment;
 
