@@ -7,7 +7,7 @@ describe('Challenge Tests', () => {
     cy.getDisabledChallenges()
   })
 
-  it('Check all enabled challenges load correctly', () => {
+  it('Check all enabled challenges display correctly', () => {
     cy.get('@enabledChallengeIds').then((enabledChallengeIds) => {
       cy.wrap(enabledChallengeIds).each((challengeNum) => {
         cy.visit('/')
@@ -17,7 +17,7 @@ describe('Challenge Tests', () => {
     })
   })
 
-  it('Check all disabled challenges load correctly', () => {
+  it('Check all disabled challenges display correctly', () => {
     cy.get('@disabledChallengeIds').then((disabledChallengeIds) => {
       cy.wrap(disabledChallengeIds).each((challengeNum) => {
         cy.visit(`/challenge/${challengeNum}`)
@@ -26,7 +26,7 @@ describe('Challenge Tests', () => {
     })
   })
 
-  it('Check all hints load correctly', () => {
+  it('Check all hints display correctly', () => {
     cy.get('@enabledChallengeIds').then((enabledChallengeIds) => {
       cy.wrap(enabledChallengeIds).each((challengeNum) => {
         cy.visit(`/challenge/${challengeNum}`)
@@ -36,7 +36,7 @@ describe('Challenge Tests', () => {
     })
   })
 
-  it('Check whats wrong section load correctly', () => {
+  it('Check whats wrong section display correctly', () => {
     cy.get('@enabledChallengeIds').then((enabledChallengeIds) => {
       cy.wrap(enabledChallengeIds).each((challengeNum) => {
         cy.visit(`/challenge/${challengeNum}`)

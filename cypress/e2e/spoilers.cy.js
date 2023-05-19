@@ -5,7 +5,7 @@ describe('Spoiler Tests', () => {
     cy.getAllChallenges()
   })
 
-  it('Check all hints load correctly', () => {
+  it('Check all spoiler pages display correctly', () => {
     cy.get('@allChallengeIds').then((allChallengeIds) => {
       cy.wrap(allChallengeIds).each((challengeNum) => {
         cy.visit(`/spoil-${challengeNum}`)
