@@ -36,4 +36,5 @@ Optionally, provide any helpful references that may help the reviewer(s).
 -   [ ] All the contributions made are solely the work of me and my co-authors
 -   [ ] I tested the changes in this PR (if applicable)
 -   [ ] I added unit tests to ensure my change works (when change in Java or on front-end code)
+-   [ ] I added UI tests to ensure my UI changes work (when change in the overall UI, not needed if just adding a challenge)
 -   [ ] The PR passes pre-commit hooks and automated tests

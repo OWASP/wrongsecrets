@@ -1,5 +1,6 @@
 package org.owasp.wrongsecrets.ctftests;
 
+import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.Matchers.containsString;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -88,12 +89,24 @@ class ChallengesControllerCTFModeWithPresetK8sAndVaultValuesTest {
         .andExpect(status().isOk())
         .andExpect(
             content()
-                .string(containsString("<td>&nbsp;<a href=\"/challenge/5\">Challenge 5</a></td>")))
+                .string(
+                    not(
+                        containsString(
+                            "class=\"disabled\" data-cy=\"challenge 5-link\">Challenge"
+                                + " 5</a></td>"))))
         .andExpect(
             content()
-                .string(containsString("<td>&nbsp;<a href=\"/challenge/6\">Challenge 6</a></td>")))
+                .string(
+                    not(
+                        containsString(
+                            "class=\"disabled\" data-cy=\"challenge 6-link\">Challenge"
+                                + " 6</a></td>"))))
         .andExpect(
             content()
-                .string(containsString("<td>&nbsp;<a href=\"/challenge/7\">Challenge 7</a></td>")));
+                .string(
+                    not(
+                        containsString(
+                            "class=\"disabled\" data-cy=\"challenge 7-link\">Challenge"
+                                + " 7</a></td>"))));
   }
 }

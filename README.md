@@ -436,7 +436,7 @@ Follow the steps below on adding a challenge:
 
 1. First make sure that you have an [Issue](https://github.com/OWASP/wrongsecrets/issues) reported for which a challenge is really wanted.
 2. Add the new challenge in the `org.owasp.wrongsecrets.challenges` folder. Make sure you add an explanation in `src/main/resources/explanations` and refer to it from your new Challenge class.
-3. Add a unit and integration test to show that your challenge is working.
+3. Add unit, integration and UI tests as appropriate to show that your challenge is working.
 4. Don't forget to add `@Order` annotation to your challenge ;-).
 5. Review the [CONTRIBUTING guide](CONTRIBUTING.md) for setting up your contributing environment and writing good commit messages.
 
