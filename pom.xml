@@ -470,19 +470,6 @@
             <phase>generate-resources</phase>
           </execution>
           <execution>
-              <id>npm-install</id>
-              <phase>integration-test</phase>
-              <goals>
-                  <goal>exec</goal>
-              </goals>
-              <configuration>
-                  <executable>npm</executable>
-                  <arguments>
-                      <argument>install</argument>
-                  </arguments>
-              </configuration>
-          </execution>
-          <execution>
             <id>cypress-test</id>
             <goals>
               <goal>exec</goal>
@@ -493,6 +480,19 @@
               <arguments>
                 <argument>run</argument>
                 <argument>test:ci</argument>
+              </arguments>
+            </configuration>
+          </execution>
+          <execution>
+            <id>npm-install</id>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <phase>integration-test</phase>
+            <configuration>
+              <executable>npm</executable>
+              <arguments>
+                <argument>install</argument>
               </arguments>
             </configuration>
           </execution>
