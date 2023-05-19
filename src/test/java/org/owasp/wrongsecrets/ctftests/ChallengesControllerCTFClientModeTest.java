@@ -78,17 +78,20 @@ class ChallengesControllerCTFClientModeTest {
             content()
                 .string(
                     containsString(
-                        "class=\"disabled\"><span data-cy=\"challenge 5-link\">Challenge 5</span>")))
+                        "class=\"disabled\"><span data-cy=\"challenge 5-link\">Challenge"
+                            + " 5</span>")))
         .andExpect(
             content()
                 .string(
                     containsString(
-                        "class=\"disabled\"><span data-cy=\"challenge 6-link\">Challenge 6</span>")))
+                        "class=\"disabled\"><span data-cy=\"challenge 6-link\">Challenge"
+                            + " 6</span>")))
         .andExpect(
             content()
                 .string(
                     containsString(
-                        "class=\"disabled\"><span data-cy=\"challenge 7-link\">Challenge 7</span>")));
+                        "class=\"disabled\"><span data-cy=\"challenge 7-link\">Challenge"
+                            + " 7</span>")));
   }
 
   @Test
