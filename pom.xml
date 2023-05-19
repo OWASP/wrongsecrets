@@ -405,9 +405,6 @@
         <groupId>org.owasp</groupId>
         <artifactId>dependency-check-maven</artifactId>
         <version>${dependency-check-maven.version}</version>
-        <configuration>
-          <skip>${skipCheck}</skip>
-        </configuration>
         <executions>
           <execution>
             <goals>
@@ -471,6 +468,19 @@
               <goal>exec</goal>
             </goals>
             <phase>generate-resources</phase>
+          </execution>
+          <execution>
+              <id>npm-install</id>
+              <phase>integration-test</phase>
+              <goals>
+                  <goal>exec</goal>
+              </goals>
+              <configuration>
+                  <executable>npm</executable>
+                  <arguments>
+                      <argument>install</argument>
+                  </arguments>
+              </configuration>
           </execution>
           <execution>
             <id>cypress-test</id>
