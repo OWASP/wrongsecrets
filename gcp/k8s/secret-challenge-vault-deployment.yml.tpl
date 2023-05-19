@@ -93,6 +93,11 @@ spec:
                 configMapKeyRef:
                   name: secrets-file
                   key: funny.entry
+            - name: CHALLENGE33
+              valueFrom:
+                secretKeyRef:
+                  name: challenge33
+                  key: answer
             - name: SPECIAL_SPECIAL_K8S_SECRET
               valueFrom:
                 secretKeyRef:
