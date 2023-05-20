@@ -17,3 +17,8 @@ You can solve this challenge by the following steps:
 3. When you do not have the source code available, try to obtain the actual application to reverse engineer it. The application, in this case, is a Jar file, which is a set of java class files together with a few resources.
 - Follow the instructions of https://docs.docker.com/engine/reference/commandline/cp/[the Docker documentation] to copy the Jar file from the container's root to your local filesystem.
 - open the JAR file in https://java-decompiler.github.io/[*JD-GUI*] or https://github.com/skylot/jadx[*jadx-gui*], now look for the `String password`!
+
+4. You can scan the repository with https://github.com/trufflesecurity/trufflehog[*Trufflehog*].
+- Clone the repo with `git clone https://github.com/OWASP/wrongsecrets`.
+- Follow the instructions https://github.com/trufflesecurity/trufflehog[here] to install Trufflehog.
+- Scan the files using `trufflehog . | grep password` and the password will be in the output.
