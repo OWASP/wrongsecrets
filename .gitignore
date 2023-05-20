@@ -73,3 +73,7 @@ js/node_modules/
 node_modules
 .npm
 /cli/Cargo.lock
+
+# Cypress
+cypress/videos
+cypress/screenshots

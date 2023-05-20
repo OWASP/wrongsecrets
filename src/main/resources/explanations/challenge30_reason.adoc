@@ -1,0 +1,8 @@
+*Why you should not use localStorage for secret information*
+
+LocalStorage persists information across sessions and is easily accessible by javascript. This means there are various ways to obtain any secret information stored in it.
+
+There are various ways to prevent leaking secrets here:
+- If you don’t have to: don’t store the secret with the client: keep it on the server.
+- If the client requires a secret for a state within one domain: use the SessionStorage, which is bound to a given domain.
+- If a secret must be shared over multiple domains but does not need to be known by the client (e.g. the client just forwards it between an identity provider and multiple servers, for instance, at different domains): encrypt the secret. Alternatively, make sure servers can connect to each other on behalf of the client, so that the client does not need to send the secret along.

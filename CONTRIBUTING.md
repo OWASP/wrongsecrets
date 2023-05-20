@@ -135,21 +135,27 @@ Please be sure to take a careful look at our [Code of Conduct](https://github.co
 
 ## How to get started with the project in IntelliJ IDEA
 
--   ### Step 1: Fork the Project.
+-
+
+### Step 1: Fork the Project.
 
     Navigate to the landing page of the repository in your web browser and click on the **_Fork_** button on the repository’s home page.
     A forked copy of that Git repository will be added to your personal GitHub.
 
     ![](images/fork-project-1.png)
 
--   ### Step 2: Clone the Project.
+-
+
+### Step 2: Clone the Project.
 
     A **clone** is a full copy of a repository, including all logging and versions of files.
     To **_clone_** the Project to your local desktop by clicking on the button as shown below.
 
     ![](images/clone-project-2.png)
 
--   ### Step 3: Open the Project using IntelliJ IDEA
+-
+
+### Step 3: Open the Project using IntelliJ IDEA
 
     -   **_Open_** the Cloned Project using IntelliJ IDEA by clicking on the button as shown below.
 
@@ -159,16 +165,25 @@ Please be sure to take a careful look at our [Code of Conduct](https://github.co
 
         ![](images/wait-3.2.png)
 
--   ### Step 4: Setup.
 
-    -   Open Settings by pressing **_Ctrl+Alt+S_**
-        ![](images/open-settings-4.1.png)
+### Step 4: Setup.
 
-    -   Follow the path **_IDE settings>Language & Frameworks > Lombok_** and then click on **_Lombok._**
-        ![](images/lombok-setup-4.2.png)
+- Open Settings by pressing **_Ctrl+Alt+S_**
+  ![](images/open-settings-4.1.png)
 
-    -   Make sure that the **_Lombok processing_** is enabled.
-        ![](images/lombok-processing-4.3.png)
+- Follow the path **_IDE settings>Language & Frameworks > Lombok_** and then click on **_Lombok._**
+  ![](images/lombok-setup-4.2.png)
+
+- Make sure that the **_Lombok processing_** is enabled.
+  ![](images/lombok-processing-4.3.png)
+
+- Select **_Plugins > Marketplace_** and type 'google-java-format' and restart IntelliJ to install the plugin.
+
+- Open Settings by pressing **_Ctrl+Alt+S_**
+  ![](images/open-settings-4.1.png)
+
+- Select **_google-java-format Settings_** and click enable.
+  ![](images/open-settings-4.4.png)
 
 -   ### Step 5: Reload the project
 
@@ -184,7 +199,9 @@ Please be sure to take a careful look at our [Code of Conduct](https://github.co
 
 **NOTE:** Indians and other Asia-Pacific countries users may have to use **VPN** if you enounter this exception `org.owasp.dependencycheck.utils.DownloadFailedException: TLS Connection Reset`.
 
--   ### Step 6: Running the Project.
+-
+
+### Step 6: Running the Project.
 
     -   Open the **_WrongSecretsApplication_** by following the path **_main>java>org.owasp.wrongsecrets>WrongSecretApplication_**.
         ![](images/open-application-6.1.png)
@@ -213,7 +230,9 @@ Please be sure to take a careful look at our [Code of Conduct](https://github.co
 
         ![](images/run-application-6.2.png)
 
--   ### There you have it, **_WrongSecrets_** running successfully.
+-
+
+### There you have it, **_WrongSecrets_** running successfully.
 
     -   Here is a _preview_ on how does it look after successfully running the Application.
         **Note:** Running the Application doesn't open any kind of **_GUI_**, it only initializes the **_local webserver_** that you can open via a **_browser._**
@@ -227,87 +246,94 @@ Please be sure to take a careful look at our [Code of Conduct](https://github.co
 
 ## How to add a challenge
 
--   ### Step 1: Creating a new issue.
+-
+
+### Step 1: Creating a new issue.
 
     First make sure that you have an [Issue](https://github.com/OWASP/wrongsecrets/issues/new) reported for which a challenge is really wanted, And make sure the challenge is assigned to you, as others might be working on the challenge.
 
--   ### Step 2: Adding the challenge.
-    Add the **new challenge** in this folder `wrongsecrets/src/main/java/org/owasp/wrongsecrets/challenges/`.
-    These are the things that you have to keep in mind.
-    -   First and foremost make sure your challenge is coded in **Java**.
-    -   Don't forget to add your challenge number in `@Order(28)` annotation, **_28_** in my case.
-    -   Here is an example of a possible Challenge 28:
-        ```java
-        package org.owasp.wrongsecrets.challenges.docker;
-        import lombok.extern.slf4j.Slf4j;
-        import org.owasp.wrongsecrets.RuntimeEnvironment;
-        import org.owasp.wrongsecrets.ScoreCard;
-        import org.owasp.wrongsecrets.challenges.Challenge;
-        import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
-        import org.owasp.wrongsecrets.challenges.Spoiler;
-        import org.springframework.core.annotation.Order;
-        import org.springframework.stereotype.Component;
-        import java.util.List;
-        /**
-         * Describe what your challenge does
-         */
-        @Slf4j
-        @Component
-        @Order(28) //make sure this number is the same as your challenge
-        public class Challenge28 extends Challenge {
-            private final String secret;
-            public Challenge28(ScoreCard scoreCard) {
-                super(scoreCard);
-                secret = "hello world";
-            }
-            //is this challenge usable in CTF mode?
-            @Override
-            public boolean canRunInCTFMode() {
-                return true;
-            }
-            //return the plain text secret here
-            @Override
-            public Spoiler spoiler() {
-                return new Spoiler(secret);
-            }
-            //here you validate if your answer matches the secret
-            @Override
-            public boolean answerCorrect(String answer) {
-                return secret.equals(answer);
-            }
-            //which runtime can you use to run the challenge on? (You can just use Docker here)
-            /**
-            * {@inheritDoc}
-            */
-            @Override
-            public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
-                return List.of(RuntimeEnvironment.Environment.DOCKER);
-            }
-            //set the difficulty: 1=low, 5=very hard
-            /**
-            * {@inheritDoc}
-            * Difficulty: 1.
-            */
-            @Override
-            public int difficulty() {
-                return 1;
-            }
-            //on which tech is this challenge? See ChallengeTechnology.Tech for categories
-            /**
-            * {@inheritDoc}
-            * Secrets based.
-            */
-            @Override
-            public String getTech() {
-                return ChallengeTechnology.Tech.SECRETS.id;
-            }
-            //if you use this in a shared environment and need to adapt it, then return true here.
-            @Override
-            public boolean isLimittedWhenOnlineHosted() {
-                return false;
+-
+
+### Step 2: Adding the challenge.
+
+Add the **new challenge** in this folder `wrongsecrets/src/main/java/org/owasp/wrongsecrets/challenges/`.
+These are the things that you have to keep in mind.
+-   First and foremost make sure your challenge is coded in **Java**.
+-   Don't forget to add your challenge number in `@Order(28)` annotation, **_28_** in my case.
+-   Here is an example of a possible Challenge 28:
+
+```java
+package org.owasp.wrongsecrets.challenges.docker;
+import lombok.extern.slf4j.Slf4j;
+import org.owasp.wrongsecrets.RuntimeEnvironment;
+import org.owasp.wrongsecrets.ScoreCard;
+import org.owasp.wrongsecrets.challenges.Challenge;
+import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
+import org.owasp.wrongsecrets.challenges.Spoiler;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
+import java.util.List;
+/**
+* Describe what your challenge does
+*/
+@Slf4j
+@Component
+@Order(28) //make sure this number is the same as your challenge
+public class Challenge28 extends Challenge {
+private final String secret;
+public Challenge28(ScoreCard scoreCard) {
+super(scoreCard);
+secret = "hello world";
+}
+//is this challenge usable in CTF mode?
+@Override
+public boolean canRunInCTFMode() {
+return true;
+}
+//return the plain text secret here
+@Override
+public Spoiler spoiler() {
+return new Spoiler(secret);
+}
+//here you validate if your answer matches the secret
+@Override
+public boolean answerCorrect(String answer) {
+return secret.equals(answer);
+}
+//which runtime can you use to run the challenge on? (You can just use Docker here)
+/**
+* {@inheritDoc}
+*/
+@Override
+public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
+return List.of(RuntimeEnvironment.Environment.DOCKER);
+}
+//set the difficulty: 1=low, 5=very hard
+/**
+* {@inheritDoc}
+* Difficulty: 1.
+*/
+@Override
+public int difficulty() {
+return 1;
+}
+//on which tech is this challenge? See ChallengeTechnology.Tech for categories
+/**
+* {@inheritDoc}
+* Secrets based.
+*/
+@Override
+public String getTech() {
+return ChallengeTechnology.Tech.SECRETS.id;
+}
+//if you use this in a shared environment and need to adapt it, then return true here.
+@Override
+public boolean isLimittedWhenOnlineHosted() {
+return false;
+
             }
         }
-        ```
+```
 -   ### Step 3: Adding Test File.
 
     Add the **new TestFile** in this folder `wrongsecrets/src/test/java/org/owasp/wrongsecrets/challenges/`. TestFile is required to do **unit testing.**
@@ -338,7 +364,9 @@ Please be sure to take a careful look at our [Code of Conduct](https://github.co
           ```
 Please note that PRs for new challenges are only accepted when unit tests are added to prove that the challenge works. Normally tests should not immediately leak the actual secret, so leverage the `.spoil()` functionality of your test implementation for this.
 
--   ### Step 4: Adding explanations, reasons and hints.
+-
+
+### Step 4: Adding explanations, reasons and hints.
 
     Add the explanation for your challenge along with the hints that will help in finding the secret in this folder `wrongsecrets/src/main/resources/explanations/`.
     Things to be noted.

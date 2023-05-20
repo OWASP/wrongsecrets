@@ -3,30 +3,30 @@
 <body>
 <div class="container" layout:fragment="content">
     <!--/*@thymesVar id="challenge" type="org.owasp.wrongsecrets.challenges.ChallengeUI"*/-->
-    <p class="h1 mt-2"> <span th:text="${challenge.name}"/> <span th:block th:text="${challenge.stars}"></span></p>
+    <p class="h1 mt-2"> <span th:text="${challenge.name}" th:attr="data-cy=challenge-title"/> <span th:block th:text="${challenge.stars}"></span></p>
 
     <p><span th:text="'Welcome to challenge ' + ${challenge.challengeNumber} + '.'"></span> You need to guess the secret
         that is hidden in <a href="https://github.com/OWASP/wrongsecrets">Java</a>, <a
             href="https://hub.docker.com/r/jeroenwillemsen/wrongsecrets">Docker</a>, Kubernetes, Vault, AWS or GCP.</p>
     <div class="row">
-        <div class="offset-lg-1 col-lg-10 col-md-12">
+        <div class="offset-lg-1 col-lg-10 col-md-12" th:attr="data-cy=challenge-description">
             <div th:replace="~{doc:__${challenge.explanation}__.adoc}"></div>
         </div>
 
 
         <div class="col-12" th:text="${challengeCompletedAlready}"></div>
         <div class="col-12 feedback alert alert-success" role="alert" th:if="${answerCorrect!=null}"
-             th:text="${answerCorrect}"></div>
+             th:text="${answerCorrect}" th:attr="data-cy='success-alert'"></div>
         <div class="col-12 feedback alert alert-danger" role="alert" th:if="${answerIncorrect!=null}"
-             th:text="${answerIncorrect}"></div>
+             th:text="${answerIncorrect}" th:attr="data-cy='incorrect-alert'"></div>
         <form action="#" th:action="'/challenge/'+${challenge.link}" th:object="${challengeForm}" method="post">
             <div class="d-inline">
-                Answer to solution : <input type="text" id="answerfield" th:field="*{solution}"/>
+                Answer to solution : <input type="text" id="answerfield" th:field="*{solution}" th:attr="data-cy='answer-textbox'"/>
             </div>
             <div class="d-none d-lg-inline">
-                <button class="btn btn-primary" type="submit" name="action" value="submit">Submit</button>
+                <button class="btn btn-primary" type="submit" name="action" value="submit" th:attr="data-cy='submit-textbox-btn'">Submit</button>
                 <button class="btn btn-secondary"
-                        onclick="document.getElementById('answerfield').value='';event.preventDefault();">Clear
+                        onclick="document.getElementById('answerfield').value='';event.preventDefault();" th:attr="data-cy='clear-textbox-btn'">Clear
                 </button>
             </div>
             <div class="d-lg-none mt-2">
@@ -36,25 +36,25 @@
                 </button>
             </div>
             <div class="col-12 mt-3">
-                <button class="btn btn-secondary" type="submit" name="action" value="reset">Reset</button>
-                <a th:if="${hintsEnabled==true}" class="btn btn-secondary" data-bs-toggle="collapse"
+                <button class="btn btn-secondary" type="submit" name="action" value="reset" th:attr="data-cy='reset-btn'">Reset</button>
+                <a th:if="${hintsEnabled==true}" th:attr="data-cy='show-hints-btn'" class="btn btn-secondary" data-bs-toggle="collapse"
                    href="#collapseHint" role="button"
                    aria-expanded="false" aria-controls="collapseHint">
                     Show hints
                 </a>
-                <a th:if="${reasonEnabled==true}" class="btn btn-secondary" data-bs-toggle="collapse"
+                <a th:if="${reasonEnabled==true}" th:attr="data-cy='whats-wrong-btn'" class="btn btn-secondary" data-bs-toggle="collapse"
                    href="#collapseExplain" role="button"
                    aria-expanded="false" aria-controls="collapseExplain">
                     What's wrong?
                 </a>
             </div>
-            <div th:if="${hintsEnabled==true}" class="offset-lg-1 col-lg-10 col-md-12 collapse mt-2 mb-2"
+            <div th:if="${hintsEnabled==true}" th:attr="data-cy='hint-paragraph'" class="offset-lg-1 col-lg-10 col-md-12 collapse mt-2 mb-2"
                  id="collapseHint">
                 <div class="card card-body">
                     <div th:replace="~{doc:__${challenge.hint}__.adoc}"></div>
                 </div>
             </div>
-            <div th:if="${reasonEnabled==true}" class="offset-lg-1 col-lg-10 col-md-12 collapse mt-2 mb-2"
+            <div th:if="${reasonEnabled==true}" th:attr="data-cy='whats-wrong-paragraph'" class="offset-lg-1 col-lg-10 col-md-12 collapse mt-2 mb-2"
                  id="collapseExplain">
                 <div class="card card-body">
                     <div th:replace="~{doc:__${challenge.reason}__.adoc}"></div>
@@ -67,24 +67,24 @@
 
         <div class="progress">
             <div class="progress-bar" role="progressbar" th:style="'width:'+${progress}+'%;'"
-                 th:attr="aria-valuenow=${progress}" aria-valuemin="0" aria-valuemax="100"
+                 th:attr="aria-valuenow=${progress}, data-cy='progress-bar'" aria-valuemin="0" aria-valuemax="100"
                  th:text="${totalPoints}"></div>
         </div>
 
-        <div th:if="${missingEnvWarning} eq 'DOCKER'" class="alert alert-danger" role="alert">
+        <div th:if="${missingEnvWarning} eq 'DOCKER'" class="alert alert-danger" role="alert" th:attr="data-cy='disabled-alert'">
             We are running outside a docker container. Please run this in a container as explained in the <a
             href="https://github.com/OWASP/wrongsecrets#basic-docker-exercises">README.md</a>.
         </div>
-        <div th:if="${missingEnvWarning} eq 'VAULT'" class="alert alert-danger" role="alert">
+        <div th:if="${missingEnvWarning} eq 'VAULT'" class="alert alert-danger" role="alert" th:attr="data-cy='disabled-alert'">
             We are running outside a K8s cluster with Vault. Please run this in the K8s cluster as explained in the
             <a href="https://github.com/OWASP/wrongsecrets#vault-exercises-with-minikube">README.md</a>.
         </div>
-        <div th:if="${missingEnvWarning} eq 'K8S'" class="alert alert-danger" role="alert">
+        <div th:if="${missingEnvWarning} eq 'K8S'" class="alert alert-danger" role="alert" th:attr="data-cy='disabled-alert'">
             We are running outside a K8s cluster. Please run this in the K8s cluster as explained in the <a
             href="https://github.com/OWASP/wrongsecrets#basic-k8s-exercise">README.md</a>.
         </div>
         <div th:if="${missingEnvWarning} eq 'AWS' or ${missingEnvWarning} eq 'GCP'" class="alert alert-danger"
-             role="alert">
+             role="alert" th:attr="data-cy='disabled-alert'">
             We are running outside a properly configured Cloud environment. Please run this in an AWS/Azure/GCP environment as
             explained in the <a href="https://github.com/OWASP/wrongsecrets#cloud-challenges">README.md</a>.
         </div>

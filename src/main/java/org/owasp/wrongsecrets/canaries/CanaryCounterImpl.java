@@ -1,37 +1,33 @@
 package org.owasp.wrongsecrets.canaries;
 
+import java.util.concurrent.atomic.AtomicInteger;
 import org.springframework.stereotype.Service;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
-/**
- * Implementation of CanaryCounter using an Atomic integer for actual implementation.
- */
+/** Implementation of CanaryCounter using an Atomic integer for actual implementation. */
 @Service
 public class CanaryCounterImpl implements CanaryCounter {
 
-    private static final AtomicInteger numberofCanaryCalls = new AtomicInteger(0);
+  private static final AtomicInteger numberofCanaryCalls = new AtomicInteger(0);
 
-    private String lastToken;
+  private String lastToken;
 
+  @Override
+  public void upCallBackCounter() {
+    numberofCanaryCalls.incrementAndGet();
+  }
 
-    @Override
-    public void upCallBackCounter() {
-        numberofCanaryCalls.incrementAndGet();
-    }
+  @Override
+  public int getTotalCount() {
+    return numberofCanaryCalls.get();
+  }
 
-    @Override
-    public int getTotalCount() {
-        return numberofCanaryCalls.get();
-    }
+  @Override
+  public void setLastCanaryToken(String tokenContent) {
+    lastToken = tokenContent;
+  }
 
-    @Override
-    public void setLastCanaryToken(String tokenContent) {
-        lastToken = tokenContent;
-    }
-
-    @Override
-    public String getLastToken() {
-        return lastToken;
-    }
+  @Override
+  public String getLastToken() {
+    return lastToken;
+  }
 }

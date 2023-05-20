@@ -4,8 +4,8 @@
 <body>
 <div class="container">
     <div class="container-fluid mt-3 text-sm p-5 bg-light" layout:fragment="content">
-        <h1>Spoiling secret</h1>
-        <p th:text="${spoiler.solution}"></p>
+        <h1 th:attr="data-cy='spoiler-title'">Spoiling secret</h1>
+        <p th:attr="data-cy='spoiler-answer'" th:text="${spoiler.solution}"></p>
     </div>
 </div>
 </body>
