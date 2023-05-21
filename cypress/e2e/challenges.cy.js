@@ -1,4 +1,5 @@
 import ChallengesPage from '../pages/challengesPage'
+import HomePage from '../pages/homePage'
 const challengesPage = new ChallengesPage()
 
 describe('Challenge Tests', () => {
@@ -87,5 +88,14 @@ describe('Challenge Tests', () => {
     cy.dataCy(ChallengesPage.SUBMIT_TEXTBOX_BTN).click()
     cy.dataCy(ChallengesPage.SUCCESS_ALERT).should('contain', 'Your answer is correct!')
     cy.dataCy(ChallengesPage.PROGRESS_BAR).should('be.visible').should('not.have.attr', 'aria-valuenow', '0')
+  })
+
+  it('Submitting right answer gives visual cue on homepage that the challenge is successfully solved', () => {
+    cy.visit('/challenge/0')
+    cy.dataCy(ChallengesPage.ANSWER_TEXTBOX).type('The first answer')
+    cy.dataCy(ChallengesPage.SUBMIT_TEXTBOX_BTN).click()
+    cy.dataCy(ChallengesPage.SUCCESS_ALERT).should('contain', 'Your answer is correct!')
+    cy.visit('/')
+    cy.dataCy(HomePage.CHALLENGE_TABLE_ROW).first().should('have.class', 'solved')
   })
 })

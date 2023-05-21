@@ -17,7 +17,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 class IndexControllerTest {
 
   private MockMvc mvc;
-  @Mock private ScoreCard scoreCard;
+  @Mock
+  private ScoreCard scoreCard;
 
   @Test
   void disableScoringWhenAddressIsSet() throws Exception {
@@ -48,6 +49,6 @@ class IndexControllerTest {
     mvc.perform(get("/"))
         .andExpect(status().isOk())
         .andExpect(model().attribute("totalScore", 1000))
-        .andExpect(model().attribute("compledtedChallenges", Arrays.asList("0", "1")));
+        .andExpect(model().attribute("completedChallenges", Arrays.asList("0", "1")));
   }
 }
