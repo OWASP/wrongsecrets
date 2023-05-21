@@ -17,8 +17,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 class IndexControllerTest {
 
   private MockMvc mvc;
-  @Mock
-  private ScoreCard scoreCard;
+  @Mock private ScoreCard scoreCard;
 
   @Test
   void disableScoringWhenAddressIsSet() throws Exception {
