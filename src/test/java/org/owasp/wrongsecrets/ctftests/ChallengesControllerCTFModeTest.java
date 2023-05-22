@@ -71,20 +71,17 @@ class ChallengesControllerCTFModeTest {
             content()
                 .string(
                     containsString(
-                        "class=\"disabled\"><span data-cy=\"challenge 5-link\">Challenge"
-                            + " 5</span>")))
+                        "<a href=\"/challenge/5\" class=\"disabled\">")))
         .andExpect(
             content()
                 .string(
                     containsString(
-                        "class=\"disabled\"><span data-cy=\"challenge 6-link\">Challenge"
-                            + " 6</span>")))
+                        "<a href=\"/challenge/6\" class=\"disabled\">")))
         .andExpect(
             content()
                 .string(
                     containsString(
-                        "class=\"disabled\"><span data-cy=\"challenge 7-link\">Challenge"
-                            + " 7</span>")));
+                        "<a href=\"/challenge/7\" class=\"disabled\">")));
   }
 
   @Test

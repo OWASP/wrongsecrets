@@ -41,21 +41,15 @@
                                 <tr
                                     th:each="challenge: ${challenges}"
                                     th:class="${completedChallenges != null && #lists.contains(completedChallenges, '' + challenge.link)} ? solved : ''"
-                                    data-cy="challenge_row"
-                                >
+                                    data-cy="challenge_row" >
                                     <th scope="row" class="d-none d-xl-table-cell" th:text="${challenge.link}"></th>
                                     <td>
                                         &nbsp;<span
                                             class="d-xl-none"
                                             th:if="${completedChallenges != null && #lists.contains(completedChallenges, '' + challenge.link)}"
-                                            >&#9745; </span
-                                        ><a
-                                            th:href="'/challenge/' + ${challenge.link}"
-                                            th:class="${challenge.isChallengeEnabled} ? '' : 'disabled'"
-                                            ><span
-                                                th:text="${challenge.name}"
-                                                th:attr="data-cy=${#strings.toLowerCase(challenge.name)} + '-link'"
-                                            ></span>
+                                            >&#9745; </span>
+                                        <a th:href="'/challenge/' + ${challenge.link}" th:class="${challenge.isChallengeEnabled} ? '' : 'disabled'">
+                                            <span th:text="${challenge.name}" th:attr="data-cy=${#strings.toLowerCase(challenge.name)} + '-link'"></span>
                                         </a>
                                     </td>
                                     <td th:text="${challenge.tech}"></td>

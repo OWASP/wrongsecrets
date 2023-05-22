@@ -130,21 +130,18 @@ class ChallengesControllerCTFModeWithPresetCloudValuesTest {
                 .string(
                     not(
                         containsString(
-                            "class=\"disabled\"><span data-cy=\"challenge 9-link\">Challenge"
-                                + " 9</span>"))))
+                            "<a href=\"/challenge/9\" class=\"disabled\">"))))
         .andExpect(
             content()
                 .string(
                     not(
                         containsString(
-                            "class=\"disabled\"><span data-cy=\"challenge 10-link\">Challenge"
-                                + " 10</span>"))))
+                            "<a href=\"/challenge/10\" class=\"disabled\">"))))
         .andExpect(
             content()
                 .string(
                     containsString(
-                        "class=\"disabled\"><span data-cy=\"challenge 11-link\">Challenge"
-                            + " 11</span>")));
+                        "<a href=\"/challenge/11\" class=\"disabled\">")));
   }
 
   @Test
