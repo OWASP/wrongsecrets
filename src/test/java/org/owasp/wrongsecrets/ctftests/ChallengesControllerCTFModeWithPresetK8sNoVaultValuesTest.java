@@ -87,21 +87,10 @@ class ChallengesControllerCTFModeWithPresetK8sNoVaultValuesTest {
     mvc.perform(get("/"))
         .andExpect(status().isOk())
         .andExpect(
-            content()
-                .string(
-                    not(
-                        containsString(
-                            "<a href=\"/challenge/5\" class=\"disabled\">"))))
+            content().string(not(containsString("<a href=\"/challenge/5\" class=\"disabled\">"))))
         .andExpect(
-            content()
-                .string(
-                    not(
-                        containsString(
-                            "<a href=\"/challenge/6\" class=\"disabled\">"))))
+            content().string(not(containsString("<a href=\"/challenge/6\" class=\"disabled\">"))))
         .andExpect(
-            content()
-                .string(
-                    containsString(
-                        "<a href=\"/challenge/7\" class=\"disabled\">")));
+            content().string(containsString("<a href=\"/challenge/7\" class=\"disabled\">")));
   }
 }
