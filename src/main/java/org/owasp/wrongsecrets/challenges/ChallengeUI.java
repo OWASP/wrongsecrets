@@ -145,16 +145,29 @@ public class ChallengeUI {
     return new DifficultyUI(challenge.difficulty()).scale();
   }
 
+    /**
+     * Used to setup the label for the link to the challenge on the homescreen
+     * return "challenge 1(_disabled)(_solveD)-link"
+     * @return label
+     */
   public String getDataLabel() {
     String label = getName().trim().toLowerCase();
     if (!this.isChallengeEnabled()) {
       label = label + "_disabled";
     }
-    if (challenge.getScoreCard().getChallengeCompleted(challenge)) {
+    if (challengeCompleted()) {
       label = label + "_completed";
     }
     label = label + "-link";
     return label;
+  }
+
+    /**
+     * Used to return whether the challenge is completed or not
+     * @return boolean
+     */
+  public boolean challengeCompleted(){
+      return challenge.getScoreCard().getChallengeCompleted(challenge);
   }
 
   /**
