@@ -40,13 +40,13 @@
                             <tbody>
                                 <tr
                                     th:each="challenge: ${challenges}"
-                                    th:class="${completedChallenges != null && #lists.contains(completedChallenges, '' + challenge.link)} ? solved : ''"
+                                    th:class="${challenge.challengeCompleted} ? solved : ''"
                                     data-cy="challenge_row" >
                                     <th scope="row" class="d-none d-xl-table-cell" th:text="${challenge.link}"></th>
                                     <td>
                                         &nbsp;<span
                                             class="d-xl-none"
-                                            th:if="${completedChallenges != null && #lists.contains(completedChallenges, '' + challenge.link)}"
+                                            th:if="${challenge.challengeCompleted}"
                                             >&#9745; </span>
                                         <a th:href="'/challenge/' + ${challenge.link}" th:class="${challenge.isChallengeEnabled} ? '' : 'disabled'">
                                             <span th:text="${challenge.name}" th:attr="data-cy=${challenge.getDataLabel}"></span>
@@ -70,7 +70,7 @@
                                     </th:block>
                                     <td class="d-none d-xl-table-cell">
                                         <span
-                                            th:if="${completedChallenges != null && #lists.contains(completedChallenges, '' + challenge.link)}"
+                                            th:if="${challenge.challengeCompleted)}"
                                             >&#9745;</span
                                         >
                                     </td>

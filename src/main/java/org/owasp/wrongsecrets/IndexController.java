@@ -29,7 +29,6 @@ public class IndexController {
     if ((!"not_set".equals(ctfServerAddress)) && !Strings.isNullOrEmpty(ctfServerAddress)) {
       model.addAttribute("ctfServerAddress", ctfServerAddress);
     } else {
-      model.addAttribute("completedChallenges", scoreCard.getCompletedChallenges());
       model.addAttribute("totalScore", scoreCard.getTotalReceivedPoints());
     }
 

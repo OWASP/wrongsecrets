@@ -41,13 +41,11 @@ class IndexControllerTest {
 
   @Test
   void shouldShowScoreAndChallengeWhenCompleted() throws Exception {
-    when(scoreCard.getCompletedChallenges()).thenReturn(Arrays.asList("0", "1"));
     when(scoreCard.getTotalReceivedPoints()).thenReturn(1000);
     var controller = new IndexController(scoreCard, "not_set");
     mvc = MockMvcBuilders.standaloneSetup(controller).build();
     mvc.perform(get("/"))
         .andExpect(status().isOk())
-        .andExpect(model().attribute("totalScore", 1000))
-        .andExpect(model().attribute("completedChallenges", Arrays.asList("0", "1")));
+        .andExpect(model().attribute("totalScore", 1000));
   }
 }
