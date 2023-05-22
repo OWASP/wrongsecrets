@@ -125,35 +125,17 @@ class ChallengesControllerCTFModeWithPresetCloudValuesTest {
   void shouldEnableCloudExerciseBut11() throws Exception {
     mvc.perform(get("/"))
         .andExpect(status().isOk())
-        .andExpect(
-            content().string(not(containsString("challenge 9_disabled-link"))))
-        .andExpect(
-            content().string(not(containsString("challenge 10_disabled-link"))))
-        .andExpect(
-            content().string(containsString("challenge 11_disabled-link")));
+        .andExpect(content().string(not(containsString("challenge 9_disabled-link"))))
+        .andExpect(content().string(not(containsString("challenge 10_disabled-link"))))
+        .andExpect(content().string(containsString("challenge 11_disabled-link")));
   }
 
   @Test
   void shouldEnableK8sExercises() throws Exception {
     mvc.perform(get("/"))
         .andExpect(status().isOk())
-        .andExpect(
-            content()
-                .string(
-                    not(
-                        containsString(
-                            "challenge 5_disabled-link"))))
-        .andExpect(
-            content()
-                .string(
-                    not(
-                        containsString(
-                            "challenge 6_disabled-link"))))
-        .andExpect(
-            content()
-                .string(
-                    not(
-                        containsString(
-                            "challenge 7_disabled-link"))));
+        .andExpect(content().string(not(containsString("challenge 5_disabled-link"))))
+        .andExpect(content().string(not(containsString("challenge 6_disabled-link"))))
+        .andExpect(content().string(not(containsString("challenge 7_disabled-link"))));
   }
 }

@@ -69,8 +69,7 @@ class ChallengesControllerCTFModeTest {
         .andExpect(status().isOk())
         .andExpect(content().string(containsString("challenge 5_disabled-link")))
         .andExpect(content().string(containsString("challenge 6_disabled-link")))
-        .andExpect(
-            content().string(containsString("challenge 7_disabled-link")));
+        .andExpect(content().string(containsString("challenge 7_disabled-link")));
   }
 
   @Test
