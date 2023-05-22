@@ -92,21 +92,18 @@ class ChallengesControllerCTFModeWithPresetK8sAndVaultValuesTest {
                 .string(
                     not(
                         containsString(
-                            "class=\"disabled\" data-cy=\"challenge 5-link\">Challenge"
-                                + " 5</a></td>"))))
+                            "challenge 5_disabled-link"))))
         .andExpect(
             content()
                 .string(
                     not(
                         containsString(
-                            "class=\"disabled\" data-cy=\"challenge 6-link\">Challenge"
-                                + " 6</a></td>"))))
+                            "challenge 6_disabled-link>"))))
         .andExpect(
             content()
                 .string(
                     not(
                         containsString(
-                            "class=\"disabled\" data-cy=\"challenge 7-link\">Challenge"
-                                + " 7</a></td>"))));
+                            "challenge 7_disabled-link"))));
   }
 }

@@ -49,7 +49,7 @@
                                             th:if="${completedChallenges != null && #lists.contains(completedChallenges, '' + challenge.link)}"
                                             >&#9745; </span>
                                         <a th:href="'/challenge/' + ${challenge.link}" th:class="${challenge.isChallengeEnabled} ? '' : 'disabled'">
-                                            <span th:text="${challenge.name}" th:attr="data-cy=${#strings.toLowerCase(challenge.name)} + '-link'"></span>
+                                            <span th:text="${challenge.name}" th:attr="data-cy=${challenge.getDataLabel}"></span>
                                         </a>
                                     </td>
                                     <td th:text="${challenge.tech}"></td>

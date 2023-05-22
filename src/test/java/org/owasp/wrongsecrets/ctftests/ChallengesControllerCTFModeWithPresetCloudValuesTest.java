@@ -126,11 +126,11 @@ class ChallengesControllerCTFModeWithPresetCloudValuesTest {
     mvc.perform(get("/"))
         .andExpect(status().isOk())
         .andExpect(
-            content().string(not(containsString("<a href=\"/challenge/9\" class=\"disabled\">"))))
+            content().string(not(containsString("challenge 9_disabled-link"))))
         .andExpect(
-            content().string(not(containsString("<a href=\"/challenge/10\" class=\"disabled\">"))))
+            content().string(not(containsString("challenge 10_disabled-link"))))
         .andExpect(
-            content().string(containsString("<a href=\"/challenge/11\" class=\"disabled\">")));
+            content().string(containsString("challenge 11_disabled-link")));
   }
 
   @Test
@@ -142,21 +142,18 @@ class ChallengesControllerCTFModeWithPresetCloudValuesTest {
                 .string(
                     not(
                         containsString(
-                            "class=\"disabled\"><span data-cy=\"challenge 5-link\">Challenge"
-                                + " 5</span>"))))
+                            "challenge 5_disabled-link"))))
         .andExpect(
             content()
                 .string(
                     not(
                         containsString(
-                            "class=\"disabled\"><span data-cy=\"challenge 6-link\">Challenge"
-                                + " 6</span>"))))
+                            "challenge 6_disabled-link"))))
         .andExpect(
             content()
                 .string(
                     not(
                         containsString(
-                            "class=\"disabled\"><span data-cy=\"challenge 7-link\">Challenge"
-                                + " 7</span>"))));
+                            "challenge 7_disabled-link"))));
   }
 }
