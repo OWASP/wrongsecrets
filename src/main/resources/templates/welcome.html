@@ -21,7 +21,7 @@
             <div class="container-fluid text-sm p-2 p-lg-3">
                 <div class="row">
                     <div class="col-12 col-lg-7">
-                        <table class="table table-responsive" id="challenge_overview" data-cy="challenge_overview">
+                        <table class="table table-responsive" id="challenge_overview" data-cy="challenge-overview">
                             <thead>
                                 <tr>
                                     <th scope="col" class="d-none d-xl-table-cell">#</th>
@@ -41,7 +41,7 @@
                                 <tr
                                     th:each="challenge: ${challenges}"
                                     th:class="${challenge.challengeCompleted} ? solved : ''"
-                                    data-cy="challenge_row" >
+                                    data-cy="challenge-row" >
                                     <th scope="row" class="d-none d-xl-table-cell" th:text="${challenge.link}"></th>
                                     <td>
                                         &nbsp;<span
@@ -77,7 +77,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <p th:if="${ctfServerAddress == null}" th:text="'Total score: '+${totalScore}"></p>
+                        <p th:if="${ctfServerAddress == null}" th:text="'Total score: '+${totalScore}" th:attr="data-cy='total-score'"></p>
                         <p
                             th:if="${ctfServerAddress != null}"
                             th:text="'Scoring and progress keeping is disabled in CTF mode, have a look at '+${ctfServerAddress}+' for your actual score and progress'"
