@@ -125,51 +125,17 @@ class ChallengesControllerCTFModeWithPresetCloudValuesTest {
   void shouldEnableCloudExerciseBut11() throws Exception {
     mvc.perform(get("/"))
         .andExpect(status().isOk())
-        .andExpect(
-            content()
-                .string(
-                    not(
-                        containsString(
-                            "class=\"disabled\" data-cy=\"challenge 9-link\">Challenge"
-                                + " 9</a></td>"))))
-        .andExpect(
-            content()
-                .string(
-                    not(
-                        containsString(
-                            "class=\"disabled\" data-cy=\"challenge 10-link\">Challenge"
-                                + " 10</a></td>"))))
-        .andExpect(
-            content()
-                .string(
-                    containsString(
-                        "class=\"disabled\" data-cy=\"challenge 11-link\">Challenge 11</a></td>")));
+        .andExpect(content().string(not(containsString("challenge 9_disabled-link"))))
+        .andExpect(content().string(not(containsString("challenge 10_disabled-link"))))
+        .andExpect(content().string(containsString("challenge 11_disabled-link")));
   }
 
   @Test
   void shouldEnableK8sExercises() throws Exception {
     mvc.perform(get("/"))
         .andExpect(status().isOk())
-        .andExpect(
-            content()
-                .string(
-                    not(
-                        containsString(
-                            "class=\"disabled\" data-cy=\"challenge 5-link\">Challenge"
-                                + " 5</a></td>"))))
-        .andExpect(
-            content()
-                .string(
-                    not(
-                        containsString(
-                            "class=\"disabled\" data-cy=\"challenge 6-link\">Challenge"
-                                + " 6</a></td>"))))
-        .andExpect(
-            content()
-                .string(
-                    not(
-                        containsString(
-                            "class=\"disabled\" data-cy=\"challenge 7-link\">Challenge"
-                                + " 7</a></td>"))));
+        .andExpect(content().string(not(containsString("challenge 5_disabled-link"))))
+        .andExpect(content().string(not(containsString("challenge 6_disabled-link"))))
+        .andExpect(content().string(not(containsString("challenge 7_disabled-link"))));
   }
 }

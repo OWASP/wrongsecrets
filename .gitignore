@@ -57,13 +57,13 @@ azure/k8s/secret-challenge-vault-deployment.yml
 azure/k8s/pod-id.yml
 
 # Challenge 12 ;-)
-.github/scripts/yourkey.txt
+# .github/scripts/yourkey.txt
 
 # Challenge 16
-.github/scripts/secondkey.txt
+# .github/scripts/secondkey.txt
 
 # Challenge 17
-.github/scripts/thirdkey.txt
+# .github/scripts/thirdkey.txt
 
 yourkey.txt
 
