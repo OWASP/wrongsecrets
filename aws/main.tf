@@ -1,13 +1,4 @@
-
 terraform {
-  required_version = ">= 0.13.1, <= 2.0.0"
-
-  required_providers {
-    aws    = ">= 3.22.0, <5.0.0"
-    random = "~> 3.0"
-    http   = "~> 2.1"
-  }
-
   # Set your region and bucket name (output from shared state) in the placeholder below
   # Then uncomment and apply!
   # backend "s3" {
@@ -16,7 +7,6 @@ terraform {
   #   key    = "wrongsecrets/terraform.tfstate"
   # }
 }
-
 
 locals {
   vpc_cidr = "172.16.0.0/16"
@@ -47,7 +37,7 @@ data "aws_availability_zones" "available" {}
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 3.7.0"
+  version = "~> 4.0.1"
 
   name                 = "${var.cluster_name}-vpc"
   cidr                 = local.vpc_cidr
@@ -72,7 +62,7 @@ module "vpc" {
 
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
-  version = "18.20.5"
+  version = "19.13.1"
 
   cluster_name    = var.cluster_name
   cluster_version = var.cluster_version
@@ -82,8 +72,9 @@ module "eks" {
 
 
   cluster_endpoint_private_access = true
+  cluster_endpoint_public_access  = true
 
-  cluster_endpoint_public_access_cidrs = ["${data.http.ip.body}/32"]
+  cluster_endpoint_public_access_cidrs = ["${data.http.ip.response_body}/32"]
 
   enable_irsa = true
 
@@ -94,21 +85,23 @@ module "eks" {
     disk_iops       = 3000
     instance_types  = ["t3a.large"]
 
-    iam_role_additional_policies = [
-      "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy",
-      "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy",
-      "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
-      "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore",
-      "arn:aws:iam::aws:policy/AmazonEKSVPCResourceController"
-    ]
+    iam_role_additional_policies = {
+      AmazonEKSWorkerNodePolicy : "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy",
+      AmazonEKS_CNI_Policy : "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy",
+      AmazonEC2ContainerRegistryReadOnly : "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
+      AmazonSSMManagedInstanceCore : "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore",
+      AmazonEKSVPCResourceController : "arn:aws:iam::aws:policy/AmazonEKSVPCResourceController",
+      AmazonEBSCSIDriverPolicy : "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"
+    }
   }
 
   eks_managed_node_groups = {
     bottlerocket_default = {
-      create_launch_template = false
-      launch_template_name   = ""
-
-      capacity_type = "SPOT"
+      use_custom_launch_template = false
+      min_size                   = 1
+      max_size                   = 3
+      desired_size               = 1
+      capacity_type              = "SPOT"
 
       ami_type = "BOTTLEROCKET_x86_64"
       platform = "bottlerocket"

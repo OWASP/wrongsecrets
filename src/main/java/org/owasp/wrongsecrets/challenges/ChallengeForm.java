@@ -1,5 +1,8 @@
 package org.owasp.wrongsecrets.challenges;
 
-public record ChallengeForm(String solution) {
-
-}
+/**
+ * Used to communicate with the front-end.
+ *
+ * @param solution as provided throught the form.
+ */
+public record ChallengeForm(String solution) {}

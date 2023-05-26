@@ -1,0 +1,14 @@
+You can find the previous state one of two ways.
+
+1. Find the previous block via a request to https://infura.io/[Infura]:
+- Find the block number for any block after the contract was created and before it was updated.
+- Search for the storage state of the contract for that block. The below command is an example vs the infura API:
+
+    curl https://goerli.infura.io/v3/${your-infura-key} \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc":"2.0", "method": "eth_getStorageAt", "params": ["${contract address}", "0x0", "${blocknumber}"], "id": 1}'
+
+2. Look at the contract creation on https://etherscan.io/[Etherscan]:
+- Look under the contract creation transaction on etherscan
+- Go to state and look at storage

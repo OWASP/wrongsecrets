@@ -4,10 +4,15 @@ name: Test minikube script (k8s)
 
 # Controls when the workflow will run
 on:
+  push:
+    branches:
+      - master
   pull_request:
-    branches: [ master ]
+    branches: [master]
   workflow_dispatch:
 
+permissions:
+  contents: read
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   test-minikube:
@@ -19,13 +24,15 @@ jobs:
       - name: Start minikube
         uses: medyagh/setup-minikube@master
         with:
-          minikube-version: 1.25.2
+          minikube-version: 1.29.0
           driver: docker
-          kubernetes-version: v1.22.5
+          kubernetes-version: v1.25.6
       - name: test script
         run: |
+          kubectl apply -f k8s/workspace-psa.yml
           kubectl apply -f k8s/secrets-config.yml
           kubectl apply -f k8s/secrets-secret.yml
+          kubectl apply -f k8s/challenge33.yml
           kubectl apply -f k8s/secret-challenge-deployment.yml
           while [[ $(kubectl get pods -l app=secret-challenge -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do echo "waiting for secret-challenge" && sleep 2; done
           kubectl logs -l app=secret-challenge -f >> pod.log &

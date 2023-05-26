@@ -1,0 +1,5 @@
+*Why are we doing this?*
+
+With this project, we hope that you will have some fun hunting for secrets. At the same time, we hope that you will learn about other peoples mistakes when it comes to secrets management, so that you will not make the same mistakes.
+
+Did you know that we spotted all of these challenges in the wild? They can therefore be a great help if you want to do more bounty hunting.

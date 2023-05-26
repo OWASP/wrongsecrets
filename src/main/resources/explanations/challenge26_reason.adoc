@@ -1,0 +1,5 @@
+*Why overwriting secrets on the blockchain does not get rid of them*
+
+The state of the chain can be verified for any point in time by executing the state updates up until a certain block.
+
+Updating the state of the chain does not remove previous changes to state.

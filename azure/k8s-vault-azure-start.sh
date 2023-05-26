@@ -34,6 +34,9 @@ export AZ_KEY_VAULT_NAME="$(terraform output -raw vault_name)"
 # Set the kubeconfig
 az aks get-credentials --resource-group $RESOURCE_GROUP --name $CLUSTER_NAME
 
+echo "Setting up workspace PSA to restricted for default"
+kubectl apply -f k8s/workspace-psa.yml
+
 kubectl get configmaps | grep 'secrets-file' &>/dev/null
 if [ $? == 0 ]; then
   echo "secrets config is already installed"
@@ -46,6 +49,7 @@ if [ $? == 0 ]; then
   echo "secrets secret is already installed"
 else
   kubectl apply -f ../k8s/secrets-secret.yml
+  kubectl apply -f ../k8s/challenge33.yml
 fi
 
 source ../scripts/install-consul.sh
@@ -53,16 +57,17 @@ source ../scripts/install-consul.sh
 source ../scripts/install-vault.sh
 
 echo "Add secrets manager driver to repo"
-helm repo add csi-secrets-store-provider-azure https://raw.githubusercontent.com/Azure/secrets-store-csi-driver-provider-azure/master/charts
+helm repo add csi-secrets-store-provider-azure https://azure.github.io/secrets-store-csi-driver-provider-azure/charts
 
 helm list --namespace kube-system | grep 'csi-secrets-store' &>/dev/null
 if [ $? == 0 ]; then
   echo "CSI driver is already installed"
 else
   echo "Installing CSI driver"
-  helm install -n kube-system csi csi-secrets-store-provider-azure/csi-secrets-store-provider-azure
+  helm install csi csi-secrets-store-provider-azure/csi-secrets-store-provider-azure --namespace kube-system
 fi
 
+#TO BE REPLACED WITH https://azure.github.io/azure-workload-identity/docs/installation.html
 echo "Add Azure pod identity to repo"
 helm repo add aad-pod-identity https://raw.githubusercontent.com/Azure/aad-pod-identity/master/charts
 
@@ -70,8 +75,10 @@ helm list --namespace kube-system | grep 'aad-pod-identity' &>/dev/null
 if [ $? == 0 ]; then
   echo "Azure pod identity chart already installed"
 else
-  helm install aad-pod-identity aad-pod-identity/aad-pod-identity
+  helm upgrade --install aad-pod-identity aad-pod-identity/aad-pod-identity #NO LONGER WORKS BECAUSE OF OUR CONFIUGRATION (RESTRICTED IN DEFAULT)
 fi
+
+#END TO BE REPLACED WITH https://azure.github.io/azure-workload-identity/docs/installation.html
 
 echo "Generate secret manager challenge secret 2"
 az keyvault secret set --name wrongsecret-2 --vault-name "${AZ_KEY_VAULT_NAME}" --value "$(openssl rand -base64 16)" >/dev/null
@@ -92,6 +99,8 @@ kubectl apply -f./k8s/pod-id.yml
 
 while [[ $(kubectl --namespace=default get pods -l "app.kubernetes.io/component=mic" -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True True" ]]; do echo "waiting for component=mic" && sleep 2; done
 while [[ $(kubectl --namespace=default get pods -l "app.kubernetes.io/component=nmi" -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do echo "waiting for component=nmi" && sleep 2; done
+
+
 
 source ../scripts/apply-and-portforward.sh
 

@@ -1,12 +1,5 @@
 data "aws_caller_identity" "current" {}
 
-data "aws_region" "current" {}
-
-locals {
-  k8s_service_account_namespace = "default"
-  k8s_service_account_name      = "default"
-}
-
 ############
 # Pod role #
 ############
@@ -20,8 +13,10 @@ resource "aws_iam_role" "irsa_role" {
 data "aws_iam_policy_document" "assume_role_with_oidc" {
   statement {
     principals {
-      type        = "Federated"
-      identifiers = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:oidc-provider/${replace(module.eks.cluster_oidc_issuer_url, "https://", "")}"]
+      type = "Federated"
+      identifiers = [
+        "arn:aws:iam::${data.aws_caller_identity.current.account_id}:oidc-provider/${replace(module.eks.cluster_oidc_issuer_url, "https://", "")}"
+      ]
     }
     effect  = "Allow"
     actions = ["sts:AssumeRoleWithWebIdentity"]
@@ -44,7 +39,7 @@ resource "aws_iam_role_policy_attachment" "irsa_role_attachment" {
 
 resource "aws_iam_policy" "secret_manager" {
   name_prefix = "secret-manager"
-  description = "EKS secret manager policy for cluster ${module.eks.cluster_id}"
+  description = "EKS secret manager policy for cluster ${module.eks.cluster_name}"
   policy      = data.aws_iam_policy_document.secret_manager.json
 }
 
@@ -124,5 +119,19 @@ data "aws_iam_policy_document" "user_policy" {
       "sts:AssumeRole"
     ]
     resources = ["*"]
+  }
+}
+
+module "ebs_csi_irsa_role" {
+  source                = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
+  version               = "~> 5.5"
+  role_name             = "ebs-csi"
+  attach_ebs_csi_policy = true
+
+  oidc_providers = {
+    ex = {
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["consul:server", "kube-system:ebs-csi-controller-sa"]
+    }
   }
 }

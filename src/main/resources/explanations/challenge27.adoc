@@ -1,0 +1,5 @@
+=== Secrets in smart contracts part 3
+
+Our smart contract developer got somewhat smarter and only stored a hashed secret in his contract. He then checks a input data vs that hash to validate whether or not a transaction returns true or false. He is sure that since the secret is never stored in the internal state of the contract, that it can't be found.
+
+In this challenge, you need to find the correct secret that has the guess method from the contract `0x8318d477f4BCae5a80BEA22E3c040cf8BaaFFe8B` on the Goerli EVM Testnet return true.

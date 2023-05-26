@@ -2,14 +2,15 @@
 
 name: Docker container test
 
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
   push:
-
-  # Allows you to run this workflow manually from the Actions tab
+    branches:
+      - master
+  pull_request:
+    branches: [master]
   workflow_dispatch:
-
+permissions:
+  contents: read
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   test:
@@ -18,11 +19,10 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: Setup Maven Action
-        uses: "s4u/setup-maven-action@v1.5.0"
+        uses: "s4u/setup-maven-action@v1.7.0"
         with:
-          java-version: 18
+          java-version: 19
           maven-version: 3.8.5
       - uses: actions/checkout@v3
       - name: Navigate to test script and run
         run: cd .github/scripts && bash docker-create.sh -t
-

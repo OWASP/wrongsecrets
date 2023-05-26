@@ -1,0 +1,4 @@
+*Why sending secrets as inputs to smart contracts is a bad idea even if they aren't stored*
+
+Inputs to all transactions to contracts, like the state of internal storage of contracts on the chain are stored forever and are easy to query.
+Inputs to transactions are even visible before those transactions are accepted. This can lead to front-running by a 3rd party who has access to the pool of transactions and can send a transaction (with higher gas) that benefits from the known transaction running after it.

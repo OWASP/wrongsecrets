@@ -89,8 +89,11 @@ sleep 10
 
 EKS_CLUSTER_VERSION=$(aws eks describe-cluster --name $CLUSTERNAME --region $AWS_REGION --query cluster.version --output text)
 
-echo "apply -f k8s/secret-challenge-vault-ingress.yml in 10 s"
+echo "apply -f k8s/secret-challenge-vault-service.yml in 10 s"
 sleep 10
+kubectl apply -f k8s/secret-challenge-vault-service.yml
+echo "apply -f k8s/secret-challenge-vault-ingress.yml in 1 s"
+sleep 1
 kubectl apply -f k8s/secret-challenge-vault-ingress.yml
 
 echo "waiting 10 s for loadBalancer"

@@ -1,2 +1,2 @@
-cluster_version = "1.22"
-region          = "eu-west-1"
+# Edit this if you want a different region, e.g., us-east-1
+# region          = "eu-west-1"

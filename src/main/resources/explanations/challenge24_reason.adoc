@@ -1,0 +1,10 @@
+*Why copying Specs is a bad idea*
+
+When you try to implement cryptographic controls, it can be very daunting: there are a lot of details you need to pay attention to.
+By now you know that it is not recommended to copy every primitive of an example for your own implementation. In this example we copied the HMAC key from a NIST spec, which anybody could have tried to use in order to brute-force the HMAC key used.
+
+Please note that copying keys from specs/examples does not only hold for HMACs, it holds for any cryptographic operation (signing, encryption, decryption, etc.).
+
+Still need to generate a key? Make sure you use a Secure Random generator and the right library for your runtime to generate the key instead.
+
+To make it even safer, use a key generation and/or derivation setup in which every new message has a different key. That way, you have "Perfect Forward secrecy". This will ensure that older messages cannot be decrypted when one key is compromised.

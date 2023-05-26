@@ -1,0 +1,21 @@
+You can solve this challenge by the following steps:
+
+1. Check the status of the configmap in Git
+- Can you see where in git we stored the `secrets-config.yml`? If not, just do a search.
+- Take a look at the `Data` field: what can you find there?
+
+PLEASE NOTE: The following options will only work when you have access to the K8s API. In this hosted version of WrongSecrets you do not have that access. When you are running a CTF: ask the organizer for access to the K8s API.
+
+1. Ask nicely using Kubectl:
+- Make sure you have Kubectl installed as defined in the README.MD & make sure kubectl is configured to send commands to the right cluster.
+- Do `kubectl get configmap`. Here you see all the configmaps active in the namespace you are in, which is for this app normally `default` (unless otherwise specified by your administrator/trainer).
+- Now do `kubectl get configmap secrets-file -o Yaml`. Can you see the secret?
+
+2. Exec into the pod and get the data:
+- Make sure you have Kubectl installed as defined in the README.MD & make sure kubectl is configured to send commands to the right cluster.
+- Do `kubectl get pods`. Here you see all the Pods active in the namespace you are in, which is for this app normally `default` (unless otherwise specified by your administrator/trainer).
+- Now for your instance of the WrongSecrets pod, do `kubectl exec -it secret-challenge-<rest of the name of the pod from the prev.step> -- /bin/sh`.
+- Now do `env | grep SPECIAL_K8S_SECRET` and there is your secret.
+
+
+Note: `kubectl get <item> -A` gives you an overview of all the items over all the namespaces you have access to. It's important *not* to give people access to every namespace in your cluster, as this might mean leaking important config/items to them.

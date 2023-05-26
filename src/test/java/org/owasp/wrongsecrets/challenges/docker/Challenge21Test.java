@@ -7,19 +7,19 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Spoiler;
+import org.owasp.wrongsecrets.challenges.docker.binaryexecution.BinaryExecutionHelper;
 
 @ExtendWith(MockitoExtension.class)
 class Challenge21Test {
 
-    @Mock
-    private ScoreCard scoreCard;
+  @Mock private ScoreCard scoreCard;
 
-    @Test
-    void spoilerShouldNotCrash() {
-        var challenge = new Challenge21(scoreCard);
+  @Test
+  void spoilerShouldNotCrash() {
+    var challenge = new Challenge21(scoreCard);
 
-        Assertions.assertThat(challenge.spoiler()).isNotEqualTo(new Spoiler(BinaryExecutionHelper.ERROR_EXECUTION));
-        Assertions.assertThat(challenge.answerCorrect(challenge.spoiler().solution())).isTrue();
-    }
-
+    Assertions.assertThat(challenge.spoiler())
+        .isNotEqualTo(new Spoiler(BinaryExecutionHelper.ERROR_EXECUTION));
+    Assertions.assertThat(challenge.answerCorrect(challenge.spoiler().solution())).isTrue();
+  }
 }

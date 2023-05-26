@@ -7,4 +7,5 @@ Note that test-credentialss are sometimes obfuscated in code by Base64 encoding 
 
 ++++
 <!-- test-credentials = WhyCommentsAsPassswordAreBad345_$"-->
+<!-- If you like this: check OWAWS Juiceshop for more awesome challenges!  https://juice-shop.herokuapp.com/#/score-board -->
 ++++

@@ -1,0 +1,22 @@
+=== Opening Challenge
+
+Welcome to OWASP WrongSecrets its opening challenge!
+
+In this challenge, we explain you everything you need to know to play OWASP WrongSecrets.
+
+Every challenge is about finding a secret that has not been well hidden and/or configured inside our https://github.com/OWASP/wrongsecrets[application code], https://hub.docker.com/r/jeroenwillemsen/wrongsecrets[Docker container], or in one of the related parts of the https://github.com/OWASP/wrongsecrets#table-of-contents[system].
+
+Once you found the secret, you can put it in the box below and press "Submit". The "Clear" button will clean the input box.
+Want to play the challenge again? Press the "Reset button".
+
+The correct answer below is `The first answer` . Copy it in the box and press "Submit".
+
+Have a lot of fun with the more difficult challenges ;-).
+
+Note: some of the challenges ahead will require you to use additional tools to get to the solution. For this you need a computer with all the tools installed. Don't want to install them yourself? You can use a container to have them all available to you at once by using
+
+[source, shell]
+docker run -p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock jeroenwillemsen/wrongsecrets-desktop:latest
+
+
+Then, in your browser go to http://localhost:3000[http://localhost:3000] to find a webtop waiting for you with all the tools required.

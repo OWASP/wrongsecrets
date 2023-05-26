@@ -1,12 +1,4 @@
 terraform {
-  required_version = ">= 0.14.0"
-
-  required_providers {
-    random  = "~> 3.0"
-    azurerm = "~> 3.9"
-    http    = "~> 2.1"
-  }
-
   # For shared state:
   # Set the resource group in the backend configuration below, then uncomment and apply!
   # Note that you probably already create a resource group. Don't forget to set that correctly in this file.
@@ -17,8 +9,6 @@ terraform {
   #   key                  = "terraform.tfstate"
   # }
 }
-
-provider "http" {}
 
 data "http" "ip" {
   url = "http://ipecho.net/plain"
@@ -53,7 +43,9 @@ resource "azurerm_kubernetes_cluster" "cluster" {
 
   kubernetes_version = var.cluster_version
 
-  api_server_authorized_ip_ranges = ["${data.http.ip.body}/32"]
+  api_server_access_profile {
+    authorized_ip_ranges = ["${data.http.ip.response_body}/32"]
+  }
 
   network_profile {
     network_plugin = "azure"
@@ -62,7 +54,7 @@ resource "azurerm_kubernetes_cluster" "cluster" {
   default_node_pool {
     name       = "default"
     node_count = 1
-    vm_size    = "Standard_A2_v2"
+    vm_size    = "Standard_A2m_v2"
   }
 
   identity {

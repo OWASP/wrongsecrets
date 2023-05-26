@@ -11,7 +11,10 @@ echo "This is a script to bootstrap the configuration. You need to have installe
 echo "This script is based on the steps defined in https://learn.hashicorp.com/tutorials/vault/kubernetes-minikube. Vault is awesome!"
 
 export GCP_PROJECT=$(gcloud config list --format 'value(core.project)' 2>/dev/null)
-export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+#export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+
+echo "Setting up workspace PSA to restricted for default"
+kubectl apply -f ../k8s/workspace-psa.yml
 
 kubectl get configmaps | grep 'secrets-file' &>/dev/null
 if [ $? == 0 ]; then
@@ -25,6 +28,7 @@ if [ $? == 0 ]; then
   echo "secrets secret is already installed"
 else
   kubectl apply -f ../k8s/secrets-secret.yml
+  kubectl apply -f ../k8s/challenge33.yml
 fi
 
 source ../scripts/install-consul.sh

@@ -7,7 +7,7 @@ Help() {
     # Display Help
     echo "A versatile script to create a docker image for testing. Call this script with no arguments to simply create a local image that you can use to test your changes. For more complex use see the below help section"
     echo
-    echo "Syntax: docker-create.sh [-h (help)|-t (test)|-p (publish)|-e (herokud)|-f (herokup)|-g (fly)|-n (notag) [tag={tag}|message={message}|buildarg={buildarg}|springProfile={springProfile}]"
+    echo "Syntax: docker-create.sh [-h (help)|-t (test)|-p (publish)|-e (herokud)|-f (herokup)|-g (fly)|-o (okteto)|-n (notag) [tag={tag}|message={message}|buildarg={buildarg}|springProfile={springProfile}]"
     echo "options: (All optional)"
     echo "tag=             Write a custom tag that will be added to the container when it is build locally."
     echo "message=         Write a message used for the actual tag-message in git"
@@ -28,6 +28,23 @@ break_on_tag(){
         exit
       fi
 }
+
+Okteto_redeploy(){
+  break_on_tag
+  echo "Rebuilding the Okteto environment: https://wrongsecrets-commjoen.cloud.okteto.net/"
+  echo "Check if all required binaries are installed"
+  source ../../scripts/check-available-commands.sh
+  checkCommandsAvailable okteto
+  echo "validating okteto k8 deployment to contain the right container with tag "${tag}" (should be part of '$(cat ../../okteto/k8s/secret-challenge-deployment.yml | grep image)')"
+  if [[ "$(cat ../../okteto/k8s/secret-challenge-deployment.yml | grep image)" != *"${tag}"* ]]; then
+    echo "tag ${tag} in  ../../okteto/k8s/secret-challenge-deployment.yml not properly set, aborting"
+    exit
+  fi
+  cd ../../okteto
+  okteto destroy
+  okteto deploy
+}
+
 heroku_check_container() {
     break_on_tag
     echo "validating dockerfile to contain tag "${tag}" (should be part of '$(head -n 1 ../../Dockerfile.web)')"
@@ -90,7 +107,7 @@ Fly_publish(){
 # Set option to local if no option provided
 script_mode="local"
 # Parse provided options
-while getopts ":htpefgn*" option; do
+while getopts ":htpefgon*" option; do
     case $option in
     h) # display Help
         Help
@@ -111,6 +128,9 @@ while getopts ":htpefgn*" option; do
     g) #Helper
         script_mode="fly_p"
         ;;
+    o) #okteto
+        script_mode="okteto"
+        ;;
     n) #notags
         disable_tagging_in_git="true"
         ;;
@@ -125,9 +145,9 @@ done
 
 # Check all arguments added to the command
 ################################################
-for ARGUMENT in "$@"; 
+for ARGUMENT in "$@";
 do
-    if [[ $ARGUMENT != "-h" && $ARGUMENT != "-t" && $ARGUMENT != "-p" && $ARGUMENT != "-e" && $ARGUMENT != "-f" && $ARGUMENT != "-g" ]]
+    if [[ $ARGUMENT != "-h" && $ARGUMENT != "-t" && $ARGUMENT != "-p" && $ARGUMENT != "-e" && $ARGUMENT != "-f" && $ARGUMENT != "-g" && $ARGUMENT != "-o" ]]
     then
         KEY=$(echo "$ARGUMENT" | cut -f1 -d=)
         KEY_LENGTH=${#KEY}
@@ -188,8 +208,10 @@ elif [[ $script_mode == "heroku_p" ]]; then
   Heroku_publish_prod
 elif [[ $script_mode == "fly_p" ]]; then
   Fly_publish
+elif [[ $script_mode == "okteto" ]]; then
+  Okteto_redeploy
 fi
-    
+
 
 local_extra_info() {
     if [[ $script_mode == "local" ]] ; then
@@ -220,7 +242,7 @@ check_required_install() {
 check_os() {
     echo "Checking for compatible operating system"
     unameOut="$(uname -s)"
-    case "${unameOut}" in 
+    case "${unameOut}" in
     Darwin*)
         echo "OSX detected 🍎"
         ;;
@@ -263,6 +285,18 @@ generate_test_data() {
 }
 
 build_update_pom() {
+    echo "Building new license overview"
+    cd ../.. && mvn license:add-third-party -Dlicense.excludedScopes=test
+    cd .github/scripts
+    echo "preprocessing third party file"
+    sed '/^$/d' ../../target/generated-sources/license/THIRD-PARTY.txt  > temp1a.txt
+    sed '/^Lists/ s/./                        &/' temp1a.txt  > temp1.txt
+    sed 's/^     /                        <li>/' temp1.txt > temp2.txt
+    sed 's/$/<\/li>/' temp2.txt > temp3.txt
+    echo "refreshing licenses into the file"
+    sed -n '1,/MARKER-start/p;/MARKER-end/,$p' ../../src/main/resources/templates/about.html | gsed '/MARKER-end-->/e cat temp3.txt ' > temp4.txt
+    mv temp4.txt ../../src/main/resources/templates/about.html
+    rm tem*.txt
     echo "Building and updating pom.xml file so we can use it in our docker"
     cd ../.. && mvn clean && mvn --batch-mode release:update-versions -DdevelopmentVersion=${tag}-SNAPSHOT && mvn install -DskipTests
     cd .github/scripts
@@ -274,13 +308,23 @@ create_containers() {
     echo "Creating containers"
     if [[ "$script_mode" == "publish" ]]; then
         docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/addo-example:$tag-no-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=without-vault" --push ./../../.
+        docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/addo-example:latest-no-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=without-vault" --push ./../../.
         docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/addo-example:$tag-local-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=local-vault" --push ./../../.
+        docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/addo-example:latest-local-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=local-vault" --push ./../../.
         docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/addo-example:$tag-k8s-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=kubernetes-vault" --push ./../../.
+        docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/addo-example:latest-k8s-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=kubernetes-vault" --push ./../../.
         docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets:$tag-no-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=without-vault" --push ./../../.
+        docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets:latest-no-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=without-vault" --push ./../../.
         docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets:$tag-local-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=local-vault" --push ./../../.
+        docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets:latest-local-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=local-vault" --push ./../../.
         docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets:$tag-k8s-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=kubernetes-vault" --push ./../../.
+        docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets:latest-k8s-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=kubernetes-vault" --push ./../../.
         cd ../..
-        docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets-desktop:$tag -f Dockerfile.webdesktop --push .
+        docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets-desktop:$tag -f Dockerfile_webdesktop --push .
+        docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets-desktop:latest -f Dockerfile_webdesktop --push .
+        docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets-desktop-k8s:$tag -f Dockerfile_webdesktopk8s --push .
+        docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets-desktop-k8s:latest -f Dockerfile_webdesktopk8s --push .
+        cd .github/scripts
     elif [[ "$script_mode" == "test" ]]; then
         docker buildx build -t jeroenwillemsen/wrongsecrets:$tag --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=without-vault" --load ./../../.
     else
@@ -349,6 +393,8 @@ test() {
         else
             log_failure "The container test has failed, this means that when we built your changes and ran a basic sanity test on the homepage it failed. Please build the container locally and double check the container is running correctly."
         fi
+        echo "testing curl for webjar caching"
+        curl -I  'http://localhost:8080/webjars/bootstrap/5.2.3/css/bootstrap.min.css'
         echo "Testing complete"
     else
         return

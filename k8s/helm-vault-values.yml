@@ -1,4 +1,4 @@
 server:
-  affinity: 
+  affinity:
   ha:
     enabled: true

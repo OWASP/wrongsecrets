@@ -1,0 +1,11 @@
+=== Cryptographic challenge part 2
+
+Implementing cryptography can be very daunting. So there are various mistakes you can find on https://twitter.com/d_feldman/status/1558309810801631233?s=20&t=z98ii6IPJEZq10cnsGAhpQ[Twitter]. What if our developers made the same mistake?
+
+In this challenge, you need to find the HMAC key. Note that we created an HMAC following the https://csrc.nist.gov/CSRC/media/Projects/Cryptographic-Standards-and-Guidelines/documents/examples/HMAC_SHA1.pdf[spec from NIST] step by step! Can you provide us the HMAC-key used to create the HMAC?
+
+Text used: `Sample message for keylen=blocklen`
+
+HMAC produced in Hex: `5FD596EE 78D5553C 8FF4E72D 266DFD19 2366DA29`
+
+What is the HMAC key used here?
