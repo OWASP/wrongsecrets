@@ -41,14 +41,14 @@ Want to play the other challenges? Read the instructions on how to set them up b
     -   [Running WrongSecrets in GCP](#running-wrongsecrets-in-gcp)
     -   [Running WrongSecrets in Azure](#running-wrongsecrets-in-azure)
     -   [Running Challenge15 in your own cloud only](#running-challenge15-in-your-own-cloud-only)
--   [Do you want to play without guidance?](#do-you-want-to-play-without-guidance)
+-   [Do you want to play without guidance?](#do-you-want-to-play-without-guidance-or-spoils)
 -   [Special thanks & Contributors](#special-thanks--contributors)
 -   [Sponsorships](#sponsorships)
 -   [Help Wanted](#help-wanted)
 -   [Use OWASP WrongSecrets as a secret detection benchmark](#use-owasp-wrongsecrets-as-a-secret-detection-benchmark)
 -   [CTF](#ctf)
     -   [CTFD Support](#ctfd-support)
-    -   [FBCTF Support](#fbctf-support--experimental--)
+    -   [FBCTF Support](#fbctf-support-experimental)
 -   [Notes on development](#notes-on-development)
     -   [Dependency management](#dependency-management)
     -   [Get the project started in IntelliJ IDEA](#get-the-project-started-in-intellij-idea)
@@ -71,7 +71,7 @@ Copyright (c) 2020-2023 Jeroen Willemsen and WrongSecrets contributors.
 
 ## Basic docker exercises
 
-_Can be used for challenges 1-4, 8, 12-32_
+_Can be used for challenges 1-4, 8, 12-33_
 
 For the basic docker exercises you currently require:
 
@@ -128,7 +128,7 @@ You can test them out at [https://wrongsecrets.fly.dev](https://wrongsecrets.fly
 
 ## Basic K8s exercise
 
-_Can be used for challenges 1-6, 8, 12-32_
+_Can be used for challenges 1-6, 8, 12-33_
 
 ### Minikube based
 
@@ -143,6 +143,7 @@ The K8S setup currently is based on using Minikube for local fun:
     minikube start
     kubectl apply -f k8s/secrets-config.yml
     kubectl apply -f k8s/secrets-secret.yml
+    kubectl apply -f k8s/challenge33.yml
     kubectl apply -f k8s/secret-challenge-deployment.yml
     while [[ $(kubectl get pods -l app=secret-challenge -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do echo "waiting for secret-challenge" && sleep 2; done
     kubectl expose deployment secret-challenge --type=LoadBalancer --port=8080
@@ -153,6 +154,7 @@ now you can use the provided IP address and port to further play with the K8s va
 
 -   [localhost:8080/challenge/5](http://localhost:8080/challenge/5)
 -   [localhost:8080/challenge/6](http://localhost:8080/challenge/6)
+-   [localhost:8080/challenge/33](http://localhost:8080/challenge/33)
 
 ### k8s based
 
@@ -161,6 +163,7 @@ Want to run vanilla on your own k8s? Use the commands below:
 ```bash
     kubectl apply -f k8s/secrets-config.yml
     kubectl apply -f k8s/secrets-secret.yml
+    kubectl apply -f k8s/challenge33.yml
     kubectl apply -f k8s/secret-challenge-deployment.yml
     while [[ $(kubectl get pods -l app=secret-challenge -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do echo "waiting for secret-challenge" && sleep 2; done
     kubectl port-forward \
@@ -172,6 +175,7 @@ now you can use the provided IP address and port to further play with the K8s va
 
 -   [localhost:8080/challenge/5](http://localhost:8080/challenge/5)
 -   [localhost:8080/challenge/6](http://localhost:8080/challenge/6)
+-   [localhost:8080/challenge/33](http://localhost:8080/challenge/33)
 
 ### Okteto based
 
@@ -192,14 +196,14 @@ Make sure you have the following installed:
 -   vault [Install from here](https://www.vaultproject.io/downloads),
 -   grep, Cat, and Sed
 
-Run `./k8s-vault-minkube-start.sh`, when the script is done, then the challenges will wait for you at <http://localhost:8080> . This will allow you to run challenges 1-8, 12-32.
+Run `./k8s-vault-minkube-start.sh`, when the script is done, then the challenges will wait for you at <http://localhost:8080> . This will allow you to run challenges 1-8, 12-33.
 
 When you stopped the `k8s-vault-minikube-start.sh` script and want to resume the port forward run: `k8s-vault-minikube-resume.sh`.
 This is because if you run the start script again it will replace the secret in the vault and not update the secret-challenge application with the new secret.
 
 ## Cloud Challenges
 
-_Can be used for challenges 1-32_
+_Can be used for challenges 1-33_
 
 **READ THIS**: Given that the exercises below contain IAM privilege escalation exercises,
 never run this on an account which is related to your production environment or can influence your account-over-arching

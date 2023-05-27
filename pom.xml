@@ -490,6 +490,10 @@
             <phase>integration-test</phase>
             <configuration>
               <executable>npm</executable>
+              <environmentVariables>
+                <challengedockermtpath>src/test/resources/</challengedockermtpath>
+                <keepasspath>src/test/resources/alibabacreds.kdbx</keepasspath>
+              </environmentVariables>
               <arguments>
                 <argument>run</argument>
                 <argument>test:ci</argument>
