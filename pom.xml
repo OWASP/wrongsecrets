@@ -426,7 +426,7 @@
             </goals>
             <phase>generate-resources</phase>
             <configuration>
-              <nodeVersion>v16.13.2</nodeVersion>
+              <nodeVersion>v18.16.0</nodeVersion>
               <!-- download node from https://nodejs.org/dist/ -->
               <workingDirectory>js</workingDirectory>
             </configuration>
@@ -454,7 +454,12 @@
         <artifactId>exec-maven-plugin</artifactId>
         <version>3.1.0</version>
         <configuration>
-
+          <environmentVariables>
+            <CHALLENGEDOCKERMTPATH>&gt;src/test/resources/</CHALLENGEDOCKERMTPATH>
+            <challengedockermtpath>src/test/resources/</challengedockermtpath>
+            <KEEPASSPATH>src/test/resources/alibabacreds.kdbx</KEEPASSPATH>
+            <keepasspath>src/test/resources/alibabacreds.kdbx</keepasspath>
+          </environmentVariables>
           <executable>./js/node_modules/.bin/javascript-obfuscator${script.extension}</executable>
           <arguments>
             <argument>./js/index.js</argument>
@@ -491,7 +496,9 @@
             <configuration>
               <executable>npm</executable>
               <environmentVariables>
+                <CHALLENGEDOCKERMTPATH>&gt;src/test/resources/</CHALLENGEDOCKERMTPATH>
                 <challengedockermtpath>src/test/resources/</challengedockermtpath>
+                <KEEPASSPATH>src/test/resources/alibabacreds.kdbx</KEEPASSPATH>
                 <keepasspath>src/test/resources/alibabacreds.kdbx</keepasspath>
               </environmentVariables>
               <arguments>

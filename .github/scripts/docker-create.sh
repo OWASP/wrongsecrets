@@ -286,7 +286,7 @@ generate_test_data() {
 
 build_update_pom() {
     echo "Building new license overview"
-    cd ../.. && mvn license:add-third-party -Dlicense.excludedScopes=test
+    cd ../.. && ./mvnw license:add-third-party -Dlicense.excludedScopes=test
     cd .github/scripts
     echo "preprocessing third party file"
     sed '/^$/d' ../../target/generated-sources/license/THIRD-PARTY.txt  > temp1a.txt
@@ -298,7 +298,9 @@ build_update_pom() {
     mv temp4.txt ../../src/main/resources/templates/about.html
     rm tem*.txt
     echo "Building and updating pom.xml file so we can use it in our docker"
-    cd ../.. && mvn clean && mvn --batch-mode release:update-versions -DdevelopmentVersion=${tag}-SNAPSHOT && mvn install -DskipTests
+    export challengedockermtpath=src/test/resources/
+    export keepasspath=src/test/resources/alibabacreds.kdbx
+    cd ../.. && ./mvnw clean && ./mvnw --batch-mode release:update-versions -DdevelopmentVersion=${tag}-SNAPSHOT && ./mvnw install -DskipTests
     cd .github/scripts
     docker buildx create --name mybuilder
     docker buildx use mybuilder
