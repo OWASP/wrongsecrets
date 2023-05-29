@@ -298,8 +298,6 @@ build_update_pom() {
     mv temp4.txt ../../src/main/resources/templates/about.html
     rm tem*.txt
     echo "Building and updating pom.xml file so we can use it in our docker"
-    export challengedockermtpath=src/test/resources/
-    export keepasspath=src/test/resources/alibabacreds.kdbx
     cd ../.. && ./mvnw clean && ./mvnw --batch-mode release:update-versions -DdevelopmentVersion=${tag}-SNAPSHOT && ./mvnw install -DskipTests
     cd .github/scripts
     docker buildx create --name mybuilder

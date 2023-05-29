@@ -326,6 +326,12 @@
             <phase>pre-integration-test</phase>
             <configuration>
               <profiles>local,without-vault</profiles>
+              <environmentVariables>
+                <CHALLENGEDOCKERMTPATH>src/test/resources/</CHALLENGEDOCKERMTPATH>
+                <challengedockermtpath>src/test/resources/</challengedockermtpath>
+                <KEEPASSPATH>src/test/resources/alibabacreds.kdbx</KEEPASSPATH>
+                <keepasspath>src/test/resources/alibabacreds.kdbx</keepasspath>
+              </environmentVariables>
             </configuration>
           </execution>
           <execution>
@@ -454,12 +460,6 @@
         <artifactId>exec-maven-plugin</artifactId>
         <version>3.1.0</version>
         <configuration>
-          <environmentVariables>
-            <CHALLENGEDOCKERMTPATH>&gt;src/test/resources/</CHALLENGEDOCKERMTPATH>
-            <challengedockermtpath>src/test/resources/</challengedockermtpath>
-            <KEEPASSPATH>src/test/resources/alibabacreds.kdbx</KEEPASSPATH>
-            <keepasspath>src/test/resources/alibabacreds.kdbx</keepasspath>
-          </environmentVariables>
           <executable>./js/node_modules/.bin/javascript-obfuscator${script.extension}</executable>
           <arguments>
             <argument>./js/index.js</argument>
@@ -495,12 +495,6 @@
             <phase>integration-test</phase>
             <configuration>
               <executable>npm</executable>
-              <environmentVariables>
-                <CHALLENGEDOCKERMTPATH>&gt;src/test/resources/</CHALLENGEDOCKERMTPATH>
-                <challengedockermtpath>src/test/resources/</challengedockermtpath>
-                <KEEPASSPATH>src/test/resources/alibabacreds.kdbx</KEEPASSPATH>
-                <keepasspath>src/test/resources/alibabacreds.kdbx</keepasspath>
-              </environmentVariables>
               <arguments>
                 <argument>run</argument>
                 <argument>test:ci</argument>
