@@ -135,8 +135,6 @@ Please be sure to take a careful look at our [Code of Conduct](https://github.co
 
 ## How to get started with the project in IntelliJ IDEA
 
--
-
 ### Step 1: Fork the Project.
 
 Navigate to the landing page of the repository in your web browser and click on the **_Fork_** button on the repository’s home page.
@@ -230,8 +228,6 @@ Here is the preview of the **web server**, you can try to find the secrets by me
 ---
 
 ## How to add a challenge
-
--
 
 ### Step 1: Creating a new issue.
 
