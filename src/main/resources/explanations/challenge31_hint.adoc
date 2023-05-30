@@ -1,0 +1,4 @@
+You can solve this challenge by the following steps:
+
+1. Go to our https://owasp.org/www-project-wrongsecrets/[Website].
+2. Browse some tabs, surely the secret is in there :)

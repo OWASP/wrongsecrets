@@ -27,6 +27,7 @@ if [ $? == 0 ]; then
   echo "secrets secret is already installed"
 else
   kubectl apply -f ../k8s/secrets-secret.yml
+  kubectl apply -f ../k8s/challenge33.yml
 fi
 
 kubectl get sa ebs-csi-controller-sa  -n kube-system | grep '1'  &>/dev/null

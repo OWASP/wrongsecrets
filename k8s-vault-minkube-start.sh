@@ -26,6 +26,7 @@ if [ $? == 0 ]; then
    echo "secrets secret is already installed"
 else
   kubectl apply -f k8s/secrets-secret.yml
+  kubectl apply -f k8s/challenge33.yml
 fi
 helm list | grep 'consul' &> /dev/null
 if [ $? == 0 ]; then
