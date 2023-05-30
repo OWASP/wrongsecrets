@@ -139,6 +139,7 @@ Please be sure to take a careful look at our [Code of Conduct](https://github.co
 
 Navigate to the landing page of the repository in your web browser and click on the **_Fork_** button on the repository’s home page.
 A forked copy of that Git repository will be added to your personal GitHub.
+
 ![](images/fork-project-1.png)
 
 
@@ -146,6 +147,7 @@ A forked copy of that Git repository will be added to your personal GitHub.
 
 A **clone** is a full copy of a repository, including all logging and versions of files.
 To **_clone_** the Project to your local desktop by clicking on the button as shown below.
+
  ![](images/clone-project-2.png)
 
 ### Step 3: Open the Project using IntelliJ IDEA
@@ -161,20 +163,25 @@ To **_clone_** the Project to your local desktop by clicking on the button as sh
 ### Step 4: Setup.
 
 Open Settings by pressing **_Ctrl+Alt+S_**
+
 ![](images/open-settings-4.1.png)
 
 Follow the path **_IDE settings>Language & Frameworks > Lombok_** and then click on **_Lombok._**
+
 ![](images/lombok-setup-4.2.png)
 
 Make sure that the **_Lombok processing_** is enabled.
+
 ![](images/lombok-processing-4.3.png)
 
 Select **_Plugins > Marketplace_** and type 'google-java-format' and restart IntelliJ to install the plugin.
 
 Open Settings by pressing **_Ctrl+Alt+S_**
+
 ![](images/open-settings-4.1.png)
 
 Select **_google-java-format Settings_** and click enable.
+
 ![](images/open-settings-4.4.png)
 
 ### Step 5: Reload the project
@@ -184,6 +191,7 @@ Open the **_Maven_** Tab
 ![](images/open-maven-5.1.png)
 
 Press the **_Reload_** button as shown below and allow the project to Reload.
+
 ![](images/reload-maven-5.2.png)
 
 Further use the **_OWASP WrongSecrets --> Lifecycle --> install_** step to load all the depedencies
@@ -193,17 +201,21 @@ Further use the **_OWASP WrongSecrets --> Lifecycle --> install_** step to load 
 ### Step 6: Running the Project.
 
 Open the **_WrongSecretsApplication_** by following the path **_main>java>org.owasp.wrongsecrets>WrongSecretApplication_**.
+
 ![](images/open-application-6.1.png)
 
 Press **_Shift+F10_** to run the application, this will open up the **_Run/Debug Configurations Menu._**
+
 ![](images/run-application-6.2.png)
 
 ### Step 7: Setting up Configurations.
 
 Select **_Edit configuration templates_** then select **_Application_** section.
+
 ![](images/edit-config-7.1.png)
 
 There under the **_Application_** section click on the button shown below.
+
 ![](images/modify-options-7.2.png)
 
 **_Select_** all the fields that are Selected in the below picture.
@@ -211,18 +223,22 @@ There under the **_Application_** section click on the button shown below.
 ![](images/select-options-7.3.png)
 
 **_Fill out_** all the fields as shown below.
+
 ![](images/fill-fields-7.4.png)
 
 Again press **_Shift+F10_** which runs the Application.
+
 ![](images/run-application-6.2.png)
 
 ### There you have it, **_WrongSecrets_** running successfully.
 
 Here is a _preview_ on how does it look after successfully running the Application.
 **Note:** Running the Application doesn't open any kind of **_GUI_**, it only initializes the **_local webserver_** that you can open via a **_browser._**
+
 ![](images/final-output-8.png)
 
 Here is the preview of the **web server**, you can try to find the secrets by means of solving the challenge offered at: [**Challenges**](https://github.com/OWASP/wrongsecrets#basic-docker-exercises)
+
 ![](images/screenshot.png)
 
 ---
