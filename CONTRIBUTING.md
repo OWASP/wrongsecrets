@@ -154,7 +154,7 @@ To **_clone_** the Project to your local desktop by clicking on the button as sh
 **_Open_** the Cloned Project using IntelliJ IDEA by clicking on the button as shown below.
 
 ![](images/open-project-3.1.png)
- 
+
 **Wait** till the Project Loads.
 
 ![](images/wait-3.2.png)
@@ -313,7 +313,7 @@ These are the things that you have to keep in mind.
     @Override
     public boolean isLimittedWhenOnlineHosted() {
     return false;
-    
+
                 }
             }
 ```
@@ -386,4 +386,3 @@ Use this block as refrence for hints:
 
 ### Step 5: Submitting your PR.
 After completing all the above steps, final step is to submit the PR and refer [**Contributing.md**](https://github.com/OWASP/wrongsecrets/blob/master/CONTRIBUTING.md#how-to-get-your-pr-accepted) on how to get your PR accepted.
-
