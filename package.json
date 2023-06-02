@@ -4,7 +4,7 @@
     "test:ci": "cypress run --browser chrome"
   },
   "devDependencies": {
-    "@commitlint/config-conventional": "^17.6.1",
+    "@commitlint/config-conventional": "^17.6.5",
     "cypress": "^12.13.0",
     "eslint": "^8.39.0",
     "eslint-config-standard": "^17.1.0",
