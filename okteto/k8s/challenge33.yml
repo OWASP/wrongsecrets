@@ -7,7 +7,7 @@ metadata:
     kubectl.kubernetes.io/last-applied-configuration: |
       {"apiVersion":"v1","kind":"Secret","metadata":{"annotations":{},"name":"challenge33","namespace":"default"},"stringData":{"answer":"This was a standardValue as SecureSecret"},"type":"generic"}
   creationTimestamp: "2023-05-14T20:58:31Z"
-  name: CHALLENGE33
+  name: challenge33
   namespace: $OKTETO_NAMESPACE
   resourceVersion: "1891"
   uid: 02f40c7a-0319-4936-9d3f-f47b8c4eb642
