@@ -6,13 +6,12 @@
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
     <version>3.0.6</version>
-    <relativePath></relativePath>
     <!-- lookup parent from repository -->
   </parent>
 
   <groupId>org.owasp</groupId>
   <artifactId>wrongsecrets</artifactId>
-  <version>1.6.1-SNAPSHOT</version>
+  <version>1.6.5RC1-SNAPSHOT</version>
 
   <name>OWASP WrongSecrets</name>
   <description>Examples with how to not use secrets</description>
@@ -326,6 +325,12 @@
             <phase>pre-integration-test</phase>
             <configuration>
               <profiles>local,without-vault</profiles>
+              <environmentVariables>
+                <CHALLENGEDOCKERMTPATH>src/test/resources/</CHALLENGEDOCKERMTPATH>
+                <challengedockermtpath>src/test/resources/</challengedockermtpath>
+                <KEEPASSPATH>src/test/resources/alibabacreds.kdbx</KEEPASSPATH>
+                <keepasspath>src/test/resources/alibabacreds.kdbx</keepasspath>
+              </environmentVariables>
             </configuration>
           </execution>
           <execution>
@@ -426,7 +431,7 @@
             </goals>
             <phase>generate-resources</phase>
             <configuration>
-              <nodeVersion>v16.13.2</nodeVersion>
+              <nodeVersion>v18.16.0</nodeVersion>
               <!-- download node from https://nodejs.org/dist/ -->
               <workingDirectory>js</workingDirectory>
             </configuration>
@@ -454,7 +459,6 @@
         <artifactId>exec-maven-plugin</artifactId>
         <version>3.1.0</version>
         <configuration>
-
           <executable>./js/node_modules/.bin/javascript-obfuscator${script.extension}</executable>
           <arguments>
             <argument>./js/index.js</argument>

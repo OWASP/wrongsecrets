@@ -46,7 +46,8 @@ jobs:
           java-version: "19"
           distribution: "temurin"
       - name: Test with Cypress
-        run: mvn verify -Dexec.id=xcypress-test -DskipTests -Ddependency-check.skip
+        run: |
+          ./mvnw verify -Dexec.id=xcypress-test -DskipTests -Ddependency-check.skip
       - name: Uploading screenshots
         uses: actions/upload-artifact@v3
         if: failure()
