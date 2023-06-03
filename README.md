@@ -287,7 +287,7 @@ Special mentions for helping out:
 
 -   [Madhu Akula @madhuakula](https://github.com/madhuakula)
 -   [Björn Kimminich @bkimminich](https://github.com/bkimminich)
--   [Dan Gora @devsecops](https://github.com/devsecops)  
+-   [Dan Gora @devsecops](https://github.com/devsecops)
 -   [Xiaolu Dai @saragluna](https://github.com/saragluna)
 -   [Jonathan Giles @jonathanGiles](https://github.com/JonathanGiles)
 
