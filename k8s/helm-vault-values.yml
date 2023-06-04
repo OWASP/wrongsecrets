@@ -2,3 +2,4 @@ server:
   affinity:
   ha:
     enabled: true
+  storage: raft
