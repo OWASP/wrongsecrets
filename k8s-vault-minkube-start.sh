@@ -36,12 +36,14 @@ else
   helm repo add hashicorp https://helm.releases.hashicorp.com
 fi
 kubectl create ns vault
-helm upgrade --install vault hashicorp/vault --version 0.23.0 --namespace vault --values k8s/helm-vault-values.yml
-
-isvaultrunning=$(kubectl get pods -n vault --field-selector=status.phase=Running)
-while [[ $isvaultrunning != *"vault-0"* ]]; do echo "waiting for Vault1" && sleep 2 && isvaultrunning=$(kubectl get pods -n vault --field-selector=status.phase=Running); done
-while [[ $isvaultrunning != *"vault-1"* ]]; do echo "waiting for Vault2" && sleep 2 && isvaultrunning=$(kubectl get pods -n vault --field-selector=status.phase=Running); done
-while [[ $isvaultrunning != *"vault-2"* ]]; do echo "waiting for Vault3" && sleep 2 && isvaultrunning=$(kubectl get pods -n vault --field-selector=status.phase=Running); done
+helm install vault hashicorp/vault \
+  --set='server.ha.enabled=true' \
+  --set='server.ha.raft.enabled=true' \
+  --namespace vault
+isvaultpending=$(kubectl get pods -n vault --field-selector=status.phase=Running)
+while [[ $isvaultrunning != *"vault-0"* ]]; do echo "waiting for Vault1" && sleep 2 && isvaultrunning=$(kubectl get pods -n vault --field-selector=status.phase=Pending); done
+while [[ $isvaultrunning != *"vault-1"* ]]; do echo "waiting for Vault2" && sleep 2 && isvaultrunning=$(kubectl get pods -n vault --field-selector=status.phase=Pending); done
+while [[ $isvaultrunning != *"vault-2"* ]]; do echo "waiting for Vault3" && sleep 2 && isvaultrunning=$(kubectl get pods -n vault --field-selector=status.phase=Pending); done
 echo "Setting up port forwarding"
 kubectl port-forward vault-0 8200:8200 -n vault &
 echo "Unsealing Vault"
@@ -53,7 +55,9 @@ echo "⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰�
 echo "PLEASE COPY PASTE THE FOLLOWING VALUE: ${VAULT_UNSEAL_KEY} , you will be asked for it 3 times to unseal the vaults"
 
 kubectl exec -it vault-0 -n vault -- vault operator unseal $VAULT_UNSEAL_KEY
+kubectl exec -ti vault-1 -- vault operator raft join http://vault-0.vault:8200
 kubectl exec -it vault-1 -n vault -- vault operator unseal $VAULT_UNSEAL_KEY
+kubectl exec -ti vault-2 -- vault operator raft join http://vault-0.vault:8200
 kubectl exec -it vault-2 -n vault -- vault operator unseal $VAULT_UNSEAL_KEY
 
 
