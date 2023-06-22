@@ -1,3 +1,5 @@
 *Why Key Derivation Functions are not safe when using hardcoded values*
 
-TBD
+Key Derivation Functions (KDFs) are deterministic in nature. This means that for a given input, they will always give back the same output. So, if the parameters are hardcoded in code, anyone with access to the code can run the KDF with the coded parameters and get the actual key.
+
+KDFs should be used to generate keys based on dynamic input, such as human supplied passwords for instance. KDFs might be used in situations where secure random sources generate certain output which can be used to generate keys. Again, in both cases: the KDF its input is not hardcoded/deterministic. 
