@@ -1,4 +1,5 @@
-This challenge can be solved by looking at the metadata of the secret
+This challenge can be solved by looking at the metadata of the secret:
+
 1. looking at it through code
 - locate the secret definition in git (Challenge33.yml)
 - find the secret value in the metadata.
