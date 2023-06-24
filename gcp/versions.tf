@@ -13,7 +13,7 @@ terraform {
       version = "~> 3.5.1"
     }
     http = {
-      version = "~> 3.3.0"
+      version = "~> 3.4.0"
     }
   }
 }
