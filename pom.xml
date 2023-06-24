@@ -50,7 +50,7 @@
     <bootstrap.version>5.3.0</bootstrap.version>
     <com.azure.spring.version>5.1.0</com.azure.spring.version>
     <cyclonedx.core.version>7.3.2</cyclonedx.core.version>
-    <datatables.version>1.13.2</datatables.version>
+    <datatables.version>1.13.4</datatables.version>
     <dependency-check-maven.version>8.2.1</dependency-check-maven.version>
     <gcp.sdk.version>4.5.0</gcp.sdk.version>
     <github.button.version>2.14.1</github.button.version>
