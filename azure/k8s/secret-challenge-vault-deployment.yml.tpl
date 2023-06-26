@@ -41,7 +41,7 @@ spec:
             volumeAttributes:
               secretProviderClass: "azure-wrongsecrets-vault"
       containers:
-        - image: jeroenwillemsen/wrongsecrets:1.6.5-k8s-vault
+        - image: jeroenwillemsen/wrongsecrets:1.6.6-k8s-vault
           imagePullPolicy: IfNotPresent
           name: secret-challenge
           securityContext:
