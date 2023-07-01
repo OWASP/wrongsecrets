@@ -1,7 +1,5 @@
 package org.owasp.wrongsecrets.challenges;
 
-import com.nimbusds.jose.shaded.json.JSONArray;
-import com.nimbusds.jose.shaded.json.JSONObject;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import io.swagger.v3.oas.annotations.Operation;
 import java.io.BufferedReader;
@@ -11,6 +9,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
+import net.minidev.json.JSONArray;
+import net.minidev.json.JSONObject;
 import org.asciidoctor.Asciidoctor;
 import org.asciidoctor.Options;
 import org.owasp.wrongsecrets.RuntimeEnvironment;

@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.0.6</version>
+    <version>3.1.1</version>
     <!-- lookup parent from repository -->
   </parent>
 
@@ -48,7 +48,7 @@
     <asciidoctorj.version>2.5.10</asciidoctorj.version>
     <aws.sdk.version>2.20.91</aws.sdk.version>
     <bootstrap.version>5.3.0</bootstrap.version>
-    <com.azure.spring.version>5.1.0</com.azure.spring.version>
+    <com.azure.spring.version>5.3.0</com.azure.spring.version>
     <cyclonedx.core.version>7.3.2</cyclonedx.core.version>
     <datatables.version>1.13.4</datatables.version>
     <dependency-check-maven.version>8.2.1</dependency-check-maven.version>
