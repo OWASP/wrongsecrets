@@ -12,10 +12,10 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "minimatch": ">=9.0.1"
+    "minimatch": ">=9.0.2"
   },
   "devDependencies": {
-    "minimatch": ">=9.0.1",
+    "minimatch": ">=9.0.2",
     "javascript-obfuscator": "^4.0.2"
   }
 }
