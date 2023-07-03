@@ -169,8 +169,8 @@ public class ChallengeUI {
    * @return boolean
    */
   public boolean challengeCompleted() {
-    if (challenge.getScoreCard() != null){
-        return challenge.getScoreCard().getChallengeCompleted(challenge);
+    if (challenge.getScoreCard() != null) {
+      return challenge.getScoreCard().getChallengeCompleted(challenge);
     }
     return false;
   }
