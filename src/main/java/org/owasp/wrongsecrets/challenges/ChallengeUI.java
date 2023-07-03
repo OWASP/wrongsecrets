@@ -169,7 +169,10 @@ public class ChallengeUI {
    * @return boolean
    */
   public boolean challengeCompleted() {
-    return challenge.getScoreCard().getChallengeCompleted(challenge);
+    if (!runtimeEnvironment.runtimeInCTFMode()) {
+      return challenge.getScoreCard().getChallengeCompleted(challenge);
+    }
+    return false;
   }
 
   /**

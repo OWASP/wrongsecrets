@@ -76,3 +76,4 @@ node_modules
 # Cypress
 cypress/videos
 cypress/screenshots
+cypress/downloads
