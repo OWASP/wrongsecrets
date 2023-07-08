@@ -1,4 +1,15 @@
+<<<<<<< HEAD
 === Generating Random Keys
 
 Many security folks teach engineers to use secure key derivation functions like https://en.wikipedia.org/wiki/PBKDF2[PBKDF2] when a key needs to be generated. A developer followed this instruction and tried to create a key in `Challenge34.java`, which should now be far more secure than a hardcoded key.
 Can you spot the mistake? Can you find the value of the generated key?
+=======
+=== Git Notes
+
+Git commits can be a constant pain point. 
+It is fine using a short message, unintelligible garble or mashing the keyboard in a git message until you have the unfortunate task of reviewing past commits and trying to figure out what has happened.
+Git notes is here to solve this, it has been around for a while but often gets overlooked.
+Add extra metadata about the commit without affecting the commit message itself.
+
+Like all Git, once information is commited it is very very hard to remove all reference of it. What could possible go wrong?
+>>>>>>> cefa8809 ( Feature(#614): Added test files)
