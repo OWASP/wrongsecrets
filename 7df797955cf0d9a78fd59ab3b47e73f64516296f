@@ -1,0 +1,1 @@
+Though I am not sure: java 19 is no longer supported, while java 17 is LTS and September seems to be very far away. Hence: let's downgrade to java 17 again
