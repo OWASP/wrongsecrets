@@ -68,7 +68,7 @@ jobs:
       - name: Setup Maven Action
         uses: "s4u/setup-maven-action@v1.8.0"
         with:
-          java-version: 19
+          java-version: 17
           maven-version: 3.8.5
       - name: run mvn clean package
         run: mvn clean package -Ddependency-check.skip=true -Dmaven.test.skip=true
