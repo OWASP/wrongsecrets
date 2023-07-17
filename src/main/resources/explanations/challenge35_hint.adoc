@@ -6,7 +6,7 @@ This challenge can be solved by replaying the Key derivation function with the g
 - Copy the used parameters to an online https://www.dcode.fr/pbkdf2-hash[generator] and execute it
 - The website will return the value of the key.
 =======
-Like other Git challenges this can be solved by manually combing the Git metadata. 
+Like other Git challenges this can be solved by manually combing the Git metadata.
 There are also a plethora of tools that will automatically search for secrets leaked in Git repos.
 
 1. Search manually using `git log`. You can then use a tool such as grep to try and find leaked secrets with regex searches.

@@ -6,7 +6,7 @@ Can you spot the mistake? Can you find the value of the generated key?
 =======
 === Git Notes
 
-Git commits can be a constant pain point. 
+Git commits can be a constant pain point.
 It is fine using a short message, unintelligible garble or mashing the keyboard in a git message until you have the unfortunate task of reviewing past commits and trying to figure out what has happened.
 Git notes is here to solve this, it has been around for a while but often gets overlooked.
 Add extra metadata about the commit without affecting the commit message itself.

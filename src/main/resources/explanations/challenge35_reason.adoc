@@ -8,7 +8,7 @@ KDFs should be used to generate keys based on dynamic input, such as human-suppl
 *Why you should be careful with Git notes?*
 
 When developers use Git notes they can also expose secrets if developers inadvertently include sensitive information, such as passwords or API keys, in the notes.
-Unlike regular commits, notes are not easily visible in code reviews, so they can go unnoticed for a long time. 
+Unlike regular commits, notes are not easily visible in code reviews, so they can go unnoticed for a long time.
 
 Although manually going through Git notes to look for secrets would be cumbersome, there are many tools attackers could use to search through Git repo's to look for these leaked secrets.
 >>>>>>> cefa8809 ( Feature(#614): Added test files)
