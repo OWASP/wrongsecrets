@@ -1,0 +1,6 @@
+This challenge can be solved by replaying the Key derivation function with the given inputs.
+
+1. Run the function online
+- Locate the parameters used for the key derivation function in the `generateKey` function in Challenge33.java
+- Copy the used parameters to an online https://www.dcode.fr/pbkdf2-hash[generator] and execute it
+- The website will return the value of the key.
