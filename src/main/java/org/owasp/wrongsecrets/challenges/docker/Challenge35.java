@@ -10,9 +10,7 @@ import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-/**
- * This is a challenge based on leaking secrets with the misuse of Git notes
- */
+/** This is a challenge based on leaking secrets with the misuse of Git notes */
 @Component
 @Order(34)
 public class Challenge34 extends Challenge {
