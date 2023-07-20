@@ -26,7 +26,7 @@ public class StartupListener implements ApplicationListener<ApplicationEvent> {
   }
 
   @UtilityClass
-  private class StartupHelper {
+  private static class StartupHelper {
 
     private boolean passedCorrectEnv(String k8sEnv) {
       try {
