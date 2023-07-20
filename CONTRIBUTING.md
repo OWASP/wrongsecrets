@@ -121,8 +121,8 @@ Please be sure to take a careful look at our [Code of Conduct](https://github.co
 2. **Node.Js**
    [_Node.Js_](https://nodejs.org/en/) is an open-source library and a cross-platform JavaScript **runtime environment** specifically for running web applications outside one's browser.
 
-3. **JDK-19**
-   [_JDK_](https://www.oracle.com/java/technologies/javase/jdk19-archive-downloads.html) is a tool used in development and testing programs written in the Java programming language.
+3. **JDK-17**
+   [_JDK_](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) is a tool used in development and testing programs written in the Java programming language.
 
 4. **IntelliJ IDEA**
    [_IntelliJ IDEA_](https://www.jetbrains.com/idea/download/#section=windows) is an integrated development environment basically an **IDE** written in Java for developing software written in Java, Kotlin, Groovy etc.
