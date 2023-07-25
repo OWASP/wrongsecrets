@@ -46,7 +46,7 @@
     <KeePassJava2.version>2.1.4</KeePassJava2.version>
     <asciidoctor.maven.plugin.version>2.2.4</asciidoctor.maven.plugin.version>
     <asciidoctorj.version>2.5.10</asciidoctorj.version>
-    <aws.sdk.version>2.20.97</aws.sdk.version>
+    <aws.sdk.version>2.20.103</aws.sdk.version>
     <bootstrap.version>5.3.0</bootstrap.version>
     <com.azure.spring.version>5.3.0</com.azure.spring.version>
     <cyclonedx.core.version>7.3.2</cyclonedx.core.version>
@@ -54,13 +54,13 @@
     <dependency-check-maven.version>8.2.1</dependency-check-maven.version>
     <gcp.sdk.version>4.5.1</gcp.sdk.version>
     <github.button.version>2.14.1</github.button.version>
-    <java.version>19</java.version>
+    <java.version>17</java.version>
     <jquery.version>3.6.4</jquery.version>
     <jruby.version>9.4.3.0</jruby.version>
     <lombok.version>1.18.28</lombok.version>
-    <maven.compiler.target>19</maven.compiler.target>
+    <maven.compiler.target>17</maven.compiler.target>
     <spring.cloud-version>2022.0.3</spring.cloud-version>
-    <spring.security.version>6.0.2</spring.security.version>
+    <spring.security.version>6.1.2</spring.security.version>
     <system-stubs-jupiter.version>2.0.2</system-stubs-jupiter.version>
     <thymeleaf-extras-springsecurity6.version>3.1.1.RELEASE</thymeleaf-extras-springsecurity6.version>
     <thymeleaf.layout.version>3.2.1</thymeleaf.layout.version>
@@ -506,8 +506,8 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
-          <source>19</source>
-          <target>19</target>
+          <source>17</source>
+          <target>17</target>
         </configuration>
       </plugin>
       <plugin>
