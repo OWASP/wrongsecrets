@@ -52,7 +52,7 @@
     <cyclonedx.core.version>7.3.2</cyclonedx.core.version>
     <datatables.version>1.13.5</datatables.version>
     <dependency-check-maven.version>8.2.1</dependency-check-maven.version>
-    <gcp.sdk.version>4.5.1</gcp.sdk.version>
+    <gcp.sdk.version>4.7.0</gcp.sdk.version>
     <github.button.version>2.14.1</github.button.version>
     <java.version>17</java.version>
     <jquery.version>3.6.4</jquery.version>
