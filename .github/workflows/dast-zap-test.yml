@@ -24,7 +24,7 @@ jobs:
       - name: Start wrongsecrets
         run: nohup ./mvnw spring-boot:run -Dspring-boot.run.profiles=without-vault &
       - name: ZAP Scan
-        uses: zaproxy/action-baseline@v0.8.2
+        uses: zaproxy/action-baseline@v0.9.0
         with:
           allow_issue_writing: false
           docker_name: "owasp/zap2docker-stable"
