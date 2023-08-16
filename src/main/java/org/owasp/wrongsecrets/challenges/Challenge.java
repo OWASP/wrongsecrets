@@ -113,4 +113,13 @@ public abstract class Challenge {
   public String getReason() {
     return this.getClass().getSimpleName().toLowerCase() + "_reason";
   }
+
+  /**
+   * Returns the number of the challenge extracted from the classname
+   *
+   * @return int of the challenge
+   */
+  public String getNumber() {
+    return this.getClass().getSimpleName().replaceAll("[^0-9]", "");
+  }
 }

@@ -87,26 +87,8 @@ class ChallengesControllerCTFModeWithPresetK8sAndVaultValuesTest {
   void shouldEnableK8sAndVaultExercises() throws Exception {
     mvc.perform(get("/"))
         .andExpect(status().isOk())
-        .andExpect(
-            content()
-                .string(
-                    not(
-                        containsString(
-                            "class=\"disabled\" data-cy=\"challenge 5-link\">Challenge"
-                                + " 5</a></td>"))))
-        .andExpect(
-            content()
-                .string(
-                    not(
-                        containsString(
-                            "class=\"disabled\" data-cy=\"challenge 6-link\">Challenge"
-                                + " 6</a></td>"))))
-        .andExpect(
-            content()
-                .string(
-                    not(
-                        containsString(
-                            "class=\"disabled\" data-cy=\"challenge 7-link\">Challenge"
-                                + " 7</a></td>"))));
+        .andExpect(content().string(not(containsString("challenge 5_disabled-link"))))
+        .andExpect(content().string(not(containsString("challenge 6_disabled-link>"))))
+        .andExpect(content().string(not(containsString("challenge 7_disabled-link"))));
   }
 }

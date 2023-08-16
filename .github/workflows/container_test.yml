@@ -19,7 +19,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: Setup Maven Action
-        uses: "s4u/setup-maven-action@v1.7.0"
+        uses: "s4u/setup-maven-action@v1.8.0"
         with:
           java-version: 19
           maven-version: 3.8.5

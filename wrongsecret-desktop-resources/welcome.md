@@ -36,9 +36,15 @@ on Aws that would be:
 
 ```shell
 export KUBERNETES_SERVICE_HOST=10.100.0.1
-export KUBERNETES_SERVICE_PORT=443
-export KUBERNETES_SERVICE_PORT_HTTPS=443
+export KUBERNETES_SERVICE_PORT=8443
+export KUBERNETES_SERVICE_PORT_HTTPS=8443
 ```
+Where the SERVICE_HOST IP might be different. You can find the right IP with the command below at the host serving the minikube:
+
+```shell
+kubectl -n kube-system get pod -l component=kube-apiserver -o=jsonpath="{.items[0].metadata.annotations.kubeadm\.kubernetes\.io/kube-apiserver\.advertise-address\.endpoint}"
+```
+
 
 ### When you are in a CTF
 

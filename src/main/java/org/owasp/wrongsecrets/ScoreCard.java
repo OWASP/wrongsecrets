@@ -1,5 +1,6 @@
 package org.owasp.wrongsecrets;
 
+import java.util.List;
 import org.owasp.wrongsecrets.challenges.Challenge;
 
 /** Interface of a scorecard where a player's progress is stored into. */
@@ -33,6 +34,13 @@ public interface ScoreCard {
    * @return int with points
    */
   int getTotalReceivedPoints();
+
+  /**
+   * Gives all completed challenges
+   *
+   * @return Set of ints
+   */
+  List<String> getCompletedChallenges();
 
   /**
    * Resets the status of a given challenge its entry in the score-card.
