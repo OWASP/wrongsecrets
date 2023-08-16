@@ -11,9 +11,7 @@ import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-/**
- * This is a challenge based on the idea of leaking a secret trough a vulnerability report.
- */
+/** This is a challenge based on the idea of leaking a secret trough a vulnerability report. */
 @Slf4j
 @Component
 @Order(36)
@@ -61,9 +59,7 @@ public class Challenge36 extends Challenge {
   }
 
   private String getKey() {
-      //google api key
+    // google api key
     return "AIzaSyBSpHvt8l1f9qlppJqQW280vGacXgwNnrk";
   }
-
-
 }

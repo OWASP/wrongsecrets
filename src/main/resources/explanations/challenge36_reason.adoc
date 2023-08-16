@@ -1,2 +1,1 @@
 *Why we need to be careful with vulnerability reports*
-
