@@ -15,9 +15,9 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @Order(36)
-public class Challenge36 extends Challenge {
+public class Challenge35 extends Challenge {
 
-  public Challenge36(ScoreCard scoreCard) {
+  public Challenge35(ScoreCard scoreCard) {
     super(scoreCard);
   }
 
@@ -42,7 +42,7 @@ public class Challenge36 extends Challenge {
     return Difficulty.EASY;
   }
 
-  /** {@inheritDoc} This is a crypto Documentation type of challenge */
+  /** {@inheritDoc} This is a Documentation type of challenge */
   @Override
   public String getTech() {
     return ChallengeTechnology.Tech.DOCUMENTATION.id;

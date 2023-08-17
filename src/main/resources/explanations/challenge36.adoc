@@ -1,3 +1,0 @@
-=== Reporting on Vulnerabilities
-
-A security researcher found a Google API key.
