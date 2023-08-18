@@ -79,6 +79,10 @@ public class Challenge35 extends Challenge {
     }
   }
 
+  @edu.umd.cs.findbugs.annotations.SuppressFBWarnings(
+      value = "CIPHER_INTEGRITY",
+      justification =
+          "The scheme is bad without hmac, but we wanted to make it a bit more fun for you")
   private String decrypt(String ciphertext)
       throws InvalidAlgorithmParameterException,
           InvalidKeyException,
@@ -93,6 +97,6 @@ public class Challenge35 extends Challenge {
 
     Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
     cipher.init(Cipher.DECRYPT_MODE, skeySpec, iv);
-    return new String(cipher.doFinal(Base64.decode(ciphertext)));
+    return new String(cipher.doFinal(Base64.decode(ciphertext.getBytes(StandardCharsets.UTF_8))));
   }
 }
