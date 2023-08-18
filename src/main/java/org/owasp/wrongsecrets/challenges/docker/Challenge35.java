@@ -97,6 +97,8 @@ public class Challenge35 extends Challenge {
 
     Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
     cipher.init(Cipher.DECRYPT_MODE, skeySpec, iv);
-    return new String(cipher.doFinal(Base64.decode(ciphertext.getBytes(StandardCharsets.UTF_8))), StandardCharsets.UTF_8);
+    return new String(
+        cipher.doFinal(Base64.decode(ciphertext.getBytes(StandardCharsets.UTF_8))),
+        StandardCharsets.UTF_8);
   }
 }
