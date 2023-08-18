@@ -1,7 +1,18 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
+import java.nio.charset.StandardCharsets;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.codec.binary.Base64;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
@@ -59,7 +70,29 @@ public class Challenge35 extends Challenge {
   }
 
   private String getKey() {
-    // google api key
-    return "AIzaSyBSpHvt8l1f9qlppJqQW280vGacXgwNnrk";
+    String ciphertext = "zRR77ETjg5GsXv3az1TZU73xiFWYHbVceJBvBbjChxLyMjHkF6kFdwIXIduVBHAT";
+    try {
+      return decrypt(ciphertext);
+    } catch (Exception e) {
+      log.warn("there was an exception with decrypting content in challenge35", e);
+      return "error_decryption";
+    }
+  }
+
+  private String decrypt(String ciphertext)
+      throws InvalidAlgorithmParameterException,
+          InvalidKeyException,
+          NoSuchPaddingException,
+          NoSuchAlgorithmException,
+          IllegalBlockSizeException,
+          BadPaddingException {
+    IvParameterSpec iv = new IvParameterSpec("1234567890123456".getBytes(StandardCharsets.UTF_8));
+    SecretKeySpec skeySpec =
+        new SecretKeySpec(
+            "12345678901234561234567890123456".getBytes(StandardCharsets.UTF_8), "AES");
+
+    Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
+    cipher.init(Cipher.DECRYPT_MODE, skeySpec, iv);
+    return new String(cipher.doFinal(Base64.decodeBase64(ciphertext)));
   }
 }
