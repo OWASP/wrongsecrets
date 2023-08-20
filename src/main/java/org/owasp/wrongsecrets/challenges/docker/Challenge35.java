@@ -25,7 +25,7 @@ import org.springframework.stereotype.Component;
 /** This is a challenge based on the idea of leaking a secret trough a vulnerability report. */
 @Slf4j
 @Component
-@Order(36)
+@Order(35)
 public class Challenge35 extends Challenge {
 
   public Challenge35(ScoreCard scoreCard) {
