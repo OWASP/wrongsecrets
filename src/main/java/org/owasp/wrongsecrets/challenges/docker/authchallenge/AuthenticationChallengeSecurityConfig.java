@@ -11,10 +11,10 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class AuthenticationChallengeSecurityConfig {
 
-    @Bean
-    @Order(2)
-    public SecurityFilterChain configureBasicAuthForChallenge(HttpSecurity http) throws Exception {
-        http.securityMatcher();
-        return http.build();
-    }
+  @Bean
+  @Order(2)
+  public SecurityFilterChain configureBasicAuthForChallenge(HttpSecurity http) throws Exception {
+    http.securityMatcher();
+    return http.build();
+  }
 }
