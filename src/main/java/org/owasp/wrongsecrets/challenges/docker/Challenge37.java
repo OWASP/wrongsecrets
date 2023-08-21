@@ -12,7 +12,10 @@ import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-/** This is a challenge based on the idea of leaking a secret for an authenticated endpoint through a ZAP configuration file. */
+/**
+ * This is a challenge based on the idea of leaking a secret for an authenticated endpoint through a
+ * ZAP configuration file.
+ */
 @Slf4j
 @Component
 @Order(37)

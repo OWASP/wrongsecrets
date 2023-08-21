@@ -20,39 +20,40 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 @EnableWebSecurity
 public class AuthenticationChallengeSecurityConfig {
 
-    @Autowired
-    private MyBasicAuthenticationEntryPoint authenticationEntryPoint;
+  @Autowired private MyBasicAuthenticationEntryPoint authenticationEntryPoint;
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-            .inMemoryAuthentication()
-            .withUser("user1")
-            .password(passwordEncoder().encode("user1Pass"))
-            .authorities("ROLE_USER");
-    }
+  @Autowired
+  public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+    auth.inMemoryAuthentication()
+        .withUser("user1")
+        .password(passwordEncoder().encode("user1Pass"))
+        .authorities("ROLE_USER");
+  }
+
   @Bean
   @Order(3)
   public SecurityFilterChain configureBasicAuthForChallenge(HttpSecurity http) throws Exception {
-      http.authorizeRequests()
-          .requestMatchers("/authenticated")
-          .permitAll()
-          .anyRequest()
-          .authenticated()
-          .and()
-          .httpBasic(new Customizer<HttpBasicConfigurer<HttpSecurity>>() {
+    http.authorizeRequests()
+        .requestMatchers("/authenticated")
+        .permitAll()
+        .anyRequest()
+        .authenticated()
+        .and()
+        .httpBasic(
+            new Customizer<HttpBasicConfigurer<HttpSecurity>>() {
               @Override
-              public void customize(HttpBasicConfigurer<HttpSecurity> httpSecurityHttpBasicConfigurer) {
-                  httpSecurityHttpBasicConfigurer.authenticationEntryPoint(authenticationEntryPoint);
+              public void customize(
+                  HttpBasicConfigurer<HttpSecurity> httpSecurityHttpBasicConfigurer) {
+                httpSecurityHttpBasicConfigurer.authenticationEntryPoint(authenticationEntryPoint);
               }
-          });
-      http.addFilterAfter(new CustomFilter(), BasicAuthenticationFilter.class);
-      return http.build();
+            });
+    http.addFilterAfter(new CustomFilter(), BasicAuthenticationFilter.class);
+    return http.build();
   }
 
-    @Bean
-    @Order(4)
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+  @Bean
+  @Order(4)
+  public PasswordEncoder passwordEncoder() {
+    return new BCryptPasswordEncoder();
+  }
 }
