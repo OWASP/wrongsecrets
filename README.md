@@ -23,8 +23,6 @@ Want to play the other challenges? Read the instructions on how to set them up b
 
 ![screenshotOfChallenge1](/images/screenshot.png)
 
-<a href="https://github.com/vshymanskyy/StandWithUkraine/blob/main/README.md"><img src="https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/banner2-no-action.svg" /></a>
-
 ## Table of contents
 
 -   [Support](#support)
