@@ -1,0 +1,6 @@
+This challenge can be solved by retrieving the strings in
+
+1. Follow the following steps:
+- Extract all the strings of the executable file
+- Find the key and the encrypted string among the extracted strings (128 bits length both)
+- Decrypt the  encrypted string using  128 bits AES algorithm
