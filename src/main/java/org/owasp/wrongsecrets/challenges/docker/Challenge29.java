@@ -2,6 +2,8 @@ package org.owasp.wrongsecrets.challenges.docker;
 
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -19,6 +21,7 @@ import org.owasp.wrongsecrets.challenges.Difficulty;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ResourceUtils;
 
 /** This challenge is about finding a secret in a Github issue (screenshot). */
 @Component
@@ -72,14 +75,25 @@ public class Challenge29 extends Challenge {
     return false;
   }
 
-  private String decryptActualAnswer() {
-    try {
+  private String getKey() throws IOException {
       String privateKeyFilePath = "src/test/resources/RSAprivatekey.pem";
+      byte[] content ;
+      try{
+          content= Files.readAllBytes(Paths.get(privateKeyFilePath));
+      } catch (IOException e) {
+          log.info("Could not get the file from {}", privateKeyFilePath);
+          content = Files.readAllBytes(ResourceUtils.getFile("classpath:RSAprivatekey.pem").toPath());
+      }
       String privateKeyContent =
-          new String(Files.readAllBytes(Paths.get(privateKeyFilePath)), StandardCharsets.UTF_8);
+          new String(content, StandardCharsets.UTF_8);
       privateKeyContent = privateKeyContent.replace("-----BEGIN PRIVATE KEY-----", "");
       privateKeyContent = privateKeyContent.replace("-----END PRIVATE KEY-----", "");
       privateKeyContent = privateKeyContent.replaceAll("\\s", "");
+      return privateKeyContent;
+  }
+  private String decryptActualAnswer() {
+    try {
+      String privateKeyContent = getKey();
       byte[] privateKeyBytes = java.util.Base64.getDecoder().decode(privateKeyContent);
       PKCS8EncodedKeySpec spec = new PKCS8EncodedKeySpec(privateKeyBytes);
       KeyFactory kf = KeyFactory.getInstance("RSA");
@@ -94,7 +108,7 @@ public class Challenge29 extends Challenge {
       String message = new String(decoded, StandardCharsets.UTF_8);
       return message;
     } catch (Exception e) {
-      log.warn("Exception when decrypting: {}", e.getMessage());
+      log.warn("Exception when decrypting: {}", e);
       return "wrong_answer";
     }
   }
