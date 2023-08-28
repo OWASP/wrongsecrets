@@ -2,7 +2,6 @@ package org.owasp.wrongsecrets.challenges.docker;
 
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -76,21 +75,21 @@ public class Challenge29 extends Challenge {
   }
 
   private String getKey() throws IOException {
-      String privateKeyFilePath = "src/test/resources/RSAprivatekey.pem";
-      byte[] content ;
-      try{
-          content= Files.readAllBytes(Paths.get(privateKeyFilePath));
-      } catch (IOException e) {
-          log.info("Could not get the file from {}", privateKeyFilePath);
-          content = Files.readAllBytes(ResourceUtils.getFile("classpath:RSAprivatekey.pem").toPath());
-      }
-      String privateKeyContent =
-          new String(content, StandardCharsets.UTF_8);
-      privateKeyContent = privateKeyContent.replace("-----BEGIN PRIVATE KEY-----", "");
-      privateKeyContent = privateKeyContent.replace("-----END PRIVATE KEY-----", "");
-      privateKeyContent = privateKeyContent.replaceAll("\\s", "");
-      return privateKeyContent;
+    String privateKeyFilePath = "src/test/resources/RSAprivatekey.pem";
+    byte[] content;
+    try {
+      content = Files.readAllBytes(Paths.get(privateKeyFilePath));
+    } catch (IOException e) {
+      log.info("Could not get the file from {}", privateKeyFilePath);
+      content = Files.readAllBytes(ResourceUtils.getFile("classpath:RSAprivatekey.pem").toPath());
+    }
+    String privateKeyContent = new String(content, StandardCharsets.UTF_8);
+    privateKeyContent = privateKeyContent.replace("-----BEGIN PRIVATE KEY-----", "");
+    privateKeyContent = privateKeyContent.replace("-----END PRIVATE KEY-----", "");
+    privateKeyContent = privateKeyContent.replaceAll("\\s", "");
+    return privateKeyContent;
   }
+
   private String decryptActualAnswer() {
     try {
       String privateKeyContent = getKey();
