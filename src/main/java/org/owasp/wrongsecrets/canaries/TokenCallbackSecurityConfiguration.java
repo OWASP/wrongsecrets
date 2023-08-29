@@ -22,11 +22,10 @@ public class TokenCallbackSecurityConfiguration {
   @Bean
   @Order(1)
   public SecurityFilterChain configureTokenCallbackSecurity(HttpSecurity http) throws Exception {
-    http.securityMatcher(
-            r ->
-                r.getRequestURL().toString().contains("canaries")
-                    || r.getRequestURL().toString().contains("token"))
-        .csrf(csrf -> csrf.disable());
-    return http.build();
+    return http.csrf(
+            csrf ->
+                csrf.ignoringRequestMatchers(
+                    "/canaries/tokencallback", "/canaries/tokencallbackdebug"))
+        .build();
   }
 }
