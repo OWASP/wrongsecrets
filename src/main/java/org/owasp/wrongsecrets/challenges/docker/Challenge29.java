@@ -20,7 +20,6 @@ import org.owasp.wrongsecrets.challenges.Difficulty;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-import org.springframework.util.ResourceUtils;
 
 /** This challenge is about finding a secret in a Github issue (screenshot). */
 @Component
