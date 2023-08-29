@@ -11,7 +11,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class HerokuWebSecurityConfig {
 
   @Bean
-  @Order(1)
+  @Order(2)
   public SecurityFilterChain configureHerokuWebSecurity(HttpSecurity http) throws Exception {
     http.requiresChannel()
         .requestMatchers(
