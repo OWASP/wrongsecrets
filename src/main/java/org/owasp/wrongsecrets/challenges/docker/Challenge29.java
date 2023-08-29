@@ -32,12 +32,6 @@ public class Challenge29 extends Challenge {
     super(scoreCard);
   }
 
-  private static byte[] decode(byte[] encoded, PrivateKey privateKey) throws Exception {
-    Cipher cipher = Cipher.getInstance("RSA/ECB/OAEPWithSHA-256AndMGF1Padding");
-    cipher.init(Cipher.DECRYPT_MODE, privateKey);
-    return cipher.doFinal(encoded);
-  }
-
   @Override
   public boolean canRunInCTFMode() {
     return true;
@@ -74,6 +68,12 @@ public class Challenge29 extends Challenge {
     return false;
   }
 
+  private byte[] decode(byte[] encoded, PrivateKey privateKey) throws Exception {
+    Cipher cipher = Cipher.getInstance("RSA/ECB/OAEPWithSHA-256AndMGF1Padding");
+    cipher.init(Cipher.DECRYPT_MODE, privateKey);
+    return cipher.doFinal(encoded);
+  }
+
   private String getKey() throws IOException {
     String privateKeyFilePath = "src/test/resources/RSAprivatekey.pem";
     byte[] content;
@@ -81,7 +81,13 @@ public class Challenge29 extends Challenge {
       content = Files.readAllBytes(Paths.get(privateKeyFilePath));
     } catch (IOException e) {
       log.info("Could not get the file from {}", privateKeyFilePath);
-      content = Files.readAllBytes(ResourceUtils.getFile("classpath:RSAprivatekey.pem").toPath());
+      privateKeyFilePath = "/var/tmp/helpers/RSAprivatekey.pem";
+      try {
+        content = Files.readAllBytes(Paths.get(privateKeyFilePath));
+      } catch (IOException e2) {
+        log.info("Could not get the file from {}", privateKeyFilePath);
+        throw e2;
+      }
     }
     String privateKeyContent = new String(content, StandardCharsets.UTF_8);
     privateKeyContent = privateKeyContent.replace("-----BEGIN PRIVATE KEY-----", "");
