@@ -13,13 +13,11 @@ public class HerokuWebSecurityConfig {
   @Bean
   @Order(2)
   public SecurityFilterChain configureHerokuWebSecurity(HttpSecurity http) throws Exception {
-    http.requiresChannel()
-        .requestMatchers(
+    http.securityMatcher(
             r ->
                 r.getRequestURL().toString().contains("heroku")
-                    && (r.getHeader("x-forwarded-proto") != null
-                        || r.getHeader("X-Forwarded-Proto") != null))
-        .requiresSecure();
+                    && (r.getHeader("x-forwarded-proto") != null))
+        .requiresChannel((requiresChannel) -> requiresChannel.anyRequest().requiresSecure());
     return http.build();
   }
 }
