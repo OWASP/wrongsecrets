@@ -5,3 +5,5 @@ Imagine you've uploaded code to look for security issues. What if that included 
 
 Try to find it through https://gpa.43z.one/[this prompting game's] first exercise.
 (Built by https://twitter.com/h43z[h43z])
+
+Please be aware that https://gpa.43z.one/[the prompting game] is completely free and open. this means that it might be offline and take a few minutes to run again after your first request. Please do not Fuzz or dynamic test the website (e.g., don't use ZAP or Burp). Make sure that others can play it as well!
