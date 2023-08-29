@@ -8,7 +8,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -17,19 +16,21 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class AuthenticationChallengeSecurityConfig {
 
-    @Bean
-    @Order(0)
-    public SecurityFilterChain configureBasicAuthForChallenge(HttpSecurity http) throws Exception {
-        return http
-            .authorizeRequests().requestMatchers("/authenticated/**").authenticated().and().httpBasic(Customizer.withDefaults()).build();
-    }
+  @Bean
+  @Order(0)
+  public SecurityFilterChain configureBasicAuthForChallenge(HttpSecurity http) throws Exception {
+    return http.authorizeRequests()
+        .requestMatchers("/authenticated/**")
+        .authenticated()
+        .and()
+        .httpBasic(Customizer.withDefaults())
+        .build();
+  }
 
-    @Bean
-    public UserDetailsService userDetailsService() {
-        UserDetails admin = User.builder().username("admin").password("{noop}admin").roles("ADMIN")
-            .build();
-        return new InMemoryUserDetailsManager(admin);
-    }
-
-
+  @Bean
+  public UserDetailsService userDetailsService() {
+    UserDetails admin =
+        User.builder().username("admin").password("{noop}admin").roles("ADMIN").build();
+    return new InMemoryUserDetailsManager(admin);
+  }
 }
