@@ -19,7 +19,7 @@ class Challenge29Test {
   @Test
   void spoilerShouldRevealAnswer() throws Exception {
     var challenge = new Challenge29(scoreCard);
-
+    Assertions.assertThat(challenge.spoiler()).isNotEqualTo("decrypt_error");
     Assertions.assertThat(challenge.spoiler()).isEqualTo(new Spoiler(passcode));
   }
 
