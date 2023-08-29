@@ -11,6 +11,8 @@ import java.security.PrivateKey;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.util.List;
 import javax.crypto.Cipher;
+
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.extern.slf4j.Slf4j;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
@@ -73,6 +75,9 @@ public class Challenge29 extends Challenge {
     return cipher.doFinal(encoded);
   }
 
+  @SuppressFBWarnings(
+      value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
+      justification = "This is embededded in the container")
   private String getKey() throws IOException {
     String privateKeyFilePath = "src/test/resources/RSAprivatekey.pem";
     byte[] content;
@@ -109,10 +114,9 @@ public class Challenge29 extends Challenge {
                   "aUb8RPnocWk17xXj0Xag8AOA8K0S4OD/jdqnIzMi5ItpEwPVLZUghYTGx53CHHb2LWRR+WH+Gx41Cr9522FbQDKbDMRaCd7GIMDApwUrFScevI/+usF0bmrw3tH9RUvCtxRZCDtsl038yNn90llsQM1e9OORMIvpzN1Ut0nDKErDvgv4pkUZXqGcybVKEGrULVWiIt8UYzd6lLNrRiRYrbcKrHNveyBhFExLpI/PsWS2NIcqyV7vXIib/PUBH0UdhSVnd+CJhNnFPBxQdScEDK7pYnhctr0I1Vl10Uk86uYsmMzqDSbt+TpCZeofcnd3tPdBB7z3c9ewVS+/fAVwlQ=="
                       .getBytes(StandardCharsets.UTF_8));
       byte[] decoded = decode(encoded, privateKey);
-      String message = new String(decoded, StandardCharsets.UTF_8);
-      return message;
+      return new String(decoded, StandardCharsets.UTF_8);
     } catch (Exception e) {
-      log.warn("Exception when decrypting: {}", e);
+      log.warn("Exception when decrypting", e);
       return "decrypt_error";
     }
   }
