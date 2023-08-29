@@ -108,7 +108,7 @@ public class Challenge29 extends Challenge {
       return message;
     } catch (Exception e) {
       log.warn("Exception when decrypting: {}", e);
-      return "wrong_answer";
+      return "decrypt_error";
     }
   }
 }
