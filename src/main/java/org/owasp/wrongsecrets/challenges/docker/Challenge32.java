@@ -72,7 +72,7 @@ public class Challenge32 extends Challenge {
     return decrypt(
         decrypt(
             decrypt(
-                    "BE8VK4p3wD7Rba3rA5bduOYG99yMhuyonyHC4JPm15VNHDU0ULORJB1oSBddWEWIA39oFP0osD+YVRX8zBZZeNdif9o1Prar3L1tbCc821PiOA6JOfZFOWscMTy0Plpo9jKsz8RBt4/Sp3xxJsjVaW+ZgBki+MeB7+rgUnK+elI5iu2E")));
+                "BE8VK4p3wD7Rba3rA5bduOYG99yMhuyonyHC4JPm15VNHDU0ULORJB1oSBddWEWIA39oFP0osD+YVRX8zBZZeNdif9o1Prar3L1tbCc821PiOA6JOfZFOWscMTy0Plpo9jKsz8RBt4/Sp3xxJsjVaW+ZgBki+MeB7+rgUnK+elI5iu2E")));
   }
 
   private String decrypt(String cipherTextString) {
