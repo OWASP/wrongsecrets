@@ -28,6 +28,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: douglascamata/setup-docker-macos-action@v1-alpha.9
+        env:
+          HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK: 1
       - name: setup colima
         run: |
           echo "Colima version: ${{ steps.docker.outputs.colima-version }}"
