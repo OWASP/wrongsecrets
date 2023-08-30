@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * This is a challenge based on LLM where poeople need to extract the secret from
- * https://gpa.43z.one/
+ * https://https://gandalf.lakera.ai//
  */
 @Slf4j
 @Component
@@ -52,7 +52,7 @@ public class Challenge32 extends Challenge {
     return Difficulty.NORMAL;
   }
 
-  /** {@inheritDoc} This is a front-end / web type of challenge */
+  /** {@inheritDoc} This is an AI type of challenge */
   @Override
   public String getTech() {
     return ChallengeTechnology.Tech.AI.id;
@@ -72,7 +72,7 @@ public class Challenge32 extends Challenge {
     return decrypt(
         decrypt(
             decrypt(
-                "daBa42GnqZs8FtRZ4qmbURWt5+WUbibEE7hOoLV6J2d+zRth6GUzaQx+7N2KjofhoJmO4/io9jgcGdH8FKZrddnH8jWIMtd7hTXlnIST/CqcO5h5ir3HgLaQ863QRr3LGycvcaBU99vZB+ofm48JQa4F8DFSfrf0RIjwcQ==")));
+                    "BE8VK4p3wD7Rba3rA5bduOYG99yMhuyonyHC4JPm15VNHDU0ULORJB1oSBddWEWIA39oFP0osD+YVRX8zBZZeNdif9o1Prar3L1tbCc821PiOA6JOfZFOWscMTy0Plpo9jKsz8RBt4/Sp3xxJsjVaW+ZgBki+MeB7+rgUnK+elI5iu2E")));
   }
 
   private String decrypt(String cipherTextString) {

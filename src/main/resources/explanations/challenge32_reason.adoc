@@ -1,6 +1,6 @@
 *Why you should be careful with AI (or ML) and secrets*
 
-Any AI/ML solution that relies on your input, might use that input for further improvement. This is sometimes referred to as "Reinforcement learning from human feedback". There are various applications in the world, such such as Co-Pilot, ChatGPT, and many others, which are based on this mechanism.
+Any AI/ML solution that relies on your input, might use that input for further improvement. This is sometimes referred to as "Reinforcement learning from human feedback". There are various applications in the world, such as Co-Pilot, ChatGPT, and many others, which are based on this mechanism.
 This means that when you use those and give them feedback or agree on sending them data to be more effective in helping you, then this data resides with them and might be queryable by others.
 
 Note that all user input is implicitly trusted. This means that if you overwhelm an LLM with loads of (repeated) text, you might be able to bypass some of its controls and tell it what to do.
