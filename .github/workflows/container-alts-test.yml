@@ -27,7 +27,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: douglascamata/setup-docker-macos-action@v1-alpha.5
+      - uses: douglascamata/setup-docker-macos-action@v1-alpha.9
       - name: setup colima
         run: |
           echo "Colima version: ${{ steps.docker.outputs.colima-version }}"
