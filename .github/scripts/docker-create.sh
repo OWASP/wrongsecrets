@@ -281,7 +281,8 @@ generate_test_data() {
     openssl rand -base64 32 | tr -d '\n' > thirdkey.txt
     answer=$(<thirdkey.txt)
     answerRegexSafe="$(printf '%s' "$answer" | $findAndReplace -e 's/[]\/$*.^|[]/\\&/g' | $findAndReplace ':a;N;$!ba;s,\n,\\n,g')"
-    $findAndReplace -i "s/Placeholder Password, find the real one in the history of the container/$answerRegexSafe/g" ../../src/main/resources/.bash_history
+    cp ../../src/main/resources/.bash_history .
+    $findAndReplace -i "s/Placeholder Password, find the real one in the history of the container/$answerRegexSafe/g" .bash_history
 }
 
 build_update_pom() {
@@ -343,6 +344,7 @@ restore_temp_change() {
     git restore ../../js/index.js
     git restore ../../pom.xml
     git restore ../../src/main/resources/.bash_history
+    rm .bash_history
 }
 
 commit_and_tag() {
