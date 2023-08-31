@@ -281,7 +281,6 @@ generate_test_data() {
     openssl rand -base64 32 | tr -d '\n' > thirdkey.txt
     answer=$(<thirdkey.txt)
     answerRegexSafe="$(printf '%s' "$answer" | $findAndReplace -e 's/[]\/$*.^|[]/\\&/g' | $findAndReplace ':a;N;$!ba;s,\n,\\n,g')"
-    echo "$answerRegexSafe" > thirdkey.txt
     cp ../../src/main/resources/.bash_history .
     $findAndReplace -i "s/Placeholder Password, find the real one in the history of the container/$answerRegexSafe/g" .bash_history
 }
