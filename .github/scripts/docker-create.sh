@@ -344,7 +344,7 @@ restore_temp_change() {
     git restore ../../js/index.js
     git restore ../../pom.xml
     git restore ../../src/main/resources/.bash_history
-    rm .bash_history
+    # rm .bash_history
 }
 
 commit_and_tag() {
