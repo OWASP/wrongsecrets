@@ -71,7 +71,7 @@ Copyright (c) 2020-2023 Jeroen Willemsen and WrongSecrets contributors.
 
 ## Basic docker exercises
 
-_Can be used for challenges 1-4, 8, 12-35_
+_Can be used for challenges 1-4, 8, 12-32, 34, 35_
 
 For the basic docker exercises you currently require:
 
