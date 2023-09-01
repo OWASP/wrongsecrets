@@ -71,7 +71,7 @@ Copyright (c) 2020-2023 Jeroen Willemsen and WrongSecrets contributors.
 
 ## Basic docker exercises
 
-_Can be used for challenges 1-4, 8, 12-35_
+_Can be used for challenges 1-4, 8, 12-32, 34, 35_
 
 For the basic docker exercises you currently require:
 
@@ -112,7 +112,8 @@ Now you can try to find the secrets by means of solving the challenge offered at
 -   [localhost:8080/challenge/30](http://localhost:8080/challenge/30)
 -   [localhost:8080/challenge/31](http://localhost:8080/challenge/31)
 -   [localhost:8080/challenge/32](http://localhost:8080/challenge/32)
--   [localhost:8080/challenge/32](http://localhost:8080/challenge/34)
+-   [localhost:8080/challenge/34](http://localhost:8080/challenge/34)
+-   [localhost:8080/challenge/35](http://localhost:8080/challenge/35)
 
 Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look
 better ;-).
@@ -283,6 +284,7 @@ Testers:
 -   [Dave van Stein @davevs](https://github.com/davevs)
 -   [Marcin Nowak @MarcinNowak-codes](https://github.com/MarcinNowak-codes)
 -   [Marc Chang Sing Pang @mchangsp](https://github.com/mchangsp)
+-   [Vineeth Jagadeesh @djvinnie](https://github.com/djvinnie)
 
 Special mentions for helping out:
 
