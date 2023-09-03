@@ -3,14 +3,14 @@ package org.owasp.wrongsecrets.challenges.docker;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
+import org.bouncycastle.util.encoders.Base64;
+import org.bouncycastle.util.encoders.Hex;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
 import org.owasp.wrongsecrets.challenges.Difficulty;
 import org.owasp.wrongsecrets.challenges.Spoiler;
-import org.spongycastle.util.encoders.Base64;
-import org.spongycastle.util.encoders.Hex;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
