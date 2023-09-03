@@ -1,6 +1,7 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
 import org.assertj.core.api.Assertions;
+import org.bouncycastle.util.encoders.Hex;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -8,7 +9,6 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Spoiler;
-import org.spongycastle.util.encoders.Hex;
 
 @ExtendWith(MockitoExtension.class)
 class Challenge28Test {
