@@ -26,7 +26,7 @@ jobs:
       - name: ZAP Scan
         uses: zaproxy/action-baseline@v0.9.0
         env:
-          ZAP_AUTH_HEADER_VALUE: "Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ=="
+          ZAP_AUTH_HEADER_VALUE: "Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ=="
         with:
           allow_issue_writing: false
           docker_name: "owasp/zap2docker-stable"
