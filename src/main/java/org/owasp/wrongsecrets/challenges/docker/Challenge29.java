@@ -2,6 +2,8 @@ package org.owasp.wrongsecrets.challenges.docker;
 
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -28,12 +30,6 @@ public class Challenge29 extends Challenge {
 
   public Challenge29(ScoreCard scoreCard) {
     super(scoreCard);
-  }
-
-  private static byte[] decode(byte[] encoded, PrivateKey privateKey) throws Exception {
-    Cipher cipher = Cipher.getInstance("RSA/ECB/OAEPWithSHA-256AndMGF1Padding");
-    cipher.init(Cipher.DECRYPT_MODE, privateKey);
-    return cipher.doFinal(encoded);
   }
 
   @Override
@@ -72,14 +68,40 @@ public class Challenge29 extends Challenge {
     return false;
   }
 
+  private byte[] decode(byte[] encoded, PrivateKey privateKey) throws Exception {
+    Cipher cipher = Cipher.getInstance("RSA/ECB/OAEPWithSHA-256AndMGF1Padding");
+    cipher.init(Cipher.DECRYPT_MODE, privateKey);
+    return cipher.doFinal(encoded);
+  }
+
+  @SuppressFBWarnings(
+      value = "DMI_HARDCODED_ABSOLUTE_FILENAME",
+      justification = "This is embededded in the container")
+  private String getKey() throws IOException {
+    String privateKeyFilePath = "src/test/resources/RSAprivatekey.pem";
+    byte[] content;
+    try {
+      content = Files.readAllBytes(Paths.get(privateKeyFilePath));
+    } catch (IOException e) {
+      log.info("Could not get the file from {}", privateKeyFilePath);
+      privateKeyFilePath = "/var/tmp/helpers/RSAprivatekey.pem";
+      try {
+        content = Files.readAllBytes(Paths.get(privateKeyFilePath));
+      } catch (IOException e2) {
+        log.info("Could not get the file from {}", privateKeyFilePath);
+        throw e2;
+      }
+    }
+    String privateKeyContent = new String(content, StandardCharsets.UTF_8);
+    privateKeyContent = privateKeyContent.replace("-----BEGIN PRIVATE KEY-----", "");
+    privateKeyContent = privateKeyContent.replace("-----END PRIVATE KEY-----", "");
+    privateKeyContent = privateKeyContent.replaceAll("\\s", "");
+    return privateKeyContent;
+  }
+
   private String decryptActualAnswer() {
     try {
-      String privateKeyFilePath = "src/test/resources/RSAprivatekey.pem";
-      String privateKeyContent =
-          new String(Files.readAllBytes(Paths.get(privateKeyFilePath)), StandardCharsets.UTF_8);
-      privateKeyContent = privateKeyContent.replace("-----BEGIN PRIVATE KEY-----", "");
-      privateKeyContent = privateKeyContent.replace("-----END PRIVATE KEY-----", "");
-      privateKeyContent = privateKeyContent.replaceAll("\\s", "");
+      String privateKeyContent = getKey();
       byte[] privateKeyBytes = java.util.Base64.getDecoder().decode(privateKeyContent);
       PKCS8EncodedKeySpec spec = new PKCS8EncodedKeySpec(privateKeyBytes);
       KeyFactory kf = KeyFactory.getInstance("RSA");
@@ -91,11 +113,10 @@ public class Challenge29 extends Challenge {
                   "aUb8RPnocWk17xXj0Xag8AOA8K0S4OD/jdqnIzMi5ItpEwPVLZUghYTGx53CHHb2LWRR+WH+Gx41Cr9522FbQDKbDMRaCd7GIMDApwUrFScevI/+usF0bmrw3tH9RUvCtxRZCDtsl038yNn90llsQM1e9OORMIvpzN1Ut0nDKErDvgv4pkUZXqGcybVKEGrULVWiIt8UYzd6lLNrRiRYrbcKrHNveyBhFExLpI/PsWS2NIcqyV7vXIib/PUBH0UdhSVnd+CJhNnFPBxQdScEDK7pYnhctr0I1Vl10Uk86uYsmMzqDSbt+TpCZeofcnd3tPdBB7z3c9ewVS+/fAVwlQ=="
                       .getBytes(StandardCharsets.UTF_8));
       byte[] decoded = decode(encoded, privateKey);
-      String message = new String(decoded, StandardCharsets.UTF_8);
-      return message;
+      return new String(decoded, StandardCharsets.UTF_8);
     } catch (Exception e) {
-      log.warn("Exception when decrypting: {}", e.getMessage());
-      return "wrong_answer";
+      log.warn("Exception when decrypting", e);
+      return "decrypt_error";
     }
   }
 }

@@ -99,7 +99,14 @@ public class Challenge14 extends Challenge {
       return database.findEntries("alibaba").get(0).getPassword();
     } catch (Exception | Error e) {
       log.error("Exception or Error with Challenge 14", e);
-      return defaultKeepassValue;
+      try (InputStream inputStream =
+          Files.newInputStream(Paths.get("src/test/resources/alibabacreds.kdbx"))) {
+        database = SimpleDatabase.load(creds, inputStream);
+        return database.findEntries("alibaba").get(0).getPassword();
+      } catch (Exception | Error e2) {
+        log.error("Exception or Error with Challenge 14 second time", e2);
+        return defaultKeepassValue;
+      }
     }
   }
 

@@ -3,5 +3,9 @@
 AI is here to stay. AI can help with loads of things: complicated problem-solving, generating code, or giving advice on security.
 Imagine you've uploaded code to look for security issues. What if that included a password? Rules should limit the LLM model to prevent it from leaking the password. Can this secret be extracted nonetheless?
 
-Try to find it through https://gpa.43z.one/[this prompting game's] first exercise.
-(Built by https://twitter.com/h43z[h43z])
+Try to find it through https://gandalf.lakera.ai/[this prompting game's] first exercise.
+
+
+Please be aware that https://gandalf.lakera.ai/[the prompting game] is completely free and open. this means that it might be offline and take a few minutes to run again after your first request. Please do not Fuzz or dynamic test the website (e.g., don't use ZAP or Burp). Make sure that others can play it as well!
+
+Note, we used to use https://gpa.43z.one/[another prompting game] which was shutdown due to cost, so it might be that LLM/AI is not here to stay for everything ;-).
