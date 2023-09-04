@@ -1,5 +1,6 @@
 package org.owasp.wrongsecrets.challenges.docker.authchallenge;
 
+import org.owasp.wrongsecrets.challenges.docker.Challenge37;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -16,6 +17,12 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class AuthenticationChallengeSecurityConfig {
 
+  private final Challenge37 challenge37;
+
+  public AuthenticationChallengeSecurityConfig(Challenge37 challenge37) {
+    this.challenge37 = challenge37;
+  }
+
   @Bean
   @Order(0)
   public SecurityFilterChain configureBasicAuthForChallenge(HttpSecurity http) throws Exception {
@@ -30,7 +37,11 @@ public class AuthenticationChallengeSecurityConfig {
   @Bean
   public UserDetailsService userDetailsService() {
     UserDetails admin =
-        User.builder().username("admin").password("{noop}admin").roles("ADMIN").build();
+        User.builder()
+            .username("Aladdin")
+            .password("{noop}" + challenge37.getPassword())
+            .roles("ADMIN")
+            .build();
     return new InMemoryUserDetailsManager(admin);
   }
 }
