@@ -1,3 +1,5 @@
 === Giving your security tests access
 
 Given all the daft findings we already have with this project, we decided to implement automated scanning using ZAP. But for that we do need to be able to fuzz the endpoint of this challenge: `authenticated/challenge37` and thus configure basic auth for ZAP. Can you find the actual secret returned at the endpoint?
+
+Tip: we have a Github Action for ZAP which has its basic auth pre-configured.

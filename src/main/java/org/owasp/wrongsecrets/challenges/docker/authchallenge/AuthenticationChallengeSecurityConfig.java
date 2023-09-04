@@ -26,10 +26,9 @@ public class AuthenticationChallengeSecurityConfig {
   @Bean
   @Order(0)
   public SecurityFilterChain configureBasicAuthForChallenge(HttpSecurity http) throws Exception {
-    return http.authorizeRequests()
-        .requestMatchers("/authenticated/**")
-        .authenticated()
-        .and()
+    return http.authorizeHttpRequests(
+            authorizeRequests ->
+                authorizeRequests.requestMatchers("/authenticated/**").authenticated())
         .httpBasic(Customizer.withDefaults())
         .build();
   }
