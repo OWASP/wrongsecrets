@@ -27,6 +27,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
+      # when https://github.com/douglascamata/setup-docker-macos-action/pull/19 is merged and tagged, move to new version:
       - uses: douglascamata/setup-docker-macos-action@ed0328701ed84842bf3a3941410e74f62392ab9c
         env:
           HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK: 1
