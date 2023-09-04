@@ -43,7 +43,7 @@
   <!--        </snapshotRepository>-->
   <!--    </distributionManagement>-->
   <properties>
-    <KeePassJava2.version>2.1.4</KeePassJava2.version>
+    <KeePassJava2.version>2.2.1</KeePassJava2.version>
     <asciidoctor.maven.plugin.version>2.2.4</asciidoctor.maven.plugin.version>
     <asciidoctorj.version>2.5.10</asciidoctorj.version>
     <aws.sdk.version>2.20.139</aws.sdk.version>

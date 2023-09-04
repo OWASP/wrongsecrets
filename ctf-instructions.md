@@ -1,7 +1,7 @@
 # CTF Instructions
 
 So you want to play a CTF with WrongSecrets? This is the place to read up all about it.
-Our CTF setup makes use of the [Juice Shop CTF CLI extension](https://github.com/juice-shop/juice-shop-ctf), which you can read all about at [here](https://pwning.owasp-juice.shop/part1/ctf.html).
+Our CTF setup makes use of the [Juice Shop CTF CLI extension](https://github.com/juice-shop/juice-shop-ctf), which you can read all about at [here](https://pwning.owasp-juice.shop/companion-guide/snapshot/part1/ctf.html).
 
 The difference between Juiceshop and WrongSecrets, is that WrongSecrets is more of a secrets-hunter game.
 This means that your contestants will try to find the CTF key soon after a few challenges.
