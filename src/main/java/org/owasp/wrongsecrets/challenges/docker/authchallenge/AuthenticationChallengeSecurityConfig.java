@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /* Ensures the need for basic auth for the endpoint having the actual Secret */
 
@@ -28,7 +29,11 @@ public class AuthenticationChallengeSecurityConfig {
   public SecurityFilterChain configureBasicAuthForChallenge(HttpSecurity http) throws Exception {
     return http.authorizeHttpRequests(
             authorizeRequests ->
-                authorizeRequests.requestMatchers("/authenticated/**").authenticated())
+                authorizeRequests
+                    .requestMatchers(new AntPathRequestMatcher("/authenticated/**"))
+                    .authenticated()
+                    .anyRequest()
+                    .permitAll())
         .httpBasic(Customizer.withDefaults())
         .build();
   }
