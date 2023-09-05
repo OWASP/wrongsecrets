@@ -24,7 +24,7 @@ jobs:
       - name: Start wrongsecrets
         run: nohup ./mvnw spring-boot:run -Dspring-boot.run.profiles=without-vault &
       - name: ZAP Scan
-        uses: zaproxy/action-full-scan@v0.7.0
+        uses: zaproxy/action-baseline@v0.9.0
         env:
           ZAP_AUTH_HEADER_VALUE: "Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ=="
         with:
@@ -33,3 +33,4 @@ jobs:
           target: "http://localhost:8080"
           rules_file_name: config/zap/rule-config.tsv
           fail_action: true
+          cmd_options: '-z "-configFile config/zap/options.prop"'
