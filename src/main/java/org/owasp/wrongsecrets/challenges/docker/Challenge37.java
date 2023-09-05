@@ -1,8 +1,10 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.UUID;
 import lombok.extern.slf4j.Slf4j;
+import org.bouncycastle.util.encoders.Base64;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
@@ -22,6 +24,7 @@ import org.springframework.stereotype.Component;
 public class Challenge37 extends Challenge {
 
   private String secret;
+  private String password = "WWpOQ2JHSnBRbnBhV0U1b1lsZFZTd289Cg==";
 
   public Challenge37(ScoreCard scoreCard) {
     super(scoreCard);
@@ -62,5 +65,11 @@ public class Challenge37 extends Challenge {
   @Override
   public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
     return List.of(RuntimeEnvironment.Environment.DOCKER);
+  }
+
+  public String getPassword() {
+
+    return new String(Base64.decode(Base64.decode(Base64.decode(password))), StandardCharsets.UTF_8)
+        .replaceAll("\\r|\\n", "");
   }
 }

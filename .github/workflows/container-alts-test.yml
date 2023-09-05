@@ -16,7 +16,7 @@ jobs:
     name: Test with podman
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: run container
         run: |
           podman run -dt -p 8080:8080 docker.io/jeroenwillemsen/wrongsecrets:latest-no-vault && \
@@ -26,8 +26,11 @@ jobs:
     name: Test with Colima
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: douglascamata/setup-docker-macos-action@v1-alpha.6
+      - uses: actions/checkout@v4
+      # when https://github.com/douglascamata/setup-docker-macos-action/pull/19 is merged and tagged, move to new version:
+      - uses: douglascamata/setup-docker-macos-action@v1-alpha.10
+        env:
+          HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK: 1
       - name: setup colima
         run: |
           echo "Colima version: ${{ steps.docker.outputs.colima-version }}"

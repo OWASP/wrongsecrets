@@ -71,7 +71,7 @@ Copyright (c) 2020-2023 Jeroen Willemsen and WrongSecrets contributors.
 
 ## Basic docker exercises
 
-_Can be used for challenges 1-4, 8, 12-35_
+_Can be used for challenges 1-4, 8, 12-32, 34, 35_
 
 For the basic docker exercises you currently require:
 
@@ -112,7 +112,8 @@ Now you can try to find the secrets by means of solving the challenge offered at
 -   [localhost:8080/challenge/30](http://localhost:8080/challenge/30)
 -   [localhost:8080/challenge/31](http://localhost:8080/challenge/31)
 -   [localhost:8080/challenge/32](http://localhost:8080/challenge/32)
--   [localhost:8080/challenge/32](http://localhost:8080/challenge/34)
+-   [localhost:8080/challenge/34](http://localhost:8080/challenge/34)
+-   [localhost:8080/challenge/35](http://localhost:8080/challenge/35)
 
 Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look
 better ;-).
@@ -283,6 +284,7 @@ Testers:
 -   [Dave van Stein @davevs](https://github.com/davevs)
 -   [Marcin Nowak @MarcinNowak-codes](https://github.com/MarcinNowak-codes)
 -   [Marc Chang Sing Pang @mchangsp](https://github.com/mchangsp)
+-   [Vineeth Jagadeesh @djvinnie](https://github.com/djvinnie)
 
 Special mentions for helping out:
 
@@ -411,11 +413,11 @@ You can use the OWASP Dependency-checker by calling `mvn dependency-check:aggreg
 
 ### Get the project started in IntelliJ IDEA
 
-Requirements: make sure you have the following tools installed: [Docker](https://www.docker.com/products/docker-desktop/), [Java19 JDK](https://jdk.java.net/19/), [NodeJS 18](https://nodejs.org/dist/v18.12.1/node-v18.12.1-x86.msi) and [IntelliJ IDEA](https://www.jetbrains.com/idea/download).
+Requirements: make sure you have the following tools installed: [Docker](https://www.docker.com/products/docker-desktop/), [Java17 JDK](https://jdk.java.net/17/), [NodeJS 20](https://nodejs.org/en/download/current) and [IntelliJ IDEA](https://www.jetbrains.com/idea/download).
 
 1. Fork and clone the project as described in the [documentation](https://github.com/OWASP/wrongsecrets/blob/master/CONTRIBUTING.md).
 2. Import the project in IntelliJ (e.g. import as mvn project / local sources)
-3. Go to the project settings and make sure it uses Java19 (And that the JDK can be found)
+3. Go to the project settings and make sure it uses Java17 (And that the JDK can be found)
 4. Go to the IDE settings>Language & Frameworks > Lombok and make sure Lombok processing is enabled
 5. Open the Maven Tab in your IDEA and run "Reload All Maven Projects" to make the system sync and download everything. Next, in that same tab use the "install" option as part of the OWASP WrongSecrets Lifecycle to genereate the asciidoc and such.
 6. Now run the `main` method in `org.owasp.wrongsecrets.WrongSecretsApplication.java`. This should fail with a stack trace.
