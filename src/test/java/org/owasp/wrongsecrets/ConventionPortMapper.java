@@ -1,5 +1,6 @@
 package org.owasp.wrongsecrets;
 
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.security.web.PortMapper;
 
 public class ConventionPortMapper implements PortMapper {

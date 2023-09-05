@@ -13,7 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.ResourceAccessException;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@Import({ConventionPortMapper.class, PortConfiguration.class})
+@Import(ConventionPortMapper.class)
 class HerokuWebSecurityConfigTest {
 
   @LocalServerPort private int port;

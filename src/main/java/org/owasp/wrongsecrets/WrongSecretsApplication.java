@@ -10,10 +10,12 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
 @SpringBootApplication
 @EnableConfigurationProperties(Vaultpassword.class)
 @Slf4j
+@EnableWebSecurity(debug = false)
 public class WrongSecretsApplication {
 
   public static void main(String[] args) {

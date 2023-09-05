@@ -20,7 +20,7 @@ public class TokenCallbackSecurityConfiguration {
           "There is no need for the token & canaries endpoints to have CSRF as it is only used for"
               + " callbacks by canarytokens.org")
   @Bean
-  @Order(1)
+  @Order(2)
   public SecurityFilterChain configureTokenCallbackSecurity(HttpSecurity http) throws Exception {
     return http.csrf(
             csrf ->
