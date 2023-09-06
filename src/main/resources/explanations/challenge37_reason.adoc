@@ -1,1 +1,5 @@
-TODO
+*Why we need to be careful with security credentials in CI/CD*
+
+People who can access the configuration of your security checks in your CI/CD environment, can easily get access to the credentials. These credentials can then be used for anything and not just for security checks.
+
+This is why security should be very careful in managing their own secrets: just because the credential is used by (a) security (tool), does not mean it should be secured less ;-).
