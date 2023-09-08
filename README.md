@@ -260,7 +260,7 @@ Top contributors:
 
 -   [Nanne Baars @nbaars](https://github.com/nbaars)
 -   [Joss Sparkes @remakingeden](https://github.com/remakingeden)
--   [Marcin Nowak @MarcinNowak-codes](https://github.com/MarcinNowak-codes)
+-   [Marcin Nowak @drnow4u](https://github.com/drnow4u)
 -   [Tibor Hercz @tiborhercz](https://github.com/tiborhercz)
 -   [Chris Elbring Jr. @neatzsche](https://github.com/neatzsche)
 -   [Puneeth Y @puneeth072003](https://github.com/puneeth072003)
@@ -282,7 +282,7 @@ Top contributors:
 Testers:
 
 -   [Dave van Stein @davevs](https://github.com/davevs)
--   [Marcin Nowak @MarcinNowak-codes](https://github.com/MarcinNowak-codes)
+-   [Marcin Nowak @MarcinNowak-codes](https://github.com/drnow4u)
 -   [Marc Chang Sing Pang @mchangsp](https://github.com/mchangsp)
 -   [Vineeth Jagadeesh @djvinnie](https://github.com/djvinnie)
 
