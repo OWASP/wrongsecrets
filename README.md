@@ -282,7 +282,7 @@ Top contributors:
 Testers:
 
 -   [Dave van Stein @davevs](https://github.com/davevs)
--   [Marcin Nowak @MarcinNowak-codes](https://github.com/MarcinNowak-codes)
+-   [Marcin Nowak @MarcinNowak-codes](https://github.com/drnow4u)
 -   [Marc Chang Sing Pang @mchangsp](https://github.com/mchangsp)
 -   [Vineeth Jagadeesh @djvinnie](https://github.com/djvinnie)
 
