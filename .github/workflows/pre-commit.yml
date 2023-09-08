@@ -18,19 +18,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout git repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup python
         uses: actions/setup-python@v4
         with:
           python-version: "3.9"
       - uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 20
           cache: "npm"
       - uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
-          java-version: '19'
+          java-version: '17'
       - name: Install npm dependencies
         run: npm install
       - uses: actions/cache@v3

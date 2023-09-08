@@ -21,8 +21,8 @@ jobs:
       - name: Setup Maven Action
         uses: "s4u/setup-maven-action@v1.9.0"
         with:
-          java-version: 19
+          java-version: 17
           maven-version: 3.8.5
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Navigate to test script and run
         run: cd .github/scripts && bash docker-create.sh -t
