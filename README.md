@@ -17,7 +17,7 @@ Welcome to the OWASP WrongSecrets game! The game is packed with real life exampl
 
 Can you solve all the 35 challenges?
 
-Try some of them on [our Heroku demo environment](https://wrongsecrets.herokuapp.com/).
+Try some of them on [our Heroku demo environment](https://wrongsecrets.herokuapp.com/) or on our [Okteto demo environment (might need to awake again)](https://wrongsecrets-commjoen.cloud.okteto.net/).
 
 Want to play the other challenges? Read the instructions on how to set them up below.
 
@@ -120,11 +120,20 @@ better ;-).
 
 ### Running these on Heroku
 
-You can test them out at [https://wrongsecrets.herokuapp.com/](https://wrongsecrets.herokuapp.com/) as well! But please
-understand that we have NO guarantees that this works. Given we run in Heroku free-tier, please do not fuzz and/or try
-to bring it down: you would be spoiling it for others that want to testdrive it.
+You can test them out at [https://wrongsecrets.herokuapp.com/](https://wrongsecrets.herokuapp.com/) as well! The folks at Heroku have given us an awesome open source support package, which allows us to run the app for free there, where it is almost always up. Still, please do not fuzz and/or try to bring it down: you would be spoiling it for others that want to testdrive it.
+
+
+### Running these on Render.io
+*status: experimental*
+
+You can test them out at [https://wrongsecrets.onrender.com/](https://wrongsecrets.onrender.com/). Please understand that we run on a free-tier instance, we cannot give any guarantees. Please do not fuzz and/or try to bring it down: you would be spoiling it for others that want to testdrive it.
+Want to deploy yourself with Render? Click the button below:
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/OWASP/wrongsecrets)
+
 
 ### Running on Fly.io
+*status: experimental*
 
 You can test them out at [https://wrongsecrets.fly.dev](https://wrongsecrets.fly.dev) as well! Please understand that we run on a free-tier instance, we cannot give any guarantees. Please do not fuzz and/or try to bring it down: you would be spoiling it for others that want to testdrive it.
 
