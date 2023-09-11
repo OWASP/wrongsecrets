@@ -2,6 +2,7 @@ services:
   - type: web
     name: wrongsecerts
     runtime: image
+    plan: free
     envVars:
     - key: PORT
       value: 8080
