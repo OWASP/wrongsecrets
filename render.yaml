@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: wrongsecerts
+    runtime: image
+    envVars:
+    - key: PORT
+      value: 8080
+    image:
+      url: docker.io/jeroenwillemsen/wrongsecrets:latest-no-vault
