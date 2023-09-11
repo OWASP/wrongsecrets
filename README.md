@@ -127,7 +127,7 @@ You can test them out at [https://wrongsecrets.herokuapp.com/](https://wrongsecr
 ### Running these on Render.io
 *status: experimental*
 
-You can test them out at [https://wrongsecrets.onrender.com/](https://wrongsecrets.onrender.com/). Please understand that we run on a free-tier instance, we cannot give any guarantees. Please do not fuzz and/or try to bring it down: you would be spoiling it for others that want to testdrive it.
+You can test them out at [https://wrongsecerts.onrender.com/](https://wrongsecerts.onrender.com/). Please understand that we run on a free-tier instance, we cannot give any guarantees. Please do not fuzz and/or try to bring it down: you would be spoiling it for others that want to testdrive it.
 Want to deploy yourself with Render? Click the button below:
 
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/OWASP/wrongsecrets)
