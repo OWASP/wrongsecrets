@@ -30,6 +30,7 @@ Want to play the other challenges? Read the instructions on how to set them up b
 -   [Support](#support)
 -   [Basic docker exercises](#basic-docker-exercises)
     -   [Running these on Heroku](#running-these-on-heroku)
+    -   [Running these on Render.io](#running-these-on-renderio)
     -   [Running on Fly.io](#running-on-flyio)
 -   [Basic K8s exercise](#basic-k8s-exercise)
     -   [Minikube based](#minikube-based)
