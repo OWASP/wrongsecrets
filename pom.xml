@@ -48,7 +48,7 @@
     <asciidoctorj.version>2.5.10</asciidoctorj.version>
     <aws.sdk.version>2.20.139</aws.sdk.version>
     <bootstrap.version>5.3.1</bootstrap.version>
-    <com.azure.spring.version>5.3.0</com.azure.spring.version>
+    <com.azure.spring.version>5.5.0</com.azure.spring.version>
     <cyclonedx.core.version>7.3.2</cyclonedx.core.version>
     <datatables.version>1.13.5</datatables.version>
     <dependency-check-maven.version>8.2.1</dependency-check-maven.version>
@@ -211,7 +211,7 @@
     <dependency>
       <groupId>org.springdoc</groupId>
       <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-      <version>2.1.0</version>
+      <version>2.2.0</version>
     </dependency>
     <dependency>
       <groupId>com.azure.spring</groupId>
