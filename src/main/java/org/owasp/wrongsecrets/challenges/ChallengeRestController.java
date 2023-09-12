@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
  * This is a controller used in challenge 30 to retrieve data that can be put into localstorage by
  * the frontend.
  */
-@Controller
 @RestController
 public class ChallengeRestController {
   private final Challenge30 challenge30;

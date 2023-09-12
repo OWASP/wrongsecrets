@@ -15,7 +15,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 @SpringBootApplication
 @EnableConfigurationProperties(Vaultpassword.class)
 @Slf4j
-@EnableWebSecurity(debug = false)
 public class WrongSecretsApplication {
 
   public static void main(String[] args) {

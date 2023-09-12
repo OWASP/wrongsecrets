@@ -5,12 +5,14 @@ import java.util.List;
 import java.util.UUID;
 import lombok.extern.slf4j.Slf4j;
 import org.bouncycastle.util.encoders.Base64;
+import org.owasp.wrongsecrets.BasicAuthentication;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
 import org.owasp.wrongsecrets.challenges.Difficulty;
 import org.owasp.wrongsecrets.challenges.Spoiler;
+import org.springframework.context.annotation.Bean;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -24,11 +26,16 @@ import org.springframework.stereotype.Component;
 public class Challenge37 extends Challenge {
 
   private String secret;
-  private String password = "WWpOQ2JHSnBRbnBhV0U1b1lsZFZTd289Cg==";
+  private static final String password = "WWpOQ2JHSnBRbnBhV0U1b1lsZFZTd289Cg==";
 
   public Challenge37(ScoreCard scoreCard) {
     super(scoreCard);
     secret = UUID.randomUUID().toString();
+  }
+
+  @Bean
+  public BasicAuthentication challenge37BasicAuth() {
+    return new BasicAuthentication("Aladdin", password, "ADMIN", "authenticated/**");
   }
 
   @Override
