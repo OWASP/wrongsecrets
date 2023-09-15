@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: wrongsecerts
+    name: wrongsecrets
     runtime: image
     plan: free
     envVars:
