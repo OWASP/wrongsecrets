@@ -1,4 +1,5 @@
 # fly.toml app configuration file generated for wrongsecrets on 2023-09-15T21:48:54+02:00
+# this is an example which you can use if you have a paid account at fly.io as you need 512 MB ram.
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
