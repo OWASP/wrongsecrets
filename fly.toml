@@ -1,49 +1,22 @@
-# fly.toml file generated for wrongsecrets on 2022-08-27T22:42:28+02:00
+# fly.toml app configuration file generated for wrongsecrets on 2023-09-15T21:48:54+02:00
+# this is an example which you can use if you have a paid account at fly.io as you need 512 MB ram.
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
 
 app = "wrongsecrets"
-kill_signal = "SIGINT"
-kill_timeout = 5
-processes = []
+primary_region = "ams"
 
 [build]
-  dockerfile = "Dockerfile"
-
-[build.args]
-  argBasedVersion="1.6.10"
-  spring_profile="without-vault"
-  springdoc_api-docs_enabled="false"
-  springdoc_swagger-ui_enabled="false"
+  image = "docker.io/jeroenwillemsen/wrongsecrets:1.6.10-no-vault"
 
 [env]
-  K8S_ENV="Fly(Docker)"
+  K8S_ENV = "Fly(Docker)"
 
-[experimental]
-  allowed_public_ports = []
-  auto_rollback = true
-  CMD = "java -Xms128m -Xmx128m -Xss512k -jar -XX:MaxRAMPercentage=75 -XX:MinRAMPercentage=25 -Dspring.profiles.active=without-vault application.jar"
-
-[[services]]
-  http_checks = []
+[http_service]
   internal_port = 8080
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
   processes = ["app"]
-  protocol = "tcp"
-  script_checks = []
-  [services.concurrency]
-    hard_limit = 25
-    soft_limit = 20
-    type = "connections"
-
-  [[services.ports]]
-    force_https = true
-    handlers = ["http"]
-    port = 80
-
-  [[services.ports]]
-    handlers = ["tls", "http"]
-    port = 443
-
-  [[services.tcp_checks]]
-    grace_period = "1s"
-    interval = "15s"
-    restart_limit = 0
-    timeout = "2s"
