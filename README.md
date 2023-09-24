@@ -423,11 +423,11 @@ You can use the OWASP Dependency-checker by calling `mvn dependency-check:aggreg
 
 ### Get the project started in IntelliJ IDEA
 
-Requirements: make sure you have the following tools installed: [Docker](https://www.docker.com/products/docker-desktop/), [Java17 JDK](https://jdk.java.net/17/), [NodeJS 20](https://nodejs.org/en/download/current) and [IntelliJ IDEA](https://www.jetbrains.com/idea/download).
+Requirements: make sure you have the following tools installed: [Docker](https://www.docker.com/products/docker-desktop/), [Java21 JDK](https://jdk.java.net/21/), [NodeJS 20](https://nodejs.org/en/download/current) and [IntelliJ IDEA](https://www.jetbrains.com/idea/download).
 
 1. Fork and clone the project as described in the [documentation](https://github.com/OWASP/wrongsecrets/blob/master/CONTRIBUTING.md).
 2. Import the project in IntelliJ (e.g. import as mvn project / local sources)
-3. Go to the project settings and make sure it uses Java17 (And that the JDK can be found)
+3. Go to the project settings and make sure it uses Java21 (And that the JDK can be found)
 4. Go to the IDE settings>Language & Frameworks > Lombok and make sure Lombok processing is enabled
 5. Open the Maven Tab in your IDEA and run "Reload All Maven Projects" to make the system sync and download everything. Next, in that same tab use the "install" option as part of the OWASP WrongSecrets Lifecycle to genereate the asciidoc and such.
 6. Now run the `main` method in `org.owasp.wrongsecrets.WrongSecretsApplication.java`. This should fail with a stack trace.
