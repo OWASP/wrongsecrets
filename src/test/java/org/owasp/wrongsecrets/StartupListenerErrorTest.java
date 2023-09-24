@@ -1,7 +1,6 @@
 package org.owasp.wrongsecrets;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static uk.org.webcompere.systemstubs.SystemStubs.catchSystemExit;
 import static uk.org.webcompere.systemstubs.SystemStubs.tapSystemErrAndOut;
 
@@ -33,22 +32,16 @@ public class StartupListenerErrorTest {
             new String[0],
             configurableApplicationContext.getEnvironment());
     var startupListener = new StartupListener();
-    var testsucceeded = false;
     try {
       text.set(
           tapSystemErrAndOut(
               () ->
                   statusCode.set(catchSystemExit(() -> startupListener.onApplicationEvent(ape)))));
       assertThat(statusCode.get()).isEqualTo(1);
-      assertThat(text.get()).contains("K8S_ENV does not contain one of the expected values");
-      testsucceeded = true;
+      assertThat(text.get())
+          .contains("K8S_ENV does not contain one of the expected values: DOCKER,");
     } catch (UnsupportedOperationException e) {
       log.info("We can no longer run thistest this way"); // todo:fix this!
-    } catch (Exception e) {
-      assertTrue(e instanceof FailtoStartupException);
-      assertThat(e.getMessage()).contains("K8S_ENV does not contain one of the expected values");
-      testsucceeded = true;
     }
-    assertTrue(testsucceeded);
   }
 }
