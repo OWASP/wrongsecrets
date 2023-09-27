@@ -1,4 +1,4 @@
-FROM eclipse-temurin:17-jre-focal
+FROM amazoncorretto:21.0.0-al2023-headless
 
 ARG argBasedPassword="default"
 ARG argBasedVersion="0.0.0"
