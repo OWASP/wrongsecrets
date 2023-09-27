@@ -7,7 +7,7 @@ Help() {
     # Display Help
     echo "A versatile script to create a docker image for testing. Call this script with no arguments to simply create a local image that you can use to test your changes. For more complex use see the below help section"
     echo
-    echo "Syntax: docker-create.sh [-h (help)|-t (test)|-p (publish)|-e (herokud)|-f (herokup)|-g (fly)|-o (okteto)|-n (notag) [tag={tag}|message={message}|buildarg={buildarg}|springProfile={springProfile}]"
+    echo "Syntax: docker-create.sh [-h (help)|-t (test)|-p (publish)|-e (herokud)|-f (herokup)|-o (okteto)|-n (notag)| -r (Render)|tag={tag}|message={message}|buildarg={buildarg}|springProfile={springProfile}]"
     echo "options: (All optional)"
     echo "tag=             Write a custom tag that will be added to the container when it is build locally."
     echo "message=         Write a message used for the actual tag-message in git"
@@ -81,18 +81,9 @@ Heroku_publish_prod(){
     exit
 }
 
-Fly_publish(){
-    echo "Publishing to Fly.io (wrongsecrets.fly.dev)"
-    echo "Check if all required binaries are installed"
-    source ../../scripts/check-available-commands.sh
-    checkCommandsAvailable fly
-    break_on_tag
-    echo "validating fly.toml to contain tag "${tag}" (should be part of '$(cat ../../fly.toml | grep argBasedVersion)')"
-    if [[ "$(cat ../../fly.toml | grep argBasedVersion)" != *"${tag}"* ]]; then
-      echo "tag ${tag} in fly.toml not properly set, aborting"
-      exit
-    fi
-    cd ../.. && fly deploy
+render_publish(){
+    echo "this depends on whether env var RENDER_HOOK is set, it curls the hook"
+    curl $RENDER_HOOK
     exit
 }
 
@@ -107,7 +98,7 @@ Fly_publish(){
 # Set option to local if no option provided
 script_mode="local"
 # Parse provided options
-while getopts ":htpefgon*" option; do
+while getopts ":htpergon*" option; do
     case $option in
     h) # display Help
         Help
@@ -125,8 +116,8 @@ while getopts ":htpefgon*" option; do
     f) # Helper
         script_mode="heroku_p"
         ;;
-    g) #Helper
-        script_mode="fly_p"
+    r) #Helper
+        script_mode="render"
         ;;
     o) #okteto
         script_mode="okteto"
@@ -206,8 +197,8 @@ if [[ $script_mode == "heroku_d" ]] ; then
   Heroku_publish_demo
 elif [[ $script_mode == "heroku_p" ]]; then
   Heroku_publish_prod
-elif [[ $script_mode == "fly_p" ]]; then
-  Fly_publish
+elif [[ $script_mode == "render" ]]; then
+  render_publish
 elif [[ $script_mode == "okteto" ]]; then
   Okteto_redeploy
 fi

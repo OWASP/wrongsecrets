@@ -65,12 +65,12 @@ jobs:
       #- run: |
       #   make bootstrap
       #   make release
-      - name: Setup Maven Action
-        uses: "s4u/setup-maven-action@v1.9.0"
+      - name: Set up JDK 21
+        uses: actions/setup-java@v3
         with:
-          java-version: 17
-          maven-version: 3.8.5
+          java-version: "21"
+          distribution: "corretto"
       - name: run mvn clean package
-        run: mvn clean package -Ddependency-check.skip=true -Dmaven.test.skip=true
+        run: ./mvnw clean package -Ddependency-check.skip=true -Dmaven.test.skip=true
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v2

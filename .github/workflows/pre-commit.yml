@@ -29,8 +29,8 @@ jobs:
           cache: "npm"
       - uses: actions/setup-java@v3
         with:
-          distribution: 'temurin'
-          java-version: '17'
+          distribution: 'oracle'
+          java-version: '21'
       - name: Install npm dependencies
         run: npm install
       - uses: actions/cache@v3
@@ -43,7 +43,7 @@ jobs:
         with:
           terraform_version: 1.1.7
       - name: Setup TFLint
-        uses: terraform-linters/setup-tflint@v3
+        uses: terraform-linters/setup-tflint@v4
         with:
           tflint_version: ${{env.TFLINT_VERSION}}
       - name: Setup Terraform docs
