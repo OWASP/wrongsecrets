@@ -22,7 +22,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: "21"
-          distribution: "oracle"
+          distribution: "corretto"
       - uses: actions/checkout@v4
       - name: Navigate to test script and run
         run: cd .github/scripts && bash docker-create.sh -t

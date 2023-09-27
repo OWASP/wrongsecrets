@@ -27,7 +27,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: "21"
-          distribution: "oracle"
+          distribution: "corretto"
       - name: Test with Maven
         run: ./mvnw --no-transfer-progress test
   ui-test:
@@ -44,7 +44,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: "21"
-          distribution: "oracle"
+          distribution: "corretto"
       - name: Test with Cypress
         run: |
           ./mvnw verify -Dexec.id=xcypress-test -DskipTests -Ddependency-check.skip
@@ -63,7 +63,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: "21"
-          distribution: "oracle"
+          distribution: "corretto"
       - name: checkstyle with Maven
         run: ./mvnw --no-transfer-progress checkstyle:check
 
@@ -76,6 +76,6 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: "21"
-          distribution: "oracle"
+          distribution: "corretto"
       - name: spotbugs with Maven
         run: ./mvnw --no-transfer-progress package -DskipTests spotbugs:check
