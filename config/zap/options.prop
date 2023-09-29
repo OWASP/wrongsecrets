@@ -4,4 +4,4 @@ replacer.full_list(0).matchtype=REQ_HEADER
 replacer.full_list(0).matchstr=Authorization
 replacer.full_list(0).regex=false
 replacer.full_list(0).replacement="Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ=="
-replacer.full_list(0).url="*authenticated/challenge37"
+replacer.full_list(0).url="http://localhost:8080/authenticated/challenge37"
