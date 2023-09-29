@@ -34,3 +34,4 @@ jobs:
           target: "http://localhost:8080"
           rules_file_name: config/zap/rule-config.tsv
           fail_action: true
+          cmd_options: '-z "-configFile /zap/wrk/config/zap/options.prop"'
