@@ -13,7 +13,9 @@ import org.owasp.wrongsecrets.challenges.docker.binaryexecution.MuslDetectorImpl
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-/** This is a binary based challenge with encryption involved to make it harder to find the answer */
+/**
+ * This is a binary based challenge with encryption involved to make it harder to find the answer
+ */
 @Slf4j
 @Component
 @Order(36) // make sure this number is the same as your challenge
