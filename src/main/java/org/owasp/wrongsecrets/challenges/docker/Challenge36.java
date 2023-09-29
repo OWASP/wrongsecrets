@@ -52,7 +52,7 @@ public class Challenge36 extends Challenge {
     return List.of(RuntimeEnvironment.Environment.DOCKER);
   }
 
-  /** {@inheritDoc} This is a 5 star challenge*/
+  /** {@inheritDoc} This is a 5 star challenge */
   @Override
   public int difficulty() {
     return Difficulty.MASTER;
