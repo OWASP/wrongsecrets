@@ -1,5 +1,6 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.UUID;
@@ -35,7 +36,13 @@ public class Challenge37 extends Challenge {
 
   @Bean
   public BasicAuthentication challenge37BasicAuth() {
-    return new BasicAuthentication("Aladdin", password, "ADMIN", "authenticated/**");
+    return new BasicAuthentication(
+        "Aladdin",
+        new String(
+            Base64.decode(new String(Base64.decode(password), Charset.defaultCharset())),
+            Charset.defaultCharset()),
+        "ADMIN",
+        "authenticated/**");
   }
 
   @Override
