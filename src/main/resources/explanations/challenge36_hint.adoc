@@ -1,6 +1,33 @@
 This challenge can be solved by retrieving the strings in
 
-1. Follow the following steps:
-- Extract all the strings of the executable file
-- Find the key and the encrypted string among the extracted strings (128 bits length both)
-- Decrypt the  encrypted string using  128 bits AES algorithm
+1. *gdb -q executable* to open GDB and load the executable
+2. *disas main* , to disassemble the *main* function, which is the entry point of the program
+3. *b execute* to set a breakpoint at *execute* function
+4. *set args 1234567812345678* to set the program arguments. You can set a random 16 length string.
+5. *r* to run the program
+6. *disas execute* to disassemble the *execute* function
+7. *b compare* to set a breakpoint at *compare* functionTo get the key:
+- a. *b get_key* to set a breakpoint at *get_key* function
+- b. *disas get_key* to disassemble the *get_key* function
+- c. Search for *movabs xxx, %rax* instruction, and copy the hexadecimal values without 0x.
+- d. Repeat it for *movabs xxx, %rdx* instruction
+Then, we need to check the endianess of the CPU architecture, to decrypt the right cypher. In order to do this, open the Python3 terminal and type:
+- e. *from sys import byteorder*
+- f. *print(byteorder)*
+- g. If the endianess is equals to *little*, https://blockchain-academy.hs-mittweida.de/litte-big-endian-converter/[click here] to convert from little to big endian.
+
+8. Copy each string and concatenate the two strings after the conversion. example:
+- a. *big_endian_a = '69676F74616C6C74'*
+- b. *big_endian_b = '68656B6579737373'*
+- c. *big_endian_result = '69676F74616C6C7468656B6579737373'*, and you got the key to decrypt. Exit the program and open it again to get the secret message.
+
+9. *b get_secret_message* to set a breakpoint at *get_secret_message* function
+- a. *c* to continue the program execution flow
+- b. *disas get_secret_message* to disassemble the *get_secret_message* function
+- c. Search for *movabs xxx, %rax* instruction, and copy the hexadecimal values without 0x .
+- d. Repeat it for *movabs xxx, %rdx* instruction
+- e. Check the endianess of your CPU architecture, using the *7.e*, *7.f* and *7.g* steps. Example: *big_endian_result = 'E49F2F331A9A251974E1BA7F724C3B7F'*
+10. Download the *decrypt.c*, open the terminal and type:
+- *gcc decrypt.c -o decrypt* to compile the code.
+
+11. *./decrypt E49F2F331A9A251974E1BA7F724C3B7F 69676F74616C6C7468656B6579737373* and you have the secret key
