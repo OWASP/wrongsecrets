@@ -1,3 +1,5 @@
 *Why should we be careful with the constants declared in the program?*
 
 Constants are fixed values that are useful for storing values that don't need to change during program execution. During the reverse engineering process, binary exploration is a technique that consists of extracting the maximum amount of information from the binary, in order to understand the logic of the program. However, some crucial information must be encrypted in such a way as to make the crucial information difficult to read.
+
+As you can tell by now: even encryption will just slow an attacker down, but not block him from finding the crucial information. Therefore: consider putting the actual crucial information online instead of only secured by offline encryption.
