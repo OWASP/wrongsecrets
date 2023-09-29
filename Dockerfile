@@ -1,4 +1,4 @@
-FROM eclipse-temurin:17-jre-focal
+FROM amazoncorretto:21.0.0-al2023-headless
 
 ARG argBasedPassword="default"
 ARG argBasedVersion="0.0.0"
@@ -19,7 +19,7 @@ RUN useradd -u 2000 -m wrongsecrets
 
 COPY --chown=wrongsecrets target/wrongsecrets-${argBasedVersion}-SNAPSHOT.jar /application.jar
 COPY --chown=wrongsecrets .github/scripts/ /var/tmp/helpers
-COPY --chown=wrongsecrets src/main/resources/.bash_history /home/wrongsecrets/
+COPY --chown=wrongsecrets .github/scripts/.bash_history /home/wrongsecrets/
 COPY --chown=wrongsecrets src/main/resources/executables/ /home/wrongsecrets/
 COPY --chown=wrongsecrets src/test/resources/alibabacreds.kdbx /var/tmp/helpers
 COPY --chown=wrongsecrets src/test/resources/RSAprivatekey.pem /var/tmp/helpers/

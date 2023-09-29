@@ -22,12 +22,12 @@ jobs:
     runs-on: ubuntu-latest
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - uses: actions/checkout@v3
-      - name: Set up JDK 17
+      - uses: actions/checkout@v4
+      - name: Set up JDK 21
         uses: actions/setup-java@v3
         with:
-          java-version: "17"
-          distribution: "temurin"
+          java-version: "21"
+          distribution: "corretto"
       - name: Test with Maven
         run: ./mvnw --no-transfer-progress test
   ui-test:
@@ -35,16 +35,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: Install node
         uses: actions/setup-node@v3
-      - name: Set up JDK 17
+      - name: Set up JDK 21
         uses: actions/setup-java@v3
         with:
-          java-version: "17"
-          distribution: "temurin"
+          java-version: "21"
+          distribution: "corretto"
       - name: Test with Cypress
         run: |
           ./mvnw verify -Dexec.id=xcypress-test -DskipTests -Ddependency-check.skip
@@ -58,12 +58,12 @@ jobs:
     name: lint javacode
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Set up JDK 17
+      - uses: actions/checkout@v4
+      - name: Set up JDK 21
         uses: actions/setup-java@v3
         with:
-          java-version: "17"
-          distribution: "temurin"
+          java-version: "21"
+          distribution: "corretto"
       - name: checkstyle with Maven
         run: ./mvnw --no-transfer-progress checkstyle:check
 
@@ -71,11 +71,11 @@ jobs:
     name: execute java spotbugs
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Set up JDK 17
+      - uses: actions/checkout@v4
+      - name: Set up JDK 21
         uses: actions/setup-java@v3
         with:
-          java-version: "17"
-          distribution: "temurin"
+          java-version: "21"
+          distribution: "corretto"
       - name: spotbugs with Maven
         run: ./mvnw --no-transfer-progress package -DskipTests spotbugs:check
