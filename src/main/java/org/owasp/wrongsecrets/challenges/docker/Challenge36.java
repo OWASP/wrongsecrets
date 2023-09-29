@@ -29,19 +29,16 @@ public class Challenge36 extends Challenge {
     this.binaryExecutionHelper = new BinaryExecutionHelper(36, new MuslDetectorImpl());
   }
 
-  // is this challenge usable in CTF mode?
   @Override
   public boolean canRunInCTFMode() {
     return true;
   }
 
-  // return the plain text secret here
   @Override
   public Spoiler spoiler() {
     return new Spoiler(binaryExecutionHelper.executeCommand("spoil", executable));
   }
 
-  // here you validate if your answer matches the secret
   @Override
   public boolean answerCorrect(String answer) {
     return binaryExecutionHelper
@@ -49,22 +46,19 @@ public class Challenge36 extends Challenge {
         .equals("This is correct! Congrats!");
   }
 
-  // which runtime can you use to run the challenge on? (You can just use Docker here)
-  /** {@inheritDoc} */
+  /** {@inheritDoc} This is a Docker based challenge */
   @Override
   public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
     return List.of(RuntimeEnvironment.Environment.DOCKER);
   }
 
-  // set the difficulty: 1=low, 5=very hard
-  /** {@inheritDoc} */
+  /** {@inheritDoc} This is a 5 star challenge*/
   @Override
   public int difficulty() {
-    return Difficulty.EXPERT;
+    return Difficulty.MASTER;
   }
 
-  // on which tech is this challenge? See ChallengeTechnology.Tech for categories
-  /** {@inheritDoc} Secrets based. */
+  /** {@inheritDoc} This is a binary based challenge. */
   @Override
   public String getTech() {
     return ChallengeTechnology.Tech.BINARY.id;
