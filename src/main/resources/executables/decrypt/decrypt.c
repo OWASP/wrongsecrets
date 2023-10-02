@@ -21,19 +21,19 @@ int main(int argc, char **argv)
 	{
 		usage(argv[0]);
 	}
-	
+
 	str_to_hex(argv[1]);
 	str_to_hex(argv[2]);
-	
+
 	uint8_t *secret = str_to_hex(argv[1]);
 	uint8_t *key = str_to_hex(argv[2]);
-	
+
 	decrypt(secret,key);
-	
+
 	return EXIT_SUCCESS;
 }
 char lowercase(char c){
-	return isalpha(c) ? tolower(c) : c; 
+	return isalpha(c) ? tolower(c) : c;
 }
 void usage(char *string)
 {
@@ -48,7 +48,7 @@ uint8_t *str_to_hex(char *str)
 	short int count = 0;
 
 	for(int a = 0; str[a]; a += 2)
-	{		
+	{
 		tmp[0] = (uint8_t)lowercase(str[a]);
 		tmp[1] = (uint8_t)lowercase(str[a+1]);
 		tmp[2] = '\0';
@@ -73,11 +73,11 @@ char* hexa_to_str(uint8_t *array)
 void decrypt(uint8_t *secret, uint8_t *key )
 {
 	struct AES_ctx ctx;
-	
+
 	AES_init_ctx(&ctx, key);
-	
+
 	AES_ECB_decrypt(&ctx,secret);
 	AES_ECB_decrypt(&ctx,secret);
-	
+
     puts(hexa_to_str(secret));
 }
