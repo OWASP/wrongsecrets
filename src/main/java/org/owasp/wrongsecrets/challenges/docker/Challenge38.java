@@ -12,10 +12,10 @@ import org.springframework.stereotype.Component;
 
 /** This is a challenge based on leaking secrets with the misuse of Git notes */
 @Component
-@Order(34)
-public class Challenge34 extends Challenge {
+@Order(38)
+public class Challenge38 extends Challenge {
 
-  public Challenge34(ScoreCard scoreCard) {
+  public Challenge38(ScoreCard scoreCard) {
     super(scoreCard);
   }
 
