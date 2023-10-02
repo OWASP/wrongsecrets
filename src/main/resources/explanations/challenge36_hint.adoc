@@ -4,7 +4,7 @@ Please note that we only show it for the windows executable. Every other executa
 To accomplish the task with GDB, open the terminal and type:
 
 1. `gdb -q wrongsecrets-advanced-c-windows.exe` to open GDB and load the executable
-2. `disas main` , to disassemble the `main` function, which is the entry point of the program. 
+2. `disas main` , to disassemble the `main` function, which is the entry point of the program.
 3. `b execute` to set a breakpoint at `execute` function.
 4. `set args 1234567812345678` to set the program arguments. You can set a random 16 length string.
 5. `r` to run the program. This might fail on MacOS, in such case please consult the https://sourceware.org/gdb/wiki/PermissionsDarwin[gdb wiki]
