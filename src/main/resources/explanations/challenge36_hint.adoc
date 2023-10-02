@@ -30,7 +30,7 @@ Then, we need to check the endianess of the CPU architecture, to decrypt the rig
 - d. Repeat it for *movabs xxx, %rdx* instruction
 - e. Check the endianess of your CPU architecture, using the *7.e*, *7.f* and *7.g* steps. As a result: *big_endian_result = 'E49F2F331A9A251974E1BA7F724C3B7F'*
 10. Download the *decrypt.c*, open the terminal and type:
-- *gcc decrypt.c -o decrypt* to compile the code.
+- *gcc decrypt.c -o decrypt* to compile the code, or you may compile de code according to your operating system.
 
 11. *./decrypt E49F2F331A9A251974E1BA7F724C3B7F 69676F74616C6C7468656B6579737373* and you have the secret key
 
@@ -52,6 +52,6 @@ To accomplish the task with Radare2, open the terminal and type:
 7. Search for *movabs %rax,xxxx* instruction, and copy the hexadecimal values without 0x.
 8. Repeat from the steps *3* to *5* to get the values. As a result: *big_endian_result = 'E49F2F331A9A251974E1BA7F724C3B7F'*
 9. Exit the program, download the *decrypt.c*, open the terminal and type:
-- *gcc decrypt.c -o decrypt* to compile the code.
+- *gcc decrypt.c -o decrypt* to compile the code, or you may compile de code according to your operating system.
 
 10. *./decrypt E49F2F331A9A251974E1BA7F724C3B7F 69676F74616C6C7468656B6579737373* and you have the secret key.
