@@ -25,8 +25,8 @@ class Challenge14Test {
   }
 
   @Test
-  void solveChallenge14WithNoFile() {
-    var challenge = new Challenge14(scoreCard, "welcome123", "doesnotwork", "nofile is here");
+  void solveChallenge14WithNoFileOrPass() {
+    var challenge = new Challenge14(scoreCard, "incorrectpass", "doesnotwork", "nofile is here");
     Assertions.assertThat(challenge.answerCorrect("doesnotwork")).isTrue();
     Assertions.assertThat(challenge.spoiler().solution()).isEqualTo("doesnotwork");
   }

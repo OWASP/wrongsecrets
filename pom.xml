@@ -5,13 +5,13 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.1.1</version>
+    <version>3.1.4</version>
     <!-- lookup parent from repository -->
   </parent>
 
   <groupId>org.owasp</groupId>
   <artifactId>wrongsecrets</artifactId>
-  <version>1.6.6-SNAPSHOT</version>
+  <version>1.6.9-SNAPSHOT</version>
 
   <name>OWASP WrongSecrets</name>
   <description>Examples with how to not use secrets</description>
@@ -43,26 +43,26 @@
   <!--        </snapshotRepository>-->
   <!--    </distributionManagement>-->
   <properties>
-    <KeePassJava2.version>2.1.4</KeePassJava2.version>
+    <KeePassJava2.version>2.2.1</KeePassJava2.version>
     <asciidoctor.maven.plugin.version>2.2.4</asciidoctor.maven.plugin.version>
     <asciidoctorj.version>2.5.10</asciidoctorj.version>
-    <aws.sdk.version>2.20.103</aws.sdk.version>
-    <bootstrap.version>5.3.0</bootstrap.version>
-    <com.azure.spring.version>5.3.0</com.azure.spring.version>
+    <aws.sdk.version>2.20.157</aws.sdk.version>
+    <bootstrap.version>5.3.1</bootstrap.version>
+    <com.azure.spring.version>5.5.0</com.azure.spring.version>
     <cyclonedx.core.version>7.3.2</cyclonedx.core.version>
-    <datatables.version>1.13.4</datatables.version>
+    <datatables.version>1.13.5</datatables.version>
     <dependency-check-maven.version>8.2.1</dependency-check-maven.version>
-    <gcp.sdk.version>4.5.1</gcp.sdk.version>
+    <gcp.sdk.version>4.7.2</gcp.sdk.version>
     <github.button.version>2.14.1</github.button.version>
-    <java.version>19</java.version>
-    <jquery.version>3.6.4</jquery.version>
+    <java.version>21</java.version>
+    <jquery.version>3.7.1</jquery.version>
     <jruby.version>9.4.3.0</jruby.version>
-    <lombok.version>1.18.28</lombok.version>
-    <maven.compiler.target>19</maven.compiler.target>
-    <spring.cloud-version>2022.0.3</spring.cloud-version>
-    <spring.security.version>6.0.2</spring.security.version>
+    <lombok.version>1.18.30</lombok.version>
+    <maven.compiler.target>21</maven.compiler.target>
+    <spring.cloud-version>2022.0.4</spring.cloud-version>
+    <spring.security.version>6.1.4</spring.security.version>
     <system-stubs-jupiter.version>2.0.2</system-stubs-jupiter.version>
-    <thymeleaf-extras-springsecurity6.version>3.1.1.RELEASE</thymeleaf-extras-springsecurity6.version>
+    <thymeleaf-extras-springsecurity6.version>3.1.2.RELEASE</thymeleaf-extras-springsecurity6.version>
     <thymeleaf.layout.version>3.2.1</thymeleaf.layout.version>
   </properties>
 
@@ -211,7 +211,7 @@
     <dependency>
       <groupId>org.springdoc</groupId>
       <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-      <version>2.1.0</version>
+      <version>2.2.0</version>
     </dependency>
     <dependency>
       <groupId>com.azure.spring</groupId>
@@ -266,14 +266,14 @@
             <dependency>
               <groupId>com.puppycrawl.tools</groupId>
               <artifactId>checkstyle</artifactId>
-              <version>10.12.1</version>
+              <version>10.12.3</version>
             </dependency>
           </dependencies>
         </plugin>
         <plugin>
           <groupId>com.github.spotbugs</groupId>
           <artifactId>spotbugs-maven-plugin</artifactId>
-          <version>4.7.3.5</version>
+          <version>4.7.3.6</version>
           <configuration>
             <omitVisitors>FindReturnRef</omitVisitors>
             <plugins>
@@ -422,7 +422,7 @@
       <plugin>
         <groupId>com.github.eirslett</groupId>
         <artifactId>frontend-maven-plugin</artifactId>
-        <version>1.13.3</version>
+        <version>1.13.4</version>
         <executions>
           <execution>
             <id>install node and npm</id>
@@ -431,7 +431,7 @@
             </goals>
             <phase>generate-resources</phase>
             <configuration>
-              <nodeVersion>v18.16.0</nodeVersion>
+              <nodeVersion>v20.6.0</nodeVersion>
               <!-- download node from https://nodejs.org/dist/ -->
               <workingDirectory>js</workingDirectory>
             </configuration>
@@ -506,8 +506,8 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
-          <source>19</source>
-          <target>19</target>
+          <source>21</source>
+          <target>21</target>
         </configuration>
       </plugin>
       <plugin>
@@ -527,7 +527,7 @@
       <plugin>
         <groupId>com.diffplug.spotless</groupId>
         <artifactId>spotless-maven-plugin</artifactId>
-        <version>2.37.0</version>
+        <version>2.40.0</version>
         <configuration>
           <formats>
             <format>

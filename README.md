@@ -15,9 +15,9 @@
 
 Welcome to the OWASP WrongSecrets game! The game is packed with real life examples of how to _not_ store secrets in your software. Each of these examples is captured in a challenge, which you need to solve using various tools and techniques. Solving these challenges will help you recognize common mistakes & can help you to reflect on your own secrets management strategy.
 
-Can you solve all the 34 challenges?
+Can you solve all the 37 challenges?
 
-Try some of them on [our Heroku demo environment](https://wrongsecrets.herokuapp.com/).
+Try some of them on [our Heroku demo environment](https://wrongsecrets.herokuapp.com/) or on our [Okteto demo environment (might need to awake again)](https://wrongsecrets-commjoen.cloud.okteto.net/).
 
 Want to play the other challenges? Read the instructions on how to set them up below.
 
@@ -30,7 +30,7 @@ Want to play the other challenges? Read the instructions on how to set them up b
 -   [Support](#support)
 -   [Basic docker exercises](#basic-docker-exercises)
     -   [Running these on Heroku](#running-these-on-heroku)
-    -   [Running on Fly.io](#running-on-flyio)
+    -   [Running these on Render.io](#running-these-on-renderio)
 -   [Basic K8s exercise](#basic-k8s-exercise)
     -   [Minikube based](#minikube-based)
     -   [k8s based](#k8s-based)
@@ -71,7 +71,7 @@ Copyright (c) 2020-2023 Jeroen Willemsen and WrongSecrets contributors.
 
 ## Basic docker exercises
 
-_Can be used for challenges 1-4, 8, 12-34_
+_Can be used for challenges 1-4, 8, 12-32, 34, 35-37_
 
 For the basic docker exercises you currently require:
 
@@ -112,24 +112,31 @@ Now you can try to find the secrets by means of solving the challenge offered at
 -   [localhost:8080/challenge/30](http://localhost:8080/challenge/30)
 -   [localhost:8080/challenge/31](http://localhost:8080/challenge/31)
 -   [localhost:8080/challenge/32](http://localhost:8080/challenge/32)
--   [localhost:8080/challenge/32](http://localhost:8080/challenge/34)
+-   [localhost:8080/challenge/34](http://localhost:8080/challenge/34)
+-   [localhost:8080/challenge/35](http://localhost:8080/challenge/35)
+-   [localhost:8080/challenge/36](http://localhost:8080/challenge/36)
+-   [localhost:8080/challenge/37](http://localhost:8080/challenge/37)
 
 Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look
 better ;-).
 
 ### Running these on Heroku
 
-You can test them out at [https://wrongsecrets.herokuapp.com/](https://wrongsecrets.herokuapp.com/) as well! But please
-understand that we have NO guarantees that this works. Given we run in Heroku free-tier, please do not fuzz and/or try
-to bring it down: you would be spoiling it for others that want to testdrive it.
+You can test them out at [https://wrongsecrets.herokuapp.com/](https://wrongsecrets.herokuapp.com/) as well! The folks at Heroku have given us an awesome open source support package, which allows us to run the app for free there, where it is almost always up. Still, please do not fuzz and/or try to bring it down: you would be spoiling it for others that want to testdrive it.
 
-### Running on Fly.io
 
-You can test them out at [https://wrongsecrets.fly.dev](https://wrongsecrets.fly.dev) as well! Please understand that we run on a free-tier instance, we cannot give any guarantees. Please do not fuzz and/or try to bring it down: you would be spoiling it for others that want to testdrive it.
+### Running these on Render.io
+*status: experimental*
+
+You can test them out at [https://wrongsecrets.onrender.com/](https://wrongsecrets.onrender.com/). Please understand that we run on a free-tier instance, we cannot give any guarantees. Please do not fuzz and/or try to bring it down: you would be spoiling it for others that want to testdrive it.
+Want to deploy yourself with Render? Click the button below:
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/OWASP/wrongsecrets)
+
 
 ## Basic K8s exercise
 
-_Can be used for challenges 1-6, 8, 12-34_
+_Can be used for challenges 1-6, 8, 12-37_
 
 ### Minikube based
 
@@ -186,7 +193,7 @@ Don't want to go over the hassle of setting up K8S yourself? visit [https://wron
 
 ## Vault exercises with minikube
 
-_Can be used for challenges 1-8, 12-34_
+_Can be used for challenges 1-8, 12-37_
 Make sure you have the following installed:
 
 -   minikube with docker (or comment out line 8 and work at your own k8s setup),
@@ -197,14 +204,14 @@ Make sure you have the following installed:
 -   vault [Install from here](https://www.vaultproject.io/downloads),
 -   grep, Cat, and Sed
 
-Run `./k8s-vault-minkube-start.sh`, when the script is done, then the challenges will wait for you at <http://localhost:8080> . This will allow you to run challenges 1-8, 12-33.
+Run `./k8s-vault-minkube-start.sh`, when the script is done, then the challenges will wait for you at <http://localhost:8080> . This will allow you to run challenges 1-8, 12-35.
 
 When you stopped the `k8s-vault-minikube-start.sh` script and want to resume the port forward run: `k8s-vault-minikube-resume.sh`.
 This is because if you run the start script again it will replace the secret in the vault and not update the secret-challenge application with the new secret.
 
 ## Cloud Challenges
 
-_Can be used for challenges 1-34_
+_Can be used for challenges 1-37_
 
 **READ THIS**: Given that the exercises below contain IAM privilege escalation exercises,
 never run this on an account which is related to your production environment or can influence your account-over-arching
@@ -259,8 +266,9 @@ Top contributors:
 
 -   [Nanne Baars @nbaars](https://github.com/nbaars)
 -   [Joss Sparkes @remakingeden](https://github.com/remakingeden)
--   [Marcin Nowak @MarcinNowak-codes](https://github.com/MarcinNowak-codes)
+-   [Marcin Nowak @drnow4u](https://github.com/drnow4u)
 -   [Tibor Hercz @tiborhercz](https://github.com/tiborhercz)
+-   [Rodolfo Cabral Neves @roddas](https://github.com/roddas)
 -   [Chris Elbring Jr. @neatzsche](https://github.com/neatzsche)
 -   [Puneeth Y @puneeth072003](https://github.com/puneeth072003)
 -   [Mike Woudenberg @mikewoudenberg](https://github.com/mikewoudenberg)
@@ -281,8 +289,9 @@ Top contributors:
 Testers:
 
 -   [Dave van Stein @davevs](https://github.com/davevs)
--   [Marcin Nowak @MarcinNowak-codes](https://github.com/MarcinNowak-codes)
+-   [Marcin Nowak @MarcinNowak-codes](https://github.com/drnow4u)
 -   [Marc Chang Sing Pang @mchangsp](https://github.com/mchangsp)
+-   [Vineeth Jagadeesh @djvinnie](https://github.com/djvinnie)
 
 Special mentions for helping out:
 
@@ -411,11 +420,11 @@ You can use the OWASP Dependency-checker by calling `mvn dependency-check:aggreg
 
 ### Get the project started in IntelliJ IDEA
 
-Requirements: make sure you have the following tools installed: [Docker](https://www.docker.com/products/docker-desktop/), [Java19 JDK](https://jdk.java.net/19/), [NodeJS 18](https://nodejs.org/dist/v18.12.1/node-v18.12.1-x86.msi) and [IntelliJ IDEA](https://www.jetbrains.com/idea/download).
+Requirements: make sure you have the following tools installed: [Docker](https://www.docker.com/products/docker-desktop/), [Java21 JDK](https://jdk.java.net/21/), [NodeJS 20](https://nodejs.org/en/download/current) and [IntelliJ IDEA](https://www.jetbrains.com/idea/download).
 
 1. Fork and clone the project as described in the [documentation](https://github.com/OWASP/wrongsecrets/blob/master/CONTRIBUTING.md).
 2. Import the project in IntelliJ (e.g. import as mvn project / local sources)
-3. Go to the project settings and make sure it uses Java19 (And that the JDK can be found)
+3. Go to the project settings and make sure it uses Java21 (And that the JDK can be found)
 4. Go to the IDE settings>Language & Frameworks > Lombok and make sure Lombok processing is enabled
 5. Open the Maven Tab in your IDEA and run "Reload All Maven Projects" to make the system sync and download everything. Next, in that same tab use the "install" option as part of the OWASP WrongSecrets Lifecycle to genereate the asciidoc and such.
 6. Now run the `main` method in `org.owasp.wrongsecrets.WrongSecretsApplication.java`. This should fail with a stack trace.

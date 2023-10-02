@@ -4,14 +4,14 @@
     "test:ci": "cypress run --browser chrome"
   },
   "devDependencies": {
-    "@commitlint/config-conventional": "^17.6.6",
-    "cypress": "^12.17.1",
-    "eslint": "^8.44.0",
+    "@commitlint/config-conventional": "^17.7.0",
+    "cypress": "^13.3.0",
+    "eslint": "^8.50.0",
     "eslint-config-standard": "^17.1.0",
-    "eslint-plugin-cypress": "^2.13.3",
-    "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-jest": "^27.2.3",
-    "eslint-plugin-n": "^16.0.1",
+    "eslint-plugin-cypress": "^2.15.1",
+    "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-jest": "^27.4.2",
+    "eslint-plugin-n": "^16.1.0",
     "eslint-plugin-promise": "^6.1.1"
   },
   "dependencies": {

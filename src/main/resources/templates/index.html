@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <title>OWASP WrongSecrets</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link th:rel="stylesheet" th:href="@{/webjars/datatables/1.13.4/css/dataTables.bootstrap5.min.css} " />
-    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css} " />
+    <link th:rel="stylesheet" th:href="@{/webjars/datatables/1.13.5/css/dataTables.bootstrap5.min.css} " />
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.1/css/bootstrap.min.css} " />
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/dark.css}" />
 
@@ -18,11 +18,11 @@
         <th:block layout:fragment="content"></th:block>
     </div>
 
-    <script th:src="@{/webjars/bootstrap/5.3.0/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/5.3.1/js/bootstrap.bundle.min.js}"></script>
     <script th:src="@{/webjars/github-buttons/2.14.1/dist/buttons.min.js}"></script>
-    <script th:src="@{/webjars/jquery/3.6.4/jquery.min.js}"></script>
-    <script th:src="@{/webjars/datatables/1.13.4/js/jquery.dataTables.min.js}"></script>
-    <script th:src="@{/webjars/datatables/1.13.4/js/dataTables.bootstrap5.min.js}"></script>
+    <script th:src="@{/webjars/jquery/3.7.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/datatables/1.13.5/js/jquery.dataTables.min.js}"></script>
+    <script th:src="@{/webjars/datatables/1.13.5/js/dataTables.bootstrap5.min.js}"></script>
     <script th:if="${allCompleted} eq 'party'">
         window.addEventListener("load", function () {
             new bootstrap.Modal(document.getElementById('finishedModal'), {}).toggle()

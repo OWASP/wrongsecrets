@@ -67,6 +67,10 @@ azure/k8s/pod-id.yml
 
 yourkey.txt
 
+# Challenge 36
+src/main/resources/executables/.gdb_history
+src/main/resources/executables/decrypt/decrypt
+
 # Node JS
 js/node/
 js/node_modules/

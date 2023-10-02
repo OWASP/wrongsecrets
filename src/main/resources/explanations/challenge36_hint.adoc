@@ -1,0 +1,58 @@
+This challenge can be solved by retrieving the strings stored in the registers. You can use any debugging tool. We'll show you how to solve using GDB and Radare2 in the following instructions.
+Please note that we only show it for the windows executable. Every other executable will have another lay-out, but the gist of the exercise will be similar.
+
+To accomplish the task with GDB, open the terminal and type:
+
+1. `gdb -q wrongsecrets-advanced-c-windows.exe` to open GDB and load the executable
+2. `disas main` , to disassemble the `main` function, which is the entry point of the program.
+3. `b execute` to set a breakpoint at `execute` function.
+4. `set args 1234567812345678` to set the program arguments. You can set a random 16 length string.
+5. `r` to run the program. This might fail on MacOS, in such case please consult the https://sourceware.org/gdb/wiki/PermissionsDarwin[gdb wiki]
+6. `disas execute` to disassemble the `execute` function
+7. `b compare` to set a breakpoint at `compare` functionTo get the key:
+- a. `b get_key` to set a breakpoint at `get_key` function
+- b. `disas get_key` to disassemble the `get_key` function
+- c. Search for `movabs xxx, %rax` instruction, and copy the hexadecimal values without 0x.
+- d. Repeat it for `movabs xxx, %rdx` instruction
+Then, we need to check the endianess of the CPU architecture, to decrypt the right cypher. In order to do this, open the Python3 terminal and type:
+- e. `from sys import byteorder`
+- f. `print(byteorder)`
+- g. If the endianess is equals to `little`, https://blockchain-academy.hs-mittweida.de/litte-big-endian-converter/[click here] to convert from little to big endian.
+
+8. Copy each string and concatenate the two strings after the conversion. example:
+- a. `big_endian_a = '69676F74616C6C74'`
+- b. `big_endian_b = '68656B6579737373'`
+- c. `big_endian_result = '69676F74616C6C7468656B6579737373'`, and you got the key to decrypt. Exit the program and open it again to get the secret message.
+
+9. `b get_secret_message` to set a breakpoint at `get_secret_message` function
+- a. `c` to continue the program execution flow
+- b. `disas get_secret_message` to disassemble the `get_secret_message` function
+- c. Search for `movabs xxx, %rax` instruction, and copy the hexadecimal values without 0x .
+- d. Repeat it for `movabs xxx, %rdx` instruction
+- e. Check the endianess of your CPU architecture, using the `7.e`, `7.f` and `7.g` steps. As a result: `big_endian_result = 'E49F2F331A9A251974E1BA7F724C3B7F'`
+10. Download the `decrypt` folder, open the terminal and type:
+- `gcc decrypt.c -o decrypt` to compile the code, or you may compile de code according to your operating system.
+
+11. `./decrypt E49F2F331A9A251974E1BA7F724C3B7F 69676F74616C6C7468656B6579737373` and you have the secret key which is the answer to the challenge.
+
+To accomplish the task with Radare2, open the terminal and type:
+
+1. `r2 -A wrongsecrets-advanced-c-windows.exe` to load the binary and analyze all referenced code.
+2. `pdf @ sym.get_key` to disassemble the `get_key` function
+3. Search for `movabs %rax,xxx` instruction, and copy the hexadecimal values without 0x.
+4. Repeat it for `movabs %rdx,xxx` instruction. Then, we need to check the endianess of the CPU architecture, to decrypt the right cypher. In order to do this, open the Python3 terminal and type:
+- a. `from sys import byteorder`
+- b. `print(byteorder)`
+- c. If the endianess is equals to `little`, https://blockchain-academy.hs-mittweida.de/litte-big-endian-converter/[click here] to convert from little to big endian.
+5. Copy each string and concatenate the two strings after the conversion. example:
+- a. `big_endian_a = '69676F74616C6C74'`
+- b. `big_endian_b = '68656B6579737373'`
+- c. `big_endian_result = '69676F74616C6C7468656B6579737373'`, and you got the key to decrypt.
+
+6. `pdf @ sym.get_secret_message` to disassemble the `get_secret_message` function.
+7. Search for `movabs %rax,xxxx` instruction, and copy the hexadecimal values without 0x.
+8. Repeat from the steps `3` to `5` to get the values. As a result: `big_endian_result = 'E49F2F331A9A251974E1BA7F724C3B7F'`
+9. Exit the program, download the `decrypt` folder, open the terminal and type:
+- `gcc decrypt.c -o decrypt` to compile the code, or you may compile de code according to your operating system.
+
+10. `./decrypt E49F2F331A9A251974E1BA7F724C3B7F 69676F74616C6C7468656B6579737373` and you have the secret key which is the answer to the challenge.
