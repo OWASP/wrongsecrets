@@ -1,0 +1,12 @@
+This is a CI/CD configuration challenge. You can find the answer by authenticating to the protected endpoint with basic auth and getting the value:
+
+1. Use a browser to get the secret:
+- First, go to the https://github.com/OWASP/wrongsecrets/blob/master/.github/workflows/dast-zap-test.yml[Github Workflow]
+- Find the environment variable with which we configure basic auth for ZAP (`ZAP_AUTH_HEADER_VALUE`)
+- Decode the base64 encoded value of the header
+- Navigate to `/authenticated/challenge37` and fill in the username and password you retrieved from the previous step.
+
+2. Use CURL to get the secret
+- First, go to the https://github.com/OWASP/wrongsecrets/blob/master/.github/workflows/dast-zap-test.yml[Github Workflow]
+- Find the environment variable with which we configure basic auth for ZAP (`ZAP_AUTH_HEADER_VALUE`)
+- In your terminal, do `curl <domain where this is run>/authenticated/challenge37 -H "<basic_auth header of previous step>"` where `<basic_auth header of previous step>` is the value of the `ZAP_AUTH_HEADER_VALUE` you found.

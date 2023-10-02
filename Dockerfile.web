@@ -4,6 +4,8 @@ ARG CANARY_URLS="http://canarytokens.com/terms/about/s7cfbdakys13246ewd8ivuvku/p
 ARG CTF_ENABLED=false
 ARG HINTS_ENABLED=true
 ARG CHALLENGE_ACHT_CTF_HOST_VALUE="not_set"
+ARG CHALLENGE_THIRTY_HOST_VALUE="not_set"
+ARG $CHALLENGE_RANDO_KEY_CTF_TO_PROVIDE_TO_HOST="not_set"
 #ONLY OVERRIDE THE ARGS BELOW WHEN YOU ARE SETTING UP A CTF!
 ARG CTF_KEY=TRwzkRJnHOTckssAeyJbysWgP!Qc2T
 ARG CHALLENGE_5_VALUE=if_you_see_this_please_use_k8s
@@ -24,6 +26,8 @@ ENV SPECIAL_K8S_SECRET=$CHALLENGE_5_VALUE
 ENV SPECIAL_SPECIAL_K8S_SECRET=$CHALLENGE_6_VALUE
 ENV vaultpassword=$CHALLENGE_7_VALUE
 ENV challenge_acht_ctf_host_value=$CHALLENGE_ACHT_CTF_HOST_VALUE
+ENV challenge_thirty_ctf_to_provide_to_host_value=$CHALLENGE_THIRTY_HOST_VALUE
+ENV challenge_rando_key_ctf_to_provide_to_host_value=$CHALLENGE_RANDO_KEY_CTF_TO_PROVIDE_TO_HOST
 ENV default_aws_value_challenge_9=$CHALLENGE_9_VALUE
 ENV default_aws_value_challenge_10=$CHALLENGE_10_VALUE
 ENV default_aws_value_challenge_11=$CHALLENGE_11_VALUE
