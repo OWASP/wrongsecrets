@@ -45,13 +45,13 @@ uint8_t *str_to_hex(char *str)
 {
 	uint8_t *ret = (uint8_t *)calloc(SIZE , sizeof(uint8_t));
 	char tmp[2];
+	memset(tmp,'\0',2);
 	short int count = 0;
 
 	for(int a = 0; str[a]; a += 2)
 	{
 		tmp[0] = (uint8_t)lowercase(str[a]);
 		tmp[1] = (uint8_t)lowercase(str[a+1]);
-		tmp[2] = '\0';
 		ret[count++] = (uint8_t)strtol(tmp, NULL, 16);
 	}
 	return ret;
