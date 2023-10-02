@@ -268,6 +268,7 @@ Top contributors:
 -   [Joss Sparkes @remakingeden](https://github.com/remakingeden)
 -   [Marcin Nowak @drnow4u](https://github.com/drnow4u)
 -   [Tibor Hercz @tiborhercz](https://github.com/tiborhercz)
+-   [Rodolfo Cabral Neves @roddas](https://github.com/roddas)
 -   [Chris Elbring Jr. @neatzsche](https://github.com/neatzsche)
 -   [Puneeth Y @puneeth072003](https://github.com/puneeth072003)
 -   [Mike Woudenberg @mikewoudenberg](https://github.com/mikewoudenberg)
