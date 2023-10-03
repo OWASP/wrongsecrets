@@ -24,7 +24,7 @@ Want to make sure you don't need to bug your users to copy paste values twice to
 
 Now users can directly use your Wrongsecrets setup together with the CTF-platform to play challenges without having to copy answers and flags twice!
 
-Note: make sure that you do set `CTF_SERVER_ADDRESS` to point to the address where you are running your CTF-platform (E.g. CTFD/Facebook CTF) and that you set `challenge_acht_ctf_to_provide_to_host_value` and `challenge_thirty_ctf_to_provide_to_host_value` to the flag you store in your CTF-platform.
+Note: make sure that you do set `CTF_SERVER_ADDRESS` to point to the address where you are running your CTF-platform (E.g. CTFD/Facebook CTF) and that you set `challenge_acht_ctf_to_provide_to_host_value`, `challenge_rando_key_ctf_to_provide_to_host_value`, and `challenge_thirty_ctf_to_provide_to_host_value` to the flag you store in your CTF-platform.
 
 ## Setting up CTFs
 

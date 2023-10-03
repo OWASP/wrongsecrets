@@ -15,7 +15,7 @@
 
 Welcome to the OWASP WrongSecrets game! The game is packed with real life examples of how to _not_ store secrets in your software. Each of these examples is captured in a challenge, which you need to solve using various tools and techniques. Solving these challenges will help you recognize common mistakes & can help you to reflect on your own secrets management strategy.
 
-Can you solve all the 35 challenges?
+Can you solve all the 37 challenges?
 
 Try some of them on [our Heroku demo environment](https://wrongsecrets.herokuapp.com/) or on our [Okteto demo environment (might need to awake again)](https://wrongsecrets-commjoen.cloud.okteto.net/).
 
@@ -71,7 +71,7 @@ Copyright (c) 2020-2023 Jeroen Willemsen and WrongSecrets contributors.
 
 ## Basic docker exercises
 
-_Can be used for challenges 1-4, 8, 12-32, 34, 35_
+_Can be used for challenges 1-4, 8, 12-32, 34, 35-37_
 
 For the basic docker exercises you currently require:
 
@@ -114,6 +114,8 @@ Now you can try to find the secrets by means of solving the challenge offered at
 -   [localhost:8080/challenge/32](http://localhost:8080/challenge/32)
 -   [localhost:8080/challenge/34](http://localhost:8080/challenge/34)
 -   [localhost:8080/challenge/35](http://localhost:8080/challenge/35)
+-   [localhost:8080/challenge/36](http://localhost:8080/challenge/36)
+-   [localhost:8080/challenge/37](http://localhost:8080/challenge/37)
 
 Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look
 better ;-).
@@ -134,7 +136,7 @@ Want to deploy yourself with Render? Click the button below:
 
 ## Basic K8s exercise
 
-_Can be used for challenges 1-6, 8, 12-35_
+_Can be used for challenges 1-6, 8, 12-37_
 
 ### Minikube based
 
@@ -191,7 +193,7 @@ Don't want to go over the hassle of setting up K8S yourself? visit [https://wron
 
 ## Vault exercises with minikube
 
-_Can be used for challenges 1-8, 12-35_
+_Can be used for challenges 1-8, 12-37_
 Make sure you have the following installed:
 
 -   minikube with docker (or comment out line 8 and work at your own k8s setup),
@@ -209,7 +211,7 @@ This is because if you run the start script again it will replace the secret in 
 
 ## Cloud Challenges
 
-_Can be used for challenges 1-35_
+_Can be used for challenges 1-37_
 
 **READ THIS**: Given that the exercises below contain IAM privilege escalation exercises,
 never run this on an account which is related to your production environment or can influence your account-over-arching
@@ -266,6 +268,7 @@ Top contributors:
 -   [Joss Sparkes @remakingeden](https://github.com/remakingeden)
 -   [Marcin Nowak @drnow4u](https://github.com/drnow4u)
 -   [Tibor Hercz @tiborhercz](https://github.com/tiborhercz)
+-   [Rodolfo Cabral Neves @roddas](https://github.com/roddas)
 -   [Chris Elbring Jr. @neatzsche](https://github.com/neatzsche)
 -   [Puneeth Y @puneeth072003](https://github.com/puneeth072003)
 -   [Mike Woudenberg @mikewoudenberg](https://github.com/mikewoudenberg)
