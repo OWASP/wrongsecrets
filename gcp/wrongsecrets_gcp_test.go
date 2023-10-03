@@ -25,7 +25,7 @@ func TestTerraformWrongSecretsGCP(t *testing.T) {
 		// The path to where our Terraform code is located
 		TerraformDir: "../gcp",
 		Vars: map[string]interface{}{
-			"region":     "eu-west4",
+			"region":     "europe-west4",
 			"project_id": "owasp-wrongsecrets",
 		},
 	})

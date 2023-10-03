@@ -89,7 +89,7 @@ When you're done:
 2. Can you easily obtain the AKS managed identity of the Node?
 3. Can you get the secrets in the Key vault? Which paths do you see?
 
-## Running Terratest (not yet supported for Azure)
+## Running Terratest
 
 Running Terratest requires Go version 1.21 and the modules installed.
 
