@@ -94,6 +94,13 @@ Do the following:
 
 Note that you might have to do some manual cleanups after that.
 
+## Running Terratest
+
+Running Terratest requires Go version 1.21 and the modules installed.
+
+1. Run `go mod download`
+2. Run `go test -timeout 99999s`. The default timeout is 10 min, which is too short for our purposes. We need to override that.
+
 ## Terraform documentation
 The documentation below is auto-generated to give insight on what's created via Terraform.
 

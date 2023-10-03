@@ -89,6 +89,13 @@ When you're done:
 2. Can you easily obtain the AKS managed identity of the Node?
 3. Can you get the secrets in the Key vault? Which paths do you see?
 
+## Running Terratest (not yet supported for Azure)
+
+Running Terratest requires Go version 1.21 and the modules installed.
+
+1. Run `go mod download`
+2. Run `go test -timeout 99999s`. The default timeout is 10 min, which is too short for our purposes. We need to override that.
+
 ## Terraform documentation
 The documentation below is auto-generated to give insight on what's created via Terraform.
 

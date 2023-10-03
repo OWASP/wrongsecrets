@@ -86,6 +86,13 @@ When you're done:
 3. Can you get the secrets in the SSM Parameter Store and Secret Manager easily? Which paths do you see?
 4. You should see at the configuration details of the cluster that `databaseEncryption` is `DECRYPTED` (`gcloud container clusters describe wrongsecrets-exercise-cluster --region europe-west4`). What does that mean?
 
+## Running Terratest (not yet supported for GCP)
+
+Running Terratest requires Go version 1.21 and the modules installed.
+
+1. Run `go mod download`
+2. Run `go test -timeout 99999s`. The default timeout is 10 min, which is too short for our purposes. We need to override that.
+
 ## Terraform documentation
 
 The documentation below is auto-generated to give insight on what's created via Terraform.
