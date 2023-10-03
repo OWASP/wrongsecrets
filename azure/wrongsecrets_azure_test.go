@@ -23,7 +23,7 @@ func TestTerraformWrongSecretsAzure(t *testing.T) {
 	// retryable errors in terraform testing.
 	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
 		// The path to where our Terraform code is located
-		TerraformDir: "../gcp",
+		TerraformDir: "../azure",
 		Vars: map[string]interface{}{
 			"region": "East US",
 		},
