@@ -88,10 +88,11 @@ When you're done:
 
 ## Running Terratest
 
-Running Terratest requires Go version 1.21 and the modules installed.
+Want to see if the setup still works? You can use terratest to check if the current setup works via automated terratest tests, for this you need to make sure that you have installed terraform and Go version 1.21. Next, you will need to install the modules and set up credentials.
 
-1. Run `go mod download`
-2. Run `go test -timeout 99999s`. The default timeout is 10 min, which is too short for our purposes. We need to override that.
+1. Run `go mod download`.
+2. Run `gcloud auth application-default login`.
+3. Run `go test -timeout 99999s`. The default timeout is 10 min, which is too short for our purposes. We need to override that.
 
 ## Terraform documentation
 
