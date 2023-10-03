@@ -65,7 +65,7 @@ func validateResponse(statusCode int, body string) bool {
 	// body should not contain if_you_see_this_please_use_AWS_Setup
 	if strings.Contains(body, "if_you_see_this_please_use_AWS_Setup") {
 		log.Printf("Found if_you_see_this_please_use_AWS_Setup in response body")
-		return true
+		return false
 	}
 	// body should not contain please_use_supported_cloud_env
 	if strings.Contains(body, "please_use_supported_cloud_env") {
