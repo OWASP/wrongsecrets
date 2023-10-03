@@ -94,6 +94,14 @@ Do the following:
 
 Note that you might have to do some manual cleanups after that.
 
+## Running Terratest
+
+Want to see if the setup still works? You can use terratest to check if the current setup works via automated terratest tests, for this you need to make sure that you have installed terraform and Go version 1.21. Next, you will need to install the modules and set up credentials.
+
+1. Run `go mod download`.
+2. Set up your AWS profile using `export AWS_PROFILE=<your-profile-here>`.
+3. Run `go test -timeout 99999s`. The default timeout is 10 min, which is too short for our purposes. We need to override that.
+
 ## Terraform documentation
 The documentation below is auto-generated to give insight on what's created via Terraform.
 
@@ -156,6 +164,7 @@ The documentation below is auto-generated to give insight on what's created via 
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | The EKS cluster name | `string` | `"wrongsecrets-exercise-cluster"` | no |
 | <a name="input_cluster_version"></a> [cluster\_version](#input\_cluster\_version) | The EKS cluster version to use | `string` | `"1.28"` | no |
 | <a name="input_region"></a> [region](#input\_region) | The AWS region to use | `string` | `"eu-west-1"` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | List of tags to apply to resources | `map(string)` | <pre>{<br>  "Application": "wrongsecrets"<br>}</pre> | no |
 
 ## Outputs
 

@@ -13,6 +13,11 @@ echo "This script is based on the steps defined in https://learn.hashicorp.com/t
 export GCP_PROJECT=$(gcloud config list --format 'value(core.project)' 2>/dev/null)
 #export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
+export REGION="$(terraform output -raw region)"
+export CLUSTER_NAME="$(terraform output -raw kubernetes_cluster_name)"
+
+gcloud container clusters get-credentials --project ${GCP_PROJECT} --zone ${REGION} ${CLUSTER_NAME}
+
 echo "Setting up workspace PSA to restricted for default"
 kubectl apply -f ../k8s/workspace-psa.yml
 
