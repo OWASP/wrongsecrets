@@ -86,7 +86,7 @@ When you're done:
 3. Can you get the secrets in the SSM Parameter Store and Secret Manager easily? Which paths do you see?
 4. You should see at the configuration details of the cluster that `databaseEncryption` is `DECRYPTED` (`gcloud container clusters describe wrongsecrets-exercise-cluster --region europe-west4`). What does that mean?
 
-## Running Terratest (not yet supported for GCP)
+## Running Terratest
 
 Running Terratest requires Go version 1.21 and the modules installed.
 
