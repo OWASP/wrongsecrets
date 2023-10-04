@@ -1,7 +1,7 @@
 variable "region" {
   description = "The GCP region to use"
   type        = string
-  default     = "eu-west4"
+  default     = "europe-west4"
 }
 
 variable "project_id" {
@@ -12,7 +12,7 @@ variable "project_id" {
 variable "cluster_version" {
   description = "The GKE cluster version to use"
   type        = string
-  default     = "1.25"
+  default     = "1.28"
 }
 
 variable "cluster_name" {

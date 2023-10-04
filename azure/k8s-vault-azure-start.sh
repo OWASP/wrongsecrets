@@ -32,7 +32,7 @@ export AZ_KEY_VAULT_TENANT_ID="$(terraform output -raw tenant_id)"
 export AZ_KEY_VAULT_NAME="$(terraform output -raw vault_name)"
 
 # Set the kubeconfig
-az aks get-credentials --resource-group $RESOURCE_GROUP --name $CLUSTER_NAME
+az aks get-credentials --resource-group $RESOURCE_GROUP --name $CLUSTER_NAME --overwrite-existing
 
 echo "Setting up workspace PSA to restricted for default"
 kubectl apply -f k8s/workspace-psa.yml
@@ -49,6 +49,7 @@ if [ $? == 0 ]; then
   echo "secrets secret is already installed"
 else
   kubectl apply -f ../k8s/secrets-secret.yml
+  kubectl apply -f ../k8s/challenge33.yml
 fi
 
 source ../scripts/install-consul.sh

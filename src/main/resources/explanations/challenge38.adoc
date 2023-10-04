@@ -1,0 +1,9 @@
+=== Git Notes
+
+Git commit messages can be a constant pain point.
+
+It is fine to use a short message, unintelligible garble or a simple mash of the keyboard in a git message until you have the unfortunate task of reviewing. At this point these scruffy messages can be a nightmare.
+
+Git notes are here to solve this, it has been around for a long while but often gets overlooked. Add extra metadata about the commit without affecting the commit message itself.
+
+Like all Git, once information is committed, it is very very hard to remove all reference of it. What could possible go wrong?

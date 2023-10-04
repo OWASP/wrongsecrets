@@ -55,23 +55,23 @@
                         <label>
                             <span class="visually-hidden">Light</span>
                             <input type="radio" value="light" name="theme">
-                            <span class="checkmark">☀️</span>
+                            <span class="checkmark" th:attr="data-cy='light-mode-radio'">☀️</span>
                         </label>
                         <label>
                             <span class="visually-hidden">Dark</span>
                             <input type="radio" value="dark" name="theme">
-                            <span class="checkmark">🌜</span>
+                            <span class="checkmark" th:attr="data-cy='dark-mode-radio'">🌜</span>
                         </label>
                     </div>
 
 
                 </ul>
                 <a th:if="${ctf_enabled != null && ctf_enabled == true}" class="nav-link disabled me-2" href="#"
-                   tabindex="-1" aria-disabled="true">In CTF-mode</a>
+                   tabindex="-1" aria-disabled="true" style="color:white">In CTF-mode</a>
                 <a class="nav-link disabled me-2" href="#" tabindex="-1" aria-disabled="true"
-                   th:text="'Environment:'+${environment}"></a>
+                   th:text="'Environment:'+${environment}" style="color:white"></a>
                 <a class="nav-link disabled me-2" href="#" tabindex="-1" aria-disabled="true"
-                   th:text="'Version:'+${version}"></a>
+                   th:text="'Version:'+${version}" style="color:white"></a>
             </div>
         </div>
     </nav>

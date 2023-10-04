@@ -39,7 +39,7 @@ spec:
             volumeAttributes:
               secretProviderClass: "wrongsecrets-gcp-secretsmanager"
       containers:
-        - image: jeroenwillemsen/wrongsecrets:1.6.4-k8s-vault
+        - image: jeroenwillemsen/wrongsecrets:1.6.10-k8s-vault
           imagePullPolicy: IfNotPresent
           name: secret-challenge
           ports:
@@ -93,6 +93,11 @@ spec:
                 configMapKeyRef:
                   name: secrets-file
                   key: funny.entry
+            - name: CHALLENGE33
+              valueFrom:
+                secretKeyRef:
+                  name: challenge33
+                  key: answer
             - name: SPECIAL_SPECIAL_K8S_SECRET
               valueFrom:
                 secretKeyRef:

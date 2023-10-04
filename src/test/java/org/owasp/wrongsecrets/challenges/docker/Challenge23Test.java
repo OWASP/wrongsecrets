@@ -11,16 +11,13 @@ import org.owasp.wrongsecrets.ScoreCard;
 @ExtendWith(MockitoExtension.class)
 class Challenge23Test {
 
-    @Mock
-    private ScoreCard scoreCard;
+  @Mock private ScoreCard scoreCard;
 
+  @Test
+  void rightAnswerShouldSolveChallenge() {
+    var challenge = new Challenge23(scoreCard);
 
-    @Test
-    void rightAnswerShouldSolveChallenge() {
-        var challenge = new Challenge23(scoreCard);
-
-        Assertions.assertThat(challenge.solved(challenge.spoiler().solution())).isTrue();
-        Mockito.verify(scoreCard).completeChallenge(challenge);
-    }
-
+    Assertions.assertThat(challenge.solved(challenge.spoiler().solution())).isTrue();
+    Mockito.verify(scoreCard).completeChallenge(challenge);
+  }
 }

@@ -4,16 +4,20 @@
 
 [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Want%20to%20dive%20into%20secrets%20management%20and%20do%20some%20hunting?%20try%20this&url=https://github.com/OWASP/wrongsecrets&hashtags=secretsmanagement,secrets,hunting,p0wnableapp,OWASP,WrongSecrets) [<img src="https://img.shields.io/badge/-MASTODON-%232B90D9?style=for-the-badge&logo=mastodon&logoColor=white" width=84>](https://tootpick.org/#text=Want%20to%20dive%20into%20secrets%20management%20and%20do%20some%20hunting?%20try%20this%0A%0Ahttps://github.com/OWASP/wrongsecrets%20%23secretsmanagement,%20%23secrets,%20%23hunting,%20%23p0wnableapp,%20%23OWASP,%20%23WrongSecrets) [<img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" width=80>](https://www.linkedin.com/shareArticle/?url=https://www.github.com/OWASP/wrongsecrets&title=OWASP%20WrongSecrets)
 
-[![Java checkstyle and testing](https://github.com/OWASP/wrongsecrets/actions/workflows/main.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/main.yml) [![Pre-commit](https://github.com/OWASP/wrongsecrets/actions/workflows/pre-commit.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/pre-commit.yml) [![Terraform FMT](https://github.com/OWASP/wrongsecrets/actions/workflows/terraform.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/terraform.yml) [![Test minikube script (k8s)](https://github.com/OWASP/wrongsecrets/actions/workflows/minikube-k8s-test.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/minikube-k8s-test.yml) [![Test minikube script (k8s&vault)](https://github.com/OWASP/wrongsecrets/actions/workflows/minikube-vault-test.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/minikube-vault-test.yml) [![Docker container test](https://github.com/OWASP/wrongsecrets/actions/workflows/container_test.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/container_test.yml)
+[![Java checkstyle and testing](https://github.com/OWASP/wrongsecrets/actions/workflows/main.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/main.yml) [![Pre-commit](https://github.com/OWASP/wrongsecrets/actions/workflows/pre-commit.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/pre-commit.yml) [![Terraform FMT](https://github.com/OWASP/wrongsecrets/actions/workflows/terraform.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/terraform.yml) [![CodeQL](https://github.com/OWASP/wrongsecrets/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/codeql-analysis.yml) [![Dead Link Checker](https://github.com/OWASP/wrongsecrets/actions/workflows/link_checker.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/link_checker.yml)[![Javadoc and Swaggerdoc generator](https://github.com/OWASP/wrongsecrets/actions/workflows/java_swagger_doc.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/java_swagger_doc.yml)
+
+[![Test minikube script (k8s)](https://github.com/OWASP/wrongsecrets/actions/workflows/minikube-k8s-test.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/minikube-k8s-test.yml) [![Test minikube script (k8s&vault)](https://github.com/OWASP/wrongsecrets/actions/workflows/minikube-vault-test.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/minikube-vault-test.yml) [![Docker container test](https://github.com/OWASP/wrongsecrets/actions/workflows/container_test.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/container_test.yml)[![Test container on podman and Colima](https://github.com/OWASP/wrongsecrets/actions/workflows/container-alts-test.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/container-alts-test.yml)
+[![DAST with ZAP](https://github.com/OWASP/wrongsecrets/actions/workflows/dast-zap-test.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/dast-zap-test.yml)
+
 [![OWASP Lab Project](https://img.shields.io/badge/OWASP-lab%20project-48A646.svg)](https://owasp.org/projects/)
 [![OpenSSF Best Practices](https://bestpractices.coreinfrastructure.org/projects/7024/badge)](https://bestpractices.coreinfrastructure.org/projects/7024)
 [![Discussions](https://img.shields.io/github/discussions/OWASP/wrongsecrets)](https://github.com/OWASP/wrongsecrets/discussions)
 
 Welcome to the OWASP WrongSecrets game! The game is packed with real life examples of how to _not_ store secrets in your software. Each of these examples is captured in a challenge, which you need to solve using various tools and techniques. Solving these challenges will help you recognize common mistakes & can help you to reflect on your own secrets management strategy.
 
-Can you solve all the 32 challenges?
+Can you solve all the 37 challenges?
 
-Try some of them on [our Heroku demo environment](https://wrongsecrets.herokuapp.com/).
+Try some of them on [our Heroku demo environment](https://wrongsecrets.herokuapp.com/) or on our [Okteto demo environment (might need to awake again)](https://wrongsecrets-commjoen.cloud.okteto.net/).
 
 Want to play the other challenges? Read the instructions on how to set them up below.
 
@@ -26,7 +30,7 @@ Want to play the other challenges? Read the instructions on how to set them up b
 -   [Support](#support)
 -   [Basic docker exercises](#basic-docker-exercises)
     -   [Running these on Heroku](#running-these-on-heroku)
-    -   [Running on Fly.io](#running-on-flyio)
+    -   [Running these on Render.io](#running-these-on-renderio)
 -   [Basic K8s exercise](#basic-k8s-exercise)
     -   [Minikube based](#minikube-based)
     -   [k8s based](#k8s-based)
@@ -37,14 +41,14 @@ Want to play the other challenges? Read the instructions on how to set them up b
     -   [Running WrongSecrets in GCP](#running-wrongsecrets-in-gcp)
     -   [Running WrongSecrets in Azure](#running-wrongsecrets-in-azure)
     -   [Running Challenge15 in your own cloud only](#running-challenge15-in-your-own-cloud-only)
--   [Do you want to play without guidance?](#do-you-want-to-play-without-guidance)
+-   [Do you want to play without guidance?](#do-you-want-to-play-without-guidance-or-spoils)
 -   [Special thanks & Contributors](#special-thanks--contributors)
 -   [Sponsorships](#sponsorships)
 -   [Help Wanted](#help-wanted)
 -   [Use OWASP WrongSecrets as a secret detection benchmark](#use-owasp-wrongsecrets-as-a-secret-detection-benchmark)
 -   [CTF](#ctf)
     -   [CTFD Support](#ctfd-support)
-    -   [FBCTF Support](#fbctf-support--experimental--)
+    -   [FBCTF Support](#fbctf-support-experimental)
 -   [Notes on development](#notes-on-development)
     -   [Dependency management](#dependency-management)
     -   [Get the project started in IntelliJ IDEA](#get-the-project-started-in-intellij-idea)
@@ -67,7 +71,7 @@ Copyright (c) 2020-2023 Jeroen Willemsen and WrongSecrets contributors.
 
 ## Basic docker exercises
 
-_Can be used for challenges 1-4, 8, 12-32_
+_Can be used for challenges 1-4, 8, 12-32, 34, 35-37_
 
 For the basic docker exercises you currently require:
 
@@ -108,23 +112,31 @@ Now you can try to find the secrets by means of solving the challenge offered at
 -   [localhost:8080/challenge/30](http://localhost:8080/challenge/30)
 -   [localhost:8080/challenge/31](http://localhost:8080/challenge/31)
 -   [localhost:8080/challenge/32](http://localhost:8080/challenge/32)
+-   [localhost:8080/challenge/34](http://localhost:8080/challenge/34)
+-   [localhost:8080/challenge/35](http://localhost:8080/challenge/35)
+-   [localhost:8080/challenge/36](http://localhost:8080/challenge/36)
+-   [localhost:8080/challenge/37](http://localhost:8080/challenge/37)
 
 Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look
 better ;-).
 
 ### Running these on Heroku
 
-You can test them out at [https://wrongsecrets.herokuapp.com/](https://wrongsecrets.herokuapp.com/) as well! But please
-understand that we have NO guarantees that this works. Given we run in Heroku free-tier, please do not fuzz and/or try
-to bring it down: you would be spoiling it for others that want to testdrive it.
+You can test them out at [https://wrongsecrets.herokuapp.com/](https://wrongsecrets.herokuapp.com/) as well! The folks at Heroku have given us an awesome open source support package, which allows us to run the app for free there, where it is almost always up. Still, please do not fuzz and/or try to bring it down: you would be spoiling it for others that want to testdrive it.
 
-### Running on Fly.io
 
-You can test them out at [https://wrongsecrets.fly.dev](https://wrongsecrets.fly.dev) as well! Please understand that we run on a free-tier instance, we cannot give any guarantees. Please do not fuzz and/or try to bring it down: you would be spoiling it for others that want to testdrive it.
+### Running these on Render.io
+*status: experimental*
+
+You can test them out at [https://wrongsecrets.onrender.com/](https://wrongsecrets.onrender.com/). Please understand that we run on a free-tier instance, we cannot give any guarantees. Please do not fuzz and/or try to bring it down: you would be spoiling it for others that want to testdrive it.
+Want to deploy yourself with Render? Click the button below:
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/OWASP/wrongsecrets)
+
 
 ## Basic K8s exercise
 
-_Can be used for challenges 1-6, 8, 12-32_
+_Can be used for challenges 1-6, 8, 12-37_
 
 ### Minikube based
 
@@ -139,6 +151,7 @@ The K8S setup currently is based on using Minikube for local fun:
     minikube start
     kubectl apply -f k8s/secrets-config.yml
     kubectl apply -f k8s/secrets-secret.yml
+    kubectl apply -f k8s/challenge33.yml
     kubectl apply -f k8s/secret-challenge-deployment.yml
     while [[ $(kubectl get pods -l app=secret-challenge -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do echo "waiting for secret-challenge" && sleep 2; done
     kubectl expose deployment secret-challenge --type=LoadBalancer --port=8080
@@ -149,6 +162,7 @@ now you can use the provided IP address and port to further play with the K8s va
 
 -   [localhost:8080/challenge/5](http://localhost:8080/challenge/5)
 -   [localhost:8080/challenge/6](http://localhost:8080/challenge/6)
+-   [localhost:8080/challenge/33](http://localhost:8080/challenge/33)
 
 ### k8s based
 
@@ -157,6 +171,7 @@ Want to run vanilla on your own k8s? Use the commands below:
 ```bash
     kubectl apply -f k8s/secrets-config.yml
     kubectl apply -f k8s/secrets-secret.yml
+    kubectl apply -f k8s/challenge33.yml
     kubectl apply -f k8s/secret-challenge-deployment.yml
     while [[ $(kubectl get pods -l app=secret-challenge -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do echo "waiting for secret-challenge" && sleep 2; done
     kubectl port-forward \
@@ -168,6 +183,7 @@ now you can use the provided IP address and port to further play with the K8s va
 
 -   [localhost:8080/challenge/5](http://localhost:8080/challenge/5)
 -   [localhost:8080/challenge/6](http://localhost:8080/challenge/6)
+-   [localhost:8080/challenge/33](http://localhost:8080/challenge/33)
 
 ### Okteto based
 
@@ -177,7 +193,7 @@ Don't want to go over the hassle of setting up K8S yourself? visit [https://wron
 
 ## Vault exercises with minikube
 
-_Can be used for challenges 1-8, 12-29_
+_Can be used for challenges 1-8, 12-37_
 Make sure you have the following installed:
 
 -   minikube with docker (or comment out line 8 and work at your own k8s setup),
@@ -188,14 +204,14 @@ Make sure you have the following installed:
 -   vault [Install from here](https://www.vaultproject.io/downloads),
 -   grep, Cat, and Sed
 
-Run `./k8s-vault-minkube-start.sh`, when the script is done, then the challenges will wait for you at <http://localhost:8080> . This will allow you to run challenges 1-8, 12-32.
+Run `./k8s-vault-minkube-start.sh`, when the script is done, then the challenges will wait for you at <http://localhost:8080> . This will allow you to run challenges 1-8, 12-35.
 
 When you stopped the `k8s-vault-minikube-start.sh` script and want to resume the port forward run: `k8s-vault-minikube-resume.sh`.
 This is because if you run the start script again it will replace the secret in the vault and not update the secret-challenge application with the new secret.
 
 ## Cloud Challenges
 
-_Can be used for challenges 1-32_
+_Can be used for challenges 1-37_
 
 **READ THIS**: Given that the exercises below contain IAM privilege escalation exercises,
 never run this on an account which is related to your production environment or can influence your account-over-arching
@@ -250,8 +266,9 @@ Top contributors:
 
 -   [Nanne Baars @nbaars](https://github.com/nbaars)
 -   [Joss Sparkes @remakingeden](https://github.com/remakingeden)
--   [Marcin Nowak @MarcinNowak-codes](https://github.com/MarcinNowak-codes)
+-   [Marcin Nowak @drnow4u](https://github.com/drnow4u)
 -   [Tibor Hercz @tiborhercz](https://github.com/tiborhercz)
+-   [Rodolfo Cabral Neves @roddas](https://github.com/roddas)
 -   [Chris Elbring Jr. @neatzsche](https://github.com/neatzsche)
 -   [Puneeth Y @puneeth072003](https://github.com/puneeth072003)
 -   [Mike Woudenberg @mikewoudenberg](https://github.com/mikewoudenberg)
@@ -272,13 +289,15 @@ Top contributors:
 Testers:
 
 -   [Dave van Stein @davevs](https://github.com/davevs)
--   [Marcin Nowak @MarcinNowak-codes](https://github.com/MarcinNowak-codes)
+-   [Marcin Nowak @MarcinNowak-codes](https://github.com/drnow4u)
 -   [Marc Chang Sing Pang @mchangsp](https://github.com/mchangsp)
+-   [Vineeth Jagadeesh @djvinnie](https://github.com/djvinnie)
 
 Special mentions for helping out:
 
 -   [Madhu Akula @madhuakula](https://github.com/madhuakula)
 -   [Björn Kimminich @bkimminich](https://github.com/bkimminich)
+-   [Dan Gora @devsecops](https://github.com/devsecops)
 -   [Xiaolu Dai @saragluna](https://github.com/saragluna)
 -   [Jonathan Giles @jonathanGiles](https://github.com/JonathanGiles)
 
@@ -401,11 +420,11 @@ You can use the OWASP Dependency-checker by calling `mvn dependency-check:aggreg
 
 ### Get the project started in IntelliJ IDEA
 
-Requirements: make sure you have the following tools installed: [Docker](https://www.docker.com/products/docker-desktop/), [Java19 JDK](https://jdk.java.net/19/), [NodeJS 18](https://nodejs.org/dist/v18.12.1/node-v18.12.1-x86.msi) and [IntelliJ IDEA](https://www.jetbrains.com/idea/download).
+Requirements: make sure you have the following tools installed: [Docker](https://www.docker.com/products/docker-desktop/), [Java21 JDK](https://jdk.java.net/21/), [NodeJS 20](https://nodejs.org/en/download/current) and [IntelliJ IDEA](https://www.jetbrains.com/idea/download).
 
 1. Fork and clone the project as described in the [documentation](https://github.com/OWASP/wrongsecrets/blob/master/CONTRIBUTING.md).
 2. Import the project in IntelliJ (e.g. import as mvn project / local sources)
-3. Go to the project settings and make sure it uses Java19 (And that the JDK can be found)
+3. Go to the project settings and make sure it uses Java21 (And that the JDK can be found)
 4. Go to the IDE settings>Language & Frameworks > Lombok and make sure Lombok processing is enabled
 5. Open the Maven Tab in your IDEA and run "Reload All Maven Projects" to make the system sync and download everything. Next, in that same tab use the "install" option as part of the OWASP WrongSecrets Lifecycle to genereate the asciidoc and such.
 6. Now run the `main` method in `org.owasp.wrongsecrets.WrongSecretsApplication.java`. This should fail with a stack trace.
@@ -418,7 +437,7 @@ Feel free to edit and propose changes via pull requests. Be sure to follow our g
 
 Please note that we officially only support Linux and MacOS for development. If you want to develop using a Windows machine, use WSL2 or a virtual machine running Linux. We did include Windows detection & a bunch of `exe` files for a first experiment, but are looking for active maintainers of them. Want to make sure it runs on Windows? Create PRs ;-).
 
-If, after reading this section, you still have no clue on the application code: Have a look [at some tutorials on Spring boot from Baeldung](https://www.baeldung.com/spring-boot)
+If, after reading this section, you still have no clue on the application code: Have a look [at some tutorials on Spring boot from Baeldung](https://www.baeldung.com/spring-boot).
 
 ### Automatic reload during development
 
@@ -436,7 +455,7 @@ Follow the steps below on adding a challenge:
 
 1. First make sure that you have an [Issue](https://github.com/OWASP/wrongsecrets/issues) reported for which a challenge is really wanted.
 2. Add the new challenge in the `org.owasp.wrongsecrets.challenges` folder. Make sure you add an explanation in `src/main/resources/explanations` and refer to it from your new Challenge class.
-3. Add a unit and integration test to show that your challenge is working.
+3. Add unit, integration and UI tests as appropriate to show that your challenge is working.
 4. Don't forget to add `@Order` annotation to your challenge ;-).
 5. Review the [CONTRIBUTING guide](CONTRIBUTING.md) for setting up your contributing environment and writing good commit messages.
 
@@ -484,6 +503,63 @@ docker run -d \
 And then at [http://localhost:3000](http://localhost:3000).
 
 Note: be careful with trying to deploy the `jeroenwillemsen/wrongsecrets-desktop` container to Heroku ;-).
+
+## Docker on macOS with M1 and Colima (Experimental!)
+
+NOTE: Colima support is experimental.
+
+Using [Colima](https://github.com/abiosoft/colima) (version 0.5.2 when written) you your macOS with Apple Silicon M1
+to run Docker image `jeroenwillemsen/wrongsecrets` you try one of:
+
+- switch off Colima
+- change Docker context
+- run Colima with 1 CPU
+
+### Switch off Colima
+
+```shell
+colima stop
+```
+and run natively Docker image `jeroenwillemsen/wrongsecrets` on ARM.
+
+### Change Docker context
+
+Running docker image on Colima container runtimes on macOS Ventura with M1 CPU can run very slowly or can hang at some point.
+Wrong Secrets provide `arm64` Docker image and switching to `desktop-linux` context will use the native `arm64` image.
+To do that in the terminal run:
+
+```shell
+docker context ls
+```
+
+you should see context default `colima *`:
+
+```
+NAME                TYPE                DESCRIPTION                               DOCKER ENDPOINT                                    KUBERNETES ENDPOINT                ORCHESTRATOR
+colima *            moby                colima                                    unix:///Users/YOUR_USER_NAME/.colima/default/docker.sock
+default             moby                Current DOCKER_HOST based configuration   unix:///var/run/docker.sock                        https://127.0.0.1:6443 (default)   swarm
+desktop-linux       moby                                                          unix:///Users/YOUR_USER_NAME/.docker/run/docker.sock
+```
+
+Now run one of the above Docker commands together with `--context` switch e.g.:
+
+```bash
+docker --context desktop-linux run -p 8080:8080 jeroenwillemsen/wrongsecrets:latest-no-vault
+```
+
+### Run Colima with 1 CPU
+
+Colima is using QEMU behind and for QEMU on Apple Silicon M1 is recommended to use 1 CPU core:
+
+```shell
+colima start -m 8 -c 1 --arch x86_64
+```
+
+and run with AMD x64 emulation e.g.:
+
+```bash
+docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:latest-no-vault
+```
 
 ## Further reading on secrets management
 

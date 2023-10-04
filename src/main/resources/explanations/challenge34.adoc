@@ -1,0 +1,4 @@
+=== Generating Random Keys
+
+Many security folks teach engineers to use secure key derivation functions like https://en.wikipedia.org/wiki/PBKDF2[PBKDF2] when a key needs to be generated. A developer followed this instruction and tried to create a key in `Challenge34.java`, which should now be far more secure than a hardcoded key.
+Can you spot the mistake? Can you find the value of the generated key?

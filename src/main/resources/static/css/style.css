@@ -33,3 +33,12 @@ a.disabled {
 .theme-toggle :checked + .checkmark {
     border-bottom: 1px solid var(--bs-gray-300);
 }
+
+tr.solved {
+    --bs-success-soft: rgba(0, 188, 140, 0.5);
+    background-color: var(--bs-success-soft) !important;
+}
+
+.table {
+    --bs-table-bg: rgba(0, 0, 0, 0) !important;
+}

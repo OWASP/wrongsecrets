@@ -20,6 +20,9 @@ RUN \
 WORKDIR /config/Desktop
 
 COPY src/main/resources/executables/*linux* /config/Desktop/wrongsecrets/
+COPY src/test/resources/executables/decrypt /config/Desktop/wrongsecrets/
+COPY src/test/resources/executables/decrypt /config/Desktop/wrongsecrets/
+COPY src/main/resources/executables/wrongsecrets-advanced-c-windows.exe /config/Desktop/wrongsecrets/
 COPY src/test/resources/alibabacreds.kdbx /var/tmp/helpers/
 COPY src/test/resources/alibabacreds.kdbx /var/tmp/wrongsecrets/
 COPY wrongsecret-desktop-resources/welcome.md /var/tmp/wrongsecrets/

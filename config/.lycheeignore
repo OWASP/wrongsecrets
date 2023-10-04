@@ -9,7 +9,8 @@ https://wrongsecrets.herokuapp.com
 # Okteto is not guaranteed to be up
 https://wrongsecrets-commjoen.cloud.okteto.net/
 https://wrongsecrets-ctf-commjoen.cloud.okteto.net/
-https://wrongsecrets.fly.dev/
+# Onrender will startup too slow
+https://wrongsecrets.onrender.com/
 https://betterprogramming.pub/stop-writing-bad-commit-messages-8df79517177d
 # Twitter its API does not like us
 https://twitter.com/intent/tweet?*

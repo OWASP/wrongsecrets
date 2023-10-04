@@ -13,14 +13,14 @@ jobs:
   javaDocGenerator:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Set up JDK 19
+      - uses: actions/checkout@v4
+      - name: Set up JDK 21
         uses: actions/setup-java@v3
         with:
-          java-version: "19"
-          distribution: "temurin"
+          java-version: "21"
+          distribution: "corretto"
       - name: Clean install
-        run: ./mvnw --no-transfer-progress clean install -DskipTests -Ddependency-check.skip -Dcyclonedx.skip=true
+        run: ./mvnw --no-transfer-progress clean install -DskipTests -Ddependency-check.skip -Dcyclonedx.skip=true -Dexec.skip
       - name: Compile javadoc
         run: ./mvnw --no-transfer-progress compile javadoc:javadoc
       - name: Start wrongsecrets

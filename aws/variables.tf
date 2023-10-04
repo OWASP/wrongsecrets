@@ -7,11 +7,19 @@ variable "region" {
 variable "cluster_version" {
   description = "The EKS cluster version to use"
   type        = string
-  default     = "1.25"
+  default     = "1.28"
 }
 
 variable "cluster_name" {
   description = "The EKS cluster name"
   type        = string
   default     = "wrongsecrets-exercise-cluster"
+}
+
+variable "tags" {
+  description = "List of tags to apply to resources"
+  type        = map(string)
+  default = {
+    "Application" = "wrongsecrets"
+  }
 }
