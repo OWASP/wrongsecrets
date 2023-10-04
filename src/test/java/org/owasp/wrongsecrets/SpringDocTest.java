@@ -13,7 +13,6 @@ import io.swagger.v3.core.util.Yaml;
 import io.swagger.v3.oas.models.OpenAPI;
 import java.util.List;
 import java.util.Map;
-
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -50,16 +49,16 @@ class SpringDocTest {
 
   @Test
   void getApiDocs() throws Exception {
-        mockMvc
-            .perform(get("/v3/api-docs"))
-            .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-            .andExpect(jsonPath("$.openapi", is("3.0.1")))
-            .andExpect(jsonPath("$.info", isA(Object.class)))
-            .andExpect(jsonPath("$.servers", isA(Object.class)))
-            .andExpect(jsonPath("$.paths", isA(Object.class)))
-            .andExpect(jsonPath("$.components", isA(Object.class)))
-            .andReturn();
+    mockMvc
+        .perform(get("/v3/api-docs"))
+        .andExpect(status().isOk())
+        .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+        .andExpect(jsonPath("$.openapi", is("3.0.1")))
+        .andExpect(jsonPath("$.info", isA(Object.class)))
+        .andExpect(jsonPath("$.servers", isA(Object.class)))
+        .andExpect(jsonPath("$.paths", isA(Object.class)))
+        .andExpect(jsonPath("$.components", isA(Object.class)))
+        .andReturn();
   }
 
   @Test
