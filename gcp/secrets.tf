@@ -5,7 +5,7 @@
 resource "google_secret_manager_secret" "wrongsecret_1" {
   secret_id = "wrongsecret-1"
   replication {
-    automatic = true
+    auto {}
   }
 }
 
@@ -36,7 +36,7 @@ resource "google_secret_manager_secret_version" "secret_version_basic" {
 resource "google_secret_manager_secret" "wrongsecret_2" {
   secret_id = "wrongsecret-2"
   replication {
-    automatic = true
+    auto {}
   }
 }
 
@@ -54,7 +54,7 @@ resource "google_secret_manager_secret_iam_member" "wrongsecret_2_member" {
 resource "google_secret_manager_secret" "wrongsecret_3" {
   secret_id = "wrongsecret-3"
   replication {
-    automatic = true
+    auto {}
   }
 }
 

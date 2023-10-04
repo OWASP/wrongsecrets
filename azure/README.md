@@ -89,6 +89,14 @@ When you're done:
 2. Can you easily obtain the AKS managed identity of the Node?
 3. Can you get the secrets in the Key vault? Which paths do you see?
 
+## Running Terratest
+
+Want to see if the setup still works? You can use terratest to check if the current setup works via automated terratest tests, for this you need to make sure that you have installed terraform and Go version 1.21. Next, you will need to install the modules and set up credentials.
+
+1. Run `go mod download`
+2. Run `az login` and make sure you are on the right subscription. If necessary, use `az account list` and `az account set --subscription <your-subscription-id-here>`.
+3. Run `go test -timeout 99999s`. The default timeout is 10 min, which is too short for our purposes. We need to override that.
+
 ## Terraform documentation
 The documentation below is auto-generated to give insight on what's created via Terraform.
 
@@ -98,7 +106,7 @@ The documentation below is auto-generated to give insight on what's created via 
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.1 |
-| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | ~> 3.71.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | ~> 3.75.0 |
 | <a name="requirement_http"></a> [http](#requirement\_http) | ~> 3.4.0 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | ~> 3.5.1 |
 
@@ -106,7 +114,7 @@ The documentation below is auto-generated to give insight on what's created via 
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.71.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.75.0 |
 | <a name="provider_http"></a> [http](#provider\_http) | 3.4.0 |
 | <a name="provider_random"></a> [random](#provider\_random) | 3.5.1 |
 

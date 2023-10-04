@@ -15,3 +15,11 @@ variable "cluster_name" {
   type        = string
   default     = "wrongsecrets-exercise-cluster"
 }
+
+variable "tags" {
+  description = "List of tags to apply to resources"
+  type        = map(string)
+  default = {
+    "Application" = "wrongsecrets"
+  }
+}
