@@ -256,7 +256,7 @@ Here is the preview of the **web server**, you can try to find the secrets by me
 
 ### Step 1: Creating a new issue.
 
-First make sure that you have an [Issue](https://github.com/OWASP/wrongsecrets/issues/new) reported for which a challenge is really wanted, And make sure the challenge is assigned to you, as others might be working on the challenge.
+First make sure that you have an [Issue](https://github.com/OWASP/wrongsecrets/issues/new) reported for which a challenge is really wanted, or pick an existing issue you want to implement. Make sure the challenge is assigned to you, as others might be working on the challenge.
 
 ### Step 2: Adding the challenge.
 
