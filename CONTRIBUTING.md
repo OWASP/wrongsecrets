@@ -184,7 +184,16 @@ Select **_google-java-format Settings_** and click enable.
 
 ![](images/open-settings-4.4.png)
 
-### Step 5: Reload the project
+### Step 5: Project Structure
+
+Open **_File > Project structure _**.
+
+In the tab `Project` make sure that an SDK of version `21` is selected (e.g. `openjdk-21`, `oraclejdk-21` or just `21` depending on which Java JDK variant you installed).
+
+In the tab `SDKs` make sure that an SDK of version `21` is selected.
+
+
+### Step 6: Reload the project
 
 Open the **_Maven_** Tab
 
@@ -198,7 +207,7 @@ Further use the **_OWASP WrongSecrets --> Lifecycle --> install_** step to load 
 
 **NOTE:** Indians and other Asia-Pacific countries users may have to use **VPN** if you enounter this exception `org.owasp.dependencycheck.utils.DownloadFailedException: TLS Connection Reset`.
 
-### Step 6: Running the Project.
+### Step 7: Running the Project.
 
 Open the **_WrongSecretsApplication_** by following the path **_main>java>org.owasp.wrongsecrets>WrongSecretApplication_**.
 
@@ -208,7 +217,7 @@ Press **_Shift+F10_** to run the application, this will open up the **_Run/Debug
 
 ![](images/run-application-6.2.png)
 
-### Step 7: Setting up Configurations.
+### Step 8: Setting up Configurations.
 
 Select **_Edit configuration templates_** then select **_Application_** section.
 
