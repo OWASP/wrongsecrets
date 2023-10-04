@@ -26,7 +26,7 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 @SpringBootTest
 @AutoConfigureMockMvc
 @Slf4j
-public class SpringDocTest {
+class SpringDocTest {
 
   @Autowired protected MockMvc mockMvc;
   @Autowired RequestMappingHandlerMapping requestMappingHandlerMapping;
@@ -48,7 +48,7 @@ public class SpringDocTest {
   }
 
   @Test
-  public void getApiDocs() throws Exception {
+  void getApiDocs() throws Exception {
     MvcResult result =
         mockMvc
             .perform(get("/v3/api-docs"))
@@ -63,7 +63,7 @@ public class SpringDocTest {
   }
 
   @Test
-  public void endpointsPresent() throws Exception {
+  void endpointsPresent() throws Exception {
     String json =
         mockMvc
             .perform(get("/v3/api-docs"))
