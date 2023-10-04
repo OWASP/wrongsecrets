@@ -55,12 +55,12 @@ class SecurityConfigTest {
   }
 
   @Test
-  public void shouldNotAllowToGetAuthValues() throws Exception {
+  void shouldNotAllowToGetAuthValues() throws Exception {
     this.mvc.perform(get("/authenticated/challenge37")).andExpect(status().isUnauthorized());
   }
 
   @Test
-  public void shouldAllowToGetAuthValuesWithBasicAuth() throws Exception {
+  void shouldAllowToGetAuthValuesWithBasicAuth() throws Exception {
     this.mvc
         .perform(
             get("/authenticated/challenge37")
