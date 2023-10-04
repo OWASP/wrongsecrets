@@ -25,9 +25,13 @@ jobs:
         run: nohup ./mvnw spring-boot:run -Dspring-boot.run.profiles=without-vault &
       - name: ZAP Scan
         uses: zaproxy/action-baseline@v0.9.0
+        env:
+          ZAP_AUTH_HEADER_VALUE: "Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ=="
+          ZAP_AUTH_HEADER: "Authorization"
         with:
           allow_issue_writing: false
           docker_name: "owasp/zap2docker-stable"
           target: "http://localhost:8080"
           rules_file_name: config/zap/rule-config.tsv
           fail_action: true
+          cmd_options: '-z "-configFile /zap/wrk/config/zap/options.prop"'

@@ -1,0 +1,9 @@
+Unlike other Git challenges this cannot be solved by the plethora of tools that will automatically search for secrets leaked in Git repos.
+
+Try solving the challenge by manually combing the Git metadata.
+
+1. Clone the repository - `git clone https://github.com/OWASP/wrongsecrets`.
+2. Navigate to the directory - `cd wrongsecrets`
+3. Fetch the notes - `git fetch origin 'refs/notes/*:refs/notes/*'`
+4. List all notes in the repo - `git notes`
+5. Using the note reference that is displayed, show the note - `git notes show [ref]` (2 references will show for each note, the second one is the note reference)
