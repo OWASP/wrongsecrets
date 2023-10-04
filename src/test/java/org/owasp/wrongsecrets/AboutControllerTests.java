@@ -19,8 +19,6 @@ class AboutControllerTests {
     @Autowired
     private RestTemplateBuilder builder;
 
-    public AboutControllerTests() {
-    }
     @Test
     void shouldGetAbout(){
         var restTemplate = builder.build();

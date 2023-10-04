@@ -19,9 +19,6 @@ class Challenge30IntegrationTest {
     @Autowired
     private RestTemplateBuilder builder;
 
-    public Challenge30IntegrationTest() {
-    }
-
     @Test
     void shouldGetFullintegratedStepsForChallenge30() {
         var restTemplate = builder.build();

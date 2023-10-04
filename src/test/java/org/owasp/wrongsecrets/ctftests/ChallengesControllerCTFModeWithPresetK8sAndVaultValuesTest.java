@@ -32,7 +32,6 @@ class ChallengesControllerCTFModeWithPresetK8sAndVaultValuesTest {
     @Autowired
     private MockMvc mvc;
 
-
     @Test
     void shouldNotSpoilWhenInCTFMode() throws Exception {
         mvc.perform(get("/spoil-5"))

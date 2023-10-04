@@ -1,19 +1,7 @@
 package org.owasp.wrongsecrets;
 
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.isA;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 import io.swagger.v3.core.util.Yaml;
 import io.swagger.v3.oas.models.OpenAPI;
-
-import java.util.List;
-
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -25,10 +13,16 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
+import java.util.List;
+
+import static org.hamcrest.Matchers.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
 @SpringBootTest
 @AutoConfigureMockMvc
 @Slf4j
-public class SpringDocTest {
+class SpringDocTest {
 
     @Autowired
     protected MockMvc mockMvc;
@@ -50,7 +44,7 @@ public class SpringDocTest {
     }
 
     @Test
-    public void getApiDocs() throws Exception {
+    void getApiDocs() throws Exception {
         MvcResult result = mockMvc.perform(get("/v3/api-docs"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -63,7 +57,7 @@ public class SpringDocTest {
     }
 
     @Test
-    public void endpointsPresent() throws Exception {
+    void endpointsPresent() throws Exception {
         String json = mockMvc.perform(get("/v3/api-docs"))
             .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
         OpenAPI openAPI = Yaml.mapper().readValue(json, OpenAPI.class);

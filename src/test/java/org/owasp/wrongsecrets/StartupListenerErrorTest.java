@@ -19,13 +19,13 @@ import static uk.org.webcompere.systemstubs.SystemStubs.tapSystemErrAndOut;
 
 @SpringJUnitConfig
 @Slf4j
-public class StartupListenerErrorTest {
+class StartupListenerErrorTest {
 
     @Autowired
     ConfigurableApplicationContext configurableApplicationContext;
 
     @Test
-    public void testFailStartupWithMissingK8s_ENV_Var() throws Exception {
+    void testFailStartupWithMissingK8s_ENV_Var() throws Exception {
         AtomicInteger statusCode = new AtomicInteger();
         AtomicReference<String> text = new AtomicReference<>();
         var ape = new ApplicationEnvironmentPreparedEvent(new DefaultBootstrapContext(), new SpringApplication(), new String[0], configurableApplicationContext.getEnvironment());
@@ -46,6 +46,5 @@ public class StartupListenerErrorTest {
            log.info("We can no longer run thistest this way"); //todo:fix this!
         }
     }
-
 
 }

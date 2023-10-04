@@ -68,7 +68,6 @@ class ChallengesControllerCTFModeTest {
 
     }
 
-
     @Test
     void shouldEnableK8sExercises() throws Exception {
         mvc.perform(get("/"))

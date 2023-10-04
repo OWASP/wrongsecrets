@@ -8,7 +8,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Spoiler;
-import org.owasp.wrongsecrets.challenges.cloud.Challenge9;
 
 import java.io.File;
 import java.io.IOException;

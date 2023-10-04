@@ -36,7 +36,6 @@ class ChallengesControllerCTFModeWithPresetCloudValuesTest {
     @Autowired
     private MockMvc mvc;
 
-
     @Test
     void shouldNotSpoilWhenInCTFMode() throws Exception {
         mvc.perform(get("/spoil-9"))

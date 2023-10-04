@@ -19,9 +19,6 @@ class ChallengeAPiControllerTest {
     @Autowired
     private RestTemplateBuilder builder;
 
-    public ChallengeAPiControllerTest() {
-    }
-
     @Test
     void shouldGetListOfChallenges() {
         var restTemplate = builder.build();

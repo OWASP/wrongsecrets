@@ -1,15 +1,12 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
 import org.assertj.core.api.Assertions;
-import org.bouncycastle.util.encoders.Hex;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.owasp.wrongsecrets.ScoreCard;
-
-import java.nio.charset.StandardCharsets;
 
 @ExtendWith(MockitoExtension.class)
 class Challenge24Test {
@@ -24,7 +21,5 @@ class Challenge24Test {
         Assertions.assertThat(challenge.solved(challenge.spoiler().solution())).isTrue();
         Mockito.verify(scoreCard).completeChallenge(challenge);
     }
-
-
 
 }

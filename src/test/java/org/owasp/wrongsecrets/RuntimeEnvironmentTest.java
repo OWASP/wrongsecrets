@@ -14,18 +14,13 @@ import org.owasp.wrongsecrets.challenges.Challenge;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.AWS;
-import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
-import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.GCP;
-import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.K8S;
-import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.VAULT;
+import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.*;
 
 @ExtendWith(MockitoExtension.class)
 class RuntimeEnvironmentTest {
 
     @Mock
     private Challenge challenge;
-
 
     @MethodSource("runtimeToChallengeEnvironments")
     private static Stream<Arguments> runtimeEnvToChallengeEnvironments() {

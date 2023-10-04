@@ -10,8 +10,6 @@ import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.ChallengeUI;
 import org.owasp.wrongsecrets.challenges.ChallengesController;
 import org.owasp.wrongsecrets.challenges.Spoiler;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 

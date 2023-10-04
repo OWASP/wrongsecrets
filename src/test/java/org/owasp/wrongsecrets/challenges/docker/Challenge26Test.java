@@ -21,6 +21,4 @@ class Challenge26Test {
         Mockito.verify(scoreCard).completeChallenge(challenge);
     }
 
-
-
 }

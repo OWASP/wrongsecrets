@@ -12,7 +12,7 @@ import org.owasp.wrongsecrets.challenges.docker.binaryexecution.MuslDetectorImpl
 
 
 @ExtendWith(MockitoExtension.class)
-public class BinaryExectionHelperTest {
+class BinaryExectionHelperTest {
 
 
     private String osArch, osName;

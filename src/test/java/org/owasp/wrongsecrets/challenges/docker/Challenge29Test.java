@@ -16,6 +16,7 @@ class Challenge29Test {
     @Mock
     private ScoreCard scoreCard;
     private final String passcode =new String(Base64.decode("c2RmZzk4YXNkZmc4YW53c2VkZHJmdWE9"));
+
     @Test
     void spoilerShouldRevealAnswer() throws Exception {
         var challenge = new Challenge29(scoreCard);

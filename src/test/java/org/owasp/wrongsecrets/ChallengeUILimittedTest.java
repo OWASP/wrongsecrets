@@ -21,6 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 )
 @AutoConfigureMockMvc
 class ChallengeUILimittedTest {
+
     @Autowired
     private MockMvc mvc;
 
