@@ -77,7 +77,7 @@ Pull requests should be as small/atomic as possible. Large, wide-sweeping change
 5. Choose what to work on, based on any of the outstanding [issues](https://github.com/OWASP/wrongsecrets/issues "WrongSecrets Issues").
 6. Create a branch so that you can cleanly work on the chosen issue: `git checkout -b fix/Issue66`
 7. Open your favorite editor and start making modifications. We recommend using the [IntelliJ Idea](https://www.jetbrains.com/idea/).
-8. Install [pre-commit](https://pre-commit.com/#install) the dependencies for our pre-commit configuration to make sure your code complies with standards used in the project. This requires terraform, [terraform-docs](https://github.com/terraform-docs/terraform-docs#installation), [tflint](https://github.com/terraform-linters/tflint#installation), and [commitlint](https://commitlint.js.org/#/guides-local-setup). For commitlint, you need [NodeJS](https://nodejs.org/en/download/) installed, after which you you can use `npm install` in the root folder of this project.
+8. Install [pre-commit](https://pre-commit.com/#install) the dependencies for our pre-commit configuration to make sure your code complies with standards used in the project. This requires terraform, [terraform-docs](https://github.com/terraform-docs/terraform-docs#installation), [tflint](https://github.com/terraform-linters/tflint#installation), and [commitlint](https://commitlint.js.org/#/guides-local-setup). For commitlint, you need [NodeJS 20](https://nodejs.org/en/download/) installed, after which you you can use `npm install` in the root folder of this project.
 9. Install the pre-commit hook using `pre-commit install --hook-type commit-msg`. We recommend to run `pre-commit run -a` every so often if you're working on a bigger change.
 10. After your modifications are done, push them to your forked repository. This can be done by executing the command `git add MYFILE` for every file you have modified, followed by `git commit -m 'your commit message here'` to commit the modifications and `git push` to push your modifications to GitHub.
 11. Create a Pull Request (PR) by going to your fork, <https://github.com/Your_Github_Handle/wrongsecrets> and click on the "New Pull Request" button. The target branch should typically be the Master branch. When submitting a PR, be sure to follow the checklist that is provided in the PR template. The checklist itself will be filled out by the reviewer.
@@ -118,7 +118,7 @@ Please be sure to take a careful look at our [Code of Conduct](https://github.co
 1. **Docker**
    [_Docker_](https://www.docker.com/) is a software platform that allows you to build, test, and deploy applications quickly and in a more efficient manner.
 
-2. **Node.Js**
+2. **Node.Js 20**
    [_Node.Js_](https://nodejs.org/en/) is an open-source library and a cross-platform JavaScript **runtime environment** specifically for running web applications outside one's browser.
 
 3. **JDK-21**
@@ -184,7 +184,16 @@ Select **_google-java-format Settings_** and click enable.
 
 ![](images/open-settings-4.4.png)
 
-### Step 5: Reload the project
+### Step 5: Project Structure
+
+Open **_File > Project structure _**.
+
+In the tab `Project` make sure that an SDK of version `21` is selected (e.g. `openjdk-21`, `oraclejdk-21` or just `21` depending on which Java JDK variant you installed).
+
+In the tab `SDKs` make sure that an SDK of version `21` is selected.
+
+
+### Step 6: Reload the project
 
 Open the **_Maven_** Tab
 
@@ -198,7 +207,7 @@ Further use the **_OWASP WrongSecrets --> Lifecycle --> install_** step to load 
 
 **NOTE:** Indians and other Asia-Pacific countries users may have to use **VPN** if you enounter this exception `org.owasp.dependencycheck.utils.DownloadFailedException: TLS Connection Reset`.
 
-### Step 6: Running the Project.
+### Step 7: Running the Project.
 
 Open the **_WrongSecretsApplication_** by following the path **_main>java>org.owasp.wrongsecrets>WrongSecretApplication_**.
 
@@ -208,7 +217,7 @@ Press **_Shift+F10_** to run the application, this will open up the **_Run/Debug
 
 ![](images/run-application-6.2.png)
 
-### Step 7: Setting up Configurations.
+### Step 8: Setting up Configurations.
 
 Select **_Edit configuration templates_** then select **_Application_** section.
 
@@ -247,7 +256,7 @@ Here is the preview of the **web server**, you can try to find the secrets by me
 
 ### Step 1: Creating a new issue.
 
-First make sure that you have an [Issue](https://github.com/OWASP/wrongsecrets/issues/new) reported for which a challenge is really wanted, And make sure the challenge is assigned to you, as others might be working on the challenge.
+First make sure that you have an [Issue](https://github.com/OWASP/wrongsecrets/issues/new) reported for which a challenge is really wanted, or pick an existing issue you want to implement. Make sure the challenge is assigned to you, as others might be working on the challenge.
 
 ### Step 2: Adding the challenge.
 
