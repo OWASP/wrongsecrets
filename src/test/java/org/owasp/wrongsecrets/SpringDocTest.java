@@ -12,6 +12,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import io.swagger.v3.core.util.Yaml;
 import io.swagger.v3.oas.models.OpenAPI;
 import java.util.List;
+import java.util.Map;
+
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -20,7 +22,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 @SpringBootTest
@@ -49,7 +50,6 @@ class SpringDocTest {
 
   @Test
   void getApiDocs() throws Exception {
-    MvcResult result =
         mockMvc
             .perform(get("/v3/api-docs"))
             .andExpect(status().isOk())
@@ -81,7 +81,7 @@ class SpringDocTest {
                         .getBeanType()
                         .getPackageName()
                         .startsWith("org.owasp.wrongsecrets"))
-            .map(e -> e.getKey())
+            .map(Map.Entry::getKey)
             .map(r -> r.getPathPatternsCondition().getFirstPattern().getPatternString())
             .toList();
 
