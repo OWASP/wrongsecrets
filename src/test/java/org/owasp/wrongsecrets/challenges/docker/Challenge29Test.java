@@ -18,7 +18,7 @@ class Challenge29Test {
     private final String passcode =new String(Base64.decode("c2RmZzk4YXNkZmc4YW53c2VkZHJmdWE9"));
 
     @Test
-    void spoilerShouldRevealAnswer() throws Exception {
+    void spoilerShouldRevealAnswer() {
         var challenge = new Challenge29(scoreCard);
 
         Assertions.assertThat(challenge.spoiler()).isEqualTo(new Spoiler(passcode));

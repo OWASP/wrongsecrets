@@ -10,7 +10,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 import java.util.List;
@@ -45,7 +44,7 @@ class SpringDocTest {
 
     @Test
     void getApiDocs() throws Exception {
-        MvcResult result = mockMvc.perform(get("/v3/api-docs"))
+        mockMvc.perform(get("/v3/api-docs"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.openapi", is("3.0.1")))
