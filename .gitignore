@@ -83,3 +83,4 @@ cypress/screenshots
 cypress/downloads
 py_env
 tmp/
+.env
