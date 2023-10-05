@@ -82,3 +82,4 @@ cypress/videos
 cypress/screenshots
 cypress/downloads
 py_env
+tmp/
