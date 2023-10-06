@@ -2,13 +2,13 @@ name: Project Management
 
 on:
   schedule:
-    - cron: '5 0 * * *' # Runs at 00:05 UTC every day
+    - cron: '0 * * * *'
 
 jobs:
   # Best used in combination with actions/stale to assign a Stale label
 
   unassign-issues-labeled-waiting-for-contributor-after-1-days-of-inactivity:
-    name: Unassign issues labeled "Wartet auf Contributor" after 7 days of inactivity.
+    name: Unassign issues labeled "Waiting for Contributor" after 1 days of inactivity.
     runs-on: ubuntu-latest
     steps:
       - uses: boundfoxstudios/action-unassign-contributor-after-days-of-inactivity@main
