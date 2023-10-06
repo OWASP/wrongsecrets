@@ -36,6 +36,9 @@ def parse_contributor_list(user_list : list) -> list:
 def get_contibutor_list(project : str,user_token: str) -> list:
 	headers = {'X-GitHub-Api-Version':'2022-11-28','Accept':'application/vnd.github+json','Authorization':'Bearer ' + user_token}
 	r = requests.get('https://api.github.com/repos/OWASP/'+project+'/contributors',headers=headers)
+	if r.status_code == 401:
+		print("Invalid token")
+		os._exit(-1)
 	return parse_contributor_list(r.json())
 
 
