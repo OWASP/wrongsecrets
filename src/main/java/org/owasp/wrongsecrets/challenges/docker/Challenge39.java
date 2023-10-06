@@ -1,10 +1,10 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.List;
-import java.util.Objects;
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
@@ -71,12 +71,19 @@ public class Challenge39 extends Challenge {
     return List.of(RuntimeEnvironment.Environment.DOCKER);
   }
 
+  @SuppressFBWarnings(
+      value = {"CIPHER_INTEGRITY", "ECB_MODE"},
+      justification = "This is to allow for easy ECB online decryptors")
   private String getSolution() {
     try {
       String encryptedText = resource.getContentAsString(Charset.defaultCharset());
       byte[] decodedEncryptedText = Base64.getDecoder().decode(encryptedText.trim());
-      byte[] decodedKey =
-          Objects.requireNonNull(resource.getFilename()).getBytes(StandardCharsets.UTF_8);
+      String filename = resource.getFilename();
+      if (filename == null) {
+        log.warn("could not get filename from resource");
+        return "error_decryption";
+      }
+      byte[] decodedKey = filename.getBytes(StandardCharsets.UTF_8);
 
       // Create a SecretKey from the plaintext key
       SecretKey secretKey = new SecretKeySpec(decodedKey, "AES");

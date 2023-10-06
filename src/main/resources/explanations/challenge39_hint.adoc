@@ -1,6 +1,12 @@
-This challenge can be solved by decrypting the base64 encoded secret in `secrchallenge.md`.
+This challenge can be solved by decrypting the base64 encoded secret in `secrchallenge.md`. You can do this either by
 
-1. Copy the contents of the `secrchallenge.md` file.
-2. Decode the copied string from base64 to UTF-8.
-3. Decrypt it using any AES decryption tool with `secrchallenge.md` as decryption key.
-4. Paste the secret into the box.
+1. Using an online aes decryption tool like https://www.devglan.com/online-tools/aes-encryption-decryption[https://www.devglan.com/online-tools/aes-encryption-decryption]
+- Copy the contents of the `secrchallenge.md` file and paste it in the textbox of the decryptor.
+- Make sure that the input format is `Base64` and cipher mode is `ECB`.
+- Use `secrchallenge.md` as decryption key and click on `Decrypt` to get the secret.
+
+2. Using the terminal
+- Launch the terminal while you are in the `executables` directory.
+- Type in `echo -n "secrchallenge.md" | xxd -p` to convert the plaintext key to hexadecimal key.
+- Then use the obtained decryption key to decrypt the file by typing `openssl enc -a -d -aes-128-ecb -in secrchallenge.md -K 736563726368616c6c656e67652e6d64 -out decrypted.md`
+- Copy the secret from the `decrypted.md` file in the `executables` folder.
