@@ -1,8 +1,6 @@
 name: Project Management
 
-on:
-  schedule:
-    - cron: '0 * * * *'
+on: [push]
 
 jobs:
   # Best used in combination with actions/stale to assign a Stale label
