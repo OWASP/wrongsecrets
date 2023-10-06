@@ -1,0 +1,6 @@
+This challenge can be solved by decrypting the base64 encoded secret in `secrchallenge.md`.
+
+1. Copy the contents of the `secrchallenge.md` file.
+2. Decode the copied string from base64 to UTF-8.
+3. Decrypt it using any AES decryption tool with `secrchallenge.md` as decryption key.
+4. Paste the secret into the box.

@@ -1,0 +1,3 @@
+*Why we should not use filename as encryption key?*
+
+There have been multiple scenarios where the contents of files were encrypted using the filename itself, which allows attackers to easily decrypt its contents.
