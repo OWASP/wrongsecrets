@@ -31,6 +31,7 @@ class Challenge39Test {
     var challenge = new Challenge39(scoreCard, resource);
     Assertions.assertThat(challenge.spoiler().solution()).isNotEmpty();
     Assertions.assertThat(challenge.answerCorrect(challenge.spoiler().solution())).isTrue();
+    Assertions.assertThat(challenge.answerCorrect("error_decryption")).isFalse();
   }
 
   @Test
