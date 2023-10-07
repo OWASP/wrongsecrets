@@ -18,5 +18,6 @@
     }
   ],
   "website": "https://github.com/OWASP/wrongsecrets",
+  "icon": "https://raw.githubusercontent.com/OWASP/wrongsecrets/master/icon.png",
   "repository": "https://github.com/OWASP/wrongsecrets"
 }
