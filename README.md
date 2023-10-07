@@ -124,7 +124,7 @@ better ;-).
 ### Running these on Heroku
 
 You can test them out at [https://wrongsecrets.herokuapp.com/](https://wrongsecrets.herokuapp.com/) as well! The folks at Heroku have given us an awesome open source support package, which allows us to run the app for free there, where it is almost always up. Still, please do not fuzz and/or try to bring it down: you would be spoiling it for others that want to testdrive it.
-
+Please use the [link](https://wrongsecrets.herokuapp.com/) to use our hosted version of the app. If you still want to host it yourself instead, you can do so by clicking [at this link](https://heroku.com/deploy?template=https://github.com/OWASP/wrongsecrets/tree/master) but please be aware that there will be cost involved for you which this project and/or its maintainers cannot be held responsible for.
 
 ### Running these on Render.io
 *status: experimental*
