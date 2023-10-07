@@ -11,11 +11,11 @@
     "awareness"
   ],
   "stack": "container",
-  "formation": {
-    "web": {
+  "formation": [
+    {"web": {
       "quantity": 1
-    }
-  },
+    }}
+  ],
   "website": "https://github.com/OWASP/wrongsecrets",
   "repository": "https://github.com/OWASP/wrongsecrets"
 }
