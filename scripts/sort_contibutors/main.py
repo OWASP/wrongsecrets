@@ -77,8 +77,11 @@ def parse_contributor_list(user_list: list, user_token: str) -> list:
         username = element['login']
         name = get_fullname(username, user_token)
 
+        black_list = ['DerGut', 'bkimminich', 'MichaelEischer', 'rseedorff', 'jonasbg', 'scornelissen85', 'zadjadr', 'stuebingerb', 'sydseter', 'troygerber', 'skandix', 'saymolet',
+                      'adrianeriksen', 'pseudobeard', 'coffemakingtoaster', 'wurstbrot', 'blucas-accela', 'fwijnholds', 'stefan-schaermeli', 'nickmalcolm', 'orangecola', 'commjoen', 'bendehaan']
+
         # Filter the github bots
-        if '[bot]' not in username and 'commjoen' not in username and 'bendehaan' not in username:
+        if '[bot]' not in username and username not in black_list:
             contributors.append(
                 {'username': username, 'name': name, 'ranking': ranking})
 
@@ -149,6 +152,8 @@ def get_contibutors_list(token: str) -> list:
     print("[+] Fetching the Wrong Secrets Binaries contributors list ... ")
     wrongsecrets_binaries_list = fetch_repository(
         'wrongsecrets-binaries', token)
+    print("[+] Fetching the Wrong Secrets contributors list ... ")
+    wrongsecrets_list = fetch_repository('wrongsecrets', token)
     print("[+] Fetching the Wrong Secrets contributors list ... ")
     wrongsecrets_list = fetch_repository('wrongsecrets', token)
     print("[+] Merging the lists .. ")
