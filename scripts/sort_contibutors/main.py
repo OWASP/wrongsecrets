@@ -26,39 +26,46 @@ def print_md(user_list: dict, label="") -> str:
     return string + '\n'
 
 
-def print_html(top_contributors: dict, contributors: dict, testers: dict, special_thanks: dict) -> str:
+def print_html(leaders: dict, top_contributors: dict, contributors: dict, testers: dict, special_thanks: dict) -> str:
 
-    string = '<html><head></head><body>'
+    string = '<html><head></head><body>\n'
 
-    string += '<h1>Top contributors</h1>'
-    string += '<ul>'
+    string += '<h1>Leaders</h1>\n'
+    string += '<ul>\n'
+    for value in leaders:
+        string += '<li><a href=\'https://www.github.com/{}\'>{} @{}</a></li>\n'.format(
+            value['username'], value['name'], value['username'])
+    string += '</ul>\n'
+
+    string += '\n<h1>Top contributors</h1>\n'
+    string += '<ul>\n'
     for value in top_contributors:
-        string += '<li><a href=\'https://www.github.com/{}\'>{} @{}</a></li>'.format(
+        string += '<li><a href=\'https://www.github.com/{}\'>{} @{}</a></li>\n'.format(
             value['username'], value['name'], value['username'])
-    string += '</ul>'
+    string += '</ul>\n'
 
-    string += '<h1>Contributors</h1>'
-    string += '<ul>'
+    string += '\n<h1>Contributors</h1>\n'
+    string += '<ul>\n'
     for value in contributors:
-        string += '<li><a href=\'https://www.github.com/{}\'>{} @{}</a></li>'.format(
+        string += '<li><a href=\'https://www.github.com/{}\'>{} @{}</a></li>\n'.format(
             value['username'], value['name'], value['username'])
-    string += '</ul>'
+    string += '</ul>\n'
 
-    string += '<h1>Testers</h1>'
-    string += '<ul>'
+    string += '<h1>Testers</h1>\n'
+    string += '<ul>\n'
     for value in testers:
         string += '<li><a href=\'https://www.github.com/{}\'>{} @{}</a></li>'.format(
             value['username'], value['name'], value['username'])
-    string += '</ul>'
+    string += '</ul>\n\n'
 
-    string += '<h1>Special thanks</h1>'
-    string += '<ul>'
+    string += '<h1>Special thanks</h1>\n'
+    string += '<ul>\n'
     for value in special_thanks:
-        string += '<li><a href=\'https://www.github.com/{}\'>{} @{}</a></li>'.format(
+        string += '<li><a href=\'https://www.github.com/{}\'>{} @{}</a></li>\n'.format(
             value['username'], value['name'], value['username'])
-    string += '</ul>'
+    string += '</ul>\n'
 
-    string += '</body><html>'
+    string += '</body><html>\n'
     return string
 
 
@@ -167,6 +174,10 @@ if token is not None:
         {'username': 'mchangsp', 'name': 'Marc Chang Sing Pang'},
         {'username': 'djvinnie', 'name': 'Vineeth Jagadeesh'}
     ]
+    leaders = [
+        {'username': 'bendehaan', 'name': 'Ben de Haan'},
+        {'username': 'commjoen', 'name': 'Jeroen Willemsen'}
+    ]
     special_thanks = [
         {'username': 'madhuakula', 'name': 'Madhu Akula @madhuakula'},
         {'username': 'bkimminich', 'name': 'Björn Kimminich'},
@@ -181,11 +192,12 @@ if token is not None:
     l = merge_users(special_list + normal_list)
 
     print('[+] Print to HTML file')
-    html_payload = print_html(l[0], l[1], testers, special_thanks)
+    html_payload = print_html(leaders, l[0], l[1], testers, special_thanks)
     print_file(html_payload, False)
 
     print('[+] Print to MD file')
-    md_payload = print_md(l[0], 'Top contributors')
+    md_payload = print_md(leaders, 'Leaders')
+    md_payload += print_md(l[0], 'Top contributors')
     md_payload += print_md(l[1], 'Contributors')
     md_payload += print_md(testers, 'Testers')
     md_payload += print_md(special_thanks, 'Special thanks')
