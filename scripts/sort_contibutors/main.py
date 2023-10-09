@@ -1,5 +1,4 @@
 import requests
-import json
 import os
 from dotenv import load_dotenv
 
@@ -27,16 +26,39 @@ def print_md(user_list: dict, label="") -> str:
     return string + '\n'
 
 
-def print_html(user_list: dict, label="") -> str:
+def print_html(top_contributors: dict, contributors: dict, testers: dict, special_thanks: dict) -> str:
 
-    string = '<html><head></head><body>'
-    string += '<h1>{}</h1>'.format(label)
+    string = '<html><head></head><>'
+
+    string += '<h1>Top contributors</h1>'
     string += '<ul>'
-    for value in user_list:
+    for value in top_contributors:
         string += '<li><a href=\'https://www.github.com/{}\'>{} @{}</a></li>'.format(
             value['username'], value['name'], value['username'])
+    string += '</ul>'
 
-    string += '</ul></body><html>'
+    string += '<h1>Contributors</h1>'
+    string += '<ul>'
+    for value in contributors:
+        string += '<li><a href=\'https://www.github.com/{}\'>{} @{}</a></li>'.format(
+            value['username'], value['name'], value['username'])
+    string += '</ul>'
+
+    string += '<h1>Testers</h1>'
+    string += '<ul>'
+    for value in testers:
+        string += '<li><a href=\'https://www.github.com/{}\'>{} @{}</a></li>'.format(
+            value['username'], value['name'], value['username'])
+    string += '</ul>'
+
+    string += '<h1>Special thanks</h1>'
+    string += '<ul>'
+    for value in special_thanks:
+        string += '<li><a href=\'https://www.github.com/{}\'>{} @{}</a></li>'.format(
+            value['username'], value['name'], value['username'])
+    string += '</ul>'
+
+    string += '</body><html>'
     return string
 
 
@@ -159,10 +181,7 @@ if token is not None:
     l = merge_users(special_list + normal_list)
 
     print('[+] Print to HTML file')
-    html_payload = print_html(l[0], 'Top contributors')
-    html_payload += print_html(l[1], 'Contributors')
-    html_payload += print_html(testers, 'Testers')
-    html_payload += print_html(special_thanks, 'Special thanks')
+    html_payload = print_html(l[0], l[1], testers, special_thanks)
     print_file(html_payload, False)
 
     print('[+] Print to MD file')
