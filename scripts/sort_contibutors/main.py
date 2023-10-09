@@ -127,3 +127,4 @@ else:
         'The variable USER_TOKEN  does not exists. You must setup the variable'
         'in the following way:')
     print('echo USER_TOKEN=github_pat_dfs1N_f>.env')
+    print('note that the USER_TOKEN requires "repository access" only')
