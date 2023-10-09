@@ -55,4 +55,3 @@ Special thanks
 - [Dan Gora @devsecops](https://www.github.com/devsecops)
 - [Xiaolu Dai @saragluna](https://www.github.com/saragluna)
 - [Jonathan Giles @jonathanGiles](https://www.github.com/jonathanGiles)
-
