@@ -28,7 +28,7 @@ def print_md(user_list: dict, label="") -> str:
 
 def print_html(top_contributors: dict, contributors: dict, testers: dict, special_thanks: dict) -> str:
 
-    string = '<html><head></head><>'
+    string = '<html><head></head>'
 
     string += '<h1>Top contributors</h1>'
     string += '<ul>'
