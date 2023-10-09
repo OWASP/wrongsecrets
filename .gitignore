@@ -84,3 +84,4 @@ cypress/downloads
 py_env
 tmp/
 .env
+contributors_file*

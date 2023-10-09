@@ -78,7 +78,7 @@ def parse_contributor_list(user_list: list, user_token: str) -> list:
         name = get_fullname(username, user_token)
 
         # Filter the github bots
-        if '[bot]' not in username:
+        if '[bot]' not in username and 'commjoen' not in username and 'bendehaan' not in username:
             contributors.append(
                 {'username': username, 'name': name, 'ranking': ranking})
 
