@@ -3,18 +3,41 @@ import json
 import os
 from dotenv import load_dotenv
 
-# It's just for debugging purpose
-
-
-def print_list(user_list: dict, label="") -> None:
-
-    print(label)
-    for value in user_list:
-        print(value['name'], " ", value['username'], ' ', value['ranking'])
-    print("=============================================")
-
 # This function parses the contribution list, sorting
 # the users per its ranks
+
+
+def print_file(s: str, flag: bool) -> None:
+
+    # True for MD , false for HTML file
+    if flag:
+        f = open('contributors.md', 'w')
+        f.write(s)
+        return
+    f = open('contributors.html', 'w')
+    f.write(s)
+
+
+def print_md(user_list: dict, label="") -> str:
+
+    string = '{}\n'.format(label)
+    for value in user_list:
+        string += '- [{} @{}](https://www.github.com/{})\n'.format(value['name'],
+                                                                   value['username'], value['username'])
+    return string + '\n'
+
+
+def print_html(user_list: dict, label="") -> str:
+
+    string = '<html><head></head><body>'
+    string += '<h1>{}</h1>'.format(label)
+    string += '<ul>'
+    for value in user_list:
+        string += '<li><a href=\'https://www.github.com/{}\'>{} @{}</a></li>'.format(
+            value['username'], value['name'], value['username'])
+
+    string += '</ul></body><html>'
+    return string
 
 
 def parse_contributor_list(user_list: list, user_token: str) -> list:
@@ -123,11 +146,23 @@ if token is not None:
         {'username': 'djvinnie', 'name': 'Vineeth Jagadeesh'}
     ]
     l = get_contibutors_list(token)
-    special = l[0]
-    normal = l[1]
-    print_list(special, 'Special thanks')
-    print_list(normal, 'Contributors')
+    special_list = l[0]
+    normal_list = l[1]
+    l = merge_users(special_list + normal_list)
 
+    print('[+] Print to HTML file')
+    html_payload = print_html(l[0], 'Top contributors')
+    html_payload += print_html(l[1], 'Contributors')
+    html_payload += print_md(testers, 'Testers')
+
+    print('[+] Print to MD file')
+    md_payload = print_md(l[0], 'Top contributors')
+    md_payload += print_md(l[1], 'Contributors')
+    md_payload += print_md(testers, 'Testers')
+
+    print_file(html_payload, False)
+    print_file(md_payload, True)
+    print('[+] Done')
 else:
     print(
         'The variable USER_TOKEN  does not exists. You must setup the variable'
