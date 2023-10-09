@@ -116,6 +116,12 @@ token = os.getenv('USER_TOKEN')
 
 if token is not None:
 
+    testers = [
+        {'username': 'davevs', 'name': 'Dave van Stein '},
+        {'username': 'drnow4u', 'name': 'Marcin Nowak'},
+        {'username': 'mchangsp', 'name': 'Marc Chang Sing Pang'},
+        {'username': 'djvinnie', 'name': 'Vineeth Jagadeesh'}
+    ]
     l = get_contibutors_list(token)
     special = l[0]
     normal = l[1]
