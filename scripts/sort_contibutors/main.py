@@ -11,10 +11,10 @@ def print_file(s: str, flag: bool) -> None:
 
     # True for MD , false for HTML file
     if flag:
-        f = open('contributors.md', 'w')
+        f = open('contributors_file.md', 'w')
         f.write(s)
         return
-    f = open('contributors.html', 'w')
+    f = open('contributors_file.html', 'w')
     f.write(s)
 
 
@@ -145,6 +145,14 @@ if token is not None:
         {'username': 'mchangsp', 'name': 'Marc Chang Sing Pang'},
         {'username': 'djvinnie', 'name': 'Vineeth Jagadeesh'}
     ]
+    special_thanks = [
+        {'username': 'madhuakula', 'name': 'Madhu Akula @madhuakula'},
+        {'username': 'bkimminich', 'name': 'Björn Kimminich'},
+        {'username': 'devsecops', 'name': 'Dan Gora'},
+        {'username': 'saragluna', 'name': 'Xiaolu Dai'},
+        {'username': 'jonathanGiles', 'name': 'Jonathan Giles'},
+    ]
+
     l = get_contibutors_list(token)
     special_list = l[0]
     normal_list = l[1]
@@ -153,15 +161,17 @@ if token is not None:
     print('[+] Print to HTML file')
     html_payload = print_html(l[0], 'Top contributors')
     html_payload += print_html(l[1], 'Contributors')
-    html_payload += print_md(testers, 'Testers')
+    html_payload += print_html(testers, 'Testers')
+    html_payload += print_html(special_thanks, 'Special thanks')
+    print_file(html_payload, False)
 
     print('[+] Print to MD file')
     md_payload = print_md(l[0], 'Top contributors')
     md_payload += print_md(l[1], 'Contributors')
     md_payload += print_md(testers, 'Testers')
-
-    print_file(html_payload, False)
+    md_payload += print_md(special_thanks, 'Special thanks')
     print_file(md_payload, True)
+
     print('[+] Done')
 else:
     print(
