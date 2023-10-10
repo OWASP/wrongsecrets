@@ -157,8 +157,6 @@ def get_contibutors_list(token: str) -> list:
     print("[+] Fetching the Wrong Secrets contributors list ... ")
     wrongsecrets_list = fetch_repository('wrongsecrets', token)
     print("[+] Fetching the Wrong Secrets contributors list ... ")
-    wrongsecrets_list = fetch_repository('wrongsecrets', token)
-    print("[+] Merging the lists .. ")
     merged_list = wrongsecrets_binaries_list + \
         wrongsecrets_ctf_list + wrongsecrets_list
     print("[+] Sorting the list .. ")
