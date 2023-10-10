@@ -81,7 +81,7 @@ def parse_contributor_list(user_list: list, user_token: str) -> list:
                       'adrianeriksen', 'pseudobeard', 'coffemakingtoaster', 'wurstbrot', 'blucas-accela', 'fwijnholds', 'stefan-schaermeli', 'nickmalcolm', 'orangecola', 'commjoen', 'bendehaan']
 
         # Filter the github bots
-        if '[bot]' not in username and username not in black_list:
+        if '[bot]' not in username and username not in leaders_and_multijuicer:
             contributors.append(
                 {'username': username, 'name': name, 'ranking': ranking})
 
