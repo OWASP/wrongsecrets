@@ -156,7 +156,6 @@ def get_contibutors_list(token: str) -> list:
         'wrongsecrets-binaries', token)
     print("[+] Fetching the Wrong Secrets contributors list ... ")
     wrongsecrets_list = fetch_repository('wrongsecrets', token)
-    print("[+] Fetching the Wrong Secrets contributors list ... ")
     merged_list = wrongsecrets_binaries_list + \
         wrongsecrets_ctf_list + wrongsecrets_list
     print("[+] Sorting the list .. ")
@@ -174,7 +173,7 @@ token = os.getenv('USER_TOKEN')
 if token is not None:
 
     testers = [
-        {'username': 'davevs', 'name': 'Dave van Stein '},
+        {'username': 'davevs', 'name': 'Dave van Stein'},
         {'username': 'drnow4u', 'name': 'Marcin Nowak'},
         {'username': 'mchangsp', 'name': 'Marc Chang Sing Pang'},
         {'username': 'djvinnie', 'name': 'Vineeth Jagadeesh'}
