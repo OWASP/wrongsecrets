@@ -76,9 +76,11 @@ def parse_contributor_list(user_list: list, user_token: str) -> list:
         ranking = element['contributions']
         username = element['login']
         name = get_fullname(username, user_token)
+        if name == None:
+            name = username
 
         leaders_and_multijuicer = ['DerGut', 'bkimminich', 'MichaelEischer', 'rseedorff', 'jonasbg', 'scornelissen85', 'zadjadr', 'stuebingerb', 'sydseter', 'troygerber', 'skandix', 'saymolet',
-                      'adrianeriksen', 'pseudobeard', 'coffemakingtoaster', 'wurstbrot', 'blucas-accela', 'fwijnholds', 'stefan-schaermeli', 'nickmalcolm', 'orangecola', 'commjoen', 'bendehaan']
+                                   'adrianeriksen', 'pseudobeard', 'coffemakingtoaster', 'wurstbrot', 'blucas-accela', 'fwijnholds', 'stefan-schaermeli', 'nickmalcolm', 'orangecola', 'commjoen', 'bendehaan']
 
         # Filter the github bots
         if '[bot]' not in username and username not in leaders_and_multijuicer:
