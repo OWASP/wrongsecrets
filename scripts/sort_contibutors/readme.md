@@ -11,6 +11,7 @@ First of all, you need to setup the ```.env``` file which contains the USER_TOKE
 * Open the terminal in the same directory as the *main.py* script and type: ```echo USER_TOKEN=github_pat_TOKEN > .env```
 
 This script does not use external libraries so just run it directly, and to do so open the terminal and type:
-```
+
+```sh
 python3 main.py
 ```
