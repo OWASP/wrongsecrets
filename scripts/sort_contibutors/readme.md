@@ -1,7 +1,7 @@
 # Revise contributor rankings
 
 ## About
-This script closes the [ISSUE #984](https://github.com/OWASP/wrongsecrets/issues/984) .
+This script is used to generate the contributor-list for home.html and for the various markdown pages on Github where we list the contributors: [www-wrongsecrets](https://github.com/OWASP/www-project-wrongsecrets/blob/main/index.md#contributors) [wrongsecrets](https://github.com/OWASP/wrongsecrets/blob/master/README.md#special-thanks--contributors).
 
 ## Installation and run
 
