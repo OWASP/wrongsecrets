@@ -28,6 +28,8 @@ WORKDIR /config/Desktop
 COPY src/main/resources/executables/*linux* /var/tmp/wrongsecrets/
 COPY src/main/resources/executables/decrypt/ /var/tmp/wrongsecrets/decrypt/
 COPY src/main/resources/executables/wrongsecrets-advanced-c-windows.exe /var/tmp/wrongsecrets/
+COPY src/main/resources/executables/secrchallenge.md /var/tmp/wrongsecrets/
+COPY src/main/resources/executables/secrchallenge.json /var/tmp/wrongsecrets/
 COPY src/test/resources/alibabacreds.kdbx /var/tmp/helpers/
 COPY src/test/resources/alibabacreds.kdbx /var/tmp/wrongsecrets/
 COPY wrongsecret-desktop-resources/welcome.md /var/tmp/wrongsecrets/
