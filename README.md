@@ -138,6 +138,7 @@ Want to deploy yourself with Render? Click the button below:
 ### Running these on Railway
 
 If you want to host WrongSecrets on Railway, you can do so by deploying [this one-click template](https://railway.app/new/template/7pnwRj), or by clicking the button below. Railway does not offer an always-free plan anymore, but the free trial is good enough to test-drive this before you decide to upgrade. If you need a step-by-step companion guide, see [this blog post](https://alphasec.io/test-your-secret-management-skills-with-owasp-wrongsecrets/).
+
 [Deploy on Railway](https://railway.app/new/template/7pnwRj)
 
 ## Basic K8s exercise
