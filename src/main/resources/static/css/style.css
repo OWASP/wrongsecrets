@@ -9,6 +9,11 @@
     margin: 20px 0px 20px 0px;
 }
 
+.dropdown-menu {
+    max-height: 370px;
+    overflow-y: auto;
+}
+
 .thank-you {
     border-radius: 25px;
     border: 2px solid var(--bs-body-color) !important;
