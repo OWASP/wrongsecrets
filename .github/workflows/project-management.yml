@@ -23,3 +23,9 @@ jobs:
           exempt-assignees: 'Octo,Cat' # Exempt some assignees from being unassigned
           labels-to-remove: 'Stale' # Labels to remove after unassigning an issue
           message: 'Automatically unassigned after 1 day of inactivity.'
+
+  test-schedule:
+    name: Test cron jobs every 5 minutes
+    runs-on: ubuntu-latest
+    steps:
+      run: echo "This step will always run every 5 minutes"
