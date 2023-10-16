@@ -81,3 +81,7 @@ node_modules
 cypress/videos
 cypress/screenshots
 cypress/downloads
+py_env
+tmp/
+.env
+contributors_file*

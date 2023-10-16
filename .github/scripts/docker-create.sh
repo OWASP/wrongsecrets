@@ -98,7 +98,7 @@ render_publish(){
 # Set option to local if no option provided
 script_mode="local"
 # Parse provided options
-while getopts ":htpergon*" option; do
+while getopts ":htperfgon*" option; do
     case $option in
     h) # display Help
         Help

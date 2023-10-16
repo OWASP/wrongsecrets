@@ -9,13 +9,13 @@
 [![Test minikube script (k8s)](https://github.com/OWASP/wrongsecrets/actions/workflows/minikube-k8s-test.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/minikube-k8s-test.yml) [![Test minikube script (k8s&vault)](https://github.com/OWASP/wrongsecrets/actions/workflows/minikube-vault-test.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/minikube-vault-test.yml) [![Docker container test](https://github.com/OWASP/wrongsecrets/actions/workflows/container_test.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/container_test.yml)[![Test container on podman and Colima](https://github.com/OWASP/wrongsecrets/actions/workflows/container-alts-test.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/container-alts-test.yml)
 [![DAST with ZAP](https://github.com/OWASP/wrongsecrets/actions/workflows/dast-zap-test.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/dast-zap-test.yml)
 
-[![OWASP Lab Project](https://img.shields.io/badge/OWASP-lab%20project-48A646.svg)](https://owasp.org/projects/)
+[![OWASP Production Project](https://img.shields.io/badge/OWASP-production%20project-48A646.svg)](https://owasp.org/projects/)
 [![OpenSSF Best Practices](https://bestpractices.coreinfrastructure.org/projects/7024/badge)](https://bestpractices.coreinfrastructure.org/projects/7024)
 [![Discussions](https://img.shields.io/github/discussions/OWASP/wrongsecrets)](https://github.com/OWASP/wrongsecrets/discussions)
 
 Welcome to the OWASP WrongSecrets game! The game is packed with real life examples of how to _not_ store secrets in your software. Each of these examples is captured in a challenge, which you need to solve using various tools and techniques. Solving these challenges will help you recognize common mistakes & can help you to reflect on your own secrets management strategy.
 
-Can you solve all the 37 challenges?
+Can you solve all the 38 challenges?
 
 Try some of them on [our Heroku demo environment](https://wrongsecrets.herokuapp.com/) or on our [Okteto demo environment (might need to awake again)](https://wrongsecrets-commjoen.cloud.okteto.net/).
 
@@ -31,6 +31,7 @@ Want to play the other challenges? Read the instructions on how to set them up b
 -   [Basic docker exercises](#basic-docker-exercises)
     -   [Running these on Heroku](#running-these-on-heroku)
     -   [Running these on Render.io](#running-these-on-renderio)
+    -   [Running these on Railway](#running-these-on-railway)
 -   [Basic K8s exercise](#basic-k8s-exercise)
     -   [Minikube based](#minikube-based)
     -   [k8s based](#k8s-based)
@@ -71,7 +72,7 @@ Copyright (c) 2020-2023 Jeroen Willemsen and WrongSecrets contributors.
 
 ## Basic docker exercises
 
-_Can be used for challenges 1-4, 8, 12-32, 34, 35-37_
+_Can be used for challenges 1-4, 8, 12-32, 34, 35-38_
 
 For the basic docker exercises you currently require:
 
@@ -116,6 +117,7 @@ Now you can try to find the secrets by means of solving the challenge offered at
 -   [localhost:8080/challenge/35](http://localhost:8080/challenge/35)
 -   [localhost:8080/challenge/36](http://localhost:8080/challenge/36)
 -   [localhost:8080/challenge/37](http://localhost:8080/challenge/37)
+-   [localhost:8080/challenge/38](http://localhost:8080/challenge/38)
 
 Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look
 better ;-).
@@ -123,7 +125,7 @@ better ;-).
 ### Running these on Heroku
 
 You can test them out at [https://wrongsecrets.herokuapp.com/](https://wrongsecrets.herokuapp.com/) as well! The folks at Heroku have given us an awesome open source support package, which allows us to run the app for free there, where it is almost always up. Still, please do not fuzz and/or try to bring it down: you would be spoiling it for others that want to testdrive it.
-
+Use [this link](https://wrongsecrets.herokuapp.com/) to use our hosted version of the app. If you want to host it on Heroku yourself (e.g., for running a training), you can do so by clicking [this link](https://heroku.com/deploy?template=https://github.com/OWASP/wrongsecrets/tree/master). Please be aware that this will incur costs for which this project and/or its maintainers cannot be held responsible.
 
 ### Running these on Render.io
 *status: experimental*
@@ -133,10 +135,14 @@ Want to deploy yourself with Render? Click the button below:
 
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/OWASP/wrongsecrets)
 
+### Running these on Railway
+*status: maintained by [alphasec.io](https://github.com/alphasecio)*
+
+If you want to host WrongSecrets on Railway, you can do so by deploying [this one-click template](https://railway.app/new/template/7pnwRj). Railway does not offer an always-free plan anymore, but the free trial is good enough to test-drive this before you decide to upgrade. If you need a step-by-step companion guide, see [this blog post](https://alphasec.io/test-your-secret-management-skills-with-owasp-wrongsecrets/).
 
 ## Basic K8s exercise
 
-_Can be used for challenges 1-6, 8, 12-37_
+_Can be used for challenges 1-6, 8, 12-38_
 
 ### Minikube based
 
@@ -193,7 +199,7 @@ Don't want to go over the hassle of setting up K8S yourself? visit [https://wron
 
 ## Vault exercises with minikube
 
-_Can be used for challenges 1-8, 12-37_
+_Can be used for challenges 1-8, 12-38_
 Make sure you have the following installed:
 
 -   minikube with docker (or comment out line 8 and work at your own k8s setup),
@@ -211,7 +217,7 @@ This is because if you run the start script again it will replace the secret in 
 
 ## Cloud Challenges
 
-_Can be used for challenges 1-37_
+_Can be used for challenges 1-38_
 
 **READ THIS**: Given that the exercises below contain IAM privilege escalation exercises,
 never run this on an account which is related to your production environment or can influence your account-over-arching
@@ -264,15 +270,15 @@ Leaders:
 
 Top contributors:
 
--   [Nanne Baars @nbaars](https://github.com/nbaars)
 -   [Joss Sparkes @remakingeden](https://github.com/remakingeden)
+-   [Nanne Baars @nbaars](https://github.com/nbaars)
+-   [Puneeth Y @puneeth072003](https://github.com/puneeth072003)
 -   [Marcin Nowak @drnow4u](https://github.com/drnow4u)
+-   [Divyanshu Dev @Novice-expert](https://github.com/Novice-expert)
 -   [Tibor Hercz @tiborhercz](https://github.com/tiborhercz)
 -   [Rodolfo Cabral Neves @roddas](https://github.com/roddas)
 -   [Chris Elbring Jr. @neatzsche](https://github.com/neatzsche)
--   [Puneeth Y @puneeth072003](https://github.com/puneeth072003)
 -   [Mike Woudenberg @mikewoudenberg](https://github.com/mikewoudenberg)
--   [Divyanshu Dev @Novice-expert](https://github.com/Novice-expert)
 -   [Filip Chyla @fchyla](https://github.com/fchyla)
 -   [Dmitry Litosh @Dlitosh](https://github.com/Dlitosh)
 -   [Josh Grossman @tghosth](https://github.com/tghosth)
@@ -437,7 +443,7 @@ Feel free to edit and propose changes via pull requests. Be sure to follow our g
 
 Please note that we officially only support Linux and MacOS for development. If you want to develop using a Windows machine, use WSL2 or a virtual machine running Linux. We did include Windows detection & a bunch of `exe` files for a first experiment, but are looking for active maintainers of them. Want to make sure it runs on Windows? Create PRs ;-).
 
-If, after reading this section, you still have no clue on the application code: Have a look [at some tutorials on Spring boot from Baeldung](https://www.baeldung.com/spring-boot)
+If, after reading this section, you still have no clue on the application code: Have a look [at some tutorials on Spring boot from Baeldung](https://www.baeldung.com/spring-boot).
 
 ### Automatic reload during development
 

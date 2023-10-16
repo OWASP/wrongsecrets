@@ -1,0 +1,7 @@
+*Why should you be careful with Git notes?*
+
+1. Like all Git repo's, once a secret is leaked it here it is very tough/impossible to remove from all history.
+
+2. Git Notes appears to be a rarely used feature of Git, therefore a lot of the secret scanners do not check them. This means it can be missed in CI.*
+
+**Concern 2 is currently being researched by the team at WrongSecrets, we are sampling the biggest open source projects to understand if Git notes is used. If it is used we may try to contribute to secret scanners to accommodate this, if it is not used we may recommend simply not using this feature of Git to ensure no issues arise. Keep an eye out on the WrongSecrets Slack for the progression of this project.**

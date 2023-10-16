@@ -20,6 +20,7 @@ import org.springframework.test.web.servlet.MockMvc;
     classes = WrongSecretsApplication.class)
 @AutoConfigureMockMvc
 class ChallengeUILimittedTest {
+
   @Autowired private MockMvc mvc;
 
   @Test

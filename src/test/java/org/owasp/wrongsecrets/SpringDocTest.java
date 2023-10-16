@@ -12,6 +12,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import io.swagger.v3.core.util.Yaml;
 import io.swagger.v3.oas.models.OpenAPI;
 import java.util.List;
+import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -20,13 +21,12 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 @Slf4j
-public class SpringDocTest {
+class SpringDocTest {
 
   @Autowired protected MockMvc mockMvc;
   @Autowired RequestMappingHandlerMapping requestMappingHandlerMapping;
@@ -48,22 +48,21 @@ public class SpringDocTest {
   }
 
   @Test
-  public void getApiDocs() throws Exception {
-    MvcResult result =
-        mockMvc
-            .perform(get("/v3/api-docs"))
-            .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-            .andExpect(jsonPath("$.openapi", is("3.0.1")))
-            .andExpect(jsonPath("$.info", isA(Object.class)))
-            .andExpect(jsonPath("$.servers", isA(Object.class)))
-            .andExpect(jsonPath("$.paths", isA(Object.class)))
-            .andExpect(jsonPath("$.components", isA(Object.class)))
-            .andReturn();
+  void getApiDocs() throws Exception {
+    mockMvc
+        .perform(get("/v3/api-docs"))
+        .andExpect(status().isOk())
+        .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+        .andExpect(jsonPath("$.openapi", is("3.0.1")))
+        .andExpect(jsonPath("$.info", isA(Object.class)))
+        .andExpect(jsonPath("$.servers", isA(Object.class)))
+        .andExpect(jsonPath("$.paths", isA(Object.class)))
+        .andExpect(jsonPath("$.components", isA(Object.class)))
+        .andReturn();
   }
 
   @Test
-  public void endpointsPresent() throws Exception {
+  void endpointsPresent() throws Exception {
     String json =
         mockMvc
             .perform(get("/v3/api-docs"))
@@ -81,7 +80,7 @@ public class SpringDocTest {
                         .getBeanType()
                         .getPackageName()
                         .startsWith("org.owasp.wrongsecrets"))
-            .map(e -> e.getKey())
+            .map(Map.Entry::getKey)
             .map(r -> r.getPathPatternsCondition().getFirstPattern().getPatternString())
             .toList();
 

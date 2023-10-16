@@ -7,10 +7,29 @@ source ../scripts/check-available-commands.sh
 
 checkCommandsAvailable helm jq vault sed grep cat aws
 
-AWS_REGION="eu-west-1"
+if test -n "${AWS_REGION-}"; then
+  echo "AWS_REGION is set to <$AWS_REGION>"
+else
+  AWS_REGION=eu-west-1
+  echo "AWS_REGION is not set or empty, defaulting to ${AWS_REGION}"
+fi
+
+if test -n "${CLUSTERNAME-}"; then
+  echo "CLUSTERNAME is set to <$CLUSTERNAME>"
+else
+  CLUSTERNAME=wrongsecrets-exercise-cluster
+  echo "CLUSTERNAME is not set or empty, defaulting to ${CLUSTERNAME}"
+fi
+
+aws eks update-kubeconfig --region $AWS_REGION --name $CLUSTERNAME --kubeconfig ~/.kube/wrongsecrets
+
+export KUBECONFIG=~/.kube/wrongsecrets
 
 echo "This is a script to bootstrap the configuration. You need to have installed: helm, kubectl, jq, vault, grep, cat, sed, and awscli, and is only tested on mac, Debian and Ubuntu"
 echo "This script is based on the steps defined in https://learn.hashicorp.com/tutorials/vault/kubernetes-minikube. Vault is awesome!"
+
+echo "Setting kubeconfig to wrongsecrets-exercise-cluster"
+aws eks update-kubeconfig --region $AWS_REGION --name $CLUSTERNAME
 
 echo "Setting up workspace PSA to restricted for default"
 kubectl apply -f ../k8s/workspace-psa.yml

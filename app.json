@@ -10,12 +10,14 @@
     "vulnerability",
     "awareness"
   ],
-  "stack": "container",
-  "formation": {
-    "web": {
-      "quantity": 1
+  "formation": [
+    {
+      "web": {
+        "quantity": 1
+      }
     }
-  },
+  ],
   "website": "https://github.com/OWASP/wrongsecrets",
+  "logo": "https://raw.githubusercontent.com/OWASP/wrongsecrets/master/icon.png",
   "repository": "https://github.com/OWASP/wrongsecrets"
 }
