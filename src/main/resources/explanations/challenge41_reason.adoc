@@ -1,0 +1,9 @@
+*Why pre-hashing passwords is not a good idea?*
+
+Though pre-hashing passwords is an easy way to upgrade legacy hashes, it becomes more easier to crack if both the legacy and the newer hashes are available.
+
+In this case, we were able to reduce bcrypt hashes to insecure md5 hashes and then cracking it.
+
+The safest way to avoid this is to reset the passwords of all users and hashing the new passwords with the newer algorithm. But, this method is not user-friendly.
+
+The best way to upgrade is by layering the hashes initially and replacing with direct hashes of the users' passwords next time they logs in.
