@@ -1,6 +1,6 @@
 === Password Shucking
 
-A website was using MD5 for hashing passwords, and its developers recently decided that it's a good idea to migrate to a stronger hashing algorithm like bcrypt.
+A website was using https://en.wikipedia.org/wiki/MD5[MD5] for hashing passwords, and its developers recently decided that it's a good idea to migrate to a stronger hashing algorithm like https://en.wikipedia.org/wiki/Bcrypt[bcrypt].
 
 The developers decided that the easiest way to migrate would be to hash the pre-existing hashes using bcrypt. Using two hashing algorithms would be more secure than using one, right? It appears so.
 
