@@ -1,14 +1,19 @@
 name: Project Management
 
 on:
+  issues:
+    types:
+      - assigned
+      - unassigned
   schedule:
-    - cron: '20 * * * *'
+    - cron: '*/5 * * * *'
 
 jobs:
   # Best used in combination with actions/stale to assign a Stale label
 
   unassign-issues-labeled-waiting-for-contributor-after-1-days-of-inactivity:
-    name: Unassign issues labeled "Waiting for Contributor" after 1 days of inactivity.
+    name: Unassign issues labeled "Stale" after 1 days of inactivity.
+    if: github.event_name == 'schedule'
     runs-on: ubuntu-latest
     steps:
       - uses: boundfoxstudios/action-unassign-contributor-after-days-of-inactivity@main
