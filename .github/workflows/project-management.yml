@@ -1,10 +1,6 @@
 name: Project Management
 
 on:
-  issues:
-    types:
-      - assigned
-      - unassigned
   schedule:
     - cron: '*/5 * * * *'
 
