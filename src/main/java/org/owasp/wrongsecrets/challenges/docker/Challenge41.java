@@ -1,7 +1,6 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -27,7 +26,7 @@ public class Challenge41 extends Challenge {
 
   private final String password;
 
-  public Challenge41(ScoreCard scoreCard, @Value("UEBzc3dvcmQxMjM=") String password) {
+  public Challenge41(ScoreCard scoreCard, @Value("{challenge41_password}") String password) {
     super(scoreCard);
     this.password = password;
   }
@@ -83,7 +82,7 @@ public class Challenge41 extends Challenge {
   private String hashWithMd5(String plainText) throws NoSuchAlgorithmException {
     MessageDigest md = MessageDigest.getInstance("MD5");
 
-    byte[] result = md.digest(plainText.getBytes(Charset.defaultCharset()));
+    byte[] result = md.digest(plainText.getBytes(StandardCharsets.UTF_8));
     StringBuilder hexString = new StringBuilder();
     for (byte b : result) {
       hexString.append(String.format("%02x", b));
