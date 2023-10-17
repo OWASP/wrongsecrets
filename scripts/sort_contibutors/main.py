@@ -19,11 +19,11 @@ def print_file(s: str, flag: bool) -> None:
 
 def print_md(user_list: dict, label="") -> str:
 
-    string = '{}\n'.format(label)
+    string = '{}:\n\n'.format(label)
     for value in user_list:
         string += '- [{} @{}](https://www.github.com/{})\n'.format(value['name'],
                                                                    value['username'], value['username'])
-    return string + '\n'
+    return string + '\n\n'
 
 
 def print_html(leaders: dict, top_contributors: dict, contributors: dict, testers: dict, special_thanks: dict) -> str:
