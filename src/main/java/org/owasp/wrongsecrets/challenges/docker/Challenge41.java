@@ -26,7 +26,7 @@ public class Challenge41 extends Challenge {
 
   private final String password;
 
-  public Challenge41(ScoreCard scoreCard, @Value("{challenge41_password}") String password) {
+  public Challenge41(ScoreCard scoreCard, @Value("${challenge41password}") String password) {
     super(scoreCard);
     this.password = password;
   }
