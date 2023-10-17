@@ -1,9 +1,10 @@
-This challenge can be solved using the following steps:
+This challenge can be solved by decrypting the base64 encoded secret in `secrchallenge.json`. You can do this either by:
 
-1. Create two txt files `old_hashes.txt` and `new_hashes.txt` containing only the hashes copied from the dump files.
-2. Using `old_hashes.txt` as password list we can use hashcat to check md5 hashes that match with the bcrypt hashes.
-   - Install https://hashcat.net/hashcat/[Hashcat]
-   - Type in `hashcat -m 3200 -a 0 new_hashes.txt old_hashes.txt --show`. You will find a single bcrypt hash mapped to a md5 hash.
-3. Using `rockyou.txt` as password list we can crack the obtained md5 hash.
-   - Download the https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt[rockyou.txt password list]
-   - Type in `hashcat -m 0 -a 0 82080600934821faf0bc59cba79964bc rockyou.txt --show` to find the cracked password.
+1. Using an online aes decryption tool like https://www.devglan.com/online-tools/aes-encryption-decryption[https://www.devglan.com/online-tools/aes-encryption-decryption]
+- Copy the value of `secret` from `secrchallenge.json` and paste it into the textbox of the decryptor.
+- Ensure the input format is `Base64` and the cipher mode is `ECB`.
+- Use the value of `key` from `secrchallenge.json` as decryption key and click on `Decrypt` to get the secret.
+
+2. Using the terminal
+- Launch the terminal while you are in the `maven` directory.
+- Copy the value of `password` from `settings.xml`.
