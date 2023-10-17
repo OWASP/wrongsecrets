@@ -85,3 +85,7 @@ py_env
 tmp/
 .env
 contributors_file*
+
+##documentation
+scripts/sort_contibutors/.env
+scripts/sort_contibutors/contributors_file.*

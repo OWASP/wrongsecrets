@@ -1,0 +1,9 @@
+*Why pre-hashing passwords is not a good idea?*
+
+Though pre-hashing passwords is an easy way to upgrade legacy hashes, it becomes prone to https://www.scottbrady91.com/authentication/beware-of-password-shucking[Password shucking].
+
+It is a technique in which the attackers strip off the newer secure layers of an updated hash reducing it into its weak older counterpart. In this case, we were able to reduce bcrypt hashes to insecure md5 hashes and then crack it.
+
+The safest way to avoid this is to reset the passwords of all users and hash the new passwords with the newer algorithm. But, this method is not user-friendly.
+
+The best way to upgrade is by layering the hashes initially and replacing with direct hashes of the users' passwords next time they logs in.
