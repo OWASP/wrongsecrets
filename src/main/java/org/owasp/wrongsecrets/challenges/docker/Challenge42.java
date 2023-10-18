@@ -25,7 +25,7 @@ import org.springframework.stereotype.Component;
 @Order(42)
 public class Challenge42 extends Challenge {
 
-    private final Resource resource;
+  private final Resource resource;
 
     public Challenge42(
         ScoreCard scoreCard, @Value("classpath:maven/settings/settings.xml") Resource resource) {
@@ -33,50 +33,50 @@ public class Challenge42 extends Challenge {
         this.resource = resource;
     }
 
-    @Override
-    public boolean canRunInCTFMode() {
-        return true;
-    }
+  @Override
+  public boolean canRunInCTFMode() {
+    return true;
+  }
 
-    @Override
-    public Spoiler spoiler() {
-        return new Spoiler(getSolution());
-    }
+  @Override
+  public Spoiler spoiler() {
+    return new Spoiler(getSolution());
+  }
 
-    @Override
-    public boolean answerCorrect(String answer) {
-        return getSolution().equals(answer);
-    }
+  @Override
+  public boolean answerCorrect(String answer) {
+    return getSolution().equals(answer);
+  }
 
-    /** {@inheritDoc} */
-    @Override
-    public int difficulty() {
-        return Difficulty.EASY;
-    }
+  /** {@inheritDoc} */
+  @Override
+  public int difficulty() {
+    return Difficulty.EASY;
+  }
 
-    /** {@inheritDoc} Cryptography based. */
-    @Override
-    public String getTech() {
-        return ChallengeTechnology.Tech.CRYPTOGRAPHY.id;
-    }
+  /** {@inheritDoc} Cryptography based. */
+  @Override
+  public String getTech() {
+    return ChallengeTechnology.Tech.CRYPTOGRAPHY.id;
+  }
 
-    @Override
-    public boolean isLimitedWhenOnlineHosted() {
-        return false;
-    }
+  @Override
+  public boolean isLimitedWhenOnlineHosted() {
+    return false;
+  }
 
-    @Override
-    public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
-        return List.of(RuntimeEnvironment.Environment.DOCKER);
-    }
+  @Override
+  public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
+    return List.of(RuntimeEnvironment.Environment.DOCKER);
+  }
 
-    private String getSolution() {
-        try {
-            String config = resource.getContentAsString(Charset.defaultCharset());
-            StringReader stringReader = new StringReader(config);
+  private String getSolution() {
+    try {
+      String config = resource.getContentAsString(Charset.defaultCharset());
+      StringReader stringReader = new StringReader(config);
 
-            XMLConfiguration xmlConfiguration = new XMLConfiguration();
-            xmlConfiguration.read(stringReader);
+      XMLConfiguration xmlConfiguration = new XMLConfiguration();
+      xmlConfiguration.read(stringReader);
 
             // Retrieve the Nexus password
             return xmlConfiguration.getString("nexus.password");
