@@ -21,19 +21,14 @@
     }
 }
 
-@media only screen and (max-width: 850px) {
+@media only screen and (max-width: 990px) and (max-height: 600px) {
     .dropdown-menu {
         max-height: 240px;
         overflow-y: auto;
     }
 }
 
-@media only screen and (max-width: 600px) {
-    .dropdown-menu {
-        max-height: 320px;
-        overflow-y: auto;
-    }
-}
+
 
 .thank-you {
     border-radius: 25px;
