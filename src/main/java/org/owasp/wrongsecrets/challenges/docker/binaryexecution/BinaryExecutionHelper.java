@@ -14,7 +14,7 @@ import org.springframework.util.ResourceUtils;
 @Slf4j
 public class BinaryExecutionHelper {
 
-  private enum Operation {
+  private enum BinaryOperation {
     Spoil,
     Guess
   }
@@ -42,9 +42,9 @@ public class BinaryExecutionHelper {
       File execFile = createTempExecutable("wrongsecrets-golang");
       String result;
       if (Strings.isNullOrEmpty(guess)) {
-        result = executeCommand(execFile, Operation.Spoil, "");
+        result = executeCommand(execFile, BinaryOperation.Spoil, "");
       } else {
-        result = executeCommand(execFile, Operation.Guess, guess);
+        result = executeCommand(execFile, BinaryOperation.Guess, guess);
       }
       log.info(
           "stdout challenge {}: {}",
@@ -68,15 +68,15 @@ public class BinaryExecutionHelper {
    * @return the actual answer
    */
   public String executeCommand(String guess, String fileName) {
-    Operation operation;
+    BinaryOperation binaryOperation;
     if (Strings.isNullOrEmpty(guess)) {
-      operation = Operation.Spoil;
+      binaryOperation = BinaryOperation.Spoil;
     } else {
-      operation = Operation.Guess;
+      binaryOperation = BinaryOperation.Guess;
     }
     try {
       File execFile = createTempExecutable(fileName);
-      String result = executeCommand(execFile, operation, guess);
+      String result = executeCommand(execFile, binaryOperation, guess);
       deleteFile(execFile);
       log.info(
           "stdout challenge {}: {}",
@@ -93,7 +93,7 @@ public class BinaryExecutionHelper {
   @SuppressFBWarnings(
       value = "COMMAND_INJECTION",
       justification = "We check for various injection methods and counter those")
-  private String executeCommand(File execFile, Operation operation, String guess)
+  private String executeCommand(File execFile, BinaryOperation binaryOperation, String guess)
       throws IOException, InterruptedException {
     ProcessBuilder ps;
 
@@ -102,7 +102,7 @@ public class BinaryExecutionHelper {
         || stringContainsCommandChainToken(guess)) {
       return BinaryExecutionHelper.ERROR_EXECUTION;
     }
-    if (operation.equals(Operation.Spoil)) {
+    if (binaryOperation.equals(BinaryOperation.Spoil)) {
       ps = new ProcessBuilder(execFile.getPath(), "spoil");
     } else {
       if (execFile.getPath().contains("golang")) {

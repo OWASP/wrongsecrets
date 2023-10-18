@@ -18,14 +18,15 @@ class Challenge1Test {
   void spoilerShouldRevealAnswer() {
     var challenge = new Challenge1(scoreCard);
 
-    Assertions.assertThat(challenge.spoiler()).isEqualTo(new Spoiler(Constants.password));
+    Assertions.assertThat(challenge.spoiler())
+        .isEqualTo(new Spoiler(WrongSecretsConstants.password));
   }
 
   @Test
   void rightAnswerShouldSolveChallenge() {
     var challenge = new Challenge1(scoreCard);
 
-    Assertions.assertThat(challenge.solved(Constants.password)).isTrue();
+    Assertions.assertThat(challenge.solved(WrongSecretsConstants.password)).isTrue();
     Mockito.verify(scoreCard).completeChallenge(challenge);
   }
 

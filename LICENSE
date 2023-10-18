@@ -175,7 +175,7 @@ measures.
   When you convey a covered work, you waive any legal power to forbid
 circumvention of technological measures to the extent such circumvention
 is effected by exercising rights under this License with respect to
-the covered work, and you disclaim any intention to limit operation or
+the covered work, and you disclaim any intention to limit binaryOperation or
 modification of the work as a means of enforcing, against the work's
 users, your or third parties' legal rights to forbid circumvention of
 technological measures.
@@ -319,7 +319,7 @@ requirement to continue to provide support service, warranty, or updates
 for a work that has been modified or installed by the recipient, or for
 the User Product in which it has been modified or installed.  Access to a
 network may be denied when the modification itself materially and
-adversely affects the operation of the network or violates the rules and
+adversely affects the binaryOperation of the network or violates the rules and
 protocols for communication across the network.
 
   Corresponding Source conveyed, and Installation Information provided,

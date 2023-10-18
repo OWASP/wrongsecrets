@@ -5,7 +5,7 @@ You can solve this challenge by the following steps:
 - Start the container locally with `docker run jeroenwillemsen/wrongsecrets:<TAGNAME-HERE>`
 - Find the container id by doing `docker ps` in a next terminal
 - Do `docker exec -it <container id> "/bin/sh"`
-- In the container, go to target directory of the COPY operation and look for the secret.
+- In the container, go to target directory of the COPY binaryOperation and look for the secret.
 2. Use https://github.com/deepfence/SecretScanner[Deepfence secret scanner]
 - Download the target version of the wrongsecrets container: `docker pull jeroenwillemsen/wrongsecrets:<VERSION YOU ARE PLAYING-HERE>`
 - Run `docker run -it --rm --name=deepfence-secretscanner -v $(pwd):/home/deepfence/output -v /var/run/docker.sock:/var/run/docker.sock -v /usr/bin/docker:/usr/bin/docker deepfenceio/secretscanning -image-name jeroenwillemsen/wrongsecrets:<VERSION YOU ARE PLAYING-HERE>`
