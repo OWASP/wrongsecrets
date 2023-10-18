@@ -5,6 +5,7 @@ import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.AZURE;
 import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.GCP;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
@@ -65,7 +66,7 @@ public class Challenge9 extends CloudChallenge {
       justification = "The location of the fileName and filePath is based on an Env Var")
   private String getCloudChallenge9and10Value(String filePath, String fileName) {
     try {
-      return Files.readString(Paths.get(filePath, fileName));
+      return Files.readString(Paths.get(filePath, fileName), StandardCharsets.UTF_8);
     } catch (Exception e) {
       log.warn(
           "Exception during reading file ({}/{}}), defaulting to default without AWS",

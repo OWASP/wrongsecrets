@@ -3,6 +3,7 @@ package org.owasp.wrongsecrets.oauth;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import io.swagger.v3.oas.annotations.Operation;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.UUID;
@@ -67,7 +68,7 @@ public class TokenController {
       justification = "The location of the dockerMountPath is based on an Env Var")
   private String getActualData() {
     try {
-      return Files.readString(Paths.get(dockerMountPath, "secondkey.txt"));
+      return Files.readString(Paths.get(dockerMountPath, "secondkey.txt"), StandardCharsets.UTF_8);
     } catch (Exception e) {
       log.warn("Exception during file reading, defaulting to default without cloud environment", e);
       return "if_you_see_this_please_use_docker_instead";
