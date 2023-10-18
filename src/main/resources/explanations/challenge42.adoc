@@ -1,0 +1,3 @@
+=== Nexus credential read
+
+Storing nexus deployment credentials in your github project hardcoded is generally considered a bad practice because it undermines the security provided by encryption.

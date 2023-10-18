@@ -1,0 +1,7 @@
+*Why you should not have nexus deployment credentials in your github project hardcoded*
+
+Storing nexus deployment credentials in your github project hardcoded is generally considered a bad practice because it undermines the security provided by encryption.
+
+In such scenarios, an attacker has the key the moment the file is in his possession.
+
+It is always recommended to store your credentials securely.
