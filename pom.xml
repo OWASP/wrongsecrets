@@ -246,7 +246,7 @@
     <dependency>
       <groupId>com.github.spotbugs</groupId>
       <artifactId>spotbugs-annotations</artifactId>
-      <version>4.7.3</version>
+      <version>4.8.0</version>
     </dependency>
     <!--        <dependency>-->
     <!--            <groupId>com.h2database</groupId>-->
