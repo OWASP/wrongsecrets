@@ -27,11 +27,11 @@ public class Challenge42 extends Challenge {
 
   private final Resource resource;
 
-    public Challenge42(
-        ScoreCard scoreCard, @Value("classpath:maven/settings/settings.xml") Resource resource) {
-        super(scoreCard);
-        this.resource = resource;
-    }
+  public Challenge42(
+      ScoreCard scoreCard, @Value("classpath:maven/settings/settings.xml") Resource resource) {
+    super(scoreCard);
+    this.resource = resource;
+  }
 
   @Override
   public boolean canRunInCTFMode() {
@@ -78,11 +78,11 @@ public class Challenge42 extends Challenge {
       XMLConfiguration xmlConfiguration = new XMLConfiguration();
       xmlConfiguration.read(stringReader);
 
-            // Retrieve the Nexus password
-            return xmlConfiguration.getString("nexus.password");
-        } catch (Exception e) {
-            log.warn("there was an exception with decrypting content in challenge42", e);
-            return "error_decryption";
-        }
+      // Retrieve the Nexus password
+      return xmlConfiguration.getString("nexus.password");
+    } catch (Exception e) {
+      log.warn("there was an exception with decrypting content in challenge42", e);
+      return "error_decryption";
     }
+  }
 }
