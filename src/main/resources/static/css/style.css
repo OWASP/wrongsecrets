@@ -10,8 +10,29 @@
 }
 
 .dropdown-menu {
-    max-height: 370px;
+    max-height: 540px;
     overflow-y: auto;
+}
+
+@media only screen and (max-width: 990px) {
+    .dropdown-menu {
+        max-height: 320px;
+        overflow-y: auto;
+    }
+}
+
+@media only screen and (max-width: 850px) {
+    .dropdown-menu {
+        max-height: 240px;
+        overflow-y: auto;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .dropdown-menu {
+        max-height: 320px;
+        overflow-y: auto;
+    }
 }
 
 .thank-you {
