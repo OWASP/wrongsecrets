@@ -15,7 +15,7 @@ import java.nio.charset.Charset;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class Challenge41Test {
+class Challenge42Test {
   @Mock private ScoreCard scoreCard;
 
   @Mock private Resource resource;
@@ -28,14 +28,14 @@ class Challenge41Test {
 
   @Test
   void spoilerShouldGiveAnswer() {
-    var challenge = new Challenge41(scoreCard, resource);
+    var challenge = new Challenge42(scoreCard, resource);
     Assertions.assertThat(challenge.spoiler().solution()).isNotEmpty();
     Assertions.assertThat(challenge.answerCorrect(challenge.spoiler().solution())).isTrue();
   }
 
   @Test
   void incorrectAnswerShouldNotSolveChallenge() {
-    var challenge = new Challenge41(scoreCard, resource);
+    var challenge = new Challenge42(scoreCard, resource);
     Assertions.assertThat(challenge.answerCorrect("wrong answer")).isFalse();
   }
 }

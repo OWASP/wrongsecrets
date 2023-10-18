@@ -22,12 +22,12 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
-@Order(41)
-public class Challenge41 extends Challenge {
+@Order(42)
+public class Challenge42 extends Challenge {
 
     private final Resource resource;
 
-    public Challenge41(
+    public Challenge42(
         ScoreCard scoreCard, @Value("classpath:maven/settings/settings.xml") Resource resource) {
         super(scoreCard);
         this.resource = resource;
@@ -81,7 +81,7 @@ public class Challenge41 extends Challenge {
             // Retrieve the Nexus password
             return xmlConfiguration.getString("nexus.password");
         } catch (Exception e) {
-            log.warn("there was an exception with decrypting content in challenge41", e);
+            log.warn("there was an exception with decrypting content in challenge42", e);
             return "error_decryption";
         }
     }
