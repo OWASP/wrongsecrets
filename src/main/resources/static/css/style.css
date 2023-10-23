@@ -22,9 +22,9 @@
 }
 
 
-@media only screen and (min-width: 992px) and (max-width: 1200px) {
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
     .neg-margin{
-        margin-top: -280px !important;
+        margin-top: -440px !important;
         display: inline;
     }
 }
@@ -45,13 +45,20 @@
     }
 }
 
-
-
 .thank-you {
     border-radius: 25px;
     border: 2px solid var(--bs-body-color) !important;
-    padding: 10px;
-    margin: 00px 0px 10px 0px;
+    padding: 10px 16px;
+    margin: 0px 0px 10px 0px;
+}
+
+@media only screen and (max-width: 990px){
+    .thank-you {
+        border-radius: 25px;
+        border: 2px solid var(--bs-body-color) !important;
+        padding: 10px;
+        margin: 0px 0px 10px 0px;
+    }
 }
 
 a.disabled {
