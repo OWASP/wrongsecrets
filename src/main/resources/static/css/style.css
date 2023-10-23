@@ -14,6 +14,23 @@
     overflow-y: auto;
 }
 
+@media only screen and (min-width: 1200px) {
+    .neg-margin{
+        margin-top: -240px !important;
+        display: inline;
+    }
+}
+
+
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+    .neg-margin{
+        margin-top: -280px !important;
+        display: inline;
+    }
+}
+
+
+
 @media only screen and (max-width: 990px) {
     .dropdown-menu {
         max-height: 320px;
