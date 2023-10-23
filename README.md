@@ -265,47 +265,56 @@ You can enable Swagger documentation and the Swagger UI by overriding the `SPRIN
 
 Leaders:
 
--   [Ben de Haan @bendehaan](https://github.com/bendehaan)
--   [Jeroen Willemsen @commjoen](https://github.com/commjoen)
+- [Ben de Haan @bendehaan](https://www.github.com/bendehaan)
+- [Jeroen Willemsen @commjoen](https://www.github.com/commjoen)
 
 Top contributors:
 
--   [Joss Sparkes @remakingeden](https://github.com/remakingeden)
--   [Nanne Baars @nbaars](https://github.com/nbaars)
--   [Puneeth Y @puneeth072003](https://github.com/puneeth072003)
--   [Marcin Nowak @drnow4u](https://github.com/drnow4u)
--   [Divyanshu Dev @Novice-expert](https://github.com/Novice-expert)
--   [Tibor Hercz @tiborhercz](https://github.com/tiborhercz)
--   [Rodolfo Cabral Neves @roddas](https://github.com/roddas)
--   [Chris Elbring Jr. @neatzsche](https://github.com/neatzsche)
--   [Mike Woudenberg @mikewoudenberg](https://github.com/mikewoudenberg)
--   [Filip Chyla @fchyla](https://github.com/fchyla)
--   [Dmitry Litosh @Dlitosh](https://github.com/Dlitosh)
--   [Josh Grossman @tghosth](https://github.com/tghosth)
--   [Turjo Chowdhury @turjoc120](https://github.com/turjoc120)
--   [Spyros @northdpole](https://github.com/northdpole)
--   [Ruben Kruiver @RubenAtBinx](https://github.com/RubenAtBinx)
--   [Shlomo Zalman Heigh @szh](https://github.com/szh)
--   [Nicolas Humblot @nhumblot](https://github.com/nhumblot)
--   [Madhu Akula @madhuakula](https://github.com/madhuakula)
--   [Finn @f3rn0s](https://github.com/f3rn0s)
--   [Alex Bender @alex-bender](https://github.com/alex-bender)
--   [Rick M @kingthorin](https://github.com/kingthorin)
+- [Jannik Hollenbach @J12934](https://www.github.com/J12934)
+- [Puneeth Y @puneeth072003](https://www.github.com/puneeth072003)
+- [Joss Sparkes @RemakingEden](https://www.github.com/RemakingEden)
+
+Contributors:
+
+- [Nanne Baars @nbaars](https://www.github.com/nbaars)
+- [Marcin Nowak @drnow4u](https://www.github.com/drnow4u)
+- [Rodolfo Cabral Neves @roddas](https://www.github.com/roddas)
+- [Osama Magdy @osamamagdy](https://www.github.com/osamamagdy)
+- [Divyanshu Dev @Novice-expert](https://www.github.com/Novice-expert)
+- [Tibor Hercz @tiborhercz](https://www.github.com/tiborhercz)
+- [Chris Elbring Jr. @neatzsche](https://www.github.com/neatzsche)
+- [Diamond Rivero @diamant3](https://www.github.com/diamant3)
+- [Adarsh A @adarsh-a-tw](https://www.github.com/adarsh-a-tw)
+- [Filip Chyla @fchyla](https://www.github.com/fchyla)
+- [Dmitry Litosh @Dlitosh](https://www.github.com/Dlitosh)
+- [Turjo Chowdhury @turjoc120](https://www.github.com/turjoc120)
+- [Josh Grossman @tghosth](https://www.github.com/tghosth)
+- [alphasec @alphasecio](https://www.github.com/alphasecio)
+- [Madhu Akula @madhuakula](https://www.github.com/madhuakula)
+- [Mike Woudenberg @mikewoudenberg](https://www.github.com/mikewoudenberg)
+- [Spyros @northdpole](https://www.github.com/northdpole)
+- [RubenAtBinx @RubenAtBinx](https://www.github.com/RubenAtBinx)
+- [Vineeth Jagadeesh @djvinnie](https://www.github.com/djvinnie)
+- [Alex Bender @alex-bender](https://www.github.com/alex-bender)
+- [Nicolas Humblot @nhumblot](https://www.github.com/nhumblot)
+- [Rick M @kingthorin](https://www.github.com/kingthorin)
+- [Shlomo Zalman Heigh @szh](https://www.github.com/szh)
+- [Fern @f3rn0s](https://www.github.com/f3rn0s)
 
 Testers:
 
--   [Dave van Stein @davevs](https://github.com/davevs)
--   [Marcin Nowak @MarcinNowak-codes](https://github.com/drnow4u)
--   [Marc Chang Sing Pang @mchangsp](https://github.com/mchangsp)
--   [Vineeth Jagadeesh @djvinnie](https://github.com/djvinnie)
+- [Dave van Stein @davevs](https://www.github.com/davevs)
+- [Marcin Nowak @drnow4u](https://www.github.com/drnow4u)
+- [Marc Chang Sing Pang @mchangsp](https://www.github.com/mchangsp)
+- [Vineeth Jagadeesh @djvinnie](https://www.github.com/djvinnie)
 
-Special mentions for helping out:
+Special thanks:
 
--   [Madhu Akula @madhuakula](https://github.com/madhuakula)
--   [Björn Kimminich @bkimminich](https://github.com/bkimminich)
--   [Dan Gora @devsecops](https://github.com/devsecops)
--   [Xiaolu Dai @saragluna](https://github.com/saragluna)
--   [Jonathan Giles @jonathanGiles](https://github.com/JonathanGiles)
+- [Madhu Akula @madhuakula @madhuakula](https://www.github.com/madhuakula)
+- [Björn Kimminich @bkimminich](https://www.github.com/bkimminich)
+- [Dan Gora @devsecops](https://www.github.com/devsecops)
+- [Xiaolu Dai @saragluna](https://www.github.com/saragluna)
+- [Jonathan Giles @jonathanGiles](https://www.github.com/jonathanGiles)
 
 ### Sponsorships
 
