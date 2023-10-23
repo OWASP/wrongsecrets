@@ -3,10 +3,10 @@ run-name: Run GitHub actions in schedule 🕒
 
 on:
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "0 * * * *"
 
 jobs:
   Run-GitHub-Actions-Schedule:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "🎉 Runs every 5 minutes"
+      - run: echo "🎉 Runs every 1 hour"
