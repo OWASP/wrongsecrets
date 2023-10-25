@@ -2,20 +2,19 @@ name: Project Management
 
 on:
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '0 2 * * *'
 
 jobs:
   # Best used in combination with actions/stale to assign a Stale label
-
-  unassign-issues-labeled-waiting-for-contributor-after-1-days-of-inactivity:
-    name: Unassign issues labeled "Stale" after 1 days of inactivity.
+  unassign-issues-labeled-waiting-for-contributor-after-90-days-of-inactivity:
+    name: Unassign issues labeled "Stale" after 90 days of inactivity.
     if: github.event_name == 'schedule'
     runs-on: ubuntu-latest
     steps:
       - uses: boundfoxstudios/action-unassign-contributor-after-days-of-inactivity@main
         with:
-          last-activity: 1 # After how many days the issue should get unassigned
-          labels: 'Stale' # Only search for issues containing this labels (comma-separated)
+          last-activity: 90 # After how many days the issue should get unassigned
+          labels: 'stale,help wanted' # Only search for issues containing this labels (comma-separated)
           exempt-assignees: 'Octo,Cat' # Exempt some assignees from being unassigned
-          labels-to-remove: 'Stale' # Labels to remove after unassigning an issue
-          message: 'Automatically unassigned after 1 day of inactivity.'
+          # labels-to-remove: 'Stale' # Labels to remove after unassigning an issue
+          message: 'Automatically unassigned after 90 days of inactivity.'
