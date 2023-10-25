@@ -15,6 +15,6 @@ jobs:
         with:
           last-activity: 90 # After how many days the issue should get unassigned
           labels: 'stale,help wanted' # Only search for issues containing this labels (comma-separated)
-          exempt-assignees: 'Octo,Cat' # Exempt some assignees from being unassigned
+          exempt-assignees: 'Octo,Cat,bendehaan,commjoen' # Exempt some assignees from being unassigned
           # labels-to-remove: 'Stale' # Labels to remove after unassigning an issue
           message: 'Automatically unassigned after 90 days of inactivity.'
