@@ -15,7 +15,7 @@
 
 Welcome to the OWASP WrongSecrets game! The game is packed with real life examples of how to _not_ store secrets in your software. Each of these examples is captured in a challenge, which you need to solve using various tools and techniques. Solving these challenges will help you recognize common mistakes & can help you to reflect on your own secrets management strategy.
 
-Can you solve all the 38 challenges?
+Can you solve all the 41 challenges?
 
 Try some of them on [our Heroku demo environment](https://wrongsecrets.herokuapp.com/) or on our [Okteto demo environment (might need to awake again)](https://wrongsecrets-commjoen.cloud.okteto.net/).
 
@@ -72,7 +72,7 @@ Copyright (c) 2020-2023 Jeroen Willemsen and WrongSecrets contributors.
 
 ## Basic docker exercises
 
-_Can be used for challenges 1-4, 8, 12-32, 34, 35-38_
+_Can be used for challenges 1-4, 8, 12-32, 34, 35-41_
 
 For the basic docker exercises you currently require:
 
@@ -118,6 +118,9 @@ Now you can try to find the secrets by means of solving the challenge offered at
 -   [localhost:8080/challenge/36](http://localhost:8080/challenge/36)
 -   [localhost:8080/challenge/37](http://localhost:8080/challenge/37)
 -   [localhost:8080/challenge/38](http://localhost:8080/challenge/38)
+-   [localhost:8080/challenge/39](http://localhost:8080/challenge/39)
+-   [localhost:8080/challenge/40](http://localhost:8080/challenge/40)
+-   [localhost:8080/challenge/41](http://localhost:8080/challenge/41)
 
 Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look
 better ;-).
@@ -142,7 +145,7 @@ If you want to host WrongSecrets on Railway, you can do so by deploying [this on
 
 ## Basic K8s exercise
 
-_Can be used for challenges 1-6, 8, 12-38_
+_Can be used for challenges 1-6, 8, 12-41_
 
 ### Minikube based
 
@@ -199,7 +202,7 @@ Don't want to go over the hassle of setting up K8S yourself? visit [https://wron
 
 ## Vault exercises with minikube
 
-_Can be used for challenges 1-8, 12-38_
+_Can be used for challenges 1-8, 12-41_
 Make sure you have the following installed:
 
 -   minikube with docker (or comment out line 8 and work at your own k8s setup),
@@ -217,7 +220,7 @@ This is because if you run the start script again it will replace the secret in 
 
 ## Cloud Challenges
 
-_Can be used for challenges 1-38_
+_Can be used for challenges 1-41_
 
 **READ THIS**: Given that the exercises below contain IAM privilege escalation exercises,
 never run this on an account which is related to your production environment or can influence your account-over-arching
@@ -265,47 +268,56 @@ You can enable Swagger documentation and the Swagger UI by overriding the `SPRIN
 
 Leaders:
 
--   [Ben de Haan @bendehaan](https://github.com/bendehaan)
--   [Jeroen Willemsen @commjoen](https://github.com/commjoen)
+- [Ben de Haan @bendehaan](https://www.github.com/bendehaan)
+- [Jeroen Willemsen @commjoen](https://www.github.com/commjoen)
 
 Top contributors:
 
--   [Joss Sparkes @remakingeden](https://github.com/remakingeden)
--   [Nanne Baars @nbaars](https://github.com/nbaars)
--   [Puneeth Y @puneeth072003](https://github.com/puneeth072003)
--   [Marcin Nowak @drnow4u](https://github.com/drnow4u)
--   [Divyanshu Dev @Novice-expert](https://github.com/Novice-expert)
--   [Tibor Hercz @tiborhercz](https://github.com/tiborhercz)
--   [Rodolfo Cabral Neves @roddas](https://github.com/roddas)
--   [Chris Elbring Jr. @neatzsche](https://github.com/neatzsche)
--   [Mike Woudenberg @mikewoudenberg](https://github.com/mikewoudenberg)
--   [Filip Chyla @fchyla](https://github.com/fchyla)
--   [Dmitry Litosh @Dlitosh](https://github.com/Dlitosh)
--   [Josh Grossman @tghosth](https://github.com/tghosth)
--   [Turjo Chowdhury @turjoc120](https://github.com/turjoc120)
--   [Spyros @northdpole](https://github.com/northdpole)
--   [Ruben Kruiver @RubenAtBinx](https://github.com/RubenAtBinx)
--   [Shlomo Zalman Heigh @szh](https://github.com/szh)
--   [Nicolas Humblot @nhumblot](https://github.com/nhumblot)
--   [Madhu Akula @madhuakula](https://github.com/madhuakula)
--   [Finn @f3rn0s](https://github.com/f3rn0s)
--   [Alex Bender @alex-bender](https://github.com/alex-bender)
--   [Rick M @kingthorin](https://github.com/kingthorin)
+- [Jannik Hollenbach @J12934](https://www.github.com/J12934)
+- [Puneeth Y @puneeth072003](https://www.github.com/puneeth072003)
+- [Joss Sparkes @RemakingEden](https://www.github.com/RemakingEden)
+
+Contributors:
+
+- [Nanne Baars @nbaars](https://www.github.com/nbaars)
+- [Marcin Nowak @drnow4u](https://www.github.com/drnow4u)
+- [Rodolfo Cabral Neves @roddas](https://www.github.com/roddas)
+- [Osama Magdy @osamamagdy](https://www.github.com/osamamagdy)
+- [Divyanshu Dev @Novice-expert](https://www.github.com/Novice-expert)
+- [Tibor Hercz @tiborhercz](https://www.github.com/tiborhercz)
+- [Chris Elbring Jr. @neatzsche](https://www.github.com/neatzsche)
+- [Diamond Rivero @diamant3](https://www.github.com/diamant3)
+- [Adarsh A @adarsh-a-tw](https://www.github.com/adarsh-a-tw)
+- [Filip Chyla @fchyla](https://www.github.com/fchyla)
+- [Dmitry Litosh @Dlitosh](https://www.github.com/Dlitosh)
+- [Turjo Chowdhury @turjoc120](https://www.github.com/turjoc120)
+- [Josh Grossman @tghosth](https://www.github.com/tghosth)
+- [alphasec @alphasecio](https://www.github.com/alphasecio)
+- [Madhu Akula @madhuakula](https://www.github.com/madhuakula)
+- [Mike Woudenberg @mikewoudenberg](https://www.github.com/mikewoudenberg)
+- [Spyros @northdpole](https://www.github.com/northdpole)
+- [RubenAtBinx @RubenAtBinx](https://www.github.com/RubenAtBinx)
+- [Vineeth Jagadeesh @djvinnie](https://www.github.com/djvinnie)
+- [Alex Bender @alex-bender](https://www.github.com/alex-bender)
+- [Nicolas Humblot @nhumblot](https://www.github.com/nhumblot)
+- [Rick M @kingthorin](https://www.github.com/kingthorin)
+- [Shlomo Zalman Heigh @szh](https://www.github.com/szh)
+- [Fern @f3rn0s](https://www.github.com/f3rn0s)
 
 Testers:
 
--   [Dave van Stein @davevs](https://github.com/davevs)
--   [Marcin Nowak @MarcinNowak-codes](https://github.com/drnow4u)
--   [Marc Chang Sing Pang @mchangsp](https://github.com/mchangsp)
--   [Vineeth Jagadeesh @djvinnie](https://github.com/djvinnie)
+- [Dave van Stein @davevs](https://www.github.com/davevs)
+- [Marcin Nowak @drnow4u](https://www.github.com/drnow4u)
+- [Marc Chang Sing Pang @mchangsp](https://www.github.com/mchangsp)
+- [Vineeth Jagadeesh @djvinnie](https://www.github.com/djvinnie)
 
-Special mentions for helping out:
+Special thanks:
 
--   [Madhu Akula @madhuakula](https://github.com/madhuakula)
--   [Björn Kimminich @bkimminich](https://github.com/bkimminich)
--   [Dan Gora @devsecops](https://github.com/devsecops)
--   [Xiaolu Dai @saragluna](https://github.com/saragluna)
--   [Jonathan Giles @jonathanGiles](https://github.com/JonathanGiles)
+- [Madhu Akula @madhuakula @madhuakula](https://www.github.com/madhuakula)
+- [Björn Kimminich @bkimminich](https://www.github.com/bkimminich)
+- [Dan Gora @devsecops](https://www.github.com/devsecops)
+- [Xiaolu Dai @saragluna](https://www.github.com/saragluna)
+- [Jonathan Giles @jonathanGiles](https://www.github.com/jonathanGiles)
 
 ### Sponsorships
 

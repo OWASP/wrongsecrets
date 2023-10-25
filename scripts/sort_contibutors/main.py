@@ -2,12 +2,12 @@ import requests
 import os
 from dotenv import load_dotenv
 
+
 # This function parses the contribution list, sorting
 # the users per its ranks
 
 
 def print_file(s: str, flag: bool) -> None:
-
     # True for MD , false for HTML file
     if flag:
         f = open('contributors_file.md', 'w')
@@ -18,47 +18,45 @@ def print_file(s: str, flag: bool) -> None:
 
 
 def print_md(user_list: dict, label="") -> str:
-
     string = '{}:\n\n'.format(label)
     for value in user_list:
         string += '- [{} @{}](https://www.github.com/{})\n'.format(value['name'],
                                                                    value['username'], value['username'])
-    return string + '\n\n'
+    return string + '\n'
 
 
 def print_html(leaders: dict, top_contributors: dict, contributors: dict, testers: dict, special_thanks: dict) -> str:
-
     string = '<html><head></head><body>\n'
 
-    string += '<h1>Leaders</h1>\n'
+    string += 'OWASP Project Leaders:\n'
     string += '<ul>\n'
     for value in leaders:
         string += '<li><a href=\'https://www.github.com/{}\'>{} @{}</a></li>\n'.format(
             value['username'], value['name'], value['username'])
     string += '</ul>\n'
 
-    string += '\n<h1>Top contributors</h1>\n'
+    string += 'Top Contributors:\n'
     string += '<ul>\n'
     for value in top_contributors:
         string += '<li><a href=\'https://www.github.com/{}\'>{} @{}</a></li>\n'.format(
             value['username'], value['name'], value['username'])
     string += '</ul>\n'
 
-    string += '\n<h1>Contributors</h1>\n'
+    string += 'Contributors:\n'
     string += '<ul>\n'
     for value in contributors:
         string += '<li><a href=\'https://www.github.com/{}\'>{} @{}</a></li>\n'.format(
             value['username'], value['name'], value['username'])
     string += '</ul>\n'
 
-    string += '<h1>Testers</h1>\n'
+    string += 'Testers:\n'
     string += '<ul>\n'
     for value in testers:
         string += '<li><a href=\'https://www.github.com/{}\'>{} @{}</a></li>'.format(
             value['username'], value['name'], value['username'])
-    string += '</ul>\n\n'
+    string += '</ul>\n'
 
-    string += '<h1>Special thanks</h1>\n'
+    string += 'Special mentions for helping out:\n'
     string += '<ul>\n'
     for value in special_thanks:
         string += '<li><a href=\'https://www.github.com/{}\'>{} @{}</a></li>\n'.format(
@@ -79,8 +77,11 @@ def parse_contributor_list(user_list: list, user_token: str) -> list:
         if name == None:
             name = username
 
-        leaders_and_multijuicer = ['DerGut', 'bkimminich', 'MichaelEischer', 'rseedorff', 'jonasbg', 'scornelissen85', 'zadjadr', 'stuebingerb', 'sydseter', 'troygerber', 'skandix', 'saymolet',
-                                   'adrianeriksen', 'pseudobeard', 'coffemakingtoaster', 'wurstbrot', 'blucas-accela', 'fwijnholds', 'stefan-schaermeli', 'nickmalcolm', 'orangecola', 'commjoen', 'bendehaan']
+        leaders_and_multijuicer = ['DerGut', 'bkimminich', 'MichaelEischer', 'rseedorff', 'jonasbg', 'scornelissen85',
+                                   'zadjadr', 'stuebingerb', 'sydseter', 'troygerber', 'skandix', 'saymolet',
+                                   'adrianeriksen', 'pseudobeard', 'coffemakingtoaster', 'wurstbrot', 'blucas-accela',
+                                   'fwijnholds', 'stefan-schaermeli', 'nickmalcolm', 'orangecola', 'commjoen',
+                                   'bendehaan', 'benno001']
 
         # Filter the github bots
         if '[bot]' not in username and username not in leaders_and_multijuicer:
@@ -89,10 +90,19 @@ def parse_contributor_list(user_list: list, user_token: str) -> list:
 
     return contributors
 
+
 # Retrieves the list of fullnames of contributors of a repository in JSON format
 
 
 def get_fullname(username: str, user_token: str) -> str:
+    name_dict = {
+        "puneeth072003": "Puneeth Y",
+        "f3rn0s": "Fern",
+        "Novice-expert": "Divyanshu Dev",
+        "neatzsche": "Chris Elbring Jr.",
+    }
+    if username in name_dict:
+        return name_dict[username]
     headers = {'X-GitHub-Api-Version': '2022-11-28',
                'Accept': 'application/vnd.github+json',
                'Authorization': 'Bearer ' + user_token}
@@ -103,6 +113,7 @@ def get_fullname(username: str, user_token: str) -> str:
         os._exit(-1)
     return r.json()['name']
 
+
 # Retrieves the list of contributors of a repository in JSON format
 
 
@@ -111,7 +122,7 @@ def fetch_repository(project: str, user_token: str) -> list:
                'Accept': 'application/vnd.github+json',
                'Authorization': 'Bearer ' + user_token}
     r = requests.get('https://api.github.com/repos/OWASP/' +
-                     project+'/contributors', headers=headers, timeout=20)
+                     project + '/contributors', headers=headers, timeout=20)
     if r.status_code == 401:
         print("Invalid token")
         os._exit(-1)
@@ -132,7 +143,7 @@ def merge_users(l: list) -> list:
                                    'name': a['name'], 'ranking': ranking[a['username']]}
 
     l = dict(sorted(username.items(),
-             key=lambda x: x[1]['ranking'], reverse=True))
+                    key=lambda x: x[1]['ranking'], reverse=True))
 
     special_contributors = []
     contributors = []
@@ -148,7 +159,6 @@ def merge_users(l: list) -> list:
 
 
 def get_contibutors_list(token: str) -> list:
-
     print("[+] Fetching the Wrong Secrets CTF party contributors list ... ")
     wrongsecrets_ctf_list = fetch_repository('wrongsecrets-ctf-party', token)
     print("[+] Fetching the Wrong Secrets Binaries contributors list ... ")
@@ -157,7 +167,7 @@ def get_contibutors_list(token: str) -> list:
     print("[+] Fetching the Wrong Secrets contributors list ... ")
     wrongsecrets_list = fetch_repository('wrongsecrets', token)
     merged_list = wrongsecrets_binaries_list + \
-        wrongsecrets_ctf_list + wrongsecrets_list
+                  wrongsecrets_ctf_list + wrongsecrets_list
     print("[+] Sorting the list .. ")
     return merge_users(merged_list)
 
