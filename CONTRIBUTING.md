@@ -34,6 +34,8 @@ The minimum requirements for code contributions are:
 3. New and changed lessons _must_ have a corresponding integration test.
 4. [Status checks](https://docs.github.com/en/github/collaborating-with-pull-requests/collaborating-on-repositories-with-code-quality-features/about-status-checks) should pass for your last commit.
 
+And please note that this project has *three months* implementation windows. So once you've been assigned to a task/issue, try to make your PR accepted within this period.
+
 Additionally, the following guidelines can help:
 
 ### Keep your pull requests limited to a single issue
