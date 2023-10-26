@@ -1,0 +1,7 @@
+=== Binaries without plaintext strings
+
+We still hear developers introducing tricks and obfuscation to hide a secret in a binary. What if we strip symbols? What if we encrypt the secret? These challenges can make it harder to find the hidden secret, but not impossible.
+
+[@roddas](https://github.com/roddas) contacted us with a "new fun binary" where he encrypted the secret, wondering if we could make use of it. This was precisely the type of challenge you should be trying out! So we asked him to create a challenge out of it and solve it. He solved it with GDB and Radare2, which taught him much about reverse engineering! Can you do the same?
+
+The challenge file is called https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-advanced-c[wrongsecrets-advanced-c] and can be found in many flavors in the https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables[executables folder].

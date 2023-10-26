@@ -29,13 +29,13 @@ public class Challenge1 extends Challenge {
   /** {@inheritDoc} */
   @Override
   public Spoiler spoiler() {
-    return new Spoiler(Constants.password);
+    return new Spoiler(WrongSecretsConstants.password);
   }
 
   /** {@inheritDoc} */
   @Override
   public boolean answerCorrect(String answer) {
-    return Constants.password.equals(answer);
+    return WrongSecretsConstants.password.equals(answer);
   }
 
   /** {@inheritDoc} */

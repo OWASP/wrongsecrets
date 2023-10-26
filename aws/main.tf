@@ -22,6 +22,9 @@ locals {
 
 provider "aws" {
   region = var.region
+  default_tags {
+    tags = var.tags
+  }
 }
 
 provider "random" {}
@@ -37,7 +40,7 @@ data "aws_availability_zones" "available" {}
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 4.0.1"
+  version = "~> 5.1.1"
 
   name                 = "${var.cluster_name}-vpc"
   cidr                 = local.vpc_cidr
@@ -62,7 +65,7 @@ module "vpc" {
 
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
-  version = "19.13.1"
+  version = "19.16.0"
 
   cluster_name    = var.cluster_name
   cluster_version = var.cluster_version

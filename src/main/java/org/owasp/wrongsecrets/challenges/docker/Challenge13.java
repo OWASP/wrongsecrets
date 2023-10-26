@@ -5,6 +5,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.crypto.Cipher;
 import javax.crypto.spec.GCMParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
@@ -83,6 +85,7 @@ public class Challenge13 extends Challenge {
 
   private boolean isKeyCorrect(String base64EncodedKey) {
     if (Strings.isNullOrEmpty(base64EncodedKey)
+        || !isBase64(base64EncodedKey)
         || Strings.isNullOrEmpty(plainText)
         || Strings.isNullOrEmpty(cipherText)) {
       // log.debug("Checking secret with values {}, {}, {}", base64EncodedKey, plainText,
@@ -113,5 +116,12 @@ public class Challenge13 extends Challenge {
       log.warn("Exception with Challenge 13", e);
       return false;
     }
+  }
+
+  private boolean isBase64(String text) {
+    String pattern = "^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?$";
+    Pattern r = Pattern.compile(pattern);
+    Matcher m = r.matcher(text);
+    return m.find();
   }
 }

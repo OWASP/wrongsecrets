@@ -8,7 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentMatchers;
-import org.owasp.wrongsecrets.challenges.docker.Constants;
+import org.owasp.wrongsecrets.challenges.docker.WrongSecretsConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -43,12 +43,12 @@ class SecretLeakageControllerTest {
 
   @Test
   void spoil1() throws Exception {
-    testSpoil("/spoil-1", Constants.password);
+    testSpoil("/spoil-1", WrongSecretsConstants.password);
   }
 
   @Test
   void solveChallenge1() throws Exception {
-    solveChallenge("/challenge/1", Constants.password);
+    solveChallenge("/challenge/1", WrongSecretsConstants.password);
   }
 
   private void solveChallenge(String endpoint, String solution) throws Exception {

@@ -11,6 +11,7 @@ import com.google.cloud.secretmanager.v1.SecretVersionName;
 import com.google.common.base.Strings;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
@@ -143,7 +144,8 @@ public class Challenge11 extends CloudChallenge {
       try { // based on
         // https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javav2/example_code/sts/src/main/java/com/example/sts
 
-        String webIDentityToken = Files.readString(Paths.get(tokenFileLocation));
+        String webIDentityToken =
+            Files.readString(Paths.get(tokenFileLocation), StandardCharsets.UTF_8);
         StsClient stsClient = StsClient.builder().region(Region.of(awsRegion)).build();
         AssumeRoleWithWebIdentityRequest webIdentityRequest =
             AssumeRoleWithWebIdentityRequest.builder()

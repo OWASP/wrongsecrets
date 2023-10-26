@@ -9,15 +9,15 @@
 [![Test minikube script (k8s)](https://github.com/OWASP/wrongsecrets/actions/workflows/minikube-k8s-test.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/minikube-k8s-test.yml) [![Test minikube script (k8s&vault)](https://github.com/OWASP/wrongsecrets/actions/workflows/minikube-vault-test.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/minikube-vault-test.yml) [![Docker container test](https://github.com/OWASP/wrongsecrets/actions/workflows/container_test.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/container_test.yml)[![Test container on podman and Colima](https://github.com/OWASP/wrongsecrets/actions/workflows/container-alts-test.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/container-alts-test.yml)
 [![DAST with ZAP](https://github.com/OWASP/wrongsecrets/actions/workflows/dast-zap-test.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/dast-zap-test.yml)
 
-[![OWASP Lab Project](https://img.shields.io/badge/OWASP-lab%20project-48A646.svg)](https://owasp.org/projects/)
+[![OWASP Production Project](https://img.shields.io/badge/OWASP-production%20project-48A646.svg)](https://owasp.org/projects/)
 [![OpenSSF Best Practices](https://bestpractices.coreinfrastructure.org/projects/7024/badge)](https://bestpractices.coreinfrastructure.org/projects/7024)
 [![Discussions](https://img.shields.io/github/discussions/OWASP/wrongsecrets)](https://github.com/OWASP/wrongsecrets/discussions)
 
 Welcome to the OWASP WrongSecrets game! The game is packed with real life examples of how to _not_ store secrets in your software. Each of these examples is captured in a challenge, which you need to solve using various tools and techniques. Solving these challenges will help you recognize common mistakes & can help you to reflect on your own secrets management strategy.
 
-Can you solve all the 32 challenges?
+Can you solve all the 41 challenges?
 
-Try some of them on [our Heroku demo environment](https://wrongsecrets.herokuapp.com/).
+Try some of them on [our Heroku demo environment](https://wrongsecrets.herokuapp.com/) or on our [Okteto demo environment (might need to awake again)](https://wrongsecrets-commjoen.cloud.okteto.net/).
 
 Want to play the other challenges? Read the instructions on how to set them up below.
 
@@ -30,7 +30,8 @@ Want to play the other challenges? Read the instructions on how to set them up b
 -   [Support](#support)
 -   [Basic docker exercises](#basic-docker-exercises)
     -   [Running these on Heroku](#running-these-on-heroku)
-    -   [Running on Fly.io](#running-on-flyio)
+    -   [Running these on Render.io](#running-these-on-renderio)
+    -   [Running these on Railway](#running-these-on-railway)
 -   [Basic K8s exercise](#basic-k8s-exercise)
     -   [Minikube based](#minikube-based)
     -   [k8s based](#k8s-based)
@@ -41,14 +42,14 @@ Want to play the other challenges? Read the instructions on how to set them up b
     -   [Running WrongSecrets in GCP](#running-wrongsecrets-in-gcp)
     -   [Running WrongSecrets in Azure](#running-wrongsecrets-in-azure)
     -   [Running Challenge15 in your own cloud only](#running-challenge15-in-your-own-cloud-only)
--   [Do you want to play without guidance?](#do-you-want-to-play-without-guidance)
+-   [Do you want to play without guidance?](#do-you-want-to-play-without-guidance-or-spoils)
 -   [Special thanks & Contributors](#special-thanks--contributors)
 -   [Sponsorships](#sponsorships)
 -   [Help Wanted](#help-wanted)
 -   [Use OWASP WrongSecrets as a secret detection benchmark](#use-owasp-wrongsecrets-as-a-secret-detection-benchmark)
 -   [CTF](#ctf)
     -   [CTFD Support](#ctfd-support)
-    -   [FBCTF Support](#fbctf-support--experimental--)
+    -   [FBCTF Support](#fbctf-support-experimental)
 -   [Notes on development](#notes-on-development)
     -   [Dependency management](#dependency-management)
     -   [Get the project started in IntelliJ IDEA](#get-the-project-started-in-intellij-idea)
@@ -71,7 +72,7 @@ Copyright (c) 2020-2023 Jeroen Willemsen and WrongSecrets contributors.
 
 ## Basic docker exercises
 
-_Can be used for challenges 1-4, 8, 12-32_
+_Can be used for challenges 1-4, 8, 12-32, 34, 35-41_
 
 For the basic docker exercises you currently require:
 
@@ -112,23 +113,39 @@ Now you can try to find the secrets by means of solving the challenge offered at
 -   [localhost:8080/challenge/30](http://localhost:8080/challenge/30)
 -   [localhost:8080/challenge/31](http://localhost:8080/challenge/31)
 -   [localhost:8080/challenge/32](http://localhost:8080/challenge/32)
+-   [localhost:8080/challenge/34](http://localhost:8080/challenge/34)
+-   [localhost:8080/challenge/35](http://localhost:8080/challenge/35)
+-   [localhost:8080/challenge/36](http://localhost:8080/challenge/36)
+-   [localhost:8080/challenge/37](http://localhost:8080/challenge/37)
+-   [localhost:8080/challenge/38](http://localhost:8080/challenge/38)
+-   [localhost:8080/challenge/39](http://localhost:8080/challenge/39)
+-   [localhost:8080/challenge/40](http://localhost:8080/challenge/40)
+-   [localhost:8080/challenge/41](http://localhost:8080/challenge/41)
 
 Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look
 better ;-).
 
 ### Running these on Heroku
 
-You can test them out at [https://wrongsecrets.herokuapp.com/](https://wrongsecrets.herokuapp.com/) as well! But please
-understand that we have NO guarantees that this works. Given we run in Heroku free-tier, please do not fuzz and/or try
-to bring it down: you would be spoiling it for others that want to testdrive it.
+You can test them out at [https://wrongsecrets.herokuapp.com/](https://wrongsecrets.herokuapp.com/) as well! The folks at Heroku have given us an awesome open source support package, which allows us to run the app for free there, where it is almost always up. Still, please do not fuzz and/or try to bring it down: you would be spoiling it for others that want to testdrive it.
+Use [this link](https://wrongsecrets.herokuapp.com/) to use our hosted version of the app. If you want to host it on Heroku yourself (e.g., for running a training), you can do so by clicking [this link](https://heroku.com/deploy?template=https://github.com/OWASP/wrongsecrets/tree/master). Please be aware that this will incur costs for which this project and/or its maintainers cannot be held responsible.
 
-### Running on Fly.io
+### Running these on Render.io
+*status: experimental*
 
-You can test them out at [https://wrongsecrets.fly.dev](https://wrongsecrets.fly.dev) as well! Please understand that we run on a free-tier instance, we cannot give any guarantees. Please do not fuzz and/or try to bring it down: you would be spoiling it for others that want to testdrive it.
+You can test them out at [https://wrongsecrets.onrender.com/](https://wrongsecrets.onrender.com/). Please understand that we run on a free-tier instance, we cannot give any guarantees. Please do not fuzz and/or try to bring it down: you would be spoiling it for others that want to testdrive it.
+Want to deploy yourself with Render? Click the button below:
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/OWASP/wrongsecrets)
+
+### Running these on Railway
+*status: maintained by [alphasec.io](https://github.com/alphasecio)*
+
+If you want to host WrongSecrets on Railway, you can do so by deploying [this one-click template](https://railway.app/new/template/7pnwRj). Railway does not offer an always-free plan anymore, but the free trial is good enough to test-drive this before you decide to upgrade. If you need a step-by-step companion guide, see [this blog post](https://alphasec.io/test-your-secret-management-skills-with-owasp-wrongsecrets/).
 
 ## Basic K8s exercise
 
-_Can be used for challenges 1-6, 8, 12-32_
+_Can be used for challenges 1-6, 8, 12-41_
 
 ### Minikube based
 
@@ -143,6 +160,7 @@ The K8S setup currently is based on using Minikube for local fun:
     minikube start
     kubectl apply -f k8s/secrets-config.yml
     kubectl apply -f k8s/secrets-secret.yml
+    kubectl apply -f k8s/challenge33.yml
     kubectl apply -f k8s/secret-challenge-deployment.yml
     while [[ $(kubectl get pods -l app=secret-challenge -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do echo "waiting for secret-challenge" && sleep 2; done
     kubectl expose deployment secret-challenge --type=LoadBalancer --port=8080
@@ -153,6 +171,7 @@ now you can use the provided IP address and port to further play with the K8s va
 
 -   [localhost:8080/challenge/5](http://localhost:8080/challenge/5)
 -   [localhost:8080/challenge/6](http://localhost:8080/challenge/6)
+-   [localhost:8080/challenge/33](http://localhost:8080/challenge/33)
 
 ### k8s based
 
@@ -161,6 +180,7 @@ Want to run vanilla on your own k8s? Use the commands below:
 ```bash
     kubectl apply -f k8s/secrets-config.yml
     kubectl apply -f k8s/secrets-secret.yml
+    kubectl apply -f k8s/challenge33.yml
     kubectl apply -f k8s/secret-challenge-deployment.yml
     while [[ $(kubectl get pods -l app=secret-challenge -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do echo "waiting for secret-challenge" && sleep 2; done
     kubectl port-forward \
@@ -172,6 +192,7 @@ now you can use the provided IP address and port to further play with the K8s va
 
 -   [localhost:8080/challenge/5](http://localhost:8080/challenge/5)
 -   [localhost:8080/challenge/6](http://localhost:8080/challenge/6)
+-   [localhost:8080/challenge/33](http://localhost:8080/challenge/33)
 
 ### Okteto based
 
@@ -181,7 +202,7 @@ Don't want to go over the hassle of setting up K8S yourself? visit [https://wron
 
 ## Vault exercises with minikube
 
-_Can be used for challenges 1-8, 12-29_
+_Can be used for challenges 1-8, 12-41_
 Make sure you have the following installed:
 
 -   minikube with docker (or comment out line 8 and work at your own k8s setup),
@@ -192,14 +213,14 @@ Make sure you have the following installed:
 -   vault [Install from here](https://www.vaultproject.io/downloads),
 -   grep, Cat, and Sed
 
-Run `./k8s-vault-minkube-start.sh`, when the script is done, then the challenges will wait for you at <http://localhost:8080> . This will allow you to run challenges 1-8, 12-32.
+Run `./k8s-vault-minkube-start.sh`, when the script is done, then the challenges will wait for you at <http://localhost:8080> . This will allow you to run challenges 1-8, 12-35.
 
 When you stopped the `k8s-vault-minikube-start.sh` script and want to resume the port forward run: `k8s-vault-minikube-resume.sh`.
 This is because if you run the start script again it will replace the secret in the vault and not update the secret-challenge application with the new secret.
 
 ## Cloud Challenges
 
-_Can be used for challenges 1-32_
+_Can be used for challenges 1-41_
 
 **READ THIS**: Given that the exercises below contain IAM privilege escalation exercises,
 never run this on an account which is related to your production environment or can influence your account-over-arching
@@ -247,44 +268,56 @@ You can enable Swagger documentation and the Swagger UI by overriding the `SPRIN
 
 Leaders:
 
--   [Ben de Haan @bendehaan](https://github.com/bendehaan)
--   [Jeroen Willemsen @commjoen](https://github.com/commjoen)
+- [Ben de Haan @bendehaan](https://www.github.com/bendehaan)
+- [Jeroen Willemsen @commjoen](https://www.github.com/commjoen)
 
 Top contributors:
 
--   [Nanne Baars @nbaars](https://github.com/nbaars)
--   [Joss Sparkes @remakingeden](https://github.com/remakingeden)
--   [Marcin Nowak @MarcinNowak-codes](https://github.com/MarcinNowak-codes)
--   [Tibor Hercz @tiborhercz](https://github.com/tiborhercz)
--   [Chris Elbring Jr. @neatzsche](https://github.com/neatzsche)
--   [Puneeth Y @puneeth072003](https://github.com/puneeth072003)
--   [Mike Woudenberg @mikewoudenberg](https://github.com/mikewoudenberg)
--   [Divyanshu Dev @Novice-expert](https://github.com/Novice-expert)
--   [Filip Chyla @fchyla](https://github.com/fchyla)
--   [Dmitry Litosh @Dlitosh](https://github.com/Dlitosh)
--   [Josh Grossman @tghosth](https://github.com/tghosth)
--   [Turjo Chowdhury @turjoc120](https://github.com/turjoc120)
--   [Spyros @northdpole](https://github.com/northdpole)
--   [Ruben Kruiver @RubenAtBinx](https://github.com/RubenAtBinx)
--   [Shlomo Zalman Heigh @szh](https://github.com/szh)
--   [Nicolas Humblot @nhumblot](https://github.com/nhumblot)
--   [Madhu Akula @madhuakula](https://github.com/madhuakula)
--   [Finn @f3rn0s](https://github.com/f3rn0s)
--   [Alex Bender @alex-bender](https://github.com/alex-bender)
--   [Rick M @kingthorin](https://github.com/kingthorin)
+- [Jannik Hollenbach @J12934](https://www.github.com/J12934)
+- [Puneeth Y @puneeth072003](https://www.github.com/puneeth072003)
+- [Joss Sparkes @RemakingEden](https://www.github.com/RemakingEden)
+
+Contributors:
+
+- [Nanne Baars @nbaars](https://www.github.com/nbaars)
+- [Marcin Nowak @drnow4u](https://www.github.com/drnow4u)
+- [Rodolfo Cabral Neves @roddas](https://www.github.com/roddas)
+- [Osama Magdy @osamamagdy](https://www.github.com/osamamagdy)
+- [Divyanshu Dev @Novice-expert](https://www.github.com/Novice-expert)
+- [Tibor Hercz @tiborhercz](https://www.github.com/tiborhercz)
+- [Chris Elbring Jr. @neatzsche](https://www.github.com/neatzsche)
+- [Diamond Rivero @diamant3](https://www.github.com/diamant3)
+- [Adarsh A @adarsh-a-tw](https://www.github.com/adarsh-a-tw)
+- [Filip Chyla @fchyla](https://www.github.com/fchyla)
+- [Dmitry Litosh @Dlitosh](https://www.github.com/Dlitosh)
+- [Turjo Chowdhury @turjoc120](https://www.github.com/turjoc120)
+- [Josh Grossman @tghosth](https://www.github.com/tghosth)
+- [alphasec @alphasecio](https://www.github.com/alphasecio)
+- [Madhu Akula @madhuakula](https://www.github.com/madhuakula)
+- [Mike Woudenberg @mikewoudenberg](https://www.github.com/mikewoudenberg)
+- [Spyros @northdpole](https://www.github.com/northdpole)
+- [RubenAtBinx @RubenAtBinx](https://www.github.com/RubenAtBinx)
+- [Vineeth Jagadeesh @djvinnie](https://www.github.com/djvinnie)
+- [Alex Bender @alex-bender](https://www.github.com/alex-bender)
+- [Nicolas Humblot @nhumblot](https://www.github.com/nhumblot)
+- [Rick M @kingthorin](https://www.github.com/kingthorin)
+- [Shlomo Zalman Heigh @szh](https://www.github.com/szh)
+- [Fern @f3rn0s](https://www.github.com/f3rn0s)
 
 Testers:
 
--   [Dave van Stein @davevs](https://github.com/davevs)
--   [Marcin Nowak @MarcinNowak-codes](https://github.com/MarcinNowak-codes)
--   [Marc Chang Sing Pang @mchangsp](https://github.com/mchangsp)
+- [Dave van Stein @davevs](https://www.github.com/davevs)
+- [Marcin Nowak @drnow4u](https://www.github.com/drnow4u)
+- [Marc Chang Sing Pang @mchangsp](https://www.github.com/mchangsp)
+- [Vineeth Jagadeesh @djvinnie](https://www.github.com/djvinnie)
 
-Special mentions for helping out:
+Special thanks:
 
--   [Madhu Akula @madhuakula](https://github.com/madhuakula)
--   [Björn Kimminich @bkimminich](https://github.com/bkimminich)
--   [Xiaolu Dai @saragluna](https://github.com/saragluna)
--   [Jonathan Giles @jonathanGiles](https://github.com/JonathanGiles)
+- [Madhu Akula @madhuakula @madhuakula](https://www.github.com/madhuakula)
+- [Björn Kimminich @bkimminich](https://www.github.com/bkimminich)
+- [Dan Gora @devsecops](https://www.github.com/devsecops)
+- [Xiaolu Dai @saragluna](https://www.github.com/saragluna)
+- [Jonathan Giles @jonathanGiles](https://www.github.com/jonathanGiles)
 
 ### Sponsorships
 
@@ -405,11 +438,11 @@ You can use the OWASP Dependency-checker by calling `mvn dependency-check:aggreg
 
 ### Get the project started in IntelliJ IDEA
 
-Requirements: make sure you have the following tools installed: [Docker](https://www.docker.com/products/docker-desktop/), [Java19 JDK](https://jdk.java.net/19/), [NodeJS 18](https://nodejs.org/dist/v18.12.1/node-v18.12.1-x86.msi) and [IntelliJ IDEA](https://www.jetbrains.com/idea/download).
+Requirements: make sure you have the following tools installed: [Docker](https://www.docker.com/products/docker-desktop/), [Java21 JDK](https://jdk.java.net/21/), [NodeJS 20](https://nodejs.org/en/download/current) and [IntelliJ IDEA](https://www.jetbrains.com/idea/download).
 
 1. Fork and clone the project as described in the [documentation](https://github.com/OWASP/wrongsecrets/blob/master/CONTRIBUTING.md).
 2. Import the project in IntelliJ (e.g. import as mvn project / local sources)
-3. Go to the project settings and make sure it uses Java19 (And that the JDK can be found)
+3. Go to the project settings and make sure it uses Java21 (And that the JDK can be found)
 4. Go to the IDE settings>Language & Frameworks > Lombok and make sure Lombok processing is enabled
 5. Open the Maven Tab in your IDEA and run "Reload All Maven Projects" to make the system sync and download everything. Next, in that same tab use the "install" option as part of the OWASP WrongSecrets Lifecycle to genereate the asciidoc and such.
 6. Now run the `main` method in `org.owasp.wrongsecrets.WrongSecretsApplication.java`. This should fail with a stack trace.
@@ -422,7 +455,7 @@ Feel free to edit and propose changes via pull requests. Be sure to follow our g
 
 Please note that we officially only support Linux and MacOS for development. If you want to develop using a Windows machine, use WSL2 or a virtual machine running Linux. We did include Windows detection & a bunch of `exe` files for a first experiment, but are looking for active maintainers of them. Want to make sure it runs on Windows? Create PRs ;-).
 
-If, after reading this section, you still have no clue on the application code: Have a look [at some tutorials on Spring boot from Baeldung](https://www.baeldung.com/spring-boot)
+If, after reading this section, you still have no clue on the application code: Have a look [at some tutorials on Spring boot from Baeldung](https://www.baeldung.com/spring-boot).
 
 ### Automatic reload during development
 

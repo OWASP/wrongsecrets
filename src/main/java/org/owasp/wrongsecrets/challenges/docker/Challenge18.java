@@ -26,8 +26,8 @@ import org.springframework.stereotype.Component;
 public class Challenge18 extends Challenge {
 
   private final String hashPassword;
-  private final String md5Hash = "MD5";
-  private final String sha1Hash = "SHA1";
+  private static final String md5Hash = "MD5";
+  private static final String sha1Hash = "SHA1";
 
   public Challenge18(ScoreCard scoreCard, @Value("aHVudGVyMg==") String hashPassword) {
     super(scoreCard);

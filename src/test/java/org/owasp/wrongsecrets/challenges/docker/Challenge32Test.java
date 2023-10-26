@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.owasp.wrongsecrets.ScoreCard;
 
-public class Challenge32Test {
+class Challenge32Test {
   @Mock private ScoreCard scoreCard;
 
   @Test

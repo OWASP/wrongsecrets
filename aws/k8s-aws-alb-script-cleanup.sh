@@ -46,3 +46,6 @@ sleep 5 # Prevents race condition - command below may error out because it's sti
 
 aws iam delete-policy \
   --policy-arn arn:aws:iam::${ACCOUNT_ID}:policy/AWSLoadBalancerControllerIAMPolicy
+
+echo "Wait for 10 seconds to let the AWS resources be cleaned up"
+sleep 10

@@ -14,6 +14,7 @@ import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.docker.Challenge0;
 import org.owasp.wrongsecrets.challenges.docker.Challenge30;
+import org.owasp.wrongsecrets.challenges.docker.Challenge37;
 import org.owasp.wrongsecrets.challenges.docker.Challenge8;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -53,6 +54,9 @@ public class ChallengesController {
 
   @Value("${challenge_thirty_ctf_to_provide_to_host_value}")
   private String keyToProvideToHostForChallenge30;
+
+  @Value("${challenge_rando_key_ctf_to_provide_to_host_value}")
+  private String getKeyToProvideToHostChallenge37;
 
   @Value("${CTF_SERVER_ADDRESS}")
   private String ctfServerAddress;
@@ -188,6 +192,19 @@ public class ChallengesController {
                         + ctfServerAddress
                         + "for which you get your code: "
                         + keyToProvideToHostForChallenge30);
+              }
+            } else if (challenge.getChallenge() instanceof Challenge37) {
+              if (!Strings.isNullOrEmpty(getKeyToProvideToHostChallenge37)
+                  && !keyToProvideToHostForChallenge30.equals(
+                      "not_set")) { // this means that it was overriden with a code that needs to be
+                // returned to the ctf key exchange hos
+                model.addAttribute(
+                    "answerCorrect",
+                    "Your answer is correct! "
+                        + "fill in the following answer in the CTF instance at "
+                        + ctfServerAddress
+                        + "for which you get your code: "
+                        + getKeyToProvideToHostChallenge37);
               }
             } else {
               model.addAttribute(

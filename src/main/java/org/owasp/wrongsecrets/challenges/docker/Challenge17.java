@@ -1,6 +1,7 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
@@ -74,7 +75,7 @@ public class Challenge17 extends Challenge {
       justification = "The location of the dockerMountPath is based on an Env Var")
   public String getActualData() {
     try {
-      return Files.readString(Paths.get(dockerMountPath, "thirdkey.txt"));
+      return Files.readString(Paths.get(dockerMountPath, "thirdkey.txt"), StandardCharsets.UTF_8);
     } catch (Exception e) {
       log.warn("Exception during file reading, defaulting to default without cloud environment", e);
       return "if_you_see_this_please_use_docker_instead";
