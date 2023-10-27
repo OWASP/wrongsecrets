@@ -30,7 +30,7 @@ jobs:
       - name: Cache JAR file
         uses: actions/cache@v3
         with:
-          path: target
+          path: target/wrongsecrets-1.7.0-SNAPSHOT.jar
           key: JarCache-${{ runner.os }}-${{ hashFiles('**/pom.xml') }}
       - name: Start wrongsecrets
         run: nohup ./mvnw spring-boot:run -Dspring-boot.run.profiles=without-vault &
