@@ -26,14 +26,10 @@ jobs:
         id: cache-jar
         uses: actions/cache@v3
         with:
-          path: target/wrongsecrets-1.7.0-SNAPSHOT.jar
+          path: ./target/wrongsecrets-1.7.0-SNAPSHOT.jar
           key: JarCache-${{ runner.os }}-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             JarCache-${{ runner.os }}-
-      - name: test
-        run: |
-          cd target
-          ls
       - name: Start wrongsecrets
         run: nohup ./mvnw spring-boot:run -Dspring-boot.run.profiles=without-vault &
       - name: ZAP Scan

@@ -14,13 +14,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Check the cache
+        uses: actions/cache/restore@v3
+        id: cache
+        with:
+          path: ./target
+          key: JarCache-${{ runner.os }}-${{ hashFiles('**/pom.xml') }}
+      - name: Check cache hit
+        id: cache-hit-check
+        run: echo "::set-output name=cache-hit::${{ steps.cache.outputs.cache-hit }}"
       - name: Set up JDK 21
+        if: steps.cache.outputs.cache-hit != 'true'
         uses: actions/setup-java@v3
         with:
           java-version: "21"
           distribution: "corretto"
       - name: Clean install
+        if: steps.cache.outputs.cache-hit != 'true'
         run: ./mvnw --no-transfer-progress clean install -DskipTests -Ddependency-check.skip -Dcyclonedx.skip=true -Dexec.skip
+
       - name: Compile javadoc
         run: ./mvnw --no-transfer-progress compile javadoc:javadoc
       - name: Start wrongsecrets
