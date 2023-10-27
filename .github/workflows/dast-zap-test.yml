@@ -20,18 +20,17 @@ jobs:
         with:
           java-version: "21"
           distribution: "corretto"
-      - name: Cache Maven packages
-        uses: actions/cache@v3
-        with:
-          path: ~/.m2
-          key: MavenCache-${{ runner.os }}-${{ hashFiles('**/pom.xml') }}
       - name: Clean install
         run: ./mvnw --no-transfer-progress clean install -DskipTests -Ddependency-check.skip -Dcyclonedx.skip=true -Dexec.skip
       - name: Cache JAR file
+        id: cache-jar
         uses: actions/cache@v3
+        run: pwd
         with:
           path: target/wrongsecrets-1.7.0-SNAPSHOT.jar
           key: JarCache-${{ runner.os }}-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            JarCache-${{ runner.os }}-
       - name: Start wrongsecrets
         run: nohup ./mvnw spring-boot:run -Dspring-boot.run.profiles=without-vault &
       - name: ZAP Scan
