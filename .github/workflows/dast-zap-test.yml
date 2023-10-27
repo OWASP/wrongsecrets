@@ -13,14 +13,25 @@ jobs:
     name: DAST test with ZAP
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
       - name: Set up JDK 21
         uses: actions/setup-java@v3
         with:
           java-version: "21"
           distribution: "corretto"
+      - name: Cache Maven packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2
+          key: MavenCache-${{ runner.os }}-${{ hashFiles('**/pom.xml') }}
       - name: Clean install
         run: ./mvnw --no-transfer-progress clean install -DskipTests -Ddependency-check.skip -Dcyclonedx.skip=true -Dexec.skip
+      - name: Cache JAR file
+        uses: actions/cache@v3
+        with:
+          path: target
+          key: JarCache-${{ runner.os }}-${{ hashFiles('**/pom.xml') }}
       - name: Start wrongsecrets
         run: nohup ./mvnw spring-boot:run -Dspring-boot.run.profiles=without-vault &
       - name: ZAP Scan
