@@ -31,7 +31,7 @@ jobs:
           restore-keys: |
             JarCache-${{ runner.os }}-
       - name: test
-        run: pwd
+        run: ls
       - name: Start wrongsecrets
         run: nohup ./mvnw spring-boot:run -Dspring-boot.run.profiles=without-vault &
       - name: ZAP Scan
