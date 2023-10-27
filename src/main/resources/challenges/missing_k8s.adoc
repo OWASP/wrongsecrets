@@ -1,0 +1,3 @@
+We are running outside a K8s cluster.
+Please run this in the K8s cluster as explained in the
+https://github.com/OWASP/wrongsecrets#basic-k8s-exercise[README.md]

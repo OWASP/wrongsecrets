@@ -6,19 +6,13 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
-import java.util.List;
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import lombok.extern.slf4j.Slf4j;
-import org.owasp.wrongsecrets.RuntimeEnvironment;
-import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
-import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
-import org.owasp.wrongsecrets.challenges.Difficulty;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.annotation.Order;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
@@ -28,20 +22,12 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
-@Order(40)
-public class Challenge40 extends Challenge {
+public class Challenge40 implements Challenge {
 
   private final Resource resource;
 
-  public Challenge40(
-      ScoreCard scoreCard, @Value("classpath:executables/secrchallenge.json") Resource resource) {
-    super(scoreCard);
+  public Challenge40(@Value("classpath:executables/secrchallenge.json") Resource resource) {
     this.resource = resource;
-  }
-
-  @Override
-  public boolean canRunInCTFMode() {
-    return true;
   }
 
   @Override
@@ -52,28 +38,6 @@ public class Challenge40 extends Challenge {
   @Override
   public boolean answerCorrect(String answer) {
     return getSolution().equals(answer);
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public int difficulty() {
-    return Difficulty.EASY;
-  }
-
-  /** {@inheritDoc} Cryptography based. */
-  @Override
-  public String getTech() {
-    return ChallengeTechnology.Tech.CRYPTOGRAPHY.id;
-  }
-
-  @Override
-  public boolean isLimitedWhenOnlineHosted() {
-    return false;
-  }
-
-  @Override
-  public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
-    return List.of(RuntimeEnvironment.Environment.DOCKER);
   }
 
   @SuppressFBWarnings(

@@ -10,14 +10,14 @@ class Challenge38Test {
 
   @Test
   void spoilerShouldGiveAnswer() {
-    var challenge = new Challenge38(scoreCard);
+    var challenge = new Challenge38();
     Assertions.assertThat(challenge.spoiler().solution()).isNotEmpty();
     Assertions.assertThat(challenge.answerCorrect(challenge.spoiler().solution())).isTrue();
   }
 
   @Test
   void incorrectAnswerShouldNotSolveChallenge() {
-    var challenge = new Challenge38(scoreCard);
-    Assertions.assertThat(challenge.solved("wrong answer")).isFalse();
+    var challenge = new Challenge38();
+    Assertions.assertThat(challenge.answerCorrect("wrong answer")).isFalse();
   }
 }

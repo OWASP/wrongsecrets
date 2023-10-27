@@ -10,13 +10,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.owasp.wrongsecrets.ScoreCard;
 import org.springframework.core.io.Resource;
 
 @ExtendWith(MockitoExtension.class)
 class Challenge40Test {
-  @Mock private ScoreCard scoreCard;
-
   @Mock private Resource resource;
 
   @BeforeEach
@@ -27,7 +24,7 @@ class Challenge40Test {
 
   @Test
   void spoilerShouldGiveAnswer() {
-    var challenge = new Challenge40(scoreCard, resource);
+    var challenge = new Challenge40(resource);
     Assertions.assertThat(challenge.spoiler().solution()).isNotEmpty();
     Assertions.assertThat(challenge.answerCorrect(challenge.spoiler().solution())).isTrue();
     Assertions.assertThat(challenge.answerCorrect("error_decryption")).isFalse();
@@ -35,7 +32,7 @@ class Challenge40Test {
 
   @Test
   void incorrectAnswerShouldNotSolveChallenge() {
-    var challenge = new Challenge40(scoreCard, resource);
+    var challenge = new Challenge40(resource);
     Assertions.assertThat(challenge.answerCorrect("wrong answer")).isFalse();
   }
 }

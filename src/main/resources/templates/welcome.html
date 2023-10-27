@@ -39,10 +39,10 @@
                     </thead>
                     <tbody>
                     <tr
-                        th:each="challenge: ${challenges}"
+                        th:each="challenge,iter: ${challenges}"
                         th:class="${challenge.challengeCompleted} ? solved : ''"
                         data-cy="challenge-row">
-                        <th scope="row" class="d-none d-xl-table-cell" th:text="${challenge.link}"></th>
+                        <th scope="row" class="d-none d-xl-table-cell" th:text="${iter.count} - 1"></th>
                         <td>
                             &nbsp;<span
                             class="d-xl-none"
@@ -55,20 +55,8 @@
                         </td>
                         <td th:text="${challenge.tech}"></td>
                         <td class="d-none d-md-table-cell" th:text="${challenge.starsOnScale}"></td>
-                        <th:block th:if="${challenge.requiredEnv} == 'DOCKER'">
-                            <td class="">Docker</td>
-                        </th:block>
-                        <th:block th:if="${challenge.requiredEnv} == 'K8S'">
-                            <td class="">K8S</td>
-                        </th:block>
-                        <th:block th:if="${challenge.requiredEnv} == 'VAULT'">
-                            <td class="">K8S with Vault</td>
-                        </th:block>
-                        <th:block
-                            th:if="${challenge.requiredEnv} == 'AWS' or ${challenge.requiredEnv} == 'GCP' or ${challenge.requiredEnv} == 'AZURE'"
-                        >
-                            <td class="">AWS, GCP, Azure</td>
-                        </th:block>
+                        <td th:text="${challenge.runtimeEnvironmentCategory}">
+                                    </td>
                         <td class="d-none d-xl-table-cell">
                                         <span
                                             th:if="${challenge.challengeCompleted}"

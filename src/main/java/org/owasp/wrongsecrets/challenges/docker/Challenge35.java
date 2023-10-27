@@ -4,7 +4,6 @@ import java.nio.charset.StandardCharsets;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.util.List;
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
@@ -13,29 +12,14 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import lombok.extern.slf4j.Slf4j;
 import org.bouncycastle.util.encoders.Base64;
-import org.owasp.wrongsecrets.RuntimeEnvironment;
-import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
-import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
-import org.owasp.wrongsecrets.challenges.Difficulty;
 import org.owasp.wrongsecrets.challenges.Spoiler;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /** This is a challenge based on the idea of leaking a secret trough a vulnerability report. */
 @Slf4j
 @Component
-@Order(35)
-public class Challenge35 extends Challenge {
-
-  public Challenge35(ScoreCard scoreCard) {
-    super(scoreCard);
-  }
-
-  @Override
-  public boolean canRunInCTFMode() {
-    return true;
-  }
+public class Challenge35 implements Challenge {
 
   @Override
   public Spoiler spoiler() {
@@ -45,28 +29,6 @@ public class Challenge35 extends Challenge {
   @Override
   public boolean answerCorrect(String answer) {
     return getKey().equals(answer);
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public int difficulty() {
-    return Difficulty.EASY;
-  }
-
-  /** {@inheritDoc} This is a Documentation type of challenge */
-  @Override
-  public String getTech() {
-    return ChallengeTechnology.Tech.DOCUMENTATION.id;
-  }
-
-  @Override
-  public boolean isLimitedWhenOnlineHosted() {
-    return false;
-  }
-
-  @Override
-  public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
-    return List.of(RuntimeEnvironment.Environment.DOCKER);
   }
 
   private String getKey() {

@@ -9,8 +9,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.owasp.wrongsecrets.InMemoryScoreCard;
 import org.owasp.wrongsecrets.WrongSecretsApplication;
 import org.owasp.wrongsecrets.challenges.kubernetes.Challenge5;
 import org.owasp.wrongsecrets.challenges.kubernetes.Challenge6;
@@ -19,12 +17,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
-@ExtendWith(SpringExtension.class)
 @SpringBootTest(
     properties = {
+      "K8S_ENV=k8s_vault",
       "ctf_enabled=true",
       "ctf_key=randomtextforkey",
       "SPECIAL_K8S_SECRET=test5",
@@ -36,19 +33,22 @@ import org.springframework.test.web.servlet.MockMvc;
 class ChallengesControllerCTFModeWithPresetK8sAndVaultValuesTest {
 
   @Autowired private MockMvc mvc;
+  @Autowired private Challenge5 challenge5;
+  @Autowired private Challenge6 challenge6;
+  @Autowired private Challenge7 challenge7;
 
   @Test
   void shouldNotSpoilWhenInCTFMode() throws Exception {
-    mvc.perform(get("/spoil-5"))
+    mvc.perform(get("/spoil/challenge-5"))
         .andExpect(status().isOk())
         .andExpect(content().string(containsString("Spoils are disabled in CTF mode")));
   }
 
   @Test
   void shouldShowFlagWhenRespondingWithSuccessInCTFModeChallenge5() throws Exception {
-    var spoil = new Challenge5(new InMemoryScoreCard(1), "test5").spoiler().solution();
+    var spoil = challenge5.spoiler().solution();
     mvc.perform(
-            post("/challenge/5")
+            post("/challenge/challenge-5")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("solution", spoil)
                 .param("action", "submit")
@@ -59,9 +59,9 @@ class ChallengesControllerCTFModeWithPresetK8sAndVaultValuesTest {
 
   @Test
   void shouldShowFlagWhenRespondingWithSuccessInCTFModeChallenge6() throws Exception {
-    var spoil = new Challenge6(new InMemoryScoreCard(1), "test6").spoiler().solution();
+    var spoil = challenge6.spoiler().solution();
     mvc.perform(
-            post("/challenge/6")
+            post("/challenge/challenge-6")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("solution", spoil)
                 .param("action", "submit")
@@ -72,9 +72,9 @@ class ChallengesControllerCTFModeWithPresetK8sAndVaultValuesTest {
 
   @Test
   void shouldShowFlagWhenRespondingWithSuccessInCTFModeChallenge7() throws Exception {
-    var spoil = new Challenge7(new InMemoryScoreCard(1), null, "test7").spoiler().solution();
+    var spoil = challenge7.spoiler().solution();
     mvc.perform(
-            post("/challenge/7")
+            post("/challenge/challenge-7")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("solution", spoil)
                 .param("action", "submit")

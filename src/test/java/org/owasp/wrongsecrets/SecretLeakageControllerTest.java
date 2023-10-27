@@ -1,54 +1,32 @@
 package org.owasp.wrongsecrets;
 
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import org.hamcrest.CoreMatchers;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentMatchers;
 import org.owasp.wrongsecrets.challenges.docker.WrongSecretsConstants;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.vault.core.VaultTemplate;
-import org.springframework.web.context.WebApplicationContext;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ExtendWith({SpringExtension.class})
-@ActiveProfiles("test")
-@AutoConfigureWebTestClient
+@SpringBootTest(properties = {"K8S_ENV=docker"})
+@AutoConfigureMockMvc
 class SecretLeakageControllerTest {
 
-  @Autowired private WebApplicationContext webApplicationContext;
-  private MockMvc mockMvc;
-  @MockBean VaultTemplate vaultTemplate;
-  @MockBean RuntimeEnvironment runtimeEnvironment;
-
-  @BeforeEach
-  public void setup() {
-    this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
-    when(runtimeEnvironment.getRuntimeEnvironment())
-        .thenReturn(RuntimeEnvironment.Environment.DOCKER);
-    when(runtimeEnvironment.canRun(ArgumentMatchers.any())).thenReturn(true);
-  }
+  @Autowired private MockMvc mockMvc;
 
   @Test
   void spoil1() throws Exception {
-    testSpoil("/spoil-1", WrongSecretsConstants.password);
+    testSpoil("/spoil/challenge-1", WrongSecretsConstants.password);
   }
 
   @Test
   void solveChallenge1() throws Exception {
-    solveChallenge("/challenge/1", WrongSecretsConstants.password);
+    solveChallenge("/challenge/challenge-1", WrongSecretsConstants.password);
   }
 
   private void solveChallenge(String endpoint, String solution) throws Exception {
@@ -56,18 +34,16 @@ class SecretLeakageControllerTest {
         .perform(
             MockMvcRequestBuilders.post(endpoint)
                 .param("solution", solution)
-                .param("action", "submit"))
-        .andExpect(MockMvcResultMatchers.status().isOk())
-        .andExpect(
-            MockMvcResultMatchers.content()
-                .string(CoreMatchers.containsString("Your answer is correct!")));
+                .param("action", "submit")
+                .with(csrf()))
+        .andExpect(status().isOk())
+        .andExpect(content().string(containsString("Your answer is correct!")));
   }
 
   private void testSpoil(String endpoint, String solution) throws Exception {
     this.mockMvc
         .perform(MockMvcRequestBuilders.get(endpoint))
-        .andDo(print())
-        .andExpect(MockMvcResultMatchers.status().isOk())
-        .andExpect(MockMvcResultMatchers.content().string(CoreMatchers.containsString(solution)));
+        .andExpect(status().isOk())
+        .andExpect(content().string(containsString(solution)));
   }
 }

@@ -1,40 +1,27 @@
 package org.owasp.wrongsecrets.challenges.cloud;
 
-import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.AWS;
-import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.AZURE;
-import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.GCP;
-
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.List;
 import lombok.extern.slf4j.Slf4j;
-import org.owasp.wrongsecrets.RuntimeEnvironment;
-import org.owasp.wrongsecrets.ScoreCard;
-import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
-import org.owasp.wrongsecrets.challenges.Difficulty;
+import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /** Cloud challenge that leverages the CSI secrets driver of the cloud you are running in. */
 @Component
 @Slf4j
-@Order(10)
-public class Challenge10 extends CloudChallenge {
+public class Challenge10 implements Challenge {
 
   private final String awsDefaultValue;
   private final String challengeAnswer;
 
   public Challenge10(
-      ScoreCard scoreCard,
       @Value("${secretmountpath}") String filePath,
       @Value("${default_aws_value_challenge_10}") String awsDefaultValue,
-      @Value("${FILENAME_CHALLENGE10}") String fileName,
-      RuntimeEnvironment runtimeEnvironment) {
-    super(scoreCard, runtimeEnvironment);
+      @Value("${FILENAME_CHALLENGE10}") String fileName) {
     this.awsDefaultValue = awsDefaultValue;
     this.challengeAnswer = getCloudChallenge9and10Value(filePath, fileName);
   }
@@ -64,27 +51,5 @@ public class Challenge10 extends CloudChallenge {
           fileName);
       return awsDefaultValue;
     }
-  }
-
-  /** {@inheritDoc} */
-  public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
-    return List.of(GCP, AWS, AZURE);
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public int difficulty() {
-    return Difficulty.EXPERT;
-  }
-
-  /** {@inheritDoc} Uses CSI Driver */
-  @Override
-  public String getTech() {
-    return ChallengeTechnology.Tech.CSI.id;
-  }
-
-  @Override
-  public boolean canRunInCTFMode() {
-    return true;
   }
 }
