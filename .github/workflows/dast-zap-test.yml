@@ -50,7 +50,7 @@ jobs:
               await github.rest.actions.createWorkflowDispatch({
               owner,
               repo,
-              workflow_id: 'other-workflow.yml',
+              workflow_id: 'building-jar-cache.yml',
               ref: 'main'
             })
       - name: Start wrongsecrets
