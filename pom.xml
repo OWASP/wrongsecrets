@@ -5,13 +5,13 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.1.4</version>
+    <version>3.1.5</version>
     <!-- lookup parent from repository -->
   </parent>
 
   <groupId>org.owasp</groupId>
   <artifactId>wrongsecrets</artifactId>
-  <version>1.7.0-SNAPSHOT</version>
+  <version>1.7.2-SNAPSHOT</version>
 
   <name>OWASP WrongSecrets</name>
   <description>Examples with how to not use secrets</description>
@@ -49,7 +49,7 @@
     <aws.sdk.version>2.21.2</aws.sdk.version>
     <bootstrap.version>5.3.1</bootstrap.version>
     <com.azure.spring.version>5.5.0</com.azure.spring.version>
-    <cyclonedx.core.version>8.0.1</cyclonedx.core.version>
+    <cyclonedx.core.version>8.0.3</cyclonedx.core.version>
     <datatables.version>1.13.5</datatables.version>
     <dependency-check-maven.version>8.2.1</dependency-check-maven.version>
     <gcp.sdk.version>4.8.2</gcp.sdk.version>
@@ -261,7 +261,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-checkstyle-plugin</artifactId>
-          <version>3.3.0</version>
+          <version>3.3.1</version>
           <dependencies>
             <dependency>
               <groupId>com.puppycrawl.tools</groupId>
@@ -345,7 +345,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
-        <version>3.3.0</version>
+        <version>3.3.1</version>
         <configuration>
           <consoleOutput>true</consoleOutput>
           <failsOnError>true</failsOnError>
@@ -422,7 +422,7 @@
       <plugin>
         <groupId>com.github.eirslett</groupId>
         <artifactId>frontend-maven-plugin</artifactId>
-        <version>1.14.0</version>
+        <version>1.14.2</version>
         <executions>
           <execution>
             <id>install node and npm</id>
