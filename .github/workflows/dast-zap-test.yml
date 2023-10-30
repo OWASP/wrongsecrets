@@ -41,18 +41,14 @@ jobs:
 #          key: JarCache-${{ runner.os }}-${{ hashFiles('**/pom.xml') }}
 #          restore-keys: |
 #            JarCache-${{ runner.os }}-
-      - name: Trigger JAR cache build
-        if: steps.cache.outputs.cache-hit != 'true'
-        uses: actions/github-script@v6
+      - name: Trigger Building JAR cache
+        uses: actions/checkout@v2
         with:
-          script: |
-              const {owner, repo} = context.repo
-              await github.rest.actions.createWorkflowDispatch({
-              owner,
-              repo,
-              workflow_id: 'building-jar-cache.yml',
-              ref: 'main'
-            })
+          repository: owner/repo
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: .github/workflows/building-jar-cache.yml
+      - name: Run Building JAR cache workflow
+        run: gh workflow run "Building JAR cache" --ref main
       - name: Start wrongsecrets
         run: nohup ./mvnw spring-boot:run -Dspring-boot.run.profiles=without-vault &
       - name: ZAP Scan
