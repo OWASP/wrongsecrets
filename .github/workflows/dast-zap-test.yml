@@ -46,11 +46,12 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            await github.rest.actions.createWorkflowDispatch({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              workflow_id: 'building-jar-cache.yml', # workflow filename
-              ref: 'main' 
+              const {owner, repo} = context.repo
+              await github.rest.actions.createWorkflowDispatch({
+              owner,
+              repo,
+              workflow_id: 'other-workflow.yml',
+              ref: 'main'
             })
       - name: Start wrongsecrets
         run: nohup ./mvnw spring-boot:run -Dspring-boot.run.profiles=without-vault &
