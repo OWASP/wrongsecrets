@@ -1,0 +1,26 @@
+name: Building JAR cache
+
+on:
+  workflow_call:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up JDK 21
+        uses: actions/setup-java@v3
+        with:
+          java-version: "21"
+          distribution: "corretto"
+      - name: Clean install
+        run: ./mvnw --no-transfer-progress clean install -DskipTests -Ddependency-check.skip -Dcyclonedx.skip=true -Dexec.skip
+      - name: Cache JAR file
+        id: cache-jar
+        uses: actions/cache@v3
+        with:
+          path: ./target/wrongsecrets-1.7.0-SNAPSHOT.jar
+          key: JarCache-${{ runner.os }}-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            JarCache-${{ runner.os }}-

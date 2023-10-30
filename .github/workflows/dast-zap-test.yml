@@ -15,21 +15,43 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Set up JDK 21
-        uses: actions/setup-java@v3
+      - uses: actions/checkout@v4
+      - name: Check the cache
+        uses: actions/cache/restore@v3
+        id: cache
         with:
-          java-version: "21"
-          distribution: "corretto"
-      - name: Clean install
-        run: ./mvnw --no-transfer-progress clean install -DskipTests -Ddependency-check.skip -Dcyclonedx.skip=true -Dexec.skip
-      - name: Cache JAR file
-        id: cache-jar
-        uses: actions/cache@v3
-        with:
-          path: ./target/wrongsecrets-1.7.0-SNAPSHOT.jar
+          path: ./target
           key: JarCache-${{ runner.os }}-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            JarCache-${{ runner.os }}-
+          restore-keys: jar-
+      - name: Check cache hit
+        id: cache-hit-check
+        run: echo "cache-hit=${{ steps.cache.outputs.cache-hit }}" >> $GITHUB_ENV
+#      - name: Set up JDK 21
+#        uses: actions/setup-java@v3
+#        with:
+#          java-version: "21"
+#          distribution: "corretto"
+#      - name: Clean install
+#        run: ./mvnw --no-transfer-progress clean install -DskipTests -Ddependency-check.skip -Dcyclonedx.skip=true -Dexec.skip
+#      - name: Cache JAR file
+#        id: cache-jar
+#        uses: actions/cache@v3
+#        with:
+#          path: ./target/wrongsecrets-1.7.0-SNAPSHOT.jar
+#          key: JarCache-${{ runner.os }}-${{ hashFiles('**/pom.xml') }}
+#          restore-keys: |
+#            JarCache-${{ runner.os }}-
+      - name: Trigger JAR cache build
+        if: steps.cache.outputs.cache-hit != 'true'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'building-jar-cache.yml', # workflow filename
+              ref: 'main' 
+            })
       - name: Start wrongsecrets
         run: nohup ./mvnw spring-boot:run -Dspring-boot.run.profiles=without-vault &
       - name: ZAP Scan
