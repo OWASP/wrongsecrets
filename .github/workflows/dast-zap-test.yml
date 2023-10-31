@@ -17,12 +17,12 @@ jobs:
         uses: actions/checkout@v4
       - name: Trigger Building JAR cache with Git CLI
         if: steps.cache.outputs.cache-hit != 'true'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          pwd
-          cd .github/workflows
-          gh workflow run "Building JAR cache" --ref "main"
+          curl -X POST \
+          -H "Authorization: ${{ secrets.GITHUB_TOKEN }}" \
+          -H "Accept: application/vnd.github.v3+json" \
+          https://github.com/puneeth072003/wrongsecrets/blob/chal/.github/workflows/building-jar-cache.yml
+          -d '{"ref":"main"}'
       - name: Start wrongsecrets
         run: nohup ./mvnw spring-boot:run -Dspring-boot.run.profiles=without-vault &
       - name: ZAP Scan
