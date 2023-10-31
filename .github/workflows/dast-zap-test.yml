@@ -42,12 +42,14 @@ jobs:
 #          restore-keys: |
 #            JarCache-${{ runner.os }}-
       - name: Trigger Building JAR cache
+        if: steps.cache.outputs.cache-hit != 'true'
         uses: actions/checkout@v2
         with:
           repository: owner/repo
           token: ${{ secrets.GITHUB_TOKEN }}
           path: .github/workflows/building-jar-cache.yml
       - name: Run Building JAR cache workflow
+        if: steps.cache.outputs.cache-hit != 'true'
         run: gh workflow run "Building JAR cache" --ref main
       - name: Start wrongsecrets
         run: nohup ./mvnw spring-boot:run -Dspring-boot.run.profiles=without-vault &
