@@ -18,20 +18,7 @@ jobs:
       - name: Trigger Building JAR cache
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
-          const { Octokit } = require("@octokit/core");
-          const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
-          const { data: workflows } = await octokit.request("GET /repos/commjoen/wrongsecrets/actions/workflows", {
-            owner: process.env.GITHUB_REPOSITORY.split("/")[0],
-            repo: process.env.GITHUB_REPOSITORY.split("/")[1]
-          });
-          const secondWorkflow = workflows.workflows.find(w => w.name === "building-jar-cache.yml");
-          if (secondWorkflow) {
-            await octokit.request("POST /repos/commjoen/wrongsecrets/actions/workflows/Building JAR cache/dispatches", {
-              owner: process.env.GITHUB_REPOSITORY.split("/")[0],
-              repo: process.env.GITHUB_REPOSITORY.split("/")[1],
-              workflow_id: secondWorkflow.id
-            });
-          }
+          gh workflow run "Building JAR cache" --ref "main"
       - name: Start wrongsecrets
         run: nohup ./mvnw spring-boot:run -Dspring-boot.run.profiles=without-vault &
       - name: ZAP Scan
