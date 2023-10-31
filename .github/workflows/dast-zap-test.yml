@@ -43,14 +43,22 @@ jobs:
 #            JarCache-${{ runner.os }}-
       - name: Trigger Building JAR cache
         if: steps.cache.outputs.cache-hit != 'true'
-        uses: actions/checkout@v2
+        uses: actions/github-script@v4
         with:
-          repository: owner/repo
-          token: ${{ secrets.GITHUB_TOKEN }}
-          path: .github/workflows/building-jar-cache.yml
-      - name: Run Building JAR cache workflow
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: gh workflow run "Building JAR cache" --ref main
+        script: |
+              const { data: workflows } = await octokit.actions.listRepoWorkflows({
+                owner: context.repo.owner,
+                repo: context.repo.repo
+              });
+              const secondWorkflow = workflows.workflows.find(w => w.name === "building-jar-cache.yml");
+              if (secondWorkflow) {
+                await octokit.actions.createWorkflowDispatch({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  workflow_id: secondWorkflow.id
+                });
+              }
+            token: ${{ secrets.GITHUB_TOKEN }}
       - name: Start wrongsecrets
         run: nohup ./mvnw spring-boot:run -Dspring-boot.run.profiles=without-vault &
       - name: ZAP Scan
