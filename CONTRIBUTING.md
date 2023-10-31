@@ -235,7 +235,7 @@ There under the **_Application_** section click on the button shown below.
 
 **_Fill out_** all the fields as shown below.
 
-![Fill out the fields: | Build and run: org.owasp.wrongsecrets.WrongSecretsApplication : -Dserver.port=8080 - Dspring.profiles.active=local,without-vault. | Working directory: /Users/razr/workspace/owasp/wrongsecrets | Environment variables: K8S_ENV=docker| Packages and classes to include in covarege data: org.owasp.wrongsecrets.*| ](images/fill-fields-7.4.pn)
+![Fill out the fields(The working directory depends on the enviroment setup): | Build and run: org.owasp.wrongsecrets.WrongSecretsApplication : -Dserver.port=8080 - Dspring.profiles.active=local,without-vault. | Working directory: /Users/razr/workspace/owasp/wrongsecrets | Environment variables: K8S_ENV=docker| Packages and classes to include in covarege data: org.owasp.wrongsecrets.*| ](images/fill-fields-7.4.png)
 
 Again press **_Shift+F10_** which runs the Application.
 
@@ -246,7 +246,10 @@ Again press **_Shift+F10_** which runs the Application.
 Here is a _preview_ on how does it look after successfully running the Application.
 **Note:** Running the Application doesn't open any kind of **_GUI_**, it only initializes the **_local webserver_** that you can open via a **_browser._**
 
-![Command line terminal running successfully](images/final-output-8.png)
+![LOGS:
+Tomcat initialized with port(s): 8080 (http) | Startubg servuce [Tomcat] | Starting Servlet engine: [Apache Tomcat/10.1.4] | Initializing Spring embedded WebApplicationContext | Root WebApplicationContext: initialization completed | Initializing challenge 8 with random value DpUOgeqY47 | Using generated security password: 652e1f46-bad4-48e2-983e-8534a4748796| This generated password is for development use only. Your sercurity configuration must be updated before running your application in production. | Validated configuration attributes | Adding welcome page template: index| Exposing endpoint(s) beneath base path '/actuator' | Tomcat started on port(s) (http) with context path '' | Started WrongSecretsApplication (process running) ](images/final-output-8.png)
+
+
 
 Here is the preview of the **web server**, you can try to find the secrets by means of solving the challenge offered at: [**Challenges**](https://github.com/OWASP/wrongsecrets#basic-docker-exercises)
 
