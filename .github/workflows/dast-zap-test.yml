@@ -20,7 +20,7 @@ jobs:
         uses: actions/github-script@v4
         with:
           script: |
-              const { data: workflows } = await octokit.actions.listRepoWorkflows({
+            const { data: workflows } = await octokit.actions.listRepoWorkflows({
                 owner: context.repo.owner,
                 repo: context.repo.repo
               });
