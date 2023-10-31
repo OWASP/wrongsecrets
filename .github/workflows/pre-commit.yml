@@ -39,7 +39,7 @@ jobs:
           path: ~/.tflint.d/plugins
           key: ${{ matrix.os }}-tflint-${{ hashFiles('.tflint.hcl') }}
       - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
+        uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: 1.1.7
       - name: Setup TFLint
