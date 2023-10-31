@@ -25,7 +25,8 @@ jobs:
           restore-keys: jar-
       - name: Check cache hit
         id: cache-hit-check
-        run: echo "cache-hit=${{ steps.cache.outputs.cache-hit }}" >> $GITHUB_ENV
+        run: |
+          echo "cache-hit=${{ steps.cache.outputs.cache-hit }}" >> $GITHUB_ENV
       - name: Trigger Building JAR cache
         if: steps.cache.outputs.cache-hit != 'true'
         uses: actions/github-script@v4
