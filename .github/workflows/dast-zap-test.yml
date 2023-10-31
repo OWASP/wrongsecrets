@@ -15,8 +15,10 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Trigger Building JAR cache
+      - name: Trigger Building JAR cache with Git CLI
         if: steps.cache.outputs.cache-hit != 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh workflow run "Building JAR cache" --ref "main"
       - name: Start wrongsecrets
