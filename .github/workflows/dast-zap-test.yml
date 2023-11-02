@@ -24,7 +24,7 @@ jobs:
       - name: Start wrongsecrets
         run: nohup ./mvnw spring-boot:run -Dspring-boot.run.profiles=without-vault &
       - name: ZAP Scan
-        uses: zaproxy/action-baseline@v0.9.0
+        uses: zaproxy/action-baseline@v0.10.0
         env:
           ZAP_AUTH_HEADER_VALUE: "Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ=="
           ZAP_AUTH_HEADER: "Authorization"
