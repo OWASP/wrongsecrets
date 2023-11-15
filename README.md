@@ -490,7 +490,7 @@ If you have made some changes to the codebase or added a new challenge and would
 2. Navigate to .github/scripts.
 3. Run the docker-create script `bash docker-create.sh`.
 4. Follow any instructions given, you made need to install/change packages.
-5. Run the newly created container `docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:local-test`
+5. Run the newly created container `docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:local-test-no-vault` for Kubernetes you can use `docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:local-test-k8s-vault` and for a setup with Vault ont he K8s cluster you can use `docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:local-test-local-vault`.
 
 ## Want to play, but are not allowed to install the tools?
 
