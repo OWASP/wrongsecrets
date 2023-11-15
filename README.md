@@ -489,8 +489,12 @@ If you have made some changes to the codebase or added a new challenge and would
 1. Ensure you have bash installed and open.
 2. Navigate to .github/scripts.
 3. Run the docker-create script `bash docker-create.sh`.
+   - Note: Do you want to run this on your minikube? then first run `eval $(minikube docker-env)`.
 4. Follow any instructions given, you made need to install/change packages.
-5. Run the newly created container `docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:local-test-no-vault` for Kubernetes you can use `docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:local-test-k8s-vault` and for a setup with Vault ont he K8s cluster you can use `docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:local-test-local-vault`.
+5. Run the newly created container:
+  - to running locally: `docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:local-test-no-vault`
+  - to run it on your minikube: use the container `jeroenwillemsen/wrongsecrets:local-test-k8s-vault` in your deployment definition.
+  - to run it with Vault on your minikube: use the container `jeroenwillemsen/wrongsecrets:local-test-local-vault` in your deployment definition.
 
 ## Want to play, but are not allowed to install the tools?
 
