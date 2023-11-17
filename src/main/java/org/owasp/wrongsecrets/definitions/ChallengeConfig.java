@@ -20,12 +20,11 @@ import org.springframework.core.convert.converter.Converter;
 public class ChallengeConfig {
 
   /**
-   * Define a converter for {@link TextWithFileLocation} which reads the source
-   * location from the configuration and reads the file contents. This way we only have to read the
-   * files once.
+   * Define a converter for {@link TextWithFileLocation} which reads the source location from the
+   * configuration and reads the file contents. This way we only have to read the files once.
    *
    * @param templateGenerator the template generator
-   * @return {@link StringToChallengeNameConverter
+   * @return {@link StringToChallengeNameConverter}
    */
   @ConfigurationPropertiesBinding
   @Bean

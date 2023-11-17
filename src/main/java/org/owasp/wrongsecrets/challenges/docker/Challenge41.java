@@ -13,7 +13,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
-/** This is a challenge based on finding secret using password shucking */
+/** This is a challenge based on finding secret using password shucking. */
 @Slf4j
 @Component
 @Order(41)

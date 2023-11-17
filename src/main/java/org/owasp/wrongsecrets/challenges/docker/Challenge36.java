@@ -8,7 +8,7 @@ import org.owasp.wrongsecrets.challenges.docker.binaryexecution.MuslDetectorImpl
 import org.springframework.stereotype.Component;
 
 /**
- * This is a binary based challenge with encryption involved to make it harder to find the answer
+ * This is a binary based challenge with encryption involved to make it harder to find the answer.
  */
 @Slf4j
 @Component

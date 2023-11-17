@@ -3,13 +3,7 @@ package org.owasp.wrongsecrets.definitions;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Encapsulate the navigation
- *
- * <p>This makes it possible for having a <code>
- * Map<ChallengeDefinition, Pair<ChallengeDefinition, ChallengeDefinition></code> without changing
- * the calling side
- */
+/** Encapsulate the navigation, we can optimise this later. */
 public record Navigation(List<ChallengeDefinition> challenges, ChallengeDefinition current) {
 
   public Optional<ChallengeDefinition> next() {

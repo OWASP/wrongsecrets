@@ -7,7 +7,7 @@ import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.stereotype.Component;
 
-/** This challenge is about finding a secret in website */
+/** This challenge is about finding a secret in website. */
 @Component
 public class Challenge31 implements Challenge {
 

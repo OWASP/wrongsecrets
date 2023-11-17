@@ -4,7 +4,7 @@ import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.stereotype.Component;
 
-/** This is a challenge based on leaking secrets with the misuse of Git notes */
+/** This is a challenge based on leaking secrets with the misuse of Git notes. */
 @Component
 public class Challenge38 implements Challenge {
 

@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * This is a challenge based on leaking secrets due to keeping the encryption key and secret
- * together
+ * together.
  */
 @Slf4j
 @Component

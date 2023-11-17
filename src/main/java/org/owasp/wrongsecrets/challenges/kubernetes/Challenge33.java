@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
- * Challenge that teaches something about converting/migrating a secret while opening the metadata
+ * Challenge that teaches something about converting/migrating a secret while opening the metadata.
  */
 @Slf4j
 @Component

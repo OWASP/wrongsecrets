@@ -28,9 +28,9 @@ import org.owasp.wrongsecrets.definitions.Sources.Source;
  *         enabled: true
  * </pre>
  *
- * During runtime a {@link ChallengeDefinition} is linked to a {@link Challenge} instance. Be aware
- * a challenge can have multiple sources. This is useful for having different implementations for
- * different environments. For example, we can have a challenge which is implemented for AWS and
+ * <p>During runtime a {@link ChallengeDefinition} is linked to a {@link Challenge} instance. Be
+ * aware a challenge can have multiple sources. This is useful for having different implementations
+ * for different environments. For example, we can have a challenge which is implemented for AWS and
  * Azure. This way you can define multiple challenge classes and the correct one is chosen during
  * runtime.
  */

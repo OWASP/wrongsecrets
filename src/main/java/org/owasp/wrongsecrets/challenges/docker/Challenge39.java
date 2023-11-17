@@ -15,7 +15,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
-/** This is a challenge based on leaking secrets due to choice of filename as encryption key */
+/** This is a challenge based on leaking secrets due to choice of filename as encryption key. */
 @Slf4j
 @Component
 @Order(39)

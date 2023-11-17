@@ -92,7 +92,7 @@ public class ChallengeUI {
   }
 
   /**
-   * Returns the number of the previous challenge
+   * Returns the number of the previous challenge.
    *
    * @return int with previous challenge number.
    */
@@ -161,7 +161,7 @@ public class ChallengeUI {
 
   /**
    * Used to setup the label for the link to the challenge on the homescreen return "challenge
-   * 1(_disabled)(_solveD)-link"
+   * 1(_disabled)(_solveD)-link".
    *
    * @return label
    */
@@ -178,7 +178,7 @@ public class ChallengeUI {
   }
 
   /**
-   * Used to return whether the challenge is completed or not
+   * Used to return whether the challenge is completed or not.
    *
    * @return boolean
    */
