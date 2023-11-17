@@ -291,7 +291,7 @@ These are the things that you have to keep in mind.
     public Challenge28() {
       secret = "hello world";
     }
-   
+
     //return the plain text secret here
     @Override
     public Spoiler spoiler() {
@@ -383,7 +383,7 @@ Open `src/main/resources/wrong_secrets_configuration.yaml` and add the following
       url: "challenge-28"
       # For each environment you can add a different implementation and documentation
       sources:
-        # Fully qualified name of the class 
+        # Fully qualified name of the class
         - class-name: "org.owasp.wrongsecrets.challenges.docker.Challenge28"
           explanation: "explanations/challenge28.adoc"
           hint: "explanations/challenge28_hint.adoc"
