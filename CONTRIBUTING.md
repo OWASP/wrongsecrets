@@ -302,12 +302,6 @@ These are the things that you have to keep in mind.
     public boolean answerCorrect(String answer) {
       return secret.equals(answer);
     }
-   
-    //if you use this in a shared environment and need to adapt it, then return true here.
-    @Override
-    public boolean isLimittedWhenOnlineHosted() {
-    return false;
-    }
 }
 ```
 
