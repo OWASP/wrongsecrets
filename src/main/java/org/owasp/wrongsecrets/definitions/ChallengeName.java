@@ -1,6 +1,5 @@
 package org.owasp.wrongsecrets.definitions;
 
-import java.util.regex.Pattern;
 import org.apache.commons.text.similarity.LevenshteinDistance;
 
 /**
