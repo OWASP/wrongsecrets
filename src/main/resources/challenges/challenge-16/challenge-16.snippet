@@ -1,6 +1,6 @@
-<script th:if="${challenge?.challengeNumber == 16}" src="/js/index.js"></script>
+<script src="/js/index.js"></script>
    <!-- Like this sort of challenges? Try https://juice-shop.herokuapp.com/#/score-board for many more of them! -->
-<script th:if="${challenge?.challengeNumber == 16}">
+<script>
     const password = secret();
     const httpRequest = new XMLHttpRequest();
     httpRequest.open("POST", "/token", true);
