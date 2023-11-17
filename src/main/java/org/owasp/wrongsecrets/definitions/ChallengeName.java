@@ -1,6 +1,7 @@
 package org.owasp.wrongsecrets.definitions;
 
 import java.util.regex.Pattern;
+import org.apache.commons.text.similarity.LevenshteinDistance;
 
 /**
  * Name of a challenge, @see {@link ChallengeConfig#nameConverter()} for more information.
@@ -9,13 +10,8 @@ import java.util.regex.Pattern;
  * @param url the url under which the challenge is available.
  */
 public record ChallengeName(String name, String url) {
-  private static final Pattern digit = Pattern.compile(".*\\d.*");
 
   public boolean partialMatches(String nameToMatch) {
-    var digitMatcher = digit.matcher(nameToMatch);
-    if (digitMatcher.matches()) {
-      return name.contains(digitMatcher.group()) || url.contains(digitMatcher.group());
-    }
-    return false;
+    return LevenshteinDistance.getDefaultInstance().apply(url, nameToMatch) <= 1;
   }
 }
