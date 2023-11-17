@@ -10,7 +10,6 @@ import lombok.Getter;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.definitions.ChallengeDefinition;
 import org.owasp.wrongsecrets.definitions.ChallengeDefinitionsConfiguration;
-import org.owasp.wrongsecrets.definitions.ChallengeName;
 import org.owasp.wrongsecrets.definitions.Difficulty;
 import org.owasp.wrongsecrets.definitions.Navigation;
 
@@ -57,17 +56,6 @@ public class Challenges {
     return definitions.challenges().stream()
         .filter(challenge -> challenge.name().url().equals(shortName))
         .findFirst();
-  }
-
-  /**
-   * To improve error messages when we cannot find a challenge, let's see if we can find some
-   * matching ones.
-   */
-  public List<ChallengeName> findMatchingChallenges(String shortChallengeName) {
-    return definitions.challenges().stream()
-        .filter(challenge -> challenge.name().partialMatches(shortChallengeName))
-        .map(def -> def.name())
-        .toList();
   }
 
   /**

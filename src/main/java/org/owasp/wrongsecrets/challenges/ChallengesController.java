@@ -20,7 +20,6 @@ import org.owasp.wrongsecrets.challenges.docker.Challenge37;
 import org.owasp.wrongsecrets.challenges.docker.Challenge8;
 import org.owasp.wrongsecrets.challenges.docker.challenge30.Challenge30;
 import org.owasp.wrongsecrets.definitions.ChallengeDefinition;
-import org.owasp.wrongsecrets.definitions.ChallengeName;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.codec.Hex;
@@ -139,14 +138,7 @@ public class ChallengesController {
             () ->
                 new ResponseStatusException(
                     HttpStatus.NOT_FOUND,
-                    configError(
-                            "Challenge with short name '%s' not found, did you mean to use one of"
-                                + " those %s?",
-                            shortName,
-                            challenges.findMatchingChallenges(shortName).stream()
-                                .map(ChallengeName::url)
-                                .toList())
-                        .get()));
+                    configError("Challenge with short name '%s' not found", shortName).get()));
   }
 
   @GetMapping("/challenge/{name}")
