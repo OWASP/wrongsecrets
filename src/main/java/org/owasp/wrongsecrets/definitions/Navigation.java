@@ -16,14 +16,11 @@ public record Navigation(List<ChallengeDefinition> challenges, ChallengeDefiniti
 
   private Optional<ChallengeDefinition> navigate(int direction) {
     int index = challenges.indexOf(current);
-    if (index == -1) {
+    int navigationIndex = index + direction;
+
+    if (navigationIndex < 0 || navigationIndex >= challenges.size()) {
       return Optional.empty();
     }
-    if (index == challenges.size() - 1 || direction == -1
-        ? index == 0
-        : index == challenges.size() - 1) {
-      return Optional.empty();
-    }
-    return Optional.of(challenges.get((index + direction) % challenges.size()));
+    return Optional.of(challenges.get(navigationIndex));
   }
 }
