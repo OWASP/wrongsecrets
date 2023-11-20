@@ -37,7 +37,7 @@ class ChallengesControllerCTFClientModeTest {
   @Test
   void shouldNotSpoilWhenInCTFMode() throws Exception {
     var randomChallenge = challenges.getChallengeDefinitions().getFirst();
-    mvc.perform(get("/spoil/%s".formatted(randomChallenge.name().url())))
+    mvc.perform(get("/spoil/%s".formatted(randomChallenge.name().shortName())))
         .andExpect(status().isOk())
         .andExpect(content().string(containsString("Spoils are disabled in CTF mode")));
   }
@@ -45,7 +45,7 @@ class ChallengesControllerCTFClientModeTest {
   @Test
   void shouldNotSpoilWhenInCTFModeEvenWhenChallengeUnsupported() throws Exception {
     var firstChallenge = challenges.getChallengeDefinitions().getFirst();
-    mvc.perform(get("/spoil/%s".formatted(firstChallenge.name().url())))
+    mvc.perform(get("/spoil/%s".formatted(firstChallenge.name().shortName())))
         .andExpect(status().isOk())
         .andExpect(content().string(containsString("Spoils are disabled in CTF mode")));
   }
@@ -53,7 +53,7 @@ class ChallengesControllerCTFClientModeTest {
   @Test
   void challenge0SshouldSShowTheAddressRightAnswersNeedToBeSubmittedTo() throws Exception {
     var firstChallenge = challenges.getChallengeDefinitions().getFirst();
-    mvc.perform(get("/challenge/%s".formatted(firstChallenge.name().url())))
+    mvc.perform(get("/challenge/%s".formatted(firstChallenge.name().shortName())))
         .andExpect(status().isOk())
         .andExpect(content().string(containsString("https://www.google.nl")));
   }

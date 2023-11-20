@@ -84,19 +84,19 @@ public class ChallengesController {
    * @param model exchanged with the FE
    * @return either a notification or a spoil
    */
-  @GetMapping("/spoil/{name}")
+  @GetMapping("/spoil/{short-name}")
   @Hidden
-  public String spoiler(@PathVariable String name, Model model) {
+  public String spoiler(@PathVariable("short-name") String shortName, Model model) {
     if (ctfModeEnabled) {
       model.addAttribute("spoiler", new Spoiler("Spoils are disabled in CTF mode"));
     } else if (!spoilingEnabled) {
       model.addAttribute("spoiler", new Spoiler("Spoils are disabled in the configuration"));
     } else {
       Optional<Spoiler> spoilerFromRuntimeEnvironment =
-          challenges.findChallenge(name, runtimeEnvironment).map(c -> c.spoiler());
+          challenges.findChallenge(shortName, runtimeEnvironment).map(c -> c.spoiler());
       Supplier<Spoiler> spoilerFromRandomChallenge =
           () -> {
-            var challengeDefinition = findByShortName(name);
+            var challengeDefinition = findByShortName(shortName);
             return challenges.getChallenge(challengeDefinition).getFirst().spoiler();
           };
 
@@ -141,10 +141,10 @@ public class ChallengesController {
                     configError("Challenge with short name '%s' not found", shortName).get()));
   }
 
-  @GetMapping("/challenge/{name}")
+  @GetMapping("/challenge/{short-name}")
   @Operation(description = "Returns the data for a given challenge's form interaction")
-  public String challenge(Model model, @PathVariable String name) {
-    var challengeDefinition = findByShortName(name);
+  public String challenge(Model model, @PathVariable("short-name") String shortName) {
+    var challengeDefinition = findByShortName(shortName);
     model.addAttribute("challengeForm", new ChallengeForm(""));
     addChallengeUI(model, challengeDefinition);
 

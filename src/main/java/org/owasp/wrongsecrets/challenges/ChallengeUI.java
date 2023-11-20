@@ -67,10 +67,10 @@ public class ChallengeUI {
   /**
    * gives back the number of the challenge.
    *
-   * @return the html friendly url name for the challenge
+   * @return the html friendly shortName name for the challenge
    */
   public String getLink() {
-    return challengeDefinition.name().url();
+    return challengeDefinition.name().shortName();
   }
 
   /**
@@ -88,7 +88,7 @@ public class ChallengeUI {
    * @return int with next challenge number.
    */
   public String next() {
-    return navigation.next().map(c -> c.name().url()).orElse(null);
+    return navigation.next().map(c -> c.name().shortName()).orElse(null);
   }
 
   /**
@@ -97,7 +97,7 @@ public class ChallengeUI {
    * @return int with previous challenge number.
    */
   public String previous() {
-    return navigation.previous().map(c -> c.name().url()).orElse(null);
+    return navigation.previous().map(c -> c.name().shortName()).orElse(null);
   }
 
   private String documentation(Function<Source, String> extractor) {
@@ -166,7 +166,7 @@ public class ChallengeUI {
    * @return label
    */
   public String getDataLabel() {
-    String label = challengeDefinition.name().url().trim().toLowerCase();
+    String label = challengeDefinition.name().shortName().trim().toLowerCase();
     if (!this.isChallengeEnabled()) {
       label = label + "_disabled";
     }

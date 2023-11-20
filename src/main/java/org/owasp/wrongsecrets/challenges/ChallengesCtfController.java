@@ -51,7 +51,7 @@ public class ChallengesCtfController {
       JSONObject jsonChallenge = new JSONObject();
       jsonChallenge.put("id", i + 1);
       jsonChallenge.put("name", definition.name().name());
-      jsonChallenge.put("key", definition.name().url());
+      jsonChallenge.put("key", definition.name().shortName());
       jsonChallenge.put("category", getCategory() + " - " + definition.category().category());
       jsonChallenge.put(
           "description",

@@ -20,16 +20,16 @@ import org.owasp.wrongsecrets.definitions.Navigation;
 public class Challenges {
 
   @Getter private final ChallengeDefinitionsConfiguration definitions;
-  private final Map<String, ChallengeDefinition> urlNameToDefinition;
+  private final Map<String, ChallengeDefinition> shortNameToDefinition;
   private final Map<String, Challenge> classNameToChallenge;
   private final Map<ChallengeDefinition, List<Challenge>> challengeDefinitionToChallenge;
 
   public Challenges(ChallengeDefinitionsConfiguration definitions, List<Challenge> challenges) {
     this.definitions = definitions;
 
-    urlNameToDefinition =
+    shortNameToDefinition =
         definitions.challenges().stream()
-            .collect(toMap(definition -> definition.name().url(), Function.identity()));
+            .collect(toMap(definition -> definition.name().shortName(), Function.identity()));
     classNameToChallenge =
         challenges.stream()
             .collect(toMap(challenge -> challenge.getClass().getName(), Function.identity()));
@@ -54,7 +54,7 @@ public class Challenges {
 
   public Optional<ChallengeDefinition> findByShortName(String shortName) {
     return definitions.challenges().stream()
-        .filter(challenge -> challenge.name().url().equals(shortName))
+        .filter(challenge -> challenge.name().shortName().equals(shortName))
         .findFirst();
   }
 
@@ -67,7 +67,7 @@ public class Challenges {
    */
   public Optional<Challenge> findChallenge(
       String shortChallengeName, RuntimeEnvironment runtimeEnvironment) {
-    var challengeDefinition = urlNameToDefinition.get(shortChallengeName);
+    var challengeDefinition = shortNameToDefinition.get(shortChallengeName);
 
     if (challengeDefinition == null) {
       return Optional.empty();
