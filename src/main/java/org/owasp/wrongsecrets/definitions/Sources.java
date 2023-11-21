@@ -3,6 +3,7 @@ package org.owasp.wrongsecrets.definitions;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Supplier;
 import org.owasp.wrongsecrets.ChallengeUiTemplateResolver;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 
@@ -32,7 +33,6 @@ public record Sources(Map<Environment, Source> sources) {
    */
   public record Source(
       String className,
-      String url,
       List<Environment> environments,
       TextWithFileLocation explanation,
       TextWithFileLocation reason,
@@ -40,5 +40,5 @@ public record Sources(Map<Environment, Source> sources) {
       TextWithFileLocation hintLimited,
       String uiSnippet) {}
 
-  public record TextWithFileLocation(String fileName, String contents) {}
+  public record TextWithFileLocation(String fileName, Supplier<String> contents) {}
 }

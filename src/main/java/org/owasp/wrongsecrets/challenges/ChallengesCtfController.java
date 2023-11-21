@@ -55,9 +55,13 @@ public class ChallengesCtfController {
       jsonChallenge.put("category", getCategory() + " - " + definition.category().category());
       jsonChallenge.put(
           "description",
-          definition.source(runtimeEnvironment).map(s -> s.explanation().contents()).orElse(null));
+          definition
+              .source(runtimeEnvironment)
+              .map(s -> s.explanation().contents().get())
+              .orElse(null));
       jsonChallenge.put(
-          "hint", definition.source(runtimeEnvironment).map(s -> s.hint().contents()).orElse(null));
+          "hint",
+          definition.source(runtimeEnvironment).map(s -> s.hint().contents().get()).orElse(null));
       jsonChallenge.put("solved", scoreCard.getChallengeCompleted(definition));
       jsonChallenge.put("disabledEnv", getDisabledEnv(definition));
       jsonChallenge.put("difficulty", definition.difficulty().difficulty());

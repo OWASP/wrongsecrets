@@ -2,6 +2,7 @@ package org.owasp.wrongsecrets.definitions;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.function.Supplier;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FilenameUtils;
 import org.owasp.wrongsecrets.Challenges;
@@ -46,12 +47,14 @@ public class ChallengeConfig {
       return new TextWithFileLocation(source, read(source));
     }
 
-    private String read(String name) {
-      try {
-        return templateGenerator.generate(FilenameUtils.removeExtension(name));
-      } catch (IOException e) {
-        return "";
-      }
+    private Supplier<String> read(String name) {
+      return () -> {
+        try {
+          return templateGenerator.generate(FilenameUtils.removeExtension(name));
+        } catch (IOException e) {
+          return "";
+        }
+      };
     }
   }
 

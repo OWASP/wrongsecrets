@@ -312,7 +312,7 @@ public class ChallengesController {
       var warning =
           challenge.supportedEnvironments().stream()
               .limit(1)
-              .map(env -> env.missingEnvironment().contents())
+              .map(env -> env.missingEnvironment().contents().get())
               .findFirst()
               .orElse(null);
       model.addAttribute("missingEnvWarning", warning);
