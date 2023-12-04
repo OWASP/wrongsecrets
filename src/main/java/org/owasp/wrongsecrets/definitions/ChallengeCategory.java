@@ -5,4 +5,4 @@ package org.owasp.wrongsecrets.definitions;
  *
  * @param category the category of the challenge as defined in the yaml configuration
  */
-public record Category(String category) {}
+public record ChallengeCategory(String category) {}

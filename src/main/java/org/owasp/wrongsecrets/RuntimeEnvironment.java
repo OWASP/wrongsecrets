@@ -32,25 +32,6 @@ public class RuntimeEnvironment {
 
   @Getter private final Environment runtimeEnvironment;
 
-  public RuntimeEnvironment(
-      String currentRuntimeEnvironment, ChallengeDefinitionsConfiguration challengeDefinitions) {
-    this.runtimeEnvironment =
-        challengeDefinitions.environments().stream()
-            .filter(env -> env.name().equalsIgnoreCase(currentRuntimeEnvironment))
-            .findFirst()
-            .orElseThrow(
-                () -> {
-                  log.error(
-                      "Unable to determine the runtime environment. Make sure K8S_ENV contains one"
-                          + " of the expected values: {}.",
-                      challengeDefinitions.environments().stream()
-                          .map(Environment::name)
-                          .collect(Collectors.joining()));
-                  throw new MissingEnvironmentException(
-                      currentRuntimeEnvironment, challengeDefinitions.environments());
-                });
-  }
-
   public RuntimeEnvironment(Environment runtimeEnvironment) {
     this.runtimeEnvironment = runtimeEnvironment;
   }
@@ -88,5 +69,25 @@ public class RuntimeEnvironment {
   private boolean isCloudUnlockedInCTFMode() {
     String defaultValueAWSValue = "if_you_see_this_please_use_AWS_Setup";
     return ctfModeEnabled && !defaultChallenge9Value.equals(defaultValueAWSValue);
+  }
+
+  public static RuntimeEnvironment fromString(
+      String currentRuntimeEnvironment, ChallengeDefinitionsConfiguration challengeDefinitions) {
+    var runtimeEnvironment =
+        challengeDefinitions.environments().stream()
+            .filter(env -> env.name().equalsIgnoreCase(currentRuntimeEnvironment))
+            .findFirst()
+            .orElseThrow(
+                () -> {
+                  log.error(
+                      "Unable to determine the runtime environment. Make sure K8S_ENV contains one"
+                          + " of the expected values: {}.",
+                      challengeDefinitions.environments().stream()
+                          .map(Environment::name)
+                          .collect(Collectors.joining()));
+                  throw new MissingEnvironmentException(
+                      currentRuntimeEnvironment, challengeDefinitions.environments());
+                });
+    return new RuntimeEnvironment(runtimeEnvironment);
   }
 }

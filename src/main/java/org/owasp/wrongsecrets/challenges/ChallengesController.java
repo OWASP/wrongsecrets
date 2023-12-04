@@ -1,6 +1,6 @@
 package org.owasp.wrongsecrets.challenges;
 
-import static org.owasp.wrongsecrets.ConfigurationException.configError;
+import static org.owasp.wrongsecrets.ChallengeConfigurationException.configError;
 
 import com.google.common.base.Strings;
 import io.swagger.v3.oas.annotations.Hidden;
@@ -13,7 +13,7 @@ import java.util.function.Supplier;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import org.owasp.wrongsecrets.Challenges;
-import org.owasp.wrongsecrets.ConfigurationException;
+import org.owasp.wrongsecrets.ChallengeConfigurationException;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.docker.Challenge37;
@@ -204,7 +204,7 @@ public class ChallengesController {
               .findChallenge(name, runtimeEnvironment)
               .orElseThrow(
                   () ->
-                      new ConfigurationException(
+                      new ChallengeConfigurationException(
                           configError(
                               "Challenge '%s' not found for environment: '%s'",
                               name, runtimeEnvironment.getRuntimeEnvironment().name())));

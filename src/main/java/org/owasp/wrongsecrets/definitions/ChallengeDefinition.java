@@ -2,13 +2,14 @@ package org.owasp.wrongsecrets.definitions;
 
 import static java.util.stream.Collectors.toMap;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.challenges.Challenge;
-import org.owasp.wrongsecrets.definitions.Sources.Source;
+import org.owasp.wrongsecrets.definitions.Sources.ChallengeSource;
 
 /**
  * We can define a challenge as follows:
@@ -36,12 +37,13 @@ import org.owasp.wrongsecrets.definitions.Sources.Source;
  */
 public record ChallengeDefinition(
     ChallengeName name,
-    List<Source> sources,
+    List<ChallengeSource> sources,
     Difficulty difficulty,
-    Category category,
+    ChallengeCategory category,
     Ctf ctf,
     Sources environmentToSource) {
 
+  @SuppressFBWarnings(value = "IP_PARAMETER_IS_DEAD_BUT_OVERWRITTEN")
   public ChallengeDefinition {
     environmentToSource =
         new Sources(
@@ -59,7 +61,7 @@ public record ChallengeDefinition(
     return difficulties.indexOf(difficulty) + 1;
   }
 
-  public Optional<Source> source(RuntimeEnvironment runtimeEnvironment) {
+  public Optional<ChallengeSource> source(RuntimeEnvironment runtimeEnvironment) {
     return environmentToSource.source(runtimeEnvironment);
   }
 

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 /** Encapsulate the navigation, we can optimise this later. */
-public record Navigation(List<ChallengeDefinition> challenges, ChallengeDefinition current) {
+public record Navigator(List<ChallengeDefinition> challenges, ChallengeDefinition current) {
 
   public Optional<ChallengeDefinition> next() {
     return navigate(1);

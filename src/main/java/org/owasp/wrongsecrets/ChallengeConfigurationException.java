@@ -3,12 +3,12 @@ package org.owasp.wrongsecrets;
 import com.google.common.base.Strings;
 import java.util.function.Supplier;
 
-public class ConfigurationException extends RuntimeException {
-  public ConfigurationException(String message) {
+public class ChallengeConfigurationException extends RuntimeException {
+  public ChallengeConfigurationException(String message) {
     super(message);
   }
 
-  public ConfigurationException(Supplier<String> message) {
+  public ChallengeConfigurationException(Supplier<String> message) {
     super(message.get());
   }
 

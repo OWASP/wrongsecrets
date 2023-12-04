@@ -28,6 +28,6 @@ public class WrongSecretsApplication {
   public RuntimeEnvironment runtimeEnvironment(
       @Value("${K8S_ENV}") String currentRuntimeEnvironment,
       ChallengeDefinitionsConfiguration challengeDefinitions) {
-    return new RuntimeEnvironment(currentRuntimeEnvironment, challengeDefinitions);
+    return RuntimeEnvironment.fromString(currentRuntimeEnvironment, challengeDefinitions);
   }
 }

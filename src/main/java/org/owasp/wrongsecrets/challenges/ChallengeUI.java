@@ -9,8 +9,8 @@ import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.definitions.ChallengeDefinition;
 import org.owasp.wrongsecrets.definitions.Difficulty;
 import org.owasp.wrongsecrets.definitions.Environment;
-import org.owasp.wrongsecrets.definitions.Navigation;
-import org.owasp.wrongsecrets.definitions.Sources.Source;
+import org.owasp.wrongsecrets.definitions.Navigator;
+import org.owasp.wrongsecrets.definitions.Sources.ChallengeSource;
 
 /** Wrapper class to move logic from Thymeleaf to keep logic in code instead of the html file. */
 @Getter
@@ -18,7 +18,7 @@ public class ChallengeUI {
 
   private final DifficultyUI difficultyUI;
   private final List<Environment> environments;
-  private final Navigation navigation;
+  private final Navigator navigation;
 
   /** Wrapper class to express the difficulty level into a UI representation. */
   private record DifficultyUI(int difficulty, int totalOfDifficultyLevels) {
@@ -44,7 +44,7 @@ public class ChallengeUI {
       RuntimeEnvironment runtimeEnvironment,
       List<Difficulty> difficulties,
       List<Environment> environments,
-      Navigation navigation) {
+      Navigator navigation) {
     this.challengeDefinition = challengeDefinition;
     this.scoreCard = scoreCard;
     this.runtimeEnvironment = runtimeEnvironment;
@@ -100,7 +100,7 @@ public class ChallengeUI {
     return navigation.previous().map(c -> c.name().shortName()).orElse(null);
   }
 
-  private String documentation(Function<Source, String> extractor) {
+  private String documentation(Function<ChallengeSource, String> extractor) {
     if (runtimeEnvironment.canRun(challengeDefinition)) {
       return challengeDefinition.source(runtimeEnvironment).map(extractor).orElse("");
     } else {
@@ -238,7 +238,7 @@ public class ChallengeUI {
       RuntimeEnvironment environment,
       List<Difficulty> difficulties,
       List<Environment> environments,
-      Navigation navigation) {
+      Navigator navigation) {
     return new ChallengeUI(
         definition, scoreCard, environment, difficulties, environments, navigation);
   }

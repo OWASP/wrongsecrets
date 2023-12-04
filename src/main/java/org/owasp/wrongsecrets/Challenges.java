@@ -11,7 +11,7 @@ import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.definitions.ChallengeDefinition;
 import org.owasp.wrongsecrets.definitions.ChallengeDefinitionsConfiguration;
 import org.owasp.wrongsecrets.definitions.Difficulty;
-import org.owasp.wrongsecrets.definitions.Navigation;
+import org.owasp.wrongsecrets.definitions.Navigator;
 
 /**
  * A collection of all challenges. This class glues a challenge definition together with the
@@ -44,8 +44,8 @@ public class Challenges {
                             .toList()));
   }
 
-  public Navigation navigation(ChallengeDefinition challengeDefinition) {
-    return new Navigation(definitions.challenges(), challengeDefinition);
+  public Navigator navigation(ChallengeDefinition challengeDefinition) {
+    return new Navigator(definitions.challenges(), challengeDefinition);
   }
 
   public int numberOfChallenges() {

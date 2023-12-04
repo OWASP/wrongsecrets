@@ -14,8 +14,8 @@ import org.owasp.wrongsecrets.RuntimeEnvironment;
  * one is chosen based on the runtime environment. The runtime environment is defined as environment
  * variable or system property or in application.properties.
  */
-public record Sources(Map<Environment, Source> sources) {
-  public Optional<Source> source(RuntimeEnvironment runtimeEnvironment) {
+public record Sources(Map<Environment, ChallengeSource> sources) {
+  public Optional<ChallengeSource> source(RuntimeEnvironment runtimeEnvironment) {
     return Optional.ofNullable(sources.get(runtimeEnvironment.getRuntimeEnvironment()));
   }
 
@@ -31,7 +31,7 @@ public record Sources(Map<Environment, Source> sources) {
    * @param uiSnippet the filename of the UI snippet, this can be used to include JavaScript and is
    *     used by {@link ChallengeUiTemplateResolver}
    */
-  public record Source(
+  public record ChallengeSource(
       String className,
       List<Environment> environments,
       TextWithFileLocation explanation,
