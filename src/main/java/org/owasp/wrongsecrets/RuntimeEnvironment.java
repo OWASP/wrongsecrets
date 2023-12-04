@@ -46,8 +46,8 @@ public class RuntimeEnvironment {
                       challengeDefinitions.environments().stream()
                           .map(Environment::name)
                           .collect(Collectors.joining()));
-                  throw new IllegalStateException(
-                      "K8S_ENV does not contain one of the expected values");
+                  throw new MissingEnvironmentException(
+                      currentRuntimeEnvironment, challengeDefinitions.environments());
                 });
   }
 
