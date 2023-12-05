@@ -9,14 +9,14 @@ ci:
   submodules: false
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.4.0
+    rev: v4.5.0
     hooks:
       - id: check-yaml
       - id: end-of-file-fixer
         exclude: ^(src/test/resources/yourkey.txt|src/test/resources/secondkey.txt)
       - id: trailing-whitespace
   - repo: https://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.79.1
+    rev: v1.83.6
     hooks:
       - id: terraform_fmt
       - id: terraform_tflint
@@ -36,18 +36,18 @@ repos:
           - "--args=--only=terraform_workspace_remote"
       - id: terraform_docs
   - repo: https://github.com/alessandrojcm/commitlint-pre-commit-hook
-    rev: v9.5.0
+    rev: v9.10.0
     hooks:
       - id: commitlint
         stages: [commit-msg]
   - repo: https://github.com/ejba/pre-commit-maven
-    rev: v0.3.3
+    rev: v0.3.4
     hooks:
       - id: maven
         args: [ 'clean compile' ]
       - id: maven-spotless-apply
   - repo: https://github.com/eslint/eslint
-    rev: v8.41.0
+    rev: v8.55.0
     hooks:
       - id: eslint
         args:
