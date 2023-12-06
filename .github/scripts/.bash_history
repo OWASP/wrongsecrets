@@ -347,7 +347,7 @@ rm -rf jdk-18_linux-x64_bin.deb
 git rebase -i main
 git rebase -i master
 git stash
-export tempPassword="4QMUMCz8BUpSizlIfnb0XPpCDGir1NyfIxkrkN3Emdc="
+export tempPassword="hUdC7XO87aUevikzk5OrNodGrHoihCWHYcORwfxoGXk="
 mvn run tempPassword
 k6
 npx k6

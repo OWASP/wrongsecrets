@@ -4,35 +4,21 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.List;
 import lombok.extern.slf4j.Slf4j;
-import org.owasp.wrongsecrets.RuntimeEnvironment;
-import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
-import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
-import org.owasp.wrongsecrets.challenges.Difficulty;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /** This challenge is about having a secret obfuscated in the front-end code. */
 @Slf4j
 @Component
-@Order(16)
-public class Challenge16 extends Challenge {
+public class Challenge16 implements Challenge {
 
   private final String dockerMountPath;
 
-  public Challenge16(
-      ScoreCard scoreCard, @Value("${challengedockermtpath}") String dockerMountPath) {
-    super(scoreCard);
+  public Challenge16(@Value("${challengedockermtpath}") String dockerMountPath) {
     this.dockerMountPath = dockerMountPath;
-  }
-
-  @Override
-  public boolean canRunInCTFMode() {
-    return true;
   }
 
   /** {@inheritDoc} */
@@ -46,29 +32,6 @@ public class Challenge16 extends Challenge {
   public boolean answerCorrect(String answer) {
     // log.debug("challenge 16, actualdata: {}, answer: {}", getActualData(), answer);
     return getActualData().equals(answer);
-  }
-
-  @Override
-  /** {@inheritDoc} */
-  public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
-    return List.of(RuntimeEnvironment.Environment.DOCKER);
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public int difficulty() {
-    return Difficulty.HARD;
-  }
-
-  /** {@inheritDoc} Frontend based. */
-  @Override
-  public String getTech() {
-    return ChallengeTechnology.Tech.FRONTEND.id;
-  }
-
-  @Override
-  public boolean isLimitedWhenOnlineHosted() {
-    return false;
   }
 
   @SuppressFBWarnings(

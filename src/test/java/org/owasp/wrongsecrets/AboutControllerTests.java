@@ -1,35 +1,25 @@
 package org.owasp.wrongsecrets;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.hamcrest.Matchers.containsString;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.client.RestClientResponseException;
+import org.springframework.test.web.servlet.MockMvc;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest
+@AutoConfigureMockMvc
 class AboutControllerTests {
-  @LocalServerPort private int port;
-
-  @Autowired private RestTemplateBuilder builder;
-
-  public AboutControllerTests() {}
+  @Autowired private MockMvc mvc;
 
   @Test
-  void shouldGetAbout() {
-    var restTemplate = builder.build();
-
-    var callbackAdress = "http://localhost:" + port + "/about";
-    try {
-      var response = restTemplate.getForEntity(callbackAdress, String.class);
-      assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-      assertThat(response.getBody()).contains("About");
-    } catch (RestClientResponseException e) {
-      fail(e);
-    }
+  void shouldGetAbout() throws Exception {
+    mvc.perform(get("/about"))
+        .andExpect(status().isOk())
+        .andExpect(content().string(containsString("About")));
   }
 }

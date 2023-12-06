@@ -87,7 +87,8 @@ class SpringDocTest {
     Assertions.assertThat(ownEndpoints).hasSizeGreaterThan(1);
     ownEndpoints.forEach(
         path -> {
-          if (!path.equals("/spoil-{id}") && !path.equals("/hidden")) { // this one is hidden
+          if (!path.equals("/spoil/{short-name}")
+              && !path.equals("/hidden")) { // this one is hidden
             log.info("Checking for path to be present in OpenAPI spec: {}", path);
             Assertions.assertThat(openAPI.getPaths().get(path)).isNotNull();
           }

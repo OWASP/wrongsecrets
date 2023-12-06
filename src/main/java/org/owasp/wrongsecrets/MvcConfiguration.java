@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.thymeleaf.extras.springsecurity6.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring6.SpringTemplateEngine;
@@ -66,16 +67,27 @@ public class MvcConfiguration implements WebMvcConfigurer {
     return resolver;
   }
 
+  /** Loads the html for the complete lesson, see lesson_content.html */
+  @Bean
+  public ChallengeUiTemplateResolver uiTemplateResolver(ResourceLoader resourceLoader) {
+    ChallengeUiTemplateResolver resolver = new ChallengeUiTemplateResolver(resourceLoader);
+    resolver.setOrder(0);
+    resolver.setCacheable(false);
+    resolver.setCharacterEncoding(UTF8);
+    return resolver;
+  }
+
   @Bean
   public SpringTemplateEngine thymeleafTemplateEngine(
       ITemplateResolver springThymeleafTemplateResolver,
+      ITemplateResolver uiTemplateResolver,
       FileTemplateResolver asciiDoctorTemplateResolver) {
     SpringTemplateEngine engine = new SpringTemplateEngine();
     engine.setEnableSpringELCompiler(true);
     engine.addDialect(new LayoutDialect());
     engine.addDialect(new SpringSecurityDialect());
     engine.setTemplateResolvers(
-        Set.of(asciiDoctorTemplateResolver, springThymeleafTemplateResolver));
+        Set.of(asciiDoctorTemplateResolver, uiTemplateResolver, springThymeleafTemplateResolver));
     return engine;
   }
 }

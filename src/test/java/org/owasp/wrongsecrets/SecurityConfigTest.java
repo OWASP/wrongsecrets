@@ -14,7 +14,9 @@ import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(
+    webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
+    properties = {"K8S_ENV=k8s"})
 @Import(ConventionPortMapper.class)
 @AutoConfigureMockMvc
 class SecurityConfigTest {
@@ -46,7 +48,7 @@ class SecurityConfigTest {
   @Test
   void shouldSucceedWhenCsrfTokenIsPresent() throws Exception {
     mvc.perform(
-            post("/challenge/5")
+            post("/challenge/challenge-5")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("solution", "test")
                 .param("action", "submit")

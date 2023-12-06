@@ -268,7 +268,6 @@ First make sure that you have an [Issue](https://github.com/OWASP/wrongsecrets/i
 Add the **new challenge** in this folder `wrongsecrets/src/main/java/org/owasp/wrongsecrets/challenges/`.
 These are the things that you have to keep in mind.
 -   First and foremost make sure your challenge is coded in **Java**.
--   Don't forget to add your challenge number in `@Order(28)` annotation, **_28_** in my case.
 -   Here is an example of a possible Challenge 28:
 
 ```java
@@ -287,62 +286,25 @@ These are the things that you have to keep in mind.
     */
     @Slf4j
     @Component
-    @Order(28) //make sure this number is the same as your challenge
-    public class Challenge28 extends Challenge {
+    public class Challenge28 implements Challenge {
     private final String secret;
-    public Challenge28(ScoreCard scoreCard) {
-    super(scoreCard);
-    secret = "hello world";
+    public Challenge28() {
+      secret = "hello world";
     }
-    //is this challenge usable in CTF mode?
-    @Override
-    public boolean canRunInCTFMode() {
-    return true;
-    }
+
     //return the plain text secret here
     @Override
     public Spoiler spoiler() {
-    return new Spoiler(secret);
+      return new Spoiler(secret);
     }
     //here you validate if your answer matches the secret
     @Override
     public boolean answerCorrect(String answer) {
-    return secret.equals(answer);
+      return secret.equals(answer);
     }
-    //which runtime can you use to run the challenge on? (You can just use Docker here)
-    /**
-    * {@inheritDoc}
-    */
-    @Override
-    public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
-    return List.of(RuntimeEnvironment.Environment.DOCKER);
-    }
-    //set the difficulty: 1=low, 5=very hard
-    /**
-    * {@inheritDoc}
-    * Difficulty: 1.
-    */
-    @Override
-    public int difficulty() {
-    return 1;
-    }
-    //on which tech is this challenge? See ChallengeTechnology.Tech for categories
-    /**
-    * {@inheritDoc}
-    * Secrets based.
-    */
-    @Override
-    public String getTech() {
-    return ChallengeTechnology.Tech.SECRETS.id;
-    }
-    //if you use this in a shared environment and need to adapt it, then return true here.
-    @Override
-    public boolean isLimittedWhenOnlineHosted() {
-    return false;
-
-                }
-            }
+}
 ```
+
 ### Step 3: Adding Test File.
 
 Add the **new TestFile** in this folder `wrongsecrets/src/test/java/org/owasp/wrongsecrets/challenges/`. TestFile is required to do **unit testing.**
@@ -410,5 +372,28 @@ Use this block as refrence for hints:
     This challenge is only meant for helping new contributors to add new challenges. Please, have fun with trying more difficult challenges;-).
 ```
 
-### Step 5: Submitting your PR.
+
+### Step 5: Add challenge configuration.
+
+In this step we configure the challenge to make it known to the application.
+Open `src/main/resources/wrong_secrets_configuration.yaml` and add the following configuration:
+
+```yaml
+    - name: Challenge 28
+      url: "challenge-28"
+      # For each environment you can add a different implementation and documentation
+      sources:
+        # Fully qualified name of the class
+        - class-name: "org.owasp.wrongsecrets.challenges.docker.Challenge28"
+          explanation: "explanations/challenge28.adoc"
+          hint: "explanations/challenge28_hint.adoc"
+          reason: "explanations/challenge28_reason.adoc"
+          environments: *docker_envs
+      difficulty: *easy
+      category: *secrets
+      ctf:
+        enabled: true
+```
+
+### Step 6: Submitting your PR.
 After completing all the above steps, final step is to submit the PR and refer [**Contributing.md**](https://github.com/OWASP/wrongsecrets/blob/master/CONTRIBUTING.md#how-to-get-your-pr-accepted) on how to get your PR accepted.
