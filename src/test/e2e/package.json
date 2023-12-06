@@ -1,0 +1,22 @@
+{
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@commitlint/config-conventional": "^18.1.0",
+    "cypress": "^13.3.0",
+    "eslint": "^8.52.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-cypress": "^2.15.1",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-jest": "^27.6.0",
+    "eslint-plugin-n": "^16.2.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "cypress-multi-reporters": "^1.2.3",
+    "mocha": "^7.0.1",
+    "mochawesome": "^4.1.0"
+  },
+  "dependencies": {
+    "test": "^3.3.0"
+  }
+}

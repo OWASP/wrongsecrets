@@ -44,29 +44,29 @@ jobs:
           echo "Do minikube delete to stop minikube from running and cleanup to start fresh again"
           echo "wait 20 seconds so we can check if vault-k8s-container works"
           sleep 20
-          if curl http://localhost:8080/spoil-5 -s | grep -q spoiler-answer
+          if curl http://localhost:8080/spoil/challenge-5 -s | grep -q spoiler-answer
           then
-             echo "spoil-5 works"
+             echo "spoil-challenge-5 works"
           else
-             echo "error in spoil-5"
+             echo "error in spoil-challenge-5"
           fi
-          if curl http://localhost:8080/spoil-6 -s | grep -q spoiler-answer
+          if curl http://localhost:8080/spoil/challenge-6 -s | grep -q spoiler-answer
           then
-             echo "spoil-6 works"
+             echo "spoil-challenge-6 works"
           else
-             echo "error in spoil-6"
+             echo "error in spoil-challenge-6"
           fi
-          if curl http://localhost:8080/spoil-7 -s | grep -q spoiler-answer
+          if curl http://localhost:8080/spoil/challenge-7 -s | grep -q spoiler-answer
           then
-             echo "spoil-7 works"
+             echo "spoil-challenge-7 works"
           else
-             echo "error in spoil-7"
+             echo "error in spoil-challenge-7"
           fi
-          if curl http://localhost:8080/spoil-33 -s | grep -q spoiler-answer
+          if curl http://localhost:8080/spoil/challenge-33 -s | grep -q spoiler-answer
           then
-             echo "spoil-33 works"
+             echo "spoil-challenge-33 works"
           else
-             echo "error in spoil-33"
+             echo "error in spoil-challenge-33"
           fi
           echo "logs from pod to make sure:"
           cat pod.log

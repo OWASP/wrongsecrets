@@ -1,0 +1,2 @@
+We are running outside a properly configured Cloud environment. Please run this in an AWS/Azure/GCP environment as
+explained in the https://github.com/OWASP/wrongsecrets#cloud-challenges[README.md]

@@ -1,21 +1,25 @@
 package org.owasp.wrongsecrets.challenges;
 
+import static org.owasp.wrongsecrets.ChallengeConfigurationException.configError;
+
 import com.google.common.base.Strings;
 import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
+import java.util.function.Supplier;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
+import org.owasp.wrongsecrets.ChallengeConfigurationException;
+import org.owasp.wrongsecrets.Challenges;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
-import org.owasp.wrongsecrets.challenges.docker.Challenge0;
-import org.owasp.wrongsecrets.challenges.docker.Challenge30;
 import org.owasp.wrongsecrets.challenges.docker.Challenge37;
 import org.owasp.wrongsecrets.challenges.docker.Challenge8;
+import org.owasp.wrongsecrets.challenges.docker.challenge30.Challenge30;
+import org.owasp.wrongsecrets.definitions.ChallengeDefinition;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.codec.Hex;
@@ -32,8 +36,8 @@ import org.springframework.web.server.ResponseStatusException;
 public class ChallengesController {
 
   private final ScoreCard scoreCard;
-  private final List<ChallengeUI> challenges;
   private final RuntimeEnvironment runtimeEnvironment;
+  private final Challenges challenges;
 
   @Value("${hints_enabled}")
   private boolean hintsEnabled;
@@ -63,7 +67,7 @@ public class ChallengesController {
 
   public ChallengesController(
       ScoreCard scoreCard,
-      List<ChallengeUI> challenges,
+      Challenges challenges,
       RuntimeEnvironment runtimeEnvironment,
       @Value("${spoiling_enabled}") boolean spoilingEnabled) {
     this.scoreCard = scoreCard;
@@ -72,52 +76,85 @@ public class ChallengesController {
     this.spoilingEnabled = spoilingEnabled;
   }
 
-  private void checkValidChallengeNumber(int id) {
-    // If the id is either negative or larger than the amount of challenges, return false.
-    if (id < 0 || id >= challenges.size()) {
-      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "challenge not found");
-    }
-  }
-
   /**
    * return a spoil of the secret Please note that there is no way to enable this in ctfMode: spoils
    * can never be returned during a CTF By default, in normal operations, spoils are enabled, unless
    * `spoilingEnabled` is set to false.
    *
    * @param model exchanged with the FE
-   * @param id id of the challenge
    * @return either a notification or a spoil
    */
-  @GetMapping("/spoil-{id}")
+  @GetMapping("/spoil/{short-name}")
   @Hidden
-  public String spoiler(Model model, @PathVariable Integer id) {
+  public String spoiler(@PathVariable("short-name") String shortName, Model model) {
     if (ctfModeEnabled) {
       model.addAttribute("spoiler", new Spoiler("Spoils are disabled in CTF mode"));
     } else if (!spoilingEnabled) {
       model.addAttribute("spoiler", new Spoiler("Spoils are disabled in the configuration"));
     } else {
-      var challenge = challenges.get(id).getChallenge();
-      model.addAttribute("spoiler", challenge.spoiler());
+      Optional<Spoiler> spoilerFromRuntimeEnvironment =
+          challenges.findChallenge(shortName, runtimeEnvironment).map(c -> c.spoiler());
+      Supplier<Spoiler> spoilerFromRandomChallenge =
+          () -> {
+            var challengeDefinition = findByShortName(shortName);
+            return challenges.getChallenge(challengeDefinition).getFirst().spoiler();
+          };
+
+      // We always want to show the spoiler even if we run in a non-supported environment
+      model.addAttribute(
+          "spoiler", spoilerFromRuntimeEnvironment.orElseGet(spoilerFromRandomChallenge));
     }
     return "spoil";
   }
 
-  @GetMapping("/challenge/{id}")
-  @Operation(description = "Returns the data for a given challenge's form interaction")
-  public String challenge(Model model, @PathVariable Integer id) {
-    checkValidChallengeNumber(id);
-    var challenge = challenges.get(id);
+  private void addChallengeUI(Model model, ChallengeDefinition challengeDefinition) {
+    model.addAttribute(
+        "challenge",
+        ChallengeUI.toUI(
+            challengeDefinition,
+            scoreCard,
+            runtimeEnvironment,
+            challenges.difficulties(),
+            challenges.getDefinitions().environments(),
+            challenges.navigation(challengeDefinition)));
+  }
 
+  /**
+   * checks whether challenge is enabled based on used runtimemode and CTF enablement.
+   *
+   * @return boolean true if the challenge can run.
+   */
+  private boolean isChallengeEnabled(ChallengeDefinition challengeDefinition) {
+    if (runtimeEnvironment.runtimeInCTFMode()) {
+      return runtimeEnvironment.canRun(challengeDefinition) && challengeDefinition.ctf().enabled();
+    }
+    return runtimeEnvironment.canRun(challengeDefinition);
+  }
+
+  private ChallengeDefinition findByShortName(String shortName) {
+    return challenges
+        .findByShortName(shortName)
+        .orElseThrow(
+            () ->
+                new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    configError("Challenge with short name '%s' not found", shortName).get()));
+  }
+
+  @GetMapping("/challenge/{short-name}")
+  @Operation(description = "Returns the data for a given challenge's form interaction")
+  public String challenge(Model model, @PathVariable("short-name") String shortName) {
+    var challengeDefinition = findByShortName(shortName);
     model.addAttribute("challengeForm", new ChallengeForm(""));
-    model.addAttribute("challenge", challenge);
+    addChallengeUI(model, challengeDefinition);
 
     model.addAttribute("answerCorrect", null);
     model.addAttribute("answerIncorrect", null);
     model.addAttribute("solution", null);
-    if (!challenge.isChallengeEnabled()) {
+    if (!isChallengeEnabled(challengeDefinition)) {
       model.addAttribute("answerIncorrect", "This challenge has been disabled.");
     }
-    if (ctfModeEnabled && challenge.getChallenge() instanceof Challenge0) {
+    if (ctfModeEnabled && challenges.isFirstChallenge(challengeDefinition)) {
       if (!Strings.isNullOrEmpty(ctfServerAddress) && !ctfServerAddress.equals("not_set")) {
         model.addAttribute(
             "answerCorrect",
@@ -133,41 +170,53 @@ public class ChallengesController {
       }
     }
     enrichWithHintsAndReasons(model);
-    includeScoringStatus(model, challenge.getChallenge());
-    addWarning(challenge.getChallenge(), model);
+    includeScoringStatus(model, challengeDefinition);
+    addWarning(challengeDefinition, model);
     fireEnding(model);
     return "challenge";
   }
 
-  @PostMapping(value = "/challenge/{id}", params = "action=reset")
+  @PostMapping(value = "/challenge/{name}", params = "action=reset")
   @Operation(description = "Resets the state of a given challenge")
   public String reset(
-      @ModelAttribute ChallengeForm challengeForm, @PathVariable Integer id, Model model) {
-    checkValidChallengeNumber(id);
-    var challenge = challenges.get(id);
-    scoreCard.reset(challenge.getChallenge());
+      @ModelAttribute ChallengeForm challengeForm, @PathVariable String name, Model model) {
+    var challengeDefinition = findByShortName(name);
+    scoreCard.reset(challengeDefinition);
 
-    model.addAttribute("challenge", challenge);
-    includeScoringStatus(model, challenge.getChallenge());
-    addWarning(challenge.getChallenge(), model);
+    addChallengeUI(model, challengeDefinition);
+    includeScoringStatus(model, challengeDefinition);
+    addWarning(challengeDefinition, model);
     enrichWithHintsAndReasons(model);
     return "challenge";
   }
 
-  @PostMapping(value = "/challenge/{id}", params = "action=submit")
-  @Operation(description = "Post your answer to the challenge for a given challenge ID")
+  @PostMapping(value = "/challenge/{name}", params = "action=submit")
+  @Operation(description = "Post your answer to the challenge for a given challenge")
   public String postController(
-      @ModelAttribute ChallengeForm challengeForm, Model model, @PathVariable Integer id) {
-    checkValidChallengeNumber(id);
-    var challenge = challenges.get(id);
+      @ModelAttribute ChallengeForm challengeForm, Model model, @PathVariable String name) {
+    var challengeDefinition = findByShortName(name);
 
-    if (!challenge.isChallengeEnabled()) {
+    if (!isChallengeEnabled(challengeDefinition)) {
       model.addAttribute("answerIncorrect", "This challenge has been disabled.");
     } else {
-      if (challenge.getChallenge().solved(challengeForm.solution())) {
+      var challenge =
+          challenges
+              .findChallenge(name, runtimeEnvironment)
+              .orElseThrow(
+                  () ->
+                      new ChallengeConfigurationException(
+                          configError(
+                              "Challenge '%s' not found for environment: '%s'",
+                              name, runtimeEnvironment.getRuntimeEnvironment().name())));
+
+      if (challenge.answerCorrect(challengeForm.solution())) {
+        scoreCard.completeChallenge(challengeDefinition);
+        // TODO extract this to a separate method probably have separate handler classes in the
+        // configuration otherwise this is not maintainable, probably give the challenge a CTF
+        // method hook which you can override and do these kind of things in there.
         if (ctfModeEnabled) {
           if (!Strings.isNullOrEmpty(ctfServerAddress) && !ctfServerAddress.equals("not_set")) {
-            if (challenge.getChallenge() instanceof Challenge8) {
+            if (challenge instanceof Challenge8) {
               if (!Strings.isNullOrEmpty(keyToProvideToHost)
                   && !keyToProvideToHost.equals(
                       "not_set")) { // this means that it was overriden with a code that needs to be
@@ -180,7 +229,7 @@ public class ChallengesController {
                         + "for which you get your code: "
                         + keyToProvideToHost);
               }
-            } else if (challenge.getChallenge() instanceof Challenge30) {
+            } else if (challenge instanceof Challenge30) {
               if (!Strings.isNullOrEmpty(keyToProvideToHostForChallenge30)
                   && !keyToProvideToHostForChallenge30.equals(
                       "not_set")) { // this means that it was overriden with a code that needs to be
@@ -193,7 +242,7 @@ public class ChallengesController {
                         + "for which you get your code: "
                         + keyToProvideToHostForChallenge30);
               }
-            } else if (challenge.getChallenge() instanceof Challenge37) {
+            } else if (challenge instanceof Challenge37) {
               if (!Strings.isNullOrEmpty(getKeyToProvideToHostChallenge37)
                   && !keyToProvideToHostForChallenge30.equals(
                       "not_set")) { // this means that it was overriden with a code that needs to be
@@ -214,7 +263,7 @@ public class ChallengesController {
                       + ctfServerAddress);
             }
           } else {
-            String code = generateCode(challenge);
+            String code = generateCode(challengeDefinition);
             model.addAttribute(
                 "answerCorrect",
                 "Your answer is correct! " + "fill in the following code in CTF scoring: " + code);
@@ -226,31 +275,30 @@ public class ChallengesController {
         model.addAttribute("answerIncorrect", "Your answer is incorrect, try harder ;-)");
       }
     }
-
-    model.addAttribute("challenge", challenge);
-
-    includeScoringStatus(model, challenge.getChallenge());
-
+    addChallengeUI(model, challengeDefinition);
+    includeScoringStatus(model, challengeDefinition);
     enrichWithHintsAndReasons(model);
 
     fireEnding(model);
     return "challenge";
   }
 
-  private String generateCode(ChallengeUI challenge) {
+  // TODO extract this to the challenge definition @see ChallengeAPIController with nested if
+  // statement
+  private String generateCode(ChallengeDefinition challenge) {
     SecretKeySpec secretKeySpec =
         new SecretKeySpec(ctfKey.getBytes(StandardCharsets.UTF_8), "HmacSHA1");
     try {
       Mac mac = Mac.getInstance("HmacSHA1");
       mac.init(secretKeySpec);
-      byte[] result = mac.doFinal(challenge.getName().getBytes(StandardCharsets.UTF_8));
+      byte[] result = mac.doFinal(challenge.name().name().getBytes(StandardCharsets.UTF_8));
       return new String(Hex.encode(result));
     } catch (NoSuchAlgorithmException | InvalidKeyException e) {
       throw new RuntimeException(e);
     }
   }
 
-  private void includeScoringStatus(Model model, Challenge challenge) {
+  private void includeScoringStatus(Model model, ChallengeDefinition challenge) {
     model.addAttribute("totalPoints", scoreCard.getTotalReceivedPoints());
     model.addAttribute("progress", "" + scoreCard.getProgress());
 
@@ -259,13 +307,14 @@ public class ChallengesController {
     }
   }
 
-  private void addWarning(Challenge challenge, Model model) {
+  private void addWarning(ChallengeDefinition challenge, Model model) {
     if (!runtimeEnvironment.canRun(challenge)) {
       var warning =
-          challenge.supportedRuntimeEnvironments().stream()
-              .map(Enum::name)
+          challenge.supportedEnvironments().stream()
               .limit(1)
-              .collect(Collectors.joining());
+              .map(env -> env.missingEnvironment().contents().get())
+              .findFirst()
+              .orElse(null);
       model.addAttribute("missingEnvWarning", warning);
     }
   }
@@ -277,9 +326,8 @@ public class ChallengesController {
 
   private void fireEnding(Model model) {
     var notCompleted =
-        challenges.stream()
-            .filter(ChallengeUI::isChallengeEnabled)
-            .map(ChallengeUI::getChallenge)
+        challenges.getDefinitions().challenges().stream()
+            .filter(def -> isChallengeEnabled(def))
             .filter(this::challengeNotCompleted)
             .count();
     if (notCompleted == 0) {
@@ -287,7 +335,7 @@ public class ChallengesController {
     }
   }
 
-  private boolean challengeNotCompleted(Challenge challenge) {
+  private boolean challengeNotCompleted(ChallengeDefinition challenge) {
     return !scoreCard.getChallengeCompleted(challenge);
   }
 }

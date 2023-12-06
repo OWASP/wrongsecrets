@@ -2,20 +2,14 @@ package org.owasp.wrongsecrets.challenges.docker;
 
 import java.nio.charset.StandardCharsets;
 import java.security.spec.AlgorithmParameterSpec;
-import java.util.List;
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.GCMParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import lombok.extern.slf4j.Slf4j;
 import org.bouncycastle.util.encoders.Base64;
-import org.owasp.wrongsecrets.RuntimeEnvironment;
-import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
-import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
-import org.owasp.wrongsecrets.challenges.Difficulty;
 import org.owasp.wrongsecrets.challenges.Spoiler;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /**
@@ -24,17 +18,7 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
-@Order(32)
-public class Challenge32 extends Challenge {
-
-  public Challenge32(ScoreCard scoreCard) {
-    super(scoreCard);
-  }
-
-  @Override
-  public boolean canRunInCTFMode() {
-    return true;
-  }
+public class Challenge32 implements Challenge {
 
   @Override
   public Spoiler spoiler() {
@@ -44,28 +28,6 @@ public class Challenge32 extends Challenge {
   @Override
   public boolean answerCorrect(String answer) {
     return getSolution().equals(answer);
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public int difficulty() {
-    return Difficulty.NORMAL;
-  }
-
-  /** {@inheritDoc} This is an AI type of challenge */
-  @Override
-  public String getTech() {
-    return ChallengeTechnology.Tech.AI.id;
-  }
-
-  @Override
-  public boolean isLimitedWhenOnlineHosted() {
-    return false;
-  }
-
-  @Override
-  public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
-    return List.of(RuntimeEnvironment.Environment.DOCKER);
   }
 
   private String getSolution() {

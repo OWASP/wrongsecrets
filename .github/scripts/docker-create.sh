@@ -300,22 +300,22 @@ create_containers() {
     echo "Creating containers"
     if [[ "$script_mode" == "publish" ]]; then
         docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/addo-example:$tag-no-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=without-vault" --push ./../../.
-        docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/addo-example:latest-no-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=without-vault" --push ./../../.
+#        docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/addo-example:latest-no-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=without-vault" --push ./../../.
         docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/addo-example:$tag-local-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=local-vault" --push ./../../.
-        docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/addo-example:latest-local-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=local-vault" --push ./../../.
+#        docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/addo-example:latest-local-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=local-vault" --push ./../../.
         docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/addo-example:$tag-k8s-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=kubernetes-vault" --push ./../../.
-        docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/addo-example:latest-k8s-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=kubernetes-vault" --push ./../../.
+#        docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/addo-example:latest-k8s-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=kubernetes-vault" --push ./../../.
         docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets:$tag-no-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=without-vault" --push ./../../.
-        docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets:latest-no-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=without-vault" --push ./../../.
+#        docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets:latest-no-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=without-vault" --push ./../../.
         docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets:$tag-local-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=local-vault" --push ./../../.
-        docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets:latest-local-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=local-vault" --push ./../../.
+#        docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets:latest-local-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=local-vault" --push ./../../.
         docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets:$tag-k8s-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=kubernetes-vault" --push ./../../.
-        docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets:latest-k8s-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=kubernetes-vault" --push ./../../.
+#        docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets:latest-k8s-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=kubernetes-vault" --push ./../../.
         cd ../..
         docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets-desktop:$tag -f Dockerfile_webdesktop --push .
-        docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets-desktop:latest -f Dockerfile_webdesktop --push .
+#        docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets-desktop:latest -f Dockerfile_webdesktop --push .
         docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets-desktop-k8s:$tag -f Dockerfile_webdesktopk8s --push .
-        docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets-desktop-k8s:latest -f Dockerfile_webdesktopk8s --push .
+#        docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets-desktop-k8s:latest -f Dockerfile_webdesktopk8s --push .
         cd .github/scripts
     elif [[ "$script_mode" == "test" ]]; then
         docker buildx build -t jeroenwillemsen/wrongsecrets:$tag --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=without-vault" --load ./../../.

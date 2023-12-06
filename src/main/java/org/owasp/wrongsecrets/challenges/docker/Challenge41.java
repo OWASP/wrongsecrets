@@ -5,62 +5,29 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
-import java.util.List;
 import lombok.extern.slf4j.Slf4j;
-import org.owasp.wrongsecrets.RuntimeEnvironment;
-import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
-import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
-import org.owasp.wrongsecrets.challenges.Difficulty;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
-/** This is a challenge based on finding secret using password shucking */
+/** This is a challenge based on finding secret using password shucking. */
 @Slf4j
 @Component
 @Order(41)
-public class Challenge41 extends Challenge {
+public class Challenge41 implements Challenge {
 
   private final String password;
 
-  public Challenge41(ScoreCard scoreCard, @Value("${challenge41password}") String password) {
-    super(scoreCard);
+  public Challenge41(@Value("${challenge41password}") String password) {
     this.password = password;
-  }
-
-  @Override
-  public boolean canRunInCTFMode() {
-    return true;
   }
 
   @Override
   public Spoiler spoiler() {
     return new Spoiler(base64Decode(password));
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public int difficulty() {
-    return Difficulty.HARD;
-  }
-
-  /** {@inheritDoc} Cryptography based. */
-  @Override
-  public String getTech() {
-    return ChallengeTechnology.Tech.CRYPTOGRAPHY.id;
-  }
-
-  @Override
-  public boolean isLimitedWhenOnlineHosted() {
-    return false;
-  }
-
-  @Override
-  public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
-    return List.of(RuntimeEnvironment.Environment.DOCKER);
   }
 
   @Override

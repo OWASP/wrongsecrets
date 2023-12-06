@@ -1,1 +1,2 @@
-org.springframework.context.ApplicationListener=org.owasp.wrongsecrets.StartupListener
+org.springframework.boot.diagnostics.FailureAnalyzer=\
+  org.owasp.wrongsecrets.StartupFailureAnalyzer

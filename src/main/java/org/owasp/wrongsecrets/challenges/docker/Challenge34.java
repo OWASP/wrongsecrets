@@ -1,15 +1,9 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
 import com.google.common.base.Strings;
-import java.util.List;
 import lombok.extern.slf4j.Slf4j;
-import org.owasp.wrongsecrets.RuntimeEnvironment;
-import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
-import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
-import org.owasp.wrongsecrets.challenges.Difficulty;
 import org.owasp.wrongsecrets.challenges.Spoiler;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -19,19 +13,9 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
-@Order(34)
-public class Challenge34 extends Challenge {
+public class Challenge34 implements Challenge {
 
   private String key;
-
-  public Challenge34(ScoreCard scoreCard) {
-    super(scoreCard);
-  }
-
-  @Override
-  public boolean canRunInCTFMode() {
-    return true;
-  }
 
   @Override
   public Spoiler spoiler() {
@@ -41,28 +25,6 @@ public class Challenge34 extends Challenge {
   @Override
   public boolean answerCorrect(String answer) {
     return getKey().equals(answer);
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public int difficulty() {
-    return Difficulty.NORMAL;
-  }
-
-  /** {@inheritDoc} This is a crypto (hashing) type of challenge */
-  @Override
-  public String getTech() {
-    return ChallengeTechnology.Tech.CRYPTOGRAPHY.id;
-  }
-
-  @Override
-  public boolean isLimitedWhenOnlineHosted() {
-    return false;
-  }
-
-  @Override
-  public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
-    return List.of(RuntimeEnvironment.Environment.DOCKER);
   }
 
   private String getKey() {
