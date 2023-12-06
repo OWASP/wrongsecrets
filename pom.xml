@@ -52,6 +52,8 @@
     <cyclonedx.core.version>8.0.3</cyclonedx.core.version>
     <datatables.version>1.13.5</datatables.version>
     <dependency-check-maven.version>8.2.1</dependency-check-maven.version>
+    <gatling-maven-plugin.version>4.6.0</gatling-maven-plugin.version>
+    <gatling.version>3.9.5</gatling.version>
     <gcp.sdk.version>4.8.3</gcp.sdk.version>
     <github.button.version>2.14.1</github.button.version>
     <java.version>21</java.version>
@@ -104,6 +106,10 @@
     </dependency>
 
     <dependency>
+      <groupId>com.fasterxml.jackson.dataformat</groupId>
+      <artifactId>jackson-dataformat-yaml</artifactId>
+    </dependency>
+    <dependency>
       <groupId>nz.net.ultraq.thymeleaf</groupId>
       <artifactId>thymeleaf-layout-dialect</artifactId>
       <version>${thymeleaf.layout.version}</version>
@@ -116,6 +122,11 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.testcontainers</groupId>
+      <artifactId>testcontainers</artifactId>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -232,6 +243,13 @@
     </dependency>
 
     <dependency>
+      <groupId>io.gatling.highcharts</groupId>
+      <artifactId>gatling-charts-highcharts</artifactId>
+      <version>${gatling.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
       <groupId>org.cyclonedx</groupId>
       <artifactId>cyclonedx-core-java</artifactId>
       <version>${cyclonedx.core.version}</version>
@@ -244,18 +262,34 @@
       <type>maven-plugin</type>
     </dependency>
     <dependency>
+      <groupId>com.tngtech.archunit</groupId>
+      <artifactId>archunit-junit5</artifactId>
+      <version>1.1.0</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
       <groupId>com.github.spotbugs</groupId>
       <artifactId>spotbugs-annotations</artifactId>
       <version>4.8.0</version>
     </dependency>
-    <!--        <dependency>-->
-    <!--            <groupId>com.h2database</groupId>-->
-    <!--            <artifactId>h2</artifactId>-->
-    <!--            <version>2.1.214</version>-->
-    <!--        </dependency>-->
+    <dependency>
+      <groupId>io.github.wimdeblauwe</groupId>
+      <artifactId>testcontainers-cypress</artifactId>
+      <version>1.9.0</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <build>
+    <testResources>
+      <testResource>
+        <directory>src/test/resources</directory>
+      </testResource>
+      <testResource>
+        <targetPath>e2e</targetPath>
+        <directory>src/test/e2e</directory>
+      </testResource>
+    </testResources>
     <pluginManagement>
       <plugins>
         <plugin>
@@ -316,31 +350,6 @@
             <!-- -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8000-->
           </jvmArguments>
         </configuration>
-        <executions>
-          <execution>
-            <id>start-app</id>
-            <goals>
-              <goal>start</goal>
-            </goals>
-            <phase>pre-integration-test</phase>
-            <configuration>
-              <profiles>local,without-vault</profiles>
-              <environmentVariables>
-                <CHALLENGEDOCKERMTPATH>src/test/resources/</CHALLENGEDOCKERMTPATH>
-                <challengedockermtpath>src/test/resources/</challengedockermtpath>
-                <KEEPASSPATH>src/test/resources/alibabacreds.kdbx</KEEPASSPATH>
-                <keepasspath>src/test/resources/alibabacreds.kdbx</keepasspath>
-              </environmentVariables>
-            </configuration>
-          </execution>
-          <execution>
-            <id>stop-app</id>
-            <goals>
-              <goal>stop</goal>
-            </goals>
-            <phase>post-integration-test</phase>
-          </execution>
-        </executions>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -473,33 +482,6 @@
             </goals>
             <phase>generate-resources</phase>
           </execution>
-          <execution>
-            <id>npm-install</id>
-            <goals>
-              <goal>exec</goal>
-            </goals>
-            <phase>integration-test</phase>
-            <configuration>
-              <executable>npm</executable>
-              <arguments>
-                <argument>install</argument>
-              </arguments>
-            </configuration>
-          </execution>
-          <execution>
-            <id>xcypress-test</id>
-            <goals>
-              <goal>exec</goal>
-            </goals>
-            <phase>integration-test</phase>
-            <configuration>
-              <executable>npm</executable>
-              <arguments>
-                <argument>run</argument>
-                <argument>test:ci</argument>
-              </arguments>
-            </configuration>
-          </execution>
         </executions>
       </plugin>
       <plugin>
@@ -577,6 +559,11 @@
             </goals>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <groupId>io.gatling</groupId>
+        <artifactId>gatling-maven-plugin</artifactId>
+        <version>${gatling-maven-plugin.version}</version>
       </plugin>
     </plugins>
   </build>

@@ -33,4 +33,4 @@ jobs:
         id: install
       - name: test script
         run: |
-          ./k8s-vault-minkube-start.sh && sleep 5 && curl http://localhost:8080/spoil-7 && minikube delete
+          ./k8s-vault-minkube-start.sh && sleep 5 && curl http://localhost:8080/spoil/challenge-7 && minikube delete

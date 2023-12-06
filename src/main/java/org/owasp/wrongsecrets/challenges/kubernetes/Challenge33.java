@@ -1,39 +1,29 @@
 package org.owasp.wrongsecrets.challenges.kubernetes;
 
-import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.K8S;
-
 import com.google.common.base.Strings;
 import java.nio.charset.StandardCharsets;
 import java.security.spec.AlgorithmParameterSpec;
-import java.util.List;
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.GCMParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import lombok.extern.slf4j.Slf4j;
 import org.bouncycastle.util.encoders.Base64;
-import org.owasp.wrongsecrets.RuntimeEnvironment;
-import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
-import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
-import org.owasp.wrongsecrets.challenges.Difficulty;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /**
- * Challenge that teaches something about converting/migrating a secret while opening the metadata
+ * Challenge that teaches something about converting/migrating a secret while opening the metadata.
  */
 @Slf4j
 @Component
-@Order(33)
-public class Challenge33 extends Challenge {
+public class Challenge33 implements Challenge {
 
   private final String secretSecret;
 
-  public Challenge33(ScoreCard scoreCard, @Value("${CHALLENGE33}") String secretSecret) {
-    super(scoreCard);
+  public Challenge33(@Value("${CHALLENGE33}") String secretSecret) {
     this.secretSecret = secretSecret;
   }
 
@@ -43,33 +33,8 @@ public class Challenge33 extends Challenge {
   }
 
   @Override
-  protected boolean answerCorrect(String answer) {
+  public boolean answerCorrect(String answer) {
     return getSolution().equals(answer);
-  }
-
-  @Override
-  public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
-    return List.of(K8S);
-  }
-
-  @Override
-  public int difficulty() {
-    return Difficulty.NORMAL;
-  }
-
-  @Override
-  public String getTech() {
-    return ChallengeTechnology.Tech.SECRETS.id;
-  }
-
-  @Override
-  public boolean isLimitedWhenOnlineHosted() {
-    return false;
-  }
-
-  @Override
-  public boolean canRunInCTFMode() {
-    return true;
   }
 
   private String getSolution() {

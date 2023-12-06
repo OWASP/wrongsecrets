@@ -78,8 +78,9 @@ node_modules
 .npm
 
 # Cypress
-cypress/videos
-cypress/screenshots
+src/test/e2e/cypress/videos
+src/test/e2e/cypress/screenshots
+src/test/e2e/cypress/reports
 cypress/downloads
 py_env
 tmp/

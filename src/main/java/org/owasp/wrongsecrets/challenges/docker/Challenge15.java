@@ -4,40 +4,27 @@ import com.google.common.base.Strings;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Base64;
-import java.util.List;
 import javax.crypto.Cipher;
 import javax.crypto.spec.GCMParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import lombok.extern.slf4j.Slf4j;
-import org.owasp.wrongsecrets.RuntimeEnvironment;
-import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.Challenge;
-import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
-import org.owasp.wrongsecrets.challenges.Difficulty;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /** This challenge is about AWS keys in git history, with actual canarytokens. */
 @Slf4j
 @Component
-@Order(15)
-public class Challenge15 extends Challenge {
+public class Challenge15 implements Challenge {
 
   private final String ciphterText;
   private final String encryptionKey;
 
-  public Challenge15(ScoreCard scoreCard, @Value("${challenge15ciphertext}") String ciphterText) {
-    super(scoreCard);
+  public Challenge15(@Value("${challenge15ciphertext}") String ciphterText) {
     this.ciphterText = ciphterText;
     encryptionKey =
         Base64.getEncoder().encodeToString("this is it for now".getBytes(StandardCharsets.UTF_8));
-  }
-
-  @Override
-  public boolean canRunInCTFMode() {
-    return true;
   }
 
   /** {@inheritDoc} */
@@ -48,32 +35,9 @@ public class Challenge15 extends Challenge {
 
   /** {@inheritDoc} */
   @Override
-  protected boolean answerCorrect(String answer) {
+  public boolean answerCorrect(String answer) {
     String correctString = quickDecrypt(ciphterText);
     return answer.equals(correctString) || minimummatch_found(answer);
-  }
-
-  @Override
-  /** {@inheritDoc} */
-  public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
-    return List.of(RuntimeEnvironment.Environment.DOCKER);
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public int difficulty() {
-    return Difficulty.NORMAL;
-  }
-
-  /** {@inheritDoc} Git based. */
-  @Override
-  public String getTech() {
-    return ChallengeTechnology.Tech.GIT.id;
-  }
-
-  @Override
-  public boolean isLimitedWhenOnlineHosted() {
-    return false;
   }
 
   private boolean minimummatch_found(String answer) {
