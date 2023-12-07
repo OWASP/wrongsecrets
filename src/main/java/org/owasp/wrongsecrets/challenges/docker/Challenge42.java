@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 
 /** This is a challenge based on finding API Key in Spring Boot Actuator audit events */
 @Slf4j
-@Order(42)
 @Component
 @RequiredArgsConstructor
 public class Challenge42 implements Challenge {
