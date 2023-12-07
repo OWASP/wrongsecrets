@@ -300,14 +300,14 @@
             <dependency>
               <groupId>com.puppycrawl.tools</groupId>
               <artifactId>checkstyle</artifactId>
-              <version>10.12.4</version>
+              <version>10.12.6</version>
             </dependency>
           </dependencies>
         </plugin>
         <plugin>
           <groupId>com.github.spotbugs</groupId>
           <artifactId>spotbugs-maven-plugin</artifactId>
-          <version>4.7.3.6</version>
+          <version>4.8.2.0</version>
           <configuration>
             <omitVisitors>FindReturnRef</omitVisitors>
             <plugins>
@@ -323,7 +323,7 @@
             <dependency>
               <groupId>com.github.spotbugs</groupId>
               <artifactId>spotbugs</artifactId>
-              <version>4.8.0</version>
+              <version>4.8.2</version>
             </dependency>
           </dependencies>
         </plugin>
