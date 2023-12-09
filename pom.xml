@@ -58,7 +58,7 @@
     <github.button.version>2.14.1</github.button.version>
     <java.version>21</java.version>
     <jquery.version>3.7.1</jquery.version>
-    <jruby.version>9.4.4.0</jruby.version>
+    <jruby.version>9.4.5.0</jruby.version>
     <lombok.version>1.18.30</lombok.version>
     <maven.compiler.target>21</maven.compiler.target>
     <spring.cloud-version>2022.0.4</spring.cloud-version>
