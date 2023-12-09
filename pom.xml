@@ -46,7 +46,7 @@
     <KeePassJava2.version>2.2.1</KeePassJava2.version>
     <asciidoctor.maven.plugin.version>2.2.4</asciidoctor.maven.plugin.version>
     <asciidoctorj.version>2.5.10</asciidoctorj.version>
-    <aws.sdk.version>2.21.13</aws.sdk.version>
+    <aws.sdk.version>2.21.42</aws.sdk.version>
     <bootstrap.version>5.3.1</bootstrap.version>
     <com.azure.spring.version>5.7.0</com.azure.spring.version>
     <cyclonedx.core.version>8.0.3</cyclonedx.core.version>
