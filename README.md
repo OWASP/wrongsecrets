@@ -293,16 +293,17 @@ Contributors:
 - [Turjo Chowdhury @turjoc120](https://www.github.com/turjoc120)
 - [Josh Grossman @tghosth](https://www.github.com/tghosth)
 - [alphasec @alphasecio](https://www.github.com/alphasecio)
+- [CaduRoriz @CaduRoriz](https://www.github.com/CaduRoriz)
 - [Madhu Akula @madhuakula](https://www.github.com/madhuakula)
 - [Mike Woudenberg @mikewoudenberg](https://www.github.com/mikewoudenberg)
 - [Spyros @northdpole](https://www.github.com/northdpole)
 - [RubenAtBinx @RubenAtBinx](https://www.github.com/RubenAtBinx)
 - [Vineeth Jagadeesh @djvinnie](https://www.github.com/djvinnie)
+- [za @za](https://www.github.com/za)
 - [Alex Bender @alex-bender](https://www.github.com/alex-bender)
 - [Nicolas Humblot @nhumblot](https://www.github.com/nhumblot)
 - [Rick M @kingthorin](https://www.github.com/kingthorin)
 - [Shlomo Zalman Heigh @szh](https://www.github.com/szh)
-- [Fern @f3rn0s](https://www.github.com/f3rn0s)
 
 Testers:
 
