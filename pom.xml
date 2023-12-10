@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.1.5</version>
+    <version>3.2.0</version>
     <!-- lookup parent from repository -->
   </parent>
 
@@ -47,7 +47,7 @@
     <asciidoctor.maven.plugin.version>2.2.4</asciidoctor.maven.plugin.version>
     <asciidoctorj.version>2.5.10</asciidoctorj.version>
     <aws.sdk.version>2.21.42</aws.sdk.version>
-    <bootstrap.version>5.3.1</bootstrap.version>
+    <bootstrap.version>5.3.2</bootstrap.version>
     <com.azure.spring.version>5.7.0</com.azure.spring.version>
     <cyclonedx.core.version>8.0.3</cyclonedx.core.version>
     <datatables.version>1.13.5</datatables.version>
@@ -61,7 +61,7 @@
     <jruby.version>9.4.5.0</jruby.version>
     <lombok.version>1.18.30</lombok.version>
     <maven.compiler.target>21</maven.compiler.target>
-    <spring.cloud-version>2022.0.4</spring.cloud-version>
+    <spring.cloud-version>2023.0.0</spring.cloud-version>
     <spring.security.version>6.1.4</spring.security.version>
     <system-stubs-jupiter.version>2.1.5</system-stubs-jupiter.version>
     <thymeleaf-extras-springsecurity6.version>3.1.2.RELEASE</thymeleaf-extras-springsecurity6.version>
