@@ -291,7 +291,7 @@ These are the things that you have to keep in mind.
 
     public String getAnswer() {
       return secret;
-    } 
+    }
 }
 ```
 
@@ -311,7 +311,7 @@ Here is a unit test for reference:
     import org.junit.jupiter.api.Test;
 
     class Challenge28Test {
-        
+
       @Test
       void rightAnswerShouldSolveChallenge() {
           var challenge = new Challenge28();
