@@ -8,8 +8,7 @@ import javax.crypto.spec.GCMParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import lombok.extern.slf4j.Slf4j;
 import org.bouncycastle.util.encoders.Base64;
-import org.owasp.wrongsecrets.challenges.Challenge;
-import org.owasp.wrongsecrets.challenges.Spoiler;
+import org.owasp.wrongsecrets.challenges.FixedAnswerChallenge;
 import org.springframework.stereotype.Component;
 
 /**
@@ -18,16 +17,11 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
-public class Challenge32 implements Challenge {
+public class Challenge32 extends FixedAnswerChallenge {
 
   @Override
-  public Spoiler spoiler() {
-    return new Spoiler(getSolution());
-  }
-
-  @Override
-  public boolean answerCorrect(String answer) {
-    return getSolution().equals(answer);
+  public String getAnswer() {
+    return getSolution();
   }
 
   private String getSolution() {

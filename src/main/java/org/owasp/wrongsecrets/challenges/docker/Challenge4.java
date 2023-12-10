@@ -20,7 +20,6 @@ public class Challenge4 implements Challenge {
     return new Spoiler(argBasedPassword);
   }
 
-  /** {@inheritDoc} */
   @Override
   public boolean answerCorrect(String answer) {
     return argBasedPassword.equals(answer) || argBasedPassword.equals("'" + answer + "'");

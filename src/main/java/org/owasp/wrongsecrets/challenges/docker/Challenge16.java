@@ -5,15 +5,14 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import lombok.extern.slf4j.Slf4j;
-import org.owasp.wrongsecrets.challenges.Challenge;
-import org.owasp.wrongsecrets.challenges.Spoiler;
+import org.owasp.wrongsecrets.challenges.FixedAnswerChallenge;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /** This challenge is about having a secret obfuscated in the front-end code. */
 @Slf4j
 @Component
-public class Challenge16 implements Challenge {
+public class Challenge16 extends FixedAnswerChallenge {
 
   private final String dockerMountPath;
 
@@ -21,17 +20,9 @@ public class Challenge16 implements Challenge {
     this.dockerMountPath = dockerMountPath;
   }
 
-  /** {@inheritDoc} */
   @Override
-  public Spoiler spoiler() {
-    return new Spoiler(getActualData());
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public boolean answerCorrect(String answer) {
-    // log.debug("challenge 16, actualdata: {}, answer: {}", getActualData(), answer);
-    return getActualData().equals(answer);
+  public String getAnswer() {
+    return getActualData();
   }
 
   @SuppressFBWarnings(
