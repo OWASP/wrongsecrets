@@ -11,7 +11,7 @@
 
   <groupId>org.owasp</groupId>
   <artifactId>wrongsecrets</artifactId>
-  <version>1.7.2-SNAPSHOT</version>
+  <version>1.8.0RC4-SNAPSHOT</version>
 
   <name>OWASP WrongSecrets</name>
   <description>Examples with how to not use secrets</description>
@@ -440,7 +440,7 @@
             </goals>
             <phase>generate-resources</phase>
             <configuration>
-              <nodeVersion>v20.9.0</nodeVersion>
+              <nodeVersion>v20.10.0</nodeVersion>
               <!-- download node from https://nodejs.org/dist/ -->
               <workingDirectory>js</workingDirectory>
             </configuration>

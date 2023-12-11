@@ -447,7 +447,7 @@ Requirements: make sure you have the following tools installed: [Docker](https:/
 4. Go to the IDE settings>Language & Frameworks > Lombok and make sure Lombok processing is enabled
 5. Open the Maven Tab in your IDEA and run "Reload All Maven Projects" to make the system sync and download everything. Next, in that same tab use the "install" option as part of the OWASP WrongSecrets Lifecycle to genereate the asciidoc and such.
 6. Now run the `main` method in `org.owasp.wrongsecrets.WrongSecretsApplication.java`. This should fail with a stack trace.
-7. Now go to the run configuration of the app and make sure you have the active profile `without-vault`. This is done by setting the VM options arguments to `-Dserver.port=8080 -Dspring.profiles.active=local,without-vault`. Set `K8S_ENV=docker` as environment argument.
+7. Now go to the run configuration of the app and make sure you have the active profile `without-vault`. This is done by setting the VM options arguments to `--server.port=8080 --spring.profiles.active=local,without-vault`. Set `K8S_ENV=docker` as environment argument.
 8. Repeat step 6: run the app again, you should have a properly running application which is visitable in your browser at http://localhost:8080.
 
 **Pictorial Guide** on how to get the project started in IntelliJ IDEA is available at [_Contributing.md_](https://github.com/OWASP/wrongsecrets/blob/master/CONTRIBUTING.md#how-to-get-started-with-the-project-in-intellij-idea).

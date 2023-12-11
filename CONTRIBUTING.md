@@ -235,7 +235,7 @@ There under the **_Application_** section click on the button shown below.
 
 **_Fill out_** all the fields as shown below.
 
-![Fill out the fields(The working directory depends on the enviroment setup): | Build and run: org.owasp.wrongsecrets.WrongSecretsApplication : -Dserver.port=8080 - Dspring.profiles.active=local,without-vault. | Working directory: /Users/razr/workspace/owasp/wrongsecrets | Environment variables: K8S_ENV=docker| Packages and classes to include in covarege data: org.owasp.wrongsecrets.*| ](images/fill-fields-7.4.png)
+![Fill out the fields(The working directory depends on the enviroment setup): | Build and run: org.owasp.wrongsecrets.WrongSecretsApplication : --server.port=8080 --spring.profiles.active=local,without-vault. | Working directory: /Users/razr/workspace/owasp/wrongsecrets | Environment variables: K8S_ENV=docker| Packages and classes to include in covarege data: org.owasp.wrongsecrets.*| ](images/fill-fields-7.4.png)
 
 Again press **_Shift+F10_** which runs the Application.
 
