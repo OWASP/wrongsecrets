@@ -12,6 +12,7 @@ import java.util.Optional;
 import java.util.function.Supplier;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
+import org.checkerframework.checker.units.qual.A;
 import org.owasp.wrongsecrets.ChallengeConfigurationException;
 import org.owasp.wrongsecrets.Challenges;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
@@ -309,13 +310,17 @@ public class ChallengesController {
 
   private void addWarning(ChallengeDefinition challenge, Model model) {
     if (!runtimeEnvironment.canRun(challenge)) {
-      var warning =
-          challenge.supportedEnvironments().stream()
-              .limit(1)
-              .map(env -> env.missingEnvironment().contents().get())
-              .findFirst()
-              .orElse(null);
-      model.addAttribute("missingEnvWarning", warning);
+      if (challenge.missingEnvironment() != null) {
+        model.addAttribute("missingEnvWarning", challenge.missingEnvironment().contents().get());
+      } else {
+        var warning =
+            challenge.supportedEnvironments().stream()
+                .limit(1)
+                .map(env -> env.missingEnvironment().contents().get())
+                .findFirst()
+                .orElse(null);
+        model.addAttribute("missingEnvWarning", warning);
+      }
     }
   }
 
