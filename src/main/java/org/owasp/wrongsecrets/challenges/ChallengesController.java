@@ -12,7 +12,6 @@ import java.util.Optional;
 import java.util.function.Supplier;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
-import org.checkerframework.checker.units.qual.A;
 import org.owasp.wrongsecrets.ChallengeConfigurationException;
 import org.owasp.wrongsecrets.Challenges;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
