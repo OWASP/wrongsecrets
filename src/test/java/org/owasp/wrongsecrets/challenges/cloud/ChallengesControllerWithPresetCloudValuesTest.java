@@ -73,7 +73,8 @@ class ChallengesControllerWithPresetCloudValuesTest {
         .andExpect(status().isOk())
         .andExpect(content().string(not(containsString("challenge-5_disabled-link"))))
         .andExpect(content().string(not(containsString("challenge-6_disabled-link"))))
-        .andExpect(content().string(not(containsString("challenge-7_disabled-link"))));
+        .andExpect(content().string(not(containsString("challenge-7_disabled-link"))))
+        .andExpect(content().string(not(containsString("challenge-33_disabled-link"))));
   }
 
   @Test
