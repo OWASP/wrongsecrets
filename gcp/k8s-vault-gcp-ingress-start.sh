@@ -11,6 +11,12 @@ echo "This is a script to bootstrap the configuration. You need to have installe
 echo "This script is based on the steps defined in https://learn.hashicorp.com/tutorials/vault/kubernetes-minikube. Vault is awesome!"
 
 export GCP_PROJECT=$(gcloud config list --format 'value(core.project)' 2>/dev/null)
+#export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+
+export REGION="$(terraform output -raw region)"
+export CLUSTER_NAME="$(terraform output -raw kubernetes_cluster_name)"
+
+gcloud container clusters get-credentials --project ${GCP_PROJECT} --zone ${REGION} ${CLUSTER_NAME}
 
 kubectl get configmaps | grep 'secrets-file' &>/dev/null
 if [ $? == 0 ]; then
@@ -24,6 +30,7 @@ if [ $? == 0 ]; then
   echo "secrets secret is already installed"
 else
   kubectl apply -f ../k8s/secrets-secret.yml
+  kubectl apply -f ../k8s/challenge33.yml
 fi
 
 helm list | grep 'consul' &>/dev/null
@@ -31,17 +38,17 @@ if [ $? == 0 ]; then
   echo "Consul is already installed"
 else
   helm repo add hashicorp https://helm.releases.hashicorp.com
-  helm install consul hashicorp/consul --version 0.30.0 --values ../k8s/helm-consul-values.yml
+  helm install consul hashicorp/consul --values ../k8s/helm-consul-values.yml
 fi
 
-while [[ $(kubectl get pods -l app=consul -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True True True True" ]]; do echo "waiting for Consul" && sleep 2; done
+while [[ $(kubectl get pods -l app=consul -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True True True True True True" ]]; do echo "waiting for Consul" && sleep 2; done
 
 helm list | grep 'vault' &>/dev/null
 if [ $? == 0 ]; then
   echo "Vault is already installed"
 else
   helm repo add hashicorp https://helm.releases.hashicorp.com
-  helm install vault hashicorp/vault --version 0.9.1 --values ../k8s/helm-vault-values.yml
+  helm install vault hashicorp/vault --values ../k8s/helm-vault-values.yml
 fi
 
 isvaultrunning=$(kubectl get pods --field-selector=status.phase=Running)
