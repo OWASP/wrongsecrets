@@ -1,0 +1,6 @@
+*Why hiding API key in the audit events is not a good idea?*
+
+In a secure and well-architected system, protecting sensitive information such as API keys is crucial.
+Audit events are significant in tracking and monitoring activities within an application.
+
+Ensure that API keys are not visible in plain text in the (audit) logs or any other output.
