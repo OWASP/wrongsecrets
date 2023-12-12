@@ -5,13 +5,13 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.1.5</version>
+    <version>3.2.0</version>
     <!-- lookup parent from repository -->
   </parent>
 
   <groupId>org.owasp</groupId>
   <artifactId>wrongsecrets</artifactId>
-  <version>1.7.2-SNAPSHOT</version>
+  <version>1.8.0RC4-SNAPSHOT</version>
 
   <name>OWASP WrongSecrets</name>
   <description>Examples with how to not use secrets</description>
@@ -46,24 +46,24 @@
     <KeePassJava2.version>2.2.1</KeePassJava2.version>
     <asciidoctor.maven.plugin.version>2.2.4</asciidoctor.maven.plugin.version>
     <asciidoctorj.version>2.5.10</asciidoctorj.version>
-    <aws.sdk.version>2.21.13</aws.sdk.version>
-    <bootstrap.version>5.3.1</bootstrap.version>
-    <com.azure.spring.version>5.6.0</com.azure.spring.version>
+    <aws.sdk.version>2.21.42</aws.sdk.version>
+    <bootstrap.version>5.3.2</bootstrap.version>
+    <com.azure.spring.version>5.7.0</com.azure.spring.version>
     <cyclonedx.core.version>8.0.3</cyclonedx.core.version>
     <datatables.version>1.13.5</datatables.version>
     <dependency-check-maven.version>8.2.1</dependency-check-maven.version>
     <gatling-maven-plugin.version>4.6.0</gatling-maven-plugin.version>
     <gatling.version>3.9.5</gatling.version>
-    <gcp.sdk.version>4.8.3</gcp.sdk.version>
+    <gcp.sdk.version>4.8.4</gcp.sdk.version>
     <github.button.version>2.14.1</github.button.version>
     <java.version>21</java.version>
     <jquery.version>3.7.1</jquery.version>
-    <jruby.version>9.4.4.0</jruby.version>
+    <jruby.version>9.4.5.0</jruby.version>
     <lombok.version>1.18.30</lombok.version>
     <maven.compiler.target>21</maven.compiler.target>
-    <spring.cloud-version>2022.0.4</spring.cloud-version>
+    <spring.cloud-version>2023.0.0</spring.cloud-version>
     <spring.security.version>6.1.4</spring.security.version>
-    <system-stubs-jupiter.version>2.1.3</system-stubs-jupiter.version>
+    <system-stubs-jupiter.version>2.1.5</system-stubs-jupiter.version>
     <thymeleaf-extras-springsecurity6.version>3.1.2.RELEASE</thymeleaf-extras-springsecurity6.version>
     <thymeleaf.layout.version>3.3.0</thymeleaf.layout.version>
   </properties>
@@ -222,7 +222,7 @@
     <dependency>
       <groupId>org.springdoc</groupId>
       <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-      <version>2.2.0</version>
+      <version>2.3.0</version>
     </dependency>
     <dependency>
       <groupId>com.azure.spring</groupId>
@@ -264,13 +264,13 @@
     <dependency>
       <groupId>com.tngtech.archunit</groupId>
       <artifactId>archunit-junit5</artifactId>
-      <version>1.1.0</version>
+      <version>1.2.1</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>com.github.spotbugs</groupId>
       <artifactId>spotbugs-annotations</artifactId>
-      <version>4.8.0</version>
+      <version>4.8.2</version>
     </dependency>
     <dependency>
       <groupId>io.github.wimdeblauwe</groupId>
@@ -431,7 +431,7 @@
       <plugin>
         <groupId>com.github.eirslett</groupId>
         <artifactId>frontend-maven-plugin</artifactId>
-        <version>1.14.2</version>
+        <version>1.15.0</version>
         <executions>
           <execution>
             <id>install node and npm</id>
@@ -440,7 +440,7 @@
             </goals>
             <phase>generate-resources</phase>
             <configuration>
-              <nodeVersion>v20.9.0</nodeVersion>
+              <nodeVersion>v20.10.0</nodeVersion>
               <!-- download node from https://nodejs.org/dist/ -->
               <workingDirectory>js</workingDirectory>
             </configuration>
@@ -466,7 +466,7 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>
-        <version>3.1.0</version>
+        <version>3.1.1</version>
         <configuration>
           <executable>./js/node_modules/.bin/javascript-obfuscator${script.extension}</executable>
           <arguments>
@@ -509,7 +509,7 @@
       <plugin>
         <groupId>com.diffplug.spotless</groupId>
         <artifactId>spotless-maven-plugin</artifactId>
-        <version>2.40.0</version>
+        <version>2.41.1</version>
         <configuration>
           <formats>
             <format>
