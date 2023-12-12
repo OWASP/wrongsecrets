@@ -85,7 +85,7 @@ class ChallengesControllerCTFClientModeTest {
   void shouldStillDissableTestsIfNotPreconfigured() throws Exception {
     testK8sChallenge("/challenge/challenge-5");
     testK8sChallenge("/challenge/challenge-6");
-    testForVault("/challenge/challenge-7");
+    testK8sChallenge("/challenge/challenge-7");
     testForCloudCluster("/challenge/challenge-9");
     testForCloudCluster("/challenge/challenge-10");
     testForCloudCluster("/challenge/challenge-11");
