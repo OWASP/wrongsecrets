@@ -1,7 +1,7 @@
 FROM amazoncorretto:21.0.1-alpine
 
 ARG argBasedPassword="default"
-ARG argBasedVersion="1.8.0RC6"
+ARG argBasedVersion="1.8.0RC9"
 ARG spring_profile=""
 ENV SPRING_PROFILES_ACTIVE=$spring_profile
 ENV ARG_BASED_PASSWORD=$argBasedPassword
