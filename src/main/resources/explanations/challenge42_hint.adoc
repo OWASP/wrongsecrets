@@ -1,0 +1,7 @@
+This challenge can be solved using the following steps:
+
+1. Check available Actuator endpoints at "/actuator"
+
+2. Check audit events exposed at the "/actuator/auditevents" endpoint
+
+3. Find API_KEY_RECEIVED event with exposed secret
