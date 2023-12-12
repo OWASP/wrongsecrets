@@ -54,7 +54,7 @@ if [ $? == 0 ]; then
   echo "EBS CSI driver is installed, skipping (1 secret found)"
 else
   echo "Installing the EBS CSI Driver from https://github.com/kubernetes-sigs/aws-ebs-csi-driver/blob/master/docs/install.md as AWS makes shit hard on us"
-  kubectl apply -k "github.com/kubernetes-sigs/aws-ebs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-1.12"
+  kubectl apply -k "github.com/kubernetes-sigs/aws-ebs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-1.25"
 fi
 
 source ../scripts/install-consul.sh
