@@ -33,6 +33,8 @@ resource "google_container_cluster" "gke" {
   network    = google_compute_network.vpc.name
   subnetwork = google_compute_subnetwork.node_subnet.name
 
+  deletion_protection = false
+
   workload_identity_config {
     workload_pool = "${var.project_id}.svc.id.goog"
   }

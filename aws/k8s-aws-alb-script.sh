@@ -24,7 +24,7 @@ fi
 ACCOUNT_ID=$(aws sts get-caller-identity | jq '.Account' -r)
 echo "ACCOUNT_ID=${ACCOUNT_ID}"
 
-LBC_VERSION="v2.4.1"
+LBC_VERSION="v2.5.4"
 echo "LBC_VERSION=$LBC_VERSION"
 
 # echo "executing eksctl utils associate-iam-oidc-provider"
@@ -57,13 +57,13 @@ export KUBECONFIG=~/.kube/wrongsecrets
 
 echo "applying aws-lbc with kubectl"
 
-kubectl apply -k "github.com/aws/eks-charts/stable/aws-load-balancer-controller//crds?ref=master"
+kubectl apply -k "github.com/aws/eks-charts/stable/aws-load-balancer-controller/crds?ref=master"
 
 kubectl get crd
 
 echo "do helm eks application"
 helm repo add eks https://aws.github.io/eks-charts
-helm repo update
+helm repo update eks
 
 echo "upgrade alb controller with helm"
 helm upgrade -i aws-load-balancer-controller \
