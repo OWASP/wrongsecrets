@@ -3,10 +3,10 @@
 The developers decided to leverage the power of Spring Boot Actuator
 to monitor and audit their application. The project involved interfacing with various external APIs,
 each requiring a unique key for authentication. The audit events, detailed and informative, seemed like
-the perfect solution for monitoring the inner working of their system.
+the perfect solution for monitoring the inner workings of their system.
 
 The team implemented a logging mechanism that included detailed audit events.
-Unbeknownst to them, these logs contained traces of the sacred API keys, hidden in plain sight within
+Unbeknownst to them, these logs contained traces of the sacred API key hidden within
 the audit events.
 
 Can you find this API key?
