@@ -85,10 +85,17 @@ class ChallengesControllerCTFClientModeTest {
   void shouldStillDissableTestsIfNotPreconfigured() throws Exception {
     testK8sChallenge("/challenge/challenge-5");
     testK8sChallenge("/challenge/challenge-6");
-    testK8sChallenge("/challenge/challenge-7");
+    testForVault("/challenge/challenge-7");
     testForCloudCluster("/challenge/challenge-9");
     testForCloudCluster("/challenge/challenge-10");
     testForCloudCluster("/challenge/challenge-11");
+  }
+
+  private void testForVault(String url) throws Exception {
+    mvc.perform(get(url).contentType(MediaType.APPLICATION_FORM_URLENCODED).with(csrf()))
+        .andExpect(status().isOk())
+        .andExpect(
+            content().string(containsString("We are running outside a K8s cluster with Vault")));
   }
 
   private void testK8sChallenge(String url) throws Exception {

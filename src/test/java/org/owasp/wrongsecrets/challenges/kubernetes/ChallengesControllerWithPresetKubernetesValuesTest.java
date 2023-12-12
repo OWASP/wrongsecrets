@@ -43,7 +43,7 @@ class ChallengesControllerWithPresetKubernetesValuesTest {
         .andExpect(content().string(containsString("test6")));
     mvc.perform(get("/spoil/challenge-9"))
         .andExpect(status().isOk())
-        .andExpect(content().string(containsString("ACTUAL_ANSWER_CHALLENGE9")));
+        .andExpect(content().string(containsString("if_you_see_this_please_use_AWS_Setup")));
   }
 
   @Test
@@ -63,12 +63,12 @@ class ChallengesControllerWithPresetKubernetesValuesTest {
   }
 
   @Test
-  void shouldEnableCloudExercises() throws Exception {
+  void shouldDisableCloudExercises() throws Exception {
     mvc.perform(get("/"))
         .andExpect(status().isOk())
-        .andExpect(content().string(not(containsString("challenge-9_disabled-link"))))
-        .andExpect(content().string(not(containsString("challenge-10_disabled-link"))))
-        .andExpect(content().string(not(containsString("challenge-11_disabled-link"))));
+        .andExpect(content().string(containsString("challenge-9_disabled-link")))
+        .andExpect(content().string(containsString("challenge-10_disabled-link")))
+        .andExpect(content().string(containsString("challenge-11_disabled-link")));
   }
 
   @Test
@@ -77,7 +77,8 @@ class ChallengesControllerWithPresetKubernetesValuesTest {
         .andExpect(status().isOk())
         .andExpect(content().string(not(containsString("challenge-5_disabled-link"))))
         .andExpect(content().string(not(containsString("challenge-6_disabled-link"))))
-        .andExpect(content().string(not(containsString("challenge-7_disabled-link"))))
+        .andExpect(
+            content().string(containsString("challenge-7_disabled-link"))) // vault is not visible
         .andExpect(content().string(not(containsString("challenge-33_disabled-link"))));
   }
 
