@@ -2,25 +2,21 @@ package org.owasp.wrongsecrets.challenges.cloud;
 
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.Matchers.containsString;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.jupiter.api.Test;
 import org.owasp.wrongsecrets.Challenges;
 import org.owasp.wrongsecrets.WrongSecretsApplication;
-import org.owasp.wrongsecrets.challenges.cloud.challenge11.Challenge11Aws;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest(
     properties = {
-      "K8S_ENV=GCP",
+      "K8S_ENV=gcp",
       "ctf_key=randomtextforkey",
       "SPECIAL_K8S_SECRET=test5",
       "SPECIAL_SPECIAL_K8S_SECRET=test6",
@@ -36,12 +32,10 @@ class ChallengesControllerWithPresetCloudValuesTest {
 
   @Autowired private MockMvc mvc;
   @Autowired private Challenges challenges;
-  @Autowired private Challenge11Aws challenge11;
 
   @Test
   void shouldSpoilExercises() throws Exception {
-    var firstChallenge = challenges.getChallengeDefinitions().getFirst();
-    mvc.perform(get("/spoil/%s".formatted(firstChallenge.name().shortName())))
+    mvc.perform(get("/spoil/challenge-0"))
         .andExpect(status().isOk())
         .andExpect(content().string(containsString("The first answer")));
     mvc.perform(get("/spoil/challenge-5"))
@@ -56,17 +50,12 @@ class ChallengesControllerWithPresetCloudValuesTest {
   }
 
   @Test
-  void shouldNotShowDisabledChallenge11() throws Exception {
-    var spoil = challenge11.spoiler().solution();
-
-    mvc.perform(
-            post("/challenge/challenge-11")
-                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                .param("solution", spoil)
-                .param("action", "submit")
-                .with(csrf()))
-        .andExpect(status().isOk())
-        .andExpect(content().string(not(containsString("This challenge has been disabled."))));
+  void shouldNotShowDisabledChallengeAnywhere() throws Exception {
+    for (var challenge : challenges.getChallengeDefinitions()) {
+      mvc.perform(get("/challenge/%s".formatted(challenge.name().shortName())))
+          .andExpect(status().isOk())
+          .andExpect(content().string(not(containsString("This challenge has been disabled."))));
+    }
   }
 
   @Test
