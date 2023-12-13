@@ -41,7 +41,8 @@ public record ChallengeDefinition(
     Difficulty difficulty,
     ChallengeCategory category,
     Ctf ctf,
-    Sources environmentToSource) {
+    Sources environmentToSource,
+    Sources.TextWithFileLocation missingEnvironment) {
 
   @SuppressFBWarnings(value = "IP_PARAMETER_IS_DEAD_BUT_OVERWRITTEN")
   public ChallengeDefinition {
