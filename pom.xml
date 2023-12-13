@@ -370,8 +370,6 @@
         <configuration>
           <baseDir>${project.basedir}</baseDir>
           <sourceDirectory>src/main/resources/explanations</sourceDirectory>
-          <sourceDirectory>src/main/resources/challenges</sourceDirectory>
-
           <outputDirectory>${project.build.outputDirectory}/explanations</outputDirectory>
           <!-- https://github.com/asciidoctor/asciidoctor-maven-examples/blob/main/asciidoc-to-html-example/pom.xml -->
         </configuration>
