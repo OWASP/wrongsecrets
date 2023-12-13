@@ -1,0 +1,8 @@
+=== Reddit Blunder
+
+Years ago, an error made by Microsoft developers in the way they set up the testing and debugging of the Windows 10 OS meant users could install
+any OS of their choice on Windows PCs and mobile devices. This was called Microsoft's 'golden key' blunder.
+
+Similarly, a developer in the OWASP community who also happened to be an active redditor, left a secret on the platform 'by mistake'.
+
+Can you find the secret?
