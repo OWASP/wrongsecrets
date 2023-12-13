@@ -120,6 +120,7 @@ Now you can try to find the secrets by means of solving the challenge offered at
 -   [localhost:8080/challenge/challenge-38](http://localhost:8080/challenge/challenge-38)
 -   [localhost:8080/challenge/challenge-39](http://localhost:8080/challenge/challenge-39)
 -   [localhost:8080/challenge/challenge-40](http://localhost:8080/challenge/challenge-40)
+-   [localhost:8080/challenge/challenge-41](http://localhost:8080/challenge/challenge-41)
 -   [localhost:8080/challenge/challenge-42](http://localhost:8080/challenge/challenge-42)
 
 Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look
