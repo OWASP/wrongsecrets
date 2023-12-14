@@ -15,7 +15,7 @@
 
 Welcome to the OWASP WrongSecrets game! The game is packed with real life examples of how to _not_ store secrets in your software. Each of these examples is captured in a challenge, which you need to solve using various tools and techniques. Solving these challenges will help you recognize common mistakes & can help you to reflect on your own secrets management strategy.
 
-Can you solve all the 41 challenges?
+Can you solve all the 42 challenges?
 
 Try some of them on [our Heroku demo environment](https://wrongsecrets.herokuapp.com/) or on our [Okteto demo environment (might need to awake again)](https://wrongsecrets-commjoen.cloud.okteto.net/).
 
@@ -72,7 +72,7 @@ Copyright (c) 2020-2023 Jeroen Willemsen and WrongSecrets contributors.
 
 ## Basic docker exercises
 
-_Can be used for challenges 1-4, 8, 12-32, 34, 35-41_
+_Can be used for challenges 1-4, 8, 12-32, 34, 35-42_
 
 For the basic docker exercises you currently require:
 
@@ -121,6 +121,7 @@ Now you can try to find the secrets by means of solving the challenge offered at
 -   [localhost:8080/challenge/challenge-39](http://localhost:8080/challenge/challenge-39)
 -   [localhost:8080/challenge/challenge-40](http://localhost:8080/challenge/challenge-40)
 -   [localhost:8080/challenge/challenge-41](http://localhost:8080/challenge/challenge-41)
+-   [localhost:8080/challenge/challenge-42](http://localhost:8080/challenge/challenge-42)
 
 Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look
 better ;-).
@@ -145,7 +146,7 @@ If you want to host WrongSecrets on Railway, you can do so by deploying [this on
 
 ## Basic K8s exercise
 
-_Can be used for challenges 1-6, 8, 12-41_
+_Can be used for challenges 1-6, 8, 12-42_
 
 ### Minikube based
 
@@ -202,7 +203,7 @@ Don't want to go over the hassle of setting up K8S yourself? visit [https://wron
 
 ## Vault exercises with minikube
 
-_Can be used for challenges 1-8, 12-41_
+_Can be used for challenges 1-8, 12-42_
 Make sure you have the following installed:
 
 -   minikube with docker (or comment out line 8 and work at your own k8s setup),
@@ -220,7 +221,7 @@ This is because if you run the start script again it will replace the secret in 
 
 ## Cloud Challenges
 
-_Can be used for challenges 1-41_
+_Can be used for challenges 1-42_
 
 **READ THIS**: Given that the exercises below contain IAM privilege escalation exercises,
 never run this on an account which is related to your production environment or can influence your account-over-arching
@@ -291,19 +292,21 @@ Contributors:
 - [Filip Chyla @fchyla](https://www.github.com/fchyla)
 - [Dmitry Litosh @Dlitosh](https://www.github.com/Dlitosh)
 - [Turjo Chowdhury @turjoc120](https://www.github.com/turjoc120)
+- [Norbert Wolniak @nwolniak](https://www.github.com/nwolniak)
 - [Josh Grossman @tghosth](https://www.github.com/tghosth)
 - [alphasec @alphasecio](https://www.github.com/alphasecio)
 - [CaduRoriz @CaduRoriz](https://www.github.com/CaduRoriz)
 - [Madhu Akula @madhuakula](https://www.github.com/madhuakula)
 - [Mike Woudenberg @mikewoudenberg](https://www.github.com/mikewoudenberg)
 - [Spyros @northdpole](https://www.github.com/northdpole)
-- [RubenAtBinx @RubenAtBinx](https://www.github.com/RubenAtBinx)
 - [Vineeth Jagadeesh @djvinnie](https://www.github.com/djvinnie)
+- [RubenAtBinx @RubenAtBinx](https://www.github.com/RubenAtBinx)
 - [za @za](https://www.github.com/za)
 - [Alex Bender @alex-bender](https://www.github.com/alex-bender)
 - [Nicolas Humblot @nhumblot](https://www.github.com/nhumblot)
 - [Rick M @kingthorin](https://www.github.com/kingthorin)
 - [Shlomo Zalman Heigh @szh](https://www.github.com/szh)
+- [Fern @f3rn0s](https://www.github.com/f3rn0s)
 
 Testers:
 

@@ -309,13 +309,17 @@ public class ChallengesController {
 
   private void addWarning(ChallengeDefinition challenge, Model model) {
     if (!runtimeEnvironment.canRun(challenge)) {
-      var warning =
-          challenge.supportedEnvironments().stream()
-              .limit(1)
-              .map(env -> env.missingEnvironment().contents().get())
-              .findFirst()
-              .orElse(null);
-      model.addAttribute("missingEnvWarning", warning);
+      if (challenge.missingEnvironment() != null) {
+        model.addAttribute("missingEnvWarning", challenge.missingEnvironment().contents().get());
+      } else {
+        var warning =
+            challenge.supportedEnvironments().stream()
+                .limit(1)
+                .map(env -> env.missingEnvironment().contents().get())
+                .findFirst()
+                .orElse(null);
+        model.addAttribute("missingEnvWarning", warning);
+      }
     }
   }
 

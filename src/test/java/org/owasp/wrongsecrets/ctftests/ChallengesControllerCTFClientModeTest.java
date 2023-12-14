@@ -91,6 +91,13 @@ class ChallengesControllerCTFClientModeTest {
     testForCloudCluster("/challenge/challenge-11");
   }
 
+  private void testForVault(String url) throws Exception {
+    mvc.perform(get(url).contentType(MediaType.APPLICATION_FORM_URLENCODED).with(csrf()))
+        .andExpect(status().isOk())
+        .andExpect(
+            content().string(containsString("We are running outside a K8s cluster with Vault")));
+  }
+
   private void testK8sChallenge(String url) throws Exception {
     mvc.perform(get(url).contentType(MediaType.APPLICATION_FORM_URLENCODED).with(csrf()))
         .andExpect(status().isOk())

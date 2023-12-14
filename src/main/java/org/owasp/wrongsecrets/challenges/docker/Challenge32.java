@@ -12,7 +12,7 @@ import org.owasp.wrongsecrets.challenges.FixedAnswerChallenge;
 import org.springframework.stereotype.Component;
 
 /**
- * This is a challenge based on LLM where poeople need to extract the secret from
+ * This is a challenge based on LLM where people need to extract the secret from
  * https://https://gandalf.lakera.ai//
  */
 @Slf4j

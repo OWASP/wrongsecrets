@@ -84,8 +84,8 @@
                  th:text="${totalPoints}"></div>
         </div>
 
-        <div th:text="${missingEnvWarning}" th:if="${missingEnvWarning!=null}" class="alert alert-danger" role="alert"
-             th:attr="data-cy='disabled-alert'">
+        <div th:if="${missingEnvWarning!=null}" class="alert alert-danger" role="alert"
+             th:attr="data-cy='disabled-alert'">[(${missingEnvWarning})]
         </div>
     </div>
     <div class="modal fade" id="finishedModal">
