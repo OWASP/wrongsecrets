@@ -565,6 +565,14 @@
         <artifactId>gatling-maven-plugin</artifactId>
         <version>${gatling-maven-plugin.version}</version>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.2.2</version>
+        <configuration>
+          <argLine>-Dspring.profiles.active=test,maven-test</argLine>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
 

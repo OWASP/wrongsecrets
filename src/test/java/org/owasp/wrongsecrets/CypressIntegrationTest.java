@@ -13,9 +13,16 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DynamicContainer;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.TestFactory;
+import org.owasp.wrongsecrets.asciidoc.AsciiDocGenerator;
+import org.owasp.wrongsecrets.asciidoc.PreCompiledGenerator;
+import org.owasp.wrongsecrets.asciidoc.TemplateGenerator;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.test.context.ActiveProfiles;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.Primary;
+import org.springframework.core.env.Environment;
 import org.testcontainers.Testcontainers;
 
 /**
@@ -35,8 +42,8 @@ import org.testcontainers.Testcontainers;
       "KEEPASSPATH=src/test/resources/alibabacreds.kdbx",
       "keepasspath=src/test/resources/alibabacreds.kdbx"
     })
-@ActiveProfiles("test")
 @Slf4j
+@Import(CypressIntegrationTest.Configuration.class)
 public class CypressIntegrationTest {
   @LocalServerPort private int port;
 
@@ -79,5 +86,20 @@ public class CypressIntegrationTest {
               }));
     }
     dynamicContainers.add(DynamicContainer.dynamicContainer(suite.getTitle(), dynamicTests));
+  }
+
+  @TestConfiguration
+  static class Configuration {
+
+    @Bean
+    @Primary
+    public TemplateGenerator generators(Environment environment) {
+      if (environment.matchesProfiles("maven-test")) {
+        log.info("Using pre-compiled generator for tests");
+        return new PreCompiledGenerator();
+      }
+      log.info("Using AsciiDoc generator for tests");
+      return new AsciiDocGenerator();
+    }
   }
 }
