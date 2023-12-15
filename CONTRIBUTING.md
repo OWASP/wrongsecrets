@@ -267,8 +267,10 @@ First make sure that you have an [Issue](https://github.com/OWASP/wrongsecrets/i
 
 Add the **new challenge** in this folder `wrongsecrets/src/main/java/org/owasp/wrongsecrets/challenges/`.
 These are the things that you have to keep in mind.
--   First and foremost make sure your challenge is coded in **Java**.
--   Here is an example of a possible Challenge 28:
+- First and foremost make sure your challenge is coded in **Java**.
+- Use either `FixedAnswerChallenge` as a class to extend or use the `Challenge` interface to imnplement.
+
+The `FixedAnswerChallenge` can be used for challenges that don't have a dependency on other (sub)systems. Here is an example of a possible Challenge 28:
 
 ```java
     package org.owasp.wrongsecrets.challenges.docker;
@@ -294,8 +296,7 @@ These are the things that you have to keep in mind.
     }
 }
 ```
-
-If solving the challenge depends on the answer you can implement the interface `Challenge` directly instead of `FixedAnswerChallenge`. For example, see `Challenge36`.
+However, if there is a dependency on external components, then you can better implement the interface `Challenge` directly instead of `FixedAnswerChallenge`. For example, see [`Challenge36`](https://github.com/OWASP/wrongsecrets/blob/master/src/main/java/org/owasp/wrongsecrets/challenges/docker/Challenge36.java), where we have to interact with external binaries.
 
 ### Step 3: Adding Test File.
 
