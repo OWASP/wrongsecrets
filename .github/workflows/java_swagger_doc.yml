@@ -30,12 +30,12 @@ jobs:
       - name: Generate swaggerdoc
         run: ./mvnw --no-transfer-progress springdoc-openapi:generate
       - name: Upload swagger api doc
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
          name: apidocs
          path: target/openapi.json
       - name: Upload javadoc
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: javadoc
           path: target/site
