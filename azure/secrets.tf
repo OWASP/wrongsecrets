@@ -39,7 +39,7 @@ resource "azurerm_key_vault_access_policy" "user" {
 resource "azurerm_key_vault_access_policy" "identity_access" {
   key_vault_id = azurerm_key_vault.vault.id
   tenant_id    = data.azurerm_client_config.current.tenant_id
-  object_id    = azurerm_user_assigned_identity.aks_pod_identity.principal_id
+  object_id    = azuread_service_principal.app.id
 
   secret_permissions = [
     "Get", "List"
@@ -107,7 +107,7 @@ resource "azurerm_key_vault_secret" "wrongsecret_3" {
 resource "azurerm_key_vault_access_policy" "extra_identity_access" {
   key_vault_id = azurerm_key_vault.vault.id
   tenant_id    = data.azurerm_client_config.current.tenant_id
-  object_id    = azurerm_user_assigned_identity.aks_extra_pod_identity.principal_id
+  object_id    = azuread_service_principal.app.id
 
   secret_permissions = [
     "Get", "List"

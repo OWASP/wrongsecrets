@@ -5,7 +5,6 @@ metadata:
 spec:
   provider: azure
   parameters:
-    usePodIdentity: "true"
     tenantId: ${AZ_KEY_VAULT_TENANT_ID}
     keyvaultName: ${AZ_KEY_VAULT_NAME}
     objects: |
