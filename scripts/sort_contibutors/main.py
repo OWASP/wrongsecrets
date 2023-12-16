@@ -199,6 +199,7 @@ if token is not None:
     ]
     special_thanks = [
         {'username': 'madhuakula', 'name': 'Madhu Akula @madhuakula'},
+        {'username': 'nbaars', 'name': 'Nanne Baars @nbaars'},        
         {'username': 'bkimminich', 'name': 'Björn Kimminich'},
         {'username': 'devsecops', 'name': 'Dan Gora'},
         {'username': 'saragluna', 'name': 'Xiaolu Dai'},
