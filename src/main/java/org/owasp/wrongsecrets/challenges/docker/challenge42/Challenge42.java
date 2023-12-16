@@ -1,8 +1,7 @@
-package org.owasp.wrongsecrets.challenges.docker;
+package org.owasp.wrongsecrets.challenges.docker.challenge42;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.owasp.wrongsecrets.AuditConfiguration;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.stereotype.Component;

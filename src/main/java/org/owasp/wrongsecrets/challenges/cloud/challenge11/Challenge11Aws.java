@@ -1,15 +1,13 @@
 package org.owasp.wrongsecrets.challenges.cloud.challenge11;
 
 import com.google.common.base.Strings;
-import com.google.common.base.Supplier;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import lombok.extern.slf4j.Slf4j;
-import org.owasp.wrongsecrets.challenges.Challenge;
-import org.owasp.wrongsecrets.challenges.Spoiler;
+import org.owasp.wrongsecrets.challenges.FixedAnswerChallenge;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import software.amazon.awssdk.regions.Region;
@@ -25,13 +23,12 @@ import software.amazon.awssdk.services.sts.model.StsException;
 /** Cloud challenge which uses IAM privilelge escalation (differentiating per cloud). */
 @Component
 @Slf4j
-public class Challenge11Aws implements Challenge {
+public class Challenge11Aws extends FixedAnswerChallenge {
 
   private final String awsRoleArn;
   private final String awsRegion;
   private final String tokenFileLocation;
   private final String awsDefaultValue;
-  private final Supplier<String> challengeAnswer;
   private final String ctfValue;
   private final boolean ctfEnabled;
 
@@ -48,32 +45,24 @@ public class Challenge11Aws implements Challenge {
     this.awsDefaultValue = awsDefaultValue;
     this.ctfValue = ctfValue;
     this.ctfEnabled = ctfEnabled;
-    this.challengeAnswer = getChallenge11Value();
   }
 
-  /** {@inheritDoc} */
   @Override
-  public Spoiler spoiler() {
-    return new Spoiler(challengeAnswer.get());
+  public String getAnswer() {
+    return getChallenge11Value();
   }
 
-  /** {@inheritDoc} */
-  @Override
-  public boolean answerCorrect(String answer) {
-    return challengeAnswer.get().equals(answer);
-  }
-
-  private Supplier<String> getChallenge11Value() {
+  private String getChallenge11Value() {
     if (!ctfEnabled) {
-      return () -> getAWSChallenge11Value();
+      return getAWSChallenge11Value();
     } else if (!Strings.isNullOrEmpty(ctfValue)
         && !Strings.isNullOrEmpty(awsDefaultValue)
         && !ctfValue.equals(awsDefaultValue)) {
-      return () -> ctfValue;
+      return ctfValue;
     }
 
     log.info("CTF enabled, skipping challenge11");
-    return () -> "please_use_supported_cloud_env";
+    return "please_use_supported_cloud_env";
   }
 
   @SuppressFBWarnings(
