@@ -27,9 +27,9 @@ resource "azuread_service_principal_password" "app" {
 ## Azure AD federated identity used to federate kubernetes with Azure AD
 resource "azuread_application_federated_identity_credential" "app" {
   application_id = azuread_application.app.application_id
-  display_name          = "fed-identity-app-wrongsecrets"
-  description           = "The federated identity used to federate K8s with Azure AD with the app service running in k8s wrongsecrets"
-  audiences             = ["api://AzureADTokenExchange"]
-  issuer                = azurerm_kubernetes_cluster.cluster.oidc_issuer_url
-  subject               = "system:serviceaccount:${local.namespace_name}:${local.service_account_name}"
+  display_name   = "fed-identity-app-wrongsecrets"
+  description    = "The federated identity used to federate K8s with Azure AD with the app service running in k8s wrongsecrets"
+  audiences      = ["api://AzureADTokenExchange"]
+  issuer         = azurerm_kubernetes_cluster.cluster.oidc_issuer_url
+  subject        = "system:serviceaccount:${local.namespace_name}:${local.service_account_name}"
 }

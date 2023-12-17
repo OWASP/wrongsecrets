@@ -106,6 +106,7 @@ The documentation below is auto-generated to give insight on what's created via 
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.1 |
+| <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 2.47.0 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | ~> 3.83.0 |
 | <a name="requirement_http"></a> [http](#requirement\_http) | ~> 3.4.0 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | ~> 3.5.1 |
@@ -114,7 +115,7 @@ The documentation below is auto-generated to give insight on what's created via 
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azuread"></a> [azuread](#provider\_azuread) | n/a |
+| <a name="provider_azuread"></a> [azuread](#provider\_azuread) | 2.47.0 |
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.83.0 |
 | <a name="provider_http"></a> [http](#provider\_http) | 3.4.0 |
 | <a name="provider_random"></a> [random](#provider\_random) | 3.5.1 |
@@ -127,10 +128,10 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [azuread_application.app](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/resources/application) | resource |
-| [azuread_application_federated_identity_credential.app](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/resources/application_federated_identity_credential) | resource |
-| [azuread_service_principal.app](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/resources/service_principal) | resource |
-| [azuread_service_principal_password.app](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/resources/service_principal_password) | resource |
+| [azuread_application.app](https://registry.terraform.io/providers/hashicorp/azuread/2.47.0/docs/resources/application) | resource |
+| [azuread_application_federated_identity_credential.app](https://registry.terraform.io/providers/hashicorp/azuread/2.47.0/docs/resources/application_federated_identity_credential) | resource |
+| [azuread_service_principal.app](https://registry.terraform.io/providers/hashicorp/azuread/2.47.0/docs/resources/service_principal) | resource |
+| [azuread_service_principal_password.app](https://registry.terraform.io/providers/hashicorp/azuread/2.47.0/docs/resources/service_principal_password) | resource |
 | [azurerm_key_vault.vault](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault) | resource |
 | [azurerm_key_vault_access_policy.extra_identity_access](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_access_policy) | resource |
 | [azurerm_key_vault_access_policy.identity_access](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_access_policy) | resource |
