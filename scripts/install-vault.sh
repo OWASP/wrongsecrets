@@ -49,11 +49,13 @@ kubectl exec vault-0 -n vault -- vault secrets enable -path=secret kv-v2
 echo "Putting a secret in"
 kubectl exec vault-0 -n vault -- vault kv put secret/secret-challenge vaultpassword.password="$(openssl rand -base64 16)"
 
+echo "Oepsi metadata"
+kubectl exec vault-0 -n vault -- vault kv metadata put -mount=secret wrongsecret -custom-metadata=secret="$(openssl rand -base64 16)"
+
 echo "Enable k8s auth"
 kubectl exec vault-0 -n vault -- vault auth enable kubernetes
 
 echo "Writing k8s auth config"
-
 kubectl exec vault-0 -n vault -- /bin/sh -c 'vault write auth/kubernetes/config \
         token_reviewer_jwt="$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" \
         kubernetes_host="https://$KUBERNETES_PORT_443_TCP_ADDR:443" \
@@ -63,6 +65,9 @@ echo "Writing policy for secret-challenge"
 kubectl exec vault-0 -n vault -- /bin/sh -c 'vault policy write secret-challenge - <<EOF
 path "secret/data/secret-challenge" {
   capabilities = ["read"]
+}
+path "secret/metadata/wrongsecret" {
+  capabilities = ["read", "list" ]
 }
 path "secret/data/application" {
   capabilities = ["read"]
