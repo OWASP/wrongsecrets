@@ -1,21 +1,15 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
-import org.owasp.wrongsecrets.challenges.Challenge;
-import org.owasp.wrongsecrets.challenges.Spoiler;
+import org.owasp.wrongsecrets.challenges.FixedAnswerChallenge;
 import org.springframework.stereotype.Component;
 
 /** This is a challenge based on leaking secrets with the misuse of Git notes. */
 @Component
-public class Challenge38 implements Challenge {
+public class Challenge38 extends FixedAnswerChallenge {
 
   @Override
-  public Spoiler spoiler() {
-    return new Spoiler(getSolution());
-  }
-
-  @Override
-  public boolean answerCorrect(String answer) {
-    return getSolution().equals(answer);
+  public String getAnswer() {
+    return getSolution();
   }
 
   private String getSolution() {

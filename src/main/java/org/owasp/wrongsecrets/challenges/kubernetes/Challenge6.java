@@ -1,13 +1,12 @@
 package org.owasp.wrongsecrets.challenges.kubernetes;
 
-import org.owasp.wrongsecrets.challenges.Challenge;
-import org.owasp.wrongsecrets.challenges.Spoiler;
+import org.owasp.wrongsecrets.challenges.FixedAnswerChallenge;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /** This challenge is about having a secrets stored as a K8s Secret. */
 @Component
-public class Challenge6 implements Challenge {
+public class Challenge6 extends FixedAnswerChallenge {
 
   private final String secretK8sSecret;
 
@@ -15,15 +14,8 @@ public class Challenge6 implements Challenge {
     this.secretK8sSecret = secretK8sSecret;
   }
 
-  /** {@inheritDoc} */
   @Override
-  public Spoiler spoiler() {
-    return new Spoiler(secretK8sSecret);
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public boolean answerCorrect(String answer) {
-    return secretK8sSecret.equals(answer);
+  public String getAnswer() {
+    return secretK8sSecret;
   }
 }

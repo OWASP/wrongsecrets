@@ -3,15 +3,14 @@ package org.owasp.wrongsecrets.challenges.docker;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.UUID;
-import org.owasp.wrongsecrets.challenges.Challenge;
-import org.owasp.wrongsecrets.challenges.Spoiler;
+import org.owasp.wrongsecrets.challenges.FixedAnswerChallenge;
 import org.springframework.stereotype.Component;
 
 /** This challenge is about finding a secret in website. */
 @Component
-public class Challenge31 implements Challenge {
+public class Challenge31 extends FixedAnswerChallenge {
 
-  private String getanswer() {
+  public String getAnswer() {
     String str = "vozvtbeY6++kjJz3tPn84LeM77I=";
     byte[] arr = Base64.getDecoder().decode(str);
 
@@ -35,17 +34,5 @@ public class Challenge31 implements Challenge {
     }
 
     return new String(xoredBytes, StandardCharsets.UTF_8);
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public Spoiler spoiler() {
-    return new Spoiler(getanswer());
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public boolean answerCorrect(String answer) {
-    return getanswer().equals(answer);
   }
 }

@@ -1,9 +1,7 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
-import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
-import org.owasp.wrongsecrets.challenges.Challenge;
-import org.owasp.wrongsecrets.challenges.Spoiler;
+import org.owasp.wrongsecrets.challenges.FixedAnswerChallenge;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -13,28 +11,18 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
-public class Challenge34 implements Challenge {
-
-  private String key;
+public class Challenge34 extends FixedAnswerChallenge {
 
   @Override
-  public Spoiler spoiler() {
-    return new Spoiler(getKey());
-  }
-
-  @Override
-  public boolean answerCorrect(String answer) {
-    return getKey().equals(answer);
+  public String getAnswer() {
+    return getKey();
   }
 
   private String getKey() {
-    if (Strings.isNullOrEmpty(key)) {
-      key = generateKey();
-    }
     log.info(
         "The key for challenge34 has been initialized, now you can use it for encryption when"
             + " needed.");
-    return key;
+    return generateKey();
   }
 
   private String generateKey() {

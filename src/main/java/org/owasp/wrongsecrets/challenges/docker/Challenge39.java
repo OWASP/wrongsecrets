@@ -8,8 +8,7 @@ import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import lombok.extern.slf4j.Slf4j;
-import org.owasp.wrongsecrets.challenges.Challenge;
-import org.owasp.wrongsecrets.challenges.Spoiler;
+import org.owasp.wrongsecrets.challenges.FixedAnswerChallenge;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.io.Resource;
@@ -19,7 +18,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @Order(39)
-public class Challenge39 implements Challenge {
+public class Challenge39 extends FixedAnswerChallenge {
 
   private final Resource resource;
 
@@ -28,13 +27,8 @@ public class Challenge39 implements Challenge {
   }
 
   @Override
-  public Spoiler spoiler() {
-    return new Spoiler(getSolution());
-  }
-
-  @Override
-  public boolean answerCorrect(String answer) {
-    return getSolution().equals(answer);
+  public String getAnswer() {
+    return getSolution();
   }
 
   @SuppressFBWarnings(

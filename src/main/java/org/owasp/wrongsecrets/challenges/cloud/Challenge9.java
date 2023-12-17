@@ -5,18 +5,18 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import lombok.extern.slf4j.Slf4j;
-import org.owasp.wrongsecrets.challenges.Challenge;
-import org.owasp.wrongsecrets.challenges.Spoiler;
+import org.owasp.wrongsecrets.challenges.FixedAnswerChallenge;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /** Cloud challenge which focuses on Terraform and secrets. */
 @Component
 @Slf4j
-public class Challenge9 implements Challenge {
+public class Challenge9 extends FixedAnswerChallenge {
 
   private final String awsDefaultValue;
-  private final String challengeAnswer;
+  private final String filePath;
+  private final String fileName;
 
   /**
    * Cloud challenge which focuses on Terraform and secrets.
@@ -31,19 +31,8 @@ public class Challenge9 implements Challenge {
       @Value("${default_aws_value_challenge_9}") String awsDefaultValue,
       @Value("${FILENAME_CHALLENGE9}") String fileName) {
     this.awsDefaultValue = awsDefaultValue;
-    this.challengeAnswer = getCloudChallenge9and10Value(filePath, fileName);
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public Spoiler spoiler() {
-    return new Spoiler(challengeAnswer);
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public boolean answerCorrect(String answer) {
-    return challengeAnswer.equals(answer);
+    this.filePath = filePath;
+    this.fileName = fileName;
   }
 
   @SuppressFBWarnings(
@@ -59,5 +48,10 @@ public class Challenge9 implements Challenge {
           fileName);
       return awsDefaultValue;
     }
+  }
+
+  @Override
+  public String getAnswer() {
+    return getCloudChallenge9and10Value(filePath, fileName);
   }
 }

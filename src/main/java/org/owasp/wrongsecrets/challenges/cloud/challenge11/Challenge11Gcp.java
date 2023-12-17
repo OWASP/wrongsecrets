@@ -5,22 +5,18 @@ import com.google.cloud.secretmanager.v1.AccessSecretVersionResponse;
 import com.google.cloud.secretmanager.v1.SecretManagerServiceClient;
 import com.google.cloud.secretmanager.v1.SecretVersionName;
 import com.google.common.base.Strings;
-import com.google.common.base.Supplier;
-import com.google.common.base.Suppliers;
 import java.io.IOException;
 import lombok.extern.slf4j.Slf4j;
-import org.owasp.wrongsecrets.challenges.Challenge;
-import org.owasp.wrongsecrets.challenges.Spoiler;
+import org.owasp.wrongsecrets.challenges.FixedAnswerChallenge;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /** Cloud challenge which uses IAM privilelge escalation (differentiating per cloud). */
 @Component
 @Slf4j
-public class Challenge11Gcp implements Challenge {
+public class Challenge11Gcp extends FixedAnswerChallenge {
 
   private final String gcpDefaultValue;
-  private final Supplier<String> challengeAnswer;
   private final String projectId;
   private final String ctfValue;
   private final boolean ctfEnabled;
@@ -34,32 +30,24 @@ public class Challenge11Gcp implements Challenge {
     this.projectId = projectId;
     this.ctfValue = ctfValue;
     this.ctfEnabled = ctfEnabled;
-    this.challengeAnswer = Suppliers.memoize(getChallenge11Value());
   }
 
-  /** {@inheritDoc} */
   @Override
-  public Spoiler spoiler() {
-    return new Spoiler(challengeAnswer.get());
+  public String getAnswer() {
+    return getChallenge11Value();
   }
 
-  /** {@inheritDoc} */
-  @Override
-  public boolean answerCorrect(String answer) {
-    return challengeAnswer.get().equals(answer);
-  }
-
-  private Supplier<String> getChallenge11Value() {
+  private String getChallenge11Value() {
     if (!ctfEnabled) {
-      return () -> getGCPChallenge11Value();
+      return getGCPChallenge11Value();
     } else if (!Strings.isNullOrEmpty(ctfValue)
         && !Strings.isNullOrEmpty(gcpDefaultValue)
         && !ctfValue.equals(gcpDefaultValue)) {
-      return () -> ctfValue;
+      return ctfValue;
     }
 
     log.info("CTF enabled, skipping challenge11");
-    return () -> "please_use_supported_cloud_env";
+    return "please_use_supported_cloud_env";
   }
 
   private String getGCPChallenge11Value() {
