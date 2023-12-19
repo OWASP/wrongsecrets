@@ -1,7 +1,7 @@
 === Reddit Blunder
 
-Years ago, an error made by Microsoft developers in the way they set up the testing and debugging of the Windows 10 OS meant users could install
-any OS of their choice on Windows PCs and mobile devices. This was called Microsoft's 'golden key' blunder.
+People easily make mistakes. They can, for instance, share an "innocent" piece of data over social media which later turns out to be a secret.
+Or they can post something on the "wrong screen" and submit it. Additionally, some password managers will happily auto-fill or paste something on any page or screen.
 
 Similarly, a developer in the OWASP community who also happened to be an active redditor, left a secret on the platform 'by mistake'.
 
