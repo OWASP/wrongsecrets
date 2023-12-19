@@ -1,0 +1,4 @@
+This challenge can be solved as follows:
+
+1. Search for the keyword 'developer' in r/owasp subreddit.
+2. The secret will be in plain sight in a comment on one of the posts found in the posts from step 1.
