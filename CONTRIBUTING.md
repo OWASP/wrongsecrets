@@ -267,43 +267,36 @@ First make sure that you have an [Issue](https://github.com/OWASP/wrongsecrets/i
 
 Add the **new challenge** in this folder `wrongsecrets/src/main/java/org/owasp/wrongsecrets/challenges/`.
 These are the things that you have to keep in mind.
--   First and foremost make sure your challenge is coded in **Java**.
--   Here is an example of a possible Challenge 28:
+- First and foremost make sure your challenge is coded in **Java**.
+- Use either `FixedAnswerChallenge` as a class to extend or use the `Challenge` interface to imnplement.
+
+The `FixedAnswerChallenge` can be used for challenges that don't have a dependency on other (sub)systems. Here is an example of a possible Challenge 28:
 
 ```java
     package org.owasp.wrongsecrets.challenges.docker;
     import lombok.extern.slf4j.Slf4j;
     import org.owasp.wrongsecrets.RuntimeEnvironment;
     import org.owasp.wrongsecrets.ScoreCard;
-    import org.owasp.wrongsecrets.challenges.Challenge;
+    import org.owasp.wrongsecrets.challenges.FixedAnswerChallenge;
     import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
     import org.owasp.wrongsecrets.challenges.Spoiler;
     import org.springframework.core.annotation.Order;
     import org.springframework.stereotype.Component;
     import java.util.List;
     /**
-    * Describe what your challenge does
-    */
+     * Describe what your challenge does
+     */
     @Slf4j
     @Component
-    public class Challenge28 implements Challenge {
-    private final String secret;
-    public Challenge28() {
-      secret = "hello world";
-    }
+    public class Challenge28 extends FixedAnswerChallenge {
+    private final String secret = "hello world";
 
-    //return the plain text secret here
-    @Override
-    public Spoiler spoiler() {
-      return new Spoiler(secret);
-    }
-    //here you validate if your answer matches the secret
-    @Override
-    public boolean answerCorrect(String answer) {
-      return secret.equals(answer);
+    public String getAnswer() {
+      return secret;
     }
 }
 ```
+However, if there is a dependency on external components, then you can better implement the interface `Challenge` directly instead of `FixedAnswerChallenge`. For example, see [`Challenge36`](https://github.com/OWASP/wrongsecrets/blob/master/src/main/java/org/owasp/wrongsecrets/challenges/docker/Challenge36.java), where we have to interact with external binaries.
 
 ### Step 3: Adding Test File.
 
@@ -312,27 +305,23 @@ These are the things that you have to keep in mind.
 
  Make sure that this file is also of **Java** type.
 Here is a unit test for reference:
+
 ```java
     package org.owasp.wrongsecrets.challenges.docker;
     import org.assertj.core.api.Assertions;
     import org.junit.jupiter.api.Test;
-    import org.junit.jupiter.api.extension.ExtendWith;
-    import org.mockito.Mock;
-    import org.mockito.Mockito;
-    import org.mockito.junit.jupiter.MockitoExtension;
-    import org.owasp.wrongsecrets.ScoreCard;
-    @ExtendWith(MockitoExtension.class)
+
     class Challenge28Test {
-      @Mock
-      private ScoreCard scoreCard;
+
       @Test
       void rightAnswerShouldSolveChallenge() {
-          var challenge = new Challenge28(scoreCard);
+          var challenge = new Challenge28();
           Assertions.assertThat(challenge.solved("wrong answer")).isFalse();
           Assertions.assertThat(challenge.solved(challenge.spoiler().solution())).isTrue();
       }
     }
 ```
+
 Please note that PRs for new challenges are only accepted when unit tests are added to prove that the challenge works. Normally tests should not immediately leak the actual secret, so leverage the `.spoil()` functionality of your test implementation for this.
 
 ### Step 4: Adding explanations, reasons and hints.

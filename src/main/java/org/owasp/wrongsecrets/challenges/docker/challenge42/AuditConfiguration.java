@@ -1,4 +1,4 @@
-package org.owasp.wrongsecrets;
+package org.owasp.wrongsecrets.challenges.docker.challenge42;
 
 import groovy.util.logging.Slf4j;
 import java.util.Map;

@@ -12,23 +12,17 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import lombok.extern.slf4j.Slf4j;
 import org.bouncycastle.util.encoders.Base64;
-import org.owasp.wrongsecrets.challenges.Challenge;
-import org.owasp.wrongsecrets.challenges.Spoiler;
+import org.owasp.wrongsecrets.challenges.FixedAnswerChallenge;
 import org.springframework.stereotype.Component;
 
 /** This is a challenge based on the idea of leaking a secret trough a vulnerability report. */
 @Slf4j
 @Component
-public class Challenge35 implements Challenge {
+public class Challenge35 extends FixedAnswerChallenge {
 
   @Override
-  public Spoiler spoiler() {
-    return new Spoiler(getKey());
-  }
-
-  @Override
-  public boolean answerCorrect(String answer) {
-    return getKey().equals(answer);
+  public String getAnswer() {
+    return getKey();
   }
 
   private String getKey() {

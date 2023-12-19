@@ -5,37 +5,31 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import lombok.extern.slf4j.Slf4j;
-import org.owasp.wrongsecrets.challenges.Challenge;
-import org.owasp.wrongsecrets.challenges.Spoiler;
+import org.owasp.wrongsecrets.challenges.FixedAnswerChallenge;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /** Cloud challenge that leverages the CSI secrets driver of the cloud you are running in. */
 @Component
 @Slf4j
-public class Challenge10 implements Challenge {
+public class Challenge10 extends FixedAnswerChallenge {
 
   private final String awsDefaultValue;
-  private final String challengeAnswer;
+  private final String filePath;
+  private final String fileName;
 
   public Challenge10(
       @Value("${secretmountpath}") String filePath,
       @Value("${default_aws_value_challenge_10}") String awsDefaultValue,
       @Value("${FILENAME_CHALLENGE10}") String fileName) {
     this.awsDefaultValue = awsDefaultValue;
-    this.challengeAnswer = getCloudChallenge9and10Value(filePath, fileName);
+    this.filePath = filePath;
+    this.fileName = fileName;
   }
 
-  /** {@inheritDoc} */
   @Override
-  public Spoiler spoiler() {
-    return new Spoiler(challengeAnswer);
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public boolean answerCorrect(String answer) {
-    return challengeAnswer.equals(answer);
+  public String getAnswer() {
+    return getCloudChallenge9and10Value(filePath, fileName);
   }
 
   @SuppressFBWarnings(

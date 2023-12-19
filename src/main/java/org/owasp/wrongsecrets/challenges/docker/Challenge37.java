@@ -1,13 +1,11 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 import lombok.extern.slf4j.Slf4j;
 import org.bouncycastle.util.encoders.Base64;
 import org.owasp.wrongsecrets.BasicAuthentication;
-import org.owasp.wrongsecrets.challenges.Challenge;
-import org.owasp.wrongsecrets.challenges.Spoiler;
+import org.owasp.wrongsecrets.challenges.FixedAnswerChallenge;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +15,7 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
-public class Challenge37 implements Challenge {
+public class Challenge37 extends FixedAnswerChallenge {
 
   private String secret;
   private static final String password = "YjNCbGJpQnpaWE5oYldVPQo=";
@@ -38,18 +36,7 @@ public class Challenge37 implements Challenge {
   }
 
   @Override
-  public Spoiler spoiler() {
-    return new Spoiler(secret);
-  }
-
-  @Override
-  public boolean answerCorrect(String answer) {
-    return secret.equals(answer);
-  }
-
-  public String getPassword() {
-
-    return new String(Base64.decode(Base64.decode(Base64.decode(password))), StandardCharsets.UTF_8)
-        .replaceAll("\\r|\\n", "");
+  public String getAnswer() {
+    return secret;
   }
 }

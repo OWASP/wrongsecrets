@@ -1,7 +1,6 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
-import org.owasp.wrongsecrets.challenges.Challenge;
-import org.owasp.wrongsecrets.challenges.Spoiler;
+import org.owasp.wrongsecrets.challenges.FixedAnswerChallenge;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -9,7 +8,7 @@ import org.springframework.stereotype.Component;
  * This challenge can be run in CTF mode and is limited to using Docker as a runtime environment.
  */
 @Component
-public class Challenge3 implements Challenge {
+public class Challenge3 extends FixedAnswerChallenge {
 
   private final String hardcodedEnvPassword;
 
@@ -17,15 +16,8 @@ public class Challenge3 implements Challenge {
     this.hardcodedEnvPassword = hardcodedEnvPassword;
   }
 
-  /** {@inheritDoc} */
   @Override
-  public Spoiler spoiler() {
-    return new Spoiler(hardcodedEnvPassword);
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public boolean answerCorrect(String answer) {
-    return hardcodedEnvPassword.equals(answer);
+  public String getAnswer() {
+    return hardcodedEnvPassword;
   }
 }
