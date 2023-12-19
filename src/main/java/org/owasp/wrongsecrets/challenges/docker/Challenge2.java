@@ -1,7 +1,6 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
-import org.owasp.wrongsecrets.challenges.Challenge;
-import org.owasp.wrongsecrets.challenges.Spoiler;
+import org.owasp.wrongsecrets.challenges.FixedAnswerChallenge;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -11,7 +10,7 @@ import org.springframework.stereotype.Component;
  * The javadoc is generated using ChatGPT.
  */
 @Component
-public class Challenge2 implements Challenge {
+public class Challenge2 extends FixedAnswerChallenge {
 
   private final String hardcodedPassword;
 
@@ -24,21 +23,8 @@ public class Challenge2 implements Challenge {
     this.hardcodedPassword = hardcodedPassword;
   }
 
-  /** {@inheritDoc} */
   @Override
-  public Spoiler spoiler() {
-    return new Spoiler(hardcodedPassword);
-  }
-
-  /**
-   * {@inheritDoc} Checks if the provided answer matches the hardcoded password for the challenge.
-   *
-   * @param answer The answer provided by the participant.
-   * @return True if the answer matches the hardcoded password, false otherwise.
-   */
-  /** {@inheritDoc} */
-  @Override
-  public boolean answerCorrect(String answer) {
-    return hardcodedPassword.equals(answer);
+  public String getAnswer() {
+    return this.hardcodedPassword;
   }
 }

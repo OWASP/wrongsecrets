@@ -1,4 +1,4 @@
-FROM lscr.io/linuxserver/webtop:4.16-r0-ls72
+FROM lscr.io/linuxserver/webtop:4.16-r0-ls95
 LABEL NAME="OWASP WrongSecrets Web Desktop" MAINTAINER="Jeroen Willemsen"
 
 RUN \

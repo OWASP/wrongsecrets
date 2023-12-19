@@ -4,29 +4,20 @@ import java.nio.charset.StandardCharsets;
 import lombok.extern.slf4j.Slf4j;
 import org.bouncycastle.util.encoders.Base64;
 import org.bouncycastle.util.encoders.Hex;
-import org.owasp.wrongsecrets.challenges.Challenge;
-import org.owasp.wrongsecrets.challenges.Spoiler;
+import org.owasp.wrongsecrets.challenges.FixedAnswerChallenge;
 import org.springframework.stereotype.Component;
 
 /** This challenge is about finding a secret hardcoded in comments in a front-end. */
 @Slf4j
 @Component
-public class Challenge23 implements Challenge {
+public class Challenge23 extends FixedAnswerChallenge {
 
-  /** {@inheritDoc} */
   @Override
-  public Spoiler spoiler() {
-    return new Spoiler(getActualData());
+  public String getAnswer() {
+    return getActualData();
   }
 
-  /** {@inheritDoc} */
-  @Override
-  public boolean answerCorrect(String answer) {
-    // log.debug("challenge 23, actualdata: {}, answer: {}", getActualData(), answer);
-    return getActualData().equals(answer);
-  }
-
-  public String getActualData() {
+  private String getActualData() {
     return new String(
         Base64.decode(
             Hex.decode(

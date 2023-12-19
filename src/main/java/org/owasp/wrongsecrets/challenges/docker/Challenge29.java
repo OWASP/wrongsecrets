@@ -10,23 +10,17 @@ import java.security.PrivateKey;
 import java.security.spec.PKCS8EncodedKeySpec;
 import javax.crypto.Cipher;
 import lombok.extern.slf4j.Slf4j;
-import org.owasp.wrongsecrets.challenges.Challenge;
-import org.owasp.wrongsecrets.challenges.Spoiler;
+import org.owasp.wrongsecrets.challenges.FixedAnswerChallenge;
 import org.springframework.stereotype.Component;
 
 /** This challenge is about finding a secret in a Github issue (screenshot). */
 @Slf4j
 @Component
-public class Challenge29 implements Challenge {
+public class Challenge29 extends FixedAnswerChallenge {
 
   @Override
-  public Spoiler spoiler() {
-    return new Spoiler(decryptActualAnswer());
-  }
-
-  @Override
-  public boolean answerCorrect(String answer) {
-    return decryptActualAnswer().equals(answer);
+  public String getAnswer() {
+    return decryptActualAnswer();
   }
 
   private byte[] decode(byte[] encoded, PrivateKey privateKey) throws Exception {

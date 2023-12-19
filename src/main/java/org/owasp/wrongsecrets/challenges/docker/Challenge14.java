@@ -13,15 +13,14 @@ import org.linguafranca.pwdb.kdbx.simple.SimpleDatabase;
 import org.linguafranca.pwdb.kdbx.simple.SimpleEntry;
 import org.linguafranca.pwdb.kdbx.simple.SimpleGroup;
 import org.linguafranca.pwdb.kdbx.simple.SimpleIcon;
-import org.owasp.wrongsecrets.challenges.Challenge;
-import org.owasp.wrongsecrets.challenges.Spoiler;
+import org.owasp.wrongsecrets.challenges.FixedAnswerChallenge;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /** This challenge is about having a weak password for your password manager. */
 @Slf4j
 @Component
-public class Challenge14 implements Challenge {
+public class Challenge14 extends FixedAnswerChallenge {
 
   private final String keepassxPassword;
   private final String defaultKeepassValue;
@@ -36,22 +35,9 @@ public class Challenge14 implements Challenge {
     this.filePath = filePath;
   }
 
-  /** {@inheritDoc} */
-  @Override
-  public Spoiler spoiler() {
-    return new Spoiler(findAnswer());
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public boolean answerCorrect(String answer) {
-    return isanswerCorrectInKeeyPassx(answer);
-  }
-
   @SuppressFBWarnings("PATH_TRAVERSAL_IN")
-  private String findAnswer() {
+  public String getAnswer() {
     if (Strings.isNullOrEmpty(keepassxPassword)) {
-      // log.debug("Checking secret with values {}", keepassxPassword);
       return defaultKeepassValue;
     }
     KdbxCreds creds = new KdbxCreds(keepassxPassword.getBytes(StandardCharsets.UTF_8));
@@ -71,13 +57,5 @@ public class Challenge14 implements Challenge {
         return defaultKeepassValue;
       }
     }
-  }
-
-  private boolean isanswerCorrectInKeeyPassx(String answer) {
-    if (Strings.isNullOrEmpty(keepassxPassword) || Strings.isNullOrEmpty(answer)) {
-      // log.debug("Checking secret with values {}, {}", keepassxPassword, answer);
-      return false;
-    }
-    return answer.equals(findAnswer());
   }
 }

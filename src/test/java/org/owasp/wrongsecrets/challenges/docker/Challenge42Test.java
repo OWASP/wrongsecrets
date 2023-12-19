@@ -8,7 +8,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.owasp.wrongsecrets.AuditConfiguration;
+import org.owasp.wrongsecrets.challenges.docker.challenge42.AuditConfiguration;
+import org.owasp.wrongsecrets.challenges.docker.challenge42.Challenge42;
 
 @ExtendWith(MockitoExtension.class)
 public class Challenge42Test {
