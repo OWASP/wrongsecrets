@@ -503,10 +503,10 @@ If you have made some changes to the codebase or added a new challenge and would
 ### Automated testing
 
 We currently have 2 different test-suites, both fired with `./mvnw test`.
-- A normal junit test suite of unit and integration tests, located at the [`test/java` folder](/Users/razr/workspace/owasp/wrongsecrets/src/test/java) with output stored at .
-- A cypress test suite, integrated by means of a junit test, located at [`test/e2e` folder](/Users/razr/workspace/owasp/wrongsecrets/src/test/e2e) with output stored at [`target/test-classes/e2e/cypress/reports/`](target/test-classes/e2e/cypress/reports/). See the [cypress readme]() for more details.
+- A normal junit test suite of unit and integration tests, located at the [`test/java` folder](src/test/java) with output stored at the default target directory.
+- A cypress test suite, integrated by means of a junit test, located at [`test/e2e` folder](src/test/e2e) with output stored at [`target/test-classes/e2e/cypress/reports/`](target/test-classes/e2e/cypress/reports/). See the [cypress readme]() for more details.
 
-Note: You can do a full roundtrip of cleaning and testing with `./mvnw clean install`.
+Note: You can do a full roundtrip of cleaning, building, and testing with `./mvnw clean install`.
 
 ## Want to play, but are not allowed to install the tools?
 
