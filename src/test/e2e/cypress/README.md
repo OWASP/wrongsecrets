@@ -8,6 +8,8 @@ Go to `CypressIntegrationTest` and run it as a normal unit test in IntelliJ. Thi
 a `SpringBootTest` which uses Testcontainers to start running the Cypress tests.
 The test then gathers all the output from the Cypress tests and displays them as normal unit test output in IntelliJ.
 
+The reporting of the tests themselves will be located in `target/test-classes/e2e/cypress/reports`.
+
 ## How to interact with elements
 
 - To select an element in the UI, add a `data-cy` attribute to the HTML element and give it a unique value.
