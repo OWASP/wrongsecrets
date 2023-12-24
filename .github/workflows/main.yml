@@ -45,7 +45,9 @@ jobs:
   test:
     name: test with java
     runs-on: ubuntu-latest
-    # Steps represent a sequence of tasks that will be executed as part of the job
+    permissions:
+      checks: write
+      contents: read
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK 21

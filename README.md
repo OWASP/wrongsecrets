@@ -500,6 +500,14 @@ If you have made some changes to the codebase or added a new challenge and would
   - to run it on your minikube: use the container `jeroenwillemsen/wrongsecrets:local-test-k8s-vault` in your deployment definition.
   - to run it with Vault on your minikube: use the container `jeroenwillemsen/wrongsecrets:local-test-local-vault` in your deployment definition.
 
+### Automated testing
+
+We currently have 2 different test-suites, both fired with `./mvnw test`.
+- A normal junit test suite of unit and integration tests, located at the [`test/java` folder](/Users/razr/workspace/owasp/wrongsecrets/src/test/java) with output stored at .
+- A cypress test suite, integrated by means of a junit test, located at [`test/e2e` folder](/Users/razr/workspace/owasp/wrongsecrets/src/test/e2e) with output stored at [`target/test-classes/e2e/cypress/reports/`](target/test-classes/e2e/cypress/reports/). See the [cypress readme]() for more details.
+
+Note: You can do a full roundtrip of cleaning and testing with `./mvnw clean install`.
+
 ## Want to play, but are not allowed to install the tools?
 
 If you want to play the challenges, but cannot install tools like keepass, Radare, etc. But are allowed to run Docker containers, try the following:
