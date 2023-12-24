@@ -60,10 +60,10 @@ jobs:
           distribution: "corretto"
       - name: Test with Maven
         run: ./mvnw --no-transfer-progress test
-      - name: Publish Test Report
-        if: success() || failure()
-        uses: scacap/action-surefire-report@v1
       - uses: actions/upload-artifact@v4
         with:
           name: e2e results
           path: target/test-classes/e2e/cypress/reports/
+      - name: Publish Test Report
+        if: success() || failure()
+        uses: scacap/action-surefire-report@v1
