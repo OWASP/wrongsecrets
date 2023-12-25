@@ -15,6 +15,17 @@
 
 // Import commands.js using ES2015 syntax:
 import './commands'
+import addContext from 'mochawesome/addContext'
+import fs from 'fs'
+
+Cypress.on('test:after:run', (test, runnable) => {
+  const screenshot = `../screenshots/${Cypress.spec.name}/${runnable.parent.title} -- ${test.title}.png`
+  if (fs.existsSync(screenshot)) {
+    addContext({ test }, screenshot)
+  } else {
+    console.log(screenshot + 'not found')
+  }
+})
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
