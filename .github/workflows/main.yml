@@ -64,7 +64,7 @@ jobs:
         if: success() || failure()
         with:
           name: e2e results
-          path: target/test-classes/e2e/cypress/reports/
+          path: target/test-classes/e2e/cypress/
       - name: Publish Test Report
         if: success() || failure()
         uses: scacap/action-surefire-report@v1
