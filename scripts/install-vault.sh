@@ -50,7 +50,8 @@ echo "Putting a secret in"
 kubectl exec vault-0 -n vault -- vault kv put secret/secret-challenge vaultpassword.password="$(openssl rand -base64 16)"
 
 echo "Oepsi metadata"
-kubectl exec vault-0 -n vault -- vault kv metadata put -mount=secret wrongsecret -custom-metadata=secret="$(openssl rand -base64 16)"
+kubectl exec vault-0 -n vault -- vault kv put secret/wrongsecret vaultpassword.password="$(openssl rand -base64 16)"
+kubectl exec vault-0 -n vault -- vault kv metadata put -mount=secret -custom-metadata=secret="$(openssl rand -base64 16)" wrongsecret
 
 echo "Enable k8s auth"
 kubectl exec vault-0 -n vault -- vault auth enable kubernetes
