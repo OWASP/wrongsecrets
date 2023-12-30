@@ -27,15 +27,17 @@ public class Challenge44Test {
             "metadata",
             "put",
             "-mount=secret",
-            "-custom-metadata=foo=bar",
-            "my-secret");
+            "-custom-metadata=secret=test",
+            "wrongsecret");
 
     assertThat(putResult.getStdout())
-        .contains("Success! Data written to: secret/metadata/my-secret");
+        .contains("Success! Data written to: secret/metadata/wrongsecret");
 
     ExecResult readResult =
         vaultContainer.execInContainer(
-            "vault", "kv", "metadata", "get", "-mount=secret", "my-secret");
-    assertThat(readResult.getStdout()).contains("foo:bar");
+            "vault", "kv", "metadata", "get", "-mount=secret", "wrongsecret");
+    assertThat(readResult.getStdout()).contains("test");
+    var metadataChallenge = new MetaDataChallenge("ACTUAL_ANSWER_CHALLENGE7");
+    assertThat(metadataChallenge.spoiler().solution()).isNotEqualTo("ACTUAL_ANSWER_CHALLENGE7");
   }
 }
