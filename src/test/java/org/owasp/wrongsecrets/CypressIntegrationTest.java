@@ -5,6 +5,7 @@ import io.github.wimdeblauwe.testcontainers.cypress.CypressTest;
 import io.github.wimdeblauwe.testcontainers.cypress.CypressTestResults;
 import io.github.wimdeblauwe.testcontainers.cypress.CypressTestSuite;
 import java.io.IOException;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
@@ -54,6 +55,8 @@ public class CypressIntegrationTest {
     Testcontainers.exposeHostPorts(port);
 
     try (CypressContainer container = new CypressContainer().withLocalServerPort(port)) {
+      container.withMaximumTotalTestDuration(Duration.ofMinutes(15));
+
       container.start();
       CypressTestResults testResults = container.getTestResults();
 
