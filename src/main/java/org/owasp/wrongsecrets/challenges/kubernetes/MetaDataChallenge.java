@@ -1,7 +1,6 @@
 package org.owasp.wrongsecrets.challenges.kubernetes;
 
 import com.google.common.base.Strings;
-import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
 import org.owasp.wrongsecrets.challenges.FixedAnswerChallenge;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,16 +28,16 @@ public class MetaDataChallenge extends FixedAnswerChallenge {
       VaultVersionedKeyValueOperations versionedOperations =
           operations.opsForVersionedKeyValue("wrongsecret");
       Versioned<String> versioned = versionedOperations.get("metadatafun", String.class);
-      assert versioned != null;
-      String metadata =
-          Objects.requireNonNull(versioned.getMetadata()).getCustomMetadata().get("secret");
-      if (Strings.isNullOrEmpty(metadata)) {
-        return vaultPasswordString;
+      if (versioned != null && versioned.getMetadata() != null) {
+        String metadata = versioned.getMetadata().getCustomMetadata().get("secret");
+        if (Strings.isNullOrEmpty(metadata)) {
+          return vaultPasswordString;
+        }
+        return metadata;
       }
-      return metadata;
     } catch (Exception e) {
-      log.warn("Exception during exection of challenge44", e);
-      return vaultPasswordString;
+      log.warn("Exception during execution of challenge44", e);
     }
+    return vaultPasswordString;
   }
 }
