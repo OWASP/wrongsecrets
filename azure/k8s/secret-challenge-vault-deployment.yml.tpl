@@ -3,7 +3,6 @@ kind: Deployment
 metadata:
   labels:
     app: secret-challenge
-    aadpodidbinding: wrongsecrets-pod-id
   name: secret-challenge
   namespace: default
 spec:
@@ -20,17 +19,15 @@ spec:
     type: RollingUpdate
   template:
     metadata:
-      creationTimestamp: "2020-10-28T20:21:04Z"
       labels:
         app: secret-challenge
-        aadpodidbinding: wrongsecrets-pod-id
       name: secret-challenge
     spec:
       securityContext:
         runAsUser: 2000
         runAsGroup: 2000
         fsGroup: 2000
-      serviceAccountName: vault
+      serviceAccountName: wrongsecrets-sa
       volumes:
         - name: 'ephemeral'
           emptyDir: {}
@@ -92,8 +89,6 @@ spec:
               value: wrongsecret-3
             - name: SPRING_CLOUD_AZURE_KEYVAULT_SECRET_PROPERTYSOURCES_0_ENDPOINT
               value: ${AZ_VAULT_URI}
-            - name: SPRING_CLOUD_AZURE_KEYVAULT_SECRET_PROPERTYSOURCES_0_CREDENTIAL_CLIENTID
-              value: ${AZ_POD_CLIENT_ID}
             - name: SPRING_CLOUD_AZURE_KEYVAULT_SECRET_PROPERTYSOURCES_0_CREDENTIAL_MANAGEDIDENTITYENABLED
               value: "true"
             - name: SPECIAL_K8S_SECRET

@@ -51,6 +51,10 @@ resource "azurerm_kubernetes_cluster" "cluster" {
 
   kubernetes_version = var.cluster_version
 
+  oidc_issuer_enabled = true
+
+  workload_identity_enabled = true
+
   api_server_access_profile {
     authorized_ip_ranges = ["${data.http.ip.response_body}/32"]
   }

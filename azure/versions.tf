@@ -14,5 +14,9 @@ terraform {
       source  = "hashicorp/http"
       version = "~> 3.4.0"
     }
+    azuread = {
+      source  = "hashicorp/azuread"
+      version = "2.47.0"
+    }
   }
 }
