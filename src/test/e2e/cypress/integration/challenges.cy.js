@@ -88,6 +88,7 @@ describe('Challenge Tests', () => {
     cy.dataCy(ChallengesPage.SUBMIT_TEXTBOX_BTN).click()
     cy.dataCy(ChallengesPage.SUCCESS_ALERT).should('contain', 'Your answer is correct!')
     cy.dataCy(ChallengesPage.PROGRESS_BAR).should('be.visible').should('not.have.attr', 'aria-valuenow', '0')
+    cy.screenshot()
   })
 
   it('Submitting right answer gives visual cue on homepage that the challenge is successfully solved', () => {

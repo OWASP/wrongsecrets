@@ -56,6 +56,7 @@ Want to play the other challenges? Read the instructions on how to set them up b
     -   [Automatic reload during development](#automatic-reload-during-development)
     -   [How to add a Challenge](#how-to-add-a-challenge)
     -   [Local testing](#local-testing)
+    -   [Local Automated testing](#Local-automated-testing)
 -   [Want to play, but are not allowed to install the tools?](#want-to-play-but-are-not-allowed-to-install-the-tools)
 -   [Further reading on secrets management](#further-reading-on-secrets-management)
 
@@ -499,6 +500,14 @@ If you have made some changes to the codebase or added a new challenge and would
   - to running locally: `docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:local-test-no-vault`
   - to run it on your minikube: use the container `jeroenwillemsen/wrongsecrets:local-test-k8s-vault` in your deployment definition.
   - to run it with Vault on your minikube: use the container `jeroenwillemsen/wrongsecrets:local-test-local-vault` in your deployment definition.
+
+### Local Automated testing
+
+We currently have 2 different test-suites, both fired with `./mvnw test`.
+- A normal junit test suite of unit and integration tests, located at the [`test/java` folder](src/test/java) with output stored at the default target directory.
+- A cypress test suite, integrated by means of a junit test, located at [`test/e2e` folder](src/test/e2e) with output stored at [`target/test-classes/e2e/cypress/reports/`](target/test-classes/e2e/cypress/reports/). See the [cypress readme](src/test/e2e/cypress/README.md) for more details.
+
+Note: You can do a full roundtrip of cleaning, building, and testing with `./mvnw clean install`.
 
 ## Want to play, but are not allowed to install the tools?
 
