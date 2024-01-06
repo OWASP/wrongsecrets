@@ -36,8 +36,10 @@ public class Challenge44Test {
     ExecResult readResult =
         vaultContainer.execInContainer(
             "vault", "kv", "metadata", "get", "-mount=secret", "wrongsecret");
+
+    String address = vaultContainer.getHttpHostAddress();
     assertThat(readResult.getStdout()).contains("test");
-    var metadataChallenge = new MetaDataChallenge("ACTUAL_ANSWER_CHALLENGE7");
+    var metadataChallenge = new MetaDataChallenge("ACTUAL_ANSWER_CHALLENGE7", address);
     assertThat(metadataChallenge.spoiler().solution()).isNotEqualTo("ACTUAL_ANSWER_CHALLENGE7");
   }
 }

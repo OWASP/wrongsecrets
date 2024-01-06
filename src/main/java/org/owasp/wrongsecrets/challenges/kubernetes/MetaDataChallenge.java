@@ -17,14 +17,23 @@ import org.springframework.vault.support.Versioned;
 public class MetaDataChallenge extends FixedAnswerChallenge {
 
   private final String vaultPasswordString;
+  private final String vaultUri;
 
-  public MetaDataChallenge(@Value("${vaultpassword}") String vaultPasswordString) {
+  private VaultEndpoint vaultEndpoint;
+
+  public MetaDataChallenge(
+      @Value("${vaultpassword}") String vaultPasswordString,
+      @Value("${spring.cloud.vault.uri}") String vaultUri) {
     this.vaultPasswordString = vaultPasswordString;
+    this.vaultUri = vaultUri;
   }
 
   public String getAnswer() {
     try {
-      VaultOperations operations = new VaultTemplate(new VaultEndpoint());
+      if (vaultEndpoint == null) {
+        vaultEndpoint = initializeVaultEndPoint();
+      }
+      VaultOperations operations = new VaultTemplate(vaultEndpoint);
       VaultVersionedKeyValueOperations versionedOperations =
           operations.opsForVersionedKeyValue("wrongsecret");
       Versioned<String> versioned = versionedOperations.get("metadatafun", String.class);
@@ -39,5 +48,12 @@ public class MetaDataChallenge extends FixedAnswerChallenge {
       log.warn("Exception during execution of challenge44", e);
     }
     return vaultPasswordString;
+  }
+
+  private VaultEndpoint initializeVaultEndPoint() {
+    if (Strings.isNullOrEmpty(vaultUri)) {
+      return new VaultEndpoint();
+    }
+    return VaultEndpoint.from(vaultUri);
   }
 }
