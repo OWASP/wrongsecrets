@@ -5,3 +5,5 @@ Secrets management systems now often have metadata support for their secrets! Th
 But what if you put confidential/secret information into a secret by mistake?
 
 A developer has put some secret metadata to a `wrongsecret` in Vault. Can you find it?
+
+Tip: take a look at the policies when vault is installed, you can see that the application is only allowed to use the metadata ;-).

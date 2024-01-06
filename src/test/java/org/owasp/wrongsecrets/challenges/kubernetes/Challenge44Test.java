@@ -20,6 +20,15 @@ public class Challenge44Test {
 
   @Test
   public void readFirstSecretPathWithCli() throws Exception {
+    var putSecretResult =
+        vaultContainer.execInContainer(
+            "vault",
+            "kv",
+            "put",
+            "secret/wrongsecret",
+            "vaultpassword.password='$(openssl rand -base64 16)'");
+    assertThat(putSecretResult.getStdout()).contains("secret/data/wrongsecret");
+
     var putResult =
         vaultContainer.execInContainer(
             "vault",
@@ -36,10 +45,10 @@ public class Challenge44Test {
     ExecResult readResult =
         vaultContainer.execInContainer(
             "vault", "kv", "metadata", "get", "-mount=secret", "wrongsecret");
-
+    assertThat(readResult.getStdout()).contains("map[secret:test]");
     String address = vaultContainer.getHttpHostAddress();
     assertThat(readResult.getStdout()).contains("test");
-    var metadataChallenge = new MetaDataChallenge("ACTUAL_ANSWER_CHALLENGE7", address);
-    assertThat(metadataChallenge.spoiler().solution()).isNotEqualTo("ACTUAL_ANSWER_CHALLENGE7");
+    var metadataChallenge = new MetaDataChallenge("ACTUAL_ANSWER_CHALLENGE7", address, VAULT_TOKEN);
+    assertThat(metadataChallenge.spoiler().solution()).isEqualTo("test");
   }
 }
