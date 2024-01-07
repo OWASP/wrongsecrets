@@ -40,17 +40,25 @@ public class MetaDataChallenge extends FixedAnswerChallenge {
 
   public String getAnswer() {
     try {
-
+      if (vaultAuthMethod == null
+          || vaultAuthMethod.equals(VaultProperties.AuthenticationMethod.NONE)) {
+        log.warn("Vault not setup for challenge 44");
+        return vaultPasswordString;
+      }
       VaultOperations operations = getVaultTemplate();
       VaultVersionedKeyValueOperations versionedOperations =
           operations.opsForVersionedKeyValue("secret");
       Versioned<Map<String, Object>> versioned = versionedOperations.get("wrongsecret");
-      if (versioned != null && versioned.getMetadata() != null) {
-        String metadata = versioned.getMetadata().getCustomMetadata().get("secret");
-        if (Strings.isNullOrEmpty(metadata)) {
+      if (versioned == null || versioned.getMetadata() == null) {
+        return vaultPasswordString;
+      }
+      var customMetadata = versioned.getMetadata().getCustomMetadata();
+      if (!customMetadata.isEmpty()) {
+        String customMedataSecret = customMetadata.get("secret");
+        if (Strings.isNullOrEmpty(customMedataSecret)) {
           return vaultPasswordString;
         }
-        return metadata;
+        return customMedataSecret;
       }
     } catch (Exception e) {
       log.warn("Exception during execution of challenge44", e);

@@ -2,10 +2,11 @@ package org.owasp.wrongsecrets.challenges.kubernetes;
 
 import com.google.common.base.Strings;
 import java.util.Map;
-import java.util.Objects;
+import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
 import org.owasp.wrongsecrets.challenges.FixedAnswerChallenge;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.vault.config.VaultProperties;
 import org.springframework.stereotype.Component;
 import org.springframework.vault.authentication.TokenAuthentication;
 import org.springframework.vault.client.VaultEndpoint;
@@ -20,17 +21,21 @@ public class VaultSubKeyChallenge extends FixedAnswerChallenge {
 
   private final String vaultPasswordString;
   private final String vaultUri;
-  private final String vaultAuthMethod;
+  private final VaultProperties.AuthenticationMethod vaultAuthMethod;
+  private final String authToken;
 
   private VaultEndpoint vaultEndpoint;
 
   public VaultSubKeyChallenge(
       @Value("${vaultpassword}") String vaultPasswordString,
       @Value("${spring.cloud.vault.uri}") String vaultUri,
-      @Value("${spring.cloud.vault.authentication}") String vaultAuthMethod) {
+      @Value("${spring.cloud.vault.authentication}")
+          VaultProperties.AuthenticationMethod vaultAuthMethod,
+      @Value("${vaulttoken") final String authToken) {
     this.vaultPasswordString = vaultPasswordString;
     this.vaultUri = vaultUri;
     this.vaultAuthMethod = vaultAuthMethod;
+    this.authToken = authToken;
   }
 
   /**
@@ -43,10 +48,12 @@ public class VaultSubKeyChallenge extends FixedAnswerChallenge {
     if (vaultEndpoint == null) {
       vaultEndpoint = initializeVaultEndPoint();
     }
-    if (Strings.isNullOrEmpty(vaultAuthMethod) || "KUBERNETES".equals(vaultAuthMethod)) {
+    if (Strings.isNullOrEmpty(vaultAuthMethod.toString())
+        || VaultProperties.AuthenticationMethod.KUBERNETES.equals(vaultAuthMethod)) {
       return new VaultTemplate(vaultEndpoint);
     }
-    return new VaultTemplate(vaultEndpoint, new TokenAuthentication(vaultAuthMethod));
+    // assume VaultProperties.AuthenticationMethod.TOKEN
+    return new VaultTemplate(vaultEndpoint, new TokenAuthentication(authToken));
   }
 
   private VaultEndpoint initializeVaultEndPoint() {
@@ -59,19 +66,21 @@ public class VaultSubKeyChallenge extends FixedAnswerChallenge {
   @Override
   public String getAnswer() {
     try {
+      if (vaultAuthMethod == null
+          || vaultAuthMethod.equals(VaultProperties.AuthenticationMethod.NONE)) {
+        log.warn("Vault not setup for challenge 45");
+        return vaultPasswordString;
+      }
       VaultOperations operations = getVaultTemplate();
       VaultVersionedKeyValueOperations versionedOperations =
           operations.opsForVersionedKeyValue("secret");
-      Versioned<Map<String, Object>> versioned = versionedOperations.get("wrongsecret1");
-      if (versioned != null) {
-        String s = Objects.requireNonNull(versioned.getData()).keySet().stream().findFirst().get();
-        if (Strings.isNullOrEmpty(s)) {
-          return vaultPasswordString;
-        }
-        return s;
+      Versioned<Map<String, Object>> versioned = versionedOperations.get("wrongsecret");
+      if (versioned == null) {
+        return vaultPasswordString;
       }
+      Optional<String> first = versioned.getRequiredData().keySet().stream().findFirst();
+      return first.orElse(vaultPasswordString);
 
-      // todo: implement the subkey retrieval here!
     } catch (Exception e) {
       log.warn("Exception during execution of challenge45", e);
     }
