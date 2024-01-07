@@ -49,10 +49,14 @@ public class MetaDataChallenge extends FixedAnswerChallenge {
       VaultVersionedKeyValueOperations versionedOperations =
           operations.opsForVersionedKeyValue("secret");
       Versioned<Map<String, Object>> versioned = versionedOperations.get("wrongsecret");
-      if (versioned == null || versioned.getMetadata() == null) {
+      if (versioned == null) {
         return vaultPasswordString;
       }
-      var customMetadata = versioned.getMetadata().getCustomMetadata();
+      var metadata = versioned.getMetadata();
+      if (metadata == null) {
+        return vaultPasswordString;
+      }
+      var customMetadata = metadata.getCustomMetadata();
       if (!customMetadata.isEmpty()) {
         String customMedataSecret = customMetadata.get("secret");
         if (Strings.isNullOrEmpty(customMedataSecret)) {
