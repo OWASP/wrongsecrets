@@ -3,6 +3,7 @@ package org.owasp.wrongsecrets.challenges.kubernetes;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.cloud.vault.config.VaultProperties;
 import org.testcontainers.containers.Container.ExecResult;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
@@ -48,7 +49,12 @@ public class Challenge44Test {
     assertThat(readResult.getStdout()).contains("map[secret:test]");
     String address = vaultContainer.getHttpHostAddress();
     assertThat(readResult.getStdout()).contains("test");
-    var metadataChallenge = new MetaDataChallenge("ACTUAL_ANSWER_CHALLENGE7", address, VAULT_TOKEN);
+    var metadataChallenge =
+        new MetaDataChallenge(
+            "ACTUAL_ANSWER_CHALLENGE7",
+            address,
+            VaultProperties.AuthenticationMethod.TOKEN,
+            VAULT_TOKEN);
     assertThat(metadataChallenge.spoiler().solution()).isEqualTo("test");
   }
 }

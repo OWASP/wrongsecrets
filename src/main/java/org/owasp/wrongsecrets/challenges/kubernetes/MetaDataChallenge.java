@@ -5,6 +5,7 @@ import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.owasp.wrongsecrets.challenges.FixedAnswerChallenge;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.vault.config.VaultProperties;
 import org.springframework.stereotype.Component;
 import org.springframework.vault.authentication.TokenAuthentication;
 import org.springframework.vault.client.VaultEndpoint;
@@ -20,17 +21,21 @@ public class MetaDataChallenge extends FixedAnswerChallenge {
 
   private final String vaultPasswordString;
   private final String vaultUri;
-  private final String vaultAuthMethod;
+  private final VaultProperties.AuthenticationMethod vaultAuthMethod;
+  private final String authToken;
 
   private VaultEndpoint vaultEndpoint;
 
   public MetaDataChallenge(
       @Value("${vaultpassword}") String vaultPasswordString,
       @Value("${spring.cloud.vault.uri}") String vaultUri,
-      @Value("${spring.cloud.vault.authentication}") String vaultAuthMethod) {
+      @Value("${spring.cloud.vault.authentication}")
+          VaultProperties.AuthenticationMethod vaultAuthMethod,
+      @Value("${vaulttoken") final String authToken) {
     this.vaultPasswordString = vaultPasswordString;
     this.vaultUri = vaultUri;
     this.vaultAuthMethod = vaultAuthMethod;
+    this.authToken = authToken;
   }
 
   public String getAnswer() {
@@ -63,10 +68,12 @@ public class MetaDataChallenge extends FixedAnswerChallenge {
     if (vaultEndpoint == null) {
       vaultEndpoint = initializeVaultEndPoint();
     }
-    if (Strings.isNullOrEmpty(vaultAuthMethod) || "KUBERNETES".equals(vaultAuthMethod)) {
+    if (Strings.isNullOrEmpty(vaultAuthMethod.toString())
+        || VaultProperties.AuthenticationMethod.KUBERNETES.equals(vaultAuthMethod)) {
       return new VaultTemplate(vaultEndpoint);
     }
-    return new VaultTemplate(vaultEndpoint, new TokenAuthentication(vaultAuthMethod));
+    // assume VaultProperties.AuthenticationMethod.TOKEN
+    return new VaultTemplate(vaultEndpoint, new TokenAuthentication(authToken));
   }
 
   private VaultEndpoint initializeVaultEndPoint() {
