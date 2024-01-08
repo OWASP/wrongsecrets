@@ -53,7 +53,6 @@ echo "Putting a subkey issue in"
 kubectl exec vault-0 -n vault -- vault kv put secret/wrongsecret aaaauser."$(openssl rand -base64 8)"="$(openssl rand -base64 16)"
 
 echo "Oepsi metadata"
-kubectl exec vault-0 -n vault -- vault kv put secret/wrongsecret vaultpassword.password="$(openssl rand -base64 16)"
 kubectl exec vault-0 -n vault -- vault kv metadata put -mount=secret -custom-metadata=secret="$(openssl rand -base64 16)" wrongsecret
 
 echo "Enable k8s auth"
