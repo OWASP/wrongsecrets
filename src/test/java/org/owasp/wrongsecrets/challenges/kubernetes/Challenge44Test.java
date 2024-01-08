@@ -4,6 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.cloud.vault.config.VaultProperties;
+import org.springframework.vault.authentication.TokenAuthentication;
+import org.springframework.vault.client.VaultEndpoint;
+import org.springframework.vault.core.VaultTemplate;
 import org.testcontainers.containers.Container.ExecResult;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
@@ -49,12 +52,12 @@ public class Challenge44Test {
     assertThat(readResult.getStdout()).contains("map[secret:test]");
     String address = vaultContainer.getHttpHostAddress();
     assertThat(readResult.getStdout()).contains("test");
+
     var metadataChallenge =
         new MetaDataChallenge(
             "ACTUAL_ANSWER_CHALLENGE7",
-            address,
-            VaultProperties.AuthenticationMethod.TOKEN,
-            VAULT_TOKEN);
+            new VaultTemplate(VaultEndpoint.from(address), new TokenAuthentication(VAULT_TOKEN)),
+            VaultProperties.AuthenticationMethod.TOKEN);
     assertThat(metadataChallenge.spoiler().solution()).isEqualTo("test");
   }
 }

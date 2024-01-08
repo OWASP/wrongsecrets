@@ -4,6 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.cloud.vault.config.VaultProperties;
+import org.springframework.vault.authentication.TokenAuthentication;
+import org.springframework.vault.client.VaultEndpoint;
+import org.springframework.vault.core.VaultTemplate;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.vault.VaultContainer;
@@ -32,9 +35,8 @@ public class Challenge45Test {
     var subkeyChallenge =
         new VaultSubKeyChallenge(
             "ACTUAL_ANSWER_CHALLENGE7",
-            address,
-            VaultProperties.AuthenticationMethod.TOKEN,
-            VAULT_TOKEN);
+            new VaultTemplate(VaultEndpoint.from(address), new TokenAuthentication(VAULT_TOKEN)),
+            VaultProperties.AuthenticationMethod.TOKEN);
     assertThat(subkeyChallenge.spoiler().solution()).isEqualTo("aaasecret.password");
   }
 }
