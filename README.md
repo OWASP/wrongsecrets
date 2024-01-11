@@ -17,7 +17,7 @@ Welcome to the OWASP WrongSecrets game! The game is packed with real life exampl
 
 Can you solve all the 42 challenges?
 
-Try some of them on [our Heroku demo environment](https://wrongsecrets.herokuapp.com/) or on our [Okteto demo environment (might need to awake again)](https://wrongsecrets-commjoen.cloud.okteto.net/).
+Try some of them on [our Heroku demo environment](https://wrongsecrets.herokuapp.com/).
 
 Want to play the other challenges? Read the instructions on how to set them up below.
 
@@ -35,7 +35,6 @@ Want to play the other challenges? Read the instructions on how to set them up b
 -   [Basic K8s exercise](#basic-k8s-exercise)
     -   [Minikube based](#minikube-based)
     -   [k8s based](#k8s-based)
-    -   [Okteto based](#okteto-based)
     -   [Vault exercises with minikube](#vault-exercises-with-minikube)
 -   [Cloud Challenges](#cloud-challenges)
     -   [Running WrongSecrets in AWS](#running-wrongsecrets-in-aws)
@@ -196,12 +195,6 @@ now you can use the provided IP address and port to further play with the K8s va
 -   [localhost:8080/challenge/challenge-6](http://localhost:8080/challenge/challenge-6)
 -   [localhost:8080/challenge/challenge-33](http://localhost:8080/challenge/challenge-33)
 
-### Okteto based
-
-[![Develop on Okteto](https://okteto.com/develop-okteto.svg)](https://cloud.okteto.com/deploy?repository=https://github.com/OWASP/wrongsecrets.git&branch=master&filename=okteto/okteto.yml)
-
-Don't want to go over the hassle of setting up K8S yourself? visit [https://wrongsecrets-commjoen.cloud.okteto.net](https://wrongsecrets-commjoen.cloud.okteto.net/). Please note that we are using the free Developer version here, so it might take a while for it to respond at first (e.g. "development environment not ready" and then a 50x for a minute). Please: do not try to hack/Fuzz the application as this might bring it down and spoil the fun for others.
-
 ## Vault exercises with minikube
 
 _Can be used for challenges 1-8, 12-42_
@@ -264,7 +257,7 @@ Therefore, you can manipulate them by overriding the following settings in your 
 
 ## Enabling Swaggerdocs and UI
 
-You can enable Swagger documentation and the Swagger UI by overriding the `SPRINGDOC_UI` and `SPRINGDOC_DOC` when running the Docker container. See our [Okteto Deployment](https://github.com/OWASP/wrongsecrets/blob/master/okteto/k8s/secret-challenge-deployment.yml) for more details.
+You can enable Swagger documentation and the Swagger UI by overriding the `SPRINGDOC_UI` and `SPRINGDOC_DOC` when running the Docker container.
 
 ## Special thanks & Contributors
 
@@ -367,7 +360,7 @@ The branch will contain a Docker container generation script using which you can
 
 We have 3 ways of playing CTFs:
 
--   The quick "let's play"-approach based on our own Heroku domain [https://wrongsecrets-ctf.herokuapp.com](https://wrongsecrets-ctf.herokuapp.com) or our Okteto domain [https://wrongsecrets-ctf-commjoen.cloud.okteto.net/](https://wrongsecrets-ctf-commjoen.cloud.okteto.net/), which we documented for you here.
+-   The quick "let's play"-approach based on our own Heroku domain [https://wrongsecrets-ctf.herokuapp.com](https://wrongsecrets-ctf.herokuapp.com), which we documented for you here.
 -   A more extended approach documented in [ctf-instructions.md](/ctf-instructions.md).
 -   A fully customizable CTF setup where every player gets its own virtual instance of WrongSecrets and a virtual instance of the wrongsecrets-desktop, so they all can play hassle-free. For this you have to use [the WrongSecrets CTF Party setup](https://github.com/OWASP/wrongsecrets-ctf-party).
 
@@ -377,21 +370,21 @@ Want to use CTFD to play a CTF based on the free Heroku wrongsecrets-ctf instanc
 
 NOTE: CTFD support now works based on the [Juiceshop CTF CLI](https://github.com/juice-shop/juice-shop-ctf).
 
-NOTE-II: [https://wrongsecrets-ctf.herokuapp.com](https://wrongsecrets-ctf.herokuapp.com) (temporary down based on lack of oss credits) is based on Heroku and has limited capacity. Alternatively you can use our Okteto setup at [https://wrongsecrets-ctf-commjoen.cloud.okteto.net/](https://wrongsecrets-ctf-commjoen.cloud.okteto.net/), which uses a free tier and needs some time to warm up. However, the Okteto environment does have more resources & supports the kubernetes challenges, unlike our Heroku setup that only supports the Docker challenges.
+NOTE-II: [https://wrongsecrets-ctf.herokuapp.com](https://wrongsecrets-ctf.herokuapp.com) (temporary down based on lack of oss credits) is based on Heroku and has limited capacity.
 
-Initial creation of the zip file for CTFD requires you to visit [https://wrongsecrets-ctf.herokuapp.com/api/Challenges](https://wrongsecrets-ctf.herokuapp.com/api/Challenges) or [https://wrongsecrets-ctf-commjoen.cloud.okteto.net/](https://wrongsecrets-ctf-commjoen.cloud.okteto.net/) once before executing the steps below.
+Initial creation of the zip file for CTFD requires you to visit [https://wrongsecrets-ctf.herokuapp.com/api/Challenges](https://wrongsecrets-ctf.herokuapp.com/api/Challenges) once before executing the steps below.
 
 Follow the following steps:
 
 ```shell
     npm install -g juice-shop-ctf-cli@9.1.0
-    juice-shop-ctf #choose ctfd and https://wrongsecrets-ctf.herokuapp.com (or https://wrongsecrets-ctf-commjoen.cloud.okteto.net/) as domain. No trailing slash! The key is 'TRwzkRJnHOTckssAeyJbysWgP!Qc2T', feel free to enable hints. We do not support snippets or links/urls to code or hints.
+    juice-shop-ctf #choose ctfd and https://wrongsecrets-ctf.herokuapp.com as domain. No trailing slash! The key is 'TRwzkRJnHOTckssAeyJbysWgP!Qc2T', feel free to enable hints. We do not support snippets or links/urls to code or hints.
     docker run -p 8001:8000 -it ctfd/ctfd:3.4.3
 ```
 
 Now visit the CTFD instance at [http://localhost:8001](http://localhost:8001) and setup your CTF.
 Then use the administrative backup function to import the zipfile you created with the juice-shop-ctf command.
-Game on using [https://wrongsecrets-ctf.herokuapp.com](https://wrongsecrets-ctf.herokuapp.com) or [https://wrongsecrets-ctf-commjoen.cloud.okteto.net/](https://wrongsecrets-ctf-commjoen.cloud.okteto.net/)!
+Game on using [https://wrongsecrets-ctf.herokuapp.com](https://wrongsecrets-ctf.herokuapp.com)!
 Want to setup your own? You can! Watch out for people finding your key though, so secure it properly: make sure the running container with the actual ctf-key is not exposed to the audience, similar to our heroku container.
 
 ## FBCTF Support (Experimental!)
