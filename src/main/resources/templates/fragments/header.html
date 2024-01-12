@@ -51,16 +51,21 @@
                             <a class="dropdown-item" href="/about">About</a>
                         </ul>
                     </li>
-                    <div class="theme-toggle navbar-text">
-                        <label>
-                            <span class="visually-hidden">Light</span>
-                            <input type="radio" value="light" name="theme">
-                            <span class="checkmark" th:attr="data-cy='light-mode-radio'">☀️</span>
-                        </label>
-                        <label>
-                            <span class="visually-hidden">Dark</span>
-                            <input type="radio" value="dark" name="theme">
-                            <span class="checkmark" th:attr="data-cy='dark-mode-radio'">🌜</span>
+                    <div class="theme-toggle navbar-text navbar-nav ms-3">
+                        <input type="checkbox" id='theme-toggle-checkbox' class='control visually-hidden'>
+                        <label for='theme-toggle-checkbox' class="switch">
+                            <span class="slider round" th:attr="data-cy='dark-mode-checkbox'">
+                                <svg class="sun" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="25" height="25" viewBox="0,0,256,256" style="fill:#000000;">
+                                    <g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+                                        <g transform="scale(10.66667,10.66667)">
+                                            <path d="M11,0v3h2v-3zM4.22266,2.80859l-1.41406,1.41406l2.12109,2.12109l1.41406,-1.41406zM19.77734,2.80859l-2.12109,2.12109l1.41406,1.41406l2.12109,-2.12109zM12,5c-3.85415,0 -7,3.14585 -7,7c0,3.85415 3.14585,7 7,7c3.85415,0 7,-3.14585 7,-7c0,-3.85415 -3.14585,-7 -7,-7zM12,7c2.77327,0 5,2.22673 5,5c0,2.77327 -2.22673,5 -5,5c-2.77327,0 -5,-2.22673 -5,-5c0,-2.77327 2.22673,-5 5,-5zM0,11v2h3v-2zM21,11v2h3v-2zM4.92969,17.65625l-2.12109,2.12109l1.41406,1.41406l2.12109,-2.12109zM19.07031,17.65625l-1.41406,1.41406l2.12109,2.12109l1.41406,-1.41406zM11,21v3h2v-3z"></path>
+                                        </g>
+                                    </g>
+                                </svg>
+                                <svg class="moon" x="0px" y="0px" width="25" height="25" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill="#9c7dd2" d="M13 6V3M18.5 12V7M14.5 4.5H11.5M21 9.5H16M15.5548 16.8151C16.7829 16.8151 17.9493 16.5506 19 16.0754C17.6867 18.9794 14.7642 21 11.3698 21C6.74731 21 3 17.2527 3 12.6302C3 9.23576 5.02061 6.31331 7.92462 5C7.44944 6.05072 7.18492 7.21708 7.18492 8.44523C7.18492 13.0678 ..."></path>
+                                </svg>
+                            </span>
                         </label>
                     </div>
 
