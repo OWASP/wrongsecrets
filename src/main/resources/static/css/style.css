@@ -83,10 +83,6 @@ tr.solved {
     height: 2.125em;
 }
 
-.control {
-    display: none;
-}
-
 .slider {
     position: absolute;
     top: 0;
