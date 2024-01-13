@@ -43,7 +43,7 @@ public class VaultConfig extends AbstractVaultConfiguration {
               .path(tokenPath)
               .jwtSupplier(jwtSupplier)
               .build();
-      return new KubernetesAuthentication(options, super.restOperations());
+      return new KubernetesAuthentication(options, restOperations());
     } else {
       return new TokenAuthentication("empty");
     }
