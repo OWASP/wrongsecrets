@@ -15,7 +15,7 @@
 
 Welcome to the OWASP WrongSecrets game! The game is packed with real life examples of how to _not_ store secrets in your software. Each of these examples is captured in a challenge, which you need to solve using various tools and techniques. Solving these challenges will help you recognize common mistakes & can help you to reflect on your own secrets management strategy.
 
-Can you solve all the 42 challenges?
+Can you solve all the 43 challenges?
 
 Try some of them on [our Heroku demo environment](https://wrongsecrets.herokuapp.com/).
 
@@ -284,16 +284,16 @@ Contributors:
 - [Diamond Rivero @diamant3](https://www.github.com/diamant3)
 - [Adarsh A @adarsh-a-tw](https://www.github.com/adarsh-a-tw)
 - [Filip Chyla @fchyla](https://www.github.com/fchyla)
-- [Dmitry Litosh @Dlitosh](https://www.github.com/Dlitosh)
-- [Turjo Chowdhury @turjoc120](https://www.github.com/turjoc120)
 - [Norbert Wolniak @nwolniak](https://www.github.com/nwolniak)
+- [Turjo Chowdhury @turjoc120](https://www.github.com/turjoc120)
+- [Vineeth Jagadeesh @djvinnie](https://www.github.com/djvinnie)
+- [Dmitry Litosh @Dlitosh](https://www.github.com/Dlitosh)
 - [Josh Grossman @tghosth](https://www.github.com/tghosth)
 - [alphasec @alphasecio](https://www.github.com/alphasecio)
 - [CaduRoriz @CaduRoriz](https://www.github.com/CaduRoriz)
 - [Madhu Akula @madhuakula](https://www.github.com/madhuakula)
 - [Mike Woudenberg @mikewoudenberg](https://www.github.com/mikewoudenberg)
 - [Spyros @northdpole](https://www.github.com/northdpole)
-- [Vineeth Jagadeesh @djvinnie](https://www.github.com/djvinnie)
 - [RubenAtBinx @RubenAtBinx](https://www.github.com/RubenAtBinx)
 - [za @za](https://www.github.com/za)
 - [Alex Bender @alex-bender](https://www.github.com/alex-bender)
@@ -312,6 +312,7 @@ Testers:
 Special thanks:
 
 - [Madhu Akula @madhuakula @madhuakula](https://www.github.com/madhuakula)
+- [Nanne Baars @nbaars @nbaars](https://www.github.com/nbaars)
 - [Björn Kimminich @bkimminich](https://www.github.com/bkimminich)
 - [Dan Gora @devsecops](https://www.github.com/devsecops)
 - [Xiaolu Dai @saragluna](https://www.github.com/saragluna)
