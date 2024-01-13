@@ -429,7 +429,9 @@ If you want to dev without a Vault instance, use additionally the `without-vault
 ./mvnw spring-boot:run -Dspring-boot.run.profiles=local,without-vault
 ```
 
-Want to push a container? See `.github/scripts/docker-create-and-push.sh` for a script that generates and pushes all containers. Do not forget to rebuild the app before composing the container
+Want to push a container? See `.github/scripts/docker-create-and-push.sh` for a script that generates and pushes all containers. Do not forget to rebuild the app before composing the container.
+
+Want to check why something in vault is not working in kubernetes? Do `kubectl exec vault-0 -n vault -- vault audit enable file file_path=stdout`.
 
 ### Dependency management
 
