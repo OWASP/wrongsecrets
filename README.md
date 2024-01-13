@@ -72,7 +72,7 @@ Copyright (c) 2020-2023 Jeroen Willemsen and WrongSecrets contributors.
 
 ## Basic docker exercises
 
-_Can be used for challenges 1-4, 8, 12-32, 34, 35-42_
+_Can be used for challenges 1-4, 8, 12-32, 34, 35-43_
 
 For the basic docker exercises you currently require:
 
@@ -122,6 +122,7 @@ Now you can try to find the secrets by means of solving the challenge offered at
 -   [localhost:8080/challenge/challenge-40](http://localhost:8080/challenge/challenge-40)
 -   [localhost:8080/challenge/challenge-41](http://localhost:8080/challenge/challenge-41)
 -   [localhost:8080/challenge/challenge-42](http://localhost:8080/challenge/challenge-42)
+-   [localhost:8080/challenge/challenge-43](http://localhost:8080/challenge/challenge-43)
 
 Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look
 better ;-).
@@ -146,7 +147,7 @@ If you want to host WrongSecrets on Railway, you can do so by deploying [this on
 
 ## Basic K8s exercise
 
-_Can be used for challenges 1-6, 8, 12-42_
+_Can be used for challenges 1-6, 8, 12-43_
 
 ### Minikube based
 
@@ -197,7 +198,7 @@ now you can use the provided IP address and port to further play with the K8s va
 
 ## Vault exercises with minikube
 
-_Can be used for challenges 1-8, 12-42_
+_Can be used for challenges 1-8, 12-43_
 Make sure you have the following installed:
 
 -   minikube with docker (or comment out line 8 and work at your own k8s setup),
@@ -215,7 +216,7 @@ This is because if you run the start script again it will replace the secret in 
 
 ## Cloud Challenges
 
-_Can be used for challenges 1-42_
+_Can be used for challenges 1-43_
 
 **READ THIS**: Given that the exercises below contain IAM privilege escalation exercises,
 never run this on an account which is related to your production environment or can influence your account-over-arching
