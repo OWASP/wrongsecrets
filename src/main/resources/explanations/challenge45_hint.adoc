@@ -20,3 +20,8 @@ This challenge can be solved using the following steps:
 
 -  Use the token to login into Vault exposed at port 8200
 -  Take a look around: can you find the location of the secret in the secrets overview?
+
+3. Find the secret as the SRE member
+- go to the vault web interface
+- login with in with username "helper" and password "foo"
+- find the actual secret.

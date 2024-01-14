@@ -11,7 +11,7 @@ if [ $? == 0 ]; then
   echo "Vault ns is already there"
 else
   kubectl create ns vault
-  helm upgrade --install vault hashicorp/vault --version 0.23.0 --namespace vault --values ../k8s/helm-vault-values.yml
+  helm upgrade --install vault hashicorp/vault --version 0.27.0 --namespace vault --values ../k8s/helm-vault-values.yml
 fi
 
 
@@ -75,10 +75,37 @@ path "secret/metadata/wrongsecret" {
 path "secret/subkeys/wrongsecret" {
   capabilities = ["read", "list" ]
 }
+path "secret/data/wrongsecret" {
+  capabilities = ["read", "list" ]
+}
 path "secret/data/application" {
   capabilities = ["read"]
 }
 EOF'
+
+kubectl exec vault-0 -n vault -- /bin/sh -c 'vault policy write standard_sre - <<EOF
+path "secret/data/secret-challenge" {
+  capabilities = ["list"]
+}
+path "secret/" {
+  capabilities = ["list"]
+}
+path "secret/*" {
+  capabilities = ["list"]
+}
+path "secret/*/subkeys/"{
+capabilities = ["list", "read"]
+}
+path "secret/*/subkeys/*"{
+capabilities = ["list", "read"]
+}
+path "secret/metadata/*"{
+capabilities = ["list", "read"]
+}
+EOF'
+
+kubectl exec vault-0 -n vault -- vault auth enable userpass
+kubectl exec vault-0 -n vault -- vault write auth/userpass/users/helper password=foo policies=standard_sre
 
 echo "Write secrets for secret-challenge"
 kubectl exec vault-0 -n vault -- vault write auth/kubernetes/role/secret-challenge \
