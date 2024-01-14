@@ -1,7 +1,7 @@
 This challenge can be solved using the following steps:
 
 1. Find the secret with the commandline
-- <todo add subkey listing here>
+- use `kubectl exec vault-0 -n vault -- vault kv get secret/wrongsecret` to find the data.
 
 
 2. Find the Secret in Vault using the logged root token:
