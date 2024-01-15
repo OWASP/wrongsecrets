@@ -52,6 +52,10 @@ class ChallengesControllerWithPresetCloudValuesTest {
   @Test
   void shouldNotShowDisabledChallengeAnywhere() throws Exception {
     for (var challenge : challenges.getChallengeDefinitions()) {
+      var shortname = challenge.name().shortName();
+      if (shortname.contains("44")) {
+        continue;
+      }
       mvc.perform(get("/challenge/%s".formatted(challenge.name().shortName())))
           .andExpect(status().isOk())
           .andExpect(content().string(not(containsString("This challenge has been disabled."))));

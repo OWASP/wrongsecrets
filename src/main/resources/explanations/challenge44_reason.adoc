@@ -1,0 +1,8 @@
+*Why Vault Template Injection is not always a good idea?*
+
+While Vault agent injection via templates can be a convenient way to manage secrets in certain scenarios,
+there are situations where it might not be the best approach.
+
+Templates might accidentally expose sensitive information in logs or temporary files.
+If not properly configured, secrets could end up in places where they are accessible by unauthorized users or processes.
+

@@ -1,0 +1,7 @@
+This challenge can be solved using the following steps:
+
+1. Run 'kubectl get pods -A' and find secret-challenge-xxx pod name
+
+2. Run 'kubectl exec secret-challenge-xxx -c secret-challenge -n default -- cat vault/secrets/challenge44'
+to print injected secrets from vault
+
