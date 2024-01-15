@@ -54,7 +54,7 @@ class ChallengesControllerWithPresetKubernetesValuesTest {
           || shortname.contains("9")
           || shortname.contains("10")
           || shortname.contains("11")
-          || shortname.contains("44")) {
+          || shortname.contains("46")) {
         continue;
       }
       mvc.perform(get("/challenge/%s".formatted(challenge.name().shortName())))
@@ -81,7 +81,7 @@ class ChallengesControllerWithPresetKubernetesValuesTest {
         .andExpect(
             content().string(containsString("challenge-7_disabled-link"))) // vault is not visible
         .andExpect(content().string(not(containsString("challenge-33_disabled-link"))))
-        .andExpect(content().string(containsString("challenge-44_disabled-link")));
+        .andExpect(content().string(containsString("challenge-46_disabled-link")));
   }
 
   @Test

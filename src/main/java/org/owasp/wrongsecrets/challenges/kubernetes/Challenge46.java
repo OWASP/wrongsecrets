@@ -7,12 +7,12 @@ import org.springframework.stereotype.Component;
 
 /** This challenge is about having a secrets injected via Vault template. */
 @Component
-public class Challenge44 extends FixedAnswerChallenge {
+public class Challenge46 extends FixedAnswerChallenge {
 
   private final Vaultpassword vaultPassword;
   private final String mockedAnswer;
 
-  public Challenge44(Vaultpassword vaultPassword, @Value("${vaultpassword}") String mockedAnswer) {
+  public Challenge46(Vaultpassword vaultPassword, @Value("${vaultpassword}") String mockedAnswer) {
     this.vaultPassword = vaultPassword;
     this.mockedAnswer = mockedAnswer;
   }
