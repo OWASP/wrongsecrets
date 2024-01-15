@@ -1,5 +1,5 @@
 export default class ChallengesPage {
-  static DARK_MODE_RADIO = 'dark-mode-radio'
-  static LIGHT_MODE_RADIO = 'light-mode-radio'
-  static DARK_MODE = '.dark-mode'
+    static DARK_MODE_CHECKBOX = 'dark-mode-checkbox'
+    static CHECKBOX_SWITCH = '.control'
+    static DARK_MODE = ".dark-mode"
 }
