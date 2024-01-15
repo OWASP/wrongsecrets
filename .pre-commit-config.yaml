@@ -16,7 +16,7 @@ repos:
         exclude: ^(src/test/resources/yourkey.txt|src/test/resources/secondkey.txt)
       - id: trailing-whitespace
   - repo: https://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.83.6
+    rev: v1.86.0
     hooks:
       - id: terraform_fmt
       - id: terraform_tflint
@@ -47,7 +47,7 @@ repos:
         args: [ 'clean compile' ]
       - id: maven-spotless-apply
   - repo: https://github.com/eslint/eslint
-    rev: v8.55.0
+    rev: v8.56.0
     hooks:
       - id: eslint
         args:
