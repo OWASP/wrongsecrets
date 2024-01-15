@@ -4,4 +4,3 @@ This challenge can be solved using the following steps:
 
 2. Run 'kubectl exec secret-challenge-xxx -c secret-challenge -n default -- cat vault/secrets/challenge44'
 to print injected secrets from vault
-
