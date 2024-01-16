@@ -1,0 +1,4 @@
+=== Vault subkey challenge
+
+Sometimes, all you want to do is have that concise entry in your secrets management system. So, what about storing your username and password in the same entry?
+We tried doing that but got into a new problem! With Hashicorp Vault, you can set up policies to allow access to a subkey (Which is the key to the value of your secret). Can you find the very random username we set up for this challenge?

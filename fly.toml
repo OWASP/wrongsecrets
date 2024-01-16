@@ -8,7 +8,7 @@ app = "wrongsecrets"
 primary_region = "ams"
 
 [build]
-  image = "docker.io/jeroenwillemsen/wrongsecrets:1.8.1-no-vault"
+  image = "docker.io/jeroenwillemsen/wrongsecrets:1.8.2-no-vault"
 
 [env]
   K8S_ENV = "Fly(Docker)"

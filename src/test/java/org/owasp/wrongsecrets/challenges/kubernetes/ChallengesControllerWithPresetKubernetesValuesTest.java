@@ -55,6 +55,8 @@ class ChallengesControllerWithPresetKubernetesValuesTest {
           || shortname.contains("9")
           || shortname.contains("10")
           || shortname.contains("11")
+          || shortname.contains("44")
+          || shortname.contains("45")
           || shortname.contains("46")) {
         continue;
       }

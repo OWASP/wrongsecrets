@@ -1,0 +1,6 @@
+*Why putting sensitive data as keys is a bad idea*
+
+Sometimes, people reason that less sensitive data should be stored as a subkey of the actual secret. That way, both a username and a password, for instance, can be combined in a single entry.
+In many cases, these secrets are equally important and should get equal protection as the secret (e.g. the password) itself. And in Vault's case, you can access a subkey (E.g., the username), but not the secret value itself (e.g., the password), which would already leak the username.
+
+We often don't want to give read access to secrets to our employees, but we do want to provide read access to subkeys instead. If any secret is stored in the subkeys, that secret is then compromised internally.
