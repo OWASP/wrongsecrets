@@ -9,18 +9,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class Challenge46 extends FixedAnswerChallenge {
 
-  private final Vaultpassword vaultPassword;
+  private final Vaultinjected vaultinjected;
   private final String mockedAnswer;
 
-  public Challenge46(Vaultpassword vaultPassword, @Value("${vaultpassword}") String mockedAnswer) {
-    this.vaultPassword = vaultPassword;
+  public Challenge46(Vaultinjected vaultinjected, @Value("${vaultinjected}") String mockedAnswer) {
+    this.vaultinjected = vaultinjected;
     this.mockedAnswer = mockedAnswer;
   }
 
   @Override
   public String getAnswer() {
-    return vaultPassword != null && !Strings.isNullOrEmpty(vaultPassword.getPasssword())
-        ? vaultPassword.getPasssword()
+    return vaultinjected != null && !Strings.isNullOrEmpty(vaultinjected.getValue())
+        ? vaultinjected.getValue()
         : mockedAnswer;
   }
 }

@@ -81,6 +81,9 @@ kubectl exec vault-0 -n vault -- vault secrets enable -path=secret kv-v2
 echo "Putting a secret in"
 kubectl exec vault-0 -n vault -- vault kv put secret/secret-challenge vaultpassword.password="$(openssl rand -base64 16)"
 
+echo "Putting a challenge key in"
+kubectl exec vault-0 -n vault -- vault kv put secret/injected vaultinjected.value="$(openssl rand -base64 16)"
+
 echo "Enable k8s auth"
 kubectl exec vault-0 -n vault -- vault auth enable kubernetes
 
@@ -97,6 +100,9 @@ path "secret/data/secret-challenge" {
   capabilities = ["read"]
 }
 path "secret/data/application" {
+  capabilities = ["read"]
+}
+path "secret/data/injected" {
   capabilities = ["read"]
 }
 EOF'

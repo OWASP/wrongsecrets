@@ -21,6 +21,7 @@ import org.springframework.test.web.servlet.MockMvc;
       "SPECIAL_K8S_SECRET=test5",
       "SPECIAL_SPECIAL_K8S_SECRET=test6",
       "vaultpassword=test7",
+      "vaultinjected=test46",
       "secretmountpath=nothere"
     },
     classes = WrongSecretsApplication.class)

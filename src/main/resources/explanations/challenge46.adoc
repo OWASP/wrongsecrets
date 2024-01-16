@@ -1,4 +1,4 @@
-=== Spring Vault Template Injection
+=== HashiCorp Vault Template Injection
 
 Vault template injection via agent injection typically involves injecting a sidecar container,
 known as the Vault Agent, alongside your main application container.
