@@ -11,7 +11,7 @@ if [ $? == 0 ]; then
   echo "Vault ns is already there"
 else
   kubectl create ns vault
-  helm upgrade --install vault hashicorp/vault --version 0.23.0 --namespace vault --values ../k8s/helm-vault-values.yml
+  helm upgrade --install vault hashicorp/vault --version 0.27.0 --namespace vault --values ../k8s/helm-vault-values.yml
 fi
 
 
@@ -49,11 +49,16 @@ kubectl exec vault-0 -n vault -- vault secrets enable -path=secret kv-v2
 echo "Putting a secret in"
 kubectl exec vault-0 -n vault -- vault kv put secret/secret-challenge vaultpassword.password="$(openssl rand -base64 16)"
 
+echo "Putting a subkey issue in"
+kubectl exec vault-0 -n vault -- vault kv put secret/wrongsecret aaaauser."$(openssl rand -base64 8)"="$(openssl rand -base64 16)"
+
+echo "Oepsi metadata"
+kubectl exec vault-0 -n vault -- vault kv metadata put -mount=secret -custom-metadata=secret="$(openssl rand -base64 16)" wrongsecret
+
 echo "Enable k8s auth"
 kubectl exec vault-0 -n vault -- vault auth enable kubernetes
 
 echo "Writing k8s auth config"
-
 kubectl exec vault-0 -n vault -- /bin/sh -c 'vault write auth/kubernetes/config \
         token_reviewer_jwt="$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" \
         kubernetes_host="https://$KUBERNETES_PORT_443_TCP_ADDR:443" \
@@ -64,10 +69,43 @@ kubectl exec vault-0 -n vault -- /bin/sh -c 'vault policy write secret-challenge
 path "secret/data/secret-challenge" {
   capabilities = ["read"]
 }
+path "secret/metadata/wrongsecret" {
+  capabilities = ["read", "list" ]
+}
+path "secret/subkeys/wrongsecret" {
+  capabilities = ["read", "list" ]
+}
+path "secret/data/wrongsecret" {
+  capabilities = ["read", "list" ]
+}
 path "secret/data/application" {
   capabilities = ["read"]
 }
 EOF'
+
+kubectl exec vault-0 -n vault -- /bin/sh -c 'vault policy write standard_sre - <<EOF
+path "secret/data/secret-challenge" {
+  capabilities = ["list"]
+}
+path "secret/" {
+  capabilities = ["list"]
+}
+path "secret/*" {
+  capabilities = ["list"]
+}
+path "secret/*/subkeys/"{
+capabilities = ["list", "read"]
+}
+path "secret/*/subkeys/*"{
+capabilities = ["list", "read"]
+}
+path "secret/metadata/*"{
+capabilities = ["list", "read"]
+}
+EOF'
+
+kubectl exec vault-0 -n vault -- vault auth enable userpass
+kubectl exec vault-0 -n vault -- vault write auth/userpass/users/helper password=foo policies=standard_sre
 
 echo "Write secrets for secret-challenge"
 kubectl exec vault-0 -n vault -- vault write auth/kubernetes/role/secret-challenge \
