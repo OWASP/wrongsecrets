@@ -1,5 +1,6 @@
 package org.owasp.wrongsecrets;
 
+import org.owasp.wrongsecrets.challenges.kubernetes.Vaultinjected;
 import org.owasp.wrongsecrets.challenges.kubernetes.Vaultpassword;
 import org.owasp.wrongsecrets.definitions.ChallengeDefinitionsConfiguration;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,7 +12,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 
 @SpringBootApplication
-@EnableConfigurationProperties(Vaultpassword.class)
+@EnableConfigurationProperties({Vaultpassword.class, Vaultinjected.class})
 public class WrongSecretsApplication {
 
   public static void main(String[] args) {

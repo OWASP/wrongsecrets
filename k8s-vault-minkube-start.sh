@@ -81,6 +81,9 @@ kubectl exec vault-0 -n vault -- vault secrets enable -path=secret kv-v2
 echo "Putting a secret in"
 kubectl exec vault-0 -n vault -- vault kv put secret/secret-challenge vaultpassword.password="$(openssl rand -base64 16)"
 
+echo "Putting a challenge key in"
+kubectl exec vault-0 -n vault -- vault kv put secret/injected vaultinjected.value="$(openssl rand -base64 16)"
+
 echo "Putting a subkey issue in"
 kubectl exec vault-0 -n vault -- vault kv put secret/wrongsecret aaaauser."$(openssl rand -base64 8)"="$(openssl rand -base64 16)"
 
@@ -113,6 +116,9 @@ path "secret/data/wrongsecret" {
   capabilities = ["read", "list" ]
 }
 path "secret/data/application" {
+  capabilities = ["read"]
+}
+path "secret/data/injected" {
   capabilities = ["read"]
 }
 EOF'
