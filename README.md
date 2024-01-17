@@ -15,7 +15,7 @@
 
 Welcome to the OWASP WrongSecrets game! The game is packed with real life examples of how to _not_ store secrets in your software. Each of these examples is captured in a challenge, which you need to solve using various tools and techniques. Solving these challenges will help you recognize common mistakes & can help you to reflect on your own secrets management strategy.
 
-Can you solve all the 43 challenges?
+Can you solve all the 45 challenges?
 
 Try some of them on [our Heroku demo environment](https://wrongsecrets.herokuapp.com/).
 
@@ -198,7 +198,7 @@ now you can use the provided IP address and port to further play with the K8s va
 
 ## Vault exercises with minikube
 
-_Can be used for challenges 1-8, 12-43_
+_Can be used for challenges 1-8, 12-45_
 Make sure you have the following installed:
 
 -   minikube with docker (or comment out line 8 and work at your own k8s setup),
@@ -216,7 +216,7 @@ This is because if you run the start script again it will replace the secret in 
 
 ## Cloud Challenges
 
-_Can be used for challenges 1-43_
+_Can be used for challenges 1-45_
 
 **READ THIS**: Given that the exercises below contain IAM privilege escalation exercises,
 never run this on an account which is related to your production environment or can influence your account-over-arching
