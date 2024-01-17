@@ -51,7 +51,7 @@ public class SecurityConfig {
     http.csrf(
         csrf ->
             csrf.ignoringRequestMatchers(
-                "/canaries/tokencallback", "/canaries/tokencallbackdebug"));
+                "/canaries/tokencallback", "/canaries/tokencallbackdebug", "/token"));
   }
 
   private void configureBasicAuthentication(HttpSecurity http, List<BasicAuthentication> auths)
