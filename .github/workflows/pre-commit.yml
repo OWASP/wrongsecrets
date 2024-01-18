@@ -33,7 +33,7 @@ jobs:
           java-version: '21'
       - name: Install npm dependencies
         run: npm install
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         name: Cache plugin dir
         with:
           path: ~/.tflint.d/plugins
