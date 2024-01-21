@@ -140,6 +140,8 @@ Want to deploy yourself with Render? Click the button below:
 
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/OWASP/wrongsecrets)
 
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template/7pnwRj)
+
 ### Running these on Railway
 *status: maintained by [alphasec.io](https://github.com/alphasecio)*
 
