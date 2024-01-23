@@ -25,6 +25,7 @@ You can solve this challenge by the following steps:
 - Download trufflehog generic detector `wget https://raw.githubusercontent.com/trufflesecurity/trufflehog/main/examples/generic.yml`.
 - Scan the files using `trufflehog filesystem --config=$PWD/generic.yml . | grep password` and the password will be in the output.
 
-5. Alternativel you can use the older Trufflehog 2:
+5. Alternative, you can use the older Trufflehog 2:
 - Have python and pip3 installed, and run `pip3 install trufflehog` to install Trufflehog 2.
 - Scan the files using `trufflehog . | grep password` and the password will be in the output.
+- Please note that Trufflehog 2 was released [> 5 years ago](https://github.com/trufflesecurity/trufflehog/tags?after=v3.0.0) and no longer [maintained](https://github.com/trufflesecurity/trufflehog/issues/2328).
