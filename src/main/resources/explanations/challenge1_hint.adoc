@@ -21,6 +21,6 @@ You can solve this challenge by the following steps:
 4. You can scan the repository with https://github.com/trufflesecurity/trufflehog[*Trufflehog*].
 - Clone the repo with `git clone https://github.com/OWASP/wrongsecrets`.
 - Follow the instructions https://github.com/trufflesecurity/trufflehog[here] to install Trufflehog.
-- How to download trufflehog https://github.com/trufflesecurity/trufflehog/blob/4afc224c635d10e732119f715f93788af1502ce4/examples/README.md[generic detector] file
+- Follow these instructions to download the https://github.com/trufflesecurity/trufflehog/blob/4afc224c635d10e732119f715f93788af1502ce4/examples/README.md[generic detector] file
 - Download trufflehog generic detector `wget https://raw.githubusercontent.com/trufflesecurity/trufflehog/main/examples/generic.yml`.
 - Scan the files using `trufflehog filesystem --config=$PWD/generic.yml . | grep password` and the password will be in the output.
