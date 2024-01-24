@@ -1,7 +1,7 @@
-import requests
 import os
-from dotenv import load_dotenv
 
+import requests
+from dotenv import load_dotenv
 
 # This function parses the contribution list, sorting
 # the users per its ranks
