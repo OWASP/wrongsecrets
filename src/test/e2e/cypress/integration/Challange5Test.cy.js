@@ -1,11 +1,14 @@
 describe('Challenge5 Tests', () => {
     it('Submitting a Correct Answer', () => {
-        cy.visit('/challenge/challenge-5');
+        cy.visit('/spoil/challenge-5');
+        cy.get('[data-cy=spoiler-answer]').invoke('text').then(spoilerAnswer => {
+            cy.visit('/challenge/challenge-5');
 
-        cy.get('#answerfield').type('thisIsK8SConfigMap');
-        cy.get('[data-cy=submit-textbox-btn]').click();
+            cy.get('#answerfield').type(spoilerAnswer.trim());
+            cy.get('[data-cy=submit-textbox-btn]').click();
 
-        cy.get('[data-cy=success-alert]').should('contain', 'correct');
+            cy.get('[data-cy=success-alert]').should('contain', 'correct');
+        });
     });
 
     it('Submitting an Incorrect Answer', () => {
