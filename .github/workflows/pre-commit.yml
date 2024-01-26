@@ -25,10 +25,6 @@ jobs:
           python-version: "3.9"
       - name: Format python code with black
         uses: psf/black@stable
-        with:
-          options: "--check --verbose"
-          src: "./scripts"
-          version: "~= 22.0"
       - uses: actions/setup-node@v4
         with:
           node-version: 20
