@@ -23,9 +23,12 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.9"
-      - name: Black
-        description: Format Python code with Black
-        language: python
+      - name: Format python code with black
+        uses: psf/black@stable
+        with:
+          options: "--check --verbose"
+          src: "./scripts"
+          version: "~= 22.0"
       - uses: actions/setup-node@v4
         with:
           node-version: 20
