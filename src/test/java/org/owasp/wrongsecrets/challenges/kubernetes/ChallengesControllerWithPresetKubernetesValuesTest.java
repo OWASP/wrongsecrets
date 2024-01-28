@@ -21,6 +21,7 @@ import org.springframework.test.web.servlet.MockMvc;
       "SPECIAL_K8S_SECRET=test5",
       "SPECIAL_SPECIAL_K8S_SECRET=test6",
       "vaultpassword=test7",
+      "vaultinjected=test46",
       "secretmountpath=nothere"
     },
     classes = WrongSecretsApplication.class)
@@ -53,7 +54,10 @@ class ChallengesControllerWithPresetKubernetesValuesTest {
       if (shortname.contains("7")
           || shortname.contains("9")
           || shortname.contains("10")
-          || shortname.contains("11")) {
+          || shortname.contains("11")
+          || shortname.contains("44")
+          || shortname.contains("45")
+          || shortname.contains("46")) {
         continue;
       }
       mvc.perform(get("/challenge/%s".formatted(challenge.name().shortName())))
@@ -79,7 +83,8 @@ class ChallengesControllerWithPresetKubernetesValuesTest {
         .andExpect(content().string(not(containsString("challenge-6_disabled-link"))))
         .andExpect(
             content().string(containsString("challenge-7_disabled-link"))) // vault is not visible
-        .andExpect(content().string(not(containsString("challenge-33_disabled-link"))));
+        .andExpect(content().string(not(containsString("challenge-33_disabled-link"))))
+        .andExpect(content().string(containsString("challenge-46_disabled-link")));
   }
 
   @Test

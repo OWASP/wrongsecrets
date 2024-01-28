@@ -2,3 +2,6 @@ server:
   affinity:
   ha:
     enabled: true
+
+injector:
+  enabled: true

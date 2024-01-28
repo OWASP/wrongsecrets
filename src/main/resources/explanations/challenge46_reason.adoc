@@ -1,0 +1,16 @@
+*Why Vault Template Injection is not always a good idea?*
+
+While Vault agent injection via templates can be a convenient way to manage secrets in certain scenarios,
+there are situations where it might not be the best approach.
+
+Templates might accidentally expose sensitive information in logs or temporary files.
+If not properly configured, secrets could end up in places where they are accessible by unauthorized users or processes.
+
+Let's consider an example involving a template injection attack in a scripted language like PHP:
+
+. Imagine a scenario where PHP application uses a template with sensitive information
+* where template can look like this: $password = "'; system('rm -rf /'); //"
+. When the template is processed it can become:
+* $connection = "password='; system('rm -rf /'); //"
+
+To prevent such issues its crucial to ensure that the values retrieved from Vault are properly validated.

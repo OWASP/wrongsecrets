@@ -1,0 +1,27 @@
+This challenge can be solved using the following steps:
+
+1. Find the secret with the commandline
+- use `kubectl exec vault-0 -n vault -- vault kv metadata get -mount=secret wrongsecret` take a look at the metadata: do you see a map with a `secret`? that's the value you need to enter
+
+
+2. Find the Secret in Vault using the logged root token:
+- When you setup the K8s environment, the script tells you the value of the root token as below:
+
+    Key                  Value
+    ---                  -----
+    token                s.Jqka4lSy8ayQw2LFsvyAgnTI
+    token_accessor       HEr9RYa3OcZNDOHeFRXIMYCV
+    token_duration       ∞
+    token_renewable      false
+    token_policies       ["root"]
+    identity_policies    []
+    policies             ["root"]
+
+
+-  Use the token to login into Vault exposed at port 8200
+-  Take a look around: can you find the location of the secret in the secrets overview?
+
+3. Find the secret as the SRE member
+- go to the vault web interface
+- login with in with username "helper" and password "foo"
+- find the actual secret.
