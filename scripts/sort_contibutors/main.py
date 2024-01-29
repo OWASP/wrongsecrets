@@ -176,6 +176,7 @@ def merge_users(l: list) -> list:
     ranking = dict()
 
     for a in l:
+
         if a["username"] in ranking:
             ranking[a["username"]] += a["ranking"]
         else:
@@ -221,6 +222,7 @@ load_dotenv()
 token = os.getenv("USER_TOKEN")
 
 if token is not None:
+
     contributors = [
         {"username": "f3rn0s", "name": "f3rn0s"},
         {"username": "szh", "name": "Shlomo Zalman Heigh"},

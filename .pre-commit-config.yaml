@@ -53,7 +53,7 @@ repos:
         args:
           - "--fix"
   - repo: https://github.com/psf/black
-    rev: 22.6b0
+    rev: 24.1.1
     hooks:
     - id: black
-      language_version: python3.8
+      language_version: python3.10
