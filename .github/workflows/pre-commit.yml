@@ -23,6 +23,8 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.9"
+      - name: Format python code with black
+        uses: psf/black@stable
       - uses: actions/setup-node@v4
         with:
           node-version: 20

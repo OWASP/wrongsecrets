@@ -65,6 +65,3 @@ jobs:
         with:
           name: e2e results
           path: target/test-classes/e2e/cypress/
-      - name: Publish Test Report
-        if: ${{ github.event.pull_request.head.repo.full_name != 'OWASP/wrongsecrets' }} && (success() || failure())
-        uses: scacap/action-surefire-report@v1
