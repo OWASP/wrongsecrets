@@ -1,0 +1,6 @@
+*Why putting sensitive data as metadata is a bad idea*
+
+Sometimes, people reason that less sensitive data should be stored as secret metadata. Think of, for instance, a username - less sensitive than a password, or is it?
+In many of these cases, these are equally important and should get equal protection as the secret (e.g. the password) itself.
+
+We often don't want to give read access to secrets to our employees, but we do want to give read access to metadata instead. If any secret is stored in the metadata, that secret is then compromised internally.

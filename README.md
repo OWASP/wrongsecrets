@@ -15,9 +15,9 @@
 
 Welcome to the OWASP WrongSecrets game! The game is packed with real life examples of how to _not_ store secrets in your software. Each of these examples is captured in a challenge, which you need to solve using various tools and techniques. Solving these challenges will help you recognize common mistakes & can help you to reflect on your own secrets management strategy.
 
-Can you solve all the 42 challenges?
+Can you solve all the 46 challenges?
 
-Try some of them on [our Heroku demo environment](https://wrongsecrets.herokuapp.com/) or on our [Okteto demo environment (might need to awake again)](https://wrongsecrets-commjoen.cloud.okteto.net/).
+Try some of them on [our Heroku demo environment](https://wrongsecrets.herokuapp.com/).
 
 Want to play the other challenges? Read the instructions on how to set them up below.
 
@@ -35,7 +35,6 @@ Want to play the other challenges? Read the instructions on how to set them up b
 -   [Basic K8s exercise](#basic-k8s-exercise)
     -   [Minikube based](#minikube-based)
     -   [k8s based](#k8s-based)
-    -   [Okteto based](#okteto-based)
     -   [Vault exercises with minikube](#vault-exercises-with-minikube)
 -   [Cloud Challenges](#cloud-challenges)
     -   [Running WrongSecrets in AWS](#running-wrongsecrets-in-aws)
@@ -73,7 +72,7 @@ Copyright (c) 2020-2023 Jeroen Willemsen and WrongSecrets contributors.
 
 ## Basic docker exercises
 
-_Can be used for challenges 1-4, 8, 12-32, 34, 35-42_
+_Can be used for challenges 1-4, 8, 12-32, 34, 35-43_
 
 For the basic docker exercises you currently require:
 
@@ -123,6 +122,7 @@ Now you can try to find the secrets by means of solving the challenge offered at
 -   [localhost:8080/challenge/challenge-40](http://localhost:8080/challenge/challenge-40)
 -   [localhost:8080/challenge/challenge-41](http://localhost:8080/challenge/challenge-41)
 -   [localhost:8080/challenge/challenge-42](http://localhost:8080/challenge/challenge-42)
+-   [localhost:8080/challenge/challenge-43](http://localhost:8080/challenge/challenge-43)
 
 Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look
 better ;-).
@@ -140,14 +140,17 @@ Want to deploy yourself with Render? Click the button below:
 
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/OWASP/wrongsecrets)
 
+
 ### Running these on Railway
 *status: maintained by [alphasec.io](https://github.com/alphasecio)*
 
 If you want to host WrongSecrets on Railway, you can do so by deploying [this one-click template](https://railway.app/new/template/7pnwRj). Railway does not offer an always-free plan anymore, but the free trial is good enough to test-drive this before you decide to upgrade. If you need a step-by-step companion guide, see [this blog post](https://alphasec.io/test-your-secret-management-skills-with-owasp-wrongsecrets/).
 
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template/7pnwRj)
+
 ## Basic K8s exercise
 
-_Can be used for challenges 1-6, 8, 12-42_
+_Can be used for challenges 1-6, 8, 12-43_
 
 ### Minikube based
 
@@ -196,15 +199,9 @@ now you can use the provided IP address and port to further play with the K8s va
 -   [localhost:8080/challenge/challenge-6](http://localhost:8080/challenge/challenge-6)
 -   [localhost:8080/challenge/challenge-33](http://localhost:8080/challenge/challenge-33)
 
-### Okteto based
-
-[![Develop on Okteto](https://okteto.com/develop-okteto.svg)](https://cloud.okteto.com/deploy?repository=https://github.com/OWASP/wrongsecrets.git&branch=master&filename=okteto/okteto.yml)
-
-Don't want to go over the hassle of setting up K8S yourself? visit [https://wrongsecrets-commjoen.cloud.okteto.net](https://wrongsecrets-commjoen.cloud.okteto.net/). Please note that we are using the free Developer version here, so it might take a while for it to respond at first (e.g. "development environment not ready" and then a 50x for a minute). Please: do not try to hack/Fuzz the application as this might bring it down and spoil the fun for others.
-
 ## Vault exercises with minikube
 
-_Can be used for challenges 1-8, 12-42_
+_Can be used for challenges 1-8, 12-46_
 Make sure you have the following installed:
 
 -   minikube with docker (or comment out line 8 and work at your own k8s setup),
@@ -215,14 +212,14 @@ Make sure you have the following installed:
 -   vault [Install from here](https://www.vaultproject.io/downloads),
 -   grep, Cat, and Sed
 
-Run `./k8s-vault-minkube-start.sh`, when the script is done, then the challenges will wait for you at <http://localhost:8080> . This will allow you to run challenges 1-8, 12-35.
+Run `./k8s-vault-minkube-start.sh`, when the script is done, then the challenges will wait for you at <http://localhost:8080> . This will allow you to run challenges 1-8, 12-46.
 
 When you stopped the `k8s-vault-minikube-start.sh` script and want to resume the port forward run: `k8s-vault-minikube-resume.sh`.
 This is because if you run the start script again it will replace the secret in the vault and not update the secret-challenge application with the new secret.
 
 ## Cloud Challenges
 
-_Can be used for challenges 1-42_
+_Can be used for challenges 1-46_
 
 **READ THIS**: Given that the exercises below contain IAM privilege escalation exercises,
 never run this on an account which is related to your production environment or can influence your account-over-arching
@@ -264,7 +261,7 @@ Therefore, you can manipulate them by overriding the following settings in your 
 
 ## Enabling Swaggerdocs and UI
 
-You can enable Swagger documentation and the Swagger UI by overriding the `SPRINGDOC_UI` and `SPRINGDOC_DOC` when running the Docker container. See our [Okteto Deployment](https://github.com/OWASP/wrongsecrets/blob/master/okteto/k8s/secret-challenge-deployment.yml) for more details.
+You can enable Swagger documentation and the Swagger UI by overriding the `SPRINGDOC_UI` and `SPRINGDOC_DOC` when running the Docker container.
 
 ## Special thanks & Contributors
 
@@ -289,20 +286,20 @@ Contributors:
 - [Tibor Hercz @tiborhercz](https://www.github.com/tiborhercz)
 - [Chris Elbring Jr. @neatzsche](https://www.github.com/neatzsche)
 - [Diamond Rivero @diamant3](https://www.github.com/diamant3)
+- [Norbert Wolniak @nwolniak](https://www.github.com/nwolniak)
 - [Adarsh A @adarsh-a-tw](https://www.github.com/adarsh-a-tw)
 - [Filip Chyla @fchyla](https://www.github.com/fchyla)
-- [Dmitry Litosh @Dlitosh](https://www.github.com/Dlitosh)
 - [Turjo Chowdhury @turjoc120](https://www.github.com/turjoc120)
-- [Norbert Wolniak @nwolniak](https://www.github.com/nwolniak)
+- [Vineeth Jagadeesh @djvinnie](https://www.github.com/djvinnie)
+- [Dmitry Litosh @Dlitosh](https://www.github.com/Dlitosh)
 - [Josh Grossman @tghosth](https://www.github.com/tghosth)
 - [alphasec @alphasecio](https://www.github.com/alphasecio)
 - [CaduRoriz @CaduRoriz](https://www.github.com/CaduRoriz)
 - [Madhu Akula @madhuakula](https://www.github.com/madhuakula)
 - [Mike Woudenberg @mikewoudenberg](https://www.github.com/mikewoudenberg)
 - [Spyros @northdpole](https://www.github.com/northdpole)
-- [Vineeth Jagadeesh @djvinnie](https://www.github.com/djvinnie)
-- [RubenAtBinx @RubenAtBinx](https://www.github.com/RubenAtBinx)
 - [za @za](https://www.github.com/za)
+- [RubenAtBinx @RubenAtBinx](https://www.github.com/RubenAtBinx)
 - [Alex Bender @alex-bender](https://www.github.com/alex-bender)
 - [Nicolas Humblot @nhumblot](https://www.github.com/nhumblot)
 - [Rick M @kingthorin](https://www.github.com/kingthorin)
@@ -319,6 +316,7 @@ Testers:
 Special thanks:
 
 - [Madhu Akula @madhuakula @madhuakula](https://www.github.com/madhuakula)
+- [Nanne Baars @nbaars @nbaars](https://www.github.com/nbaars)
 - [Björn Kimminich @bkimminich](https://www.github.com/bkimminich)
 - [Dan Gora @devsecops](https://www.github.com/devsecops)
 - [Xiaolu Dai @saragluna](https://www.github.com/saragluna)
@@ -335,10 +333,6 @@ We would like to thank the following parties for helping us out:
 [![jetbrains_logo.png](images/jetbrains_logo.png)](https://www.jetbrains.com/)
 
 [Jetbrains](https://www.jetbrains.com/) for licensing an instance of Intellij IDEA Ultimate edition to the project leads. We could not have been this fast with the development without it!
-
-[![docker_logo.png](images/docker_logo.png)](https://www.docker.com)
-
-[Docker](https://www.docker.com) for granting us their Docker Open Source Sponsored program.
 
 [![1password_logo.png](images/1password_logo.png)](https://github.com/1Password/1password-teams-open-source/pull/552)
 
@@ -367,7 +361,7 @@ The branch will contain a Docker container generation script using which you can
 
 We have 3 ways of playing CTFs:
 
--   The quick "let's play"-approach based on our own Heroku domain [https://wrongsecrets-ctf.herokuapp.com](https://wrongsecrets-ctf.herokuapp.com) or our Okteto domain [https://wrongsecrets-ctf-commjoen.cloud.okteto.net/](https://wrongsecrets-ctf-commjoen.cloud.okteto.net/), which we documented for you here.
+-   The quick "let's play"-approach based on our own Heroku domain [https://wrongsecrets-ctf.herokuapp.com](https://wrongsecrets-ctf.herokuapp.com), which we documented for you here.
 -   A more extended approach documented in [ctf-instructions.md](/ctf-instructions.md).
 -   A fully customizable CTF setup where every player gets its own virtual instance of WrongSecrets and a virtual instance of the wrongsecrets-desktop, so they all can play hassle-free. For this you have to use [the WrongSecrets CTF Party setup](https://github.com/OWASP/wrongsecrets-ctf-party).
 
@@ -377,21 +371,21 @@ Want to use CTFD to play a CTF based on the free Heroku wrongsecrets-ctf instanc
 
 NOTE: CTFD support now works based on the [Juiceshop CTF CLI](https://github.com/juice-shop/juice-shop-ctf).
 
-NOTE-II: [https://wrongsecrets-ctf.herokuapp.com](https://wrongsecrets-ctf.herokuapp.com) (temporary down based on lack of oss credits) is based on Heroku and has limited capacity. Alternatively you can use our Okteto setup at [https://wrongsecrets-ctf-commjoen.cloud.okteto.net/](https://wrongsecrets-ctf-commjoen.cloud.okteto.net/), which uses a free tier and needs some time to warm up. However, the Okteto environment does have more resources & supports the kubernetes challenges, unlike our Heroku setup that only supports the Docker challenges.
+NOTE-II: [https://wrongsecrets-ctf.herokuapp.com](https://wrongsecrets-ctf.herokuapp.com) (temporary down based on lack of oss credits) is based on Heroku and has limited capacity.
 
-Initial creation of the zip file for CTFD requires you to visit [https://wrongsecrets-ctf.herokuapp.com/api/Challenges](https://wrongsecrets-ctf.herokuapp.com/api/Challenges) or [https://wrongsecrets-ctf-commjoen.cloud.okteto.net/](https://wrongsecrets-ctf-commjoen.cloud.okteto.net/) once before executing the steps below.
+Initial creation of the zip file for CTFD requires you to visit [https://wrongsecrets-ctf.herokuapp.com/api/Challenges](https://wrongsecrets-ctf.herokuapp.com/api/Challenges) once before executing the steps below.
 
 Follow the following steps:
 
 ```shell
     npm install -g juice-shop-ctf-cli@9.1.0
-    juice-shop-ctf #choose ctfd and https://wrongsecrets-ctf.herokuapp.com (or https://wrongsecrets-ctf-commjoen.cloud.okteto.net/) as domain. No trailing slash! The key is 'TRwzkRJnHOTckssAeyJbysWgP!Qc2T', feel free to enable hints. We do not support snippets or links/urls to code or hints.
+    juice-shop-ctf #choose ctfd and https://wrongsecrets-ctf.herokuapp.com as domain. No trailing slash! The key is 'TRwzkRJnHOTckssAeyJbysWgP!Qc2T', feel free to enable hints. We do not support snippets or links/urls to code or hints.
     docker run -p 8001:8000 -it ctfd/ctfd:3.4.3
 ```
 
 Now visit the CTFD instance at [http://localhost:8001](http://localhost:8001) and setup your CTF.
 Then use the administrative backup function to import the zipfile you created with the juice-shop-ctf command.
-Game on using [https://wrongsecrets-ctf.herokuapp.com](https://wrongsecrets-ctf.herokuapp.com) or [https://wrongsecrets-ctf-commjoen.cloud.okteto.net/](https://wrongsecrets-ctf-commjoen.cloud.okteto.net/)!
+Game on using [https://wrongsecrets-ctf.herokuapp.com](https://wrongsecrets-ctf.herokuapp.com)!
 Want to setup your own? You can! Watch out for people finding your key though, so secure it properly: make sure the running container with the actual ctf-key is not exposed to the audience, similar to our heroku container.
 
 ## FBCTF Support (Experimental!)
@@ -434,7 +428,9 @@ If you want to dev without a Vault instance, use additionally the `without-vault
 ./mvnw spring-boot:run -Dspring-boot.run.profiles=local,without-vault
 ```
 
-Want to push a container? See `.github/scripts/docker-create-and-push.sh` for a script that generates and pushes all containers. Do not forget to rebuild the app before composing the container
+Want to push a container? See `.github/scripts/docker-create-and-push.sh` for a script that generates and pushes all containers. Do not forget to rebuild the app before composing the container.
+
+Want to check why something in vault is not working in kubernetes? Do `kubectl exec vault-0 -n vault -- vault audit enable file file_path=stdout`.
 
 ### Dependency management
 

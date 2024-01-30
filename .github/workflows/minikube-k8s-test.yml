@@ -70,3 +70,23 @@ jobs:
           fi
           echo "logs from pod to make sure:"
           cat pod.log
+
+  cypress-tests:
+    name: Run Cypress Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+      - name: Change Directory
+        run: cd src/test/K8s-tests
+      - name: Install Dependencies
+        run: npm install cypress
+      - name: Run Tests
+        run: cypress run
+
+
+
+
