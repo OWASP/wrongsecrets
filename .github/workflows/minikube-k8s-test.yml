@@ -79,7 +79,7 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v2
         with:
-          node-version: 14
+          node-version: 21
       - name: Change Directory
         run: cd src/test/K8s-tests
       - name: Install Dependencies
