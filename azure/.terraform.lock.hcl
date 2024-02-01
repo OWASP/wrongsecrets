@@ -2,23 +2,23 @@
 # Manual edits may be lost in future updates.
 
 provider "registry.terraform.io/hashicorp/azurerm" {
-  version     = "3.85.0"
-  constraints = "~> 3.85.0"
+  version     = "3.89.0"
+  constraints = "~> 3.89.0"
   hashes = [
-    "h1:BX6+m8KJATrpqlwBSyA63Fmwjvgwcs/v1qwB7B5GLCU=",
-    "h1:vPlaTsywMaTyPPYPy0t8twBwrYOGckDFg4kQ5yyJG0U=",
-    "zh:1ae6c0d82b5801641a17094b84f2ec1dcac699c1c4e40669a267511061414a34",
-    "zh:259e9386a43aabecb1205b0ceea2d205223637c09b66d806a89fed04f3343253",
-    "zh:4d940f9c14fece4f1d9219ac9d104202e5561bddc5024e5ac97f3f93eea20110",
-    "zh:530bca70b950e835f63c796c694106d701e5de0e2cf096fa35f08afd5c254594",
-    "zh:69e6b7f44ffbe0383b6485bb9db26781eb7869503889303e202967900a6b35ed",
-    "zh:8528e7d054254daae06eeb2bf343d566d3908a024fdfb5e515fbdbe0669c15eb",
-    "zh:98d66edfa89ed9a431ca37be384e5dfe7fa20bdc732c6e7d30f3f922ca3b29dc",
-    "zh:b8d37cedeffeb6bd37d4ec79fc2da19ed6b57d1ac08d835395dfa4fb3cfdf447",
-    "zh:bbc94e89cd6c0d59c2e5ed0bce852cac8435b6dc2e979691ee84af4c8b2c9bb8",
-    "zh:ceb4c624e8bb56bbcfe53e3c4ed4b4d27c3a5b62e5f4890b32c98b60b83c7827",
-    "zh:f08c5bf19eb25f668633964c6bfa823aa0ead785824082533c4a6cff3959e3d0",
+    "h1:UMRZkHMvGczZdghtUx18YLIOHcnLSUHLf2FO10Je0LM=",
+    "h1:ehJwPzxMnjJ4918yvSYrTNMKFp9bepP2K/KgVJpxR50=",
+    "zh:22d24fcf1cefb3d318481883029f22d9cf64d427bd82b8c120f4f53b7a9273c8",
+    "zh:2d4678821f8cca5a6892db7721e43d33adfc97fa25607e77d5168285b9ac029f",
+    "zh:348ca00999765cbba88870e93bad6bdbde7319674dfb4200a6d7bde2c1d1181c",
+    "zh:4c93d68a060cf8d75ae7374042de893122cf753172960fb340e8d67d7ef911d2",
+    "zh:524792a28f369056c5062e6b070d1d5871662ff69b9d3de686f8d15da3b195f0",
+    "zh:7dac505227638fcdf887735d68614086aa6cc5492bb5826a16c67272f5e00888",
+    "zh:baa80b214b443fd973224280b04ae62d5ddc628bc21d21e4bda3c6668978602c",
+    "zh:bcc988c761931bebbd7d18be2d4a8c51db468b08b76827878d1d7983a35e57bd",
+    "zh:eac9a7fa302f7c50883d4c9338fd8808bc6f6ae9ac4c5e40b74540562578361b",
+    "zh:eef85f11c16629436ed3df3a89be288d8b6603a1f9bacb44cadf88be5f22f822",
     "zh:f569b65999264a9416862bca5cd2a6177d94ccb0424f3a4ef424428912b9cb3c",
+    "zh:ffa67c67a0b51656839cc07f60e6ea1182166361af80ca2ce7868d9fcb528361",
   ]
 }
 
