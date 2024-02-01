@@ -85,8 +85,8 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y xvfb libnss3
           sudo apt install wget
-          wget https://download.java.net/java/early_access/jdk21/28/GPL/openjdk-21-ea+xx_linux-x64_bin.tar.gz
-          tar -xvf openjdk-21-ea+28_linux-x64_bin.tar.gz
+          wget https://download.oracle.com/java/21/latest/jdk-21_linux-x64_bin.tar.gz
+          tar -xvf jdk-21_linux-x64_bin.tar.gz
           cd jdk-21
           sudo mkdir -p /usr/local/jdk-21
           sudo mv * /usr/local/jdk-21
