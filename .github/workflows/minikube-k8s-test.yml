@@ -84,8 +84,18 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y xvfb libnss3
-          sudo apt install default-jre
-          sudo apt install default-jdk
+          sudo apt install wget
+          wget https://download.java.net/java/early_access/jdk21/28/GPL/openjdk-21-ea+xx_linux-x64_bin.tar.gz
+          tar -xvf openjdk-21-ea+28_linux-x64_bin.tar.gz
+          cd jdk-21
+          sudo mkdir -p /usr/local/jdk-21
+          sudo mv * /usr/local/jdk-21
+          export JAVA_HOME=/usr/local/jdk-21
+          export PATH=$JAVA_HOME/bin:$PATH
+          source ~/.bashrc
+          echo 'export JAVA_HOME=/usr/local/jdk-21' >> ~/.bashrc
+          echo 'export PATH=$JAVA_HOME/bin:$PATH' >> ~/.bashrc
+          source ~/.bashrc
           npm install
           ./mvnw spring-boot:run
       - name: Run Tests
