@@ -21,7 +21,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - uses: actions/checkout@v4
-      - uses: eLco/setup-vault@v1.0.2
+      - uses: eLco/setup-vault@v1.0.3
       - name: Start minikube
         uses: medyagh/setup-minikube@master
         with:
