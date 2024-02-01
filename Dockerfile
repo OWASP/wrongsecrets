@@ -1,4 +1,4 @@
-FROM amazoncorretto:21.0.1-alpine
+FROM amazoncorretto:21.0.2-alpine
 
 ARG argBasedPassword="default"
 ARG argBasedVersion="1.8.2"
