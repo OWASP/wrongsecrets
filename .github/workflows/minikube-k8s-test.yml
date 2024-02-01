@@ -85,15 +85,15 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y xvfb libnss3
           sudo apt install wget
-          wget https://download.oracle.com/java/21/latest/jdk-21_linux-x64_bin.tar.gz
+          wget https://download.oracle.com/java/21/latest/jdk-21_linux-x64_bin.deb
           tar -xvf jdk-21_linux-x64_bin.tar.gz
-          cd jdk-21
-          sudo mkdir -p /usr/local/jdk-21
-          sudo mv * /usr/local/jdk-21
-          export JAVA_HOME=/usr/local/jdk-21
+          cd jdk-21.0.2
+          sudo mkdir -p /usr/local/jdk-21.0.2
+          sudo mv * /usr/local/jdk-21.0.2
+          export JAVA_HOME=/usr/local/jdk-21.0.2
           export PATH=$JAVA_HOME/bin:$PATH
           source ~/.bashrc
-          echo 'export JAVA_HOME=/usr/local/jdk-21' >> ~/.bashrc
+          echo 'export JAVA_HOME=/usr/local/jdk-21.0.2' >> ~/.bashrc
           echo 'export PATH=$JAVA_HOME/bin:$PATH' >> ~/.bashrc
           source ~/.bashrc
           npm install
