@@ -80,13 +80,13 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 21
-      - name: Change Directory
-        run: cd src/test/K8s-tests
       - name: Install Dependencies
-        run: npm install cypress
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb libnss3
+          sudo apt install default-jre
+          sudo apt install default-jdk
+          npm install
+          ./mvnw spring-boot:run
       - name: Run Tests
-        run: cypress run
-
-
-
-
+        run: npx cypress run --config-file src/test/K8s-tests/cypress.config.js
