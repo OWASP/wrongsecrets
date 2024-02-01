@@ -97,6 +97,7 @@ jobs:
           echo 'export PATH=$JAVA_HOME/bin:$PATH' >> ~/.bashrc
           source ~/.bashrc
           npm install
+          sudo java --version
           ./mvn spring-boot:run
       - name: Run Tests
         run: npx cypress run --config-file src/test/K8s-tests/cypress.config.js
