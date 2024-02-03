@@ -284,21 +284,21 @@ Contributors:
 - [Osama Magdy @osamamagdy](https://www.github.com/osamamagdy)
 - [Divyanshu Dev @Novice-expert](https://www.github.com/Novice-expert)
 - [Tibor Hercz @tiborhercz](https://www.github.com/tiborhercz)
+- [za @za](https://www.github.com/za)
 - [Chris Elbring Jr. @neatzsche](https://www.github.com/neatzsche)
 - [Diamond Rivero @diamant3](https://www.github.com/diamant3)
 - [Norbert Wolniak @nwolniak](https://www.github.com/nwolniak)
 - [Adarsh A @adarsh-a-tw](https://www.github.com/adarsh-a-tw)
 - [Filip Chyla @fchyla](https://www.github.com/fchyla)
-- [Turjo Chowdhury @turjoc120](https://www.github.com/turjoc120)
-- [Vineeth Jagadeesh @djvinnie](https://www.github.com/djvinnie)
 - [Dmitry Litosh @Dlitosh](https://www.github.com/Dlitosh)
+- [Vineeth Jagadeesh @djvinnie](https://www.github.com/djvinnie)
+- [Turjo Chowdhury @turjoc120](https://www.github.com/turjoc120)
 - [Josh Grossman @tghosth](https://www.github.com/tghosth)
 - [alphasec @alphasecio](https://www.github.com/alphasecio)
 - [CaduRoriz @CaduRoriz](https://www.github.com/CaduRoriz)
 - [Madhu Akula @madhuakula](https://www.github.com/madhuakula)
 - [Mike Woudenberg @mikewoudenberg](https://www.github.com/mikewoudenberg)
 - [Spyros @northdpole](https://www.github.com/northdpole)
-- [za @za](https://www.github.com/za)
 - [RubenAtBinx @RubenAtBinx](https://www.github.com/RubenAtBinx)
 - [Alex Bender @alex-bender](https://www.github.com/alex-bender)
 - [Nicolas Humblot @nhumblot](https://www.github.com/nhumblot)
@@ -321,6 +321,7 @@ Special thanks:
 - [Dan Gora @devsecops](https://www.github.com/devsecops)
 - [Xiaolu Dai @saragluna](https://www.github.com/saragluna)
 - [Jonathan Giles @jonathanGiles](https://www.github.com/jonathanGiles)
+
 
 ### Sponsorships
 
