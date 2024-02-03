@@ -77,27 +77,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Set up Node
-        uses: actions/setup-node@v2
+        uses: medyagh/setup-minikube@master
         with:
-          node-version: 21
+          minikube-version: 1.31.2
+          driver: docker
+          kubernetes-version: v1.28.1
       - name: Install Dependencies
         run: |
-          sudo apt-get update
-          sudo apt-get install -y xvfb libnss3
-          sudo apt install wget
-          wget https://download.oracle.com/java/21/latest/jdk-21_linux-x64_bin.tar.gz
-          tar -xvf jdk-21_linux-x64_bin.tar.gz
-          cd jdk-21.0.2
-          sudo mkdir -p /usr/local/jdk-21.0.2
-          sudo mv * /usr/local/jdk-21.0.2
-          export JAVA_HOME=/usr/local/jdk-21.0.2
-          export PATH=$JAVA_HOME/bin:$PATH
-          source ~/.bashrc
-          echo 'export JAVA_HOME=/usr/local/jdk-21.0.2' >> ~/.bashrc
-          echo 'export PATH=$JAVA_HOME/bin:$PATH' >> ~/.bashrc
-          source ~/.bashrc
+          node -v
+          java --version
+          kubectl get pods
           npm install
-          sudo java --version
-          ./mvn spring-boot:run
       - name: Run Tests
         run: npx cypress run --config-file src/test/K8s-tests/cypress.config.js
