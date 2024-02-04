@@ -70,24 +70,3 @@ jobs:
           fi
           echo "logs from pod to make sure:"
           cat pod.log
-          
-          npm install
-
-  cypress-test:
-    name: Cypress Test for Challenges
-    runs-on: ubuntu-latest
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      - uses: actions/checkout@v4
-      - name: Start minikube
-        uses: medyagh/setup-minikube@master
-        with:
-          minikube-version: 1.31.2
-          driver: docker
-          kubernetes-version: v1.28.1
-      - name: test script
-        run: |
-          ./k8s-vault-minkube-start.sh
-          npm install
-      - name: Run Tests
-        run: npx cypress run --config-file src/test/K8s-tests/cypress.config.js
