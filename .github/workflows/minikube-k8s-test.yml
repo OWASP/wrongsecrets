@@ -72,11 +72,9 @@ jobs:
           cat pod.log
           
           npm install
-      - name: Run Tests
-        run: npx cypress run --config-file src/test/K8s-tests/cypress.config.js
 
   cypress-test:
-    name: Test with minikube
+    name: Cypress Test for Challenges
     runs-on: ubuntu-latest
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -89,23 +87,7 @@ jobs:
           kubernetes-version: v1.28.1
       - name: test script
         run: |
-          kubectl apply -f k8s/workspace-psa.yml
-          kubectl apply -f k8s/secrets-config.yml
-          kubectl apply -f k8s/secrets-secret.yml
-          kubectl apply -f k8s/challenge33.yml
-          kubectl apply -f k8s/secret-challenge-deployment.yml
-          while [[ $(kubectl get pods -l app=secret-challenge -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do echo "waiting for secret-challenge" && sleep 2; done
-          kubectl logs -l app=secret-challenge -f >> pod.log &
-          kubectl expose deployment secret-challenge --type=LoadBalancer --port=8080
-          kubectl port-forward \
-              $(kubectl get pod -l app=secret-challenge -o jsonpath="{.items[0].metadata.name}") \
-              8080:8080 \
-              &
-          echo "Do minikube delete to stop minikube from running and cleanup to start fresh again"
-          echo "wait 20 seconds so we can check if vault-k8s-container works"
-          sleep 20
-          
-          
+          ./k8s-vault-minkube-start.sh
           npm install
       - name: Run Tests
         run: npx cypress run --config-file src/test/K8s-tests/cypress.config.js
