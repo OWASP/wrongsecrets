@@ -34,3 +34,28 @@ jobs:
       - name: test script
         run: |
           ./k8s-vault-minkube-start.sh && sleep 5 && curl http://localhost:8080/spoil/challenge-7 && minikube delete
+
+  cypress-tests:
+    name: Cypress Test for Challenges
+    runs-on: ubuntu-latest
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - uses: actions/checkout@v4
+      - uses: eLco/setup-vault@v1.0.3
+      - name: Start minikube
+        uses: medyagh/setup-minikube@master
+        with:
+          minikube-version: 1.31.2
+          driver: docker
+          kubernetes-version: v1.28.1
+      - name: Setup helm
+        uses: azure/setup-helm@v3.5
+        id: install
+      - name: test script
+        run: |
+          ./k8s-vault-minkube-start.sh && sleep 5 && curl http://localhost:8080/spoil/challenge-7
+
+      - name: Run Tests
+        run: |
+          npm install
+          npx cypress run --config-file src/test/K8s-tests/cypress.config.js && minikube delete
