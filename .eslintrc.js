@@ -6,7 +6,10 @@ module.exports = {
     commonjs: true,
     es2021: true
   },
-  extends: 'standard',
+  extends: [
+      'standard',
+      'plugin:chai-friendly/recommended'
+  ],
   overrides: [
   ],
   parserOptions: {
@@ -14,5 +17,8 @@ module.exports = {
   },
   rules: {
   },
-  plugins: ['cypress']
-}
+  plugins: [
+      'cypress',
+      'chai-friendly'
+  ]
+};
