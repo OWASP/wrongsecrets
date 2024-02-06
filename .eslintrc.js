@@ -7,8 +7,8 @@ module.exports = {
     es2021: true
   },
   extends: [
-      'standard',
-      'plugin:chai-friendly/recommended'
+    'standard',
+    'plugin:chai-friendly/recommended'
   ],
   overrides: [
   ],
@@ -18,7 +18,7 @@ module.exports = {
   rules: {
   },
   plugins: [
-      'cypress',
-      'chai-friendly'
+    'cypress',
+    'chai-friendly'
   ]
-};
+}
