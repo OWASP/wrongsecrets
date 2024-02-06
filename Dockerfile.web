@@ -1,11 +1,11 @@
-FROM jeroenwillemsen/wrongsecrets:1.8.2-no-vault
-ARG argBasedVersion="1.8.2-no-vault"
+FROM jeroenwillemsen/wrongsecrets:1.8.3-no-vault
+ARG argBasedVersion="1.8.3-no-vault"
 ARG CANARY_URLS="http://canarytokens.com/terms/about/s7cfbdakys13246ewd8ivuvku/post.jsp,http://canarytokens.com/terms/about/y0all60b627gzp19ahqh7rl6j/post.jsp"
 ARG CTF_ENABLED=false
 ARG HINTS_ENABLED=true
 ARG CHALLENGE_ACHT_CTF_HOST_VALUE="not_set"
 ARG CHALLENGE_THIRTY_HOST_VALUE="not_set"
-ARG $CHALLENGE_RANDO_KEY_CTF_TO_PROVIDE_TO_HOST="not_set"
+ARG CHALLENGE_RANDO_KEY_CTF_TO_PROVIDE_TO_HOST="not_set"
 #ONLY OVERRIDE THE ARGS BELOW WHEN YOU ARE SETTING UP A CTF!
 ARG CTF_KEY=TRwzkRJnHOTckssAeyJbysWgP!Qc2T
 ARG CHALLENGE_5_VALUE=if_you_see_this_please_use_k8s
