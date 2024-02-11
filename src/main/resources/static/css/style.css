@@ -70,3 +70,43 @@ tr.solved {
 .table {
     --bs-table-bg: rgba(0, 0, 0, 0) !important;
 }
+
+.theme-switch {
+    display: inline-flex;
+    cursor: pointer;
+    position: relative;
+
+}
+
+#theme-toggle-label {
+    display: inline-block;
+    font-size: 20px;
+    transition: all 0.3s ease;
+}
+.toggle-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px; /* Button width */
+    height: 30px;
+    border-radius: 50%;
+    border: 0.9px solid;
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
+.toggle-button:hover {
+    background-color: var(--bs-gray-600); /* Slightly darker on hover */
+}
+
+.sect2, .thank-you, .toggle-button {
+    border-color: #ffffff; /* Or any color that contrasts well with your light mode background */
+}
+
+.rotate {
+    transform: rotate(360deg);
+}
+
+.notransition {
+    transition: none !important;
+}
