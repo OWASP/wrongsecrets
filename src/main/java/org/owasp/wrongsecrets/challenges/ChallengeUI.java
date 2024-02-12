@@ -105,7 +105,7 @@ public class ChallengeUI {
       return challengeDefinition.source(runtimeEnvironment).map(extractor).orElse("");
     } else {
       // We cannot run the challenge but showing documentation should still be possible
-      return extractor.apply(challengeDefinition.sources().get(0));
+      return extractor.apply(challengeDefinition.sources().getFirst());
     }
   }
 
