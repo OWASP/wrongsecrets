@@ -60,7 +60,7 @@ jobs:
           chmod +x tfsec
           mv tfsec /usr/local/bin/
       - name: Pre-commit checks
-        uses: pre-commit/action@v3.0.0
+        uses: pre-commit/action@v3.0.1
       - name: pre-commit-ci-lite
-        uses: pre-commit-ci/lite-action@v1.0.1
+        uses: pre-commit-ci/lite-action@v1.0.2
         if: always()

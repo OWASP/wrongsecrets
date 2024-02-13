@@ -11,7 +11,7 @@
 
   <groupId>org.owasp</groupId>
   <artifactId>wrongsecrets</artifactId>
-  <version>1.8.1-SNAPSHOT</version>
+  <version>1.8.3-SNAPSHOT</version>
 
   <name>OWASP WrongSecrets</name>
   <description>Examples with how to not use secrets</description>
@@ -46,7 +46,7 @@
     <KeePassJava2.version>2.2.1</KeePassJava2.version>
     <asciidoctor.maven.plugin.version>2.2.5</asciidoctor.maven.plugin.version>
     <asciidoctorj.version>2.5.11</asciidoctorj.version>
-    <aws.sdk.version>2.22.9</aws.sdk.version>
+    <aws.sdk.version>2.23.15</aws.sdk.version>
     <bootstrap.version>5.3.2</bootstrap.version>
     <com.azure.spring.version>5.8.0</com.azure.spring.version>
     <cyclonedx.core.version>8.0.3</cyclonedx.core.version>
@@ -320,7 +320,7 @@
             <dependency>
               <groupId>com.puppycrawl.tools</groupId>
               <artifactId>checkstyle</artifactId>
-              <version>10.12.7</version>
+              <version>10.13.0</version>
             </dependency>
           </dependencies>
         </plugin>
