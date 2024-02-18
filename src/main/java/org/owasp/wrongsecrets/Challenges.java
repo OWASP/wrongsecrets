@@ -88,6 +88,10 @@ public class Challenges {
     return challengeDefinition.equals(definitions.challenges().get(0));
   }
 
+  public boolean isLastChallenge(ChallengeDefinition challengeDefinition) {
+    return challengeDefinition.equals(definitions.challenges().getLast());
+  }
+
   public List<ChallengeDefinition> getChallengeDefinitions() {
     return definitions.challenges();
   }
