@@ -51,20 +51,10 @@
                             <a class="dropdown-item" href="/about">About</a>
                         </ul>
                     </li>
-                    <div class="theme-toggle navbar-text">
-                        <label>
-                            <span class="visually-hidden">Light</span>
-                            <input type="radio" value="light" name="theme">
-                            <span class="checkmark" th:attr="data-cy='light-mode-radio'">☀️</span>
-                        </label>
-                        <label>
-                            <span class="visually-hidden">Dark</span>
-                            <input type="radio" value="dark" name="theme">
-                            <span class="checkmark" th:attr="data-cy='dark-mode-radio'">🌜</span>
-                        </label>
+                    <div class="theme-switch toggle-button mt-10" th:attr="data-cy='dark-mode-radio'">
+                        <label for="theme-toggle" id="theme-toggle-label" onclick="toggleTheme()">☀</label>
+                        <input type="checkbox" id="theme-toggle" class="theme-toggle" hidden>
                     </div>
-
-
                 </ul>
                 <a th:if="${ctf_enabled != null && ctf_enabled == true}" class="nav-link disabled me-2" href="#"
                    tabindex="-1" aria-disabled="true" style="color:white">In CTF-mode</a>
