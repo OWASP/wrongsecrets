@@ -15,9 +15,6 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 'latest'
   },
-  rules: {
-    'chai-friendly/no-unused-expressions': 'off'
-  },
   plugins: [
     'cypress',
     'chai-friendly'

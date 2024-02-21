@@ -102,11 +102,3 @@ tr.solved {
 .sect2, .thank-you, .toggle-button {
     border-color: #ffffff; /* Or any color that contrasts well with your light mode background */
 }
-
-.rotate {
-    transform: rotate(360deg);
-}
-
-.notransition {
-    transition: none !important;
-}

@@ -48,7 +48,7 @@ public class ChallengesController {
   @Value("${ctf_enabled}")
   private boolean ctfModeEnabled;
 
-  private boolean spoilingEnabled;
+  private final boolean spoilingEnabled;
 
   @Value("${ctf_key}")
   private String ctfKey;
@@ -93,7 +93,7 @@ public class ChallengesController {
       model.addAttribute("spoiler", new Spoiler("Spoils are disabled in the configuration"));
     } else {
       Optional<Spoiler> spoilerFromRuntimeEnvironment =
-          challenges.findChallenge(shortName, runtimeEnvironment).map(c -> c.spoiler());
+          challenges.findChallenge(shortName, runtimeEnvironment).map(Challenge::spoiler);
       Supplier<Spoiler> spoilerFromRandomChallenge =
           () -> {
             var challengeDefinition = findByShortName(shortName);
@@ -151,8 +151,13 @@ public class ChallengesController {
     model.addAttribute("answerCorrect", null);
     model.addAttribute("answerIncorrect", null);
     model.addAttribute("solution", null);
+    String clickNext =
+        "This challenge has been disabled. Click \"next\" to go to the next challenge.";
+    if (challenges.isLastChallenge(challengeDefinition)) {
+      clickNext = "This challenge has been disabled";
+    }
     if (!isChallengeEnabled(challengeDefinition)) {
-      model.addAttribute("answerIncorrect", "This challenge has been disabled.");
+      model.addAttribute("answerIncorrect", "This challenge has been disabled." + clickNext);
     }
     if (ctfModeEnabled && challenges.isFirstChallenge(challengeDefinition)) {
       if (!Strings.isNullOrEmpty(ctfServerAddress) && !ctfServerAddress.equals("not_set")) {
@@ -331,7 +336,7 @@ public class ChallengesController {
   private void fireEnding(Model model) {
     var notCompleted =
         challenges.getDefinitions().challenges().stream()
-            .filter(def -> isChallengeEnabled(def))
+            .filter(this::isChallengeEnabled)
             .filter(this::challengeNotCompleted)
             .count();
     if (notCompleted == 0) {

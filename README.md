@@ -289,6 +289,7 @@ Contributors:
 - [Diamond Rivero @diamant3](https://www.github.com/diamant3)
 - [Norbert Wolniak @nwolniak](https://www.github.com/nwolniak)
 - [Adarsh A @adarsh-a-tw](https://www.github.com/adarsh-a-tw)
+- [Shubham Patel @Shubham-Patel07](https://www.github.com/Shubham-Patel07)
 - [Filip Chyla @fchyla](https://www.github.com/fchyla)
 - [Dmitry Litosh @Dlitosh](https://www.github.com/Dlitosh)
 - [Vineeth Jagadeesh @djvinnie](https://www.github.com/djvinnie)
