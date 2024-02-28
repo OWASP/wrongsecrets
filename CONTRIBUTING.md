@@ -268,7 +268,7 @@ First make sure that you have an [Issue](https://github.com/OWASP/wrongsecrets/i
 Add the **new challenge** in this folder `wrongsecrets/src/main/java/org/owasp/wrongsecrets/challenges/`.
 These are the things that you have to keep in mind.
 - First and foremost make sure your challenge is coded in **Java**.
-- Use either `FixedAnswerChallenge` as a class to extend or use the `Challenge` interface to imnplement.
+- Use either `FixedAnswerChallenge` as a class to extend or use the `Challenge` interface to implement.
 
 The `FixedAnswerChallenge` can be used for challenges that don't have a dependency on other (sub)systems. Here is an example of a possible Challenge 28:
 
