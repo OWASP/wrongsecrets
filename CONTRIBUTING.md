@@ -207,7 +207,7 @@ Press the **_Reload_** button as shown below and allow the project to Reload.
 
 Further use the **_OWASP WrongSecrets --> Lifecycle --> install_** step to load all the depedencies
 
-**NOTE:** Indians and other Asia-Pacific countries users may have to use **VPN** if you enounter this exception `org.owasp.dependencycheck.utils.DownloadFailedException: TLS Connection Reset`.
+**NOTE:** Indians and other Asia-Pacific countries users may have to use **VPN** if you encounter this exception `org.owasp.dependencycheck.utils.DownloadFailedException: TLS Connection Reset`.
 
 ### Step 7: Running the Project.
 
