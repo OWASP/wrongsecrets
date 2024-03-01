@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.2.2</version>
+    <version>3.2.3</version>
     <!-- lookup parent from repository -->
   </parent>
 
@@ -48,7 +48,7 @@
     <asciidoctorj.version>2.5.11</asciidoctorj.version>
     <aws.sdk.version>2.23.15</aws.sdk.version>
     <bootstrap.version>5.3.2</bootstrap.version>
-    <com.azure.spring.version>5.8.0</com.azure.spring.version>
+    <com.azure.spring.version>5.9.1</com.azure.spring.version>
     <cyclonedx.core.version>8.0.3</cyclonedx.core.version>
     <datatables.version>1.13.5</datatables.version>
     <dependency-check-maven.version>8.2.1</dependency-check-maven.version>
@@ -320,14 +320,14 @@
             <dependency>
               <groupId>com.puppycrawl.tools</groupId>
               <artifactId>checkstyle</artifactId>
-              <version>10.13.0</version>
+              <version>10.14.0</version>
             </dependency>
           </dependencies>
         </plugin>
         <plugin>
           <groupId>com.github.spotbugs</groupId>
           <artifactId>spotbugs-maven-plugin</artifactId>
-          <version>4.8.3.0</version>
+          <version>4.8.3.1</version>
           <configuration>
             <omitVisitors>FindReturnRef</omitVisitors>
             <plugins>
@@ -486,7 +486,7 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>
-        <version>3.1.1</version>
+        <version>3.2.0</version>
         <configuration>
           <executable>./js/node_modules/.bin/javascript-obfuscator${script.extension}</executable>
           <arguments>
