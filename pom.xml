@@ -44,7 +44,7 @@
   <!--    </distributionManagement>-->
   <properties>
     <KeePassJava2.version>2.2.1</KeePassJava2.version>
-    <asciidoctor.maven.plugin.version>2.2.5</asciidoctor.maven.plugin.version>
+    <asciidoctor.maven.plugin.version>3.0.0</asciidoctor.maven.plugin.version>
     <asciidoctorj.version>2.5.11</asciidoctorj.version>
     <aws.sdk.version>2.25.0</aws.sdk.version>
     <bootstrap.version>5.3.3</bootstrap.version>
