@@ -7,7 +7,7 @@ Help() {
     # Display Help
     echo "A versatile script to create a docker image for testing. Call this script with no arguments to simply create a local image that you can use to test your changes. For more complex use see the below help section"
     echo
-    echo "Syntax: docker-create.sh [-h (help)|-t (test)|-p (publish)|-e (herokud)|-f (herokup)|-o (okteto)|-n (notag)| -r (Render)|tag={tag}|message={message}|buildarg={buildarg}|springProfile={springProfile}]"
+    echo "Syntax: docker-create.sh [-h (help)|-t (test)|-p (publish)|-e (herokud)|-f (herokup)|-n (notag)| -r (Render)|tag={tag}|message={message}|buildarg={buildarg}|springProfile={springProfile}]"
     echo "options: (All optional)"
     echo "tag=             Write a custom tag that will be added to the container when it is build locally."
     echo "message=         Write a message used for the actual tag-message in git"
@@ -29,25 +29,25 @@ break_on_tag(){
       fi
 }
 
-Okteto_redeploy(){
-  break_on_tag
-  echo "Rebuilding the Okteto environment: https://wrongsecrets-commjoen.cloud.okteto.net/"
-  echo "Check if all required binaries are installed"
-  source ../../scripts/check-available-commands.sh
-  checkCommandsAvailable okteto
-  echo "validating okteto k8 deployment to contain the right container with tag "${tag}" (should be part of '$(cat ../../okteto/k8s/secret-challenge-deployment.yml | grep image)')"
-  if [[ "$(cat ../../okteto/k8s/secret-challenge-deployment.yml | grep image)" != *"${tag}"* ]]; then
-    echo "tag ${tag} in  ../../okteto/k8s/secret-challenge-deployment.yml not properly set, aborting"
-    exit
-  fi
-  cd ../../okteto
-  okteto destroy
-  okteto deploy
-}
+# Okteto_redeploy(){ //okteto is only available commercially. hence commenting this out. feel free to use it if you can.
+#   break_on_tag
+#   echo "Rebuilding the Okteto environment: https://wrongsecrets-commjoen.cloud.okteto.net/"
+#   echo "Check if all required binaries are installed"
+#   source ../../scripts/check-available-commands.sh
+#   checkCommandsAvailable okteto
+#   echo "validating okteto k8 deployment to contain the right container with tag "${tag}" (should be part of '$(cat ../../okteto/k8s/secret-challenge-deployment.yml | grep image)')"
+#   if [[ "$(cat ../../okteto/k8s/secret-challenge-deployment.yml | grep image)" != *"${tag}"* ]]; then
+#     echo "tag ${tag} in  ../../okteto/k8s/secret-challenge-deployment.yml not properly set, aborting"
+#     exit
+#   fi
+#   cd ../../okteto
+#   okteto destroy
+#   okteto deploy
+# }
 
 heroku_check_container() {
     break_on_tag
-    echo "validating dockerfile to contain tag "${tag}" (should be part of '$(head -n 1 ../../Dockerfile.web)')"
+    echo "validating dockerfile to contain tag ""${tag}"" (should be part of '$(head -n 1 ../../Dockerfile.web)')"
     if [[ "$(head -n 1 ../../Dockerfile.web)" != *"${tag}"* ]]; then
       echo "tag ${tag} in dockerfile FROM was not set properly, aborting"
       exit
@@ -98,7 +98,7 @@ render_publish(){
 # Set option to local if no option provided
 script_mode="local"
 # Parse provided options
-while getopts ":htperfgon*" option; do
+while getopts ":htperfn*" option; do
     case $option in
     h) # display Help
         Help
@@ -119,9 +119,6 @@ while getopts ":htperfgon*" option; do
     r) #Helper
         script_mode="render"
         ;;
-    o) #okteto
-        script_mode="okteto"
-        ;;
     n) #notags
         disable_tagging_in_git="true"
         ;;
@@ -138,7 +135,7 @@ done
 ################################################
 for ARGUMENT in "$@";
 do
-    if [[ $ARGUMENT != "-h" && $ARGUMENT != "-t" && $ARGUMENT != "-p" && $ARGUMENT != "-e" && $ARGUMENT != "-f" && $ARGUMENT != "-g" && $ARGUMENT != "-o" ]]
+    if [[ $ARGUMENT != "-h" && $ARGUMENT != "-t" && $ARGUMENT != "-p" && $ARGUMENT != "-e" && $ARGUMENT != "-f" ]]
     then
         KEY=$(echo "$ARGUMENT" | cut -f1 -d=)
         KEY_LENGTH=${#KEY}
@@ -150,7 +147,7 @@ done
 if test -n "${tag+x}"; then
     echo "tag is set"
 else
-    SCRIPT_PATH=$(dirname $(dirname $(dirname $(readlink -f "$0"))))
+    SCRIPT_PATH="$(dirname $(dirname $(dirname $(readlink -f "$0"))))"
     tag="local-test"
     echo "Setting default tag: ${tag}"
 fi
@@ -158,7 +155,7 @@ fi
 if test -n "${message+x}"; then
     echo "message is set"
 else
-    SCRIPT_PATH=$(dirname $(dirname $(dirname $(readlink -f "$0"))))
+    SCRIPT_PATH="$(dirname $(dirname $(dirname $(readlink -f "$0"))))"
     message="local testcontainer build"
     echo "Setting default message: ${message}"
 fi
@@ -195,12 +192,13 @@ fi
 
 if [[ $script_mode == "heroku_d" ]] ; then
   Heroku_publish_demo
+  exit
 elif [[ $script_mode == "heroku_p" ]]; then
   Heroku_publish_prod
+  exit
 elif [[ $script_mode == "render" ]]; then
   render_publish
-elif [[ $script_mode == "okteto" ]]; then
-  Okteto_redeploy
+  exit
 fi
 
 
@@ -258,22 +256,28 @@ check_correct_launch_location() {
 }
 
 generate_test_data() {
+  if [[ $script_mode != "heroku"* ]];then
+    echo "cleanup all data"
+    rm yourkey.txt
+    rm secondkey.txt
+    rm thirdkey.txt
     echo "Generating challenge 12-data"
     openssl rand -base64 32 | tr -d '\n' > yourkey.txt
     echo "Generating challenge 16-data"
-    SECENDKEYPART1=$(openssl rand -base64 5 | tr -d '\n')
-    SECENDKEYPART2=$(openssl rand -base64 3 | tr -d '\n')
-    SECENDKEYPART3=$(openssl rand -base64 2 | tr -d '\n')
-    SECENDKEYPART4=$(openssl rand -base64 3 | tr -d '\n')
-    echo -n "${SECENDKEYPART1}9${SECENDKEYPART2}6${SECENDKEYPART3}2${SECENDKEYPART4}7" > secondkey.txt
-    printf "function secret() { \n var password = \"$SECENDKEYPART1\" + 9 + \"$SECENDKEYPART2\" + 6 + \"$SECENDKEYPART3\" + 2 + \"$SECENDKEYPART4\" + 7;\n return password;\n }\n" > ../../js/index.js
+    SECONDKEYPART1=$(openssl rand -base64 5 | tr -d '\n')
+    SECONDKEYPART2=$(openssl rand -base64 3 | tr -d '\n')
+    SECONDKEYPART3=$(openssl rand -base64 2 | tr -d '\n')
+    SECONDKEYPART4=$(openssl rand -base64 3 | tr -d '\n')
+    echo -n "${SECONDKEYPART1}9${SECONDKEYPART2}6${SECONDKEYPART3}2${SECONDKEYPART4}7" > secondkey.txt
+    rm ../../js/index.js
+    printf "// eslint-disable-next-line no-unused-vars\n function secret() { \n var password = \"$SECONDKEYPART1\" + 9 + \"$SECONDKEYPART2\" + 6 + \"$SECONDKEYPART3\" + 2 + \"$SECONDKEYPART4\" + 7;\n return password;\n }\n" > ../../js/index.js
     echo "Generating challenge 17"
-    rm thirdkey.txt
     openssl rand -base64 32 | tr -d '\n' > thirdkey.txt
     answer=$(<thirdkey.txt)
     answerRegexSafe="$(printf '%s' "$answer" | $findAndReplace -e 's/[]\/$*.^|[]/\\&/g' | $findAndReplace ':a;N;$!ba;s,\n,\\n,g')"
     cp ../../src/main/resources/.bash_history .
     $findAndReplace -i "s/Placeholder Password, find the real one in the history of the container/$answerRegexSafe/g" .bash_history
+  fi
 }
 
 build_update_pom() {
@@ -332,7 +336,7 @@ create_containers() {
 
 restore_temp_change() {
     echo "Restoring temporal change"
-    git restore ../../js/index.js
+#    git restore ../../js/index.js
     git restore ../../pom.xml
     git restore ../../src/main/resources/.bash_history
     # rm .bash_history

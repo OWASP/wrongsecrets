@@ -30,7 +30,8 @@ public class Challenge16 extends FixedAnswerChallenge {
       justification = "The location of the dockerMountPath is based on an Env Var")
   public String getActualData() {
     try {
-      return Files.readString(Paths.get(dockerMountPath, "secondkey.txt"), StandardCharsets.UTF_8);
+      return Files.readString(Paths.get(dockerMountPath, "secondkey.txt"), StandardCharsets.UTF_8)
+          .strip();
     } catch (Exception e) {
       log.warn("Exception during file reading, defaulting to default without cloud environment", e);
       return "if_you_see_this_please_use_docker_instead";
