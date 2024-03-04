@@ -79,7 +79,8 @@ module "eks" {
 
   cluster_endpoint_public_access_cidrs = ["${data.http.ip.response_body}/32"]
 
-  enable_irsa = true
+  enable_irsa         = true
+  authentication_mode = "API_AND_CONFIG_MAP"
 
   eks_managed_node_group_defaults = {
     disk_size       = 50
