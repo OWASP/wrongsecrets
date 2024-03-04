@@ -22,7 +22,7 @@ else
 fi
 
 
-KUBECONFIG=~/.kube/wrongsecrets
+export KUBECONFIG=~/.kube/wrongsecrets
 
 echo "This is a script to bootstrap the configuration. You need to have installed: helm, kubectl, jq, vault, grep, cat, sed, and awscli, and is only tested on mac, Debian and Ubuntu"
 echo "This script is based on the steps defined in https://learn.hashicorp.com/tutorials/vault/kubernetes-minikube. Vault is awesome!"
