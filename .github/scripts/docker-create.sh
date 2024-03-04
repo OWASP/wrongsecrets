@@ -67,6 +67,12 @@ Heroku_publish_demo() {
     heroku container:release web --app arcane-scrubland-42646
     heroku container:push --recursive --arg argBasedVersion=${tag}heroku,CTF_ENABLED=true,HINTS_ENABLED=false --app wrongsecrets-ctf
     heroku container:release web --app wrongsecrets-ctf
+    echo "testing challenge 16"
+    cd .github/scripts
+    export RAW_TEST=$(< secondkey.txt)
+    export TEST_DATA=$(echo -n $RAW_TEST)
+    curl --fail 'https://arcane-scrubland-42646.herokuapp.com/token'  --data-raw "grant_type=client_credentials&client_id=WRONGSECRET_CLIENT_ID&client_secret=$TEST_DATA"
+    echo $?
     exit
 }
 
@@ -78,6 +84,12 @@ Heroku_publish_prod(){
     cd ../..
     heroku container:push --recursive --arg argBasedVersion=${tag}heroku,CANARY_URLS=http://canarytokens.com/feedback/images/traffic/tgy3epux7jm59n0ejb4xv4zg3/submit.aspx,http://canarytokens.com/traffic/cjldn0fsgkz97ufsr92qelimv/post.jsp --app=wrongsecrets
     heroku container:release web --app=wrongsecrets
+    echo "testing challenge 16"
+    cd .github/scripts
+    export RAW_TEST=$(< secondkey.txt)
+    export TEST_DATA=$(echo -n $RAW_TEST)
+    curl --fail 'https://wrongsecrets.herokuapp.com/token'  --data-raw "grant_type=client_credentials&client_id=WRONGSECRET_CLIENT_ID&client_secret=$TEST_DATA"
+    echo $?
     exit
 }
 
