@@ -119,7 +119,7 @@ The documentation below is auto-generated to give insight on what's created via 
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.39.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.39.1 |
 | <a name="provider_http"></a> [http](#provider\_http) | 3.4.2 |
 | <a name="provider_random"></a> [random](#provider\_random) | 3.6.0 |
 
