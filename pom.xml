@@ -401,7 +401,7 @@
             </goals>
             <phase>compile</phase>
             <configuration>
-              <headerFooter>false</headerFooter>
+              <standalone>false</standalone>
               <attributes>
                 <docType>null</docType>
               </attributes>
@@ -439,6 +439,9 @@
         <groupId>org.owasp</groupId>
         <artifactId>dependency-check-maven</artifactId>
         <version>${dependency-check-maven.version}</version>
+        <configuration>
+          <assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>
+        </configuration>
         <executions>
           <execution>
             <goals>

@@ -100,5 +100,5 @@ tr.solved {
 }
 
 .sect2, .thank-you, .toggle-button {
-    border-color: #ffffff; /* Or any color that contrasts well with your light mode background */
+    border-color: black; /* Or any color that contrasts well with your light mode background */
 }
