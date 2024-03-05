@@ -119,7 +119,7 @@ The documentation below is auto-generated to give insight on what's created via 
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.39.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.39.1 |
 | <a name="provider_http"></a> [http](#provider\_http) | 3.4.2 |
 | <a name="provider_random"></a> [random](#provider\_random) | 3.6.0 |
 
@@ -162,7 +162,7 @@ The documentation below is auto-generated to give insight on what's created via 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | The EKS cluster name | `string` | `"wrongsecrets-exercise-cluster"` | no |
-| <a name="input_cluster_version"></a> [cluster\_version](#input\_cluster\_version) | The EKS cluster version to use | `string` | `"1.28"` | no |
+| <a name="input_cluster_version"></a> [cluster\_version](#input\_cluster\_version) | The EKS cluster version to use | `string` | `"1.29"` | no |
 | <a name="input_region"></a> [region](#input\_region) | The AWS region to use | `string` | `"eu-west-1"` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | List of tags to apply to resources | `map(string)` | <pre>{<br>  "Application": "wrongsecrets"<br>}</pre> | no |
 
