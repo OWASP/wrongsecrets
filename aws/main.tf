@@ -81,6 +81,8 @@ module "eks" {
 
   enable_irsa = true
 
+  enable_cluster_creator_admin_permissions = true
+
   eks_managed_node_group_defaults = {
     disk_size       = 50
     disk_type       = "gp3"
