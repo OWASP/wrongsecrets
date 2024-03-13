@@ -1,7 +1,5 @@
 import os
-
 import requests
-from dotenv import load_dotenv
 
 # This function parses the contribution list, sorting
 # the users per its ranks
@@ -217,8 +215,7 @@ def get_contibutors_list(token: str) -> list:
 # THE MAIN PROGRAM STARTS HERE
 # =============================================================
 
-# Loads the .env file
-load_dotenv()
+# Make sure you load a user token in env
 token = os.getenv("USER_TOKEN")
 
 if token is not None:
