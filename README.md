@@ -68,7 +68,7 @@ an [issue](https://github.com/OWASP/wrongsecrets/issues) , or
 use [discussions](https://github.com/OWASP/wrongsecrets/discussions). Please note that this is an OWASP volunteer
 based project, so it might take a little while before we respond.
 
-Copyright (c) 2020-2023 Jeroen Willemsen and WrongSecrets contributors.
+Copyright (c) 2020-2024 Jeroen Willemsen and WrongSecrets contributors.
 
 ## Basic docker exercises
 
