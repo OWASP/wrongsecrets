@@ -306,6 +306,7 @@ Contributors:
 - [Rick M @kingthorin](https://www.github.com/kingthorin)
 - [Shlomo Zalman Heigh @szh](https://www.github.com/szh)
 - [Fern @f3rn0s](https://www.github.com/f3rn0s)
+- [Jeff Tong @Wind010](https://www.github.com/Wind010)
 
 Testers:
 
