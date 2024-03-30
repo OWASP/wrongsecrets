@@ -192,7 +192,7 @@ Open **_File > Project structure _**.
 
 In the tab `Project` make sure that an SDK of version `22` is selected (e.g. `openjdk-22`, `oraclejdk-22` or just `22` depending on which Java JDK variant you installed).
 
-In the tab `SDKs` make sure that an SDK of version `21` is selected.
+In the tab `SDKs` make sure that an SDK of version `22` is selected.
 
 
 ### Step 6: Reload the project
