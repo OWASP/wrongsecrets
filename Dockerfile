@@ -1,4 +1,4 @@
-FROM amazoncorretto:21.0.2-alpine
+FROM amazoncorretto:22.0.0-alpine
 
 ARG argBasedPassword="default"
 ARG argBasedVersion="1.8.4"
@@ -14,6 +14,8 @@ ENV SPRINGDOC_DOC=false
 RUN echo "2vars"
 RUN echo "$ARG_BASED_PASSWORD"
 RUN echo "$argBasedPassword"
+
+RUN apk add --no-cache libstdc++
 
 # RUN useradd -u 2000 -m wrongsecrets
 RUN adduser -u 2000 -D wrongsecrets
