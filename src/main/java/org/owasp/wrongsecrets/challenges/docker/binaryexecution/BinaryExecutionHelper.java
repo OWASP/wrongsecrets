@@ -195,7 +195,7 @@ public class BinaryExecutionHelper {
       log.info("While we detected windows, please note that it is officially not supported.");
     } else if (useLinux()) {
       fileName = fileName + "-linux";
-      if (useMusl()) {
+      if (useMusl() && !fileName.contains("golang")) {
         fileName = fileName + "-musl";
       }
     }
