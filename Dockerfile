@@ -1,7 +1,7 @@
 FROM eclipse-temurin:22_36-jre-alpine
 
 ARG argBasedPassword="default"
-ARG argBasedVersion="1.8.4"
+ARG argBasedVersion="1.8.5test5"
 ARG spring_profile=""
 ENV SPRING_PROFILES_ACTIVE=$spring_profile
 ENV ARG_BASED_PASSWORD=$argBasedPassword
