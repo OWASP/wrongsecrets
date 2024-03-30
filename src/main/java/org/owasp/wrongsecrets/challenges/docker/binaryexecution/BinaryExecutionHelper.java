@@ -195,9 +195,7 @@ public class BinaryExecutionHelper {
       log.info("While we detected windows, please note that it is officially not supported.");
     } else if (useLinux()) {
       fileName = fileName + "-linux";
-      if (useMusl()) {
-        fileName = fileName + "-musl";
-      }
+      // no musl detector as these are statically linked
     }
     if (!useX86()) {
       if (!useArm()) {
