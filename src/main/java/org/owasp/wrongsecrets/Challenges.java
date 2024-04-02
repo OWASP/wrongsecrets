@@ -25,10 +25,10 @@ public class Challenges {
   private final Map<ChallengeDefinition, List<Challenge>> challengeDefinitionToChallenge;
 
   public static final class ErrorResponses {
-    public static String ENCRYPTION_ERROR = "Error Encrypting";
-    public static String DECRYPTION_ERROR = "Error Decrypting";
-    public static String EXECUTION_ERROR = "Error Executing executable";
-    public static String FILE_MOUNT_ERROR = "Error reading secret";
+    public static final String ENCRYPTION_ERROR = "Error Encrypting";
+    public static final String DECRYPTION_ERROR = "Error Decrypting";
+    public static final String EXECUTION_ERROR = "Error Executing executable";
+    public static final String FILE_MOUNT_ERROR = "Error reading secret";
     // if_you_see_this_please_fix_the_keepass_setup
   }
 
