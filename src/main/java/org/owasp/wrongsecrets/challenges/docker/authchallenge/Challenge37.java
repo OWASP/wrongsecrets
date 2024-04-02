@@ -1,4 +1,4 @@
-package org.owasp.wrongsecrets.challenges.docker;
+package org.owasp.wrongsecrets.challenges.docker.authchallenge;
 
 import java.nio.charset.Charset;
 import java.util.UUID;

@@ -3,6 +3,7 @@ package org.owasp.wrongsecrets.challenges.docker;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
+import org.owasp.wrongsecrets.challenges.docker.authchallenge.Challenge37;
 
 public class Challenge37Test {
 
