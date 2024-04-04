@@ -44,7 +44,13 @@ public class Challenge29 extends FixedAnswerChallenge {
         content = Files.readAllBytes(Paths.get(privateKeyFilePath));
       } catch (IOException e2) {
         log.info("Could not get the file from {}", privateKeyFilePath);
-        throw e2;
+        privateKeyFilePath = "/var/helpers/RSAprivatekey.pem";
+        try {
+          content = Files.readAllBytes(Paths.get(privateKeyFilePath));
+        } catch (IOException e3) {
+          log.info("Could not get the file from {}", privateKeyFilePath);
+          throw e3;
+        }
       }
     }
     String privateKeyContent = new String(content, StandardCharsets.UTF_8);
