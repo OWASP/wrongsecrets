@@ -57,6 +57,7 @@ Want to play the other challenges? Read the instructions on how to set them up b
     -   [Local testing](#local-testing)
     -   [Local Automated testing](#Local-automated-testing)
 -   [Want to play, but are not allowed to install the tools?](#want-to-play-but-are-not-allowed-to-install-the-tools)
+-   [Want to disable challenges in your own release?](#want-to-disable-challenges-in-your-own-release)
 -   [Further reading on secrets management](#further-reading-on-secrets-management)
 
 ## Support
@@ -594,6 +595,30 @@ and run with AMD x64 emulation e.g.:
 ```bash
 docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:latest-no-vault
 ```
+
+## Want to disable challenges in your own release?
+
+If you want to run WrongSecrets but without certain challenges you don't want to present to others: please read this section.
+
+*_NOTE_* Please note that we do not deliver any support to your fork when you follow the process below. Please understand that license and copyright of the original application remain intact for your Fork.
+
+Requirements:
+- Have the JDK of Java 22 installed;
+- Have an account at a registry to which you can push your variant of the WrongSecrets container;
+
+Here are the steps you have to follow to create your own release of WrongSecrets with certain challenges disabled:
+1. Fork the repository.
+2. In `src/main/resources/wrong-secrets-configuration.yaml` remove the reference to the challenge you no longer want to have in your fork.
+3. In the root of the project run `./mvnw clean install`
+4. Now build the Docker image for your target of choice:
+
+```sh
+   docker buildx create --name mybuilder
+   docker buildx use mybuilder
+   docker buildx build --platform linux/amd64,linux/arm64 -t <registry/container-name>:<yourtag>-no-vault --build-arg "argBasedPassword='this is on your command line'" --build-arg "PORT=8081" --build-arg "argBasedVersion=<yourtag>" --build-arg "spring_profile=without-vault" --push
+   docker buildx build --platform linux/amd64,linux/arm64 -t <registry/container-name>:<yourtag>-kubernetes-vault--build-arg "argBasedPassword='this is on your command line'" --build-arg "PORT=8081" --build-arg "argBasedVersion=<yourtag>" --build-arg "spring_profile=kubernetes-vault" --push
+```
+
 
 ## Further reading on secrets management
 
