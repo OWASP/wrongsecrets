@@ -9,14 +9,14 @@ public class Challenge37Test {
 
   @Test
   void spoilerShouldGiveAnswer() {
-    var challenge = new Challenge37();
+    var challenge = new Challenge37("DEFAULT37");
     assertThat(challenge.spoiler().solution()).isNotEmpty();
     assertThat(challenge.answerCorrect(challenge.spoiler().solution())).isTrue();
   }
 
   @Test
   void incorrectAnswerShouldNotSolveChallenge() {
-    var challenge = new Challenge37();
+    var challenge = new Challenge37("DEFAULT37");
     assertThat(challenge.answerCorrect("wrong answer")).isFalse();
   }
 }

@@ -1,5 +1,7 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
+import static org.owasp.wrongsecrets.Challenges.ErrorResponses.DECRYPTION_ERROR;
+
 import java.nio.charset.StandardCharsets;
 import java.security.spec.AlgorithmParameterSpec;
 import javax.crypto.Cipher;
@@ -47,7 +49,7 @@ public class Challenge32 extends FixedAnswerChallenge {
           StandardCharsets.UTF_8);
     } catch (Exception e) {
       log.warn("Exception in Challenge32", e);
-      return "";
+      return DECRYPTION_ERROR;
     }
   }
 }
