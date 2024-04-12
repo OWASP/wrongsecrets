@@ -13,3 +13,5 @@
 10112	IGNORE	Session Management Response Identified
 10105	IGNORE	Authentication Credentials Captured
 90003	IGNORE	Sub Resource Integrity Attribute Missing
+10094	IGNORE	Base64 Disclosure
+90005	IGNORE	Sec-Fetch-Dest Header is Missing
