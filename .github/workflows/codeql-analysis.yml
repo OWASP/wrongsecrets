@@ -72,5 +72,5 @@ jobs:
           distribution: "temurin"
       - name: run mvn clean package
         run: ./mvnw clean package -Ddependency-check.skip=true -Dmaven.test.skip=true
-#      - name: Perform CodeQL Analysis blocked on https://github.com/github/roadmap/issues/919
-#        uses: github/codeql-action/analyze@v3
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
