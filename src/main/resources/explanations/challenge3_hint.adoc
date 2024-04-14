@@ -1,7 +1,7 @@
 You can solve this challenge by the following steps:
 
 1. Use `docker history`:
- - Download the container (`docker pull jeroenwillemsen/wrongsecrets:<TAGNAME-HERE>`) ,
+ - Download the container (`docker pull jeroenwillemsen/wrongsecrets:<TAGNAME-HERE>` where the tag can be `latest-no-vault` or a specific version you are using now) ,
 - Run `docker history --no-trunc  jeroenwillemsen/wrongsecrets:<TAGNAME-HERE>` with which you can find the arguments used for the container with the given tag.
 - Now try finding the `DOCKER_ENV_PASSWORD` .
 2. Visit the Docker-repository online:
