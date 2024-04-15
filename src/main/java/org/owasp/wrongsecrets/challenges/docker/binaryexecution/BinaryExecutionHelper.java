@@ -1,5 +1,7 @@
 package org.owasp.wrongsecrets.challenges.docker.binaryexecution;
 
+import static org.owasp.wrongsecrets.Challenges.ErrorResponses.EXECUTION_ERROR;
+
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Strings;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
@@ -19,7 +21,7 @@ public class BinaryExecutionHelper {
     Guess
   }
 
-  public static final String ERROR_EXECUTION = "Error with executing";
+  public static final String ERROR_EXECUTION = EXECUTION_ERROR;
   private final int challengeNumber;
 
   private Exception executionException;

@@ -5,6 +5,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 import lombok.extern.slf4j.Slf4j;
+import org.owasp.wrongsecrets.Challenges;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.beans.factory.annotation.Value;
@@ -38,7 +39,7 @@ public class Challenge18 implements Challenge {
     } catch (NoSuchAlgorithmException e) {
       log.warn("Exception thrown when calculating hash", e);
     }
-    return "No Hash Selected";
+    return Challenges.ErrorResponses.DECRYPTION_ERROR;
   }
 
   /** {@inheritDoc} */

@@ -1,5 +1,7 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
+import static org.owasp.wrongsecrets.Challenges.ErrorResponses.DECRYPTION_ERROR;
+
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -59,7 +61,7 @@ public class Challenge39 extends FixedAnswerChallenge {
       return new String(decryptedData, StandardCharsets.UTF_8);
     } catch (Exception e) {
       log.warn("there was an exception with decrypting content in challenge39", e);
-      return "error_decryption";
+      return DECRYPTION_ERROR;
     }
   }
 }

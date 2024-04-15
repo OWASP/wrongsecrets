@@ -1,5 +1,7 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
+import static org.owasp.wrongsecrets.Challenges.ErrorResponses.DECRYPTION_ERROR;
+
 import java.nio.charset.StandardCharsets;
 import java.security.spec.AlgorithmParameterSpec;
 import javax.crypto.Cipher;
@@ -33,7 +35,7 @@ public class Challenge26 implements Challenge {
   @Override
   public boolean answerCorrect(String answer) {
     String correctString = quickDecrypt(cipherText);
-    return answer.equals(correctString);
+    return answer.equals(correctString) && !DECRYPTION_ERROR.equals(answer);
   }
 
   private String quickDecrypt(String cipherText) {
@@ -48,7 +50,7 @@ public class Challenge26 implements Challenge {
           StandardCharsets.UTF_8);
     } catch (Exception e) {
       log.warn("Exception with Challenge 26", e);
-      return "";
+      return DECRYPTION_ERROR;
     }
   }
 }
