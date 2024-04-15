@@ -5,6 +5,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import lombok.extern.slf4j.Slf4j;
+import org.owasp.wrongsecrets.Challenges;
 import org.owasp.wrongsecrets.challenges.FixedAnswerChallenge;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -34,7 +35,7 @@ public class Challenge16 extends FixedAnswerChallenge {
           .strip();
     } catch (Exception e) {
       log.warn("Exception during file reading, defaulting to default without cloud environment", e);
-      return "if_you_see_this_please_use_docker_instead";
+      return Challenges.ErrorResponses.FILE_MOUNT_ERROR;
     }
   }
 }

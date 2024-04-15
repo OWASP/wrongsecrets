@@ -1,6 +1,7 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.owasp.wrongsecrets.Challenges.ErrorResponses.DECRYPTION_ERROR;
 
 import org.bouncycastle.util.encoders.Base64;
 import org.junit.jupiter.api.Test;
@@ -13,7 +14,7 @@ class Challenge29Test {
   @Test
   void spoilerShouldRevealAnswer() throws Exception {
     var challenge = new Challenge29();
-    assertThat(challenge.spoiler()).isNotEqualTo("decrypt_error");
+    assertThat(challenge.spoiler().solution()).isNotEqualTo(DECRYPTION_ERROR);
     assertThat(challenge.spoiler()).isEqualTo(new Spoiler(passcode));
   }
 

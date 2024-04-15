@@ -1,5 +1,7 @@
 package org.owasp.wrongsecrets.challenges.kubernetes;
 
+import static org.owasp.wrongsecrets.Challenges.ErrorResponses.DECRYPTION_ERROR;
+
 import com.google.common.base.Strings;
 import java.nio.charset.StandardCharsets;
 import java.security.spec.AlgorithmParameterSpec;
@@ -34,7 +36,7 @@ public class Challenge33 implements Challenge {
 
   @Override
   public boolean answerCorrect(String answer) {
-    return getSolution().equals(answer);
+    return getSolution().equals(answer) && !DECRYPTION_ERROR.equals(answer);
   }
 
   private String getSolution() {
@@ -59,7 +61,7 @@ public class Challenge33 implements Challenge {
           StandardCharsets.UTF_8);
     } catch (Exception e) {
       log.warn("Exception in Challenge33", e);
-      return "";
+      return DECRYPTION_ERROR;
     }
   }
 }

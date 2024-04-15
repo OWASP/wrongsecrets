@@ -1,5 +1,7 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
+import static org.owasp.wrongsecrets.Challenges.ErrorResponses.FILE_MOUNT_ERROR;
+
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -32,8 +34,11 @@ public class Challenge12 extends FixedAnswerChallenge {
     try {
       return Files.readString(Paths.get(dockerMountPath, "yourkey.txt"), StandardCharsets.UTF_8);
     } catch (Exception e) {
-      log.warn("Exception during file reading, defaulting to default without cloud environment", e);
-      return "if_you_see_this_please_use_docker_instead";
+      log.warn(
+          "Exception during file reading, defaulting to default without a docker container"
+              + " environment",
+          e);
+      return FILE_MOUNT_ERROR;
     }
   }
 }

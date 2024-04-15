@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
+import org.owasp.wrongsecrets.Challenges;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 
 class Challenge12Test {
@@ -17,7 +18,7 @@ class Challenge12Test {
     var challenge = new Challenge12(dir.toString());
 
     assertThat(challenge.answerCorrect("secretvalueWitFile")).isFalse();
-    assertThat(challenge.answerCorrect("if_you_see_this_please_use_docker_instead")).isTrue();
+    assertThat(challenge.answerCorrect(Challenges.ErrorResponses.FILE_MOUNT_ERROR)).isTrue();
   }
 
   @Test

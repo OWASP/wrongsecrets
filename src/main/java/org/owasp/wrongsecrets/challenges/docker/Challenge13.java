@@ -50,8 +50,6 @@ public class Challenge13 implements Challenge {
         || !isBase64(base64EncodedKey)
         || Strings.isNullOrEmpty(plainText)
         || Strings.isNullOrEmpty(cipherText)) {
-      // log.debug("Checking secret with values {}, {}, {}", base64EncodedKey, plainText,
-      // cipherText);
       return false;
     }
 

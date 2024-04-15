@@ -8,6 +8,7 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.GCMParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import lombok.extern.slf4j.Slf4j;
+import org.owasp.wrongsecrets.Challenges;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.beans.factory.annotation.Value;
@@ -37,7 +38,11 @@ public class Challenge15 implements Challenge {
   @Override
   public boolean answerCorrect(String answer) {
     String correctString = quickDecrypt(ciphterText);
-    return answer.equals(correctString) || minimummatch_found(answer);
+    if (!correctString.equals(Challenges.ErrorResponses.DECRYPTION_ERROR)) {
+      return answer.equals(correctString) || minimummatch_found(answer);
+    } else {
+      return false;
+    }
   }
 
   private boolean minimummatch_found(String answer) {
@@ -73,7 +78,7 @@ public class Challenge15 implements Challenge {
       return new String(plainTextBytes, StandardCharsets.UTF_8);
     } catch (Exception e) {
       log.warn("Exception with Challenge 15", e);
-      return "";
+      return Challenges.ErrorResponses.DECRYPTION_ERROR;
     }
   }
 
