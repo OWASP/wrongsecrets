@@ -1,5 +1,6 @@
 package org.owasp.wrongsecrets.challenges.docker.authchallenge;
 
+import com.google.common.base.Strings;
 import java.nio.charset.Charset;
 import java.util.UUID;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +23,7 @@ public class Challenge37 extends FixedAnswerChallenge {
   private static final String password = "YjNCbGJpQnpaWE5oYldVPQo=";
 
   public Challenge37(@Value("${DEFAULT37}") String secret) {
-    if ("DEFAULT37".equals(secret)) {
+    if ("DEFAULT37".equals(secret) || Strings.isNullOrEmpty(secret)) {
       this.secret = UUID.randomUUID().toString();
     } else {
       this.secret = secret;
