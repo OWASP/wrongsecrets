@@ -1,5 +1,4 @@
 import SpoilersPage from '../pages/spoilersPage'
-import ChallengesPage from '../pages/challengesPage'
 
 describe('Spoiler Tests', () => {
   beforeEach(() => {
@@ -14,10 +13,10 @@ describe('Spoiler Tests', () => {
         cy.dataCy(SpoilersPage.SPOILER_TITLE).should('not.be.empty')
         cy.dataCy(SpoilersPage.SPOILER_ANSWER).should('be.visible')
         cy.dataCy(SpoilersPage.SPOILER_ANSWER).should('not.be.empty')
-        cy.dataCy(ChallengesPage.SPOILER_ANSWER).should('not.contain', 'Error Encrypting')
-        cy.dataCy(ChallengesPage.SPOILER_ANSWER).should('not.contain', 'Error Decrypting')
-        cy.dataCy(ChallengesPage.SPOILER_ANSWER).should('not.contain', 'Error Executing executable')
-        cy.dataCy(ChallengesPage.SPOILER_ANSWER).should('not.contain', 'Error reading secret')
+        cy.dataCy(SpoilersPage.SPOILER_ANSWER).should('not.contain', 'Error Encrypting')
+        cy.dataCy(SpoilersPage.SPOILER_ANSWER).should('not.contain', 'Error Decrypting')
+        cy.dataCy(SpoilersPage.SPOILER_ANSWER).should('not.contain', 'Error Executing executable')
+        cy.dataCy(SpoilersPage.SPOILER_ANSWER).should('not.contain', 'Error reading secret')
       })
     })
   })
