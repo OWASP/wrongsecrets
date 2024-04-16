@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Test minikube script (k8s&vault)
+name: Test Heroku with cypress
 
 # Controls when the workflow will run
 on:
@@ -16,7 +16,7 @@ permissions:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   test-heroku:
-    name: Test heroku with cypress
+    name: run tests
     runs-on: ubuntu-latest
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
