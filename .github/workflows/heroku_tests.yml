@@ -24,3 +24,8 @@ jobs:
       - name: Run Tests
         run: |
           cd src/test/e2e && npx cypress run --config-file src/test/K8s-tests/cypress.config.js && minikube delete
+      - uses: actions/upload-artifact@v4
+        if: success() || failure()
+        with:
+          name: e2e results
+          path: src/test/e2e/cypress/reports/mochawesome/

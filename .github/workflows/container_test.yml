@@ -26,3 +26,8 @@ jobs:
       - uses: actions/checkout@v4
       - name: Navigate to test script and run
         run: cd .github/scripts && bash docker-create.sh -t
+      - uses: actions/upload-artifact@v4
+        if: success() || failure()
+        with:
+          name: e2e results
+          path: src/test/e2e/cypress/reports/mochawesome/
