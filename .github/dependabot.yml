@@ -25,6 +25,17 @@ updates:
     schedule:
       interval: "monthly"
 
+  #cypress updates -1
+  - package-ecosystem: "npm"
+    directory: "/src/test/e2e"
+    schedule:
+      interval: "monthly"
+
+  #cypress updates -2
+  - package-ecosystem: "npm"
+    directory: "/src/test/K8s-tests"
+    schedule:
+      interval: "monthly"
   # check our npm for dev
   - package-ecosystem: "npm"
     directory: "/"
