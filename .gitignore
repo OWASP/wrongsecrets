@@ -81,6 +81,9 @@ node_modules
 src/test/e2e/cypress/videos
 src/test/e2e/cypress/screenshots
 src/test/e2e/cypress/reports
+src/test/k8s-tests/cypress/videos
+src/test/k8s-tests/cypress/screenshots
+src/test/k8s-tests/cypress/reports
 cypress/downloads
 py_env
 tmp/
