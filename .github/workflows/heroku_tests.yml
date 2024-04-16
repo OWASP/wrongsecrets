@@ -23,7 +23,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Run Tests
         run: |
-          cd src/test/e2e && npx cypress run --config-file src/test/K8s-tests/cypress.config.js && minikube delete
+          cd src/test/e2e && npx cypress run --config-file cypress.config.heroku.js
       - uses: actions/upload-artifact@v4
         if: success() || failure()
         with:
