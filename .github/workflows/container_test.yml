@@ -30,4 +30,4 @@ jobs:
         if: success() || failure()
         with:
           name: e2e results
-          path: src/test/e2e/cypress/reports/mochawesome/
+          path: src/test/e2e/cypress/reports/mochawesome
