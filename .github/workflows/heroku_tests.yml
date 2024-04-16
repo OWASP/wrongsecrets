@@ -23,7 +23,9 @@ jobs:
       - uses: actions/checkout@v4
       - name: Run Tests
         run: |
-          cd src/test/e2e && npx cypress run --config-file cypress.config.heroku.js
+          cd src/test/e2e
+          npm install cypress
+          npx cypress run --config-file cypress.config.heroku.js
       - uses: actions/upload-artifact@v4
         if: success() || failure()
         with:
