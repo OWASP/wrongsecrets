@@ -58,6 +58,7 @@ jobs:
       - name: Run Tests
         run: |
           cd src/test/K8s-tests
+          npm install
           npx cypress run
           minikube delete
       - uses: actions/upload-artifact@v4
