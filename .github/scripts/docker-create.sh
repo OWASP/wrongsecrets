@@ -73,6 +73,9 @@ Heroku_publish_demo() {
     export TEST_DATA=$(echo -n $RAW_TEST)
     curl --fail 'https://arcane-scrubland-42646.herokuapp.com/token'  --data-raw "grant_type=client_credentials&client_id=WRONGSECRET_CLIENT_ID&client_secret=$TEST_DATA"
     echo $?
+    echo "testing arcane with cypress"
+    cd ../../src/test/e2e
+    npx cypress run --config-file cypress.config.arcane.js
     exit
 }
 
@@ -90,6 +93,9 @@ Heroku_publish_prod(){
     export TEST_DATA=$(echo -n $RAW_TEST)
     curl --fail 'https://wrongsecrets.herokuapp.com/token'  --data-raw "grant_type=client_credentials&client_id=WRONGSECRET_CLIENT_ID&client_secret=$TEST_DATA"
     echo $?
+    echo "testing heroku with cypress"
+    cd ../../src/test/e2e
+    npx cypress run --config-file cypress.config.heroku.js
     exit
 }
 
@@ -404,6 +410,9 @@ test() {
         fi
         echo "testing curl for webjar caching"
         curl -I  'http://localhost:8080/webjars/bootstrap/5.3.3/css/bootstrap.min.css'
+        echo "testing with cypress (requires node20)"
+        cd ../../src/test/e2e
+        npx cypress run
         echo "Testing complete"
     else
         return

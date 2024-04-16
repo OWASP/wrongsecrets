@@ -1,0 +1,26 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Test minikube script (k8s&vault)
+
+# Controls when the workflow will run
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  test-heroku:
+    name: Test heroku with cypress
+    runs-on: ubuntu-latest
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Tests
+        run: |
+          cd src/test/e2e && npx cypress run --config-file src/test/K8s-tests/cypress.config.js && minikube delete
