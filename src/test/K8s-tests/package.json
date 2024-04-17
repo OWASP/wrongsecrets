@@ -11,7 +11,7 @@
     "eslint-plugin-cypress": "^2.15.1",
     "eslint-plugin-import": "^2.29.0",
     "eslint-plugin-jest": "^28.2.0",
-    "eslint-plugin-n": "^16.2.0",
+    "eslint-plugin-n": "^17.2.1",
     "eslint-plugin-promise": "^6.1.1",
     "mocha": "^10.3.0"
   },
