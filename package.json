@@ -4,6 +4,7 @@
     "eslint": "^8.57.0",
     "eslint-plugin-chai-friendly": "^0.7.4",
     "eslint-plugin-cypress": "^2.15.2",
+    "eslint-config-standard": "^17.1.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-jest": "^28.2.0",
     "eslint-plugin-n": "^17.2.1",
