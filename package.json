@@ -6,7 +6,7 @@
     "eslint-plugin-chai-friendly": "^0.7.4",
     "eslint-plugin-cypress": "^2.15.2",
     "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-jest": "^27.9.0",
+    "eslint-plugin-jest": "^28.2.0",
     "eslint-plugin-n": "^17.2.1",
     "eslint-plugin-promise": "^6.1.1"
   },
