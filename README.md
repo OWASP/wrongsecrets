@@ -160,7 +160,7 @@ Make sure you have the following installed:
 -   Docker [Install from here](https://docs.docker.com/get-docker/)
 -   Minikube [Install from here](https://minikube.sigs.k8s.io/docs/start/)
 
-The K8S setup currently is based on using Minikube for local fun:
+The K8S setup currently is based on using Minikube for local fun. You can use the commands below from the root of the project:
 
 ```bash
     minikube start
@@ -171,6 +171,12 @@ The K8S setup currently is based on using Minikube for local fun:
     while [[ $(kubectl get pods -l app=secret-challenge -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do echo "waiting for secret-challenge" && sleep 2; done
     kubectl expose deployment secret-challenge --type=LoadBalancer --port=8080
     minikube service secret-challenge
+```
+
+Alternatively you can do :
+
+```bash
+    ./k8s-vault-minkube-start.sh
 ```
 
 now you can use the provided IP address and port to further play with the K8s variant (instead of localhost).
