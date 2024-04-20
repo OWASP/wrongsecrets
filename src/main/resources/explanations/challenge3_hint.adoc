@@ -16,7 +16,7 @@ You can solve this challenge by the following alternative solutions:
 4. Exec into the container and dump the ENV-vars:
  - Start the container locally with `docker run jeroenwillemsen/wrongsecrets:<TAGNAME-HERE>`
  - Find the container id by doing `docker ps` in a next terminal
- - Do `docker exec -it <container id> "/bin/sh"`
+ - Do `docker exec -it <container id> sh`
  - In the container do `env` .
 
 5. Use `docker inspect` to find the ENV-vars:

@@ -1,4 +1,4 @@
-You can solve this challenge by the following steps:
+You can solve this challenge by the following alternative solutions:
 
 1. Find the secret in the front-end
 - Use the developer tools of the browser to see the HTML code of this challenge.

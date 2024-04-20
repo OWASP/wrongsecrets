@@ -1,11 +1,11 @@
-You can solve this challenge by the following steps:
+You can solve this challenge by the following alternative solutions:
 
 1. Look at the storage in Etherscan:
-- Look under the contract creation transaction on https://goerli.etherscan.io/tx/0x497b71a1fd4c57509bfecc2114ec649387fe669c23a3a7e97961f389444d9561[Etherscan]
+- Look under the contract creation transaction on https://goerli.etherscan.io/tx/0x497b71a1fd4c57509bfecc2114ec649387fe669c23a3a7e97961f389444d9561[Etherscan]. Note: if it errors, just enter `https://goerli.etherscan.io/tx/0x497b71a1fd4c57509bfecc2114ec649387fe669c23a3a7e97961f389444d9561` in the search box.
 - Go to state and look at storage.
 
 2. Look at the input data in Etherscan:
-- Look under the contract creation transaction on https://goerli.etherscan.io/tx/0x497b71a1fd4c57509bfecc2114ec649387fe669c23a3a7e97961f389444d9561[Etherscan]
+- Look under the contract creation transaction on https://goerli.etherscan.io/tx/0x497b71a1fd4c57509bfecc2114ec649387fe669c23a3a7e97961f389444d9561[Etherscan]. Note: if it errors, just enter `https://goerli.etherscan.io/tx/0x497b71a1fd4c57509bfecc2114ec649387fe669c23a3a7e97961f389444d9561` in the search box.
 - Have a look at the input data.
 
 3. Use Infura with web3js at Infura:
@@ -14,7 +14,7 @@ You can solve this challenge by the following steps:
 
 4. Do a storage request at Infura:
 - Create an Infura key at https://infura.io/[Infura].
--  Read the storage at position 0 for the contract like:
+- Read the storage at position 0 for the contract like:
 
     curl https://goerli.infura.io/v3/${<your-infura-key>} \
     -X POST \
