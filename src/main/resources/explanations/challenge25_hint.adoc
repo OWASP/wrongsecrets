@@ -2,7 +2,7 @@ You can solve this challenge by the following alternative solutions:
 
 1. Look at the storage in Etherscan:
 - Look under the contract creation transaction on https://goerli.etherscan.io/tx/0x497b71a1fd4c57509bfecc2114ec649387fe669c23a3a7e97961f389444d9561[Etherscan]. Note: if it errors, just enter `https://goerli.etherscan.io/tx/0x497b71a1fd4c57509bfecc2114ec649387fe669c23a3a7e97961f389444d9561` in the search box.
-- Go to state and look at storage.
+- Go to state and look at storage: copy the new value and hex decode it.
 
 2. Look at the input data in Etherscan:
 - Look under the contract creation transaction on https://goerli.etherscan.io/tx/0x497b71a1fd4c57509bfecc2114ec649387fe669c23a3a7e97961f389444d9561[Etherscan]. Note: if it errors, just enter `https://goerli.etherscan.io/tx/0x497b71a1fd4c57509bfecc2114ec649387fe669c23a3a7e97961f389444d9561` in the search box.
