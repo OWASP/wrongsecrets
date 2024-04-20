@@ -1,10 +1,10 @@
-You can solve this challenge by the following steps:
+You can solve this challenge by the following alternative solutions:
 
 1. Exec into the container and go over the files:
 - First check the actual Dockerfile and see what COPY operations happen. Note that you can get this data using `docker history` (see challenge 3&4 as well) when you have no Dockerfile but only an image.
 - Start the container locally with `docker run jeroenwillemsen/wrongsecrets:<TAGNAME-HERE>`
 - Find the container id by doing `docker ps` in a next terminal
-- Do `docker exec -it <container id> "/bin/sh"`
+- Do `docker exec -it <container id> "sh"`
 - In the container, go to target directory of the COPY operation and look for the secret. Forgot which secret it was? https://github.com/OWASP/wrongsecrets/blob/master/src/main/java/org/owasp/wrongsecrets/challenges/docker/Challenge12.java[Check the code of challenge12]!
 2. Use https://github.com/deepfence/SecretScanner[Deepfence secret scanner]
 - Download the target version of the wrongsecrets container: `docker pull jeroenwillemsen/wrongsecrets:<VERSION YOU ARE PLAYING-HERE>`

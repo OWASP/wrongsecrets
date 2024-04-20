@@ -1,6 +1,6 @@
 This challenge is specifically looking at MD5 and SHA1 hashes without salting. Are these un-crackable?
 
-You can solve this challenge using the following steps:
+You can solve this challenge using the following solutions:
 
 1. For the first hash (MD5):
 - Use a tool such as Hashcat:

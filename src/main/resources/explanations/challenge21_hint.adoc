@@ -1,7 +1,7 @@
 This challenge is specifically looking at a secret in a Go binary
 
 This one is a little harder, as we used Cobra to create the CLI, introducing some more overhead.
-You can solve this challenge using the following steps:
+You can solve this challenge using the following alternative solutions:
 
 1. Find the secrets with https://ghidra-sre.org/[Ghidra].
 - Install https://ghidra-sre.org/[Ghidra].
@@ -16,3 +16,5 @@ You can solve this challenge using the following steps:
 - Launch r2 analysis with `$ r2 -A wrongsecrets-golang`
 - Start a search for the string with `/w secret`
 - Now take the results and look for possible answers, how about `/w his is the secret in Golang` ? You should be able to find the secret now.
+
+Don't want to install the tools? check the https://github.com/OWASP/wrongsecrets/tree/master?tab=readme-ov-file#want-to-play-but-are-not-allowed-to-install-the-tools[WrongSecrets Desktop container]!

@@ -1,6 +1,6 @@
-You can solve this challenge by the following steps:
+You can solve this challenge by the following alternative solutions:
 
-Note this challenge requires you to install https://www.keepassx.org/[Keepass(X)] on your system to open the kdbx file.
+Note this challenge requires you to install https://www.keepassx.org/[Keepass(X)] on your system to open the kdbx file. alternatively you can use the https://github.com/OWASP/wrongsecrets?tab=readme-ov-file#want-to-play-but-are-not-allowed-to-install-the-tools[WrongSecrets Deskop] to solve the challenge.
 
 1. Get the Keepass file from the Docker container and open it.
  - take a look at the Dockerfile to see where the KeePass file has been copied to.
