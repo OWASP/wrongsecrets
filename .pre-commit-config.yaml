@@ -9,14 +9,14 @@ ci:
   submodules: false
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.5.0
+    rev: v4.6.0
     hooks:
       - id: check-yaml
       - id: end-of-file-fixer
         exclude: ^(src/test/resources/yourkey.txt|src/test/resources/secondkey.txt)
       - id: trailing-whitespace
   - repo: https://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.86.0
+    rev: v1.89.0
     hooks:
       - id: terraform_fmt
       - id: terraform_tflint
@@ -36,7 +36,7 @@ repos:
           - "--args=--only=terraform_workspace_remote"
       - id: terraform_docs
   - repo: https://github.com/alessandrojcm/commitlint-pre-commit-hook
-    rev: v9.10.0
+    rev: v9.15.0
     hooks:
       - id: commitlint
         stages: [commit-msg]
@@ -46,14 +46,14 @@ repos:
       - id: maven
         args: [ 'clean compile' ]
       - id: maven-spotless-apply
-  - repo: https://github.com/eslint/eslint
-    rev: v8.56.0
-    hooks:
-      - id: eslint
-        args:
-          - "--fix"
+  # - repo: https://github.com/eslint/eslint
+  #   rev: v9.0.0
+  #   hooks:
+  #     - id: eslint
+  #       args:
+  #         - "--fix"
   - repo: https://github.com/psf/black
-    rev: 24.1.1
+    rev: 24.4.0
     hooks:
     - id: black
       language_version: python3.10
