@@ -1,7 +1,8 @@
-You can find the previous state one of two ways.
+You can find the previous state one of two alternative solutions:
 
 1. Find the previous block via a request to https://infura.io/[Infura]:
 - Find the block number for any block after the contract was created and before it was updated.
+- Create an Infura key at https://infura.io/[Infura].
 - Search for the storage state of the contract for that block. The below command is an example vs the infura API:
 
     curl https://goerli.infura.io/v3/${your-infura-key} \

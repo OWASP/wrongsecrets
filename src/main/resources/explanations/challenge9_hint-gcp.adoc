@@ -1,4 +1,4 @@
-You can solve this challenge by the following steps:
+You can solve this challenge by the following alternative solutions:
 
 1. Dig through terraform.tfstate with Trufflehog:
 - After you have build the infrastructure following the instructions in the README of the `gcp` folder, stay in that folder and run `trufflehog3 --output=terraform-infra.json --format=json .`
@@ -11,5 +11,5 @@ You can solve this challenge by the following steps:
 3. Find the secret by exec-ing into the POD
 - Make sure you have Kubectl installed as defined in the README.MD & make sure kubectl is configured to send commands to the right cluster.
 - Now do `kubectl get pods`. Here you see all the Pods active in the namespace you are in, which is for this app normally `default` (unless otherwise specified by your administrator/trainer).
-- Now for your instance of the WrongSecrets pod, do `kubectl exec -it secret-challenge-<rest of the name of the pod from the prev.step> -- /bin/sh`.
+- Now for your instance of the WrongSecrets pod, do `kubectl exec -it secret-challenge-<rest of the name of the pod from the prev.step> -- sh`.
 - Examine the data which you can find in `/mnt/secrets-store`
