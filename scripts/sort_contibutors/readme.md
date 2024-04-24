@@ -5,13 +5,21 @@ This script is used to generate the contributor-list for home.html and for the v
 
 ## Installation and run
 
-First of all, you need to setup the ```.env``` file which contains the USER_TOKEN variable. You may follow the following steps:
-* [Click here](https://github.com/settings/tokens?type=beta) to setup a Fine-grained token
-* Create a token. Note that the *USER_TOKEN* requires "repository access" only
-* Open the terminal in the same directory as the *main.py* script and type: ```echo USER_TOKEN=github_pat_TOKEN > .env```
+1. Make sure you get a fine grained access token from github to read the repositories (https://github.com/settings/tokens?type=beta):
+- go to https://github.com/settings/tokens?type=beta
+- create a token and make sure it has "repository access" only
+- store the token in a safe secrets manager and export it before you run it (`export USER_TOKEN=github_pat<redacted>`).
 
-This script does not use external libraries so just run it directly, and to do so open the terminal and type:
+2. When on macos, install the requests library if you are using python 3.12 or higher:
 
 ```sh
+brew install pipenv
+pipenv install requests
+```
+
+3. Now run the script;
+
+```sh
+pipenv shell
 python3 main.py
 ```

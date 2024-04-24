@@ -4,7 +4,7 @@
 
 [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Want%20to%20dive%20into%20secrets%20management%20and%20do%20some%20hunting?%20try%20this&url=https://github.com/OWASP/wrongsecrets&hashtags=secretsmanagement,secrets,hunting,p0wnableapp,OWASP,WrongSecrets) [<img src="https://img.shields.io/badge/-MASTODON-%232B90D9?style=for-the-badge&logo=mastodon&logoColor=white" width=84>](https://tootpick.org/#text=Want%20to%20dive%20into%20secrets%20management%20and%20do%20some%20hunting?%20try%20this%0A%0Ahttps://github.com/OWASP/wrongsecrets%20%23secretsmanagement,%20%23secrets,%20%23hunting,%20%23p0wnableapp,%20%23OWASP,%20%23WrongSecrets) [<img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" width=80>](https://www.linkedin.com/shareArticle/?url=https://www.github.com/OWASP/wrongsecrets&title=OWASP%20WrongSecrets)
 
-[![Java checkstyle and testing](https://github.com/OWASP/wrongsecrets/actions/workflows/main.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/main.yml) [![Pre-commit](https://github.com/OWASP/wrongsecrets/actions/workflows/pre-commit.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/pre-commit.yml) [![Terraform FMT](https://github.com/OWASP/wrongsecrets/actions/workflows/terraform.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/terraform.yml) [![CodeQL](https://github.com/OWASP/wrongsecrets/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/codeql-analysis.yml) [![Dead Link Checker](https://github.com/OWASP/wrongsecrets/actions/workflows/link_checker.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/link_checker.yml)[![Javadoc and Swaggerdoc generator](https://github.com/OWASP/wrongsecrets/actions/workflows/java_swagger_doc.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/java_swagger_doc.yml)
+[![Java checkstyle and testing](https://github.com/OWASP/wrongsecrets/actions/workflows/main.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/main.yml) [![Pre-commit](https://github.com/OWASP/wrongsecrets/actions/workflows/pre-commit.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/pre-commit.yml) [![Terraform FMT](https://github.com/OWASP/wrongsecrets/actions/workflows/terraform.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/terraform.yml) [![CodeQL](https://github.com/OWASP/wrongsecrets/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/codeql-analysis.yml) [![Dead Link Checker](https://github.com/OWASP/wrongsecrets/actions/workflows/link_checker.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/link_checker.yml)[![Javadoc and Swaggerdoc generator](https://github.com/OWASP/wrongsecrets/actions/workflows/java_swagger_doc.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/java_swagger_doc.yml) [![Test Heroku with cypress](https://github.com/OWASP/wrongsecrets/actions/workflows/heroku_tests.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/heroku_tests.yml)
 
 [![Test minikube script (k8s)](https://github.com/OWASP/wrongsecrets/actions/workflows/minikube-k8s-test.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/minikube-k8s-test.yml) [![Test minikube script (k8s&vault)](https://github.com/OWASP/wrongsecrets/actions/workflows/minikube-vault-test.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/minikube-vault-test.yml) [![Docker container test](https://github.com/OWASP/wrongsecrets/actions/workflows/container_test.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/container_test.yml)[![Test container on podman and Colima](https://github.com/OWASP/wrongsecrets/actions/workflows/container-alts-test.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/container-alts-test.yml)
 [![DAST with ZAP](https://github.com/OWASP/wrongsecrets/actions/workflows/dast-zap-test.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/dast-zap-test.yml)
@@ -57,6 +57,7 @@ Want to play the other challenges? Read the instructions on how to set them up b
     -   [Local testing](#local-testing)
     -   [Local Automated testing](#Local-automated-testing)
 -   [Want to play, but are not allowed to install the tools?](#want-to-play-but-are-not-allowed-to-install-the-tools)
+-   [Want to disable challenges in your own release?](#want-to-disable-challenges-in-your-own-release)
 -   [Further reading on secrets management](#further-reading-on-secrets-management)
 
 ## Support
@@ -68,7 +69,7 @@ an [issue](https://github.com/OWASP/wrongsecrets/issues) , or
 use [discussions](https://github.com/OWASP/wrongsecrets/discussions). Please note that this is an OWASP volunteer
 based project, so it might take a little while before we respond.
 
-Copyright (c) 2020-2023 Jeroen Willemsen and WrongSecrets contributors.
+Copyright (c) 2020-2024 Jeroen Willemsen and WrongSecrets contributors.
 
 ## Basic docker exercises
 
@@ -159,7 +160,7 @@ Make sure you have the following installed:
 -   Docker [Install from here](https://docs.docker.com/get-docker/)
 -   Minikube [Install from here](https://minikube.sigs.k8s.io/docs/start/)
 
-The K8S setup currently is based on using Minikube for local fun:
+The K8S setup currently is based on using Minikube for local fun. You can use the commands below from the root of the project:
 
 ```bash
     minikube start
@@ -170,6 +171,12 @@ The K8S setup currently is based on using Minikube for local fun:
     while [[ $(kubectl get pods -l app=secret-challenge -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do echo "waiting for secret-challenge" && sleep 2; done
     kubectl expose deployment secret-challenge --type=LoadBalancer --port=8080
     minikube service secret-challenge
+```
+
+Alternatively you can do :
+
+```bash
+    ./k8s-vault-minkube-start.sh
 ```
 
 now you can use the provided IP address and port to further play with the K8s variant (instead of localhost).
@@ -289,10 +296,11 @@ Contributors:
 - [Diamond Rivero @diamant3](https://www.github.com/diamant3)
 - [Norbert Wolniak @nwolniak](https://www.github.com/nwolniak)
 - [Adarsh A @adarsh-a-tw](https://www.github.com/adarsh-a-tw)
+- [Shubham Patel @Shubham-Patel07](https://www.github.com/Shubham-Patel07)
 - [Filip Chyla @fchyla](https://www.github.com/fchyla)
-- [Dmitry Litosh @Dlitosh](https://www.github.com/Dlitosh)
-- [Vineeth Jagadeesh @djvinnie](https://www.github.com/djvinnie)
 - [Turjo Chowdhury @turjoc120](https://www.github.com/turjoc120)
+- [Vineeth Jagadeesh @djvinnie](https://www.github.com/djvinnie)
+- [Dmitry Litosh @Dlitosh](https://www.github.com/Dlitosh)
 - [Josh Grossman @tghosth](https://www.github.com/tghosth)
 - [alphasec @alphasecio](https://www.github.com/alphasecio)
 - [CaduRoriz @CaduRoriz](https://www.github.com/CaduRoriz)
@@ -300,11 +308,13 @@ Contributors:
 - [Mike Woudenberg @mikewoudenberg](https://www.github.com/mikewoudenberg)
 - [Spyros @northdpole](https://www.github.com/northdpole)
 - [RubenAtBinx @RubenAtBinx](https://www.github.com/RubenAtBinx)
-- [Alex Bender @alex-bender](https://www.github.com/alex-bender)
-- [Nicolas Humblot @nhumblot](https://www.github.com/nhumblot)
-- [Rick M @kingthorin](https://www.github.com/kingthorin)
-- [Shlomo Zalman Heigh @szh](https://www.github.com/szh)
+- [Jeff Tong @Wind010](https://www.github.com/Wind010)
 - [Fern @f3rn0s](https://www.github.com/f3rn0s)
+- [Shlomo Zalman Heigh @szh](https://www.github.com/szh)
+- [Rick M @kingthorin](https://www.github.com/kingthorin)
+- [Nicolas Humblot @nhumblot](https://www.github.com/nhumblot)
+- [Danny Lloyd @dannylloyd](https://www.github.com/dannylloyd)
+- [Alex Bender @alex-bender](https://www.github.com/alex-bender)
 
 Testers:
 
@@ -440,11 +450,11 @@ You can use the OWASP Dependency-checker by calling `mvn dependency-check:aggreg
 
 ### Get the project started in IntelliJ IDEA
 
-Requirements: make sure you have the following tools installed: [Docker](https://www.docker.com/products/docker-desktop/), [Java21 JDK](https://jdk.java.net/21/), [NodeJS 20](https://nodejs.org/en/download/current) and [IntelliJ IDEA](https://www.jetbrains.com/idea/download).
+Requirements: make sure you have the following tools installed: [Docker](https://www.docker.com/products/docker-desktop/), [Java22 JDK](https://jdk.java.net/22/), [NodeJS 20](https://nodejs.org/en/download/current) and [IntelliJ IDEA](https://www.jetbrains.com/idea/download).
 
 1. Fork and clone the project as described in the [documentation](https://github.com/OWASP/wrongsecrets/blob/master/CONTRIBUTING.md).
 2. Import the project in IntelliJ (e.g. import as mvn project / local sources)
-3. Go to the project settings and make sure it uses Java21 (And that the JDK can be found)
+3. Go to the project settings and make sure it uses Java22 (And that the JDK can be found)
 4. Go to the IDE settings>Language & Frameworks > Lombok and make sure Lombok processing is enabled
 5. Open the Maven Tab in your IDEA and run "Reload All Maven Projects" to make the system sync and download everything. Next, in that same tab use the "install" option as part of the OWASP WrongSecrets Lifecycle to genereate the asciidoc and such.
 6. Now run the `main` method in `org.owasp.wrongsecrets.WrongSecretsApplication.java`. This should fail with a stack trace.
@@ -592,6 +602,30 @@ and run with AMD x64 emulation e.g.:
 ```bash
 docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:latest-no-vault
 ```
+
+## Want to disable challenges in your own release?
+
+If you want to run WrongSecrets but without certain challenges you don't want to present to others: please read this section.
+
+*_NOTE_* Please note that we do not deliver any support to your fork when you follow the process below. Please understand that license and copyright of the original application remain intact for your Fork.
+
+Requirements:
+- Have the JDK of Java 22 installed;
+- Have an account at a registry to which you can push your variant of the WrongSecrets container;
+
+Here are the steps you have to follow to create your own release of WrongSecrets with certain challenges disabled:
+1. Fork the repository.
+2. In `src/main/resources/wrong-secrets-configuration.yaml` remove the reference to the challenge you no longer want to have in your fork.
+3. In the root of the project run `./mvnw clean install`
+4. Now build the Docker image for your target of choice:
+
+```sh
+   docker buildx create --name mybuilder
+   docker buildx use mybuilder
+   docker buildx build --platform linux/amd64,linux/arm64 -t <registry/container-name>:<yourtag>-no-vault --build-arg "argBasedPassword='this is on your command line'" --build-arg "PORT=8081" --build-arg "argBasedVersion=<yourtag>" --build-arg "spring_profile=without-vault" --push
+   docker buildx build --platform linux/amd64,linux/arm64 -t <registry/container-name>:<yourtag>-kubernetes-vault--build-arg "argBasedPassword='this is on your command line'" --build-arg "PORT=8081" --build-arg "argBasedVersion=<yourtag>" --build-arg "spring_profile=kubernetes-vault" --push
+```
+
 
 ## Further reading on secrets management
 

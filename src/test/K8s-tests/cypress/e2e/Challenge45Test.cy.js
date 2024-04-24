@@ -5,6 +5,7 @@ describe('Challenge45 Tests', () => {
     cy.get('[data-cy=spoiler-answer]').invoke('text').then(spoilerAnswer => {
       // Asserting that the spoiler is not a default value
       expect(spoilerAnswer.trim()).to.not.equal('if_you_see_this_please_use_K8S_and_Vault')
+      expect(spoilerAnswer.trim()).to.not.equal('ACTUAL_ANSWER_CHALLENGE7')
       expect(spoilerAnswer.trim()).to.not.be.empty
 
       // Visit the challenge page and submit the spoiler as the answer

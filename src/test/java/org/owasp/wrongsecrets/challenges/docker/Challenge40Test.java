@@ -1,6 +1,7 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
 import static org.mockito.Mockito.when;
+import static org.owasp.wrongsecrets.Challenges.ErrorResponses.DECRYPTION_ERROR;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -27,7 +28,7 @@ class Challenge40Test {
     var challenge = new Challenge40(resource);
     Assertions.assertThat(challenge.spoiler().solution()).isNotEmpty();
     Assertions.assertThat(challenge.answerCorrect(challenge.spoiler().solution())).isTrue();
-    Assertions.assertThat(challenge.answerCorrect("error_decryption")).isFalse();
+    Assertions.assertThat(challenge.answerCorrect(DECRYPTION_ERROR)).isFalse();
   }
 
   @Test

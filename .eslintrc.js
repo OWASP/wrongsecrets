@@ -7,16 +7,12 @@ module.exports = {
     es2021: true
   },
   extends: [
-    'standard',
     'plugin:chai-friendly/recommended'
   ],
   overrides: [
   ],
   parserOptions: {
     ecmaVersion: 'latest'
-  },
-  rules: {
-    'chai-friendly/no-unused-expressions': 'off'
   },
   plugins: [
     'cypress',

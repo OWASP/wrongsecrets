@@ -1,0 +1,33 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Test Heroku with cypress
+
+# Controls when the workflow will run
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  test-heroku:
+    name: run tests
+    runs-on: ubuntu-latest
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Tests
+        run: |
+          cd src/test/e2e
+          npm install cypress
+          npx cypress run --config-file cypress.config.heroku.js
+      - uses: actions/upload-artifact@v4
+        if: success() || failure()
+        with:
+          name: e2e results
+          path: src/test/e2e/cypress/reports/mochawesome/

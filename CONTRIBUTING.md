@@ -123,8 +123,8 @@ Please be sure to take a careful look at our [Code of Conduct](https://github.co
 2. **Node.Js 20**
    [_Node.Js_](https://nodejs.org/en/) is an open-source library and a cross-platform JavaScript **runtime environment** specifically for running web applications outside one's browser.
 
-3. **JDK-21**
-   [_JDK_](https://www.oracle.com/java/technologies/downloads/#java21) is a tool used in development and testing programs written in the Java programming language.
+3. **JDK-22**
+   [_JDK_](https://www.oracle.com/java/technologies/downloads/#java22) is a tool used in development and testing programs written in the Java programming language.
 
 4. **IntelliJ IDEA**
    [_IntelliJ IDEA_](https://www.jetbrains.com/idea/download) is an integrated development environment basically an **IDE** written in Java for developing software written in Java, Kotlin, Groovy etc.
@@ -190,9 +190,9 @@ Select **_google-java-format Settings_** and click enable.
 
 Open **_File > Project structure _**.
 
-In the tab `Project` make sure that an SDK of version `21` is selected (e.g. `openjdk-21`, `oraclejdk-21` or just `21` depending on which Java JDK variant you installed).
+In the tab `Project` make sure that an SDK of version `22` is selected (e.g. `openjdk-22`, `oraclejdk-22` or just `22` depending on which Java JDK variant you installed).
 
-In the tab `SDKs` make sure that an SDK of version `21` is selected.
+In the tab `SDKs` make sure that an SDK of version `22` is selected.
 
 
 ### Step 6: Reload the project
@@ -207,7 +207,7 @@ Press the **_Reload_** button as shown below and allow the project to Reload.
 
 Further use the **_OWASP WrongSecrets --> Lifecycle --> install_** step to load all the depedencies
 
-**NOTE:** Indians and other Asia-Pacific countries users may have to use **VPN** if you enounter this exception `org.owasp.dependencycheck.utils.DownloadFailedException: TLS Connection Reset`.
+**NOTE:** Indians and other Asia-Pacific countries users may have to use **VPN** if you encounter this exception `org.owasp.dependencycheck.utils.DownloadFailedException: TLS Connection Reset`.
 
 ### Step 7: Running the Project.
 
@@ -268,7 +268,7 @@ First make sure that you have an [Issue](https://github.com/OWASP/wrongsecrets/i
 Add the **new challenge** in this folder `wrongsecrets/src/main/java/org/owasp/wrongsecrets/challenges/`.
 These are the things that you have to keep in mind.
 - First and foremost make sure your challenge is coded in **Java**.
-- Use either `FixedAnswerChallenge` as a class to extend or use the `Challenge` interface to imnplement.
+- Use either `FixedAnswerChallenge` as a class to extend or use the `Challenge` interface to implement.
 
 The `FixedAnswerChallenge` can be used for challenges that don't have a dependency on other (sub)systems. Here is an example of a possible Challenge 28:
 

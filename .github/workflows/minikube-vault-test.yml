@@ -29,7 +29,7 @@ jobs:
           driver: docker
           kubernetes-version: v1.28.1
       - name: Setup helm
-        uses: azure/setup-helm@v3.5
+        uses: azure/setup-helm@v4
         id: install
       - name: test script
         run: |
@@ -49,7 +49,7 @@ jobs:
           driver: docker
           kubernetes-version: v1.28.1
       - name: Setup helm
-        uses: azure/setup-helm@v3.5
+        uses: azure/setup-helm@v4
         id: install
       - name: test script
         run: |
@@ -57,5 +57,12 @@ jobs:
 
       - name: Run Tests
         run: |
-          npm install cypress
-          npx cypress run --config-file src/test/K8s-tests/cypress.config.js && minikube delete
+          cd src/test/K8s-tests
+          npm install
+          npx cypress run
+          minikube delete
+      - uses: actions/upload-artifact@v4
+        if: success() || failure()
+        with:
+          name: e2e results
+          path: src/test/K8s-tests/cypress/reports/mochawesome/

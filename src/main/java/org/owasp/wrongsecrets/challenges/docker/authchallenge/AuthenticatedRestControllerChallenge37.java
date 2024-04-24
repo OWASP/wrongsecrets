@@ -3,7 +3,6 @@ package org.owasp.wrongsecrets.challenges.docker.authchallenge;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.owasp.wrongsecrets.challenges.docker.Challenge37;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 

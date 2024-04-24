@@ -1,7 +1,7 @@
-FROM amazoncorretto:21.0.2-alpine
+FROM eclipse-temurin:22_36-jre-alpine
 
 ARG argBasedPassword="default"
-ARG argBasedVersion="1.8.3"
+ARG argBasedVersion="1.8.5test5"
 ARG spring_profile=""
 ENV SPRING_PROFILES_ACTIVE=$spring_profile
 ENV ARG_BASED_PASSWORD=$argBasedPassword
@@ -15,7 +15,9 @@ RUN echo "2vars"
 RUN echo "$ARG_BASED_PASSWORD"
 RUN echo "$argBasedPassword"
 
-# RUN useradd -u 2000 -m wrongsecrets
+RUN apk add --no-cache libstdc++
+
+#RUN useradd -u 2000 -m wrongsecrets
 RUN adduser -u 2000 -D wrongsecrets
 USER wrongsecrets
 

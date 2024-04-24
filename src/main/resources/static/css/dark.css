@@ -103,3 +103,8 @@
     background-color: var(--bs-gray-600);
     color: var(--bs-body-color);
 }
+
+.dark-mode .sect2 {
+    /*background-color: var(--bs-gray-600);*/
+   border-color: white;
+}
