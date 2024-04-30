@@ -24,7 +24,7 @@ jobs:
           curl localhost:8080
   test-colima:
     name: Test with Colima
-    runs-on: macos-latest
+    runs-on: macos-13
     steps:
       - uses: actions/checkout@v4
       - uses: douglascamata/setup-docker-macos-action@v1-alpha.13
