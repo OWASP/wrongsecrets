@@ -9,7 +9,7 @@
     "eslint-plugin-jest": "^28.2.0",
     "eslint-plugin-n": "^17.2.1",
     "eslint-plugin-promise": "^6.1.1",
-    "globals": "^15.0.0"
+    "globals": "^15.1.0"
   },
   "dependencies": {
     "test": "^3.3.0"
