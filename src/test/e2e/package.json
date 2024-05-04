@@ -4,7 +4,7 @@
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^19.2.2",
-    "cypress": "^13.7.3",
+    "cypress": "^13.8.1",
     "cypress-multi-reporters": "^1.2.3",
     "eslint": "^8.57.0",
     "eslint-plugin-cypress": "^3.0.2",
