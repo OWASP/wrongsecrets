@@ -51,7 +51,7 @@
     <com.azure.spring.version>5.11.0</com.azure.spring.version>
     <cyclonedx.core.version>8.0.3</cyclonedx.core.version>
     <datatables.version>2.0.3</datatables.version>
-    <dependency-check-maven.version>9.0.10</dependency-check-maven.version>
+    <dependency-check-maven.version>9.2.0</dependency-check-maven.version>
     <gatling-maven-plugin.version>4.9.0</gatling-maven-plugin.version>
     <gatling.version>3.11.1</gatling.version>
     <gcp.sdk.version>5.1.2</gcp.sdk.version>
@@ -161,6 +161,7 @@
     <dependency>
       <groupId>org.testcontainers</groupId>
       <artifactId>testcontainers</artifactId>
+      <version>1.19.8</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -320,7 +321,7 @@
             <dependency>
               <groupId>com.puppycrawl.tools</groupId>
               <artifactId>checkstyle</artifactId>
-              <version>10.15.0</version>
+              <version>10.16.0</version>
             </dependency>
           </dependencies>
         </plugin>
@@ -343,7 +344,7 @@
             <dependency>
               <groupId>com.github.spotbugs</groupId>
               <artifactId>spotbugs</artifactId>
-              <version>4.8.4</version>
+              <version>4.8.5</version>
             </dependency>
           </dependencies>
         </plugin>
