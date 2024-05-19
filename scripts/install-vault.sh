@@ -52,6 +52,9 @@ kubectl exec vault-0 -n vault -- vault kv put secret/secret-challenge vaultpassw
 echo "Putting a challenge key in"
 kubectl exec vault-0 -n vault -- vault kv put secret/injected vaultinjected.value="$(openssl rand -base64 16)"
 
+echo "Putting a challenge key in"
+kubectl exec vault-0 -n vault -- vault kv put secret/codified challenge47secret.value="debugvalue"
+
 echo "Putting a subkey issue in"
 kubectl exec vault-0 -n vault -- vault kv put secret/wrongsecret aaaauser."$(openssl rand -base64 8)"="$(openssl rand -base64 16)"
 
