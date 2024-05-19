@@ -90,6 +90,9 @@ path "secret/data/application" {
 path "secret/data/injected" {
   capabilities = ["read"]
 }
+path "secret/data/codified" {
+  capabilities = ["read"]
+}
 EOF'
 
 kubectl exec vault-0 -n vault -- /bin/sh -c 'vault policy write standard_sre - <<EOF
@@ -123,6 +126,7 @@ kubectl exec vault-0 -n vault -- vault write auth/kubernetes/role/secret-challen
   policies=secret-challenge \
   ttl=24h &&
   vault kv put secret/secret-challenge vaultpassword.password="$(openssl rand -base64 16)" &&
-  vault kv put secret/application vaultpassword.password="$(openssl rand -base64 16)"
+  vault kv put secret/application vaultpassword.password="$(openssl rand -base64 16)" &&
+  vault kv put secret/codified challenge47secret.value="debugvalue"
 
 kubectl create serviceaccount vault
