@@ -94,6 +94,10 @@ Do the following:
 
 Note that you might have to do some manual cleanups after that.
 
+#### TLS
+
+You might want to set up TLS. For that, refer to the [AWS documentation](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.8/guide/ingress/annotations/#tls).
+
 ## Running Terratest
 
 Want to see if the setup still works? You can use terratest to check if the current setup works via automated terratest tests, for this you need to make sure that you have installed terraform and Go version 1.21. Next, you will need to install the modules and set up credentials.
