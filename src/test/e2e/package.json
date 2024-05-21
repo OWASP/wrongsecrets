@@ -4,13 +4,13 @@
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^19.2.2",
-    "cypress": "^13.7.3",
+    "cypress": "^13.8.1",
     "cypress-multi-reporters": "^1.2.3",
     "eslint": "^8.57.0",
-    "eslint-plugin-cypress": "^2.15.2",
+    "eslint-plugin-cypress": "^3.0.2",
     "eslint-plugin-import": "^2.29.0",
-    "eslint-plugin-jest": "^28.2.0",
-    "eslint-plugin-n": "^17.2.1",
+    "eslint-plugin-jest": "^28.5.0",
+    "eslint-plugin-n": "^17.4.0",
     "eslint-plugin-promise": "^6.1.1",
     "mocha": "^10.4.0"
   },
