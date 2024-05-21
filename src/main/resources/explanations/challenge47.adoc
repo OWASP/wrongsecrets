@@ -1,0 +1,4 @@
+=== HashiCorp Vault Template Injection Part 2
+
+A developer tried to debug why his vault injection did not work. So he hardcoded the secrets "temporary" in the Vault template itself.
+Can you find the secret hardcoded in the Vault Template?
