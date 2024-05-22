@@ -54,7 +54,6 @@ jobs:
       - name: test script
         run: |
           ./k8s-vault-minkube-start.sh && sleep 5 && curl http://localhost:8080/spoil/challenge-7
-
       - name: Run Tests
         run: |
           cd src/test/K8s-tests
