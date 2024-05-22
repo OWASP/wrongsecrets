@@ -48,6 +48,8 @@ spec:
         runAsUser: 2000
         runAsGroup: 2000
         fsGroup: 2000
+        seccompProfile:
+            type: RuntimeDefault
       serviceAccountName: vault
       volumes:
         - name: 'ephemeral'
@@ -59,7 +61,7 @@ spec:
             volumeAttributes:
               secretProviderClass: "azure-wrongsecrets-vault"
       containers:
-        - image: jeroenwillemsen/wrongsecrets:4-k8s-vault
+        - image: jeroenwillemsen/wrongsecrets:1.8.6A4-k8s-vault
           imagePullPolicy: IfNotPresent
           name: secret-challenge
           command: ["/bin/sh"]
