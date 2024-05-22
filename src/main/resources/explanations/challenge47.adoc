@@ -1,0 +1,5 @@
+=== HashiCorp Vault Template Injection Part 2
+
+Secrets can be retrieved from Vault using the https://developer.hashicorp.com/vault/docs/platform/k8s/injector[Vault Agent] sidecar container, which runs alongside your main application container. This sidecar can inject the secrets into your applications environment.
+A developer tried to debug why his vault injection did not work. So, he hardcoded the secrets "temporarily" in the Vault template itself.
+Can you find the secret hardcoded in the Vault Template?

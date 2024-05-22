@@ -425,6 +425,8 @@ export SPRING_CLOUD_VAULT_URI='http://127.0.0.1:8200'
 export SPRING_CLOUD_VAULT_TOKEN='<TOKENHERE>'
 vault token create -id="00000000-0000-0000-0000-000000000000" -policy="root"
 vault kv put secret/secret-challenge vaultpassword.password="$(openssl rand -base64 16)"
+vault kv put secret/injected vaultinjected.value="$(openssl rand -base64 16)"
+vault kv put secret/codified challenge47secret.value="debugvalue"
 ```
 
 Now use the `local-vault` profile to do your development.
