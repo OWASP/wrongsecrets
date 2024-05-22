@@ -19,7 +19,24 @@ spec:
     type: RollingUpdate
   template:
     metadata:
-      creationTimestamp: "2020-10-28T20:21:04Z"
+      annotations:
+        vault.hashicorp.com/agent-inject: "true"
+        vault.hashicorp.com/tls-skip-verify: "true"
+        vault.hashicorp.com/namespace: "default"
+        vault.hashicorp.com/log-level: debug
+        vault.hashicorp.com/agent-inject-secret-challenge46: "secret/data/injected"
+        vault.hashicorp.com/agent-inject-template-challenge46: |
+          {{ with secret "/secret/data/injected" }}
+            {{ range $k, $v := .Data.data }}
+              {{ printf "echo %s=%s" $k $v }}
+            {{ end }}
+          {{ end }}
+        vault.hashicorp.com/agent-inject-secret-challenge47: "secret/data/codified"
+        vault.hashicorp.com/agent-inject-template-challenge47: |
+          {{ with secret "secret/data/codified" }}
+              export challenge47secret="isthiswhatweneed?"
+          {{ end }}
+        vault.hashicorp.com/role: "secret-challenge"
       labels:
         app: secret-challenge
       name: secret-challenge
@@ -39,9 +56,11 @@ spec:
             volumeAttributes:
               secretProviderClass: "wrongsecrets-gcp-secretsmanager"
       containers:
-        - image: jeroenwillemsen/wrongsecrets:1.8.5-k8s-vault
+        - image: jeroenwillemsen/wrongsecrets:1.8.6A4-k8s-vault
           imagePullPolicy: IfNotPresent
           name: secret-challenge
+          command: ["/bin/sh"]
+          args: ["-c", "source /vault/secrets/challenge46 && source /vault/secrets/challenge47 && java -jar -Dspring.profiles.active=kubernetes-vault -Dspringdoc.swagger-ui.enabled=true -Dspringdoc.api-docs.enabled=true -D /application.jar"]
           ports:
             - containerPort: 8080
               protocol: TCP
