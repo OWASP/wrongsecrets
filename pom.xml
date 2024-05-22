@@ -11,7 +11,7 @@
 
   <groupId>org.owasp</groupId>
   <artifactId>wrongsecrets</artifactId>
-  <version>1.8.6A1-SNAPSHOT</version>
+  <version>1.8.6A4-SNAPSHOT</version>
 
   <name>OWASP WrongSecrets</name>
   <description>Examples with how to not use secrets</description>
