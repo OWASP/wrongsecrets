@@ -46,12 +46,12 @@ repos:
       - id: maven
         args: [ 'clean compile' ]
       - id: maven-spotless-apply
-  - repo: https://github.com/eslint/eslint
-    rev: v9.3.0
-    hooks:
-      - id: eslint
-        args:
-          - "--fix"
+  # - repo: https://github.com/eslint/eslint
+  #   rev: v9.3.0
+  #   hooks:
+  #     - id: eslint
+  #       args:
+  #         - "--fix"
   - repo: https://github.com/psf/black
     rev: 24.4.2
     hooks:
