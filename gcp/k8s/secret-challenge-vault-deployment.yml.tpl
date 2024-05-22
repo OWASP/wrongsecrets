@@ -27,8 +27,8 @@ spec:
         vault.hashicorp.com/agent-inject-secret-challenge46: "secret/data/injected"
         vault.hashicorp.com/agent-inject-template-challenge46: |
           {{ with secret "/secret/data/injected" }}
-            {{ range $k, $v := .Data.data }}
-              {{ printf "echo %s=%s" $k $v }}
+            {{ range $key, $value := .Data.data }}
+              {{ printf "echo %s=%s" $key $value }}
             {{ end }}
           {{ end }}
         vault.hashicorp.com/agent-inject-secret-challenge47: "secret/data/codified"
