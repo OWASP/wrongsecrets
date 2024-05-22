@@ -16,6 +16,7 @@ import (
 
 var START_SCRIPT = "./k8s-vault-aws-start.sh"
 var LB_SCRIPT = "./k8s-aws-alb-script.sh"
+var LB_CLEANUP_SCRIPT = "./k8s-aws-alb-script-cleanup.sh"
 
 func TestTerraformWrongSecretsAWS(t *testing.T) {
 	t.Parallel()
@@ -36,12 +37,12 @@ func TestTerraformWrongSecretsAWS(t *testing.T) {
 	})
 
 	// At the end of the test, run `terraform destroy` to clean up any resources that were created.
-	// Also run the cleanup script to remove the ALB resources
-	cleanupCommand := []string{LB_SCRIPT}
-	defer execute(LB_SCRIPT, cleanupCommand)
-	defer log.Printf("Setup completed, now waiting 30 seconds to get all settled in")
-	defer time.Sleep(time.Duration(30) * time.Second)
+	// Also run the cleanup script to remove the ALB resources (note defer is in reverse order!)
+	cleanupCommand := []string{LB_CLEANUP_SCRIPT}
 	defer terraform.Destroy(t, terraformOptions)
+	defer time.Sleep(time.Duration(30) * time.Second)
+	defer log.Printf("Setup completed, now waiting 30 seconds to get all settled in")
+	defer execute(LB_CLEANUP_SCRIPT, cleanupCommand)
 
 	// Run `terraform init` and `terraform apply`. Fail the test if there are any errors.
 	terraform.InitAndApply(t, terraformOptions)
@@ -51,6 +52,8 @@ func TestTerraformWrongSecretsAWS(t *testing.T) {
 
 	command := []string{START_SCRIPT}
 	execute(START_SCRIPT, command)
+	log.Printf("Setup completed, now waiting 40 seconds to get all settled in")
+	time.Sleep(time.Duration(40) * time.Second)
 
 	// Make an HTTP request to the instance and make sure we get back a 200 OK with the body "Hello, World!"
 	challenge9 := fmt.Sprintf("http://%s:8080/%s", "localhost", "spoil/challenge-9")
