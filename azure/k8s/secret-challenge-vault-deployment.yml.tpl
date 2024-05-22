@@ -48,6 +48,8 @@ spec:
         runAsUser: 2000
         runAsGroup: 2000
         fsGroup: 2000
+        seccompProfile:
+            type: RuntimeDefault
       serviceAccountName: vault
       volumes:
         - name: 'ephemeral'
