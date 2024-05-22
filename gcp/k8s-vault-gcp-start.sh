@@ -75,7 +75,7 @@ kubectl annotate serviceaccount \
   --namespace default default \
   "iam.gke.io/gcp-service-account=wrongsecrets-workload-sa@${GCP_PROJECT}.iam.gserviceaccount.com"
 
-envsubst <./k8s/secret-challenge-vault-deployment.yml.tpl >./k8s/secret-challenge-vault-deployment.yml
+envsubst '${GCP_PROJECT}' <./k8s/secret-challenge-vault-deployment.yml.tpl >./k8s/secret-challenge-vault-deployment.yml
 
 source ../scripts/apply-and-portforward.sh
 
