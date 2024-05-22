@@ -93,7 +93,7 @@ echo "Apply secretsmanager storage volume"
 kubectl apply -f./k8s/secret-volume.yml
 
 envsubst <./k8s/pod-id.yml.tpl >./k8s/pod-id.yml
-envsubst <./k8s/secret-challenge-vault-deployment.yml.tpl >./k8s/secret-challenge-vault-deployment.yml
+envsubst '${AZ_VAULT_URI},${AZ_POD_CLIENT_ID}' <./k8s/secret-challenge-vault-deployment.yml.tpl >./k8s/secret-challenge-vault-deployment.yml
 
 kubectl apply -f./k8s/pod-id.yml
 

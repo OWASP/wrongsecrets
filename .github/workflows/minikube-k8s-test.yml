@@ -24,7 +24,7 @@ jobs:
       - name: Start minikube
         uses: medyagh/setup-minikube@master
         with:
-          minikube-version: 1.31.2
+          minikube-version: 1.33.1
           driver: docker
           kubernetes-version: v1.28.1
       - name: test script

@@ -1,6 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  annotations:
+    vault.hashicorp.com/agent-inject: "true"
+    vault.hashicorp.com/tls-skip-verify: "true"
+    vault.hashicorp.com/namespace: "default"
+    vault.hashicorp.com/log-level: debug
+    vault.hashicorp.com/agent-inject-secret-challenge46: "secret/data/injected"
+    vault.hashicorp.com/agent-inject-template-challenge46: |
+      {{ with secret "/secret/data/injected" }}
+        {{ range $k, $v := .Data.data }}
+          {{ printf "echo %s=%s" $k $v }}
+        {{ end }}
+      {{ end }}
+    vault.hashicorp.com/agent-inject-secret-challenge47: "secret/data/codified"
+    vault.hashicorp.com/agent-inject-template-challenge47: |
+      {{ with secret "secret/data/codified" }}
+          export challenge47secret="isthiswhatweneed?"
+      {{ end }}
+    vault.hashicorp.com/role: "secret-challenge"
   labels:
     app: secret-challenge
     aadpodidbinding: wrongsecrets-pod-id
@@ -30,6 +48,8 @@ spec:
         runAsUser: 2000
         runAsGroup: 2000
         fsGroup: 2000
+        seccompProfile:
+            type: RuntimeDefault
       serviceAccountName: vault
       volumes:
         - name: 'ephemeral'
@@ -41,9 +61,11 @@ spec:
             volumeAttributes:
               secretProviderClass: "azure-wrongsecrets-vault"
       containers:
-        - image: jeroenwillemsen/wrongsecrets:4-k8s-vault
+        - image: jeroenwillemsen/wrongsecrets:1.8.6A4-k8s-vault
           imagePullPolicy: IfNotPresent
           name: secret-challenge
+          command: ["/bin/sh"]
+          args: ["-c", "source /vault/secrets/challenge46 && source /vault/secrets/challenge47 && java -jar -Dspring.profiles.active=kubernetes-vault -Dspringdoc.swagger-ui.enabled=true -Dspringdoc.api-docs.enabled=true -D /application.jar"]
           securityContext:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true

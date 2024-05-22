@@ -57,7 +57,8 @@ class ChallengesControllerWithPresetKubernetesValuesTest {
           || shortname.contains("11")
           || shortname.contains("44")
           || shortname.contains("45")
-          || shortname.contains("46")) {
+          || shortname.contains("46")
+          || shortname.contains("47")) {
         continue;
       }
       mvc.perform(get("/challenge/%s".formatted(challenge.name().shortName())))

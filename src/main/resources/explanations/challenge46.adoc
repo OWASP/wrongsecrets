@@ -1,7 +1,6 @@
 === HashiCorp Vault Template Injection
 
-Vault template injection via agent injection typically involves injecting a sidecar container,
-known as the Vault Agent, alongside your main application container.
-The Vault Agent is responsible for interacting with HashiCorp Vault to retrieve secrets and inject them into the application's runtime environment.
+Secrets can be retrieved from Vault using the https://developer.hashicorp.com/vault/docs/platform/k8s/injector[Vault Agent] sidecar container, which runs alongside your main application container. This sidecar can inject the secrets into your applications environment.
+ One way to do this, is by means of rendering the secrets as a file. The file can then be picked up by your target application. However, in this case, the developer was unsure if the file was picked up, so instead of exporting the secret as an env-var, he `echo`-ed them.
 
-Can you find secret injected into application environment?
+Can you find the secret injected into application environment?

@@ -19,7 +19,6 @@ Make sure you have an active account at GCP for which you have configured the cr
 
 Please note that this setup relies on bash scripts that have been tested in MacOS and Linux. We have no intention of supporting vanilla Windows at the moment.
 
-
 ### Multi-user setup: shared state
 
 If you want to host a multi-user setup, you will probably want to share the state file so that everyone can try related challenges. We have provided a starter to easily do so using a Terraform gcs backend.
@@ -60,6 +59,10 @@ Please note that the GKE ingress can take a few minues to deploy and is publicly
 Your GKE cluster should be visible in [EU-West4](https://console.cloud.google.com/kubernetes?referrer=search&project=wrongsecrets) by default. Want a different region? You can modify `terraform.tfvars` or input it directly using the `region` variable in plan/apply.
 
 Are you done playing? Please run `terraform destroy` twice to clean up.
+
+#### Setting up TLS
+
+In order to use TLS, you will need to set up your own domain name and configure the load balancer to use TLS. Please refer to the official [GCP documentation](https://cloud.google.com/kubernetes-engine/docs/concepts/ingress#options_for_providing_ssl_certificates) on how to do that.
 
 ### Test it
 
