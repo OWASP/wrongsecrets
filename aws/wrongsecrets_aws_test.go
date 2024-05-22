@@ -39,6 +39,8 @@ func TestTerraformWrongSecretsAWS(t *testing.T) {
 	// Also run the cleanup script to remove the ALB resources
 	defer terraform.Destroy(t, terraformOptions)
 	cleanupCommand := []string{LB_SCRIPT}
+	defer log.Printf("Setup completed, now waiting 30 seconds to get all settled in")
+	defer time.Sleep(time.Duration(30) * time.Second)
 	defer execute(LB_SCRIPT, cleanupCommand)
 
 	// Run `terraform init` and `terraform apply`. Fail the test if there are any errors.

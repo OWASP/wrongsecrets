@@ -43,7 +43,8 @@ func TestTerraformWrongSecretsGCP(t *testing.T) {
 		START_SCRIPT,
 	}
 	execute(START_SCRIPT, command)
-
+	log.Printf("Setup completed, now waiting 40 seconds to get all settled in")
+	time.Sleep(time.Duration(40) * time.Second)
 	// Make an HTTP request to the instance and make sure we get back a 200 OK with the body "Hello, World!"
 	challenge9 := fmt.Sprintf("http://%s:8080/%s", "localhost", "spoil/challenge-9")
 	challenge10 := fmt.Sprintf("http://%s:8080/%s", "localhost", "spoil/challenge-10")
