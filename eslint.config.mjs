@@ -1,21 +1,39 @@
-import globals from "globals";
-import pluginJs from "@eslint/js";
-import cypress from "eslint-plugin-cypress";
-import chai from "eslint-plugin-chai-friendly";
+import { FlatCompat } from '@eslint/eslintrc';
+import mochaPlugin from 'eslint-plugin-mocha';
+import globals from 'globals';
+import babelParser from "@babel/eslint-parser";
 
-// convert the rest of eslintrc.js!
+const compat = new FlatCompat();
+
 export default [
   {
     languageOptions: {
-      globals:{
+      ecmaVersion: 2022,
+      sourceType: 'module',
+      globals: {
         ...globals.browser,
-        cy: "readonly"
-      }
+      },
+      parser: babelParser,
+      parserOptions: {
+        requireConfigFile: false,
+        babelOptions: {
+          presets: ['@babel/preset-env'],
+        },
+      },
     },
-    plugins: {
-      cypress:cypress,
-      chai
-    }
   },
-  pluginJs.configs.recommended,
+  mochaPlugin.configs.flat.recommended,
+  {
+    rules: {
+      'mocha/no-exclusive-tests': 'error',
+      'mocha/no-skipped-tests': 'error',
+      'mocha/no-mocha-arrows': 'off',
+    },
+  },
+  ...compat.config({
+    extends: ['plugin:cypress/recommended'],
+    rules: {
+      'cypress/no-unnecessary-waiting': 'off',
+    },
+  }),
 ];
