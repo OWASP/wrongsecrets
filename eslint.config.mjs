@@ -1,21 +1,28 @@
+import { FlatCompat } from '@eslint/eslintrc'
+import mochaPlugin from 'eslint-plugin-mocha'
 import globals from "globals";
-import pluginJs from "@eslint/js";
-import cypress from "eslint-plugin-cypress";
-import chai from "eslint-plugin-chai-friendly";
-
-// convert the rest of eslintrc.js!
+const compat = new FlatCompat()
 export default [
   {
     languageOptions: {
+      ecmaVersion: 2022,
       globals:{
-        ...globals.browser,
-        cy: "readonly"
+        ...globals.browser
       }
     },
-    plugins: {
-      cypress:cypress,
-      chai
+  },
+  mochaPlugin.configs.flat.recommended, {
+    rules: {
+      'mocha/no-exclusive-tests': 'error',
+      'mocha/no-skipped-tests': 'error',
+      'mocha/no-mocha-arrows': 'off'
     }
   },
-  pluginJs.configs.recommended,
-];
+  ...compat.config(
+    {
+      extends: ['plugin:cypress/recommended'],
+      rules: {
+        'cypress/no-unnecessary-waiting': 'off'
+      }
+    })
+]
