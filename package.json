@@ -4,7 +4,7 @@
     "@babel/preset-env": "^7.24.5",
     "@commitlint/config-conventional": "^19.2.2",
     "@eslint/eslintrc": "^3.1.0",
-    "eslint": "^9.3.0",
+    "eslint": "^9.4.0",
     "eslint-plugin-chai-friendly": "^0.7.4",
     "eslint-plugin-cypress": "^3.3.0",
     "eslint-plugin-mocha": "^10.4.3",
