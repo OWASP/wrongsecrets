@@ -49,7 +49,7 @@
     <aws.sdk.version>2.25.42</aws.sdk.version>
     <bootstrap.version>5.3.3</bootstrap.version>
     <com.azure.spring.version>5.11.0</com.azure.spring.version>
-    <cyclonedx.core.version>8.0.3</cyclonedx.core.version>
+    <cyclonedx.core.version>9.0.2</cyclonedx.core.version>
     <datatables.version>2.0.3</datatables.version>
     <dependency-check-maven.version>9.2.0</dependency-check-maven.version>
     <gatling-maven-plugin.version>4.9.0</gatling-maven-plugin.version>
