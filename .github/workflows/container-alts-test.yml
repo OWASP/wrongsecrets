@@ -55,7 +55,7 @@ jobs:
           brew upgrade
           brew install colima
           brew uninstall --zap qemu colima lima
-          brew install colima
+          brew install colima docker
       - name: Start Docker container runtimes
         run: |
           colima start --vm-type vz --arch aarch64
