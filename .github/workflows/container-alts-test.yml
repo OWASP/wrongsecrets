@@ -1,10 +1,9 @@
-name: Test container on podman and Colima
+name: Test container on podman
 
 on:
   push:
     branches:
       - master
-      - hotfix-fix-colima-2
   pull_request:
     branches: [master]
   workflow_dispatch:
@@ -23,43 +22,3 @@ jobs:
           podman run -dt -p 8080:8080 docker.io/jeroenwillemsen/wrongsecrets:latest-no-vault && \
           echo "wait 20 seconds for container to come up" && sleep 20 && \
           curl localhost:8080
-  test-colima:
-    name: Test with Colima
-    runs-on: macos-13
-    steps:
-      - uses: actions/checkout@v4
-      - name: fix brew
-        run: |
-          brew tap --repair
-          brew upgrade
-      - uses: douglascamata/setup-docker-macos-action@v1-alpha.13
-        id: docker
-      - name: Get Colima version
-        run: |
-          echo "Colima version: ${{ steps.docker.outputs.colima-version }}"
-      - name: test if container comes up
-        run: |
-          docker run -d -p 8080:8080 jeroenwillemsen/wrongsecrets:latest-no-vault && \
-          echo "wait 40 seconds for container to come up" && sleep 40 && \
-          curl http://localhost:8080
-  test-colima-2:
-    name: Test with Colima on 14
-    runs-on: macos-14
-    steps:
-      - name: Checkout the Git repository
-        uses: actions/checkout@v2
-      - name: Setup Docker
-        run: |
-          brew upgrade
-          brew update
-          brew upgrade
-          brew install colima
-          brew uninstall --zap qemu colima lima
-          brew install colima docker
-      - name: Start Docker container runtimes
-        run: |
-          colima delete
-          colima start --vm-type vz --arch aarch64
-          docker run -d -p 8080:8080 jeroenwillemsen/wrongsecrets:latest-no-vault && \
-          echo "wait 30 seconds for container to come up" && sleep 30 && \
-          curl http://localhost:8080
