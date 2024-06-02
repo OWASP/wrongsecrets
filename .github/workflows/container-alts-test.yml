@@ -41,3 +41,18 @@ jobs:
           docker run -d -p 8080:8080 jeroenwillemsen/wrongsecrets:latest-no-vault && \
           echo "wait 40 seconds for container to come up" && sleep 40 && \
           curl http://localhost:8080
+  test-colima-2:
+    name: Test with Colima on 14
+    runs-on: macos-14
+    steps:
+      - name: Checkout the Git repository
+        uses: actions/checkout@v2
+      - name: Setup Docker
+        run: |
+          brew install docker colima docker-buildx
+      - name: Start Docker container runtimes
+        run: |
+          colima start --vm-type vz
+          docker run -d -p 8080:8080 jeroenwillemsen/wrongsecrets:latest-no-vault && \
+          echo "wait 30 seconds for container to come up" && sleep 30 && \
+          curl http://localhost:8080
