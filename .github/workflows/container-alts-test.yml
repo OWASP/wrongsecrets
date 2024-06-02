@@ -50,10 +50,11 @@ jobs:
         uses: actions/checkout@v2
       - name: Setup Docker
         run: |
-          brew uninstall --zap qemu colima lima
           brew upgrade
           brew update
           brew upgrade
+          brew install colima
+          brew uninstall --zap qemu colima lima
           brew install colima
       - name: Start Docker container runtimes
         run: |
