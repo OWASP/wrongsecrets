@@ -555,55 +555,9 @@ NOTE: We do not officially support Colima, as we can tell that Github runners ha
 If you cannot switch to Docker Desktop/Podman and you want to use Colima with Apple Silicon M1
 to run Docker image `jeroenwillemsen/wrongsecrets` you try one of:
 
-- switch off Colima
-- change Docker context
-- run Colima with 1 CPU
-
-### Switch off Colima
-
-```shell
-colima stop
-```
-and run natively Docker image `jeroenwillemsen/wrongsecrets` on ARM.
-
-### Change Docker context
-
-Running docker image on Colima container runtimes on macOS Ventura with M1 CPU can run very slowly or can hang at some point.
-Wrong Secrets provide `arm64` Docker image and switching to `desktop-linux` context will use the native `arm64` image.
-To do that in the terminal run:
-
-```shell
-docker context ls
-```
-
-you should see context default `colima *`:
-
-```
-NAME                TYPE                DESCRIPTION                               DOCKER ENDPOINT                                    KUBERNETES ENDPOINT                ORCHESTRATOR
-colima *            moby                colima                                    unix:///Users/YOUR_USER_NAME/.colima/default/docker.sock
-default             moby                Current DOCKER_HOST based configuration   unix:///var/run/docker.sock                        https://127.0.0.1:6443 (default)   swarm
-desktop-linux       moby                                                          unix:///Users/YOUR_USER_NAME/.docker/run/docker.sock
-```
-
-Now run one of the above Docker commands together with `--context` switch e.g.:
-
-```bash
-docker --context desktop-linux run -p 8080:8080 jeroenwillemsen/wrongsecrets:latest-no-vault
-```
-
-### Run Colima with 1 CPU
-
-Colima is using QEMU behind and for QEMU on Apple Silicon M1 is recommended to use 1 CPU core:
-
-```shell
-colima start -m 8 -c 1 --arch x86_64
-```
-
-and run with AMD x64 emulation e.g.:
-
-```bash
-docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:latest-no-vault
-```
+- switch off Colima (`colima stop`)
+- change Docker context (`docker --context desktop-linux run -p 8080:8080 jeroenwillemsen/wrongsecrets:latest-no-vault`)
+- run Colima with 1 CPU (`colima start -m 8 -c 1 --arch x86_64`)
 
 ## Want to disable challenges in your own release?
 
