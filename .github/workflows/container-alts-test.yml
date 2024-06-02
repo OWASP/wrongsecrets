@@ -50,7 +50,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Setup Docker
         run: |
-          brew install docker colima docker-buildx
+          arch -arm64 brew install docker colima docker-buildx
       - name: Start Docker container runtimes
         run: |
           colima start --vm-type vz
