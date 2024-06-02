@@ -58,6 +58,7 @@ jobs:
           brew install colima docker
       - name: Start Docker container runtimes
         run: |
+          colima delete
           colima start --vm-type vz --arch aarch64
           docker run -d -p 8080:8080 jeroenwillemsen/wrongsecrets:latest-no-vault && \
           echo "wait 30 seconds for container to come up" && sleep 30 && \
