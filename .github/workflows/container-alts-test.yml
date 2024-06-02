@@ -32,9 +32,8 @@ jobs:
           brew tap --repair
           brew upgrade
       - uses: douglascamata/setup-docker-macos-action@v1-alpha.13
-        env:
-          HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK: 1
-      - name: setup colima
+        id: docker
+      - name: Get Colima version
         run: |
           echo "Colima version: ${{ steps.docker.outputs.colima-version }}"
       - name: test if container comes up
