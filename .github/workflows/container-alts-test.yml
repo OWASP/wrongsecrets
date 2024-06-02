@@ -27,14 +27,17 @@ jobs:
     runs-on: macos-13
     steps:
       - uses: actions/checkout@v4
+      - name: fix brew
+        run: |
+          brew tap --repair
+          brew upgrade
       - uses: douglascamata/setup-docker-macos-action@v1-alpha.13
-        env:
-          HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK: 1
-      - name: setup colima
+        id: docker
+      - name: Get Colima version
         run: |
           echo "Colima version: ${{ steps.docker.outputs.colima-version }}"
       - name: test if container comes up
         run: |
           docker run -d -p 8080:8080 jeroenwillemsen/wrongsecrets:latest-no-vault && \
           echo "wait 40 seconds for container to come up" && sleep 40 && \
-          curl localhost:8080
+          curl http://localhost:8080
