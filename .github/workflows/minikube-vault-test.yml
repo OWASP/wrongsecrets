@@ -33,7 +33,7 @@ jobs:
         id: install
       - name: test script
         run: |
-          ./k8s-vault-minkube-start.sh && sleep 5 && curl http://localhost:8080/spoil/challenge-7 && minikube delete
+          ./k8s-vault-minkube-start.sh && sleep 5 && curl http://localhost:8080/spoil/challenge-7
 
   cypress-tests:
     name: Cypress Test for Challenges
@@ -59,7 +59,6 @@ jobs:
           cd src/test/K8s-tests
           npm install
           npx cypress run
-          minikube delete
       - uses: actions/upload-artifact@v4
         if: success() || failure()
         with:
