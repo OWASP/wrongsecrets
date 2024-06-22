@@ -1,0 +1,19 @@
+This challenge can be solved using the following ways:
+
+- Decrypt the sealed secret using the accessible private key found in the repository:
+  1. Clone the repository containing the challenge files.
+  2. Locate the `sealedsecret.yaml` file in the repository.
+  3. Find the unencrypted private key file named `private.pem` in the repository.
+  4. private.pem is `base64` encoded Decrypt it:
+    ``base64 --decode -i private.pem -o private_unencrypted.pem``
+  5. Use the `kubeseal` tool to decrypt the sealed secret:
+     ``
+     kubeseal --recovery-unseal --recovery-private-key private_unencrypted.pem < sealedsecret.yaml > db-credentials.yaml
+     ``
+  6. Read the decrypted secret from the `db-credentials.yaml` file:
+     ``
+     cat db-credentials.yaml
+     ``
+
+Note: Ensure you have a valid Kubernetes configuration and access to a Kubernetes cluster. If you are running this on a hosted environment where you do not have direct access to the Kubernetes cluster, ask the organizer of the hosted solution to execute the commands for you and return the results.
+
