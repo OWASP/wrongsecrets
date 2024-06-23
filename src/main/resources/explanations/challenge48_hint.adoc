@@ -16,4 +16,3 @@ This challenge can be solved using the following ways:
      ``
 
 Note: Ensure you have a valid Kubernetes configuration and access to a Kubernetes cluster. If you are running this on a hosted environment where you do not have direct access to the Kubernetes cluster, ask the organizer of the hosted solution to execute the commands for you and return the results.
-
