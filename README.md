@@ -168,6 +168,8 @@ The K8S setup currently is based on using Minikube for local fun. You can use th
     kubectl apply -f k8s/secrets-secret.yml
     kubectl apply -f k8s/challenge33.yml
     kubectl apply -f k8s/secret-challenge-deployment.yml
+    kubectl apply -f https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.17.4/controller.yaml
+    kubectl apply -f k8s/sealed-secret-controller.yaml
     while [[ $(kubectl get pods -l app=secret-challenge -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do echo "waiting for secret-challenge" && sleep 2; done
     kubectl expose deployment secret-challenge --type=LoadBalancer --port=8080
     minikube service secret-challenge
@@ -194,6 +196,8 @@ Want to run vanilla on your own k8s? Use the commands below:
     kubectl apply -f k8s/secrets-secret.yml
     kubectl apply -f k8s/challenge33.yml
     kubectl apply -f k8s/secret-challenge-deployment.yml
+    kubectl apply -f https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.17.4/controller.yaml
+    kubectl apply -f k8s/sealed-secret-controller.yaml
     while [[ $(kubectl get pods -l app=secret-challenge -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do echo "waiting for secret-challenge" && sleep 2; done
     kubectl port-forward \
         $(kubectl get pod -l app=secret-challenge -o jsonpath="{.items[0].metadata.name}") \
