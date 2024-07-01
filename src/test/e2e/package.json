@@ -10,7 +10,7 @@
     "eslint-plugin-chai-friendly": "^0.8.0",
     "eslint-plugin-cypress": "^3.3.0",
     "eslint-plugin-mocha": "^10.4.3",
-    "globals": "^15.1.0",
+    "globals": "^15.7.0",
     "mocha": "^10.4.0"
   },
   "dependencies": {
