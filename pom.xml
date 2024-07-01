@@ -59,7 +59,7 @@
     <java.version>22</java.version>
     <jquery.version>3.7.1</jquery.version>
     <jruby.version>9.4.7.0</jruby.version>
-    <lombok.version>1.18.32</lombok.version>
+    <lombok.version>1.18.34</lombok.version>
     <maven.compiler.target>22</maven.compiler.target>
     <spring.cloud-version>2023.0.2</spring.cloud-version>
     <spring.security.version>6.2.3</spring.security.version>
