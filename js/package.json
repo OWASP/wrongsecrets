@@ -16,6 +16,6 @@
   },
   "devDependencies": {
     "minimatch": ">=9.0.4",
-    "javascript-obfuscator": "^4.1.0"
+    "javascript-obfuscator": "^4.1.1"
   }
 }
