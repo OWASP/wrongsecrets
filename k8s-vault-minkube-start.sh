@@ -20,9 +20,14 @@ if [ $? == 0 ]; then
 else
   kubectl apply -f k8s/secrets-config.yml
 fi
-# Adding new commands for Sealed Secrets setup
+
+echo "Setting up the bitnami sealed secret controler"
 kubectl apply -f https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.17.4/controller.yaml
 kubectl apply -f k8s/sealed-secret-controller.yaml
+kubectl apply -f k8s/main.key
+kubectl delete pod -n kube-system -l name=sealed-secrets-controller
+kubectl apply -f k8s/sealed-db-credentials.yaml
+echo "finishing up the sealed secret controler part"
 
 kubectl get secrets | grep 'funnystuff' &> /dev/null
 if [ $? == 0 ]; then
