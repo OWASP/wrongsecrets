@@ -26,7 +26,7 @@ jobs:
         with:
           minikube-version: 1.33.1
           driver: docker
-          kubernetes-version: v1.28.1
+          kubernetes-version: v1.30.0
       - name: test script
         run: |
           kubectl apply -f k8s/workspace-psa.yml

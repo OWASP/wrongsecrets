@@ -6,13 +6,7 @@ else
   helm repo update hashicorp
 fi
 
-kubectl get ns | grep 'vault' $>/dev/null
-if [ $? == 0 ]; then
-  echo "Vault ns is already there"
-else
-  kubectl create ns vault
-  helm upgrade --install vault hashicorp/vault --version 0.27.0 --namespace vault --values ../k8s/helm-vault-values.yml
-fi
+helm upgrade --install vault hashicorp/vault --version 0.28.0 --namespace vault --values ../k8s/helm-vault-values.yml --create-namespace
 
 
 isvaultrunning=$(kubectl get pods -n vault --field-selector=status.phase=Running)
