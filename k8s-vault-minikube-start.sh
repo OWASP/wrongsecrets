@@ -52,10 +52,16 @@ VAULT_UNSEAL_KEY=$(cat cluster-keys.json | jq -r ".unseal_keys_b64[]")
 echo "⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰"
 echo "PLEASE COPY PASTE THE FOLLOWING VALUE: ${VAULT_UNSEAL_KEY} , you will be asked for it 3 times to unseal the vaults"
 
-kubectl exec -it vault-0 -n vault -- vault operator unseal $VAULT_UNSEAL_KEY
-kubectl exec -it vault-1 -n vault -- vault operator unseal $VAULT_UNSEAL_KEY
-kubectl exec -it vault-2 -n vault -- vault operator unseal $VAULT_UNSEAL_KEY
+echo "Unsealing Vault 0"
+kubectl exec -it vault-0 -n vault  -- vault operator unseal $VAULT_UNSEAL_KEY
 
+echo "Joining & unsealing Vault 1"
+kubectl exec -it vault-1 -n vault -- vault operator raft join http://vault-0.vault-internal:8200
+kubectl exec -it vault-1 -n vault -- vault operator unseal $VAULT_UNSEAL_KEY
+
+echo "Joining & unsealing Vault 2"
+kubectl exec -it vault-2 -n vault -- vault operator raft join http://vault-0.vault-internal:8200
+kubectl exec -it vault-2 -n vault -- vault operator unseal $VAULT_UNSEAL_KEY
 
 echo "Obtaining root token"
 jq .root_token cluster-keys.json > commentedroottoken
