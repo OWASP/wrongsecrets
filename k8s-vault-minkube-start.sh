@@ -26,8 +26,9 @@ kubectl apply -f https://github.com/bitnami-labs/sealed-secrets/releases/downloa
 kubectl apply -f k8s/sealed-secret-controller.yaml
 kubectl apply -f k8s/main.key
 kubectl delete pod -n kube-system -l name=sealed-secrets-controller
-kubectl apply -f k8s/sealed-db-credentials.yaml
+kubectl create -f k8s/sealed-challenge48.json
 echo "finishing up the sealed secret controler part"
+echo "do you need to decrypt and/or handle things for the sealed secret use kubeseal"
 
 kubectl get secrets | grep 'funnystuff' &> /dev/null
 if [ $? == 0 ]; then
