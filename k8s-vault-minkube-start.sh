@@ -28,15 +28,6 @@ else
   kubectl apply -f k8s/secrets-secret.yml
   kubectl apply -f k8s/challenge33.yml
 fi
-helm list | grep 'consul' &> /dev/null
-if [ $? == 0 ]; then
-   echo "Consul is already installed"
-else
-  helm repo add hashicorp https://helm.releases.hashicorp.com
-fi
-helm upgrade --install consul hashicorp/consul --set global.name=consul --create-namespace -n consul --values k8s/helm-consul-values.yml
-
-while [[ $(kubectl get pods -n consul -l app=consul -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True True True True" ]]; do echo "waiting for Consul" && sleep 2; done
 
 helm list | grep 'vault' &> /dev/null
 if [ $? == 0 ]; then
