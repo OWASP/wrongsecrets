@@ -9,7 +9,7 @@ Anyone with access to the repository can decrypt the secrets, leading to potenti
 Let's consider an example:
 
 . Imagine a scenario where a developer stores the private key used for Sealed Secrets decryption in the same repository:
-* The repository contains `sealedsecret.yaml` and the private key `private.pem`.
+* The repository contains `sealed-challenge48.json` and the private key `main.key`.
 . This situation is analogous to locking a door and leaving the key under the doormat:
 * An attacker can easily find the key and unlock the door, gaining access to everything inside.
 
