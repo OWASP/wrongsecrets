@@ -184,7 +184,7 @@ The K8S setup currently is based on using Minikube for local fun. You can use th
 Alternatively you can do :
 
 ```bash
-    ./k8s-vault-minkube-start.sh
+    ./k8s-vault-minikube-start.sh
 ```
 
 now you can use the provided IP address and port to further play with the K8s variant (instead of localhost).
@@ -235,7 +235,7 @@ Make sure you have the following installed:
 -   vault [Install from here](https://www.vaultproject.io/downloads),
 -   grep, Cat, and Sed
 
-Run `./k8s-vault-minkube-start.sh`, when the script is done, then the challenges will wait for you at <http://localhost:8080> . This will allow you to run challenges 1-8, 12-46.
+Run `./k8s-vault-minikube-start.sh`, when the script is done, then the challenges will wait for you at <http://localhost:8080> . This will allow you to run challenges 1-8, 12-46.
 
 When you stopped the `k8s-vault-minikube-start.sh` script and want to resume the port forward run: `k8s-vault-minikube-resume.sh`.
 This is because if you run the start script again it will replace the secret in the vault and not update the secret-challenge application with the new secret.

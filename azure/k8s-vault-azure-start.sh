@@ -61,8 +61,6 @@ else
   kubectl apply -f ../k8s/challenge33.yml
 fi
 
-source ../scripts/install-consul.sh
-
 source ../scripts/install-vault.sh
 
 echo "Add secrets manager driver to repo"
