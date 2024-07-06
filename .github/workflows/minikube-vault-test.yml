@@ -27,13 +27,13 @@ jobs:
         with:
           minikube-version: 1.33.1
           driver: docker
-          kubernetes-version: v1.28.1
+          kubernetes-version: v1.30.0
       - name: Setup helm
         uses: azure/setup-helm@v4
         id: install
       - name: test script
         run: |
-          ./k8s-vault-minkube-start.sh && sleep 5 && curl http://localhost:8080/spoil/challenge-7
+          ./k8s-vault-minikube-start.sh && sleep 5 && curl http://localhost:8080/spoil/challenge-7
 
   cypress-tests:
     name: Cypress Test for Challenges
@@ -47,13 +47,13 @@ jobs:
         with:
           minikube-version: 1.33.1
           driver: docker
-          kubernetes-version: v1.28.1
+          kubernetes-version: v1.30.0
       - name: Setup helm
         uses: azure/setup-helm@v4
         id: install
       - name: test script
         run: |
-          ./k8s-vault-minkube-start.sh && sleep 5 && curl http://localhost:8080/spoil/challenge-7
+          ./k8s-vault-minikube-start.sh && sleep 5 && curl http://localhost:8080/spoil/challenge-7
       - name: Run Tests
         run: |
           cd src/test/K8s-tests
