@@ -9,7 +9,7 @@ checkCommandsAvailable helm minikube jq vault sed grep docker grep cat
 
 echo "This is only a script for demoing purposes. You can comment out line 22 and work with your own k8s setup"
 echo "This script is based on the steps defined in https://learn.hashicorp.com/tutorials/vault/kubernetes-minikube . Vault is awesome!"
-minikube start --kubernetes-version=v1.28.1
+minikube start --kubernetes-version=v1.30.0
 
 echo "Patching default ns with new PSA; we should run as restricted!"
 kubectl apply -f k8s/workspace-psa.yml
@@ -20,7 +20,6 @@ if [ $? == 0 ]; then
 else
   kubectl apply -f k8s/secrets-config.yml
 fi
-
 echo "Setting up the bitnami sealed secret controler"
 kubectl apply -f https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.27.0/controller.yaml
 kubectl apply -f k8s/sealed-secret-controller.yaml
@@ -29,7 +28,6 @@ kubectl delete pod -n kube-system -l name=sealed-secrets-controller
 kubectl create -f k8s/sealed-challenge48.json
 echo "finishing up the sealed secret controler part"
 echo "do you need to decrypt and/or handle things for the sealed secret use kubeseal"
-
 kubectl get secrets | grep 'funnystuff' &> /dev/null
 if [ $? == 0 ]; then
    echo "secrets secret is already installed"
@@ -37,15 +35,6 @@ else
   kubectl apply -f k8s/secrets-secret.yml
   kubectl apply -f k8s/challenge33.yml
 fi
-helm list | grep 'consul' &> /dev/null
-if [ $? == 0 ]; then
-   echo "Consul is already installed"
-else
-  helm repo add hashicorp https://helm.releases.hashicorp.com
-fi
-helm upgrade --install consul hashicorp/consul --set global.name=consul --create-namespace -n consul --values k8s/helm-consul-values.yml
-
-while [[ $(kubectl get pods -n consul -l app=consul -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True True True True" ]]; do echo "waiting for Consul" && sleep 2; done
 
 helm list | grep 'vault' &> /dev/null
 if [ $? == 0 ]; then
@@ -70,10 +59,16 @@ VAULT_UNSEAL_KEY=$(cat cluster-keys.json | jq -r ".unseal_keys_b64[]")
 echo "⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰⏰"
 echo "PLEASE COPY PASTE THE FOLLOWING VALUE: ${VAULT_UNSEAL_KEY} , you will be asked for it 3 times to unseal the vaults"
 
-kubectl exec -it vault-0 -n vault -- vault operator unseal $VAULT_UNSEAL_KEY
-kubectl exec -it vault-1 -n vault -- vault operator unseal $VAULT_UNSEAL_KEY
-kubectl exec -it vault-2 -n vault -- vault operator unseal $VAULT_UNSEAL_KEY
+echo "Unsealing Vault 0"
+kubectl exec -it vault-0 -n vault  -- vault operator unseal $VAULT_UNSEAL_KEY
 
+echo "Joining & unsealing Vault 1"
+kubectl exec -it vault-1 -n vault -- vault operator raft join http://vault-0.vault-internal:8200
+kubectl exec -it vault-1 -n vault -- vault operator unseal $VAULT_UNSEAL_KEY
+
+echo "Joining & unsealing Vault 2"
+kubectl exec -it vault-2 -n vault -- vault operator raft join http://vault-0.vault-internal:8200
+kubectl exec -it vault-2 -n vault -- vault operator unseal $VAULT_UNSEAL_KEY
 
 echo "Obtaining root token"
 jq .root_token cluster-keys.json > commentedroottoken
