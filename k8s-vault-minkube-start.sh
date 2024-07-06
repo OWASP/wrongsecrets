@@ -28,6 +28,7 @@ kubectl delete pod -n kube-system -l name=sealed-secrets-controller
 kubectl create -f k8s/sealed-challenge48.json
 echo "finishing up the sealed secret controler part"
 echo "do you need to decrypt and/or handle things for the sealed secret use kubeseal"
+
 kubectl get secrets | grep 'funnystuff' &> /dev/null
 if [ $? == 0 ]; then
    echo "secrets secret is already installed"
