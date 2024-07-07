@@ -175,11 +175,15 @@ while [[ $(kubectl get pods -l app=secret-challenge -o 'jsonpath={..status.condi
 do
   echo "waiting for secret-challenge" && sleep 2;
   ((golivecounter+=1))
-  if [ $((n % 4)) -eq 0 ]; then
+  if [ $((golivecounter % 10)) -eq 0 ]; then
     kubectl describe deployment secret-challenge
+  else
+    echo "waiting for secret-challenge, step $golivecounter"s
   fi
-  if [ $((n % 7)) -eq 0 ]; then
+  if [ $((golivecounter % 15)) -eq 0 ]; then
     kubectl describe pod -l app=secret-challenge
+  else
+    echo "waiting for secret-challenge, step $golivecounter"
   fi
 done
 kubectl logs -l app=secret-challenge -f >> pod.log &
