@@ -56,18 +56,22 @@ func TestTerraformWrongSecretsAWS(t *testing.T) {
 	time.Sleep(time.Duration(40) * time.Second)
 
 	// Make an HTTP request to the instance and make sure we get back a 200 OK with the body "Hello, World!"
+	challenge7 := fmt.Sprintf("http://%s:8080/%s", "localhost", "spoil/challenge-7")
 	challenge9 := fmt.Sprintf("http://%s:8080/%s", "localhost", "spoil/challenge-9")
 	challenge10 := fmt.Sprintf("http://%s:8080/%s", "localhost", "spoil/challenge-10")
 	challenge11 := fmt.Sprintf("http://%s:8080/%s", "localhost", "spoil/challenge-11")
+	challenge47 := fmt.Sprintf("http://%s:8080/%s", "localhost", "spoil/challenge-47")
 	main := fmt.Sprintf("http://%s:8080", "localhost")
 
 	// Make sure all challenges are enabled
 	http_helper.HttpGetWithCustomValidation(t, main, nil, validateChallengesEnabled)
 
 	// Make an HTTP request to the instance and make sure we get back a 200 OK and don't see expected string. Retries for a while.
+	http_helper.HttpGetWithRetryWithCustomValidation(t, challenge7, nil, 30, 5*time.Second, validateCloudChallengeResponse)
 	http_helper.HttpGetWithRetryWithCustomValidation(t, challenge9, nil, 30, 5*time.Second, validateCloudChallengeResponse)
 	http_helper.HttpGetWithRetryWithCustomValidation(t, challenge10, nil, 30, 5*time.Second, validateCloudChallengeResponse)
 	http_helper.HttpGetWithRetryWithCustomValidation(t, challenge11, nil, 30, 5*time.Second, validateCloudChallengeResponse)
+	http_helper.HttpGetWithRetryWithCustomValidation(t, challenge47, nil, 30, 5*time.Second, validateCloudChallengeResponse)
 }
 
 func validateCloudChallengeResponse(statusCode int, body string) bool {
@@ -79,6 +83,16 @@ func validateCloudChallengeResponse(statusCode int, body string) bool {
 	// body should not contain please_use_supported_cloud_env
 	if strings.Contains(body, "please_use_supported_cloud_env") {
 		log.Printf("Found please_use_supported_cloud_env in response body")
+		return false
+	}
+	// body should not contain if_you_see_this_please_use_k8s
+	if strings.Contains(body, "if_you_see_this_please_use_k8s") {
+		log.Printf("Found if_you_see_this_please_use_k8s in response body")
+		return false
+	}
+	// body should not contain if_you_see_this_please_use_K8S_and_Vault
+	if strings.Contains(body, "if_you_see_this_please_use_K8S_and_Vault") {
+		log.Printf("Found if_you_see_this_please_use_K8S_and_Vault in response body")
 		return false
 	}
 	return statusCode == 200
