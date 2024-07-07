@@ -167,6 +167,14 @@ The K8S setup currently is based on using Minikube for local fun. You can use th
     kubectl apply -f k8s/secrets-config.yml
     kubectl apply -f k8s/secrets-secret.yml
     kubectl apply -f k8s/challenge33.yml
+    echo "Setting up the bitnami sealed secret controler"
+    kubectl apply -f https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.27.0/controller.yaml
+    kubectl apply -f k8s/sealed-secret-controller.yaml
+    kubectl apply -f k8s/main.key
+    kubectl delete pod -n kube-system -l name=sealed-secrets-controller
+    kubectl create -f k8s/sealed-challenge48.json
+    echo "finishing up the sealed secret controler part"
+    wait 10 #or check whether secret48 is there
     kubectl apply -f k8s/secret-challenge-deployment.yml
     while [[ $(kubectl get pods -l app=secret-challenge -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do echo "waiting for secret-challenge" && sleep 2; done
     kubectl expose deployment secret-challenge --type=LoadBalancer --port=8080
@@ -192,6 +200,14 @@ Want to run vanilla on your own k8s? Use the commands below:
 ```bash
     kubectl apply -f k8s/secrets-config.yml
     kubectl apply -f k8s/secrets-secret.yml
+    echo "Setting up the bitnami sealed secret controler"
+    kubectl apply -f https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.27.0/controller.yaml
+    kubectl apply -f k8s/sealed-secret-controller.yaml
+    kubectl apply -f k8s/main.key
+    kubectl delete pod -n kube-system -l name=sealed-secrets-controller
+    kubectl create -f k8s/sealed-challenge48.json
+    echo "finishing up the sealed secret controler part"
+    wait 10 #or check whether secret48 is there
     kubectl apply -f k8s/challenge33.yml
     kubectl apply -f k8s/secret-challenge-deployment.yml
     while [[ $(kubectl get pods -l app=secret-challenge -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do echo "waiting for secret-challenge" && sleep 2; done

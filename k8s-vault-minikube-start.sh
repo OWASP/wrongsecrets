@@ -20,6 +20,14 @@ if [ $? == 0 ]; then
 else
   kubectl apply -f k8s/secrets-config.yml
 fi
+echo "Setting up the bitnami sealed secret controler"
+kubectl apply -f https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.27.0/controller.yaml
+kubectl apply -f k8s/sealed-secret-controller.yaml
+kubectl apply -f k8s/main.key
+kubectl delete pod -n kube-system -l name=sealed-secrets-controller
+kubectl create -f k8s/sealed-challenge48.json
+echo "finishing up the sealed secret controler part"
+echo "do you need to decrypt and/or handle things for the sealed secret use kubeseal"
 
 kubectl get secrets | grep 'funnystuff' &> /dev/null
 if [ $? == 0 ]; then
@@ -162,7 +170,22 @@ kubectl exec vault-0 -n vault -- vault write auth/kubernetes/role/secret-challen
 kubectl create serviceaccount vault
 echo "Deploy secret challenge app"
 kubectl apply -f k8s/secret-challenge-vault-deployment.yml
-while [[ $(kubectl get pods -l app=secret-challenge -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do echo "waiting for secret-challenge" && sleep 2; done
+golivecounter=0
+while [[ $(kubectl get pods -l app=secret-challenge -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]];
+do
+  echo "waiting for secret-challenge" && sleep 2;
+  ((golivecounter+=1))
+  if [ $((golivecounter % 10)) -eq 0 ]; then
+    kubectl describe deployment secret-challenge
+  else
+    echo "waiting for secret-challenge, step $golivecounter"s
+  fi
+  if [ $((golivecounter % 15)) -eq 0 ]; then
+    kubectl describe pod -l app=secret-challenge
+  else
+    echo "waiting for secret-challenge, step $golivecounter"
+  fi
+done
 kubectl logs -l app=secret-challenge -f >> pod.log &
 kubectl expose deployment secret-challenge --type=LoadBalancer --port=8080
 kubectl port-forward \

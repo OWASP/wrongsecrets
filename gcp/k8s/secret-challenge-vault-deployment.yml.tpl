@@ -119,6 +119,11 @@ spec:
                 secretKeyRef:
                   name: challenge33
                   key: answer
+            - name: SEALED_SECRET_ANSWER
+              valueFrom:
+                secretKeyRef:
+                  name: challenge48secret
+                  key: secret
             - name: SPECIAL_SPECIAL_K8S_SECRET
               valueFrom:
                 secretKeyRef:

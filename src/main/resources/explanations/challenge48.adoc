@@ -1,0 +1,7 @@
+=== Sealed Secret with Accessible Key
+
+In this challenge, you will explore the usage of kubernetes Sealed Secret. Sealed Secrets are a way to encrypt your Kubernetes secrets and store them safely, even in a public repository. However, improper handling of these secrets can still pose a security risk.
+
+A Developer has accidentally made the private key for decrypting the sealed secrets accessible within the same repository that contains the sealed secret. Your task is to find and decrypt teh sealed secret using the accessible private key.
+
+Can you find and decrypt the sealed secret to reveal the sensitive information?
