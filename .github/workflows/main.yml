@@ -30,6 +30,7 @@ jobs:
         with:
           java-version: "22"
           distribution: "temurin"
+          cache: "maven"
       - name: checkstyle with Maven
         run: ./mvnw --no-transfer-progress checkstyle:check
 
@@ -43,6 +44,7 @@ jobs:
         with:
           java-version: "22"
           distribution: "temurin"
+          cache: "maven"
       - name: spotbugs with Maven
         run: ./mvnw --no-transfer-progress package -DskipTests spotbugs:check
   test:
@@ -58,6 +60,7 @@ jobs:
         with:
           java-version: "22"
           distribution: "temurin"
+          cache: "maven"
       - name: Test with Maven
         run: ./mvnw --no-transfer-progress test
       - uses: actions/upload-artifact@v4

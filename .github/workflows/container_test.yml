@@ -23,7 +23,7 @@ jobs:
         with:
           java-version: "22"
           distribution: "temurin"
-          cache: 'maven'
+          cache: "maven"
       - uses: actions/checkout@v4
       - name: Navigate to test script and run
         run: cd .github/scripts && bash docker-create.sh -t
