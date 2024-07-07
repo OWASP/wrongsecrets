@@ -59,3 +59,21 @@ updates:
     directory: "/gcp"
     schedule:
       interval: "monthly"
+
+    # Check our golang - gcp
+  - package-ecosystem: "golang"
+    directory: "/gcp"
+    schedule:
+      interval: "monthly"
+
+    # Check our golang - aws
+  - package-ecosystem: "golang"
+    directory: "/aws"
+    schedule:
+      interval: "monthly"
+
+    # Check our golang - azure
+  - package-ecosystem: "golang"
+    directory: "/azure"
+    schedule:
+      interval: "monthly"
