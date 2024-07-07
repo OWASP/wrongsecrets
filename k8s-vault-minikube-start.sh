@@ -171,9 +171,9 @@ kubectl create serviceaccount vault
 echo "Deploy secret challenge app"
 kubectl apply -f k8s/secret-challenge-vault-deployment.yml
 golivecounter=0
-while [[ $(kubectl get pods -l app=secret-challenge -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; 
-do 
-  echo "waiting for secret-challenge" && sleep 2; 
+while [[ $(kubectl get pods -l app=secret-challenge -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]];
+do
+  echo "waiting for secret-challenge" && sleep 2;
   ((golivecounter+=1))
   if [ $((n % 4)) -eq 0 ]; then
     kubectl describe deployment secret-challenge
