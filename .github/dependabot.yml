@@ -61,19 +61,19 @@ updates:
       interval: "monthly"
 
     # Check our golang - gcp
-  - package-ecosystem: "golang"
+  - package-ecosystem: "gomod"
     directory: "/gcp"
     schedule:
       interval: "monthly"
 
     # Check our golang - aws
-  - package-ecosystem: "golang"
+  - package-ecosystem: "gomod"
     directory: "/aws"
     schedule:
       interval: "monthly"
 
     # Check our golang - azure
-  - package-ecosystem: "golang"
+  - package-ecosystem: "gomod"
     directory: "/azure"
     schedule:
       interval: "monthly"
