@@ -15,7 +15,7 @@
 
 Welcome to the OWASP WrongSecrets game! The game is packed with real life examples of how to _not_ store secrets in your software. Each of these examples is captured in a challenge, which you need to solve using various tools and techniques. Solving these challenges will help you recognize common mistakes & can help you to reflect on your own secrets management strategy.
 
-Can you solve all the 46 challenges?
+Can you solve all the 48 challenges?
 
 Try some of them on [our Heroku demo environment](https://wrongsecrets.herokuapp.com/).
 
@@ -151,7 +151,7 @@ If you want to host WrongSecrets on Railway, you can do so by deploying [this on
 
 ## Basic K8s exercise
 
-_Can be used for challenges 1-6, 8, 12-43_
+_Can be used for challenges 1-6, 8, 12-43, 48_
 
 ### Minikube based
 
@@ -192,6 +192,7 @@ now you can use the provided IP address and port to further play with the K8s va
 -   [localhost:8080/challenge/challenge-5](http://localhost:8080/challenge/challenge-5)
 -   [localhost:8080/challenge/challenge-6](http://localhost:8080/challenge/challenge-6)
 -   [localhost:8080/challenge/challenge-33](http://localhost:8080/challenge/challenge-33)
+-   [localhost:8080/challenge/challenge-48](http://localhost:8080/challenge/challenge-48)
 
 ### k8s based
 
@@ -221,10 +222,11 @@ now you can use the provided IP address and port to further play with the K8s va
 -   [localhost:8080/challenge/challenge-5](http://localhost:8080/challenge/challenge-5)
 -   [localhost:8080/challenge/challenge-6](http://localhost:8080/challenge/challenge-6)
 -   [localhost:8080/challenge/challenge-33](http://localhost:8080/challenge/challenge-33)
+-   [localhost:8080/challenge/challenge-48](http://localhost:8080/challenge/challenge-48)
 
 ## Vault exercises with minikube
 
-_Can be used for challenges 1-8, 12-46_
+_Can be used for challenges 1-8, 12-48_
 Make sure you have the following installed:
 
 -   minikube with docker (or comment out line 8 and work at your own k8s setup),
@@ -235,14 +237,14 @@ Make sure you have the following installed:
 -   vault [Install from here](https://www.vaultproject.io/downloads),
 -   grep, Cat, and Sed
 
-Run `./k8s-vault-minikube-start.sh`, when the script is done, then the challenges will wait for you at <http://localhost:8080> . This will allow you to run challenges 1-8, 12-46.
+Run `./k8s-vault-minikube-start.sh`, when the script is done, then the challenges will wait for you at <http://localhost:8080> . This will allow you to run challenges 1-8, 12-48.
 
 When you stopped the `k8s-vault-minikube-start.sh` script and want to resume the port forward run: `k8s-vault-minikube-resume.sh`.
 This is because if you run the start script again it will replace the secret in the vault and not update the secret-challenge application with the new secret.
 
 ## Cloud Challenges
 
-_Can be used for challenges 1-46_
+_Can be used for challenges 1-48_
 
 **READ THIS**: Given that the exercises below contain IAM privilege escalation exercises,
 never run this on an account which is related to your production environment or can influence your account-over-arching
@@ -305,6 +307,7 @@ Contributors:
 - [Marcin Nowak @drnow4u](https://www.github.com/drnow4u)
 - [Rodolfo Cabral Neves @roddas](https://www.github.com/roddas)
 - [Osama Magdy @osamamagdy](https://www.github.com/osamamagdy)
+- [Shubham Patel @Shubham-Patel07](https://www.github.com/Shubham-Patel07)
 - [Divyanshu Dev @Novice-expert](https://www.github.com/Novice-expert)
 - [Tibor Hercz @tiborhercz](https://www.github.com/tiborhercz)
 - [za @za](https://www.github.com/za)
@@ -312,7 +315,6 @@ Contributors:
 - [Diamond Rivero @diamant3](https://www.github.com/diamant3)
 - [Norbert Wolniak @nwolniak](https://www.github.com/nwolniak)
 - [Adarsh A @adarsh-a-tw](https://www.github.com/adarsh-a-tw)
-- [Shubham Patel @Shubham-Patel07](https://www.github.com/Shubham-Patel07)
 - [Filip Chyla @fchyla](https://www.github.com/fchyla)
 - [Turjo Chowdhury @turjoc120](https://www.github.com/turjoc120)
 - [Vineeth Jagadeesh @djvinnie](https://www.github.com/djvinnie)

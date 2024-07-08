@@ -15,3 +15,10 @@ Let's consider an example:
 
 To prevent such issues, it is crucial to ensure that private keys are stored securely and separately from the encrypted data.
 Always follow best practices for secret management and avoid exposing sensitive information in your repositories.
+
+*Food for thought on sealed secrets*
+Sealed secrets have some issues even when you keep the private key away from the repository.
+1.  If you don't configure RBAC or ABAC correctly, anyone can still access the secret when they can access the cluster.
+2. Sealed secrets are a type of hardcoded secret, which makes auditing difficult. Who or what accessed a secret, and from where?
+3. If you're going to rotate your sealing key, you'll need to rotate all of your secrets encrypted with said key -  potentially across dozens of repositories (as to why: see the git history challenge). How will you find them? And how do you identify which secrets were encrypted with what key? How do you make the previous version of a secret securely accessible?
+4. Sealed secrets can be subject to offline attacks, the viability of which depends on what you used to encrypt the secrets. Can you think of improper encryption schemes?
