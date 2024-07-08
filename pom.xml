@@ -441,7 +441,7 @@
         <artifactId>dependency-check-maven</artifactId>
         <version>${dependency-check-maven.version}</version>
         <configuration>
-          <nvdApiKey>a1c86a6f-95f5-4680-b447-1e2e2c501cd0</nvdApiKey>
+          <nvdApiKey>27a3071a-9d40-42f2-ac92-74bebbc4bdeb</nvdApiKey>
           <assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>
         </configuration>
         <executions>
