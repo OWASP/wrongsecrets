@@ -9,6 +9,7 @@ public class Challenge48 extends FixedAnswerChallenge {
 
   private final String sealedSecret;
 
+  /** This challenges is about how to misuse sealed secrets */
   public Challenge48(@Value("${SEALED_SECRET_ANSWER}") String sealedSecret) {
     this.sealedSecret = sealedSecret;
   }

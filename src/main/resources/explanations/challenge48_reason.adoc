@@ -15,3 +15,5 @@ Let's consider an example:
 
 To prevent such issues, it is crucial to ensure that private keys are stored securely and separately from the encrypted data.
 Always follow best practices for secret management and avoid exposing sensitive information in your repositories.
+
+Note: even when you keep the private key away from the repository, if you don't configure RBAC or ABAC correctly, anyone can still access the secret when they have access to the cluster.
