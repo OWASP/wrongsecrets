@@ -1,0 +1,13 @@
+This challenge can be solved by decrypting the base64 encoded secret in `secrchallenge.json`. You can do this either by:
+
+1. Using an online aes decryption tool like https://www.devglan.com/online-tools/aes-encryption-decryption[https://www.devglan.com/online-tools/aes-encryption-decryption]
+- Copy the value of `secret` from `secrchallenge.json` and paste it into the textbox of the decryptor.
+- Ensure the input format is `Base64` and the cipher mode is `ECB`.
+- Use the value of `key` from `secrchallenge.json` as decryption key and click on `Decrypt` to get the secret.
+
+2. Using the terminal
+- Launch the terminal while you are in the `executables` directory.
+- Copy the value of `key` from `secrchallenge.json` and type in `echo -n "3Ulyfmfgro6uh1cN" | xxd -p`. This gives you the decryption key in hexadecimal format.
+- Copy the value of `secret` from `secrchallenge.json`.
+- Then, use the obtained decryption key to decrypt the by typing `echo "7RwunHeLkY7c0TCTLRMOGCIeX0jWiYibAexA0unYGDI=" | openssl enc -a -d -aes-128-ecb -K 33556c79666d6667726f36756831634e -out decrypted.md`
+- Copy the secret from the `decrypted.md` file in the `executables` folder.

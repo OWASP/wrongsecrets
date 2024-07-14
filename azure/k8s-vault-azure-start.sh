@@ -32,7 +32,7 @@ export AZ_KEY_VAULT_TENANT_ID="$(terraform output -raw tenant_id)"
 export AZ_KEY_VAULT_NAME="$(terraform output -raw vault_name)"
 
 # Set the kubeconfig
-az aks get-credentials --resource-group $RESOURCE_GROUP --name $CLUSTER_NAME
+az aks get-credentials --resource-group $RESOURCE_GROUP --name $CLUSTER_NAME --overwrite-existing
 
 echo "Setting up workspace PSA to restricted for default"
 kubectl apply -f k8s/workspace-psa.yml
@@ -44,6 +44,15 @@ else
   kubectl apply -f ../k8s/secrets-config.yml
 fi
 
+echo "Setting up the bitnami sealed secret controler"
+kubectl apply -f https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.27.0/controller.yaml
+kubectl apply -f ../k8s/sealed-secret-controller.yaml
+kubectl apply -f ../k8s/main.key
+kubectl delete pod -n kube-system -l name=sealed-secrets-controller
+kubectl create -f ../k8s/sealed-challenge48.json
+echo "finishing up the sealed secret controler part"
+echo "do you need to decrypt and/or handle things for the sealed secret use kubeseal"
+
 kubectl get secrets | grep 'funnystuff' &>/dev/null
 if [ $? == 0 ]; then
   echo "secrets secret is already installed"
@@ -51,8 +60,6 @@ else
   kubectl apply -f ../k8s/secrets-secret.yml
   kubectl apply -f ../k8s/challenge33.yml
 fi
-
-source ../scripts/install-consul.sh
 
 source ../scripts/install-vault.sh
 
@@ -93,7 +100,7 @@ echo "Apply secretsmanager storage volume"
 kubectl apply -f./k8s/secret-volume.yml
 
 envsubst <./k8s/pod-id.yml.tpl >./k8s/pod-id.yml
-envsubst <./k8s/secret-challenge-vault-deployment.yml.tpl >./k8s/secret-challenge-vault-deployment.yml
+envsubst '${AZ_VAULT_URI},${AZ_POD_CLIENT_ID}' <./k8s/secret-challenge-vault-deployment.yml.tpl >./k8s/secret-challenge-vault-deployment.yml
 
 kubectl apply -f./k8s/pod-id.yml
 

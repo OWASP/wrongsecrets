@@ -9,20 +9,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.owasp.wrongsecrets.InMemoryScoreCard;
 import org.owasp.wrongsecrets.WrongSecretsApplication;
 import org.owasp.wrongsecrets.challenges.docker.Challenge1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
-@ExtendWith(SpringExtension.class)
 @SpringBootTest(
-    properties = {"ctf_enabled=true", "ctf_key=randomtextforkey"},
+    properties = {"K8S_ENV=docker", "ctf_enabled=true", "ctf_key=randomtextforkey"},
     classes = WrongSecretsApplication.class)
 @AutoConfigureMockMvc
 class ChallengesControllerCTFModeTest {
@@ -31,30 +27,30 @@ class ChallengesControllerCTFModeTest {
 
   @Test
   void shouldNotSpoilWhenInCTFMode() throws Exception {
-    mvc.perform(get("/spoil-1"))
+    mvc.perform(get("/spoil/challenge-1"))
         .andExpect(status().isOk())
         .andExpect(content().string(containsString("Spoils are disabled in CTF mode")));
   }
 
   @Test
   void shouldNotSpoilWhenInCTFModeEvenWhenChallengeUnsupported() throws Exception {
-    mvc.perform(get("/spoil-5"))
+    mvc.perform(get("/spoil/challenge-5"))
         .andExpect(status().isOk())
         .andExpect(content().string(containsString("Spoils are disabled in CTF mode")));
   }
 
   @Test
   void challenge0SshouldNotShowTheAddressRightAnswersNeedToBeSsubmittedTo() throws Exception {
-    mvc.perform(get("/challenge/0"))
+    mvc.perform(get("/challenge/challenge-0"))
         .andExpect(status().isOk())
         .andExpect(content().string(not(containsString("https://www.google.nl"))));
   }
 
   @Test
   void shouldShowFlagWhenRespondingWithSuccessInCTFMode() throws Exception {
-    var spoil = new Challenge1(new InMemoryScoreCard(1)).spoiler().solution();
+    var spoil = new Challenge1().spoiler().solution();
     mvc.perform(
-            post("/challenge/1")
+            post("/challenge/challenge-1")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("solution", spoil)
                 .param("action", "submit")
@@ -67,19 +63,19 @@ class ChallengesControllerCTFModeTest {
   void shouldNotEnableK8sExercises() throws Exception {
     mvc.perform(get("/"))
         .andExpect(status().isOk())
-        .andExpect(content().string(containsString("challenge 5_disabled-link")))
-        .andExpect(content().string(containsString("challenge 6_disabled-link")))
-        .andExpect(content().string(containsString("challenge 7_disabled-link")));
+        .andExpect(content().string(containsString("challenge-5_disabled-link")))
+        .andExpect(content().string(containsString("challenge-6_disabled-link")))
+        .andExpect(content().string(containsString("challenge-7_disabled-link")));
   }
 
   @Test
   void shouldStillDissableTestsIfNotPreconfigured() throws Exception {
-    testK8sChallenge("/challenge/5");
-    testK8sChallenge("/challenge/6");
-    testK8sChallenge("/challenge/7");
-    testForCloudCluster("/challenge/9");
-    testForCloudCluster("/challenge/10");
-    testForCloudCluster("/challenge/11");
+    testK8sChallenge("/challenge/challenge-5");
+    testK8sChallenge("/challenge/challenge-6");
+    testK8sChallenge("/challenge/challenge-7");
+    testForCloudCluster("/challenge/challenge-9");
+    testForCloudCluster("/challenge/challenge-10");
+    testForCloudCluster("/challenge/challenge-11");
   }
 
   private void testK8sChallenge(String url) throws Exception {

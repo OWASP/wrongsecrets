@@ -1,36 +1,31 @@
 package org.owasp.wrongsecrets.canaries;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.client.RestClientResponseException;
+import org.springframework.test.web.servlet.MockMvc;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest
+@AutoConfigureMockMvc
 class CanaryCallbackTest {
-  @LocalServerPort private int port;
-
-  @Autowired private RestTemplateBuilder builder;
+  @Autowired private MockMvc mvc;
+  @Autowired private ObjectMapper objectMapper;
 
   @Test
-  void shouldAcceptPostOfMessage() {
-    var restTemplate = builder.build();
+  void shouldAcceptPostOfMessage() throws Exception {
     var additonalCanaryData = new AdditionalCanaryData("source", "agent", "referer", "location");
-    CanaryToken token = new CanaryToken("url", "memo", "channel", "time", additonalCanaryData);
+    var canaryToken = new CanaryToken("url", "memo", "channel", "time", additonalCanaryData);
 
-    var callbackAdress = "http://localhost:" + port + "/canaries/tokencallback";
-
-    try {
-      var response = restTemplate.postForEntity(callbackAdress, token, String.class);
-      assertThat(response.getStatusCode()).isEqualTo(HttpStatus.ACCEPTED);
-    } catch (RestClientResponseException e) {
-      fail(e);
-    }
+    mvc.perform(
+            post("/canaries/tokencallback")
+                .contentType("application/json")
+                .content(objectMapper.writeValueAsString(canaryToken)))
+        .andExpect(status().isAccepted());
   }
 }
 

@@ -1,0 +1,18 @@
+This challenge can be solved using the following ways:
+
+- Decrypt the sealed secret using the accessible private key found in the repository:
+  1. Clone the repository containing the challenge files.
+  2. Locate the `sealed-challenge48.json` file in the repository.
+  3. Find the unencrypted private key file named `main.key` in the repository.
+  4. Use the `kubeseal` tool to decrypt the sealed secret:
+     ``
+     kubeseal --recovery-unseal --recovery-private-key k8s/main.key < k8s/sealed-challenge48.json > unsealed-secret.yaml
+     ``
+  5. `unsealed-secret.yaml` is unsealed secret is base64 encoded, we need to decode it and the resulting text will be the answer.
+
+- Get access to the secret directly:
+  1. with access to the cluster, do `kubectl get secret challenge48secret -o yaml`
+  2. decode the secret.
+
+
+Note: Ensure you have a valid Kubernetes configuration and access to a Kubernetes cluster. If you are running this on a hosted environment where you do not have direct access to the Kubernetes cluster, ask the organizer of the hosted solution to execute the commands for you and return the results.

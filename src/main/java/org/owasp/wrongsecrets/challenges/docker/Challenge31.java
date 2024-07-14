@@ -1,29 +1,16 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
-import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.DOCKER;
-
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
-import java.util.List;
 import java.util.UUID;
-import org.owasp.wrongsecrets.RuntimeEnvironment;
-import org.owasp.wrongsecrets.ScoreCard;
-import org.owasp.wrongsecrets.challenges.Challenge;
-import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
-import org.owasp.wrongsecrets.challenges.Spoiler;
-import org.springframework.core.annotation.Order;
+import org.owasp.wrongsecrets.challenges.FixedAnswerChallenge;
 import org.springframework.stereotype.Component;
 
-/** This challenge is about finding a secret in website */
+/** This challenge is about finding a secret in website. */
 @Component
-@Order(31)
-public class Challenge31 extends Challenge {
+public class Challenge31 extends FixedAnswerChallenge {
 
-  public Challenge31(ScoreCard scoreCard) {
-    super(scoreCard);
-  }
-
-  private String getanswer() {
+  public String getAnswer() {
     String str = "vozvtbeY6++kjJz3tPn84LeM77I=";
     byte[] arr = Base64.getDecoder().decode(str);
 
@@ -47,44 +34,5 @@ public class Challenge31 extends Challenge {
     }
 
     return new String(xoredBytes, StandardCharsets.UTF_8);
-  }
-
-  @Override
-  public boolean canRunInCTFMode() {
-    return true;
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public Spoiler spoiler() {
-    return new Spoiler(getanswer());
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public boolean answerCorrect(String answer) {
-    return getanswer().equals(answer);
-  }
-
-  /** {@inheritDoc} */
-  public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
-    return List.of(DOCKER);
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public int difficulty() {
-    return 1;
-  }
-
-  /** {@inheritDoc} Documentation based. */
-  @Override
-  public String getTech() {
-    return ChallengeTechnology.Tech.DOCUMENTATION.id;
-  }
-
-  @Override
-  public boolean isLimitedWhenOnlineHosted() {
-    return false;
   }
 }

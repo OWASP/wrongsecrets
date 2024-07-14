@@ -1,0 +1,16 @@
+# Ignore all files
+file://.*
+
+# This is used as an example when creating a pull request
+https://github.com/Your_Github_Handle.*
+# Heroku is not guaranteed to be up
+https://wrongsecrets-ctf.herokuapp.com/
+https://wrongsecrets.herokuapp.com
+# Okteto is not guaranteed to be up
+https://wrongsecrets-commjoen.cloud.okteto.net/
+https://wrongsecrets-ctf-commjoen.cloud.okteto.net/
+# Onrender will startup too slow
+https://wrongsecrets.onrender.com/
+https://betterprogramming.pub/stop-writing-bad-commit-messages-8df79517177d
+# Twitter its API does not like us
+https://twitter.com/intent/tweet?*

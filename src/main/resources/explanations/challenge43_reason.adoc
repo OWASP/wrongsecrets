@@ -1,0 +1,7 @@
+*Why should we not share a secret on social media?*
+
+Sharing a secret from your application on social media is a really bad practice because it becomes publicly available for anyone to abuse if they learn about the context in which the secret is used.
+
+Although the user or platform can often delete comments/posts, the secret almost always ends up in some database that could get leaked.
+
+Never share any secrets, personal or work-related, on social media!

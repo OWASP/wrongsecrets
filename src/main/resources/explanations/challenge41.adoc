@@ -1,0 +1,13 @@
+=== Password Shucking
+
+A website was using https://en.wikipedia.org/wiki/MD5[MD5] for hashing passwords, and its developers recently found out that someone released a dump of their user data.
+
+In an attempt to improve security, they decided to migrate to a stronger hashing algorithm like https://en.wikipedia.org/wiki/Bcrypt[bcrypt].
+
+The developers decided that the fastest way to migrate would be to hash the pre-existing hashes using bcrypt. Using two hashing algorithms would be more secure than using one, right? It appears so.
+
+Unfortunately, a data leak occurred again and this time the dump contained the bcrypt hashed passwords. At least, this time they are safe right?
+
+For this challenge, you are provided with two database dumps containing usernames and passwords. The dump file https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/db-dumps/db-dump.txt[db-dump.txt] was generated before the migration and the other dump file https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/db-dumps/db-dump-2.txt[db-dump-2.txt] was generated after the migration. Both dump files are available inside the https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/db-dumps[db-dumps folder].
+
+Now, assuming that all the users except one have changed their passwords, can you find the unchanged password?

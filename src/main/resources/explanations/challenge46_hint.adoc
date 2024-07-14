@@ -1,0 +1,11 @@
+This challenge can be solved using the following ways:
+
+- Get the data of the sidecar by looking at the files created by Vault Agent sidecar:
+  1. Run `kubectl get pods -A` and find secret-challenge-xxx pod name
+  2. Run `kubectl exec secret-challenge-xxx -c secret-challenge -n default -- cat vault/secrets/challenge46` where `xxx` is the rest of the randomly generated pod name to print injected secrets from vault.
+
+- Get the data by checking the logs of the Wrongsecrets pod as the `echo` is being sourced:
+  1. Run `kubectl get pods -A` and find secret-challenge-xxx pod name
+  2. Run `kubectl logs secret-challenge-xxx` where `xxx` is the rest of the randomly generated pod name to print the logs including the `echo` statement.
+
+Note: if you are running this on a hosted environment, where you do not have access to the Kubernetes cluster, ask the organizer of the hosted solution to execute the commands for you and return the results.

@@ -6,24 +6,18 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.io.TempDir;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.owasp.wrongsecrets.ScoreCard;
+import org.owasp.wrongsecrets.Challenges;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 
-@ExtendWith(MockitoExtension.class)
 class Challenge17Test {
-
-  @Mock private ScoreCard scoreCard;
 
   @Test
   void solveChallenge17WithoutFile(@TempDir Path dir) {
-    var challenge = new Challenge17(scoreCard, dir.toString());
+    var challenge = new Challenge17(dir.toString());
 
     Assertions.assertThat(challenge.answerCorrect("secretvalueWitFile")).isFalse();
-    Assertions.assertThat(challenge.answerCorrect("if_you_see_this_please_use_docker_instead"))
+    Assertions.assertThat(challenge.answerCorrect(Challenges.ErrorResponses.FILE_MOUNT_ERROR))
         .isTrue();
   }
 
@@ -33,7 +27,7 @@ class Challenge17Test {
     var secret = "secretvalueWitFile";
     Files.writeString(testFile.toPath(), secret);
 
-    var challenge = new Challenge17(scoreCard, dir.toString());
+    var challenge = new Challenge17(dir.toString());
 
     Assertions.assertThat(challenge.answerCorrect("secretvalueWitFile")).isTrue();
   }
@@ -44,7 +38,7 @@ class Challenge17Test {
     var secret = "secretvalueWitFile";
     Files.writeString(testFile.toPath(), secret);
 
-    var challenge = new Challenge17(scoreCard, dir.toString());
+    var challenge = new Challenge17(dir.toString());
 
     Assertions.assertThat(challenge.spoiler()).isEqualTo(new Spoiler("secretvalueWitFile"));
   }

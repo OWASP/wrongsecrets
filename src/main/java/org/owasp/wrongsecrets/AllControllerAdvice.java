@@ -1,11 +1,10 @@
 package org.owasp.wrongsecrets;
 
 import jakarta.servlet.http.HttpServletRequest;
-import java.util.List;
-import org.owasp.wrongsecrets.challenges.Challenge;
+import java.util.stream.Collectors;
 import org.owasp.wrongsecrets.challenges.ChallengeUI;
+import org.owasp.wrongsecrets.definitions.ChallengeDefinitionsConfiguration;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,22 +17,40 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 @ControllerAdvice
 public class AllControllerAdvice {
 
-  private final List<ChallengeUI> challenges;
+  private final Challenges challenges;
   private final String version;
+  private final ScoreCard scoreCard;
+  private final ChallengeDefinitionsConfiguration challengeDefinitionsConfiguration;
   private final RuntimeEnvironment runtimeEnvironment;
 
   public AllControllerAdvice(
-      List<Challenge> challenges,
+      Challenges challenges,
       @Value("${APP_VERSION}") String version,
+      ScoreCard scoreCard,
+      ChallengeDefinitionsConfiguration challengeDefinitionsConfiguration,
       RuntimeEnvironment runtimeEnvironment) {
-    this.challenges = ChallengeUI.toUI(challenges, runtimeEnvironment);
+    this.challenges = challenges;
     this.version = version;
+    this.scoreCard = scoreCard;
+    this.challengeDefinitionsConfiguration = challengeDefinitionsConfiguration;
     this.runtimeEnvironment = runtimeEnvironment;
   }
 
   @ModelAttribute
   public void addChallenges(Model model) {
-    model.addAttribute("challenges", challenges);
+    model.addAttribute(
+        "challenges",
+        challengeDefinitionsConfiguration.challenges().stream()
+            .map(
+                def ->
+                    ChallengeUI.toUI(
+                        def,
+                        scoreCard,
+                        runtimeEnvironment,
+                        challenges.difficulties(),
+                        challenges.getDefinitions().environments(),
+                        challenges.navigation(def)))
+            .collect(Collectors.toList()));
   }
 
   @ModelAttribute
@@ -48,12 +65,7 @@ public class AllControllerAdvice {
 
   @ModelAttribute
   public void addRuntimeEnvironment(Model model) {
-    model.addAttribute("environment", runtimeEnvironment.getRuntimeEnvironment().name());
+    model.addAttribute("environment", runtimeEnvironment.getRuntimeEnvironment().displayName());
     model.addAttribute("ctf_enabled", runtimeEnvironment.runtimeInCTFMode());
-  }
-
-  @Bean
-  public List<ChallengeUI> uiChallenges() {
-    return challenges;
   }
 }

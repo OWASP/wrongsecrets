@@ -1,0 +1,8 @@
+=== Reddit Blunder
+
+People easily make mistakes. They can, for instance, share an "innocent" piece of data over social media which later turns out to be a secret.
+Or they can post something on the "wrong screen" and submit it. Additionally, some password managers will happily auto-fill or paste something on any page or screen.
+
+Similarly, a developer in the OWASP community who also happened to be an active redditor, left a secret on the platform 'by mistake'.
+
+Can you find the secret?

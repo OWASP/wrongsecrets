@@ -1,0 +1,9 @@
+=== Vault Metadata Challenge
+
+Secrets management systems now often have metadata support for their secrets! This is awesome, as it allows you to enrich the secret with contextual data further, making it easier to remember the secret.
+
+But what if you put confidential/secret information into a secret by mistake?
+
+A developer has put secret metadata on a `wrongsecret` in Vault. Can you find it?
+
+Tip: take a look at the policies when vault is installed; you can see that the application is only allowed to use the metadata ;-).

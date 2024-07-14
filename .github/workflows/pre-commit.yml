@@ -8,8 +8,8 @@ on:
 
 env:
   TF_DOCS_VERSION: v0.16.0
-  TFSEC_VERSION: v1.27.6
-  TFLINT_VERSION: v0.41.0
+  TFSEC_VERSION: v1.28.6
+  TFLINT_VERSION: v0.47.0
 permissions:
   contents: read
 jobs:
@@ -18,32 +18,34 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout git repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: "3.9"
-      - uses: actions/setup-node@v3
+          python-version: "3.11"
+      - name: Format python code with black
+        uses: psf/black@stable
+      - uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
           cache: "npm"
-      - uses: actions/setup-java@v3
+      - uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '19'
+          java-version: '22'
       - name: Install npm dependencies
         run: npm install
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         name: Cache plugin dir
         with:
           path: ~/.tflint.d/plugins
           key: ${{ matrix.os }}-tflint-${{ hashFiles('.tflint.hcl') }}
       - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
+        uses: hashicorp/setup-terraform@v3
         with:
-          terraform_version: 1.1.7
+          terraform_version: 1.7.4
       - name: Setup TFLint
-        uses: terraform-linters/setup-tflint@v3
+        uses: terraform-linters/setup-tflint@v4
         with:
           tflint_version: ${{env.TFLINT_VERSION}}
       - name: Setup Terraform docs
@@ -58,7 +60,7 @@ jobs:
           chmod +x tfsec
           mv tfsec /usr/local/bin/
       - name: Pre-commit checks
-        uses: pre-commit/action@v3.0.0
+        uses: pre-commit/action@v3.0.1
       - name: pre-commit-ci-lite
-        uses: pre-commit-ci/lite-action@v1.0.1
+        uses: pre-commit-ci/lite-action@v1.0.2
         if: always()

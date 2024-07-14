@@ -1,17 +1,19 @@
-You can solve this challenge by the following steps:
+You can solve this challenge by the following alternative solutions:
 
 1. Check the status of the secret in Git:
 - Can you see where in git we stored the `secrets-secret.yml`? If not, just do a search.
-- Take a look at the `Data` field: what can you find there?
+- Take a look at the `Data` field: what can you find there? Please bare in mind that secrets are base64 encoded. Once mounted into the workloads, they are decoded.
+
 2. Ask nicely using Kubectl:
 - Make sure you have Kubectl installed as defined in the README.MD & make sure kubectl is configured to send commands to the right cluster.
 - Now do `kubectl get secrets` . Here you see all the configmaps active in the namespace you are in, which is for this app normally `default` (unless otherwise specified by your administrator/trainer).
-- Now do `kubectl get secret funnystuff -o Yaml` . Can you see the secret?
+- Now do `kubectl get secret funnystuff -o Yaml` . Can you see the secret? What is the value of it once you base64 decocde it?
+
 3. Exec into the pod and get the data:
 - Make sure you have Kubectl installed as defined in the README.MD & make sure kubectl is configured to send commands to the right cluster.
 - Now do `kubectl get pods`. Here you see all the Pods active in the namespace you are in, which is for this app normally `default` (unless otherwise specified by your administrator/trainer).
-- Now for your instance of the WrongSecrets pod, do `kubectl exec -it secret-challenge-<rest of the name of the pod from the prev.step> -- /bin/sh`.
-- Now do `env | grep SPECIAL_SPECIAL_K8S_SECRET` and there is your secret.
+- Now for your instance of the WrongSecrets pod, do `kubectl exec -it secret-challenge-<rest of the name of the pod from the prev.step> -- sh`.
+- Now do `env | grep SPECIAL_SPECIAL_K8S_SECRET` and there is your secret. Note that there is no decoding required as the secret is mounted now.
 
 
-BTW: with `kubectl get <item> -A` gives you an overview of all the items over all the namespaces you have access to. This shows how important it is not to give people access to every namespace in your cluster, as this might mean leaking important config/items to them.
+BTW: with `kubectl get <resourcetype> -A` gives you an overview of all the instances of such a resourcetype over all the namespaces you have access to. This shows how important it is not to give people access to every namespace in your cluster, as this might mean leaking important config/items to them.

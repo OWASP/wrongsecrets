@@ -2,6 +2,6 @@
 
 When people write a Proof of Concept, they often start with hardcoded secrets, such as a `password` in code. What if we forget to remove these hardcoded secrets?
 
-Can you spot the secret we are looking for in code? What about looking for it in the container?
+Can you spot the secret we are looking for in the https://github.com/OWASP/wrongsecrets/tree/master/src/main/java/org/owasp/wrongsecrets[Java code]? What about looking for it in the container?
 
 Sometimes the simpler tools are the most effective. Try cloning the repo and use https://man7.org/linux/man-pages/man1/grep.1.html[*grep*] to see what you find. It is also possible to find with https://github.com/awslabs/git-secrets[*Git-secrets*] or https://github.com/trufflesecurity/trufflehog[*Trufflehog*]. Just dive into the code!

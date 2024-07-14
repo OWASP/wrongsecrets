@@ -1,5 +1,6 @@
 package org.owasp.wrongsecrets.oauth;
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -12,7 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 @AutoConfigureMockMvc
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest
 class TokenControllerTest {
 
   @Autowired MockMvc mvc;
@@ -23,6 +24,7 @@ class TokenControllerTest {
     var response =
         mvc.perform(
             post("/token")
+                .with(csrf())
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .content(
                     "grant_type=client_credentials&client_id=WRONGSECRET_CLIENT_ID&client_secret=this"
@@ -43,6 +45,7 @@ class TokenControllerTest {
     var response =
         mvc.perform(
             post("/token")
+                .with(csrf())
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .content(
                     "grant_type=client_credentials&client_id=WRONGSECRET_CLIENT_ID&client_secret=this"

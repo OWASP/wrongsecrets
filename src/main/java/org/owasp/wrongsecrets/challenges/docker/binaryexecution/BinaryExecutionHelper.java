@@ -1,5 +1,7 @@
 package org.owasp.wrongsecrets.challenges.docker.binaryexecution;
 
+import static org.owasp.wrongsecrets.Challenges.ErrorResponses.EXECUTION_ERROR;
+
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Strings;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
@@ -14,12 +16,12 @@ import org.springframework.util.ResourceUtils;
 @Slf4j
 public class BinaryExecutionHelper {
 
-  private enum Operation {
+  private enum BinaryInstructionForFile {
     Spoil,
     Guess
   }
 
-  public static final String ERROR_EXECUTION = "Error with executing";
+  public static final String ERROR_EXECUTION = EXECUTION_ERROR;
   private final int challengeNumber;
 
   private Exception executionException;
@@ -42,9 +44,9 @@ public class BinaryExecutionHelper {
       File execFile = createTempExecutable("wrongsecrets-golang");
       String result;
       if (Strings.isNullOrEmpty(guess)) {
-        result = executeCommand(execFile, Operation.Spoil, "");
+        result = executeCommand(execFile, BinaryInstructionForFile.Spoil, "");
       } else {
-        result = executeCommand(execFile, Operation.Guess, guess);
+        result = executeCommand(execFile, BinaryInstructionForFile.Guess, guess);
       }
       log.info(
           "stdout challenge {}: {}",
@@ -68,15 +70,15 @@ public class BinaryExecutionHelper {
    * @return the actual answer
    */
   public String executeCommand(String guess, String fileName) {
-    Operation operation;
+    BinaryInstructionForFile binaryInstructionForFile;
     if (Strings.isNullOrEmpty(guess)) {
-      operation = Operation.Spoil;
+      binaryInstructionForFile = BinaryInstructionForFile.Spoil;
     } else {
-      operation = Operation.Guess;
+      binaryInstructionForFile = BinaryInstructionForFile.Guess;
     }
     try {
       File execFile = createTempExecutable(fileName);
-      String result = executeCommand(execFile, operation, guess);
+      String result = executeCommand(execFile, binaryInstructionForFile, guess);
       deleteFile(execFile);
       log.info(
           "stdout challenge {}: {}",
@@ -93,7 +95,8 @@ public class BinaryExecutionHelper {
   @SuppressFBWarnings(
       value = "COMMAND_INJECTION",
       justification = "We check for various injection methods and counter those")
-  private String executeCommand(File execFile, Operation operation, String guess)
+  private String executeCommand(
+      File execFile, BinaryInstructionForFile binaryInstructionForFile, String guess)
       throws IOException, InterruptedException {
     ProcessBuilder ps;
 
@@ -102,7 +105,7 @@ public class BinaryExecutionHelper {
         || stringContainsCommandChainToken(guess)) {
       return BinaryExecutionHelper.ERROR_EXECUTION;
     }
-    if (operation.equals(Operation.Spoil)) {
+    if (binaryInstructionForFile.equals(BinaryInstructionForFile.Spoil)) {
       ps = new ProcessBuilder(execFile.getPath(), "spoil");
     } else {
       if (execFile.getPath().contains("golang")) {
@@ -194,7 +197,7 @@ public class BinaryExecutionHelper {
       log.info("While we detected windows, please note that it is officially not supported.");
     } else if (useLinux()) {
       fileName = fileName + "-linux";
-      if (useMusl()) {
+      if (useMusl() && !fileName.contains("golang")) {
         fileName = fileName + "-musl";
       }
     }

@@ -45,6 +45,9 @@ Where the SERVICE_HOST IP might be different. You can find the right IP with the
 kubectl -n kube-system get pod -l component=kube-apiserver -o=jsonpath="{.items[0].metadata.annotations.kubeadm\.kubernetes\.io/kube-apiserver\.advertise-address\.endpoint}"
 ```
 
+### Need to save your work?
+
+Feel free to write files to your Desktop: that's where we created a small volume where you can write to.
 
 ### When you are in a CTF
 

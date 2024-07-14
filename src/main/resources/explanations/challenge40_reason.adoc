@@ -1,0 +1,7 @@
+*Why should we not store the encryption key and the secret together?*
+
+Storing an encryption key and the data it encrypts together is generally considered a bad practice because it undermines the security provided by encryption.
+
+In such scenarios, an attacker has the key the moment the file is in his possession.
+
+It is always recommended to store your encryption keys securely.

@@ -1,53 +1,35 @@
 package org.owasp.wrongsecrets.challenges.cloud;
 
-import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.AWS;
-import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.AZURE;
-import static org.owasp.wrongsecrets.RuntimeEnvironment.Environment.GCP;
-
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.List;
 import lombok.extern.slf4j.Slf4j;
-import org.owasp.wrongsecrets.RuntimeEnvironment;
-import org.owasp.wrongsecrets.ScoreCard;
-import org.owasp.wrongsecrets.challenges.ChallengeTechnology;
-import org.owasp.wrongsecrets.challenges.Difficulty;
-import org.owasp.wrongsecrets.challenges.Spoiler;
+import org.owasp.wrongsecrets.challenges.FixedAnswerChallenge;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /** Cloud challenge that leverages the CSI secrets driver of the cloud you are running in. */
 @Component
 @Slf4j
-@Order(10)
-public class Challenge10 extends CloudChallenge {
+public class Challenge10 extends FixedAnswerChallenge {
 
   private final String awsDefaultValue;
-  private final String challengeAnswer;
+  private final String filePath;
+  private final String fileName;
 
   public Challenge10(
-      ScoreCard scoreCard,
       @Value("${secretmountpath}") String filePath,
       @Value("${default_aws_value_challenge_10}") String awsDefaultValue,
-      @Value("${FILENAME_CHALLENGE10}") String fileName,
-      RuntimeEnvironment runtimeEnvironment) {
-    super(scoreCard, runtimeEnvironment);
+      @Value("${FILENAME_CHALLENGE10}") String fileName) {
     this.awsDefaultValue = awsDefaultValue;
-    this.challengeAnswer = getCloudChallenge9and10Value(filePath, fileName);
+    this.filePath = filePath;
+    this.fileName = fileName;
   }
 
-  /** {@inheritDoc} */
   @Override
-  public Spoiler spoiler() {
-    return new Spoiler(challengeAnswer);
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public boolean answerCorrect(String answer) {
-    return challengeAnswer.equals(answer);
+  public String getAnswer() {
+    return getCloudChallenge9and10Value(filePath, fileName);
   }
 
   @SuppressFBWarnings(
@@ -55,7 +37,7 @@ public class Challenge10 extends CloudChallenge {
       justification = "The location of the file is based on an Env Var")
   private String getCloudChallenge9and10Value(String filePath, String fileName) {
     try {
-      return Files.readString(Paths.get(filePath, fileName));
+      return Files.readString(Paths.get(filePath, fileName), StandardCharsets.UTF_8);
     } catch (Exception e) {
       log.warn(
           "Exception during reading file ({}/{}}), defaulting to default without AWS",
@@ -63,27 +45,5 @@ public class Challenge10 extends CloudChallenge {
           fileName);
       return awsDefaultValue;
     }
-  }
-
-  /** {@inheritDoc} */
-  public List<RuntimeEnvironment.Environment> supportedRuntimeEnvironments() {
-    return List.of(GCP, AWS, AZURE);
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public int difficulty() {
-    return Difficulty.EXPERT;
-  }
-
-  /** {@inheritDoc} Uses CSI Driver */
-  @Override
-  public String getTech() {
-    return ChallengeTechnology.Tech.CSI.id;
-  }
-
-  @Override
-  public boolean canRunInCTFMode() {
-    return true;
   }
 }

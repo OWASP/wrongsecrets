@@ -1,7 +1,7 @@
-FROM eclipse-temurin:17-jre-focal
+FROM eclipse-temurin:22.0.1_8-jre-alpine
 
 ARG argBasedPassword="default"
-ARG argBasedVersion="0.0.0"
+ARG argBasedVersion="1.8.5"
 ARG spring_profile=""
 ENV SPRING_PROFILES_ACTIVE=$spring_profile
 ENV ARG_BASED_PASSWORD=$argBasedPassword
@@ -15,12 +15,17 @@ RUN echo "2vars"
 RUN echo "$ARG_BASED_PASSWORD"
 RUN echo "$argBasedPassword"
 
-RUN useradd -u 2000 -m wrongsecrets
+RUN apk add --no-cache libstdc++
+
+#RUN useradd -u 2000 -m wrongsecrets
+RUN adduser -u 2000 -D wrongsecrets
+USER wrongsecrets
 
 COPY --chown=wrongsecrets target/wrongsecrets-${argBasedVersion}-SNAPSHOT.jar /application.jar
 COPY --chown=wrongsecrets .github/scripts/ /var/tmp/helpers
-COPY --chown=wrongsecrets src/main/resources/.bash_history /home/wrongsecrets/
+COPY --chown=wrongsecrets .github/scripts/.bash_history /home/wrongsecrets/
 COPY --chown=wrongsecrets src/main/resources/executables/ /home/wrongsecrets/
 COPY --chown=wrongsecrets src/test/resources/alibabacreds.kdbx /var/tmp/helpers
+COPY --chown=wrongsecrets src/test/resources/RSAprivatekey.pem /var/tmp/helpers/
 USER wrongsecrets
 CMD java -jar -Dspring.profiles.active=$(echo ${SPRING_PROFILES_ACTIVE}) -Dspringdoc.swagger-ui.enabled=${SPRINGDOC_UI} -Dspringdoc.api-docs.enabled=${SPRINGDOC_DOC} -D /application.jar

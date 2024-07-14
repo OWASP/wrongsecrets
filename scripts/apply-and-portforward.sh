@@ -4,5 +4,5 @@ while [[ $(kubectl get pods -l app=secret-challenge -o 'jsonpath={..status.condi
 kubectl port-forward \
   $(kubectl get pod -l app=secret-challenge -o jsonpath="{.items[0].metadata.name}") \
   8080:8080 \
-  ;
+  &
 echo "Run terraform destroy to clean everything up."

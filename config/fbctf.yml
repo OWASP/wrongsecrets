@@ -92,3 +92,18 @@ ctf:
     challenge30:
       name: Panama
       code: PA
+    challenge31:
+      name: Netherlands
+      code: NL
+    challenge32:
+      name: Germany
+      code: DE
+    challenge33:
+      name: Israel
+      code: IL
+    challenge34:
+      name: Brazil
+      code: BR
+    challenge35:
+      name: Japan
+      code: JP

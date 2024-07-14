@@ -1,0 +1,3 @@
+*Why we need to be careful with vulnerability reports*
+
+When you report a vulnerability or publish a security advisory, always be careful with the information you spread with them. Exact values of found hardcoded secrets, especially those harder to rotate, should not be put into your security report and/or the publication.

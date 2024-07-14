@@ -1,0 +1,5 @@
+=== Insecure Encryption Key - Part 2
+
+A developer encrypted a secret using https://en.wikipedia.org/wiki/Advanced_Encryption_Standard[AES] and stored its base64 encoded value in a json file. But where to leave the key? What about just leaving the key inside the file with the secret? That way, every secret can have its own key easily! Can you find the secret?
+
+The challenge file is called https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/secrchallenge.json[secrchallenge.json] and can be found in the https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables[executables folder].

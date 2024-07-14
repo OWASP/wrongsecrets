@@ -1,0 +1,13 @@
+This is a documentation challenge, which can be solved by going to the Github Advisory.
+
+1. Get to the key using the Github security advisory
+- Go to https://github.com/OWASP/wrongsecrets/security/advisories/GHSA-vv4g-7gjw-fvqw[the advisory].
+- Find the Google API key.
+- Copy it into the answer box.
+
+2. Follow the Github security advisory information
+- Go to https://github.com/OWASP/wrongsecrets/security/advisories/GHSA-vv4g-7gjw-fvqw[the advisory].
+- Find the version that is impacted (1.6.8RC1).
+- Open the tag at https://github.com/OWASP/wrongsecrets/tree/1.6.8RC1[Github].
+- Find the Google API key in challenge 35.
+- Copy it into the answer box.

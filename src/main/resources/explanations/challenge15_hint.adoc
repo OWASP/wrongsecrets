@@ -1,4 +1,4 @@
-You can solve this challenge by the following steps:
+You can solve this challenge by the following alternative solutions:
 
 1. Get the secret from older commits using Trufflehog
 - install https://github.com/feeltheajf/trufflehog3[trufflehog3] by running `pip3 install trufflehog3` which requires python3 and pip to be installed
@@ -7,5 +7,5 @@ You can solve this challenge by the following steps:
 - Find the container which is used to offer this challenge to you
 - Extract the ciphertext for Challenge15
 - Clone the project locally and run it locally following the instructions at the https://github.com/OWASP/wrongsecrets#notes-on-development[Readme.md].
-- Debug the project, by setting a breakpoint at the beginning of the `quickDecrypt` method
+- https://www.jetbrains.com/help/idea/debugging-your-first-java-application.html[Debug] the project, by setting a breakpoint at the beginning of the `quickDecrypt` method.
 - Override the cipherText value with the ciphertext you extracted at step 2, and now find the plaintext.

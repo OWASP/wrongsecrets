@@ -7,7 +7,7 @@ Help() {
     # Display Help
     echo "A versatile script to create a docker image for testing. Call this script with no arguments to simply create a local image that you can use to test your changes. For more complex use see the below help section"
     echo
-    echo "Syntax: docker-create.sh [-h (help)|-t (test)|-p (publish)|-e (herokud)|-f (herokup)|-g (fly)|-o (okteto)|-n (notag) [tag={tag}|message={message}|buildarg={buildarg}|springProfile={springProfile}]"
+    echo "Syntax: docker-create.sh [-h (help)|-t (test)|-p (publish)|-e (herokud)|-f (herokup)|-n (notag)| -r (Render)|tag={tag}|message={message}|buildarg={buildarg}|springProfile={springProfile}]"
     echo "options: (All optional)"
     echo "tag=             Write a custom tag that will be added to the container when it is build locally."
     echo "message=         Write a message used for the actual tag-message in git"
@@ -29,25 +29,25 @@ break_on_tag(){
       fi
 }
 
-Okteto_redeploy(){
-  break_on_tag
-  echo "Rebuilding the Okteto environment: https://wrongsecrets-commjoen.cloud.okteto.net/"
-  echo "Check if all required binaries are installed"
-  source ../../scripts/check-available-commands.sh
-  checkCommandsAvailable okteto
-  echo "validating okteto k8 deployment to contain the right container with tag "${tag}" (should be part of '$(cat ../../okteto/k8s/secret-challenge-deployment.yml | grep image)')"
-  if [[ "$(cat ../../okteto/k8s/secret-challenge-deployment.yml | grep image)" != *"${tag}"* ]]; then
-    echo "tag ${tag} in  ../../okteto/k8s/secret-challenge-deployment.yml not properly set, aborting"
-    exit
-  fi
-  cd ../../okteto
-  okteto destroy
-  okteto deploy
-}
+# Okteto_redeploy(){ //okteto is only available commercially. hence commenting this out. feel free to use it if you can.
+#   break_on_tag
+#   echo "Rebuilding the Okteto environment: https://wrongsecrets-commjoen.cloud.okteto.net/"
+#   echo "Check if all required binaries are installed"
+#   source ../../scripts/check-available-commands.sh
+#   checkCommandsAvailable okteto
+#   echo "validating okteto k8 deployment to contain the right container with tag "${tag}" (should be part of '$(cat ../../okteto/k8s/secret-challenge-deployment.yml | grep image)')"
+#   if [[ "$(cat ../../okteto/k8s/secret-challenge-deployment.yml | grep image)" != *"${tag}"* ]]; then
+#     echo "tag ${tag} in  ../../okteto/k8s/secret-challenge-deployment.yml not properly set, aborting"
+#     exit
+#   fi
+#   cd ../../okteto
+#   okteto destroy
+#   okteto deploy
+# }
 
 heroku_check_container() {
     break_on_tag
-    echo "validating dockerfile to contain tag "${tag}" (should be part of '$(head -n 1 ../../Dockerfile.web)')"
+    echo "validating dockerfile to contain tag ""${tag}"" (should be part of '$(head -n 1 ../../Dockerfile.web)')"
     if [[ "$(head -n 1 ../../Dockerfile.web)" != *"${tag}"* ]]; then
       echo "tag ${tag} in dockerfile FROM was not set properly, aborting"
       exit
@@ -67,6 +67,15 @@ Heroku_publish_demo() {
     heroku container:release web --app arcane-scrubland-42646
     heroku container:push --recursive --arg argBasedVersion=${tag}heroku,CTF_ENABLED=true,HINTS_ENABLED=false --app wrongsecrets-ctf
     heroku container:release web --app wrongsecrets-ctf
+    echo "testing challenge 16"
+    cd .github/scripts
+    export RAW_TEST=$(< secondkey.txt)
+    export TEST_DATA=$(echo -n $RAW_TEST)
+    curl --fail 'https://arcane-scrubland-42646.herokuapp.com/token'  --data-raw "grant_type=client_credentials&client_id=WRONGSECRET_CLIENT_ID&client_secret=$TEST_DATA"
+    echo $?
+    echo "testing arcane with cypress"
+    cd ../../src/test/e2e
+    npx cypress run --config-file cypress.config.arcane.js
     exit
 }
 
@@ -78,21 +87,21 @@ Heroku_publish_prod(){
     cd ../..
     heroku container:push --recursive --arg argBasedVersion=${tag}heroku,CANARY_URLS=http://canarytokens.com/feedback/images/traffic/tgy3epux7jm59n0ejb4xv4zg3/submit.aspx,http://canarytokens.com/traffic/cjldn0fsgkz97ufsr92qelimv/post.jsp --app=wrongsecrets
     heroku container:release web --app=wrongsecrets
+    echo "testing challenge 16"
+    cd .github/scripts
+    export RAW_TEST=$(< secondkey.txt)
+    export TEST_DATA=$(echo -n $RAW_TEST)
+    curl --fail 'https://wrongsecrets.herokuapp.com/token'  --data-raw "grant_type=client_credentials&client_id=WRONGSECRET_CLIENT_ID&client_secret=$TEST_DATA"
+    echo $?
+    echo "testing heroku with cypress"
+    cd ../../src/test/e2e
+    npx cypress run --config-file cypress.config.heroku.js
     exit
 }
 
-Fly_publish(){
-    echo "Publishing to Fly.io (wrongsecrets.fly.dev)"
-    echo "Check if all required binaries are installed"
-    source ../../scripts/check-available-commands.sh
-    checkCommandsAvailable fly
-    break_on_tag
-    echo "validating fly.toml to contain tag "${tag}" (should be part of '$(cat ../../fly.toml | grep argBasedVersion)')"
-    if [[ "$(cat ../../fly.toml | grep argBasedVersion)" != *"${tag}"* ]]; then
-      echo "tag ${tag} in fly.toml not properly set, aborting"
-      exit
-    fi
-    cd ../.. && fly deploy
+render_publish(){
+    echo "this depends on whether env var RENDER_HOOK is set, it curls the hook"
+    curl $RENDER_HOOK
     exit
 }
 
@@ -107,7 +116,7 @@ Fly_publish(){
 # Set option to local if no option provided
 script_mode="local"
 # Parse provided options
-while getopts ":htpefgon*" option; do
+while getopts ":htperfn*" option; do
     case $option in
     h) # display Help
         Help
@@ -125,11 +134,8 @@ while getopts ":htpefgon*" option; do
     f) # Helper
         script_mode="heroku_p"
         ;;
-    g) #Helper
-        script_mode="fly_p"
-        ;;
-    o) #okteto
-        script_mode="okteto"
+    r) #Helper
+        script_mode="render"
         ;;
     n) #notags
         disable_tagging_in_git="true"
@@ -147,7 +153,7 @@ done
 ################################################
 for ARGUMENT in "$@";
 do
-    if [[ $ARGUMENT != "-h" && $ARGUMENT != "-t" && $ARGUMENT != "-p" && $ARGUMENT != "-e" && $ARGUMENT != "-f" && $ARGUMENT != "-g" && $ARGUMENT != "-o" ]]
+    if [[ $ARGUMENT != "-h" && $ARGUMENT != "-t" && $ARGUMENT != "-p" && $ARGUMENT != "-e" && $ARGUMENT != "-f" ]]
     then
         KEY=$(echo "$ARGUMENT" | cut -f1 -d=)
         KEY_LENGTH=${#KEY}
@@ -159,7 +165,7 @@ done
 if test -n "${tag+x}"; then
     echo "tag is set"
 else
-    SCRIPT_PATH=$(dirname $(dirname $(dirname $(readlink -f "$0"))))
+    SCRIPT_PATH="$(dirname $(dirname $(dirname $(readlink -f "$0"))))"
     tag="local-test"
     echo "Setting default tag: ${tag}"
 fi
@@ -167,7 +173,7 @@ fi
 if test -n "${message+x}"; then
     echo "message is set"
 else
-    SCRIPT_PATH=$(dirname $(dirname $(dirname $(readlink -f "$0"))))
+    SCRIPT_PATH="$(dirname $(dirname $(dirname $(readlink -f "$0"))))"
     message="local testcontainer build"
     echo "Setting default message: ${message}"
 fi
@@ -204,12 +210,13 @@ fi
 
 if [[ $script_mode == "heroku_d" ]] ; then
   Heroku_publish_demo
+  exit
 elif [[ $script_mode == "heroku_p" ]]; then
   Heroku_publish_prod
-elif [[ $script_mode == "fly_p" ]]; then
-  Fly_publish
-elif [[ $script_mode == "okteto" ]]; then
-  Okteto_redeploy
+  exit
+elif [[ $script_mode == "render" ]]; then
+  render_publish
+  exit
 fi
 
 
@@ -267,21 +274,28 @@ check_correct_launch_location() {
 }
 
 generate_test_data() {
+  if [[ $script_mode != "heroku"* ]];then
+    echo "cleanup all data"
+    rm yourkey.txt
+    rm secondkey.txt
+    rm thirdkey.txt
     echo "Generating challenge 12-data"
     openssl rand -base64 32 | tr -d '\n' > yourkey.txt
     echo "Generating challenge 16-data"
-    SECENDKEYPART1=$(openssl rand -base64 5 | tr -d '\n')
-    SECENDKEYPART2=$(openssl rand -base64 3 | tr -d '\n')
-    SECENDKEYPART3=$(openssl rand -base64 2 | tr -d '\n')
-    SECENDKEYPART4=$(openssl rand -base64 3 | tr -d '\n')
-    echo -n "${SECENDKEYPART1}9${SECENDKEYPART2}6${SECENDKEYPART3}2${SECENDKEYPART4}7" > secondkey.txt
-    printf "function secret() { \n var password = \"$SECENDKEYPART1\" + 9 + \"$SECENDKEYPART2\" + 6 + \"$SECENDKEYPART3\" + 2 + \"$SECENDKEYPART4\" + 7;\n return password;\n }\n" > ../../js/index.js
+    SECONDKEYPART1=$(openssl rand -base64 5 | tr -d '\n')
+    SECONDKEYPART2=$(openssl rand -base64 3 | tr -d '\n')
+    SECONDKEYPART3=$(openssl rand -base64 2 | tr -d '\n')
+    SECONDKEYPART4=$(openssl rand -base64 3 | tr -d '\n')
+    echo -n "${SECONDKEYPART1}9${SECONDKEYPART2}6${SECONDKEYPART3}2${SECONDKEYPART4}7" > secondkey.txt
+    rm ../../js/index.js
+    printf "// eslint-disable-next-line no-unused-vars\n function secret() { \n var password = \"$SECONDKEYPART1\" + 9 + \"$SECONDKEYPART2\" + 6 + \"$SECONDKEYPART3\" + 2 + \"$SECONDKEYPART4\" + 7;\n return password;\n }\n" > ../../js/index.js
     echo "Generating challenge 17"
-    rm thirdkey.txt
     openssl rand -base64 32 | tr -d '\n' > thirdkey.txt
     answer=$(<thirdkey.txt)
     answerRegexSafe="$(printf '%s' "$answer" | $findAndReplace -e 's/[]\/$*.^|[]/\\&/g' | $findAndReplace ':a;N;$!ba;s,\n,\\n,g')"
-    $findAndReplace -i "s/Placeholder Password, find the real one in the history of the container/$answerRegexSafe/g" ../../src/main/resources/.bash_history
+    cp ../../src/main/resources/.bash_history .
+    $findAndReplace -i "s/Placeholder Password, find the real one in the history of the container/$answerRegexSafe/g" .bash_history
+  fi
 }
 
 build_update_pom() {
@@ -298,7 +312,7 @@ build_update_pom() {
     mv temp4.txt ../../src/main/resources/templates/about.html
     rm tem*.txt
     echo "Building and updating pom.xml file so we can use it in our docker"
-    cd ../.. && ./mvnw clean && ./mvnw --batch-mode release:update-versions -DdevelopmentVersion=${tag}-SNAPSHOT && ./mvnw install -DskipTests
+    cd ../.. && ./mvnw clean && ./mvnw --batch-mode release:update-versions -DdevelopmentVersion=${tag}-SNAPSHOT && ./mvnw spotless:apply && ./mvnw install -DskipTests
     cd .github/scripts
     docker buildx create --name mybuilder
     docker buildx use mybuilder
@@ -340,9 +354,10 @@ create_containers() {
 
 restore_temp_change() {
     echo "Restoring temporal change"
-    git restore ../../js/index.js
+#    git restore ../../js/index.js
     git restore ../../pom.xml
     git restore ../../src/main/resources/.bash_history
+    # rm .bash_history
 }
 
 commit_and_tag() {
@@ -394,7 +409,10 @@ test() {
             log_failure "The container test has failed, this means that when we built your changes and ran a basic sanity test on the homepage it failed. Please build the container locally and double check the container is running correctly."
         fi
         echo "testing curl for webjar caching"
-        curl -I  'http://localhost:8080/webjars/bootstrap/5.2.3/css/bootstrap.min.css'
+        curl -I  'http://localhost:8080/webjars/bootstrap/5.3.3/css/bootstrap.min.css'
+        echo "testing with cypress (requires node20)"
+        cd ../../src/test/e2e
+        npx cypress run
         echo "Testing complete"
     else
         return

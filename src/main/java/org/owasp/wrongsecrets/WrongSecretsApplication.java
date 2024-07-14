@@ -1,9 +1,9 @@
 package org.owasp.wrongsecrets;
 
-import java.util.List;
-import lombok.extern.slf4j.Slf4j;
-import org.owasp.wrongsecrets.challenges.Challenge;
+import org.owasp.wrongsecrets.challenges.kubernetes.Vaultinjected;
 import org.owasp.wrongsecrets.challenges.kubernetes.Vaultpassword;
+import org.owasp.wrongsecrets.definitions.ChallengeDefinitionsConfiguration;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -12,8 +12,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 
 @SpringBootApplication
-@EnableConfigurationProperties(Vaultpassword.class)
-@Slf4j
+@EnableConfigurationProperties({Vaultpassword.class, Vaultinjected.class})
 public class WrongSecretsApplication {
 
   public static void main(String[] args) {
@@ -22,8 +21,14 @@ public class WrongSecretsApplication {
 
   @Bean
   @Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
-  public InMemoryScoreCard scoreCard(List<Challenge> challenges) {
-    log.info("Initializing scorecard with {} challenges", challenges.size());
-    return new InMemoryScoreCard(challenges.size());
+  public InMemoryScoreCard scoreCard(Challenges challenges) {
+    return new InMemoryScoreCard(challenges);
+  }
+
+  @Bean
+  public RuntimeEnvironment runtimeEnvironment(
+      @Value("${K8S_ENV}") String currentRuntimeEnvironment,
+      ChallengeDefinitionsConfiguration challengeDefinitions) {
+    return RuntimeEnvironment.fromString(currentRuntimeEnvironment, challengeDefinitions);
   }
 }

@@ -20,17 +20,47 @@ jobs:
     runs-on: ubuntu-latest
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - uses: actions/checkout@v3
-      - uses: eLco/setup-vault@v1.0.2
+      - uses: actions/checkout@v4
+      - uses: eLco/setup-vault@v1.0.3
       - name: Start minikube
         uses: medyagh/setup-minikube@master
         with:
-          minikube-version: 1.29.0
+          minikube-version: 1.33.1
           driver: docker
-          kubernetes-version: v1.25.6
+          kubernetes-version: v1.30.0
       - name: Setup helm
-        uses: azure/setup-helm@v3.5
+        uses: azure/setup-helm@v4
         id: install
       - name: test script
         run: |
-          ./k8s-vault-minkube-start.sh && sleep 5 && curl http://localhost:8080/spoil-7 && minikube delete
+          ./k8s-vault-minikube-start.sh && sleep 5 && curl http://localhost:8080/spoil/challenge-7
+
+  cypress-tests:
+    name: Cypress Test for Challenges
+    runs-on: ubuntu-latest
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - uses: actions/checkout@v4
+      - uses: eLco/setup-vault@v1.0.3
+      - name: Start minikube
+        uses: medyagh/setup-minikube@master
+        with:
+          minikube-version: 1.33.1
+          driver: docker
+          kubernetes-version: v1.30.0
+      - name: Setup helm
+        uses: azure/setup-helm@v4
+        id: install
+      - name: test script
+        run: |
+          ./k8s-vault-minikube-start.sh && sleep 5 && curl http://localhost:8080/spoil/challenge-7
+      - name: Run Tests
+        run: |
+          cd src/test/K8s-tests
+          npm install
+          npx cypress run
+      - uses: actions/upload-artifact@v4
+        if: success() || failure()
+        with:
+          name: e2e results
+          path: src/test/K8s-tests/cypress/reports/mochawesome/

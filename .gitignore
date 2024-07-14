@@ -67,6 +67,10 @@ azure/k8s/pod-id.yml
 
 yourkey.txt
 
+# Challenge 36
+src/main/resources/executables/.gdb_history
+src/main/resources/executables/decrypt/decrypt
+
 # Node JS
 js/node/
 js/node_modules/
@@ -74,6 +78,18 @@ node_modules
 .npm
 
 # Cypress
-cypress/videos
-cypress/screenshots
+src/test/e2e/cypress/videos
+src/test/e2e/cypress/screenshots
+src/test/e2e/cypress/reports
+src/test/k8s-tests/cypress/videos
+src/test/k8s-tests/cypress/screenshots
+src/test/k8s-tests/cypress/reports
 cypress/downloads
+py_env
+tmp/
+.env
+contributors_file*
+
+##documentation
+scripts/sort_contibutors/.env
+scripts/sort_contibutors/contributors_file.*

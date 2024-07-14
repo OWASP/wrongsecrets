@@ -1,0 +1,5 @@
+*Why should we not use the filename as the encryption key?*
+
+There have been multiple scenarios where the contents of files were encrypted using the filename itself, which allows attackers to easily decrypt its contents easily. It is often perceived as an easy way to keep the key close to the content, without reusing the same encryption key everywhere.
+
+But as you can tell by now, this is not a good idea. An attacker has the key the moment the file is in his possession.

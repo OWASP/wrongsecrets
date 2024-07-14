@@ -1,0 +1,21 @@
+{
+  "kind": "SealedSecret",
+  "apiVersion": "bitnami.com/v1alpha1",
+  "metadata": {
+    "name": "challenge48secret",
+    "namespace": "default",
+    "creationTimestamp": null
+  },
+  "spec": {
+    "template": {
+      "metadata": {
+        "name": "challenge48secret",
+        "namespace": "default",
+        "creationTimestamp": null
+      }
+    },
+    "encryptedData": {
+      "secret": "AgARfKwI9gk4rNz6floknF2lXCiHTHDhRTtWv1DsBw0xptba9c4uj/wC2wbBHhWddoGJEC5TtiJNTM/Rl04UMKFiQOVWKWBupd3NYnWIn8p9QfmJRqLKnlbQaUPxprNvHSxLHJVBejkYDOnD9WbzOXC9B+mHhu7LDpM8UJMHN0ftwVmebAbmFobMvP1/WtoQJ/KvA0l/yMS+oM/bZy6rVMtj5/wQqDz+2ozzXpd5nrDLh6N+RGQo/FBlPYPWc0ymFzx2Tj6FOAzHEugLdyNJJD8jjz+UZXfO30NbZ9LQXea1Ef1BosfrwqGlNaUBCJEfIPlg7Sdw51npRu+cWEJFnEA2Gm5nnDJdGrTzRKFwXCFLQIyv2feUpa/wkasQDwLjfyWei9WN+pl5U8+rVSUf1GQN0CQGavqgXqiwkvJpkWdLFA5JxhPj4/zNuldk16AoH1W2dR2OY4HPS7AKFNaVb5hME5iKGgWqcl9u0e68M4G95c4HJ1NlvYBvLV4zlJrEquWXJ3g/f+1fNUlTjj7ffpsBo+ixB8vuABmCc+Ww9ea789CQMqzXNrYuliMqgvmYXwhdL9/DzscepHvMqBIs2lbx79kSTZgZrJop3cjhOZzQBGKGwQ25amCKpuPi6vATpEviMcmHs7nzN5vN289CPpkxJKd7/azLf4WIGI0/I7j+JfV8/HpatPAY/x4FwOw/XICLb79oINKKGf8T2cfJSdP//RBvQ/QgwCPnmxEtgrbdwY+FXO2RAaXFG2LRax/am0qHng=="
+    }
+  }
+}

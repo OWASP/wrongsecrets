@@ -1,0 +1,3 @@
+=== Reporting on Vulnerabilities
+
+A security researcher found a Google API key and together with the project leader https://github.com/commjoen[@commjoen] made a GitHub security advisory. The only thing @commjoen did wrong was publish the API key as part of the advisory. Can you spot the key?

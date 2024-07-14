@@ -1,0 +1,9 @@
+This challenge can be solved using the following steps:
+
+1. Create two txt files `old_hashes.txt` and `new_hashes.txt` containing only the hashes copied from the dump files.
+2. Using `old_hashes.txt` as password list we can use hashcat to check md5 hashes that match with the bcrypt hashes.
+   - Install https://hashcat.net/hashcat/[Hashcat]
+   - Type in `hashcat -m 3200 -a 0 new_hashes.txt old_hashes.txt --show`. You will find a single bcrypt hash mapped to a md5 hash.
+3. Using `rockyou.txt` as password list we can crack the obtained md5 hash.
+   - Download the https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt[rockyou.txt password list]
+   - Type in `hashcat -m 0 -a 0 82080600934821faf0bc59cba79964bc rockyou.txt --show` to find the cracked password.

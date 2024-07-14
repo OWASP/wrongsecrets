@@ -9,23 +9,19 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.owasp.wrongsecrets.InMemoryScoreCard;
-import org.owasp.wrongsecrets.RuntimeEnvironment;
+import org.owasp.wrongsecrets.Challenges;
 import org.owasp.wrongsecrets.WrongSecretsApplication;
 import org.owasp.wrongsecrets.challenges.cloud.Challenge10;
-import org.owasp.wrongsecrets.challenges.cloud.Challenge11;
-import org.owasp.wrongsecrets.challenges.cloud.Challenge9;
+import org.owasp.wrongsecrets.challenges.cloud.challenge11.Challenge11Aws;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
-@ExtendWith(SpringExtension.class)
 @SpringBootTest(
     properties = {
+      "K8S_ENV=gcp",
       "ctf_enabled=true",
       "ctf_key=randomtextforkey",
       "SPECIAL_K8S_SECRET=test5",
@@ -41,27 +37,24 @@ import org.springframework.test.web.servlet.MockMvc;
 class ChallengesControllerCTFModeWithPresetCloudValuesTest {
 
   @Autowired private MockMvc mvc;
+  @Autowired private Challenges challenges;
+  @Autowired private Challenge11Aws challenge11;
 
   @Test
   void shouldNotSpoilWhenInCTFMode() throws Exception {
-    mvc.perform(get("/spoil-9"))
+    var firstChallenge = challenges.getChallengeDefinitions().getFirst();
+    mvc.perform(get("/spoil/%s".formatted(firstChallenge.name().shortName())))
         .andExpect(status().isOk())
         .andExpect(content().string(containsString("Spoils are disabled in CTF mode")));
   }
 
   @Test
   void shouldShowFlagWhenRespondingWithSuccessInCTFModeChallenge9() throws Exception {
-    var spoil =
-        new Challenge9(
-                new InMemoryScoreCard(1),
-                null,
-                "ACTUAL_ANSWER_CHALLENGE9",
-                "wrongsecret",
-                new RuntimeEnvironment(RuntimeEnvironment.Environment.HEROKU_DOCKER))
-            .spoiler()
-            .solution();
+    var challenge9Definition = challenges.findByShortName("challenge-9").orElseThrow();
+    var challenge9 = challenges.getChallenge(challenge9Definition).getFirst();
+    var spoil = challenge9.spoiler().solution();
     mvc.perform(
-            post("/challenge/9")
+            post("/challenge/%s".formatted(challenge9Definition.name().shortName()))
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("solution", spoil)
                 .param("action", "submit")
@@ -73,16 +66,9 @@ class ChallengesControllerCTFModeWithPresetCloudValuesTest {
   @Test
   void shouldShowFlagWhenRespondingWithSuccessInCTFModeChallenge10() throws Exception {
     var spoil =
-        new Challenge10(
-                new InMemoryScoreCard(1),
-                null,
-                "ACTUAL_ANSWER_CHALLENGE10",
-                "wrongsecret-2",
-                new RuntimeEnvironment(RuntimeEnvironment.Environment.HEROKU_DOCKER))
-            .spoiler()
-            .solution();
+        new Challenge10(null, "ACTUAL_ANSWER_CHALLENGE10", "wrongsecret-2").spoiler().solution();
     mvc.perform(
-            post("/challenge/10")
+            post("/challenge/challenge-10")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("solution", spoil)
                 .param("action", "submit")
@@ -93,26 +79,10 @@ class ChallengesControllerCTFModeWithPresetCloudValuesTest {
 
   @Test
   void shouldNotShowFlagWhenRespondingWithSuccessInCTFModeChallenge11() throws Exception {
-    var spoil =
-        new Challenge11(
-                new InMemoryScoreCard(1),
-                "awsRoleArn",
-                "tokenFileLocation",
-                "awsRegion",
-                "gcpDefualtValue",
-                "awsDefaultValue",
-                "azureDefaultValue",
-                "azureVaultUri",
-                "azureWrongSecret3",
-                "projectId",
-                "ACTUAL_ANSWER_CHALLENGE_11",
-                true,
-                new RuntimeEnvironment(RuntimeEnvironment.Environment.HEROKU_DOCKER))
-            .spoiler()
-            .solution();
+    var spoil = challenge11.spoiler().solution();
 
     mvc.perform(
-            post("/challenge/11")
+            post("/challenge/challenge-11")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("solution", spoil)
                 .param("action", "submit")
@@ -125,17 +95,17 @@ class ChallengesControllerCTFModeWithPresetCloudValuesTest {
   void shouldEnableCloudExerciseBut11() throws Exception {
     mvc.perform(get("/"))
         .andExpect(status().isOk())
-        .andExpect(content().string(not(containsString("challenge 9_disabled-link"))))
-        .andExpect(content().string(not(containsString("challenge 10_disabled-link"))))
-        .andExpect(content().string(containsString("challenge 11_disabled-link")));
+        .andExpect(content().string(not(containsString("challenge-9_disabled-link"))))
+        .andExpect(content().string(not(containsString("challeng-10_disabled-link"))))
+        .andExpect(content().string(containsString("challenge-11_disabled-link")));
   }
 
   @Test
   void shouldEnableK8sExercises() throws Exception {
     mvc.perform(get("/"))
         .andExpect(status().isOk())
-        .andExpect(content().string(not(containsString("challenge 5_disabled-link"))))
-        .andExpect(content().string(not(containsString("challenge 6_disabled-link"))))
-        .andExpect(content().string(not(containsString("challenge 7_disabled-link"))));
+        .andExpect(content().string(not(containsString("challenge-5_disabled-link"))))
+        .andExpect(content().string(not(containsString("challenge-6_disabled-link"))))
+        .andExpect(content().string(not(containsString("challenge-7_disabled-link"))));
   }
 }

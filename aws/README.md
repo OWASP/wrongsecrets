@@ -37,7 +37,7 @@ The bucket name should be in the output. Please use that to configure the Terraf
 
 ## Installation
 
-The terraform code is loosely based on [this EKS managed Node Group TF example](https://github.com/terraform-aws-modules/terraform-aws-eks/tree/master/examples/eks_managed_node_group).
+The terraform code is loosely based on [this EKS managed Node Group TF example](https://github.com/terraform-aws-modules/terraform-aws-eks/tree/master/examples/eks-managed-node-group).
 
 **Note**: Applying the Terraform means you are creating cloud infrastructure which actually costs you money. The authors are not responsible for any cost coming from following the instructions below.
 
@@ -94,6 +94,18 @@ Do the following:
 
 Note that you might have to do some manual cleanups after that.
 
+#### TLS
+
+You might want to set up TLS. For that, refer to the [AWS documentation](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.8/guide/ingress/annotations/#tls).
+
+## Running Terratest
+
+Want to see if the setup still works? You can use terratest to check if the current setup works via automated terratest tests, for this you need to make sure that you have installed terraform and Go version 1.21. Next, you will need to install the modules and set up credentials.
+
+1. Run `go mod download`.
+2. Set up your AWS profile using `export AWS_PROFILE=<your-profile-here>`.
+3. Run `go test -timeout 99999s`. The default timeout is 10 min, which is too short for our purposes. We need to override that.
+
 ## Terraform documentation
 The documentation below is auto-generated to give insight on what's created via Terraform.
 
@@ -103,25 +115,25 @@ The documentation below is auto-generated to give insight on what's created via 
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.1 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.10.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.57.0 |
 | <a name="requirement_http"></a> [http](#requirement\_http) | ~> 3.4.0 |
-| <a name="requirement_random"></a> [random](#requirement\_random) | ~> 3.5.1 |
+| <a name="requirement_random"></a> [random](#requirement\_random) | ~> 3.6.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.10.0 |
-| <a name="provider_http"></a> [http](#provider\_http) | 3.4.0 |
-| <a name="provider_random"></a> [random](#provider\_random) | 3.5.1 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.57.0 |
+| <a name="provider_http"></a> [http](#provider\_http) | 3.4.3 |
+| <a name="provider_random"></a> [random](#provider\_random) | 3.6.2 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_ebs_csi_irsa_role"></a> [ebs\_csi\_irsa\_role](#module\_ebs\_csi\_irsa\_role) | terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks | ~> 5.5 |
-| <a name="module_eks"></a> [eks](#module\_eks) | terraform-aws-modules/eks/aws | 19.15.4 |
-| <a name="module_vpc"></a> [vpc](#module\_vpc) | terraform-aws-modules/vpc/aws | ~> 5.1.1 |
+| <a name="module_eks"></a> [eks](#module\_eks) | terraform-aws-modules/eks/aws | 20.17.2 |
+| <a name="module_vpc"></a> [vpc](#module\_vpc) | terraform-aws-modules/vpc/aws | ~> 5.9.0 |
 
 ## Resources
 
@@ -154,8 +166,9 @@ The documentation below is auto-generated to give insight on what's created via 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | The EKS cluster name | `string` | `"wrongsecrets-exercise-cluster"` | no |
-| <a name="input_cluster_version"></a> [cluster\_version](#input\_cluster\_version) | The EKS cluster version to use | `string` | `"1.25"` | no |
+| <a name="input_cluster_version"></a> [cluster\_version](#input\_cluster\_version) | The EKS cluster version to use | `string` | `"1.30"` | no |
 | <a name="input_region"></a> [region](#input\_region) | The AWS region to use | `string` | `"eu-west-1"` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | List of tags to apply to resources | `map(string)` | <pre>{<br>  "Application": "wrongsecrets"<br>}</pre> | no |
 
 ## Outputs
 

@@ -1,6 +1,6 @@
 This challenge is specifically looking at a secret in a C++ binary
 
-You can solve this challenge using the following steps:
+You can solve this challenge using the following alternative solutions:
 
 1. Find the secrets with https://ghidra-sre.org/[Ghidra].
 - Install https://ghidra-sre.org/[Ghidra].
@@ -16,3 +16,5 @@ You can solve this challenge using the following steps:
 - Launch r2 analysis with `$ r2 -A wrongsecrets-cplus`
 - Use command `pdf @ sym.secret__` to see disassembled output of function which returns secret
 - Use command `pdf @ sym.secret2__` to see disassembled output of function which returns secret2
+
+Don't want to install the tools? check the https://github.com/OWASP/wrongsecrets/tree/master?tab=readme-ov-file#want-to-play-but-are-not-allowed-to-install-the-tools[WrongSecrets Desktop container]!

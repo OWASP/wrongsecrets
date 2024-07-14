@@ -1,0 +1,6 @@
+replacer.full_list(0).description=auth1
+replacer.full_list(0).enabled=true
+replacer.full_list(0).matchtype=REQ_HEADER
+replacer.full_list(0).matchstr=Authorization
+replacer.full_list(0).regex=false
+replacer.full_list(0).replacement=Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==

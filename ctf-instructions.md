@@ -1,7 +1,7 @@
 # CTF Instructions
 
 So you want to play a CTF with WrongSecrets? This is the place to read up all about it.
-Our CTF setup makes use of the [Juice Shop CTF CLI extension](https://github.com/juice-shop/juice-shop-ctf), which you can read all about at [here](https://pwning.owasp-juice.shop/part1/ctf.html).
+Our CTF setup makes use of the [Juice Shop CTF CLI extension](https://github.com/juice-shop/juice-shop-ctf), which you can read all about at [here](https://pwning.owasp-juice.shop/companion-guide/snapshot/part1/ctf.html).
 
 The difference between Juiceshop and WrongSecrets, is that WrongSecrets is more of a secrets-hunter game.
 This means that your contestants will try to find the CTF key soon after a few challenges.
@@ -24,7 +24,7 @@ Want to make sure you don't need to bug your users to copy paste values twice to
 
 Now users can directly use your Wrongsecrets setup together with the CTF-platform to play challenges without having to copy answers and flags twice!
 
-Note: make sure that you do set `CTF_SERVER_ADDRESS` to point to the address where you are running your CTF-platform (E.g. CTFD/Facebook CTF) and that you set `challenge_acht_ctf_to_provide_to_host_value` and `challenge_thirty_ctf_to_provide_to_host_value` to the flag you store in your CTF-platform.
+Note: make sure that you do set `CTF_SERVER_ADDRESS` to point to the address where you are running your CTF-platform (E.g. CTFD/Facebook CTF) and that you set `challenge_acht_ctf_to_provide_to_host_value`, `challenge_rando_key_ctf_to_provide_to_host_value`, and `challenge_thirty_ctf_to_provide_to_host_value` to the flag you store in your CTF-platform.
 
 ## Setting up CTFs
 

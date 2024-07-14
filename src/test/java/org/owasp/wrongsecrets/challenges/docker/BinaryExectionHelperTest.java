@@ -4,14 +4,11 @@ import org.assertj.core.util.Strings;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.owasp.wrongsecrets.challenges.docker.binaryexecution.BinaryExecutionHelper;
 import org.owasp.wrongsecrets.challenges.docker.binaryexecution.MuslDetector;
 import org.owasp.wrongsecrets.challenges.docker.binaryexecution.MuslDetectorImpl;
 
-@ExtendWith(MockitoExtension.class)
-public class BinaryExectionHelperTest {
+class BinaryExectionHelperTest {
 
   private String osArch, osName;
 

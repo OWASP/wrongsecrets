@@ -1,34 +1,25 @@
 (function () {
-  const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
-  let initialTheme
-  if (localStorage.getItem('darkmode-pref-set') === 'true') {
-    initialTheme = localStorage.getItem('darkMode') === 'true'
-  } else {
-    initialTheme = darkModeMediaQuery.matches
-  }
+  const label = document.getElementById('theme-toggle-label')
+  const toggle = document.getElementById('theme-toggle')
 
-  function updateToggle (darkMode) {
-    document.querySelector(".theme-toggle input[type=radio][value='dark']").checked = darkMode
-    document.querySelector(".theme-toggle input[type=radio][value='light']").checked = !darkMode
-
+  function applyDarkMode (darkMode) {
     document.body.classList.toggle('dark-mode', darkMode)
-    localStorage.setItem('darkMode', darkMode)
+    label.textContent = darkMode ? '🌙' : '☀️'
+    localStorage.setItem('darkMode', darkMode ? 'true' : 'false')
     localStorage.setItem('darkmode-pref-set', 'true')
   }
 
-  darkModeMediaQuery.addEventListener('change', (e) => {
-    const darkModeOn = e.matches
-    updateToggle(darkModeOn)
+  function toggleTheme () {
+    const darkMode = !document.body.classList.contains('dark-mode')
+    applyDarkMode(darkMode)
+    toggle.checked = darkMode
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const darkModePref = localStorage.getItem('darkMode') === 'true'
+    applyDarkMode(darkModePref)
+    toggle.checked = darkModePref
   })
 
-  window.addEventListener('load', function () {
-    const radios = document.querySelectorAll('.theme-toggle input[type=radio]')
-    radios.forEach((radio) => {
-      radio.addEventListener('change', function (e) {
-        updateToggle(e.target.value === 'dark')
-      })
-    })
-
-    updateToggle(initialTheme)
-  })
+  label.onclick = toggleTheme
 })()
