@@ -54,7 +54,7 @@
     <dependency-check-maven.version>10.0.2</dependency-check-maven.version>
     <gatling-maven-plugin.version>4.9.6</gatling-maven-plugin.version>
     <gatling.version>3.11.5</gatling.version>
-    <gcp.sdk.version>5.4.3</gcp.sdk.version>
+    <gcp.sdk.version>5.5.0</gcp.sdk.version>
     <github.button.version>2.14.1</github.button.version>
     <java.version>22</java.version>
     <jquery.version>3.7.1</jquery.version>
