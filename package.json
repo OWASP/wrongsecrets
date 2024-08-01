@@ -5,7 +5,7 @@
     "@commitlint/config-conventional": "^19.2.2",
     "@eslint/eslintrc": "^3.1.0",
     "eslint": "^9.6.0",
-    "eslint-plugin-chai-friendly": "^1.0.0",
+    "eslint-plugin-chai-friendly": "^1.0.1",
     "eslint-plugin-cypress": "^3.3.0",
     "eslint-plugin-mocha": "^10.4.3",
     "globals": "^15.8.0"
