@@ -7,7 +7,7 @@
     "cypress": "^13.13.0",
     "cypress-multi-reporters": "^1.2.3",
     "eslint": "^9.6.0",
-    "eslint-plugin-chai-friendly": "^1.0.0",
+    "eslint-plugin-chai-friendly": "^1.0.1",
     "eslint-plugin-cypress": "^3.3.0",
     "eslint-plugin-mocha": "^10.4.3",
     "globals": "^15.8.0",
