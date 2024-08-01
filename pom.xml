@@ -61,7 +61,7 @@
     <jruby.version>9.4.8.0</jruby.version>
     <lombok.version>1.18.34</lombok.version>
     <maven.compiler.target>22</maven.compiler.target>
-    <spring.cloud-version>2023.0.2</spring.cloud-version>
+    <spring.cloud-version>2023.0.3</spring.cloud-version>
     <spring.security.version>6.2.3</spring.security.version>
     <system-stubs-jupiter.version>2.1.6</system-stubs-jupiter.version>
     <thymeleaf-extras-springsecurity6.version>3.1.2.RELEASE</thymeleaf-extras-springsecurity6.version>
