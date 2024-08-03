@@ -50,7 +50,7 @@
     <bootstrap.version>5.3.3</bootstrap.version>
     <com.azure.spring.version>5.14.0</com.azure.spring.version>
     <cyclonedx.core.version>9.0.4</cyclonedx.core.version>
-    <datatables.version>2.0.7</datatables.version>
+    <datatables.version>2.1.0</datatables.version>
     <dependency-check-maven.version>10.0.2</dependency-check-maven.version>
     <gatling-maven-plugin.version>4.9.6</gatling-maven-plugin.version>
     <gatling.version>3.11.5</gatling.version>
