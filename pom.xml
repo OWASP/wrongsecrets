@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.3.1</version>
+    <version>3.3.2</version>
     <!-- lookup parent from repository -->
   </parent>
 
@@ -46,22 +46,22 @@
     <KeePassJava2.version>2.2.1</KeePassJava2.version>
     <asciidoctor.maven.plugin.version>3.0.0</asciidoctor.maven.plugin.version>
     <asciidoctorj.version>2.5.13</asciidoctorj.version>
-    <aws.sdk.version>2.26.16</aws.sdk.version>
+    <aws.sdk.version>2.26.28</aws.sdk.version>
     <bootstrap.version>5.3.3</bootstrap.version>
-    <com.azure.spring.version>5.13.0</com.azure.spring.version>
+    <com.azure.spring.version>5.14.0</com.azure.spring.version>
     <cyclonedx.core.version>9.0.4</cyclonedx.core.version>
     <datatables.version>2.0.7</datatables.version>
     <dependency-check-maven.version>10.0.2</dependency-check-maven.version>
     <gatling-maven-plugin.version>4.9.6</gatling-maven-plugin.version>
     <gatling.version>3.11.5</gatling.version>
-    <gcp.sdk.version>5.4.3</gcp.sdk.version>
+    <gcp.sdk.version>5.5.0</gcp.sdk.version>
     <github.button.version>2.14.1</github.button.version>
     <java.version>22</java.version>
     <jquery.version>3.7.1</jquery.version>
     <jruby.version>9.4.8.0</jruby.version>
     <lombok.version>1.18.34</lombok.version>
     <maven.compiler.target>22</maven.compiler.target>
-    <spring.cloud-version>2023.0.2</spring.cloud-version>
+    <spring.cloud-version>2023.0.3</spring.cloud-version>
     <spring.security.version>6.2.3</spring.security.version>
     <system-stubs-jupiter.version>2.1.6</system-stubs-jupiter.version>
     <thymeleaf-extras-springsecurity6.version>3.1.2.RELEASE</thymeleaf-extras-springsecurity6.version>
@@ -161,7 +161,7 @@
     <dependency>
       <groupId>org.testcontainers</groupId>
       <artifactId>testcontainers</artifactId>
-      <version>1.19.8</version>
+      <version>1.20.1</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -593,7 +593,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.3.0</version>
+        <version>3.3.1</version>
         <configuration>
           <argLine>-Dspring.profiles.active=test,maven-test</argLine>
         </configuration>
