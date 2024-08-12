@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-/** About controler hosting /about endpoint. */
+/** About controler hosting /about endpoint  . */
 @Controller
 public class AboutController {
 
