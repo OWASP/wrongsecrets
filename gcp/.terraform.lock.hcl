@@ -2,22 +2,22 @@
 # Manual edits may be lost in future updates.
 
 provider "registry.terraform.io/hashicorp/google" {
-  version     = "5.39.1"
-  constraints = "~> 5.39.1"
+  version     = "6.0.1"
+  constraints = "~> 6.0.1"
   hashes = [
-    "h1:3pdSH1PIQUXV0O/fSC3SXap/nAaFIQ8OTo9R3Kodgyo=",
-    "zh:28763694f5f06a98a4745f0e37f8f8ae412e48a6cfd9b7339599abf89e7577c5",
-    "zh:469a415b398a08c8b479e32cb24b028791eac57bdab3c15d8b987290e55bfa55",
-    "zh:4a1f97c58f22379f7c98c7bfe94c923d58c41cb9801679e1a54f85c9848af48c",
-    "zh:4b2bc066b977cf57de895d1a68f47cc4df48cc7ce0054f8c3de06f6cd63f263d",
-    "zh:6436aa9a7721079f0784b3ccc0da953337f96500bd34a5ba927fe1833392c54a",
-    "zh:6b0833e932bc904dee2ca320d5efb785766fd4474c041128868232cc78a0e764",
-    "zh:8c2a47a571dce3b825fd90789d1af3699cdd615f06e5bf13258585d1560222b8",
-    "zh:ae5b4cdc76720165023870bc9899bb7de9aee8f4ead95dd368a6ebad95176fe4",
-    "zh:c30307a74d64f61fbd5a6b5e8658e4d11152ee1f54f43a02c0fe734e5f0f529a",
-    "zh:e892a200145641b8ae55ba0f69cf83454267b41e0f2d3b6932d4d917d8112911",
-    "zh:ecd95d22838181ae578eba90154a972661bcdc779f728d71957c059b56c7fd61",
+    "h1:yYQNXIaAp7gNCcmPcVMLYyvEmWxaFdIXwW2BYDvf864=",
+    "zh:053bcc0e62396d10a4ef40e59dcdf7d4a1491839e0dfc945de7cef5d9106a566",
+    "zh:282624e6dd086dfe10281f6ad6def3b64279e69fbd667d1141c5f1565e42aecf",
+    "zh:633384cc00d1c6e84b6cb302a898a407c85806a818ca2c93989992b4f9e9af99",
+    "zh:7099aa1a79594c6e041659e36a48f0134a19bd8e1810dfddc21bbad6d3e36d54",
+    "zh:8259adb345c1563a64bdc58efd1cae2ff174b518ccb1f31f79c9c5825e7f762e",
+    "zh:ae2c3008fe93a3bc1318079c23b1da9b55a77ace45f18cf0fa3b2aefcf33e94a",
+    "zh:b7f17cb09b4636edf4aed68ab224885523bd33a0b50af2a2a2819d5a843d49e9",
+    "zh:bee71d0adb8b842b812e4fc76853bedec93c17a6cbf56bc502a2ecf0bcbdaf98",
+    "zh:c187e22fa33cfa90a093cd25e61a77fb88898cce3f79bef33392ddb7708724ca",
+    "zh:dd5923c79697be9429edb98156aa94e69b7258f8de42d8c910dde6814c1ef981",
     "zh:f569b65999264a9416862bca5cd2a6177d94ccb0424f3a4ef424428912b9cb3c",
+    "zh:fe789dc52fc029c18e92db0efb3b013d15679b81c1ab633fa69b3eacde9842ac",
   ]
 }
 
