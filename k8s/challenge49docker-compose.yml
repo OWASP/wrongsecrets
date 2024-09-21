@@ -4,9 +4,9 @@ services:
   db:
     image: postgres:latest
     environment:
-      POSTGRES_USER: your_username
-      POSTGRES_PASSWORD: your_password
-      POSTGRES_DB: your_database
+      POSTGRES_USER: wrongsecrets
+      POSTGRES_PASSWORD: sdfjklhjUYYkghjv;-jhkf
+      POSTGRES_DB: Acme
     ports:
       - "5432:5432"
     volumes:
