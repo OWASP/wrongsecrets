@@ -1,0 +1,13 @@
+This challenge can be solved using the following ways:
+
+- *Acme Inc*. has a misconfigured docker-compose.yml file where sensitive information is exposed. Your task is to find these vulnerabilities.
+  1. Clone the repository containing the challenge files.
+  2. Locate the `challenge49docker-compose.yml` file in the repository.
+  3. Inspect the Environment Variables
+  4. Identify Hardcoded Credentials
+     Within the environment section, check for variables like:
+     - `POSTGRES_USER`
+     - `POSTGRES_PASSWORD`
+     - `POSTGRES_DB`
+  5. Extract the Database Password
+     - The value assigned to `POSTGRES_PASSWORD` is the database password.
