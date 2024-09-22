@@ -7,14 +7,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class Challenge49 extends FixedAnswerChallenge {
 
-    private final String dockerSecret;
+  private final String dockerSecret;
 
-    public Challenge49(@Value("${DOCKER_SECRET_CHALLENGE49}") String dockerSecret) {
-        this.dockerSecret = dockerSecret;
-    }
+  public Challenge49(@Value("${DOCKER_SECRET_CHALLENGE49}") String dockerSecret) {
+    this.dockerSecret = dockerSecret;
+  }
 
-    @Override
-    public String getAnswer() {
-        return this.dockerSecret;
-    }
+  @Override
+  public String getAnswer() {
+    return this.dockerSecret;
+  }
 }
