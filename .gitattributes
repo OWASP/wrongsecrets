@@ -1,0 +1,6 @@
+src/main/resources/executables/wrongsecrets-dotnet-arm filter=lfs diff=lfs merge=lfs -text
+src/main/resources/executables/wrongsecrets-dotnet-linux filter=lfs diff=lfs merge=lfs -text
+src/main/resources/executables/wrongsecrets-dotnet-linux-arm filter=lfs diff=lfs merge=lfs -text
+src/main/resources/executables/wrongsecrets-dotnet-linux-musl filter=lfs diff=lfs merge=lfs -text
+src/main/resources/executables/wrongsecrets-dotnet-linux-musl-arm filter=lfs diff=lfs merge=lfs -text
+src/main/resources/executables/wrongsecrets-dotnet filter=lfs diff=lfs merge=lfs -text
