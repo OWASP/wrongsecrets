@@ -1,5 +1,7 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
+import static org.owasp.wrongsecrets.Challenges.ErrorResponses.EXECUTION_ERROR;
+
 import lombok.extern.slf4j.Slf4j;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.Spoiler;
@@ -26,24 +28,20 @@ public class Challenge50 implements Challenge {
   /** {@inheritDoc} */
   @Override
   public Spoiler spoiler() {
-    try {
-      return new Spoiler(binaryExecutionHelper.executeCommand("", "wrongsecrets-dotnet"));
-    } catch (Exception e) {
-      log.error("Error with executing the spoil command, did you run LFS?", e);
+    final String answer = binaryExecutionHelper.executeCommand("", "wrongsecrets-dotnet");
+    if (EXECUTION_ERROR.equals(answer)) {
       return new Spoiler(LFS_ERROR);
     }
+    return new Spoiler(answer);
   }
 
   /** {@inheritDoc} */
   @Override
   public boolean answerCorrect(String answer) {
-    try {
-      return binaryExecutionHelper
-          .executeCommand(answer, "wrongsecrets-dotnet")
-          .equals("This is correct! Congrats!");
-    } catch (Exception e) {
-      log.error("Error with executing the guess command, did you run LFS?", e);
+    final String actualAnswer = binaryExecutionHelper.executeCommand("", "wrongsecrets-dotnet");
+    if (EXECUTION_ERROR.equals(actualAnswer)) {
       return LFS_ERROR.equals(answer);
     }
+    return actualAnswer.equals(answer);
   }
 }
