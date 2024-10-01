@@ -3,7 +3,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "@commitlint/config-conventional": "^19.4.1",
+    "@commitlint/config-conventional": "^19.5.0",
     "cypress": "^13.14.1",
     "cypress-multi-reporters": "^1.2.3",
     "eslint": "^9.9.1",
