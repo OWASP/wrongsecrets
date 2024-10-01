@@ -6,7 +6,7 @@
     "@commitlint/config-conventional": "^19.4.1",
     "cypress": "^13.14.1",
     "cypress-multi-reporters": "^1.2.3",
-    "eslint": "^9.9.1",
+    "eslint": "^9.11.1",
     "eslint-plugin-chai-friendly": "^1.0.1",
     "eslint-plugin-cypress": "^3.5.0",
     "eslint-plugin-mocha": "^10.5.0",
