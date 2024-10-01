@@ -25,7 +25,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          lfs: true
+          lfs: false
       - uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: 0.13.1

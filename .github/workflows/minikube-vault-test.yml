@@ -22,7 +22,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          lfs: true
+          lfs: false
       - uses: eLco/setup-vault@v1.0.3
       - name: Start minikube
         uses: medyagh/setup-minikube@master
@@ -44,7 +44,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          lfs: true
+          lfs: false
       - uses: eLco/setup-vault@v1.0.3
       - name: Start minikube
         uses: medyagh/setup-minikube@master
