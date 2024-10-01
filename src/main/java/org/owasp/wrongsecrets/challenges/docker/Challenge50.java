@@ -7,12 +7,17 @@ import org.owasp.wrongsecrets.challenges.docker.binaryexecution.BinaryExecutionH
 import org.owasp.wrongsecrets.challenges.docker.binaryexecution.MuslDetectorImpl;
 import org.springframework.stereotype.Component;
 
-/** This challenge is about finding a secret hardcoded in a dotnet binary. */
+/**
+ * This challenge is about finding a secret hardcoded in a dotnet binary. Given that the dotnetfiles
+ * are very large, we need to get them with git LFS, hence if we cannot find the file we will log
+ * that you need to do git lfs pull and show a spoiler issue when requested the config
+ */
 @Slf4j
 @Component
 public class Challenge50 implements Challenge {
 
   private final BinaryExecutionHelper binaryExecutionHelper;
+  private static String LFS_ERROR = "Please pull using GIT LFS";
 
   public Challenge50() {
     this.binaryExecutionHelper = new BinaryExecutionHelper(50, new MuslDetectorImpl());
@@ -21,14 +26,24 @@ public class Challenge50 implements Challenge {
   /** {@inheritDoc} */
   @Override
   public Spoiler spoiler() {
-    return new Spoiler(binaryExecutionHelper.executeCommand("", "wrongsecrets-dotnet"));
+    try {
+      return new Spoiler(binaryExecutionHelper.executeCommand("", "wrongsecrets-dotnet"));
+    } catch (Exception e) {
+      log.error("Error with executing the spoil command, did you run LFS?", e);
+      return new Spoiler(LFS_ERROR);
+    }
   }
 
   /** {@inheritDoc} */
   @Override
   public boolean answerCorrect(String answer) {
-    return binaryExecutionHelper
-        .executeCommand(answer, "wrongsecrets-dotnet")
-        .equals("This is correct! Congrats!");
+    try {
+      return binaryExecutionHelper
+          .executeCommand(answer, "wrongsecrets-dotnet")
+          .equals("This is correct! Congrats!");
+    } catch (Exception e) {
+      log.error("Error with executing the guess command, did you run LFS?", e);
+      return LFS_ERROR.equals(answer);
+    }
   }
 }

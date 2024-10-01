@@ -60,7 +60,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          lfs: true
+          # enable only lfs when you want to test the actual files in a runner.
+          lfs: false
       - name: Set up JDK 22
         uses: actions/setup-java@v4
         with:
