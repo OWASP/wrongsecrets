@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 public class Challenge50 implements Challenge {
 
   private final BinaryExecutionHelper binaryExecutionHelper;
-  private static String LFS_ERROR = "Please pull using GIT LFS";
+  private static final String LFS_ERROR = "Please pull using GIT LFS";
 
   public Challenge50() {
     this.binaryExecutionHelper = new BinaryExecutionHelper(50, new MuslDetectorImpl());
