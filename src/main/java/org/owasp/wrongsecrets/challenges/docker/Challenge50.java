@@ -1,5 +1,6 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
+import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.Spoiler;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Component;
 public class Challenge50 implements Challenge {
 
   private final BinaryExecutionHelper binaryExecutionHelper;
+  private String correctAnswer;
 
   public Challenge50() {
     this.binaryExecutionHelper = new BinaryExecutionHelper(50, new MuslDetectorImpl());
@@ -25,12 +27,18 @@ public class Challenge50 implements Challenge {
   /** {@inheritDoc} */
   @Override
   public Spoiler spoiler() {
-    return new Spoiler(binaryExecutionHelper.executeCommand("", "wrongsecrets-dotnet"));
+    if (Strings.isNullOrEmpty(correctAnswer)) {
+      correctAnswer = binaryExecutionHelper.executeCommand("", "wrongsecrets-dotnet");
+    }
+    return new Spoiler(correctAnswer);
   }
 
   /** {@inheritDoc} */
   @Override
   public boolean answerCorrect(String answer) {
-    return binaryExecutionHelper.executeCommand("", "wrongsecrets-dotnet").equals(answer);
+    if (Strings.isNullOrEmpty(correctAnswer)) {
+      correctAnswer = binaryExecutionHelper.executeCommand("", "wrongsecrets-dotnet");
+    }
+    return correctAnswer.equals(answer);
   }
 }
