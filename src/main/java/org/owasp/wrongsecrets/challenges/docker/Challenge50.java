@@ -28,7 +28,7 @@ public class Challenge50 implements Challenge {
   @Override
   public Spoiler spoiler() {
     if (Strings.isNullOrEmpty(correctAnswer)) {
-      correctAnswer = binaryExecutionHelper.executeCommand("", "wrongsecrets-dotnet");
+      this.correctAnswer = binaryExecutionHelper.executeCommand("", "wrongsecrets-dotnet");
     }
     return new Spoiler(correctAnswer);
   }
@@ -37,7 +37,7 @@ public class Challenge50 implements Challenge {
   @Override
   public boolean answerCorrect(String answer) {
     if (Strings.isNullOrEmpty(correctAnswer)) {
-      correctAnswer = binaryExecutionHelper.executeCommand("", "wrongsecrets-dotnet");
+      this.correctAnswer = binaryExecutionHelper.executeCommand("", "wrongsecrets-dotnet");
     }
     return correctAnswer.equals(answer);
   }
