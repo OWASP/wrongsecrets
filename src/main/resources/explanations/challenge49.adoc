@@ -1,0 +1,9 @@
+=== Cracking AES Encryption with a Weak MD5 Key
+
+Imagine you're a security analyst investigating a mobile app that handles sensitive information. You discover that the developer is using AES encryption to protect a secret, but instead of using a strong Key Derivation Function (KDF), they rely on the insecure MD5 algorithm to derive encryption keys from a simple numeric PIN.
+
+You’ve obtained an encrypted string: `k800mdwu8vlQoqeAgRMHDQ==`. You know that this string, when decrypted, reveals the text `the answer`.
+
+The key used for AES encryption is derived by taking the MD5 hash of a PIN, which is a number between 0 and 99999. Your task is to find the correct PIN that was used to derive the encryption key and decrypt the secret.
+
+Can you figure out the correct PIN and unlock the secret?

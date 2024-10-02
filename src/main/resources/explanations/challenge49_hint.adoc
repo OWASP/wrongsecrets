@@ -1,0 +1,5 @@
+The simplest way to crack the PIN in this scenario is to perform a brute-force attack due to the limited range of possible values (0 to 99,999).
+
+- Iterate over all possible PINs (from 0 to 99,999).
+- For each PIN, compute its MD5 hash to get the decryption key and try decrypting provided ciphertext.
+- If decrypted text is equal to `the answer`, you've found the correct PIN.
