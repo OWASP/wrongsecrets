@@ -1,7 +1,5 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
-import static org.owasp.wrongsecrets.Challenges.ErrorResponses.EXECUTION_ERROR;
-
 import lombok.extern.slf4j.Slf4j;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.Spoiler;
@@ -19,7 +17,6 @@ import org.springframework.stereotype.Component;
 public class Challenge50 implements Challenge {
 
   private final BinaryExecutionHelper binaryExecutionHelper;
-  private static final String LFS_ERROR = "Please pull using GIT LFS";
 
   public Challenge50() {
     this.binaryExecutionHelper = new BinaryExecutionHelper(50, new MuslDetectorImpl());
@@ -28,20 +25,12 @@ public class Challenge50 implements Challenge {
   /** {@inheritDoc} */
   @Override
   public Spoiler spoiler() {
-    final String answer = binaryExecutionHelper.executeCommand("", "wrongsecrets-dotnet");
-    if (EXECUTION_ERROR.equals(answer)) {
-      return new Spoiler(LFS_ERROR);
-    }
-    return new Spoiler(answer);
+    return new Spoiler(binaryExecutionHelper.executeCommand("", "wrongsecrets-dotnet"));
   }
 
   /** {@inheritDoc} */
   @Override
   public boolean answerCorrect(String answer) {
-    final String actualAnswer = binaryExecutionHelper.executeCommand("", "wrongsecrets-dotnet");
-    if (EXECUTION_ERROR.equals(actualAnswer)) {
-      return LFS_ERROR.equals(answer);
-    }
-    return actualAnswer.equals(answer);
+    return binaryExecutionHelper.executeCommand("", "wrongsecrets-dotnet").equals(answer);
   }
 }

@@ -1,6 +1,7 @@
 package org.owasp.wrongsecrets.challenges.docker.binaryexecution;
 
 import static org.owasp.wrongsecrets.Challenges.ErrorResponses.EXECUTION_ERROR;
+import static org.owasp.wrongsecrets.Challenges.ErrorResponses.LFS_ERROR;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Strings;
@@ -57,6 +58,9 @@ public class BinaryExecutionHelper {
       return result;
     } catch (Exception e) {
       log.warn("Error executing:", e);
+      if (challengeNumber == 50) {
+        return LFS_ERROR;
+      }
       return ERROR_EXECUTION;
     }
   }
@@ -84,10 +88,19 @@ public class BinaryExecutionHelper {
           "stdout challenge {}: {}",
           challengeNumber,
           result.lines().collect(Collectors.joining("")));
+      if (!Strings.isNullOrEmpty(result) && result.contains("command not found")) {
+        if (challengeNumber == 50) {
+          return LFS_ERROR;
+        }
+        return ERROR_EXECUTION;
+      }
       return result;
     } catch (Exception e) {
       log.warn("Error executing:", e);
       executionException = e;
+      if (challengeNumber == 50) {
+        return LFS_ERROR;
+      }
       return ERROR_EXECUTION;
     }
   }
