@@ -55,8 +55,6 @@ Pull requests should be as small/atomic as possible. Large, wide-sweeping change
 
 ## How to set up your Contributor Environment
 
-#TODO: add gitl lfs intro here and in readme!
-
 1. Create a GitHub account. Multiple different GitHub subscription plans are available, but you only need a free one. Follow [these steps](https://help.github.com/en/articles/signing-up-for-a-new-github-account "Signing up for a new GitHub account") to set up your account.
 2. Fork the repository. Creating a fork means creating a copy of the repository on your own account, which you can modify without any impact on this repository. GitHub has an [article that describes all the needed steps](https://help.github.com/en/articles/fork-a-repo "Fork a repo").
 3. Clone your own repository to your host computer so that you can make modifications. If you followed the GitHub tutorial from step 2, you have already done this.
@@ -100,6 +98,16 @@ If at any time you want to work on a different issue, you can simply switch to a
 
 > Tip: Don't try to work on too many issues at once though, as it will be a lot more difficult to merge branches the longer they are open.
 
+### Optionally: use Git LFS
+
+If you want to be able to create docker containers yourself with a funcitoning challenge50, you need to enable Git LFS in order to download the self-contained dotnet files. For this you have to execute the following steps:
+
+1. Download and install [Git LFS](https://git-lfs.com/)
+2. do `git lfs install`
+3. do `git lfs pull`
+
+Note: in order to keep the need for LFS to a bare minimum, we are not supporting new challenge-based contributions using large files. If you really want to add more large files to the repository, please contact the project leaders to discuss the best way forward first.
+
 ## What not to do
 
 Although we greatly appreciate any and all contributions to the project, there are a few things that you should take into consideration:
@@ -131,7 +139,7 @@ Please be sure to take a careful look at our [Code of Conduct](https://github.co
 4. **IntelliJ IDEA**
    [_IntelliJ IDEA_](https://www.jetbrains.com/idea/download) is an integrated development environment basically an **IDE** written in Java for developing software written in Java, Kotlin, Groovy etc.
 
-5. **GitHub Desktop**
+5. **Optionally: GitHub Desktop**
    [_GitHub Desktop_](https://desktop.github.com/) is an application that enables you to interact with GitHub using a **GUI** instead of the command line or a web browser.
    (_Not Mandatory but is recommended for beginners_)
 
