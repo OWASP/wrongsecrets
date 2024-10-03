@@ -24,6 +24,7 @@ RUN echo "**** clone wrongsecrets.git for webtop in k8s ****" && \
 
 RUN \
     echo "installing dotnet" && \
+    apk add icu-libs icu-data-full && \
     wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh && \
     chmod +x dotnet-install.sh && \
     ./dotnet-install.sh --version latest && \
