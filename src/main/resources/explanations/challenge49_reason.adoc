@@ -1,0 +1,9 @@
+*Why Using MD5 as a KDF is Bad*
+
+Protecting keys effectively is crucial, and this means using the right Key Derivation Functions (KDFs) with additional entropy and contextual binding, as emphasized in the https://mas.owasp.org/MASTG/0x04g-Testing-Cryptography/#weak-key-generation-functions[Mobile Security Testing Guide (MSTG).]
+
+MD5 is too fast and easy to compute, enabling attackers to quickly try a vast number of inputs (like PINs) to derive the key. Additionally (although a bit harder to exploit), the collision space is relatively small, meaning multiple different inputs can lead to the same md5 hash.
+
+Stronger KDFs are crucial when dealing with sensitive data, as they provide much-needed resistance against brute-force attacks and protect secrets even if the attacker gains access to partial information.
+
+The MSTG recommends using robust KDFs like PBKDF2, bcrypt, or Argon2, which incorporate additional entropy and enforce computational hardness, making brute-force attacks more costly.
