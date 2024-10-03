@@ -14,13 +14,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /** This is a challenge based on using weak KDF to protect secrets. */
 @Slf4j
 @Component
-@Order(49)
 public class Challenge49 implements Challenge {
 
   private final String cipherText;
