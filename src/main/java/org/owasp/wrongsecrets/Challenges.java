@@ -31,7 +31,6 @@ public class Challenges {
     public static final String FILE_MOUNT_ERROR = "Error reading secret";
     public static final String DOWNLOAD_DOTNET_ERROR =
         "Error, please add the dotnet binary to the challenges file.";
-    // if_you_see_this_please_fix_the_keepass_setup
   }
 
   public Challenges(ChallengeDefinitionsConfiguration definitions, List<Challenge> challenges) {
