@@ -300,12 +300,13 @@ generate_test_data() {
 
 download_dot_net_binaries() {
   echo "downloading dotnet binaries"
-  curl -L -o src/main/resources/executables/wrongsecrets-dotnet https://github.com/OWASP/wrongsecrets-binaries/releases/download/0.1.0/wrongsecrets-dotnet
-  curl -L -o src/main/resources/executables/wrongsecrets-dotnet-arm https://github.com/OWASP/wrongsecrets-binaries/releases/download/0.1.0/wrongsecrets-dotnet-arm
-  curl -L -o src/main/resources/executables/wrongsecrets-dotnet-linux https://github.com/OWASP/wrongsecrets-binaries/releases/download/0.1.0/wrongsecrets-dotnet-linux
-  curl -L -o src/main/resources/executables/wrongsecrets-dotnet-linux-arm https://github.com/OWASP/wrongsecrets-binaries/releases/download/0.1.0/wrongsecrets-dotnet-linux-arm
-  curl -L -o src/main/resources/executables/wrongsecrets-dotnet-linux-musl https://github.com/OWASP/wrongsecrets-binaries/releases/download/0.1.0/wrongsecrets-dotnet-linux-musl
-  curl -L -o src/main/resources/executables/wrongsecrets-dotnet-linux-musl-arm https://github.com/OWASP/wrongsecrets-binaries/releases/download/0.1.0/wrongsecrets-dotnet-linux-musl-arm
+  rm ../../src/main/resources/executables/wrongsecrets-dotne*
+  curl -L -o ../../src/main/resources/executables/wrongsecrets-dotnet https://github.com/OWASP/wrongsecrets-binaries/releases/download/0.1.0/wrongsecrets-dotnet
+  curl -L -o ../../src/main/resources/executables/wrongsecrets-dotnet-arm https://github.com/OWASP/wrongsecrets-binaries/releases/download/0.1.0/wrongsecrets-dotnet-arm
+  curl -L -o ../../src/main/resources/executables/wrongsecrets-dotnet-linux https://github.com/OWASP/wrongsecrets-binaries/releases/download/0.1.0/wrongsecrets-dotnet-linux
+  curl -L -o ../../src/main/resources/executables/wrongsecrets-dotnet-linux-arm https://github.com/OWASP/wrongsecrets-binaries/releases/download/0.1.0/wrongsecrets-dotnet-linux-arm
+  curl -L -o ../../src/main/resources/executables/wrongsecrets-dotnet-linux-musl https://github.com/OWASP/wrongsecrets-binaries/releases/download/0.1.0/wrongsecrets-dotnet-linux-musl
+  curl -L -o ../../src/main/resources/executables/wrongsecrets-dotnet-linux-musl-arm https://github.com/OWASP/wrongsecrets-binaries/releases/download/0.1.0/wrongsecrets-dotnet-linux-musl-arm
 }
 
 build_update_pom() {
@@ -325,7 +326,10 @@ build_update_pom() {
     cd ../.. && ./mvnw clean && ./mvnw --batch-mode release:update-versions -DdevelopmentVersion=${tag}-SNAPSHOT && ./mvnw spotless:apply && ./mvnw install -DskipTests
     cd .github/scripts
     echo "Removing unnecessary binaries from the jar file"
-
+    zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-dotnet
+    zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-dotnet-arm
+    zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-dotnet-linux
+    zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-dotnet-linux-arm
     docker buildx create --name mybuilder
     docker buildx use mybuilder
 }
