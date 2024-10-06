@@ -7,9 +7,11 @@ import org.owasp.wrongsecrets.challenges.docker.binaryexecution.BinaryExecutionH
 import org.owasp.wrongsecrets.challenges.docker.binaryexecution.MuslDetectorImpl;
 
 /**
- * This challenge is about finding a secret hardcoded in a dotnet binary. Given that the dotnetfiles
- * are very large, you have to download them to your system as they are part of the .gitignore. They
- * are located at https://github.com/OWASP/wrongsecrets-binaries/releases
+ * This challenge is about finding a secret hardcoded in a dotnet binary. Given that the dotnet
+ * executables are very large, you have to download them to your system as they are part of the
+ * .gitignore. They are located at <a
+ * href="https://github.com/OWASP/wrongsecrets-binaries/releases">The WrongSecrets Binary
+ * Releases</a>
  */
 public class Challenge50 implements Challenge {
   private final BinaryExecutionHelper binaryExecutionHelper;

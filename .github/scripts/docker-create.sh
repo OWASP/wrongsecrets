@@ -324,6 +324,8 @@ build_update_pom() {
     echo "Building and updating pom.xml file so we can use it in our docker"
     cd ../.. && ./mvnw clean && ./mvnw --batch-mode release:update-versions -DdevelopmentVersion=${tag}-SNAPSHOT && ./mvnw spotless:apply && ./mvnw install -DskipTests
     cd .github/scripts
+    echo "Removing unnecessary binaries from the jar file"
+
     docker buildx create --name mybuilder
     docker buildx use mybuilder
 }
