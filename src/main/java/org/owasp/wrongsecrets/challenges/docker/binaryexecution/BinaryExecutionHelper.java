@@ -1,5 +1,6 @@
 package org.owasp.wrongsecrets.challenges.docker.binaryexecution;
 
+import static org.owasp.wrongsecrets.Challenges.ErrorResponses.DOWNLOAD_DOTNET_ERROR;
 import static org.owasp.wrongsecrets.Challenges.ErrorResponses.EXECUTION_ERROR;
 
 import com.google.common.annotations.VisibleForTesting;
@@ -57,6 +58,9 @@ public class BinaryExecutionHelper {
       return result;
     } catch (Exception e) {
       log.warn("Error executing:", e);
+      if (challengeNumber == 50) {
+        return DOWNLOAD_DOTNET_ERROR;
+      }
       return ERROR_EXECUTION;
     }
   }
@@ -84,9 +88,18 @@ public class BinaryExecutionHelper {
           "stdout challenge {}: {}",
           challengeNumber,
           result.lines().collect(Collectors.joining("")));
+      if (!Strings.isNullOrEmpty(result) && result.contains("command not found")) {
+        if (challengeNumber == 50) {
+          return DOWNLOAD_DOTNET_ERROR;
+        }
+        return ERROR_EXECUTION;
+      }
       return result;
     } catch (Exception e) {
       log.warn("Error executing:", e);
+      if (challengeNumber == 50) {
+        return DOWNLOAD_DOTNET_ERROR;
+      }
       executionException = e;
       return ERROR_EXECUTION;
     }

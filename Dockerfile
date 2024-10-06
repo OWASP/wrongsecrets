@@ -15,7 +15,7 @@ RUN echo "2vars"
 RUN echo "$ARG_BASED_PASSWORD"
 RUN echo "$argBasedPassword"
 
-RUN apk add --no-cache libstdc++
+RUN apk add --no-cache libstdc++ icu-libs
 
 #RUN useradd -u 2000 -m wrongsecrets
 RUN adduser -u 2000 -D wrongsecrets
@@ -24,7 +24,7 @@ USER wrongsecrets
 COPY --chown=wrongsecrets target/wrongsecrets-${argBasedVersion}-SNAPSHOT.jar /application.jar
 COPY --chown=wrongsecrets .github/scripts/ /var/tmp/helpers
 COPY --chown=wrongsecrets .github/scripts/.bash_history /home/wrongsecrets/
-COPY --chown=wrongsecrets src/main/resources/executables/ /home/wrongsecrets/
+COPY --chown=wrongsecrets src/main/resources/executables/*linux-musl* /home/wrongsecrets/
 COPY --chown=wrongsecrets src/test/resources/alibabacreds.kdbx /var/tmp/helpers
 COPY --chown=wrongsecrets src/test/resources/RSAprivatekey.pem /var/tmp/helpers/
 USER wrongsecrets

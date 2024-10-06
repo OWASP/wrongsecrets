@@ -298,6 +298,16 @@ generate_test_data() {
   fi
 }
 
+download_dot_net_binaries() {
+  echo "downloading dotnet binaries"
+  curl -L -o src/main/resources/executables/wrongsecrets-dotnet https://github.com/OWASP/wrongsecrets-binaries/releases/download/0.1.0/wrongsecrets-dotnet
+  curl -L -o src/main/resources/executables/wrongsecrets-dotnet-arm https://github.com/OWASP/wrongsecrets-binaries/releases/download/0.1.0/wrongsecrets-dotnet-arm
+  curl -L -o src/main/resources/executables/wrongsecrets-dotnet-linux https://github.com/OWASP/wrongsecrets-binaries/releases/download/0.1.0/wrongsecrets-dotnet-linux
+  curl -L -o src/main/resources/executables/wrongsecrets-dotnet-linux-arm https://github.com/OWASP/wrongsecrets-binaries/releases/download/0.1.0/wrongsecrets-dotnet-linux-arm
+  curl -L -o src/main/resources/executables/wrongsecrets-dotnet-linux-musl https://github.com/OWASP/wrongsecrets-binaries/releases/download/0.1.0/wrongsecrets-dotnet-linux-musl
+  curl -L -o src/main/resources/executables/wrongsecrets-dotnet-linux-musl-arm https://github.com/OWASP/wrongsecrets-binaries/releases/download/0.1.0/wrongsecrets-dotnet-linux-musl-arm
+}
+
 build_update_pom() {
     echo "Building new license overview"
     cd ../.. && ./mvnw license:add-third-party -Dlicense.excludedScopes=test
@@ -424,6 +434,7 @@ check_correct_launch_location
 check_os
 check_required_install
 generate_test_data
+download_dot_net_binaries
 build_update_pom
 create_containers
 restore_temp_change

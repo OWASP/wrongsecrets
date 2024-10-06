@@ -71,6 +71,10 @@ yourkey.txt
 src/main/resources/executables/.gdb_history
 src/main/resources/executables/decrypt/decrypt
 
+# Challenge 50
+src/main/resources/executables/wrongsecrets-dotnet
+src/main/resources/executables/wrongsecrets-dotnet*
+
 # Node JS
 js/node/
 js/node_modules/
