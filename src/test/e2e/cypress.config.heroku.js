@@ -6,6 +6,7 @@ module.exports = defineConfig({
     baseUrl: 'https://wrongsecrets.herokuapp.com/',
     specPattern: 'cypress/integration/*.cy.js',
     reporter: 'cypress-multi-reporters',
+    pageLoadTimeout: 60000,
     reporterOptions: {
       configFile: 'reporter-config.json'
     },

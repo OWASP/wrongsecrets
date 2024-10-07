@@ -6,6 +6,7 @@ module.exports = defineConfig({
     baseUrl: 'http://localhost:8080',
     specPattern: 'cypress/integration/*.cy.js',
     reporter: 'cypress-multi-reporters',
+    pageLoadTimeout: 60000,
     reporterOptions: {
       configFile: 'reporter-config.json'
     },

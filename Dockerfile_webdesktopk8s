@@ -9,7 +9,7 @@ RUN \
 
 RUN \
   echo "**** install packages ****" && \
-  apk add --no-cache shadow keepassxc radare2 aws-cli geany git build-base && \
+  apk add --no-cache shadow keepassxc radare2 aws-cli geany git build-base icu-libs icu-data-full && \
   echo "**** adding abc user to root for Docker ****" && \
   usermod -aG root abc && \
   touch /var/run/docker.sock && \
@@ -22,6 +22,15 @@ RUN echo "**** clone wrongsecrets.git for webtop in k8s ****" && \
     cd /var/tmp/wrongsecrets && \
     git clone https://github.com/OWASP/wrongsecrets.git
 
+RUN \
+  echo "installing dotnet" && \
+  wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh && \
+  chmod +x dotnet-install.sh && \
+  ./dotnet-install.sh --version latest && \
+  export DOTNET_ROOT=$HOME/.dotnet && \
+  export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools && \
+  dotnet tool install --global ilspycmd && \
+  dotnet tool install -g sfextract
 
 WORKDIR /config/Desktop
 
