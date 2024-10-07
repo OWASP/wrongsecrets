@@ -6,6 +6,7 @@ module.exports = defineConfig({
     baseUrl: 'https://arcane-scrubland-42646.herokuapp.com/',
     specPattern: 'cypress/integration/*.cy.js',
     reporter: 'cypress-multi-reporters',
+    pageLoadTimeout: 60000,
     reporterOptions: {
       configFile: 'reporter-config.json'
     },
