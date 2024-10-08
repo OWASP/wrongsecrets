@@ -308,6 +308,7 @@ download_dot_net_binaries() {
   curl -L -o ../../src/main/resources/executables/wrongsecrets-dotnet-linux-arm https://github.com/OWASP/wrongsecrets-binaries/releases/download/$BINARY_VERSION/wrongsecrets-dotnet-linux-arm
   curl -L -o ../../src/main/resources/executables/wrongsecrets-dotnet-linux-musl https://github.com/OWASP/wrongsecrets-binaries/releases/download/$BINARY_VERSION/wrongsecrets-dotnet-linux-musl
   curl -L -o ../../src/main/resources/executables/wrongsecrets-dotnet-linux-musl-arm https://github.com/OWASP/wrongsecrets-binaries/releases/download/$BINARY_VERSION/wrongsecrets-dotnet-linux-musl-arm
+  curl -L -o ../../src/main/resources/executables/wrongsecrets-dotnet-windows.exe https://github.com/OWASP/wrongsecrets-binaries/releases/download/$$BINARY_VERSION/wrongsecrets-dotnet-windows.exe
 }
 
 build_update_pom() {
