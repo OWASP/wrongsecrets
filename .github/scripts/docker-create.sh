@@ -299,13 +299,14 @@ generate_test_data() {
 }
 
 download_dot_net_binaries() {
-  BINARY_VERSION=0.1.0
-  if test -f binary_version.txt; then
-    echo "binary_version.txt exists checkig content"
-    if grep -qe ^$BINARY_VERSION$ binary_version.txt; then \
+  BINARY_VERSION="0.1.0"
+  FILE_VERSION_PERSIST=./binary_version.txt
+  if [ -e  "$FILE_VERSION_PERSIST" ]; then
+    echo "$FILE_VERSION_PERSIST exists checkig content"
+    if grep -qe ^$BINARY_VERSION $FILE_VERSION_PERSIST; then \
             echo "no need for dowloading";
             return
-        fi
+    fi
   fi
   echo "downloading dotnet binaries, version $BINARY_VERSION"
   rm ../../src/main/resources/executables/wrongsecrets-dotne*
@@ -316,8 +317,8 @@ download_dot_net_binaries() {
   curl -L -o ../../src/main/resources/executables/wrongsecrets-dotnet-linux-musl https://github.com/OWASP/wrongsecrets-binaries/releases/download/$BINARY_VERSION/wrongsecrets-dotnet-linux-musl
   curl -L -o ../../src/main/resources/executables/wrongsecrets-dotnet-linux-musl-arm https://github.com/OWASP/wrongsecrets-binaries/releases/download/$BINARY_VERSION/wrongsecrets-dotnet-linux-musl-arm
   curl -L -o ../../src/main/resources/executables/wrongsecrets-dotnet-windows.exe https://github.com/OWASP/wrongsecrets-binaries/releases/download/$$BINARY_VERSION/wrongsecrets-dotnet-windows.exe
-  echo "setting up binary versionf file"
-  echo $BINARY_VERSION > binary_version.txt
+  echo "setting up binary version file"
+  echo -n $BINARY_VERSION > $FILE_VERSION_PERSIST
 }
 
 build_update_pom() {
@@ -453,8 +454,8 @@ local_extra_info
 check_correct_launch_location
 check_os
 check_required_install
-generate_test_data
 download_dot_net_binaries
+generate_test_data
 build_update_pom
 create_containers
 restore_temp_change
