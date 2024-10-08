@@ -1,0 +1,5 @@
+=== Hiding in binaries revisited: .NET self contained runtime
+
+It is super easy to find a secret in a DLL, but when you are on MacOS or Linux it is much harder. So I am sure we can keep one there right?
+
+Show us that we should not do that! Can you find the secret in https://github.com/OWASP/wrongsecrets-binaries/releases/download/0.1.0/wrongsecrets-dotnet[wrongsecrets-dotnet] (or https://github.com/OWASP/wrongsecrets-binaries/releases/download/0.1.0/wrongsecrets-dotnet-arm[wrongsecrets-dotnet-arm], https://github.com/OWASP/wrongsecrets-binaries/releases/download/0.1.0/wrongsecrets-dotnet-linux[wrongsecrets-dotnet-linux])?
