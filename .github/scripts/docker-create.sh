@@ -337,6 +337,8 @@ build_update_pom() {
     cd ../.. && ./mvnw clean && ./mvnw --batch-mode release:update-versions -DdevelopmentVersion=${tag}-SNAPSHOT && ./mvnw spotless:apply && ./mvnw install -DskipTests
     cd .github/scripts
     echo "Removing unnecessary binaries from the jar file"
+    zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-golang
+    zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-golang-arm
     zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-dotnet
     zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-dotnet-arm
     zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-dotnet-linux
