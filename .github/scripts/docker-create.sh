@@ -300,6 +300,13 @@ generate_test_data() {
 
 download_dot_net_binaries() {
   BINARY_VERSION=0.1.0
+  if test -f binary_version.txt; then
+    echo "binary_version.txt exists checkig content"
+    if grep -qe ^$BINARY_VERSION$ binary_version.txt; then \
+            echo "no need for dowloading";
+            return
+        fi
+  fi
   echo "downloading dotnet binaries, version $BINARY_VERSION"
   rm ../../src/main/resources/executables/wrongsecrets-dotne*
   curl -L -o ../../src/main/resources/executables/wrongsecrets-dotnet https://github.com/OWASP/wrongsecrets-binaries/releases/download/$BINARY_VERSION/wrongsecrets-dotnet
@@ -309,6 +316,8 @@ download_dot_net_binaries() {
   curl -L -o ../../src/main/resources/executables/wrongsecrets-dotnet-linux-musl https://github.com/OWASP/wrongsecrets-binaries/releases/download/$BINARY_VERSION/wrongsecrets-dotnet-linux-musl
   curl -L -o ../../src/main/resources/executables/wrongsecrets-dotnet-linux-musl-arm https://github.com/OWASP/wrongsecrets-binaries/releases/download/$BINARY_VERSION/wrongsecrets-dotnet-linux-musl-arm
   curl -L -o ../../src/main/resources/executables/wrongsecrets-dotnet-windows.exe https://github.com/OWASP/wrongsecrets-binaries/releases/download/$$BINARY_VERSION/wrongsecrets-dotnet-windows.exe
+  echo "setting up binary versionf file"
+  echo $BINARY_VERSION > binary_version.txt
 }
 
 build_update_pom() {
@@ -332,6 +341,7 @@ build_update_pom() {
     zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-dotnet-arm
     zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-dotnet-linux
     zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-dotnet-linux-arm
+    zip -d ../../target/*.jar BOOT-INF/classes/executables/*.exe
     docker buildx create --name mybuilder
     docker buildx use mybuilder
 }
