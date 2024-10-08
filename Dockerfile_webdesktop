@@ -27,7 +27,7 @@ RUN \
   export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools && \
   export PATH="$PATH:/config/.dotnet/tools" &&\
   dotnet tool install --global ilspycmd --version 9.0.0.7660-preview2
-  
+
 WORKDIR /config/Desktop
 
 COPY src/main/resources/executables/*linux* /var/tmp/wrongsecrets/
