@@ -31,11 +31,11 @@ RUN \
     export DOTNET_ROOT=/etc/dotnet && \
     export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools && \
     export PATH="$PATH:/config/.dotnet/tools" &&\
-    dotnet tool install --global ilspycmd --version 9.0.0.7660-preview2
+    dotnet tool install ilspycmd --version 9.0.0.7660-preview2 --tool-path /etc/dotnet/tools
 
 WORKDIR /config/Desktop
 
-COPY src/main/resources/executables/*linux* /var/tmp/wrongsecrets/
+COPY src/main/resources/executables/*linux-mus* /var/tmp/wrongsecrets/
 COPY src/main/resources/executables/decrypt/ /var/tmp/wrongsecrets/decrypt/
 COPY src/main/resources/executables/wrongsecrets-advanced-c-windows.exe /var/tmp/wrongsecrets/
 COPY src/main/resources/executables/secrchallenge.md /var/tmp/wrongsecrets/
