@@ -25,7 +25,6 @@ public class ChallengesCtfController {
   private final Challenges challenges;
   private final ChallengeDefinitionsConfiguration wrongSecretsConfiguration;
   private final RuntimeEnvironment runtimeEnvironment;
-  private final String disabledChallenge = "This challenge is disbled";
 
   public ChallengesCtfController(
       ScoreCard scoreCard,
@@ -54,6 +53,7 @@ public class ChallengesCtfController {
       jsonChallenge.put("name", definition.name().name());
       jsonChallenge.put("key", definition.name().shortName());
       jsonChallenge.put("category", getCategory() + " - " + definition.category().category());
+      String disabledChallenge = "This challenge is disbled";
       jsonChallenge.put(
           "description",
           definition
