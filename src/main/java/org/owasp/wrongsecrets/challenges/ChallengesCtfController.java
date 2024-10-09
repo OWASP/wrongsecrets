@@ -25,6 +25,7 @@ public class ChallengesCtfController {
   private final Challenges challenges;
   private final ChallengeDefinitionsConfiguration wrongSecretsConfiguration;
   private final RuntimeEnvironment runtimeEnvironment;
+  private final String disabledChallenge = "This challenge is disbled";
 
   public ChallengesCtfController(
       ScoreCard scoreCard,
@@ -58,10 +59,13 @@ public class ChallengesCtfController {
           definition
               .source(runtimeEnvironment)
               .map(s -> s.explanation().contents().get())
-              .orElse(null));
+              .orElse(disabledChallenge));
       jsonChallenge.put(
           "hint",
-          definition.source(runtimeEnvironment).map(s -> s.hint().contents().get()).orElse(null));
+          definition
+              .source(runtimeEnvironment)
+              .map(s -> s.hint().contents().get())
+              .orElse(disabledChallenge));
       jsonChallenge.put("solved", scoreCard.getChallengeCompleted(definition));
       jsonChallenge.put("disabledEnv", getDisabledEnv(definition));
       jsonChallenge.put("difficulty", definition.difficulty().difficulty());
