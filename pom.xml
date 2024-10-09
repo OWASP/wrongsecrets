@@ -56,11 +56,12 @@
     <gatling.version>3.12.0</gatling.version>
     <gcp.sdk.version>5.7.0</gcp.sdk.version>
     <github.button.version>2.14.1</github.button.version>
-    <java.version>22</java.version>
+    <java.version>23</java.version>
     <jquery.version>3.7.1</jquery.version>
     <jruby.version>9.4.8.0</jruby.version>
     <lombok.version>1.18.34</lombok.version>
-    <maven.compiler.target>22</maven.compiler.target>
+    <maven.compiler.proc>full</maven.compiler.proc>
+    <maven.compiler.target>23</maven.compiler.target>
     <spring.cloud-version>2023.0.3</spring.cloud-version>
     <spring.security.version>6.2.3</spring.security.version>
     <system-stubs-jupiter.version>2.1.7</system-stubs-jupiter.version>
@@ -511,9 +512,10 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.13.0</version>
         <configuration>
-          <source>22</source>
-          <target>22</target>
+          <source>23</source>
+          <target>23</target>
         </configuration>
       </plugin>
       <plugin>
