@@ -1,4 +1,4 @@
-FROM eclipse-temurin:22.0.2_9-jre-alpine
+FROM eclipse-temurin:23_37-jre-alpine
 
 ARG argBasedPassword="default"
 ARG argBasedVersion="1.8.5"
