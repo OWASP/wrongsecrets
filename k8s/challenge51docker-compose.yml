@@ -1,26 +1,18 @@
-version: '3.7'
+version: '3.8'
 
 services:
-  db:
-    image: postgres:latest
-    volumes:
-      - db_data:/var/lib/postgresql/data
-    environment:
-      POSTGRES_USER_FILE: /run/secrets/db_user
-      POSTGRES_PASSWORD_FILE: /run/secrets/db_password
-      POSTGRES_DB_FILE: /run/secrets/db_name
-    secrets:
-      - db_user
-      - db_password
-      - db_name
+  myservice:
+    build:
+      context: "."
+      secrets:
+        - "db_user"
+        - "db_password"
+        - "db_name"
+
 secrets:
-  db_user:
-    file: db_user.txt
-  db_password:
-    file: db_password.txt
-  db_name:
-    file: db_name.txt
-
-volumes:
-  db_data:
-
+  DB_USER:
+    environment: "DB_USER"
+  DB_PASSWORD:
+    environment: "DB_PASSWORD"
+  DB_NAME:
+    environment: "DB_NAME"
