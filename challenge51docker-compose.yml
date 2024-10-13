@@ -3,7 +3,7 @@ version: '3.8'
 services:
   myservice:
     build:
-      context: "."
+      context: "k8s"
       secrets:
         - "db_user"
         - "db_password"
