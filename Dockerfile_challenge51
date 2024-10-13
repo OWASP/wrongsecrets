@@ -1,10 +1,10 @@
+# syntax=docker/dockerfile:1.4
 FROM debian:stable-slim
 
-# Using --mount to inject secrets
 RUN --mount=type=secret,id=db_user \
     --mount=type=secret,id=db_password \
     --mount=type=secret,id=db_name \
     echo "$(cat /run/secrets/db_user) | $(cat /run/secrets/db_password) | $(cat /run/secrets/db_name)" \
-      > /tmp/db_secrets_output
+    > /tmp/db_secrets_output
 
 CMD ["cat", "/tmp/db_secrets_output"]
