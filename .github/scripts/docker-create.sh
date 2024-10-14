@@ -299,7 +299,15 @@ generate_test_data() {
 }
 
 download_dot_net_binaries() {
-  BINARY_VERSION=0.1.0
+  BINARY_VERSION="0.1.0"
+  FILE_VERSION_PERSIST=./binary_version.txt
+  if [ -e  "$FILE_VERSION_PERSIST" ]; then
+    echo "$FILE_VERSION_PERSIST exists checkig content"
+    if grep -qe ^$BINARY_VERSION $FILE_VERSION_PERSIST; then \
+            echo "no need for dowloading";
+            return
+    fi
+  fi
   echo "downloading dotnet binaries, version $BINARY_VERSION"
   rm ../../src/main/resources/executables/wrongsecrets-dotne*
   curl -L -o ../../src/main/resources/executables/wrongsecrets-dotnet https://github.com/OWASP/wrongsecrets-binaries/releases/download/$BINARY_VERSION/wrongsecrets-dotnet
@@ -308,6 +316,10 @@ download_dot_net_binaries() {
   curl -L -o ../../src/main/resources/executables/wrongsecrets-dotnet-linux-arm https://github.com/OWASP/wrongsecrets-binaries/releases/download/$BINARY_VERSION/wrongsecrets-dotnet-linux-arm
   curl -L -o ../../src/main/resources/executables/wrongsecrets-dotnet-linux-musl https://github.com/OWASP/wrongsecrets-binaries/releases/download/$BINARY_VERSION/wrongsecrets-dotnet-linux-musl
   curl -L -o ../../src/main/resources/executables/wrongsecrets-dotnet-linux-musl-arm https://github.com/OWASP/wrongsecrets-binaries/releases/download/$BINARY_VERSION/wrongsecrets-dotnet-linux-musl-arm
+  curl -L -o ../../src/main/resources/executables/wrongsecrets-dotnet-windows.exe https://github.com/OWASP/wrongsecrets-binaries/releases/download/$$BINARY_VERSION/wrongsecrets-dotnet-windows.exe
+  chmod +x ../../src/main/resources/executables/wrongsecrets-dotne*
+  echo "setting up binary version file"
+  echo -n $BINARY_VERSION > $FILE_VERSION_PERSIST
 }
 
 build_update_pom() {
@@ -327,10 +339,13 @@ build_update_pom() {
     cd ../.. && ./mvnw clean && ./mvnw --batch-mode release:update-versions -DdevelopmentVersion=${tag}-SNAPSHOT && ./mvnw spotless:apply && ./mvnw install -DskipTests
     cd .github/scripts
     echo "Removing unnecessary binaries from the jar file"
+    zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-golang
+    zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-golang-arm
     zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-dotnet
     zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-dotnet-arm
     zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-dotnet-linux
     zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-dotnet-linux-arm
+    zip -d ../../target/*.jar BOOT-INF/classes/executables/*.exe
     docker buildx create --name mybuilder
     docker buildx use mybuilder
 }
@@ -440,8 +455,8 @@ local_extra_info
 check_correct_launch_location
 check_os
 check_required_install
-generate_test_data
 download_dot_net_binaries
+generate_test_data
 build_update_pom
 create_containers
 restore_temp_change
