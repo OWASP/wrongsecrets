@@ -10,6 +10,7 @@ import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.definitions.ChallengeDefinition;
 import org.owasp.wrongsecrets.definitions.ChallengeDefinitionsConfiguration;
+import org.owasp.wrongsecrets.definitions.Difficulty;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -53,18 +54,22 @@ public class ChallengesCtfController {
       jsonChallenge.put("name", definition.name().name());
       jsonChallenge.put("key", definition.name().shortName());
       jsonChallenge.put("category", getCategory() + " - " + definition.category().category());
+      String disabledChallenge = "This challenge is disbled";
       jsonChallenge.put(
           "description",
           definition
               .source(runtimeEnvironment)
               .map(s -> s.explanation().contents().get())
-              .orElse(null));
+              .orElse(disabledChallenge));
       jsonChallenge.put(
           "hint",
-          definition.source(runtimeEnvironment).map(s -> s.hint().contents().get()).orElse(null));
+          definition
+              .source(runtimeEnvironment)
+              .map(s -> s.hint().contents().get())
+              .orElse(disabledChallenge));
       jsonChallenge.put("solved", scoreCard.getChallengeCompleted(definition));
       jsonChallenge.put("disabledEnv", getDisabledEnv(definition));
-      jsonChallenge.put("difficulty", definition.difficulty().difficulty());
+      jsonChallenge.put("difficulty", getDificulty(definition.difficulty()));
       jsonArray.add(jsonChallenge);
     }
     json.put("status", "success");
@@ -72,6 +77,23 @@ public class ChallengesCtfController {
     String result = json.toJSONString();
     log.trace("returning {}", result);
     return result;
+  }
+
+  private int getDificulty(Difficulty difficulty) {
+    switch (difficulty.difficulty()) {
+      case "easy":
+        return 1;
+      case "normal":
+        return 2;
+      case "hard":
+        return 3;
+      case "expert":
+        return 4;
+      case "master":
+        return 5;
+      default:
+        return 0;
+    }
   }
 
   private String getCategory() {
