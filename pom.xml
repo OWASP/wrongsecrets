@@ -60,6 +60,7 @@
     <jquery.version>3.7.1</jquery.version>
     <jruby.version>9.4.8.0</jruby.version>
     <lombok.version>1.18.34</lombok.version>
+    <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
     <maven.compiler.proc>full</maven.compiler.proc>
     <maven.compiler.target>23</maven.compiler.target>
     <spring.cloud-version>2023.0.3</spring.cloud-version>
@@ -512,7 +513,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.13.0</version>
+        <version>${maven-compiler-plugin.version}</version>
         <configuration>
           <source>23</source>
           <target>23</target>
