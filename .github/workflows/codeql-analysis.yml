@@ -69,7 +69,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: "23"
-          distribution: "temurin"
+          distribution: "oracle"
       - name: run mvn clean package
         run: ./mvnw clean package -Ddependency-check.skip=true -Dmaven.test.skip=true
       - name: Perform CodeQL Analysis

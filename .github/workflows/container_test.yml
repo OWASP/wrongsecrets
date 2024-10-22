@@ -23,7 +23,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: "23"
-          distribution: "temurin"
+          distribution: "oracle"
           cache: "maven"
       - name: Navigate to test script and run
         run: cd .github/scripts && bash docker-create.sh -t
