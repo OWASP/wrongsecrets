@@ -120,7 +120,7 @@ Please be sure to take a careful look at our [Code of Conduct](https://github.co
 1. **Docker**
    [_Docker_](https://www.docker.com/) is a software platform that allows you to build, test, and deploy applications quickly and in a more efficient manner.
 
-2. **Node.Js 20**
+2. **Node.Js 22**
    [_Node.Js_](https://nodejs.org/en/) is an open-source library and a cross-platform JavaScript **runtime environment** specifically for running web applications outside one's browser.
 
 3. **JDK-23**

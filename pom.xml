@@ -466,7 +466,7 @@
             </goals>
             <phase>generate-resources</phase>
             <configuration>
-              <nodeVersion>v20.18.0</nodeVersion>
+              <nodeVersion>v22.10.0</nodeVersion>
               <!-- download node from https://nodejs.org/dist/ -->
               <workingDirectory>js</workingDirectory>
             </configuration>
