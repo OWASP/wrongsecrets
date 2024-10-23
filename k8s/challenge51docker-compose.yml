@@ -9,10 +9,6 @@ services:
         - db_user
         - db_password
         - db_name
-    secrets:
-      - db_user
-      - db_password
-      - db_name
 
 secrets:
   db_user:

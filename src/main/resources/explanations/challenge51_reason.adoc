@@ -1,0 +1,28 @@
+= Docker Compose Secrets Misconfiguration Challenge
+
+*Why Improper Secret Management in Docker Compose Can Lead to Vulnerabilities*
+
+In containerized environments, secret management is critical to maintaining the confidentiality and integrity of sensitive information such as database credentials, API keys, and other secrets. Docker Compose offers a convenient way to define and manage secrets, but improper handling of these secrets can expose your system to attacks.
+
+A common mistake is to pass secrets directly via environment variables or commit secret files into version control. This approach is flawed because:
+
+1. **Secrets are visible in the environment**: Environment variables are easy to inspect using basic system commands or logging, which may lead to unintentional exposure.
+2. **Hardcoding secrets in Dockerfiles**: When secrets are embedded in the Dockerfile or `docker-compose.yml`, they become part of the build process and are included in the image layers. Anyone with access to the image can inspect these layers and retrieve the secret.
+3. **Committing secret files to version control**: Storing secrets in files and committing them to Git or other version control systems introduces significant risks, as anyone with access to the repository can obtain the secrets.
+
+*Why This Challenge?*
+
+The purpose of this challenge is to highlight the risks associated with improper secret management in Docker Compose. Specifically, it demonstrates the dangers of using environment variables and file-based secrets incorrectly. Although Docker Compose provides mechanisms to handle secrets securely, such as Docker secrets and external secret management solutions, developers may often overlook these features for convenience.
+
+This challenge simulates a scenario where:
+
+- Database credentials (`db_user`, `db_password`, and `db_name`) are stored in a secret file and referenced in the `docker-compose`.
+- These secrets are improperly managed and can be easily exposed by anyone with access to the environment or the repository.
+
+*Key Learning Points:*
+
+- **Avoid using environment variables for secrets**: While convenient, environment variables are not secure for managing sensitive information. Use Docker secrets or external tools like Vault or AWS Secrets Manager instead.
+- **Do not commit secrets to version control**: Always keep secret files out of your repository by using `.gitignore` or secure secret management solutions.
+- **Ensure secrets are not baked into images**: Secrets should not be embedded in the Docker image itself; they should be injected at runtime or securely retrieved via an external service.
+
+By completing this challenge, you will learn how easy it is for attackers to gain access to improperly managed secrets and the best practices for securing secrets in Docker Compose environments.
