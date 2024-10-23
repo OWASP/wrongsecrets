@@ -13,7 +13,7 @@ The reporting of the tests themselves will be located in `target/test-classes/e2
 Please note that cypress requires the templates to have been build first.
 
 ### Run outside of maven
-Want to run them outside of maven? Make sure you have node20 installed and the application running and listening to `http://localhost:8080` . Then do:
+Want to run them outside of maven? Make sure you have node 22 installed and the application running and listening to `http://localhost:8080` . Then do:
 
 ```shell
 cd src/test/e2e/cypress

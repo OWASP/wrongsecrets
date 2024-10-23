@@ -27,12 +27,12 @@ jobs:
         uses: psf/black@stable
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: "npm"
       - uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
-          java-version: '22'
+          distribution: 'oracle'
+          java-version: '23'
       - name: Install npm dependencies
         run: npm install
       - uses: actions/cache@v4
@@ -43,7 +43,7 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
-          terraform_version: 1.7.4
+          terraform_version: 1.9.8
       - name: Setup TFLint
         uses: terraform-linters/setup-tflint@v4
         with:
@@ -62,5 +62,5 @@ jobs:
       - name: Pre-commit checks
         uses: pre-commit/action@v3.0.1
       - name: pre-commit-ci-lite
-        uses: pre-commit-ci/lite-action@v1.0.3
+        uses: pre-commit-ci/lite-action@v1.1.0
         if: always()
