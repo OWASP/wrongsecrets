@@ -11,7 +11,7 @@ This challenge can be solved using the following ways:
   4. Now you can run the Docker Compose commands to build and run your service:
      - ```
         export DOCKER_BUILDKIT=1
-        docker compose -f k8s/challenge51docker-compose.yml build
-        docker compose -f k8s/challenge51docker-compose.yml run myservice
+        docker compose -f src/main/resources/challenges/challenge-51/challenge51docker-compose.yml build
+        docker compose -f src/main/resources/challenges/challenge-51/challenge51docker-compose.yml run myservice
         ```.
   5. The answer is in the output
