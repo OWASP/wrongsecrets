@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  myservice:
+    build:
+      context: "../../../../.."
+      dockerfile: ../Dockerfile_challenge51
+      secrets:
+        - db_user
+        - db_password
+        - db_name
+
+secrets:
+  db_user:
+    file: secretfiles/db_user.txt
+  db_password:
+    file: secretfiles/db_password.txt
+  db_name:
+    file: secretfiles/db_name.txt

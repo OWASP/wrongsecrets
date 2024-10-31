@@ -1,0 +1,7 @@
+=== Exposed Docker Secrets Challenge
+
+In this challenge, you will explore the importance of securely managing sensitive information using Docker secrets in a https://github.com/OWASP/wrongsecrets/blob/775648678a60e57faa8c3fc0799ce1526f4b0f42/src/main/resources/challenges/challenge-51/Dockerfile_challenge51[Docker Compose file]. Docker secrets are intended to safely transmit and store sensitive data like passwords, API keys, and certificates within Docker services. However, improper handling or misconfigurations can inadvertently expose these secrets, leading to potential security risks.
+
+*Acme Inc.*, a rapidly growing e-commerce platform, has recently experienced suspicious activities suggesting that sensitive customer data might have been compromised. An internal audit reveals that a developer inadvertently exposed database credentials by keeping secretfiles in repository and pushing it to a public Git repository. Additionally, the application was not utilizing Docker secrets effectively, leading to plaintext exposure of sensitive information within running containers.
+
+You have been hired as Technical Security Consultant, your job is to secure the exposed secrets to protect the sensitive information? For now identify the misconfigurations and report the database password in the box below to show the issue.
