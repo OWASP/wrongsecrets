@@ -11,7 +11,7 @@
     "eslint-plugin-cypress": "^3.5.0",
     "eslint-plugin-mocha": "^10.5.0",
     "globals": "^15.9.0",
-    "mocha": "^10.7.3"
+    "mocha": "^10.8.2"
   },
   "dependencies": {
     "mochawesome": "^7.1.3",
