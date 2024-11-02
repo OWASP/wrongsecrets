@@ -6,7 +6,7 @@
     "@eslint/eslintrc": "^3.1.0",
     "eslint": "^9.11.1",
     "eslint-plugin-chai-friendly": "^1.0.1",
-    "eslint-plugin-cypress": "^3.5.0",
+    "eslint-plugin-cypress": "^4.1.0",
     "eslint-plugin-mocha": "^10.5.0",
     "globals": "^15.9.0"
   }
