@@ -1,6 +1,53 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:recommended"
-  ]
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "reviewers": ["commjoen", "bendehaan"],
+    "extends": ["config:recommended", ":enablePreCommit"],
+    "customManagers": [
+        {
+            "customType": "regex",
+            "fileMatch": ".github/scripts/docker-create.sh",
+            "depNameTemplate": "wrongsecrets-binaries",
+            "matchStrings": ["BINARY_VERSION=\"(?<currentvalue>)\""],
+            "versioningStrategy": "replace",
+            "datasourceTemplate": "github-releases",
+            "registryUrlTemplate": "https://github.com/OWASP/wrongsecrets-binaries"
+        },
+        {
+            "customType": "regex",
+            "fileMatch": "aws/k8s-aws-alb-script.sh",
+            "depNameTemplate": "aws-alb-ingress-controller",
+            "matchStrings": ["LBC_VERSION=\"v(?<currentvalue>)\""],
+            "versioningStrategy": "replace",
+            "datasourceTemplate": "github-releases",
+            "registryUrlTemplate": "https://github.com/kubernetes-sigs/aws-load-balancer-controller/"
+        }
+    ],
+    "packageRules": [
+        {
+            "matchPackageNames": ["/eslint/"],
+            "groupName": "eslint",
+            "enabled": true
+        },
+        {
+            "groupName": "go",
+            "matchDatasources": ["go"],
+            "matchUpdateTypes": ["minor", "patch"],
+            "enabled": true
+        },
+        {
+            "groupName": "terraform-aws",
+            "matchPackageNames": ["terraform-provider-aws", "terraform-aws-modules"],
+            "enabled": true
+        },
+        {
+            "groupName": "terraform-azure",
+            "matchPackageNames": ["terraform-provider-azurerm", "terraform-azurerm-modules"],
+            "enabled": true
+        },
+        {
+            "groupName": "terraform-gcp",
+            "matchPackageNames": ["terraform-provider-google", "terraform-google-modules"],
+            "enabled": true
+        }
+    ]
 }
