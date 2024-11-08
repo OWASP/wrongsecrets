@@ -1,0 +1,7 @@
+=== Hardcoded Encryption Key Challenge
+
+In this challenge, the encrypted secret is stored directly in the code, along with its encryption key. This is meant to demonstrate the risks associated with "bad encryption practices," specifically hardcoding sensitive information.
+
+Encryption is a strong security measure, but only if the encryption keys are properly secured. Hardcoding the encryption key into the code base significantly weakens the protection that encryption provides. Attackers can decompile or analyze the code to retrieve these keys, making it easy for them to decrypt sensitive information.
+
+This challenge serves as a reminder that encryption keys should be stored securely, preferably in a secure vault or environment variable, rather than in the source code itself.
