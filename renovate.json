@@ -31,7 +31,6 @@
         {
             "groupName": "go",
             "matchDatasources": ["go"],
-            "matchUpdateTypes": ["minor", "patch"],
             "enabled": true
         },
         {
