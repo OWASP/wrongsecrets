@@ -55,11 +55,6 @@
             "enabled": true
         }
     ],
-    "postUpgradeTasks": {
-        "commands": [".github/scripts/renovate-post-upgrade-tasks.sh"],
-        "fileFilters": ["**/README.md", "**/.terraform.lock.hcl"],
-        "executionMode": "branch"
-    },
     "regexManagers": [
         {
             "fileMatch": ["^\\.github/scripts/renovate-post-upgrade-tasks\\.sh$"],
