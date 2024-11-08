@@ -8,6 +8,10 @@ ci:
   skip: []
   submodules: false
 repos:
+  - repo: https://github.com/renovatebot/pre-commit-hooks
+    rev: 39.7.6
+    hooks:
+      - id: renovate-config-validator
   - repo: https://github.com/eslint/eslint
     rev: v9.3.0
     hooks:
@@ -50,10 +54,10 @@ repos:
     rev: v0.3.4
     hooks:
       - id: maven
-        args: [ 'clean compile' ]
+        args: ["clean compile"]
       - id: maven-spotless-apply
   - repo: https://github.com/psf/black
     rev: 24.4.2
     hooks:
-    - id: black
-      language_version: python3.11
+      - id: black
+        language_version: python3.11

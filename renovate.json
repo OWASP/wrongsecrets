@@ -1,0 +1,87 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "reviewers": ["commjoen", "bendehaan"],
+    "extends": ["config:recommended", ":enablePreCommit"],
+    "customManagers": [
+        {
+            "customType": "regex",
+            "fileMatch": ".github/scripts/docker-create.sh",
+            "depNameTemplate": "OWASP/wrongsecrets-binaries",
+            "currentValueTemplate": "${1}.${2}.${3}",
+            "matchStrings": ["BINARY_VERSION=\"(?<currentValue>.*?)\""],
+            "datasourceTemplate": "github-releases",
+            "registryUrlTemplate": "https://github.com/OWASP/wrongsecrets-binaries"
+        },
+        {
+            "customType": "regex",
+            "fileMatch": "aws/k8s-aws-alb-script.sh",
+            "depNameTemplate": "kubernetes-sigs/aws-alb-ingress-controller",
+            "currentValueTemplate": "v${1}.${2}.${3}",
+            "matchStrings": ["LBC_VERSION=\"v(?<currentValue>.*?)\""],
+            "datasourceTemplate": "github-releases",
+            "registryUrlTemplate": "https://github.com/kubernetes-sigs/aws-load-balancer-controller"
+        }
+    ],
+    "packageRules": [
+        {
+            "matchPackagePatterns": ["^eslint"],
+            "groupName": "eslint",
+            "enabled": true
+        },
+        {
+            "groupName": "go",
+            "matchDatasources": ["go"],
+            "enabled": true
+        },
+        {
+            "groupName": "pre-commit",
+            "matchPaths": [".pre-commit-config.yaml"],
+            "enabled": true
+        },
+        {
+            "groupName": "terraform-aws",
+            "matchDatasources": ["terraform-provider", "terraform-module"],
+            "matchPackagePatterns": ["aws", "terraform-aws-modules/.*"],
+            "enabled": true
+        },
+        {
+            "groupName": "terraform-azure",
+            "matchDatasources": ["terraform-provider", "terraform-module"],
+            "matchPackagePatterns": ["azurerm"],
+            "enabled": true
+        },
+        {
+            "groupName": "terraform-gcp",
+            "matchDatasources": ["terraform-provider", "terraform-module"],
+            "matchPackagePatterns": ["google", "google-beta"],
+            "enabled": true
+        }
+    ],
+    "postUpgradeTasks": {
+        "commands": [".github/scripts/renovate-post-upgrade-tasks.sh"],
+        "fileFilters": ["**/README.md", "**/.terraform.lock.hcl"],
+        "executionMode": "branch"
+    },
+    "regexManagers": [
+        {
+            "fileMatch": ["^\\.github/scripts/renovate-post-upgrade-tasks\\.sh$"],
+            "currentValueTemplate": "v${1}.${2}.${3}",
+            "matchStrings": [
+                "https://releases\\.hashicorp\\.com/terraform/(?<currentValue>.*?)/terraform_([0-9]+)\\.([0-9]+)\\.([0-9]+)_linux_\\$\\(dpkg --print-architecture\\)\\.zip",
+                "https://releases\\.hashicorp\\.com/terraform/([0-9]+)\\.([0-9]+)\\.([0-9]+)/terraform_(?<currentValue>.*?)_linux_\\$\\(dpkg --print-architecture\\)\\.zip"
+            ],
+            "depNameTemplate": "hashicorp/terraform",
+            "datasourceTemplate": "docker"
+        },
+        {
+            "fileMatch": ["^\\.github/scripts/renovate-post-upgrade-tasks\\.sh$"],
+            "currentValueTemplate": "v${1}.${2}.${3}",
+            "matchStrings": [
+                "https://terraform-docs\\.io/dl/v([0-9]+)\\.([0-9]+)\\.([0-9]+)/terraform-docs-v(?<currentValue>.*?)-\\$\\(uname\\)-\\$\\(dpkg --print-architecture\\)\\.tar\\.gz",
+                "https://terraform-docs\\.io/dl/v(?<currentValue>.*?)/terraform-docs-v([0-9]+)\\.([0-9]+)\\.([0-9]+)-\\$\\(uname\\)-\\$\\(dpkg --print-architecture\\)\\.tar\\.gz"
+            ],
+            "depNameTemplate": "quay.io/terraform-docs/terraform-docs",
+            "datasourceTemplate": "docker"
+        }
+    ]
+}
