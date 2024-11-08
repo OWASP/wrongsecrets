@@ -8,7 +8,6 @@
             "fileMatch": ".github/scripts/docker-create.sh",
             "depNameTemplate": "wrongsecrets-binaries",
             "matchStrings": ["BINARY_VERSION=\"(?<currentvalue>)\""],
-            "versioningStrategy": "replace",
             "datasourceTemplate": "github-releases",
             "registryUrlTemplate": "https://github.com/OWASP/wrongsecrets-binaries"
         },
@@ -17,7 +16,6 @@
             "fileMatch": "aws/k8s-aws-alb-script.sh",
             "depNameTemplate": "aws-alb-ingress-controller",
             "matchStrings": ["LBC_VERSION=\"v(?<currentvalue>)\""],
-            "versioningStrategy": "replace",
             "datasourceTemplate": "github-releases",
             "registryUrlTemplate": "https://github.com/kubernetes-sigs/aws-load-balancer-controller/"
         }
