@@ -7,7 +7,8 @@
             "customType": "regex",
             "fileMatch": ".github/scripts/docker-create.sh",
             "depNameTemplate": "wrongsecrets-binaries",
-            "matchStrings": ["BINARY_VERSION=\"(?<currentvalue>)\""],
+            "currentValueTemplate": "v${1}.${2}.${3}",
+            "matchStrings": ["BINARY_VERSION=\"(?<currentvalue>.*?)\""],
             "datasourceTemplate": "github-releases",
             "registryUrlTemplate": "https://github.com/OWASP/wrongsecrets-binaries"
         },
@@ -15,14 +16,15 @@
             "customType": "regex",
             "fileMatch": "aws/k8s-aws-alb-script.sh",
             "depNameTemplate": "aws-alb-ingress-controller",
-            "matchStrings": ["LBC_VERSION=\"v(?<currentvalue>)\""],
+            "currentValueTemplate": "v${1}.${2}.${3}",
+            "matchStrings": ["LBC_VERSION=\"v(?<currentvalue>.*?)\""],
             "datasourceTemplate": "github-releases",
             "registryUrlTemplate": "https://github.com/kubernetes-sigs/aws-load-balancer-controller/"
         }
     ],
     "packageRules": [
         {
-            "matchPackageNames": ["/eslint/"],
+            "matchPackageNames": ["eslint"],
             "groupName": "eslint",
             "enabled": true
         },
