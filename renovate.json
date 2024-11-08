@@ -9,8 +9,7 @@
             "depNameTemplate": "OWASP/wrongsecrets-binaries",
             "currentValueTemplate": "${1}.${2}.${3}",
             "matchStrings": ["BINARY_VERSION=\"(?<currentValue>.*?)\""],
-            "datasourceTemplate": "github-releases",
-            "registryUrlTemplate": "https://github.com/OWASP/wrongsecrets-binaries"
+            "datasourceTemplate": "github-releases"
         },
         {
             "customType": "regex",
@@ -18,8 +17,7 @@
             "depNameTemplate": "kubernetes-sigs/aws-alb-ingress-controller",
             "currentValueTemplate": "v${1}.${2}.${3}",
             "matchStrings": ["LBC_VERSION=\"v(?<currentValue>.*?)\""],
-            "datasourceTemplate": "github-releases",
-            "registryUrlTemplate": "https://github.com/kubernetes-sigs/aws-load-balancer-controller"
+            "datasourceTemplate": "github-releases"
         }
     ],
     "packageRules": [
