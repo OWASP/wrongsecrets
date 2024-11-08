@@ -24,7 +24,7 @@
     ],
     "packageRules": [
         {
-            "matchPackageNames": ["eslint"],
+            "matchPackagePatterns": ["^eslint"],
             "groupName": "eslint",
             "enabled": true
         },
@@ -35,17 +35,20 @@
         },
         {
             "groupName": "terraform-aws",
-            "matchPackageNames": ["terraform-provider-aws", "terraform-aws-modules"],
+            "matchDatasources": ["terraform"],
+            "matchPackagePatterns": ["aws", "terraform-aws-modules/"],
             "enabled": true
         },
         {
             "groupName": "terraform-azure",
-            "matchPackageNames": ["terraform-provider-azurerm", "terraform-azurerm-modules"],
+            "matchDatasources": ["terraform"],
+            "matchPackagePatterns": ["azurerm"],
             "enabled": true
         },
         {
             "groupName": "terraform-gcp",
-            "matchPackageNames": ["terraform-provider-google", "terraform-google-modules"],
+            "matchDatasources": ["terraform"],
+            "matchPackagePatterns": ["google", "google-beta"],
             "enabled": true
         }
     ],
