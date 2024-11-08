@@ -9,7 +9,7 @@
             "depNameTemplate": "OWASP/wrongsecrets-binaries",
             "currentValueTemplate": "${1}.${2}.${3}",
             "matchStrings": ["BINARY_VERSION=\"(?<currentValue>.*?)\""],
-            "datasourceTemplate": "github-releases",
+            "datasourceTemplate": "github-tags",
             "registryUrlTemplate": "https://github.com/OWASP/wrongsecrets-binaries"
         },
         {
@@ -18,7 +18,7 @@
             "depNameTemplate": "kubernetes-sigs/aws-alb-ingress-controller",
             "currentValueTemplate": "v${1}.${2}.${3}",
             "matchStrings": ["LBC_VERSION=\"v(?<currentValue>.*?)\""],
-            "datasourceTemplate": "github-releases",
+            "datasourceTemplate": "github-tags",
             "registryUrlTemplate": "https://github.com/kubernetes-sigs/aws-load-balancer-controller"
         }
     ],
@@ -34,20 +34,25 @@
             "enabled": true
         },
         {
+            "groupName": "pre-commit",
+            "matchDatasources": ["pre-commit"],
+            "enabled": true
+        },
+        {
             "groupName": "terraform-aws",
-            "matchDatasources": ["terraform"],
-            "matchPackagePatterns": ["aws", "terraform-aws-modules/"],
+            "matchDatasources": ["terraform-provider", "terraform-module"],
+            "matchPackagePatterns": ["aws", "terraform-aws-modules/.*"],
             "enabled": true
         },
         {
             "groupName": "terraform-azure",
-            "matchDatasources": ["terraform"],
+            "matchDatasources": ["terraform-provider", "terraform-module"],
             "matchPackagePatterns": ["azurerm"],
             "enabled": true
         },
         {
             "groupName": "terraform-gcp",
-            "matchDatasources": ["terraform"],
+            "matchDatasources": ["terraform-provider", "terraform-module"],
             "matchPackagePatterns": ["google", "google-beta"],
             "enabled": true
         }
