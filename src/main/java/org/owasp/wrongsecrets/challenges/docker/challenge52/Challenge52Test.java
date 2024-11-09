@@ -12,5 +12,5 @@ class Challenge52Test {
     }
 }
  Challenge52Test {
-    
+
 }
