@@ -1,7 +1,7 @@
 # Terraform documentation
 The documentation below is auto-generated to give insight on what's created via Terraform.
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
@@ -42,4 +42,4 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_storage_account_name"></a> [storage\_account\_name](#output\_storage\_account\_name) | The generated storage account name |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- END_TF_DOCS -->

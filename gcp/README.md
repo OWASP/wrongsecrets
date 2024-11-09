@@ -101,7 +101,7 @@ Want to see if the setup still works? You can use terratest to check if the curr
 
 The documentation below is auto-generated to give insight on what's created via Terraform.
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
@@ -168,4 +168,4 @@ No modules.
 | <a name="output_kubernetes_cluster_name"></a> [kubernetes\_cluster\_name](#output\_kubernetes\_cluster\_name) | GKE Cluster Name |
 | <a name="output_project_id"></a> [project\_id](#output\_project\_id) | GCloud Project ID |
 | <a name="output_region"></a> [region](#output\_region) | GCloud Region |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- END_TF_DOCS -->
