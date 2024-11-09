@@ -7,9 +7,9 @@ on:
   workflow_dispatch:
 
 env:
-  TF_DOCS_VERSION: v0.16.0
-  TFSEC_VERSION: v1.28.6
-  TFLINT_VERSION: v0.47.0
+  TF_DOCS_VERSION: v0.19.0
+  TFSEC_VERSION: v1.28.11
+  TFLINT_VERSION: v0.53.0
 permissions:
   contents: read
 jobs:
@@ -31,8 +31,8 @@ jobs:
           cache: "npm"
       - uses: actions/setup-java@v4
         with:
-          distribution: 'oracle'
-          java-version: '23'
+          distribution: "oracle"
+          java-version: "23"
       - name: Install npm dependencies
         run: npm install
       - uses: actions/cache@v4
