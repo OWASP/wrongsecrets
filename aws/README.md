@@ -109,7 +109,7 @@ Want to see if the setup still works? You can use terratest to check if the curr
 ## Terraform documentation
 The documentation below is auto-generated to give insight on what's created via Terraform.
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
@@ -168,7 +168,7 @@ The documentation below is auto-generated to give insight on what's created via 
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | The EKS cluster name | `string` | `"wrongsecrets-exercise-cluster"` | no |
 | <a name="input_cluster_version"></a> [cluster\_version](#input\_cluster\_version) | The EKS cluster version to use | `string` | `"1.30"` | no |
 | <a name="input_region"></a> [region](#input\_region) | The AWS region to use | `string` | `"eu-west-1"` | no |
-| <a name="input_tags"></a> [tags](#input\_tags) | List of tags to apply to resources | `map(string)` | <pre>{<br>  "Application": "wrongsecrets"<br>}</pre> | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | List of tags to apply to resources | `map(string)` | <pre>{<br/>  "Application": "wrongsecrets"<br/>}</pre> | no |
 
 ## Outputs
 
@@ -179,4 +179,4 @@ The documentation below is auto-generated to give insight on what's created via 
 | <a name="output_cluster_security_group_id"></a> [cluster\_security\_group\_id](#output\_cluster\_security\_group\_id) | Security group ids attached to the cluster control plane. |
 | <a name="output_irsa_role"></a> [irsa\_role](#output\_irsa\_role) | The role ARN used in the IRSA setup |
 | <a name="output_secrets_manager_secret_name"></a> [secrets\_manager\_secret\_name](#output\_secrets\_manager\_secret\_name) | The name of the secrets manager secret |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- END_TF_DOCS -->
