@@ -100,7 +100,7 @@ Want to see if the setup still works? You can use terratest to check if the curr
 ## Terraform documentation
 The documentation below is auto-generated to give insight on what's created via Terraform.
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
@@ -168,4 +168,4 @@ No modules.
 | <a name="output_tenant_id"></a> [tenant\_id](#output\_tenant\_id) | Azure tenant ID |
 | <a name="output_vault_name"></a> [vault\_name](#output\_vault\_name) | Vault name |
 | <a name="output_vault_uri"></a> [vault\_uri](#output\_vault\_uri) | Vault URI |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- END_TF_DOCS -->
