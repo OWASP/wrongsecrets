@@ -101,27 +101,6 @@ Want to see if the setup still works? You can use terratest to check if the curr
 The documentation below is auto-generated to give insight on what's created via Terraform.
 
 <!-- BEGIN_TF_DOCS -->
-## Requirements
-
-| Name | Version |
-|------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.1 |
-| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | ~> 4.3.0 |
-| <a name="requirement_http"></a> [http](#requirement\_http) | ~> 3.4.0 |
-| <a name="requirement_random"></a> [random](#requirement\_random) | ~> 3.6.0 |
-
-## Providers
-
-| Name | Version |
-|------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 4.3.0 |
-| <a name="provider_http"></a> [http](#provider\_http) | 3.4.5 |
-| <a name="provider_random"></a> [random](#provider\_random) | 3.6.3 |
-
-## Modules
-
-No modules.
-
 ## Resources
 
 | Name | Type |
