@@ -2,7 +2,7 @@ module wrongsecrets
 
 go 1.21.1
 
-require github.com/gruntwork-io/terratest v0.47.1
+require github.com/gruntwork-io/terratest v0.47.2
 
 require (
 	cloud.google.com/go v0.116.0 // indirect
