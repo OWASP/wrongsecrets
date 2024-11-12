@@ -16,7 +16,7 @@
         {
             "customType": "regex",
             "fileMatch": ".github/workflows/pre-commit.yml",
-            "depNameTemplate": "OWASP/terraform-docs/terraform-docs",
+            "depNameTemplate": "terraform-docs/terraform-docs",
             "matchStrings": [
                 "TF_DOCS_VERSION=\"(?<currentValue>.*?)\""
             ],
