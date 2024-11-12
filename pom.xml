@@ -46,7 +46,7 @@
     <KeePassJava2.version>2.2.2</KeePassJava2.version>
     <asciidoctor.maven.plugin.version>3.1.0</asciidoctor.maven.plugin.version>
     <asciidoctorj.version>3.0.0</asciidoctorj.version>
-    <aws.sdk.version>2.29.8</aws.sdk.version>
+    <aws.sdk.version>2.29.9</aws.sdk.version>
     <bootstrap.version>5.3.3</bootstrap.version>
     <com.azure.spring.version>5.18.0</com.azure.spring.version>
     <cyclonedx.core.version>9.1.0</cyclonedx.core.version>
@@ -58,7 +58,7 @@
     <github.button.version>2.14.1</github.button.version>
     <java.version>23</java.version>
     <jquery.version>3.7.1</jquery.version>
-    <jruby.version>9.4.8.0</jruby.version>
+    <jruby.version>9.4.9.0</jruby.version>
     <lombok.version>1.18.34</lombok.version>
     <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
     <maven.compiler.proc>full</maven.compiler.proc>
@@ -323,7 +323,7 @@
             <dependency>
               <groupId>com.puppycrawl.tools</groupId>
               <artifactId>checkstyle</artifactId>
-              <version>10.18.2</version>
+              <version>10.20.1</version>
             </dependency>
           </dependencies>
         </plugin>

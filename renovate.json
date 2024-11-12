@@ -17,7 +17,6 @@
             "customType": "regex",
             "fileMatch": ".github/scripts/docker-create.sh",
             "depNameTemplate": "OWASP/wrongsecrets-binaries",
-            "currentValueTemplate": "${1}.${2}.${3}",
             "matchStrings": [
                 "BINARY_VERSION=\"(?<currentValue>.*?)\""
             ],
@@ -27,7 +26,6 @@
             "customType": "regex",
             "fileMatch": "aws/k8s-aws-alb-script.sh",
             "depNameTemplate": "kubernetes-sigs/aws-alb-ingress-controller",
-            "currentValueTemplate": "v${1}.${2}.${3}",
             "matchStrings": [
                 "LBC_VERSION=\"(?<currentValue>.*?)\""
             ],
