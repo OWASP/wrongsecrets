@@ -9,7 +9,7 @@ ci:
   submodules: false
 repos:
   - repo: https://github.com/renovatebot/pre-commit-hooks
-    rev: 39.9.3
+    rev: 39.10.0
     hooks:
       - id: renovate-config-validator
   - repo: https://github.com/eslint/eslint
