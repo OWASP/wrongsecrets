@@ -4,6 +4,9 @@
         "commjoen",
         "bendehaan"
     ],
+    "schedule": [
+        "* * 1,15 * *"
+    ],
     "extends": [
         "config:recommended",
         ":enablePreCommit"
