@@ -1,0 +1,54 @@
+formatter: "" # this is required
+
+version: ""
+
+header-from: main.tf
+footer-from: ""
+
+recursive:
+  enabled: true
+  path: shared-state
+  include-main: true
+
+sections:
+  hide:
+    - requirements
+    - providers
+    - modules
+  show: []
+
+  hide-all: false # deprecated in v0.13.0, removed in v0.15.0
+  show-all: true # deprecated in v0.13.0, removed in v0.15.0
+
+content: ""
+
+output:
+  file: ""
+  mode: inject
+  template: |-
+    <!-- BEGIN_TF_DOCS -->
+    {{ .Content }}
+    <!-- END_TF_DOCS -->
+
+output-values:
+  enabled: false
+  from: ""
+
+sort:
+  enabled: true
+  by: name
+
+settings:
+  anchor: true
+  color: true
+  default: true
+  description: false
+  escape: true
+  hide-empty: false
+  html: true
+  indent: 2
+  lockfile: true
+  read-comments: true
+  required: true
+  sensitive: true
+  type: true

@@ -11,3 +11,9 @@ class Challenge52Test {
         Assertions.assertThat(challenge.solved(challenge.getAnswer())).isTrue();
     }
 }
+<<<<<<< HEAD
+=======
+ Challenge52Test {
+
+}
+>>>>>>> 42db351e9a0a187e934fd9326c782d0ab9b1acbd
