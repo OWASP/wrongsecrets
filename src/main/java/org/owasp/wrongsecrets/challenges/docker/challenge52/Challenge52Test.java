@@ -11,6 +11,3 @@ class Challenge52Test {
         Assertions.assertThat(challenge.solved(challenge.getAnswer())).isTrue();
     }
 }
- Challenge52Test {
-    
-}

@@ -1,7 +1,6 @@
 package org.owasp.wrongsecrets.challenges.docker.challenge52;
 
 import lombok.extern.slf4j.Slf4j;
-import org.owasp.wrongsecrets.challenges.FixedAnswerChallenge;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.Cipher;
