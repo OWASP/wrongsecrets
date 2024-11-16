@@ -9,11 +9,11 @@ ci:
   submodules: false
 repos:
   - repo: https://github.com/renovatebot/pre-commit-hooks
-    rev: 39.15.1
+    rev: 39.17.1
     hooks:
       - id: renovate-config-validator
   - repo: https://github.com/eslint/eslint
-    rev: v9.14.0
+    rev: v9.15.0
     hooks:
       - id: eslint
         args:
