@@ -1,0 +1,5 @@
+==== Reason
+
+The purpose of this challenge is to highlight a common security issue: hardcoding sensitive information, such as encryption keys, directly into source code. This practice leaves applications vulnerable because anyone with access to the code can easily retrieve the key and decrypt the sensitive data.
+
+In real-world applications, this vulnerability can lead to data breaches and other serious security issues. By solving this challenge, you will gain a better understanding of why encryption keys should be stored securely and separate from the codebase.
