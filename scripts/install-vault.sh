@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 helm list | grep 'vault' &>/dev/null
 if [ $? == 0 ]; then
   echo "Vault is already installed"
