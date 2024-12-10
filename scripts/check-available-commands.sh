@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 function checkCommandsAvailable() {
   for var in "$@"
   do

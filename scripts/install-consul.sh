@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 helm list | grep 'consul' &>/dev/null
 if [ $? == 0 ]; then
   echo "Consul is already installed"
