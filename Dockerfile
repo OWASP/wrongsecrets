@@ -1,7 +1,7 @@
 FROM eclipse-temurin:23.0.1_11-jre-alpine
 
 ARG argBasedPassword="default"
-ARG argBasedVersion="1.8.5"
+ARG argBasedVersion="1.10.0"
 ARG spring_profile=""
 ENV SPRING_PROFILES_ACTIVE=$spring_profile
 ENV ARG_BASED_PASSWORD=$argBasedPassword
@@ -17,7 +17,6 @@ RUN echo "$argBasedPassword"
 
 RUN apk add --no-cache libstdc++ icu-libs
 
-#RUN useradd -u 2000 -m wrongsecrets
 RUN adduser -u 2000 -D wrongsecrets
 USER wrongsecrets
 
