@@ -88,8 +88,9 @@ docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:latest-no-vault
 ```
 Now you can try to find the secrets by means of solving the challenge offered at the links below
 <details>
-    <summary>all the links for docker challenges.
+    <summary>all the links for docker challenges (click triangle to open the block).
     </summary>
+    
 -   [localhost:8080/challenge/challenge-1](http://localhost:8080/challenge/challenge-1)
 -   [localhost:8080/challenge/challenge-2](http://localhost:8080/challenge/challenge-2)
 -   [localhost:8080/challenge/challenge-3](http://localhost:8080/challenge/challenge-3)
@@ -129,6 +130,7 @@ Now you can try to find the secrets by means of solving the challenge offered at
 -   [localhost:8080/challenge/challenge-49](http://localhost:8080/challenge/challenge-49)
 -   [localhost:8080/challenge/challenge-50](http://localhost:8080/challenge/challenge-50)
 -   [localhost:8080/challenge/challenge-51](http://localhost:8080/challenge/challenge-51)
+
 </details>
 
 Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look
