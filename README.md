@@ -86,14 +86,13 @@ You can install it by doing:
 ```bash
 docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:latest-no-vault
 ```
-
+Now you can try to find the secrets by means of solving the challenge offered at the links below
 <details>
-    <summary>Now you can try to find the secrets by means of solving the challenge offered at the links in the block below
-    -   [localhost:8080/challenge/challenge-1](http://localhost:8080/challenge/challenge-1)
-    -   [localhost:8080/challenge/challenge-2](http://localhost:8080/challenge/challenge-2)
-    -   [localhost:8080/challenge/challenge-3](http://localhost:8080/challenge/challenge-3)
-        (click the triangle to see more)
+    <summary>all the links for docker challenges.
     </summary>
+-   [localhost:8080/challenge/challenge-1](http://localhost:8080/challenge/challenge-1)
+-   [localhost:8080/challenge/challenge-2](http://localhost:8080/challenge/challenge-2)
+-   [localhost:8080/challenge/challenge-3](http://localhost:8080/challenge/challenge-3)
 -   [localhost:8080/challenge/challenge-4](http://localhost:8080/challenge/challenge-4)
 -   [localhost:8080/challenge/challenge-8](http://localhost:8080/challenge/challenge-8)
 -   [localhost:8080/challenge/challenge-12](http://localhost:8080/challenge/challenge-12)
