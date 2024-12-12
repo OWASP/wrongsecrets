@@ -90,7 +90,7 @@ Now you can try to find the secrets by means of solving the challenge offered at
 <details>
     <summary>all the links for docker challenges (click triangle to open the block).
     </summary>
-    
+
 -   [localhost:8080/challenge/challenge-1](http://localhost:8080/challenge/challenge-1)
 -   [localhost:8080/challenge/challenge-2](http://localhost:8080/challenge/challenge-2)
 -   [localhost:8080/challenge/challenge-3](http://localhost:8080/challenge/challenge-3)
