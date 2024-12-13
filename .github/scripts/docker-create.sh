@@ -453,4 +453,14 @@ test() {
 }
 
 local_extra_info
-check_co
+check_correct_launch_location
+check_os
+check_required_install
+download_dot_net_binaries
+generate_test_data
+build_update_pom
+create_containers
+restore_temp_change
+commit_and_tag
+echo_next_steps
+test
