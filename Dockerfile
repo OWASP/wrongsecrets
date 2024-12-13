@@ -24,8 +24,6 @@ RUN mkdir -p /app
 RUN --mount=type=secret,id=mysecret \
     cat /run/secrets/mysecret > /app/secret.txt
 
-RUN ls -l /app && cat /app/secret.txt
-
 #RUN useradd -u 2000 -m wrongsecrets
 RUN adduser -u 2000 -D wrongsecrets
 USER wrongsecrets
