@@ -352,7 +352,7 @@ build_update_pom() {
 
 create_containers() {
     echo "Creating containers"
-    SECRET_VALUE="youCantHandleThisSecret"
+    export SECRET_VALUE="youCantHandleThisSecret"
     if [[ "$script_mode" == "publish" ]]; then
         docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/addo-example:$tag-no-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=without-vault" --secret id=mysecret,env=SECRET_VALUE --push ./../../.
         docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/addo-example:latest-no-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=without-vault" --secret id=mysecret,env=SECRET_VALUE --push ./../../.
