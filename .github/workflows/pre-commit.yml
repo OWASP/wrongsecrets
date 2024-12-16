@@ -54,11 +54,10 @@ jobs:
           tar -zxvf terraform_docs.tar.gz terraform-docs
           chmod +x terraform-docs
           mv terraform-docs /usr/local/bin/
-      - name: Setup tfsec
+      - name: Setup trivy
         run: |
-          curl --output tfsec https://github.com/aquasecurity/tfsec/releases/download/${{env.TFSEC_VERSION}}/tfsec-linux-amd64
-          chmod +x tfsec
-          mv tfsec /usr/local/bin/
+          curl --output trivy https://github.com/aquasecurity/trivy/releases/download/v${{env.TRIVY_VERSION}}/trivy_{{env.TRIVY_VERSION}}_Linux-64bit.deb
+          sudo dpkg -i trivy.deb
       - name: Pre-commit checks
         uses: pre-commit/action@v3.0.1
       - name: pre-commit-ci-lite
