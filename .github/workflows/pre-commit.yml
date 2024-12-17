@@ -57,7 +57,7 @@ jobs:
       - name: Setup trivy
         run: |
           wget https://github.com/aquasecurity/trivy/releases/download/v${{env.TRIVY_VERSION}}/trivy_${{env.TRIVY_VERSION}}_Linux-64bit.deb
-          sudo dpkg -i trivy.deb
+          sudo dpkg -i trivy_${{env.TRIVY_VERSION}}_Linux-64bit.deb
       - name: Pre-commit checks
         uses: pre-commit/action@v3.0.1
       - name: pre-commit-ci-lite
