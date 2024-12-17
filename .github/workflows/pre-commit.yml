@@ -56,7 +56,7 @@ jobs:
           mv terraform-docs /usr/local/bin/
       - name: Setup trivy
         run: |
-          curl --output trivy https://github.com/aquasecurity/trivy/releases/download/v${{env.TRIVY_VERSION}}/trivy_{{env.TRIVY_VERSION}}_Linux-64bit.deb
+          curl --output trivy https://github.com/aquasecurity/trivy/releases/download/v${{env.TRIVY_VERSION}}/trivy_${{env.TRIVY_VERSION}}_Linux-64bit.deb
           sudo dpkg -i trivy.deb
       - name: Pre-commit checks
         uses: pre-commit/action@v3.0.1
