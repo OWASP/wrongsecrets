@@ -8,8 +8,8 @@ on:
 
 env:
   TF_DOCS_VERSION: v0.19.0
-  TFSEC_VERSION: v1.28.11
   TFLINT_VERSION: v0.53.0
+  TRIVY_VERSION: 0.58.0
 permissions:
   contents: read
 jobs:
