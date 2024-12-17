@@ -8,8 +8,8 @@ on:
 
 env:
   TF_DOCS_VERSION: v0.19.0
-  TFSEC_VERSION: v1.28.11
   TFLINT_VERSION: v0.53.0
+  TRIVY_VERSION: 0.58.0
 permissions:
   contents: read
 jobs:
@@ -54,11 +54,10 @@ jobs:
           tar -zxvf terraform_docs.tar.gz terraform-docs
           chmod +x terraform-docs
           mv terraform-docs /usr/local/bin/
-      - name: Setup tfsec
+      - name: Setup trivy
         run: |
-          curl --output tfsec https://github.com/aquasecurity/tfsec/releases/download/${{env.TFSEC_VERSION}}/tfsec-linux-amd64
-          chmod +x tfsec
-          mv tfsec /usr/local/bin/
+          wget https://github.com/aquasecurity/trivy/releases/download/v${{env.TRIVY_VERSION}}/trivy_${{env.TRIVY_VERSION}}_Linux-64bit.deb
+          sudo dpkg -i trivy_${{env.TRIVY_VERSION}}_Linux-64bit.deb
       - name: Pre-commit checks
         uses: pre-commit/action@v3.0.1
       - name: pre-commit-ci-lite

@@ -28,9 +28,9 @@
         {
             "customType": "regex",
             "fileMatch": ".github/workflows/pre-commit.yml",
-            "depNameTemplate": "aquasecurity/tfsec",
+            "depNameTemplate": "aquasecurity/trivy",
             "matchStrings": [
-                "TFSEC_VERSION=\"(?<currentValue>.*?)\""
+                "TRIVY_VERSION=\"(?<currentValue>.*?)\""
             ],
             "datasourceTemplate": "github-releases"
         },
