@@ -1,0 +1,5 @@
+==== Hint
+
+Think about what makes this type of encryption insecure. What would happen if someone could read the code? The key to solving this challenge lies in understanding that the encryption key is hardcoded in the Java code.
+
+To solve this challenge, you might try to access the encrypted secret and decrypt it using the hardcoded key. Look closely at the challenge code to find both the encrypted secret and the key.
