@@ -17,6 +17,15 @@ RUN echo "$argBasedPassword"
 
 RUN apk add --no-cache libstdc++ icu-libs
 
+
+# Create the /app directory
+RUN mkdir -p /app
+
+# Use a separate RUN command for --mount
+RUN --mount=type=secret,id=mysecret \
+    cat /run/secrets/mysecret > /app/secret.txt
+
+
 RUN adduser -u 2000 -D wrongsecrets
 USER wrongsecrets
 
