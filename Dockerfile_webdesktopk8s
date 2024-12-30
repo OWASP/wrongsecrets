@@ -36,9 +36,11 @@ RUN \
 # Add a secret using --mount and write it to a specific file path for the challenge
 # Create the /app directory to store the secret
 RUN mkdir -p /app
-# This demonstrates how secrets can be mishandled during Docker builds
+
+# Use a separate RUN command for --mount
 RUN --mount=type=secret,id=mysecret \
-    cat /run/secrets/mysecret > /var/tmp/wrongsecrets/secret.txt
+    export SECRET_VALUE=$(cat /run/secrets/mysecret) && \
+    echo $SECRET_VALUE >> /app/secret.txt
 
 WORKDIR /config/Desktop
 

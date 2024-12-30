@@ -31,9 +31,11 @@ RUN \
 # Add secret handling for Kubernetes-specific Docker builds
 # Create the /app directory to store the secret
 RUN mkdir -p /app
-# The secret will be written to a file for the challenge
+
+# Use a separate RUN command for --mount
 RUN --mount=type=secret,id=mysecret \
-    cat /run/secrets/mysecret > /var/tmp/wrongsecrets/secret.txt
+    export SECRET_VALUE=$(cat /run/secrets/mysecret) && \
+    echo $SECRET_VALUE >> /app/secret.txt
 
 WORKDIR /config/Desktop
 
