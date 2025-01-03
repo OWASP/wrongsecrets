@@ -8,7 +8,7 @@ terraform {
     }
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "~> 4.10.0"
+      version = "~> 4.14.0"
     }
     http = {
       source  = "hashicorp/http"
