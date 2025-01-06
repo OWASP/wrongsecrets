@@ -1,0 +1,30 @@
+= Docker Buildx Secrets Misconfiguration Challenge
+
+*Why Improper Secret Management in Docker Build Processes Can Lead to Vulnerabilities*
+
+In modern DevOps workflows, Docker Buildx is a powerful tool for building multi-platform Docker images efficiently. It provides a secure way to pass sensitive information like API keys, database credentials, and certificates during the build process using the `--secret` flag. However, improper handling or storage of these secrets during or after the build process can introduce critical vulnerabilities.
+
+A common mistake is to write these secrets into the container filesystem or to expose them in build scripts. This approach is flawed because:
+
+1. **Secrets become part of the container image**: If secrets are written to the container's filesystem during the build phase, they are included in the final image. Anyone with access to the image can extract these secrets by inspecting the container layers or accessing the filesystem.
+2. **Hardcoding secrets in build scripts**: Developers may hardcode secrets in scripts used to build images. When these scripts are stored in version control systems, the secrets are exposed to anyone with access to the repository.
+3. **Lack of cleanup during the build process**: Even if secrets are used temporarily, failing to securely clean up or remove these secrets before finalizing the image can leave them exposed.
+
+*Why This Challenge?*
+
+The purpose of this challenge is to demonstrate the risks of improperly handling secrets in Docker Buildx workflows. Specifically, it showcases how secrets intended to be temporary during the build process can end up being permanently stored in the container's filesystem due to misconfiguration.
+
+This challenge simulates a scenario where:
+
+- A sensitive secret is passed to the Docker build process using the `--secret` flag.
+- Due to misconfiguration, the secret is written to a file in the container's filesystem (`/app/secret.txt`) during the build phase.
+- The resulting image contains this secret, making it accessible to anyone who can run or inspect the container.
+
+*Key Learning Points:*
+
+- **Avoid embedding secrets in container images**: Secrets should never be baked into Docker images. Use mechanisms like runtime environment variables or external secret management tools to provide secrets dynamically.
+- **Secure the build process**: Even with tools like `--secret`, ensure secrets are not permanently stored in intermediate or final image layers.
+- **Do not hardcode secrets in build scripts**: Build scripts should not contain sensitive information. Store sensitive values securely and reference them dynamically during the build process.
+- **Implement cleanup mechanisms**: If secrets must be written to temporary files during the build process, ensure they are securely removed before the image is finalized.
+
+By completing this challenge, you will understand the implications of improper secret handling during Docker builds and learn best practices for managing secrets securely in containerized environments.

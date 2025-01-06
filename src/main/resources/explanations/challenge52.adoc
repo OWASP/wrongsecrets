@@ -1,0 +1,7 @@
+=== Exposed Buildx Secrets Challenge
+
+Acme Inc., a rising star in the SaaS industry, prides itself on delivering cutting-edge AI analytics to its global clientele. However, amidst their rapid deployment cycles and growing customer base, a critical security oversight has come to light.
+
+During their Docker Buildx process, a sensitive secret, meant to remain temporary and secure during the build phase, was accidentally embedded into the container's filesystem due to a misconfiguration. This secret, now accessible within the running container, poses a significant security risk if exploited.
+
+As Acme Inc.'s newly hired Security Consultant, your task is clear: investigate the container, identify the exposed secret, and report it to the team. By uncovering this vulnerability, you will help Acme Inc. understand the risks and implement better practices to secure their deployment pipeline.
