@@ -52,7 +52,7 @@
     <cyclonedx.core.version>9.1.0</cyclonedx.core.version>
     <datatables.version>2.1.8</datatables.version>
     <dependency-check-maven.version>11.1.1</dependency-check-maven.version>
-    <gatling-maven-plugin.version>4.10.2</gatling-maven-plugin.version>
+    <gatling-maven-plugin.version>4.12.2</gatling-maven-plugin.version>
     <gatling.version>3.13.1</gatling.version>
     <gcp.sdk.version>5.8.0</gcp.sdk.version>
     <github.button.version>2.14.1</github.button.version>
