@@ -70,7 +70,7 @@ an [issue](https://github.com/OWASP/wrongsecrets/issues) , or
 use [discussions](https://github.com/OWASP/wrongsecrets/discussions). Please note that this is an OWASP volunteer
 based project, so it might take a little while before we respond.
 
-Copyright (c) 2020-2024 Jeroen Willemsen and WrongSecrets contributors.
+Copyright (c) 2020-2025 Jeroen Willemsen and WrongSecrets contributors.
 
 ## Basic docker exercises
 
@@ -316,17 +316,18 @@ Contributors:
 - [Rodolfo Cabral Neves @roddas](https://www.github.com/roddas)
 - [Osama Magdy @osamamagdy](https://www.github.com/osamamagdy)
 - [Shubham Patel @Shubham-Patel07](https://www.github.com/Shubham-Patel07)
+- [za @za](https://www.github.com/za)
 - [Divyanshu Dev @Novice-expert](https://www.github.com/Novice-expert)
 - [Tibor Hercz @tiborhercz](https://www.github.com/tiborhercz)
-- [za @za](https://www.github.com/za)
 - [Chris Elbring Jr. @neatzsche](https://www.github.com/neatzsche)
+- [Adarsh A @adarsh-a-tw](https://www.github.com/adarsh-a-tw)
 - [Diamond Rivero @diamant3](https://www.github.com/diamant3)
 - [Norbert Wolniak @nwolniak](https://www.github.com/nwolniak)
-- [Adarsh A @adarsh-a-tw](https://www.github.com/adarsh-a-tw)
 - [Filip Chyla @fchyla](https://www.github.com/fchyla)
-- [Turjo Chowdhury @turjoc120](https://www.github.com/turjoc120)
-- [Vineeth Jagadeesh @djvinnie](https://www.github.com/djvinnie)
 - [Dmitry Litosh @Dlitosh](https://www.github.com/Dlitosh)
+- [Vineeth Jagadeesh @djvinnie](https://www.github.com/djvinnie)
+- [Turjo Chowdhury @turjoc120](https://www.github.com/turjoc120)
+- [SndR @SndR85](https://www.github.com/SndR85)
 - [Josh Grossman @tghosth](https://www.github.com/tghosth)
 - [alphasec @alphasecio](https://www.github.com/alphasecio)
 - [CaduRoriz @CaduRoriz](https://www.github.com/CaduRoriz)
@@ -334,13 +335,13 @@ Contributors:
 - [Mike Woudenberg @mikewoudenberg](https://www.github.com/mikewoudenberg)
 - [Spyros @northdpole](https://www.github.com/northdpole)
 - [RubenAtBinx @RubenAtBinx](https://www.github.com/RubenAtBinx)
-- [Jeff Tong @Wind010](https://www.github.com/Wind010)
-- [Fern @f3rn0s](https://www.github.com/f3rn0s)
-- [Shlomo Zalman Heigh @szh](https://www.github.com/szh)
-- [Rick M @kingthorin](https://www.github.com/kingthorin)
-- [Nicolas Humblot @nhumblot](https://www.github.com/nhumblot)
-- [Danny Lloyd @dannylloyd](https://www.github.com/dannylloyd)
 - [Alex Bender @alex-bender](https://www.github.com/alex-bender)
+- [Danny Lloyd @dannylloyd](https://www.github.com/dannylloyd)
+- [Nicolas Humblot @nhumblot](https://www.github.com/nhumblot)
+- [Rick M @kingthorin](https://www.github.com/kingthorin)
+- [Shlomo Zalman Heigh @szh](https://www.github.com/szh)
+- [Fern @f3rn0s](https://www.github.com/f3rn0s)
+- [Jeff Tong @Wind010](https://www.github.com/Wind010)
 
 Testers:
 
