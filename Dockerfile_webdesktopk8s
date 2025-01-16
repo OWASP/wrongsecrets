@@ -33,6 +33,15 @@ RUN \
     export PATH="$PATH:/config/.dotnet/tools" &&\
     dotnet tool install ilspycmd --version 9.0.0.7660-preview2 --tool-path /etc/dotnet/tools
 
+# Add a secret using --mount and write it to a specific file path for the challenge
+# Create the /app directory to store the secret
+RUN mkdir -p /app
+
+# Use a separate RUN command for --mount
+RUN --mount=type=secret,id=mysecret \
+    export SECRET_VALUE=$(cat /run/secrets/mysecret) && \
+    echo $SECRET_VALUE >> /app/secret.txt
+
 WORKDIR /config/Desktop
 
 COPY src/main/resources/executables/*linux-mus* /var/tmp/wrongsecrets/
