@@ -19,7 +19,7 @@ public class SecurityHeaderAddingFilter implements Filter {
     res.addHeader(
         "Content-Security-Policy",
         "default-src * 'self'; script-src  * 'self' 'unsafe-inline'; style-src * 'self'"
-            + " 'unsafe-inline'; img-src data:");
+            + " 'unsafe-inline'; img-src data:; form-action 'self'; frame-ancestors 'self'");
     chain.doFilter(request, res);
   }
 }
