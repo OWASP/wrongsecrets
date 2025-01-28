@@ -1,7 +1,16 @@
+FROM bellsoft/liberica-openjre-debian:23.0.1-13-cds AS builder
+WORKDIR /builder
+
+ARG argBasedVersion="1.10.0"
+
+COPY --chown=wrongsecrets target/wrongsecrets-${argBasedVersion}-SNAPSHOT.jar application.jar
+RUN java -Djarmode=tools -jar application.jar extract --layers --destination extracted
+
+# FROM bellsoft/liberica-openjre-debian:17-cds
 FROM eclipse-temurin:23.0.1_11-jre-alpine
+WORKDIR /application
 
 ARG argBasedPassword="default"
-ARG argBasedVersion="1.10.0"
 ARG spring_profile=""
 ENV SPRING_PROFILES_ACTIVE=$spring_profile
 ENV ARG_BASED_PASSWORD=$argBasedPassword
@@ -17,14 +26,34 @@ RUN echo "$argBasedPassword"
 
 RUN apk add --no-cache libstdc++ icu-libs
 
-RUN adduser -u 2000 -D wrongsecrets
-USER wrongsecrets
-
-COPY --chown=wrongsecrets target/wrongsecrets-${argBasedVersion}-SNAPSHOT.jar /application.jar
 COPY --chown=wrongsecrets .github/scripts/ /var/tmp/helpers
 COPY --chown=wrongsecrets .github/scripts/.bash_history /home/wrongsecrets/
 COPY --chown=wrongsecrets src/main/resources/executables/*linux-musl* /home/wrongsecrets/
 COPY --chown=wrongsecrets src/test/resources/alibabacreds.kdbx /var/tmp/helpers
 COPY --chown=wrongsecrets src/test/resources/RSAprivatekey.pem /var/tmp/helpers/
+
+COPY --from=builder /builder/extracted/dependencies/ ./
+COPY --from=builder /builder/extracted/spring-boot-loader/ ./
+COPY --from=builder /builder/extracted/snapshot-dependencies/ ./
+COPY --from=builder /builder/extracted/application/ ./
+
+
+# Mock the service account token for CDS profile generation
+RUN mkdir -p /var/run/secrets/kubernetes.io/serviceaccount && \
+    echo "mock-token" > /var/run/secrets/kubernetes.io/serviceaccount/token && \
+    chmod 600 /var/run/secrets/kubernetes.io/serviceaccount/token
+
+# Create a dynamic archive
+RUN java -XX:ArchiveClassesAtExit=application.jsa -Dspring.context.exit=onRefresh -jar application.jar
+
+# Clean up the mocked token
+RUN rm -rf /var/run/secrets/kubernetes.io
+
+# Static archive
+# RUN java -Xshare:off -XX:DumpLoadedClassList=application.classlist -Dspring.context.exit=onRefresh -jar application.jar
+# RUN java -Xshare:dump -XX:SharedArchiveFile=application.jsa -XX:SharedClassListFile=application.classlist -Dspring.context.exit=onRefresh -cp application.jar
+
+RUN adduser -u 2000 -D wrongsecrets
 USER wrongsecrets
-CMD java -jar -Dspring.profiles.active=$(echo ${SPRING_PROFILES_ACTIVE}) -Dspringdoc.swagger-ui.enabled=${SPRINGDOC_UI} -Dspringdoc.api-docs.enabled=${SPRINGDOC_DOC} -D /application.jar
+
+CMD java -jar -XX:SharedArchiveFile=application.jsa -Dspring.profiles.active=$(echo ${SPRING_PROFILES_ACTIVE}) -Dspringdoc.swagger-ui.enabled=${SPRINGDOC_UI} -Dspringdoc.api-docs.enabled=${SPRINGDOC_DOC} -D application.jar
