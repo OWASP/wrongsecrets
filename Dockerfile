@@ -6,7 +6,6 @@ ARG argBasedVersion="1.10.0"
 COPY --chown=wrongsecrets target/wrongsecrets-${argBasedVersion}-SNAPSHOT.jar application.jar
 RUN java -Djarmode=tools -jar application.jar extract --layers --destination extracted
 
-# FROM bellsoft/liberica-openjre-debian:17-cds
 FROM eclipse-temurin:23.0.1_11-jre-alpine
 WORKDIR /application
 
