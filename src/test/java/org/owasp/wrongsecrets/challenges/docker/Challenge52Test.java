@@ -3,6 +3,7 @@ package org.owasp.wrongsecrets.challenges.docker;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import org.jruby.exceptions.Exception;
@@ -12,8 +13,8 @@ import org.junit.jupiter.api.io.TempDir;
 public class Challenge52Test {
 
   @Test
-  void rightAnswerShouldSolveChallenge(@TempDir Path dir) throws Exception {
-    var testFile = new File(dir.toFile(), "yourkey.txt");
+  void rightAnswerShouldSolveChallenge(@TempDir Path dir) throws IOException {
+    var testFile = new File(dir.toFile(), "secret.txt");
     var secret = "secretvalueWitFile";
     Files.writeString(testFile.toPath(), secret);
     var challenge = new Challenge52(dir.toString());
