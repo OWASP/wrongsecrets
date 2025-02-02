@@ -7,8 +7,7 @@ else
   helm repo update hashicorp
 fi
 
-helm upgrade --install vault hashicorp/vault --version 0.28.0 --namespace vault --values ../k8s/helm-vault-values.yml --create-namespace
-
+helm upgrade --install vault hashicorp/vault --version 0.29.1 --namespace vault --values ../k8s/helm-vault-values.yml --create-namespace
 
 isvaultrunning=$(kubectl get pods -n vault --field-selector=status.phase=Running)
 while [[ $isvaultrunning != *"vault-0"* ]]; do echo "waiting for Vault0" && sleep 2 && isvaultrunning=$(kubectl get pods -n vault --field-selector=status.phase=Running); done

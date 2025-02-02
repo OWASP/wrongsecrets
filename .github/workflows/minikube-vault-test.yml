@@ -25,7 +25,7 @@ jobs:
       - name: Start minikube
         uses: medyagh/setup-minikube@master
         with:
-          minikube-version: 1.33.1
+          minikube-version: 1.35.0
           driver: docker
           kubernetes-version: v1.30.0
       - name: Setup helm
@@ -45,7 +45,7 @@ jobs:
       - name: Start minikube
         uses: medyagh/setup-minikube@master
         with:
-          minikube-version: 1.33.1
+          minikube-version: 1.35.0
           driver: docker
           kubernetes-version: v1.30.0
       - name: Setup helm
