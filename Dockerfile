@@ -25,8 +25,8 @@ RUN echo "$argBasedPassword"
 
 RUN apk add --no-cache libstdc++ icu-libs
 
-# Create the /app directory
-RUN mkdir -p /app
+# Create the /var/run/secrets2 directory
+RUN mkdir -p /var/run/secrets2
 
 # Use a separate RUN command for --mount
 RUN --mount=type=secret,id=mysecret \
