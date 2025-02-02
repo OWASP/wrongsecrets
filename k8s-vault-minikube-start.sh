@@ -9,7 +9,7 @@ checkCommandsAvailable helm minikube jq vault sed grep docker grep cat
 
 echo "This is only a script for demoing purposes. You can comment out line 22 and work with your own k8s setup"
 echo "This script is based on the steps defined in https://learn.hashicorp.com/tutorials/vault/kubernetes-minikube . Vault is awesome!"
-minikube start --kubernetes-version=v1.30.0
+minikube start --kubernetes-version=v1.30.0 --driver=docker
 
 echo "Patching default ns with new PSA; we should run as restricted!"
 kubectl apply -f k8s/workspace-psa.yml
@@ -21,7 +21,7 @@ else
   kubectl apply -f k8s/secrets-config.yml
 fi
 echo "Setting up the bitnami sealed secret controler"
-kubectl apply -f https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.27.0/controller.yaml
+kubectl apply -f https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.28.0/controller.yaml
 kubectl apply -f k8s/sealed-secret-controller.yaml
 kubectl apply -f k8s/main.key
 kubectl delete pod -n kube-system -l name=sealed-secrets-controller
@@ -41,10 +41,10 @@ helm list | grep 'vault' &> /dev/null
 if [ $? == 0 ]; then
    echo "Vault is already installed"
 else
-  helm repo add hashicorp https://helm.releases.hashicorp.com
+   helm repo add hashicorp https://helm.releases.hashicorp.com
 fi
 kubectl create ns vault
-helm upgrade --install vault hashicorp/vault --version 0.27.0 --namespace vault --values k8s/helm-vault-values.yml
+helm upgrade --install vault hashicorp/vault --version 0.29.1 --namespace vault --values k8s/helm-vault-values.yml
 
 isvaultrunning=$(kubectl get pods -n vault --field-selector=status.phase=Running)
 while [[ $isvaultrunning != *"vault-0"* ]]; do echo "waiting for Vault1" && sleep 2 && isvaultrunning=$(kubectl get pods -n vault --field-selector=status.phase=Running); done
