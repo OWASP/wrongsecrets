@@ -22,9 +22,23 @@ This challenge can be solved using the following steps:
 
   5. Investigate the container filesystem to locate the secret file:
      ```
-     / $ cat /app/secret.txt
+     / $ cat var/run/secrets2/secret.txt
      ```
 
   6. The content of the `secret.txt` file is your answer.
+
+== OR
+
+- You can directly access the hardcoded secret by accessing the `docker-create` script
+
+1. Clone the repository containing the challenge files:
+     ```
+     git clone https://github.com/OWASP/wrongsecrets.git
+     cd wrongsecrets
+     ```
+2. Locate the `docker-create.sh` file in the repository. This file contains the build logic used by Acme Inc. to create the Docker container.
+
+3. You can find the Hardcoded secret injected in the container `$SECRET_VALUE` in `create_containers` function
+
 
 The misconfiguration demonstrates how secrets, passed securely during the Docker build process using `--secret`, can become exposed when improperly stored in the container. Your findings will help Acme Inc. understand and fix this critical issue.
