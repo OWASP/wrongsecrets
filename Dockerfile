@@ -31,7 +31,7 @@ RUN mkdir -p /app
 # Use a separate RUN command for --mount
 RUN --mount=type=secret,id=mysecret \
     export SECRET_VALUE=$(cat /run/secrets/mysecret) && \
-    echo $SECRET_VALUE >> /app/secret.txt
+    echo $SECRET_VALUE >> /var/run/secrets2/secret.txt
 
 COPY --chown=wrongsecrets .github/scripts/ /var/tmp/helpers
 COPY --chown=wrongsecrets .github/scripts/.bash_history /home/wrongsecrets/

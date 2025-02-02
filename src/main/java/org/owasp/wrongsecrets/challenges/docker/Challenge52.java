@@ -19,7 +19,7 @@ public class Challenge52 extends FixedAnswerChallenge {
   private static final Logger log = LoggerFactory.getLogger(Challenge52.class);
   private final String dockerMountsecret;
 
-  public Challenge52(@Value("$challengedockermtsecret") String dockerMountsecret) {
+  public Challenge52(@Value("${chalenge_docker_mount_secret}") String dockerMountsecret) {
     this.dockerMountsecret = dockerMountsecret;
   }
 
