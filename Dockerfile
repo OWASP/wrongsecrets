@@ -25,6 +25,14 @@ RUN echo "$argBasedPassword"
 
 RUN apk add --no-cache libstdc++ icu-libs
 
+# Create the /var/run/secrets2 directory
+RUN mkdir -p /var/run/secrets2
+
+# Use a separate RUN command for --mount
+RUN --mount=type=secret,id=mysecret \
+    export SECRET_VALUE=$(cat /run/secrets/mysecret) && \
+    echo $SECRET_VALUE >> /var/run/secrets2/secret.txt
+
 COPY --chown=wrongsecrets .github/scripts/ /var/tmp/helpers
 COPY --chown=wrongsecrets .github/scripts/.bash_history /home/wrongsecrets/
 COPY --chown=wrongsecrets src/main/resources/executables/*linux-musl* /home/wrongsecrets/
