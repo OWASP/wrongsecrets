@@ -172,7 +172,6 @@ kubectl exec vault-0 -n vault -- vault write auth/kubernetes/role/secret-challen
 kubectl create serviceaccount vault
 echo "Deploy secret challenge app"
 kubectl apply -f k8s/secret-challenge-vault-deployment.yml
-read
 golivecounter=0
 while [[ $(kubectl get pods -l app=secret-challenge -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]];
 do
