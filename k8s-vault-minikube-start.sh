@@ -11,6 +11,8 @@ echo "This is only a script for demoing purposes. You can comment out line 22 an
 echo "This script is based on the steps defined in https://learn.hashicorp.com/tutorials/vault/kubernetes-minikube . Vault is awesome!"
 minikube start --kubernetes-version=v1.30.0 --driver=docker
 
+kubectl apply -f k8s/secret-challenge52.yml
+
 echo "Patching default ns with new PSA; we should run as restricted!"
 kubectl apply -f k8s/workspace-psa.yml
 
@@ -186,6 +188,7 @@ do
     echo "waiting for secret-challenge, step $golivecounter"
   fi
 done
+
 kubectl logs -l app=secret-challenge -f >> pod.log &
 kubectl expose deployment secret-challenge --type=LoadBalancer --port=8080
 kubectl port-forward \
