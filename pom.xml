@@ -58,7 +58,7 @@
     <github.button.version>2.14.1</github.button.version>
     <java.version>23</java.version>
     <jquery.version>3.7.1</jquery.version>
-    <jruby.version>9.4.9.0</jruby.version>
+    <jruby.version>9.4.12.0</jruby.version>
     <lombok.version>1.18.36</lombok.version>
     <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
     <maven.compiler.proc>full</maven.compiler.proc>
