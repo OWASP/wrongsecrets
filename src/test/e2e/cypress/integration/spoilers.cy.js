@@ -17,6 +17,7 @@ describe('Spoiler Tests', () => {
         cy.dataCy(SpoilersPage.SPOILER_ANSWER).should('not.contain', 'Error Decrypting')
         cy.dataCy(SpoilersPage.SPOILER_ANSWER).should('not.contain', 'Error Executing executable')
         cy.dataCy(SpoilersPage.SPOILER_ANSWER).should('not.contain', 'Error reading secret')
+        cy.dataCy(SpoilersPage.SPOILER_ANSWER).should('not.contain', 'Error reading secret: this challenge only works from a container')
         cy.dataCy(SpoilersPage.SPOILER_ANSWER).should('not.contain', 'Error, please add the dotnet binary to the challenges file.')
       })
     })
