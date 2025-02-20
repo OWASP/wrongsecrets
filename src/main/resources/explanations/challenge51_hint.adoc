@@ -4,7 +4,7 @@ This challenge can be solved using the following ways:
   1. Clone the repository containing the challenge files.
   2. Locate the `challenge51docker-compose.yml` file in the repository.
   3. Identify credentials:
-    Within the environmentsd section in challenge49docker-compose.yml, check for variables like:
+    Within the environments section in challenge51docker-compose.yml, check for variables like:
      * `db_user`
      * `db_password`
      * `db_name`
