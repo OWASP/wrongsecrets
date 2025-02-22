@@ -88,7 +88,7 @@ module "eks" {
     disk_type       = "gp3"
     disk_throughput = 150
     disk_iops       = 3000
-    instance_types  = ["t3a.large"]
+    instance_types  = ["t3.large"]
 
     iam_role_additional_policies = {
       AmazonEKSWorkerNodePolicy : "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy",
