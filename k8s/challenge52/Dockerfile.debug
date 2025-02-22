@@ -1,0 +1,6 @@
+FROM ubuntu:25.04
+
+# Install gdb and others tools
+RUN apt update && apt install -y gdb strace lsof procps
+
+CMD ["/bin/bash"]
