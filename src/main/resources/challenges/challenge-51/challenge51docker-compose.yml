@@ -3,8 +3,8 @@ version: '3.8'
 services:
   myservice:
     build:
-      context: "../../../../.."
-      dockerfile: ../Dockerfile_challenge51
+      context: .
+      dockerfile: Dockerfile_challenge51
       secrets:
         - db_user
         - db_password
