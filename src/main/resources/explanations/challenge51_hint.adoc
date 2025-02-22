@@ -2,16 +2,14 @@ This challenge can be solved using the following ways:
 
 - *Acme Inc*. has a misconfigured `challenge51docker-compose.yml` file where sensitive information is exposed. Your task is to find these vulnerabilities.
   1. Clone the repository containing the challenge files.
-  2. Locate the `challenge51docker-compose.yml` file in the repository.
+  2. Locate the `challenge51docker-compose.yml` file in the repository and navigate to that location.
   3. Identify credentials:
     Within the environments section in challenge51docker-compose.yml, check for variables like:
      * `db_user`
      * `db_password`
      * `db_name`
   4. Now you can run the Docker Compose commands to build and run your service:
-     - ```
-        export DOCKER_BUILDKIT=1
-        docker compose -f src/main/resources/challenges/challenge-51/challenge51docker-compose.yml build
-        docker compose -f src/main/resources/challenges/challenge-51/challenge51docker-compose.yml run myservice
-        ```.
+     * export DOCKER_BUILDKIT=1
+     * docker compose -f challenge51docker-compose.yml build
+     * docker compose -f challenge51docker-compose.yml run myservice
   5. The answer is in the output
