@@ -1,0 +1,13 @@
+#Problem
+I added the binary file in the docker image and I can execute it but I can't use gdb on the process.
+The binary file is not in the final container.
+
+Even with 1 in proc/sys/kernel/yama/ptrace_scope and the process launched by the user wrongsecrets, I can't use gdb on it.(in the docker image and in the kubernetes container)
+
+#Test
+To test we have to build our own docker image with gdb on it, we use the Dockerfile.debug file to build a image then we push this image.
+We can now attach a debug container to the main container.
+Then we can use gdb -p <PID> and use p &secret to get the variable's memory address of secret.
+
+I used a specific secret here for the test but later we will be able to use rand() to have a random secret.
+You can see the script in this directory where all commands are for the tests.
