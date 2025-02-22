@@ -38,6 +38,4 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Run compose and print out service
-        run: export DOCKER_BUILDKIT=1 && cd src/main/resources/challenges/challenge-51 && \
-          docker compose -f challenge51docker-compose.yml build && \
-          docker compose -f challenge51docker-compose.yml run myservice
+        run: export DOCKER_BUILDKIT=1 && cd src/main/resources/challenges/challenge-51 && docker compose -f challenge51docker-compose.yml build && docker compose -f challenge51docker-compose.yml run myservice
