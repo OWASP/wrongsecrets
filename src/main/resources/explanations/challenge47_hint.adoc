@@ -2,7 +2,7 @@ This challenge can be solved using the following ways:
 
 - Get the data of the sidecar by looking at the files created by Vault Agent sidecar:
   1. Run `kubectl get pods -A` and find secret-challenge-xxx pod name
-  2. Run `kubectl exec secret-challenge-xxx -c secret-challenge -n default -- cat vault/secrets/challenge46` where `xxx` is the rest of the randomly generated pod name to print the hardcoded value used by the developer.
+  2. Run `kubectl exec secret-challenge-xxx -c secret-challenge -n default -- cat /vault/secrets/challenge47` where `xxx` is the rest of the randomly generated pod name to print the hardcoded value used by the developer.
 
 - Get the data by checking the logs of the Wrongsecrets pod as the export is being sourced:
   1. Run `kubectl get pods -A` and find secret-challenge-xxx pod name
