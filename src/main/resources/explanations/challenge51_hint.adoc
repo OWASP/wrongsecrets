@@ -9,7 +9,7 @@ This challenge can be solved using the following ways:
      * `db_password`
      * `db_name`
   4. Now you can run the Docker Compose commands to build and run your service:
-     * export DOCKER_BUILDKIT=1
-     * docker compose -f challenge51docker-compose.yml build
-     * docker compose -f challenge51docker-compose.yml run myservice
+     * `export DOCKER_BUILDKIT=1`
+     * `docker compose -f challenge51docker-compose.yml build`
+     * `docker compose -f challenge51docker-compose.yml run myservice`
   5. The answer is in the output
