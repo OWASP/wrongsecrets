@@ -597,10 +597,7 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.5.2</version>
         <configuration>
-          <argLine>-Dspring.profiles.active=test,maven-test
-              -javaagent:${settings.localRepository}/org/mockito/mockito-core/${mockito.version}/mockito-core-${mockito.version}.jar
-              -Xshare:offz</argLine>
-
+          <argLine>-Dspring.profiles.active=test,maven-test</argLine>
         </configuration>
       </plugin>
     </plugins>
