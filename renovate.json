@@ -11,6 +11,9 @@
         "config:recommended",
         ":enablePreCommit"
     ],
+    "ignorePresets": [
+        "workarounds:javaLTSVersions"
+    ],
     "labels": [
         "renovate",
         "dependencies"
