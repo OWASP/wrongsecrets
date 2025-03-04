@@ -1,4 +1,4 @@
-# This is a basic workflow to help you get started with Actions
+ # This is a basic workflow to help you get started with Actions
 
 name: Docker container test
 
@@ -32,3 +32,10 @@ jobs:
         with:
           name: e2e results
           path: src/test/e2e/cypress/reports/mochawesome/
+  challenge_51_test:
+    name: Challenge 51 compose test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run compose and print out service
+        run: export DOCKER_BUILDKIT=1 && cd src/main/resources/challenges/challenge-51 && docker compose -f challenge51docker-compose.yml build && docker compose -f challenge51docker-compose.yml run myservice
