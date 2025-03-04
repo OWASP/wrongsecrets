@@ -67,7 +67,7 @@
     <spring.security.version>6.2.3</spring.security.version>
     <system-stubs-jupiter.version>2.1.7</system-stubs-jupiter.version>
     <thymeleaf-extras-springsecurity6.version>3.1.3.RELEASE</thymeleaf-extras-springsecurity6.version>
-    <thymeleaf.layout.version>3.3.0</thymeleaf.layout.version>
+    <thymeleaf.layout.version>3.4.0</thymeleaf.layout.version>
   </properties>
 
   <dependencyManagement>
