@@ -63,7 +63,7 @@
     <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
     <maven.compiler.proc>full</maven.compiler.proc>
     <maven.compiler.target>23</maven.compiler.target>
-    <spring.cloud-version>2023.0.5</spring.cloud-version>
+    <spring.cloud-version>2024.0.0</spring.cloud-version>
     <spring.security.version>6.2.3</spring.security.version>
     <system-stubs-jupiter.version>2.1.7</system-stubs-jupiter.version>
     <thymeleaf-extras-springsecurity6.version>3.1.3.RELEASE</thymeleaf-extras-springsecurity6.version>
@@ -466,7 +466,7 @@
             </goals>
             <phase>generate-resources</phase>
             <configuration>
-              <nodeVersion>v22.10.0</nodeVersion>
+              <nodeVersion>v22.14.0</nodeVersion>
               <!-- download node from https://nodejs.org/dist/ -->
               <workingDirectory>js</workingDirectory>
             </configuration>
@@ -597,7 +597,10 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.5.2</version>
         <configuration>
-          <argLine>-Dspring.profiles.active=test,maven-test</argLine>
+          <argLine>-Dspring.profiles.active=test,maven-test
+              -javaagent:${settings.localRepository}/org/mockito/mockito-core/${mockito.version}/mockito-core-${mockito.version}.jar
+              -Xshare:offz</argLine>
+
         </configuration>
       </plugin>
     </plugins>
