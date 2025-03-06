@@ -51,7 +51,7 @@
     <com.azure.spring.version>5.20.1</com.azure.spring.version>
     <cyclonedx.core.version>9.1.0</cyclonedx.core.version>
     <datatables.version>2.1.8</datatables.version>
-    <dependency-check-maven.version>11.1.1</dependency-check-maven.version>
+    <dependency-check-maven.version>12.1.0</dependency-check-maven.version>
     <gatling-maven-plugin.version>4.16.1</gatling-maven-plugin.version>
     <gatling.version>3.13.4</gatling.version>
     <gcp.sdk.version>6.0.1</gcp.sdk.version>
