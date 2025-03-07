@@ -43,18 +43,18 @@
   <!--        </snapshotRepository>-->
   <!--    </distributionManagement>-->
   <properties>
-    <KeePassJava2.version>2.2.3</KeePassJava2.version>
+    <KeePassJava2.version>2.2.4</KeePassJava2.version>
     <asciidoctor.maven.plugin.version>3.1.1</asciidoctor.maven.plugin.version>
     <asciidoctorj.version>3.0.0</asciidoctorj.version>
-    <aws.sdk.version>2.30.31</aws.sdk.version>
+    <aws.sdk.version>2.30.35</aws.sdk.version>
     <bootstrap.version>5.3.3</bootstrap.version>
     <com.azure.spring.version>5.20.1</com.azure.spring.version>
     <cyclonedx.core.version>9.1.0</cyclonedx.core.version>
     <datatables.version>2.1.8</datatables.version>
-    <dependency-check-maven.version>11.1.1</dependency-check-maven.version>
+    <dependency-check-maven.version>12.1.0</dependency-check-maven.version>
     <gatling-maven-plugin.version>4.16.1</gatling-maven-plugin.version>
     <gatling.version>3.13.4</gatling.version>
-    <gcp.sdk.version>5.8.0</gcp.sdk.version>
+    <gcp.sdk.version>6.0.1</gcp.sdk.version>
     <github.button.version>2.14.1</github.button.version>
     <java.version>23</java.version>
     <jquery.version>3.7.1</jquery.version>
@@ -163,7 +163,7 @@
     <dependency>
       <groupId>org.testcontainers</groupId>
       <artifactId>testcontainers</artifactId>
-      <version>1.20.5</version>
+      <version>1.20.6</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -288,7 +288,7 @@
     <dependency>
       <groupId>com.github.spotbugs</groupId>
       <artifactId>spotbugs-annotations</artifactId>
-      <version>4.9.1</version>
+      <version>4.9.2</version>
     </dependency>
     <dependency>
       <groupId>io.github.wimdeblauwe</groupId>
@@ -323,14 +323,14 @@
             <dependency>
               <groupId>com.puppycrawl.tools</groupId>
               <artifactId>checkstyle</artifactId>
-              <version>10.21.3</version>
+              <version>10.21.4</version>
             </dependency>
           </dependencies>
         </plugin>
         <plugin>
           <groupId>com.github.spotbugs</groupId>
           <artifactId>spotbugs-maven-plugin</artifactId>
-          <version>4.9.1.0</version>
+          <version>4.9.2.0</version>
           <configuration>
             <omitVisitors>FindReturnRef</omitVisitors>
             <plugins>
@@ -346,7 +346,7 @@
             <dependency>
               <groupId>com.github.spotbugs</groupId>
               <artifactId>spotbugs</artifactId>
-              <version>4.9.1</version>
+              <version>4.9.2</version>
             </dependency>
           </dependencies>
         </plugin>
