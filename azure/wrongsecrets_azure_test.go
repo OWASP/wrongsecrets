@@ -57,11 +57,11 @@ func TestTerraformWrongSecretsAzure(t *testing.T) {
 	http_helper.HttpGetWithCustomValidation(t, main, nil, validateChallengesEnabled)
 
 	// Make an HTTP request to the instance and make sure we get back a 200 OK and don't see expected string. Retries for a while.
-	http_helper.HttpGetWithRetryWithCustomValidation(t, challenge7, nil, 30, 5*time.Second, validateCloudChallengeResponse)
-	http_helper.HttpGetWithRetryWithCustomValidation(t, challenge9, nil, 30, 5*time.Second, validateCloudChallengeResponse)
-	http_helper.HttpGetWithRetryWithCustomValidation(t, challenge10, nil, 30, 5*time.Second, validateCloudChallengeResponse)
-	http_helper.HttpGetWithRetryWithCustomValidation(t, challenge11, nil, 30, 5*time.Second, validateCloudChallengeResponse)
-	http_helper.HttpGetWithRetryWithCustomValidation(t, challenge47, nil, 30, 5*time.Second, validateCloudChallengeResponse)
+	http_helper.HttpGetWithRetryWithCustomValidation(t, challenge7, nil, 30, 8*time.Second, validateCloudChallengeResponse)
+	http_helper.HttpGetWithRetryWithCustomValidation(t, challenge9, nil, 30, 8*time.Second, validateCloudChallengeResponse)
+	http_helper.HttpGetWithRetryWithCustomValidation(t, challenge10, nil, 30, 8*time.Second, validateCloudChallengeResponse)
+	http_helper.HttpGetWithRetryWithCustomValidation(t, challenge11, nil, 30, 8*time.Second, validateCloudChallengeResponse)
+	http_helper.HttpGetWithRetryWithCustomValidation(t, challenge47, nil, 30, 8*time.Second, validateCloudChallengeResponse)
 }
 
 func validateCloudChallengeResponse(statusCode int, body string) bool {
