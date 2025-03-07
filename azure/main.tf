@@ -24,8 +24,10 @@ provider "azurerm" {
       recover_soft_deleted_secrets          = false
     }
   }
+  #requieres to export ARM_SUBSCRIPTION_ID=00000000-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+  # subscription_id = "00000000-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 
-  skip_provider_registration = true
+  resource_provider_registrations = "none"
 }
 
 data "azurerm_client_config" "current" {}
