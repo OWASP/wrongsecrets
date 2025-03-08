@@ -1,0 +1,28 @@
+This challenge can be solved using the following steps:
+
+1. Identify the running pod in Kubernetes:
+   ```
+   kubectl get pods
+   ```
+2. Attach a debugging container to the running pod:
+   ```
+   kubectl exec -it <pod-name> -c sidecar -- /bin/sh
+   ```
+3. Navigate to the shared directory where the binary is stored:
+   ```
+   cd /shared-data
+   ```
+4. Use `gdb` to inspect the binary and run it:
+   ```
+   gdb wrongsecrets-challenge52-c-linux
+   run &
+   ```
+5. Locate the memory address of the secret:
+   ```
+   print &secret
+   x/s <memory-address>
+   ```
+
+By analyzing the memory, you will uncover the hardcoded secret stored within the binary.
+
+

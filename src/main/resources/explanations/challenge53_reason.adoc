@@ -1,0 +1,10 @@
+=== Debugging Containers and Memory Secrets
+
+Debugging tools are powerful, but when left available in production environments, they can expose sensitive information. This challenge highlights how an attacker with debugging access can retrieve secrets from memory using debugging techniques.
+
+The scenario involves a Kubernetes pod running a compiled binary that holds a secret in memory. The binary is part of an application, but due to a misconfiguration, a debugging container can be attached to inspect it. This represents a real-world scenario where misconfigured debugging permissions can lead to security risks.
+
+Organizations should be aware that:
+- Allowing unrestricted debugging tools in production environments increases the attack surface.
+- Secrets stored in memory can be extracted using debugging techniques.
+- Best practices include restricting debug permissions, using ephemeral secrets, and ensuring sensitive data is encrypted in memory.
