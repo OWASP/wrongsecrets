@@ -24,5 +24,3 @@ This challenge can be solved using the following steps:
    ```
 
 By analyzing the memory, you will uncover the hardcoded secret stored within the binary.
-
-

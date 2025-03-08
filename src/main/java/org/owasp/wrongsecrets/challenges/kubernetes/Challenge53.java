@@ -4,12 +4,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.owasp.wrongsecrets.challenges.docker.binaryexecution.BinaryExecutionHelper;
 import org.owasp.wrongsecrets.challenges.docker.binaryexecution.MuslDetectorImpl;
 
-/**
- * Abstract class for challenges with fixed answers, integrating binary execution.
- */
+/** Abstract class for challenges with fixed answers, integrating binary execution. */
 @Slf4j
 public abstract class FixedAnswerChallenge implements Challenge {
-  
+
   private final BinaryExecutionHelper binaryExecutionHelper;
   private final String executable;
 
