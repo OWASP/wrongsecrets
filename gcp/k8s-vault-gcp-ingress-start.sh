@@ -33,6 +33,9 @@ else
   kubectl apply -f ../k8s/challenge33.yml
 fi
 
+echo "Setting up challenge 52"
+kubectl apply -f ../k8s/challenge52/secret-challenge52.yml
+
 source ../scripts/install-vault.sh
 
 echo "Add secrets manager driver to repo"
