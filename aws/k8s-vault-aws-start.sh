@@ -50,6 +50,9 @@ kubectl create -f ../k8s/sealed-challenge48.json
 echo "finishing up the sealed secret controler part"
 echo "do you need to decrypt and/or handle things for the sealed secret use kubeseal"
 
+echo "Setting up challenge 52"
+kubectl apply -f ../k8s/challenge52/secret-challenge52.yml
+
 kubectl get secrets | grep 'funnystuff' &>/dev/null
 if [ $? == 0 ]; then
   echo "secrets secret is already installed"
