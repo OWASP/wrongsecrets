@@ -15,6 +15,7 @@ Have the following tools installed:
 -   Helm [Installation](https://helm.sh/docs/intro/install/)
 -   jq [Installation](https://stedolan.github.io/jq/download/)
 -   Kubectl [Installation](https://kubernetes.io/docs/tasks/tools/)
+-   openssl
 -   sed
 -   Tfenv (Optional) - [Installation](https://github.com/tfutils/tfenv)
 -   Terraform CLI - [Installation](https://learn.hashicorp.com/tutorials/terraform/install-cli)
