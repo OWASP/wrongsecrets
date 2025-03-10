@@ -16,6 +16,6 @@ public class Challenge53Test {
   @Test
   void incorrectAnswerShouldNotSolveChallenge() {
     var challenge = new Challenge53();
-    assertThat(challenge.answerCorrect("puthrightanswerhereunfortunately")).isFalse();
+    assertThat(challenge.answerCorrect("wrong answer")).isFalse();
   }
 }
