@@ -8,12 +8,23 @@ Please make sure that the account in which you run this exercise has either Log 
 Have the following tools installed:
 
 -   az CLI - [Installation](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)
--   Tfenv (Optional) - [Installation](https://github.com/tfutils/tfenv)
--   Terraform CLI - [Installation](https://learn.hashicorp.com/tutorials/terraform/install-cli)
--   Wget - [Installation](https://www.jcchouinard.com/wget/)
+-   cat
+-   curl
+-   envsubst
+-   grep
 -   Helm [Installation](https://helm.sh/docs/intro/install/)
--   Kubectl [Installation](https://kubernetes.io/docs/tasks/tools/)
 -   jq [Installation](https://stedolan.github.io/jq/download/)
+-   openssl
+-   Kubectl [Installation](https://kubernetes.io/docs/tasks/tools/)
+-   sed
+-   Terraform CLI - [Installation](https://learn.hashicorp.com/tutorials/terraform/install-cli)
+-   Tfenv (Optional) - [Installation](https://github.com/tfutils/tfenv)
+-   Vault - [Installation](https://developer.hashicorp.com/vault/docs/install)
+-   Wget - [Installation](https://www.jcchouinard.com/wget/)
+
+
+
+az cat curl envsubst grep helm jq kubectl openssl sed terraform vault
 
 Make sure you have an active subscription at Azure for which you have configured the credentials on the system where you will execute the steps below.
 
