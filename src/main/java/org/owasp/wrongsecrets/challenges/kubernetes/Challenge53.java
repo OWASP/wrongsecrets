@@ -1,9 +1,9 @@
 package org.owasp.wrongsecrets.challenges.kubernetes;
 
-import org.springframework.stereotype.Component;
 import org.owasp.wrongsecrets.challenges.FixedAnswerChallenge;
 import org.owasp.wrongsecrets.challenges.docker.binaryexecution.BinaryExecutionHelper;
 import org.owasp.wrongsecrets.challenges.docker.binaryexecution.MuslDetectorImpl;
+import org.springframework.stereotype.Component;
 
 /** Challenge53 with a focus on sidecars */
 @Component
@@ -17,8 +17,8 @@ public class Challenge53 extends FixedAnswerChallenge {
     this.binaryExecutionHelper = new BinaryExecutionHelper(53, new MuslDetectorImpl());
   }
 
-    @Override
-    public String getAnswer() {
-        return binaryExecutionHelper.executeCommand("", executable);
-    }
+  @Override
+  public String getAnswer() {
+    return binaryExecutionHelper.executeCommand("", executable);
+  }
 }
