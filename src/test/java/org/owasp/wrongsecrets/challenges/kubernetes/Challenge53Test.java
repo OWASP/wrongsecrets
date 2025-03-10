@@ -9,7 +9,7 @@ public class Challenge53Test {
   @Test
   void spoilerShouldGiveAnswer() {
     var challenge = new Challenge53();
-    assertThat(challenge.spoiler().solution()).isEqualTo("K8S_DEBUG_SECRET";
+    assertThat(challenge.spoiler().solution()).isEqualTo("K8S_DEBUG_SECRET");
     assertThat(challenge.answerCorrect(challenge.spoiler().solution())).isTrue();
   }
 
