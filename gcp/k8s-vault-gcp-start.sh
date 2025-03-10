@@ -18,6 +18,9 @@ export CLUSTER_NAME="$(terraform output -raw kubernetes_cluster_name)"
 
 gcloud container clusters get-credentials --project ${GCP_PROJECT} --zone ${REGION} ${CLUSTER_NAME}
 
+kubectl patch storageclass standard-rwo -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}'
+kubectl patch storageclass standard -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
+
 echo "Setting up workspace PSA to restricted for default"
 kubectl apply -f ../k8s/workspace-psa.yml
 
