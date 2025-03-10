@@ -9,7 +9,7 @@ ci:
   submodules: false
 repos:
   - repo: https://github.com/renovatebot/pre-commit-hooks
-    rev: 39.174.3
+    rev: 39.185.6
     hooks:
       - id: renovate-config-validator
   - repo: https://github.com/eslint/eslint
@@ -26,7 +26,7 @@ repos:
         exclude: ^(src/test/resources/yourkey.txt|src/test/resources/secondkey.txt)
       - id: trailing-whitespace
   - repo: https://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.97.3
+    rev: v1.97.4
     hooks:
       - id: terraform_fmt
       - id: terraform_tflint
@@ -57,7 +57,7 @@ repos:
         args: ["clean compile"]
       - id: maven-spotless-apply
   - repo: https://github.com/psf/black
-    rev: 24.10.0
+    rev: 25.1.0
     hooks:
       - id: black
         language_version: python3.11

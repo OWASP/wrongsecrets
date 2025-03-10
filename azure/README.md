@@ -52,15 +52,16 @@ The storage account name should be in the output. Please use that to configure t
 
 1. Set either a new resource group or use an existing resource group in `main.tf` (it defaults to the existing `OWASP-Projects` resource group). Note that you'll need to find/replace references to "data.azurerm_resource_group.default" to "arurerm_resource_group.default" if you want to create a new one.
 2. check whether you have the right project by doing `az account show` (after `az login`). Want to set the project as your default? Use `az account set --subscription <.id here>`.
-3. If not yet enabled, register the required services for the subscription, run:
+3. do `export ARM_SUBSCRIPTION_ID=<.id here>`.
+4. If not yet enabled, register the required services for the subscription, run:
     - `az provider register --namespace Microsoft.ContainerService`
     - `az provider register --namespace Microsoft.KeyVault`
     - `az provider register --namespace Microsoft.ManagedIdentity`
-4. Run `terraform init` (if required, use `tfenv` to select TF 0.14.0 or higher )
-5. Run `terraform plan` to see what will be created (optional).
-6. Run `terraform apply`. Note: the apply will take 5 to 20 minutes depending on the speed of the Azure backplane.
-7. Run `./k8s-vault-azure-start.sh`. Your kubeconfig file will automatically be updated.
-8. (Optional) To make the app available over a load balancer, run `kubectl apply -f ./k8s/lb.yml`, then look for the public IP using `kubectl describe service wrongsecrets-lb`. The app should be available on HTTP port 80 within a few minutes.
+5. Run `terraform init` (if required, use `tfenv` to select TF 0.14.0 or higher )
+6. Run `terraform plan` to see what will be created (optional).
+7. Run `terraform apply`. Note: the apply will take 5 to 20 minutes depending on the speed of the Azure backplane.
+8. Run `./k8s-vault-azure-start.sh`. Your kubeconfig file will automatically be updated.
+9. (Optional) To make the app available over a load balancer, run `kubectl apply -f ./k8s/lb.yml`, then look for the public IP using `kubectl describe service wrongsecrets-lb`. The app should be available on HTTP port 80 within a few minutes.
 
 Your AKS cluster should be visible in your resource group. Want a different region? You can modify `terraform.tfvars` or input it directly using the `region` variable in plan/apply.
 
@@ -94,7 +95,7 @@ When you're done:
 Want to see if the setup still works? You can use terratest to check if the current setup works via automated terratest tests, for this you need to make sure that you have installed terraform and Go version 1.21. Next, you will need to install the modules and set up credentials.
 
 1. Run `go mod download`
-2. Run `az login` and make sure you are on the right subscription. If necessary, use `az account list` and `az account set --subscription <your-subscription-id-here>`.
+2. Run `az login` and make sure you are on the right subscription. If necessary, use `az account list` and `az account set --subscription <your-subscription-id-here>`. and then do `export ARM_SUBSCRIPTION_ID=<.id here>`.
 3. Run `go test -timeout 99999s`. The default timeout is 10 min, which is too short for our purposes. We need to override that.
 
 ## Terraform documentation

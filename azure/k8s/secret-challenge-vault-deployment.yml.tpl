@@ -1,24 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    vault.hashicorp.com/agent-inject: "true"
-    vault.hashicorp.com/tls-skip-verify: "true"
-    vault.hashicorp.com/namespace: "default"
-    vault.hashicorp.com/log-level: debug
-    vault.hashicorp.com/agent-inject-secret-challenge46: "secret/data/injected"
-    vault.hashicorp.com/agent-inject-template-challenge46: |
-      {{ with secret "/secret/data/injected" }}
-        {{ range $k, $v := .Data.data }}
-          {{ printf "echo %s=%s" $k $v }}
-        {{ end }}
-      {{ end }}
-    vault.hashicorp.com/agent-inject-secret-challenge47: "secret/data/codified"
-    vault.hashicorp.com/agent-inject-template-challenge47: |
-      {{ with secret "secret/data/codified" }}
-          export challenge47secret="isthiswhatweneed?"
-      {{ end }}
-    vault.hashicorp.com/role: "secret-challenge"
   labels:
     app: secret-challenge
     aadpodidbinding: wrongsecrets-pod-id
@@ -38,7 +20,25 @@ spec:
     type: RollingUpdate
   template:
     metadata:
-      creationTimestamp: "2020-10-28T20:21:04Z"
+      annotations:
+        vault.hashicorp.com/agent-inject: "true"
+        vault.hashicorp.com/tls-skip-verify: "true"
+        vault.hashicorp.com/namespace: "default"
+        vault.hashicorp.com/log-level: debug
+        vault.hashicorp.com/agent-inject-secret-challenge46: "secret/data/injected"
+        vault.hashicorp.com/agent-inject-template-challenge46: |
+          {{ with secret "/secret/data/injected" }}
+            {{ range $k, $v := .Data.data }}
+              {{ printf "echo %s=%s" $k $v }}
+            {{ end }}
+          {{ end }}
+        vault.hashicorp.com/agent-inject-secret-challenge47: "secret/data/codified"
+        vault.hashicorp.com/agent-inject-template-challenge47: |
+          {{ with secret "secret/data/codified" }}
+              export challenge47secret="isthiswhatweneed?"
+          {{ end }}
+        vault.hashicorp.com/role: "secret-challenge"
+      creationTimestamp: "2024-03-07T10:21:04Z"
       labels:
         app: secret-challenge
         aadpodidbinding: wrongsecrets-pod-id

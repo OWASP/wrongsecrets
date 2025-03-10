@@ -53,7 +53,7 @@ class SpringDocTest {
         .perform(get("/v3/api-docs"))
         .andExpect(status().isOk())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-        .andExpect(jsonPath("$.openapi", is("3.0.1")))
+        .andExpect(jsonPath("$.openapi", is("3.1.0")))
         .andExpect(jsonPath("$.info", isA(Object.class)))
         .andExpect(jsonPath("$.servers", isA(Object.class)))
         .andExpect(jsonPath("$.paths", isA(Object.class)))
