@@ -1,26 +1,42 @@
+By default, the challenge runs without a debugging sidecar. Your goal is to analyze the binary running inside the pod and uncover the secret.
+
 This challenge can be solved using the following steps:
 
-1. Identify the running pod in Kubernetes:
+1. Deploy the challenge without the sidecar:
+   ```
+   kubectl apply -f k8s/challenge53/secret-challenge53.yml
+   ```
+   Verify that the pod is running:
    ```
    kubectl get pods
    ```
-2. Attach a debugging container to the running pod:
+
+2. Realize that the pod alone does not provide debugging capabilities. Now, replace the deployment with one that includes a sidecar:
+   ```
+   kubectl apply -f k8s/challenge53/secret-challenge53-sidecar.yml
+   ```
+
+3. Run the debugging container attached to the running pod:
    ```
    kubectl exec -it <pod-name> -c sidecar -- /bin/sh
    ```
-3. Navigate to the shared directory where the binary is stored:
+
+4. Navigate to the shared directory where the binary is stored:
    ```
    cd /shared-data
    ```
-4. Use `gdb` to inspect the binary and run it:
+
+5. Use `gdb` to inspect the binary and run it:
    ```
    gdb wrongsecrets-challenge53-c-linux
    run &
    ```
-5. Locate the memory address of the secret:
+
+6. Locate the memory address of the secret:
    ```
    print &secret
    x/s <memory-address>
    ```
 
 By analyzing the memory, you will uncover the hardcoded secret stored within the binary.
+
