@@ -1,30 +1,24 @@
-package org.owasp.wrongsecrets.challenges;
+package org.owasp.wrongsecrets.challenges.kubernetes;
 
-import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+import org.owasp.wrongsecrets.challenges.FixedAnswerChallenge;
 import org.owasp.wrongsecrets.challenges.docker.binaryexecution.BinaryExecutionHelper;
 import org.owasp.wrongsecrets.challenges.docker.binaryexecution.MuslDetectorImpl;
 
-/** Abstract class for challenges with fixed answers, integrating binary execution. */
-@Slf4j
-public abstract class FixedAnswerChallenge implements Challenge {
+/** Challenge53 with a focus on sidecars */
+@Component
+public class Challenge53 extends FixedAnswerChallenge {
 
   private final BinaryExecutionHelper binaryExecutionHelper;
   private final String executable;
 
-  protected FixedAnswerChallenge(int challengeNumber) {
+  protected Challenge53() {
     this.executable = "wrongsecrets-challenge53-c";
-    this.binaryExecutionHelper = new BinaryExecutionHelper(challengeNumber, new MuslDetectorImpl());
+    this.binaryExecutionHelper = new BinaryExecutionHelper(53, new MuslDetectorImpl());
   }
 
-  @Override
-  public Spoiler spoiler() {
-    return new Spoiler(binaryExecutionHelper.executeCommand("spoil", executable));
-  }
-
-  @Override
-  public boolean answerCorrect(String answer) {
-    return binaryExecutionHelper
-        .executeCommand(answer, executable)
-        .equals("This is correct! Congrats!");
-  }
+    @Override
+    public String getAnswer() {
+        return binaryExecutionHelper.executeCommand("", executable);
+    }
 }
