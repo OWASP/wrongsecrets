@@ -5,7 +5,7 @@
 
 source scripts/check-available-commands.sh
 
-checkCommandsAvailable helm minikube jq vault sed grep docker grep cat
+checkCommandsAvailable cat docker grep helm jq kubectl minikube openssl sed vault
 
 echo "This is only a script for demoing purposes. You can comment out line 22 and work with your own k8s setup"
 echo "This script is based on the steps defined in https://learn.hashicorp.com/tutorials/vault/kubernetes-minikube . Vault is awesome!"
