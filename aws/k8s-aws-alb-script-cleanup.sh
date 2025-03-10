@@ -5,7 +5,7 @@
 
 source ../scripts/check-available-commands.sh
 
-checkCommandsAvailable helm jq vault sed grep docker grep cat aws curl eksctl kubectl
+checkCommandsAvailable aws cat docker eksctl grep helm jq kubectl openssl sed terraform vault
 
 if test -n "${AWS_REGION-}"; then
   echo "AWS_REGION is set to <$AWS_REGION>"
