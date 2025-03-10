@@ -10,12 +10,16 @@ Have the following tools installed:
 
 -   AWS CLI - [Installation](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)
 -   EKS CTL - [Installation](https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html)
+-   cat
+-   grep
+-   Helm [Installation](https://helm.sh/docs/intro/install/)
+-   jq [Installation](https://stedolan.github.io/jq/download/)
+-   Kubectl [Installation](https://kubernetes.io/docs/tasks/tools/)
+-   sed
 -   Tfenv (Optional) - [Installation](https://github.com/tfutils/tfenv)
 -   Terraform CLI - [Installation](https://learn.hashicorp.com/tutorials/terraform/install-cli)
--   Wget - [Installation](https://www.jcchouinard.com/wget/)
--   Helm [Installation](https://helm.sh/docs/intro/install/)
--   Kubectl [Installation](https://kubernetes.io/docs/tasks/tools/)
--   jq [Installation](https://stedolan.github.io/jq/download/)
+-   Vault - [Installation](https://developer.hashicorp.com/vault/docs/install)
+-   Wget - [Installaxtion](https://www.jcchouinard.com/wget/)
 
 Make sure you have an active account at AWS for which you have configured the credentials on the system where you will execute the steps below. In this example we stored the credentials under an aws profile as `awsuser`.
 

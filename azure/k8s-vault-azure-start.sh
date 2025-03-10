@@ -5,7 +5,7 @@
 
 source ../scripts/check-available-commands.sh
 
-checkCommandsAvailable helm vault jq sed grep cat az envsubst
+checkCommandsAvailable az cat envsubst grep helm jq sed terraform kubectl vault
 
 echo "This is a script to bootstrap the configuration. You need to have installed: helm, kubectl, vault, grep, cat, sed, envsubst, and azure cli, and is only tested on mac, Debian and Ubuntu"
 echo "This script is based on the steps defined in https://learn.hashicorp.com/tutorials/vault/kubernetes-minikube. Vault is awesome!"
