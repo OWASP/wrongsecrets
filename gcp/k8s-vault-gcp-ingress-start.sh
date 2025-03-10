@@ -33,8 +33,8 @@ else
   kubectl apply -f ../k8s/challenge33.yml
 fi
 
-echo "Setting up challenge 52"
-kubectl apply -f ../k8s/challenge52/secret-challenge52.yml
+echo "Setting up challenge 53"
+kubectl apply -f ../k8s/challenge53/secret-challenge53.yml
 
 source ../scripts/install-vault.sh
 

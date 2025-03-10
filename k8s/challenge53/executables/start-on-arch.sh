@@ -7,9 +7,9 @@ ARCH=$(uname -m)
 if [[ "$ARCH" == "arm" || "$ARCH" == "aarch64" ]]; then
     echo "Running on Linux ARM architecture"
     # Start the ARM binary
-    ./home/wrongsecrets/wrongsecrets-challenge52-c-linux-arm
+    ./home/wrongsecrets/wrongsecrets-challenge53-c-linux-arm
 else
     echo "Running on non-ARM architecture"
     # Start the non-ARM binary
-    ./home/wrongsecrets/wrongsecrets-challenge52-c-linux
+    ./home/wrongsecrets/wrongsecrets-challenge53-c-linux
 fi

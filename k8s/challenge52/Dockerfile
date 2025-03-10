@@ -1,8 +1,0 @@
-FROM ubuntu:25.04
-RUN useradd -m -u 2000 wrongsecrets
-
-COPY --chown=wrongsecrets executables/ /home/wrongsecrets/
-
-#use `docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets-challenge52:4 -f Dockerfile --push .` to push
-# use `docker run jeroenwillemsen/wrongsecrets-challenge52:5` to run it
-CMD ["./home/wrongsecrets/start-on-arch.sh"]

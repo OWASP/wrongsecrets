@@ -14,7 +14,7 @@ This challenge can be solved using the following steps:
    ```
 4. Use `gdb` to inspect the binary and run it:
    ```
-   gdb wrongsecrets-challenge52-c-linux
+   gdb wrongsecrets-challenge53-c-linux
    run &
    ```
 5. Locate the memory address of the secret:

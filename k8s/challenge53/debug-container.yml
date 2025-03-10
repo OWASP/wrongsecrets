@@ -9,7 +9,7 @@ spec:
     allowPrivilegeEscalation: false
   containers:
   - name: app
-    image: jeroenwillemsen/wrongsecrets-challenge52-debug:1
+    image: jeroenwillemsen/wrongsecrets-challenge53-debug:1
     securityContext:
       allowPrivilegeEscalation: false
       capabilities:
