@@ -12,7 +12,7 @@ public abstract class FixedAnswerChallenge implements Challenge {
   private final String executable;
 
   protected FixedAnswerChallenge(int challengeNumber) {
-    this.executable = "wrongsecrets-challenge52-c-linux";
+    this.executable = "wrongsecrets-challenge52-c";
     this.binaryExecutionHelper = new BinaryExecutionHelper(challengeNumber, new MuslDetectorImpl());
   }
 
