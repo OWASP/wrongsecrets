@@ -1,0 +1,8 @@
+FROM ubuntu:25.04
+
+RUN useradd -m -u 2000 wrongsecrets
+
+# Install gdb and others tools
+RUN apt update && apt install -y gdb strace lsof procps
+
+CMD ["/bin/bash"]

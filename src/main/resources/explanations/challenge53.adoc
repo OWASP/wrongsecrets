@@ -1,0 +1,7 @@
+=== Debugging Container Leak
+
+Modern cloud environments often rely on debugging tools to troubleshoot issues in running applications. However, when debugging capabilities are left open in production, they can expose sensitive information.
+
+A Kubernetes deployment has been misconfigured, allowing developers to attach a debugging container to a running application. Inside this pod, a binary holds a secret in memory. Normally, this secret would be protected, but due to the debugging access, it becomes retrievable.
+
+Can you uncover the secret?
