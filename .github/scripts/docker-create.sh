@@ -372,9 +372,10 @@ create_containers() {
         docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets-desktop-k8s:$tag -f Dockerfile_webdesktopk8s --secret id=mysecret,env=SECRET_VALUE --push .
         docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets-desktop-k8s:latest -f Dockerfile_webdesktopk8s --secret id=mysecret,env=SECRET_VALUE --push .
         cd k8s/challenge53
-        #todo: cp the challenge53 files to the right location instead of having 2 copies
+        cp ../../src/main/resources/executables/wrongsecrets-challenge53-* ./executables
         docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets-challenge53:$tag -f Dockerfile --push .
         docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets-challenge53-debug:$tag -f Dockerfile.debug --push .
+        rm ./executables/wrongsecrets-challenge53-*
         cd ../..
         cd .github/scripts
     elif [[ "$script_mode" == "test" ]]; then
