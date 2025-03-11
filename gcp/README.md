@@ -7,13 +7,20 @@ Please make sure that the account in which you run this exercise has either Clou
 
 Have the following tools installed:
 
+-   cat
+-   envsubst
 -   gcloud CLI - [Installation](https://cloud.google.com/sdk/docs/install)
--   Tfenv (Optional) - [Installation](https://github.com/tfutils/tfenv)
--   Terraform CLI - [Installation](https://learn.hashicorp.com/tutorials/terraform/install-cli)
--   Wget - [Installation](https://www.jcchouinard.com/wget/)
+-   grep
 -   Helm [Installation](https://helm.sh/docs/intro/install/)
--   Kubectl [Installation](https://kubernetes.io/docs/tasks/tools/)
 -   jq [Installation](https://stedolan.github.io/jq/download/)
+-   Kubectl [Installation](https://kubernetes.io/docs/tasks/tools/)
+-   sed
+-   Terraform CLI - [Installation](https://learn.hashicorp.com/tutorials/terraform/install-cli)
+-   Tfenv (Optional) - [Installation](https://github.com/tfutils/tfenv)
+-   vault - [Installation](https://developer.hashicorp.com/vault/docs/install)
+-   Wget - [Installation](https://www.jcchouinard.com/wget/)
+
+
 
 Make sure you have an active account at GCP for which you have configured the credentials on the system where you will execute the steps below.
 

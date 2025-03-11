@@ -5,7 +5,7 @@
 
 source ../scripts/check-available-commands.sh
 
-checkCommandsAvailable helm jq vault sed grep cat gcloud envsubst
+checkCommandsAvailable cat envsubst gcloud grep helm jq kubectl sed terraform vault
 
 echo "This is a script to bootstrap the configuration. You need to have installed: helm, kubectl, jq, vault, grep, cat, sed, envsubst, and google cloud cli, and is only tested on mac, Debian and Ubuntu"
 echo "This script is based on the steps defined in https://learn.hashicorp.com/tutorials/vault/kubernetes-minikube. Vault is awesome!"
@@ -17,6 +17,9 @@ export REGION="$(terraform output -raw region)"
 export CLUSTER_NAME="$(terraform output -raw kubernetes_cluster_name)"
 
 gcloud container clusters get-credentials --project ${GCP_PROJECT} --zone ${REGION} ${CLUSTER_NAME}
+
+kubectl patch storageclass standard-rwo -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}'
+kubectl patch storageclass standard -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
 
 kubectl get configmaps | grep 'secrets-file' &>/dev/null
 if [ $? == 0 ]; then

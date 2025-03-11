@@ -12,7 +12,7 @@ Have the following tools installed:
 -   EKS CTL - [Installation](https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html)
 -   cat
 -   curl
--   docker - [Installatin](https://docs.docker.com/engine/install/)
+-   docker - [Installation](https://docs.docker.com/engine/install/)
 -   grep
 -   Helm [Installation](https://helm.sh/docs/intro/install/)
 -   jq [Installation](https://stedolan.github.io/jq/download/)
@@ -22,7 +22,7 @@ Have the following tools installed:
 -   Tfenv (Optional) - [Installation](https://github.com/tfutils/tfenv)
 -   Terraform CLI - [Installation](https://learn.hashicorp.com/tutorials/terraform/install-cli)
 -   Vault - [Installation](https://developer.hashicorp.com/vault/docs/install)
--   wget - [Installaxtion](https://www.jcchouinard.com/wget/)
+-   wget - [Installation](https://www.jcchouinard.com/wget/)
 
 Make sure you have an active account at AWS for which you have configured the credentials on the system where you will execute the steps below. In this example we stored the credentials under an aws profile as `awsuser`.
 
