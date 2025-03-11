@@ -16,6 +16,6 @@ public class Challenge53Test {
   @Test
   void incorrectAnswerShouldNotSolveChallenge() {
     var challenge = new Challenge53();
-    assertThat(challenge.answerCorrect("K8S_DEBUG_SECRET")).isFalse();
+    assertThat(challenge.answerCorrect("wrong answer")).isFalse();
   }
 }
