@@ -58,6 +58,17 @@ else
   kubectl apply -f ../k8s/challenge33.yml
 fi
 
+# Get Helm version
+HELM_VERSION=$(helm version --template "{{ .Version }}" | sed 's/^v//')
+
+# Check if it's Helm 3
+if [[ $HELM_VERSION =~ ^3\. ]]; then
+    echo "Helm version 3 is installed: v$HELM_VERSION"
+else
+    echo "Helm version 3 is NOT installed. Current version: v$HELM_VERSION"
+    exit 1
+fi
+
 helm list -n | grep 'aws-ebs-csi-driver' &> /dev/null
 if [ $? == 0 ]; then
   echo "AWS EBS CSI driver is already installed"
