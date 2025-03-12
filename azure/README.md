@@ -12,7 +12,7 @@ Have the following tools installed:
 -   curl
 -   envsubst
 -   grep
--   Helm [Installation](https://helm.sh/docs/intro/install/)
+-   Helm [Installation](https://helm.sh/docs/intro/install/) version 3.x.x or above
 -   jq [Installation](https://stedolan.github.io/jq/download/)
 -   openssl
 -   Kubectl [Installation](https://kubernetes.io/docs/tasks/tools/)
