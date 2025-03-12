@@ -58,7 +58,7 @@ spec:
             volumeAttributes:
               secretProviderClass: "wrongsecrets-gcp-secretsmanager"
       containers:
-        - image: jeroenwillemsen/wrongsecrets:1.10.3-k8s-vault
+        - image: jeroenwillemsen/wrongsecrets:1.11.0-alpha3-k8s-vault
           imagePullPolicy: IfNotPresent
           name: secret-challenge
           command: ["/bin/sh"]
