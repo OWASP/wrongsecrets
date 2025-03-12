@@ -11,7 +11,7 @@ Have the following tools installed:
 -   envsubst
 -   gcloud CLI - [Installation](https://cloud.google.com/sdk/docs/install)
 -   grep
--   Helm [Installation](https://helm.sh/docs/intro/install/)
+-   Helm [Installation](https://helm.sh/docs/intro/install/) version 3.x.x or above
 -   jq [Installation](https://stedolan.github.io/jq/download/)
 -   Kubectl [Installation](https://kubernetes.io/docs/tasks/tools/)
 -   sed
