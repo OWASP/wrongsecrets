@@ -41,6 +41,7 @@ jobs:
           kubectl apply -f k8s/secrets-secret.yml
           kubectl apply -f k8s/challenge33.yml
           kubectl apply -f k8s/secret-challenge-deployment.yml
+          kubectl apply -f k8s/challenge53/secret-challenge53.yml
           golivecounter=0
           while [[ $(kubectl get pods -l app=secret-challenge -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]];
           do

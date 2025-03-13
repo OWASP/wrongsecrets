@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: secure-pod
+spec:
+  securityContext:
+    runAsUser: 2000
+    runAsNonRoot: true
+    allowPrivilegeEscalation: false
+  containers:
+  - name: app
+    image: jeroenwillemsen/wrongsecrets-challenge53-debug:1
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop: ["ALL"]
+        ## TODO: update container image and user

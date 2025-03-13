@@ -175,6 +175,7 @@ The K8S setup currently is based on using Minikube for local fun. You can use th
     kubectl apply -f k8s/secrets-config.yml
     kubectl apply -f k8s/secrets-secret.yml
     kubectl apply -f k8s/challenge33.yml
+    kubectl apply -f k8s/challenge53/secret-challenge53.yml
     echo "Setting up the bitnami sealed secret controler"
     kubectl apply -f https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.27.0/controller.yaml
     kubectl apply -f k8s/sealed-secret-controller.yaml

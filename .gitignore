@@ -75,6 +75,10 @@ src/main/resources/executables/decrypt/decrypt
 src/main/resources/executables/wrongsecrets-dotnet
 src/main/resources/executables/wrongsecrets-dotnet*
 
+# Challenge 59
+k8s/challenge53/executables/wrongsecrets-challenge53-c
+k8s/challenge53/executables/wrongsecrets-challenge53-c*
+
 # Node JS
 js/node/
 js/node_modules/

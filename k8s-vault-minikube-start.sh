@@ -24,6 +24,8 @@ echo "Setting up the bitnami sealed secret controler"
 kubectl apply -f https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.28.0/controller.yaml
 kubectl apply -f k8s/sealed-secret-controller.yaml
 kubectl apply -f k8s/main.key
+echo "Setting up challenge 53"
+kubectl apply -f k8s/challenge53/secret-challenge53.yml
 kubectl delete pod -n kube-system -l name=sealed-secrets-controller
 kubectl create -f k8s/sealed-challenge48.json
 echo "finishing up the sealed secret controler part"
