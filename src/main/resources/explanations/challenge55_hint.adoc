@@ -1,0 +1,13 @@
+The secret is AES-256-CBC encrypted and base64-encoded in a comment within the `.ssh/config` file.
+
+Decrypt the secret using these steps:
+
+1. Open `.ssh/config` and locate the encrypted secret comment.
+2. Decrypt the encrypted comment using OpenSSL:
++
+[source,bash]
+----
+echo "<encrypted_base64_secret_here>" | openssl enc -aes-256-cbc -a -d -pass pass:"key_to_decrypt_the_secret"
+----
+
+Replace `<encrypted_base64_secret_here>` with the actual encrypted secret found in `.ssh/config`.

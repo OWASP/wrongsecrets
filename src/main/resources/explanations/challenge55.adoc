@@ -1,0 +1,12 @@
+=== .ssh Secret Challenge
+
+The SSH configuration file (`.ssh/config`) simplifies SSH connections by storing host-specific configurations. However, this convenience sometimes leads developers to unintentionally expose sensitive details, especially when encrypted secrets or hints are added as comments or extra parameters.
+
+An encrypted secret has been hidden within `.ssh/config` as a comment.
+
+Find and decrypt this forgotten secret.
+
+==== Hint
+The secret is encrypted using AES-256-CBC. Use the provided passphrase to decrypt it.
+
+The passphrase is "key_to_decrypt_the_secret".
