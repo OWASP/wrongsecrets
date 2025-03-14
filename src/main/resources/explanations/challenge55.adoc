@@ -1,8 +1,8 @@
-=== .ssh Secret Challenge
+=== Hidden Secret Challenge
 
-The SSH configuration file (`.ssh/config`) simplifies SSH connections by storing host-specific configurations. However, this convenience sometimes leads developers to unintentionally expose sensitive details, especially when encrypted secrets or hints are added as comments or extra parameters.
+Sometimes developers mistakenly add sensitive data or secrets as comments or hidden entries in files.
 
-An encrypted secret has been hidden within `.ssh/config` as a comment.
+In this challenge, a developer left behind an encrypted secret in a file comment. This challenge highlights how easy it is to forget critical secrets in accessible file.
 
 Find and decrypt this forgotten secret.
 
