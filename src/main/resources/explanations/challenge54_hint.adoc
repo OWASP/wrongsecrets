@@ -9,5 +9,3 @@ Follow these steps to decrypt the secret:
 ----
 echo "<encrypted_base64_secret_here>" | openssl enc -aes-256-cbc -a -d -pass pass:"key_to_decrypt_the_secret"
 ----
-
-Replace `<encrypted_base64_secret_here>` with the actual encrypted string found in the file.
