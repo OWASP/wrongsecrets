@@ -7,4 +7,4 @@ In this challenge, a developer left behind an encrypted secret in a file comment
 Your goal is to find and decrypt this forgotten secret.
 
 ==== Note
-The secret is encrypted using AES-256-CBC. Use the following passphrase "key_to_decrypt_the_secret" to decrypt it.
+The secret is encrypted using AES-256-CBC and base64 format. Use the following passphrase "key_to_decrypt_the_secret" to decrypt it.
