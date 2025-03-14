@@ -1,4 +1,4 @@
-Developers regularly update configuration files like `.gitignore`, occasionally leaving sensitive information behind, such as passwords, tokens, or critical file paths. 
+Developers regularly update configuration files like `.gitignore`, occasionally leaving sensitive information behind, such as passwords, tokens, or critical file paths.
 
 Forgotten secrets in public files indicate poor security practices and weak secret management.
 
