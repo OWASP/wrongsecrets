@@ -1,0 +1,5 @@
+Developers regularly update configuration files like `.gitignore`, occasionally leaving sensitive information behind, such as passwords, tokens, or critical file paths.
+
+Forgotten secrets in public files indicate poor security practices and weak secret management.
+
+This challenge demonstrates the importance of code reviews and ensuring secrets are never accidentally committed or left behind.
