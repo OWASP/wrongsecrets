@@ -74,7 +74,7 @@ Copyright (c) 2020-2025 Jeroen Willemsen and WrongSecrets contributors.
 
 ## Basic docker exercises
 
-_Can be used for challenges 1-4, 8, 12-32, 34, 35-43, 49-51_
+_Can be used for challenges 1-4, 8, 12-32, 34, 35-43, 49-52_
 
 For the basic docker exercises you currently require:
 
@@ -130,6 +130,7 @@ Now you can try to find the secrets by means of solving the challenge offered at
 -   [localhost:8080/challenge/challenge-49](http://localhost:8080/challenge/challenge-49)
 -   [localhost:8080/challenge/challenge-50](http://localhost:8080/challenge/challenge-50)
 -   [localhost:8080/challenge/challenge-51](http://localhost:8080/challenge/challenge-51)
+-   [localhost:8080/challenge/challenge-52](http://localhost:8080/challenge/challenge-52)
 
 </details>
 
@@ -159,7 +160,7 @@ If you want to host WrongSecrets on Railway, you can do so by deploying [this on
 
 ## Basic K8s exercise
 
-_Can be used for challenges 1-6, 8, 12-43, 48-51_
+_Can be used for challenges 1-6, 8, 12-43, 48-53_
 
 ### Minikube based
 
@@ -202,6 +203,7 @@ now you can use the provided IP address and port to further play with the K8s va
 -   [localhost:8080/challenge/challenge-6](http://localhost:8080/challenge/challenge-6)
 -   [localhost:8080/challenge/challenge-33](http://localhost:8080/challenge/challenge-33)
 -   [localhost:8080/challenge/challenge-48](http://localhost:8080/challenge/challenge-48)
+-   [localhost:8080/challenge/challenge-48](http://localhost:8080/challenge/challenge-53)
 
 ### k8s based
 
@@ -235,7 +237,7 @@ now you can use the provided IP address and port to further play with the K8s va
 
 ## Vault exercises with minikube
 
-_Can be used for challenges 1-8, 12-50_
+_Can be used for challenges 1-8, 12-53_
 Make sure you have the following installed:
 
 -   minikube with docker (or comment out line 8 and work at your own k8s setup),
@@ -253,7 +255,7 @@ This is because if you run the start script again it will replace the secret in 
 
 ## Cloud Challenges
 
-_Can be used for challenges 1-51_
+_Can be used for challenges 1-53_
 
 **READ THIS**: Given that the exercises below contain IAM privilege escalation exercises,
 never run this on an account which is related to your production environment or can influence your account-over-arching
