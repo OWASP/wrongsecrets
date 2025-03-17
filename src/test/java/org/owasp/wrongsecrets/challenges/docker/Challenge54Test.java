@@ -1,4 +1,4 @@
-package org.owasp.wrongsecrets.challenges;
+package org.owasp.wrongsecrets.challenges.docker;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
