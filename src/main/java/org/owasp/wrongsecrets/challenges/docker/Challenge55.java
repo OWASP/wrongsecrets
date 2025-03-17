@@ -1,5 +1,6 @@
 package org.owasp.wrongsecrets.challenges;
 
+import org.owasp.wrongsecrets.challenges.FixedAnswerChallenge;
 import org.springframework.stereotype.Component;
 
 /** Challenge with a secret in .ssh */
