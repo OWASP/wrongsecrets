@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Challenge54 extends FixedAnswerChallenge {
 
-  private final String secret = "(<:GITIGN0RE_SECRET:>)";
+  private static final String secret = "(<:GITIGN0RE_SECRET:>)";
 
   @Override
   public String getAnswer() {
