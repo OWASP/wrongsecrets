@@ -1,12 +1,12 @@
 FROM bellsoft/liberica-openjre-debian:23.0.2-9-cds AS builder
 WORKDIR /builder
-
-ARG argBasedVersion="1.10.3"
+ENV SPRING_THREADS_VIRTUAL_ENABLED=true
+ARG argBasedVersion="1.11.2A"
 
 COPY --chown=wrongsecrets target/wrongsecrets-${argBasedVersion}-SNAPSHOT.jar application.jar
 RUN java -Djarmode=tools -jar application.jar extract --layers --destination extracted
 
-FROM eclipse-temurin:23.0.2_7-jre-alpine-3.21
+FROM bellsoft/liberica-openjre-debian:23.0.2-9
 WORKDIR /application
 
 ARG argBasedPassword="default"
@@ -18,6 +18,7 @@ ENV DOCKER_ENV_PASSWORD="This is it"
 ENV AZURE_KEY_VAULT_ENABLED=false
 ENV SPRINGDOC_UI=false
 ENV SPRINGDOC_DOC=false
+ENV SPRING_THREADS_VIRTUAL_ENABLED=true
 
 RUN echo "2vars"
 RUN echo "$ARG_BASED_PASSWORD"

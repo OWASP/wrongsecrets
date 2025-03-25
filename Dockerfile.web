@@ -1,5 +1,5 @@
-FROM jeroenwillemsen/wrongsecrets:1.11.1-no-vault
-ARG argBasedVersion="1.11.1-no-vault"
+FROM jeroenwillemsen/wrongsecrets:1.11.2A-no-vault
+ARG argBasedVersion="1.11.2A-no-vault"
 ARG CANARY_URLS="http://canarytokens.com/terms/about/s7cfbdakys13246ewd8ivuvku/post.jsp,http://canarytokens.com/terms/about/y0all60b627gzp19ahqh7rl6j/post.jsp"
 ARG CTF_ENABLED=false
 ARG HINTS_ENABLED=true
@@ -14,6 +14,7 @@ ARG CHALLENGE_7_VALUE=if_you_see_this_please_use_K8S_and_Vault
 ARG CHALLENGE_9_VALUE=if_you_see_this_please_use_AWS_Setup
 ARG CHALLENGE_10_VALUE=if_you_see_this_please_use
 ARG CHALLENGE_11_VALUE=if_you_see_this_please_use
+ENV SPRING_THREADS_VIRTUAL_ENABLED=true
 ENV APP_VERSION=$argBasedVersion
 ENV K8S_ENV=Heroku(Docker)
 ENV canarytokenURLs=$CANARY_URLS
