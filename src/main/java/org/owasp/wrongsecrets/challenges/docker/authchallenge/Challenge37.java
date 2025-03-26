@@ -38,7 +38,7 @@ public class Challenge37 extends FixedAnswerChallenge {
             Base64.decode(new String(Base64.decode(password), Charset.defaultCharset())),
             Charset.defaultCharset()),
         "ADMIN",
-        "authenticated/**");
+        "/authenticated/**");
   }
 
   @Override
