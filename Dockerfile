@@ -6,7 +6,19 @@ ADD mvn* /builder/wrongsecrets/
 ADD .mvn /builder/wrongsecrets/.mvn
 ADD package* /builder/wrongsecrets/
 ADD js /builder/wrongsecrets/js
-RUN cd wrongsecrets && ./mvnw -Dmaven.test.skip=true clean compile spring-boot:process-aot package && ./mvnw install -DskipTests
+ENV NODE_PACKAGE_URL  https://unofficial-builds.nodejs.org/download/release/v22.14.0/node-v22.14.0-linux-x64-musl.tar.gz
+
+RUN apk add libstdc++
+WORKDIR /opt
+RUN wget $NODE_PACKAGE_URL
+RUN mkdir -p /opt/nodejs
+RUN tar -zxvf *.tar.gz --directory /opt/nodejs --strip-components=1
+RUN rm *.tar.gz
+RUN ln -s /opt/nodejs/bin/node /usr/local/bin/node
+RUN ln -s /opt/nodejs/bin/npm /usr/local/bin/npm
+
+WORKDIR /builder
+RUN cd wrongsecrets && ./mvnw -Dmaven.test.skip=true clean compile spring-boot:process-aot package
 RUN cd wrongsecrets && zip -d /target/*.jar BOOT-INF/classes/executables/wrongsecrets-golang && \
         zip -d /target/*.jar BOOT-INF/classes/executables/wrongsecrets-golang-arm && \
         zip -d /target/*.jar BOOT-INF/classes/executables/wrongsecrets-dotnet && \
