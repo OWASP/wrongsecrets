@@ -8,4 +8,3 @@ Find and decrypt this forgotten secret.
 
 ==== Note
 The secret is encrypted using AES-256-ECB and no salt. Use the key found in ".ssh" directory to decrypt it.
-
