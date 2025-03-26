@@ -1,4 +1,4 @@
-FROM bellsoft/liberica-openjre-debian:23.0.2-9-cds AS builder
+FROM bellsoft/liberica-openjdk-alpine-musl:23.0.2-9-cds AS builder
 WORKDIR /builder
 ENV SPRING_THREADS_VIRTUAL_ENABLED=true
 ARG argBasedVersion="1.11.2A"
@@ -6,7 +6,7 @@ ARG argBasedVersion="1.11.2A"
 COPY --chown=wrongsecrets target/wrongsecrets-${argBasedVersion}-SNAPSHOT.jar application.jar
 RUN java -Djarmode=tools -jar application.jar extract --layers --destination extracted
 
-FROM bellsoft/liberica-openjre-debian:23.0.2-9
+FROM bellsoft/liberica-openjdk-alpine-musl:23.0.2-9
 WORKDIR /application
 
 ARG argBasedPassword="default"
