@@ -40,7 +40,7 @@ public class ChallengeConfig {
     return new StringToChallengeNameConverter();
   }
 
-  private record TextWithFileLocationConverter(TemplateGenerator templateGenerator)
+  public record TextWithFileLocationConverter(TemplateGenerator templateGenerator)
       implements Converter<String, TextWithFileLocation> {
 
     @Override
@@ -59,7 +59,7 @@ public class ChallengeConfig {
     }
   }
 
-  private record StringToChallengeNameConverter() implements Converter<String, ChallengeName> {
+  public record StringToChallengeNameConverter() implements Converter<String, ChallengeName> {
 
     @Override
     public ChallengeName convert(String name) {

@@ -336,7 +336,7 @@ build_update_pom() {
     mv temp4.txt ../../src/main/resources/templates/about.html
     rm tem*.txt
     echo "Building and updating pom.xml file so we can use it in our docker"
-    cd ../.. && ./mvnw clean && ./mvnw --batch-mode release:update-versions -DdevelopmentVersion=${tag}-SNAPSHOT && ./mvnw spotless:apply && ./mvnw install -DskipTests
+    cd ../.. && ./mvnw clean && ./mvnw --batch-mode release:update-versions -DdevelopmentVersion=${tag}-SNAPSHOT && ./mvnw spotless:apply && ./mvnw clean compile spring-boot:process-aot package && ./mvnw install -DskipTests
     cd .github/scripts
     echo "Removing unnecessary binaries from the jar file"
     zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-golang

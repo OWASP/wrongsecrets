@@ -1,13 +1,29 @@
-FROM bellsoft/liberica-openjdk-alpine-musl:23.0.2-9-cds AS builder
+FROM bellsoft/liberica-runtime-container:jdk-23.0.2_9-musl AS builder
 WORKDIR /builder
-ENV SPRING_THREADS_VIRTUAL_ENABLED=true
-ARG argBasedVersion="1.11.2A"
+ADD src /builder/wrongsecrets/src
+ADD pom.xml /builder/wrongsecrets/pom.xml
+ADD mvn* /builder/wrongsecrets/
+ADD .mvn /builder/wrongsecrets/.mvn
+ADD package* /builder/wrongsecrets/
+ADD js /builder/wrongsecrets/js
+RUN cd wrongsecrets && ./mvnw -Dmaven.test.skip=true clean compile spring-boot:process-aot package && ./mvnw install -DskipTests
+RUN cd wrongsecrets && zip -d /target/*.jar BOOT-INF/classes/executables/wrongsecrets-golang && \
+        zip -d /target/*.jar BOOT-INF/classes/executables/wrongsecrets-golang-arm && \
+        zip -d /target/*.jar BOOT-INF/classes/executables/wrongsecrets-dotnet && \
+        zip -d /target/*.jar BOOT-INF/classes/executables/wrongsecrets-dotnet-arm && \
+        zip -d /target/*.jar BOOT-INF/classes/executables/wrongsecrets-dotnet-linux && \
+        zip -d /target/*.jar BOOT-INF/classes/executables/wrongsecrets-dotnet-linux-arm && \
+        zip -d /target/*.jar BOOT-INF/classes/executables/*.exe
 
-COPY --chown=wrongsecrets target/wrongsecrets-${argBasedVersion}-SNAPSHOT.jar application.jar
+
+FROM bellsoft/liberica-runtime-container:jre-23.0.2_9-cds-slim-musl AS optimizer
+WORKDIR /optimizer
+COPY --from=builder /builder/wrongsecrets/target/*.jar wrongsecrets.jar
 RUN java -Djarmode=tools -jar application.jar extract --layers --destination extracted
 
-FROM bellsoft/liberica-openjdk-alpine-musl:23.0.2-9
+FROM bellsoft/liberica-runtime-container:jre-23.0.2_9-slim-musl
 WORKDIR /application
+ARG argBasedVersion="1.11.2A"
 
 ARG argBasedPassword="default"
 ARG spring_profile=""
@@ -24,7 +40,7 @@ RUN echo "2vars"
 RUN echo "$ARG_BASED_PASSWORD"
 RUN echo "$argBasedPassword"
 
-RUN apk add --no-cache libstdc++ icu-libs
+# todo: replace or enable (And fix golang) RUN apk add --no-cache libstdc++ icu-libs
 
 # Create the /var/run/secrets2 directory
 RUN mkdir -p /var/run/secrets2
@@ -40,10 +56,10 @@ COPY --chown=wrongsecrets src/main/resources/executables/*linux-musl* /home/wron
 COPY --chown=wrongsecrets src/test/resources/alibabacreds.kdbx /var/tmp/helpers
 COPY --chown=wrongsecrets src/test/resources/RSAprivatekey.pem /var/tmp/helpers/
 
-COPY --from=builder /builder/extracted/dependencies/ ./
-COPY --from=builder /builder/extracted/spring-boot-loader/ ./
-COPY --from=builder /builder/extracted/snapshot-dependencies/ ./
-COPY --from=builder /builder/extracted/application/ ./
+COPY --from=optimizer /optimizer/extracted/dependencies/ ./
+COPY --from=optimizer /optimizer/extracted/spring-boot-loader/ ./
+COPY --from=optimizer /optimizer/extracted/snapshot-dependencies/ ./
+COPY --from=optimizer /optimizer/extracted/application/ ./
 
 
 # Mock the service account token for CDS profile generation
@@ -64,4 +80,4 @@ RUN rm -rf /var/run/secrets/kubernetes.io
 RUN adduser -u 2000 -D wrongsecrets
 USER wrongsecrets
 
-CMD java -jar -XX:SharedArchiveFile=application.jsa -Dspring.profiles.active=$(echo ${SPRING_PROFILES_ACTIVE}) -Dspringdoc.swagger-ui.enabled=${SPRINGDOC_UI} -Dspringdoc.api-docs.enabled=${SPRINGDOC_DOC} -D application.jar
+CMD java -Dspring.aot.enabled=true -XX:SharedArchiveFile=application.jsa -Dspring.profiles.active=$(echo ${SPRING_PROFILES_ACTIVE}) -Dspringdoc.swagger-ui.enabled=${SPRINGDOC_UI} -Dspringdoc.api-docs.enabled=${SPRINGDOC_DOC} -D -jar application.jar
