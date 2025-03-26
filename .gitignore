@@ -105,5 +105,6 @@ scripts/sort_contibutors/contributors_file.*
 #optimizations
 .github/scripts/binary_version.txt
 
-# Cha-llen-ge 5-4 (to avoid detection by scanning tools)
-# Se-cret en-cry-pted : U2FsdGVkX1+p6s7MeffGxSCZ5EcJoNqQD/W6bm9VKwzFmH1XAVpnP4Rcio6uPXYV
+# Cha-llen-ge 5-4
+# Se-cret en-cry-pted : D7/KHlnFd5J3IXL+CF+TeLKrO3g99lzbOmLGYhdxxRw=
+# K-E-Y : bef66b7c4dd3e69728107d679b1beeaae20ba974cd84138340025ec3805855fc
