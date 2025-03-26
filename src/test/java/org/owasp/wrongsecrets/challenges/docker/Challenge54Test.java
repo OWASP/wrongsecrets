@@ -6,15 +6,23 @@ import org.junit.jupiter.api.Test;
 
 class Challenge54Test {
 
-  @Test
-  void rightAnswerShouldSolveChallenge() {
-    var challenge = new Challenge54();
-    assertThat(challenge.answerCorrect(challenge.getAnswer())).isTrue();
-  }
+    @Test
+    void rightAnswerShouldSolveChallenge() throws Exception {
+        var challenge = new Challenge54();
 
-  @Test
-  void incorrectAnswerShouldNotSolveChallenge() {
-    var challenge = new Challenge54();
-    assertThat(challenge.answerCorrect("wrong answer")).isFalse();
-  }
+        String clearSecret = "(<:GITIGN0RE_SECRET:>)";
+        String encryptedInput = Challenge54.encryptAES(clearSecret);
+
+        assertThat(challenge.answerCorrect(encryptedInput)).isTrue();
+    }
+
+    @Test
+    void incorrectAnswerShouldNotSolveChallenge() throws Exception {
+        var challenge = new Challenge54();
+
+        String wrongSecret = "wrong answer";
+        String encryptedInput = Challenge54.encryptAES(wrongSecret);
+
+        assertThat(challenge.answerCorrect(encryptedInput)).isFalse();
+    }
 }

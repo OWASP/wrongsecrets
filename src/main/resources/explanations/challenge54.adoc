@@ -1,10 +1,10 @@
-=== Hidden Secret Challenge
+=== .gitignore Secret Challenge
 
-Sometimes developers mistakenly add sensitive data or secrets as comments or hidden entries in files.
+`.gitignore` files help avoid accidental commit of sensitive or irrelevant data into source control. However, sometimes developers mistakenly add sensitive data or secrets as comments or hidden entries within `.gitignore`.
 
-In this challenge, a developer left behind an encrypted secret in a file comment. This challenge highlights how easy it is to forget critical secrets in accessible file.
+In this challenge, a developer left behind an encrypted secret in a `.gitignore` file comment. Even though encrypted, it highlights how easy it is to forget critical secrets in accessible locations.
 
 Your goal is to find and decrypt this forgotten secret.
 
 ==== Note
-The secret is encrypted using AES-256-CBC and base64 format. Use the following passphrase "key_to_decrypt_the_secret" to decrypt it.
+The secret is encrypted using AES-256-ECB and no salt. Use the key found in ".gitignore" to decrypt it.
