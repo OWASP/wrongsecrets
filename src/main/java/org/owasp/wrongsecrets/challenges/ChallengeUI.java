@@ -69,8 +69,12 @@ public class ChallengeUI {
    *
    * @return the html friendly shortName name for the challenge
    */
+  public String getLink(ChallengeDefinition definition) {
+    return definition.name().shortName();
+  }
+
   public String getLink() {
-    return challengeDefinition.name().shortName();
+    return getLink(this.challengeDefinition);
   }
 
   /**
@@ -88,16 +92,16 @@ public class ChallengeUI {
    * @return int with next challenge number.
    */
   public String next() {
-    return navigation.next().map(c -> c.name().shortName()).orElse(null);
+    return navigation.next().map(this::getLink).orElse(null);
   }
 
   /**
-   * Returns the number of the previous challenge.
+   * Returns the short name of the previous challenge.
    *
    * @return int with previous challenge number.
    */
   public String previous() {
-    return navigation.previous().map(c -> c.name().shortName()).orElse(null);
+    return navigation.previous().map(this::getLink).orElse(null);
   }
 
   private String documentation(Function<ChallengeSource, String> extractor) {
