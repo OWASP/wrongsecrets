@@ -18,7 +18,6 @@
                         <a th:class="'nav-link '+${requestURI == '/' ? 'active' : ''}"
                            href="/">Home</a>
                     </li>
-                    </li>
                     <li class="nav-item dropdown">
                         <a th:class="'nav-link dropdown-toggle '+${requestURI.contains('challenge') ? 'active' : ''}"
                            href="#" id="navbarDropdown" role="button"
@@ -28,9 +27,9 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <!--/*@thymesVar id="challenges" type="java.util.List<org.owasp.wrongsecrets.challenges.ChallengeUI>"*/-->
                             <span th:each="challenge : ${challenges}" th:remove="tag">
-                                    <a class="dropdown-item" th:href="@{/challenge} + '/' + ${challenge.link}"><span
-                                        th:text="${challenge.name}" th:remove="tag"></span></a>
-                                </span>
+                                <a class="dropdown-item" th:href="${challenge.link}"><span
+                                    th:text="${challenge.name}" th:remove="tag"></span></a>
+                            </span>
                         </ul>
                     </li>
                     <li class="nav-item">

@@ -21,7 +21,7 @@
              th:text="${answerCorrect}" th:attr="data-cy='success-alert'"></div>
         <div class="col-12 feedback alert alert-danger" role="alert" th:if="${answerIncorrect!=null}"
              th:text="${answerIncorrect}" th:attr="data-cy='incorrect-alert'"></div>
-        <form action="#" th:action="'/challenge/'+${challenge.link}" th:object="${challengeForm}" method="post">
+        <form action="#" th:action="${challenge.link}" th:object="${challengeForm}" method="post">
             <div class="d-inline">
                 Answer to solution : <input type="text" id="answerfield" th:field="*{solution}"
                                             th:attr="data-cy='answer-textbox'"/>
