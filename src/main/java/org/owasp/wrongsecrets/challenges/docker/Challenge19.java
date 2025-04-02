@@ -11,14 +11,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class Challenge19 extends FixedAnswerChallenge {
 
-  private final BinaryExecutionHelper binaryExecutionHelper;
-
-  public Challenge19() {
-    this.binaryExecutionHelper = new BinaryExecutionHelper(19, new MuslDetectorImpl());
-  }
-
   @Override
   public String getAnswer() {
+
+    BinaryExecutionHelper binaryExecutionHelper =
+        new BinaryExecutionHelper(19, new MuslDetectorImpl());
     return binaryExecutionHelper.executeCommand("", "wrongsecrets-c");
   }
 }
