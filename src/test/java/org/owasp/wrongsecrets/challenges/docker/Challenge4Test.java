@@ -23,7 +23,7 @@ class Challenge4Test {
 
   @Test
   void rightAnswerWithoutQuotesShouldSolveChallenge() {
-    var challenge = new Challenge4("'test'");
+    var challenge = new Challenge4("test");
 
     assertThat(challenge.answerCorrect("test")).isTrue();
   }
