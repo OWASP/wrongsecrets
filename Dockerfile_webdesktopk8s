@@ -31,7 +31,7 @@ RUN \
     export DOTNET_ROOT=/etc/dotnet && \
     export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools && \
     export PATH="$PATH:/config/.dotnet/tools" &&\
-    dotnet tool install ilspycmd --version 9.0.0.7660-preview2 --tool-path /etc/dotnet/tools
+    dotnet tool install ilspycmd --version 9.0.0.7889 --tool-path /etc/dotnet/tools
 
 # Add a secret using --mount and write it to a specific file path for the challenge
 # Create the /app directory to store the secret

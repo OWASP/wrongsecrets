@@ -1,9 +1,10 @@
 package org.owasp.wrongsecrets.asciidoc;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.tomcat.util.http.fileupload.ByteArrayOutputStream;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.util.FileCopyUtils;
 
@@ -20,7 +21,7 @@ public class PreCompiledGenerator implements TemplateGenerator {
 
     try (var bos = new ByteArrayOutputStream()) {
       FileCopyUtils.copy(new ClassPathResource(templateFile).getInputStream(), bos);
-      return new String(bos.toByteArray(), StandardCharsets.UTF_8);
+      return bos.toString(UTF_8);
     }
   }
 }

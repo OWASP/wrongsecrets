@@ -44,22 +44,23 @@
   <!--    </distributionManagement>-->
   <properties>
     <KeePassJava2.version>2.2.4</KeePassJava2.version>
-    <asciidoctor.maven.plugin.version>3.1.1</asciidoctor.maven.plugin.version>
+    <asciidoctor.maven.plugin.version>3.2.0</asciidoctor.maven.plugin.version>
     <asciidoctorj.version>3.0.0</asciidoctorj.version>
-    <aws.sdk.version>2.31.1</aws.sdk.version>
+    <aws.sdk.version>2.31.13</aws.sdk.version>
     <bootstrap.version>5.3.3</bootstrap.version>
-    <com.azure.spring.version>5.20.1</com.azure.spring.version>
+    <com.azure.spring.version>5.21.0</com.azure.spring.version>
     <cyclonedx.core.version>10.2.1</cyclonedx.core.version>
     <datatables.version>2.1.8</datatables.version>
     <dependency-check-maven.version>12.1.0</dependency-check-maven.version>
-    <gatling-maven-plugin.version>4.16.1</gatling-maven-plugin.version>
+    <gatling-maven-plugin.version>4.16.3</gatling-maven-plugin.version>
     <gatling.version>3.13.5</gatling.version>
     <gcp.sdk.version>5.6.1</gcp.sdk.version>
     <github.button.version>2.14.1</github.button.version>
+    <io.netty.version>4.1.118.Final</io.netty.version>
     <java.version>23</java.version>
     <jquery.version>3.7.1</jquery.version>
     <jruby.version>9.4.9.0</jruby.version>
-    <lombok.version>1.18.36</lombok.version>
+    <lombok.version>1.18.38</lombok.version>
     <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
     <maven.compiler.proc>full</maven.compiler.proc>
     <maven.compiler.target>23</maven.compiler.target>
@@ -96,6 +97,14 @@
         <groupId>com.azure.spring</groupId>
         <artifactId>spring-cloud-azure-dependencies</artifactId>
         <version>${com.azure.spring.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>io.netty</groupId>
+        <artifactId>netty-bom</artifactId>
+        <version>${io.netty.version}</version>
+        <!-- Explicitly define the Netty version to be in sync with the Azure one otherwise a warning is shown -->
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -240,7 +249,7 @@
     <dependency>
       <groupId>org.springdoc</groupId>
       <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-      <version>2.8.5</version>
+      <version>2.8.6</version>
     </dependency>
     <dependency>
       <groupId>com.azure.spring</groupId>
@@ -323,14 +332,14 @@
             <dependency>
               <groupId>com.puppycrawl.tools</groupId>
               <artifactId>checkstyle</artifactId>
-              <version>10.21.4</version>
+              <version>10.22.0</version>
             </dependency>
           </dependencies>
         </plugin>
         <plugin>
           <groupId>com.github.spotbugs</groupId>
           <artifactId>spotbugs-maven-plugin</artifactId>
-          <version>4.9.2.0</version>
+          <version>4.9.3.0</version>
           <configuration>
             <omitVisitors>FindReturnRef</omitVisitors>
             <plugins>
@@ -595,7 +604,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.5.2</version>
+        <version>3.5.3</version>
         <configuration>
           <argLine>-Dspring.profiles.active=test,maven-test</argLine>
         </configuration>

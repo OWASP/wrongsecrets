@@ -1,7 +1,7 @@
 FROM bellsoft/liberica-openjre-debian:23.0.2-9-cds AS builder
 WORKDIR /builder
 
-ARG argBasedVersion="1.10.3"
+ARG argBasedVersion="1.11.1D"
 
 COPY --chown=wrongsecrets target/wrongsecrets-${argBasedVersion}-SNAPSHOT.jar application.jar
 RUN java -Djarmode=tools -jar application.jar extract --layers --destination extracted
@@ -35,7 +35,8 @@ RUN --mount=type=secret,id=mysecret \
 
 COPY --chown=wrongsecrets .github/scripts/ /var/tmp/helpers
 COPY --chown=wrongsecrets .github/scripts/.bash_history /home/wrongsecrets/
-COPY --chown=wrongsecrets src/main/resources/executables/*linux-musl* /home/wrongsecrets/
+COPY --chown=wrongsecrets src/main/resources/executables/wrongsecrets*linux-musl* /home/wrongsecrets/
+COPY --chown=wrongsecrets src/main/resources/executables/wrongsecrets-golang-linux /home/wrongsecrets/
 COPY --chown=wrongsecrets src/test/resources/alibabacreds.kdbx /var/tmp/helpers
 COPY --chown=wrongsecrets src/test/resources/RSAprivatekey.pem /var/tmp/helpers/
 
