@@ -11,9 +11,8 @@ class Challenge54Test {
     var challenge = new Challenge54();
 
     String clearSecret = "(<:GITIGN0RE_SECRET:>)";
-    String encryptedInput = Challenge54.encryptAES(clearSecret);
 
-    assertThat(challenge.answerCorrect(encryptedInput)).isTrue();
+    assertThat(challenge.answerCorrect(clearSecret)).isTrue();
   }
 
   @Test
@@ -21,8 +20,7 @@ class Challenge54Test {
     var challenge = new Challenge54();
 
     String wrongSecret = "wrong answer";
-    String encryptedInput = Challenge54.encryptAES(wrongSecret);
 
-    assertThat(challenge.answerCorrect(encryptedInput)).isFalse();
+    assertThat(challenge.answerCorrect(wrongSecret)).isFalse();
   }
 }
