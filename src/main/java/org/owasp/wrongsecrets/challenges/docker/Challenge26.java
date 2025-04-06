@@ -10,32 +10,23 @@ import javax.crypto.spec.GCMParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import lombok.extern.slf4j.Slf4j;
 import org.bouncycastle.util.encoders.Base64;
-import org.owasp.wrongsecrets.challenges.Challenge;
-import org.owasp.wrongsecrets.challenges.Spoiler;
+import org.owasp.wrongsecrets.challenges.FixedAnswerChallenge;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /** This challenge is about finding a secret hardcoded in a web3 contract. */
 @Slf4j
 @Component
-public class Challenge26 implements Challenge {
+public class Challenge26 extends FixedAnswerChallenge {
   private final String cipherText;
 
   public Challenge26(@Value("${challenge26ciphertext}") String cipherText) {
     this.cipherText = cipherText;
   }
 
-  /** {@inheritDoc} */
   @Override
-  public Spoiler spoiler() {
-    return new Spoiler(quickDecrypt(cipherText));
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public boolean answerCorrect(String answer) {
-    String correctString = quickDecrypt(cipherText);
-    return answer.equals(correctString) && !DECRYPTION_ERROR.equals(answer);
+  public String getAnswer() {
+    return quickDecrypt(cipherText);
   }
 
   private String quickDecrypt(String cipherText) {
