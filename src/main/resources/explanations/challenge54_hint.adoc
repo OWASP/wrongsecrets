@@ -7,7 +7,7 @@ Follow these steps to decrypt the secret:
 +
 [source,bash]
 ----
-echo 'encrypted_secret_here' | openssl enc -aes-256-ecb -d \
-  -K key_here \
-  -nosalt -base64
+ | openssl enc -aes-256-cbc -K $(echo -n "key_to_decrypt_the_secret" | sha256sum)  \
+  -iv 30313233343536373839616263646566 \
+  -nosalt -base64 -d
 ----

@@ -7,4 +7,12 @@ In this challenge, a developer left behind an encrypted secret in a `.gitignore`
 Your goal is to find and decrypt this forgotten secret.
 
 ==== Note
-The secret is encrypted using AES-256-ECB and no salt. Use the key found in ".gitignore" to decrypt it.
+The secret is encrypted using AES-256-CBC and with an IV. Use the key found in ".gitignore" to decrypt it.
+We used the following command for encryption:
+
+```bash
+echo -n "<you will have to find out>" | openssl enc -aes-256-cbc \
+  -K $(echo -n "<look for this key>" | sha256sum)  \
+  -iv 30313233343536373839616263646566 \
+  -nosalt -base64
+```
