@@ -1,13 +1,10 @@
-The secret is AES-256-CBC encrypted and the key in a comment within the `.ssh/config` file.
+The private key is located inside the .ssh part of the container and accidentally comitted to git in this case ;-).
 
-Decrypt the secret using these steps:
+You can find the key by:
 
-1. Open `.ssh/config` and locate the encrypted secret comment and the key to decrypt the secret.
-2. Decrypt the encrypted comment using OpenSSL:
-+
-[source,bash]
-----
-echo 'encrypted_secret_here' | openssl enc -aes-256-ecb -d \
-  -K key_here \
-  -nosalt -base64
-----
+1. obtaining it from git in the `.ssh/wrongsecrets.keys` file
+
+2. obtaining it from the docker container:
+<todo>
+
+3. obtain it from the layer <todo>

@@ -18,6 +18,7 @@ ENV DOCKER_ENV_PASSWORD="This is it"
 ENV AZURE_KEY_VAULT_ENABLED=false
 ENV SPRINGDOC_UI=false
 ENV SPRINGDOC_DOC=false
+ENV BASTIONHOSTPATH="/home/wrongsecrets/.ssh"
 
 RUN echo "2vars"
 RUN echo "$ARG_BASED_PASSWORD"
@@ -39,6 +40,7 @@ COPY --chown=wrongsecrets src/main/resources/executables/wrongsecrets*linux-musl
 COPY --chown=wrongsecrets src/main/resources/executables/wrongsecrets-golang-linux /home/wrongsecrets/
 COPY --chown=wrongsecrets src/test/resources/alibabacreds.kdbx /var/tmp/helpers
 COPY --chown=wrongsecrets src/test/resources/RSAprivatekey.pem /var/tmp/helpers/
+COPY --chown=wrongsecrets .ssh/ /home/wrongsecrets/.ssh/
 
 COPY --from=builder /builder/extracted/dependencies/ ./
 COPY --from=builder /builder/extracted/spring-boot-loader/ ./
