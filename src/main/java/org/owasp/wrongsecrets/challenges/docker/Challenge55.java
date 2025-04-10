@@ -14,12 +14,16 @@ import org.springframework.stereotype.Component;
 
 import static org.owasp.wrongsecrets.Challenges.ErrorResponses.FILE_MOUNT_ERROR;
 
-/** Challenge with a secret in .ssh/config */
+/**
+ * Challenge with a secret in .ssh/config
+ */
 @Slf4j
 @Component
 public class Challenge55 implements Challenge {
 
     private final String basionhostpath;
+    private String actualData;
+
     public Challenge55(@Value("${basionhostpath}") String basionhostpath) {
         this.basionhostpath = basionhostpath;
     }
@@ -31,21 +35,25 @@ public class Challenge55 implements Challenge {
 
     @Override
     public boolean answerCorrect(String answer) {
-        return !Strings.isNullOrEmpty(answer) && (answer.contains(getActualData()) || getActualData().contains(answer));
+        return !Strings.isNullOrEmpty(answer) && answer.length() > 10 &&  (answer.contains(getActualData()) || getActualData().contains(answer));
     }
 
     @SuppressFBWarnings(
         value = "PATH_TRAVERSAL_IN",
         justification = "The location of the basionhostpath is based on an Env Var")
     private String getActualData() {
-        try {
-            return Files.readString(Paths.get(basionhostpath, "wrongsecrets.keys"), StandardCharsets.UTF_8);
-        } catch (Exception e) {
-            log.warn(
-                "Exception during file reading, defaulting to default without a docker container"
-                    + " environment",
-                e);
-            return FILE_MOUNT_ERROR;
+        if (Strings.isNullOrEmpty(actualData)) {
+            try {
+                actualData = Files.readString(Paths.get(basionhostpath, "wrongsecrets.keys"), StandardCharsets.UTF_8);
+            } catch (Exception e) {
+                log.warn(
+                    "Exception during file reading, defaulting to default without a docker container"
+                        + " environment",
+                    e);
+                return FILE_MOUNT_ERROR;
+            }
         }
+        return actualData;
     }
+
 }
