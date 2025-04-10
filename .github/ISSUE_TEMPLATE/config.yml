@@ -1,8 +1,0 @@
-blank_issues_enabled: false
-contact_links:
-  - name: OWASP Slack registration
-    url: https://owasp.org/slack/invite
-    about: Sign up for OWASP slack to contact us there
-  - name: WrongSecrets Slack Channel
-    url: https://owasp.slack.com/archives/C02KQ7D9XHR
-    about: Please ask questions here. Please also report security vulnerabilities here (`#project-wrongsecrets`). 🏥
