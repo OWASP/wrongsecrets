@@ -34,7 +34,12 @@ public class Challenge55 implements Challenge {
   public boolean answerCorrect(String answer) {
     return !Strings.isNullOrEmpty(answer)
         && answer.length() > 10
-        && (answer.contains(getActualData()) || getActualData().replace("\r", "").replace("\n", "").replace(" ", "").contains(answer.replace("\r", "").replace("\n", "").replace(" ", "")));
+        && (answer.contains(getActualData())
+            || getActualData()
+                .replace("\r", "")
+                .replace("\n", "")
+                .replace(" ", "")
+                .contains(answer.replace("\r", "").replace("\n", "").replace(" ", "")));
   }
 
   @SuppressFBWarnings(
