@@ -48,7 +48,7 @@
     <asciidoctorj.version>3.0.0</asciidoctorj.version>
     <aws.sdk.version>2.31.13</aws.sdk.version>
     <bootstrap.version>5.3.3</bootstrap.version>
-    <com.azure.spring.version>5.21.0</com.azure.spring.version>
+    <com.azure.spring.version>5.22.0</com.azure.spring.version>
     <cyclonedx.core.version>10.2.1</cyclonedx.core.version>
     <datatables.version>2.1.8</datatables.version>
     <dependency-check-maven.version>12.1.1</dependency-check-maven.version>
