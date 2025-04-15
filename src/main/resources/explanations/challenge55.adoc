@@ -1,0 +1,7 @@
+=== .ssh Bastion?
+
+We have seen many so-called "bastion containers". Here people create a Docker container and embed the "secret" to authenticate to the host inside the container. This secret is often an SSH keypair used to authenticate against a host. In some cases the keypair is committed to git and in some cases it is injected into the container before teh container is pushed to a registry.
+
+In order to make the bastion container work, we have to embed an SSH configuration file (`.ssh/config`) to simplify the SSH connection setup by storing host-specific configurations.
+
+Can you find the private key? Paste its contents into the answer box below.
