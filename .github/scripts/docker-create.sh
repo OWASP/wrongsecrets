@@ -448,7 +448,7 @@ test() {
             log_failure "The container test has failed, this means that when we built your changes and ran a basic sanity test on the homepage it failed. Please build the container locally and double check the container is running correctly."
         fi
         echo "testing curl for webjar caching"
-        curl -I  'http://localhost:8080/webjars/bootstrap/5.3.3/css/bootstrap.min.css'
+        curl -I  'http://localhost:8080/webjars/bootstrap/5.3.5/css/bootstrap.min.css'
         echo "testing with cypress (requires node20)"
         cd ../../src/test/e2e
         npx cypress run
