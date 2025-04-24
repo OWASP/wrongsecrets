@@ -11,8 +11,7 @@ The secret is encrypted using AES-256-CBC and with an IV. Use the key found in "
 We used the following command for encryption:
 
 ```bash
-echo -n "<you will have to find out>" | openssl enc -aes-256-cbc \
-  -K $(echo -n "<look for this key>" | sha256sum)  \
+echo -n "<you will have to find out>" | openssl enc -aes-256-cbc -K <you will have to find out> \
   -iv 30313233343536373839616263646566 \
-  -nosalt -base64
+  -nosalt -base64 -e
 ```
