@@ -13,7 +13,7 @@ import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-/** Challenge with a secret in .ssh/config */
+/** Challenge with a secret in .ssh/authorized_keys */
 @Slf4j
 @Component
 public class Challenge55 implements Challenge {
