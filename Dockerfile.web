@@ -31,8 +31,9 @@ ENV challenge_rando_key_ctf_to_provide_to_host_value=$CHALLENGE_RANDO_KEY_CTF_TO
 ENV default_aws_value_challenge_9=$CHALLENGE_9_VALUE
 ENV default_aws_value_challenge_10=$CHALLENGE_10_VALUE
 ENV default_aws_value_challenge_11=$CHALLENGE_11_VALUE
+ENV BASTIONHOSTPATH="/home/wrongsecrets/.ssh"
 COPY .github/scripts/ /var/helpers
 COPY src/test/resources/alibabacreds.kdbx /var/helpers
 COPY src/test/resources/RSAprivatekey.pem /var/helpers
-
+COPY .ssh/ /home/wrongsecrets/.ssh/
 CMD java -Xms128m -Xmx128m -Xss512k -jar -Dserver.port=$PORT -XX:MaxRAMPercentage=75 -XX:MinRAMPercentage=25 -Dspring.profiles.active=without-vault -Dspringdoc.swagger-ui.enabled=${SPRINGDOC_UI} -Dspringdoc.api-docs.enabled=${SPRINGDOC_DOC} application.jar

@@ -1,0 +1,14 @@
+The private key is located inside the .ssh part of the container and accidentally comitted to git in this case ;-).
+
+You can find the key by:
+
+1. obtaining it from git in the [`.ssh/wrongsecrets.keys`]() file:
+- Clone the repo with `git clone https://github.com/OWASP/wrongsecrets`.
+- Go into the projects root and cd into `.ssh` folder and find the `wrongsecrets.keys` file.
+
+2. obtaining it from the docker container:
+- Start the container locally with `docker run jeroenwillemsen/wrongsecrets:<TAGNAME-HERE>`
+ - Find the container id by doing `docker ps` in a next terminal
+ - Do `docker exec -it <container id> sh`
+ - go to /home/wrongsecrets/.ssh/
+ - do `cat wrongsecrets.keys`
