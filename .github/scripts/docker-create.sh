@@ -59,6 +59,7 @@ heroku_check_container() {
 
 Heroku_publish_demo() {
     echo "preparing heroku deployment to demo"
+    export BUILDX_NO_DEFAULT_ATTESTATIONS=1
     heroku_check_container
     heroku container:login
     echo "heroku deployment to demo"
@@ -81,6 +82,7 @@ Heroku_publish_demo() {
 
 Heroku_publish_prod(){
     echo "preparing heroku deployment to prod"
+    export BUILDX_NO_DEFAULT_ATTESTATIONS=1
     heroku_check_container
     heroku container:login
     echo "heroku deployment to prod"
