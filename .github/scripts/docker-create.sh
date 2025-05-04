@@ -68,6 +68,11 @@ Heroku_publish_demo() {
     heroku container:release web --app arcane-scrubland-42646
     heroku container:push --recursive --arg argBasedVersion=${tag}heroku,CTF_ENABLED=true,HINTS_ENABLED=false --app wrongsecrets-ctf
     heroku container:release web --app wrongsecrets-ctf
+    echo "wait for contianer to come up"
+    until curl --output /dev/null --silent --head --fail https://arcane-scrubland-42646.herokuapp.com/; do
+        printf '.'
+        sleep 5
+    done
     echo "testing challenge 16"
     cd .github/scripts
     export RAW_TEST=$(< secondkey.txt)
@@ -89,6 +94,11 @@ Heroku_publish_prod(){
     cd ../..
     heroku container:push --recursive --arg argBasedVersion=${tag}heroku,CANARY_URLS=http://canarytokens.com/feedback/images/traffic/tgy3epux7jm59n0ejb4xv4zg3/submit.aspx,http://canarytokens.com/traffic/cjldn0fsgkz97ufsr92qelimv/post.jsp --app=wrongsecrets
     heroku container:release web --app=wrongsecrets
+    echo "wait for contianer to come up"
+    until curl --output /dev/null --silent --head --fail https://wrongsecrets.herokuapp.com; do
+        printf '.'
+        sleep 5
+    done
     echo "testing challenge 16"
     cd .github/scripts
     export RAW_TEST=$(< secondkey.txt)
