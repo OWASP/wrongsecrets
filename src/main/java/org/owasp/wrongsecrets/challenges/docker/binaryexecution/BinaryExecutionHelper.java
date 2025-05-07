@@ -133,10 +133,6 @@ public class BinaryExecutionHelper {
         new BufferedReader(new InputStreamReader(pr.getInputStream(), StandardCharsets.UTF_8))) {
       String result = in.readLine();
       pr.waitFor();
-      if (!execFile.delete()) {
-        log.info("we were not able to cleanup {}", execFile.getPath());
-      }
-
       return result;
     }
   }
@@ -243,8 +239,18 @@ public class BinaryExecutionHelper {
     return execFile;
   }
 
+  @SuppressFBWarnings(
+      value = "COMMAND_INJECTION",
+      justification = "We check for various injection methods and counter those")
   private static void xattrMacOSExecFile(File execFile) {
     try {
+      if (!(execFile != null
+          && execFile.exists()
+          && !Strings.isNullOrEmpty(execFile.getPath())
+          && execFile.getPath().contains("wrongsecrets"))) {
+        log.info("The execfile is not properly setup, returning");
+        return;
+      }
       ProcessBuilder ps =
           new ProcessBuilder("/usr/bin/xattr", "-d", "com.apple.quarantine", execFile.getPath());
       ps.redirectErrorStream(true);
