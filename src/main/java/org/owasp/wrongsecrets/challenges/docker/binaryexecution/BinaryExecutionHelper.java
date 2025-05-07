@@ -229,7 +229,42 @@ public class BinaryExecutionHelper {
       log.info("setting the file {} executable failed... rest can be ignored", execFile.getPath());
     }
     FileUtils.copyFile(challengeFile, execFile);
+    if (useArm() && !useLinux() && !useWindows()) {
+      // we have an aarch macos
+      log.info(
+          "We are on Mac os with ARM let's use  xattr -d com.apple.quarantine on {}",
+          execFile.getPath());
+      xattrMacOSExecFile(execFile);
+    }
     return execFile;
+  }
+
+  @SuppressFBWarnings(
+      value = "COMMAND_INJECTION",
+      justification = "We check for various injection methods and counter those")
+  private static void xattrMacOSExecFile(File execFile) {
+    try {
+      if (!(execFile != null
+          && execFile.exists()
+          && !Strings.isNullOrEmpty(execFile.getPath())
+          && execFile.getPath().contains("wrongsecrets"))) {
+        log.info("The execfile is not properly setup, returning");
+        return;
+      }
+      ProcessBuilder ps =
+          new ProcessBuilder("/usr/bin/xattr", "-d", "com.apple.quarantine", execFile.getPath());
+      ps.redirectErrorStream(true);
+      Process pr = ps.start();
+      try (BufferedReader in =
+          new BufferedReader(new InputStreamReader(pr.getInputStream(), StandardCharsets.UTF_8))) {
+        String result = in.readLine();
+        log.info("result of xatr operation: " + result);
+      } catch (IOException e) {
+        log.warn("error while reading executable file", e);
+      }
+    } catch (IOException e) {
+      log.warn("error while reading executable file", e);
+    }
   }
 
   private void deleteFile(File execFile) {
