@@ -229,6 +229,28 @@ public class BinaryExecutionHelper {
       log.info("setting the file {} executable failed... rest can be ignored", execFile.getPath());
     }
     FileUtils.copyFile(challengeFile, execFile);
+    if (useArm() && !useLinux() && !useWindows()) {
+      // we have an aarch macos
+      log.info(
+          "We are on Mac os with ARM let's use  xattr -d com.apple.quarantine on {}",
+          execFile.getPath());
+      try {
+        ProcessBuilder ps =
+            new ProcessBuilder("/usr/bin/xattr", "-d", "com.apple.quarantine", execFile.getPath());
+        ps.redirectErrorStream(true);
+        Process pr = ps.start();
+        try (BufferedReader in =
+            new BufferedReader(
+                new InputStreamReader(pr.getInputStream(), StandardCharsets.UTF_8))) {
+          String result = in.readLine();
+          log.info("result of xatr operation: " + result);
+        } catch (IOException e) {
+          log.warn("error while reading executable file", e);
+        }
+      } catch (IOException e) {
+        log.warn("error while reading executable file", e);
+      }
+    }
     return execFile;
   }
 
