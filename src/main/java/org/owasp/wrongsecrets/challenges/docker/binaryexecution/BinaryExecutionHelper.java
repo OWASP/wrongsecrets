@@ -133,6 +133,10 @@ public class BinaryExecutionHelper {
         new BufferedReader(new InputStreamReader(pr.getInputStream(), StandardCharsets.UTF_8))) {
       String result = in.readLine();
       pr.waitFor();
+      if (!execFile.delete()) {
+        log.info("we were not able to cleanup {}", execFile.getPath());
+      }
+
       return result;
     }
   }
