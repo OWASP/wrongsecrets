@@ -311,7 +311,7 @@ generate_test_data() {
 }
 
 download_dot_net_binaries() {
-  BINARY_VERSION="0.1.0"
+  BINARY_VERSION="0.2.0"
   FILE_VERSION_PERSIST=./binary_version.txt
   if [ -e  "$FILE_VERSION_PERSIST" ]; then
     echo "$FILE_VERSION_PERSIST exists checkig content"
