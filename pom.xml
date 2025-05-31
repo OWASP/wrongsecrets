@@ -59,7 +59,7 @@
     <io.netty.version>4.1.118.Final</io.netty.version>
     <java.version>23</java.version>
     <jquery.version>3.7.1</jquery.version>
-    <jruby.version>9.4.9.0</jruby.version>
+    <jruby.version>10.0.0.1</jruby.version>
     <lombok.version>1.18.38</lombok.version>
     <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
     <maven.compiler.proc>full</maven.compiler.proc>
