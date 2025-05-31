@@ -21,7 +21,9 @@
     "customManagers": [
         {
             "customType": "regex",
-            "fileMatch": ".github/workflows/pre-commit.yml",
+            "managerFilePatterns": [
+                "/.github/workflows/pre-commit.yml/"
+            ],
             "depNameTemplate": "terraform-docs/terraform-docs",
             "matchStrings": [
                 "TF_DOCS_VERSION=\"(?<currentValue>.*?)\""
@@ -30,7 +32,9 @@
         },
         {
             "customType": "regex",
-            "fileMatch": ".github/workflows/pre-commit.yml",
+            "managerFilePatterns": [
+                "/.github/workflows/pre-commit.yml/"
+            ],
             "depNameTemplate": "aquasecurity/trivy",
             "matchStrings": [
                 "TRIVY_VERSION=\"(?<currentValue>.*?)\""
@@ -39,7 +43,9 @@
         },
         {
             "customType": "regex",
-            "fileMatch": ".github/workflows/pre-commit.yml",
+            "managerFilePatterns": [
+                "/.github/workflows/pre-commit.yml/"
+            ],
             "depNameTemplate": "terraform-linters/tflint",
             "matchStrings": [
                 "TFLINT_VERSION=\"(?<currentValue>.*?)\""
@@ -48,7 +54,9 @@
         },
         {
             "customType": "regex",
-            "fileMatch": ".github/scripts/docker-create.sh",
+            "managerFilePatterns": [
+                "/.github/scripts/docker-create.sh/"
+            ],
             "depNameTemplate": "OWASP/wrongsecrets-binaries",
             "matchStrings": [
                 "BINARY_VERSION=\"(?<currentValue>.*?)\""
@@ -57,7 +65,9 @@
         },
         {
             "customType": "regex",
-            "fileMatch": "aws/k8s-aws-alb-script.sh",
+            "managerFilePatterns": [
+                "/aws/k8s-aws-alb-script.sh/"
+            ],
             "depNameTemplate": "kubernetes-sigs/aws-alb-ingress-controller",
             "matchStrings": [
                 "LBC_VERSION=\"(?<currentValue>.*?)\""
