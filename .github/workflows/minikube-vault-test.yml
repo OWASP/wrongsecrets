@@ -27,7 +27,7 @@ jobs:
         with:
           minikube-version: 1.36.0
           driver: docker
-          kubernetes-version: v1.32.0
+          kubernetes-version: v1.33.0
       - name: Setup helm
         uses: azure/setup-helm@v4
         id: install
@@ -47,7 +47,7 @@ jobs:
         with:
           minikube-version: 1.36.0
           driver: docker
-          kubernetes-version: v1.32.0
+          kubernetes-version: v1.33.0
       - name: Setup helm
         uses: azure/setup-helm@v4
         id: install
