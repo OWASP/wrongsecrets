@@ -9,11 +9,11 @@ ci:
   submodules: false
 repos:
   - repo: https://github.com/renovatebot/pre-commit-hooks
-    rev: 40.36.8
+    rev: 40.62.1
     hooks:
       - id: renovate-config-validator
   - repo: https://github.com/eslint/eslint
-    rev: v9.28.0
+    rev: v9.29.0
     hooks:
       - id: eslint
         args:
@@ -26,7 +26,7 @@ repos:
         exclude: ^(src/test/resources/yourkey.txt|src/test/resources/secondkey.txt)
       - id: trailing-whitespace
   - repo: https://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.99.1
+    rev: v1.99.4
     hooks:
       - id: terraform_fmt
       - id: terraform_tflint
