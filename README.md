@@ -156,9 +156,9 @@ Want to deploy yourself with Render? Click the button below:
 ### Running these on Railway
 *status: maintained by [alphasec.io](https://github.com/alphasecio)*
 
-If you want to host WrongSecrets on Railway, you can do so by deploying [this one-click template](https://railway.app/new/template/7pnwRj). Railway does not offer an always-free plan anymore, but the free trial is good enough to test-drive this before you decide to upgrade. If you need a step-by-step companion guide, see [this blog post](https://alphasec.io/test-your-secret-management-skills-with-owasp-wrongsecrets/).
+If you want to host WrongSecrets on Railway, you can do so by deploying [this one-click template](https://railway.com/deploy/McqJ_j?referralCode=I07F1). Railway does not offer an always-free plan anymore, but the free trial is good enough to test-drive this before you decide to upgrade. If you need a step-by-step companion guide, see [this blog post](https://alphasec.io/test-your-secret-management-skills-with-owasp-wrongsecrets/).
 
-[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template/7pnwRj)
+[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/deploy/McqJ_j?referralCode=I07F1j)
 
 ## Basic K8s exercise
 
