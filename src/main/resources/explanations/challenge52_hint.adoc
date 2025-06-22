@@ -1,6 +1,6 @@
-This challenge can be solved using the following steps:
+This challenge can be solved using the following ways:
 
-- *Acme Inc.* has misconfigured their Docker Buildx process, leading to sensitive secrets being embedded in the container's filesystem. Your task is to uncover these vulnerabilities.
+- Use the container itself:
 
   1. Clone the repository containing the challenge files:
      ```
@@ -27,9 +27,7 @@ This challenge can be solved using the following steps:
 
   6. The content of the `secret.txt` file is your answer.
 
-== OR
-
-- You can directly access the hardcoded secret by accessing the `docker-create` script
+- Find the secret in the buildx script:
 
 1. Clone the repository containing the challenge files:
      ```
