@@ -17,4 +17,4 @@
 90005	IGNORE	Sec-Fetch-Dest Header is Missing
 10003	IGNORE	Vulnerable JS Library
 90004	IGNORE	Insufficient Site Isolation Against Spectre Vulnerability
-2		IGNORE	Private IP Disclosure
+2	IGNORE	Private IP Disclosure
