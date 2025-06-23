@@ -9,7 +9,8 @@ checkCommandsAvailable cat docker grep helm jq kubectl minikube openssl sed vaul
 
 echo "This is only a script for demoing purposes. You can comment out line 22 and work with your own k8s setup"
 echo "This script is based on the steps defined in https://learn.hashicorp.com/tutorials/vault/kubernetes-minikube . Vault is awesome!"
-minikube start --kubernetes-version=v1.30.0 --driver=docker
+echo "This requires minikube-version: 1.36.0 or later"
+minikube start --kubernetes-version=v1.33.0 --driver=docker
 
 echo "Patching default ns with new PSA; we should run as restricted!"
 kubectl apply -f k8s/workspace-psa.yml
