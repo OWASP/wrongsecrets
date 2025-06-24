@@ -24,10 +24,7 @@ func TestTerraformWrongSecretsGCP(t *testing.T) {
 	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
 		// The path to where our Terraform code is located
 		TerraformDir: "../gcp",
-		Vars: map[string]interface{}{
-			"region":     "europe-west4",
-			"project_id": "owasp-wrongsecrets",
-		},
+		VarFiles:     []string{"../gcp/terraform.tfvars"},
 	})
 
 	// At the end of the test, run `terraform destroy` to clean up any resources that were created.
