@@ -6,7 +6,7 @@ ARG argBasedVersion="1.12.0"
 COPY --chown=wrongsecrets target/wrongsecrets-${argBasedVersion}-SNAPSHOT.jar application.jar
 RUN java -Djarmode=tools -jar application.jar extract --layers --destination extracted
 
-FROM eclipse-temurin:23.0.2_7-jre-alpine-3.21
+FROM  bellsoft/liberica-openjre-debian:23.0.2-9
 WORKDIR /application
 
 ARG argBasedPassword="default"
