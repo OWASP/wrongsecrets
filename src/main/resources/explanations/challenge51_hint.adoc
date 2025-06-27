@@ -1,6 +1,6 @@
 This challenge can be solved using the following ways:
 
-- *Acme Inc*. has a misconfigured `challenge51docker-compose.yml` file where sensitive information is exposed. Your task is to find these vulnerabilities.
+- Use docker-compose file (`challenge51docker-compose.yml`) to build the containers and find the secret
   1. Clone the repository containing the challenge files.
   2. Locate the `challenge51docker-compose.yml` file in the repository and navigate to that location.
   3. Identify credentials:
@@ -13,3 +13,8 @@ This challenge can be solved using the following ways:
      * `docker compose -f challenge51docker-compose.yml build`
      * `docker compose -f challenge51docker-compose.yml run myservice`
   5. The answer is in the output
+
+- Find the secrets directly on the filesystem:
+   1. Clone the repository containing the challenge files.
+   2. Leverage the file references in `challenge51docker-compose.yml` to locate the files containing the secrets.
+   3. Open the file to find the secret.
