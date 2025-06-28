@@ -9,7 +9,7 @@ RUN \
 
 RUN \
   echo "**** install packages ****" && \
-  apk add --no-cache shadow keepassxc radare2 aws-cli geany git build-base icu-libs icu-data-full && \
+  apk add --no-cache shadow keepassxc radare2 aws-cli geany git gdb build-base icu-libs icu-data-full && \
   echo "**** adding abc user to root for Docker ****" && \
   usermod -aG root abc && \
   touch /var/run/docker.sock && \
