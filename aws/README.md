@@ -109,7 +109,7 @@ You might want to set up TLS. For that, refer to the [AWS documentation](https:/
 
 Want to see if the setup still works? You can use terratest to check if the current setup works via automated terratest tests, for this you need to make sure that you have installed terraform and Go version 1.21. Next, you will need to install the modules and set up credentials.
 
-1. Run `go mod download`.
+1. Run `go mod download && go mod tidy`.
 2. Set up your AWS profile using `export AWS_PROFILE=<your-profile-here>`.
 3. Run `go test -timeout 99999s`. The default timeout is 10 min, which is too short for our purposes. We need to override that.
 
