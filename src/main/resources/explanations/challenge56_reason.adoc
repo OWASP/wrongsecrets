@@ -1,0 +1,3 @@
+*Why you should check documentation for secrets*
+
+Documentation and specification files are often shared widely and may be overlooked during security reviews. Sometimes, secrets or sensitive information are added as examples or instructions and are not removed before sharing or publishing. This challenge highlights the importance of reviewing all project files—including documentation—for secrets and sensitive data.

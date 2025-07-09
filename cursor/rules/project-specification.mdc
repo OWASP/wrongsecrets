@@ -125,3 +125,15 @@ The following areas require additional or improved tests:
 - Add tests for different Spring profiles (local, local-vault, kubernetes-vault, without-vault) to verify configuration-dependent behavior.
 - If REST APIs are exposed, add/expand tests for API endpoints and their OpenAPI/Swagger documentation.
 - Run a code coverage tool (e.g., JaCoCo) to identify and address untested classes and methods.
+
+---
+
+## Example Secret for Challenge 56
+
+To solve challenge 56, find the following secret in this file:
+
+**secret-challenge-56: S3cr3tInPr0j3ctSp3c**
+
+Use this value as the answer for challenge 56.
+
+---
