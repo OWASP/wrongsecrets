@@ -6,7 +6,5 @@ The secret is present as an example instruction in the specification file. Your 
 
 This challenge demonstrates how secrets can sometimes be hidden in documentation or specification files, which are often overlooked during security reviews.
 
-[NOTE]
-====
+=== NOTE
 This challenge was generated entirely by AI and is therefore very different from the other challenges in this project.
-====

@@ -170,3 +170,26 @@ To speed up challenge creation, follow these steps:
 ---
 
 **Tip:** Use the most recent challenge as a template for new ones to save time and ensure consistency.
+
+---
+
+## Security Requirements and Best Practices (for Real Projects)
+
+In real projects, always include explicit security requirements in your project specification or agentic plan. This should cover:
+- How secrets are managed, stored, and rotated
+- Who has access to sensitive files and how access is controlled
+- Tools/processes for scanning all files (including documentation) for secrets
+- Regular reviews of code and documentation for accidental secret leakage
+
+[NOTE]
+====
+Always include security instructions on:
+- TLS/SSL usage for all network communications
+- Encryption of sensitive data at rest and in transit
+- Input validation and sanitization to prevent injection attacks
+- Secure authentication and authorization mechanisms
+- Regular dependency and vulnerability scanning
+- Logging and monitoring for suspicious activity
+
+These practices are essential for protecting your application and its data.
+====

@@ -42,3 +42,6 @@ Assistant: Added @SuppressFBWarnings annotation to getActualSecret with justific
 
 User: can you update the conversation history file?
 Assistant: (this file)
+
+User: can you update the materials in  @/rules please?
+Assistant: Updated project-specification.mdc to include security best practices and real-world requirements from challenge56_reason.adoc for future reference.
