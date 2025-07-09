@@ -1,0 +1,127 @@
+# Project Specification: OWASP WrongSecrets
+
+## Overview
+OWASP WrongSecrets is a security training application focused on secret management challenges. The project is containerized and supports multiple deployment and development environments, including Docker, Kubernetes, Heroku, Fly.io, and Okteto.
+The application contains secrets and vulnerabilities for its users to find in order to learn about bad security practices.
+
+## Java context
+
+You are a Java developer that wants to use the latest LTS java syntax, using clean code that is easy to read, with coherent consistent classes. Yyou are a test driven developer that creates tests for everything that you build.
+you run tests every time that you are adding something new.
+
+---
+
+## 1. Containerization & Docker
+
+### Dockerfiles
+- **Dockerfile**: Main build for the Java Spring Boot application. Uses multi-stage builds for optimized images. Supports build arguments for versioning and secret injection.
+- **Dockerfile.web**: Specialized for Heroku/Fly.io/CTF deployments, extends the main image and adds CTF-specific environment variables.
+- **Dockerfile_webdesktop** & **Dockerfile_webdesktopk8s**: Provide a web-based desktop environment with security tools for users, supporting both local and Kubernetes environments.
+- **k8s/challenge53/Dockerfile**: Custom Dockerfile for a specific challenge.
+
+### Build & Push Scripts
+- **.github/scripts/docker-create.sh**: Central script for building, tagging, and pushing Docker images. Supports different profiles (local, local-vault, kubernetes-vault, heroku, render, etc.) and multi-architecture builds via `docker buildx`. Handles secret injection using Docker BuildKit secrets.
+- **.github/scripts/docker-create-and-push.sh**: Automates building and pushing all containers.
+
+### Docker Compose
+- **src/main/resources/challenges/challenge-51/challenge51docker-compose.yml**: Used for challenge-specific multi-container orchestration.
+
+### Key Docker Concepts
+- Multi-stage builds for smaller images.
+- Use of ARG and ENV for secret and configuration injection.
+- BuildKit secrets for secure secret handling (with caveats for exposure).
+- Custom user and permissions for container security.
+- Support for both x86_64 and ARM64 architectures.
+
+---
+
+## 2. Deployment Targets
+
+### Kubernetes
+- **k8s/**: Contains deployment manifests for running the app and challenges in Kubernetes clusters.
+- **k8s-vault-minikube-start.sh**: Script to start a local Vault instance in Minikube for development/testing.
+- **k8s/challenge53/Dockerfile**: Example of a challenge-specific container for Kubernetes.
+
+### Heroku
+- **heroku.yml**: Defines Heroku deployment configuration.
+- **Dockerfile.web**: Used for Heroku container builds.
+
+### Fly.io
+- **fly.toml**: Configuration for deploying the app to Fly.io using Docker images.
+
+### Okteto
+- **okteto/okteto.yml**: Defines development and deployment flows for Okteto cloud environments.
+
+### Render
+- **render.yaml**: Render.com deployment configuration.
+
+---
+
+## 3. Development & Testing
+
+- **README.md**: Comprehensive instructions for local development, Docker usage, and running tests.
+- **pom.xml**: Maven build configuration for Java dependencies and plugins.
+- **cypress/**: End-to-end tests using Cypress, integrated with JUnit.
+- **.github/workflows/container_test.yml**: GitHub Actions workflow for automated container build and test.
+
+---
+
+## 4. Security & Dependency Management
+
+- **OWASP Dependency-Check** and **CycloneDX**: Integrated for vulnerability and SBOM generation.
+- **.pre-commit-config.yaml**: Linting and security checks on commit.
+
+---
+
+## 5. Agentic Plan for Containerization & Deployment
+
+### Step 1: Build
+- Use `./mvnw clean install` to build the Java application.
+- Use `.github/scripts/docker-create.sh` to build Docker images for different profiles (local, vault, k8s, etc.).
+- BuildKit secrets are injected at build time for certain challenges.
+
+### Step 2: Test
+- Run unit and integration tests via Maven.
+- Run Cypress E2E tests.
+- Use GitHub Actions for CI container builds and tests.
+
+### Step 3: Deploy
+- **Docker**: Run locally with `docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:latest-no-vault`.
+- **Kubernetes**: Apply manifests from `k8s/` and use challenge-specific images as needed.
+- **Heroku/Fly.io/Render/Okteto**: Use respective configuration files for cloud deployment.
+
+### Step 4: Play/Operate
+- Access the app via browser (default port 8080 or 3000 for desktop).
+- Use the web desktop container for a pre-installed security tools environment.
+
+---
+
+## 6. Key Files & Directories
+- `Dockerfile`, `Dockerfile.web`, `Dockerfile_webdesktop`, `Dockerfile_webdesktopk8s`, `k8s/challenge53/Dockerfile`
+- `.github/scripts/docker-create.sh`, `.github/scripts/docker-create-and-push.sh`
+- `k8s/`, `heroku.yml`, `fly.toml`, `okteto/okteto.yml`, `render.yaml`
+- `README.md`, `pom.xml`, `cypress/`, `.github/workflows/`
+
+---
+
+## 7. References
+- [OWASP WrongSecrets GitHub](https://github.com/OWASP/wrongsecrets)
+- [Docker Hub](https://hub.docker.com/r/jeroenwillemsen/wrongsecrets)
+- [Project README](../README.md)
+description:
+globs:
+alwaysApply: false
+---
+
+## 8. TODO: Test Coverage Improvements
+
+The following areas require additional or improved tests:
+
+- Ensure every challenge in `org.owasp.wrongsecrets.challenges` has a corresponding unit test in `src/test/java/org/owasp/wrongsecrets/challenges/`.
+- Add/expand tests for `SecurityConfig` and authentication flows (route protection, CSRF, login, etc.).
+- Add unit tests for `RuntimeEnvironment` logic, covering all environment and CTF settings.
+- Add tests for error handling and edge cases (invalid challenge IDs, misconfigured environments, missing secrets, etc.).
+- Expand integration tests for multi-component flows (challenge completion, scoring, UI updates).
+- Add tests for different Spring profiles (local, local-vault, kubernetes-vault, without-vault) to verify configuration-dependent behavior.
+- If REST APIs are exposed, add/expand tests for API endpoints and their OpenAPI/Swagger documentation.
+- Run a code coverage tool (e.g., JaCoCo) to identify and address untested classes and methods.
