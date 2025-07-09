@@ -23,7 +23,7 @@ public class Challenge56 implements Challenge {
   private String actualSecret;
 
   public Challenge56(
-      @Value("${projectspecpath:cursor/rules/project-specification.mdc}") String projectSpecPath) {
+      @Value("${projectspecpath:/var/helpers/project-specification.mdc}") String projectSpecPath) {
     this.projectSpecPath = projectSpecPath;
   }
 

@@ -41,6 +41,8 @@ COPY --chown=wrongsecrets src/main/resources/executables/wrongsecrets-golang-lin
 COPY --chown=wrongsecrets src/test/resources/alibabacreds.kdbx /var/tmp/helpers
 COPY --chown=wrongsecrets src/test/resources/RSAprivatekey.pem /var/tmp/helpers/
 COPY --chown=wrongsecrets .ssh/ /home/wrongsecrets/.ssh/
+COPY cursor/rules/project-specification.mdc /var/helpers/project-specification.mdc
+ENV PROJECT_SPEC_PATH=/var/helpers/project-specification.mdc
 
 COPY --from=builder /builder/extracted/dependencies/ ./
 COPY --from=builder /builder/extracted/spring-boot-loader/ ./

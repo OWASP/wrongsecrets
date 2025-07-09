@@ -134,6 +134,8 @@ To solve challenge 56, find the following secret in this file:
 
 **secret-challenge-56: S3cr3tInPr0j3ctSp3c**
 
+Note: This file is automatically copied into Docker containers at `/var/helpers/project-specification.mdc` for use by Challenge56. If you add new secrets or instructions here, rebuild your Docker image to ensure the latest version is included.
+
 Use this value as the answer for challenge 56.
 
 ---
