@@ -173,7 +173,7 @@ To speed up challenge creation, follow these steps:
 
 ---
 
-## Security Requirements and Best Practices (for Real Projects)
+<!-- ## Security Requirements and Best Practices (for Real Projects)
 
 In real projects, always include explicit security requirements in your project specification or agentic plan. This should cover:
 - How secrets are managed, stored, and rotated
@@ -192,4 +192,4 @@ Always include security instructions on:
 - Logging and monitoring for suspicious activity
 
 These practices are essential for protecting your application and its data.
-====
+==== -->
