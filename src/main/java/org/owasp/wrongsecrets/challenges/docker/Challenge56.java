@@ -3,6 +3,7 @@ package org.owasp.wrongsecrets.challenges.docker;
 import static org.owasp.wrongsecrets.Challenges.ErrorResponses.FILE_MOUNT_ERROR;
 
 import com.google.common.base.Strings;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -36,6 +37,9 @@ public class Challenge56 implements Challenge {
     return !Strings.isNullOrEmpty(answer) && getActualSecret().equals(answer.trim());
   }
 
+  @SuppressFBWarnings(
+      value = "PATH_TRAVERSAL_IN",
+      justification = "Intentional for educational purposes in this challenge; see documentation.")
   private String getActualSecret() {
     if (Strings.isNullOrEmpty(actualSecret)) {
       try {
