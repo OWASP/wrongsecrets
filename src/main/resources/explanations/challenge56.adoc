@@ -1,0 +1,10 @@
+=== Challenge 56: Find the Secret in the Project Specification
+
+In this challenge, your task is to find a secret that has been hidden in the project's agentic plan documentation file: `cursor/rules/project-specification.mdc`.
+
+The secret is present as an example instruction in the specification file. Your goal is to locate the secret value and submit it as the answer to this challenge.
+
+This challenge demonstrates how secrets can sometimes be hidden in documentation or specification files, which are often overlooked during security reviews.
+
+=== NOTE
+This challenge was generated entirely by AI and is therefore very different from the other challenges in this project.

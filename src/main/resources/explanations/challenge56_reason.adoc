@@ -1,0 +1,29 @@
+*Why you should check documentation for secrets*
+
+Documentation and specification files are often shared widely and may be overlooked during security reviews.
+Sometimes, secrets or sensitive information are added as examples or instructions and are not removed before sharing or publishing.
+This challenge highlights the importance of reviewing all project files—including documentation—for secrets and sensitive data.
+
+----
+
+In a real project, you should always include explicit security requirements in your project specification or agentic plan. This means:
+- Listing how secrets should be managed, stored, and rotated.
+- Defining who has access to sensitive files and how access is controlled.
+- Stating which tools or processes must be used to scan for secrets in all files, including documentation.
+- Requiring regular reviews of both code and documentation for accidental secret leakage.
+
+Adding these requirements helps ensure that security is considered from the start and reduces the risk of sensitive data exposure through overlooked files or bad practices.
+
+[NOTE]
+====
+In real projects, always include security instructions on:
+- TLS/SSL usage for all network communications
+- Encryption of sensitive data at rest and in transit
+- Input validation and sanitization to prevent injection attacks
+- Secure authentication and authorization mechanisms
+- Regular dependency and vulnerability scanning
+- Logging and monitoring for suspicious activity
+- Using the right model and language for the right problem
+
+These practices are essential for protecting your application and its data.
+====
