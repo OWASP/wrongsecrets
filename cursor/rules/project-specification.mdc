@@ -137,3 +137,36 @@ To solve challenge 56, find the following secret in this file:
 Use this value as the answer for challenge 56.
 
 ---
+
+## Instructions: How to Quickly Add a New Challenge
+
+To speed up challenge creation, follow these steps:
+
+1. **Create the Challenge Class**
+   - Add a new Java class in the appropriate package (e.g., `org.owasp.wrongsecrets.challenges.docker`).
+   - Implement the `Challenge` interface or extend `FixedAnswerChallenge` as needed.
+
+2. **Write Documentation**
+   - Add three files in `src/main/resources/explanations/`:
+     - `challengeXX.adoc` (main description)
+     - `challengeXX_hint.adoc` (hint for users)
+     - `challengeXX_reason.adoc` (explanation of the challenge's relevance)
+
+3. **Add Unit Tests**
+   - Create a test class in `src/test/java/org/owasp/wrongsecrets/challenges/docker/` (or the relevant package).
+   - Cover correct, incorrect, and edge cases.
+
+4. **Register the Challenge**
+   - Add an entry to `src/main/resources/wrong-secrets-configuration.yaml` under `challenges:`
+     - Set the class name, explanation, hint, reason, environments, difficulty, category, and CTF status.
+
+5. **(Optional) Add UI Snippet**
+   - If your challenge needs a custom UI, add a snippet in `src/main/resources/templates/challenges/` and reference it in the configuration.
+
+6. **Test Everything**
+   - Run `./mvnw test` to ensure all tests pass.
+   - Start the app and verify the challenge appears and works as expected.
+
+---
+
+**Tip:** Use the most recent challenge as a template for new ones to save time and ensure consistency.
