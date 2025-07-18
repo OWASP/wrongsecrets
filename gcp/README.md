@@ -17,7 +17,7 @@ Have the following tools installed:
 -   sed
 -   Terraform CLI - [Installation](https://learn.hashicorp.com/tutorials/terraform/install-cli)
 -   Tfenv (Optional) - [Installation](https://github.com/tfutils/tfenv)
--   vault - [Installation](https://developer.hashicorp.com/vault/docs/install)
+-   vault - [Installation](https://developer.hashicorp.com/vault/install)
 -   Wget - [Installation](https://www.jcchouinard.com/wget/)
 
 

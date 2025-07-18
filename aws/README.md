@@ -21,7 +21,7 @@ Have the following tools installed:
 -   sed
 -   Tfenv (Optional) - [Installation](https://github.com/tfutils/tfenv)
 -   Terraform CLI - [Installation](https://learn.hashicorp.com/tutorials/terraform/install-cli)
--   Vault - [Installation](https://developer.hashicorp.com/vault/docs/install)
+-   Vault - [Installation](https://developer.hashicorp.com/vault/install)
 -   wget - [Installation](https://www.jcchouinard.com/wget/)
 
 Make sure you have an active account at AWS for which you have configured the credentials on the system where you will execute the steps below. In this example we stored the credentials under an aws profile as `awsuser`.
