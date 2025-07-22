@@ -366,39 +366,39 @@ create_containers() {
     echo "Creating containers"
     export SECRET_VALUE="youCantHandleThisSecret"
     if [[ "$script_mode" == "publish" ]]; then
-        docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/addo-example:$tag-no-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=without-vault" --secret id=mysecret,env=SECRET_VALUE --push ./../../.
-        docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/addo-example:latest-no-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=without-vault" --secret id=mysecret,env=SECRET_VALUE --push ./../../.
-        docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/addo-example:$tag-local-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=local-vault" --secret id=mysecret,env=SECRET_VALUE --push ./../../.
-        docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/addo-example:latest-local-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=local-vault" --secret id=mysecret,env=SECRET_VALUE --push ./../../.
-        docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/addo-example:$tag-k8s-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=kubernetes-vault" --secret id=mysecret,env=SECRET_VALUE --push ./../../.
-        docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/addo-example:latest-k8s-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=kubernetes-vault" --secret id=mysecret,env=SECRET_VALUE --push ./../../.
-        docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets:$tag-no-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=without-vault" --secret id=mysecret,env=SECRET_VALUE --push ./../../.
-        docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets:latest-no-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=without-vault" --secret id=mysecret,env=SECRET_VALUE --push ./../../.
-        docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets:$tag-local-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=local-vault" --secret id=mysecret,env=SECRET_VALUE --push ./../../.
-        docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets:latest-local-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=local-vault" --secret id=mysecret,env=SECRET_VALUE --push ./../../.
-        docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets:$tag-k8s-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=kubernetes-vault" --secret id=mysecret,env=SECRET_VALUE --push ./../../.
-        docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets:latest-k8s-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=kubernetes-vault" --secret id=mysecret,env=SECRET_VALUE --push ./../../.
+        docker buildx build --no-cache --platform linux/amd64,linux/arm64 -t jeroenwillemsen/addo-example:$tag-no-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=without-vault" --secret id=mysecret,env=SECRET_VALUE --push ./../../.
+        docker buildx build --no-cache --platform linux/amd64,linux/arm64 -t jeroenwillemsen/addo-example:latest-no-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=without-vault" --secret id=mysecret,env=SECRET_VALUE --push ./../../.
+        docker buildx build --no-cache --platform linux/amd64,linux/arm64 -t jeroenwillemsen/addo-example:$tag-local-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=local-vault" --secret id=mysecret,env=SECRET_VALUE --push ./../../.
+        docker buildx build --no-cache --platform linux/amd64,linux/arm64 -t jeroenwillemsen/addo-example:latest-local-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=local-vault" --secret id=mysecret,env=SECRET_VALUE --push ./../../.
+        docker buildx build --no-cache --platform linux/amd64,linux/arm64 -t jeroenwillemsen/addo-example:$tag-k8s-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=kubernetes-vault" --secret id=mysecret,env=SECRET_VALUE --push ./../../.
+        docker buildx build --no-cache --platform linux/amd64,linux/arm64 -t jeroenwillemsen/addo-example:latest-k8s-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=kubernetes-vault" --secret id=mysecret,env=SECRET_VALUE --push ./../../.
+        docker buildx build --no-cache --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets:$tag-no-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=without-vault" --secret id=mysecret,env=SECRET_VALUE --push ./../../.
+        docker buildx build --no-cache --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets:latest-no-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=without-vault" --secret id=mysecret,env=SECRET_VALUE --push ./../../.
+        docker buildx build --no-cache --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets:$tag-local-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=local-vault" --secret id=mysecret,env=SECRET_VALUE --push ./../../.
+        docker buildx build --no-cache --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets:latest-local-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=local-vault" --secret id=mysecret,env=SECRET_VALUE --push ./../../.
+        docker buildx build --no-cache --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets:$tag-k8s-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=kubernetes-vault" --secret id=mysecret,env=SECRET_VALUE --push ./../../.
+        docker buildx build --no-cache --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets:latest-k8s-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=kubernetes-vault" --secret id=mysecret,env=SECRET_VALUE --push ./../../.
         cd ../..
-        docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets-desktop:$tag -f Dockerfile_webdesktop --secret id=mysecret,env=SECRET_VALUE --push .
-        docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets-desktop:latest -f Dockerfile_webdesktop --secret id=mysecret,env=SECRET_VALUE --push .
-        docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets-desktop-k8s:$tag -f Dockerfile_webdesktopk8s --secret id=mysecret,env=SECRET_VALUE --push .
-        docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets-desktop-k8s:latest -f Dockerfile_webdesktopk8s --secret id=mysecret,env=SECRET_VALUE --push .
+        docker buildx build --no-cache --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets-desktop:$tag -f Dockerfile_webdesktop --secret id=mysecret,env=SECRET_VALUE --push .
+        docker buildx build --no-cache --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets-desktop:latest -f Dockerfile_webdesktop --secret id=mysecret,env=SECRET_VALUE --push .
+        docker buildx build --no-cache --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets-desktop-k8s:$tag -f Dockerfile_webdesktopk8s --secret id=mysecret,env=SECRET_VALUE --push .
+        docker buildx build --no-cache --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets-desktop-k8s:latest -f Dockerfile_webdesktopk8s --secret id=mysecret,env=SECRET_VALUE --push .
         cd k8s/challenge53
         cp ../../src/main/resources/executables/wrongsecrets-challenge53-* ./executables
-        docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets-challenge53:$tag -f Dockerfile --push .
-        docker buildx build --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets-challenge53-debug:$tag -f Dockerfile.debug --push .
+        docker buildx build --no-cache --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets-challenge53:$tag -f Dockerfile --push .
+        docker buildx build --no-cache --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets-challenge53-debug:$tag -f Dockerfile.debug --push .
         rm ./executables/wrongsecrets-challenge53-*
         cd ../..
         cd .github/scripts
     elif [[ "$script_mode" == "test" ]]; then
-        docker buildx build -t jeroenwillemsen/wrongsecrets:$tag --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=without-vault" --load --secret id=mysecret,env=SECRET_VALUE ./../../.
+        docker buildx build --no-cache  -t jeroenwillemsen/wrongsecrets:$tag --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=without-vault" --load --secret id=mysecret,env=SECRET_VALUE ./../../.
     else
         if [[ "$springProfile" != "All" ]]; then
             docker buildx build -t jeroenwillemsen/wrongsecrets:$tag-$springProfile --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=$springProfile" --load --secret id=mysecret,env=SECRET_VALUE ./../../.
         else
-            docker buildx build -t jeroenwillemsen/wrongsecrets:$tag-no-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=without-vault" --load --secret id=mysecret,env=SECRET_VALUE ./../../.
-            docker buildx build -t jeroenwillemsen/wrongsecrets:$tag-local-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=local-vault" --load --secret id=mysecret,env=SECRET_VALUE ./../../.
-            docker buildx build -t jeroenwillemsen/wrongsecrets:$tag-k8s-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=kubernetes-vault" --load --secret id=mysecret,env=SECRET_VALUE ./../../.
+            docker buildx build --no-cache  -t jeroenwillemsen/wrongsecrets:$tag-no-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=without-vault" --load --secret id=mysecret,env=SECRET_VALUE ./../../.
+            docker buildx build --no-cache  -t jeroenwillemsen/wrongsecrets:$tag-local-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=local-vault" --load --secret id=mysecret,env=SECRET_VALUE ./../../.
+            docker buildx build --no-cache  -t jeroenwillemsen/wrongsecrets:$tag-k8s-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=kubernetes-vault" --load --secret id=mysecret,env=SECRET_VALUE ./../../.
         fi
     fi
 }
