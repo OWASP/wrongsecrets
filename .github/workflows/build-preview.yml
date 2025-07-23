@@ -22,6 +22,16 @@ jobs:
           distribution: "oracle"
           cache: "maven"
 
+      - name: Extract version from pom.xml
+        id: extract-version
+        run: |
+          VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          DOCKER_VERSION=${VERSION%-SNAPSHOT}
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "docker_version=$DOCKER_VERSION" >> $GITHUB_OUTPUT
+          echo "Detected version: $VERSION"
+          echo "Docker version: $DOCKER_VERSION"
+
       - name: Build application
         run: |
           echo "Building WrongSecrets application..."
@@ -33,8 +43,8 @@ jobs:
 
       - name: Build Docker image
         run: |
-          echo "Building Docker image..."
-          docker build -t wrongsecrets-preview .
+          echo "Building Docker image with version ${{ steps.extract-version.outputs.docker_version }}..."
+          docker build --build-arg argBasedVersion="${{ steps.extract-version.outputs.docker_version }}" -t wrongsecrets-preview .
           echo "Docker image built successfully"
           docker save wrongsecrets-preview > wrongsecrets-preview.tar
 

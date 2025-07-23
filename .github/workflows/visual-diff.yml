@@ -28,13 +28,23 @@ jobs:
           distribution: "oracle"
           cache: "maven"
 
+      - name: Extract PR version
+        id: extract-pr-version
+        working-directory: pr-code
+        run: |
+          VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          DOCKER_VERSION=${VERSION%-SNAPSHOT}
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "docker_version=$DOCKER_VERSION" >> $GITHUB_OUTPUT
+          echo "PR version: $VERSION"
+
       - name: Build PR version
         working-directory: pr-code
         run: |
           echo "Building PR version..."
           ./mvnw --no-transfer-progress clean package -DskipTests
           echo "PR JAR built successfully"
-          docker build -t wrongsecrets-pr .
+          docker build --build-arg argBasedVersion="${{ steps.extract-pr-version.outputs.docker_version }}" -t wrongsecrets-pr .
           echo "PR Docker image built successfully"
 
       - name: Set up JDK 23 for main build
@@ -44,13 +54,23 @@ jobs:
           distribution: "oracle"
           cache: "maven"
 
+      - name: Extract main version
+        id: extract-main-version
+        working-directory: main-code
+        run: |
+          VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          DOCKER_VERSION=${VERSION%-SNAPSHOT}
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "docker_version=$DOCKER_VERSION" >> $GITHUB_OUTPUT
+          echo "Main version: $VERSION"
+
       - name: Build main version
         working-directory: main-code
         run: |
           echo "Building main version..."
           ./mvnw --no-transfer-progress clean package -DskipTests
           echo "Main JAR built successfully"
-          docker build -t wrongsecrets-main .
+          docker build --build-arg argBasedVersion="${{ steps.extract-main-version.outputs.docker_version }}" -t wrongsecrets-main .
           echo "Main Docker image built successfully"
           docker build -t wrongsecrets-main .
 

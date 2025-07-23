@@ -35,6 +35,16 @@ jobs:
       - name: Build application
         run: ./mvnw --no-transfer-progress clean package -DskipTests
 
+      - name: Extract version from pom.xml
+        id: extract-version
+        run: |
+          VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          DOCKER_VERSION=${VERSION%-SNAPSHOT}
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "docker_version=$DOCKER_VERSION" >> $GITHUB_OUTPUT
+          echo "Detected version: $VERSION"
+          echo "Docker version: $DOCKER_VERSION"
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
@@ -62,6 +72,8 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            argBasedVersion=${{ steps.extract-version.outputs.docker_version }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
@@ -149,11 +161,25 @@ jobs:
           distribution: "oracle"
           cache: "maven"
 
+      - name: Extract PR version
+        id: extract-pr-version
+        working-directory: pr-code
+        run: |
+          VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          DOCKER_VERSION=${VERSION%-SNAPSHOT}
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "docker_version=$DOCKER_VERSION" >> $GITHUB_OUTPUT
+          echo "PR version: $VERSION"
+          echo "PR Docker version: $DOCKER_VERSION"
+
       - name: Build PR version
         working-directory: pr-code
         run: |
+          echo "Building PR version..."
           ./mvnw --no-transfer-progress clean package -DskipTests
-          docker build -t wrongsecrets-pr .
+          echo "PR JAR built successfully"
+          docker build --build-arg argBasedVersion="${{ steps.extract-pr-version.outputs.docker_version }}" -t wrongsecrets-pr .
+          echo "PR Docker image built successfully"
 
       - name: Set up JDK 23 for main
         uses: actions/setup-java@v4
@@ -162,11 +188,25 @@ jobs:
           distribution: "oracle"
           cache: "maven"
 
+      - name: Extract main version
+        id: extract-main-version
+        working-directory: main-code
+        run: |
+          VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          DOCKER_VERSION=${VERSION%-SNAPSHOT}
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "docker_version=$DOCKER_VERSION" >> $GITHUB_OUTPUT
+          echo "Main version: $VERSION"
+          echo "Main Docker version: $DOCKER_VERSION"
+
       - name: Build main version
         working-directory: main-code
         run: |
+          echo "Building main version..."
           ./mvnw --no-transfer-progress clean package -DskipTests
-          docker build -t wrongsecrets-main .
+          echo "Main JAR built successfully"
+          docker build --build-arg argBasedVersion="${{ steps.extract-main-version.outputs.docker_version }}" -t wrongsecrets-main .
+          echo "Main Docker image built successfully"
 
       # Alternative approach: Pull the PR image from registry
       # - name: Log in to GitHub Container Registry
