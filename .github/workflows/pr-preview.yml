@@ -102,6 +102,21 @@ jobs:
           echo "Verifying Docker image was built successfully..."
           docker images | grep wrongsecrets-pr || echo "No wrongsecrets-pr images found"
 
+      - name: Save Docker image as artifact
+        run: |
+          echo "Saving Docker image as tar artifact..."
+          IMAGE_TAG="${{ steps.meta.outputs.tags }}" | head -n1
+          docker save "$IMAGE_TAG" -o wrongsecrets-preview.tar
+          echo "Docker image saved to wrongsecrets-preview.tar"
+          ls -lh wrongsecrets-preview.tar
+
+      - name: Upload Docker image artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: wrongsecrets-preview-pr-${{ github.event.number }}
+          path: wrongsecrets-preview.tar
+          retention-days: 30
+
       # Comment out Render deployment for now
       # - name: Deploy to Render (Preview)
       #   env:
@@ -130,6 +145,7 @@ jobs:
           script: |
             const prNumber = context.issue.number;
             const imageTag = `${{ steps.meta.outputs.tags }}`.split('\n')[0];
+            const runId = context.runId;
 
             const comment = `🔨 **Preview Build Complete!**
 
@@ -137,9 +153,17 @@ jobs:
 
             **🐳 Docker Image:** \`${imageTag}\`
 
-            **🚀 To test locally:**
+            **� Download & Test Locally:**
+            1. [📁 Download Docker Image Artifact](https://github.com/${{ github.repository }}/actions/runs/${runId}) (look for \`wrongsecrets-preview-pr-${prNumber}\`)
+            2. Load and run the image:
             \`\`\`bash
-            # Pull and run the preview image
+            # Download the artifact, extract it, then:
+            docker load < wrongsecrets-preview.tar
+            docker run -p 8080:8080 wrongsecrets-preview
+            \`\`\`
+
+            **🚀 Alternative - Pull from Registry:**
+            \`\`\`bash
             docker pull ${imageTag}
             docker run -p 8080:8080 ${imageTag}
             \`\`\`
