@@ -1,0 +1,387 @@
+name: PR Preview and Visual Diff
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    paths:
+      - 'src/main/resources/templates/**'
+      - 'src/main/resources/static/**'
+      - 'src/main/resources/explanations/**'
+      - 'src/main/java/**'
+
+permissions:
+  contents: read
+  packages: write
+  pull-requests: write
+
+jobs:
+  build-containers:
+    runs-on: ubuntu-latest
+    if: github.event.action != 'closed'
+    outputs:
+      pr-image-tag: ${{ steps.pr-meta.outputs.tags }}
+      pr-version: ${{ steps.extract-pr-version.outputs.docker_version }}
+      main-version: ${{ steps.extract-main-version.outputs.docker_version }}
+    steps:
+      # Checkout both PR and main branch code
+      - name: Checkout PR code
+        uses: actions/checkout@v4
+        with:
+          path: pr-code
+
+      - name: Checkout main branch
+        uses: actions/checkout@v4
+        with:
+          ref: master
+          path: main-code
+
+      # Set up Java once for both builds
+      - name: Set up JDK 23
+        uses: actions/setup-java@v4
+        with:
+          java-version: "23"
+          distribution: "oracle"
+          cache: "maven"
+
+      # Extract versions from both branches
+      - name: Extract PR version
+        id: extract-pr-version
+        working-directory: pr-code
+        run: |
+          echo "Extracting PR version from pom.xml..."
+          chmod +x ./mvnw
+          VERSION=$(./mvnw help:evaluate -Dexpression=project.version -q -DforceStdout)
+          DOCKER_VERSION=${VERSION%-SNAPSHOT}
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "docker_version=$DOCKER_VERSION" >> $GITHUB_OUTPUT
+          echo "PR version: $VERSION"
+          echo "PR Docker version: $DOCKER_VERSION"
+
+      - name: Extract main version
+        id: extract-main-version
+        working-directory: main-code
+        run: |
+          echo "Extracting main version from pom.xml..."
+          chmod +x ./mvnw
+          VERSION=$(./mvnw help:evaluate -Dexpression=project.version -q -DforceStdout)
+          DOCKER_VERSION=${VERSION%-SNAPSHOT}
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "docker_version=$DOCKER_VERSION" >> $GITHUB_OUTPUT
+          echo "Main version: $VERSION"
+          echo "Main Docker version: $DOCKER_VERSION"
+
+      # Build PR version
+      - name: Build PR application
+        working-directory: pr-code
+        run: |
+          echo "Building PR version..."
+          ./mvnw --no-transfer-progress clean package -DskipTests
+          echo "PR JAR built successfully"
+
+      - name: Verify PR JAR file
+        working-directory: pr-code
+        run: |
+          JAR_FILE="target/wrongsecrets-${{ steps.extract-pr-version.outputs.version }}.jar"
+          if [ -f "$JAR_FILE" ]; then
+            echo "✅ PR JAR file found: $JAR_FILE"
+            ls -la "$JAR_FILE"
+          else
+            echo "❌ Expected PR JAR file not found: $JAR_FILE"
+            echo "Available JAR files:"
+            find target/ -name "*.jar" -type f || echo "No JAR files found"
+            exit 1
+          fi
+
+      # Build main version
+      - name: Build main application
+        working-directory: main-code
+        run: |
+          echo "Building main version..."
+          ./mvnw --no-transfer-progress clean package -DskipTests
+          echo "Main JAR built successfully"
+
+      # Set up Docker for both builds
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # Build PR Docker image and push to registry
+      - name: Extract PR metadata
+        id: pr-meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository }}/wrongsecrets-pr
+          tags: |
+            type=ref,event=pr,suffix=-{{sha}}
+            type=ref,event=pr
+
+      - name: Build and push PR Docker image
+        id: pr-build
+        uses: docker/build-push-action@v5
+        with:
+          context: ./pr-code
+          push: true
+          tags: ${{ steps.pr-meta.outputs.tags }}
+          labels: ${{ steps.pr-meta.outputs.labels }}
+          build-args: |
+            argBasedVersion=${{ steps.extract-pr-version.outputs.docker_version }}
+          cache-from: type=gha,scope=pr
+          cache-to: type=gha,mode=max,scope=pr
+
+      # Build main Docker image locally (no push needed)
+      - name: Build main Docker image
+        working-directory: main-code
+        run: |
+          docker build --build-arg argBasedVersion="${{ steps.extract-main-version.outputs.docker_version }}" -t wrongsecrets-main .
+          echo "Main Docker image built successfully"
+
+      # Save PR image as artifact for download
+      - name: Save PR Docker image as artifact
+        run: |
+          echo "Saving PR Docker image as tar artifact..."
+          IMAGE_TAG=$(echo "${{ steps.pr-meta.outputs.tags }}" | head -n1)
+          echo "Using image tag: $IMAGE_TAG"
+
+          # Pull the image we just pushed
+          docker pull "$IMAGE_TAG" || {
+            echo "Failed to pull image, waiting 10 seconds and trying again..."
+            sleep 10
+            docker pull "$IMAGE_TAG"
+          }
+
+          # Save the image as tar
+          docker save "$IMAGE_TAG" -o wrongsecrets-preview.tar
+          echo "Docker image saved to wrongsecrets-preview.tar"
+          ls -lh wrongsecrets-preview.tar
+
+      - name: Upload PR Docker image artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: wrongsecrets-preview-pr-${{ github.event.number }}
+          path: wrongsecrets-preview.tar
+          retention-days: 30
+
+  visual-diff:
+    runs-on: ubuntu-latest
+    needs: build-containers
+    if: github.event.action != 'closed'
+    steps:
+      # We don't need to rebuild - just pull the images
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Pull PR image and setup main image
+        run: |
+          # Pull PR image from registry
+          PR_IMAGE_TAG=$(echo "${{ needs.build-containers.outputs.pr-image-tag }}" | head -n1)
+          echo "Pulling PR image: $PR_IMAGE_TAG"
+          docker pull "$PR_IMAGE_TAG"
+          docker tag "$PR_IMAGE_TAG" wrongsecrets-pr
+
+          # We need to rebuild main image since it wasn't pushed
+          # Checkout main branch
+          git clone --depth 1 --branch master https://github.com/${{ github.repository }}.git main-code
+          cd main-code
+
+          # Set up Java
+          curl -s "https://get.sdkman.io" | bash
+          source "$HOME/.sdkman/bin/sdkman-init.sh"
+          sdk install java 23.0.1-oracle
+
+          # Make mvnw executable and build
+          chmod +x ./mvnw
+          ./mvnw --no-transfer-progress clean package -DskipTests
+
+          # Build Docker image
+          docker build --build-arg argBasedVersion="${{ needs.build-containers.outputs.main-version }}" -t wrongsecrets-main .
+          echo "Main Docker image rebuilt successfully"
+
+      - name: Start both versions
+        run: |
+          docker run -d -p 8080:8080 --name pr-version wrongsecrets-pr
+          docker run -d -p 8081:8080 --name main-version wrongsecrets-main
+
+          # Wait for containers to start
+          echo "Waiting for containers to start..."
+          sleep 30
+
+          # Verify containers are running
+          if ! docker ps --filter "name=pr-version" --filter "status=running" --quiet | grep -q .; then
+            echo "PR version container failed to start"
+            docker logs pr-version
+            exit 1
+          fi
+
+          if ! docker ps --filter "name=main-version" --filter "status=running" --quiet | grep -q .; then
+            echo "Main version container failed to start"
+            docker logs main-version
+            exit 1
+          fi
+
+          # Wait for services to be ready
+          echo "Waiting for services to be ready..."
+          timeout 60 bash -c 'until curl -f http://localhost:8080/actuator/health 2>/dev/null; do sleep 2; done' || echo "PR version health check failed"
+          timeout 60 bash -c 'until curl -f http://localhost:8081/actuator/health 2>/dev/null; do sleep 2; done' || echo "Main version health check failed"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install Playwright
+        run: |
+          npm install playwright@latest
+          npx playwright install --with-deps chromium
+
+      - name: Take screenshots
+        run: |
+          mkdir -p screenshots
+
+          # Verify services are running
+          echo "Verifying services are running..."
+          docker ps --filter "name=pr-version" --format "table {{.Names}}\t{{.Status}}"
+          docker ps --filter "name=main-version" --format "table {{.Names}}\t{{.Status}}"
+
+          # Screenshot main pages with error handling
+          node -e "
+          const { chromium } = require('playwright');
+          (async () => {
+            const browser = await chromium.launch({ headless: true });
+            const page = await browser.newPage();
+            await page.setViewportSize({ width: 1280, height: 1024 });
+
+            try {
+              // PR version screenshots
+              console.log('Taking PR screenshots...');
+              await page.goto('http://localhost:8080', { waitUntil: 'networkidle', timeout: 30000 });
+              await page.screenshot({ path: 'screenshots/pr-home.png', fullPage: true });
+
+              await page.goto('http://localhost:8080/about', { waitUntil: 'networkidle', timeout: 30000 });
+              await page.screenshot({ path: 'screenshots/pr-about.png', fullPage: true });
+
+              await page.goto('http://localhost:8080/challenge/1', { waitUntil: 'networkidle', timeout: 30000 });
+              await page.screenshot({ path: 'screenshots/pr-challenge.png', fullPage: true });
+
+              // Main version screenshots
+              console.log('Taking main branch screenshots...');
+              await page.goto('http://localhost:8081', { waitUntil: 'networkidle', timeout: 30000 });
+              await page.screenshot({ path: 'screenshots/main-home.png', fullPage: true });
+
+              await page.goto('http://localhost:8081/about', { waitUntil: 'networkidle', timeout: 30000 });
+              await page.screenshot({ path: 'screenshots/main-about.png', fullPage: true });
+
+              await page.goto('http://localhost:8081/challenge/1', { waitUntil: 'networkidle', timeout: 30000 });
+              await page.screenshot({ path: 'screenshots/main-challenge.png', fullPage: true });
+
+            } catch (error) {
+              console.error('Screenshot error:', error);
+              process.exit(1);
+            } finally {
+              await browser.close();
+            }
+          })();
+          "
+
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-diff-pr-${{ github.event.number }}
+          path: screenshots/
+          retention-days: 30
+
+  comment-results:
+    runs-on: ubuntu-latest
+    needs: [build-containers, visual-diff]
+    if: github.event.action != 'closed'
+    steps:
+      - name: Comment PR with comprehensive results
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const prNumber = context.issue.number;
+            const imageTag = `${{ needs.build-containers.outputs.pr-image-tag }}`.split('\n')[0];
+            const runId = context.runId;
+
+            const comment = `🚀 **PR Preview Complete!**
+
+            Your changes have been built and analyzed. Here's what's available:
+
+            ## 🐳 Docker Preview
+            **Image:** \`${imageTag}\`
+
+            **📦 Download & Test Locally:**
+            1. [📁 Download Docker Image](https://github.com/${{ github.repository }}/actions/runs/${runId}) (look for \`wrongsecrets-preview-pr-${prNumber}\`)
+            2. Load and run:
+            \`\`\`bash
+            # Download the artifact, extract it, then:
+            docker load < wrongsecrets-preview.tar
+            docker run -p 8080:8080 wrongsecrets-preview
+            \`\`\`
+
+            **🚀 Or pull directly:**
+            \`\`\`bash
+            docker pull ${imageTag}
+            docker run -p 8080:8080 ${imageTag}
+            \`\`\`
+
+            ## 📸 Visual Diff
+            Screenshots comparing your changes with main branch are available:
+            [📁 Download Visual Diff](https://github.com/${{ github.repository }}/actions/runs/${runId}) (look for \`visual-diff-pr-${prNumber}\`)
+
+            **🖼️ Includes:**
+            - \`pr-home.png\` vs \`main-home.png\` - Welcome page
+            - \`pr-about.png\` vs \`main-about.png\` - About page
+            - \`pr-challenge.png\` vs \`main-challenge.png\` - Challenge page
+
+            ## 📝 Changed Files:`;
+
+            // Get the list of changed files
+            const { data: files } = await github.rest.pulls.listFiles({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: prNumber
+            });
+
+            const relevantFiles = files.filter(file =>
+              file.filename.includes('templates/') ||
+              file.filename.includes('static/') ||
+              file.filename.includes('explanations/') ||
+              file.filename.includes('src/main/java/')
+            );
+
+            let filesList = '';
+            if (relevantFiles.length > 0) {
+              filesList = relevantFiles.slice(0, 10).map(file => `- \`${file.filename}\``).join('\n            ');
+              if (relevantFiles.length > 10) {
+                filesList += `\n            - ... and ${relevantFiles.length - 10} more files`;
+              }
+            } else {
+              filesList = '- No relevant files changed';
+            }
+
+            const finalComment = comment + '\n            ' + filesList + `
+
+            **🔍 How to review:**
+            1. Test the Docker preview locally
+            2. Download and compare the visual diff screenshots
+            3. Look for differences in layout, styling, and functionality
+
+            ---
+            <sub>Generated by consolidated PR preview workflow</sub>`;
+
+            github.rest.issues.createComment({
+              issue_number: prNumber,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: finalComment
+            });
