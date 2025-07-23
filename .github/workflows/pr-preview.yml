@@ -108,9 +108,20 @@ jobs:
           IMAGE_TAG=$(echo "${{ steps.meta.outputs.tags }}" | head -n1)
           echo "Using image tag: $IMAGE_TAG"
 
-          # Pull the image locally if it's not available
-          echo "Pulling image to ensure it's available locally..."
-          docker pull "$IMAGE_TAG"
+          # Check if image is available locally first
+          if docker images --format "table {{.Repository}}:{{.Tag}}" | grep -q "$IMAGE_TAG"; then
+            echo "Image found locally, using local image"
+          else
+            echo "Image not found locally, attempting to pull..."
+            if docker pull "$IMAGE_TAG"; then
+              echo "Successfully pulled image"
+            else
+              echo "Failed to pull image, but this might be expected immediately after push"
+              echo "Waiting 10 seconds and trying again..."
+              sleep 10
+              docker pull "$IMAGE_TAG" || echo "Still failed to pull, continuing with local build"
+            fi
+          fi
 
           # Save the image as tar
           docker save "$IMAGE_TAG" -o wrongsecrets-preview.tar
@@ -195,15 +206,15 @@ jobs:
 
             let filesList = '';
             if (relevantFiles.length > 0) {
-              filesList = relevantFiles.slice(0, 10).map(file => `- \`${file.filename}\``).join('\\n            ');
+              filesList = relevantFiles.slice(0, 10).map(file => `- \`${file.filename}\``).join('\n            ');
               if (relevantFiles.length > 10) {
-                filesList += `\\n            - ... and ${relevantFiles.length - 10} more files`;
+                filesList += `\n            - ... and ${relevantFiles.length - 10} more files`;
               }
             } else {
               filesList = '- No relevant files changed';
             }
 
-            const finalComment = comment + '\\n            ' + filesList + `
+            const finalComment = comment + '\n            ' + filesList + `
 
             Visual diff screenshots will be available shortly...
 
@@ -320,48 +331,64 @@ jobs:
             sleep 2
           done
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
       - name: Install Playwright
         run: |
-          npm install -g playwright@latest
-          playwright install chromium
+          npm install playwright@latest
+          npx playwright install --with-deps chromium
 
       - name: Take screenshots
         run: |
           mkdir -p screenshots
 
+          # Verify services are still running
+          echo "Verifying services are still running..."
+          docker ps --filter "name=pr-version" --format "table {{.Names}}\t{{.Status}}"
+          docker ps --filter "name=main-version" --format "table {{.Names}}\t{{.Status}}"
+
+          # Test connectivity one more time
+          echo "Testing connectivity..."
+          curl -s -o /dev/null -w "%{http_code}" http://localhost:8080 || echo "PR version not responding"
+          curl -s -o /dev/null -w "%{http_code}" http://localhost:8081 || echo "Main version not responding"
+
           node -e "
           const { chromium } = require('playwright');
           (async () => {
-            const browser = await chromium.launch();
+            const browser = await chromium.launch({ headless: true });
             const page = await browser.newPage();
             await page.setViewportSize({ width: 1280, height: 1024 });
 
             try {
               // PR version screenshots
               console.log('Taking PR screenshots...');
-              await page.goto('http://localhost:8080', { waitUntil: 'networkidle' });
+              await page.goto('http://localhost:8080', { waitUntil: 'networkidle', timeout: 30000 });
               await page.screenshot({ path: 'screenshots/pr-home.png', fullPage: true });
 
-              await page.goto('http://localhost:8080/about', { waitUntil: 'networkidle' });
+              await page.goto('http://localhost:8080/about', { waitUntil: 'networkidle', timeout: 30000 });
               await page.screenshot({ path: 'screenshots/pr-about.png', fullPage: true });
 
               // Try to get a challenge page
-              await page.goto('http://localhost:8080/challenge/1', { waitUntil: 'networkidle' });
+              await page.goto('http://localhost:8080/challenge/1', { waitUntil: 'networkidle', timeout: 30000 });
               await page.screenshot({ path: 'screenshots/pr-challenge.png', fullPage: true });
 
               // Main version screenshots
               console.log('Taking main branch screenshots...');
-              await page.goto('http://localhost:8081', { waitUntil: 'networkidle' });
+              await page.goto('http://localhost:8081', { waitUntil: 'networkidle', timeout: 30000 });
               await page.screenshot({ path: 'screenshots/main-home.png', fullPage: true });
 
-              await page.goto('http://localhost:8081/about', { waitUntil: 'networkidle' });
+              await page.goto('http://localhost:8081/about', { waitUntil: 'networkidle', timeout: 30000 });
               await page.screenshot({ path: 'screenshots/main-about.png', fullPage: true });
 
-              await page.goto('http://localhost:8081/challenge/1', { waitUntil: 'networkidle' });
+              await page.goto('http://localhost:8081/challenge/1', { waitUntil: 'networkidle', timeout: 30000 });
               await page.screenshot({ path: 'screenshots/main-challenge.png', fullPage: true });
 
             } catch (error) {
               console.error('Screenshot error:', error);
+              process.exit(1);
             } finally {
               await browser.close();
             }

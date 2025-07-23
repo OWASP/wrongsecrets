@@ -98,12 +98,12 @@ jobs:
 
             let filesList = '';
             if (templateFiles.length > 0) {
-              filesList = templateFiles.map(file => `- \`${file.filename}\``).join('\\n            ');
+              filesList = templateFiles.map(file => `- \`${file.filename}\``).join('\n            ');
             } else {
               filesList = '- No template/static files changed';
             }
 
-            const fullComment = comment + '\\n            ' + filesList + `
+            const fullComment = comment + '\n            ' + filesList + `
 
             ---
             <sub>Build completed by GitHub Actions</sub>`;

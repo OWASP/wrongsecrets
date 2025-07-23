@@ -84,37 +84,56 @@ jobs:
           docker run -d -p 8081:8080 --name main-version wrongsecrets-main
           sleep 30
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
       - name: Install Playwright
         run: |
-          npm install -g playwright
-          playwright install chromium
+          npm install playwright@latest
+          npx playwright install --with-deps chromium
 
       - name: Take screenshots
         run: |
           mkdir -p screenshots
 
-          # Screenshot main pages
+          # Verify services are running
+          echo "Verifying services are running..."
+          docker ps --filter "name=pr-version" --format "table {{.Names}}\t{{.Status}}"
+          docker ps --filter "name=main-version" --format "table {{.Names}}\t{{.Status}}"
+
+          # Screenshot main pages with error handling
           node -e "
           const { chromium } = require('playwright');
           (async () => {
-            const browser = await chromium.launch();
+            const browser = await chromium.launch({ headless: true });
             const page = await browser.newPage();
+            await page.setViewportSize({ width: 1280, height: 1024 });
 
-            // PR version screenshots
-            await page.goto('http://localhost:8080');
-            await page.screenshot({ path: 'screenshots/pr-home.png', fullPage: true });
+            try {
+              // PR version screenshots
+              console.log('Taking PR screenshots...');
+              await page.goto('http://localhost:8080', { waitUntil: 'networkidle', timeout: 30000 });
+              await page.screenshot({ path: 'screenshots/pr-home.png', fullPage: true });
 
-            await page.goto('http://localhost:8080/about');
-            await page.screenshot({ path: 'screenshots/pr-about.png', fullPage: true });
+              await page.goto('http://localhost:8080/about', { waitUntil: 'networkidle', timeout: 30000 });
+              await page.screenshot({ path: 'screenshots/pr-about.png', fullPage: true });
 
-            // Main version screenshots
-            await page.goto('http://localhost:8081');
-            await page.screenshot({ path: 'screenshots/main-home.png', fullPage: true });
+              // Main version screenshots
+              console.log('Taking main branch screenshots...');
+              await page.goto('http://localhost:8081', { waitUntil: 'networkidle', timeout: 30000 });
+              await page.screenshot({ path: 'screenshots/main-home.png', fullPage: true });
 
-            await page.goto('http://localhost:8081/about');
-            await page.screenshot({ path: 'screenshots/main-about.png', fullPage: true });
+              await page.goto('http://localhost:8081/about', { waitUntil: 'networkidle', timeout: 30000 });
+              await page.screenshot({ path: 'screenshots/main-about.png', fullPage: true });
 
-            await browser.close();
+            } catch (error) {
+              console.error('Screenshot error:', error);
+              process.exit(1);
+            } finally {
+              await browser.close();
+            }
           })();
           "
 
