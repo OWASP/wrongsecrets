@@ -377,33 +377,33 @@ jobs:
               body: comment
             });
 
-  cleanup-preview:
-    runs-on: ubuntu-latest
-    if: github.event.action == 'closed'
-    steps:
-      - name: Log in to GitHub Container Registry
-        uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+#   cleanup-preview:
+#     runs-on: ubuntu-latest
+#     if: github.event.action == 'closed'
+#     steps:
+#       - name: Log in to GitHub Container Registry
+#         uses: docker/login-action@v3
+#         with:
+#           registry: ghcr.io
+#           username: ${{ github.actor }}
+#           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Delete PR container images
-        run: |
-          # Delete container images for this PR
-          PR_NUMBER=${{ github.event.number }}
-          REPO_LOWER=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
+#       - name: Delete PR container images
+#         run: |
+#           # Delete container images for this PR
+#           PR_NUMBER=${{ github.event.number }}
+#           REPO_LOWER=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
 
-          # Get all tags for this PR and delete them
-          for tag in $(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-            "https://api.github.com/orgs/${{ github.repository_owner }}/packages/container/${REPO_LOWER}%2Fwrongsecrets-pr/versions" | \
-            jq -r --arg pr "$PR_NUMBER" '.[] | select(.metadata.container.tags[]? | contains($pr)) | .id'); do
+#           # Get all tags for this PR and delete them
+#           for tag in $(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+#             "https://api.github.com/orgs/${{ github.repository_owner }}/packages/container/${REPO_LOWER}%2Fwrongsecrets-pr/versions" | \
+#             jq -r --arg pr "$PR_NUMBER" '.[] | select(.metadata.container.tags[]? | contains($pr)) | .id'); do
 
-            echo "Deleting container version: $tag"
-            curl -X DELETE \
-              -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-              "https://api.github.com/orgs/${{ github.repository_owner }}/packages/container/${REPO_LOWER}%2Fwrongsecrets-pr/versions/$tag"
-          done
+#             echo "Deleting container version: $tag"
+#             curl -X DELETE \
+#               -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+#               "https://api.github.com/orgs/${{ github.repository_owner }}/packages/container/${REPO_LOWER}%2Fwrongsecrets-pr/versions/$tag"
+#           done
 
       # Comment out Render cleanup for now
       # - name: Cleanup Render service
@@ -420,24 +420,24 @@ jobs:
       #         -H "Authorization: Bearer $RENDER_API_KEY"
       #     fi
 
-      - name: Comment PR closure
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const comment = `🧹 **Preview Cleanup Complete**
+    #   - name: Comment PR closure
+    #     uses: actions/github-script@v7
+    #     with:
+    #       script: |
+    #         const comment = `🧹 **Preview Cleanup Complete**
 
-            PR preview resources have been cleaned up:
-            - ✅ Container images deleted from GitHub Container Registry
-            - ✅ Artifacts will expire automatically in 30 days
+    #         PR preview resources have been cleaned up:
+    #         - ✅ Container images deleted from GitHub Container Registry
+    #         - ✅ Artifacts will expire automatically in 30 days
 
-            Thanks for contributing to WrongSecrets! 🎉
+    #         Thanks for contributing to WrongSecrets! 🎉
 
-            ---
-            <sub>Cleanup completed by GitHub Actions</sub>`;
+    #         ---
+    #         <sub>Cleanup completed by GitHub Actions</sub>`;
 
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: comment
-            });
+    #         github.rest.issues.createComment({
+    #           issue_number: context.issue.number,
+    #           owner: context.repo.owner,
+    #           repo: context.repo.repo,
+    #           body: comment
+    #         });
