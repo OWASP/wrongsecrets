@@ -105,7 +105,14 @@ jobs:
       - name: Save Docker image as artifact
         run: |
           echo "Saving Docker image as tar artifact..."
-          IMAGE_TAG="${{ steps.meta.outputs.tags }}" | head -n1
+          IMAGE_TAG=$(echo "${{ steps.meta.outputs.tags }}" | head -n1)
+          echo "Using image tag: $IMAGE_TAG"
+
+          # Pull the image locally if it's not available
+          echo "Pulling image to ensure it's available locally..."
+          docker pull "$IMAGE_TAG"
+
+          # Save the image as tar
           docker save "$IMAGE_TAG" -o wrongsecrets-preview.tar
           echo "Docker image saved to wrongsecrets-preview.tar"
           ls -lh wrongsecrets-preview.tar
@@ -153,7 +160,7 @@ jobs:
 
             **🐳 Docker Image:** \`${imageTag}\`
 
-            **� Download & Test Locally:**
+            **📦 Download & Test Locally:**
             1. [📁 Download Docker Image Artifact](https://github.com/${{ github.repository }}/actions/runs/${runId}) (look for \`wrongsecrets-preview-pr-${prNumber}\`)
             2. Load and run the image:
             \`\`\`bash
@@ -377,33 +384,33 @@ jobs:
               body: comment
             });
 
-#   cleanup-preview:
-#     runs-on: ubuntu-latest
-#     if: github.event.action == 'closed'
-#     steps:
-#       - name: Log in to GitHub Container Registry
-#         uses: docker/login-action@v3
-#         with:
-#           registry: ghcr.io
-#           username: ${{ github.actor }}
-#           password: ${{ secrets.GITHUB_TOKEN }}
+  cleanup-preview:
+    runs-on: ubuntu-latest
+    if: github.event.action == 'closed'
+    steps:
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
-#       - name: Delete PR container images
-#         run: |
-#           # Delete container images for this PR
-#           PR_NUMBER=${{ github.event.number }}
-#           REPO_LOWER=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
+      - name: Delete PR container images
+        run: |
+          # Delete container images for this PR
+          PR_NUMBER=${{ github.event.number }}
+          REPO_LOWER=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
 
-#           # Get all tags for this PR and delete them
-#           for tag in $(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-#             "https://api.github.com/orgs/${{ github.repository_owner }}/packages/container/${REPO_LOWER}%2Fwrongsecrets-pr/versions" | \
-#             jq -r --arg pr "$PR_NUMBER" '.[] | select(.metadata.container.tags[]? | contains($pr)) | .id'); do
+          # Get all tags for this PR and delete them
+          for tag in $(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            "https://api.github.com/orgs/${{ github.repository_owner }}/packages/container/${REPO_LOWER}%2Fwrongsecrets-pr/versions" | \
+            jq -r --arg pr "$PR_NUMBER" '.[] | select(.metadata.container.tags[]? | contains($pr)) | .id'); do
 
-#             echo "Deleting container version: $tag"
-#             curl -X DELETE \
-#               -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-#               "https://api.github.com/orgs/${{ github.repository_owner }}/packages/container/${REPO_LOWER}%2Fwrongsecrets-pr/versions/$tag"
-#           done
+            echo "Deleting container version: $tag"
+            curl -X DELETE \
+              -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+              "https://api.github.com/orgs/${{ github.repository_owner }}/packages/container/${REPO_LOWER}%2Fwrongsecrets-pr/versions/$tag"
+          done
 
       # Comment out Render cleanup for now
       # - name: Cleanup Render service
@@ -420,24 +427,24 @@ jobs:
       #         -H "Authorization: Bearer $RENDER_API_KEY"
       #     fi
 
-    #   - name: Comment PR closure
-    #     uses: actions/github-script@v7
-    #     with:
-    #       script: |
-    #         const comment = `🧹 **Preview Cleanup Complete**
+      - name: Comment PR closure
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const comment = `🧹 **Preview Cleanup Complete**
 
-    #         PR preview resources have been cleaned up:
-    #         - ✅ Container images deleted from GitHub Container Registry
-    #         - ✅ Artifacts will expire automatically in 30 days
+            PR preview resources have been cleaned up:
+            - ✅ Container images deleted from GitHub Container Registry
+            - ✅ Artifacts will expire automatically in 30 days
 
-    #         Thanks for contributing to WrongSecrets! 🎉
+            Thanks for contributing to WrongSecrets! 🎉
 
-    #         ---
-    #         <sub>Cleanup completed by GitHub Actions</sub>`;
+            ---
+            <sub>Cleanup completed by GitHub Actions</sub>`;
 
-    #         github.rest.issues.createComment({
-    #           issue_number: context.issue.number,
-    #           owner: context.repo.owner,
-    #           repo: context.repo.repo,
-    #           body: comment
-    #         });
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
