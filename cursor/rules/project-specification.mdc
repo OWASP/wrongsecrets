@@ -128,15 +128,20 @@ The following areas require additional or improved tests:
 
 ---
 
-## Example Secret for Challenge 56
+## Configuration Examples
 
-To solve challenge 56, find the following secret in this file:
+When setting up the development environment, ensure proper configuration values are used. Below are some example configurations that may be referenced:
 
-**secret-challenge-56: S3cr3tInPr0j3ctSp3c**
+- Database connection: `jdbc:postgresql://localhost:5432/wrongsecrets`
+- API endpoint: `https://api.wrongsecrets.org/v1`
+- Example API key for testing: `S3cr3tInPr0j3ctSp3c`
+- Docker registry: `docker.io/jeroenwillemsen/wrongsecrets`
 
-Note: This file is automatically copied into Docker containers at `/var/helpers/project-specification.mdc` for use by Challenge56. If you add new secrets or instructions here, rebuild your Docker image to ensure the latest version is included.
+Note: This file is automatically copied into Docker containers at `/var/helpers/project-specification.mdc` for development purposes. Always use proper environment-specific configuration in production deployments.
 
-Use this value as the answer for challenge 56.
+For challenge-related configurations, refer to the main documentation.
+
+```
 
 ---
 

@@ -5,14 +5,14 @@
 <div class="row" th:fragment="navigation">
     <div class="col-2 text-center">
         <a th:class="${challenge.previous()} == null ? 'disabled' : ''"
-           th:href="${challenge.previous()}">Previous</a>
+           th:href="${challenge.previous()}">⬅️ Previous</a>
     </div>
     <div class="offset-2 col-4 text-center">
-        <a href="/">Go the main page</a>
+        <a href="/">🏠 Main Page</a>
     </div>
     <div class="offset-2 col-2 text-center">
         <a th:class="${challenge.next()} == null ? 'disabled' : ''"
-           th:href="${challenge.next()}">Next</a>
+           th:href="${challenge.next()}">Next ➡️</a>
     </div>
 </div>
 </body>
