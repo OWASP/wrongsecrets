@@ -11,6 +11,9 @@ on:
 jobs:
   build-preview:
     runs-on: ubuntu-latest
+    # Temporarily disabled to avoid duplicate comments with pr-preview.yml
+    # Both workflows provide similar functionality, pr-preview.yml is more comprehensive
+    if: false
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -60,27 +63,54 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
+            const prNumber = context.issue.number;
+            const runId = context.runId;
+
             const comment = `🔨 **Preview Build Complete!**
 
-            Your changes have been built successfully. To test locally:
+            Your changes have been built successfully.
 
+            **📦 Download & Test Locally:**
+            1. [📁 Download Docker Image Artifact](https://github.com/${{ github.repository }}/actions/runs/${runId}) (look for \`wrongsecrets-preview-${prNumber}\`)
+            2. Load and run the image:
             \`\`\`bash
-            # Download the artifact and load the Docker image
+            # Download the artifact, extract it, then:
             docker load < wrongsecrets-preview.tar
             docker run -p 8080:8080 wrongsecrets-preview
             \`\`\`
 
             Then visit: http://localhost:8080
 
-            **Changed Files in this PR:**
-            - Templates: ${{ github.event.pull_request.changed_files }}
+            **📝 Changed Files in this PR:**`;
+
+            // Get the list of changed files
+            const { data: files } = await github.rest.pulls.listFiles({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: prNumber
+            });
+
+            const templateFiles = files.filter(file =>
+              file.filename.includes('templates/') ||
+              file.filename.includes('static/') ||
+              file.filename.includes('explanations/')
+            );
+
+            let filesList = '';
+            if (templateFiles.length > 0) {
+              filesList = templateFiles.map(file => `- \`${file.filename}\``).join('\\n            ');
+            } else {
+              filesList = '- No template/static files changed';
+            }
+
+            const fullComment = comment + '\\n            ' + filesList + `
 
             ---
             <sub>Build completed by GitHub Actions</sub>`;
 
             github.rest.issues.createComment({
-              issue_number: context.issue.number,
+              issue_number: prNumber,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: comment
+              body: fullComment
             });

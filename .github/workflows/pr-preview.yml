@@ -177,10 +177,33 @@ jobs:
 
             Then visit: http://localhost:8080
 
-            **📝 Changes in this PR:**
-            - Templates and static content updates
-            - Challenge explanations
-            - Application logic changes
+            **📝 Changes in this PR:**`;
+
+            // Get the list of changed files
+            const { data: files } = await github.rest.pulls.listFiles({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: prNumber
+            });
+
+            const relevantFiles = files.filter(file =>
+              file.filename.includes('templates/') ||
+              file.filename.includes('static/') ||
+              file.filename.includes('explanations/') ||
+              file.filename.includes('src/main/java/')
+            );
+
+            let filesList = '';
+            if (relevantFiles.length > 0) {
+              filesList = relevantFiles.slice(0, 10).map(file => `- \`${file.filename}\``).join('\\n            ');
+              if (relevantFiles.length > 10) {
+                filesList += `\\n            - ... and ${relevantFiles.length - 10} more files`;
+              }
+            } else {
+              filesList = '- No relevant files changed';
+            }
+
+            const finalComment = comment + '\\n            ' + filesList + `
 
             Visual diff screenshots will be available shortly...
 
@@ -191,7 +214,7 @@ jobs:
               issue_number: prNumber,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: comment
+              body: finalComment
             });
 
   visual-diff:
