@@ -23,11 +23,19 @@ jobs:
           cache: "maven"
 
       - name: Build application
-        run: ./mvnw --no-transfer-progress clean package -DskipTests
+        run: |
+          echo "Building WrongSecrets application..."
+          ./mvnw --no-transfer-progress clean package -DskipTests
+          echo "Build completed. Checking target directory..."
+          ls -la target/
+          echo "JAR file details:"
+          ls -la target/*.jar || echo "No JAR files found in target/"
 
       - name: Build Docker image
         run: |
+          echo "Building Docker image..."
           docker build -t wrongsecrets-preview .
+          echo "Docker image built successfully"
           docker save wrongsecrets-preview > wrongsecrets-preview.tar
 
       - name: Upload preview artifact

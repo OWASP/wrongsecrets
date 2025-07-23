@@ -21,7 +21,7 @@ jobs:
           ref: master
           path: main-code
 
-      - name: Set up JDK 23 for PR
+      - name: Set up JDK 23 for PR build
         uses: actions/setup-java@v4
         with:
           java-version: "23"
@@ -31,13 +31,27 @@ jobs:
       - name: Build PR version
         working-directory: pr-code
         run: |
+          echo "Building PR version..."
           ./mvnw --no-transfer-progress clean package -DskipTests
+          echo "PR JAR built successfully"
           docker build -t wrongsecrets-pr .
+          echo "PR Docker image built successfully"
+
+      - name: Set up JDK 23 for main build
+        uses: actions/setup-java@v4
+        with:
+          java-version: "23"
+          distribution: "oracle"
+          cache: "maven"
 
       - name: Build main version
         working-directory: main-code
         run: |
+          echo "Building main version..."
           ./mvnw --no-transfer-progress clean package -DskipTests
+          echo "Main JAR built successfully"
+          docker build -t wrongsecrets-main .
+          echo "Main Docker image built successfully"
           docker build -t wrongsecrets-main .
 
       - name: Start both versions

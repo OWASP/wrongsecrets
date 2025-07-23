@@ -142,6 +142,19 @@ jobs:
           ref: master
           path: main-code
 
+      - name: Set up JDK 23 for PR build
+        uses: actions/setup-java@v4
+        with:
+          java-version: "23"
+          distribution: "oracle"
+          cache: "maven"
+
+      - name: Build PR version
+        working-directory: pr-code
+        run: |
+          ./mvnw --no-transfer-progress clean package -DskipTests
+          docker build -t wrongsecrets-pr .
+
       - name: Set up JDK 23 for main
         uses: actions/setup-java@v4
         with:
@@ -155,17 +168,18 @@ jobs:
           ./mvnw --no-transfer-progress clean package -DskipTests
           docker build -t wrongsecrets-main .
 
-      - name: Log in to GitHub Container Registry
-        uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+      # Alternative approach: Pull the PR image from registry
+      # - name: Log in to GitHub Container Registry
+      #   uses: docker/login-action@v3
+      #   with:
+      #     registry: ghcr.io
+      #     username: ${{ github.actor }}
+      #     password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Pull PR image
-        run: |
-          docker pull ${{ needs.build-preview.outputs.image-tag }}
-          docker tag ${{ needs.build-preview.outputs.image-tag }} wrongsecrets-pr
+      # - name: Pull PR image
+      #   run: |
+      #     docker pull ${{ needs.build-preview.outputs.image-tag }}
+      #     docker tag ${{ needs.build-preview.outputs.image-tag }} wrongsecrets-pr
 
       - name: Start both versions
         run: |
