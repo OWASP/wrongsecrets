@@ -25,7 +25,9 @@ jobs:
       - name: Extract version from pom.xml
         id: extract-version
         run: |
-          VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          echo "Extracting version from pom.xml..."
+          chmod +x ./mvnw
+          VERSION=$(./mvnw help:evaluate -Dexpression=project.version -q -DforceStdout)
           DOCKER_VERSION=${VERSION%-SNAPSHOT}
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "docker_version=$DOCKER_VERSION" >> $GITHUB_OUTPUT

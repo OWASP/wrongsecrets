@@ -6,7 +6,7 @@ set -e
 echo "🔍 Checking version consistency across files..."
 
 # Extract version from pom.xml
-POM_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+POM_VERSION=$(./mvnw help:evaluate -Dexpression=project.version -q -DforceStdout)
 echo "📄 pom.xml version: $POM_VERSION"
 
 # Extract base version (remove -SNAPSHOT)

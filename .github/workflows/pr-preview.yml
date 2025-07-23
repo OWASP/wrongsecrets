@@ -32,18 +32,38 @@ jobs:
           distribution: "oracle"
           cache: "maven"
 
-      - name: Build application
-        run: ./mvnw --no-transfer-progress clean package -DskipTests
-
       - name: Extract version from pom.xml
         id: extract-version
         run: |
-          VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          echo "Extracting version from pom.xml..."
+          chmod +x ./mvnw
+          VERSION=$(./mvnw help:evaluate -Dexpression=project.version -q -DforceStdout)
           DOCKER_VERSION=${VERSION%-SNAPSHOT}
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "docker_version=$DOCKER_VERSION" >> $GITHUB_OUTPUT
           echo "Detected version: $VERSION"
           echo "Docker version: $DOCKER_VERSION"
+
+      - name: Build application
+        run: ./mvnw --no-transfer-progress clean package -DskipTests
+
+      - name: Verify JAR file was created
+        run: |
+          echo "Checking target directory..."
+          ls -la target/
+          echo "Looking for JAR files..."
+          find target/ -name "*.jar" -type f
+          echo "Verifying specific JAR exists..."
+          JAR_FILE="target/wrongsecrets-${{ steps.extract-version.outputs.version }}.jar"
+          if [ -f "$JAR_FILE" ]; then
+            echo "✅ JAR file found: $JAR_FILE"
+            ls -la "$JAR_FILE"
+          else
+            echo "❌ Expected JAR file not found: $JAR_FILE"
+            echo "Available JAR files:"
+            find target/ -name "*.jar" -type f || echo "No JAR files found"
+            exit 1
+          fi
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -76,6 +96,11 @@ jobs:
             argBasedVersion=${{ steps.extract-version.outputs.docker_version }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
+      - name: Verify Docker image was built
+        run: |
+          echo "Verifying Docker image was built successfully..."
+          docker images | grep wrongsecrets-pr || echo "No wrongsecrets-pr images found"
 
       # Comment out Render deployment for now
       # - name: Deploy to Render (Preview)
@@ -165,7 +190,9 @@ jobs:
         id: extract-pr-version
         working-directory: pr-code
         run: |
-          VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          echo "Extracting PR version from pom.xml..."
+          chmod +x ./mvnw
+          VERSION=$(./mvnw help:evaluate -Dexpression=project.version -q -DforceStdout)
           DOCKER_VERSION=${VERSION%-SNAPSHOT}
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "docker_version=$DOCKER_VERSION" >> $GITHUB_OUTPUT
@@ -192,7 +219,9 @@ jobs:
         id: extract-main-version
         working-directory: main-code
         run: |
-          VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          echo "Extracting main version from pom.xml..."
+          chmod +x ./mvnw
+          VERSION=$(./mvnw help:evaluate -Dexpression=project.version -q -DforceStdout)
           DOCKER_VERSION=${VERSION%-SNAPSHOT}
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "docker_version=$DOCKER_VERSION" >> $GITHUB_OUTPUT

@@ -4,7 +4,7 @@
 set -e
 
 # Extract version from pom.xml
-VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+VERSION=$(./mvnw help:evaluate -Dexpression=project.version -q -DforceStdout)
 echo "Detected version from pom.xml: $VERSION"
 
 # Remove -SNAPSHOT suffix for Docker tags if present

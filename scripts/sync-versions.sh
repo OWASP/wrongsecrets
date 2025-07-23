@@ -6,7 +6,7 @@ set -e
 echo "🔄 Syncing versions across all files..."
 
 # Extract version from pom.xml
-POM_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+POM_VERSION=$(./mvnw help:evaluate -Dexpression=project.version -q -DforceStdout)
 BASE_VERSION=${POM_VERSION%-SNAPSHOT}
 WEB_VERSION="$BASE_VERSION-no-vault"
 
