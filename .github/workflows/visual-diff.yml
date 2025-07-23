@@ -76,13 +76,33 @@ jobs:
           echo "Main JAR built successfully"
           docker build --build-arg argBasedVersion="${{ steps.extract-main-version.outputs.docker_version }}" -t wrongsecrets-main .
           echo "Main Docker image built successfully"
-          docker build -t wrongsecrets-main .
 
       - name: Start both versions
         run: |
           docker run -d -p 8080:8080 --name pr-version wrongsecrets-pr
           docker run -d -p 8081:8080 --name main-version wrongsecrets-main
+
+          # Wait for containers to start
+          echo "Waiting for containers to start..."
           sleep 30
+
+          # Verify containers are running
+          if ! docker ps --filter "name=pr-version" --filter "status=running" --quiet | grep -q .; then
+            echo "PR version container failed to start"
+            docker logs pr-version
+            exit 1
+          fi
+
+          if ! docker ps --filter "name=main-version" --filter "status=running" --quiet | grep -q .; then
+            echo "Main version container failed to start"
+            docker logs main-version
+            exit 1
+          fi
+
+          # Wait for services to be ready
+          echo "Waiting for services to be ready..."
+          timeout 60 bash -c 'until curl -f http://localhost:8080/actuator/health 2>/dev/null; do sleep 2; done' || echo "PR version health check failed"
+          timeout 60 bash -c 'until curl -f http://localhost:8081/actuator/health 2>/dev/null; do sleep 2; done' || echo "Main version health check failed"
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
