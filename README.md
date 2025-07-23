@@ -41,7 +41,7 @@ Want to play the other challenges? Read the instructions on how to set them up b
 - Tools and techniques for secret detection
 
 **How it works:**
-This repository contains **intentionally vulnerable code and configuration files** with real secrets hidden throughout the codebase. You'll examine source code, configuration files, Docker containers, and cloud deployments to discover these secrets. Each challenge teaches you different ways secrets can be accidentally exposed in real-world applications.
+This repository contains **intentionally vulnerable code and configuration files** with real and fake secrets hidden throughout the codebase. You'll examine source code, configuration files, Docker containers, and cloud deployments to discover these secrets. Each challenge teaches you different ways secrets can be accidentally exposed in real-world applications.
 
 ![screenshotOfChallenge1](/images/screenshot.png)
 
