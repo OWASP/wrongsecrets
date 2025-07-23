@@ -1,0 +1,66 @@
+name: Build and Deploy Preview
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+    paths:
+      - 'src/main/resources/templates/**'
+      - 'src/main/resources/static/**'
+      - 'src/main/resources/explanations/**'
+
+jobs:
+  build-preview:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 23
+        uses: actions/setup-java@v4
+        with:
+          java-version: "23"
+          distribution: "oracle"
+          cache: "maven"
+
+      - name: Build application
+        run: ./mvnw --no-transfer-progress clean package -DskipTests
+
+      - name: Build Docker image
+        run: |
+          docker build -t wrongsecrets-preview .
+          docker save wrongsecrets-preview > wrongsecrets-preview.tar
+
+      - name: Upload preview artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: wrongsecrets-preview-${{ github.event.number }}
+          path: wrongsecrets-preview.tar
+
+      - name: Comment on PR with instructions
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const comment = `🔨 **Preview Build Complete!**
+
+            Your changes have been built successfully. To test locally:
+
+            \`\`\`bash
+            # Download the artifact and load the Docker image
+            docker load < wrongsecrets-preview.tar
+            docker run -p 8080:8080 wrongsecrets-preview
+            \`\`\`
+
+            Then visit: http://localhost:8080
+
+            **Changed Files in this PR:**
+            - Templates: ${{ github.event.pull_request.changed_files }}
+
+            ---
+            <sub>Build completed by GitHub Actions</sub>`;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });

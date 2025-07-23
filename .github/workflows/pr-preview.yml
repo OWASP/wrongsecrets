@@ -1,0 +1,336 @@
+name: PR Preview and Visual Diff
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    paths:
+      - 'src/main/resources/templates/**'
+      - 'src/main/resources/static/**'
+      - 'src/main/resources/explanations/**'
+      - 'src/main/java/**'
+
+permissions:
+  contents: read
+  packages: write
+  pull-requests: write
+
+jobs:
+  build-preview:
+    runs-on: ubuntu-latest
+    if: github.event.action != 'closed'
+    outputs:
+      image-tag: ${{ steps.meta.outputs.tags }}
+      image-digest: ${{ steps.build.outputs.digest }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 23
+        uses: actions/setup-java@v4
+        with:
+          java-version: "23"
+          distribution: "oracle"
+          cache: "maven"
+
+      - name: Build application
+        run: ./mvnw --no-transfer-progress clean package -DskipTests
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository }}/wrongsecrets-pr
+          tags: |
+            type=ref,event=pr,suffix=-{{sha}}
+            type=ref,event=pr
+
+      - name: Build and push Docker image
+        id: build
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      # Comment out Render deployment for now
+      # - name: Deploy to Render (Preview)
+      #   env:
+      #     RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+      #   run: |
+      #     # Create a temporary Render service for this PR
+      #     curl -X POST "https://api.render.com/v1/services" \
+      #       -H "Authorization: Bearer $RENDER_API_KEY" \
+      #       -H "Content-Type: application/json" \
+      #       -d '{
+      #         "type": "web_service",
+      #         "name": "wrongsecrets-pr-${{ github.event.number }}",
+      #         "runtime": "docker",
+      #         "dockerImage": {
+      #           "url": "${{ steps.meta.outputs.tags }}"
+      #         },
+      #         "plan": "free",
+      #         "envVars": [
+      #           {"key": "PORT", "value": "8080"}
+      #         ]
+      #       }'
+
+      - name: Comment PR with build info
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const prNumber = context.issue.number;
+            const imageTag = `${{ steps.meta.outputs.tags }}`.split('\n')[0];
+
+            const comment = `🔨 **Preview Build Complete!**
+
+            Your changes have been built and pushed to GitHub Container Registry.
+
+            **🐳 Docker Image:** \`${imageTag}\`
+
+            **🚀 To test locally:**
+            \`\`\`bash
+            # Pull and run the preview image
+            docker pull ${imageTag}
+            docker run -p 8080:8080 ${imageTag}
+            \`\`\`
+
+            Then visit: http://localhost:8080
+
+            **📝 Changes in this PR:**
+            - Templates and static content updates
+            - Challenge explanations
+            - Application logic changes
+
+            Visual diff screenshots will be available shortly...
+
+            ---
+            <sub>Preview built by GitHub Actions</sub>`;
+
+            github.rest.issues.createComment({
+              issue_number: prNumber,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+
+  visual-diff:
+    runs-on: ubuntu-latest
+    needs: build-preview
+    if: github.event.action != 'closed'
+    steps:
+      - name: Checkout PR code
+        uses: actions/checkout@v4
+        with:
+          path: pr-code
+
+      - name: Checkout main branch
+        uses: actions/checkout@v4
+        with:
+          ref: master
+          path: main-code
+
+      - name: Set up JDK 23 for main
+        uses: actions/setup-java@v4
+        with:
+          java-version: "23"
+          distribution: "oracle"
+          cache: "maven"
+
+      - name: Build main version
+        working-directory: main-code
+        run: |
+          ./mvnw --no-transfer-progress clean package -DskipTests
+          docker build -t wrongsecrets-main .
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Pull PR image
+        run: |
+          docker pull ${{ needs.build-preview.outputs.image-tag }}
+          docker tag ${{ needs.build-preview.outputs.image-tag }} wrongsecrets-pr
+
+      - name: Start both versions
+        run: |
+          docker run -d -p 8080:8080 --name pr-version wrongsecrets-pr
+          docker run -d -p 8081:8080 --name main-version wrongsecrets-main
+
+          # Wait for services to start
+          echo "Waiting for services to start..."
+          for i in {1..30}; do
+            if curl -s http://localhost:8080 >/dev/null && curl -s http://localhost:8081 >/dev/null; then
+              echo "Both services are ready!"
+              break
+            fi
+            echo "Attempt $i/30: Services not ready yet..."
+            sleep 2
+          done
+
+      - name: Install Playwright
+        run: |
+          npm install -g playwright@latest
+          playwright install chromium
+
+      - name: Take screenshots
+        run: |
+          mkdir -p screenshots
+
+          node -e "
+          const { chromium } = require('playwright');
+          (async () => {
+            const browser = await chromium.launch();
+            const page = await browser.newPage();
+            await page.setViewportSize({ width: 1280, height: 1024 });
+
+            try {
+              // PR version screenshots
+              console.log('Taking PR screenshots...');
+              await page.goto('http://localhost:8080', { waitUntil: 'networkidle' });
+              await page.screenshot({ path: 'screenshots/pr-home.png', fullPage: true });
+
+              await page.goto('http://localhost:8080/about', { waitUntil: 'networkidle' });
+              await page.screenshot({ path: 'screenshots/pr-about.png', fullPage: true });
+
+              // Try to get a challenge page
+              await page.goto('http://localhost:8080/challenge/1', { waitUntil: 'networkidle' });
+              await page.screenshot({ path: 'screenshots/pr-challenge.png', fullPage: true });
+
+              // Main version screenshots
+              console.log('Taking main branch screenshots...');
+              await page.goto('http://localhost:8081', { waitUntil: 'networkidle' });
+              await page.screenshot({ path: 'screenshots/main-home.png', fullPage: true });
+
+              await page.goto('http://localhost:8081/about', { waitUntil: 'networkidle' });
+              await page.screenshot({ path: 'screenshots/main-about.png', fullPage: true });
+
+              await page.goto('http://localhost:8081/challenge/1', { waitUntil: 'networkidle' });
+              await page.screenshot({ path: 'screenshots/main-challenge.png', fullPage: true });
+
+            } catch (error) {
+              console.error('Screenshot error:', error);
+            } finally {
+              await browser.close();
+            }
+          })();
+          "
+
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-diff-pr-${{ github.event.number }}
+          path: screenshots/
+          retention-days: 30
+
+      - name: Comment with visual diff
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const comment = `📸 **Visual Diff Ready!**
+
+            Screenshots comparing your changes with the main branch are available:
+
+            [📁 Download Visual Diff Artifacts](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
+
+            **🖼️ Included screenshots:**
+            - \`pr-home.png\` vs \`main-home.png\` - Welcome page comparison
+            - \`pr-about.png\` vs \`main-about.png\` - About page comparison
+            - \`pr-challenge.png\` vs \`main-challenge.png\` - Challenge page comparison
+
+            **🔍 How to review:**
+            1. Download the artifact zip file
+            2. Extract and compare the \`pr-*\` and \`main-*\` images side by side
+            3. Look for visual differences in layout, styling, and content
+
+            **💡 Tip:** Use an image comparison tool or open both images in separate browser tabs to spot differences easily.
+
+            ---
+            <sub>Visual diff generated by GitHub Actions • PR #${{ github.event.number }}</sub>`;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+
+  cleanup-preview:
+    runs-on: ubuntu-latest
+    if: github.event.action == 'closed'
+    steps:
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Delete PR container images
+        run: |
+          # Delete container images for this PR
+          PR_NUMBER=${{ github.event.number }}
+          REPO_LOWER=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
+
+          # Get all tags for this PR and delete them
+          for tag in $(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            "https://api.github.com/orgs/${{ github.repository_owner }}/packages/container/${REPO_LOWER}%2Fwrongsecrets-pr/versions" | \
+            jq -r --arg pr "$PR_NUMBER" '.[] | select(.metadata.container.tags[]? | contains($pr)) | .id'); do
+
+            echo "Deleting container version: $tag"
+            curl -X DELETE \
+              -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+              "https://api.github.com/orgs/${{ github.repository_owner }}/packages/container/${REPO_LOWER}%2Fwrongsecrets-pr/versions/$tag"
+          done
+
+      # Comment out Render cleanup for now
+      # - name: Cleanup Render service
+      #   env:
+      #     RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+      #   run: |
+      #     # Delete the temporary Render service
+      #     SERVICE_ID=$(curl -H "Authorization: Bearer $RENDER_API_KEY" \
+      #       "https://api.render.com/v1/services" | \
+      #       jq -r ".[] | select(.name==\"wrongsecrets-pr-${{ github.event.number }}\") | .id")
+      #
+      #     if [ "$SERVICE_ID" != "null" ]; then
+      #       curl -X DELETE "https://api.render.com/v1/services/$SERVICE_ID" \
+      #         -H "Authorization: Bearer $RENDER_API_KEY"
+      #     fi
+
+      - name: Comment PR closure
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const comment = `🧹 **Preview Cleanup Complete**
+
+            PR preview resources have been cleaned up:
+            - ✅ Container images deleted from GitHub Container Registry
+            - ✅ Artifacts will expire automatically in 30 days
+
+            Thanks for contributing to WrongSecrets! 🎉
+
+            ---
+            <sub>Cleanup completed by GitHub Actions</sub>`;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
