@@ -73,6 +73,39 @@
                 "LBC_VERSION=\"(?<currentValue>.*?)\""
             ],
             "datasourceTemplate": "github-releases"
+        },
+        {
+            "customType": "regex",
+            "description": "Track Docker base images in Dockerfiles",
+            "fileMatch": ["(^|/)Dockerfile[^/]*$"],
+            "matchStrings": [
+                "FROM\\s+(?<depName>bellsoft/liberica-openjre-debian):(?<currentValue>[^\\s]+)",
+                "FROM\\s+(?<depName>eclipse-temurin):(?<currentValue>[^\\s]+)"
+            ],
+            "datasourceTemplate": "docker"
+        },
+        {
+            "customType": "regex",
+            "description": "Track runtime versions in GitHub Actions",
+            "fileMatch": ["^\\.github/workflows/[^/]+\\.ya?ml$"],
+            "matchStrings": [
+                "node-version:\\s*['\"]?(?<currentValue>[^'\"\\s]+)['\"]?",
+                "python-version:\\s*['\"]?(?<currentValue>[^'\"\\s]+)['\"]?",
+                "java-version:\\s*['\"]?(?<currentValue>[^'\"\\s]+)['\"]?"
+            ],
+            "depNameTemplate": "node",
+            "datasourceTemplate": "node-version"
+        },
+        {
+            "customType": "regex",
+            "description": "Track jeroenwillemsen/wrongsecrets images in K8s manifests",
+            "fileMatch": ["(^|/)k8s/.+\\.ya?ml$", "(^|/)[^/]*\\.ya?ml$"],
+            "matchStrings": [
+                "image:\\s*['\"]?jeroenwillemsen/wrongsecrets:(?<currentValue>[^'\"\\s]+)['\"]?",
+                "image:\\s*['\"]?jeroenwillemsen/wrongsecrets-challenge53:(?<currentValue>[^'\"\\s]+)['\"]?"
+            ],
+            "depNameTemplate": "jeroenwillemsen/wrongsecrets",
+            "datasourceTemplate": "docker"
         }
     ],
     "packageRules": [
@@ -130,6 +163,44 @@
             "matchPackageNames": [
                 "/google/",
                 "/google-beta/"
+            ]
+        },
+        {
+            "groupName": "GitHub Actions",
+            "matchDatasources": ["github-tags"],
+            "matchPackageNames": [
+                "/^actions\//"
+            ]
+        },
+        {
+            "groupName": "Docker Actions",
+            "matchDatasources": ["github-tags"],
+            "matchPackageNames": [
+                "/^docker\//"
+            ]
+        },
+        {
+            "groupName": "Java Runtime Images",
+            "matchDatasources": ["docker"],
+            "matchPackageNames": [
+                "bellsoft/liberica-openjre-debian",
+                "eclipse-temurin"
+            ]
+        },
+        {
+            "groupName": "Runtime Versions",
+            "schedule": ["before 6am on the first day of the month"],
+            "matchPackageNames": [
+                "node",
+                "python",
+                "java"
+            ]
+        },
+        {
+            "groupName": "Frontend Dependencies",
+            "matchPackageNames": [
+                "/^playwright/",
+                "/^@babel\//"
             ]
         }
     ]
