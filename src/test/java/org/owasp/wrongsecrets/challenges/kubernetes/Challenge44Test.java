@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.cloud.vault.config.VaultProperties;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.vault.authentication.TokenAuthentication;
 import org.springframework.vault.client.VaultEndpoint;
 import org.springframework.vault.core.VaultTemplate;
@@ -12,13 +13,15 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.vault.VaultContainer;
 
+@DirtiesContext
 @Testcontainers
 public class Challenge44Test {
   private static final String VAULT_TOKEN = "my-token";
 
+  @SuppressWarnings("resource")
   @Container
   public static VaultContainer<?> vaultContainer =
-      new VaultContainer<>("hashicorp/vault:1.13")
+      new VaultContainer<>("hashicorp/vault:1.20")
           .withVaultToken(VAULT_TOKEN)
           .withInitCommand("secrets enable transit");
 

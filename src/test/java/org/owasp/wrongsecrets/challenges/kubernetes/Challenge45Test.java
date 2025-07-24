@@ -15,9 +15,10 @@ import org.testcontainers.vault.VaultContainer;
 public class Challenge45Test {
   private static final String VAULT_TOKEN = "my-token";
 
+  @SuppressWarnings("resource")
   @Container
   public static VaultContainer<?> vaultContainer =
-      new VaultContainer<>("hashicorp/vault:1.13")
+      new VaultContainer<>("hashicorp/vault:1.20")
           .withVaultToken(VAULT_TOKEN)
           .withInitCommand("secrets enable transit");
 
