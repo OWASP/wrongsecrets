@@ -18,7 +18,7 @@ public class Challenge45Test {
   @SuppressWarnings("resource")
   @Container
   public static VaultContainer<?> vaultContainer =
-      new VaultContainer<>("hashicorp/vault:1.20")
+      new VaultContainer<>("hashicorp/vault:1.19")
           .withVaultToken(VAULT_TOKEN)
           .withInitCommand("secrets enable transit");
 
