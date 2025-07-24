@@ -122,7 +122,7 @@ Not sure which setup is right for you? Here's a quick guide:
 
 | **I want to...** | **Recommended Setup** | **Challenges Available** |
 |------------------|----------------------|--------------------------|
-| Try it quickly online | [Heroku Demo](https://wrongsecrets.herokuapp.com/) | Basic challenges (1-4, 8, 12-32, 34-43, 49-52, 54-55) |
+| Try it quickly online | [Container running on Heroku](https://www.wrongsecrets.com/) | Basic challenges (1-4, 8, 12-32, 34-43, 49-52, 54-55) |
 | Run locally with Docker | [Basic Docker](#basic-docker-exercises) | Same as above, but on your machine |
 | Learn Kubernetes secrets | [K8s/Minikube Setup](#basic-k8s-exercise) | Kubernetes challenges (1-6, 8, 12-43, 48-55) |
 | Practice with cloud secrets | [Cloud Challenges](#cloud-challenges) | All challenges (1-55) |
