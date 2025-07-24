@@ -1,0 +1,192 @@
+name: Visual Template Diff
+
+on:
+  pull_request:
+    paths:
+      - 'src/main/resources/templates/**'
+      - 'src/main/resources/static/**'
+
+jobs:
+  visual-diff:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout PR code
+        uses: actions/checkout@v4
+        with:
+          path: pr-code
+
+      - name: Checkout main branch
+        uses: actions/checkout@v4
+        with:
+          ref: master
+          path: main-code
+
+      - name: Set up JDK 23 for PR build
+        uses: actions/setup-java@v4
+        with:
+          java-version: "23"
+          distribution: "oracle"
+          cache: "maven"
+
+      - name: Extract PR version
+        id: extract-pr-version
+        working-directory: pr-code
+        run: |
+          echo "Extracting PR version..."
+          chmod +x ./mvnw
+          VERSION=$(./mvnw help:evaluate -Dexpression=project.version -q -DforceStdout)
+          DOCKER_VERSION=${VERSION%-SNAPSHOT}
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "docker_version=$DOCKER_VERSION" >> $GITHUB_OUTPUT
+          echo "PR version: $VERSION"
+
+      - name: Build PR version
+        working-directory: pr-code
+        run: |
+          echo "Building PR version..."
+          ./mvnw --no-transfer-progress clean package -DskipTests
+          echo "PR JAR built successfully"
+          docker build --build-arg argBasedVersion="${{ steps.extract-pr-version.outputs.docker_version }}" -t wrongsecrets-pr .
+          echo "PR Docker image built successfully"
+
+      - name: Set up JDK 23 for main build
+        uses: actions/setup-java@v4
+        with:
+          java-version: "23"
+          distribution: "oracle"
+          cache: "maven"
+
+      - name: Extract main version
+        id: extract-main-version
+        working-directory: main-code
+        run: |
+          echo "Extracting main version..."
+          chmod +x ./mvnw
+          VERSION=$(./mvnw help:evaluate -Dexpression=project.version -q -DforceStdout)
+          DOCKER_VERSION=${VERSION%-SNAPSHOT}
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "docker_version=$DOCKER_VERSION" >> $GITHUB_OUTPUT
+          echo "Main version: $VERSION"
+
+      - name: Build main version
+        working-directory: main-code
+        run: |
+          echo "Building main version..."
+          ./mvnw --no-transfer-progress clean package -DskipTests
+          echo "Main JAR built successfully"
+          docker build --build-arg argBasedVersion="${{ steps.extract-main-version.outputs.docker_version }}" -t wrongsecrets-main .
+          echo "Main Docker image built successfully"
+
+      - name: Start both versions
+        run: |
+          docker run -d -p 8080:8080 --name pr-version wrongsecrets-pr
+          docker run -d -p 8081:8080 --name main-version wrongsecrets-main
+
+          # Wait for containers to start
+          echo "Waiting for containers to start..."
+          sleep 30
+
+          # Verify containers are running
+          if ! docker ps --filter "name=pr-version" --filter "status=running" --quiet | grep -q .; then
+            echo "PR version container failed to start"
+            docker logs pr-version
+            exit 1
+          fi
+
+          if ! docker ps --filter "name=main-version" --filter "status=running" --quiet | grep -q .; then
+            echo "Main version container failed to start"
+            docker logs main-version
+            exit 1
+          fi
+
+          # Wait for services to be ready
+          echo "Waiting for services to be ready..."
+          timeout 60 bash -c 'until curl -f http://localhost:8080/actuator/health 2>/dev/null; do sleep 2; done' || echo "PR version health check failed"
+          timeout 60 bash -c 'until curl -f http://localhost:8081/actuator/health 2>/dev/null; do sleep 2; done' || echo "Main version health check failed"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install Playwright
+        run: |
+          npm install playwright@latest
+          npx playwright install --with-deps chromium
+
+      - name: Take screenshots
+        run: |
+          mkdir -p screenshots
+
+          # Verify services are running
+          echo "Verifying services are running..."
+          docker ps --filter "name=pr-version" --format "table {{.Names}}\t{{.Status}}"
+          docker ps --filter "name=main-version" --format "table {{.Names}}\t{{.Status}}"
+
+          # Screenshot main pages with error handling
+          node -e "
+          const { chromium } = require('playwright');
+          (async () => {
+            const browser = await chromium.launch({ headless: true });
+            const page = await browser.newPage();
+            await page.setViewportSize({ width: 1280, height: 1024 });
+
+            try {
+              // PR version screenshots
+              console.log('Taking PR screenshots...');
+              await page.goto('http://localhost:8080', { waitUntil: 'networkidle', timeout: 30000 });
+              await page.screenshot({ path: 'screenshots/pr-home.png', fullPage: true });
+
+              await page.goto('http://localhost:8080/about', { waitUntil: 'networkidle', timeout: 30000 });
+              await page.screenshot({ path: 'screenshots/pr-about.png', fullPage: true });
+
+              // Main version screenshots
+              console.log('Taking main branch screenshots...');
+              await page.goto('http://localhost:8081', { waitUntil: 'networkidle', timeout: 30000 });
+              await page.screenshot({ path: 'screenshots/main-home.png', fullPage: true });
+
+              await page.goto('http://localhost:8081/about', { waitUntil: 'networkidle', timeout: 30000 });
+              await page.screenshot({ path: 'screenshots/main-about.png', fullPage: true });
+
+            } catch (error) {
+              console.error('Screenshot error:', error);
+              process.exit(1);
+            } finally {
+              await browser.close();
+            }
+          })();
+          "
+
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-diff-${{ github.event.number }}
+          path: screenshots/
+
+      - name: Comment with visual diff
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const comment = `📸 **Visual Diff Available!**
+
+            Screenshots have been generated comparing your changes with the main branch.
+
+            [Download Visual Diff Artifacts](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
+
+            The artifacts contain:
+            - \`pr-home.png\` - Your version of the home page
+            - \`main-home.png\` - Current main branch home page
+            - \`pr-about.png\` - Your version of the about page
+            - \`main-about.png\` - Current main branch about page
+
+            Compare these images to see the visual impact of your changes!
+
+            ---
+            <sub>Visual diff generated by GitHub Actions</sub>`;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });

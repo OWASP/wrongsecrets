@@ -4,10 +4,10 @@
 
 [![Tweet](https://img.shields.io/badge/-Twitter-%232B90D9?style=for-the-badge&logo=x&logoColor=white)](https://twitter.com/intent/tweet?text=Want%20to%20dive%20into%20secrets%20management%20and%20do%20some%20hunting?%20try%20this&url=https://github.com/OWASP/wrongsecrets&hashtags=secretsmanagement,secrets,hunting,p0wnableapp,OWASP,WrongSecrets) [<img src="https://img.shields.io/badge/-MASTODON-%232B90D9?style=for-the-badge&logo=mastodon&logoColor=white">](https://tootpick.org/#text=Want%20to%20dive%20into%20secrets%20management%20and%20do%20some%20hunting?%20try%20this%0A%0Ahttps://github.com/OWASP/wrongsecrets%20%23secretsmanagement,%20%23secrets,%20%23hunting,%20%23p0wnableapp,%20%23OWASP,%20%23WrongSecrets) [<img src="https://img.shields.io/badge/-BLUESKY-%230085FF?style=for-the-badge&logo=bluesky&logoColor=white">](https://bsky.app/intent/compose?text=Want%20to%20dive%20into%20secrets%20management%20and%20do%20some%20hunting?%20try%20this%0A%0Ahttps://github.com/OWASP/wrongsecrets%20%23secretsmanagement%20%23secrets%20%23hunting%20%23p0wnableapp%20%23OWASP%20%23WrongSecrets) [<img src="https://img.shields.io/badge/-LINKEDIN-0077B5?style=for-the-badge&logo=linkedin&logoColor=white">](https://www.linkedin.com/shareArticle/?url=https://www.github.com/OWASP/wrongsecrets&title=OWASP%20WrongSecrets)
 
-[![Java checkstyle and testing](https://github.com/OWASP/wrongsecrets/actions/workflows/main.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/main.yml) [![Pre-commit](https://github.com/OWASP/wrongsecrets/actions/workflows/pre-commit.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/pre-commit.yml) [![Terraform FMT](https://github.com/OWASP/wrongsecrets/actions/workflows/terraform.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/terraform.yml) [![CodeQL](https://github.com/OWASP/wrongsecrets/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/codeql-analysis.yml) [![Dead Link Checker](https://github.com/OWASP/wrongsecrets/actions/workflows/link_checker.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/link_checker.yml)[![Javadoc and Swaggerdoc generator](https://github.com/OWASP/wrongsecrets/actions/workflows/java_swagger_doc.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/java_swagger_doc.yml) [![Test Heroku with cypress](https://github.com/OWASP/wrongsecrets/actions/workflows/heroku_tests.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/heroku_tests.yml)
+[![Java checkstyle and testing](https://github.com/OWASP/wrongsecrets/actions/workflows/main.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/main.yml) [![Pre-commit](https://github.com/OWASP/wrongsecrets/actions/workflows/pre-commit.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/pre-commit.yml) [![Terraform FMT](https://github.com/OWASP/wrongsecrets/actions/workflows/terraform.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/terraform.yml) [![CodeQL](https://github.com/OWASP/wrongsecrets/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/codeql-analysis.yml) [![Dead Link Checker](https://github.com/OWASP/wrongsecrets/actions/workflows/link_checker.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/link_checker.yml) [![Javadoc and Swaggerdoc generator](https://github.com/OWASP/wrongsecrets/actions/workflows/java_swagger_doc.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/java_swagger_doc.yml) [![Test Heroku with cypress](https://github.com/OWASP/wrongsecrets/actions/workflows/heroku_tests.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/heroku_tests.yml)
 
-[![Test minikube script (k8s)](https://github.com/OWASP/wrongsecrets/actions/workflows/minikube-k8s-test.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/minikube-k8s-test.yml) [![Test minikube script (k8s&vault)](https://github.com/OWASP/wrongsecrets/actions/workflows/minikube-vault-test.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/minikube-vault-test.yml) [![Docker container test](https://github.com/OWASP/wrongsecrets/actions/workflows/container_test.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/container_test.yml)[![Test container on podman](https://github.com/OWASP/wrongsecrets/actions/workflows/container-alts-test.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/container-alts-test.yml)
-[![DAST with ZAP](https://github.com/OWASP/wrongsecrets/actions/workflows/dast-zap-test.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/dast-zap-test.yml)
+[![Test minikube script (k8s)](https://github.com/OWASP/wrongsecrets/actions/workflows/minikube-k8s-test.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/minikube-k8s-test.yml) [![Test minikube script (k8s&vault)](https://github.com/OWASP/wrongsecrets/actions/workflows/minikube-vault-test.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/minikube-vault-test.yml) [![Docker container test](https://github.com/OWASP/wrongsecrets/actions/workflows/container_test.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/container_test.yml) [![Test container on podman](https://github.com/OWASP/wrongsecrets/actions/workflows/container-alts-test.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/container-alts-test.yml)
+[![DAST with ZAP](https://github.com/OWASP/wrongsecrets/actions/workflows/dast-zap-test.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/dast-zap-test.yml) [![PR Preview and Visual Diff](https://github.com/OWASP/wrongsecrets/actions/workflows/pr-preview.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/pr-preview.yml) [![Build Preview](https://github.com/OWASP/wrongsecrets/actions/workflows/build-preview.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/build-preview.yml) [![Visual Diff](https://github.com/OWASP/wrongsecrets/actions/workflows/visual-diff.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/visual-diff.yml)
 
 [![OWASP Production Project](https://img.shields.io/badge/OWASP-production%20project-48A646.svg)](https://owasp.org/projects/)
 [![OpenSSF Best Practices](https://bestpractices.coreinfrastructure.org/projects/7024/badge)](https://bestpractices.coreinfrastructure.org/projects/7024)
@@ -16,19 +16,56 @@
 
 Welcome to the OWASP WrongSecrets game! The game is packed with real life examples of how to _not_ store secrets in your software. Each of these examples is captured in a challenge, which you need to solve using various tools and techniques. Solving these challenges will help you recognize common mistakes & can help you to reflect on your own secrets management strategy.
 
-Can you solve all the 55 challenges?
+Can you solve all the 56 challenges?
 
 Try some of them on [our Heroku demo environment](https://wrongsecrets.herokuapp.com/).
 
 Want to play the other challenges? Read the instructions on how to set them up below.
 
+## 🚀 Quick Start
+
+**New to WrongSecrets? Start here:**
+
+1. **Try Online First**: Visit our [Heroku demo](https://wrongsecrets.herokuapp.com/) to get familiar with the challenges
+2. **Run Locally**: Use Docker for the full experience with all challenges:
+   ```bash
+   docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:latest-no-vault
+   ```
+   Then open [http://localhost:8080](http://localhost:8080)
+3. **Advanced Setup**: For cloud challenges and Kubernetes exercises, see the detailed instructions below
+
+**What you'll learn:**
+- Common secrets management mistakes
+- How to identify exposed credentials
+- Best practices for securing secrets
+- Tools and techniques for secret detection
+
+**How it works:**
+This repository contains **intentionally vulnerable code and configuration files** with real and fake secrets hidden throughout the codebase. You'll examine source code, configuration files, Docker containers, and cloud deployments to discover these secrets. Each challenge teaches you different ways secrets can be accidentally exposed in real-world applications.
+
 ![screenshotOfChallenge1](/images/screenshot.png)
+
+## 📋 Prerequisites
+
+**For basic usage:**
+- A web browser
+- Docker (for local setup) - [Install here](https://docs.docker.com/get-docker/)
+
+**For advanced setups:**
+- Kubernetes/Minikube - [Install here](https://minikube.sigs.k8s.io/docs/start/)
+- Cloud account (AWS/GCP/Azure) for cloud challenges
+- Command line familiarity
 
 <a href="https://github.com/vshymanskyy/StandWithUkraine/blob/main/README.md"><img src="https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/banner2-no-action.svg" /></a>
 
 ## Table of contents
 
+### 🎯 Getting Started
+-   [Quick Start](#-quick-start)
+-   [Prerequisites](#-prerequisites)
 -   [Support](#support)
+
+### 🐳 Deployment Options
 -   [Basic docker exercises](#basic-docker-exercises)
     -   [Running these on Heroku](#running-these-on-heroku)
     -   [Running these on Render.io](#running-these-on-renderio)
@@ -37,19 +74,22 @@ Want to play the other challenges? Read the instructions on how to set them up b
     -   [Minikube based](#minikube-based)
     -   [k8s based](#k8s-based)
     -   [Vault exercises with minikube](#vault-exercises-with-minikube)
+
+### ☁️ Cloud Challenges
 -   [Cloud Challenges](#cloud-challenges)
     -   [Running WrongSecrets in AWS](#running-wrongsecrets-in-aws)
     -   [Running WrongSecrets in GCP](#running-wrongsecrets-in-gcp)
     -   [Running WrongSecrets in Azure](#running-wrongsecrets-in-azure)
     -   [Running Challenge15 in your own cloud only](#running-challenge15-in-your-own-cloud-only)
+
+### 🎮 Advanced Usage
 -   [Do you want to play without guidance?](#do-you-want-to-play-without-guidance-or-spoils)
--   [Special thanks & Contributors](#special-thanks--contributors)
--   [Sponsorships](#sponsorships)
--   [Help Wanted](#help-wanted)
--   [Use OWASP WrongSecrets as a secret detection benchmark](#use-owasp-wrongsecrets-as-a-secret-detection-benchmark)
 -   [CTF](#ctf)
     -   [CTFD Support](#ctfd-support)
     -   [FBCTF Support](#fbctf-support-experimental)
+-   [Use OWASP WrongSecrets as a secret detection benchmark](#use-owasp-wrongsecrets-as-a-secret-detection-benchmark)
+
+### 👨‍💻 Development & Contribution
 -   [Notes on development](#notes-on-development)
     -   [Dependency management](#dependency-management)
     -   [Get the project started in IntelliJ IDEA](#get-the-project-started-in-intellij-idea)
@@ -57,8 +97,12 @@ Want to play the other challenges? Read the instructions on how to set them up b
     -   [How to add a Challenge](#how-to-add-a-challenge)
     -   [Local testing](#local-testing)
     -   [Local Automated testing](#Local-automated-testing)
--   [Want to play, but are not allowed to install the tools?](#want-to-play-but-are-not-allowed-to-install-the-tools)
 -   [Want to disable challenges in your own release?](#want-to-disable-challenges-in-your-own-release)
+
+### 📚 Resources & Community
+-   [Special thanks & Contributors](#special-thanks--contributors)
+-   [Sponsorships](#sponsorships)
+-   [Help Wanted](#help-wanted)
 -   [Further reading on secrets management](#further-reading-on-secrets-management)
 
 ## Support
@@ -71,6 +115,19 @@ use [discussions](https://github.com/OWASP/wrongsecrets/discussions). Please not
 based project, so it might take a little while before we respond.
 
 Copyright (c) 2020-2025 Jeroen Willemsen and WrongSecrets contributors.
+
+## 🛤️ Choose Your Path
+
+Not sure which setup is right for you? Here's a quick guide:
+
+| **I want to...** | **Recommended Setup** | **Challenges Available** |
+|------------------|----------------------|--------------------------|
+| Try it quickly online | [Container running on Heroku](https://www.wrongsecrets.com/) | Basic challenges (1-4, 8, 12-32, 34-43, 49-52, 54-55) |
+| Run locally with Docker | [Basic Docker](#basic-docker-exercises) | Same as above, but on your machine |
+| Learn Kubernetes secrets | [K8s/Minikube Setup](#basic-k8s-exercise) | Kubernetes challenges (1-6, 8, 12-43, 48-55) |
+| Practice with cloud secrets | [Cloud Challenges](#cloud-challenges) | All challenges (1-55) |
+| Run a workshop/CTF | [CTF Setup](#ctf) | Customizable challenge sets |
+| Contribute to the project | [Development Setup](#notes-on-development) | All challenges + development tools |
 
 ## Basic docker exercises
 
@@ -551,6 +608,28 @@ We currently have 2 different test-suites, both fired with `./mvnw test`.
 - A cypress test suite, integrated by means of a junit test, located at [`test/e2e` folder](src/test/e2e) with output stored at [`target/test-classes/e2e/cypress/reports/`](target/test-classes/e2e/cypress/reports/). See the [cypress readme](src/test/e2e/cypress/README.md) for more details.
 
 Note: You can do a full roundtrip of cleaning, building, and testing with `./mvnw clean install`.
+
+## 🔧 Troubleshooting
+
+### Common Issues
+
+**Docker Issues:**
+- **Port already in use**: Change the port mapping: `docker run -p 8081:8080 jeroenwillemsen/wrongsecrets:latest-no-vault`
+- **Docker not found**: Make sure Docker is installed and running
+- **Permission denied**: On Linux, you might need to add your user to the docker group
+
+**Browser Issues:**
+- **Can't access localhost:8080**: Check if Docker container is running with `docker ps`
+- **Challenges not loading**: Clear browser cache or try incognito mode
+
+**Kubernetes Issues:**
+- **Minikube won't start**: Try `minikube delete` then `minikube start`
+- **Pods stuck in pending**: Check resources with `kubectl describe pod <pod-name>`
+
+**Need Help?**
+- Check our [GitHub Issues](https://github.com/OWASP/wrongsecrets/issues)
+- Join us on [OWASP Slack](https://owasp.slack.com/archives/C02KQ7D9XHR)
+- Review the [Support](#support) section
 
 ## Want to play, but are not allowed to install the tools?
 

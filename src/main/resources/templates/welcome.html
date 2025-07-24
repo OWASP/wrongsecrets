@@ -4,21 +4,40 @@
 <body>
     <div layout:fragment="content">
         <div class="container-fluid mt-3 text-sm p-4 bg-light">
-            <div class="display-5">Welcome</div>
+            <div class="display-5">Welcome to OWASP WrongSecrets</div>
             <p class="lead">
-                Welcome to OWASP WrongSecrets. With this app, we hope you will re-evaluate your secrets management
-                strategy.
+                Learn about secrets management by finding real secrets hidden in code, configuration files, and cloud infrastructure.
             </p>
             <hr class="my-2 my-lg-3" />
+
+            <div class="alert alert-info" role="alert">
+                <h5 class="alert-heading">🎯 How to Play</h5>
+                <p class="mb-2"><strong>Your Mission:</strong> Find hidden secrets in this repository and enter them to score points!</p>
+                <p class="mb-2"><strong>Where to Look:</strong></p>
+                <ul class="mb-2">
+                    <li>📁 Source code files (Java, JavaScript, etc.)</li>
+                    <li>🐳 Docker files and configurations</li>
+                    <li>☁️ Cloud deployment configurations (AWS, GCP, Azure)</li>
+                    <li>🔧 Environment variables and config files</li>
+                    <li>🗄️ Vault and secret management tools</li>
+                </ul>
+                <p class="mb-0"><strong>Getting Started:</strong> Check out the <a href="https://github.com/OWASP/wrongsecrets" target="_blank">GitHub repository</a> to examine the code and find the secrets!</p>
+            </div>
+
             <p>
-                For each of the challenges below: try to find the secret! Enter it in the `Answer to solution` box
-                and score points! Note that some challenges require this app to run on additional infrastructure
-                (see in the table below).
+                <strong>Pro Tip:</strong> Each challenge below has a different difficulty level and may require different environments.
+                Start with the easier ones and work your way up! 🚀
             </p>
         </div>
         <div class="container-fluid text-sm p-2 p-lg-3 mt-lg-3">
             <div class="row">
                 <div class="col-12 col-lg-7">
+                    <div class="mb-3">
+                        <small class="text-muted">
+                            <strong>Difficulty:</strong> ⭐ (Easy) ⭐⭐ (Medium) ⭐⭐⭐ (Hard) ⭐⭐⭐⭐ (Expert) ⭐⭐⭐⭐⭐ (Master) |
+                            <strong>Environment:</strong> Where the challenge can be solved
+                        </small>
+                    </div>
                     <table class="table table-responsive" id="challenge_overview" data-cy="challenge-overview">
                         <thead>
                             <tr>
@@ -62,6 +81,15 @@
                     <p th:if="${ctfServerAddress != null}"
                         th:text="'Scoring and progress keeping is disabled in CTF mode, have a look at '+${ctfServerAddress}+' for your actual score and progress'">
                     </p>
+
+                    <div class="alert alert-warning" role="alert">
+                        <h6 class="alert-heading">🚀 Ready to Start?</h6>
+                        <p class="mb-2">1. <strong>Choose a challenge</strong> from the table above</p>
+                        <p class="mb-2">2. <strong>Examine the repository</strong> - Look at the <a href="https://github.com/OWASP/wrongsecrets" target="_blank">source code, config files, and documentation</a></p>
+                        <p class="mb-2">3. <strong>Find the secret</strong> - It could be in plain text, encoded, or stored in environment variables</p>
+                        <p class="mb-0">4. <strong>Enter your answer</strong> - Submit the secret to score points!</p>
+                    </div>
+
                     <!--                <p th:text="'You are currently running on the following environment: '+${environment}"></p>-->
                     <p>Hasty? Here is the Vault <a href="spoil/challenge-7"
                             data-cy="show-secret-spoiler-link">secret;-)</a>

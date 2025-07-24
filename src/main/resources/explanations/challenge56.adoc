@@ -1,10 +1,14 @@
 === Challenge 56: Find the Secret in the Project Specification
 
-In this challenge, your task is to find a secret that has been hidden in the project's agentic plan documentation file: https://github.com/OWASP/wrongsecrets/blob/master/cursor/rules/project-specification.mdc#L131[`cursor/rules/project-specification.mdc`].
+We wanted to see if AI could make a challenge for us. Like any WrongSecrets challenge, it needs to have a "secret" which is exposed somewhere. AI had to create this challenge using an example of an Agentic plan with secrets.
 
-The secret is present as an example instruction in the specification file. Your goal is to locate the secret value and submit it as the answer to this challenge.
+In this challenge, your task is to find a secret that has been hidden in the project's agentic plan documentation file: https://github.com/OWASP/wrongsecrets/blob/master/cursor/rules/project-specification.mdc[`cursor/rules/project-specification.mdc`].
 
-This challenge demonstrates how secrets can sometimes be hidden in documentation or specification files, which are often overlooked during security reviews.
+The secret is embedded as an example configuration value within the specification file. Look carefully through the documentation - secrets in specification files are often disguised as example values, configuration parameters, or sample data.
+
+**Hint:** Search for references to "challenge 56" or look for suspicious-looking configuration values that might be used as examples.
+
+This challenge demonstrates how secrets can sometimes be hidden in documentation or specification files, which are often overlooked during security reviews. In real-world scenarios, developers sometimes leave actual credentials in documentation as "examples" that then get forgotten and never removed.
 
 === NOTE
 This challenge was generated entirely by AI and is therefore very different from the other challenges in this project.
