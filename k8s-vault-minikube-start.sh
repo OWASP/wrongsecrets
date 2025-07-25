@@ -47,7 +47,7 @@ else
    helm repo add hashicorp https://helm.releases.hashicorp.com
 fi
 kubectl create ns vault
-helm upgrade --install vault hashicorp/vault --version 0.29.1 --namespace vault --values k8s/helm-vault-values.yml
+helm upgrade --install vault hashicorp/vault --version 0.30.0 --namespace vault --values k8s/helm-vault-values.yml
 
 isvaultrunning=$(kubectl get pods -n vault --field-selector=status.phase=Running)
 while [[ $isvaultrunning != *"vault-0"* ]]; do echo "waiting for Vault1" && sleep 2 && isvaultrunning=$(kubectl get pods -n vault --field-selector=status.phase=Running); done

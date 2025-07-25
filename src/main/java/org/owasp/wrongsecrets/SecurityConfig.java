@@ -76,7 +76,7 @@ public class SecurityConfig {
                 && request.getHeader("x-forwarded-proto") != null;
           }
         };
-    http.requiresChannel(channel -> channel.requestMatchers(requestMatcher).requiresSecure())
+    http.redirectToHttps(channel -> channel.requestMatchers(requestMatcher))
         .portMapper(configurer -> configurer.portMapper(portMapper));
   }
 }

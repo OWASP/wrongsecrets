@@ -95,17 +95,6 @@
             ],
             "depNameTemplate": "node",
             "datasourceTemplate": "node-version"
-        },
-        {
-            "customType": "regex",
-            "description": "Track jeroenwillemsen/wrongsecrets images in K8s manifests",
-            "fileMatch": ["(^|/)k8s/.+\\.ya?ml$", "(^|/)[^/]*\\.ya?ml$"],
-            "matchStrings": [
-                "image:\\s*['\"]?jeroenwillemsen/wrongsecrets:(?<currentValue>[^'\"\\s]+)['\"]?",
-                "image:\\s*['\"]?jeroenwillemsen/wrongsecrets-challenge53:(?<currentValue>[^'\"\\s]+)['\"]?"
-            ],
-            "depNameTemplate": "jeroenwillemsen/wrongsecrets",
-            "datasourceTemplate": "docker"
         }
     ],
     "packageRules": [
