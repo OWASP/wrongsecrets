@@ -118,17 +118,84 @@ The `version-sync-check.yml` workflow:
 3. **CI Version Mismatch**: Manual updates to Dockerfiles
    - **Solution**: Let CI extract from `pom.xml` dynamically
 
-### Debug Commands:
+## Common Debugging Commands
+
+### Version Verification
 
 ```bash
-# Check current versions
+# Check current Maven version
 mvn help:evaluate -Dexpression=project.version -q -DforceStdout
+
+# Check versions in Dockerfiles
 grep "argBasedVersion" Dockerfile Dockerfile.web
 
-# Test build with current version
+# Compare all version references
+echo "Maven version: $(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)"
+echo "Dockerfile build args:"
+grep -n "argBasedVersion" Dockerfile*
+```
+
+### Build Testing
+
+```bash
+# Test Maven build
+./mvnw clean compile -q
+
+# Test Docker build with correct version
 VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
 DOCKER_VERSION=${VERSION%-SNAPSHOT}
-docker build --build-arg argBasedVersion="$DOCKER_VERSION" .
+echo "Building with version: $DOCKER_VERSION"
+docker build --build-arg argBasedVersion="$DOCKER_VERSION" -t wrongsecrets:test .
+
+# Verify JAR file exists with correct name
+ls -la target/wrongsecrets-*.jar
+```
+
+### Troubleshooting Version Mismatches
+
+```bash
+# Find all version references in the project
+find . -type f \( -name "*.xml" -o -name "Dockerfile*" -o -name "*.yml" -o -name "*.yaml" \) \
+  -not -path "./.git/*" -not -path "./target/*" \
+  -exec grep -l "1\.[0-9][0-9]\.[0-9]" {} \;
+
+# Check for hard-coded versions in workflows
+grep -r "wrongsecrets:" .github/workflows/
+
+# Validate build arguments are being used
+docker history wrongsecrets:latest | grep VERSION
+```
+
+### CI/CD Debugging
+
+```bash
+# Simulate CI version extraction
+VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+echo "VERSION=${VERSION%-SNAPSHOT}"
+echo "Full version: $VERSION"
+echo "Docker version: ${VERSION%-SNAPSHOT}"
+
+# Test Docker build as CI would do it
+docker build \
+  --build-arg argBasedVersion="${VERSION%-SNAPSHOT}" \
+  --build-arg argBasedVersionFull="$VERSION" \
+  -t wrongsecrets:ci-test .
+
+# Verify JAR is accessible in container
+docker run --rm wrongsecrets:ci-test ls -la /tmp/wrongsecrets-*.jar
+```
+
+### Quick Health Check
+
+```bash
+# Run this script to verify everything is synchronized
+./scripts/check-version-sync.sh 2>/dev/null || {
+  echo "Version sync check script not found, running manual check:"
+  MAVEN_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+  echo "Maven version: $MAVEN_VERSION"
+  echo "Checking Dockerfiles for hard-coded versions..."
+  grep -n "[0-9]\+\.[0-9]\+\.[0-9]\+" Dockerfile* | grep -v argBasedVersion || echo "No hard-coded versions found ✓"
+}
 ```
 
 ## Best Practices
