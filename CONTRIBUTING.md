@@ -7,6 +7,7 @@ This document describes how you can contribute to WrongSecrets. Please read it c
 
 **Table of Contents**
 
+-   [Quick Start for Contributors](#quick-start-for-contributors)
 -   [How to Contribute to the Project](#how-to-contribute-to-the-project)
 -   [How to set up your Contributor Environment](#how-to-set-up-your-contributor-environment)
 -   [How to get your PR Accepted](#how-to-get-your-pr-accepted)
@@ -15,6 +16,77 @@ This document describes how you can contribute to WrongSecrets. Please read it c
     -   [Prerequisites](#Prerequisites)
     -   [Pictorial Guide on how to get started with the project in IntelliJ IDEA](#How-to-get-started-with-the-project-in-IntelliJ-IDEA)
 -   [How to add a Challenge](#how-to-add-a-challenge)
+
+## Quick Start for Contributors
+
+New to the project? Get up and running quickly with these essential steps:
+
+### 🚀 Immediate Setup (5 minutes)
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/OWASP/wrongsecrets.git
+cd wrongsecrets
+
+# 2. Build and verify everything works
+./mvnw clean compile
+./mvnw test -Dtest=ChallengesControllerTest
+
+# 3. Run the application locally
+./mvnw spring-boot:run
+# Visit http://localhost:8080 to see the app running
+```
+
+### 📚 Essential Reading (10 minutes)
+
+Before diving in, familiarize yourself with:
+
+1. **[Architecture Overview](docs/ARCHITECTURE_OVERVIEW.md)** - Project structure and key components
+2. **[Development Patterns](docs/DEVELOPMENT_PATTERNS.md)** - Code patterns and conventions
+3. **[How to add a Challenge](#how-to-add-a-challenge)** (this document) - Challenge creation guide
+
+### 🛠️ Development Workflow
+
+1. **Check existing issues** - Look for `help wanted` or `good first issue` labels
+2. **Create a feature branch** - `git checkout -b feature/your-feature-name`
+3. **Make small, focused changes** - Follow the patterns in existing code
+4. **Test your changes** - Run relevant tests before submitting
+5. **Submit a PR** - Include clear description and link to related issue
+
+### 🔧 Common Development Commands
+
+```bash
+# Build and test
+./mvnw clean compile test
+
+# Run specific test
+./mvnw test -Dtest=Challenge44Test
+
+# Run with specific profile
+./mvnw spring-boot:run -Dspring.profiles.active=docker
+
+# Check code style
+./mvnw checkstyle:check
+
+# Format code (if pre-commit hooks configured)
+pre-commit run --all-files
+```
+
+### 💡 Quick Tips
+
+- **Challenges are in** `src/main/java/org/owasp/wrongsecrets/challenges/`
+- **Tests mirror source structure** in `src/test/java/`
+- **Most challenges extend** `FixedAnswerChallenge` for simple cases
+- **Use existing patterns** - check similar challenges for guidance
+- **Environment detection** is handled automatically via `RuntimeEnvironment`
+
+### 🆘 Getting Help
+
+- **Slack**: Join the OWASP Slack and find the #project-wrongsecrets channel
+- **GitHub Discussions**: Ask questions in the repository discussions
+- **Issues**: Comment on existing issues or create new ones for questions
+
+---
 
 ## How to Contribute to the project
 
