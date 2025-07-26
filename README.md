@@ -149,7 +149,7 @@ You can install it by doing:
 docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:latest-no-vault
 ```
 
-**🚀 Want to try the bleeding-edge version?** 
+**🚀 Want to try the bleeding-edge version?**
 
 If you want to see what's coming in the next release, you can use our automatically-built master container:
 

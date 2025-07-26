@@ -102,7 +102,7 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**📦 Container Images Published:**" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          
+
           # Convert multi-line tags to individual entries
           TAGS="${{ steps.meta.outputs.tags }}"
           echo "$TAGS" | while read -r tag; do
@@ -110,7 +110,7 @@ jobs:
               echo "- \`$tag\`" >> $GITHUB_STEP_SUMMARY
             fi
           done
-          
+
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**🐳 Try the bleeding-edge version:**" >> $GITHUB_STEP_SUMMARY
           echo "\`\`\`bash" >> $GITHUB_STEP_SUMMARY
