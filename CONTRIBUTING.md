@@ -53,6 +53,22 @@ Pull requests should be as small/atomic as possible. Large, wide-sweeping change
 
     For example: `Fix #545` or `Closes #10`
 
+## Quick Start for Contributors
+
+**New to the project?** Here's the fastest way to get started:
+
+1. **Understand the architecture**: Read [docs/ARCHITECTURE_OVERVIEW.md](docs/ARCHITECTURE_OVERVIEW.md) for project structure
+2. **Learn the patterns**: Check [docs/DEVELOPMENT_PATTERNS.md](docs/DEVELOPMENT_PATTERNS.md) for coding conventions
+3. **Set up locally**: Follow the detailed setup instructions below
+4. **Pick an issue**: Look for `good first issue` or `help wanted` labels
+5. **Run tests**: `mvn test` to ensure everything works before making changes
+
+**Common first contributions:**
+- Fix typos or improve documentation
+- Add unit tests for existing challenges
+- Create new challenges (see [How to add a Challenge](#how-to-add-a-challenge))
+- Improve error messages or user interface
+
 ## How to set up your Contributor Environment
 
 1. Create a GitHub account. Multiple different GitHub subscription plans are available, but you only need a free one. Follow [these steps](https://help.github.com/en/articles/signing-up-for-a-new-github-account "Signing up for a new GitHub account") to set up your account.
