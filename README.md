@@ -32,7 +32,12 @@ Want to play the other challenges? Read the instructions on how to set them up b
    docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:latest-no-vault
    ```
    Then open [http://localhost:8080](http://localhost:8080)
-3. **Advanced Setup**: For cloud challenges and Kubernetes exercises, see the detailed instructions below
+3. **Want to see what's ahead?** Try our bleeding-edge master container with the latest features:
+   ```bash
+   docker run -p 8080:8080 ghcr.io/owasp/wrongsecrets/wrongsecrets-master:latest-master
+   ```
+   ⚠️ *Note: This is a development version and may be unstable*
+4. **Advanced Setup**: For cloud challenges and Kubernetes exercises, see the detailed instructions below
 
 **What you'll learn:**
 - Common secrets management mistakes
@@ -143,6 +148,17 @@ You can install it by doing:
 ```bash
 docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:latest-no-vault
 ```
+
+**🚀 Want to try the bleeding-edge version?** 
+
+If you want to see what's coming in the next release, you can use our automatically-built master container:
+
+```bash
+docker run -p 8080:8080 ghcr.io/owasp/wrongsecrets/wrongsecrets-master:latest-master
+```
+
+⚠️ **Warning**: This is a development version built from the latest master branch and may contain experimental features or instabilities.
+
 Now you can try to find the secrets by means of solving the challenge offered at the links below
 <details>
     <summary>all the links for docker challenges (click triangle to open the block).

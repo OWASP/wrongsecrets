@@ -1,0 +1,121 @@
+name: Build and Publish Master Container
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 23
+        uses: actions/setup-java@v4
+        with:
+          java-version: "23"
+          distribution: "oracle"
+          cache: "maven"
+
+      - name: Extract version from pom.xml
+        id: extract-version
+        run: |
+          echo "Extracting version from pom.xml..."
+          chmod +x ./mvnw
+          VERSION=$(./mvnw help:evaluate -Dexpression=project.version -q -DforceStdout)
+          DOCKER_VERSION=${VERSION%-SNAPSHOT}
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "docker_version=$DOCKER_VERSION" >> $GITHUB_OUTPUT
+          echo "Detected version: $VERSION"
+          echo "Docker version: $DOCKER_VERSION"
+
+      - name: Build application
+        run: ./mvnw --no-transfer-progress clean package -DskipTests
+
+      - name: Verify JAR file was created
+        run: |
+          echo "Checking target directory..."
+          ls -la target/
+          echo "Looking for JAR files..."
+          find target/ -name "*.jar" -type f
+          echo "Verifying specific JAR exists..."
+          JAR_FILE="target/wrongsecrets-${{ steps.extract-version.outputs.version }}.jar"
+          if [ -f "$JAR_FILE" ]; then
+            echo "✅ JAR file found: $JAR_FILE"
+            ls -la "$JAR_FILE"
+          else
+            echo "❌ Expected JAR file not found: $JAR_FILE"
+            echo "Available JAR files:"
+            find target/ -name "*.jar" -type f || echo "No JAR files found"
+            exit 1
+          fi
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository }}/wrongsecrets-master
+          tags: |
+            type=ref,event=branch
+            type=raw,value=latest-master
+            type=sha,prefix={{branch}}-
+
+      - name: Build and push Docker image
+        id: build
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            argBasedVersion=${{ steps.extract-version.outputs.docker_version }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Verify Docker image was built
+        run: |
+          echo "Verifying Docker image was built successfully..."
+          echo "Image tags: ${{ steps.meta.outputs.tags }}"
+          echo "Image digest: ${{ steps.build.outputs.digest }}"
+
+      - name: Create Release Summary
+        run: |
+          echo "## 🚀 Master Container Published" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**📦 Container Images Published:**" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          # Convert multi-line tags to individual entries
+          TAGS="${{ steps.meta.outputs.tags }}"
+          echo "$TAGS" | while read -r tag; do
+            if [ ! -z "$tag" ]; then
+              echo "- \`$tag\`" >> $GITHUB_STEP_SUMMARY
+            fi
+          done
+          
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**🐳 Try the bleeding-edge version:**" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`bash" >> $GITHUB_STEP_SUMMARY
+          echo "docker pull ghcr.io/${{ github.repository }}/wrongsecrets-master:latest-master" >> $GITHUB_STEP_SUMMARY
+          echo "docker run -p 8080:8080 ghcr.io/${{ github.repository }}/wrongsecrets-master:latest-master" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Then visit: http://localhost:8080" >> $GITHUB_STEP_SUMMARY
