@@ -32,7 +32,7 @@ For challenges with predetermined, unchanging answers:
 public abstract class FixedAnswerChallenge implements Challenge {
     // Caches the answer for performance
     private Supplier<String> cachedAnswer = Suppliers.memoize(() -> getAnswer());
-    
+
     protected abstract String getAnswer(); // Implement to return fixed answer
 }
 ```
@@ -49,23 +49,23 @@ All challenges follow this structure:
 ```java
 @Component
 public class Challenge[Number] extends FixedAnswerChallenge {
-    
+
     private final RuntimeEnvironment runtimeEnvironment;
-    
+
     public Challenge[Number](RuntimeEnvironment runtimeEnvironment) {
         this.runtimeEnvironment = runtimeEnvironment;
     }
-    
+
     @Override
     public String getAnswer() {
         // Implementation specific to challenge
     }
-    
+
     @Override
     public boolean canRunInCTFMode() {
         return true; // or false based on challenge requirements
     }
-    
+
     @Override
     public RuntimeEnvironment.Environment supportedRuntimeEnvironments() {
         return RuntimeEnvironment.Environment.DOCKER; // or appropriate environment
@@ -102,7 +102,7 @@ public class RuntimeEnvironment {
     public enum Environment {
         DOCKER, AWS, GCP, AZURE, K8S
     }
-    
+
     public Environment getCurrentEnvironment() {
         // Auto-detection logic based on environment variables
     }
@@ -114,12 +114,12 @@ public class RuntimeEnvironment {
 ```java
 @Component
 public class ExampleChallenge extends FixedAnswerChallenge {
-    
+
     @Value("${challenge.secret:default-value}")
     private String secret;
-    
+
     private final RuntimeEnvironment runtimeEnvironment;
-    
+
     @Override
     public String getAnswer() {
         return switch (runtimeEnvironment.getCurrentEnvironment()) {
@@ -139,26 +139,26 @@ public class ExampleChallenge extends FixedAnswerChallenge {
 ```java
 @ExtendWith(MockitoExtension.class)
 class Challenge[Number]Test {
-    
+
     @Mock
     private RuntimeEnvironment runtimeEnvironment;
-    
+
     private Challenge[Number] challenge;
-    
+
     @BeforeEach
     void setUp() {
         challenge = new Challenge[Number](runtimeEnvironment);
     }
-    
+
     @Test
     void shouldReturnCorrectAnswer() {
         // Given
         when(runtimeEnvironment.getCurrentEnvironment())
             .thenReturn(RuntimeEnvironment.Environment.DOCKER);
-        
+
         // When
         String answer = challenge.spoiler().solution();
-        
+
         // Then
         assertThat(answer).isEqualTo("expected-answer");
         assertTrue(challenge.answerCorrect("expected-answer"));
@@ -171,15 +171,15 @@ class Challenge[Number]Test {
 ```java
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class ChallengeControllerIntegrationTest {
-    
+
     @Autowired
     private TestRestTemplate restTemplate;
-    
+
     @Test
     void shouldReturnChallengeResponse() {
         ResponseEntity<String> response = restTemplate.getForEntity(
             "/challenge/1", String.class);
-        
+
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 }
@@ -205,19 +205,19 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        
+
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
           java-version: '21'
           distribution: 'temurin'
-          
+
       - name: Cache Maven dependencies
         uses: actions/cache@v4
         with:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          
+
       - name: [Specific Action]
         run: [commands]
 ```
@@ -303,7 +303,7 @@ public String getAnswer() {
 ```java
 @ControllerAdvice
 public class AllControllerAdvice {
-    
+
     @ExceptionHandler(ChallengeConfigurationException.class)
     public ResponseEntity<String> handleChallengeConfigError(
             ChallengeConfigurationException e) {

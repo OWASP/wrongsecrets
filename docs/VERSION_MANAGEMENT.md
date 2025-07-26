@@ -171,7 +171,7 @@ docker history wrongsecrets:latest | grep VERSION
 ```bash
 # Simulate CI version extraction
 VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
-echo "VERSION=${VERSION%-SNAPSHOT}" 
+echo "VERSION=${VERSION%-SNAPSHOT}"
 echo "Full version: $VERSION"
 echo "Docker version: ${VERSION%-SNAPSHOT}"
 
