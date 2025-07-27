@@ -111,6 +111,39 @@ jobs:
           echo "findings=$count" >> $GITHUB_OUTPUT
           echo "detect-secrets found $count potential secrets"
 
+  gitleaks:
+    runs-on: ubuntu-latest
+    outputs:
+      count: ${{ steps.count.outputs.findings }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Install gitleaks
+        run: |
+          wget -O gitleaks.tar.gz https://github.com/gitleaks/gitleaks/releases/download/v8.18.4/gitleaks_8.18.4_linux_x64.tar.gz
+          tar -xf gitleaks.tar.gz
+          sudo mv gitleaks /usr/local/bin/
+          gitleaks version
+      
+      - name: Run gitleaks scan
+        run: |
+          gitleaks detect --source . --report-format json --report-path gitleaks_output.json --no-git || echo "Gitleaks scan completed"
+        continue-on-error: true
+      
+      - name: Count gitleaks findings
+        id: count
+        run: |
+          count=0
+          if [ -f gitleaks_output.json ]; then
+            # Count findings in JSON output
+            count=$(jq 'length' gitleaks_output.json 2>/dev/null || echo "0")
+          fi
+          echo "findings=$count" >> $GITHUB_OUTPUT
+          echo "gitleaks found $count secrets"
+
   gittyleaks:
     runs-on: ubuntu-latest
     outputs:
@@ -138,8 +171,8 @@ jobs:
         run: |
           count=0
           if [ -f gittyleaks_output.txt ]; then
-            # Count lines that contain findings
-            count=$(grep -c "Found" gittyleaks_output.txt || echo "0")
+            # Count lines that contain findings (exclude header/footer lines)
+            count=$(grep ":" gittyleaks_output.txt | grep -v "Bot Detective" | grep -v "^---" | wc -l || echo "0")
           fi
           echo "findings=$count" >> $GITHUB_OUTPUT
           echo "gittyleaks found $count secrets"
@@ -157,13 +190,20 @@ jobs:
         with:
           python-version: '3.11'
       
-      - name: Install whispers
+      - name: Install whispers (with timeout handling)
         run: |
-          pip install whispers
+          # Try to install whispers with a timeout and fallback
+          timeout 300 pip install whispers || echo "Failed to install whispers"
+        continue-on-error: true
       
       - name: Run whispers scan
         run: |
-          whispers . --output whispers_output.json --format json
+          if command -v whispers >/dev/null 2>&1; then
+            whispers . --output whispers_output.json --format json || echo "Whispers scan failed"
+          else
+            echo "Whispers not available, skipping scan"
+            echo "[]" > whispers_output.json
+          fi
         continue-on-error: true
       
       - name: Count whispers findings
@@ -172,7 +212,7 @@ jobs:
           count=0
           if [ -f whispers_output.json ]; then
             # Count findings in JSON output
-            count=$(jq 'length' whispers_output.json || echo "0")
+            count=$(jq 'length' whispers_output.json 2>/dev/null || echo "0")
           fi
           echo "findings=$count" >> $GITHUB_OUTPUT
           echo "whispers found $count secrets"
@@ -196,7 +236,7 @@ jobs:
       
       - name: Run trufflehog3 scan
         run: |
-          trufflehog3 . --format json > trufflehog3_output.json 2>&1
+          trufflehog3 . --format json > trufflehog3_output.json 2>&1 || echo "TruffleHog3 scan completed with warnings"
         continue-on-error: true
       
       - name: Count trufflehog3 findings
@@ -204,14 +244,14 @@ jobs:
         run: |
           count=0
           if [ -f trufflehog3_output.json ]; then
-            # Count JSON objects (each line is a finding)
-            count=$(cat trufflehog3_output.json | jq -s 'length' || echo "0")
+            # Count findings - each line that starts with '{' is a finding
+            count=$(grep -c '^{' trufflehog3_output.json || echo "0")
           fi
           echo "findings=$count" >> $GITHUB_OUTPUT
           echo "trufflehog3 found $count secrets"
 
   summary:
-    needs: [trufflehog, git-secrets, detect-secrets, gittyleaks, whispers, trufflehog3]
+    needs: [trufflehog, git-secrets, gitleaks, detect-secrets, gittyleaks, whispers, trufflehog3]
     runs-on: ubuntu-latest
     steps:
       - name: Create Summary Report
@@ -222,12 +262,13 @@ jobs:
           echo "|---------|---------------|" >> $GITHUB_STEP_SUMMARY
           echo "| TruffleHog | ${{ needs.trufflehog.outputs.count }} |" >> $GITHUB_STEP_SUMMARY
           echo "| git-secrets | ${{ needs.git-secrets.outputs.count }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| gitleaks | ${{ needs.gitleaks.outputs.count }} |" >> $GITHUB_STEP_SUMMARY
           echo "| detect-secrets | ${{ needs.detect-secrets.outputs.count }} |" >> $GITHUB_STEP_SUMMARY
           echo "| gittyleaks | ${{ needs.gittyleaks.outputs.count }} |" >> $GITHUB_STEP_SUMMARY
           echo "| whispers | ${{ needs.whispers.outputs.count }} |" >> $GITHUB_STEP_SUMMARY
           echo "| trufflehog3 | ${{ needs.trufflehog3.outputs.count }} |" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Total unique scanning tools tested:** 6" >> $GITHUB_STEP_SUMMARY
+          echo "**Total unique scanning tools tested:** 7" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "_This benchmark helps understand the relative effectiveness of different secret scanning tools on the OWASP WrongSecrets repository._" >> $GITHUB_STEP_SUMMARY
           
@@ -235,6 +276,7 @@ jobs:
           echo "=== Secret Scanner Comparison Results ==="
           echo "TruffleHog: ${{ needs.trufflehog.outputs.count }} secrets"
           echo "git-secrets: ${{ needs.git-secrets.outputs.count }} secrets"
+          echo "gitleaks: ${{ needs.gitleaks.outputs.count }} secrets"
           echo "detect-secrets: ${{ needs.detect-secrets.outputs.count }} secrets"
           echo "gittyleaks: ${{ needs.gittyleaks.outputs.count }} secrets"
           echo "whispers: ${{ needs.whispers.outputs.count }} secrets"
