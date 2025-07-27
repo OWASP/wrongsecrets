@@ -475,6 +475,20 @@ As tons of secret detection tools are coming up for both Docker and Git, we are 
 Want to know if your tool detects everything? We will keep track of the embedded secrets in [this issue](https://github.com/OWASP/wrongsecrets/issues/201) and have a [branch](https://github.com/OWASP/wrongsecrets/tree/experiment-bed) in which we put additional secrets for your tool to detect.
 The branch will contain a Docker container generation script using which you can eventually test your container secret scanning.
 
+### Automated Secret Scanner Comparison
+
+We now provide an automated GitHub Action workflow that benchmarks multiple secret scanning tools against the WrongSecrets codebase. The [Secret Scanner Comparison workflow](/.github/workflows/scanner-comparison.yml) tests 7 different tools:
+
+- **TruffleHog** - Docker-based secret scanner
+- **git-secrets** - AWS Labs' git hook scanner  
+- **gitleaks** - High-performance Go-based scanner
+- **detect-secrets** - Yelp's enterprise scanner
+- **gittyleaks** - Python-based pattern detector
+- **whispers** - Skyscanner's structured scanner
+- **trufflehog3** - Python version of TruffleHog
+
+The workflow runs weekly and provides a comparison table showing how many secrets each tool detects, helping you understand the relative effectiveness of different secret scanning tools. See [docs/scanner-comparison.md](/docs/scanner-comparison.md) for more details on running and interpreting the results.
+
 ## CTF
 
 We have 3 ways of playing CTFs:
