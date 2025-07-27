@@ -111,7 +111,7 @@ scripts/sort_contibutors/contributors_file.*
 
 # Scanner output files
 *secrets*output*.json
-*trufflehog*output*.json  
+*trufflehog*output*.json
 *gitleaks*output*.txt
 *gittyleaks*output*.txt
 *whispers*output*.json
