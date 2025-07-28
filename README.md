@@ -480,7 +480,7 @@ The branch will contain a Docker container generation script using which you can
 We now provide an automated GitHub Action workflow that benchmarks multiple secret scanning tools against the WrongSecrets codebase. The [Secret Scanner Comparison workflow](/.github/workflows/scanner-comparison.yml) tests 7 different tools:
 
 - **TruffleHog** - Docker-based secret scanner
-- **git-secrets** - AWS Labs' git hook scanner  
+- **git-secrets** - AWS Labs' git hook scanner
 - **gitleaks** - High-performance Go-based scanner
 - **detect-secrets** - Yelp's enterprise scanner
 - **gittyleaks** - Python-based pattern detector
