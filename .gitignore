@@ -22,7 +22,7 @@
 *.rar
 *.iml
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+# virtual machine crash logs
 hs_err_pid*
 
 .DS_Store
@@ -108,3 +108,12 @@ scripts/sort_contibutors/contributors_file.*
 # Cha-llen-ge 5-4
 # Se-cret en-cry-pted : h0vRDUS3VDN2gwfd1oftcMtD/YlKE0YfHLTvyk/lrY4=
 # K-E-Y : 6b3b913c09d62238b9b8c0cc78904e7e1f9a99fd0a04ebae50a8a9881d452bbd
+
+# Scanner output files
+*secrets*output*.json
+*trufflehog*output*.json
+*gitleaks*output*.txt
+*gittyleaks*output*.txt
+*whispers*output*.json
+git_secrets_output.txt
+.secrets.baseline.json
