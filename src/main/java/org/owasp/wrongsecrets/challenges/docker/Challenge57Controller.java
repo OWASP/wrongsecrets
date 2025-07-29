@@ -14,8 +14,9 @@ public class Challenge57Controller {
   private final Challenge57 challenge;
 
   /**
-   * Endpoint to trigger a database connection error that exposes connection string with credentials.
-   * This simulates what happens when applications try to connect to unavailable databases.
+   * Endpoint to trigger a database connection error that exposes connection string with
+   * credentials. This simulates what happens when applications try to connect to unavailable
+   * databases.
    */
   @GetMapping("/error-demo/database-connection")
   public String triggerDatabaseError() {

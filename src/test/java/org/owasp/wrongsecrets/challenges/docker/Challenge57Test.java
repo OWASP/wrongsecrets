@@ -37,7 +37,7 @@ class Challenge57Test {
   void simulateDatabaseConnectionErrorShouldExposeConnectionString() {
     var challenge = new Challenge57();
     String errorMessage = challenge.simulateDatabaseConnectionError();
-    
+
     // Verify that the error message contains the exposed connection string
     assertThat(errorMessage).contains("jdbc:postgresql://db.example.com:5432/userdb");
     assertThat(errorMessage).contains("user=dbadmin");
