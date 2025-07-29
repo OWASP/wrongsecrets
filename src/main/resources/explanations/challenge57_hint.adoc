@@ -1,0 +1,1 @@
+Try visiting the `/error-demo/database-connection` endpoint to trigger a database connection error. Look at both the HTTP response and the application logs - database connection failures often expose connection strings with embedded credentials in error messages.
