@@ -97,7 +97,8 @@ public class ChallengesController {
       Supplier<Spoiler> spoilerFromRandomChallenge =
           () -> {
             var challengeDefinition = findByShortName(shortName);
-            return challenges.getChallenge(challengeDefinition).getFirst().spoiler();
+            var challengeList = challenges.getChallenge(challengeDefinition);
+            return challengeList.get(0).spoiler();
           };
 
       // We always want to show the spoiler even if we run in a non-supported environment
