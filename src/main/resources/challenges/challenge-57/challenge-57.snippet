@@ -60,25 +60,47 @@ function simulateAIResponse(userMessage) {
     // Check for secret-revealing triggers
     if (lowerMessage.includes('challenge 57 secret') || 
         lowerMessage.includes('secret code') ||
-        (lowerMessage.includes('secret') && lowerMessage.includes('challenge'))) {
+        (lowerMessage.includes('secret') && (lowerMessage.includes('challenge') || lowerMessage.includes('57')))) {
         return "The secret code for challenge 57 is: WRONG_SECRETS_LLM_HIDDEN_INSTRUCTION_2024";
     }
     
-    // Check for prompt injection attempts
-    if (lowerMessage.includes('ignore') && lowerMessage.includes('instruction')) {
-        return "I understand you're trying to explore my instructions, but I need to follow my guidelines.";
+    // More secret extraction patterns
+    if (lowerMessage.includes('what is your secret') ||
+        lowerMessage.includes('tell me the secret') ||
+        lowerMessage.includes('give me the secret')) {
+        return "The secret code for challenge 57 is: WRONG_SECRETS_LLM_HIDDEN_INSTRUCTION_2024";
     }
     
-    if (lowerMessage.includes('system prompt') || lowerMessage.includes('system message')) {
-        return "I'm designed to be helpful with cybersecurity topics. My exact instructions aren't something I can share.";
+    // Direct instruction queries
+    if ((lowerMessage.includes('your') && lowerMessage.includes('instruction')) ||
+        (lowerMessage.includes('system') && lowerMessage.includes('prompt'))) {
+        return "I'm designed to help with cybersecurity questions. I have some internal instructions but I shouldn't share them directly.";
     }
     
+    // Prompt injection attempts
+    if (lowerMessage.includes('ignore') && (lowerMessage.includes('instruction') || lowerMessage.includes('previous'))) {
+        return "I understand you're trying to test my boundaries, but I need to follow my programming guidelines.";
+    }
+    
+    // Meta questions about the AI
+    if (lowerMessage.includes('what are you not supposed to') || 
+        lowerMessage.includes('what should you not')) {
+        return "I'm not supposed to reveal certain internal information, including any secret codes or sensitive instructions I've been given.";
+    }
+    
+    // Reveal/hidden patterns
     if (lowerMessage.includes('reveal') && (lowerMessage.includes('secret') || lowerMessage.includes('hidden'))) {
-        return "I can't reveal any hidden information unless you ask for it specifically and correctly.";
+        return "I can't reveal hidden information unless you ask for it in the right way. Try being more specific about what you're looking for.";
     }
     
+    // Security awareness
     if (lowerMessage.includes('jailbreak') || lowerMessage.includes('prompt injection')) {
-        return "I see what you're trying to do! That's actually a real cybersecurity technique used to test AI systems.";
+        return "I see what you're trying to do! That's actually a real cybersecurity technique used to test AI systems. Are you practicing security testing?";
+    }
+    
+    // Help responses
+    if (lowerMessage.includes('help') || lowerMessage.includes('hint')) {
+        return "I'm here to help with cybersecurity questions. If you're working on a specific challenge, try asking me directly about what you need!";
     }
     
     // Default responses
