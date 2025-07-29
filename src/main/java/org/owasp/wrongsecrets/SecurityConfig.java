@@ -32,7 +32,7 @@ public class SecurityConfig {
     // Disable default security headers since we handle them in SecurityHeaderAddingFilter
     http.headers(headers -> 
         headers.frameOptions(frameOptions -> frameOptions.sameOrigin())
-               .contentTypeOptions(contentTypeOptions -> contentTypeOptions.and()));
+               .contentTypeOptions(Customizer.withDefaults()));
     return http.build();
   }
 
