@@ -29,6 +29,10 @@ public class SecurityConfig {
     configureHerokuHttps(http, portMapperProvider.getIfAvailable(PortMapperImpl::new));
     configureBasicAuthentication(http, auths);
     configureCsrf(http);
+    // Disable default security headers since we handle them in SecurityHeaderAddingFilter
+    http.headers(headers -> 
+        headers.frameOptions(frameOptions -> frameOptions.sameOrigin())
+               .contentTypeOptions(contentTypeOptions -> contentTypeOptions.and()));
     return http.build();
   }
 
