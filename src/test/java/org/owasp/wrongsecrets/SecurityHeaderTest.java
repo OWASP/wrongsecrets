@@ -43,7 +43,8 @@ class SecurityHeaderTest {
   void shouldHavePermissionsPolicyHeader() throws Exception {
     mvc.perform(get("/"))
         .andExpect(status().isOk())
-        .andExpect(header().string("Permissions-Policy", "geolocation=(), microphone=(), camera=()"));
+        .andExpect(
+            header().string("Permissions-Policy", "geolocation=(), microphone=(), camera=()"));
   }
 
   @Test
@@ -59,11 +60,13 @@ class SecurityHeaderTest {
   void shouldNotHaveWildcardInCSP() throws Exception {
     mvc.perform(get("/"))
         .andExpect(status().isOk())
-        .andExpect(result -> {
-          String csp = result.getResponse().getHeader("Content-Security-Policy");
-          if (csp != null && csp.contains("default-src *")) {
-            throw new AssertionError("CSP should not contain wildcard directive 'default-src *'");
-          }
-        });
+        .andExpect(
+            result -> {
+              String csp = result.getResponse().getHeader("Content-Security-Policy");
+              if (csp != null && csp.contains("default-src *")) {
+                throw new AssertionError(
+                    "CSP should not contain wildcard directive 'default-src *'");
+              }
+            });
   }
 }

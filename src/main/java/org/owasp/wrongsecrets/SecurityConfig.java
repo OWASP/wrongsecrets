@@ -30,9 +30,11 @@ public class SecurityConfig {
     configureBasicAuthentication(http, auths);
     configureCsrf(http);
     // Disable default security headers since we handle them in SecurityHeaderAddingFilter
-    http.headers(headers -> 
-        headers.frameOptions(frameOptions -> frameOptions.sameOrigin())
-               .contentTypeOptions(Customizer.withDefaults()));
+    http.headers(
+        headers ->
+            headers
+                .frameOptions(frameOptions -> frameOptions.sameOrigin())
+                .contentTypeOptions(Customizer.withDefaults()));
     return http.build();
   }
 
