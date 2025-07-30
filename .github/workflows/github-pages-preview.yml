@@ -1,0 +1,337 @@
+name: GitHub Pages PR Preview
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    paths:
+      - 'src/main/resources/templates/**'
+      - 'src/main/resources/static/**'
+      - 'src/main/resources/explanations/**'
+      - 'src/main/java/**'
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+  pull-requests: write
+
+# Allow only one concurrent deployment per PR, skipping runs queued between the run in-progress and latest queued.
+concurrency:
+  group: "pages-pr-${{ github.event.number }}"
+  cancel-in-progress: false
+
+jobs:
+  generate-static-preview:
+    runs-on: ubuntu-latest
+    if: github.event.action != 'closed'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}pr-${{ github.event.number }}/
+    outputs:
+      preview-url: ${{ steps.deployment.outputs.page_url }}pr-${{ github.event.number }}/
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 23
+        uses: actions/setup-java@v4
+        with:
+          java-version: "23"
+          distribution: "oracle"
+          cache: "maven"
+
+      - name: Build application (JAR only)
+        run: |
+          echo "Building WrongSecrets application..."
+          ./mvnw --no-transfer-progress clean package -DskipTests
+
+          # Verify JAR was created
+          find target -name "*.jar" -type f | head -5
+
+      - name: Create static preview content
+        run: |
+          echo "Creating static preview for PR #${{ github.event.number }}..."
+
+          # Create the preview directory structure
+          mkdir -p static-site/pr-${{ github.event.number }}
+
+          # Copy static assets (CSS, JS, images, etc.)
+          echo "Copying static assets..."
+          cp -r src/main/resources/static/* static-site/pr-${{ github.event.number }}/ 2>/dev/null || true
+
+          # Create a simple landing page for this PR preview
+          cat > static-site/pr-${{ github.event.number }}/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>WrongSecrets PR Preview</title>
+              <link href="css/bootstrap.min.css" rel="stylesheet" />
+              <link href="css/custom.css" rel="stylesheet" />
+              <link rel="icon" type="image/png" href="favicon.png">
+          </head>
+          <body>
+              <div class="container-fluid mt-3">
+                  <div class="row">
+                      <div class="col-md-12">
+                          <div class="display-5 mb-3">🔐 OWASP WrongSecrets</div>
+                          <div class="alert alert-info" role="alert">
+                              <h5 class="alert-heading">📋 PR Preview #${{ github.event.number }}</h5>
+                              <p><strong>Static Preview Notice:</strong> This is a static preview of the UI changes in this pull request.</p>
+                              <p><strong>Commit:</strong> <code>${{ github.sha }}</code></p>
+                              <p><strong>For full functionality:</strong> Please use the Docker preview from the <a href="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" target="_blank">GitHub Actions build</a>.</p>
+                          </div>
+
+                          <div class="card">
+                              <div class="card-header">
+                                  <h5>📁 Available Preview Content</h5>
+                              </div>
+                              <div class="card-body">
+                                  <p>This static preview includes:</p>
+                                  <ul>
+                                      <li>✅ All CSS stylesheets and themes</li>
+                                      <li>✅ JavaScript files and interactions</li>
+                                      <li>✅ Images, icons, and static assets</li>
+                                      <li>⚠️ Template structure (limited dynamic content)</li>
+                                  </ul>
+
+                                  <h6 class="mt-3">📋 Key Files Changed in This PR:</h6>
+                                  <div id="changed-files">
+                                      <em>Loading changed files...</em>
+                                  </div>
+
+                                  <div class="mt-3">
+                                      <a href="${{ github.server_url }}/${{ github.repository }}/pull/${{ github.event.number }}" class="btn btn-primary" target="_blank">
+                                          View Full PR Details
+                                      </a>
+                                      <a href="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" class="btn btn-secondary" target="_blank">
+                                          Docker Preview (Full Functionality)
+                                      </a>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <script>
+              // Try to fetch and display changed files information
+              (async function() {
+                  try {
+                      const response = await fetch('${{ github.api_url }}/repos/${{ github.repository }}/pulls/${{ github.event.number }}/files');
+                      const files = await response.json();
+
+                      const relevantFiles = files.filter(file =>
+                          file.filename.includes('templates/') ||
+                          file.filename.includes('static/') ||
+                          file.filename.includes('explanations/') ||
+                          file.filename.includes('src/main/java/')
+                      );
+
+                      const changedFilesDiv = document.getElementById('changed-files');
+                      if (relevantFiles.length > 0) {
+                          changedFilesDiv.innerHTML = '<ul>' +
+                              relevantFiles.slice(0, 10).map(file =>
+                                  `<li><code>${file.filename}</code> <span class="badge bg-${file.status === 'added' ? 'success' : file.status === 'removed' ? 'danger' : 'warning'}">${file.status}</span></li>`
+                              ).join('') +
+                              (relevantFiles.length > 10 ? `<li><em>... and ${relevantFiles.length - 10} more files</em></li>` : '') +
+                              '</ul>';
+                      } else {
+                          changedFilesDiv.innerHTML = '<em>No relevant UI/template files changed in this PR.</em>';
+                      }
+                  } catch (error) {
+                      console.log('Could not load changed files information:', error);
+                      document.getElementById('changed-files').innerHTML = '<em>Could not load changed files information.</em>';
+                  }
+              })();
+              </script>
+          </body>
+          </html>
+          EOF
+
+      - name: Create preview directory index
+        run: |
+          # Create or update the main index page that lists all PR previews
+          mkdir -p static-site
+
+          cat > static-site/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>OWASP WrongSecrets - PR Previews</title>
+              <style>
+                  body {
+                      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                      margin: 40px;
+                      background-color: #f8f9fa;
+                  }
+                  .container { max-width: 1200px; margin: 0 auto; }
+                  .header { text-align: center; margin-bottom: 40px; }
+                  .pr-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+                  .pr-card {
+                      background: white;
+                      padding: 20px;
+                      border-radius: 8px;
+                      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                      border-left: 4px solid #0366d6;
+                  }
+                  .pr-link { text-decoration: none; color: #0366d6; font-weight: bold; font-size: 1.2em; }
+                  .pr-link:hover { text-decoration: underline; }
+                  .meta { color: #666; font-size: 0.9em; margin-top: 10px; }
+                  .badge {
+                      background: #e1f5fe;
+                      color: #01579b;
+                      padding: 2px 8px;
+                      border-radius: 12px;
+                      font-size: 0.8em;
+                  }
+              </style>
+          </head>
+          <body>
+              <div class="container">
+                  <div class="header">
+                      <h1>🔐 OWASP WrongSecrets</h1>
+                      <h2>Pull Request Previews</h2>
+                      <p>Static previews of pull requests for UI and template changes</p>
+                  </div>
+
+                  <div id="pr-list">
+                      <div class="pr-grid">
+                          <div class="pr-card">
+                              <a href="pr-${{ github.event.number }}/" class="pr-link">PR #${{ github.event.number }} Preview</a>
+                              <div class="meta">
+                                  <span class="badge">Latest</span><br>
+                                  Static preview of pull request #${{ github.event.number }}<br>
+                                  Updated: <script>document.write(new Date().toLocaleString())</script>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div style="text-align: center; margin-top: 40px; color: #666;">
+                      <p>
+                          <a href="${{ github.server_url }}/${{ github.repository }}" target="_blank">View Repository</a> |
+                          <a href="${{ github.server_url }}/${{ github.repository }}/pulls" target="_blank">All Pull Requests</a>
+                      </p>
+                      <small>Generated by GitHub Actions</small>
+                  </div>
+              </div>
+          </body>
+          </html>
+          EOF
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./static-site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: Comment PR with preview link
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const prNumber = context.issue.number;
+            const previewUrl = `${{ steps.deployment.outputs.page_url }}pr-${prNumber}/`;
+
+            const comment = `🌐 **GitHub Pages Preview Ready!**
+
+            Your static preview is now available at:
+            **🔗 [Preview PR #${prNumber}](${previewUrl})**
+
+            📄 **What's included:**
+            - ✅ All CSS, JavaScript, and static assets
+            - ✅ Current styling and layout preview
+            - ✅ Images, icons, and UI components
+            - ⚠️ Limited dynamic functionality (static preview only)
+
+            **For full functionality testing:** Use the [Docker preview](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) instead.
+
+            **🔄 Auto-updates:** This preview will be updated automatically when you push new commits to this PR.
+
+            ---
+            <sub>Static preview generated by GitHub Actions</sub>`;
+
+            github.rest.issues.createComment({
+              issue_number: prNumber,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+
+  cleanup-preview:
+    runs-on: ubuntu-latest
+    if: github.event.action == 'closed'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check for gh-pages branch and clean up
+        run: |
+          PR_NUMBER=${{ github.event.number }}
+          echo "Cleaning up preview for PR #${PR_NUMBER}..."
+
+          # Check if gh-pages branch exists
+          if git ls-remote --exit-code --heads origin gh-pages >/dev/null 2>&1; then
+            echo "gh-pages branch exists, proceeding with cleanup..."
+
+            # Checkout gh-pages branch
+            git checkout gh-pages || {
+              echo "Failed to checkout gh-pages branch, it may not exist yet"
+              exit 0
+            }
+
+            PR_DIR="pr-${PR_NUMBER}"
+
+            if [ -d "$PR_DIR" ]; then
+              echo "Removing preview directory: $PR_DIR"
+              rm -rf "$PR_DIR"
+
+              # Configure git
+              git config user.name github-actions[bot]
+              git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+
+              # Commit and push the removal
+              git add .
+              if git commit -m "Clean up preview for closed PR #${PR_NUMBER}"; then
+                git push origin gh-pages
+                echo "✅ Successfully cleaned up preview for PR #${PR_NUMBER}"
+              else
+                echo "Nothing to commit for cleanup"
+              fi
+            else
+              echo "Preview directory $PR_DIR not found, nothing to clean up"
+            fi
+          else
+            echo "gh-pages branch doesn't exist yet, nothing to clean up"
+          fi
+
+      - name: Comment PR cleanup completion
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const comment = `🧹 **Preview Cleanup Complete**
+
+            The static preview for this PR has been removed from GitHub Pages.
+
+            Thanks for contributing to WrongSecrets! 🎉
+
+            ---
+            <sub>Cleanup completed by GitHub Actions</sub>`;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
