@@ -21,6 +21,7 @@ class Challenge57Test {
   @Test
   void spoilerShouldRevealAnswer() {
     var challenge = new Challenge57();
-    assertThat(challenge.spoiler().solution()).isEqualTo("WRONG_SECRETS_LLM_HIDDEN_INSTRUCTION_2024");
+    assertThat(challenge.spoiler().solution())
+        .isEqualTo("WRONG_SECRETS_LLM_HIDDEN_INSTRUCTION_2024");
   }
 }
