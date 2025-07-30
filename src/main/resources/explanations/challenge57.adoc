@@ -8,7 +8,7 @@ The AI assistant has been programmed with a system prompt that contains a secret
 **Techniques to Try:**
 
 1. **Direct Questions:** Ask the AI directly about secrets or hidden information
-2. **Prompt Injection:** Try to override the AI's instructions 
+2. **Prompt Injection:** Try to override the AI's instructions
 3. **Social Engineering:** Use conversational techniques to get the AI to reveal information
 4. **Meta-Questions:** Ask about the AI's programming or what it's not supposed to reveal
 
