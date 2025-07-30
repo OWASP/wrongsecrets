@@ -4,25 +4,51 @@ This document explains how to set up preview deployments for pull requests in th
 
 ## Available Preview Methods
 
-### 1. Full Preview Deployment (Recommended)
+### 1. GitHub Pages Static Preview (NEW)
+- **File**: `.github/workflows/github-pages-preview.yml`
+- **What it does**: Creates static HTML previews on GitHub Pages for each PR
+- **Requirements**: GitHub Pages enabled for the repository
+- **Benefits**: Fast, lightweight previews of UI changes, automatic cleanup, no external dependencies
+- **URL Format**: `https://owasp.github.io/wrongsecrets/pr-{number}/`
+
+### 2. Full Preview Deployment (Recommended for testing)
 - **File**: `.github/workflows/pr-preview.yml`
 - **What it does**: Deploys each PR to a temporary environment
 - **Requirements**: Render.com account and API key
 - **Benefits**: Full functional testing, shareable links
 
-### 2. Build-Only Preview
+### 3. Build-Only Preview
 - **File**: `.github/workflows/build-preview.yml`
 - **What it does**: Builds Docker image, provides local testing instructions
 - **Requirements**: None (uses GitHub Actions only)
 - **Benefits**: No external dependencies, quick setup
 
-### 3. Visual Diff
+### 4. Visual Diff
 - **File**: `.github/workflows/visual-diff.yml`
 - **What it does**: Takes screenshots comparing PR vs main branch
 - **Requirements**: None (uses GitHub Actions only)
 - **Benefits**: Visual comparison of UI changes
 
 ## Setup Instructions
+
+### For GitHub Pages Static Preview
+
+1. **Enable GitHub Pages** in repository settings:
+   - Go to repository Settings > Pages
+   - Source: GitHub Actions
+   - No additional configuration needed
+
+2. **The workflow is automatic**: Once the workflow file is present, it will:
+   - Trigger on PRs affecting templates, static files, or Java code
+   - Generate static preview with all CSS, JS, and assets
+   - Deploy to GitHub Pages with PR-specific URL
+   - Clean up automatically when PR is closed
+
+3. **What gets previewed**:
+   - All static assets (CSS, JavaScript, images)
+   - Basic HTML structure and styling
+   - Theme toggle and UI components
+   - Links to full Docker preview for functionality testing
 
 ### For Full Preview Deployment
 
