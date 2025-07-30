@@ -98,7 +98,7 @@ def main():
                 existing_content = f.read()
             
             # Extract existing PR cards
-            card_pattern = r'<div class="pr-card"[^>]*>.*?</div>\\s*</div>'
+            card_pattern = r'<div class="pr-card"[^>]*>.*?</div>\s*</div>'
             existing_cards = re.findall(card_pattern, existing_content, re.DOTALL)
             
             # Remove the current PR card if it exists
