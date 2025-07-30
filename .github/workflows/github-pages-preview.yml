@@ -271,31 +271,49 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.action == 'closed'
     steps:
-      - name: Checkout gh-pages branch
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          ref: gh-pages
           fetch-depth: 0
 
-      - name: Remove PR preview directory
+      - name: Check for gh-pages branch and clean up
         run: |
           PR_NUMBER=${{ github.event.number }}
-          PR_DIR="pr-${PR_NUMBER}"
+          echo "Cleaning up preview for PR #${PR_NUMBER}..."
           
-          if [ -d "$PR_DIR" ]; then
-            echo "Removing preview directory: $PR_DIR"
-            rm -rf "$PR_DIR"
+          # Check if gh-pages branch exists
+          if git ls-remote --exit-code --heads origin gh-pages >/dev/null 2>&1; then
+            echo "gh-pages branch exists, proceeding with cleanup..."
             
-            # Configure git
-            git config user.name github-actions[bot]
-            git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+            # Checkout gh-pages branch
+            git checkout gh-pages || {
+              echo "Failed to checkout gh-pages branch, it may not exist yet"
+              exit 0
+            }
             
-            # Commit and push the removal
-            git add .
-            git commit -m "Clean up preview for closed PR #${PR_NUMBER}" || echo "Nothing to commit"
-            git push
+            PR_DIR="pr-${PR_NUMBER}"
+            
+            if [ -d "$PR_DIR" ]; then
+              echo "Removing preview directory: $PR_DIR"
+              rm -rf "$PR_DIR"
+              
+              # Configure git
+              git config user.name github-actions[bot]
+              git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+              
+              # Commit and push the removal
+              git add .
+              if git commit -m "Clean up preview for closed PR #${PR_NUMBER}"; then
+                git push origin gh-pages
+                echo "✅ Successfully cleaned up preview for PR #${PR_NUMBER}"
+              else
+                echo "Nothing to commit for cleanup"
+              fi
+            else
+              echo "Preview directory $PR_DIR not found, nothing to clean up"
+            fi
           else
-            echo "Preview directory $PR_DIR not found, nothing to clean up"
+            echo "gh-pages branch doesn't exist yet, nothing to clean up"
           fi
 
       - name: Comment PR cleanup completion
