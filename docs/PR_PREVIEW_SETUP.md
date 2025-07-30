@@ -10,6 +10,7 @@ This document explains how to set up preview deployments for pull requests in th
 - **Requirements**: GitHub Pages enabled for the repository
 - **Benefits**: Fast, lightweight previews of UI changes, automatic cleanup, no external dependencies
 - **URL Format**: `https://owasp.github.io/wrongsecrets/pr-{number}/`
+- **Index Page**: `https://owasp.github.io/wrongsecrets/` (lists all active PR previews)
 
 ### 2. Full Preview Deployment (Recommended for testing)
 - **File**: `.github/workflows/pr-preview.yml`
@@ -42,9 +43,16 @@ This document explains how to set up preview deployments for pull requests in th
    - Trigger on PRs affecting templates, static files, or Java code
    - Generate static preview with all CSS, JS, and assets
    - Deploy to GitHub Pages with PR-specific URL
+   - **Maintain a shared index** that lists all active PR previews
    - Clean up automatically when PR is closed
 
-3. **What gets previewed**:
+3. **Multiple PR Support**: The system now supports multiple PRs simultaneously:
+   - Each PR gets its own preview directory: `pr-{number}/`
+   - All PRs are listed on the main index page
+   - PRs can be deployed and updated in parallel
+   - Cleanup removes only the specific PR without affecting others
+
+4. **What gets previewed**:
    - All static assets (CSS, JavaScript, images)
    - Basic HTML structure and styling
    - Theme toggle and UI components
@@ -101,10 +109,20 @@ Each method adds helpful comments to PRs:
 
 ## Troubleshooting
 
+### Multiple PR Previews Not Showing
+- Check that each PR is creating its own directory structure
+- Verify the main index page is being updated correctly
+- Look for deployment conflicts in GitHub Actions logs
+
 ### Preview Deployment Fails
-- Check Render API key is valid
+- Check that GitHub Pages is enabled and set to GitHub Actions source
 - Verify Docker image builds successfully
-- Check for resource limits on free tier
+- Check for resource limits or permission issues
+
+### Cleanup Not Working
+- Ensure the PR close event is triggering the cleanup job
+- Check that the gh-pages branch exists and is accessible
+- Verify the Python scripts can parse and update the index file
 
 ### Visual Diff Missing
 - Ensure Playwright can access both versions
