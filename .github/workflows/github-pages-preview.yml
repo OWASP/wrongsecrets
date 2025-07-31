@@ -51,7 +51,6 @@ jobs:
       - name: Generate Thymeleaf static previews
         run: |
           echo "Generating Thymeleaf static previews for PR #${{ github.event.number }}..."
-          
           # Generate static HTML from Thymeleaf templates
           python3 .github/scripts/generate_thymeleaf_previews.py ${{ github.event.number }}
 

@@ -34,7 +34,7 @@ if ! grep -q "OWASP WrongSecrets" "static-site/pr-999/pages/welcome.html"; then
 fi
 
 if ! grep -q "About WrongSecrets" "static-site/pr-999/pages/about.html"; then
-    echo "❌ Error: about.html missing expected content"  
+    echo "❌ Error: about.html missing expected content"
     exit 1
 fi
 

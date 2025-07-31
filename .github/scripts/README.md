@@ -8,7 +8,7 @@ This directory contains scripts to generate static HTML previews from Thymeleaf 
 
 - `generate_thymeleaf_previews.py` - Main script that converts Thymeleaf templates to static HTML
 - `test_thymeleaf_generation.sh` - Test script to verify the generation works
-- `update_pr_index.py` - Updates the main GitHub Pages index with PR information  
+- `update_pr_index.py` - Updates the main GitHub Pages index with PR information
 - `remove_pr_from_index.py` - Removes PR information when PR is closed
 
 ## How It Works
@@ -34,7 +34,7 @@ The `generate_thymeleaf_previews.py` script:
 ### Generated Pages
 
 - **welcome.html** - Home page with challenge table (from `welcome.html` template)
-- **about.html** - About page with project information (from `about.html` template)  
+- **about.html** - About page with project information (from `about.html` template)
 - **stats.html** - Stats and configuration page (from `stats.html` template)
 - **challenge-example.html** - Sample challenge page (from `challenge.html` template)
 
