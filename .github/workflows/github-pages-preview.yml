@@ -254,10 +254,10 @@ jobs:
 
           # Create temporary directory for the cleaned site
           mkdir -p /tmp/cleaned-site
-          
+
           # Copy everything except the PR directory we want to remove
           PR_DIR="pr-${PR_NUMBER}"
-          
+
           for item in *; do
             if [ "$item" != "$PR_DIR" ] && [ "$item" != ".git" ]; then
               cp -r "$item" /tmp/cleaned-site/ 2>/dev/null || true
