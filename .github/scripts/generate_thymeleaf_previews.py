@@ -112,23 +112,44 @@ class ThymeleafToStaticConverter:
     
     def replace_th_text(self, content):
         """Replace th:text attributes with mock values."""
-        replacements = {
-            r'th:text="\$\{totalScore\}"': f'>{self.mock_data["totalScore"]}<',
-            r'th:text="\$\{sessioncounter\}"': f'>{self.mock_data["sessioncounter"]}<',
-            r'th:text="\$\{canaryCounter\}"': f'>{self.mock_data["canaryCounter"]}<',
-            r'th:text="\$\{lastCanaryToken\}"': f'>{self.mock_data["lastCanaryToken"]}<',
-            r'th:text="\$\{hintsEnabled\}"': f'>{self.mock_data["hintsEnabled"]}<',
-            r'th:text="\$\{reasonEnabled\}"': f'>{self.mock_data["reasonEnabled"]}<',
-            r'th:text="\$\{ctfModeEnabled\}"': f'>{self.mock_data["ctfModeEnabled"]}<',
-            r'th:text="\$\{spoilingEnabled\}"': f'>{self.mock_data["spoilingEnabled"]}<',
-            r'th:text="\$\{swaggerUIEnabled\}"': f'>{self.mock_data["swaggerUIEnabled"]}<',
-            r'th:text="\$\{springdocenabled\}"': f'>{self.mock_data["springdocenabled"]}<',
-            r'th:text="\$\{swaggerURI\}"': f'>{self.mock_data["swaggerURI"]}<',
-            r'th:text="\$\{#strings\.replace\(environment,\'_\',\' _\'\)\}"': f'>{self.mock_data["environment"]}<',
-            r'th:text="\'Total score: \'\+\$\{totalScore\}"': f'>Total score: {self.mock_data["totalScore"]}<',
+        # Handle th:text patterns with proper content replacement
+        patterns = [
+            (r'<span[^>]*th:text="\$\{totalScore\}"[^>]*>[^<]*</span>', f'<span>{self.mock_data["totalScore"]}</span>'),
+            (r'<span[^>]*th:text="\$\{sessioncounter\}"[^>]*>[^<]*</span>', f'<span>{self.mock_data["sessioncounter"]}</span>'),
+            (r'<span[^>]*th:text="\$\{canaryCounter\}"[^>]*>[^<]*</span>', f'<span>{self.mock_data["canaryCounter"]}</span>'),
+            (r'<span[^>]*th:text="\$\{lastCanaryToken\}"[^>]*>[^<]*</span>', f'<span>{self.mock_data["lastCanaryToken"]}</span>'),
+            (r'<span[^>]*th:text="\$\{hintsEnabled\}"[^>]*>[^<]*</span>', f'<span>{self.mock_data["hintsEnabled"]}</span>'),
+            (r'<span[^>]*th:text="\$\{reasonEnabled\}"[^>]*>[^<]*</span>', f'<span>{self.mock_data["reasonEnabled"]}</span>'),
+            (r'<span[^>]*th:text="\$\{ctfModeEnabled\}"[^>]*>[^<]*</span>', f'<span>{self.mock_data["ctfModeEnabled"]}</span>'),
+            (r'<span[^>]*th:text="\$\{spoilingEnabled\}"[^>]*>[^<]*</span>', f'<span>{self.mock_data["spoilingEnabled"]}</span>'),
+            (r'<span[^>]*th:text="\$\{swaggerUIEnabled\}"[^>]*>[^<]*</span>', f'<span>{self.mock_data["swaggerUIEnabled"]}</span>'),
+            (r'<span[^>]*th:text="\$\{springdocenabled\}"[^>]*>[^<]*</span>', f'<span>{self.mock_data["springdocenabled"]}</span>'),
+            (r'<span[^>]*th:text="\$\{swaggerURI\}"[^>]*>[^<]*</span>', f'<span>{self.mock_data["swaggerURI"]}</span>'),
+            (r'<span[^>]*th:text="\$\{#strings\.replace\(environment,\'_\',\' _\'\)\}"[^>]*>[^<]*</span>', f'<span>{self.mock_data["environment"]}</span>'),
+            (r'<p[^>]*th:text="\'Total score: \'\+\$\{totalScore\}"[^>]*>[^<]*</p>', f'<p>Total score: {self.mock_data["totalScore"]}</p>'),
+        ]
+        
+        for pattern, replacement in patterns:
+            content = re.sub(pattern, replacement, content)
+        
+        # Also handle simple th:text attributes without full element matching
+        simple_replacements = {
+            r'th:text="\$\{totalScore\}"': '',
+            r'th:text="\$\{sessioncounter\}"': '',
+            r'th:text="\$\{canaryCounter\}"': '',
+            r'th:text="\$\{lastCanaryToken\}"': '',
+            r'th:text="\$\{hintsEnabled\}"': '',
+            r'th:text="\$\{reasonEnabled\}"': '',
+            r'th:text="\$\{ctfModeEnabled\}"': '',
+            r'th:text="\$\{spoilingEnabled\}"': '',
+            r'th:text="\$\{swaggerUIEnabled\}"': '',
+            r'th:text="\$\{springdocenabled\}"': '',
+            r'th:text="\$\{swaggerURI\}"': '',
+            r'th:text="\$\{#strings\.replace\(environment,\'_\',\' _\'\)\}"': '',
+            r'th:text="\'Total score: \'\+\$\{totalScore\}"': '',
         }
         
-        for pattern, replacement in replacements.items():
+        for pattern, replacement in simple_replacements.items():
             content = re.sub(pattern, replacement, content)
         
         return content
