@@ -50,21 +50,21 @@ class ThymeleafToStaticConverter:
             script_dir = Path(__file__).parent
             repo_root = script_dir.parent.parent
             css_dir = repo_root / "src" / "main" / "resources" / "static" / "css"
-            
+
             css_content = ""
-            
+
             # Load main style.css
             style_css_path = css_dir / "style.css"
             if style_css_path.exists():
                 with open(style_css_path, "r", encoding="utf-8") as f:
                     css_content += f"/* style.css */\n{f.read()}\n\n"
-            
+
             # Load dark.css
             dark_css_path = css_dir / "dark.css"
             if dark_css_path.exists():
                 with open(dark_css_path, "r", encoding="utf-8") as f:
                     css_content += f"/* dark.css */\n{f.read()}\n\n"
-            
+
             # Add Bootstrap CSS (minimal version for the demo)
             css_content += """
 /* Bootstrap CSS (minimal) */
@@ -101,7 +101,7 @@ class ThymeleafToStaticConverter:
 .form-text { font-size: 0.875em; color: #6c757d; }
 body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif; }
 """
-            
+
             return css_content
         except Exception as e:
             print(f"Warning: Could not load CSS content: {e}")
@@ -568,26 +568,28 @@ body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetic
         content = re.sub(
             r'<span th:text="\$\{challenge\.name\}"[^>]*>[^<]*</span>',
             f'<span data-cy="challenge-title">{mock_challenge["name"]}</span>',
-            content
+            content,
         )
         content = re.sub(
             r'<span[^>]*th:text="\$\{challenge\.stars\}"[^>]*>[^<]*</span>',
             f'<span>{mock_challenge["stars"]}</span>',
-            content
+            content,
         )
         content = re.sub(
             r'<strong th:text="\$\{challenge\.tech\}"[^>]*>[^<]*</strong>',
             f'<strong>{mock_challenge["tech"]}</strong>',
-            content
+            content,
         )
         content = re.sub(
             r'<span th:text="\'Welcome to challenge \'\s*\+\s*\$\{challenge\.name\}\s*\+\s*\'\.\'"></span>',
             f'<span>Welcome to challenge {mock_challenge["name"]}.</span>',
-            content
+            content,
         )
 
         # Replace the explanation section with Challenge 57 content
-        explanation_pattern = r'<div th:replace="~\{doc:__\$\{challenge\.explanation\}__\}"></div>'
+        explanation_pattern = (
+            r'<div th:replace="~\{doc:__\$\{challenge\.explanation\}__\}"></div>'
+        )
         challenge57_explanation = f"""
         <div class="challenge-explanation">
             <h5>🎯 Challenge Overview</h5>
@@ -639,8 +641,16 @@ body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetic
         try:
             script_dir = Path(__file__).parent
             repo_root = script_dir.parent.parent
-            snippet_path = repo_root / "src" / "main" / "resources" / "challenges" / "challenge-57" / "challenge-57.snippet"
-            
+            snippet_path = (
+                repo_root
+                / "src"
+                / "main"
+                / "resources"
+                / "challenges"
+                / "challenge-57"
+                / "challenge-57.snippet"
+            )
+
             if snippet_path.exists():
                 with open(snippet_path, "r", encoding="utf-8") as f:
                     return f.read()
