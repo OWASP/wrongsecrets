@@ -135,46 +135,48 @@ body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetic
         html = adoc_content
 
         # Convert headers
-        html = re.sub(r'^=== (.+)$', r'<h3>\1</h3>', html, flags=re.MULTILINE)
-        html = re.sub(r'^== (.+)$', r'<h2>\1</h2>', html, flags=re.MULTILINE)
-        html = re.sub(r'^= (.+)$', r'<h1>\1</h1>', html, flags=re.MULTILINE)
+        html = re.sub(r"^=== (.+)$", r"<h3>\1</h3>", html, flags=re.MULTILINE)
+        html = re.sub(r"^== (.+)$", r"<h2>\1</h2>", html, flags=re.MULTILINE)
+        html = re.sub(r"^= (.+)$", r"<h1>\1</h1>", html, flags=re.MULTILINE)
 
         # Convert bold text
-        html = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', html)
+        html = re.sub(r"\*\*([^*]+)\*\*", r"<strong>\1</strong>", html)
 
         # Convert lists
-        lines = html.split('\n')
+        lines = html.split("\n")
         html_lines = []
         in_list = False
 
         for line in lines:
-            if line.strip().startswith('- '):
+            if line.strip().startswith("- "):
                 if not in_list:
-                    html_lines.append('<ul>')
+                    html_lines.append("<ul>")
                     in_list = True
                 list_item = line.strip()[2:]  # Remove '- '
-                html_lines.append(f'<li>{list_item}</li>')
-            elif line.strip().startswith('. '):
+                html_lines.append(f"<li>{list_item}</li>")
+            elif line.strip().startswith(". "):
                 if not in_list:
-                    html_lines.append('<ol>')
+                    html_lines.append("<ol>")
                     in_list = True
                 list_item = line.strip()[2:]  # Remove '. '
-                html_lines.append(f'<li>{list_item}</li>')
+                html_lines.append(f"<li>{list_item}</li>")
             else:
                 if in_list:
-                    html_lines.append('</ul>' if html_lines[-1].startswith('<li>') else '</ol>')
+                    html_lines.append(
+                        "</ul>" if html_lines[-1].startswith("<li>") else "</ol>"
+                    )
                     in_list = False
 
                 # Convert paragraphs
                 if line.strip():
-                    html_lines.append(f'<p>{line.strip()}</p>')
+                    html_lines.append(f"<p>{line.strip()}</p>")
                 else:
-                    html_lines.append('')
+                    html_lines.append("")
 
         if in_list:
-            html_lines.append('</ul>')
+            html_lines.append("</ul>")
 
-        return '\n'.join(html_lines)
+        return "\n".join(html_lines)
 
     def generate_mock_challenges(self):
         """Generate mock challenge data."""
