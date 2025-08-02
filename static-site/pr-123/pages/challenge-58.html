@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenge 58: Database Connection String Exposure - Preview</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../css/style.css" rel="stylesheet" />
+    <style>
+        .preview-banner { background: #f8f9fa; border: 1px solid #dee2e6; padding: 15px; margin-bottom: 20px; border-radius: 5px; }
+        .challenge-card { background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 20px; margin-bottom: 20px; }
+        .code-preview { background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 4px; padding: 15px; font-family: 'Courier New', monospace; font-size: 0.9em; }
+        .vulnerability-highlight { background: #f8d7da; border: 1px solid #f5c6cb; border-radius: 4px; padding: 10px; margin: 10px 0; }
+        .tech-badge { background: #28a745; color: white; padding: 4px 8px; border-radius: 12px; font-size: 0.8em; }
+        .difficulty-stars { color: #ffc107; }
+        .error-example { background: #f8d7da; border: 1px solid #f5c6cb; border-radius: 4px; padding: 10px; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="preview-banner">
+            <h4>📋 Challenge 58 Preview</h4>
+            <p>This is a static preview of <strong>Challenge 58: Database Connection String Exposure through Error Messages</strong></p>
+        </div>
+
+        <div class="challenge-card">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2>🗄️ Challenge 58: Database Connection String Exposure</h2>
+                <div>
+                    <span class="tech-badge">LOGGING</span>
+                    <span class="difficulty-stars ms-2">⭐⭐</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>📋 Challenge Description</h4>
+                    <p>This challenge demonstrates one of the most common and dangerous ways secrets leak in real-world applications: <strong>database connection strings with embedded credentials exposed through error messages</strong>.</p>
+                    
+                    <p>When applications fail to connect to databases, they often expose the full connection string (including usernames and passwords) in error messages, logs, or even user-facing interfaces.</p>
+
+                    <div class="vulnerability-highlight">
+                        <strong>⚠️ Critical Risk:</strong> Database connection string exposure can lead to direct database access and complete data breaches.
+                    </div>
+
+                    <h5>🎯 Your Mission</h5>
+                    <p>Trigger a database connection error and find the exposed password. Look for:</p>
+                    <ul>
+                        <li>JDBC connection URLs with embedded credentials</li>
+                        <li>Error messages containing connection strings</li>
+                        <li>Log entries with sensitive information</li>
+                        <li>Patterns like <code>password=SECRET</code></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-6">
+                    <h4>💻 Vulnerable Code Example</h4>
+                    <div class="code-preview">
+// Simulated database connection string with embedded credentials
+private static final String DB_CONNECTION_STRING =
+    "jdbc:postgresql://db.example.com:5432/userdb?" +
+    "user=dbadmin&password=SuperSecretDB2024!&ssl=true";
+
+public String simulateDatabaseConnectionError() {
+    try {
+        // This will fail and expose the connection string
+        Connection conn = DriverManager.getConnection(DB_CONNECTION_STRING);
+        return "Connection successful";
+    } catch (SQLException e) {
+        // Poor error handling - exposing full connection string
+        String errorMessage = 
+            "Database connection failed with connection string: " +
+            DB_CONNECTION_STRING + "
+Error: " + e.getMessage();
+        
+        // Credentials also get logged (another exposure vector)
+        log.error("Failed to connect to database: {}", errorMessage);
+        
+        return errorMessage;
+    }
+}
+                    </div>
+
+                    <div class="error-example">
+                        <strong>Example Error Output:</strong><br>
+                        <code>Database connection failed with connection string: jdbc:postgresql://db.example.com:5432/userdb?user=dbadmin&password=SuperSecretDB2024!&ssl=true</code>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <h4>🔍 How to Trigger the Error</h4>
+                <p>Visit the <code>/error-demo/database-connection</code> endpoint to simulate a database connection failure that exposes credentials in both the HTTP response and application logs.</p>
+            </div>
+
+            <div class="mt-4">
+                <h4>🏆 Learning Objectives</h4>
+                <div class="row">
+                    <div class="col-md-4">
+                        <strong>🚨 Common Exposure Vectors</strong>
+                        <ul class="small">
+                            <li>Application startup logs</li>
+                            <li>Health check failures</li>
+                            <li>CI/CD pipeline logs</li>
+                            <li>Error tracking services</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <strong>💥 Real-World Impact</strong>
+                        <ul class="small">
+                            <li>Production database compromises</li>
+                            <li>Complete data breaches</li>
+                            <li>Lateral movement attacks</li>
+                            <li>Compliance violations</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <strong>🛡️ Prevention</strong>
+                        <ul class="small">
+                            <li>External secret management</li>
+                            <li>Error message sanitization</li>
+                            <li>Separate database credentials</li>
+                            <li>Connection pooling</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

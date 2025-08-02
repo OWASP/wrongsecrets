@@ -16,16 +16,28 @@ class Challenge57ControllerTest {
   @InjectMocks private Challenge57Controller controller;
 
   @Test
-  void triggerDatabaseErrorShouldReturnErrorMessage() {
+  void getLLMJavaScriptShouldReturnJavaScriptCode() {
     // Given
-    String expectedError = "Database connection failed with connection string: ...";
-    org.mockito.Mockito.when(challenge.simulateDatabaseConnectionError()).thenReturn(expectedError);
+    String expectedJs = "// AI Chat Application - Client-side JavaScript\nclass LLMChatApp {";
+    org.mockito.Mockito.when(challenge.getLLMJavaScriptCode()).thenReturn(expectedJs);
 
     // When
-    String result = controller.triggerDatabaseError();
+    String result = controller.getLLMJavaScript();
 
     // Then
-    assertThat(result).isEqualTo(expectedError);
-    org.mockito.Mockito.verify(challenge).simulateDatabaseConnectionError();
+    assertThat(result).isEqualTo(expectedJs);
+    org.mockito.Mockito.verify(challenge).getLLMJavaScriptCode();
+  }
+
+  @Test
+  void getLLMDemoPageShouldReturnHTMLPage() {
+    // When
+    String result = controller.getLLMDemoPage();
+
+    // Then
+    assertThat(result).contains("<!DOCTYPE html>");
+    assertThat(result).contains("LLM Chat Demo");
+    assertThat(result).contains("Security Notice");
+    assertThat(result).contains("/llm-chat.js");
   }
 }

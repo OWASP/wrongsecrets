@@ -55,32 +55,72 @@ class ThymeleafToStaticConverter:
             "Find the secret in the container",
             "Retrieve cloud instance metadata",
             "Use AWS Parameter Store",
+            "Find the secret in SSM",
+            "Find the Docker secret",
+            "GitHub Actions secret",
+            "Find the K8s secret",
+            "Find the hardcoded secret",
+            "Front-end secret exposure",
+            "Bash history secret",
+            "Find the secret in logs",
+            "Find the encrypted secret",
+            "Binary analysis secret",
+            "Go binary secret",
+            "Rust binary secret",
+            "Front-end secret part 2",
+            "Web3 secret exposure",
+            "Smart contract secret",
+            "Binary secret 2",
+            "Terraform secret",
+            "GitHub issue secret",
+            "Log analysis secret",
+            "Web page secret",
+            "AI prompt injection",
+            "Container debugging",
+            "Password shucking",
+            "Random key generation",
+            "Vulnerability reporting",
+            "Binary without strings",
+            "Security test access",
+            "Git notes secret",
+            "Insecure encryption key",
+            "Encryption key storage",
+            "Password shucking 2",
+            "Audit event secret",
+            "Vault template injection",
+            "Multi-environment secret",
+            "Vault subkey challenge",
+            "HashiCorp Vault injection",
+            "Binary secret 3",
+            "Binary secret 4",
+            "AES MD5 cracking",
+            "Docker secret 2",
+            "Binary secret 5",
+            "Docker secret 3",
+            "Container debugging 2",
+            "Docker secret 4",
+            "SSH bastion secret",
+            "AI secret exposure",
+            "LLM API key exposure in JavaScript",  # Challenge 57
+            "Database connection string exposure",  # Challenge 58
         ]
 
         difficulties = ["⭐", "⭐⭐", "⭐⭐⭐", "⭐⭐⭐⭐", "⭐⭐⭐⭐⭐"]
         techs = [
-            "DEVOPS",
-            "GIT",
-            "FRONTEND",
-            "DEVOPS",
-            "AWS",
-            "AZURE",
-            "DOCKER",
-            "DOCKER",
-            "AWS",
-            "AWS",
+            "DEVOPS", "GIT", "FRONTEND", "DEVOPS", "AWS", "AZURE", "DOCKER", "DOCKER", "AWS", "AWS",
+            "AWS", "DOCKER", "CI/CD", "K8S", "DEVOPS", "FRONTEND", "DEVOPS", "LOGGING", "CRYPTO", "BINARY",
+            "BINARY", "BINARY", "FRONTEND", "WEB3", "WEB3", "BINARY", "TERRAFORM", "GIT", "LOGGING", "FRONTEND",
+            "AI", "DOCKER", "PASSWORD", "CRYPTO", "DOCS", "BINARY", "CI/CD", "GIT", "CRYPTO", "CRYPTO",
+            "PASSWORD", "LOGGING", "VAULT", "VAULT", "VAULT", "VAULT", "BINARY", "BINARY", "CRYPTO", "DOCKER",
+            "BINARY", "DOCKER", "DOCKER", "DOCKER", "DOCKER", "AI", "AI", "LOGGING"
         ]
         environments = [
-            "Docker",
-            "Docker",
-            "Docker",
-            "Docker",
-            "AWS",
-            "Azure",
-            "Docker",
-            "Docker",
-            "AWS",
-            "AWS",
+            "Docker", "Docker", "Docker", "Docker", "AWS", "Azure", "Docker", "Docker", "AWS", "AWS",
+            "AWS", "Docker", "Docker", "K8s", "Docker", "Docker", "Docker", "Docker", "Docker", "Docker",
+            "Docker", "Docker", "Docker", "Docker", "Docker", "Docker", "AWS", "Docker", "Docker", "Docker",
+            "Docker", "K8s", "Docker", "Docker", "Docker", "Docker", "Docker", "Docker", "Docker", "Docker",
+            "Docker", "Docker", "K8s with Vault", "K8s with Vault", "K8s with Vault", "K8s with Vault", "Docker", "Docker", "Docker", "Docker",
+            "Docker", "Docker", "K8s", "Docker", "Docker", "Docker", "Docker", "Docker"
         ]
 
         for i, name in enumerate(challenge_names):
@@ -416,6 +456,266 @@ class ThymeleafToStaticConverter:
 
         return content
 
+    def generate_challenge_57_preview(self):
+        """Generate a specific preview page for Challenge 57 (LLM)."""
+        return """<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenge 57: LLM API Key Exposure - Preview</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../css/style.css" rel="stylesheet" />
+    <style>
+        .preview-banner { background: #f8f9fa; border: 1px solid #dee2e6; padding: 15px; margin-bottom: 20px; border-radius: 5px; }
+        .challenge-card { background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 20px; margin-bottom: 20px; }
+        .code-preview { background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 4px; padding: 15px; font-family: 'Courier New', monospace; font-size: 0.9em; }
+        .vulnerability-highlight { background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 4px; padding: 10px; margin: 10px 0; }
+        .tech-badge { background: #007bff; color: white; padding: 4px 8px; border-radius: 12px; font-size: 0.8em; }
+        .difficulty-stars { color: #ffc107; }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="preview-banner">
+            <h4>📋 Challenge 57 Preview</h4>
+            <p>This is a static preview of <strong>Challenge 57: LLM API Key Exposure in Client-Side JavaScript</strong></p>
+        </div>
+
+        <div class="challenge-card">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2>🤖 Challenge 57: LLM API Key Exposure</h2>
+                <div>
+                    <span class="tech-badge">AI</span>
+                    <span class="difficulty-stars ms-2">⭐⭐</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>📋 Challenge Description</h4>
+                    <p>This challenge demonstrates a critical security vulnerability in modern AI-powered web applications: <strong>LLM API keys exposed in client-side JavaScript code</strong>.</p>
+                    
+                    <p>As developers rush to integrate AI capabilities, many make the critical mistake of putting sensitive API credentials directly in browser-accessible code.</p>
+
+                    <div class="vulnerability-highlight">
+                        <strong>⚠️ Vulnerability:</strong> API keys exposed in client-side JavaScript can lead to massive financial losses, service disruption, and data harvesting.
+                    </div>
+
+                    <h5>🎯 Your Mission</h5>
+                    <p>Find the exposed LLM API key in the client-side JavaScript code. Look for:</p>
+                    <ul>
+                        <li>API keys starting with "sk-"</li>
+                        <li>JavaScript variables storing credentials</li>
+                        <li>Console.log statements with sensitive data</li>
+                        <li>Authorization headers in network requests</li>
+                    </ul>
+                </div>
+
+                <div class="col-md-6">
+                    <h4>💻 Code Preview</h4>
+                    <div class="code-preview">
+// AI Chat Application - Client-side JavaScript
+class LLMChatApp {
+    constructor() {
+        // WARNING: This is a security anti-pattern!
+        // API keys should NEVER be exposed in client-side code
+        this.apiKey = 'sk-llm-api-key-abc123def456ghi789jkl012mno345pqr678stu901vwx234yzA';
+        this.apiEndpoint = 'https://api.example-llm.com/v1/chat/completions';
+        this.initializeChat();
+    }
+    
+    async sendMessage() {
+        try {
+            const response = await fetch(this.apiEndpoint, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${this.apiKey}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    model: 'gpt-3.5-turbo',
+                    messages: [{role: 'user', content: message}]
+                })
+            });
+        } catch (error) {
+            console.log('Failed request used API key:', this.apiKey);
+        }
+    }
+}
+
+// Debug: Log the API key for development (another anti-pattern!)
+console.log('Debug: LLM API Key = sk-llm-api-key-abc123def456ghi789jkl012mno345pqr678stu901vwx234yzA');
+                    </div>
+
+                    <div class="mt-3">
+                        <h5>🔍 How to Explore:</h5>
+                        <ol>
+                            <li>Visit <code>/llm-demo</code> to see the vulnerable chat application</li>
+                            <li>Open Developer Tools (F12)</li>
+                            <li>Check the <code>/llm-chat.js</code> file</li>
+                            <li>Monitor console for debug messages</li>
+                            <li>Examine network requests</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <h4>🏆 Learning Objectives</h4>
+                <div class="row">
+                    <div class="col-md-4">
+                        <strong>💰 Financial Impact</strong>
+                        <p>LLM API calls can be extremely expensive. Exposed keys have led to bills of tens of thousands of dollars within hours.</p>
+                    </div>
+                    <div class="col-md-4">
+                        <strong>🔒 Security Risks</strong>
+                        <p>Attackers can use your API keys for data harvesting, service disruption, and generating harmful content.</p>
+                    </div>
+                    <div class="col-md-4">
+                        <strong>🛡️ Prevention</strong>
+                        <p>Always use server-side proxies, environment variables, and proper access controls for AI service credentials.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>"""
+
+    def generate_challenge_58_preview(self):
+        """Generate a specific preview page for Challenge 58 (Database)."""
+        return """<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenge 58: Database Connection String Exposure - Preview</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../css/style.css" rel="stylesheet" />
+    <style>
+        .preview-banner { background: #f8f9fa; border: 1px solid #dee2e6; padding: 15px; margin-bottom: 20px; border-radius: 5px; }
+        .challenge-card { background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 20px; margin-bottom: 20px; }
+        .code-preview { background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 4px; padding: 15px; font-family: 'Courier New', monospace; font-size: 0.9em; }
+        .vulnerability-highlight { background: #f8d7da; border: 1px solid #f5c6cb; border-radius: 4px; padding: 10px; margin: 10px 0; }
+        .tech-badge { background: #28a745; color: white; padding: 4px 8px; border-radius: 12px; font-size: 0.8em; }
+        .difficulty-stars { color: #ffc107; }
+        .error-example { background: #f8d7da; border: 1px solid #f5c6cb; border-radius: 4px; padding: 10px; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="preview-banner">
+            <h4>📋 Challenge 58 Preview</h4>
+            <p>This is a static preview of <strong>Challenge 58: Database Connection String Exposure through Error Messages</strong></p>
+        </div>
+
+        <div class="challenge-card">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2>🗄️ Challenge 58: Database Connection String Exposure</h2>
+                <div>
+                    <span class="tech-badge">LOGGING</span>
+                    <span class="difficulty-stars ms-2">⭐⭐</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>📋 Challenge Description</h4>
+                    <p>This challenge demonstrates one of the most common and dangerous ways secrets leak in real-world applications: <strong>database connection strings with embedded credentials exposed through error messages</strong>.</p>
+                    
+                    <p>When applications fail to connect to databases, they often expose the full connection string (including usernames and passwords) in error messages, logs, or even user-facing interfaces.</p>
+
+                    <div class="vulnerability-highlight">
+                        <strong>⚠️ Critical Risk:</strong> Database connection string exposure can lead to direct database access and complete data breaches.
+                    </div>
+
+                    <h5>🎯 Your Mission</h5>
+                    <p>Trigger a database connection error and find the exposed password. Look for:</p>
+                    <ul>
+                        <li>JDBC connection URLs with embedded credentials</li>
+                        <li>Error messages containing connection strings</li>
+                        <li>Log entries with sensitive information</li>
+                        <li>Patterns like <code>password=SECRET</code></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-6">
+                    <h4>💻 Vulnerable Code Example</h4>
+                    <div class="code-preview">
+// Simulated database connection string with embedded credentials
+private static final String DB_CONNECTION_STRING =
+    "jdbc:postgresql://db.example.com:5432/userdb?" +
+    "user=dbadmin&password=SuperSecretDB2024!&ssl=true";
+
+public String simulateDatabaseConnectionError() {
+    try {
+        // This will fail and expose the connection string
+        Connection conn = DriverManager.getConnection(DB_CONNECTION_STRING);
+        return "Connection successful";
+    } catch (SQLException e) {
+        // Poor error handling - exposing full connection string
+        String errorMessage = 
+            "Database connection failed with connection string: " +
+            DB_CONNECTION_STRING + "\nError: " + e.getMessage();
+        
+        // Credentials also get logged (another exposure vector)
+        log.error("Failed to connect to database: {}", errorMessage);
+        
+        return errorMessage;
+    }
+}
+                    </div>
+
+                    <div class="error-example">
+                        <strong>Example Error Output:</strong><br>
+                        <code>Database connection failed with connection string: jdbc:postgresql://db.example.com:5432/userdb?user=dbadmin&password=SuperSecretDB2024!&ssl=true</code>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <h4>🔍 How to Trigger the Error</h4>
+                <p>Visit the <code>/error-demo/database-connection</code> endpoint to simulate a database connection failure that exposes credentials in both the HTTP response and application logs.</p>
+            </div>
+
+            <div class="mt-4">
+                <h4>🏆 Learning Objectives</h4>
+                <div class="row">
+                    <div class="col-md-4">
+                        <strong>🚨 Common Exposure Vectors</strong>
+                        <ul class="small">
+                            <li>Application startup logs</li>
+                            <li>Health check failures</li>
+                            <li>CI/CD pipeline logs</li>
+                            <li>Error tracking services</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <strong>💥 Real-World Impact</strong>
+                        <ul class="small">
+                            <li>Production database compromises</li>
+                            <li>Complete data breaches</li>
+                            <li>Lateral movement attacks</li>
+                            <li>Compliance violations</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <strong>🛡️ Prevention</strong>
+                        <ul class="small">
+                            <li>External secret management</li>
+                            <li>Error message sanitization</li>
+                            <li>Separate database credentials</li>
+                            <li>Connection pooling</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>"""
+
     def generate_challenge_page(self):
         """Generate an example challenge page."""
         template_path = self.templates_dir / "challenge.html"
@@ -552,6 +852,8 @@ class ThymeleafToStaticConverter:
             "about.html": self.generate_about_page(),
             "stats.html": self.generate_stats_page(),
             "challenge-example.html": self.generate_challenge_page(),
+            "challenge-57.html": self.generate_challenge_57_preview(),
+            "challenge-58.html": self.generate_challenge_58_preview(),
         }
 
         for filename, content in pages.items():

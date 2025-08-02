@@ -1,0 +1,128 @@
+<html lang="en">
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">🔐 OWASP WrongSecrets</a>
+            <div class="navbar-nav">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="about.html">About</a>
+                <a class="nav-link" href="stats.html">Stats</a>
+                <a class="nav-link" href="challenge-example.html">Challenge Example</a>
+            </div>
+        </div>
+    </nav>
+<div class="container">
+    <div class="preview-banner">
+        <div class="alert-heading">📋 Static Preview Notice</div>
+        <small>This is a static preview of PR #123. Some dynamic content may be simplified or use mock data.</small>
+    </div>
+    <!--/*@thymesVar id="challenge" type="org.owasp.wrongsecrets.challenges.ChallengeUI"*/-->
+    <p class="h1 mt-2"><span >Challenge 1: Find the hard-coded password< /> <span th:block
+                                                                                                   >⭐<></span>
+    </p>
+
+    <p><span></span></p>
+
+    <div class="alert alert-primary" role="alert">
+        <h6 class="alert-heading">🔍 Your Task</h6>
+        <p class="mb-2">Find the secret hidden in the <strong><a href="https://github.com/OWASP/wrongsecrets" target="_blank">WrongSecrets repository</a></strong>. This challenge focuses on <strong >DEVOPS<>secret management</strong>.</p>
+        <p class="mb-0">💡 <strong>Look for:</strong> Configuration files, source code, environment variables, Docker files, or cloud infrastructure related to this challenge.</p>
+    </div>
+    <div class="row">
+        <div class="offset-lg-1 col-lg-10 col-md-12" >
+            <div></div>
+        </div>
+
+
+        <div class="col-12"></div>
+        <div class="col-12 feedback alert alert-success" role="alert" ></div>
+        <div class="col-12 feedback alert alert-danger" role="alert" ></div>
+        <form action="#" method="post">
+            <div class="mb-3">
+                <label for="answerfield" class="form-label"><strong>🔑 Enter the secret you found:</strong></label>
+                <input type="text" class="form-control" id="answerfield"
+                       placeholder="Type the secret here..." />
+                <small class="form-text text-muted">💡 Tip: Secrets are often strings, numbers, or encoded values. Copy and paste exactly what you find.</small>
+            </div>
+            <div class="d-none d-lg-inline">
+                <button class="btn btn-primary" type="submit" name="action" value="submit"
+                        >🚀 Submit Answer
+                </button>
+                <button class="btn btn-secondary"
+                        onclick="document.getElementById('answerfield').value='';event.preventDefault();"
+                        >🗑️ Clear
+                </button>
+            </div>
+            <div class="d-lg-none mt-2">
+                <button class="btn btn-primary" type="submit" name="action" value="submit">🚀 Submit Answer</button>
+                <button class="btn btn-secondary"
+                        onclick="document.getElementById('answerfield').value='';event.preventDefault();">🗑️ Clear
+                </button>
+            </div>
+            <div class="col-12 mt-3">
+                <button class="btn btn-warning" type="submit" name="action" value="reset"
+                        >🔄 Reset Challenge
+                </button>
+                <a   class="btn btn-info"
+                   data-bs-toggle="collapse"
+                   href="#collapseHint" role="button"
+                   aria-expanded="false" aria-controls="collapseHint">
+                    💡 Show Hints
+                </a>
+                <a   class="btn btn-info"
+                   data-bs-toggle="collapse"
+                   href="#collapseExplain" role="button"
+                   aria-expanded="false" aria-controls="collapseExplain">
+                    🔍 What's Wrong?
+                </a>
+            </div>
+            <div  
+                 class="offset-lg-1 col-lg-10 col-md-12 collapse mt-2 mb-2"
+                 id="collapseHint">
+                <div class="card card-body">
+                    <div></div>
+                </div>
+            </div>
+            <div  
+                 class="offset-lg-1 col-lg-10 col-md-12 collapse mt-2 mb-2"
+                 id="collapseExplain">
+                <div class="card card-body">
+                    <div></div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <br/>
+    <div class="row">
+        <div></div>
+
+        <div class="progress">
+            <div class="progress-bar" role="progressbar"
+                  aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+
+        <div  class="alert alert-danger" role="alert"
+             >[(${missingEnvWarning})]
+        </div>
+    </div>
+    <div class="modal fade" id="finishedModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Congratulations!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>You have finished all the doable challenges! Congratulations!</p>
+                    <p>We hope you have enjoyed the ride! And have learned something about the pitfalls in secrets
+                        management. </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -112,6 +112,9 @@ jobs:
                                               <a href="pages/about.html" class="list-group-item list-group-item-action">
                                                   ℹ️ About Page
                                               </a>
+                                              <a href="pages/challenge-57.html" class="list-group-item list-group-item-action">
+                                                  🤖 Challenge 57: LLM API Key Exposure
+                                              </a>
                                           </div>
                                       </div>
                                       <div class="col-md-6">
@@ -121,6 +124,9 @@ jobs:
                                               </a>
                                               <a href="pages/challenge-example.html" class="list-group-item list-group-item-action">
                                                   🧩 Challenge Example
+                                              </a>
+                                              <a href="pages/challenge-58.html" class="list-group-item list-group-item-action">
+                                                  🗄️ Challenge 58: Database Connection Exposure
                                               </a>
                                           </div>
                                       </div>
@@ -240,6 +246,8 @@ jobs:
               - ℹ️ [About Page](${previewUrl}pages/about.html)
               - 📊 [Stats & Config Page](${previewUrl}pages/stats.html)
               - 🧩 [Challenge Example](${previewUrl}pages/challenge-example.html)
+              - 🤖 [Challenge 57: LLM API Key Exposure](${previewUrl}pages/challenge-57.html)
+              - 🗄️ [Challenge 58: Database Connection Exposure](${previewUrl}pages/challenge-58.html)
 
             **For full functionality testing:** Use the [Docker preview](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) instead.
 

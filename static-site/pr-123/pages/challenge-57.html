@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenge 57: LLM API Key Exposure - Preview</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../css/style.css" rel="stylesheet" />
+    <style>
+        .preview-banner { background: #f8f9fa; border: 1px solid #dee2e6; padding: 15px; margin-bottom: 20px; border-radius: 5px; }
+        .challenge-card { background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 20px; margin-bottom: 20px; }
+        .code-preview { background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 4px; padding: 15px; font-family: 'Courier New', monospace; font-size: 0.9em; }
+        .vulnerability-highlight { background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 4px; padding: 10px; margin: 10px 0; }
+        .tech-badge { background: #007bff; color: white; padding: 4px 8px; border-radius: 12px; font-size: 0.8em; }
+        .difficulty-stars { color: #ffc107; }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="preview-banner">
+            <h4>📋 Challenge 57 Preview</h4>
+            <p>This is a static preview of <strong>Challenge 57: LLM API Key Exposure in Client-Side JavaScript</strong></p>
+        </div>
+
+        <div class="challenge-card">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2>🤖 Challenge 57: LLM API Key Exposure</h2>
+                <div>
+                    <span class="tech-badge">AI</span>
+                    <span class="difficulty-stars ms-2">⭐⭐</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>📋 Challenge Description</h4>
+                    <p>This challenge demonstrates a critical security vulnerability in modern AI-powered web applications: <strong>LLM API keys exposed in client-side JavaScript code</strong>.</p>
+                    
+                    <p>As developers rush to integrate AI capabilities, many make the critical mistake of putting sensitive API credentials directly in browser-accessible code.</p>
+
+                    <div class="vulnerability-highlight">
+                        <strong>⚠️ Vulnerability:</strong> API keys exposed in client-side JavaScript can lead to massive financial losses, service disruption, and data harvesting.
+                    </div>
+
+                    <h5>🎯 Your Mission</h5>
+                    <p>Find the exposed LLM API key in the client-side JavaScript code. Look for:</p>
+                    <ul>
+                        <li>API keys starting with "sk-"</li>
+                        <li>JavaScript variables storing credentials</li>
+                        <li>Console.log statements with sensitive data</li>
+                        <li>Authorization headers in network requests</li>
+                    </ul>
+                </div>
+
+                <div class="col-md-6">
+                    <h4>💻 Code Preview</h4>
+                    <div class="code-preview">
+// AI Chat Application - Client-side JavaScript
+class LLMChatApp {
+    constructor() {
+        // WARNING: This is a security anti-pattern!
+        // API keys should NEVER be exposed in client-side code
+        this.apiKey = 'sk-llm-api-key-abc123def456ghi789jkl012mno345pqr678stu901vwx234yzA';
+        this.apiEndpoint = 'https://api.example-llm.com/v1/chat/completions';
+        this.initializeChat();
+    }
+    
+    async sendMessage() {
+        try {
+            const response = await fetch(this.apiEndpoint, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${this.apiKey}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    model: 'gpt-3.5-turbo',
+                    messages: [{role: 'user', content: message}]
+                })
+            });
+        } catch (error) {
+            console.log('Failed request used API key:', this.apiKey);
+        }
+    }
+}
+
+// Debug: Log the API key for development (another anti-pattern!)
+console.log('Debug: LLM API Key = sk-llm-api-key-abc123def456ghi789jkl012mno345pqr678stu901vwx234yzA');
+                    </div>
+
+                    <div class="mt-3">
+                        <h5>🔍 How to Explore:</h5>
+                        <ol>
+                            <li>Visit <code>/llm-demo</code> to see the vulnerable chat application</li>
+                            <li>Open Developer Tools (F12)</li>
+                            <li>Check the <code>/llm-chat.js</code> file</li>
+                            <li>Monitor console for debug messages</li>
+                            <li>Examine network requests</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <h4>🏆 Learning Objectives</h4>
+                <div class="row">
+                    <div class="col-md-4">
+                        <strong>💰 Financial Impact</strong>
+                        <p>LLM API calls can be extremely expensive. Exposed keys have led to bills of tens of thousands of dollars within hours.</p>
+                    </div>
+                    <div class="col-md-4">
+                        <strong>🔒 Security Risks</strong>
+                        <p>Attackers can use your API keys for data harvesting, service disruption, and generating harmful content.</p>
+                    </div>
+                    <div class="col-md-4">
+                        <strong>🛡️ Prevention</strong>
+                        <p>Always use server-side proxies, environment variables, and proper access controls for AI service credentials.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,1 +1,35 @@
-Try visiting the `/error-demo/database-connection` endpoint to trigger a database connection error. Look at both the HTTP response and the application logs - database connection failures often expose connection strings with embedded credentials in error messages.
+=== Hint for Challenge 57
+
+This challenge focuses on a critical security flaw in modern AI-powered web applications: **LLM API keys exposed in client-side JavaScript code**.
+
+**Where to Look:**
+
+1. **Visit the demo page:** Go to `/llm-demo` to see the vulnerable chat application
+2. **Open Developer Tools:** Press F12 to open your browser's developer tools
+3. **Check JavaScript source:** Look at the `/llm-chat.js` file that's loaded by the page
+4. **Monitor the console:** Watch for any debug messages that might expose credentials
+5. **Examine network requests:** See how API keys are transmitted in HTTP headers
+
+**What to Look For:**
+
+- API keys that start with "sk-" (typical OpenAI format)
+- JavaScript variables that store authentication credentials
+- Console.log statements that might expose sensitive data
+- Authorization headers in network requests
+
+**Common Exposure Patterns:**
+
+- `this.apiKey = "sk-..."` in JavaScript classes
+- `console.log()` statements with API keys for debugging
+- `Authorization: Bearer ${apiKey}` in fetch requests
+- Hardcoded credentials in client-side configuration objects
+
+**Real-World Context:**
+
+This vulnerability is becoming increasingly common as developers integrate AI services like:
+- OpenAI GPT models
+- Anthropic Claude
+- Google Gemini/Bard
+- Azure OpenAI Service
+
+**Remember:** The goal is to find the LLM API key that's exposed in the client-side JavaScript code.
