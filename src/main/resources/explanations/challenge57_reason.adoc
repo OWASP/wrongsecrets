@@ -1,0 +1,43 @@
+=== What went wrong?
+
+The application demonstrates several critical security mistakes commonly found in real-world applications:
+
+**1. Embedded Credentials in Connection Strings**
+The database connection string contains the username and password directly embedded:
+```
+jdbc:postgresql://db.example.com:5432/userdb?user=dbadmin&password=SuperSecretDB2024!&ssl=true
+```
+
+**2. Poor Error Handling**
+When the database connection fails, the application exposes the entire connection string in the error message, revealing the embedded credentials to anyone who can see the error.
+
+**3. Sensitive Information in Logs**
+The error gets logged with the full connection string, meaning the credentials are now stored in log files that may be:
+- Accessible to multiple team members
+- Shipped to centralized logging systems
+- Stored long-term in log archives
+- Exposed through log monitoring tools
+
+**4. No Secret Sanitization**
+The application doesn't sanitize sensitive information before logging or displaying errors.
+
+**How to fix this:**
+
+1. **Use external secret management:** Store database credentials in environment variables, secret management systems (AWS Secrets Manager, Azure Key Vault, HashiCorp Vault), or configuration files not checked into version control.
+
+2. **Separate connection parameters:** Keep the connection URL separate from credentials:
+   ```
+   DB_HOST=db.example.com
+   DB_PORT=5432
+   DB_NAME=userdb
+   DB_USER=dbadmin
+   DB_PASS=SuperSecretDB2024!
+   ```
+
+3. **Implement proper error handling:** Sanitize error messages before logging or displaying them. Never include connection strings or other sensitive data in error messages.
+
+4. **Use connection pooling with secure configuration:** Modern frameworks like Spring Boot support secure configuration of connection pools without exposing credentials.
+
+5. **Monitor and audit:** Regularly review logs and error messages to ensure sensitive information isn't being inadvertently exposed.
+
+This type of credential exposure is extremely common in production applications and represents one of the most frequent ways database credentials are accidentally leaked.
