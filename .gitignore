@@ -27,6 +27,9 @@ hs_err_pid*
 
 .DS_Store
 target
+__pycache__/
+*.py[cod]
+*$py.class
 
 .vscode
 .idea
