@@ -35,7 +35,7 @@
                 <div class="col-md-6">
                     <h4>📋 Challenge Description</h4>
                     <p>This challenge demonstrates a critical security vulnerability in modern AI-powered web applications: <strong>LLM API keys exposed in client-side JavaScript code</strong>.</p>
-                    
+
                     <p>As developers rush to integrate AI capabilities, many make the critical mistake of putting sensitive API credentials directly in browser-accessible code.</p>
 
                     <div class="vulnerability-highlight">
@@ -64,7 +64,7 @@ class LLMChatApp {
         this.apiEndpoint = 'https://api.example-llm.com/v1/chat/completions';
         this.initializeChat();
     }
-    
+
     async sendMessage() {
         try {
             const response = await fetch(this.apiEndpoint, {

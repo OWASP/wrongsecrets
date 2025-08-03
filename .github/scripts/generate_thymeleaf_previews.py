@@ -599,7 +599,7 @@ class ThymeleafToStaticConverter:
                 <div class="col-md-6">
                     <h4>📋 Challenge Description</h4>
                     <p>This challenge demonstrates a critical security vulnerability in modern AI-powered web applications: <strong>LLM API keys exposed in client-side JavaScript code</strong>.</p>
-                    
+
                     <p>As developers rush to integrate AI capabilities, many make the critical mistake of putting sensitive API credentials directly in browser-accessible code.</p>
 
                     <div class="vulnerability-highlight">
@@ -628,7 +628,7 @@ class LLMChatApp {
         this.apiEndpoint = 'https://api.example-llm.com/v1/chat/completions';
         this.initializeChat();
     }
-    
+
     async sendMessage() {
         try {
             const response = await fetch(this.apiEndpoint, {
@@ -727,7 +727,7 @@ console.log('Debug: LLM API Key = sk-llm-api-key-abc123def456ghi789jkl012mno345p
                 <div class="col-md-6">
                     <h4>📋 Challenge Description</h4>
                     <p>This challenge demonstrates one of the most common and dangerous ways secrets leak in real-world applications: <strong>database connection strings with embedded credentials exposed through error messages</strong>.</p>
-                    
+
                     <p>When applications fail to connect to databases, they often expose the full connection string (including usernames and passwords) in error messages, logs, or even user-facing interfaces.</p>
 
                     <div class="vulnerability-highlight">
@@ -759,13 +759,13 @@ public String simulateDatabaseConnectionError() {
         return "Connection successful";
     } catch (SQLException e) {
         // Poor error handling - exposing full connection string
-        String errorMessage = 
+        String errorMessage =
             "Database connection failed with connection string: " +
             DB_CONNECTION_STRING + "\nError: " + e.getMessage();
-        
+
         // Credentials also get logged (another exposure vector)
         log.error("Failed to connect to database: {}", errorMessage);
-        
+
         return errorMessage;
     }
 }

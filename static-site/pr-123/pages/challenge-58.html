@@ -36,7 +36,7 @@
                 <div class="col-md-6">
                     <h4>📋 Challenge Description</h4>
                     <p>This challenge demonstrates one of the most common and dangerous ways secrets leak in real-world applications: <strong>database connection strings with embedded credentials exposed through error messages</strong>.</p>
-                    
+
                     <p>When applications fail to connect to databases, they often expose the full connection string (including usernames and passwords) in error messages, logs, or even user-facing interfaces.</p>
 
                     <div class="vulnerability-highlight">
@@ -68,14 +68,14 @@ public String simulateDatabaseConnectionError() {
         return "Connection successful";
     } catch (SQLException e) {
         // Poor error handling - exposing full connection string
-        String errorMessage = 
+        String errorMessage =
             "Database connection failed with connection string: " +
             DB_CONNECTION_STRING + "
 Error: " + e.getMessage();
-        
+
         // Credentials also get logged (another exposure vector)
         log.error("Failed to connect to database: {}", errorMessage);
-        
+
         return errorMessage;
     }
 }
