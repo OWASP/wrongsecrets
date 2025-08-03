@@ -1,6 +1,7 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
 import com.google.common.base.Strings;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.extern.slf4j.Slf4j;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.Spoiler;
@@ -30,6 +31,7 @@ public class Challenge57 implements Challenge {
    * an exposed LLM API key. This demonstrates how sensitive API keys can be accidentally exposed in
    * client-side code.
    */
+  @SuppressFBWarnings("VA_FORMAT_STRING_USES_NEWLINE")
   public String getLLMJavaScriptCode() {
     return """
            // AI Chat Application - Client-side JavaScript
