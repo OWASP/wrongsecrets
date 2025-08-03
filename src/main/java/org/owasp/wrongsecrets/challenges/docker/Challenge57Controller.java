@@ -18,7 +18,7 @@ public class Challenge57Controller {
    * Endpoint to serve JavaScript code that contains an exposed LLM API key. This simulates how
    * developers accidentally expose API keys in client-side code.
    */
-  @GetMapping(value = "/llm-chat.js", produces = MediaType.APPLICATION_JAVASCRIPT_VALUE)
+  @GetMapping(value = "/llm-chat.js", produces = "application/javascript")
   public String getLLMJavaScript() {
     log.info("Serving LLM JavaScript for Challenge 57...");
     return challenge.getLLMJavaScriptCode();
