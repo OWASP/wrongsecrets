@@ -1,4 +1,7 @@
 {
+  "engines": {
+    "node": ">=24.0.0"
+  },
   "devDependencies": {
     "@babel/eslint-parser": "^7.25.9",
     "@babel/preset-env": "^7.26.0",
