@@ -1,6 +1,6 @@
 {
   "engines": {
-    "node": ">=24.0.0"
+    "node": ">=20.0.0"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.25.9",

@@ -4,7 +4,7 @@
   "description": "Examples with how to not use secrets",
   "main": "index.js",
   "engines": {
-    "node": ">=24.0.0"
+    "node": ">=20.0.0"
   },
   "scripts": {
     "build": "./node_modules/.bin/javascript-obfuscator index.js --output ../target/classes/static/js/index.js"
