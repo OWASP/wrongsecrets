@@ -1,0 +1,38 @@
+**Why AI System Prompts Can Be Vulnerable**
+
+This challenge demonstrates several important security concerns with AI systems:
+
+**1. Prompt Injection Vulnerabilities:**
+AI systems can be manipulated through carefully crafted inputs that bypass their safety measures or instruction boundaries. This is similar to SQL injection but for AI models.
+
+**2. System Prompt Exposure:**
+When sensitive information is embedded in system prompts, it creates a risk that this information could be extracted through various techniques. System prompts should never contain secrets, credentials, or sensitive data.
+
+**3. AI Jailbreaking:**
+This refers to techniques used to bypass an AI's built-in restrictions or safety measures. Attackers might use social engineering, role-playing, or instruction override techniques.
+
+**4. Information Leakage:**
+AI systems might inadvertently reveal information they were instructed to keep hidden, especially when faced with sophisticated questioning techniques.
+
+**Real-World Implications:**
+
+- **API Keys in Prompts:** Never embed API keys, passwords, or tokens in AI system prompts
+- **Sensitive Business Logic:** Don't include confidential business rules or processes in prompts
+- **Personal Data:** Avoid including PII or sensitive user data in system instructions
+- **Security Measures:** Don't rely solely on prompt-based restrictions for security
+
+**Best Practices:**
+- Use proper authentication and authorization outside the AI system
+- Implement security controls at the application level, not just in prompts
+- Regularly test AI systems for prompt injection vulnerabilities
+- Monitor AI interactions for potential security issues
+- Use AI safety frameworks and guidelines
+
+**Detection and Prevention:**
+- Implement input validation and sanitization
+- Use content filtering systems
+- Monitor for suspicious prompt patterns
+- Implement rate limiting and abuse detection
+- Regular security assessments of AI implementations
+
+This challenge shows why treating AI system prompts as a security boundary is insufficient - proper security must be implemented at multiple layers.
