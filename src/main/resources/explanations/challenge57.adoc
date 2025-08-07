@@ -1,0 +1,37 @@
+=== LLM API Key Exposure in Client-Side JavaScript
+
+As AI and Large Language Model (LLM) integrations become increasingly popular in web applications, a new class of security vulnerabilities has emerged: **LLM API key exposure in client-side code**. This challenge demonstrates one of the most dangerous mistakes developers make when building AI-powered applications.
+
+This challenge simulates a scenario where a developer:
+
+1. **Embeds LLM API keys directly in client-side JavaScript** instead of using server-side proxy endpoints
+2. **Exposes sensitive API credentials** to anyone who can view the source code
+3. **Logs API keys in browser console** for debugging purposes
+4. **Makes API keys accessible** to browser extensions, XSS attacks, and web scraping
+
+**Why This Is Dangerous:**
+
+- **Financial Impact:** Exposed LLM API keys can be used by attackers to make expensive API calls, leading to huge bills
+- **Rate Limit Abuse:** Attackers can exhaust your API quotas, causing service disruptions
+- **Data Extraction:** Malicious actors can use your API keys to extract training data or perform reconnaissance
+- **Brand Damage:** Unauthorized use of your API keys can be associated with malicious activities
+
+**Common Real-World Scenarios:**
+
+- Chat applications that call OpenAI, Anthropic, or Google AI APIs directly from the browser
+- JavaScript code that includes API keys for development convenience
+- Single-page applications (SPAs) with hardcoded credentials
+- Debug console logs that accidentally expose API keys
+- Source maps that reveal API keys from minified code
+
+**How to Explore:**
+
+1. Visit `/llm-demo` to see the vulnerable chat application
+2. Open your browser's Developer Tools (F12)
+3. Look for exposed API keys in the JavaScript source code
+4. Check the Console tab for any logged credentials
+5. Examine the Network tab to see how API keys are transmitted
+
+Can you find the exposed LLM API key that would allow unauthorized access to the AI service?
+
+**Hint:** The secret you're looking for starts with "sk-" and is a typical OpenAI-style API key format.

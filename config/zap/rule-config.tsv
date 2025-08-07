@@ -18,3 +18,4 @@
 10003	IGNORE	Vulnerable JS Library
 90004	IGNORE	Insufficient Site Isolation Against Spectre Vulnerability
 2	IGNORE	Private IP Disclosure
+90022	IGNORE	Application Error Disclosure
