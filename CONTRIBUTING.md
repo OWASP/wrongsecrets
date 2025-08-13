@@ -140,7 +140,7 @@ pre-commit run
 
 #### Common Issues & Fixes
 - **Trailing whitespace**: Automatically fixed by pre-commit
-- **Missing newlines**: Automatically fixed by pre-commit  
+- **Missing newlines**: Automatically fixed by pre-commit
 - **Java formatting**: Run `./mvnw spotless:apply`
 - **Commit message format**: Follow [Conventional Commits](https://www.conventionalcommits.org/)
 
