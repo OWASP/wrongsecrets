@@ -28,4 +28,4 @@ This challenge demonstrates real-world vulnerabilities in AI systems:
 - **Information Leakage:** How AI models can inadvertently reveal protected data
 - **AI Jailbreaking:** Methods to circumvent AI restrictions
 
-Try different approaches with the AI assistant above until you discover the hidden secret!
+Try different approaches with the AI assistant below until you discover the hidden secret!

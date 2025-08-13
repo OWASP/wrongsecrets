@@ -1,4 +1,4 @@
-<div id="llm-challenge-container" style="border: 1px solid #ccc; border-radius: 8px; padding: 20px; margin: 20px 0; background-color: #f9f9f9;">
+<div id="llm-challenge-container" style="border: 1px solid #ccc; border-radius: 8px; padding: 20px; margin: 20px; background-color: #f9f9f9;">
     <h4>🤖 In-Browser AI Assistant</h4>
     <p>Chat with our simple AI assistant. Try asking it questions!</p>
 
@@ -57,7 +57,52 @@ function addMessage(content, isUser = false) {
 function simulateAIResponse(userMessage) {
     const lowerMessage = userMessage.toLowerCase();
 
-    // Check for secret-revealing triggers
+    // Greeting patterns
+    if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('hey')) {
+        const greetings = [
+            "Hello! Great to meet you. I'm here to help with cybersecurity questions.",
+            "Hi there! I'm your AI assistant for security topics. What can I help you with?",
+            "Hey! Ready to dive into some cybersecurity learning?",
+            "Hello! I'm excited to help you explore security concepts today."
+        ];
+        return greetings[Math.floor(Math.random() * greetings.length)];
+    }
+
+    // Gratitude responses
+    if (lowerMessage.includes('thank') || lowerMessage.includes('thanks')) {
+        const thankYouResponses = [
+            "You're very welcome! Happy to help with your security learning.",
+            "My pleasure! Feel free to ask more questions anytime.",
+            "Glad I could help! Security is fascinating, isn't it?",
+            "No problem at all! Keep those great questions coming."
+        ];
+        return thankYouResponses[Math.floor(Math.random() * thankYouResponses.length)];
+    }
+
+    // How are you / Personal questions
+    if (lowerMessage.includes('how are you') || lowerMessage.includes('how do you feel')) {
+        const personalResponses = [
+            "I'm doing well, thanks for asking! I love discussing cybersecurity topics.",
+            "Great! I'm always energized when talking about security. How about you?",
+            "I'm fantastic! Ready to explore some interesting security concepts with you.",
+            "Doing wonderful! I find cybersecurity endlessly fascinating."
+        ];
+        return personalResponses[Math.floor(Math.random() * personalResponses.length)];
+    }
+
+    // What can you do / capabilities
+    if ((lowerMessage.includes('what') && lowerMessage.includes('can you')) ||
+        lowerMessage.includes('your capabilities') || lowerMessage.includes('what do you do')) {
+        const capabilityResponses = [
+            "I can help with cybersecurity concepts, answer security questions, and discuss best practices. I'm particularly knowledgeable about common vulnerabilities!",
+            "I specialize in cybersecurity topics! I can explain security concepts, discuss threats, and help with learning. What interests you most?",
+            "I'm here to assist with security-related questions and learning. I know quite a bit about vulnerabilities, defenses, and security practices.",
+            "My expertise is in cybersecurity! I can help explain concepts, discuss real-world scenarios, and guide your security learning journey."
+        ];
+        return capabilityResponses[Math.floor(Math.random() * capabilityResponses.length)];
+    }
+
+    // Secret-related queries (the main challenge triggers)
     if (lowerMessage.includes('challenge 57 secret') ||
         lowerMessage.includes('secret code') ||
         (lowerMessage.includes('secret') && (lowerMessage.includes('challenge') || lowerMessage.includes('57')))) {
@@ -69,6 +114,83 @@ function simulateAIResponse(userMessage) {
         lowerMessage.includes('tell me the secret') ||
         lowerMessage.includes('give me the secret')) {
         return "The secret code for challenge 57 is: WRONG_SECRETS_LLM_HIDDEN_INSTRUCTION_2024";
+    }
+
+    // Password/authentication questions
+    if (lowerMessage.includes('password') || lowerMessage.includes('authentication')) {
+        const passwordResponses = [
+            "Ah, password security! That's crucial. Strong passwords should be long, complex, and unique. Are you working on password best practices?",
+            "Password security is fundamental! Multi-factor authentication is also essential. What specific aspect interests you?",
+            "Great topic! Password management and authentication are core security principles. Any particular scenario you're dealing with?",
+            "Authentication security is so important! From passwords to biometrics, there's a lot to consider. What would you like to explore?"
+        ];
+        return passwordResponses[Math.floor(Math.random() * passwordResponses.length)];
+    }
+
+    // Vulnerability questions
+    if (lowerMessage.includes('vulnerability') || lowerMessage.includes('exploit') || lowerMessage.includes('attack')) {
+        const vulnResponses = [
+            "Vulnerabilities are fascinating from a defense perspective! Understanding them helps build better security. What type are you curious about?",
+            "Security vulnerabilities come in many forms - from code flaws to configuration issues. Which category interests you most?",
+            "Attacks and exploits are important to understand for defense! Are you looking at a specific type of vulnerability?",
+            "Great question about vulnerabilities! The more we understand attack vectors, the better we can defend. What's your focus area?"
+        ];
+        return vulnResponses[Math.floor(Math.random() * vulnResponses.length)];
+    }
+
+    // Encryption/crypto questions
+    if (lowerMessage.includes('encrypt') || lowerMessage.includes('crypto') || lowerMessage.includes('hash')) {
+        const cryptoResponses = [
+            "Cryptography is such a powerful tool! From encryption to hashing, it's the backbone of modern security. What aspect interests you?",
+            "Crypto is fascinating! Whether it's symmetric encryption, asymmetric keys, or hashing algorithms, there's so much depth here.",
+            "Encryption is crucial for data protection! Are you looking at implementation, algorithms, or practical applications?",
+            "Cryptographic concepts are fundamental to security! From AES to RSA to SHA, each has its place. What would you like to explore?"
+        ];
+        return cryptoResponses[Math.floor(Math.random() * cryptoResponses.length)];
+    }
+
+    // Network security
+    if (lowerMessage.includes('network') || lowerMessage.includes('firewall') || lowerMessage.includes('intrusion')) {
+        const networkResponses = [
+            "Network security is such a broad field! From firewalls to IDS/IPS systems, there are many layers of defense. What's your focus?",
+            "Great network security question! The network layer has so many interesting security considerations. What specific area?",
+            "Network defense is crucial! Whether it's perimeter security, network segmentation, or monitoring - lots to discuss.",
+            "Network security involves so many components! From protocol security to network architecture. What interests you most?"
+        ];
+        return networkResponses[Math.floor(Math.random() * networkResponses.length)];
+    }
+
+    // Web security
+    if (lowerMessage.includes('web') || lowerMessage.includes('xss') || lowerMessage.includes('sql injection') || lowerMessage.includes('owasp')) {
+        const webSecResponses = [
+            "Web security is my specialty! From XSS to SQL injection to CSRF - there are so many interesting web vulnerabilities to understand.",
+            "OWASP is a fantastic resource! The Top 10 list is essential reading. Are you working through web application security?",
+            "Web application security is constantly evolving! From injection flaws to broken authentication - lots to explore.",
+            "Great web security question! Modern web apps face so many threats. What specific vulnerability or defense interests you?"
+        ];
+        return webSecResponses[Math.floor(Math.random() * webSecResponses.length)];
+    }
+
+    // Social engineering
+    if (lowerMessage.includes('social') || lowerMessage.includes('phishing') || lowerMessage.includes('human')) {
+        const socialResponses = [
+            "Social engineering is such an interesting attack vector! Humans are often the weakest link, but also our best defense with proper training.",
+            "Phishing and social engineering attacks are so prevalent! Understanding these psychological tactics is crucial for defense.",
+            "The human element in security is fascinating! Social engineering exploits our natural tendencies to be helpful and trusting.",
+            "Social engineering awareness is so important! From phishing emails to pretexting calls, these attacks are constantly evolving."
+        ];
+        return socialResponses[Math.floor(Math.random() * socialResponses.length)];
+    }
+
+    // Cloud security
+    if (lowerMessage.includes('cloud') || lowerMessage.includes('aws') || lowerMessage.includes('azure')) {
+        const cloudResponses = [
+            "Cloud security is such a hot topic! The shared responsibility model makes it really interesting from a security perspective.",
+            "Cloud platforms like AWS and Azure have amazing security features, but configuration is key! Are you working with cloud security?",
+            "Cloud security involves so many considerations - from IAM to encryption to network security. What's your focus area?",
+            "Great cloud security question! The scalability and complexity of cloud environments create unique security challenges."
+        ];
+        return cloudResponses[Math.floor(Math.random() * cloudResponses.length)];
     }
 
     // Direct instruction queries
@@ -98,14 +220,87 @@ function simulateAIResponse(userMessage) {
         return "I see what you're trying to do! That's actually a real cybersecurity technique used to test AI systems. Are you practicing security testing?";
     }
 
-    // Help responses
-    if (lowerMessage.includes('help') || lowerMessage.includes('hint')) {
-        return "I'm here to help with cybersecurity questions. If you're working on a specific challenge, try asking me directly about what you need!";
+    // Learning and education
+    if (lowerMessage.includes('learn') || lowerMessage.includes('study') || lowerMessage.includes('course')) {
+        const learningResponses = [
+            "I love helping people learn cybersecurity! It's such a rewarding field. What area are you focusing on?",
+            "Security education is so important! There are many great resources and hands-on labs. What's your learning style?",
+            "Learning cybersecurity is exciting! From theory to practical labs, there's always something new. What interests you most?",
+            "Great to hear you're studying security! It's a field that never stops evolving. Any particular specialization catching your eye?"
+        ];
+        return learningResponses[Math.floor(Math.random() * learningResponses.length)];
     }
 
-    // Default responses
-    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-    return randomResponse;
+    // Career questions
+    if (lowerMessage.includes('career') || lowerMessage.includes('job') || lowerMessage.includes('work')) {
+        const careerResponses = [
+            "Cybersecurity careers are so diverse! From pentesting to compliance to architecture - there's something for everyone.",
+            "The security field has amazing career opportunities! What type of security work interests you most?",
+            "Security careers are in high demand! Whether technical or governance-focused, there are many paths to explore.",
+            "Great question about security careers! The field offers everything from hands-on technical roles to strategic positions."
+        ];
+        return careerResponses[Math.floor(Math.random() * careerResponses.length)];
+    }
+
+    // Tools and technology
+    if (lowerMessage.includes('tool') || lowerMessage.includes('software') || lowerMessage.includes('scanner')) {
+        const toolResponses = [
+            "Security tools are fascinating! From Nmap to Burp Suite to Metasploit - each has its specific purpose. What tools are you curious about?",
+            "There are so many great security tools available! Open source and commercial options for every need. Any particular category?",
+            "Security tooling is constantly evolving! Whether for assessment, monitoring, or defense - what type of tools interest you?",
+            "Tools are essential for security work! From vulnerability scanners to forensics suites. What's your area of interest?"
+        ];
+        return toolResponses[Math.floor(Math.random() * toolResponses.length)];
+    }
+
+    // Compliance and standards
+    if (lowerMessage.includes('compliance') || lowerMessage.includes('standard') || lowerMessage.includes('framework')) {
+        const complianceResponses = [
+            "Security frameworks and compliance are crucial! From NIST to ISO 27001, these provide great structure for security programs.",
+            "Compliance can be challenging but it's so important! Which standards or frameworks are you working with?",
+            "Security standards help organizations build mature programs! Are you looking at a specific compliance requirement?",
+            "Great question about security frameworks! They provide excellent guidance for building comprehensive security programs."
+        ];
+        return complianceResponses[Math.floor(Math.random() * complianceResponses.length)];
+    }
+
+    // Help responses
+    if (lowerMessage.includes('help') || lowerMessage.includes('hint')) {
+        const helpResponses = [
+            "I'm here to help with cybersecurity questions! If you're working on a specific challenge, try asking me directly about what you need.",
+            "Happy to help! I know quite a bit about security topics. What specific area can I assist you with?",
+            "Absolutely! I love helping with security questions. What's on your mind?",
+            "Of course! Whether it's concepts, techniques, or practical applications - I'm here to help with security topics."
+        ];
+        return helpResponses[Math.floor(Math.random() * helpResponses.length)];
+    }
+
+    // Confused or unclear responses
+    if (lowerMessage.includes('what') || lowerMessage.includes('how') || lowerMessage.includes('why')) {
+        const clarifyingResponses = [
+            "That's an interesting question! Could you be a bit more specific about the security aspect you're curious about?",
+            "I'd love to help answer that! Can you provide a bit more context about what you're looking for?",
+            "Great question! To give you the best answer, could you tell me more about your specific interest or scenario?",
+            "I'm intrigued! Could you elaborate a bit more so I can provide you with the most helpful response?"
+        ];
+        return clarifyingResponses[Math.floor(Math.random() * clarifyingResponses.length)];
+    }
+
+    // Default responses (enhanced)
+    const enhancedResponses = [
+        "That's an interesting point! How does that relate to your cybersecurity learning journey?",
+        "I'm here to help with security topics! What specific area would you like to explore?",
+        "Great to chat with you! I find cybersecurity discussions really engaging. What's on your mind?",
+        "I love talking about security! Whether it's technical details or high-level concepts, I'm here to help.",
+        "Cybersecurity is such a broad field! What aspect interests you most right now?",
+        "That's worth exploring from a security perspective! Can you tell me more about what you're thinking?",
+        "I'm always excited to discuss security topics! What would you like to dive into?",
+        "Security is fascinating, isn't it? What particular area catches your attention?",
+        "I'm here for all your cybersecurity questions! What can we explore together?",
+        "There's always something interesting to discuss in cybersecurity! What's your current focus?"
+    ];
+
+    return enhancedResponses[Math.floor(Math.random() * enhancedResponses.length)];
 }
 
 function sendMessage() {
