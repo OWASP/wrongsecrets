@@ -47,24 +47,24 @@ wrongsecrets/
 ```java
 @Component
 public class Challenge[Number] extends FixedAnswerChallenge {
-    
+
     private final RuntimeEnvironment runtimeEnvironment;
-    
+
     public Challenge[Number](RuntimeEnvironment runtimeEnvironment) {
         this.runtimeEnvironment = runtimeEnvironment;
     }
-    
+
     @Override
     public String getAnswer() {
         // Return the secret that users need to find
         return "the-secret-value";
     }
-    
+
     @Override
     public boolean canRunInCTFMode() {
         return true; // Set to false if challenge can't run in CTF mode
     }
-    
+
     @Override
     public RuntimeEnvironment.Environment supportedRuntimeEnvironments() {
         return RuntimeEnvironment.Environment.DOCKER; // or ALL, K8S, etc.
@@ -77,17 +77,17 @@ public class Challenge[Number] extends FixedAnswerChallenge {
 ```java
 @Component
 public class Challenge[Number] implements Challenge {
-    
+
     @Override
     public Spoiler spoiler() {
         return new Spoiler(calculateAnswer());
     }
-    
+
     @Override
     public boolean answerCorrect(String answer) {
         return Objects.equals(calculateAnswer(), answer);
     }
-    
+
     private String calculateAnswer() {
         // Complex logic here
     }
@@ -101,25 +101,25 @@ public class Challenge[Number] implements Challenge {
 ```java
 @ExtendWith(MockitoExtension.class)
 class Challenge[Number]Test {
-    
+
     @Mock
     private RuntimeEnvironment runtimeEnvironment;
-    
+
     @InjectMocks
     private Challenge[Number] challenge;
-    
+
     @Test
     void answerCorrect() {
         // Test the correct answer
         assertTrue(challenge.answerCorrect(challenge.spoiler().solution()));
     }
-    
+
     @Test
     void answerIncorrect() {
         // Test incorrect answers
         assertFalse(challenge.answerCorrect("wrong-answer"));
     }
-    
+
     @Test
     void canRunInCTFMode() {
         // Test CTF mode support
@@ -133,7 +133,7 @@ class Challenge[Number]Test {
 ### Java Conventions
 
 - **Package naming**: Follow existing structure under `org.owasp.wrongsecrets`
-- **Class naming**: 
+- **Class naming**:
   - Challenges: `Challenge[Number]` (e.g., `Challenge1`, `Challenge42`)
   - Tests: `Challenge[Number]Test`
 - **Formatting**: Use standard Spring Boot/Google Java style

@@ -32,7 +32,10 @@ cd wrongsecrets
 ./mvnw clean compile
 ./mvnw test -Dtest=ChallengesControllerTest
 
-# 3. Run the application locally
+# 3. Setup pre-commit hooks (recommended)
+./.github/scripts/setup-precommit.sh
+
+# 4. Run the application locally
 ./mvnw spring-boot:run
 # Visit http://localhost:8080 to see the app running
 ```
@@ -107,6 +110,41 @@ The minimum requirements for code contributions are:
 4. [Status checks](https://docs.github.com/en/github/collaborating-with-pull-requests/collaborating-on-repositories-with-code-quality-features/about-status-checks) should pass for your last commit.
 
 And please note that this project has *three months* implementation windows. So once you've been assigned to a task/issue, try to make your PR accepted within this period.
+
+### 🔧 Pre-commit Hooks Setup
+
+**Important:** Always run pre-commit checks before submitting your PR to avoid CI failures.
+
+#### Quick Setup
+```bash
+# Automated setup (recommended)
+./.github/scripts/setup-precommit.sh
+
+# Manual setup
+pip install pre-commit
+pre-commit install
+pre-commit install --hook-type commit-msg
+```
+
+#### Running Checks
+```bash
+# Check all files
+pre-commit run --all-files
+
+# Check specific file
+pre-commit run --files path/to/your/file.md
+
+# Check what will run on next commit
+pre-commit run
+```
+
+#### Common Issues & Fixes
+- **Trailing whitespace**: Automatically fixed by pre-commit
+- **Missing newlines**: Automatically fixed by pre-commit  
+- **Java formatting**: Run `./mvnw spotless:apply`
+- **Commit message format**: Follow [Conventional Commits](https://www.conventionalcommits.org/)
+
+💡 **Tip**: Pre-commit hooks will run automatically on every commit after installation!
 
 Additionally, the following guidelines can help:
 
