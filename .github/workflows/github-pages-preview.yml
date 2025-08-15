@@ -119,6 +119,9 @@ jobs:
                                               <a href="pages/stats.html" class="list-group-item list-group-item-action">
                                                   📊 Stats & Config Page
                                               </a>
+                                              <a href="pages/challenge-57.html" class="list-group-item list-group-item-action">
+                                                  🤖 <strong>Challenge 57: LLM Security (Latest)</strong>
+                                              </a>
                                               <a href="pages/challenge-example.html" class="list-group-item list-group-item-action">
                                                   🧩 Challenge Example
                                               </a>
@@ -229,13 +232,14 @@ jobs:
             **🔗 [Preview PR #${prNumber}](${previewUrl})**
 
             📄 **What's included:**
-            - ✅ All CSS, JavaScript, and static assets
+            - ✅ All CSS, JavaScript, and static assets (embedded inline)
             - ✅ Current styling and layout preview
             - ✅ Images, icons, and UI components
             - ✅ **NEW:** Generated HTML from Thymeleaf templates
               - 🏠 [Home/Welcome Page](${previewUrl}pages/welcome.html)
               - ℹ️ [About Page](${previewUrl}pages/about.html)
               - 📊 [Stats & Config Page](${previewUrl}pages/stats.html)
+              - 🤖 **[Challenge 57: LLM Security (Latest)](${previewUrl}pages/challenge-57.html)**
               - 🧩 [Challenge Example](${previewUrl}pages/challenge-example.html)
 
             **For full functionality testing:** Use the [Docker preview](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) instead.
