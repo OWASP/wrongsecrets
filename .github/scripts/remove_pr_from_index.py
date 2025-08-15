@@ -14,7 +14,7 @@ def main():
 
         # Remove the PR card for this specific PR number
         card_pattern = (
-            f'<div class="pr-card"[^>]*data-pr="{pr_number}"[^>]*>.*?</div>\s*</div>'
+            rf'<div class="pr-card"[^>]*data-pr="{pr_number}"[^>]*>.*?</div>\s*</div>'
         )
         updated_content = re.sub(card_pattern, "", content, flags=re.DOTALL)
 

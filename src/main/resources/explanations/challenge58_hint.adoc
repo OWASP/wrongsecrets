@@ -1,0 +1,25 @@
+=== Hint for Challenge 58
+
+This challenge demonstrates a very common security anti-pattern: **database connection strings with embedded credentials that leak through error messages**.
+
+**Where to look:**
+
+1. **Try the error endpoint:** Visit `/error-demo/database-connection` to trigger a database connection failure
+2. **Check the response:** The application will attempt to connect to a database and fail, exposing the connection string
+3. **Look at logs:** The application also logs the error with the exposed credentials
+
+**What to look for:**
+
+- JDBC connection URLs often contain sensitive information
+- Look for patterns like `jdbc:postgresql://...?user=USERNAME&password=PASSWORD`
+- The error message will show the full connection string when the database connection fails
+
+**Real-world context:**
+
+This is one of the most common ways secrets leak in production:
+- Database connection failures during application startup
+- Health check failures in container orchestration
+- Development environments with verbose error reporting
+- CI/CD pipelines where database connections fail
+
+**Remember:** The goal is to find the database password that gets exposed in the error message when the connection fails.
