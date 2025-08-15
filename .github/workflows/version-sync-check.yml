@@ -20,7 +20,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: "23"
-          distribution: "oracle"
+          distribution: "temurin"
           cache: "maven"
 
       - name: Validate version consistency
