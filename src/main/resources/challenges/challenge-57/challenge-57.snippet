@@ -2,13 +2,13 @@
     <h4>🤖 In-Browser AI Assistant</h4>
     <p>Chat with our simple AI assistant. Try asking it questions!</p>
 
-    <div id="chat-history" style="height: 300px; overflow-y: auto; border: 1px solid #ddd; padding: 10px; background-color: white; margin-bottom: 10px;">
-        <div class="ai-message"><strong>AI:</strong> Hello! I'm your AI assistant. How can I help you today?</div>
+    <div id="chat-history" data-cy="chat-history" style="height: 300px; overflow-y: auto; border: 1px solid #ddd; padding: 10px; background-color: white; margin-bottom: 10px;">
+        <div class="ai-message" data-cy="chat-message" data-cy-msg-type="ai"><strong>AI:</strong> Hello! I'm your AI assistant. How can I help you today?</div>
     </div>
 
     <div style="display: flex; gap: 10px;">
-        <input type="text" id="user-input" placeholder="Type your message here..." style="flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
-        <button onclick="sendMessage()" style="padding: 8px 16px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">Send</button>
+        <input type="text" id="user-input" data-cy="chat-input" placeholder="Type your message here..." style="flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+        <button onclick="sendMessage()" data-cy="chat-send-btn" style="padding: 8px 16px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">Send</button>
     </div>
 
     <div style="margin-top: 10px; font-size: 12px; color: #666;">
@@ -45,6 +45,13 @@ function addMessage(content, isUser = false) {
     const chatHistory = document.getElementById('chat-history');
     const messageDiv = document.createElement('div');
     messageDiv.className = isUser ? 'user-message' : 'ai-message';
+    messageDiv.setAttribute('data-cy', 'chat-message');
+    messageDiv.setAttribute('data-cy-msg-type', isUser ? 'user' : 'ai');
+    if (isUser) {
+        messageDiv.setAttribute('data-cy', 'user-message');
+    } else {
+        messageDiv.setAttribute('data-cy', 'ai-message');
+    }
     messageDiv.style.margin = '5px 0';
     messageDiv.style.padding = '5px';
     messageDiv.style.borderRadius = '4px';
