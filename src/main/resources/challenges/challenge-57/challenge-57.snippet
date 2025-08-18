@@ -193,6 +193,171 @@ function simulateAIResponse(userMessage) {
         return cloudResponses[Math.floor(Math.random() * cloudResponses.length)];
     }
 
+    // WrongSecrets project specific questions
+    if (lowerMessage.includes('wrongsecrets') || lowerMessage.includes('wrong secrets')) {
+        const wrongSecretsResponses = [
+            "WrongSecrets is an OWASP educational project that teaches secrets management through intentionally vulnerable examples! It's a great way to learn what NOT to do with secrets.",
+            "This application contains 56+ challenges showing common mistakes in secrets management. Each challenge demonstrates a different vulnerability - it's quite comprehensive!",
+            "WrongSecrets is designed to help developers understand secrets management anti-patterns. You're actually using it right now to learn about AI prompt injection!",
+            "The WrongSecrets project covers everything from hardcoded secrets to cloud misconfigurations. It's one of the best hands-on ways to learn secure secrets management."
+        ];
+        return wrongSecretsResponses[Math.floor(Math.random() * wrongSecretsResponses.length)];
+    }
+
+    // OWASP specific questions
+    if (lowerMessage.includes('owasp')) {
+        const owaspResponses = [
+            "OWASP (Open Web Application Security Project) is fantastic! WrongSecrets is an official OWASP project focused on secrets management education. Have you checked out the OWASP Top 10?",
+            "OWASP provides incredible security resources! This WrongSecrets application is part of their educational project portfolio, specifically targeting secrets management vulnerabilities.",
+            "As an OWASP project, WrongSecrets follows their mission of improving software security through education. The challenges here align with real-world OWASP findings!",
+            "OWASP's approach to education through practical examples is perfect for this kind of learning. WrongSecrets embodies that philosophy with hands-on vulnerability discovery."
+        ];
+        return owaspResponses[Math.floor(Math.random() * owaspResponses.length)];
+    }
+
+    // Challenges and learning questions
+    if (lowerMessage.includes('challenge') && !lowerMessage.includes('57') && !lowerMessage.includes('secret')) {
+        const challengeResponses = [
+            "WrongSecrets has over 56 different challenges! Each one demonstrates a unique way secrets can be exposed - from environment variables to cloud storage misconfigurations.",
+            "The challenges here cover Docker secrets, Kubernetes secrets, cloud provider secrets, and even secrets in source code. Which type interests you most?",
+            "Each challenge in WrongSecrets teaches a specific vulnerability pattern. They range from beginner-friendly to advanced cloud security scenarios. Have you tried any others?",
+            "The beauty of these challenges is they show real-world scenarios where secrets get exposed. It's much more effective than just reading about theoretical vulnerabilities!"
+        ];
+        return challengeResponses[Math.floor(Math.random() * challengeResponses.length)];
+    }
+
+    // Secrets management questions
+    if (lowerMessage.includes('secrets management') || (lowerMessage.includes('secret') && lowerMessage.includes('management'))) {
+        const secretsMgmtResponses = [
+            "Secrets management is crucial! WrongSecrets shows you all the ways it can go wrong - hardcoded passwords, exposed environment variables, insecure storage, and more.",
+            "Good secrets management involves proper storage (like HashiCorp Vault), rotation, access controls, and never hardcoding them. This app shows you what happens when you skip these practices!",
+            "The WrongSecrets challenges demonstrate why tools like AWS Secrets Manager, Azure Key Vault, and Kubernetes secrets exist. Each vulnerability here could be prevented with proper secrets management.",
+            "Secrets management is about confidentiality, integrity, and availability of sensitive data. Every challenge in this application shows a failure in one or more of these areas."
+        ];
+        return secretsMgmtResponses[Math.floor(Math.random() * secretsMgmtResponses.length)];
+    }
+
+    // Deployment and infrastructure questions
+    if (lowerMessage.includes('docker') || lowerMessage.includes('kubernetes') || lowerMessage.includes('k8s')) {
+        const infraResponses = [
+            "WrongSecrets runs on Docker and Kubernetes to demonstrate container and orchestration security issues! Many challenges specifically target secrets exposed in these environments.",
+            "Container security is fascinating! This application shows how secrets can leak through environment variables, mounted volumes, or misconfigured container registries.",
+            "Kubernetes adds another layer of complexity to secrets management. WrongSecrets has specific challenges showing K8s secrets, ConfigMaps, and service account vulnerabilities.",
+            "The containerized deployment here isn't just for convenience - it's part of the learning experience! Many of the vulnerabilities are specific to containerized applications."
+        ];
+        return infraResponses[Math.floor(Math.random() * infraResponses.length)];
+    }
+
+    // Cloud security questions
+    if (lowerMessage.includes('cloud') || lowerMessage.includes('aws') || lowerMessage.includes('azure') || lowerMessage.includes('gcp')) {
+        const cloudSecResponses = [
+            "WrongSecrets has dedicated cloud challenges for AWS, Azure, and GCP! Each cloud provider has unique ways secrets can be exposed through misconfigurations.",
+            "Cloud secrets management is complex - IAM roles, service principals, managed identities, and more. This application shows real scenarios where these go wrong.",
+            "The cloud challenges here demonstrate issues like overprivileged IAM roles, exposed storage buckets, and misconfigured key management services. Very realistic scenarios!",
+            "Each major cloud provider (AWS, Azure, GCP) has different secrets management services, and WrongSecrets shows vulnerabilities specific to each platform."
+        ];
+        return cloudSecResponses[Math.floor(Math.random() * cloudSecResponses.length)];
+    }
+
+    // Educational approach questions
+    if (lowerMessage.includes('learn') || lowerMessage.includes('education') || lowerMessage.includes('teaching')) {
+        const educationResponses = [
+            "WrongSecrets uses a hands-on learning approach - instead of just telling you about vulnerabilities, you actually find and exploit them! It's much more engaging than traditional security training.",
+            "The educational philosophy here is 'learning by doing wrong things safely.' You get to make all the mistakes in a controlled environment before working with real systems.",
+            "This application is perfect for security training because it combines theory with practice. Each challenge has explanations of what went wrong and how to fix it.",
+            "The progressive difficulty in WrongSecrets challenges helps build expertise gradually - from simple hardcoded secrets to complex cloud misconfigurations."
+        ];
+        return educationResponses[Math.floor(Math.random() * educationResponses.length)];
+    }
+
+    // CTF and competition questions
+    if (lowerMessage.includes('ctf') || lowerMessage.includes('competition') || lowerMessage.includes('flag')) {
+        const ctfResponses = [
+            "WrongSecrets has a CTF (Capture The Flag) mode! It's perfect for security competitions and training events. Each challenge becomes a flag to capture.",
+            "The CTF mode makes this great for team training and competitions. You can track progress and compare solutions across participants.",
+            "In CTF mode, each secret you find becomes a flag! It gamifies the learning experience and makes security training more engaging.",
+            "CTF competitions using WrongSecrets are becoming popular in the security community. It's a practical way to test real-world secrets management skills."
+        ];
+        return ctfResponses[Math.floor(Math.random() * ctfResponses.length)];
+    }
+
+    // Development and contribution questions
+    if (lowerMessage.includes('contribute') || lowerMessage.includes('development') || lowerMessage.includes('open source')) {
+        const devResponses = [
+            "WrongSecrets is open source on GitHub! The community contributes new challenges regularly. It's a great project to contribute to if you're interested in security education.",
+            "The project welcomes contributions - new challenges, improved documentation, or even infrastructure improvements. Check out the GitHub repository!",
+            "Being open source means WrongSecrets benefits from community expertise. Security professionals worldwide contribute realistic vulnerability scenarios.",
+            "The development approach here is collaborative - challenges are peer-reviewed to ensure they represent real-world scenarios accurately."
+        ];
+        return devResponses[Math.floor(Math.random() * devResponses.length)];
+    }
+
+    // Real-world applications
+    if (lowerMessage.includes('real world') || lowerMessage.includes('production') || lowerMessage.includes('practical')) {
+        const realWorldResponses = [
+            "Every vulnerability in WrongSecrets is based on real-world incidents! The challenges reflect actual ways secrets get exposed in production systems.",
+            "The practical value here is huge - these aren't theoretical problems. They're based on actual security breaches and common misconfigurations found in real applications.",
+            "Production systems frequently have these exact vulnerabilities! WrongSecrets helps you recognize and prevent them before they reach production.",
+            "The scenarios here come from actual penetration testing findings and security audits. It's like having a library of real security incidents to learn from."
+        ];
+        return realWorldResponses[Math.floor(Math.random() * realWorldResponses.length)];
+    }
+
+    // Specific vulnerability types
+    if (lowerMessage.includes('hardcoded') || lowerMessage.includes('environment variable') || lowerMessage.includes('config')) {
+        const vulnTypeResponses = [
+            "Hardcoded secrets are probably the most common vulnerability WrongSecrets demonstrates! You'll find passwords, API keys, and tokens embedded directly in code.",
+            "Environment variables seem safe but can be exposed in many ways - process lists, container inspection, log files, and more. Several challenges show these attack vectors.",
+            "Configuration file vulnerabilities are everywhere in WrongSecrets! From exposed .properties files to misconfigured YAML, there are many ways configs leak secrets.",
+            "The variety of vulnerability types here is impressive - Git history, database connections, CI/CD pipelines, and even binary analysis challenges."
+        ];
+        return vulnTypeResponses[Math.floor(Math.random() * vulnTypeResponses.length)];
+    }
+
+    // Tools and techniques
+    if (lowerMessage.includes('tool') && (lowerMessage.includes('find') || lowerMessage.includes('discover') || lowerMessage.includes('scan'))) {
+        const toolResponses = [
+            "WrongSecrets teaches you to use various security tools! From simple grep commands to advanced tools like GitLeaks, TruffleHog, and cloud security scanners.",
+            "The challenges here help you practice with both manual techniques and automated scanning tools. It's great preparation for real security assessments!",
+            "You'll learn tools like kubectl for Kubernetes secrets, AWS CLI for cloud enumeration, and various static analysis tools for code scanning.",
+            "The beauty is that you learn both the vulnerabilities AND the tools to find them. It's comprehensive security education in one application!"
+        ];
+        return toolResponses[Math.floor(Math.random() * toolResponses.length)];
+    }
+
+    // Hints and guidance
+    if (lowerMessage.includes('hint') || lowerMessage.includes('stuck') || lowerMessage.includes('help me solve')) {
+        const hintResponses = [
+            "WrongSecrets provides hints for each challenge! If you're stuck, check the hint system built into each challenge page. They guide you without giving away the answer.",
+            "Getting stuck is part of the learning process! The application has a progressive hint system - start with general guidance and get more specific if needed.",
+            "Each challenge has multiple hint levels and explanations. The goal is to help you learn the methodology, not just find the specific answer.",
+            "Don't forget to check the 'What's wrong' section for each challenge - it explains the vulnerability after you solve it, which is crucial for learning!"
+        ];
+        return hintResponses[Math.floor(Math.random() * hintResponses.length)];
+    }
+
+    // Progress and gamification
+    if (lowerMessage.includes('progress') || lowerMessage.includes('score') || lowerMessage.includes('complete')) {
+        const progressResponses = [
+            "WrongSecrets tracks your progress through all the challenges! You can see which ones you've completed and your overall advancement through the learning path.",
+            "The progress tracking helps you understand your learning journey. Each completed challenge builds skills for more advanced scenarios.",
+            "Completing challenges in WrongSecrets gives you a real sense of accomplishment! Plus, the skills transfer directly to real-world security work.",
+            "The application shows your progress visually, which is motivating when working through all 56+ challenges. Each one teaches something new!"
+        ];
+        return progressResponses[Math.floor(Math.random() * progressResponses.length)];
+    }
+
+    // Community and sharing
+    if (lowerMessage.includes('community') || lowerMessage.includes('share') || lowerMessage.includes('discuss')) {
+        const communityResponses = [
+            "The WrongSecrets community is very active! People share solutions, discuss techniques, and help each other learn. It's a great security learning community.",
+            "Sharing your solutions and approaches helps everyone learn! The community welcomes discussion about different techniques and tools for solving challenges.",
+            "The project has an active community on GitHub and OWASP forums. It's a great place to ask questions and share insights about secrets management.",
+            "Community contributions make WrongSecrets better! People share new vulnerability scenarios, improve existing challenges, and help with documentation."
+        ];
+        return communityResponses[Math.floor(Math.random() * communityResponses.length)];
+    }
+
     // Direct instruction queries
     if ((lowerMessage.includes('your') && lowerMessage.includes('instruction')) ||
         (lowerMessage.includes('system') && lowerMessage.includes('prompt'))) {
