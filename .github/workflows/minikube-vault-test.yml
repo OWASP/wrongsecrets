@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: eLco/setup-vault@v1.0.3
       - name: Start minikube
         uses: medyagh/setup-minikube@master
@@ -40,7 +40,7 @@ jobs:
     runs-on: ubuntu-latest
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: eLco/setup-vault@v1.0.3
       - name: Start minikube
         uses: medyagh/setup-minikube@master
