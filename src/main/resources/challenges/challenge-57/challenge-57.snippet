@@ -3,7 +3,7 @@
     <p>Chat with our simple AI assistant. Try asking it questions!</p>
 
     <div id="chat-history" data-cy="chat-history" style="height: 300px; overflow-y: auto; border: 1px solid #ddd; padding: 10px; background-color: white; margin-bottom: 10px;">
-        <div class="ai-message" data-cy="ai-message" data-cy-msg-type="ai"><strong>AI:</strong> Hello! I'm your AI assistant. How can I help you today?</div>
+        <div class="ai-message" data-cy="ai-message"><strong>AI:</strong> Hello! I'm your AI assistant. How can I help you today?</div>
     </div>
 
     <div style="display: flex; gap: 10px;">
@@ -46,9 +46,9 @@ function addMessage(content, isUser = false) {
     const messageDiv = document.createElement('div');
     messageDiv.className = isUser ? 'user-message' : 'ai-message';
 
-    // Set the correct data-cy attribute based on message type
+    // Add both generic and specific data-cy attributes for different test selectors
     messageDiv.setAttribute('data-cy', isUser ? 'user-message' : 'ai-message');
-    messageDiv.setAttribute('data-cy-msg-type', isUser ? 'user' : 'ai');
+    messageDiv.classList.add('chat-message'); // Add class for generic selection
 
     messageDiv.style.margin = '5px 0';
     messageDiv.style.padding = '5px';

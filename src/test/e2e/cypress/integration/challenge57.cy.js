@@ -4,7 +4,7 @@ describe('Challenge 57 AI Bot Tests', () => {
   const CHAT_INPUT = '[data-cy="chat-input"]'
   const CHAT_SEND_BTN = '[data-cy="chat-send-btn"]'
   const CHAT_HISTORY = '[data-cy="chat-history"]'
-  const CHAT_MESSAGE = '[data-cy="chat-message"]'
+  const CHAT_MESSAGE = '.chat-message'
   const AI_MESSAGE = '[data-cy="ai-message"]'
   const USER_MESSAGE = '[data-cy="user-message"]'
 
