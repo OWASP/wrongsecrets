@@ -711,7 +711,9 @@ body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetic
             {snippet_content}
         </div>
         """
-        content = re.sub(explanation_pattern, lambda m: challenge57_explanation, content)
+        content = re.sub(
+            explanation_pattern, lambda m: challenge57_explanation, content
+        )
 
         # Process the template
         content = self.process_thymeleaf_syntax(content, "challenge57")
