@@ -45,17 +45,17 @@ function addMessage(content, isUser = false) {
     const chatHistory = document.getElementById('chat-history');
     const messageDiv = document.createElement('div');
     messageDiv.className = isUser ? 'user-message' : 'ai-message';
-    
+
     // Set the correct data-cy attribute based on message type
     messageDiv.setAttribute('data-cy', isUser ? 'user-message' : 'ai-message');
     messageDiv.setAttribute('data-cy-msg-type', isUser ? 'user' : 'ai');
-    
+
     messageDiv.style.margin = '5px 0';
     messageDiv.style.padding = '5px';
     messageDiv.style.borderRadius = '4px';
     messageDiv.style.backgroundColor = isUser ? '#e3f2fd' : '#f5f5f5';
     messageDiv.innerHTML = `<strong>${isUser ? 'You' : 'AI'}:</strong> ${content}`;
-    
+
     chatHistory.appendChild(messageDiv);
     chatHistory.scrollTop = chatHistory.scrollHeight;
 }
