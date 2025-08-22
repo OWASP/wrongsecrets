@@ -5,13 +5,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/** REST controller for Challenge 57 to trigger database connection error. */
+/** REST controller for Challenge 58 to trigger database connection error. */
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-public class Challenge57Controller {
+public class Challenge58Controller {
 
-  private final Challenge57 challenge;
+  private final Challenge58 challenge;
 
   /**
    * Endpoint to trigger a database connection error that exposes connection string with
@@ -20,7 +20,7 @@ public class Challenge57Controller {
    */
   @GetMapping("/error-demo/database-connection")
   public String triggerDatabaseError() {
-    log.info("Attempting database connection for Challenge 57...");
+    log.info("Attempting database connection for Challenge 58...");
     return challenge.simulateDatabaseConnectionError();
   }
 }

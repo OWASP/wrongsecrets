@@ -9,11 +9,11 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-class Challenge57ControllerTest {
+class Challenge58ControllerTest {
 
-  @Mock private Challenge57 challenge;
+  @Mock private Challenge58 challenge;
 
-  @InjectMocks private Challenge57Controller controller;
+  @InjectMocks private Challenge58Controller controller;
 
   @Test
   void triggerDatabaseErrorShouldReturnErrorMessage() {
