@@ -31,7 +31,7 @@ jobs:
       preview-url: ${{ steps.deployment.outputs.page_url }}pr-${{ github.event.number }}/
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up JDK 23
         uses: actions/setup-java@v4
@@ -112,9 +112,6 @@ jobs:
                                               <a href="pages/about.html" class="list-group-item list-group-item-action">
                                                   ℹ️ About Page
                                               </a>
-                                              <a href="pages/challenge-57.html" class="list-group-item list-group-item-action">
-                                                  🤖 Challenge 57: LLM API Key Exposure
-                                              </a>
                                           </div>
                                       </div>
                                       <div class="col-md-6">
@@ -122,11 +119,11 @@ jobs:
                                               <a href="pages/stats.html" class="list-group-item list-group-item-action">
                                                   📊 Stats & Config Page
                                               </a>
+                                              <a href="pages/challenge-57.html" class="list-group-item list-group-item-action">
+                                                  🤖 <strong>Challenge 57: LLM Security (Latest)</strong>
+                                              </a>
                                               <a href="pages/challenge-example.html" class="list-group-item list-group-item-action">
                                                   🧩 Challenge Example
-                                              </a>
-                                              <a href="pages/challenge-58.html" class="list-group-item list-group-item-action">
-                                                  🗄️ Challenge 58: Database Connection Exposure
                                               </a>
                                           </div>
                                       </div>
@@ -217,13 +214,10 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./static-site
-          name: github-pages-preview
 
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-        with:
-          artifact_name: github-pages-preview
 
       - name: Comment PR with preview link
         uses: actions/github-script@v7
@@ -238,16 +232,15 @@ jobs:
             **🔗 [Preview PR #${prNumber}](${previewUrl})**
 
             📄 **What's included:**
-            - ✅ All CSS, JavaScript, and static assets
+            - ✅ All CSS, JavaScript, and static assets (embedded inline)
             - ✅ Current styling and layout preview
             - ✅ Images, icons, and UI components
             - ✅ **NEW:** Generated HTML from Thymeleaf templates
               - 🏠 [Home/Welcome Page](${previewUrl}pages/welcome.html)
               - ℹ️ [About Page](${previewUrl}pages/about.html)
               - 📊 [Stats & Config Page](${previewUrl}pages/stats.html)
+              - 🤖 **[Challenge 57: LLM Security (Latest)](${previewUrl}pages/challenge-57.html)**
               - 🧩 [Challenge Example](${previewUrl}pages/challenge-example.html)
-              - 🤖 [Challenge 57: LLM API Key Exposure](${previewUrl}pages/challenge-57.html)
-              - 🗄️ [Challenge 58: Database Connection Exposure](${previewUrl}pages/challenge-58.html)
 
             **For full functionality testing:** Use the [Docker preview](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) instead.
 
@@ -276,7 +269,7 @@ jobs:
       pull-requests: write
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
@@ -329,13 +322,10 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./static-site
-          name: github-pages-cleanup
 
       - name: Deploy cleaned pages
         id: deployment
         uses: actions/deploy-pages@v4
-        with:
-          artifact_name: github-pages-cleanup
 
       - name: Comment PR cleanup completion
         uses: actions/github-script@v7

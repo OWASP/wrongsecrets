@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout git repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Setup python
         uses: actions/setup-python@v5
         with:
@@ -27,7 +27,7 @@ jobs:
         uses: psf/black@stable
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
           cache: "npm"
       - uses: actions/setup-java@v4
         with:
@@ -45,7 +45,7 @@ jobs:
         with:
           terraform_version: 1.9.8
       - name: Setup TFLint
-        uses: terraform-linters/setup-tflint@v4
+        uses: terraform-linters/setup-tflint@v5
         with:
           tflint_version: ${{env.TFLINT_VERSION}}
       - name: Setup Terraform docs

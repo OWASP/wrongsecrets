@@ -17,7 +17,7 @@ jobs:
       count: ${{ steps.count.outputs.findings }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
@@ -48,7 +48,7 @@ jobs:
       count: ${{ steps.count.outputs.findings }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Install git-secrets
         run: |
@@ -88,12 +88,12 @@ jobs:
       count: ${{ steps.count.outputs.findings }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: '3.13'
 
       - name: Install detect-secrets
         run: |
@@ -122,7 +122,7 @@ jobs:
       count: ${{ steps.count.outputs.findings }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
@@ -158,12 +158,12 @@ jobs:
       count: ${{ steps.count.outputs.findings }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: '3.13'
 
       - name: Install gittyleaks
         run: |
@@ -193,12 +193,12 @@ jobs:
       count: ${{ steps.count.outputs.findings }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: '3.13'
 
       - name: Install whispers (with timeout handling)
         run: |
@@ -234,12 +234,12 @@ jobs:
       count: ${{ steps.count.outputs.findings }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: '3.13'
 
       - name: Install trufflehog3
         run: |

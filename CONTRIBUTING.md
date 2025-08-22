@@ -32,7 +32,10 @@ cd wrongsecrets
 ./mvnw clean compile
 ./mvnw test -Dtest=ChallengesControllerTest
 
-# 3. Run the application locally
+# 3. Setup pre-commit hooks (recommended)
+./.github/scripts/setup-precommit.sh
+
+# 4. Run the application locally
 ./mvnw spring-boot:run
 # Visit http://localhost:8080 to see the app running
 ```
@@ -108,6 +111,41 @@ The minimum requirements for code contributions are:
 
 And please note that this project has *three months* implementation windows. So once you've been assigned to a task/issue, try to make your PR accepted within this period.
 
+### 🔧 Pre-commit Hooks Setup
+
+**Important:** Always run pre-commit checks before submitting your PR to avoid CI failures.
+
+#### Quick Setup
+```bash
+# Automated setup (recommended)
+./.github/scripts/setup-precommit.sh
+
+# Manual setup
+pip install pre-commit
+pre-commit install
+pre-commit install --hook-type commit-msg
+```
+
+#### Running Checks
+```bash
+# Check all files
+pre-commit run --all-files
+
+# Check specific file
+pre-commit run --files path/to/your/file.md
+
+# Check what will run on next commit
+pre-commit run
+```
+
+#### Common Issues & Fixes
+- **Trailing whitespace**: Automatically fixed by pre-commit
+- **Missing newlines**: Automatically fixed by pre-commit
+- **Java formatting**: Run `./mvnw spotless:apply`
+- **Commit message format**: Follow [Conventional Commits](https://www.conventionalcommits.org/)
+
+💡 **Tip**: Pre-commit hooks will run automatically on every commit after installation!
+
 Additionally, the following guidelines can help:
 
 ### Keep your pull requests limited to a single issue
@@ -151,7 +189,7 @@ Pull requests should be as small/atomic as possible. Large, wide-sweeping change
 5. Choose what to work on, based on any of the outstanding [issues](https://github.com/OWASP/wrongsecrets/issues "WrongSecrets Issues").
 6. Create a branch so that you can cleanly work on the chosen issue: `git checkout -b fix/Issue66`
 7. Open your favorite editor and start making modifications. We recommend using the [IntelliJ Idea](https://www.jetbrains.com/idea/).
-8. Install [pre-commit](https://pre-commit.com/#install) the dependencies for our pre-commit configuration to make sure your code complies with standards used in the project. This requires terraform, [terraform-docs](https://github.com/terraform-docs/terraform-docs#installation), [tflint](https://github.com/terraform-linters/tflint#installation), and [commitlint](https://commitlint.js.org/#/guides-local-setup). For commitlint, you need [NodeJS 20](https://nodejs.org/en/download/) installed, after which you you can use `npm install` in the root folder of this project.
+8. Install [pre-commit](https://pre-commit.com/#install) the dependencies for our pre-commit configuration to make sure your code complies with standards used in the project. This requires terraform, [terraform-docs](https://github.com/terraform-docs/terraform-docs#installation), [tflint](https://github.com/terraform-linters/tflint#installation), and [commitlint](https://commitlint.js.org/#/guides-local-setup). For commitlint, you need [NodeJS 24](https://nodejs.org/en/download/) installed, after which you you can use `npm install` in the root folder of this project.
 9. Install the pre-commit hook using `pre-commit install --hook-type commit-msg`. We recommend to run `pre-commit run -a` every so often if you're working on a bigger change.
 10. After your modifications are done, push them to your forked repository. This can be done by executing the command `git add MYFILE` for every file you have modified, followed by `git commit -m 'your commit message here'` to commit the modifications and `git push` to push your modifications to GitHub.
 11. Create a Pull Request (PR) by going to your fork, <https://github.com/Your_Github_Handle/wrongsecrets> and click on the "New Pull Request" button. The target branch should typically be the Master branch. When submitting a PR, be sure to follow the checklist that is provided in the PR template. The checklist itself will be filled out by the reviewer.
@@ -192,7 +230,7 @@ Please be sure to take a careful look at our [Code of Conduct](https://github.co
 1. **Docker**
    [_Docker_](https://www.docker.com/) is a software platform that allows you to build, test, and deploy applications quickly and in a more efficient manner.
 
-2. **Node.Js 22**
+2. **Node.Js 24**
    [_Node.Js_](https://nodejs.org/en/) is an open-source library and a cross-platform JavaScript **runtime environment** specifically for running web applications outside one's browser.
 
 3. **JDK-23**

@@ -1,35 +1,25 @@
-=== Hint for Challenge 57
+=== Hint for Challenge 58
 
-This challenge focuses on a critical security flaw in modern AI-powered web applications: **LLM API keys exposed in client-side JavaScript code**.
+This challenge demonstrates a very common security anti-pattern: **database connection strings with embedded credentials that leak through error messages**.
 
-**Where to Look:**
+**Where to look:**
 
-1. **Visit the demo page:** Go to `/llm-demo` to see the vulnerable chat application
-2. **Open Developer Tools:** Press F12 to open your browser's developer tools
-3. **Check JavaScript source:** Look at the `/llm-chat.js` file that's loaded by the page
-4. **Monitor the console:** Watch for any debug messages that might expose credentials
-5. **Examine network requests:** See how API keys are transmitted in HTTP headers
+1. **Try the error endpoint:** Visit `/error-demo/database-connection` to trigger a database connection failure
+2. **Check the response:** The application will attempt to connect to a database and fail, exposing the connection string
+3. **Look at logs:** The application also logs the error with the exposed credentials
 
-**What to Look For:**
+**What to look for:**
 
-- API keys that start with "sk-" (typical OpenAI format)
-- JavaScript variables that store authentication credentials
-- Console.log statements that might expose sensitive data
-- Authorization headers in network requests
+- JDBC connection URLs often contain sensitive information
+- Look for patterns like `jdbc:postgresql://...?user=USERNAME&password=PASSWORD`
+- The error message will show the full connection string when the database connection fails
 
-**Common Exposure Patterns:**
+**Real-world context:**
 
-- `this.apiKey = "sk-..."` in JavaScript classes
-- `console.log()` statements with API keys for debugging
-- `Authorization: Bearer ${apiKey}` in fetch requests
-- Hardcoded credentials in client-side configuration objects
+This is one of the most common ways secrets leak in production:
+- Database connection failures during application startup
+- Health check failures in container orchestration
+- Development environments with verbose error reporting
+- CI/CD pipelines where database connections fail
 
-**Real-World Context:**
-
-This vulnerability is becoming increasingly common as developers integrate AI services like:
-- OpenAI GPT models
-- Anthropic Claude
-- Google Gemini/Bard
-- Azure OpenAI Service
-
-**Remember:** The goal is to find the LLM API key that's exposed in the client-side JavaScript code.
+**Remember:** The goal is to find the database password that gets exposed in the error message when the connection fails.

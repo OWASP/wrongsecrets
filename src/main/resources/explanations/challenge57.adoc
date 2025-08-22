@@ -1,37 +1,33 @@
-=== LLM API Key Exposure in Client-Side JavaScript
+=== Database Connection String Exposure in Error Messages
 
-As AI and Large Language Model (LLM) integrations become increasingly popular in web applications, a new class of security vulnerabilities has emerged: **LLM API key exposure in client-side code**. This challenge demonstrates one of the most dangerous mistakes developers make when building AI-powered applications.
+One of the most common and dangerous ways secrets leak in real-world applications is through database connection strings that contain embedded credentials. When applications fail to connect to databases, they often expose the full connection string (including usernames and passwords) in error messages, logs, or even user-facing interfaces.
 
-This challenge simulates a scenario where a developer:
+This challenge demonstrates a scenario where a developer:
 
-1. **Embeds LLM API keys directly in client-side JavaScript** instead of using server-side proxy endpoints
-2. **Exposes sensitive API credentials** to anyone who can view the source code
-3. **Logs API keys in browser console** for debugging purposes
-4. **Makes API keys accessible** to browser extensions, XSS attacks, and web scraping
+1. **Uses embedded credentials in connection strings** instead of external secret management
+2. **Has poor error handling** that exposes the full connection string when database connections fail
+3. **Logs sensitive information** without sanitizing credentials first
+4. **Displays technical details** that could reach monitoring systems, error tracking tools, or even end users
 
-**Why This Is Dangerous:**
+**Common places where these exposed connection strings appear:**
 
-- **Financial Impact:** Exposed LLM API keys can be used by attackers to make expensive API calls, leading to huge bills
-- **Rate Limit Abuse:** Attackers can exhaust your API quotas, causing service disruptions
-- **Data Extraction:** Malicious actors can use your API keys to extract training data or perform reconnaissance
-- **Brand Damage:** Unauthorized use of your API keys can be associated with malicious activities
+- Application startup logs when database is unavailable
+- Exception stack traces in monitoring tools like Sentry, Rollbar, or CloudWatch
+- Error messages displayed to users during maintenance windows
+- CI/CD pipeline logs when deployment health checks fail
+- Docker container logs during orchestration failures
 
-**Common Real-World Scenarios:**
+**Real-world examples:**
 
-- Chat applications that call OpenAI, Anthropic, or Google AI APIs directly from the browser
-- JavaScript code that includes API keys for development convenience
-- Single-page applications (SPAs) with hardcoded credentials
-- Debug console logs that accidentally expose API keys
-- Source maps that reveal API keys from minified code
+- Applications that fail health checks during Kubernetes deployments
+- Microservices that can't reach their database during startup
+- Database migration scripts that fail with exposed connection details
+- Development/testing environments where error verbosity is set too high
 
-**How to Explore:**
+**How to trigger the error:**
 
-1. Visit `/llm-demo` to see the vulnerable chat application
-2. Open your browser's Developer Tools (F12)
-3. Look for exposed API keys in the JavaScript source code
-4. Check the Console tab for any logged credentials
-5. Examine the Network tab to see how API keys are transmitted
+Visit the `/error-demo/database-connection` endpoint to simulate a database connection failure. This endpoint attempts to connect to a database using a connection string with embedded credentials, and when it fails, it exposes the credentials in both the HTTP response and application logs.
 
-Can you find the exposed LLM API key that would allow unauthorized access to the AI service?
+Can you find the database password that gets exposed when the application tries to connect to the database?
 
-**Hint:** The secret you're looking for starts with "sk-" and is a typical OpenAI-style API key format.
+**Hint:** Look for database connection error messages that reveal more than they should.
