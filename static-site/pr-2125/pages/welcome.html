@@ -1,0 +1,757 @@
+<html lang="en">
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">🔐 OWASP WrongSecrets</a>
+            <div class="navbar-nav">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="about.html">About</a>
+                <a class="nav-link" href="stats.html">Stats</a>
+                <a class="nav-link" href="challenge-example.html">Challenge Example</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+    <div class="preview-banner">
+        <div class="alert-heading">🤖 Challenge 57 - LLM Security Demo (PR #2125)</div>
+        <small>This is a live preview of Challenge 57 featuring an interactive AI assistant with embedded secrets. Try asking it questions to find the hidden secret!</small>
+    </div>>
+        <div class="container-fluid mt-3 text-sm p-4 bg-light">
+            <div class="display-5">Welcome to OWASP WrongSecrets</div>
+            <p class="lead">
+                Learn about secrets management by finding real secrets hidden in code, configuration files, and cloud infrastructure.
+            </p>
+            <hr class="my-2 my-lg-3" />
+
+            <div class="alert alert-info" role="alert">
+                <h5 class="alert-heading">🎯 How to Play</h5>
+                <p class="mb-2"><strong>Your Mission:</strong> Find hidden secrets in this repository and enter them to score points!</p>
+                <p class="mb-2"><strong>Where to Look:</strong></p>
+                <ul class="mb-2">
+                    <li>📁 Source code files (Java, JavaScript, etc.)</li>
+                    <li>🐳 Docker files and configurations</li>
+                    <li>☁️ Cloud deployment configurations (AWS, GCP, Azure)</li>
+                    <li>🔧 Environment variables and config files</li>
+                    <li>🗄️ Vault and secret management tools</li>
+                </ul>
+                <p class="mb-0"><strong>Getting Started:</strong> Check out the <a href="https://github.com/OWASP/wrongsecrets" target="_blank">GitHub repository</a> to examine the code and find the secrets!</p>
+            </div>
+
+            <p>
+                <strong>Pro Tip:</strong> Each challenge below has a different difficulty level and may require different environments.
+                Start with the easier ones and work your way up! 🚀
+            </p>
+        </div>
+        <div class="container-fluid text-sm p-2 p-lg-3 mt-lg-3">
+            <div class="row">
+                <div class="col-12 col-lg-7">
+                    <div class="mb-3">
+                        <small class="text-muted">
+                            <strong>Difficulty:</strong> ⭐ (Easy) ⭐⭐ (Medium) ⭐⭐⭐ (Hard) ⭐⭐⭐⭐ (Expert) ⭐⭐⭐⭐⭐ (Master) |
+                            <strong>Environment:</strong> Where the challenge can be solved
+                        </small>
+                    </div>
+                    <table class="table table-responsive" id="challenge_overview" data-cy="challenge-overview">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="d-none d-xl-table-cell">#</th>
+                                <th scope="col">&nbsp;Challenge&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                                <th scope="col">Focus&nbsp;&nbsp;&nbsp;</th>
+                                <th scope="col" class="d-none d-md-table-cell">
+                                    Difficulty&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                </th>
+                                <th scope="col">
+                                </th>
+                                <th scope="col" class="d-none d-xl-table-cell">Solved</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="solved" data-cy="challenge-row">
+                                <th scope="row" class="d-none d-xl-table-cell">0</th>
+                                <td>
+                                    &nbsp;<span class="d-xl-none">&#9745;</span>
+                                    <a href="/challenge/challenge-1">
+                                        <span data-cy="challenge-1-name">Find the hard-coded password</span>
+                                    </a>
+                                </td>
+                                <td>DEVOPS</td>
+                                <td class="d-none d-md-table-cell">⭐</td>
+                                <td>Docker</td>
+                                <td class="d-none d-xl-table-cell">
+                                    <span>&#9745;</span>
+                                </td>
+                            </tr>
+                            <tr class="solved" data-cy="challenge-row">
+                                <th scope="row" class="d-none d-xl-table-cell">1</th>
+                                <td>
+                                    &nbsp;<span class="d-xl-none">&#9745;</span>
+                                    <a href="/challenge/challenge-2">
+                                        <span data-cy="challenge-2-name">Find the unencrypted password in Git</span>
+                                    </a>
+                                </td>
+                                <td>GIT</td>
+                                <td class="d-none d-md-table-cell">⭐⭐</td>
+                                <td>Docker</td>
+                                <td class="d-none d-xl-table-cell">
+                                    <span>&#9745;</span>
+                                </td>
+                            </tr>
+                            <tr class="solved" data-cy="challenge-row">
+                                <th scope="row" class="d-none d-xl-table-cell">2</th>
+                                <td>
+                                    &nbsp;<span class="d-xl-none">&#9745;</span>
+                                    <a href="/challenge/challenge-3">
+                                        <span data-cy="challenge-3-name">Find the hard-coded password in front-end</span>
+                                    </a>
+                                </td>
+                                <td>FRONTEND</td>
+                                <td class="d-none d-md-table-cell">⭐⭐⭐</td>
+                                <td>Docker</td>
+                                <td class="d-none d-xl-table-cell">
+                                    <span>&#9745;</span>
+                                </td>
+                            </tr>
+                            <tr class="" data-cy="challenge-row">
+                                <th scope="row" class="d-none d-xl-table-cell">3</th>
+                                <td>
+                                    &nbsp;<span class="d-xl-none"></span>
+                                    <a href="/challenge/challenge-4">
+                                        <span data-cy="challenge-4-name">Take a look at this file</span>
+                                    </a>
+                                </td>
+                                <td>DEVOPS</td>
+                                <td class="d-none d-md-table-cell">⭐⭐⭐⭐</td>
+                                <td>Docker</td>
+                                <td class="d-none d-xl-table-cell">
+                                    <span></span>
+                                </td>
+                            </tr>
+                            <tr class="" data-cy="challenge-row">
+                                <th scope="row" class="d-none d-xl-table-cell">4</th>
+                                <td>
+                                    &nbsp;<span class="d-xl-none"></span>
+                                    <a href="/challenge/challenge-5">
+                                        <span data-cy="challenge-5-name">Find the AWS S3 bucket password</span>
+                                    </a>
+                                </td>
+                                <td>AWS</td>
+                                <td class="d-none d-md-table-cell">⭐⭐⭐⭐⭐</td>
+                                <td>AWS</td>
+                                <td class="d-none d-xl-table-cell">
+                                    <span></span>
+                                </td>
+                            </tr>
+                            <tr class="" data-cy="challenge-row">
+                                <th scope="row" class="d-none d-xl-table-cell">5</th>
+                                <td>
+                                    &nbsp;<span class="d-xl-none"></span>
+                                    <a href="/challenge/challenge-6">
+                                        <span data-cy="challenge-6-name">Find the Azure Key Vault secret</span>
+                                    </a>
+                                </td>
+                                <td>AZURE</td>
+                                <td class="d-none d-md-table-cell">⭐</td>
+                                <td>Azure</td>
+                                <td class="d-none d-xl-table-cell">
+                                    <span></span>
+                                </td>
+                            </tr>
+                            <tr class="" data-cy="challenge-row">
+                                <th scope="row" class="d-none d-xl-table-cell">6</th>
+                                <td>
+                                    &nbsp;<span class="d-xl-none"></span>
+                                    <a href="/challenge/challenge-7">
+                                        <span data-cy="challenge-7-name">Connect the dots with Docker</span>
+                                    </a>
+                                </td>
+                                <td>DOCKER</td>
+                                <td class="d-none d-md-table-cell">⭐⭐</td>
+                                <td>Docker</td>
+                                <td class="d-none d-xl-table-cell">
+                                    <span></span>
+                                </td>
+                            </tr>
+                            <tr class="" data-cy="challenge-row">
+                                <th scope="row" class="d-none d-xl-table-cell">7</th>
+                                <td>
+                                    &nbsp;<span class="d-xl-none"></span>
+                                    <a href="/challenge/challenge-8">
+                                        <span data-cy="challenge-8-name">Find the secret in the container</span>
+                                    </a>
+                                </td>
+                                <td>DOCKER</td>
+                                <td class="d-none d-md-table-cell">⭐⭐⭐</td>
+                                <td>Docker</td>
+                                <td class="d-none d-xl-table-cell">
+                                    <span></span>
+                                </td>
+                            </tr>
+                            <tr class="" data-cy="challenge-row">
+                                <th scope="row" class="d-none d-xl-table-cell">8</th>
+                                <td>
+                                    &nbsp;<span class="d-xl-none"></span>
+                                    <a href="/challenge/challenge-9">
+                                        <span data-cy="challenge-9-name">Retrieve cloud instance metadata</span>
+                                    </a>
+                                </td>
+                                <td>AWS</td>
+                                <td class="d-none d-md-table-cell">⭐⭐⭐⭐</td>
+                                <td>AWS</td>
+                                <td class="d-none d-xl-table-cell">
+                                    <span></span>
+                                </td>
+                            </tr>
+                            <tr class="" data-cy="challenge-row">
+                                <th scope="row" class="d-none d-xl-table-cell">9</th>
+                                <td>
+                                    &nbsp;<span class="d-xl-none"></span>
+                                    <a href="/challenge/challenge-10">
+                                        <span data-cy="challenge-10-name">Use AWS Parameter Store</span>
+                                    </a>
+                                </td>
+                                <td>AWS</td>
+                                <td class="d-none d-md-table-cell">⭐⭐⭐⭐⭐</td>
+                                <td>AWS</td>
+                                <td class="d-none d-xl-table-cell">
+                                    <span></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>Total score: 42</p>
+                    <p
+                    </p>
+
+                    <div class="alert alert-warning" role="alert">
+                        <h6 class="alert-heading">🚀 Ready to Start?</h6>
+                        <p class="mb-2">1. <strong>Choose a challenge</strong> from the table above</p>
+                        <p class="mb-2">2. <strong>Examine the repository</strong> - Look at the <a href="https://github.com/OWASP/wrongsecrets" target="_blank">source code, config files, and documentation</a></p>
+                        <p class="mb-2">3. <strong>Find the secret</strong> - It could be in plain text, encoded, or stored in environment variables</p>
+                        <p class="mb-0">4. <strong>Enter your answer</strong> - Submit the secret to score points!</p>
+                    </div>
+
+                    <!--                <p></p>-->
+                    <p>Hasty? Here is the Vault <a href="spoil/challenge-7"
+                            data-cy="show-secret-spoiler-link">secret;-)</a>
+                    </p>
+                </div>
+                <div class="col-12 col-lg-4 offset-lg-1">
+                    <div class="border border-dark thank-you text-center">
+                        Like what you see? Please <br />
+                        <a class="github-button" href="https://github.com/OWASP/wrongsecrets" data-icon="octicon-star"
+                            data-size="large" data-color-scheme="dark: light;" data-show-count="true"
+                            aria-label="Star commjoen/wrongsecrets on GitHub">Star us on Github</a>
+                        <div class="text-center">Note: The above button only takes you to the repository. Please ensure
+                            to
+                            star the repository once you are there!
+                        </div>
+                    </div>
+                    <div class="border border-dark thank-you">
+                        <html>
+
+                        <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OWASP WrongSecrets - Challenge 57 Preview</title>
+    <style>
+/* style.css */
+.sect2 {
+    border-radius: 25px;
+    border: 2px solid var(--bs-body-color);
+    padding: 20px;
+    margin: 20px 0px 20px 0px;
+}
+
+.progress {
+    margin: 20px 0px 20px 0px;
+}
+
+.dropdown-menu {
+    max-height: 540px;
+    overflow-y: auto;
+}
+
+@media only screen and (max-width: 990px) {
+    .dropdown-menu {
+        max-height: 320px;
+        overflow-y: auto;
+    }
+}
+
+@media only screen and (max-width: 990px) and (max-height: 600px) {
+    .dropdown-menu {
+        max-height: 200px;
+        overflow-y: auto;
+    }
+}
+
+.thank-you {
+    border-radius: 25px;
+    border: 2px solid var(--bs-body-color) !important;
+    padding: 10px 16px;
+    margin: 0px 0px 10px 0px;
+}
+
+@media only screen and (max-width: 990px){
+    .thank-you {
+        border-radius: 25px;
+        border: 2px solid var(--bs-body-color) !important;
+        padding: 10px;
+        margin: 0px 0px 10px 0px;
+    }
+}
+
+a.disabled {
+    cursor: default;
+    pointer-events: none;
+    text-decoration: none;
+    color: var(--bs-body-color);
+}
+.theme-toggle input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.theme-toggle :checked + .checkmark {
+    border-bottom: 1px solid var(--bs-gray-300);
+}
+
+tr.solved {
+    --bs-success-soft: rgba(0, 188, 140, 0.5);
+    background-color: var(--bs-success-soft) !important;
+}
+
+.table {
+    --bs-table-bg: rgba(0, 0, 0, 0) !important;
+}
+
+.theme-switch {
+    display: inline-flex;
+    cursor: pointer;
+    position: relative;
+
+}
+
+#theme-toggle-label {
+    display: inline-block;
+    font-size: 20px;
+    transition: all 0.3s ease;
+}
+.toggle-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px; /* Button width */
+    height: 30px;
+    border-radius: 50%;
+    border: 0.9px solid;
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
+.toggle-button:hover {
+    background-color: var(--bs-gray-600); /* Slightly darker on hover */
+}
+
+.sect2, .thank-you, .toggle-button {
+    border-color: black; /* Or any color that contrasts well with your light mode background */
+}
+
+
+/* dark.css */
+.dark-mode {
+    --bs-blue: #375a7f;
+    --bs-indigo: #673ab7;
+    --bs-light-purple: #9c7dd2;
+    --bs-purple: #9c7dd2;
+    --bs-pink: #e83e8c;
+    --bs-red: #e74c3c;
+    --bs-orange: #fd7e14;
+    --bs-yellow: #f39c12;
+    --bs-green: #00bc8c;
+    --bs-teal: #45b5aa;
+    --bs-cyan: #17a2b8;
+    --bs-white: #fafafa;
+    --bs-black: #111;
+    --bs-gray: #7e7e7e;
+    --bs-gray-dark: #121212;
+    --bs-gray-100: #e1e1e1;
+    --bs-gray-200: #cfcfcf;
+    --bs-gray-300: #b1b1b1;
+    --bs-gray-400: #9e9e9e;
+    --bs-gray-500: #7e7e7e;
+    --bs-gray-600: #626262;
+    --bs-gray-700: #515151;
+    --bs-gray-800: #3b3b3b;
+    --bs-gray-900: #222;
+    --bs-primary: #375a7f;
+    --bs-secondary: #626262;
+    --bs-success: #00bc8c;
+    --bs-info: #17a2b8;
+    --bs-warning: #f39c12;
+    --bs-danger: #e74c3c;
+    --bs-light: #9e9e9e;
+    --bs-dark: #3b3b3b;
+    --bs-primary-rgb: 55, 90, 127;
+    --bs-secondary-rgb: 98, 98, 98;
+    --bs-success-rgb: 0, 188, 140;
+    --bs-info-rgb: 23, 162, 184;
+    --bs-warning-rgb: 243, 156, 18;
+    --bs-danger-rgb: 231, 76, 60;
+    --bs-light-rgb: 120, 120, 120;
+    --bs-dark-rgb: 59, 59, 59;
+    --bs-white-rgb: 250, 250, 250;
+    --bs-black-rgb: 17, 17, 17;
+    --bs-body-color-rgb: 225, 225, 225;
+    --bs-body-bg-rgb: 34, 34, 34;
+    --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
+        "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --bs-gradient: linear-gradient(180deg, rgba(17, 17, 17, 0.15), rgba(17, 17, 17, 0));
+    --bs-body-font-family: var(--bs-font-sans-serif);
+    --bs-body-font-size: 1rem;
+    --bs-body-font-weight: 400;
+    --bs-body-line-height: 1.5;
+    --bs-body-color: #e1e1e1;
+    --bs-body-bg: #222;
+}
+
+.dark-mode a {
+    color: var(--bs-light-purple);
+}
+
+.dark-mode a.disabled {
+    color: var(--bs-body-color);
+}
+.dark-mode a.btn-secondary {
+    color: var(--bs-body-color);
+}
+
+.dark-mode .table {
+    color: var(--bs-body-color);
+    --bs-table-color: var(--bs-body-color);
+}
+
+.dark-mode .card {
+    background-color: var(--bs-gray-800);
+}
+
+.dark-mode .btn-primary {
+    background-color: var(--bs-primary);
+    border-color: var(--bs-primary);
+}
+.dark-mode .btn-primary:hover {
+    background-color: var(--bs-indigo);
+    border-color: var(--bs-indigo);
+}
+
+.dark-mode .paginate_button {
+    background-color: var(--bs-primary);
+    border-color: var(--bs-primary);
+    color: #7e7e7e;
+}
+.dark-mode .paginate_button:hover {
+    background-color: var(--bs-indigo);
+    border-color: var(--bs-indigo);
+}
+
+.dark-mode input {
+    background-color: var(--bs-gray-600);
+    color: var(--bs-body-color);
+}
+
+.dark-mode select {
+    background-color: var(--bs-gray-600);
+    color: var(--bs-body-color);
+}
+
+.dark-mode .sect2 {
+    /*background-color: var(--bs-gray-600);*/
+   border-color: white;
+}
+
+
+
+/* Bootstrap CSS (minimal) */
+.container { max-width: 1140px; margin: 0 auto; padding: 0 15px; }
+.row { display: flex; flex-wrap: wrap; margin: 0 -15px; }
+.col-12 { flex: 0 0 100%; max-width: 100%; padding: 0 15px; }
+.col-md-6 { flex: 0 0 50%; max-width: 50%; padding: 0 15px; }
+.col-lg-10 { flex: 0 0 83.333333%; max-width: 83.333333%; padding: 0 15px; }
+.offset-lg-1 { margin-left: 8.333333%; }
+.btn { display: inline-block; padding: 8px 16px; margin: 4px 2px; border: none; border-radius: 4px; cursor: pointer; text-decoration: none; }
+.btn-primary { background-color: #007bff; color: white; }
+.btn-secondary { background-color: #6c757d; color: white; }
+.btn-warning { background-color: #ffc107; color: black; }
+.btn-info { background-color: #17a2b8; color: white; }
+.form-control { display: block; width: 100%; padding: 8px 12px; border: 1px solid #ced4da; border-radius: 4px; }
+.alert { padding: 15px; margin-bottom: 20px; border: 1px solid transparent; border-radius: 4px; }
+.alert-primary { background-color: #d1ecf1; border-color: #bee5eb; color: #0c5460; }
+.alert-success { background-color: #d4edda; border-color: #c3e6cb; color: #155724; }
+.alert-danger { background-color: #f8d7da; border-color: #f5c6cb; color: #721c24; }
+.alert-info { background-color: #d1ecf1; border-color: #bee5eb; color: #0c5460; }
+.card { border: 1px solid rgba(0,0,0,.125); border-radius: 0.25rem; margin-bottom: 1rem; }
+.card-body { padding: 1.25rem; }
+.card-header { padding: 0.75rem 1.25rem; background-color: rgba(0,0,0,.03); border-bottom: 1px solid rgba(0,0,0,.125); }
+.collapse { display: none; }
+.collapse.show { display: block; }
+.progress { height: 1rem; background-color: #e9ecef; border-radius: 0.25rem; overflow: hidden; }
+.progress-bar { height: 100%; background-color: #007bff; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-3 { margin-bottom: 1rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-3 { margin-top: 1rem; }
+.h1 { font-size: 2.5rem; font-weight: 500; }
+.form-label { font-weight: 600; }
+.form-text { font-size: 0.875em; color: #6c757d; }
+body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif; }
+
+        .preview-banner {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 10px 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .preview-banner .alert-heading {
+            color: #0c5460;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+        .solved { background-color: #d4edda; }
+
+        /* Challenge 57 specific styles - embedded */
+        #llm-challenge-container {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            background-color: #f9f9f9;
+        }
+
+        #chat-history {
+            height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            padding: 10px;
+            background-color: white;
+            margin-bottom: 10px;
+        }
+
+        .user-message {
+            text-align: right;
+            margin: 5px 0;
+            padding: 5px;
+            border-radius: 4px;
+            background-color: #e3f2fd;
+        }
+
+        .ai-message {
+            text-align: left;
+            margin: 5px 0;
+            padding: 5px;
+            border-radius: 4px;
+            background-color: #f5f5f5;
+        }
+
+        .chat-input-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .chat-send-btn {
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .chat-tip {
+            margin-top: 10px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* Challenge explanation sections */
+        .challenge-content {
+            margin-bottom: 30px;
+        }
+        .explanation-content, .hint-content, .reason-content {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .explanation-content h3, .hint-content h3, .reason-content h3 {
+            color: #495057;
+            margin-top: 0;
+        }
+        .explanation-content ul, .hint-content ul, .reason-content ul {
+            margin-bottom: 10px;
+        }
+        .explanation-content li, .hint-content li, .reason-content li {
+            margin-bottom: 5px;
+        }
+    </style></head>
+
+                        <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">🔐 OWASP WrongSecrets</a>
+            <div class="navbar-nav">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="about.html">About</a>
+                <a class="nav-link" href="stats.html">Stats</a>
+                <a class="nav-link" href="challenge-example.html">Challenge Example</a>
+            </div>
+        </div>
+    </nav>
+                            OWASP Project Leaders:
+                            <ul>
+                                <li><a href='https://www.github.com/bendehaan'>Ben de Haan @bendehaan</a></li>
+                                <li><a href='https://www.github.com/commjoen'>Jeroen Willemsen @commjoen</a></li>
+                            </ul>
+                            Top Contributors:
+                            <ul>
+                                <li><a href='https://www.github.com/J12934'>Jannik Hollenbach @J12934</a></li>
+                                <li><a href='https://www.github.com/puneeth072003'>Puneeth Y @puneeth072003</a></li>
+                                <li><a href='https://www.github.com/RemakingEden'>Joss Sparkes @RemakingEden</a></li>
+                            </ul>
+                            Contributors:
+                            <ul>
+                                <li><a href='https://www.github.com/nbaars'>Nanne Baars @nbaars</a></li>
+                                <li><a href='https://www.github.com/drnow4u'>Marcin Nowak @drnow4u</a></li>
+                                <li><a href='https://www.github.com/roddas'>Rodolfo Neves @roddas</a></li>
+                                <li><a href='https://www.github.com/osamamagdy'>Osama Magdy @osamamagdy</a></li>
+                                <li><a href='https://www.github.com/Shubham-Patel07'>Shubham Patel @Shubham-Patel07</a>
+                                </li>
+                                <li><a href='https://www.github.com/za'>za @za</a></li>
+                                <li><a href='https://www.github.com/Novice-expert'>Divyanshu Dev @Novice-expert</a></li>
+                                <li><a href='https://www.github.com/Pastekitoo'>Pastekitoo @Pastekitoo</a></li>
+                                <li><a href='https://www.github.com/tiborhercz'>Tibor Hercz @tiborhercz</a></li>
+                                <li><a href='https://www.github.com/neatzsche'>Chris Elbring Jr. @neatzsche</a></li>
+                                <li><a href='https://www.github.com/adarsh-a-tw'>Adarsh A @adarsh-a-tw</a></li>
+                                <li><a href='https://www.github.com/diamant3'>Diamond Rivero @diamant3</a></li>
+                                <li><a href='https://www.github.com/nwolniak'>Norbert Wolniak @nwolniak</a></li>
+                                <li><a href='https://www.github.com/fchyla'>Filip Chyla @fchyla</a></li>
+                                <li><a href='https://www.github.com/Dlitosh'>Dmitry Litosh @Dlitosh</a></li>
+                                <li><a href='https://www.github.com/djvinnie'>Vineeth Jagadeesh @djvinnie</a></li>
+                                <li><a href='https://www.github.com/mahaputrailhamawal'>Mahaputra Ilham Awal
+                                        @mahaputrailhamawal</a></li>
+                                <li><a href='https://www.github.com/turjoc120'>Turjo Chowdhury @turjoc120</a></li>
+                                <li><a href='https://www.github.com/SndR85'>SndR @SndR85</a></li>
+                                <li><a href='https://www.github.com/tghosth'>Josh Grossman @tghosth</a></li>
+                                <li><a href='https://www.github.com/alphasecio'>alphasec @alphasecio</a></li>
+                                <li><a href='https://www.github.com/CaduRoriz'>CaduRoriz @CaduRoriz</a></li>
+                                <li><a href='https://www.github.com/madhuakula'>Madhu Akula @madhuakula</a></li>
+                                <li><a href='https://www.github.com/mikewoudenberg'>Mike Woudenberg @mikewoudenberg</a>
+                                </li>
+                                <li><a href='https://www.github.com/northdpole'>Spyros @northdpole</a></li>
+                                <li><a href='https://www.github.com/RubenAtBinx'>RubenAtBinx @RubenAtBinx</a></li>
+                                <li><a href='https://www.github.com/alex-bender'>Alex Bender @alex-bender</a></li>
+                                <li><a href='https://www.github.com/dannylloyd'>Danny Lloyd @dannylloyd</a></li>
+                                <li><a href='https://www.github.com/nhumblot'>Nicolas Humblot @nhumblot</a></li>
+                                <li><a href='https://www.github.com/kingthorin'>Rick M @kingthorin</a></li>
+                                <li><a href='https://www.github.com/szh'>Shlomo Zalman Heigh @szh</a></li>
+                                <li><a href='https://www.github.com/f3rn0s'>Fern @f3rn0s</a></li>
+                                <li><a href='https://www.github.com/Wind010'>Jeff Tong @Wind010</a></li>
+                            </ul>
+                            Testers:
+                            <ul>
+                                <li><a href='https://www.github.com/davevs'>Dave van Stein @davevs</a></li>
+                                <li><a href='https://www.github.com/drnow4u'>Marcin Nowak @drnow4u</a></li>
+                                <li><a href='https://www.github.com/mchangsp'>Marc Chang Sing Pang @mchangsp</a></li>
+                                <li><a href='https://www.github.com/djvinnie'>Vineeth Jagadeesh @djvinnie</a></li>
+                            </ul>
+                            Special mentions for helping out:
+                            <ul>
+                                <li><a href='https://www.github.com/madhuakula'>Madhu Akula @madhuakula @madhuakula</a>
+                                </li>
+                                <li><a href='https://www.github.com/nbaars'>Nanne Baars @nbaars @nbaars</a></li>
+                                <li><a href='https://www.github.com/bkimminich'>Björn Kimminich @bkimminich</a></li>
+                                <li><a href='https://www.github.com/devsecops'>Dan Gora @devsecops</a></li>
+                                <li><a href='https://www.github.com/saragluna'>Xiaolu Dai @saragluna</a></li>
+                                <li><a href='https://www.github.com/jonathanGiles'>Jonathan Giles @jonathanGiles</a>
+                                </li>
+                            </ul>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-7">
+                    <div class="border border-dark thank-you">
+                        Resources/further reading on secrets management:<br />
+                        <ul>
+                            <li>
+                                <a
+                                    href="https://dev.to/commjoen/secure-deployment-10-pointers-on-secrets-management-187j">Blog:
+                                    10 Pointers on Secrets Management</a>
+                            </li>
+                            <li>
+                                <a href="https://owaspsamm.org/model/implementation/secure-deployment/stream-b/">OWASP
+                                    SAMM on Secret Management</a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/topics/secrets-detection">The secret detection topic at
+                                    Github</a>
+                            </li>
+                            <li>
+                                <a
+                                    href="https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Secrets_Management_Cheat_Sheet.md">OWASP
+                                    Secretsmanagement Cheatsheet</a>
+                            </li>
+                            <li>
+                                <a
+                                    href="https://www.opencre.org/cre/223-780?register=true&type=tool&tool_type=training&tags=secrets,training&description=With%20this%20app%2C%20we%20have%20packed%20various%20ways%20of%20how%20to%20not%20store%20your%20secrets.%20These%20can%20help%20you%20to%20realize%20whether%20your%20secret%20management%20is%20ok.%20The%20challenge%20is%20to%20find%20all%20the%20different%20secrets%20by%20means%20of%20various%20tools%20and%20techniques.%20Can%20you%20solve%20all%20the%2014%20challenges%3F&trk=flagship-messaging-web&messageThreadUrn=urn:li:messagingThread:2-YmRkNjRkZTMtNjRlYS00OWNiLWI2YmUtMDYwNzY3ZjI1MDcyXzAxMg==&lipi=urn:li:page:d_flagship3_feed;J58Sgd80TdanpKWFMH6z+w==">Open
+                                    CRE on Secrets Management</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="border border-dark thank-you">
+                        Wondering what a secret is? A secret is often a confidential piece of information that is
+                        required to unlock certain functionalities or information. It can exists in many shapes or
+                        forms, for instance:
+                        <ul>
+                            <li>2FA keys</li>
+                            <li>Activation/Callback links</li>
+                            <li>API keys</li>
+                            <li>Credentials</li>
+                            <li>Passwords</li>
+                            <li>Private keys (decryption, signing, TLS, SSH, GPG)</li>
+                            <li>Secret keys (symmetric encryption, HMAC)</li>
+                            <li>Session cookies</li>
+                            <li>Tokens (Session, Refresh, Authentication, Activation, etc.)</li>
+                        </ul>
+                    </div>
+                    <div class="border border-dark thank-you text-center">
+                        Want to see if your tool of choice detects all the secrets available in this project?
+                        <br />
+                        <a
+                            href="https://github.com/OWASP/wrongsecrets/#use-owasp-wrongsecrets-as-a-secret-detection-benchmark">
+                            Check the instructions in the README
+                        </a>.
+                    </div>
+                    <div class="border border-dark thank-you text-center">
+                        Developing our solution in 3 clouds costs money. Want to help us to cover our cloud bills?
+                        <a href="https://owasp.org/donate/?reponame=www-project-wrongsecrets&title=OWASP+wrongsecrets"
+                            target="_blank">Donate</a>.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
