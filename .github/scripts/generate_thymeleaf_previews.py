@@ -1352,7 +1352,9 @@ body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetic
             print(f"Generated {filename}")
 
         print(f"Generated {len(pages)} static pages in {pages_dir}")
-        print(f"✅ Challenge 57 (LLM Security) and Challenge 58 (Database Connection String Exposure) are both available")
+        print(
+            f"✅ Challenge 57 (LLM Security) and Challenge 58 (Database Connection String Exposure) are both available"
+        )
         print(f"✅ Challenge 58 is featured as the latest challenge")
         return pages_dir
 
