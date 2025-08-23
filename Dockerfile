@@ -1,7 +1,7 @@
 FROM bellsoft/liberica-openjre-debian:23.0.2-9-cds AS builder
 WORKDIR /builder
 
-ARG argBasedVersion="1.12.3"
+ARG argBasedVersion="1.12.4"
 
 COPY --chown=wrongsecrets target/wrongsecrets-${argBasedVersion}-SNAPSHOT.jar application.jar
 RUN java -Djarmode=tools -jar application.jar extract --layers --destination extracted
@@ -19,7 +19,7 @@ ENV AZURE_KEY_VAULT_ENABLED=false
 ENV SPRINGDOC_UI=false
 ENV SPRINGDOC_DOC=false
 ENV BASTIONHOSTPATH="/home/wrongsecrets/.ssh"
-
+ENV PROJECTSPECPATH="/var/helpers/project-specification.mdc"
 RUN echo "2vars"
 RUN echo "$ARG_BASED_PASSWORD"
 RUN echo "$argBasedPassword"

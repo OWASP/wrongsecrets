@@ -23,7 +23,7 @@ class Challenge56Test {
   @Test
   void solveChallenge56WithFile(@TempDir Path dir) throws Exception {
     var testFile = new File(dir.toFile(), "project-specification.mdc");
-    var secretLine = "**secret-challenge-56: S3cr3tInPr0j3ctSp3c";
+    var secretLine = "blabla\n- Example API key for testing: S3cr3tInPr0j3ctSp3c";
     Files.writeString(testFile.toPath(), "Some intro text\n" + secretLine + "\nSome outro text\n");
 
     var challenge = new Challenge56(testFile.getAbsolutePath());
@@ -34,7 +34,7 @@ class Challenge56Test {
   @Test
   void spoilShouldReturnCorrectAnswer(@TempDir Path dir) throws IOException {
     var testFile = new File(dir.toFile(), "project-specification.mdc");
-    var secretLine = "**secret-challenge-56: S3cr3tInPr0j3ctSp3c";
+    var secretLine = "blabla\n- Example API key for testing: S3cr3tInPr0j3ctSp3c";
     Files.writeString(testFile.toPath(), secretLine + "\n");
 
     var challenge = new Challenge56(testFile.getAbsolutePath());
