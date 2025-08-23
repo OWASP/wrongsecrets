@@ -21,7 +21,7 @@ public class Challenge55 implements Challenge {
   private final String basionhostpath;
   private String actualData;
 
-  public Challenge55(@Value("${basionhostpath}") String basionhostpath) {
+  public Challenge55(@Value("${BASTIONHOSTPATH}") String basionhostpath) {
     this.basionhostpath = basionhostpath;
   }
 
