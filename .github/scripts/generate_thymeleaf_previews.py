@@ -431,6 +431,103 @@ body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetic
         content = re.sub(r'th:attr="[^"]*"', "", content)
         return content
 
+    def add_static_assets_challenge58(self, content):
+        """Add embedded CSS and JS for Challenge 58 static preview."""
+        if "<head>" in content:
+            head_additions = f"""
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OWASP WrongSecrets - Challenge 58 Preview</title>
+    <style>
+{self.embedded_css}
+        .preview-banner {{
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 10px 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }}
+        .preview-banner .alert-heading {{
+            color: #0c5460;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }}
+        .solved {{ background-color: #d4edda; }}
+
+        /* Challenge 58 specific styles */
+        .demo-section {{
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 15px 0;
+        }}
+
+        .demo-section .btn-warning {{
+            background-color: #ffc107;
+            border-color: #ffc107;
+            color: #212529;
+            text-decoration: none;
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 4px;
+            border: 1px solid transparent;
+            font-weight: 400;
+            text-align: center;
+            vertical-align: middle;
+            cursor: pointer;
+            font-size: 1rem;
+            line-height: 1.5;
+            margin-top: 10px;
+        }}
+
+        .demo-section .btn-warning:hover {{
+            background-color: #e0a800;
+            border-color: #d39e00;
+        }}
+
+        /* Challenge explanation sections */
+        .challenge-content {{
+            margin-bottom: 30px;
+        }}
+        .explanation-content, .hint-content, .reason-content {{
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }}
+        .explanation-content h3, .hint-content h3, .reason-content h3 {{
+            color: #495057;
+            margin-top: 0;
+        }}
+        .explanation-content ul, .hint-content ul, .reason-content ul {{
+            margin-bottom: 10px;
+        }}
+        .explanation-content li, .hint-content li, .reason-content li {{
+            margin-bottom: 5px;
+        }}
+    </style>"""
+            content = content.replace("<head>", f"<head>{head_additions}")
+
+        # Add preview banner for Challenge 58
+        banner = f"""
+    <div class="preview-banner">
+        <div class="alert-heading">🗄️ Challenge 58 - Database Connection String Exposure (PR #{self.pr_number})</div>
+        <small>This is a live preview of Challenge 58 demonstrating how database credentials leak through error messages. Click the demo button to see the vulnerable endpoint in action!</small>
+    </div>"""
+
+        if '<div class="container"' in content:
+            content = content.replace(
+                '<div class="container"', f'<div class="container">{banner}'
+            )
+        elif "<body>" in content:
+            content = content.replace(
+                "<body>", f'<body><div class="container">{banner}</div>'
+            )
+
+        return content
+
     def add_static_assets(self, content, template_name):
         """Add embedded CSS and JS for the static preview."""
         if "<head>" in content:
@@ -625,6 +722,120 @@ body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetic
 
         # Process the template
         content = self.process_thymeleaf_syntax(content, "stats")
+
+        # Add navigation
+        nav = self.generate_navigation_html()
+        content = content.replace("<body>", f"<body>{nav}")
+
+        return content
+
+    def generate_challenge58_page(self):
+        """Generate Challenge 58 (Database Connection String Exposure) page with embedded content."""
+        template_path = self.templates_dir / "challenge.html"
+
+        if not template_path.exists():
+            print(f"Warning: Template {template_path} not found")
+            return self.generate_fallback_challenge58()
+
+        with open(template_path, "r", encoding="utf-8") as f:
+            content = f.read()
+
+        # Mock Challenge 58 data
+        mock_challenge = {
+            "name": "Challenge 58: Database Connection String Exposure",
+            "stars": "⭐⭐⭐",
+            "tech": "LOGGING",
+            "explanation": "challenge58.adoc",
+            "hint": "challenge58_hint.adoc",
+            "reason": "challenge58_reason.adoc",
+            "link": "/challenge/challenge-58",
+        }
+
+        # Replace challenge-specific Thymeleaf content
+        content = re.sub(
+            r'<span th:text="\$\{challenge\.name\}"[^>]*>[^<]*</span>',
+            f'<span data-cy="challenge-title">{mock_challenge["name"]}</span>',
+            content,
+        )
+        content = re.sub(
+            r'<span[^>]*th:text="\$\{challenge\.stars\}"[^>]*>[^<]*</span>',
+            f'<span>{mock_challenge["stars"]}</span>',
+            content,
+        )
+        content = re.sub(
+            r'<strong th:text="\$\{challenge\.tech\}"[^>]*>[^<]*</strong>',
+            f'<strong>{mock_challenge["tech"]}</strong>',
+            content,
+        )
+        content = re.sub(
+            r'<span th:text="\'Welcome to challenge \'\s*\+\s*\$\{challenge\.name\}\s*\+\s*\'\.\'"></span>',
+            f'<span>Welcome to challenge {mock_challenge["name"]}.</span>',
+            content,
+        )
+
+        # Replace the explanation section with Challenge 58 content
+        explanation_pattern = (
+            r'<div th:replace="~\{doc:__\$\{challenge\.explanation\}__\}"></div>'
+        )
+
+        # Load actual Challenge 58 content from AsciiDoc files
+        explanation_content = self.load_adoc_content("challenge58.adoc")
+        hint_content = self.load_adoc_content("challenge58_hint.adoc")
+        reason_content = self.load_adoc_content("challenge58_reason.adoc")
+
+        challenge58_explanation = f"""
+        <div class="challenge-explanation">
+            <div class="challenge-content">
+                <h4>📖 Challenge Explanation</h4>
+                <div class="explanation-content">
+                    {explanation_content}
+                </div>
+
+                <h4>💡 Hints</h4>
+                <div class="hint-content">
+                    {hint_content}
+                </div>
+
+                <h4>🧠 Reasoning</h4>
+                <div class="reason-content">
+                    {reason_content}
+                </div>
+            </div>
+
+            <div class="challenge-demo">
+                <h4>🔗 Database Connection Error Demo</h4>
+                <div class="demo-section">
+                    <p><strong>Try the vulnerable endpoint:</strong></p>
+                    <a href="/error-demo/database-connection" class="btn btn-warning">
+                        🚨 Trigger Database Connection Error
+                    </a>
+                    <p><small class="text-muted">This endpoint simulates a database connection failure that exposes the connection string with embedded credentials.</small></p>
+                </div>
+            </div>
+        </div>
+        """
+        content = re.sub(
+            explanation_pattern, lambda m: challenge58_explanation, content
+        )
+
+        # Process the template
+        content = self.process_thymeleaf_syntax(content, "challenge58")
+
+        # Ensure we have a proper HTML structure with head
+        if "<head>" not in content:
+            # Add basic HTML structure
+            content = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OWASP WrongSecrets - Challenge 58</title>
+</head>
+{content}
+</html>"""
+
+        # Add embedded CSS and styling for Challenge 58
+        content = self.add_static_assets_challenge58(content)
 
         # Add navigation
         nav = self.generate_navigation_html()
@@ -899,6 +1110,57 @@ body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetic
         </script>
         """
 
+    def generate_fallback_challenge58(self):
+        """Generate a fallback Challenge 58 page if template is missing."""
+        return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OWASP WrongSecrets - Challenge 58</title>
+    <style>
+{self.embedded_css}
+    </style>
+</head>
+<body>
+    {self.generate_navigation_html()}
+    <div class="container mt-4">
+        <div class="preview-banner">
+            <div class="alert-heading">🗄️ Challenge 58 - Database Connection String Exposure (PR #{self.pr_number})</div>
+            <small>This is a live preview of Challenge 58 demonstrating how database credentials leak through error messages.</small>
+        </div>
+
+        <h1>Challenge 58: Database Connection String Exposure ⭐⭐⭐</h1>
+        <p>Welcome to Challenge 58: Database Connection String Exposure.</p>
+
+        <div class="alert alert-primary" role="alert">
+            <h6 class="alert-heading">🔍 Your Task</h6>
+            <p class="mb-2">Find the database password that gets exposed when the application fails to connect to the database.</p>
+            <p class="mb-0">💡 <strong>Visit:</strong> The <code>/error-demo/database-connection</code> endpoint to trigger the error.</p>
+        </div>
+
+        <div class="demo-section">
+            <h4>🔗 Database Connection Error Demo</h4>
+            <p><strong>Try the vulnerable endpoint:</strong></p>
+            <a href="/error-demo/database-connection" class="btn btn-warning">
+                🚨 Trigger Database Connection Error
+            </a>
+            <p><small class="text-muted">This endpoint simulates a database connection failure that exposes the connection string with embedded credentials.</small></p>
+        </div>
+
+        <form>
+            <div class="mb-3">
+                <label for="answerfield" class="form-label"><strong>🔑 Enter the database password you found:</strong></label>
+                <input type="text" class="form-control" id="answerfield" placeholder="Type the password here..."/>
+                <small class="form-text text-muted">💡 Tip: Look for the password in the database connection error message.</small>
+            </div>
+            <button class="btn btn-primary" type="button">🚀 Submit Answer</button>
+            <button class="btn btn-secondary" type="button" onclick="document.getElementById('answerfield').value='';">🗑️ Clear</button>
+        </form>
+    </div>
+</body>
+</html>"""
+
     def generate_fallback_challenge57(self):
         """Generate a fallback Challenge 57 page if template is missing."""
         return f"""<!DOCTYPE html>
@@ -1069,7 +1331,7 @@ body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetic
 </html>"""
 
     def generate_all_pages(self):
-        """Generate all static pages with Challenge 57 as the featured challenge."""
+        """Generate all static pages with Challenge 58 as the featured latest challenge."""
         # Create pages directory
         pages_dir = self.static_dir / f"pr-{self.pr_number}" / "pages"
         pages_dir.mkdir(parents=True, exist_ok=True)
@@ -1078,8 +1340,9 @@ body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetic
             "welcome.html": self.generate_welcome_page(),
             "about.html": self.generate_about_page(),
             "stats.html": self.generate_stats_page(),
-            "challenge-57.html": self.generate_challenge57_page(),  # Always render Challenge 57
-            "challenge-example.html": self.generate_challenge57_page(),  # Use Challenge 57 as the example too
+            "challenge-57.html": self.generate_challenge57_page(),  # LLM Challenge (AI category)
+            "challenge-58.html": self.generate_challenge58_page(),  # Database Challenge (Latest)
+            "challenge-example.html": self.generate_challenge58_page(),  # Use Challenge 58 as the latest example
         }
 
         for filename, content in pages.items():
@@ -1089,7 +1352,8 @@ body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetic
             print(f"Generated {filename}")
 
         print(f"Generated {len(pages)} static pages in {pages_dir}")
-        print(f"✅ Challenge 57 (LLM Security) is featured as the latest challenge")
+        print(f"✅ Challenge 57 (LLM Security) and Challenge 58 (Database Connection String Exposure) are both available")
+        print(f"✅ Challenge 58 is featured as the latest challenge")
         return pages_dir
 
 
