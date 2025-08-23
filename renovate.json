@@ -77,7 +77,9 @@
         {
             "customType": "regex",
             "description": "Track Docker base images in Dockerfiles",
-            "fileMatch": ["(^|/)Dockerfile[^/]*$"],
+            "managerFilePatterns": [
+                "/(^|/)Dockerfile[^/]*$/"
+            ],
             "matchStrings": [
                 "FROM\\s+(?<depName>bellsoft/liberica-openjre-debian):(?<currentValue>[^\\s]+)",
                 "FROM\\s+(?<depName>eclipse-temurin):(?<currentValue>[^\\s]+)"
@@ -87,7 +89,9 @@
         {
             "customType": "regex",
             "description": "Track runtime versions in GitHub Actions",
-            "fileMatch": ["^\\.github/workflows/[^/]+\\.ya?ml$"],
+            "managerFilePatterns": [
+                "/^\\.github/workflows/[^/]+\\.ya?ml$/"
+            ],
             "matchStrings": [
                 "node-version:\\s*['\"]?(?<currentValue>[^'\"\\s]+)['\"]?",
                 "python-version:\\s*['\"]?(?<currentValue>[^'\"\\s]+)['\"]?",
@@ -156,21 +160,27 @@
         },
         {
             "groupName": "GitHub Actions",
-            "matchDatasources": ["github-tags"],
+            "matchDatasources": [
+                "github-tags"
+            ],
             "matchPackageNames": [
-                "/^actions\//"
+                "/^actions//"
             ]
         },
         {
             "groupName": "Docker Actions",
-            "matchDatasources": ["github-tags"],
+            "matchDatasources": [
+                "github-tags"
+            ],
             "matchPackageNames": [
-                "/^docker\//"
+                "/^docker//"
             ]
         },
         {
             "groupName": "Java Runtime Images",
-            "matchDatasources": ["docker"],
+            "matchDatasources": [
+                "docker"
+            ],
             "matchPackageNames": [
                 "bellsoft/liberica-openjre-debian",
                 "eclipse-temurin"
@@ -178,7 +188,9 @@
         },
         {
             "groupName": "Runtime Versions",
-            "schedule": ["before 6am on the first day of the month"],
+            "schedule": [
+                "before 6am on the first day of the month"
+            ],
             "matchPackageNames": [
                 "node",
                 "python",
@@ -189,7 +201,7 @@
             "groupName": "Frontend Dependencies",
             "matchPackageNames": [
                 "/^playwright/",
-                "/^@babel\//"
+                "/^@babel//"
             ]
         }
     ]
