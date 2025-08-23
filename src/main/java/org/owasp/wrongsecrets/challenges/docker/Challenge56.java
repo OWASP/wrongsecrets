@@ -22,8 +22,7 @@ public class Challenge56 implements Challenge {
   private final String projectSpecPath;
   private String actualSecret;
 
-  public Challenge56(
-      @Value("${projectspecpath:/var/helpers/project-specification.mdc}") String projectSpecPath) {
+  public Challenge56(@Value("${PROJECTSPECPATH}") String projectSpecPath) {
     this.projectSpecPath = projectSpecPath;
   }
 
@@ -34,7 +33,9 @@ public class Challenge56 implements Challenge {
 
   @Override
   public boolean answerCorrect(String answer) {
-    return !Strings.isNullOrEmpty(answer) && getActualSecret().equals(answer.trim());
+    return !Strings.isNullOrEmpty(answer)
+        && !Strings.isNullOrEmpty(getActualSecret())
+        && getActualSecret().contains(answer);
   }
 
   @SuppressFBWarnings(
@@ -47,12 +48,13 @@ public class Challenge56 implements Challenge {
         String content = Files.readString(filePath, StandardCharsets.UTF_8);
         // Look for the line with the secret
         for (String line : content.split("\n")) {
-          if (line.trim().startsWith("**secret-challenge-56:")) {
+          if (line.trim().startsWith("- Example API key for testing: ")) {
             actualSecret = line.split(":", 2)[1].trim();
             break;
           }
         }
         if (Strings.isNullOrEmpty(actualSecret)) {
+          log.warn("Exception during file reading for Challenge56: empty");
           return FILE_MOUNT_ERROR;
         }
       } catch (Exception e) {
@@ -60,6 +62,8 @@ public class Challenge56 implements Challenge {
         return FILE_MOUNT_ERROR;
       }
     }
+
+    log.info("secret is: " + actualSecret);
     return actualSecret;
   }
 }
