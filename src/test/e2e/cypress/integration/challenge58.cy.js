@@ -66,13 +66,13 @@ describe('Challenge 58 Database Connection String Exposure Tests', () => {
   it('Can solve the challenge using the exposed database password', () => {
     // First, trigger the database error to find the secret
     cy.get(ERROR_DEMO_LINK).click()
-    
+
     // Wait for error page and extract the secret
     cy.get('body', { timeout: 10000 }).should('contain', 'SuperSecretDB2024!')
-    
+
     // Navigate back to the challenge page
     cy.visit('/challenge/challenge-58')
-    
+
     // Use the secret to solve the challenge
     cy.dataCy(ChallengesPage.ANSWER_TEXTBOX).type('SuperSecretDB2024!')
     cy.dataCy(ChallengesPage.SUBMIT_TEXTBOX_BTN).click()
@@ -120,7 +120,7 @@ describe('Challenge 58 Database Connection String Exposure Tests', () => {
 
     // Access the error endpoint
     cy.visit('/error-demo/database-connection')
-    
+
     // Verify error content contains realistic database connection information
     cy.get('body').should(($body) => {
       const text = $body.text()
@@ -136,14 +136,14 @@ describe('Challenge 58 Database Connection String Exposure Tests', () => {
 
     // Most importantly, verify the credentials are exposed
     cy.get('body').should('contain', 'SuperSecretDB2024!')
-    
+
     cy.log('Educational objective achieved: Database credentials exposed through error handling demonstrate real-world vulnerability')
   })
 
   it('Error endpoint demonstrates common logging/error disclosure patterns', () => {
     // Test that the error endpoint demonstrates realistic error disclosure
     cy.visit('/error-demo/database-connection')
-    
+
     // Check for common error patterns that expose secrets
     cy.get('body').should(($body) => {
       const content = $body.text()
@@ -160,7 +160,7 @@ describe('Challenge 58 Database Connection String Exposure Tests', () => {
     // Verify the challenge provides educational context
     cy.get(DATABASE_CONTAINER).should('contain', 'database connection failures can expose sensitive credentials')
     cy.get(DATABASE_CONTAINER).should('contain', 'Look for the database password')
-    
+
     // Verify the demo section explains the vulnerability
     cy.get(DATABASE_CONTAINER).should('contain', 'Click the button below to trigger a database connection error')
     cy.get(DATABASE_CONTAINER).should('contain', 'exposes the connection string with embedded credentials')
