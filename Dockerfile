@@ -19,7 +19,7 @@ ENV AZURE_KEY_VAULT_ENABLED=false
 ENV SPRINGDOC_UI=false
 ENV SPRINGDOC_DOC=false
 ENV BASTIONHOSTPATH="/home/wrongsecrets/.ssh"
-
+ENV PROJECTSPECPATH="/var/helpers/project-specification.mdc"
 RUN echo "2vars"
 RUN echo "$ARG_BASED_PASSWORD"
 RUN echo "$argBasedPassword"

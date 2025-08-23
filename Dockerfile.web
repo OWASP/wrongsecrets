@@ -32,6 +32,7 @@ ENV default_aws_value_challenge_9=$CHALLENGE_9_VALUE
 ENV default_aws_value_challenge_10=$CHALLENGE_10_VALUE
 ENV default_aws_value_challenge_11=$CHALLENGE_11_VALUE
 ENV BASTIONHOSTPATH="/home/wrongsecrets/.ssh"
+ENV PROJECTSPECPATH="cursor/rules/project-specification.mdc"
 COPY .github/scripts/ /var/helpers
 COPY src/test/resources/alibabacreds.kdbx /var/helpers
 COPY src/test/resources/RSAprivatekey.pem /var/helpers
