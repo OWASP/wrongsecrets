@@ -1,0 +1,37 @@
+=== Find the Slack API Token
+
+Welcome to this challenge that demonstrates the vulnerability of hardcoded Slack API tokens in environment variables!
+
+This challenge simulates a real-world scenario where:
+
+1. **Slack API tokens are stored as environment variables** for application integration
+2. **The tokens are obfuscated** to avoid detection by secret scanning tools 
+3. **Employee turnover risk**: When an employee leaves, the token may not be rotated, allowing continued access
+
+==== Your Mission
+
+In this scenario, a developer has stored a Slack API token as an environment variable `CHALLENGE59_SLACK_TOKEN`. The token has been obfuscated using double base64 encoding to bypass Slack's secret scanning detection.
+
+Your task is to:
+
+1. Find the obfuscated Slack API token in the environment variable
+2. Deobfuscate it to reveal the original token
+3. Submit the deobfuscated token as your answer
+
+==== Real-World Impact
+
+This vulnerability demonstrates why:
+
+- Hardcoded secrets in environment variables are risky
+- Obfuscation is not a security measure
+- API tokens should be rotated when employees leave
+- Proper secrets management solutions should be used
+
+==== Educational Note
+
+In production environments:
+- Use proper secrets management (AWS Secrets Manager, Azure Key Vault, HashiCorp Vault)
+- Implement token rotation policies
+- Monitor API token usage
+- Revoke access immediately when employees leave
+- Never obfuscate secrets as a security measure
