@@ -22,7 +22,7 @@ jobs:
           path: main-code
 
       - name: Set up JDK 23 for PR build
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: "23"
           distribution: "oracle"
@@ -50,7 +50,7 @@ jobs:
           echo "PR Docker image built successfully"
 
       - name: Set up JDK 23 for main build
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: "23"
           distribution: "oracle"
