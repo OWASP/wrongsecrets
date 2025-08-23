@@ -100,7 +100,8 @@ public class Challenges {
   }
 
   public boolean isLastChallenge(ChallengeDefinition challengeDefinition) {
-    return challengeDefinition.equals(definitions.challenges().getLast());
+    var challenges = definitions.challenges();
+    return challengeDefinition.equals(challenges.get(challenges.size() - 1));
   }
 
   public List<ChallengeDefinition> getChallengeDefinitions() {
