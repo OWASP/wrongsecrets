@@ -120,4 +120,3 @@ scripts/sort_contibutors/contributors_file.*
 *whispers*output*.json
 git_secrets_output.txt
 .secrets.baseline.json
-static-site/
