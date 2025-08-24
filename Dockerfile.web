@@ -37,4 +37,4 @@ COPY .github/scripts/ /var/helpers
 COPY src/test/resources/alibabacreds.kdbx /var/helpers
 COPY src/test/resources/RSAprivatekey.pem /var/helpers
 COPY .ssh/ /home/wrongsecrets/.ssh/
-CMD java -Xms128m -Xmx128m -Xss512k -jar -Dserver.port=$PORT -XX:MaxRAMPercentage=75 -XX:MinRAMPercentage=25 -Dspring.profiles.active=without-vault -Dspringdoc.swagger-ui.enabled=${SPRINGDOC_UI} -Dspringdoc.api-docs.enabled=${SPRINGDOC_DOC} application.jar
+CMD ["java", "-Xms128m", "-Xmx128m", "-Xss512k", "-jar", "-Dserver.port=$PORT", "-XX:MaxRAMPercentage=75", "-XX:MinRAMPercentage=25", "-Dspring.profiles.active=without-vault", "-Dspringdoc.swagger-ui.enabled=${SPRINGDOC_UI}", "-Dspringdoc.api-docs.enabled=${SPRINGDOC_DOC}", "application.jar"]
