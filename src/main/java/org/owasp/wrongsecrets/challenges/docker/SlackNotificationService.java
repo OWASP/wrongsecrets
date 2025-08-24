@@ -22,17 +22,14 @@ public class SlackNotificationService {
   private final RestTemplate restTemplate;
   private final ObjectMapper objectMapper;
   private final Optional<Challenge59> challenge59;
-  private final String slackWebhookUrl;
 
   public SlackNotificationService(
       RestTemplate restTemplate,
       ObjectMapper objectMapper,
-      @Autowired(required = false) Challenge59 challenge59,
-      @Value("${SLACK_WEBHOOK_URL:}") String slackWebhookUrl) {
+      @Autowired(required = false) Challenge59 challenge59) {
     this.restTemplate = restTemplate;
     this.objectMapper = objectMapper;
     this.challenge59 = Optional.ofNullable(challenge59);
-    this.slackWebhookUrl = slackWebhookUrl;
   }
 
   /**
@@ -53,14 +50,11 @@ public class SlackNotificationService {
 
       HttpHeaders headers = new HttpHeaders();
       headers.setContentType(MediaType.APPLICATION_JSON);
-      
-      if (challenge59.isPresent()) {
-        headers.setBearerAuth(challenge59.get().getSlackKey());
-      }
 
       HttpEntity<SlackMessage> request = new HttpEntity<>(slackMessage, headers);
 
-      restTemplate.postForEntity(slackWebhookUrl, request, String.class);
+      String webhookUrl = challenge59.get().getSlackWebhookUrl();
+      restTemplate.postForEntity(webhookUrl, request, String.class);
       logger.info("Successfully sent Slack notification for challenge completion: {}", challengeName);
 
     } catch (Exception e) {
@@ -70,9 +64,10 @@ public class SlackNotificationService {
 
   private boolean isSlackConfigured() {
     return challenge59.isPresent() 
-        && slackWebhookUrl != null 
-        && !slackWebhookUrl.trim().isEmpty()
-        && !slackWebhookUrl.equals("not_set");
+        && challenge59.get().getSlackWebhookUrl() != null 
+        && !challenge59.get().getSlackWebhookUrl().trim().isEmpty()
+        && !challenge59.get().getSlackWebhookUrl().equals("not_set")
+        && challenge59.get().getSlackWebhookUrl().startsWith("https://hooks.slack.com");
   }
 
   private String buildCompletionMessage(String challengeName, String userName) {

@@ -8,45 +8,45 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
- * This challenge demonstrates the security risk of hardcoded Slack API keys in environment
- * variables. Shows how an ex-employee could misuse the key if it's not rotated when they leave.
+ * This challenge demonstrates the security risk of hardcoded Slack webhook URLs in environment
+ * variables. Shows how an ex-employee could misuse the webhook if it's not rotated when they leave.
  */
 @Component
 public class Challenge59 extends FixedAnswerChallenge {
 
-  private final String obfuscatedSlackKey;
+  private final String obfuscatedSlackWebhookUrl;
 
-  public Challenge59(@Value("${CHALLENGE59_SLACK_TOKEN}") String obfuscatedSlackKey) {
-    this.obfuscatedSlackKey = obfuscatedSlackKey;
+  public Challenge59(@Value("${CHALLENGE59_SLACK_WEBHOOK_URL}") String obfuscatedSlackWebhookUrl) {
+    this.obfuscatedSlackWebhookUrl = obfuscatedSlackWebhookUrl;
   }
 
   @Override
   public String getAnswer() {
-    return deobfuscateSlackKey(obfuscatedSlackKey);
+    return deobfuscateSlackWebhookUrl(obfuscatedSlackWebhookUrl);
   }
 
   /**
-   * Deobfuscates the Slack API key. The key is base64 encoded twice to avoid detection by Slack's
-   * secret scanning.
+   * Deobfuscates the Slack webhook URL. The URL is base64 encoded twice to avoid detection by
+   * security scanners.
    */
-  private String deobfuscateSlackKey(String obfuscatedKey) {
+  private String deobfuscateSlackWebhookUrl(String obfuscatedUrl) {
     try {
       // First decode from base64
-      byte[] firstDecode = Base64.getDecoder().decode(obfuscatedKey);
+      byte[] firstDecode = Base64.getDecoder().decode(obfuscatedUrl);
       // Second decode from base64
       byte[] secondDecode = Base64.getDecoder().decode(firstDecode);
       return new String(secondDecode, UTF_8);
     } catch (Exception e) {
       // Return a default value if the environment variable is not properly set
-      return "xoxb-1234567890-1234567890-abcdefghijklmnopqrstuvwx";
+      return "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX";
     }
   }
 
   /**
-   * Gets the deobfuscated Slack key for use in Slack notifications. This method is used by the
+   * Gets the deobfuscated Slack webhook URL for use in Slack notifications. This method is used by the
    * Slack integration service.
    */
-  public String getSlackKey() {
+  public String getSlackWebhookUrl() {
     return getAnswer();
   }
 }
