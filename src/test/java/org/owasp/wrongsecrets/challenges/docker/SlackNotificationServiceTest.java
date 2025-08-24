@@ -50,8 +50,7 @@ class SlackNotificationServiceTest {
   @Test
   void shouldNotSendNotificationWhenSlackNotConfigured() {
     // Given
-    slackNotificationService =
-        new SlackNotificationService(restTemplate, objectMapper, null);
+    slackNotificationService = new SlackNotificationService(restTemplate, objectMapper, null);
 
     // When
     slackNotificationService.notifyChallengeCompletion("challenge-1", "testuser");

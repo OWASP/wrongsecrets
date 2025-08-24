@@ -43,8 +43,8 @@ public class Challenge59 extends FixedAnswerChallenge {
   }
 
   /**
-   * Gets the deobfuscated Slack webhook URL for use in Slack notifications. This method is used by the
-   * Slack integration service.
+   * Gets the deobfuscated Slack webhook URL for use in Slack notifications. This method is used by
+   * the Slack integration service.
    */
   public String getSlackWebhookUrl() {
     return getAnswer();

@@ -5,7 +5,7 @@ Welcome to this challenge that demonstrates the vulnerability of hardcoded Slack
 This challenge simulates a real-world scenario where:
 
 1. **Slack API tokens are stored as environment variables** for application integration
-2. **The tokens are obfuscated** to avoid detection by secret scanning tools 
+2. **The tokens are obfuscated** to avoid detection by secret scanning tools
 3. **Employee turnover risk**: When an employee leaves, the token may not be rotated, allowing continued access
 
 ==== Your Mission

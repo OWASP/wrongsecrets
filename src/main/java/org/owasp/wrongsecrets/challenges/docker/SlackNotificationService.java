@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -55,7 +54,8 @@ public class SlackNotificationService {
 
       String webhookUrl = challenge59.get().getSlackWebhookUrl();
       restTemplate.postForEntity(webhookUrl, request, String.class);
-      logger.info("Successfully sent Slack notification for challenge completion: {}", challengeName);
+      logger.info(
+          "Successfully sent Slack notification for challenge completion: {}", challengeName);
 
     } catch (Exception e) {
       logger.warn("Failed to send Slack notification for challenge: {}", challengeName, e);
@@ -63,18 +63,16 @@ public class SlackNotificationService {
   }
 
   private boolean isSlackConfigured() {
-    return challenge59.isPresent() 
-        && challenge59.get().getSlackWebhookUrl() != null 
+    return challenge59.isPresent()
+        && challenge59.get().getSlackWebhookUrl() != null
         && !challenge59.get().getSlackWebhookUrl().trim().isEmpty()
         && !challenge59.get().getSlackWebhookUrl().equals("not_set")
         && challenge59.get().getSlackWebhookUrl().startsWith("https://hooks.slack.com");
   }
 
   private String buildCompletionMessage(String challengeName, String userName) {
-    String userPart = (userName != null && !userName.trim().isEmpty()) 
-        ? " by " + userName 
-        : "";
-    
+    String userPart = (userName != null && !userName.trim().isEmpty()) ? " by " + userName : "";
+
     return String.format(
         "🎉 Challenge %s completed%s! Another secret vulnerability discovered in WrongSecrets.",
         challengeName, userPart);

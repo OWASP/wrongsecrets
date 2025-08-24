@@ -223,7 +223,8 @@ public class ChallengesController {
         scoreCard.completeChallenge(challengeDefinition);
         // Send Slack notification for challenge completion
         if (slackNotificationService != null) {
-          slackNotificationService.notifyChallengeCompletion(challengeDefinition.name().shortName(), null);
+          slackNotificationService.notifyChallengeCompletion(
+              challengeDefinition.name().shortName(), null);
         }
         // TODO extract this to a separate method probably have separate handler classes in the
         // configuration otherwise this is not maintainable, probably give the challenge a CTF

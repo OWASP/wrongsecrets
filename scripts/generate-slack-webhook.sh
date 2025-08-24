@@ -43,27 +43,27 @@ deobfuscate_webhook() {
 main() {
     echo "=== Slack Webhook URL Generator for Challenge 59 ==="
     echo
-    
+
     # Use provided webhook URL or default
     local webhook_url="${1:-$DEFAULT_WEBHOOK}"
-    
+
     # Validate the webhook URL format
     validate_webhook_url "$webhook_url"
-    
+
     echo "Original webhook URL: $webhook_url"
     echo
-    
+
     # Obfuscate the webhook URL
     local obfuscated=$(obfuscate_webhook "$webhook_url")
     echo "Obfuscated webhook URL (double base64 encoded):"
     echo "$obfuscated"
     echo
-    
+
     # Verification - deobfuscate to ensure it works
     local verified=$(deobfuscate_webhook "$obfuscated")
     echo "Verification (deobfuscated): $verified"
     echo
-    
+
     if [ "$webhook_url" = "$verified" ]; then
         echo "✅ Obfuscation/deobfuscation successful!"
         echo
