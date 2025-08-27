@@ -26,7 +26,7 @@ This challenge demonstrates a scenario where a developer:
 
 **How to trigger the error:**
 
-Visit the `/error-demo/database-connection` endpoint to simulate a database connection failure. This endpoint attempts to connect to a database using a connection string with embedded credentials, and when it fails, it exposes the credentials in both the HTTP response and application logs.
+Push the button at the bottom of the screen or visit the `/error-demo/database-connection` endpoint to simulate a database connection failure. This endpoint attempts to connect to a database using a connection string with embedded credentials, and when it fails, it exposes the credentials in both the HTTP response and application logs.
 
 Can you find the database password that gets exposed when the application tries to connect to the database?
 
