@@ -10,6 +10,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @EnableConfigurationProperties({Vaultpassword.class, Vaultinjected.class})
@@ -30,5 +31,10 @@ public class WrongSecretsApplication {
       @Value("${K8S_ENV}") String currentRuntimeEnvironment,
       ChallengeDefinitionsConfiguration challengeDefinitions) {
     return RuntimeEnvironment.fromString(currentRuntimeEnvironment, challengeDefinitions);
+  }
+
+  @Bean
+  public RestTemplate restTemplate() {
+    return new RestTemplate();
   }
 }

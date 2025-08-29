@@ -1,0 +1,75 @@
+=== Why This Challenge Matters
+
+This challenge demonstrates a critical vulnerability commonly found in production systems: **hardcoded Slack API tokens stored in environment variables with inadequate obfuscation**.
+
+==== The Vulnerability
+
+**Root Cause**: Developers often store API tokens in environment variables thinking they're secure, and sometimes obfuscate them believing this provides security.
+
+**The Problem**:
+1. **Environment variables are easily accessible** to anyone with system access
+2. **Obfuscation ≠ Security**: Base64 encoding is trivial to reverse
+3. **Employee turnover risk**: Tokens often aren't rotated when staff leave
+4. **Container inspection**: Environment variables are visible in container metadata
+
+==== Real-World Attack Scenarios
+
+**Scenario 1 - Ex-Employee Access**:
+- Developer leaves company
+- Slack token not rotated
+- Ex-employee can still use the token to:
+  - Read private messages
+  - Post malicious content
+  - Access confidential information
+  - Impersonate the application
+
+**Scenario 2 - Container Breach**:
+- Attacker gains access to production environment
+- Inspects container environment variables
+- Finds obfuscated Slack token
+- Easily deobfuscates and gains Slack access
+
+**Scenario 3 - Log Exposure**:
+- Environment variables accidentally logged
+- Logs stored in insecure locations
+- Obfuscated tokens exposed but easily decoded
+
+==== Security Best Practices
+
+**✅ Proper Solutions**:
+
+1. **Use Secrets Management**:
+   - AWS Secrets Manager
+   - Azure Key Vault
+   - HashiCorp Vault
+   - Kubernetes Secrets (with encryption at rest)
+
+2. **Implement Token Rotation**:
+   - Regular automatic rotation
+   - Immediate rotation on employee departure
+   - Short-lived tokens where possible
+
+3. **Access Controls**:
+   - Principle of least privilege
+   - Role-based access to secrets
+   - Audit logs for secret access
+
+4. **Never Obfuscate for Security**:
+   - Use proper encryption instead
+   - Obfuscation provides no security benefit
+   - Can create false sense of security
+
+**❌ What Not to Do**:
+- Store secrets in environment variables
+- Use obfuscation as a security measure
+- Leave tokens active after employee departure
+- Hardcode secrets in any form
+
+==== Impact Assessment
+
+**Confidentiality**: High - Slack conversations and data exposure
+**Integrity**: High - Ability to post malicious content
+**Availability**: Medium - Potential for service disruption
+**Compliance**: Critical - Violation of data protection regulations
+
+This vulnerability type has been found in numerous security audits and represents a fundamental misunderstanding of secrets management best practices.

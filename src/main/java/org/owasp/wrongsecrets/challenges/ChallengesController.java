@@ -17,9 +17,11 @@ import org.owasp.wrongsecrets.Challenges;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.challenges.docker.Challenge8;
+import org.owasp.wrongsecrets.challenges.docker.SlackNotificationService;
 import org.owasp.wrongsecrets.challenges.docker.authchallenge.Challenge37;
 import org.owasp.wrongsecrets.challenges.docker.challenge30.Challenge30;
 import org.owasp.wrongsecrets.definitions.ChallengeDefinition;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.codec.Hex;
@@ -38,6 +40,7 @@ public class ChallengesController {
   private final ScoreCard scoreCard;
   private final RuntimeEnvironment runtimeEnvironment;
   private final Challenges challenges;
+  private final SlackNotificationService slackNotificationService;
 
   @Value("${hints_enabled}")
   private boolean hintsEnabled;
@@ -69,10 +72,12 @@ public class ChallengesController {
       ScoreCard scoreCard,
       Challenges challenges,
       RuntimeEnvironment runtimeEnvironment,
+      @Autowired(required = false) SlackNotificationService slackNotificationService,
       @Value("${spoiling_enabled}") boolean spoilingEnabled) {
     this.scoreCard = scoreCard;
     this.challenges = challenges;
     this.runtimeEnvironment = runtimeEnvironment;
+    this.slackNotificationService = slackNotificationService;
     this.spoilingEnabled = spoilingEnabled;
   }
 
@@ -216,6 +221,11 @@ public class ChallengesController {
 
       if (challenge.answerCorrect(challengeForm.solution())) {
         scoreCard.completeChallenge(challengeDefinition);
+        // Send Slack notification for challenge completion
+        if (slackNotificationService != null) {
+          slackNotificationService.notifyChallengeCompletion(
+              challengeDefinition.name().shortName(), null);
+        }
         // TODO extract this to a separate method probably have separate handler classes in the
         // configuration otherwise this is not maintainable, probably give the challenge a CTF
         // method hook which you can override and do these kind of things in there.
