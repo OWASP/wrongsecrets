@@ -7,21 +7,20 @@ import org.junit.jupiter.api.Test;
 class Challenge57Test {
 
   @Test
-  void rightAnswerShouldSolveChallenge() {
+  void answerCorrect() {
     var challenge = new Challenge57();
-    assertThat(challenge.answerCorrect("WRONG_SECRETS_LLM_HIDDEN_INSTRUCTION_2024")).isTrue();
+    assertThat(challenge.answerCorrect(challenge.spoiler().solution())).isTrue();
   }
 
   @Test
-  void wrongAnswerShouldNotSolveChallenge() {
+  void answerIncorrect() {
     var challenge = new Challenge57();
     assertThat(challenge.answerCorrect("wrong answer")).isFalse();
   }
 
   @Test
-  void spoilerShouldRevealAnswer() {
+  void getAnswerShouldReturnDecodedSecret() {
     var challenge = new Challenge57();
-    assertThat(challenge.spoiler().solution())
-        .isEqualTo("WRONG_SECRETS_LLM_HIDDEN_INSTRUCTION_2024");
+    assertThat(challenge.getAnswer()).isEqualTo("WRONG_SECRETS_LLM_HIDDEN_INSTRUCTION_2024");
   }
 }
