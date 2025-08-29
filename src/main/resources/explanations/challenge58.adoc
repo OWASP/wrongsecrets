@@ -1,0 +1,33 @@
+=== Database Connection String Exposure in Error Messages
+
+One of the most common and dangerous ways secrets leak in real-world applications is through database connection strings that contain embedded credentials. When applications fail to connect to databases, they often expose the full connection string (including usernames and passwords) in error messages, logs, or even user-facing interfaces.
+
+This challenge demonstrates a scenario where a developer:
+
+1. **Uses embedded credentials in connection strings** instead of external secret management
+2. **Has poor error handling** that exposes the full connection string when database connections fail
+3. **Logs sensitive information** without sanitizing credentials first
+4. **Displays technical details** that could reach monitoring systems, error tracking tools, or even end users
+
+**Common places where these exposed connection strings appear:**
+
+- Application startup logs when database is unavailable
+- Exception stack traces in monitoring tools like Sentry, Rollbar, or CloudWatch
+- Error messages displayed to users during maintenance windows
+- CI/CD pipeline logs when deployment health checks fail
+- Docker container logs during orchestration failures
+
+**Real-world examples:**
+
+- Applications that fail health checks during Kubernetes deployments
+- Microservices that can't reach their database during startup
+- Database migration scripts that fail with exposed connection details
+- Development/testing environments where error verbosity is set too high
+
+**How to trigger the error:**
+
+Push the button at the bottom of the screen or visit the `/error-demo/database-connection` endpoint to simulate a database connection failure. This endpoint attempts to connect to a database using a connection string with embedded credentials, and when it fails, it exposes the credentials in both the HTTP response and application logs.
+
+Can you find the database password that gets exposed when the application tries to connect to the database?
+
+**Hint:** Look for database connection error messages that reveal more than they should.

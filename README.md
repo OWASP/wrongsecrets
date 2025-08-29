@@ -16,7 +16,7 @@
 
 Welcome to the OWASP WrongSecrets game! The game is packed with real life examples of how to _not_ store secrets in your software. Each of these examples is captured in a challenge, which you need to solve using various tools and techniques. Solving these challenges will help you recognize common mistakes & can help you to reflect on your own secrets management strategy.
 
-Can you solve all the 57 challenges?
+Can you solve all the 58 challenges?
 
 Try some of them on [our Heroku demo environment](https://wrongsecrets.herokuapp.com/).
 
@@ -127,16 +127,16 @@ Not sure which setup is right for you? Here's a quick guide:
 
 | **I want to...** | **Recommended Setup** | **Challenges Available** |
 |------------------|----------------------|--------------------------|
-| Try it quickly online | [Container running on Heroku](https://www.wrongsecrets.com/) | Basic challenges (1-4, 8, 12-32, 34-43, 49-52, 54-57) |
+| Try it quickly online | [Container running on Heroku](https://www.wrongsecrets.com/) | Basic challenges (1-4, 8, 12-32, 34-43, 49-52, 54-58) |
 | Run locally with Docker | [Basic Docker](#basic-docker-exercises) | Same as above, but on your machine |
-| Learn Kubernetes secrets | [K8s/Minikube Setup](#basic-k8s-exercise) | Kubernetes challenges (1-6, 8, 12-43, 48-57) |
-| Practice with cloud secrets | [Cloud Challenges](#cloud-challenges) | All challenges (1-57) |
+| Learn Kubernetes secrets | [K8s/Minikube Setup](#basic-k8s-exercise) | Kubernetes challenges (1-6, 8, 12-43, 48-58) |
+| Practice with cloud secrets | [Cloud Challenges](#cloud-challenges) | All challenges (1-87) |
 | Run a workshop/CTF | [CTF Setup](#ctf) | Customizable challenge sets |
 | Contribute to the project | [Development Setup](#notes-on-development) | All challenges + development tools |
 
 ## Basic docker exercises
 
-_Can be used for challenges 1-4, 8, 12-32, 34, 35-43, 49-52, 54-57_
+_Can be used for challenges 1-4, 8, 12-32, 34, 35-43, 49-52, 54-58_
 
 For the basic docker exercises you currently require:
 
@@ -208,7 +208,7 @@ Now you can try to find the secrets by means of solving the challenge offered at
 -   [localhost:8080/challenge/challenge-55](http://localhost:8080/challenge/challenge-55)
 -   [localhost:8080/challenge/challenge-56](http://localhost:8080/challenge/challenge-56)
 -   [localhost:8080/challenge/challenge-57](http://localhost:8080/challenge/challenge-57)
-
+-   [localhost:8080/challenge/challenge-58](http://localhost:8080/challenge/challenge-58)
 </details>
 
 Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look
@@ -237,7 +237,7 @@ If you want to host WrongSecrets on Railway, you can do so by deploying [this on
 
 ## Basic K8s exercise
 
-_Can be used for challenges 1-6, 8, 12-43, 48-57_
+_Can be used for challenges 1-6, 8, 12-43, 48-58_
 
 ### Minikube based
 
@@ -314,7 +314,7 @@ now you can use the provided IP address and port to further play with the K8s va
 
 ## Vault exercises with minikube
 
-_Can be used for challenges 1-8, 12-57_
+_Can be used for challenges 1-8, 12-58_
 Make sure you have the following installed:
 
 -   minikube with docker (or comment out line 8 and work at your own k8s setup),
@@ -332,7 +332,7 @@ This is because if you run the start script again it will replace the secret in 
 
 ## Cloud Challenges
 
-_Can be used for challenges 1-57_
+_Can be used for challenges 1-58_
 
 **READ THIS**: Given that the exercises below contain IAM privilege escalation exercises,
 never run this on an account which is related to your production environment or can influence your account-over-arching
