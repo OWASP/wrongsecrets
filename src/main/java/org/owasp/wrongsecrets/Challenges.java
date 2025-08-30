@@ -96,11 +96,11 @@ public class Challenges {
   }
 
   public boolean isFirstChallenge(ChallengeDefinition challengeDefinition) {
-    return challengeDefinition.equals(definitions.challenges().get(0));
+    return challengeDefinition.equals(definitions.challenges().getFirst());
   }
 
   public boolean isLastChallenge(ChallengeDefinition challengeDefinition) {
-    return challengeDefinition.equals(definitions.challenges().get(definitions.challenges().size() - 1));
+    return challengeDefinition.equals(definitions.challenges().getLast());
   }
 
   public List<ChallengeDefinition> getChallengeDefinitions() {
