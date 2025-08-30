@@ -29,6 +29,11 @@ public class Challenge59 implements Challenge {
         .build();
   }
 
+  // Constructor for testing with mocked RestTemplate
+  Challenge59(RestTemplate restTemplate) {
+    this.restTemplate = restTemplate;
+  }
+
   /** {@inheritDoc} */
   @Override
   public Spoiler spoiler() {
