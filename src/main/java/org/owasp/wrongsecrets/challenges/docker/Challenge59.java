@@ -30,7 +30,7 @@ public class Challenge59 implements Challenge {
     // that can be accessed using the bot token below
     
     // Hardcoded bot token (intentionally vulnerable for educational purposes)
-    String botToken = getBotToken();
+    var botToken = getBotToken();
     
     // For this challenge, the secret is what you would find in the Telegram channel
     // Bot: @WrongsecretsBot
@@ -41,10 +41,8 @@ public class Challenge59 implements Challenge {
   private String getBotToken() {
     // Double-encoded bot token to make it slightly more challenging
     // but still discoverable through code inspection
-    return new String(
-        Base64.decode(
-            new String(
-                Base64.decode("T0RFek1qZzJOalkwTXpwQlFVaEtiWFphY1haMlRUbGtTVEp5ZEVKUGRTMHRWMDFhZVUxR1ZHWklUbTg1U1E9PQo="), UTF_8)),
-        UTF_8);
+    var encodedToken = "T0RFek1qZzJOalkwTXpwQlFVaEtiWFphY1haMlRUbGtTVEp5ZEVKUGRTMHRWMDFhZVUxR1ZHWklUbTg1U1E9PQo=";
+    var firstDecode = new String(Base64.decode(encodedToken), UTF_8);
+    return new String(Base64.decode(firstDecode), UTF_8);
   }
 }
