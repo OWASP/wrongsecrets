@@ -16,7 +16,7 @@ class NavigatorTest {
     var navigation =
         new Navigator(
             challengeDefinitionsConfiguration.challenges(),
-            challengeDefinitionsConfiguration.challenges().get(0));
+            challengeDefinitionsConfiguration.challenges().getFirst());
 
     assertThat(navigation.previous()).isEmpty();
   }
@@ -27,16 +27,17 @@ class NavigatorTest {
     var navigation =
         new Navigator(
             challenges,
-            challenges.get(challenges.size() - 1));
+            challenges.getLast());
 
     assertThat(navigation.next()).isEmpty();
   }
 
   @Test
   void navigatePreviousAndNextOnSecondChallenge() {
-    var first = challengeDefinitionsConfiguration.challenges().get(0);
-    var second = challengeDefinitionsConfiguration.challenges().get(1);
-    var third = challengeDefinitionsConfiguration.challenges().get(2);
+    var challenges = challengeDefinitionsConfiguration.challenges();
+    var first = challenges.getFirst();
+    var second = challenges.get(1);
+    var third = challenges.get(2);
 
     var navigation = new Navigator(challengeDefinitionsConfiguration.challenges(), second);
 

@@ -42,7 +42,7 @@ class ChallengesControllerCTFModeWithPresetCloudValuesTest {
 
   @Test
   void shouldNotSpoilWhenInCTFMode() throws Exception {
-    var firstChallenge = challenges.getChallengeDefinitions().get(0);
+    var firstChallenge = challenges.getChallengeDefinitions().getFirst();
     mvc.perform(get("/spoil/%s".formatted(firstChallenge.name().shortName())))
         .andExpect(status().isOk())
         .andExpect(content().string(containsString("Spoils are disabled in CTF mode")));
@@ -51,7 +51,7 @@ class ChallengesControllerCTFModeWithPresetCloudValuesTest {
   @Test
   void shouldShowFlagWhenRespondingWithSuccessInCTFModeChallenge9() throws Exception {
     var challenge9Definition = challenges.findByShortName("challenge-9").orElseThrow();
-    var challenge9 = challenges.getChallenge(challenge9Definition).get(0);
+    var challenge9 = challenges.getChallenge(challenge9Definition).getFirst();
     var spoil = challenge9.spoiler().solution();
     mvc.perform(
             post("/challenge/%s".formatted(challenge9Definition.name().shortName()))
