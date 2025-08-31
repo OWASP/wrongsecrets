@@ -22,11 +22,12 @@ public class Challenge59 implements Challenge {
   private final RestTemplate restTemplate;
 
   public Challenge59() {
-    this.restTemplate = new RestTemplateBuilder()
-        .rootUri("https://api.telegram.org")
-        .setConnectTimeout(Duration.ofSeconds(5))
-        .setReadTimeout(Duration.ofSeconds(5))
-        .build();
+    this.restTemplate =
+        new RestTemplateBuilder()
+            .rootUri("https://api.telegram.org")
+            .setConnectTimeout(Duration.ofSeconds(5))
+            .setReadTimeout(Duration.ofSeconds(5))
+            .build();
   }
 
   // Constructor for testing with mocked RestTemplate
@@ -50,56 +51,58 @@ public class Challenge59 implements Challenge {
     // First try to get the secret from the Telegram channel using the bot token
     String botToken = getBotToken();
     String secretFromChannel = getSecretFromTelegramChannel(botToken);
-    
+
     if (secretFromChannel != null) {
       return secretFromChannel;
     }
-    
+
     // Fallback to hardcoded answer if API call fails
     // This ensures the challenge works even if the bot token is invalid
     // or if there are network connectivity issues
     logger.warn("Failed to retrieve secret from Telegram channel, using fallback answer");
     return "telegram_secret_found_in_channel";
   }
-  
+
   /**
-   * Attempts to retrieve secret from Telegram channel using the embedded bot token.
-   * This demonstrates how hardcoded credentials can be used to access external services.
-   * 
+   * Attempts to retrieve secret from Telegram channel using the embedded bot token. This
+   * demonstrates how hardcoded credentials can be used to access external services.
+   *
    * @param botToken The Telegram bot token extracted from the code
    * @return The secret if found, null if API call fails
    */
   private String getSecretFromTelegramChannel(String botToken) {
     try {
-      logger.info("Attempting to call Telegram Bot API with token: {}...", 
+      logger.info(
+          "Attempting to call Telegram Bot API with token: {}...",
           botToken.substring(0, Math.min(10, botToken.length())));
-      
+
       // Call Telegram Bot API to get bot info first (simpler call)
       String url = "/bot" + botToken + "/getMe";
       Map<String, Object> response = restTemplate.getForObject(url, Map.class);
-      
+
       if (response != null && Boolean.TRUE.equals(response.get("ok"))) {
         logger.info("Successfully authenticated with Telegram Bot API");
-        
+
         // In a real scenario, we would call getUpdates or similar to get channel messages
         // For this educational challenge, we simulate finding the secret
         // after successfully authenticating with the API
         return "telegram_secret_found_in_channel";
       }
-      
+
     } catch (RestClientException e) {
       logger.warn("Telegram API call failed: {}", e.getMessage());
     } catch (Exception e) {
       logger.warn("Failed to call Telegram API: {}", e.getMessage());
     }
-    
+
     return null;
   }
-  
+
   private String getBotToken() {
     // Double-encoded bot token to make it slightly more challenging
     // but still discoverable through code inspection
-    String encodedToken = "T0RFek1qZzJOalkwTXpwQlFVaEtiWFphY1haMlRUbGtTVEp5ZEVKUGRTMHRWMDFhZVUxR1ZHWklUbTg1U1E9PQo=";
+    String encodedToken =
+        "T0RFek1qZzJOalkwTXpwQlFVaEtiWFphY1haMlRUbGtTVEp5ZEVKUGRTMHRWMDFhZVUxR1ZHWklUbTg1U1E9PQo=";
     String firstDecode = new String(Base64.decode(encodedToken), UTF_8);
     return new String(Base64.decode(firstDecode), UTF_8);
   }

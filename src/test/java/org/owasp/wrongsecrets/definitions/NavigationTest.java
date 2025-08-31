@@ -24,10 +24,7 @@ class NavigatorTest {
   @Test
   void navigateNextWhenOnLastChallenge() {
     var challenges = challengeDefinitionsConfiguration.challenges();
-    var navigation =
-        new Navigator(
-            challenges,
-            challenges.getLast());
+    var navigation = new Navigator(challenges, challenges.getLast());
 
     assertThat(navigation.next()).isEmpty();
   }
