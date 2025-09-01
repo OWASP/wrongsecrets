@@ -1,0 +1,38 @@
+=== Hint for Challenge 59
+
+Looking for the Slack webhook URL? Here are some hints to get you started:
+
+==== Where to Look
+
+1. **Environment Variables**: The webhook URL is stored in an environment variable called `CHALLENGE59_SLACK_WEBHOOK_URL`
+2. **Check the Application**: You can inspect environment variables through the application or container
+
+==== Deobfuscation Process
+
+The webhook URL has been obfuscated using a common technique:
+
+1. **Double Base64 Encoding**: The original URL has been base64 encoded twice
+2. **Process**: Original → Base64 → Base64 again
+3. **To decode**: Reverse the process (decode base64 twice)
+
+==== What You're Looking For
+
+- Slack webhook URLs follow the pattern: `https://hooks.slack.com/services/...`
+- They contain three path segments after `/services/`
+- Example format: `https://hooks.slack.com/services/T123456789/B123456789/abcdefghijklmnopqrstuvwx`
+- The URL segments represent: Team ID / Channel ID / Secret Token
+
+==== Tools You Can Use
+
+- **Base64 decoder**: Any online base64 decoder or command line tools
+- **Command line**: `echo "encoded_string" | base64 -d`
+- **Browser console**: `atob("encoded_string")` in JavaScript
+
+==== Security Learning
+
+This challenge teaches you about webhook-specific risks:
+- How attackers can find obfuscated webhook URLs
+- Why webhook URLs are sensitive credentials that need protection
+- The potential for unauthorized message posting and social engineering
+- Risk of hardcoded webhook URLs in environment variables
+- How exposed webhooks can lead to reputation damage and information disclosure
