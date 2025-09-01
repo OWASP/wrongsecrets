@@ -1,7 +1,7 @@
 FROM bellsoft/liberica-openjre-debian:23.0.2-9-cds AS builder
 WORKDIR /builder
 
-ARG argBasedVersion="1.12.5"
+ARG argBasedVersion="1.12.6"
 
 COPY --chown=wrongsecrets target/wrongsecrets-${argBasedVersion}-SNAPSHOT.jar application.jar
 RUN java -Djarmode=tools -jar application.jar extract --layers --destination extracted
@@ -11,11 +11,13 @@ WORKDIR /application
 
 ARG argBasedPassword="default"
 ARG spring_profile=""
+ARG challenge59_webhook_url="YUhSMGNITTZMeTlvYjI5cmN5NXpiR0ZqYXk1amIyMHZjMlZ5ZG1salpYTXZWREEwVkRRd1RraFlMMEl3T1VSQlRrb3lUamRMTDJNeWFqYzFSVEUzVjFrd2NFeE5SRXRvU0RsbGQzZzBhdz09"
 ENV SPRING_PROFILES_ACTIVE=$spring_profile
 ENV ARG_BASED_PASSWORD=$argBasedPassword
 ENV APP_VERSION=$argBasedVersion
 ENV DOCKER_ENV_PASSWORD="This is it"
 ENV AZURE_KEY_VAULT_ENABLED=false
+ENV CHALLENGE59_SLACK_WEBHOOK_URL=$challenge59_webhook_url
 ENV SPRINGDOC_UI=false
 ENV SPRINGDOC_DOC=false
 ENV BASTIONHOSTPATH="/home/wrongsecrets/.ssh"

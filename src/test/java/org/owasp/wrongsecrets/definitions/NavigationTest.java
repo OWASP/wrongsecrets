@@ -13,10 +13,8 @@ class NavigatorTest {
 
   @Test
   void navigatePreviousWhenOnFirstChallenge() {
-    var navigation =
-        new Navigator(
-            challengeDefinitionsConfiguration.challenges(),
-            challengeDefinitionsConfiguration.challenges().getFirst());
+    var challenges = challengeDefinitionsConfiguration.challenges();
+    var navigation = new Navigator(challenges, challenges.getFirst());
 
     assertThat(navigation.previous()).isEmpty();
   }
@@ -36,7 +34,7 @@ class NavigatorTest {
     var second = challenges.get(1);
     var third = challenges.get(2);
 
-    var navigation = new Navigator(challengeDefinitionsConfiguration.challenges(), second);
+    var navigation = new Navigator(challenges, second);
 
     assertThat(navigation.previous()).hasValue(first);
     assertThat(navigation.next()).hasValue(third);
