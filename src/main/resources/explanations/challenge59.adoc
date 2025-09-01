@@ -1,37 +1,40 @@
-=== Find the Slack API Token
+=== Find the Slack Webhook URL
 
-Welcome to this challenge that demonstrates the vulnerability of hardcoded Slack API tokens in environment variables!
+Welcome to this challenge that demonstrates the vulnerability of hardcoded Slack webhook URLs in environment variables!
 
 This challenge simulates a real-world scenario where:
 
-1. **Slack API tokens are stored as environment variables** for application integration
-2. **The tokens are obfuscated** to avoid detection by secret scanning tools
-3. **Employee turnover risk**: When an employee leaves, the token may not be rotated, allowing continued access
+1. **Slack webhook URLs are stored as environment variables** for application notifications
+2. **The URLs are obfuscated** to avoid detection by secret scanning tools
+3. **Employee turnover risk**: When an employee leaves, the webhook may not be rotated, allowing continued access
 
 ==== Your Mission
 
-In this scenario, a developer has stored a Slack API token as an environment variable `CHALLENGE59_SLACK_TOKEN`. The token has been obfuscated using double base64 encoding to bypass Slack's secret scanning detection.
+In this scenario, a developer has stored a Slack webhook URL as an environment variable `CHALLENGE59_SLACK_WEBHOOK_URL`. The URL has been obfuscated using double base64 encoding to bypass Slack's secret scanning detection.
 
 Your task is to:
 
-1. Find the obfuscated Slack API token in the environment variable
-2. Deobfuscate it to reveal the original token
-3. Submit the deobfuscated token as your answer
+1. Find the obfuscated Slack webhook URL in the environment variable
+2. Deobfuscate it to reveal the original URL
+3. Submit the deobfuscated webhook URL as your answer
 
 ==== Real-World Impact
 
-This vulnerability demonstrates why:
+This vulnerability demonstrates the specific risks of exposed Slack webhook URLs:
 
-- Hardcoded secrets in environment variables are risky
-- Obfuscation is not a security measure
-- API tokens should be rotated when employees leave
-- Proper secrets management solutions should be used
+- **Unauthorized message posting**: Attackers can send malicious messages to your Slack channels
+- **Social engineering attacks**: Fake announcements or phishing attempts via trusted channels
+- **Information disclosure**: Sensitive channel names and workspace information revealed
+- **Reputation damage**: Spam or inappropriate content posted under your organization's name
+- **Obfuscation is not security**: Base64 encoding provides no real protection
+- **Webhook persistence**: Unlike tokens, webhooks may remain active for extended periods
 
 ==== Educational Note
 
 In production environments:
 - Use proper secrets management (AWS Secrets Manager, Azure Key Vault, HashiCorp Vault)
-- Implement token rotation policies
-- Monitor API token usage
-- Revoke access immediately when employees leave
+- Implement webhook rotation policies when employees leave
+- Monitor webhook usage and establish alerts for unusual activity
+- Revoke and regenerate webhooks immediately when employees leave
 - Never obfuscate secrets as a security measure
+- Consider using webhook signing secrets for additional validation
