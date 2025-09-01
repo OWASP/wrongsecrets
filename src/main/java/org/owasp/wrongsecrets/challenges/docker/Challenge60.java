@@ -16,12 +16,12 @@ import org.springframework.web.client.RestTemplate;
 
 /** This challenge is about finding a secret in a Telegram channel. */
 @Component
-public class Challenge59 implements Challenge {
+public class Challenge60 implements Challenge {
 
-  private static final Logger logger = LoggerFactory.getLogger(Challenge59.class);
+  private static final Logger logger = LoggerFactory.getLogger(Challenge60.class);
   private final RestTemplate restTemplate;
 
-  public Challenge59() {
+  public Challenge60() {
     this.restTemplate =
         new RestTemplateBuilder()
             .rootUri("https://api.telegram.org")
@@ -31,7 +31,7 @@ public class Challenge59 implements Challenge {
   }
 
   // Constructor for testing with mocked RestTemplate
-  Challenge59(RestTemplate restTemplate) {
+  Challenge60(RestTemplate restTemplate) {
     this.restTemplate = restTemplate;
   }
 

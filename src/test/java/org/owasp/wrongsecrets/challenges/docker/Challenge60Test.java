@@ -12,14 +12,14 @@ import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
-class Challenge59Test {
+class Challenge60Test {
 
   @Test
   void spoilerShouldRevealAnswer() {
     var restTemplate = mock(RestTemplate.class);
     // Mock to avoid any real API calls
     when(restTemplate.getForObject(any(String.class), eq(Map.class))).thenReturn(null);
-    var challenge = new Challenge59(restTemplate);
+    var challenge = new Challenge60(restTemplate);
 
     assertThat(challenge.spoiler()).isEqualTo(new Spoiler("telegram_secret_found_in_channel"));
   }
@@ -29,7 +29,7 @@ class Challenge59Test {
     var restTemplate = mock(RestTemplate.class);
     // Mock to avoid any real API calls
     when(restTemplate.getForObject(any(String.class), eq(Map.class))).thenReturn(null);
-    var challenge = new Challenge59(restTemplate);
+    var challenge = new Challenge60(restTemplate);
 
     assertThat(challenge.answerCorrect("telegram_secret_found_in_channel")).isTrue();
   }
@@ -39,7 +39,7 @@ class Challenge59Test {
     var restTemplate = mock(RestTemplate.class);
     // Mock to avoid any real API calls
     when(restTemplate.getForObject(any(String.class), eq(Map.class))).thenReturn(null);
-    var challenge = new Challenge59(restTemplate);
+    var challenge = new Challenge60(restTemplate);
 
     assertThat(challenge.answerCorrect("wrong answer")).isFalse();
   }
@@ -47,7 +47,7 @@ class Challenge59Test {
   @Test
   void shouldReturnSecretWhenTelegramApiSucceeds() {
     var restTemplate = mock(RestTemplate.class);
-    var challenge = new Challenge59(restTemplate);
+    var challenge = new Challenge60(restTemplate);
 
     // Mock successful API response
     Map<String, Object> mockResponse = Map.of("ok", true);
@@ -59,7 +59,7 @@ class Challenge59Test {
   @Test
   void shouldReturnFallbackSecretWhenTelegramApiFails() {
     var restTemplate = mock(RestTemplate.class);
-    var challenge = new Challenge59(restTemplate);
+    var challenge = new Challenge60(restTemplate);
 
     // Mock API failure
     when(restTemplate.getForObject(any(String.class), eq(Map.class)))

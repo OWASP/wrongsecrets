@@ -1,7 +1,7 @@
 You can solve this challenge by the following alternative solutions:
 
 1. Find the bot token in the source code
-- Look at the Challenge59 class in the source code
+- Look at the Challenge60 class in the source code
 - Find the encoded bot token in the `getBotToken()` method
 - Decode the Base64-encoded string (it's double-encoded)
 - The token format is: `BOTID:TOKEN_STRING`
