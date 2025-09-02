@@ -12,7 +12,6 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
@@ -69,9 +68,10 @@ class SlackNotificationServiceTest {
     ArgumentCaptor<HttpEntity> entityCaptor = ArgumentCaptor.forClass(HttpEntity.class);
     verify(restTemplate, times(1))
         .postForEntity(eq(webhookUrl), entityCaptor.capture(), eq(String.class));
-    
+
     HttpEntity capturedEntity = entityCaptor.getValue();
-    SlackNotificationService.SlackMessage slackMessage = (SlackNotificationService.SlackMessage) capturedEntity.getBody();
+    SlackNotificationService.SlackMessage slackMessage =
+        (SlackNotificationService.SlackMessage) capturedEntity.getBody();
     assertTrue(slackMessage.getText().contains("(User-Agent: " + userAgent + ")"));
   }
 
@@ -93,9 +93,10 @@ class SlackNotificationServiceTest {
     ArgumentCaptor<HttpEntity> entityCaptor = ArgumentCaptor.forClass(HttpEntity.class);
     verify(restTemplate, times(1))
         .postForEntity(eq(webhookUrl), entityCaptor.capture(), eq(String.class));
-    
+
     HttpEntity capturedEntity = entityCaptor.getValue();
-    SlackNotificationService.SlackMessage slackMessage = (SlackNotificationService.SlackMessage) capturedEntity.getBody();
+    SlackNotificationService.SlackMessage slackMessage =
+        (SlackNotificationService.SlackMessage) capturedEntity.getBody();
     assertFalse(slackMessage.getText().contains("User-Agent"));
   }
 

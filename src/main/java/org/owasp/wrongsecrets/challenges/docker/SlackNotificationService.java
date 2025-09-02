@@ -83,7 +83,10 @@ public class SlackNotificationService {
 
   private String buildCompletionMessage(String challengeName, String userName, String userAgent) {
     String userPart = (userName != null && !userName.trim().isEmpty()) ? " by " + userName : "";
-    String userAgentPart = (userAgent != null && !userAgent.trim().isEmpty()) ? " (User-Agent: " + userAgent + ")" : "";
+    String userAgentPart =
+        (userAgent != null && !userAgent.trim().isEmpty())
+            ? " (User-Agent: " + userAgent + ")"
+            : "";
 
     return String.format(
         "🎉 Challenge %s completed%s%s! Another secret vulnerability discovered in WrongSecrets.",

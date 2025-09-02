@@ -204,8 +204,8 @@ public class ChallengesController {
   @PostMapping(value = "/challenge/{name}", params = "action=submit")
   @Operation(description = "Post your answer to the challenge for a given challenge")
   public String postController(
-      @ModelAttribute ChallengeForm challengeForm, 
-      Model model, 
+      @ModelAttribute ChallengeForm challengeForm,
+      Model model,
       @PathVariable String name,
       HttpServletRequest request) {
     var challengeDefinition = findByShortName(name);
