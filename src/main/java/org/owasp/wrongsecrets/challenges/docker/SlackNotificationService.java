@@ -45,16 +45,11 @@ public class SlackNotificationService {
     }
 
     try {
-      String message = buildCompletionMessage(challengeName, userName);
+      String message = buildCompletionMessage(challengeName, userName, userAgent);
       SlackMessage slackMessage = new SlackMessage(message);
 
       HttpHeaders headers = new HttpHeaders();
       headers.setContentType(MediaType.APPLICATION_JSON);
-      
-      // Add User-Agent header if provided
-      if (userAgent != null && !userAgent.trim().isEmpty()) {
-        headers.set("User-Agent", userAgent);
-      }
 
       HttpEntity<SlackMessage> request = new HttpEntity<>(slackMessage, headers);
 
@@ -86,12 +81,17 @@ public class SlackNotificationService {
         && challenge59.get().getSlackWebhookUrl().startsWith("https://hooks.slack.com");
   }
 
-  private String buildCompletionMessage(String challengeName, String userName) {
+  private String buildCompletionMessage(String challengeName, String userName, String userAgent) {
     String userPart = (userName != null && !userName.trim().isEmpty()) ? " by " + userName : "";
+    String userAgentPart = (userAgent != null && !userAgent.trim().isEmpty()) ? " (User-Agent: " + userAgent + ")" : "";
 
     return String.format(
-        "🎉 Challenge %s completed%s! Another secret vulnerability discovered in WrongSecrets.",
-        challengeName, userPart);
+        "🎉 Challenge %s completed%s%s! Another secret vulnerability discovered in WrongSecrets.",
+        challengeName, userPart, userAgentPart);
+  }
+
+  private String buildCompletionMessage(String challengeName, String userName) {
+    return buildCompletionMessage(challengeName, userName, null);
   }
 
   /** Simple record for Slack message payload. */

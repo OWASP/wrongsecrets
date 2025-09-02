@@ -51,7 +51,7 @@ class SlackNotificationServiceTest {
   }
 
   @Test
-  void shouldSetUserAgentHeaderWhenProvided() {
+  void shouldIncludeUserAgentInMessageWhenProvided() {
     // Given
     String webhookUrl = "https://hooks.slack.com/services/T123456789/B123456789/abcdef123456";
     String userAgent = "Cypress WrongSecrets E2E Tests";
@@ -71,12 +71,12 @@ class SlackNotificationServiceTest {
         .postForEntity(eq(webhookUrl), entityCaptor.capture(), eq(String.class));
     
     HttpEntity capturedEntity = entityCaptor.getValue();
-    HttpHeaders headers = capturedEntity.getHeaders();
-    assertEquals(userAgent, headers.getFirst("User-Agent"));
+    SlackNotificationService.SlackMessage slackMessage = (SlackNotificationService.SlackMessage) capturedEntity.getBody();
+    assertTrue(slackMessage.getText().contains("(User-Agent: " + userAgent + ")"));
   }
 
   @Test
-  void shouldNotSetUserAgentHeaderWhenNotProvided() {
+  void shouldNotIncludeUserAgentInMessageWhenNotProvided() {
     // Given
     String webhookUrl = "https://hooks.slack.com/services/T123456789/B123456789/abcdef123456";
     when(challenge59.getSlackWebhookUrl()).thenReturn(webhookUrl);
@@ -95,8 +95,8 @@ class SlackNotificationServiceTest {
         .postForEntity(eq(webhookUrl), entityCaptor.capture(), eq(String.class));
     
     HttpEntity capturedEntity = entityCaptor.getValue();
-    HttpHeaders headers = capturedEntity.getHeaders();
-    assertNull(headers.getFirst("User-Agent"));
+    SlackNotificationService.SlackMessage slackMessage = (SlackNotificationService.SlackMessage) capturedEntity.getBody();
+    assertFalse(slackMessage.getText().contains("User-Agent"));
   }
 
   @Test
