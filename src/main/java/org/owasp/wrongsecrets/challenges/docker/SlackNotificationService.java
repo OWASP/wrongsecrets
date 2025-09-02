@@ -90,10 +90,6 @@ public class SlackNotificationService {
         challengeName, userPart, userAgentPart);
   }
 
-  private String buildCompletionMessage(String challengeName, String userName) {
-    return buildCompletionMessage(challengeName, userName, null);
-  }
-
   /** Simple record for Slack message payload. */
   public static class SlackMessage {
     @JsonProperty("text")
