@@ -37,7 +37,7 @@ jobs:
         uses: actions/setup-java@v5
         with:
           java-version: "23"
-          distribution: "oracle"
+          distribution: "temurin"
           cache: "maven"
 
       - name: Build application (JAR only)

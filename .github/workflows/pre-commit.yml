@@ -31,7 +31,7 @@ jobs:
           cache: "npm"
       - uses: actions/setup-java@v5
         with:
-          distribution: "oracle"
+          distribution: "temurin"
           java-version: "23"
       - name: Install npm dependencies
         run: npm install
