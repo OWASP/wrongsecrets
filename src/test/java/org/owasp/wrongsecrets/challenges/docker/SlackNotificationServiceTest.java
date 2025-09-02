@@ -8,9 +8,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
@@ -26,6 +28,75 @@ class SlackNotificationServiceTest {
   @BeforeEach
   void setUp() {
     objectMapper = new ObjectMapper();
+  }
+
+  @Test
+  void shouldSendNotificationWithUserAgentWhenSlackIsConfigured() {
+    // Given
+    String webhookUrl = "https://hooks.slack.com/services/T123456789/B123456789/abcdef123456";
+    String userAgent = "Mozilla/5.0 (Test Browser)";
+    when(challenge59.getSlackWebhookUrl()).thenReturn(webhookUrl);
+    when(restTemplate.postForEntity(anyString(), any(HttpEntity.class), eq(String.class)))
+        .thenReturn(ResponseEntity.ok("ok"));
+
+    slackNotificationService =
+        new SlackNotificationService(restTemplate, objectMapper, challenge59);
+
+    // When
+    slackNotificationService.notifyChallengeCompletion("challenge-1", "testuser", userAgent);
+
+    // Then
+    verify(restTemplate, times(1))
+        .postForEntity(eq(webhookUrl), any(HttpEntity.class), eq(String.class));
+  }
+
+  @Test
+  void shouldSetUserAgentHeaderWhenProvided() {
+    // Given
+    String webhookUrl = "https://hooks.slack.com/services/T123456789/B123456789/abcdef123456";
+    String userAgent = "Cypress WrongSecrets E2E Tests";
+    when(challenge59.getSlackWebhookUrl()).thenReturn(webhookUrl);
+    when(restTemplate.postForEntity(anyString(), any(HttpEntity.class), eq(String.class)))
+        .thenReturn(ResponseEntity.ok("ok"));
+
+    slackNotificationService =
+        new SlackNotificationService(restTemplate, objectMapper, challenge59);
+
+    // When
+    slackNotificationService.notifyChallengeCompletion("challenge-1", "testuser", userAgent);
+
+    // Then
+    ArgumentCaptor<HttpEntity> entityCaptor = ArgumentCaptor.forClass(HttpEntity.class);
+    verify(restTemplate, times(1))
+        .postForEntity(eq(webhookUrl), entityCaptor.capture(), eq(String.class));
+    
+    HttpEntity capturedEntity = entityCaptor.getValue();
+    HttpHeaders headers = capturedEntity.getHeaders();
+    assertEquals(userAgent, headers.getFirst("User-Agent"));
+  }
+
+  @Test
+  void shouldNotSetUserAgentHeaderWhenNotProvided() {
+    // Given
+    String webhookUrl = "https://hooks.slack.com/services/T123456789/B123456789/abcdef123456";
+    when(challenge59.getSlackWebhookUrl()).thenReturn(webhookUrl);
+    when(restTemplate.postForEntity(anyString(), any(HttpEntity.class), eq(String.class)))
+        .thenReturn(ResponseEntity.ok("ok"));
+
+    slackNotificationService =
+        new SlackNotificationService(restTemplate, objectMapper, challenge59);
+
+    // When
+    slackNotificationService.notifyChallengeCompletion("challenge-1", "testuser", null);
+
+    // Then
+    ArgumentCaptor<HttpEntity> entityCaptor = ArgumentCaptor.forClass(HttpEntity.class);
+    verify(restTemplate, times(1))
+        .postForEntity(eq(webhookUrl), entityCaptor.capture(), eq(String.class));
+    
+    HttpEntity capturedEntity = entityCaptor.getValue();
+    HttpHeaders headers = capturedEntity.getHeaders();
+    assertNull(headers.getFirst("User-Agent"));
   }
 
   @Test

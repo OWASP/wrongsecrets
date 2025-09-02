@@ -10,6 +10,7 @@ module.exports = defineConfig({
     reporterOptions: {
       configFile: 'reporter-config.json'
     },
+    userAgent: 'Cypress WrongSecrets E2E Tests (Heroku)',
     setupNodeEvents (on, config) {
       // implement node event listeners here
     }

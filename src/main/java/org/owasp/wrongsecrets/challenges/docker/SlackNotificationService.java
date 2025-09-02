@@ -36,8 +36,9 @@ public class SlackNotificationService {
    *
    * @param challengeName The name of the completed challenge
    * @param userName Optional username of the person who completed the challenge
+   * @param userAgent Optional user agent string from the HTTP request
    */
-  public void notifyChallengeCompletion(String challengeName, String userName) {
+  public void notifyChallengeCompletion(String challengeName, String userName, String userAgent) {
     if (!isSlackConfigured()) {
       logger.debug("Slack not configured, skipping notification for challenge: {}", challengeName);
       return;
@@ -49,6 +50,11 @@ public class SlackNotificationService {
 
       HttpHeaders headers = new HttpHeaders();
       headers.setContentType(MediaType.APPLICATION_JSON);
+      
+      // Add User-Agent header if provided
+      if (userAgent != null && !userAgent.trim().isEmpty()) {
+        headers.set("User-Agent", userAgent);
+      }
 
       HttpEntity<SlackMessage> request = new HttpEntity<>(slackMessage, headers);
 
@@ -60,6 +66,16 @@ public class SlackNotificationService {
     } catch (Exception e) {
       logger.warn("Failed to send Slack notification for challenge: {}", challengeName, e);
     }
+  }
+
+  /**
+   * Sends a Slack notification when a challenge is completed (backward compatibility method).
+   *
+   * @param challengeName The name of the completed challenge
+   * @param userName Optional username of the person who completed the challenge
+   */
+  public void notifyChallengeCompletion(String challengeName, String userName) {
+    notifyChallengeCompletion(challengeName, userName, null);
   }
 
   private boolean isSlackConfigured() {
