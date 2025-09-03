@@ -80,7 +80,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ghcr.io/${{ github.repository }}/${{ matrix.image_name }}
+          images: ghcr.io/${{ github.repository }}/${{ matrix.container.image_name }}
           tags: |
             type=ref,event=branch
             type=raw,value=latest-master
@@ -96,7 +96,7 @@ jobs:
         with:
           platforms: linux/amd64,linux/arm64
           context: .
-          file: ${{ matrix.dockerfile }}
+          file: ${{ matrix.container.dockerfile }}
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
@@ -104,14 +104,14 @@ jobs:
             argBasedVersion=${{ steps.extract-version.outputs.docker_version }}
           secrets: |
             mysecret=/tmp/mysecret.txt
-          cache-from: type=gha,scope=${{ matrix.name }}
-          cache-to: type=gha,mode=max,scope=${{ matrix.name }}
+          cache-from: type=gha,scope=${{ matrix.container.name }}
+          cache-to: type=gha,mode=max,scope=${{ matrix.container.name }}
 
       - name: Verify Docker image was built
         run: |
           echo "Verifying Docker image was built successfully..."
-          echo "Container: ${{ matrix.name }}"
-          echo "Dockerfile: ${{ matrix.dockerfile }}"
+          echo "Container: ${{ matrix.container.name }}"
+          echo "Dockerfile: ${{ matrix.container.dockerfile }}"
           echo "Image tags: ${{ steps.meta.outputs.tags }}"
           echo "Image digest: ${{ steps.build.outputs.digest }}"
 
