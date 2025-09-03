@@ -36,15 +36,16 @@ public class SlackNotificationService {
    *
    * @param challengeName The name of the completed challenge
    * @param userName Optional username of the person who completed the challenge
+   * @param userAgent Optional user agent string from the HTTP request
    */
-  public void notifyChallengeCompletion(String challengeName, String userName) {
+  public void notifyChallengeCompletion(String challengeName, String userName, String userAgent) {
     if (!isSlackConfigured()) {
       logger.debug("Slack not configured, skipping notification for challenge: {}", challengeName);
       return;
     }
 
     try {
-      String message = buildCompletionMessage(challengeName, userName);
+      String message = buildCompletionMessage(challengeName, userName, userAgent);
       SlackMessage slackMessage = new SlackMessage(message);
 
       HttpHeaders headers = new HttpHeaders();
@@ -62,6 +63,16 @@ public class SlackNotificationService {
     }
   }
 
+  /**
+   * Sends a Slack notification when a challenge is completed (backward compatibility method).
+   *
+   * @param challengeName The name of the completed challenge
+   * @param userName Optional username of the person who completed the challenge
+   */
+  public void notifyChallengeCompletion(String challengeName, String userName) {
+    notifyChallengeCompletion(challengeName, userName, null);
+  }
+
   private boolean isSlackConfigured() {
     return challenge59.isPresent()
         && challenge59.get().getSlackWebhookUrl() != null
@@ -70,12 +81,16 @@ public class SlackNotificationService {
         && challenge59.get().getSlackWebhookUrl().startsWith("https://hooks.slack.com");
   }
 
-  private String buildCompletionMessage(String challengeName, String userName) {
+  private String buildCompletionMessage(String challengeName, String userName, String userAgent) {
     String userPart = (userName != null && !userName.trim().isEmpty()) ? " by " + userName : "";
+    String userAgentPart =
+        (userAgent != null && !userAgent.trim().isEmpty())
+            ? " (User-Agent: " + userAgent + ")"
+            : "";
 
     return String.format(
-        "🎉 Challenge %s completed%s! Another secret vulnerability discovered in WrongSecrets.",
-        challengeName, userPart);
+        "🎉 Challenge %s completed%s%s! Another secret vulnerability discovered in WrongSecrets.",
+        challengeName, userPart, userAgentPart);
   }
 
   /** Simple record for Slack message payload. */

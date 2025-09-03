@@ -9,7 +9,7 @@ RUN \
 
 RUN \
   echo "**** install packages ****" && \
-  apk add --no-cache shadow keepassxc radare2 aws-cli geany git gdb build-base icu-libs icu-data-full && \
+  apk add --no-cache shadow keepassxc radare2 aws-cli geany git gdb build-base icu-libs icu-data-full ca-certificates libgcc libstdc++ zlib && \
   echo "**** adding abc user to root for Docker ****" && \
   usermod -aG root abc && \
   touch /var/run/docker.sock && \
@@ -23,14 +23,13 @@ RUN echo "**** clone wrongsecrets.git for webtop in k8s ****" && \
     git clone https://github.com/OWASP/wrongsecrets.git
 
 RUN \
-    export DOTNET_INSTALL_DIR="/etc/dotnet" && \
     echo "installing dotnet" && \
     wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh && \
     chmod +x dotnet-install.sh && \
-    ./dotnet-install.sh --version latest && \
+    ./dotnet-install.sh --install-dir /etc/dotnet --version latest && \
     export DOTNET_ROOT=/etc/dotnet && \
-    export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools && \
-    export PATH="$PATH:/config/.dotnet/tools" &&\
+    export PATH="/etc/dotnet:/etc/dotnet/tools:$PATH" && \
+    dotnet --info && \
     dotnet tool install ilspycmd --version 9.0.0.7889 --tool-path /etc/dotnet/tools
 
 # Add a secret using --mount and write it to a specific file path for the challenge

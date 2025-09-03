@@ -5,6 +5,7 @@ import static org.owasp.wrongsecrets.ChallengeConfigurationException.configError
 import com.google.common.base.Strings;
 import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.servlet.http.HttpServletRequest;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -203,7 +204,10 @@ public class ChallengesController {
   @PostMapping(value = "/challenge/{name}", params = "action=submit")
   @Operation(description = "Post your answer to the challenge for a given challenge")
   public String postController(
-      @ModelAttribute ChallengeForm challengeForm, Model model, @PathVariable String name) {
+      @ModelAttribute ChallengeForm challengeForm,
+      Model model,
+      @PathVariable String name,
+      HttpServletRequest request) {
     var challengeDefinition = findByShortName(name);
 
     if (!isChallengeEnabled(challengeDefinition)) {
@@ -223,8 +227,9 @@ public class ChallengesController {
         scoreCard.completeChallenge(challengeDefinition);
         // Send Slack notification for challenge completion
         if (slackNotificationService != null) {
+          String userAgent = request.getHeader("User-Agent");
           slackNotificationService.notifyChallengeCompletion(
-              challengeDefinition.name().shortName(), null);
+              challengeDefinition.name().shortName(), null, userAgent);
         }
         // TODO extract this to a separate method probably have separate handler classes in the
         // configuration otherwise this is not maintainable, probably give the challenge a CTF

@@ -1,4 +1,4 @@
-name: Build and Publish Master Container
+name: Build and Publish Desktop Containers
 
 on:
   push:
@@ -11,8 +11,17 @@ permissions:
   packages: write
 
 jobs:
-  build-and-publish:
+  build-and-publish-desktop:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        container:
+          - name: "webdesktop"
+            dockerfile: "Dockerfile_webdesktop"
+            image_name: "wrongsecrets-desktop"
+          - name: "webdesktop-k8s"
+            dockerfile: "Dockerfile_webdesktopk8s"
+            image_name: "wrongsecrets-desktop-k8s"
     steps:
       - name: Checkout code
         uses: actions/checkout@v5
@@ -71,11 +80,15 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ghcr.io/${{ github.repository }}/wrongsecrets-master
+          images: ghcr.io/${{ github.repository }}/${{ matrix.image_name }}
           tags: |
             type=ref,event=branch
             type=raw,value=latest-master
             type=sha,prefix={{branch}}-
+
+      - name: Create secret file for build
+        run: |
+          echo "wrongsecret-3" > /tmp/mysecret.txt
 
       - name: Build and push Docker image
         id: build
@@ -83,40 +96,50 @@ jobs:
         with:
           platforms: linux/amd64,linux/arm64
           context: .
+          file: ${{ matrix.dockerfile }}
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
             argBasedVersion=${{ steps.extract-version.outputs.docker_version }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          secrets: |
+            mysecret=/tmp/mysecret.txt
+          cache-from: type=gha,scope=${{ matrix.name }}
+          cache-to: type=gha,mode=max,scope=${{ matrix.name }}
 
       - name: Verify Docker image was built
         run: |
           echo "Verifying Docker image was built successfully..."
+          echo "Container: ${{ matrix.name }}"
+          echo "Dockerfile: ${{ matrix.dockerfile }}"
           echo "Image tags: ${{ steps.meta.outputs.tags }}"
           echo "Image digest: ${{ steps.build.outputs.digest }}"
 
+  create-summary:
+    runs-on: ubuntu-latest
+    needs: build-and-publish-desktop
+    steps:
       - name: Create Release Summary
         run: |
-          echo "## 🚀 Master Container Published" >> $GITHUB_STEP_SUMMARY
+          echo "## 🖥️ Desktop Containers Published" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**📦 Container Images Published:**" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-
-          # Convert multi-line tags to individual entries
-          TAGS="${{ steps.meta.outputs.tags }}"
-          echo "$TAGS" | while read -r tag; do
-            if [ ! -z "$tag" ]; then
-              echo "- \`$tag\`" >> $GITHUB_STEP_SUMMARY
-            fi
-          done
-
+          echo "- \`ghcr.io/${{ github.repository }}/wrongsecrets-desktop:latest-master\`" >> $GITHUB_STEP_SUMMARY
+          echo "- \`ghcr.io/${{ github.repository }}/wrongsecrets-desktop-k8s:latest-master\`" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**🐳 Try the bleeding-edge version:**" >> $GITHUB_STEP_SUMMARY
+          echo "**🐳 Try the desktop environments:**" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Standard Desktop:**" >> $GITHUB_STEP_SUMMARY
           echo "\`\`\`bash" >> $GITHUB_STEP_SUMMARY
-          echo "docker pull ghcr.io/${{ github.repository }}/wrongsecrets-master:latest-master" >> $GITHUB_STEP_SUMMARY
-          echo "docker run -p 8080:8080 ghcr.io/${{ github.repository }}/wrongsecrets-master:latest-master" >> $GITHUB_STEP_SUMMARY
+          echo "docker pull ghcr.io/${{ github.repository }}/wrongsecrets-desktop:latest-master" >> $GITHUB_STEP_SUMMARY
+          echo "docker run -d -p 3000:3000 ghcr.io/${{ github.repository }}/wrongsecrets-desktop:latest-master" >> $GITHUB_STEP_SUMMARY
           echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "Then visit: http://localhost:8080" >> $GITHUB_STEP_SUMMARY
+          echo "**Kubernetes Desktop:**" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`bash" >> $GITHUB_STEP_SUMMARY
+          echo "docker pull ghcr.io/${{ github.repository }}/wrongsecrets-desktop-k8s:latest-master" >> $GITHUB_STEP_SUMMARY
+          echo "docker run -d -p 3000:3000 ghcr.io/${{ github.repository }}/wrongsecrets-desktop-k8s:latest-master" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Then visit: http://localhost:3000" >> $GITHUB_STEP_SUMMARY
