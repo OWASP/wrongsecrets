@@ -46,5 +46,4 @@ COPY src/main/resources/executables/secrchallenge.json /var/tmp/wrongsecrets/
 COPY src/test/resources/alibabacreds.kdbx /var/tmp/wrongsecrets/
 COPY wrongsecret-desktop-resources/welcome.md /var/tmp/wrongsecrets/
 
-
 COPY wrongsecret-desktop-resources/startwm.sh /defaults/startwm.sh
