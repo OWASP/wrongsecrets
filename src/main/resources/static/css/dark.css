@@ -108,3 +108,7 @@
     /*background-color: var(--bs-gray-600);*/
    border-color: white;
 }
+
+.dark-mode .text-muted {
+    color: var(--bs-gray-300) !important;
+}
