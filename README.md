@@ -322,7 +322,7 @@ Make sure you have the following installed:
 -   helm [Install from here](https://helm.sh/docs/intro/install/),
 -   kubectl [Install from here](https://kubernetes.io/docs/tasks/tools/),
 -   jq [Install from here](https://stedolan.github.io/jq/download/),
--   vault [Install from here](https://www.vaultproject.io/downloads),
+-   vault [Install from here](https://developer.hashicorp.com/vault/install),
 -   grep, Cat, and Sed
 
 Run `./k8s-vault-minikube-start.sh`, when the script is done, then the challenges will wait for you at <http://localhost:8080> . This will allow you to run challenges 1-8, 12-48.
