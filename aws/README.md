@@ -20,7 +20,7 @@ Have the following tools installed:
 -   openssl
 -   sed
 -   Tfenv (Optional) - [Installation](https://github.com/tfutils/tfenv)
--   Terraform CLI - [Installation](https://learn.hashicorp.com/tutorials/terraform/install-cli)
+-   Terraform CLI - [Installation](https://developer.hashicorp.com/terraform/install)
 -   Vault - [Installation](https://developer.hashicorp.com/vault/install)
 -   wget - [Installation](https://www.jcchouinard.com/wget/)
 

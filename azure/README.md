@@ -17,7 +17,7 @@ Have the following tools installed:
 -   openssl
 -   Kubectl [Installation](https://kubernetes.io/docs/tasks/tools/)
 -   sed
--   Terraform CLI - [Installation](https://learn.hashicorp.com/tutorials/terraform/install-cli)
+-   Terraform CLI - [Installation](https://developer.hashicorp.com/terraform/install)
 -   Tfenv (Optional) - [Installation](https://github.com/tfutils/tfenv)
 -   Vault - [Installation](https://developer.hashicorp.com/vault/install)
 -   Wget - [Installation](https://www.jcchouinard.com/wget/)

@@ -15,7 +15,7 @@ Have the following tools installed:
 -   jq [Installation](https://stedolan.github.io/jq/download/)
 -   Kubectl [Installation](https://kubernetes.io/docs/tasks/tools/)
 -   sed
--   Terraform CLI - [Installation](https://learn.hashicorp.com/tutorials/terraform/install-cli)
+-   Terraform CLI - [Installation](https://developer.hashicorp.com/terraform/install)
 -   Tfenv (Optional) - [Installation](https://github.com/tfutils/tfenv)
 -   vault - [Installation](https://developer.hashicorp.com/vault/install)
 -   Wget - [Installation](https://www.jcchouinard.com/wget/)

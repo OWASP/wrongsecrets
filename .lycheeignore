@@ -19,3 +19,8 @@ https://twitter.com/intent/tweet?*
 https://github.com/OWASP/CheatSheetSeries*
 https://github.com/OWASP/wrongsecrets*
 https://github.com/OWASP/www-project-wrongsecrets*
+
+# HashiCorp sites are rate-limited and cause 429 errors
+https://developer.hashicorp.com/*
+https://learn.hashicorp.com/*
+https://www.vaultproject.io/*
