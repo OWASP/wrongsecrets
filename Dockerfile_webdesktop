@@ -32,6 +32,9 @@ RUN \
 
 WORKDIR /config/Desktop
 
+# Create directories for copied files
+RUN mkdir -p /var/tmp/wrongsecrets /var/tmp/wrongsecrets/decrypt
+
 COPY src/main/resources/executables/*linux-mus* /var/tmp/wrongsecrets/
 COPY src/main/resources/executables/decrypt/ /var/tmp/wrongsecrets/decrypt/
 COPY src/main/resources/executables/wrongsecrets-advanced-c-windows.exe /var/tmp/wrongsecrets/
