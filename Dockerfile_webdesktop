@@ -21,20 +21,14 @@ RUN \
   echo "installing dotnet" && \
   wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh && \
   chmod +x dotnet-install.sh && \
-  ./dotnet-install.sh --install-dir /etc/dotnet --version latest && \
+  ./dotnet-install.sh --install-dir /etc/dotnet --channel 6.0 --version latest && \
+  rm dotnet-install.sh && \
   export DOTNET_ROOT=/etc/dotnet && \
   export PATH="/etc/dotnet:/etc/dotnet/tools:$PATH" && \
-  dotnet --info && \
-  dotnet tool install ilspycmd --version 9.0.0.7889 --tool-path /etc/dotnet/tools
-
-# Add secret handling for Kubernetes-specific Docker builds
-# Create the /app directory to store the secret
-RUN mkdir -p /app
-
-# Use a separate RUN command for --mount
-RUN --mount=type=secret,id=mysecret \
-    export SECRET_VALUE=$(cat /run/secrets/mysecret) && \
-    echo $SECRET_VALUE >> /app/secret.txt
+  echo "Checking dotnet installation..." && \
+  /etc/dotnet/dotnet --info && \
+  echo "Installing ilspycmd..." && \
+  /etc/dotnet/dotnet tool install ilspycmd --version 9.0.0.7889 --tool-path /etc/dotnet/tools
 
 WORKDIR /config/Desktop
 
