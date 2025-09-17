@@ -92,10 +92,6 @@ jobs:
             type=ref,event=pr,suffix=-{{sha}}
             type=ref,event=pr
 
-      - name: Create secret file for build
-        run: |
-          echo "wrongsecret-3" > /tmp/mysecret.txt
-
       - name: Build and push Docker image
         id: build
         uses: docker/build-push-action@v6
@@ -108,8 +104,6 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
             argBasedVersion=${{ steps.extract-version.outputs.docker_version }}
-          secrets: |
-            mysecret=/tmp/mysecret.txt
           cache-from: type=gha,scope=${{ matrix.container.name }}-pr
           cache-to: type=gha,mode=max,scope=${{ matrix.container.name }}-pr
 
