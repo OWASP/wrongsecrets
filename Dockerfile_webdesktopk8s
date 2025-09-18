@@ -52,3 +52,4 @@ COPY wrongsecret-desktop-resources/welcome.md /var/tmp/wrongsecrets/
 RUN sudo chown abc /var/tmp/wrongsecrets
 
 COPY wrongsecret-desktop-resources/startwm.sh /defaults/startwm.sh
+
