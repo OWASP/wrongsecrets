@@ -9,7 +9,7 @@ RUN \
 
 RUN \
   echo "**** install packages ****" && \
-  apk add --no-cache shadow keepassxc radare2 aws-cli geany git gdb build-base icu-libs icu-data-full ca-certificates libgcc libstdc++ zlib libintl musl-locales && \
+  apk add --no-cache shadow keepassxc radare2 aws-cli geany git gdb build-base icu-libs icu-data-full ca-certificates libgcc libstdc++ zlib libintl musl-locales musl-locales-lang lttng-ust libunwind libgdiplus && \
   echo "**** adding abc user to root for Docker ****" && \
   usermod -aG root abc && \
   touch /var/run/docker.sock && \
@@ -23,11 +23,14 @@ RUN echo "**** clone wrongsecrets.git for webtop in k8s ****" && \
     git clone https://github.com/OWASP/wrongsecrets.git
 
 RUN \
-    echo "installing dotnet with musl compatibility" && \
-    apk add --no-cache curl icu-libs krb5-libs libgcc libintl libssl1.1 libstdc++ zlib && \
-    curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --channel 6.0 --install-dir /etc/dotnet && \
+    echo "installing dotnet 8.0 with comprehensive musl compatibility" && \
+    apk add --no-cache curl icu-libs icu-data-full krb5-libs libgcc libintl libssl3 libstdc++ zlib \
+      musl-locales musl-locales-lang tzdata ca-certificates lttng-ust libunwind libgdiplus && \
+    curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --channel 8.0 --install-dir /etc/dotnet && \
     export DOTNET_ROOT=/etc/dotnet && \
     export PATH="/etc/dotnet:/etc/dotnet/tools:$PATH" && \
+    export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=0 && \
+    export DOTNET_RUNNING_IN_CONTAINER=true && \
     echo "Checking dotnet installation..." && \
     /etc/dotnet/dotnet --info && \
     echo "Installing ilspycmd..." && \
