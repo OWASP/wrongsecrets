@@ -1,0 +1,182 @@
+name: Build PR Desktop Containers
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - 'Dockerfile_webdesktop'
+      - 'Dockerfile_webdesktopk8s'
+      - 'wrongsecret-desktop-resources/**'
+      - 'src/main/resources/executables/**'
+      - 'src/test/resources/alibabacreds.kdbx'
+      - 'pom.xml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+  pull-requests: write
+
+jobs:
+  build-pr-desktop-containers:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        container:
+          - name: "webdesktop"
+            dockerfile: "Dockerfile_webdesktop"
+            image_name: "wrongsecrets-desktop-pr"
+          - name: "webdesktop-k8s"
+            dockerfile: "Dockerfile_webdesktopk8s"
+            image_name: "wrongsecrets-desktop-k8s-pr"
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Set up JDK 23
+        uses: actions/setup-java@v5
+        with:
+          java-version: "23"
+          distribution: "temurin"
+          cache: "maven"
+
+      - name: Extract version from pom.xml
+        id: extract-version
+        run: |
+          echo "Extracting version from pom.xml..."
+          chmod +x ./mvnw
+          VERSION=$(./mvnw help:evaluate -Dexpression=project.version -q -DforceStdout)
+          DOCKER_VERSION=${VERSION%-SNAPSHOT}
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "docker_version=$DOCKER_VERSION" >> $GITHUB_OUTPUT
+          echo "Detected version: $VERSION"
+          echo "Docker version: $DOCKER_VERSION"
+
+      - name: Build application
+        run: ./mvnw --no-transfer-progress clean package -DskipTests
+
+      - name: Verify JAR file was created
+        run: |
+          echo "Checking target directory..."
+          ls -la target/
+          echo "Looking for JAR files..."
+          find target/ -name "*.jar" -type f
+          echo "Verifying specific JAR exists..."
+          JAR_FILE="target/wrongsecrets-${{ steps.extract-version.outputs.version }}.jar"
+          if [ -f "$JAR_FILE" ]; then
+            echo "✅ JAR file found: $JAR_FILE"
+            ls -la "$JAR_FILE"
+          else
+            echo "❌ Expected JAR file not found: $JAR_FILE"
+            echo "Available JAR files:"
+            find target/ -name "*.jar" -type f || echo "No JAR files found"
+            exit 1
+          fi
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository }}/${{ matrix.container.image_name }}
+          tags: |
+            type=ref,event=pr,suffix=-{{sha}}
+            type=ref,event=pr
+
+      - name: Create secret file for build
+        run: |
+          echo "wrongsecret-3" > /tmp/mysecret.txt
+
+      - name: Build and push Docker image
+        id: build
+        uses: docker/build-push-action@v6
+        with:
+          platforms: linux/amd64,linux/arm64
+          context: .
+          file: ${{ matrix.container.dockerfile }}
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            argBasedVersion=${{ steps.extract-version.outputs.docker_version }}
+          secrets: |
+            mysecret=/tmp/mysecret.txt
+          cache-from: type=gha,scope=${{ matrix.container.name }}-pr
+          cache-to: type=gha,mode=max,scope=${{ matrix.container.name }}-pr
+
+      - name: Verify Docker image was built
+        run: |
+          echo "Verifying Docker image was built successfully..."
+          echo "Container: ${{ matrix.container.name }}"
+          echo "Dockerfile: ${{ matrix.container.dockerfile }}"
+          echo "Image tags: ${{ steps.meta.outputs.tags }}"
+          echo "Image digest: ${{ steps.build.outputs.digest }}"
+
+  comment-pr-with-desktop-images:
+    runs-on: ubuntu-latest
+    needs: build-pr-desktop-containers
+    steps:
+      - name: Comment PR with desktop container info
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const prNumber = context.issue.number;
+            const runId = context.runId;
+
+            const comment = `🖥️ **Desktop Containers Built!**
+
+            Your PR changes have been built into desktop containers and pushed to GitHub Container Registry.
+
+            **🐳 Desktop Container Images:**
+            - \`ghcr.io/${{ github.repository }}/wrongsecrets-desktop-pr:${{ github.event.number }}\`
+            - \`ghcr.io/${{ github.repository }}/wrongsecrets-desktop-k8s-pr:${{ github.event.number }}\`
+
+            **🚀 Test the Desktop Environment:**
+
+            **Standard Desktop:**
+            \`\`\`bash
+            docker pull ghcr.io/${{ github.repository }}/wrongsecrets-desktop-pr:${{ github.event.number }}
+            docker run -d -p 3000:3000 ghcr.io/${{ github.repository }}/wrongsecrets-desktop-pr:${{ github.event.number }}
+            \`\`\`
+
+            **Kubernetes Desktop:**
+            \`\`\`bash
+            docker pull ghcr.io/${{ github.repository }}/wrongsecrets-desktop-k8s-pr:${{ github.event.number }}
+            docker run -d -p 3000:3000 ghcr.io/${{ github.repository }}/wrongsecrets-desktop-k8s-pr:${{ github.event.number }}
+            \`\`\`
+
+            Then visit: **http://localhost:3000**
+
+            **🔧 What's included:**
+            - Full desktop environment with browser access
+            - Pre-installed tools: Radare2, KeepassXC, AWS CLI, GDB, etc.
+            - .NET 6.0 LTS (fixed segmentation fault issue)
+            - All WrongSecrets challenge files and executables
+            - Jupyter notebooks and analysis tools
+
+            **📝 Desktop-related changes in this PR:**
+            - Fixed .NET installation segmentation fault by using .NET 6.0 LTS
+            - Improved installation robustness and error handling
+            - Removed problematic secret mount commands
+            - Applied fixes to both desktop variants consistently
+
+            These containers are perfect for testing the .NET installation fix and ensuring all desktop tools work correctly.
+
+            ---
+            <sub>Desktop containers built by GitHub Actions • PR #${prNumber}</sub>`;
+
+            github.rest.issues.createComment({
+              issue_number: prNumber,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });

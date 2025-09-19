@@ -1,4 +1,4 @@
-FROM lscr.io/linuxserver/webtop:4.16-r0-ls95
+FROM lscr.io/linuxserver/webtop:alpine-xfce-latest
 LABEL NAME="OWASP WrongSecrets Web Desktop" MAINTAINER="Jeroen Willemsen"
 
 RUN \
@@ -9,7 +9,7 @@ RUN \
 
 RUN \
   echo "**** install packages ****" && \
-  apk add --no-cache shadow keepassxc radare2 aws-cli geany git gdb build-base icu-libs icu-data-full ca-certificates libgcc libstdc++ zlib && \
+  apk add --no-cache shadow keepassxc radare2 aws-cli geany git gdb build-base icu-libs icu-data-full ca-certificates libgcc libstdc++ zlib libintl musl-locales musl-locales-lang lttng-ust libunwind libgdiplus && \
   echo "**** adding abc user to root for Docker ****" && \
   usermod -aG root abc && \
   touch /var/run/docker.sock && \
@@ -23,16 +23,22 @@ RUN echo "**** clone wrongsecrets.git for webtop in k8s ****" && \
     git clone https://github.com/OWASP/wrongsecrets.git
 
 RUN \
-    echo "installing dotnet" && \
-    wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh && \
-    chmod +x dotnet-install.sh && \
-    ./dotnet-install.sh --install-dir /etc/dotnet --version latest && \
+    echo "installing dotnet 8.0 with enhanced musl compatibility on newer Alpine" && \
+    apk add --no-cache curl icu-libs icu-data-full krb5-libs libgcc libintl libssl3 libstdc++ zlib \
+      musl-locales musl-locales-lang tzdata ca-certificates lttng-ust libunwind libgdiplus && \
+    curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --channel 8.0 --install-dir /etc/dotnet && \
     export DOTNET_ROOT=/etc/dotnet && \
     export PATH="/etc/dotnet:/etc/dotnet/tools:$PATH" && \
-    dotnet --info && \
-    dotnet tool install ilspycmd --version 9.0.0.7889 --tool-path /etc/dotnet/tools
+    export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=0 && \
+    export DOTNET_RUNNING_IN_CONTAINER=true && \
+    echo "Checking dotnet installation..." && \
+    /etc/dotnet/dotnet --info && \
+    echo "Installing ilspycmd..." && \
+    /etc/dotnet/dotnet tool install ilspycmd --version 9.0.0.7889 --tool-path /etc/dotnet/tools
 
-# Add a secret using --mount and write it to a specific file path for the challenge
+WORKDIR /config/Desktop
+
+# Add secret handling for challenge functionality
 # Create the /app directory to store the secret
 RUN mkdir -p /app
 
@@ -41,7 +47,8 @@ RUN --mount=type=secret,id=mysecret \
     export SECRET_VALUE=$(cat /run/secrets/mysecret) && \
     echo $SECRET_VALUE >> /app/secret.txt
 
-WORKDIR /config/Desktop
+# Create directories for copied files
+RUN mkdir -p /var/tmp/wrongsecrets /var/tmp/wrongsecrets/decrypt
 
 COPY src/main/resources/executables/*linux-mus* /var/tmp/wrongsecrets/
 COPY src/main/resources/executables/decrypt/ /var/tmp/wrongsecrets/decrypt/
@@ -55,3 +62,4 @@ COPY wrongsecret-desktop-resources/welcome.md /var/tmp/wrongsecrets/
 RUN sudo chown abc /var/tmp/wrongsecrets
 
 COPY wrongsecret-desktop-resources/startwm.sh /defaults/startwm.sh
+
