@@ -9,7 +9,7 @@ RUN \
 
 RUN \
   echo "**** install packages ****" && \
-  apk add --no-cache shadow keepassxc radare2 aws-cli geany git gdb build-base icu-libs icu-data-full ca-certificates libgcc libstdc++ zlib && \
+  apk add --no-cache shadow keepassxc radare2 aws-cli geany git gdb build-base icu-libs icu-data-full ca-certificates libgcc libstdc++ zlib libintl musl-locales && \
   echo "**** adding abc user to root for Docker ****" && \
   usermod -aG root abc && \
   touch /var/run/docker.sock && \
@@ -23,17 +23,14 @@ RUN echo "**** clone wrongsecrets.git for webtop in k8s ****" && \
     git clone https://github.com/OWASP/wrongsecrets.git
 
 RUN \
-    echo "installing dotnet" && \
-    wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh && \
-    chmod +x dotnet-install.sh && \
-    ./dotnet-install.sh --install-dir /etc/dotnet --channel 6.0 --version latest && \
-    rm dotnet-install.sh && \
-    export DOTNET_ROOT=/etc/dotnet && \
-    export PATH="/etc/dotnet:/etc/dotnet/tools:$PATH" && \
+    echo "installing dotnet via Alpine packages" && \
+    apk add --no-cache dotnet8-sdk dotnet8-runtime aspnetcore8-runtime && \
+    export DOTNET_ROOT=/usr/share/dotnet && \
+    export PATH="/usr/share/dotnet:$PATH" && \
     echo "Checking dotnet installation..." && \
-    /etc/dotnet/dotnet --info && \
+    dotnet --info && \
     echo "Installing ilspycmd..." && \
-    /etc/dotnet/dotnet tool install ilspycmd --version 9.0.0.7889 --tool-path /etc/dotnet/tools
+    dotnet tool install --global ilspycmd --version 9.0.0.7889
 
 WORKDIR /config/Desktop
 
