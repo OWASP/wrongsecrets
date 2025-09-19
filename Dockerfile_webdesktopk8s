@@ -1,4 +1,4 @@
-FROM lscr.io/linuxserver/webtop:4.16-r0-ls95
+FROM lscr.io/linuxserver/webtop:alpine-xfce-latest
 LABEL NAME="OWASP WrongSecrets Web Desktop" MAINTAINER="Jeroen Willemsen"
 
 RUN \
@@ -23,7 +23,7 @@ RUN echo "**** clone wrongsecrets.git for webtop in k8s ****" && \
     git clone https://github.com/OWASP/wrongsecrets.git
 
 RUN \
-    echo "installing dotnet 8.0 with comprehensive musl compatibility" && \
+    echo "installing dotnet 8.0 with enhanced musl compatibility on newer Alpine" && \
     apk add --no-cache curl icu-libs icu-data-full krb5-libs libgcc libintl libssl3 libstdc++ zlib \
       musl-locales musl-locales-lang tzdata ca-certificates lttng-ust libunwind libgdiplus && \
     curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --channel 8.0 --install-dir /etc/dotnet && \
