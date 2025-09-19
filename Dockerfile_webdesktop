@@ -32,6 +32,15 @@ RUN \
 
 WORKDIR /config/Desktop
 
+# Add secret handling for challenge functionality
+# Create the /app directory to store the secret
+RUN mkdir -p /app
+
+# Use a separate RUN command for --mount
+RUN --mount=type=secret,id=mysecret \
+    export SECRET_VALUE=$(cat /run/secrets/mysecret) && \
+    echo $SECRET_VALUE >> /app/secret.txt
+
 # Create directories for copied files
 RUN mkdir -p /var/tmp/wrongsecrets /var/tmp/wrongsecrets/decrypt
 

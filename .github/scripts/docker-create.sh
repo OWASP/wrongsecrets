@@ -379,10 +379,10 @@ create_containers() {
         docker buildx build --no-cache --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets:$tag-k8s-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=kubernetes-vault" --secret id=mysecret,env=SECRET_VALUE --push ./../../.
         docker buildx build --no-cache --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets:latest-k8s-vault --build-arg "$buildarg" --build-arg "PORT=8081" --build-arg "argBasedVersion=$tag" --build-arg "spring_profile=kubernetes-vault" --secret id=mysecret,env=SECRET_VALUE --push ./../../.
         cd ../..
-        docker buildx build --no-cache --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets-desktop:$tag -f Dockerfile_webdesktop --push .
-        docker buildx build --no-cache --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets-desktop:latest -f Dockerfile_webdesktop --push .
-        docker buildx build --no-cache --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets-desktop-k8s:$tag -f Dockerfile_webdesktopk8s --push .
-        docker buildx build --no-cache --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets-desktop-k8s:latest -f Dockerfile_webdesktopk8s --push .
+        docker buildx build --no-cache --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets-desktop:$tag -f Dockerfile_webdesktop --secret id=mysecret,env=SECRET_VALUE --push .
+        docker buildx build --no-cache --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets-desktop:latest -f Dockerfile_webdesktop --secret id=mysecret,env=SECRET_VALUE --push .
+        docker buildx build --no-cache --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets-desktop-k8s:$tag -f Dockerfile_webdesktopk8s --secret id=mysecret,env=SECRET_VALUE --push .
+        docker buildx build --no-cache --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets-desktop-k8s:latest -f Dockerfile_webdesktopk8s --secret id=mysecret,env=SECRET_VALUE --push .
         cd k8s/challenge53
         cp ../../src/main/resources/executables/wrongsecrets-challenge53-* ./executables
         docker buildx build --no-cache --platform linux/amd64,linux/arm64 -t jeroenwillemsen/wrongsecrets-challenge53:$tag -f Dockerfile --push .
