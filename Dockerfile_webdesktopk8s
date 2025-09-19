@@ -23,14 +23,15 @@ RUN echo "**** clone wrongsecrets.git for webtop in k8s ****" && \
     git clone https://github.com/OWASP/wrongsecrets.git
 
 RUN \
-    echo "installing dotnet via Alpine packages" && \
-    apk add --no-cache dotnet8-sdk dotnet8-runtime aspnetcore8-runtime && \
-    export DOTNET_ROOT=/usr/share/dotnet && \
-    export PATH="/usr/share/dotnet:$PATH" && \
+    echo "installing dotnet with musl compatibility" && \
+    apk add --no-cache curl icu-libs krb5-libs libgcc libintl libssl1.1 libstdc++ zlib && \
+    curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --channel 6.0 --install-dir /etc/dotnet && \
+    export DOTNET_ROOT=/etc/dotnet && \
+    export PATH="/etc/dotnet:/etc/dotnet/tools:$PATH" && \
     echo "Checking dotnet installation..." && \
-    dotnet --info && \
+    /etc/dotnet/dotnet --info && \
     echo "Installing ilspycmd..." && \
-    dotnet tool install --global ilspycmd --version 9.0.0.7889
+    /etc/dotnet/dotnet tool install ilspycmd --version 9.0.0.7889 --tool-path /etc/dotnet/tools
 
 WORKDIR /config/Desktop
 

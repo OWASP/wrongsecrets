@@ -1,8 +1,8 @@
 #!/bin/bash
 
-export DOTNET_ROOT=/usr/share/dotnet
-export DOTNET_INSTALL_DIR="/usr/share/dotnet"
-export PATH="$PATH:$DOTNET_ROOT:/root/.dotnet/tools"
+export DOTNET_ROOT=/etc/dotnet
+export DOTNET_INSTALL_DIR="/etc/dotnet"
+export PATH="$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools"
 export PATH="$PATH:/config/.dotnet/tools"
 /startpulse.sh &
 ln -s -r /var/tmp/wrongsecrets /config/Desktop/wrongsecrets
