@@ -121,3 +121,4 @@ scripts/sort_contibutors/contributors_file.*
 git_secrets_output.txt
 .secrets.baseline.json
 lychee
+sed*
