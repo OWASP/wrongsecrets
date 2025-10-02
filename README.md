@@ -573,6 +573,69 @@ Want to check why something in vault is not working in kubernetes? Do `kubectl e
 We have CycloneDX and OWASP Dependency-check integrated to check dependencies for vulnerabilities.
 You can use the OWASP Dependency-checker by calling `mvn dependency-check:aggregate` and `mvn cyclonedx:makeBom` to use CycloneDX to create an SBOM.
 
+### Dependency-Check Maven Plugin Configuration
+
+OWASP WrongSecrets uses the [`dependency-check-maven`](https://jeremylong.github.io/DependencyCheck/dependency-check-maven/index.html) plugin to automatically scan project dependencies for known vulnerabilities (CVEs).
+
+#### How It Works
+
+- The plugin runs during the Maven build (`./mvnw clean install`) and checks all dependencies against public vulnerability databases.
+- By default, it uses the NVD (National Vulnerability Database) and can also use OSS Index for additional coverage.
+
+#### Configuration Highlights
+
+The plugin is configured in `pom.xml` under the `<build><plugins>` section:
+
+```xml
+<plugin>
+  <groupId>org.owasp</groupId>
+  <artifactId>dependency-check-maven</artifactId>
+  <version>${dependency-check-maven.version}</version>
+  <configuration>
+    <nvdApiKey>...</nvdApiKey>
+    <assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>
+    <ossIndexServerId>ossindex</ossIndexServerId>
+    <ossindexAnalyzerEnabled>true</ossindexAnalyzerEnabled> <!-- SET THIS TO FALSE IF YOU HAVE NO SONATYPE ACCOUNT! -->
+  </configuration>
+  <executions>
+    <execution>
+      <goals>
+        <goal>check</goal>
+      </goals>
+    </execution>
+  </executions>
+</plugin>
+```
+
+- **nvdApiKey**: API key for accessing the NVD database (recommended for faster and more reliable scans).
+- **ossIndexServerId**: References credentials in your Maven `settings.xml` for OSS Index (see below).
+- **ossindexAnalyzerEnabled**: Set to `true` to enable OSS Index scanning. If you encounter authentication errors (401), set this to `false` to disable OSS Index.
+
+#### Authenticating with OSS Index
+
+To use OSS Index, you need to add your credentials to your Maven `settings.xml`:
+
+```xml
+<servers>
+  <server>
+    <id>ossindex</id>
+    <username>YOUR_OSSINDEX_USERNAME</username>
+    <password>YOUR_OSSINDEX_API_TOKEN</password>
+  </server>
+</servers>
+```
+
+Replace `YOUR_OSSINDEX_USERNAME` and `YOUR_OSSINDEX_API_TOKEN` with your OSS Index account details.
+
+#### Troubleshooting
+
+- If you see `401 Unauthorized` errors for OSS Index, check your credentials or disable OSS Index by setting `<ossindexAnalyzerEnabled>false</ossindexAnalyzerEnabled>` in `pom.xml`.
+- You can always run the build without OSS Index if you prefer only NVD-based scanning.
+
+#### More Info
+
+See [Dependency-Check Maven Plugin Documentation](https://jeremylong.github.io/DependencyCheck/dependency-check-maven/index.html) for advanced configuration options.
+
 ### Get the project started in IntelliJ IDEA
 
 Requirements: make sure you have the following tools installed: [Docker](https://www.docker.com/products/docker-desktop/), [Java23 JDK](https://jdk.java.net/23/), [NodeJS 24](https://nodejs.org/en/download/current) and [IntelliJ IDEA](https://www.jetbrains.com/idea/download).
