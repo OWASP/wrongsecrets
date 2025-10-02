@@ -72,6 +72,7 @@ resource "aws_iam_role" "user_role" {
   name = "cant-read-secrets"
 
   assume_role_policy = data.aws_iam_policy_document.user_assume_role.json
+  tags               = var.tags
 }
 
 data "aws_iam_policy_document" "user_assume_role" {
@@ -94,6 +95,7 @@ resource "aws_iam_policy" "secret_deny" {
   name_prefix = "secret-deny"
   description = "Deny secrets manager and SSM"
   policy      = data.aws_iam_policy_document.user_policy.json
+  tags        = var.tags
 }
 
 data "aws_iam_policy_document" "user_policy" {
@@ -123,15 +125,16 @@ data "aws_iam_policy_document" "user_policy" {
 }
 
 module "ebs_csi_irsa_role" {
-  source                = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
+  source                = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts"
   version               = "~> 6.0"
-  role_name             = "ebs-csi"
+  name                  = "ebs-csi"
   attach_ebs_csi_policy = true
 
   oidc_providers = {
     ex = {
       provider_arn               = module.eks.oidc_provider_arn
-      namespace_service_accounts = ["consul:server", "kube-system:ebs-csi-controller-sa"]
+      namespace_service_accounts = ["kube-system:ebs-csi-controller-sa"]
     }
   }
+  tags = var.tags
 }
