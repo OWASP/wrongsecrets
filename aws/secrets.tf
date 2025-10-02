@@ -49,6 +49,7 @@ POLICY
 resource "aws_secretsmanager_secret" "secret_2" {
   name                    = "wrongsecret-2"
   recovery_window_in_days = 0
+  tags                    = var.tags
 }
 
 resource "aws_secretsmanager_secret_policy" "policy_2" {

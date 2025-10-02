@@ -13,7 +13,7 @@ variable "cluster_version" {
 variable "cluster_name" {
   description = "The EKS cluster name"
   type        = string
-  default     = "wrongsecrets-exercise-cluster"
+  default     = "wrongsecrets"
 }
 
 variable "tags" {
