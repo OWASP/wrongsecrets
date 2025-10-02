@@ -61,19 +61,6 @@ else
   kubectl apply -f ../k8s/challenge33.yml
 fi
 
-#helm list -n | grep 'aws-ebs-csi-driver' &>/dev/null
-#if [ $? == 0 ]; then
-#  echo "AWS EBS CSI driver is already installed"
-#else
-#  echo "Installing AWS EBS CSI driver"
-#  helm repo add aws-ebs-csi-driver https://kubernetes-sigs.github.io/aws-ebs-csi-driver
-#  helm repo update
-#  helm upgrade --install aws-ebs-csi-driver --version 2.32.0 \
-#    --namespace kube-system \
-#    aws-ebs-csi-driver/aws-ebs-csi-driver \
-#    --values ./k8s/ebs-csi-driver-values.yaml
-#fi
-
 echo "Setting up gp3 storage class..."
 kubectl apply -f ./k8s/ebs-csi-gp3.yaml
 
