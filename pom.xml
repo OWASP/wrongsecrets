@@ -469,6 +469,10 @@
         <configuration>
           <nvdApiKey>27a3071a-9d40-42f2-ac92-74bebbc4bdeb</nvdApiKey>
           <assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>
+          <ossIndexServerId>ossindex</ossIndexServerId>
+          <!-- server id configured in settings.xml-->
+          <ossindexAnalyzerEnabled>true</ossindexAnalyzerEnabled>
+          <!--disable when getting 401 errors-->
         </configuration>
         <executions>
           <execution>
