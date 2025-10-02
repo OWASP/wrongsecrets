@@ -1,15 +1,9 @@
-FROM lscr.io/linuxserver/webtop:4.16-r0-ls95
+FROM linuxserver/webtop:latest
 LABEL NAME="OWASP WrongSecrets Web Desktop" MAINTAINER="Jeroen Willemsen"
 
 RUN \
-   echo "*** install kubectl ***" && \
-    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" &&\
-    sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl &&\
-    rm kubectl
-
-RUN \
   echo "**** install packages ****" && \
-  apk add --no-cache shadow keepassxc radare2 aws-cli geany git gdb build-base icu-libs icu-data-full ca-certificates libgcc libstdc++ zlib && \
+  apk add --no-cache shadow keepassxc kubectl radare2 dotnet9-sdk aws-cli geany git gdb build-base icu-libs icu-data-full ca-certificates libgcc libstdc++ zlib && \
   echo "**** adding abc user to root for Docker ****" && \
   usermod -aG root abc && \
   touch /var/run/docker.sock && \
@@ -17,22 +11,8 @@ RUN \
   echo "**** cleanup ****" && \
   rm -rf /tmp/*
 
-RUN echo "**** clone wrongsecrets.git for webtop in k8s ****" && \
-    mkdir /var/tmp/wrongsecrets && \
-    cd /var/tmp/wrongsecrets && \
-    git clone https://github.com/OWASP/wrongsecrets.git
-
-RUN \
-    echo "installing dotnet" && \
-    wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh && \
-    chmod +x dotnet-install.sh && \
-    ./dotnet-install.sh --install-dir /etc/dotnet --version latest && \
-    export DOTNET_ROOT=/etc/dotnet && \
-    export PATH="/etc/dotnet:/etc/dotnet/tools:$PATH" && \
-    dotnet --info && \
-    dotnet tool install ilspycmd --version 9.0.0.7889 --tool-path /etc/dotnet/tools
-
-# Add a secret using --mount and write it to a specific file path for the challenge
+RUN dotnet tool install ilspycmd --version 9.0.0.7889 --tool-path /etc/dotnet/tools
+# Add secret handling for Kubernetes-specific Docker builds
 # Create the /app directory to store the secret
 RUN mkdir -p /app
 
@@ -50,8 +30,5 @@ COPY src/main/resources/executables/secrchallenge.md /var/tmp/wrongsecrets/
 COPY src/main/resources/executables/secrchallenge.json /var/tmp/wrongsecrets/
 COPY src/test/resources/alibabacreds.kdbx /var/tmp/wrongsecrets/
 COPY wrongsecret-desktop-resources/welcome.md /var/tmp/wrongsecrets/
-
-
-RUN sudo chown abc /var/tmp/wrongsecrets
 
 COPY wrongsecret-desktop-resources/startwm.sh /defaults/startwm.sh
