@@ -1,12 +1,6 @@
 FROM linuxserver/webtop:latest
 LABEL NAME="OWASP WrongSecrets Web Desktop" MAINTAINER="Jeroen Willemsen"
 
-# RUN \
-#    echo "*** install kubectl ***" && \
-#     curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" &&\
-#     sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl &&\
-#     rm kubectl
-
 RUN \
   echo "**** install packages ****" && \
   apk add --no-cache shadow keepassxc kubectl radare2 dotnet9-sdk aws-cli geany git gdb build-base icu-libs icu-data-full ca-certificates libgcc libstdc++ zlib && \
@@ -16,16 +10,6 @@ RUN \
   chown abc:abc /var/run/docker.sock && \
   echo "**** cleanup ****" && \
   rm -rf /tmp/*
-
-# RUN \
-#   echo "installing dotnet" && \
-#   wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh && \
-#   chmod +x dotnet-install.sh && \
-#   ./dotnet-install.sh --install-dir /etc/dotnet --version latest && \
-#   export DOTNET_ROOT=/etc/dotnet && \
-#   export PATH="/etc/dotnet:/etc/dotnet/tools:$PATH" && \
-#   dotnet --info && \
-#   dotnet tool install ilspycmd --version 9.0.0.7889 --tool-path /etc/dotnet/tools
 
 RUN dotnet tool install ilspycmd --version 9.0.0.7889 --tool-path /etc/dotnet/tools
 # Add secret handling for Kubernetes-specific Docker builds
