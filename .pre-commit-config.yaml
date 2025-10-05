@@ -9,11 +9,11 @@ ci:
   submodules: false
 repos:
   - repo: https://github.com/renovatebot/pre-commit-hooks
-    rev: 41.92.1
+    rev: 41.135.4
     hooks:
       - id: renovate-config-validator
   - repo: https://github.com/eslint/eslint
-    rev: v9.34.0
+    rev: v9.37.0
     hooks:
       - id: eslint
         args:
@@ -26,7 +26,7 @@ repos:
         exclude: ^(src/test/resources/yourkey.txt|src/test/resources/secondkey.txt)
       - id: trailing-whitespace
   - repo: https://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.100.0
+    rev: v1.101.0
     hooks:
       - id: terraform_fmt
       - id: terraform_tflint
@@ -46,7 +46,7 @@ repos:
           - "--args=--only=terraform_workspace_remote"
       - id: terraform_docs
   - repo: https://github.com/alessandrojcm/commitlint-pre-commit-hook
-    rev: v9.22.0
+    rev: v9.23.0
     hooks:
       - id: commitlint
         stages: [commit-msg]
@@ -57,7 +57,7 @@ repos:
         args: ["clean compile"]
       - id: maven-spotless-apply
   - repo: https://github.com/psf/black
-    rev: 25.1.0
+    rev: 25.9.0
     hooks:
       - id: black
         language_version: python3.13
