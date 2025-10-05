@@ -220,7 +220,7 @@ jobs:
         uses: actions/deploy-pages@v4
 
       - name: Comment PR with preview link
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const prNumber = context.issue.number;
@@ -328,7 +328,7 @@ jobs:
         uses: actions/deploy-pages@v4
 
       - name: Comment PR cleanup completion
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const comment = `🧹 **Preview Cleanup Complete**
