@@ -21,7 +21,7 @@ jobs:
           ref: master
           path: main-code
 
-      - name: Set up JDK 23 for PR build
+      - name: Set up JDK 25 for PR build
         uses: actions/setup-java@v5
         with:
           java-version: "25"
@@ -49,7 +49,7 @@ jobs:
           docker build --build-arg argBasedVersion="${{ steps.extract-pr-version.outputs.docker_version }}" -t wrongsecrets-pr .
           echo "PR Docker image built successfully"
 
-      - name: Set up JDK 23 for main build
+      - name: Set up JDK 25 for main build
         uses: actions/setup-java@v5
         with:
           java-version: "25"
