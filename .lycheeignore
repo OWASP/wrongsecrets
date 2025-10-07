@@ -24,3 +24,6 @@ https://github.com/OWASP/www-project-wrongsecrets*
 https://developer.hashicorp.com/*
 https://learn.hashicorp.com/*
 https://www.vaultproject.io/*
+
+# Oracle Java downloads page may not have Java 25 anchor yet
+https://www.oracle.com/java/technologies/downloads/#java25
