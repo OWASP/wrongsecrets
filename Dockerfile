@@ -1,4 +1,4 @@
-FROM bellsoft/liberica-openjre-debian:23.0.2-9-cds AS builder
+FROM bellsoft/liberica-openjre-debian:25-cds AS builder
 WORKDIR /builder
 
 ARG argBasedVersion="1.12.8"
@@ -6,7 +6,7 @@ ARG argBasedVersion="1.12.8"
 COPY --chown=wrongsecrets target/wrongsecrets-${argBasedVersion}-SNAPSHOT.jar application.jar
 RUN java -Djarmode=tools -jar application.jar extract --layers --destination extracted
 
-FROM eclipse-temurin:23.0.2_7-jre-alpine-3.21
+FROM eclipse-temurin:25-jre-alpine
 WORKDIR /application
 
 ARG argBasedPassword="default"
