@@ -24,7 +24,7 @@ jobs:
       - name: Set up JDK 23 for PR build
         uses: actions/setup-java@v5
         with:
-          java-version: "23"
+          java-version: "25"
           distribution: "temurin"
           cache: "maven"
 
@@ -52,7 +52,7 @@ jobs:
       - name: Set up JDK 23 for main build
         uses: actions/setup-java@v5
         with:
-          java-version: "23"
+          java-version: "25"
           distribution: "temurin"
           cache: "maven"
 
