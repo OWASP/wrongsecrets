@@ -25,8 +25,5 @@ https://developer.hashicorp.com/*
 https://learn.hashicorp.com/*
 https://www.vaultproject.io/*
 
-# Oracle Java downloads page may not have Java 25 anchor yet
-https://www.oracle.com/java/technologies/downloads/#java25
-
-# jdk.java.net may be rate-limited and cause 429 errors
-https://jdk.java.net/25/
+# Issues with lychee:
+https://github.com/topics/secrets-detection
