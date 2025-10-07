@@ -300,9 +300,9 @@ Select **_google-java-format Settings_** and click enable.
 
 Open **_File > Project structure _**.
 
-In the tab `Project` make sure that an SDK of version `23` is selected (e.g. `openjdk-23`, `oraclejdk-23` or just `23` depending on which Java JDK variant you installed).
+In the tab `Project` make sure that an SDK of version `25` is selected (e.g. `openjdk-25`, `oraclejdk-25` or just `25` depending on which Java JDK variant you installed).
 
-In the tab `SDKs` make sure that an SDK of version `23` is selected.
+In the tab `SDKs` make sure that an SDK of version `25` is selected.
 
 
 ### Step 6: Reload the project
