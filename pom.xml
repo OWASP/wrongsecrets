@@ -53,7 +53,7 @@
     <datatables.version>2.3.2</datatables.version>
     <dependency-check-maven.version>12.1.6</dependency-check-maven.version>
     <gatling-maven-plugin.version>4.20.6</gatling-maven-plugin.version>
-    <gatling.version>3.14.5</gatling.version>
+    <gatling.version>3.14.6</gatling.version>
     <gcp.sdk.version>7.3.2</gcp.sdk.version>
     <github.button.version>2.14.1</github.button.version>
     <io.netty.version>4.1.118.Final</io.netty.version>
