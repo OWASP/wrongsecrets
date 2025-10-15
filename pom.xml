@@ -370,7 +370,7 @@
             <dependency>
               <groupId>com.github.spotbugs</groupId>
               <artifactId>spotbugs</artifactId>
-              <version>4.9.6</version>
+              <version>4.9.7</version>
             </dependency>
           </dependencies>
         </plugin>
