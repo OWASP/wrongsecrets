@@ -105,7 +105,7 @@ jobs:
           timeout 60 bash -c 'until curl -f http://localhost:8081/actuator/health 2>/dev/null; do sleep 2; done' || echo "Main version health check failed"
 
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: '24'
 
