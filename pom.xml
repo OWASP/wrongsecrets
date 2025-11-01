@@ -354,7 +354,7 @@
         <plugin>
           <groupId>com.github.spotbugs</groupId>
           <artifactId>spotbugs-maven-plugin</artifactId>
-          <version>4.9.7.0</version>
+          <version>4.9.8.1</version>
           <configuration>
             <omitVisitors>FindReturnRef</omitVisitors>
             <plugins>
