@@ -1,5 +1,8 @@
-# Ignore all files
+# Ignore all file:// URIs
 file://.*
+
+# Ignore internal application routes (relative paths starting with /)
+^/[^/].*
 
 # This is used as an example when creating a pull request
 https://github.com/Your_Github_Handle.*
@@ -27,3 +30,6 @@ https://www.vaultproject.io/*
 
 # Issues with lychee:
 https://github.com/topics/secrets-detection
+
+# Docker Hub returns 403 Forbidden errors
+https://hub.docker.com/*
