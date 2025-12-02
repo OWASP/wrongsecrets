@@ -27,3 +27,6 @@ https://www.vaultproject.io/*
 
 # Issues with lychee:
 https://github.com/topics/secrets-detection
+
+# Docker Hub returns 403 Forbidden errors
+https://hub.docker.com/*
