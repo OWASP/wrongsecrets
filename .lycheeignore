@@ -25,5 +25,8 @@ https://developer.hashicorp.com/*
 https://learn.hashicorp.com/*
 https://www.vaultproject.io/*
 
+# Medium not working along:
+https://medium.com/sweetmeat/how-to-keep-a-downstream-git-repository-current-with-upstream-repository-changes-10b76fad6d97
+
 # Issues with lychee:
 https://github.com/topics/secrets-detection
