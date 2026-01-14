@@ -9,7 +9,7 @@ ci:
   submodules: false
 repos:
   - repo: https://github.com/renovatebot/pre-commit-hooks
-    rev: 42.57.1
+    rev: 42.81.3
     hooks:
       - id: renovate-config-validator
   - repo: https://github.com/eslint/eslint
@@ -26,7 +26,7 @@ repos:
         exclude: ^(src/test/resources/yourkey.txt|src/test/resources/secondkey.txt)
       - id: trailing-whitespace
   - repo: https://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.104.0
+    rev: v1.105.0
     hooks:
       - id: terraform_fmt
       - id: terraform_tflint
@@ -46,7 +46,7 @@ repos:
           - "--args=--only=terraform_workspace_remote"
       - id: terraform_docs
   - repo: https://github.com/alessandrojcm/commitlint-pre-commit-hook
-    rev: v9.23.0
+    rev: v9.24.0
     hooks:
       - id: commitlint
         stages: [commit-msg]
