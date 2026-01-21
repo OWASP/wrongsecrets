@@ -1,0 +1,18 @@
+You can solve this challenge by the following alternative solutions:
+
+1. Find the bot token in the source code
+- Look at the Challenge60 class in the source code
+- Find the encoded bot token in the `getBotToken()` method
+- Decode the Base64-encoded string (it's double-encoded)
+- The token format is: `BOTID:TOKEN_STRING`
+
+2. Use the bot token to access the Telegram channel
+- The bot token can be used with the Telegram Bot API
+- Visit https://t.me/WrongsecretsBot to see the channel
+- Look for messages in the channel that contain the secret
+- For this challenge, the secret is: `telegram_secret_found_in_channel`
+
+3. Analyze the code structure
+- The challenge follows the same pattern as other social media challenges
+- Check how the `getTelegramSecret()` method works
+- Look for hardcoded return values that represent the expected answer
