@@ -20,10 +20,10 @@ provider-specific features, making it easy to adapt or extend.
 ## Notes
 
 - The deployment uses the public Docker Hub image `owasp/wrongsecrets`.
-- Image pulling depends on cluster network configuration.  
+- Image pulling depends on cluster network configuration.
   If pods remain in `ImagePullBackOff`, verify that the cluster
   has outbound internet access and can pull images from Docker Hub.
-  
+
 ---
 ## Deployment
 
