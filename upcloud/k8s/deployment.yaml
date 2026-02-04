@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wrongsecrets
+  labels:
+    app: wrongsecrets
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wrongsecrets
+  template:
+    metadata:
+      labels:
+        app: wrongsecrets
+    spec:
+      containers:
+        - name: wrongsecrets
+          image:  owasp/wrongsecrets
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SERVER_PORT
+              value: "8080"
