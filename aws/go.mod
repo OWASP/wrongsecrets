@@ -2,7 +2,7 @@ module wrongsecrets
 
 go 1.24.0
 
-toolchain go1.25.5
+toolchain go1.25.7
 
 require github.com/gruntwork-io/terratest v0.51.0
 
