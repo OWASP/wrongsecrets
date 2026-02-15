@@ -1,4 +1,4 @@
-# syntax=docker/dockerfile:1.20
+# syntax=docker/dockerfile:1.21
 FROM debian:stable-slim
 
 RUN --mount=type=secret,id=db_user \
