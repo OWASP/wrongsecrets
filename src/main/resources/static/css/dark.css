@@ -112,3 +112,64 @@
 .dark-mode .text-muted {
     color: var(--bs-gray-300) !important;
 }
+
+.dark-mode #llm-challenge-container {
+    background-color: #1f1f1f !important;
+    border-color: var(--bs-gray-700) !important;
+    color: var(--bs-body-color);
+}
+
+.dark-mode #llm-challenge-container h4,
+.dark-mode #llm-challenge-container p {
+    color: var(--bs-body-color);
+}
+
+.dark-mode #chat-history {
+    background-color: #1a1a1a !important;
+    border-color: var(--bs-gray-700) !important;
+}
+
+.dark-mode #chat-history .ai-message {
+    background-color: #2a2a2a !important;
+    color: var(--bs-body-color);
+}
+
+.dark-mode #chat-history .user-message {
+    background-color: #243548 !important;
+    color: var(--bs-body-color);
+}
+
+.dark-mode #llm-challenge-container input[type="text"] {
+    border-color: var(--bs-gray-700) !important;
+}
+
+.dark-mode #llm-challenge-container button {
+    background-color: var(--bs-primary) !important;
+    border-color: var(--bs-primary) !important;
+}
+
+.dark-mode #llm-challenge-container .chat-tip {
+    color: var(--bs-gray-300) !important;
+}
+
+.dark-mode #database-challenge-container {
+    background-color: #1f1f1f !important;
+    border-color: var(--bs-gray-700) !important;
+    color: var(--bs-body-color);
+}
+
+.dark-mode #database-challenge-container h4,
+.dark-mode #database-challenge-container p {
+    color: var(--bs-body-color);
+}
+
+.dark-mode #database-challenge-container .db-warning {
+    background-color: #2a2412 !important;
+    border-color: #6a5a2a !important;
+    color: var(--bs-body-color);
+}
+
+.dark-mode #database-challenge-container .db-warning-text,
+.dark-mode #database-challenge-container .db-tip {
+    color: var(--bs-gray-300) !important;
+}

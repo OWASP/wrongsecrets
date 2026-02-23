@@ -456,7 +456,6 @@ body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetic
 
         /* Challenge 58 specific styles */
         .demo-section {{
-            background: #fff3cd;
             border: 1px solid #ffeaa7;
             border-radius: 6px;
             padding: 15px;
