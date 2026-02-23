@@ -13,11 +13,10 @@ import org.owasp.wrongsecrets.WrongSecretsApplication;
 import org.owasp.wrongsecrets.challenges.kubernetes.Challenge5;
 import org.owasp.wrongsecrets.challenges.kubernetes.Challenge6;
 import org.owasp.wrongsecrets.challenges.kubernetes.Challenge7;
+import org.owasp.wrongsecrets.testutil.MockMvcTestSupport;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest(
     properties = {
@@ -28,10 +27,7 @@ import org.springframework.test.web.servlet.MockMvc;
       "SPECIAL_SPECIAL_K8S_SECRET=test6"
     },
     classes = WrongSecretsApplication.class)
-@AutoConfigureMockMvc
-class ChallengesControllerCTFModeWithPresetK8sNoVaultValuesTest {
-
-  @Autowired private MockMvc mvc;
+class ChallengesControllerCTFModeWithPresetK8sNoVaultValuesTest extends MockMvcTestSupport {
   @Autowired private Challenge5 challenge5;
   @Autowired private Challenge6 challenge6;
   @Autowired private Challenge7 challenge7;

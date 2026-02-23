@@ -7,17 +7,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import org.junit.jupiter.api.Test;
 import org.owasp.wrongsecrets.challenges.docker.WrongSecretsConstants;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.owasp.wrongsecrets.testutil.MockMvcTestSupport;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 @SpringBootTest(properties = {"K8S_ENV=docker"})
-@AutoConfigureMockMvc
-class SecretLeakageControllerTest {
-
-  @Autowired private MockMvc mockMvc;
+class SecretLeakageControllerTest extends MockMvcTestSupport {
 
   @Test
   void spoil1() throws Exception {
@@ -30,7 +25,7 @@ class SecretLeakageControllerTest {
   }
 
   private void solveChallenge(String endpoint, String solution) throws Exception {
-    this.mockMvc
+    this.mvc
         .perform(
             MockMvcRequestBuilders.post(endpoint)
                 .param("solution", solution)
@@ -41,7 +36,7 @@ class SecretLeakageControllerTest {
   }
 
   private void testSpoil(String endpoint, String solution) throws Exception {
-    this.mockMvc
+    this.mvc
         .perform(MockMvcRequestBuilders.get(endpoint))
         .andExpect(status().isOk())
         .andExpect(content().string(containsString(solution)));

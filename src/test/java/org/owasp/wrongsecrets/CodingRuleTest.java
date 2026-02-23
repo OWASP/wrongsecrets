@@ -28,5 +28,5 @@ public class CodingRuleTest {
           .areNotDeclaredIn(CypressIntegrationTest.class)
           .should()
           .beAnnotatedWith(LocalServerPort.class)
-          .because("we use AutoConfigureMockMvc for testing");
+          .because("we use MockMvcTestSupport for testing");
 }

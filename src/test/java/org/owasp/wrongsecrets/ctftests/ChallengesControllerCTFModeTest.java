@@ -11,19 +11,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import org.junit.jupiter.api.Test;
 import org.owasp.wrongsecrets.WrongSecretsApplication;
 import org.owasp.wrongsecrets.challenges.docker.Challenge1;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.owasp.wrongsecrets.testutil.MockMvcTestSupport;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest(
     properties = {"K8S_ENV=docker", "ctf_enabled=true", "ctf_key=randomtextforkey"},
     classes = WrongSecretsApplication.class)
-@AutoConfigureMockMvc
-class ChallengesControllerCTFModeTest {
-
-  @Autowired private MockMvc mvc;
+class ChallengesControllerCTFModeTest extends MockMvcTestSupport {
 
   @Test
   void shouldNotSpoilWhenInCTFMode() throws Exception {

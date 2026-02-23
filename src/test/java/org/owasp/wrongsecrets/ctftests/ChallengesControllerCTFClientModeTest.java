@@ -12,11 +12,10 @@ import org.junit.jupiter.api.Test;
 import org.owasp.wrongsecrets.Challenges;
 import org.owasp.wrongsecrets.WrongSecretsApplication;
 import org.owasp.wrongsecrets.challenges.docker.Challenge1;
+import org.owasp.wrongsecrets.testutil.MockMvcTestSupport;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest(
     properties = {
@@ -28,10 +27,7 @@ import org.springframework.test.web.servlet.MockMvc;
       "challenge_acht_ctf_to_provide_to_host_value=workit"
     },
     classes = WrongSecretsApplication.class)
-@AutoConfigureMockMvc
-class ChallengesControllerCTFClientModeTest {
-
-  @Autowired private MockMvc mvc;
+class ChallengesControllerCTFClientModeTest extends MockMvcTestSupport {
   @Autowired private Challenges challenges;
 
   @Test

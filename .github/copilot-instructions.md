@@ -30,8 +30,8 @@ wrongsecrets/
 
 ## Technology Stack
 
-- **Framework**: Spring Boot 3.5.x
-- **Java Version**: 23 (configured in pom.xml)
+- **Framework**: Spring Boot 4.0.x
+- **Java Version**: 25 (configured in pom.xml)
 - **Build Tool**: Maven (use `./mvnw`)
 - **Testing**: JUnit 5, Spring Boot Test
 - **Container**: Docker + Kubernetes

@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.5.10</version>
+    <version>4.0.3</version>
     <!-- lookup parent from repository -->
   </parent>
 
@@ -48,7 +48,7 @@
     <asciidoctorj.version>3.0.1</asciidoctorj.version>
     <aws.sdk.version>2.40.9</aws.sdk.version>
     <bootstrap.version>5.3.8</bootstrap.version>
-    <com.azure.spring.version>6.0.0</com.azure.spring.version>
+    <com.azure.spring.version>7.0.0</com.azure.spring.version>
     <cyclonedx.core.version>11.0.1</cyclonedx.core.version>
     <datatables.version>2.3.7</datatables.version>
     <dependency-check-maven.version>12.1.9</dependency-check-maven.version>
@@ -64,9 +64,9 @@
     <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
     <maven.compiler.proc>full</maven.compiler.proc>
     <maven.compiler.target>25</maven.compiler.target>
-    <spring.cloud-version>2025.0.0</spring.cloud-version>
-    <spring.security.version>6.2.3</spring.security.version>
+    <spring.cloud-version>2025.1.1</spring.cloud-version>
     <system-stubs-jupiter.version>2.1.8</system-stubs-jupiter.version>
+    <testcontainers.version>1.21.4</testcontainers.version>
     <thymeleaf-extras-springsecurity6.version>3.1.3.RELEASE</thymeleaf-extras-springsecurity6.version>
     <thymeleaf.layout.version>3.4.0</thymeleaf.layout.version>
   </properties>
@@ -147,17 +147,14 @@
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-config</artifactId>
-      <version>${spring-security.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-web</artifactId>
-      <version>${spring-security.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-test</artifactId>
-      <version>${spring-security.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -264,7 +261,7 @@
     <dependency>
       <groupId>org.springdoc</groupId>
       <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-      <version>2.8.15</version>
+      <version>3.0.1</version>
     </dependency>
     <dependency>
       <groupId>com.azure.spring</groupId>
@@ -274,6 +271,12 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-test-autoconfigure</artifactId>
       <scope>test</scope>
     </dependency>
 
@@ -323,7 +326,7 @@
     <dependency>
       <groupId>org.springframework.vault</groupId>
       <artifactId>spring-vault-core</artifactId>
-      <version>3.2.0</version>
+      <version>4.0.1</version>
     </dependency>
   </dependencies>
 
@@ -543,8 +546,8 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>${maven-compiler-plugin.version}</version>
         <configuration>
-          <source>23</source>
-          <target>23</target>
+          <source>25</source>
+          <target>25</target>
         </configuration>
       </plugin>
       <plugin>

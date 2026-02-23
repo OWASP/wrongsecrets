@@ -16,41 +16,34 @@ import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.owasp.wrongsecrets.testutil.MockMvcTestSupport;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 @SpringBootTest
-@AutoConfigureMockMvc
 @Slf4j
-class SpringDocTest {
-
-  @Autowired protected MockMvc mockMvc;
+class SpringDocTest extends MockMvcTestSupport {
   @Autowired RequestMappingHandlerMapping requestMappingHandlerMapping;
 
   @Test
   void shouldRedirectToSwaggerUiPage() throws Exception {
-    mockMvc
-        .perform(get("/swagger-ui.html"))
+    mvc.perform(get("/swagger-ui.html"))
         .andExpect(status().is3xxRedirection())
         .andExpect(redirectedUrl("/swagger-ui/index.html"));
   }
 
   @Test
   void shouldDisplaySwaggerUiPage() throws Exception {
-    mockMvc
-        .perform(get("/swagger-ui/index.html"))
+    mvc.perform(get("/swagger-ui/index.html"))
         .andExpect(status().isOk())
         .andExpect(content().string(containsString("Swagger UI")));
   }
 
   @Test
   void getApiDocs() throws Exception {
-    mockMvc
-        .perform(get("/v3/api-docs"))
+    mvc.perform(get("/v3/api-docs"))
         .andExpect(status().isOk())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
         .andExpect(jsonPath("$.openapi", is("3.1.0")))
@@ -64,8 +57,7 @@ class SpringDocTest {
   @Test
   void endpointsPresent() throws Exception {
     String json =
-        mockMvc
-            .perform(get("/v3/api-docs"))
+        mvc.perform(get("/v3/api-docs"))
             .andExpect(status().isOk())
             .andReturn()
             .getResponse()
