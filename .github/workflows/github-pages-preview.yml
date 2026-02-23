@@ -2,7 +2,6 @@ name: GitHub Pages PR Preview
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened, closed]
     paths:
       - 'src/main/resources/templates/**'
       - 'src/main/resources/static/**'
