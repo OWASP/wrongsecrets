@@ -30,3 +30,6 @@ https://medium.com/sweetmeat/how-to-keep-a-downstream-git-repository-current-wit
 
 # Issues with lychee:
 https://github.com/topics/secrets-detection
+
+# Helm docs are flaky in CI (connection resets)
+https://helm.sh/docs/intro/install/
