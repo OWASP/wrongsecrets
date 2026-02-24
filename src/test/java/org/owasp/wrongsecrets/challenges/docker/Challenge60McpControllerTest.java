@@ -96,4 +96,27 @@ class Challenge60McpControllerTest {
 
     assertThat(response).containsKey("error");
   }
+
+  @Test
+  void crlfInMethodShouldBeHandledWithoutError() {
+    Map<String, Object> request =
+        Map.of("jsonrpc", "2.0", "id", 7, "method", "unknown\r\ninjected");
+    Map<String, Object> response = controller.handleMcpRequest(request);
+
+    assertThat(response).containsKey("error");
+    @SuppressWarnings("unchecked")
+    Map<String, Object> error = (Map<String, Object>) response.get("error");
+    assertThat(error.get("code")).isEqualTo(-32601);
+  }
+
+  @Test
+  void crlfInCommandShouldBeHandledWithoutError() {
+    Map<String, Object> arguments = Map.of("command", "env\r\ninjected");
+    Map<String, Object> params = Map.of("name", "execute_command", "arguments", arguments);
+    Map<String, Object> request =
+        Map.of("jsonrpc", "2.0", "id", 8, "method", "tools/call", "params", params);
+    Map<String, Object> response = controller.handleMcpRequest(request);
+
+    assertThat(response).containsKey("result");
+  }
 }

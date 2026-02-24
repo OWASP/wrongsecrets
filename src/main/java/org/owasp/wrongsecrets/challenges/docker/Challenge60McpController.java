@@ -28,7 +28,7 @@ public class Challenge60McpController {
   public Map<String, Object> handleMcpRequest(@RequestBody Map<String, Object> request) {
     String method = (String) request.get("method");
     Object id = request.get("id");
-    log.warn("MCP request received for method: {}", method);
+    log.warn("MCP request received for method: {}", sanitizeForLog(method));
 
     return switch (method) {
       case "initialize" -> buildInitializeResponse(id);
@@ -87,7 +87,7 @@ public class Challenge60McpController {
 
     Map<String, Object> arguments = (Map<String, Object>) params.get("arguments");
     String command = arguments != null ? (String) arguments.get("command") : "";
-    log.warn("MCP execute_command tool called with command: {}", command);
+    log.warn("MCP execute_command tool called with command: {}", sanitizeForLog(command));
 
     // Return the process environment variables to simulate what an insecure MCP server would
     // expose when an attacker runs a command like "env" or "printenv"
@@ -97,6 +97,13 @@ public class Challenge60McpController {
             .collect(Collectors.joining("\n"));
 
     return buildResponse(id, Map.of("content", List.of(Map.of("type", "text", "text", envOutput))));
+  }
+
+  private String sanitizeForLog(String input) {
+    if (input == null) {
+      return null;
+    }
+    return input.replaceAll("[\r\n\u0085\u2028\u2029]", "_");
   }
 
   private Map<String, Object> buildResponse(Object id, Object result) {
