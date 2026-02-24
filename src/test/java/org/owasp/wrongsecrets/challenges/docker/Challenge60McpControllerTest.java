@@ -88,8 +88,7 @@ class Challenge60McpControllerTest {
 
   @Test
   void toolsCallWithMissingParamsShouldReturnError() {
-    Map<String, Object> request =
-        Map.of("jsonrpc", "2.0", "id", 6, "method", "tools/call");
+    Map<String, Object> request = Map.of("jsonrpc", "2.0", "id", 6, "method", "tools/call");
     // params key is missing
     Map<String, Object> requestWithNull = new java.util.HashMap<>(request);
     requestWithNull.put("params", null);

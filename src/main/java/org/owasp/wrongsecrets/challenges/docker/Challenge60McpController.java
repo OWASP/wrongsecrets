@@ -69,10 +69,7 @@ public class Challenge60McpController {
                         Map.of(
                             "command",
                             Map.of(
-                                "type",
-                                "string",
-                                "description",
-                                "The shell command to execute")),
+                                "type", "string", "description", "The shell command to execute")),
                         "required",
                         List.of("command"))))));
   }
@@ -99,8 +96,7 @@ public class Challenge60McpController {
             .map(e -> e.getKey() + "=" + e.getValue())
             .collect(Collectors.joining("\n"));
 
-    return buildResponse(
-        id, Map.of("content", List.of(Map.of("type", "text", "text", envOutput))));
+    return buildResponse(id, Map.of("content", List.of(Map.of("type", "text", "text", envOutput))));
   }
 
   private Map<String, Object> buildResponse(Object id, Object result) {

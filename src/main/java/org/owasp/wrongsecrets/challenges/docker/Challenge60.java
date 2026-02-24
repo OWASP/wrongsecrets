@@ -6,7 +6,9 @@ import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-/** Challenge demonstrating how an insecure MCP server exposes secrets from environment variables. */
+/**
+ * Challenge demonstrating how an insecure MCP server exposes secrets from environment variables.
+ */
 @Component
 public class Challenge60 implements Challenge {
 
