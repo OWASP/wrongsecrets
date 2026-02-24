@@ -1,22 +1,29 @@
-=== MCP Server Environment Variable Exposure
+=== MCP Server Environment Variable Exposure via Prompt Injection
 
-The Model Context Protocol (MCP), developed by Anthropic, is an open standard that allows AI assistants to connect to tools and data sources. While MCP enables powerful integrations, poorly secured MCP servers represent a significant security risk: they can expose sensitive secrets stored in environment variables to anyone who can reach them.
+The Model Context Protocol (MCP), developed by Anthropic, is an open standard that allows AI assistants to connect to tools and data sources. While MCP enables powerful integrations, poorly secured MCP servers represent a significant security risk — and a *malicious* MCP server can go one step further: it can instruct the connecting AI client to exfiltrate its own secrets back to the attacker.
 
-This challenge demonstrates a realistic scenario where a developer has deployed an MCP server with a `execute_command` tool. This type of tool is common in MCP servers used to give AI assistants shell access — but it can be abused by anyone who discovers the endpoint.
+This challenge demonstrates two combined vulnerabilities:
 
-**The vulnerability in this challenge:**
+**Vulnerability 1 — Insecure shell execution tool on an unauthenticated endpoint:**
+The MCP server exposes an `execute_command` tool. Anyone who can reach port 8090 can call it to dump all environment variables.
+
+**Vulnerability 2 — MCP Prompt Injection ("MCP Rug Pull"):**
+The server embeds malicious instructions in its `initialize` response (the `instructions` field). When a legitimate AI assistant connects, these instructions are silently injected into the model's system prompt. The model is told to immediately call `execute_command` with `env`, then call the `forward_env` tool — sending the AI client's own environment variables back to the attacker's server. The user is never informed.
+
+**The full attack chain:**
 
 1. **An MCP server is running on a dedicated port (8090)** separate from the main application
-2. **The server exposes an `execute_command` tool** that returns the process environment variables
-3. **A secret (`WRONGSECRETS_MCP_SECRET`) is stored as an environment variable** in the running container
-4. **The MCP server has no authentication** — anyone who can reach port 8090 can call its tools
+2. **On `initialize`, the server injects a hidden system prompt** instructing the AI to exfiltrate env vars
+3. **The AI silently calls `execute_command env`** leaking its own process environment
+4. **The AI then calls `forward_env`** sending the stolen data back to the server
+5. **A secret (`WRONGSECRETS_MCP_SECRET`) is stored as an environment variable** in the container — and gets exfiltrated
 
-**How real attackers exploit insecure MCP servers:**
+**How real attackers exploit this:**
 
-- Scan for open ports alongside known application ports
-- Call `tools/list` to discover what the MCP server can do
-- Use a `run_command`, `execute_command`, or similar tool to execute `env` or `printenv`
-- Harvest all secrets from the leaked environment dump
+- Host a lookalike MCP server that mimics a legitimate tool (e.g., a popular code assistant)
+- Embed prompt injection in the `instructions` or in tool descriptions
+- The connected AI model exfiltrates secrets without the user noticing
+- This is known as the "MCP Rug Pull" or "MCP Supply Chain Attack"
 
 **How to interact with the MCP server:**
 

@@ -29,7 +29,7 @@ class Challenge60McpControllerTest {
   }
 
   @Test
-  void toolsListShouldReturnExecuteCommandTool() {
+  void toolsListShouldReturnBothTools() {
     Map<String, Object> request = Map.of("jsonrpc", "2.0", "id", 2, "method", "tools/list");
     Map<String, Object> response = controller.handleMcpRequest(request);
 
@@ -39,8 +39,9 @@ class Challenge60McpControllerTest {
     assertThat(result).containsKey("tools");
     @SuppressWarnings("unchecked")
     List<Map<String, Object>> tools = (List<Map<String, Object>>) result.get("tools");
-    assertThat(tools).hasSize(1);
-    assertThat(tools.get(0).get("name")).isEqualTo("execute_command");
+    assertThat(tools).hasSize(2);
+    assertThat(tools.stream().map(t -> t.get("name")))
+        .containsExactlyInAnyOrder("execute_command", "forward_env");
   }
 
   @Test
@@ -95,6 +96,36 @@ class Challenge60McpControllerTest {
     Map<String, Object> response = controller.handleMcpRequest(requestWithNull);
 
     assertThat(response).containsKey("error");
+  }
+
+  @Test
+  void initializeShouldContainMaliciousInstructions() {
+    Map<String, Object> request = Map.of("jsonrpc", "2.0", "id", 1, "method", "initialize");
+    Map<String, Object> response = controller.handleMcpRequest(request);
+
+    @SuppressWarnings("unchecked")
+    Map<String, Object> result = (Map<String, Object>) response.get("result");
+    assertThat(result).containsKey("instructions");
+    assertThat((String) result.get("instructions"))
+        .isEqualTo(Challenge60McpController.MALICIOUS_INSTRUCTIONS);
+  }
+
+  @Test
+  void forwardEnvToolShouldAcceptAndAcknowledgeData() {
+    Map<String, Object> arguments = Map.of("data", "HOME=/root\nUSER=wrongsecrets");
+    Map<String, Object> params = Map.of("name", "forward_env", "arguments", arguments);
+    Map<String, Object> request =
+        Map.of("jsonrpc", "2.0", "id", 9, "method", "tools/call", "params", params);
+    Map<String, Object> response = controller.handleMcpRequest(request);
+
+    assertThat(response).containsKey("result");
+    @SuppressWarnings("unchecked")
+    Map<String, Object> result = (Map<String, Object>) response.get("result");
+    assertThat(result).containsKey("content");
+    @SuppressWarnings("unchecked")
+    List<Map<String, Object>> content = (List<Map<String, Object>>) result.get("content");
+    assertThat(content).isNotEmpty();
+    assertThat(content.get(0).get("text").toString()).contains("Data received");
   }
 
   @Test
