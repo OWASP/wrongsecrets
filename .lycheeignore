@@ -19,3 +19,17 @@ https://twitter.com/intent/tweet?*
 https://github.com/OWASP/CheatSheetSeries*
 https://github.com/OWASP/wrongsecrets*
 https://github.com/OWASP/www-project-wrongsecrets*
+
+# HashiCorp sites are rate-limited and cause 429 errors
+https://developer.hashicorp.com/*
+https://learn.hashicorp.com/*
+https://www.vaultproject.io/*
+
+# Medium not working along:
+https://medium.com/sweetmeat/how-to-keep-a-downstream-git-repository-current-with-upstream-repository-changes-10b76fad6d97
+
+# Issues with lychee:
+https://github.com/topics/secrets-detection
+
+# Helm docs are flaky in CI (connection resets)
+https://helm.sh/docs/intro/install/

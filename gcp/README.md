@@ -15,7 +15,7 @@ Have the following tools installed:
 -   jq [Installation](https://stedolan.github.io/jq/download/)
 -   Kubectl [Installation](https://kubernetes.io/docs/tasks/tools/)
 -   sed
--   Terraform CLI - [Installation](https://learn.hashicorp.com/tutorials/terraform/install-cli)
+-   Terraform CLI - [Installation](https://developer.hashicorp.com/terraform/install)
 -   Tfenv (Optional) - [Installation](https://github.com/tfutils/tfenv)
 -   vault - [Installation](https://developer.hashicorp.com/vault/install)
 -   Wget - [Installation](https://www.jcchouinard.com/wget/)
@@ -139,7 +139,7 @@ The documentation below is auto-generated to give insight on what's created via 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | The GKE cluster name | `string` | `"wrongsecrets-exercise-cluster"` | no |
-| <a name="input_cluster_version"></a> [cluster\_version](#input\_cluster\_version) | The GKE cluster version to use | `string` | `"1.33"` | no |
+| <a name="input_cluster_version"></a> [cluster\_version](#input\_cluster\_version) | The GKE cluster version to use | `string` | `"1.34"` | no |
 | <a name="input_project_id"></a> [project\_id](#input\_project\_id) | project id | `string` | n/a | yes |
 | <a name="input_region"></a> [region](#input\_region) | The GCP region to use | `string` | `"europe-west4"` | no |
 

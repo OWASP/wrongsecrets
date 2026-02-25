@@ -1,4 +1,4 @@
-FROM ubuntu:plucky-20250730
+FROM ubuntu:plucky-20251001
 RUN useradd -m -u 2000 wrongsecrets
 
 COPY --chown=wrongsecrets executables/ /home/wrongsecrets/

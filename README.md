@@ -16,7 +16,7 @@
 
 Welcome to the OWASP WrongSecrets game! The game is packed with real life examples of how to _not_ store secrets in your software. Each of these examples is captured in a challenge, which you need to solve using various tools and techniques. Solving these challenges will help you recognize common mistakes & can help you to reflect on your own secrets management strategy.
 
-Can you solve all the 58 challenges?
+Can you solve all the 60 challenges?
 
 Try some of them on [our Heroku demo environment](https://wrongsecrets.herokuapp.com/).
 
@@ -322,7 +322,7 @@ Make sure you have the following installed:
 -   helm [Install from here](https://helm.sh/docs/intro/install/),
 -   kubectl [Install from here](https://kubernetes.io/docs/tasks/tools/),
 -   jq [Install from here](https://stedolan.github.io/jq/download/),
--   vault [Install from here](https://www.vaultproject.io/downloads),
+-   vault [Install from here](https://developer.hashicorp.com/vault/install),
 -   grep, Cat, and Sed
 
 Run `./k8s-vault-minikube-start.sh`, when the script is done, then the challenges will wait for you at <http://localhost:8080> . This will allow you to run challenges 1-8, 12-48.
@@ -573,13 +573,76 @@ Want to check why something in vault is not working in kubernetes? Do `kubectl e
 We have CycloneDX and OWASP Dependency-check integrated to check dependencies for vulnerabilities.
 You can use the OWASP Dependency-checker by calling `mvn dependency-check:aggregate` and `mvn cyclonedx:makeBom` to use CycloneDX to create an SBOM.
 
+### Dependency-Check Maven Plugin Configuration
+
+OWASP WrongSecrets uses the [`dependency-check-maven`](https://jeremylong.github.io/DependencyCheck/dependency-check-maven/index.html) plugin to automatically scan project dependencies for known vulnerabilities (CVEs).
+
+#### How It Works
+
+- The plugin runs during the Maven build (`./mvnw clean install`) and checks all dependencies against public vulnerability databases.
+- By default, it uses the NVD (National Vulnerability Database) and can also use OSS Index for additional coverage.
+
+#### Configuration Highlights
+
+The plugin is configured in `pom.xml` under the `<build><plugins>` section:
+
+```xml
+<plugin>
+  <groupId>org.owasp</groupId>
+  <artifactId>dependency-check-maven</artifactId>
+  <version>${dependency-check-maven.version}</version>
+  <configuration>
+    <nvdApiKey>...</nvdApiKey>
+    <assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>
+    <ossIndexServerId>ossindex</ossIndexServerId>
+    <ossindexAnalyzerEnabled>true</ossindexAnalyzerEnabled> <!-- SET THIS TO FALSE IF YOU HAVE NO SONATYPE ACCOUNT! -->
+  </configuration>
+  <executions>
+    <execution>
+      <goals>
+        <goal>check</goal>
+      </goals>
+    </execution>
+  </executions>
+</plugin>
+```
+
+- **nvdApiKey**: API key for accessing the NVD database (recommended for faster and more reliable scans).
+- **ossIndexServerId**: References credentials in your Maven `settings.xml` for OSS Index (see below).
+- **ossindexAnalyzerEnabled**: Set to `true` to enable OSS Index scanning. If you encounter authentication errors (401), set this to `false` to disable OSS Index.
+
+#### Authenticating with OSS Index
+
+To use OSS Index, you need to add your credentials to your Maven `settings.xml`:
+
+```xml
+<servers>
+  <server>
+    <id>ossindex</id>
+    <username>YOUR_OSSINDEX_USERNAME</username>
+    <password>YOUR_OSSINDEX_API_TOKEN</password>
+  </server>
+</servers>
+```
+
+Replace `YOUR_OSSINDEX_USERNAME` and `YOUR_OSSINDEX_API_TOKEN` with your OSS Index account details.
+
+#### Troubleshooting
+
+- If you see `401 Unauthorized` errors for OSS Index, check your credentials or disable OSS Index by setting `<ossindexAnalyzerEnabled>false</ossindexAnalyzerEnabled>` in `pom.xml`.
+- You can always run the build without OSS Index if you prefer only NVD-based scanning.
+
+#### More Info
+
+See [Dependency-Check Maven Plugin Documentation](https://jeremylong.github.io/DependencyCheck/dependency-check-maven/index.html) for advanced configuration options.
+
 ### Get the project started in IntelliJ IDEA
 
-Requirements: make sure you have the following tools installed: [Docker](https://www.docker.com/products/docker-desktop/), [Java23 JDK](https://jdk.java.net/23/), [NodeJS 24](https://nodejs.org/en/download/current) and [IntelliJ IDEA](https://www.jetbrains.com/idea/download).
+Requirements: make sure you have the following tools installed: [Docker](https://www.docker.com/products/docker-desktop/), [Java25 JDK](https://jdk.java.net/25/), [NodeJS 24](https://nodejs.org/en/download/current) and [IntelliJ IDEA](https://www.jetbrains.com/idea/download).
 
 1. Fork and clone the project as described in the [documentation](https://github.com/OWASP/wrongsecrets/blob/master/CONTRIBUTING.md).
 2. Import the project in IntelliJ (e.g. import as mvn project / local sources)
-3. Go to the project settings and make sure it uses Java23 (And that the JDK can be found)
+3. Go to the project settings and make sure it uses Java25 (And that the JDK can be found)
 4. Go to the IDE settings>Language & Frameworks > Lombok and make sure Lombok processing is enabled
 5. Open the Maven Tab in your IDEA and run "Reload All Maven Projects" to make the system sync and download everything. Next, in that same tab use the "install" option as part of the OWASP WrongSecrets Lifecycle to genereate the asciidoc and such.
 6. Now run the `main` method in `org.owasp.wrongsecrets.WrongSecretsApplication.java`. This should fail with a stack trace.
@@ -711,7 +774,7 @@ If you want to run WrongSecrets but without certain challenges you don't want to
 *_NOTE_* Please note that we do not deliver any support to your fork when you follow the process below. Please understand that license and copyright of the original application remain intact for your Fork.
 
 Requirements:
-- Have the JDK of Java 22 installed;
+- Have the JDK of Java 25 installed;
 - Have an account at a registry to which you can push your variant of the WrongSecrets container;
 
 Here are the steps you have to follow to create your own release of WrongSecrets with certain challenges disabled:

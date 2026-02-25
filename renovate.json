@@ -65,17 +65,6 @@
         },
         {
             "customType": "regex",
-            "managerFilePatterns": [
-                "/aws/k8s-aws-alb-script.sh/"
-            ],
-            "depNameTemplate": "kubernetes-sigs/aws-alb-ingress-controller",
-            "matchStrings": [
-                "LBC_VERSION=\"(?<currentValue>.*?)\""
-            ],
-            "datasourceTemplate": "github-releases"
-        },
-        {
-            "customType": "regex",
             "description": "Track Docker base images in Dockerfiles",
             "managerFilePatterns": [
                 "/(^|/)Dockerfile[^/]*$/"

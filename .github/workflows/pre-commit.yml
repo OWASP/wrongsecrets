@@ -20,19 +20,19 @@ jobs:
       - name: Checkout git repository
         uses: actions/checkout@v5
       - name: Setup python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
-          python-version: "3.13"
+          python-version: "3.14"
       - name: Format python code with black
         uses: psf/black@stable
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version: 24
           cache: "npm"
       - uses: actions/setup-java@v5
         with:
           distribution: "temurin"
-          java-version: "23"
+          java-version: "25"
       - name: Install npm dependencies
         run: npm install
       - uses: actions/cache@v4
@@ -45,7 +45,7 @@ jobs:
         with:
           terraform_version: 1.9.8
       - name: Setup TFLint
-        uses: terraform-linters/setup-tflint@v5
+        uses: terraform-linters/setup-tflint@v6
         with:
           tflint_version: ${{env.TFLINT_VERSION}}
       - name: Setup Terraform docs

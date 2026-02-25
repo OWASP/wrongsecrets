@@ -17,7 +17,7 @@ Have the following tools installed:
 -   openssl
 -   Kubectl [Installation](https://kubernetes.io/docs/tasks/tools/)
 -   sed
--   Terraform CLI - [Installation](https://learn.hashicorp.com/tutorials/terraform/install-cli)
+-   Terraform CLI - [Installation](https://developer.hashicorp.com/terraform/install)
 -   Tfenv (Optional) - [Installation](https://github.com/tfutils/tfenv)
 -   Vault - [Installation](https://developer.hashicorp.com/vault/install)
 -   Wget - [Installation](https://www.jcchouinard.com/wget/)
@@ -142,7 +142,7 @@ The documentation below is auto-generated to give insight on what's created via 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | The AKS cluster name | `string` | `"wrongsecrets-exercise-cluster"` | no |
-| <a name="input_cluster_version"></a> [cluster\_version](#input\_cluster\_version) | The AKS cluster version to use | `string` | `"1.33"` | no |
+| <a name="input_cluster_version"></a> [cluster\_version](#input\_cluster\_version) | The AKS cluster version to use | `string` | `"1.34"` | no |
 | <a name="input_region"></a> [region](#input\_region) | The Azure region to use | `string` | `"East US"` | no |
 
 ## Outputs

@@ -7,13 +7,13 @@ variable "region" {
 variable "cluster_version" {
   description = "The EKS cluster version to use"
   type        = string
-  default     = "1.33"
+  default     = "1.34"
 }
 
 variable "cluster_name" {
   description = "The EKS cluster name"
   type        = string
-  default     = "wrongsecrets-exercise-cluster"
+  default     = "wrongsecrets"
 }
 
 variable "tags" {
