@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.5.10</version>
+    <version>3.5.11</version>
     <!-- lookup parent from repository -->
   </parent>
 
@@ -44,14 +44,21 @@
   <!--    </distributionManagement>-->
   <properties>
     <KeePassJava2.version>2.2.4</KeePassJava2.version>
+    <archunit.version>1.4.1</archunit.version>
     <asciidoctor.maven.plugin.version>3.2.0</asciidoctor.maven.plugin.version>
     <asciidoctorj.version>3.0.1</asciidoctorj.version>
     <aws.sdk.version>2.40.9</aws.sdk.version>
     <bootstrap.version>5.3.8</bootstrap.version>
+    <checkstyle-maven.version>3.6.0</checkstyle-maven.version>
+    <checkstyle.version>11.1.0</checkstyle.version>
     <com.azure.spring.version>6.0.0</com.azure.spring.version>
+    <cyclonedx-maven.version>2.9.1</cyclonedx-maven.version>
     <cyclonedx.core.version>11.0.1</cyclonedx.core.version>
     <datatables.version>2.3.7</datatables.version>
     <dependency-check-maven.version>12.1.9</dependency-check-maven.version>
+    <exec-maven-plugin.version>3.6.3</exec-maven-plugin.version>
+    <findsecbugs.version>1.14.0</findsecbugs.version>
+    <frontend-maven-plugin.version>1.15.4</frontend-maven-plugin.version>
     <gatling-maven-plugin.version>4.21.0</gatling-maven-plugin.version>
     <gatling.version>3.14.9</gatling.version>
     <gcp.sdk.version>7.4.5</gcp.sdk.version>
@@ -62,13 +69,24 @@
     <jruby.version>10.0.3.0</jruby.version>
     <lombok.version>1.18.42</lombok.version>
     <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
+    <maven-surefire-plugin.version>3.5.4</maven-surefire-plugin.version>
     <maven.compiler.proc>full</maven.compiler.proc>
     <maven.compiler.target>25</maven.compiler.target>
-    <spring.cloud-version>2025.0.0</spring.cloud-version>
-    <spring.security.version>6.2.3</spring.security.version>
+    <node.version>v24.5.0</node.version>
+    <spotbugs-maven.version>4.9.8.2</spotbugs-maven.version>
+    <spotbugs.version>4.9.8</spotbugs.version>
+    <spotless-maven-plugin.version>3.2.1</spotless-maven-plugin.version>
+    <spring-boot.version>3.5.11</spring-boot.version>
+    <spring-vault.version>3.2.0</spring-vault.version>
+    <spring.cloud-version>2025.0.1</spring.cloud-version>
+    <spring.security.version>6.5.8</spring.security.version>
+    <springdoc.version>2.8.15</springdoc.version>
     <system-stubs-jupiter.version>2.1.8</system-stubs-jupiter.version>
+    <testcontainers-cypress.version>1.10.0</testcontainers-cypress.version>
+    <testcontainers.version>1.21.4</testcontainers.version>
     <thymeleaf-extras-springsecurity6.version>3.1.3.RELEASE</thymeleaf-extras-springsecurity6.version>
     <thymeleaf.layout.version>3.4.0</thymeleaf.layout.version>
+    <tidy-maven-plugin.version>1.4.0</tidy-maven-plugin.version>
   </properties>
 
   <dependencyManagement>
@@ -147,17 +165,17 @@
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-config</artifactId>
-      <version>${spring-security.version}</version>
+      <version>${spring.security.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-web</artifactId>
-      <version>${spring-security.version}</version>
+      <version>${spring.security.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-test</artifactId>
-      <version>${spring-security.version}</version>
+      <version>${spring.security.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -172,7 +190,7 @@
     <dependency>
       <groupId>org.testcontainers</groupId>
       <artifactId>testcontainers</artifactId>
-      <version>1.21.4</version>
+      <version>${testcontainers.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -264,7 +282,7 @@
     <dependency>
       <groupId>org.springdoc</groupId>
       <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-      <version>2.8.15</version>
+      <version>${springdoc.version}</version>
     </dependency>
     <dependency>
       <groupId>com.azure.spring</groupId>
@@ -306,24 +324,24 @@
     <dependency>
       <groupId>com.tngtech.archunit</groupId>
       <artifactId>archunit-junit5</artifactId>
-      <version>1.4.1</version>
+      <version>${archunit.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>com.github.spotbugs</groupId>
       <artifactId>spotbugs-annotations</artifactId>
-      <version>4.9.8</version>
+      <version>${spotbugs.version}</version>
     </dependency>
     <dependency>
       <groupId>io.github.wimdeblauwe</groupId>
       <artifactId>testcontainers-cypress</artifactId>
-      <version>1.10.0</version>
+      <version>${testcontainers-cypress.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.springframework.vault</groupId>
       <artifactId>spring-vault-core</artifactId>
-      <version>3.2.0</version>
+      <version>${spring-vault.version}</version>
     </dependency>
   </dependencies>
 
@@ -342,26 +360,26 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-checkstyle-plugin</artifactId>
-          <version>3.6.0</version>
+          <version>${checkstyle-maven.version}</version>
           <dependencies>
             <dependency>
               <groupId>com.puppycrawl.tools</groupId>
               <artifactId>checkstyle</artifactId>
-              <version>11.1.0</version>
+              <version>${checkstyle.version}</version>
             </dependency>
           </dependencies>
         </plugin>
         <plugin>
           <groupId>com.github.spotbugs</groupId>
           <artifactId>spotbugs-maven-plugin</artifactId>
-          <version>4.9.8.2</version>
+          <version>${spotbugs-maven.version}</version>
           <configuration>
             <omitVisitors>FindReturnRef</omitVisitors>
             <plugins>
               <plugin>
                 <groupId>com.h3xstream.findsecbugs</groupId>
                 <artifactId>findsecbugs-plugin</artifactId>
-                <version>1.14.0</version>
+                <version>${findsecbugs.version}</version>
               </plugin>
             </plugins>
           </configuration>
@@ -370,7 +388,7 @@
             <dependency>
               <groupId>com.github.spotbugs</groupId>
               <artifactId>spotbugs</artifactId>
-              <version>4.9.8</version>
+              <version>${spotbugs.version}</version>
             </dependency>
           </dependencies>
         </plugin>
@@ -401,7 +419,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
-        <version>3.6.0</version>
+        <version>${checkstyle-maven.version}</version>
         <configuration>
           <consoleOutput>true</consoleOutput>
           <failsOnError>true</failsOnError>
@@ -439,7 +457,7 @@
       <plugin>
         <groupId>org.cyclonedx</groupId>
         <artifactId>cyclonedx-maven-plugin</artifactId>
-        <version>2.9.1</version>
+        <version>${cyclonedx-maven.version}</version>
         <configuration>
           <projectType>library</projectType>
           <schemaVersion>1.3</schemaVersion>
@@ -485,7 +503,7 @@
       <plugin>
         <groupId>com.github.eirslett</groupId>
         <artifactId>frontend-maven-plugin</artifactId>
-        <version>1.15.4</version>
+        <version>${frontend-maven-plugin.version}</version>
         <executions>
           <execution>
             <id>install node and npm</id>
@@ -494,7 +512,7 @@
             </goals>
             <phase>generate-resources</phase>
             <configuration>
-              <nodeVersion>v24.5.0</nodeVersion>
+              <nodeVersion>${node.version}</nodeVersion>
               <!-- download node from https://nodejs.org/dist/ -->
               <workingDirectory>js</workingDirectory>
             </configuration>
@@ -515,12 +533,12 @@
       <plugin>
         <groupId>org.springdoc</groupId>
         <artifactId>springdoc-openapi-maven-plugin</artifactId>
-        <version>1.5</version>
+        <version>${springdoc.version}</version>
       </plugin>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>
-        <version>3.6.3</version>
+        <version>${exec-maven-plugin.version}</version>
         <configuration>
           <executable>./js/node_modules/.bin/javascript-obfuscator${script.extension}</executable>
           <arguments>
@@ -543,14 +561,14 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>${maven-compiler-plugin.version}</version>
         <configuration>
-          <source>23</source>
-          <target>23</target>
+          <source>25</source>
+          <target>25</target>
         </configuration>
       </plugin>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>tidy-maven-plugin</artifactId>
-        <version>1.4.0</version>
+        <version>${tidy-maven-plugin.version}</version>
         <executions>
           <execution>
             <id>validate</id>
@@ -564,7 +582,7 @@
       <plugin>
         <groupId>com.diffplug.spotless</groupId>
         <artifactId>spotless-maven-plugin</artifactId>
-        <version>3.2.1</version>
+        <version>${spotless-maven-plugin.version}</version>
         <configuration>
           <formats>
             <format>
@@ -623,7 +641,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.5.4</version>
+        <version>${maven-surefire-plugin.version}</version>
         <configuration>
           <argLine>-Dspring.profiles.active=test,maven-test</argLine>
         </configuration>
