@@ -21,6 +21,11 @@ jobs:
           distribution: "temurin"
       - name: Clean install
         run: ./mvnw --no-transfer-progress clean install -DskipTests -Ddependency-check.skip -Dcyclonedx.skip=true -Dexec.skip
+      - name: Show npm logs on failure
+        if: failure()
+        run: |
+          ls -la /home/runner/.npm/_logs || true
+          cat /home/runner/.npm/_logs/*-debug-0.log || true
       - name: Compile javadoc
         run: ./mvnw --no-transfer-progress compile javadoc:javadoc
       - name: Start wrongsecrets
