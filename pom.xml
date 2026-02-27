@@ -53,9 +53,9 @@
     <checkstyle.version>13.2.0</checkstyle.version>
     <com.azure.spring.version>6.0.0</com.azure.spring.version>
     <cyclonedx-maven.version>2.9.1</cyclonedx-maven.version>
-    <cyclonedx.core.version>11.0.1</cyclonedx.core.version>
+    <cyclonedx.core.version>12.1.0</cyclonedx.core.version>
     <datatables.version>2.3.7</datatables.version>
-    <dependency-check-maven.version>12.1.9</dependency-check-maven.version>
+    <dependency-check-maven.version>12.2.0</dependency-check-maven.version>
     <exec-maven-plugin.version>3.6.3</exec-maven-plugin.version>
     <findsecbugs.version>1.14.0</findsecbugs.version>
     <frontend-maven-plugin.version>1.15.4</frontend-maven-plugin.version>
