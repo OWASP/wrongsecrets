@@ -450,7 +450,7 @@ We would like to thank the following parties for helping us out:
 
 [GitGuardian](https://www.gitguardian.com/) for their sponsorship which allows us to pay the bills for our cloud-accounts.
 
-[![JetBrains logo.](https://resources.jetbrains.com/storage/products/company/brand/logos/jetbrains.svg)](https://jb.gg/OpenSource)
+[![JetBrains logo.](https://www.jetbrains.com/company/brand/img/logo_jb_dos_3.svg)](https://jb.gg/OpenSource)
 
 [Jetbrains](https://www.jetbrains.com/) for licensing an instance of Intellij IDEA Ultimate edition to the project leads. We could not have been this fast with the development without it!
 
