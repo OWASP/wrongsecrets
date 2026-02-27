@@ -3,8 +3,8 @@ package org.owasp.wrongsecrets.challenges;
 import io.swagger.v3.oas.annotations.Operation;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
-import net.minidev.json.JSONArray;
-import net.minidev.json.JSONObject;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import org.owasp.wrongsecrets.Challenges;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
@@ -45,11 +45,11 @@ public class ChallengesCtfController {
       summary = "Gives all challenges back in a jsonArray, to be used with the Juiceshop CTF cli")
   public String getChallenges() {
     List<ChallengeDefinition> definitions = challenges.getDefinitions().challenges();
-    JSONObject json = new JSONObject();
-    JSONArray jsonArray = new JSONArray();
+    var json = JsonNodeFactory.instance.objectNode();
+    ArrayNode jsonArray = JsonNodeFactory.instance.arrayNode();
     for (int i = 0; i < definitions.size(); i++) {
       ChallengeDefinition definition = definitions.get(i);
-      JSONObject jsonChallenge = new JSONObject();
+      var jsonChallenge = JsonNodeFactory.instance.objectNode();
       jsonChallenge.put("id", i + 1);
       jsonChallenge.put("name", definition.name().name());
       jsonChallenge.put("key", definition.name().shortName());
@@ -68,13 +68,18 @@ public class ChallengesCtfController {
               .map(s -> s.hint().contents().get())
               .orElse(disabledChallenge));
       jsonChallenge.put("solved", scoreCard.getChallengeCompleted(definition));
-      jsonChallenge.put("disabledEnv", getDisabledEnv(definition));
+      String disabledEnv = getDisabledEnv(definition);
+      if (disabledEnv != null) {
+        jsonChallenge.put("disabledEnv", disabledEnv);
+      } else {
+        jsonChallenge.putNull("disabledEnv");
+      }
       jsonChallenge.put("difficulty", getDificulty(definition.difficulty()));
       jsonArray.add(jsonChallenge);
     }
     json.put("status", "success");
-    json.put("data", jsonArray);
-    String result = json.toJSONString();
+    json.set("data", jsonArray);
+    String result = json.toString();
     log.trace("returning {}", result);
     return result;
   }
