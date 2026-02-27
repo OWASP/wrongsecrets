@@ -1,10 +1,10 @@
 package org.owasp.wrongsecrets.challenges;
 
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import io.swagger.v3.oas.annotations.Operation;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import org.owasp.wrongsecrets.Challenges;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
