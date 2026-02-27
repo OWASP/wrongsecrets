@@ -72,7 +72,8 @@
     <maven-surefire-plugin.version>3.5.4</maven-surefire-plugin.version>
     <maven.compiler.proc>full</maven.compiler.proc>
     <maven.compiler.target>25</maven.compiler.target>
-    <node.version>v24.5.0</node.version>
+    <node.version>v24.14.0</node.version>
+    <npm.version>11.8.0</npm.version>
     <spotbugs-maven.version>4.9.8.2</spotbugs-maven.version>
     <spotbugs.version>4.9.8</spotbugs.version>
     <spotless-maven-plugin.version>3.2.1</spotless-maven-plugin.version>
@@ -505,6 +506,12 @@
         <groupId>com.github.eirslett</groupId>
         <artifactId>frontend-maven-plugin</artifactId>
         <version>${frontend-maven-plugin.version}</version>
+        <configuration>
+          <installDirectory>js</installDirectory>
+          <nodeVersion>${node.version}</nodeVersion>
+          <npmVersion>${npm.version}</npmVersion>
+          <workingDirectory>js</workingDirectory>
+        </configuration>
         <executions>
           <execution>
             <id>install node and npm</id>
@@ -514,6 +521,7 @@
             <phase>generate-resources</phase>
             <configuration>
               <nodeVersion>${node.version}</nodeVersion>
+              <npmVersion>${npm.version}</npmVersion>
               <!-- download node from https://nodejs.org/dist/ -->
               <workingDirectory>js</workingDirectory>
             </configuration>
