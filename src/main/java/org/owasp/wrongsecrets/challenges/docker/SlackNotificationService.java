@@ -54,7 +54,10 @@ public class SlackNotificationService {
           "Successfully sent Slack notification for challenge completion: {}", challengeName);
 
     } catch (Exception e) {
-      logger.warn("Failed to send Slack notification for challenge: {}", challengeName, e);
+      logger.warn(
+          "Failed to send Slack notification for challenge: {}. Message: {}",
+          challengeName,
+          e.getMessage());
     }
   }
 
