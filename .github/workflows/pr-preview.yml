@@ -178,13 +178,13 @@ jobs:
             \`\`\`bash
             # Download the artifact, extract it, then:
             docker load < wrongsecrets-preview.tar
-            docker run -p 8080:8080 wrongsecrets-preview
+            docker run -p 8080:8080 -p 8090:8090 wrongsecrets-preview
             \`\`\`
 
             **🚀 Alternative - Pull from Registry:**
             \`\`\`bash
             docker pull ${imageTag}
-            docker run -p 8080:8080 ${imageTag}
+            docker run -p 8080:8080 -p 8090:8090 ${imageTag}
             \`\`\`
 
             Then visit: http://localhost:8080
@@ -318,8 +318,8 @@ jobs:
 
       - name: Start both versions
         run: |
-          docker run -d -p 8080:8080 --name pr-version wrongsecrets-pr
-          docker run -d -p 8081:8080 --name main-version wrongsecrets-main
+          docker run -d -p 8080:8080 -p 8090:8090 --name pr-version wrongsecrets-pr
+          docker run -d -p 8081:8080 -p 8091:8090 --name main-version wrongsecrets-main
 
           # Wait for services to start
           echo "Waiting for services to start..."
