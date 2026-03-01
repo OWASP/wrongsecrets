@@ -3,6 +3,7 @@ package org.owasp.wrongsecrets.challenges.docker;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.util.Base64;
+import lombok.extern.slf4j.Slf4j;
 import org.owasp.wrongsecrets.challenges.FixedAnswerChallenge;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Component;
  * variables. Shows how an ex-employee could misuse the webhook if it's not rotated when they leave.
  */
 @Component
+@Slf4j
 public class Challenge59 extends FixedAnswerChallenge {
 
   private final String obfuscatedSlackWebhookUrl;
@@ -37,6 +39,7 @@ public class Challenge59 extends FixedAnswerChallenge {
       byte[] secondDecode = Base64.getDecoder().decode(firstDecode);
       return new String(secondDecode, UTF_8);
     } catch (Exception e) {
+      log.warn("Webhook URL not properly set for Slack in {}", this);
       // Return a default value if the environment variable is not properly set
       return "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX";
     }

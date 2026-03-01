@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.5.11</version>
+    <version>4.0.3</version>
     <!-- lookup parent from repository -->
   </parent>
 
@@ -47,11 +47,11 @@
     <archunit.version>1.4.1</archunit.version>
     <asciidoctor.maven.plugin.version>3.2.0</asciidoctor.maven.plugin.version>
     <asciidoctorj.version>3.0.1</asciidoctorj.version>
-    <aws.sdk.version>2.40.9</aws.sdk.version>
+    <aws.sdk.version>2.42.4</aws.sdk.version>
     <bootstrap.version>5.3.8</bootstrap.version>
     <checkstyle-maven.version>3.6.0</checkstyle-maven.version>
     <checkstyle.version>13.2.0</checkstyle.version>
-    <com.azure.spring.version>6.0.0</com.azure.spring.version>
+    <com.azure.spring.version>7.0.0</com.azure.spring.version>
     <cyclonedx-maven.version>2.9.1</cyclonedx-maven.version>
     <cyclonedx.core.version>12.1.0</cyclonedx.core.version>
     <datatables.version>2.3.7</datatables.version>
@@ -60,10 +60,12 @@
     <findsecbugs.version>1.14.0</findsecbugs.version>
     <frontend-maven-plugin.version>1.15.4</frontend-maven-plugin.version>
     <gatling-maven-plugin.version>4.21.0</gatling-maven-plugin.version>
-    <gatling.version>3.14.9</gatling.version>
-    <gcp.sdk.version>7.4.5</gcp.sdk.version>
+    <gatling.version>3.15.0</gatling.version>
     <github.button.version>2.14.1</github.button.version>
-    <io.netty.version>4.1.123.Final</io.netty.version>
+    <google.cloud.libraries-bom.version>26.76.0</google.cloud.libraries-bom.version>
+    <!-- Pin Groovy to 4.x for thymeleaf-layout-dialect compatibility (Spring Boot 4.0 manages 5.x) -->
+    <groovy.version>4.0.25</groovy.version>
+    <io.netty.version>4.1.130.Final</io.netty.version>
     <java.version>25</java.version>
     <jquery.version>3.7.1</jquery.version>
     <jruby.version>10.0.3.0</jruby.version>
@@ -77,12 +79,12 @@
     <spotbugs-maven.version>4.9.8.2</spotbugs-maven.version>
     <spotbugs.version>4.9.8</spotbugs.version>
     <spotless-maven-plugin.version>3.2.1</spotless-maven-plugin.version>
-    <spring-boot.version>3.5.11</spring-boot.version>
-    <spring-vault.version>3.2.0</spring-vault.version>
-    <spring.cloud-version>2025.0.0</spring.cloud-version>
-    <spring.security.version>6.5.8</spring.security.version>
+    <spring-boot.version>4.0.3</spring-boot.version>
+    <spring-vault.version>4.0.1</spring-vault.version>
+    <spring.cloud-version>2025.1.1</spring.cloud-version>
+    <spring.security.version>7.0.3</spring.security.version>
     <springdoc-maven.version>1.5</springdoc-maven.version>
-    <springdoc.version>2.8.15</springdoc.version>
+    <springdoc.version>3.0.1</springdoc.version>
     <system-stubs-jupiter.version>2.1.8</system-stubs-jupiter.version>
     <testcontainers-cypress.version>1.10.0</testcontainers-cypress.version>
     <testcontainers.version>1.21.4</testcontainers.version>
@@ -108,8 +110,8 @@
 
       <dependency>
         <groupId>com.google.cloud</groupId>
-        <artifactId>spring-cloud-gcp-dependencies</artifactId>
-        <version>${gcp.sdk.version}</version>
+        <artifactId>libraries-bom</artifactId>
+        <version>${google.cloud.libraries-bom.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -294,6 +296,12 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-webmvc-test</artifactId>
       <scope>test</scope>
     </dependency>
 
@@ -660,10 +668,22 @@
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>3.8.1</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>properties</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>${maven-surefire-plugin.version}</version>
         <configuration>
-          <argLine>-Dspring.profiles.active=test,maven-test</argLine>
+          <argLine>-Dspring.profiles.active=test,maven-test -javaagent:${org.mockito:mockito-core:jar}</argLine>
         </configuration>
       </plugin>
     </plugins>

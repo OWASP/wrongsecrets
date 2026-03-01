@@ -5,7 +5,6 @@ Sometimes, secrets or sensitive information are added as examples or instruction
 This challenge highlights the importance of reviewing all project files—including documentation—for secrets and sensitive data.
 
 ----
-
 In a real project, you should always include explicit security requirements in your project specification or agentic plan. This means:
 - Listing how secrets should be managed, stored, and rotated.
 - Defining who has access to sensitive files and how access is controlled.
@@ -13,6 +12,7 @@ In a real project, you should always include explicit security requirements in y
 - Requiring regular reviews of both code and documentation for accidental secret leakage.
 
 Adding these requirements helps ensure that security is considered from the start and reduces the risk of sensitive data exposure through overlooked files or bad practices.
+----
 
 [NOTE]
 ====
