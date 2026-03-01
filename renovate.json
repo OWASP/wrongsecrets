@@ -37,7 +37,7 @@
             ],
             "depNameTemplate": "aquasecurity/trivy",
             "matchStrings": [
-                "TRIVY_VERSION=\"(?<currentValue>.*?)\""
+                "TRIVY_VERSION:\\s+(?<currentValue>[^\\s]+)"
             ],
             "datasourceTemplate": "github-releases"
         },
