@@ -4,29 +4,33 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.HttpEntity;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.client.RestClient;
 
 @ExtendWith(MockitoExtension.class)
 class SlackNotificationServiceTest {
 
-  @Mock private RestTemplate restTemplate;
+  @Mock private RestClient restClient;
+  @Mock private RestClient.RequestBodyUriSpec postSpec;
+  @Mock private RestClient.RequestBodySpec bodySpec;
+  @Mock private RestClient.ResponseSpec responseSpec;
   @Mock private Challenge59 challenge59;
 
-  private ObjectMapper objectMapper;
   private SlackNotificationService slackNotificationService;
 
   @BeforeEach
   void setUp() {
-    objectMapper = new ObjectMapper();
+    when(restClient.post()).thenReturn(postSpec);
+    when(postSpec.uri(anyString())).thenReturn(bodySpec);
+    when(bodySpec.contentType(any(MediaType.class))).thenReturn(bodySpec);
+    when(bodySpec.body(any())).thenReturn(bodySpec);
+    when(bodySpec.retrieve()).thenReturn(responseSpec);
   }
 
   @Test
@@ -35,17 +39,16 @@ class SlackNotificationServiceTest {
     String webhookUrl = "https://hooks.slack.com/services/T123456789/B123456789/abcdef123456";
     String userAgent = "Mozilla/5.0 (Test Browser)";
     when(challenge59.getSlackWebhookUrl()).thenReturn(webhookUrl);
-    when(restTemplate.postForEntity(anyString(), any(HttpEntity.class), eq(String.class)))
-        .thenReturn(ResponseEntity.ok("ok"));
+    when(responseSpec.toEntity(String.class)).thenReturn(ResponseEntity.ok("ok"));
 
-    slackNotificationService = new SlackNotificationService(restTemplate, challenge59);
+    slackNotificationService = new SlackNotificationService(restClient, challenge59);
 
     // When
     slackNotificationService.notifyChallengeCompletion("challenge-1", "testuser", userAgent);
 
     // Then
-    verify(restTemplate, times(1))
-        .postForEntity(eq(webhookUrl), any(HttpEntity.class), eq(String.class));
+    verify(restClient, times(1)).post();
+    verify(postSpec, times(1)).uri(webhookUrl);
   }
 
   @Test
@@ -54,23 +57,19 @@ class SlackNotificationServiceTest {
     String webhookUrl = "https://hooks.slack.com/services/T123456789/B123456789/abcdef123456";
     String userAgent = "Cypress WrongSecrets E2E Tests";
     when(challenge59.getSlackWebhookUrl()).thenReturn(webhookUrl);
-    when(restTemplate.postForEntity(anyString(), any(HttpEntity.class), eq(String.class)))
-        .thenReturn(ResponseEntity.ok("ok"));
+    when(responseSpec.toEntity(String.class)).thenReturn(ResponseEntity.ok("ok"));
 
-    slackNotificationService = new SlackNotificationService(restTemplate, challenge59);
+    slackNotificationService = new SlackNotificationService(restClient, challenge59);
 
     // When
     slackNotificationService.notifyChallengeCompletion("challenge-1", "testuser", userAgent);
 
     // Then
-    ArgumentCaptor<HttpEntity> entityCaptor = ArgumentCaptor.forClass(HttpEntity.class);
-    verify(restTemplate, times(1))
-        .postForEntity(eq(webhookUrl), entityCaptor.capture(), eq(String.class));
-
-    HttpEntity capturedEntity = entityCaptor.getValue();
-    SlackNotificationService.SlackMessage slackMessage =
-        (SlackNotificationService.SlackMessage) capturedEntity.getBody();
-    assertTrue(slackMessage.text().contains("(User-Agent: " + userAgent + ")"));
+    verify(bodySpec).body(
+        argThat(
+            msg ->
+                msg instanceof SlackNotificationService.SlackMessage slackMsg
+                    && slackMsg.text().contains("(User-Agent: " + userAgent + ")")));
   }
 
   @Test
@@ -78,23 +77,19 @@ class SlackNotificationServiceTest {
     // Given
     String webhookUrl = "https://hooks.slack.com/services/T123456789/B123456789/abcdef123456";
     when(challenge59.getSlackWebhookUrl()).thenReturn(webhookUrl);
-    when(restTemplate.postForEntity(anyString(), any(HttpEntity.class), eq(String.class)))
-        .thenReturn(ResponseEntity.ok("ok"));
+    when(responseSpec.toEntity(String.class)).thenReturn(ResponseEntity.ok("ok"));
 
-    slackNotificationService = new SlackNotificationService(restTemplate, challenge59);
+    slackNotificationService = new SlackNotificationService(restClient, challenge59);
 
     // When
     slackNotificationService.notifyChallengeCompletion("challenge-1", "testuser", null);
 
     // Then
-    ArgumentCaptor<HttpEntity> entityCaptor = ArgumentCaptor.forClass(HttpEntity.class);
-    verify(restTemplate, times(1))
-        .postForEntity(eq(webhookUrl), entityCaptor.capture(), eq(String.class));
-
-    HttpEntity capturedEntity = entityCaptor.getValue();
-    SlackNotificationService.SlackMessage slackMessage =
-        (SlackNotificationService.SlackMessage) capturedEntity.getBody();
-    assertFalse(slackMessage.text().contains("User-Agent"));
+    verify(bodySpec).body(
+        argThat(
+            msg ->
+                msg instanceof SlackNotificationService.SlackMessage slackMsg
+                    && !slackMsg.text().contains("User-Agent")));
   }
 
   @Test
@@ -102,66 +97,63 @@ class SlackNotificationServiceTest {
     // Given
     String webhookUrl = "https://hooks.slack.com/services/T123456789/B123456789/abcdef123456";
     when(challenge59.getSlackWebhookUrl()).thenReturn(webhookUrl);
-    when(restTemplate.postForEntity(anyString(), any(HttpEntity.class), eq(String.class)))
-        .thenReturn(ResponseEntity.ok("ok"));
+    when(responseSpec.toEntity(String.class)).thenReturn(ResponseEntity.ok("ok"));
 
-    slackNotificationService = new SlackNotificationService(restTemplate, challenge59);
+    slackNotificationService = new SlackNotificationService(restClient, challenge59);
 
     // When
     slackNotificationService.notifyChallengeCompletion("challenge-1", "testuser");
 
     // Then
-    verify(restTemplate, times(1))
-        .postForEntity(eq(webhookUrl), any(HttpEntity.class), eq(String.class));
+    verify(restClient, times(1)).post();
   }
 
   @Test
   void shouldNotSendNotificationWhenSlackNotConfigured() {
     // Given
-    slackNotificationService = new SlackNotificationService(restTemplate, null);
+    slackNotificationService = new SlackNotificationService(restClient, null);
 
     // When
     slackNotificationService.notifyChallengeCompletion("challenge-1", "testuser");
 
     // Then
-    verify(restTemplate, never()).postForEntity(anyString(), any(), any());
+    verify(restClient, never()).post();
   }
 
   @Test
   void shouldNotSendNotificationWhenWebhookUrlNotSet() {
     // Given
     when(challenge59.getSlackWebhookUrl()).thenReturn("not_set");
-    slackNotificationService = new SlackNotificationService(restTemplate, challenge59);
+    slackNotificationService = new SlackNotificationService(restClient, challenge59);
 
     // When
     slackNotificationService.notifyChallengeCompletion("challenge-1", "testuser");
 
     // Then
-    verify(restTemplate, never()).postForEntity(anyString(), any(), any());
+    verify(restClient, never()).post();
   }
 
   @Test
   void shouldNotSendNotificationWhenWebhookUrlIsInvalid() {
     // Given
     when(challenge59.getSlackWebhookUrl()).thenReturn("https://example.com/invalid");
-    slackNotificationService = new SlackNotificationService(restTemplate, challenge59);
+    slackNotificationService = new SlackNotificationService(restClient, challenge59);
 
     // When
     slackNotificationService.notifyChallengeCompletion("challenge-1", "testuser");
 
     // Then
-    verify(restTemplate, never()).postForEntity(anyString(), any(), any());
+    verify(restClient, never()).post();
   }
 
   @Test
-  void shouldHandleRestTemplateException() {
+  void shouldHandleRestClientException() {
     // Given
     String webhookUrl = "https://hooks.slack.com/services/T123456789/B123456789/abcdef123456";
     when(challenge59.getSlackWebhookUrl()).thenReturn(webhookUrl);
-    when(restTemplate.postForEntity(anyString(), any(HttpEntity.class), eq(String.class)))
-        .thenThrow(new RuntimeException("Network error"));
+    when(responseSpec.toEntity(String.class)).thenThrow(new RuntimeException("Network error"));
 
-    slackNotificationService = new SlackNotificationService(restTemplate, challenge59);
+    slackNotificationService = new SlackNotificationService(restClient, challenge59);
 
     // When & Then - should not throw exception
     assertDoesNotThrow(
@@ -173,16 +165,14 @@ class SlackNotificationServiceTest {
     // Given
     String webhookUrl = "https://hooks.slack.com/services/T123456789/B123456789/abcdef123456";
     when(challenge59.getSlackWebhookUrl()).thenReturn(webhookUrl);
-    when(restTemplate.postForEntity(anyString(), any(HttpEntity.class), eq(String.class)))
-        .thenReturn(ResponseEntity.ok("ok"));
+    when(responseSpec.toEntity(String.class)).thenReturn(ResponseEntity.ok("ok"));
 
-    slackNotificationService = new SlackNotificationService(restTemplate, challenge59);
+    slackNotificationService = new SlackNotificationService(restClient, challenge59);
 
     // When
     slackNotificationService.notifyChallengeCompletion("challenge-1", null);
 
     // Then
-    verify(restTemplate, times(1))
-        .postForEntity(eq(webhookUrl), any(HttpEntity.class), eq(String.class));
+    verify(restClient, times(1)).post();
   }
 }
