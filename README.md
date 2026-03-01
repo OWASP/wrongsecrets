@@ -96,6 +96,7 @@ This repository contains **intentionally vulnerable code and configuration files
 
 ### 👨‍💻 Development & Contribution
 -   [Notes on development](#notes-on-development)
+  -   [Spring Boot 4 adoption checklist](docs/SPRING_BOOT_4_ADOPTION_CHECKLIST.md)
     -   [Dependency management](#dependency-management)
     -   [Get the project started in IntelliJ IDEA](#get-the-project-started-in-intellij-idea)
     -   [Automatic reload during development](#automatic-reload-during-development)
