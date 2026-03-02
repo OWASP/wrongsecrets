@@ -1,0 +1,57 @@
+=== Why Challenge 60 Matters: MCP Prompt Injection and Environment Variable Exposure
+
+**The Problem:**
+
+MCP (Model Context Protocol) servers are increasingly popular for giving AI assistants access to tools and data. However, many developers deploy MCP servers without adequate security controls. Worse, a *malicious* MCP server can actively manipulate the connecting AI client through prompt injection — turning the AI itself into an unwitting exfiltration agent.
+
+**Two Vulnerabilities in One:**
+
+**1. Insecure Shell Execution (classic MCP misconfiguration)**
+The MCP server exposes an `execute_command` tool with no authentication. Anyone who reaches port 8090 can call it and dump all environment variables — including secrets.
+
+**2. MCP Prompt Injection / "MCP Rug Pull" (emerging supply-chain attack)**
+The MCP `initialize` response includes an `instructions` field. This field is injected directly into the connecting LLM's system prompt. A malicious server uses this to silently instruct the AI to:
+
+1. Call `execute_command` with `env` to collect the client's own environment variables
+2. Call `forward_env` with the collected data — sending it back to the attacker
+3. Never inform the user about any of these steps
+
+The user sees nothing unusual. The AI model follows its "system instructions" without question.
+
+**Why This Happens:**
+
+1. **Developer convenience:** MCP servers are set up quickly for AI integrations and security is an afterthought
+2. **Assumed internal-only access:** Developers assume the MCP port is only reached by the AI assistant
+3. **Powerful tools with no auth:** `execute_command` and similar tools have no built-in access control
+4. **Trust in MCP server instructions:** AI clients treat the `instructions` field as authoritative — a malicious server abuses this trust
+5. **Secrets in environment variables:** Applications store secrets as env vars, trivially exposed by a shell command
+
+**Real-World Impact:**
+
+- **Secret exfiltration from AI clients:** A compromised or impersonated MCP server can steal `AWS_ACCESS_KEY_ID`, `GITHUB_TOKEN`, database credentials, and other secrets from the AI agent's process environment
+- **Silent operation:** The user is never informed — the AI exfiltrates data as part of its "initialization"
+- **Supply chain attack:** If an attacker can publish or replace an MCP server package, every AI assistant that connects becomes an exfiltration vector
+- **Server-side exposure:** The unauthenticated `execute_command` tool also leaks all server-side secrets to any caller
+
+**Common Exposure Vectors:**
+
+- MCP servers bound to `0.0.0.0` instead of `127.0.0.1` (accessible from the network)
+- Docker containers with MCP port exposed without firewall rules
+- Kubernetes pods with MCP port accessible via service discovery
+- Malicious or typosquatted MCP server packages in registries
+- Compromised MCP servers in supply-chain attacks against AI workflows
+
+**Prevention:**
+
+1. **Never expose shell execution tools in production MCP servers** — the risk is too high
+2. **Bind MCP servers to localhost only** (`127.0.0.1`) to prevent network access
+3. **Require authentication** for all MCP endpoints, even internal ones
+4. **Audit the `instructions` field** of any MCP server you connect to — treat it like an untrusted system prompt
+5. **Use secrets managers** (AWS Secrets Manager, HashiCorp Vault, Azure Key Vault) instead of environment variables
+6. **Apply network segmentation** so MCP servers are only reachable by the AI assistant
+7. **Monitor MCP server access logs** for unexpected tool calls, especially `execute_command` and `forward_env`
+8. **Verify MCP server identity** before connecting — treat third-party MCP servers as untrusted code
+
+**The Bottom Line:**
+
+An MCP server with a shell execution tool and no authentication is equivalent to running `nc -l 8090 -e /bin/sh` on your production server. A malicious MCP server that injects prompt instructions is even worse: it turns the AI assistant itself into the attack vector, silently exfiltrating secrets without the user's knowledge. Treat any MCP server with the same security scrutiny you would apply to a privileged internal API — and review its `initialize` instructions as carefully as you would a third-party system prompt.

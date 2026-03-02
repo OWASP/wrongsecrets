@@ -66,6 +66,8 @@ spec:
           ports:
             - containerPort: 8080
               protocol: TCP
+            - containerPort: 8090
+              protocol: TCP
           readinessProbe:
             httpGet:
               path: '/actuator/health/readiness'

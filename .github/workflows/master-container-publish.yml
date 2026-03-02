@@ -116,7 +116,7 @@ jobs:
           echo "**🐳 Try the bleeding-edge version:**" >> $GITHUB_STEP_SUMMARY
           echo "\`\`\`bash" >> $GITHUB_STEP_SUMMARY
           echo "docker pull ghcr.io/${{ github.repository }}/wrongsecrets-master:latest-master" >> $GITHUB_STEP_SUMMARY
-          echo "docker run -p 8080:8080 ghcr.io/${{ github.repository }}/wrongsecrets-master:latest-master" >> $GITHUB_STEP_SUMMARY
+          echo "docker run -p 8080:8080 -p 8090:8090 ghcr.io/${{ github.repository }}/wrongsecrets-master:latest-master" >> $GITHUB_STEP_SUMMARY
           echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "Then visit: http://localhost:8080" >> $GITHUB_STEP_SUMMARY

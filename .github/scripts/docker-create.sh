@@ -236,7 +236,7 @@ local_extra_info() {
     if [[ $script_mode == "local" ]] ; then
         echo ""
         echo "⚠️⚠️ This script is running in local mode, with no arguments this script will build your current code and package into a docker container for easy local testing"
-        echo "If the container gets built correctly you can run the container with the command: docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:local-test, if there are errors the script should tell you what to do ⚠️⚠️"
+        echo "If the container gets built correctly you can run the container with the command: docker run -p 8080:8080 -p 8090:8090 jeroenwillemsen/wrongsecrets:local-test, if there are errors the script should tell you what to do ⚠️⚠️"
         echo ""
     fi
 }
@@ -447,7 +447,7 @@ test() {
     if [[ "$script_mode" == "test" ]]; then
         echo "Running the tests"
         echo "Starting the docker container"
-        docker run -d -p 8080:8080 jeroenwillemsen/wrongsecrets:local-test
+        docker run -d -p 8080:8080 -p 8090:8090 jeroenwillemsen/wrongsecrets:local-test
         until $(curl --output /dev/null --silent --head --fail http://localhost:8080); do
             printf '.'
             sleep 5

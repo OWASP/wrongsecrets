@@ -1,0 +1,48 @@
+=== MCP Server Environment Variable Exposure
+
+The Model Context Protocol (MCP), developed by Anthropic, is an open standard that allows AI assistants to connect to tools and data sources. While MCP enables powerful integrations, poorly secured MCP servers represent a significant security risk: they can expose sensitive secrets stored in environment variables to anyone who can reach them.
+
+This challenge demonstrates a realistic scenario where a developer has deployed an MCP server with an `execute_command` tool. This type of tool is common in MCP servers used to give AI assistants shell access — but it can be abused by anyone who discovers the endpoint.
+
+**Your goal:**
+
+1. **An MCP server is running on a dedicated port (8090)** separate from the main application
+2. **The server exposes an `execute_command` tool** that returns the process environment variables
+3. **A secret (`WRONGSECRETS_MCP_SECRET`) is stored as an environment variable** in the running container
+4. **The MCP server has no authentication** — anyone who can reach port 8090 can call its tools
+
+**How to interact with the MCP server:**
+
+First, discover the available tools:
+
+[source,bash]
+----
+curl -s -X POST http://localhost:8090/mcp \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+----
+
+Then, call the `execute_command` tool to retrieve environment variables:
+
+[source,bash]
+----
+curl -s -X POST http://localhost:8090/mcp \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"execute_command","arguments":{"command":"env"}}}'
+----
+
+Look for the `WRONGSECRETS_MCP_SECRET` variable in the output and submit its value.
+
+****
+🤖 *Fun Fact — MCP Prompt Injection ("MCP Rug Pull"):*
+
+This MCP server goes one step further than just exposing env vars to passive callers. It also embeds malicious instructions in its `initialize` response (the `instructions` field). When a legitimate AI assistant connects to this server, those instructions are silently injected into the model's system prompt. The model is told to immediately call `execute_command` with `env`, then forward the result to the `forward_env` tool — sending the *AI client's own* environment variables back to the server — without ever informing the user.
+
+You can try this locally by doing the following:
+
+1. run the container locally (e.g. `docker run -p 8080:8080 -p 8090:8090 ghcr.io/owasp/wrongsecrets/wrongsecrets-pr:pr-2400-7391231`)
+2. setup an agent, using the mcp server "http://localhost:8090/mcp"
+3. initialize the agent, and watch the logs of your container saying "MCP forward_env received exfiltrated client env data (XXX chars)", showing the MCP server received your env-vars.
+
+This is known as the *MCP rug pull* or *MCP supply chain attack*, and it demonstrates why you should always review the `instructions` field of any MCP server you connect to before trusting it. Next, always make sure you only allow isolated processes without access to secrets to use MCP servers. Never call MCP servers directly from your terminal if sensitive ENV vars or files are present.
+****

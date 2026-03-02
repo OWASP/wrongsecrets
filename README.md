@@ -16,7 +16,7 @@
 
 Welcome to the OWASP WrongSecrets game! The game is packed with real life examples of how to _not_ store secrets in your software. Each of these examples is captured in a challenge, which you need to solve using various tools and techniques. Solving these challenges will help you recognize common mistakes & can help you to reflect on your own secrets management strategy.
 
-Can you solve all the 60 challenges?
+Can you solve all the 61 challenges?
 
 Try some of them on [our Heroku demo environment](https://wrongsecrets.herokuapp.com/).
 
@@ -29,12 +29,12 @@ Want to play the other challenges? Read the instructions on how to set them up b
 1. **Try Online First**: Visit our [Heroku demo](https://wrongsecrets.herokuapp.com/) to get familiar with the challenges
 2. **Run Locally**: Use Docker for the full experience with all challenges:
    ```bash
-   docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:latest-no-vault
+   docker run -p 8080:8080 -p 8090:8090 jeroenwillemsen/wrongsecrets:latest-no-vault
    ```
    Then open [http://localhost:8080](http://localhost:8080)
 3. **Want to see what's ahead?** Try our bleeding-edge master container with the latest features:
    ```bash
-   docker run -p 8080:8080 ghcr.io/owasp/wrongsecrets/wrongsecrets-master:latest-master
+   docker run -p 8080:8080 -p 8090:8090 ghcr.io/owasp/wrongsecrets/wrongsecrets-master:latest-master
    ```
    ⚠️ *Note: This is a development version and may be unstable*
 4. **Advanced Setup**: For cloud challenges and Kubernetes exercises, see the detailed instructions below
@@ -128,16 +128,16 @@ Not sure which setup is right for you? Here's a quick guide:
 
 | **I want to...** | **Recommended Setup** | **Challenges Available** |
 |------------------|----------------------|--------------------------|
-| Try it quickly online | [Container running on Heroku](https://www.wrongsecrets.com/) | Basic challenges (1-4, 8, 12-32, 34-43, 49-52, 54-58) |
+| Try it quickly online | [Container running on Heroku](https://www.wrongsecrets.com/) | Basic challenges (1-4, 8, 12-32, 34-43, 49-52, 54-60) |
 | Run locally with Docker | [Basic Docker](#basic-docker-exercises) | Same as above, but on your machine |
-| Learn Kubernetes secrets | [K8s/Minikube Setup](#basic-k8s-exercise) | Kubernetes challenges (1-6, 8, 12-43, 48-58) |
+| Learn Kubernetes secrets | [K8s/Minikube Setup](#basic-k8s-exercise) | Kubernetes challenges (1-6, 8, 12-43, 48-60) |
 | Practice with cloud secrets | [Cloud Challenges](#cloud-challenges) | All challenges (1-87) |
 | Run a workshop/CTF | [CTF Setup](#ctf) | Customizable challenge sets |
 | Contribute to the project | [Development Setup](#notes-on-development) | All challenges + development tools |
 
 ## Basic docker exercises
 
-_Can be used for challenges 1-4, 8, 12-32, 34, 35-43, 49-52, 54-58_
+_Can be used for challenges 1-4, 8, 12-32, 34, 35-43, 49-52, 54-60_
 
 For the basic docker exercises you currently require:
 
@@ -147,7 +147,7 @@ For the basic docker exercises you currently require:
 You can install it by doing:
 
 ```bash
-docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:latest-no-vault
+docker run -p 8080:8080 -p 8090:8090 jeroenwillemsen/wrongsecrets:latest-no-vault
 ```
 
 **🚀 Want to try the bleeding-edge version?**
@@ -155,10 +155,14 @@ docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:latest-no-vault
 If you want to see what's coming in the next release, you can use our automatically-built master container:
 
 ```bash
-docker run -p 8080:8080 ghcr.io/owasp/wrongsecrets/wrongsecrets-master:latest-master
+docker run -p 8080:8080 -p 8090:8090 ghcr.io/owasp/wrongsecrets/wrongsecrets-master:latest-master
 ```
 
 ⚠️ **Warning**: This is a development version built from the latest master branch and may contain experimental features or instabilities.
+
+**📝 Note on Ports:**
+- Port **8080**: Main application (challenges 1-59)
+- Port **8090**: MCP server (required for Challenge 60)
 
 Now you can try to find the secrets by means of solving the challenge offered at the links below
 <details>
@@ -210,6 +214,8 @@ Now you can try to find the secrets by means of solving the challenge offered at
 -   [localhost:8080/challenge/challenge-56](http://localhost:8080/challenge/challenge-56)
 -   [localhost:8080/challenge/challenge-57](http://localhost:8080/challenge/challenge-57)
 -   [localhost:8080/challenge/challenge-58](http://localhost:8080/challenge/challenge-58)
+-   [localhost:8080/challenge/challenge-59](http://localhost:8080/challenge/challenge-59)
+-   [localhost:8080/challenge/challenge-60](http://localhost:8080/challenge/challenge-60)
 </details>
 
 Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look
@@ -693,7 +699,7 @@ If you have made some changes to the codebase or added a new challenge and would
    - Note: Do you want to run this on your minikube? then first run `eval $(minikube docker-env)`.
 4. Follow any instructions given, you made need to install/change packages.
 5. Run the newly created container:
-  - to running locally: `docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:local-test-no-vault`
+  - to running locally: `docker run -p 8080:8080 -p 8090:8090 jeroenwillemsen/wrongsecrets:local-test-no-vault`
   - to run it on your minikube: use the container `jeroenwillemsen/wrongsecrets:local-test-k8s-vault` in your deployment definition.
   - to run it with Vault on your minikube: use the container `jeroenwillemsen/wrongsecrets:local-test-local-vault` in your deployment definition.
 
@@ -710,7 +716,7 @@ Note: You can do a full roundtrip of cleaning, building, and testing with `./mvn
 ### Common Issues
 
 **Docker Issues:**
-- **Port already in use**: Change the port mapping: `docker run -p 8081:8080 jeroenwillemsen/wrongsecrets:latest-no-vault`
+- **Port already in use**: Change the port mapping: `docker run -p 8081:8080 -p 8091:8090 jeroenwillemsen/wrongsecrets:latest-no-vault`
 - **Docker not found**: Make sure Docker is installed and running
 - **Permission denied**: On Linux, you might need to add your user to the docker group
 
