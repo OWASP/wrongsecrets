@@ -65,7 +65,7 @@
     <google.cloud.libraries-bom.version>26.76.0</google.cloud.libraries-bom.version>
     <!-- Pin Groovy to 4.x for thymeleaf-layout-dialect compatibility (Spring Boot 4.0 manages 5.x) -->
     <groovy.version>4.0.25</groovy.version>
-    <io.netty.version>4.1.130.Final</io.netty.version>
+    <io.netty.version>4.2.10.Final</io.netty.version>
     <java.version>25</java.version>
     <jquery.version>3.7.1</jquery.version>
     <jruby.version>10.0.3.0</jruby.version>
