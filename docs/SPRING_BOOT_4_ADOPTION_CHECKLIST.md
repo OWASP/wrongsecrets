@@ -54,10 +54,10 @@ This checklist is tailored to the current `wrongsecrets` codebase (Spring Boot `
 - [ ] Ensure logs include trace/span correlation IDs.
 - [ ] Add dashboard/alerts for key challenge-flow operations.
 
-### 5) Harden Actuator for production profiles
+### 5) Do not Harden Actuator for production profiles
 
 - [ ] Verify readiness/liveness probes are exposed and used by deployment manifests.
-- [ ] Restrict sensitive actuator endpoints by profile.
+- [ ] Do not restrict sensitive endpoints for the actuator to make sure the challenge still works!
 - [ ] Add health contributors for external dependencies used in runtime profiles.
 
 ### 6) Structured logging profile
