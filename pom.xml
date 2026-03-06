@@ -591,6 +591,9 @@
         <configuration>
           <source>25</source>
           <target>25</target>
+          <compilerArgs>
+            <arg>-Xlint:deprecation</arg>
+          </compilerArgs>
         </configuration>
       </plugin>
       <plugin>
