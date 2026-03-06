@@ -21,24 +21,24 @@ This checklist is tailored to the current `wrongsecrets` codebase (Spring Boot `
 
 ### 1) Standardize HTTP error responses with `ProblemDetail`
 
-- [ ] Add a global `@RestControllerAdvice` for API endpoints that returns `ProblemDetail`.
-- [ ] Keep MVC HTML error handling as-is for Thymeleaf pages; only modernize JSON API errors.
-- [ ] Add tests that assert RFC 9457-style payload fields (`type`, `title`, `status`, `detail`, `instance`).
+- [x] Add a global `@RestControllerAdvice` for API endpoints that returns `ProblemDetail`.
+- [x] Keep MVC HTML error handling as-is for Thymeleaf pages; only modernize JSON API errors.
+- [x] Add tests that assert RFC 9457-style payload fields (`type`, `title`, `status`, `detail`, `instance`).
 
 **Why now:** Reduces custom exception payload drift and improves API consistency.
 
 ### 2) Replace new `RestTemplate` usage with `RestClient`
 
-- [ ] Stop introducing any new `RestTemplate` usage.
-- [ ] Migrate existing bean in `WrongSecretsApplication` from `RestTemplate` to `RestClient.Builder`.
-- [ ] Migrate call sites incrementally (start with `SlackNotificationService`).
-- [ ] Add timeout and retry policy explicitly for outbound calls.
+- [x] Stop introducing any new `RestTemplate` usage.
+- [x] Migrate existing bean in `WrongSecretsApplication` from `RestTemplate` to `RestClient.Builder`.
+- [x] Migrate call sites incrementally (start with `SlackNotificationService`).
+- [x] Add timeout and retry policy explicitly for outbound calls.
 
 **Current state:** `RestTemplate` bean and usage exist and can be migrated safely in phases.
 
 ### 3) Add/verify deprecation gate in CI
 
-- [ ] Run compile with deprecation warnings enabled in CI (`-Xlint:deprecation`).
+- [x] Run compile with deprecation warnings enabled in CI (`-Xlint:deprecation`).
 - [ ] Fail build on newly introduced deprecations (can be soft-fail initially).
 - [ ] Track remaining suppressions/deprecations as explicit TODOs.
 
@@ -139,8 +139,8 @@ This checklist is tailored to the current `wrongsecrets` codebase (Spring Boot `
 
 ## Definition of done for Boot 4 adoption
 
-- [ ] No new `RestTemplate` code introduced.
-- [ ] API errors are standardized on `ProblemDetail`.
-- [ ] Deprecation warnings are tracked and controlled in CI.
+- [x] No new `RestTemplate` code introduced.
+- [x] API errors are standardized on `ProblemDetail`.
+- [x] Deprecation warnings are tracked and controlled in CI.
 - [ ] Observability baseline (metrics, traces, log correlation) is active in non-local profiles.
 - [ ] Migration choices and rollout decisions are documented in `docs/`.
