@@ -38,8 +38,7 @@ class SlackNotificationServiceTest {
     when(restTemplate.postForEntity(anyString(), any(HttpEntity.class), eq(String.class)))
         .thenReturn(ResponseEntity.ok("ok"));
 
-    slackNotificationService =
-        new SlackNotificationService(restTemplate, objectMapper, challenge59);
+    slackNotificationService = new SlackNotificationService(restTemplate, challenge59);
 
     // When
     slackNotificationService.notifyChallengeCompletion("challenge-1", "testuser", userAgent);
@@ -58,8 +57,7 @@ class SlackNotificationServiceTest {
     when(restTemplate.postForEntity(anyString(), any(HttpEntity.class), eq(String.class)))
         .thenReturn(ResponseEntity.ok("ok"));
 
-    slackNotificationService =
-        new SlackNotificationService(restTemplate, objectMapper, challenge59);
+    slackNotificationService = new SlackNotificationService(restTemplate, challenge59);
 
     // When
     slackNotificationService.notifyChallengeCompletion("challenge-1", "testuser", userAgent);
@@ -72,7 +70,7 @@ class SlackNotificationServiceTest {
     HttpEntity capturedEntity = entityCaptor.getValue();
     SlackNotificationService.SlackMessage slackMessage =
         (SlackNotificationService.SlackMessage) capturedEntity.getBody();
-    assertTrue(slackMessage.getText().contains("(User-Agent: " + userAgent + ")"));
+    assertTrue(slackMessage.text().contains("(User-Agent: " + userAgent + ")"));
   }
 
   @Test
@@ -83,8 +81,7 @@ class SlackNotificationServiceTest {
     when(restTemplate.postForEntity(anyString(), any(HttpEntity.class), eq(String.class)))
         .thenReturn(ResponseEntity.ok("ok"));
 
-    slackNotificationService =
-        new SlackNotificationService(restTemplate, objectMapper, challenge59);
+    slackNotificationService = new SlackNotificationService(restTemplate, challenge59);
 
     // When
     slackNotificationService.notifyChallengeCompletion("challenge-1", "testuser", null);
@@ -97,7 +94,7 @@ class SlackNotificationServiceTest {
     HttpEntity capturedEntity = entityCaptor.getValue();
     SlackNotificationService.SlackMessage slackMessage =
         (SlackNotificationService.SlackMessage) capturedEntity.getBody();
-    assertFalse(slackMessage.getText().contains("User-Agent"));
+    assertFalse(slackMessage.text().contains("User-Agent"));
   }
 
   @Test
@@ -108,8 +105,7 @@ class SlackNotificationServiceTest {
     when(restTemplate.postForEntity(anyString(), any(HttpEntity.class), eq(String.class)))
         .thenReturn(ResponseEntity.ok("ok"));
 
-    slackNotificationService =
-        new SlackNotificationService(restTemplate, objectMapper, challenge59);
+    slackNotificationService = new SlackNotificationService(restTemplate, challenge59);
 
     // When
     slackNotificationService.notifyChallengeCompletion("challenge-1", "testuser");
@@ -122,7 +118,7 @@ class SlackNotificationServiceTest {
   @Test
   void shouldNotSendNotificationWhenSlackNotConfigured() {
     // Given
-    slackNotificationService = new SlackNotificationService(restTemplate, objectMapper, null);
+    slackNotificationService = new SlackNotificationService(restTemplate, null);
 
     // When
     slackNotificationService.notifyChallengeCompletion("challenge-1", "testuser");
@@ -135,8 +131,7 @@ class SlackNotificationServiceTest {
   void shouldNotSendNotificationWhenWebhookUrlNotSet() {
     // Given
     when(challenge59.getSlackWebhookUrl()).thenReturn("not_set");
-    slackNotificationService =
-        new SlackNotificationService(restTemplate, objectMapper, challenge59);
+    slackNotificationService = new SlackNotificationService(restTemplate, challenge59);
 
     // When
     slackNotificationService.notifyChallengeCompletion("challenge-1", "testuser");
@@ -149,8 +144,7 @@ class SlackNotificationServiceTest {
   void shouldNotSendNotificationWhenWebhookUrlIsInvalid() {
     // Given
     when(challenge59.getSlackWebhookUrl()).thenReturn("https://example.com/invalid");
-    slackNotificationService =
-        new SlackNotificationService(restTemplate, objectMapper, challenge59);
+    slackNotificationService = new SlackNotificationService(restTemplate, challenge59);
 
     // When
     slackNotificationService.notifyChallengeCompletion("challenge-1", "testuser");
@@ -167,8 +161,7 @@ class SlackNotificationServiceTest {
     when(restTemplate.postForEntity(anyString(), any(HttpEntity.class), eq(String.class)))
         .thenThrow(new RuntimeException("Network error"));
 
-    slackNotificationService =
-        new SlackNotificationService(restTemplate, objectMapper, challenge59);
+    slackNotificationService = new SlackNotificationService(restTemplate, challenge59);
 
     // When & Then - should not throw exception
     assertDoesNotThrow(
@@ -183,8 +176,7 @@ class SlackNotificationServiceTest {
     when(restTemplate.postForEntity(anyString(), any(HttpEntity.class), eq(String.class)))
         .thenReturn(ResponseEntity.ok("ok"));
 
-    slackNotificationService =
-        new SlackNotificationService(restTemplate, objectMapper, challenge59);
+    slackNotificationService = new SlackNotificationService(restTemplate, challenge59);
 
     // When
     slackNotificationService.notifyChallengeCompletion("challenge-1", null);

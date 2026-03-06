@@ -2,6 +2,10 @@
 
 This document outlines common code patterns, conventions, and best practices used throughout the WrongSecrets project.
 
+## Related documentation
+
+- [Spring Boot 4 Adoption Checklist](SPRING_BOOT_4_ADOPTION_CHECKLIST.md)
+
 ## Challenge Structure Patterns
 
 ### Challenge Interface vs FixedAnswerChallenge

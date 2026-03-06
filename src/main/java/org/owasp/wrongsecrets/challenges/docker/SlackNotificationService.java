@@ -1,7 +1,6 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,15 +18,11 @@ public class SlackNotificationService {
   private static final Logger logger = LoggerFactory.getLogger(SlackNotificationService.class);
 
   private final RestTemplate restTemplate;
-  private final ObjectMapper objectMapper;
   private final Optional<Challenge59> challenge59;
 
   public SlackNotificationService(
-      RestTemplate restTemplate,
-      ObjectMapper objectMapper,
-      @Autowired(required = false) Challenge59 challenge59) {
+      RestTemplate restTemplate, @Autowired(required = false) Challenge59 challenge59) {
     this.restTemplate = restTemplate;
-    this.objectMapper = objectMapper;
     this.challenge59 = Optional.ofNullable(challenge59);
   }
 
@@ -59,7 +54,10 @@ public class SlackNotificationService {
           "Successfully sent Slack notification for challenge completion: {}", challengeName);
 
     } catch (Exception e) {
-      logger.warn("Failed to send Slack notification for challenge: {}", challengeName, e);
+      logger.warn(
+          "Failed to send Slack notification for challenge: {}. Message: {}",
+          challengeName,
+          e.getMessage());
     }
   }
 
@@ -94,16 +92,9 @@ public class SlackNotificationService {
   }
 
   /** Simple record for Slack message payload. */
-  public static class SlackMessage {
-    @JsonProperty("text")
-    private final String text;
-
+  public record SlackMessage(@JsonProperty("text") String text) {
     public SlackMessage(String text) {
       this.text = text;
-    }
-
-    public String getText() {
-      return text;
     }
   }
 }

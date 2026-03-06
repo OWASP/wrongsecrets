@@ -46,7 +46,7 @@ public class Challenge49 implements Challenge {
         return false;
       }
     } catch (Exception e) {
-      log.warn("given answer is not an integer", e);
+      log.warn("given answer is not an integer. Exception: {}", e.getMessage());
       return false;
     }
 

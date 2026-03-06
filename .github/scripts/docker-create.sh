@@ -64,10 +64,11 @@ Heroku_publish_demo() {
     heroku container:login
     echo "heroku deployment to demo"
     cd ../..
-    heroku container:push --recursive --arg argBasedVersion=${tag}heroku --app arcane-scrubland-42646
+    # heroku container:push --recursive --arg argBasedVersion=${tag}heroku --app arcane-scrubland-42646
+    heroku container:push --arg argBasedVersion=${tag}heroku --app arcane-scrubland-42646
     heroku container:release web --app arcane-scrubland-42646
-    heroku container:push --recursive --arg argBasedVersion=${tag}heroku,CTF_ENABLED=true,HINTS_ENABLED=false --app wrongsecrets-ctf
-    heroku container:release web --app wrongsecrets-ctf
+    # heroku container:push --recursive --arg argBasedVersion=${tag}heroku,CTF_ENABLED=true,HINTS_ENABLED=false --app wrongsecrets-ctf
+    # heroku container:release web --app wrongsecrets-ctf
     echo "wait for contianer to come up"
     until curl --output /dev/null --silent --head --fail https://arcane-scrubland-42646.herokuapp.com/; do
         printf '.'
@@ -236,7 +237,7 @@ local_extra_info() {
     if [[ $script_mode == "local" ]] ; then
         echo ""
         echo "⚠️⚠️ This script is running in local mode, with no arguments this script will build your current code and package into a docker container for easy local testing"
-        echo "If the container gets built correctly you can run the container with the command: docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:local-test, if there are errors the script should tell you what to do ⚠️⚠️"
+        echo "If the container gets built correctly you can run the container with the command: docker run -p 8080:8080 -p 8090:8090 jeroenwillemsen/wrongsecrets:local-test, if there are errors the script should tell you what to do ⚠️⚠️"
         echo ""
     fi
 }
@@ -447,7 +448,7 @@ test() {
     if [[ "$script_mode" == "test" ]]; then
         echo "Running the tests"
         echo "Starting the docker container"
-        docker run -d -p 8080:8080 jeroenwillemsen/wrongsecrets:local-test
+        docker run -d -p 8080:8080 -p 8090:8090 jeroenwillemsen/wrongsecrets:local-test
         until $(curl --output /dev/null --silent --head --fail http://localhost:8080); do
             printf '.'
             sleep 5

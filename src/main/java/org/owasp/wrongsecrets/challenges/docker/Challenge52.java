@@ -33,7 +33,10 @@ public class Challenge52 extends FixedAnswerChallenge {
     try {
       return Files.readString(Paths.get(dockerMountsecret, "secret.txt"), StandardCharsets.UTF_8);
     } catch (Exception e) {
-      log.warn("Exception during file reading, defaulting to default without cloud environment", e);
+      log.warn(
+          "Exception during file reading, defaulting to default without cloud environment."
+              + " Exception message: {}",
+          e.getMessage());
       return Challenges.ErrorResponses.OUTSIDE_DOCKER;
     }
   }
