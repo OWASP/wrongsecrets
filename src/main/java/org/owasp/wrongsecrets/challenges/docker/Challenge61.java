@@ -9,7 +9,7 @@ import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
@@ -22,12 +22,10 @@ public class Challenge61 implements Challenge {
   private final RestTemplate restTemplate;
 
   public Challenge61() {
-    this.restTemplate =
-        new RestTemplateBuilder()
-            .rootUri("https://api.telegram.org")
-            .setConnectTimeout(Duration.ofSeconds(5))
-            .setReadTimeout(Duration.ofSeconds(5))
-            .build();
+    var requestFactory = new SimpleClientHttpRequestFactory();
+    requestFactory.setConnectTimeout(Duration.ofSeconds(5));
+    requestFactory.setReadTimeout(Duration.ofSeconds(5));
+    this.restTemplate = new RestTemplate(requestFactory);
   }
 
   // Constructor for testing with mocked RestTemplate
@@ -77,7 +75,7 @@ public class Challenge61 implements Challenge {
           botToken.substring(0, Math.min(10, botToken.length())));
 
       // Call Telegram Bot API to get bot info first (simpler call)
-      String url = "/bot" + botToken + "/getMe";
+      String url = "https://api.telegram.org/bot" + botToken + "/getMe";
       Map<String, Object> response = restTemplate.getForObject(url, Map.class);
 
       if (response != null && Boolean.TRUE.equals(response.get("ok"))) {
