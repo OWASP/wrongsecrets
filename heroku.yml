@@ -2,12 +2,3 @@ build:
   docker:
     web: Dockerfile.web
     worker: Dockerfile
-    env:
-      SPRING_PROFILES_ACTIVE: without-vault
-      SPRINGDOC_UI: true
-      SPRINGDOC_DOC: true
-run:
-  web:
-    image: web
-    command:
-      - java -jar -XX:SharedArchiveFile=application.jsa -Dspring.profiles.active=without-vault -Dspringdoc.swagger-ui.enabled=true -Dspringdoc.api-docs.enabled=true -D application.jar
