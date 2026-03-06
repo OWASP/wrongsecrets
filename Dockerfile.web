@@ -40,4 +40,4 @@ COPY .github/scripts/ /var/helpers
 COPY src/test/resources/alibabacreds.kdbx /var/helpers
 COPY src/test/resources/RSAprivatekey.pem /var/helpers
 COPY .ssh/ /home/wrongsecrets/.ssh/
-CMD java -jar -XX:SharedArchiveFile=application.jsa -Dspring.profiles.active=$(echo ${SPRING_PROFILES_ACTIVE}) -Dspringdoc.swagger-ui.enabled=${SPRINGDOC_UI} -Dspringdoc.api-docs.enabled=${SPRINGDOC_DOC} -D application.jar
+CMD ["java", "-jar", "-XX:SharedArchiveFile=application.jsa", "-Dspring.profiles.active=$(echo ${SPRING_PROFILES_ACTIVE})", "-Dspringdoc.swagger-ui.enabled=${SPRINGDOC_UI}", "-Dspringdoc.api-docs.enabled=${SPRINGDOC_DOC}", "-D", "application.jar"]
