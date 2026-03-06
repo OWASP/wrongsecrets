@@ -64,10 +64,11 @@ Heroku_publish_demo() {
     heroku container:login
     echo "heroku deployment to demo"
     cd ../..
-    heroku container:push --recursive --arg argBasedVersion=${tag}heroku --app arcane-scrubland-42646
+    # heroku container:push --recursive --arg argBasedVersion=${tag}heroku --app arcane-scrubland-42646
+    heroku container:push --arg argBasedVersion=${tag}heroku --app arcane-scrubland-42646
     heroku container:release web --app arcane-scrubland-42646
-    heroku container:push --recursive --arg argBasedVersion=${tag}heroku,CTF_ENABLED=true,HINTS_ENABLED=false --app wrongsecrets-ctf
-    heroku container:release web --app wrongsecrets-ctf
+    # heroku container:push --recursive --arg argBasedVersion=${tag}heroku,CTF_ENABLED=true,HINTS_ENABLED=false --app wrongsecrets-ctf
+    # heroku container:release web --app wrongsecrets-ctf
     echo "wait for contianer to come up"
     until curl --output /dev/null --silent --head --fail https://arcane-scrubland-42646.herokuapp.com/; do
         printf '.'
