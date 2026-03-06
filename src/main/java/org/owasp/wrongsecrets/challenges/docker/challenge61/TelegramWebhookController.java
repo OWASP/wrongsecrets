@@ -2,6 +2,7 @@ package org.owasp.wrongsecrets.challenges.docker.challenge61;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+import java.time.Duration;
 import java.util.Map;
 import org.bouncycastle.util.encoders.Base64;
 import org.slf4j.Logger;
@@ -9,19 +10,19 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 /**
- * Optional webhook controller for Challenge61. Enable by setting
- * challenge61.webhook.enabled=true and challenge61.webhook.token=<your-secret-token> This is a
- * better approach for production than polling with getUpdates.
+ * Optional webhook controller for Challenge61. Enable by setting challenge61.webhook.enabled=true
+ * and challenge61.webhook.token=<your-secret-token> This is a better approach for production than
+ * polling with getUpdates.
  *
  * <p>To use: 1. Set environment variables: - CHALLENGE61_WEBHOOK_ENABLED=true -
- * CHALLENGE61_WEBHOOK_TOKEN=<random-secret-string> 2. Set webhook URL with Telegram:
- * curl -X POST
+ * CHALLENGE61_WEBHOOK_TOKEN=<random-secret-string> 2. Set webhook URL with Telegram: curl -X POST
  * "https://api.telegram.org/bot<BOT_TOKEN>/setWebhook?url=https://<your-heroku-app>.herokuapp.com/telegram/webhook/challenge61&secret_token=<your-secret-token>"
  */
 @RestController
@@ -32,10 +33,11 @@ public class TelegramWebhookController {
   private final RestTemplate restTemplate;
   private final String webhookToken;
 
-  public TelegramWebhookController(
-      RestTemplate restTemplate,
-      @Value("${challenge61.webhook.token:}") String webhookToken) {
-    this.restTemplate = restTemplate;
+  public TelegramWebhookController(@Value("${challenge61.webhook.token:}") String webhookToken) {
+    var requestFactory = new SimpleClientHttpRequestFactory();
+    requestFactory.setConnectTimeout(Duration.ofSeconds(5));
+    requestFactory.setReadTimeout(Duration.ofSeconds(5));
+    this.restTemplate = new RestTemplate(requestFactory);
     this.webhookToken = webhookToken;
     logger.info("Challenge61 Telegram webhook controller enabled");
   }

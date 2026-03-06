@@ -39,9 +39,11 @@ ENV default_aws_value_challenge_11=$CHALLENGE_11_VALUE
 ENV BASTIONHOSTPATH="/home/wrongsecrets/.ssh"
 ENV PROJECTSPECPATH="/var/helpers/project-specification.mdc"
 ENV funnybunny="This is a funny bunny"
+# Keep memory usage within Heroku dyno limits.
+ENV JAVA_TOOL_OPTIONS="-XX:MaxRAMPercentage=60 -XX:InitialRAMPercentage=25 -XX:MaxMetaspaceSize=128m -XX:+UseSerialGC -XX:+ExitOnOutOfMemoryError"
 # Deploy WrongSecrets to Heroku
 COPY .github/scripts/ /var/helpers
 COPY src/test/resources/alibabacreds.kdbx /var/helpers
 COPY src/test/resources/RSAprivatekey.pem /var/helpers
 COPY .ssh/ /home/wrongsecrets/.ssh/
-CMD ["/bin/sh", "-c", "java -jar -XX:SharedArchiveFile=application.jsa -Dspring.profiles.active=${SPRING_PROFILES_ACTIVE} -Dserver.port=${PORT} -Dspringdoc.swagger-ui.enabled=${SPRINGDOC_UI} -Dspringdoc.api-docs.enabled=${SPRINGDOC_DOC} application.jar"]
+CMD ["/bin/sh", "-c", "java ${JAVA_TOOL_OPTIONS} -XX:SharedArchiveFile=application.jsa -Dspring.profiles.active=${SPRING_PROFILES_ACTIVE} -Dserver.port=${PORT} -Dspringdoc.swagger-ui.enabled=${SPRINGDOC_UI} -Dspringdoc.api-docs.enabled=${SPRINGDOC_DOC} -jar application.jar"]

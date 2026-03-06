@@ -23,7 +23,7 @@ heroku config:set CHALLENGE61_WEBHOOK_TOKEN=$(openssl rand -hex 32) -a wrongsecr
 
 For **Arcane Heroku app**:
 ```bash
-heroku config:set CHALLENGE61_WEBHOOK_ENABLED=true -a arcane-app  
+heroku config:set CHALLENGE61_WEBHOOK_ENABLED=true -a arcane-app
 heroku config:set CHALLENGE61_WEBHOOK_TOKEN=$(openssl rand -hex 32) -a arcane-app
 ```
 
@@ -45,7 +45,7 @@ curl -X POST "https://api.telegram.org/bot8132866643:AAHJmvZqvvM9dI2rtBOu--WMZyM
 # Get your webhook token
 WEBHOOK_TOKEN=$(heroku config:get CHALLENGE61_WEBHOOK_TOKEN -a arcane-app)
 
-# Set the webhook  
+# Set the webhook
 curl -X POST "https://api.telegram.org/bot8132866643:AAHJmvZqvvM9dI2rtBOu--WMZyMFTfHNo9I/setWebhook?url=https://your-arcane-app.herokuapp.com/telegram/webhook/challenge61&secret_token=$WEBHOOK_TOKEN"
 ```
 
