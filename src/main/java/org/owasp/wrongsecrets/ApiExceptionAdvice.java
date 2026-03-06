@@ -29,8 +29,7 @@ public class ApiExceptionAdvice {
   public ProblemDetail handleResponseStatus(
       ResponseStatusException ex, HttpServletRequest request) {
     ProblemDetail pd = ProblemDetail.forStatus(ex.getStatusCode());
-    pd.setTitle(
-        ex.getReason() != null ? ex.getReason() : ex.getStatusCode().toString());
+    pd.setTitle(ex.getReason() != null ? ex.getReason() : ex.getStatusCode().toString());
     pd.setDetail(ex.getMessage());
     pd.setInstance(URI.create(request.getRequestURI()));
     return pd;
