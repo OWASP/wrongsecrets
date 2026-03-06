@@ -79,8 +79,8 @@ jobs:
 
       - name: Start both versions
         run: |
-          docker run -d -p 8080:8080 --name pr-version wrongsecrets-pr
-          docker run -d -p 8081:8080 --name main-version wrongsecrets-main
+          docker run -d -p 8080:8080 -p 8090:8090 --name pr-version wrongsecrets-pr
+          docker run -d -p 8081:8080 -p 8091:8090 --name main-version wrongsecrets-main
 
           # Wait for containers to start
           echo "Waiting for containers to start..."
