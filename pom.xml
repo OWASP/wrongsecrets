@@ -58,7 +58,7 @@
     <dependency-check-maven.version>12.2.0</dependency-check-maven.version>
     <exec-maven-plugin.version>3.6.3</exec-maven-plugin.version>
     <findsecbugs.version>1.14.0</findsecbugs.version>
-    <frontend-maven-plugin.version>1.15.4</frontend-maven-plugin.version>
+    <frontend-maven-plugin.version>2.0.0</frontend-maven-plugin.version>
     <gatling-maven-plugin.version>4.21.0</gatling-maven-plugin.version>
     <gatling.version>3.15.0</gatling.version>
     <github.button.version>2.14.1</github.button.version>
