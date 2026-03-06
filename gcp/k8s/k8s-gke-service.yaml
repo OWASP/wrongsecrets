@@ -11,5 +11,10 @@ spec:
     - port: 80
       targetPort: 8080
       protocol: TCP
+      name: http
+    - port: 81
+      targetPort: 8090
+      protocol: TCP
+      name: MCP
   selector:
     app: secret-challenge

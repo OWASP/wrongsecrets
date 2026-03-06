@@ -193,7 +193,7 @@ kubectl logs -l app=secret-challenge -f >> pod.log &
 kubectl expose deployment secret-challenge --type=LoadBalancer --port=8080
 kubectl port-forward \
     $(kubectl get pod -l app=secret-challenge -o jsonpath="{.items[0].metadata.name}") \
-    8080:8080 \
+    8080:8080 8090:8090 \
     &
 echo "Do minikube delete to stop minikube from running and cleanup to start fresh again"
 echo "wait 20 seconds so we can check if vault-k8s-container works"
