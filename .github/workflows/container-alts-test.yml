@@ -19,6 +19,6 @@ jobs:
       - uses: actions/checkout@v5
       - name: run container
         run: |
-          podman run -dt -p 8080:8080 docker.io/jeroenwillemsen/wrongsecrets:latest-no-vault && \
+          podman run -dt -p 8080:8080 -p 8090:8090 docker.io/jeroenwillemsen/wrongsecrets:latest-no-vault && \
           echo "wait 20 seconds for container to come up" && sleep 20 && \
           curl localhost:8080

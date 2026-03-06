@@ -86,7 +86,7 @@ you run tests every time that you are adding something new.
 - Use GitHub Actions for CI container builds and tests.
 
 ### Step 3: Deploy
-- **Docker**: Run locally with `docker run -p 8080:8080 jeroenwillemsen/wrongsecrets:latest-no-vault`.
+- **Docker**: Run locally with `docker run -p 8080:8080 -p 8090:8090 jeroenwillemsen/wrongsecrets:latest-no-vault`.
 - **Kubernetes**: Apply manifests from `k8s/` and use challenge-specific images as needed.
 - **Heroku/Fly.io/Render/Okteto**: Use respective configuration files for cloud deployment.
 
