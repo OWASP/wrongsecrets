@@ -64,8 +64,7 @@ Heroku_publish_demo() {
     heroku container:login
     echo "heroku deployment to demo"
     cd ../..
-    # heroku container:push --recursive --arg argBasedVersion=${tag}heroku --app arcane-scrubland-42646
-    heroku container:push --arg argBasedVersion=${tag}heroku --app arcane-scrubland-42646
+    heroku container:push web --arg argBasedVersion=${tag} --app arcane-scrubland-42646
     heroku container:release web --app arcane-scrubland-42646
     # heroku container:push --recursive --arg argBasedVersion=${tag}heroku,CTF_ENABLED=true,HINTS_ENABLED=false --app wrongsecrets-ctf
     # heroku container:release web --app wrongsecrets-ctf
