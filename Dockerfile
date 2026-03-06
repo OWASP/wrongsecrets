@@ -1,7 +1,7 @@
 FROM bellsoft/liberica-openjre-debian:25-cds AS builder
 WORKDIR /builder
 
-ARG argBasedVersion="1.13.1-alpha5"
+ARG argBasedVersion="1.13.1-alpha6"
 
 COPY --chown=wrongsecrets target/wrongsecrets-${argBasedVersion}-SNAPSHOT.jar application.jar
 RUN java -Djarmode=tools -jar application.jar extract --layers --destination extracted
@@ -59,7 +59,7 @@ RUN mkdir -p /var/run/secrets/kubernetes.io/serviceaccount && \
     chmod 600 /var/run/secrets/kubernetes.io/serviceaccount/token
 
 # Create a dynamic archive
-RUN java --add-modules=jdk.unsupported -XX:ArchiveClassesAtExit=application.jsa -Dspring.context.exit=onRefresh -jar application.jar
+RUN java -XX:ArchiveClassesAtExit=application.jsa -Dspring.context.exit=onRefresh -jar application.jar
 
 # Clean up the mocked token
 RUN rm -rf /var/run/secrets/kubernetes.io
@@ -71,5 +71,4 @@ RUN rm -rf /var/run/secrets/kubernetes.io
 RUN adduser -u 2000 -D wrongsecrets
 USER wrongsecrets
 
-CMD ["java", "-Xms128m", "-Xmx128m", "-Xss512k", "-jar", "-Dserver.port=$PORT", "-XX:MaxRAMPercentage=75", "-XX:MinRAMPercentage=25", "-Dspring.profiles.active=without-vault", "-Dspringdoc.swagger-ui.enabled=${SPRINGDOC_UI}", "-Dspringdoc.api-docs.enabled=${SPRINGDOC_DOC}", "application.jar"]
-# CMD java -jar -XX:SharedArchiveFile=application.jsa -Dspring.profiles.active=$(echo ${SPRING_PROFILES_ACTIVE}) -Dspringdoc.swagger-ui.enabled=${SPRINGDOC_UI} -Dspringdoc.api-docs.enabled=${SPRINGDOC_DOC} -D application.jar
+CMD java -jar -XX:SharedArchiveFile=application.jsa -Dspring.profiles.active=$(echo ${SPRING_PROFILES_ACTIVE}) -Dspringdoc.swagger-ui.enabled=${SPRINGDOC_UI} -Dspringdoc.api-docs.enabled=${SPRINGDOC_DOC} -D application.jar
