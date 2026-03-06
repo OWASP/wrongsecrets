@@ -64,8 +64,11 @@ Heroku_publish_demo() {
     heroku container:login
     echo "heroku deployment to demo"
     cd ../..
-    heroku container:push web --arg argBasedVersion=${tag} --app arcane-scrubland-42646
-    heroku container:release web --app arcane-scrubland-42646
+    git add Dockerfile.web
+    git commit --no-verify -m "Fix Heroku deploy"
+    git push heroku HEAD:master
+    # heroku container:push web --arg argBasedVersion=${tag} --app arcane-scrubland-42646
+    # heroku container:release web --app arcane-scrubland-42646
     # heroku container:push --recursive --arg argBasedVersion=${tag}heroku,CTF_ENABLED=true,HINTS_ENABLED=false --app wrongsecrets-ctf
     # heroku container:release web --app wrongsecrets-ctf
     echo "wait for contianer to come up"
