@@ -1,5 +1,6 @@
 package org.owasp.wrongsecrets;
 
+import java.time.Duration;
 import org.owasp.wrongsecrets.challenges.kubernetes.Vaultinjected;
 import org.owasp.wrongsecrets.challenges.kubernetes.Vaultpassword;
 import org.owasp.wrongsecrets.definitions.ChallengeDefinitionsConfiguration;
@@ -10,7 +11,8 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
+import org.springframework.web.client.RestClient;
 
 @SpringBootApplication
 @EnableConfigurationProperties({Vaultpassword.class, Vaultinjected.class})
@@ -34,7 +36,10 @@ public class WrongSecretsApplication {
   }
 
   @Bean
-  public RestTemplate restTemplate() {
-    return new RestTemplate();
+  public RestClient restClient(RestClient.Builder builder) {
+    SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
+    factory.setConnectTimeout(Duration.ofSeconds(5));
+    factory.setReadTimeout(Duration.ofSeconds(10));
+    return builder.requestFactory(factory).build();
   }
 }

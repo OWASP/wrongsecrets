@@ -5,11 +5,9 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.client.RestClient;
 
 /** Service for sending Slack notifications when challenges are completed. */
 @Service
@@ -17,12 +15,12 @@ public class SlackNotificationService {
 
   private static final Logger logger = LoggerFactory.getLogger(SlackNotificationService.class);
 
-  private final RestTemplate restTemplate;
+  private final RestClient restClient;
   private final Optional<Challenge59> challenge59;
 
   public SlackNotificationService(
-      RestTemplate restTemplate, @Autowired(required = false) Challenge59 challenge59) {
-    this.restTemplate = restTemplate;
+      RestClient restClient, @Autowired(required = false) Challenge59 challenge59) {
+    this.restClient = restClient;
     this.challenge59 = Optional.ofNullable(challenge59);
   }
 
@@ -42,14 +40,16 @@ public class SlackNotificationService {
     try {
       String message = buildCompletionMessage(challengeName, userName, userAgent);
       SlackMessage slackMessage = new SlackMessage(message);
-
-      HttpHeaders headers = new HttpHeaders();
-      headers.setContentType(MediaType.APPLICATION_JSON);
-
-      HttpEntity<SlackMessage> request = new HttpEntity<>(slackMessage, headers);
-
       String webhookUrl = challenge59.get().getSlackWebhookUrl();
-      restTemplate.postForEntity(webhookUrl, request, String.class);
+
+      restClient
+          .post()
+          .uri(webhookUrl)
+          .contentType(MediaType.APPLICATION_JSON)
+          .body(slackMessage)
+          .retrieve()
+          .toEntity(String.class);
+
       logger.info(
           "Successfully sent Slack notification for challenge completion: {}", challengeName);
 
