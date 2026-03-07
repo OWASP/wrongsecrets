@@ -1,5 +1,5 @@
-FROM jeroenwillemsen/wrongsecrets:1.13.1-alpha6-no-vault
-ARG argBasedVersion="1.13.1-alpha6-no-vault"
+FROM jeroenwillemsen/wrongsecrets:1.13.1-alpha11-no-vault
+ARG argBasedVersion="1.13.1-alpha11-no-vault"
 ARG spring_profile="without-vault"
 ARG CANARY_URLS="http://canarytokens.com/terms/about/s7cfbdakys13246ewd8ivuvku/post.jsp,http://canarytokens.com/terms/about/y0all60b627gzp19ahqh7rl6j/post.jsp"
 ARG CTF_ENABLED=false
@@ -39,9 +39,12 @@ ENV default_aws_value_challenge_11=$CHALLENGE_11_VALUE
 ENV BASTIONHOSTPATH="/home/wrongsecrets/.ssh"
 ENV PROJECTSPECPATH="/var/helpers/project-specification.mdc"
 ENV funnybunny="This is a funny bunny"
+# Keep memory usage within Heroku dyno limits (512MB dyno).
+# Hard cap heap to 250M, metaspace to 60M, disable expensive GC, exit on OOM immediately.
+ENV JAVA_TOOL_OPTIONS="-Xmx250M -Xms128M -XX:MetaspaceSize=40M -XX:MaxMetaspaceSize=60M -XX:CompressedClassSpaceSize=32M -XX:+UseG1GC -XX:MaxGCPauseMillis=50 -XX:+ExitOnOutOfMemoryError -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/tmp/heapdump.hprof"
 # Deploy WrongSecrets to Heroku
 COPY .github/scripts/ /var/helpers
 COPY src/test/resources/alibabacreds.kdbx /var/helpers
 COPY src/test/resources/RSAprivatekey.pem /var/helpers
 COPY .ssh/ /home/wrongsecrets/.ssh/
-CMD ["/bin/sh", "-c", "java -jar -XX:SharedArchiveFile=application.jsa -Dspring.profiles.active=${SPRING_PROFILES_ACTIVE} -Dserver.port=${PORT} -Dspringdoc.swagger-ui.enabled=${SPRINGDOC_UI} -Dspringdoc.api-docs.enabled=${SPRINGDOC_DOC} application.jar"]
+CMD ["/bin/sh", "-c", "java ${JAVA_TOOL_OPTIONS} -XX:SharedArchiveFile=application.jsa -Dspring.profiles.active=${SPRING_PROFILES_ACTIVE} -Dserver.port=${PORT} -Dspringdoc.swagger-ui.enabled=${SPRINGDOC_UI} -Dspringdoc.api-docs.enabled=${SPRINGDOC_DOC} -jar application.jar"]

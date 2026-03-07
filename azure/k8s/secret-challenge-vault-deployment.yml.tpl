@@ -61,7 +61,7 @@ spec:
             volumeAttributes:
               secretProviderClass: "azure-wrongsecrets-vault"
       containers:
-        - image: jeroenwillemsen/wrongsecrets:1.13.1-alpha6-k8s-vault
+        - image: jeroenwillemsen/wrongsecrets:1.13.1-alpha11-k8s-vault
           imagePullPolicy: IfNotPresent
           name: secret-challenge
           command: ["/bin/sh"]

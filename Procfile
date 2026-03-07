@@ -1,0 +1,1 @@
+web: java -Xmx200M -Xms100M -XX:MetaspaceSize=30M -XX:MaxMetaspaceSize=50M -XX:CompressedClassSpaceSize=24M -XX:+UseG1GC -XX:MaxGCPauseMillis=50 -XX:+ExitOnOutOfMemoryError -Dspring.profiles.active=${SPRING_PROFILES_ACTIVE} -Dserver.port=${PORT} -Dspringdoc.swagger-ui.enabled=${SPRINGDOC_UI} -Dspringdoc.api-docs.enabled=${SPRINGDOC_DOC} -jar target/application.jar
