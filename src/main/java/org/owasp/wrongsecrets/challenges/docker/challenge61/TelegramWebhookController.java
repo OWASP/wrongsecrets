@@ -17,13 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 /**
- * Optional webhook controller for Challenge61. Enable by setting challenge61.webhook.enabled=true
- * and challenge61.webhook.token=<your-secret-token> This is a better approach for production than
- * polling with getUpdates.
+ * Optional webhook controller for Challenge61. Enable by setting {@code
+ * challenge61.webhook.enabled=true} and {@code challenge61.webhook.token} properties.
  *
- * <p>To use: 1. Set environment variables: - CHALLENGE61_WEBHOOK_ENABLED=true -
- * CHALLENGE61_WEBHOOK_TOKEN=<random-secret-string> 2. Set webhook URL with Telegram: curl -X POST
- * "https://api.telegram.org/bot<BOT_TOKEN>/setWebhook?url=https://<your-heroku-app>.herokuapp.com/telegram/webhook/challenge61&secret_token=<your-secret-token>"
+ * <p>Webhooks are recommended for production deployments to replace polling with getUpdates. For
+ * detailed setup instructions including environment variables and webhook configuration, see:
+ * {@code docs/CHALLENGE61_MULTI_INSTANCE_SETUP.md}
  */
 @RestController
 @ConditionalOnProperty(name = "challenge61.webhook.enabled", havingValue = "true")

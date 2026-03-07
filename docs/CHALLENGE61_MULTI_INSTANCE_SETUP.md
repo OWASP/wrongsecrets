@@ -1,17 +1,25 @@
 # Challenge61 Multi-Instance Setup Guide
 
-This guide explains how to run Challenge61 across multiple Heroku apps (Arcane and WrongSecrets).
+This guide explains how to configure and run Challenge61, which demonstrates how hardcoded Telegram bot credentials can be discovered and exploited. The bot token is double-encoded in base64 to make it slightly more challenging but still discoverable through code inspection.
 
-## Current Solution: Improved getUpdates with Offsets
+## Overview
 
-The code now uses update offsets to minimize conflicts between multiple app instances:
+This challenge supports running on multiple app instances (e.g., Arcane and WrongSecrets Heroku apps) using either polling (getUpdates) or webhooks.
+
+## Option 1: Polling with getUpdates (Default - Works Out of Box)
+
+The code uses update offsets to minimize conflicts between multiple app instances:
+- No configuration needed
+- Uses update offsets to minimize conflicts between instances
+- Multiple instances can run simultaneously
+- Less efficient but simpler setup
 - `timeout=0` - No long polling, quick responses
 - `limit=1` - Process one update at a time
 - Offset acknowledgment - Marks updates as processed
 
 **Status**: ✅ Code updated and tested
 
-## Webhook Solution (Recommended for Production)
+## Option 2: Webhook Solution (Recommended for Production)
 
 ### Step 1: Configure Each Heroku App
 
@@ -92,3 +100,42 @@ heroku logs --tail -a arcane-app | grep Challenge61
 For **production with multiple apps**: Use webhook on ONE primary app (WrongSecrets).
 
 For **development/testing**: The current getUpdates approach with offsets works fine.
+
+## BotFather Configuration (Optional but Recommended)
+
+### 1. Configure Commands
+
+- Send `/setcommands` to @BotFather
+- Select your bot
+- Add: `start - Get the secret message`
+
+### 2. Set Description
+
+- Send `/setdescription` to @BotFather
+- Select your bot
+- Add: "OWASP WrongSecrets Challenge 61 - Demonstrates hardcoded bot credentials. Send /start to receive the secret!"
+
+### 3. Set About Text
+
+- Send `/setabouttext` to @BotFather
+- Add: "Educational security challenge from OWASP WrongSecrets project"
+
+## Testing the Bot
+
+1. Find the bot: Search for @WrongsecretsBot in Telegram (or your bot username)
+2. Send: `/start`
+3. Receive: "Welcome! Your secret is: telegram_secret_found_in_channel"
+
+## Creating a New Bot
+
+If you need to create your own bot for testing:
+
+1. Message @BotFather in Telegram
+2. Send `/newbot`
+3. Follow prompts to choose name and username
+4. BotFather will provide a token like: `1234567890:ABCdefGHIjklMNOpqrsTUVwxyz`
+5. Double-encode the token for use in this challenge:
+   ```bash
+   echo -n "YOUR_TOKEN" | base64 | base64
+   ```
+6. Replace the `encodedToken` value in the `getBotToken()` method in Challenge61.java

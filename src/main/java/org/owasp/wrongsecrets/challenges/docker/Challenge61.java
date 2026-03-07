@@ -15,71 +15,18 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 /**
- * This challenge is about finding a secret in a Telegram channel/bot.
+ * This challenge demonstrates how hardcoded Telegram bot credentials can be discovered and
+ * exploited.
  *
- * <p>The challenge demonstrates how hardcoded Telegram bot credentials can be discovered and
- * exploited. The bot token is double-encoded in base64 to make it slightly more challenging but
- * still discoverable through code inspection.
+ * <p>The bot token is double-encoded in base64 to make it slightly more challenging but still
+ * discoverable through code inspection.
  *
- * <p><b>Multi-Instance Setup (Heroku/Cloud Deployments):</b>
+ * <p>This challenge supports running on multiple app instances using either polling (getUpdates) or
+ * webhooks. For detailed setup instructions including BotFather configuration, webhook setup, and
+ * creating a new bot, see: {@code docs/CHALLENGE61_MULTI_INSTANCE_SETUP.md}
  *
- * <p>This challenge supports running on multiple app instances (e.g., Arcane and WrongSecrets
- * Heroku apps) using either polling (getUpdates) or webhooks:
- *
- * <p><b>Option 1: Polling with getUpdates (Default - Works Out of Box)</b><br>
- * - No configuration needed<br>
- * - Uses update offsets to minimize conflicts between instances<br>
- * - Multiple instances can run simultaneously<br>
- * - Less efficient but simpler setup
- *
- * <p><b>Option 2: Webhooks (Recommended for Production)</b><br>
- * 1. Enable webhook mode by setting environment variables:<br>
- * {@code heroku config:set CHALLENGE61_WEBHOOK_ENABLED=true -a your-app}<br>
- * {@code heroku config:set CHALLENGE61_WEBHOOK_TOKEN=$(openssl rand -hex 32) -a your-app}
- *
- * <p>2. Set the webhook URL with Telegram (choose ONE primary app):<br>
- * {@code curl -X POST
- * "https://api.telegram.org/bot<BOT_TOKEN>/setWebhook?url=https://your-app.herokuapp.com/telegram/webhook/challenge61&secret_token=<WEBHOOK_TOKEN>"}
- *
- * <p>3. Verify webhook is active:<br>
- * {@code curl "https://api.telegram.org/bot<BOT_TOKEN>/getWebhookInfo"}
- *
- * <p>4. To disable webhook and return to polling:<br>
- * {@code curl -X POST "https://api.telegram.org/bot<BOT_TOKEN>/deleteWebhook"}
- *
- * <p><b>BotFather Configuration (Optional but Recommended):</b>
- *
- * <p>1. Configure commands:<br>
- * - Send {@code /setcommands} to @BotFather<br>
- * - Select your bot<br>
- * - Add: {@code start - Get the secret message}
- *
- * <p>2. Set description:<br>
- * - Send {@code /setdescription} to @BotFather<br>
- * - Select your bot<br>
- * - Add: "OWASP WrongSecrets Challenge 61 - Demonstrates hardcoded bot credentials. Send /start to
- * receive the secret!"
- *
- * <p>3. Set about text:<br>
- * - Send {@code /setabouttext} to @BotFather<br>
- * - Add: "Educational security challenge from OWASP WrongSecrets project"
- *
- * <p><b>Testing the Bot:</b><br>
- * 1. Find the bot: Search for @WrongsecretsBot in Telegram (or your bot username)<br>
- * 2. Send: {@code /start}<br>
- * 3. Receive: "Welcome! Your secret is: telegram_secret_found_in_channel"
- *
- * <p><b>Creating a New Bot:</b><br>
- * If you need to create your own bot for testing:<br>
- * 1. Message @BotFather in Telegram<br>
- * 2. Send {@code /newbot}<br>
- * 3. Follow prompts to choose name and username<br>
- * 4. BotFather will provide a token like: {@code 1234567890:ABCdefGHIjklMNOpqrsTUVwxyz}<br>
- * 5. Double-encode the token for use in this challenge:<br>
- * {@code echo -n "YOUR_TOKEN" | base64 | base64}<br>
- * 6. Replace the {@code encodedToken} value in the {@code getBotToken()} method
- *
- * <p>See also: docs/CHALLENGE61_MULTI_INSTANCE_SETUP.md for detailed setup instructions
+ * <p><b>Quick Start:</b> Search for @WrongsecretsBot in Telegram and send {@code /start} to receive
+ * the secret.
  */
 @Component
 public class Challenge61 implements Challenge {
