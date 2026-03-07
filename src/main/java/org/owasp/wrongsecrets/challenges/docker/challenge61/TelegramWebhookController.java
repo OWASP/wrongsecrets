@@ -57,7 +57,7 @@ public class TelegramWebhookController {
     }
 
     try {
-      logger.info("Received webhook update: {}", update.get("update_id"));
+      logger.info("Received webhook update: {}", sanitizeForLog(String.valueOf(update.get("update_id"))));
 
       // Check if this is a message update
       if (update.containsKey("message")) {
@@ -104,7 +104,7 @@ public class TelegramWebhookController {
       Map<String, Object> response = restTemplate.getForObject(sendMessageUrl, Map.class);
 
       if (response != null && Boolean.TRUE.equals(response.get("ok"))) {
-        logger.info("Successfully sent secret message to chat_id: {}", chatId);
+        logger.info("Successfully sent secret message to chat_id: {}", sanitizeForLog(String.valueOf(chatId)));
       } else {
         logger.warn("Failed to send message to Telegram");
       }
@@ -112,6 +112,13 @@ public class TelegramWebhookController {
     } catch (Exception e) {
       logger.error("Error sending secret message", e);
     }
+  }
+
+  private String sanitizeForLog(String value) {
+    if (value == null) {
+      return "null";
+    }
+    return value.replaceAll("[\r\n]", "_");
   }
 
   private String getBotToken() {
