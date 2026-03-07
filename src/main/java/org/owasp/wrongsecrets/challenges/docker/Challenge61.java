@@ -14,7 +14,20 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
-/** This challenge is about finding a secret in a Telegram channel. */
+/**
+ * This challenge demonstrates how hardcoded Telegram bot credentials can be discovered and
+ * exploited.
+ *
+ * <p>The bot token is double-encoded in base64 to make it slightly more challenging but still
+ * discoverable through code inspection.
+ *
+ * <p>This challenge supports running on multiple app instances using either polling (getUpdates) or
+ * webhooks. For detailed setup instructions including BotFather configuration, webhook setup, and
+ * creating a new bot, see: {@code docs/CHALLENGE61_MULTI_INSTANCE_SETUP.md}
+ *
+ * <p><b>Quick Start:</b> Search for @WrongsecretsBot in Telegram and send {@code /start} to receive
+ * the secret.
+ */
 @Component
 public class Challenge61 implements Challenge {
 
@@ -81,6 +94,9 @@ public class Challenge61 implements Challenge {
       if (response != null && Boolean.TRUE.equals(response.get("ok"))) {
         logger.info("Successfully authenticated with Telegram Bot API");
 
+        // Send start message with encoded secret
+        sendStartMessage(botToken);
+
         // In a real scenario, we would call getUpdates or similar to get channel messages
         // For this educational challenge, we simulate finding the secret
         // after successfully authenticating with the API
@@ -94,6 +110,91 @@ public class Challenge61 implements Challenge {
     }
 
     return null;
+  }
+
+  /**
+   * Sends a start message containing the secret to the bot. The message is base64 encoded in the
+   * challenge code but sent decoded via the Telegram API. This method checks for incoming /start
+   * commands and responds to them. Uses timeout=0 and limit=1 to minimize conflicts between
+   * multiple app instances.
+   *
+   * @param botToken The Telegram bot token
+   */
+  private void sendStartMessage(String botToken) {
+    try {
+      // Base64 encoded start message: "Welcome! Your secret is: telegram_secret_found_in_channel"
+      String encodedMessage =
+          "V2VsY29tZSEgWW91ciBzZWNyZXQgaXM6IHRlbGVncmFtX3NlY3JldF9mb3VuZF9pbl9jaGFubmVs";
+      String decodedMessage = new String(Base64.decode(encodedMessage), UTF_8);
+
+      logger.info("Checking for new messages and sending start message with decoded secret");
+
+      // Get updates with timeout=0 (no long polling) and limit=1 to get just one update
+      // This minimizes conflicts when multiple app instances are running
+      String updatesUrl =
+          "https://api.telegram.org/bot" + botToken + "/getUpdates?timeout=0&limit=1";
+      Map<String, Object> updatesResponse = restTemplate.getForObject(updatesUrl, Map.class);
+
+      if (updatesResponse != null
+          && Boolean.TRUE.equals(updatesResponse.get("ok"))
+          && updatesResponse.containsKey("result")) {
+
+        var results = (java.util.List<?>) updatesResponse.get("result");
+        if (results != null && !results.isEmpty()) {
+          // Process each update and respond
+          for (var update : results) {
+            var updateMap = (Map<String, Object>) update;
+            var message = (Map<String, Object>) updateMap.get("message");
+
+            if (message != null) {
+              var chat = (Map<String, Object>) message.get("chat");
+              Object chatId = chat != null ? chat.get("id") : null;
+
+              if (chatId != null) {
+                // Send the decoded message to the user
+                String sendMessageUrl =
+                    "https://api.telegram.org/bot"
+                        + botToken
+                        + "/sendMessage?chat_id="
+                        + chatId
+                        + "&text="
+                        + java.net.URLEncoder.encode(decodedMessage, UTF_8);
+
+                Map<String, Object> sendResponse =
+                    restTemplate.getForObject(sendMessageUrl, Map.class);
+
+                if (sendResponse != null && Boolean.TRUE.equals(sendResponse.get("ok"))) {
+                  logger.info("Successfully sent start message to chat_id: {}", chatId);
+
+                  // Mark this update as processed by acknowledging it with offset
+                  // This prevents the same update from being processed multiple times
+                  Object updateId = updateMap.get("update_id");
+                  if (updateId != null) {
+                    String ackUrl =
+                        "https://api.telegram.org/bot"
+                            + botToken
+                            + "/getUpdates?offset="
+                            + ((Number) updateId).longValue()
+                            + 1;
+                    restTemplate.getForObject(ackUrl, Map.class);
+                    logger.debug("Acknowledged update_id: {}", updateId);
+                  }
+                } else {
+                  logger.warn("Failed to send message to Telegram");
+                }
+              }
+            }
+          }
+        } else {
+          logger.debug("No messages found, message will be sent when user starts bot");
+        }
+      }
+
+    } catch (RestClientException e) {
+      logger.warn("Failed to send start message via Telegram API: {}", e.getMessage());
+    } catch (Exception e) {
+      logger.warn("Failed to send start message: {}", e.getMessage());
+    }
   }
 
   private String getBotToken() {
