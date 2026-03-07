@@ -63,7 +63,7 @@ src/test/java/org/owasp/wrongsecrets/
 ### Maven → Docker Workflow
 
 1. **Maven Build** (`pom.xml`)
-   - Spring Boot 3.x application
+   - Spring Boot 4.x application
    - Dependencies managed through Spring Boot parent POM
    - Plugins: AsciiDoctor, Checkstyle, PMD, SpotBugs
 
@@ -137,8 +137,8 @@ src/test/java/org/owasp/wrongsecrets/
 
 ### Prerequisites
 
-- Java 21+
-- Maven 3.8+
+- Java 25
+- Maven 3.9+
 - Docker
 - Node.js (for frontend dependencies)
 

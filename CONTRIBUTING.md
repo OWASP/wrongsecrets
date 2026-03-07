@@ -475,7 +475,7 @@ Use this block as refrence for hints:
 ### Step 5: Add challenge configuration.
 
 In this step we configure the challenge to make it known to the application.
-Open `src/main/resources/wrong_secrets_configuration.yaml` and add the following configuration:
+Open `src/main/resources/wrong-secrets-configuration.yaml` and add the following configuration:
 
 ```yaml
     - name: Challenge 28
