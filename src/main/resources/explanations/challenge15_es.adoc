@@ -1,0 +1,9 @@
+=== Historial de Git
+
+Uno de los errores que a menudo cometemos cuando hacemos commit de secretos en Git es tratar de deshacernos de ellos sin rotar el secreto.
+
+Lo que lo empeora es que sin sobrescribir correctamente el commit con el secreto y/o eliminar el commit, permanecerá en el historial para siempre.
+
+Entonces, hemos mantenido algunas claves de acceso de AWS en Git como un "error", ¿puedes encontrarlas?
+
+Nota: la respuesta contiene uno de los 3 perfiles de credenciales de AWS que encuentras en los comentarios de un commit, pero sin el marcado de comentario Java como una sola línea.

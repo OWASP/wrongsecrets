@@ -1,0 +1,5 @@
+=== Gestionnaires de mots de passe
+
+Quand nous avons montré ce projet à mon ami Kees, il a demandé : hey, n'est-ce pas la même chose que d'avoir un mot de passe très faible sur votre gestionnaire de mots de passe ? Car c'est ce qu'a fait mon collègue.
+
+Donc voici : le défi du gestionnaire de mots de passe ! Nous avons configuré un fichier Keepass dans le conteneur Docker où nous avons mis des informations d'identification secrètes pour Alibabacloud. Pouvez-vous l'obtenir ?

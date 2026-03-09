@@ -1,0 +1,9 @@
+Puedes resolver este desafío con las siguientes soluciones alternativas:
+
+1. Encuentra el secreto directamente en el gestor de secretos cloud (la forma barata):
+ - Inicia sesión en la consola cloud y ve al gestor de secretos.
+ - Obtén los datos del secreto correcto.
+
+2. Encuentra el secreto ejecutando en el pod:
+ - Asegúrate de tener kubectl configurado.
+ - Usa `kubectl exec -it <nombre-pod> -- cat /mnt/secrets/wrongsecret`.

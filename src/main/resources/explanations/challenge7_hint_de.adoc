@@ -1,0 +1,8 @@
+Du kannst diese Herausforderung mit den folgenden Schritten lösen:
+
+1. Finde das Geheimnis in Vault mit dem protokollierten Root-Token:
+ - Wenn du die K8s-Umgebung einrichtest, teilt dir das Skript den Wert des Root-Tokens mit.
+ - Verwende `vault login <token>` und dann `vault kv get secret/wrongsecret`.
+
+2. Schaue die Konfiguration auf Fehler durch:
+ - Überprüfe die Vault-Konfigurationsdateien im Git-Repository auf hardcodierte Tokens.

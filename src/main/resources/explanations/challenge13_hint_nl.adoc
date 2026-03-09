@@ -1,0 +1,6 @@
+Je kunt deze uitdaging oplossen met de volgende stappen:
+
+1. Exfiltreer het geheim via Github Actions:
+ - Log in op Github met je eigen account.
+ - Ga naar https://github.com/OWASP/wrongsecrets/actions en fork de repository.
+ - Maak een pull request en bekijk de geheimen die in het Github Actions-logboek zijn opgeslagen.

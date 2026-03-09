@@ -1,0 +1,3 @@
+*Waarom het gebruik van containers om geheimen in op te slaan een slecht idee is*
+
+Zoals je nu kunt zien, kun je elk geheim dat in een container is opgeslagen gemakkelijk detecteren. Of het nu een ENV, een bestand of een andere eigenschap is: als een systeem het kan lezen, kan een mens dat ook.

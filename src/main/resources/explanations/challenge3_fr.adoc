@@ -1,0 +1,5 @@
+=== Mot de passe basé sur Docker ENV
+
+Saviez-vous que vous pouvez également utiliser ENV dans les conteneurs Docker pour définir le mot de passe ? Quelle bonne idée de le partager avec tout le monde !
+
+Vous pouvez facilement repérer le secret en regardant comment les couches ont été construites ou en le détectant avec un outil comme https://github.com/goodwithtech/dockle[*Dockle*].
