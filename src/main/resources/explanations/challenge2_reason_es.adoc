@@ -1,0 +1,7 @@
+*Por qué usar código para almacenar secretos es una mala idea.*
+
+Como puedes ver, obtuvimos un poco más de flexibilidad que con el desafío 1. Sin embargo: ¡todavía tenemos la contraseña en el código!
+
+Aunque ahora podemos sobrecargar fácilmente las variables en una etapa posterior, a menudo vemos que los secretos se almacenan como parte de la Spring Config o Spring Cloud Config, sin sobrecargarlos en una etapa posterior. Esto significa que cualquier persona con acceso a la Spring Cloud Config ahora puede aprender cuál es el secreto.
+
+Usar una solución distribuida como https://cloud.spring.io/spring-cloud-config/reference/html/[Spring Cloud Config] para gestionar externamente las propiedades de la aplicación puede tener el mismo problema si no tienes cuidado.
