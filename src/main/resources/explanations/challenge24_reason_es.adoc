@@ -1,0 +1,10 @@
+*Por qué copiar especificaciones es una mala idea*
+
+Cuando intentas implementar controles criptográficos, puede ser muy desalentador: hay muchos detalles a los que debes prestar atención.
+Ahora sabes que no se recomienda copiar cada primitiva de un ejemplo para tu propia implementación. En este ejemplo copiamos la clave HMAC de una especificación NIST, que cualquiera podría haber intentado usar para forzar la clave HMAC utilizada.
+
+Ten en cuenta que copiar claves de especificaciones/ejemplos no solo aplica para HMACs, aplica para cualquier operación criptográfica.
+
+¿Todavía necesitas generar una clave? Asegúrate de usar un generador aleatorio seguro para generar la clave.
+
+Para hacerlo aún más seguro, usa una configuración de generación y/o derivación de claves en la que cada nuevo mensaje tenga una clave diferente. De esa manera, tienes "Perfect Forward Secrecy".

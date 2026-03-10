@@ -1,0 +1,11 @@
+=== Секрети у фронтенд-коді частина 2
+
+Іноді ми не хочемо забути, як увійти з тестовими обліковими даними, працюючи над фронтенд-кодом.
+Чи можете ви знайти тестові облікові дані?
+
+Зверніть увагу, що тестові облікові дані іноді обфускуються в коді шляхом кодування їх у Base64.
+
+++++
+<!-- test-credentials = WhyCommentsAsPassswordAreBad345_$"-->
+<!-- If you like this: check OWAWS Juiceshop for more awesome challenges!  https://juice-shop.herokuapp.com/#/score-board -->
+++++

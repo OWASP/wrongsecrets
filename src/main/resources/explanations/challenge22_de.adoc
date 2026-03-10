@@ -1,0 +1,7 @@
+=== Verstecken in Binärdateien Teil 4: Die Rust-Binärdatei
+
+Ähnlich wie das Verstecken von Geheimnissen in C kannst du dies in Rust tun. Ghidra ist standardmäßig jedoch nicht so gut bei der Analyse von Rust... Kannst du das Geheimnis in unserer Binärdatei finden?
+
+Lass uns den Mythos für Rust entkräften: Kannst du das Geheimnis in https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-rust[wrongsecrets-rust] finden?
+
+Versuche die Binärdatei herunterzuladen und lokal auszuführen (z.B. `./wrongsecrets-rust<dieVersion> <deine Antwort>`).

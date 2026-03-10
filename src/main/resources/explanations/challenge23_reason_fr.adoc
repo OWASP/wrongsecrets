@@ -1,0 +1,11 @@
+*Pourquoi avoir des secrets dans le code frontend est une mauvaise idée*
+
+Quand vous exécutez une application mobile ou une SPA, vous devriez essayer de ne pas coder en dur les secrets. Un attaquant peut toujours faire de la rétro-ingénierie de l'application et trouver le secret réel.
+
+*Pourquoi utiliser des applications à page unique ou des applications mobiles pour des secrets client est une mauvaise idée*
+
+Comme vous pouvez le voir, vous pouvez facilement détecter tout secret stocké dans une application à page unique ou mobile.
+
+*Pourquoi l'encodage Base64 n'est pas un chiffrement*
+
+Il était assez facile de décoder le secret du fichier Challenge. C'est pourquoi l'encodage Base64 et Hex ne devrait jamais être considéré comme une méthode pour cacher un secret. Utilisez l'encodage Base64 et/ou Hex uniquement pour transporter une séquence binaire comme une chaîne.

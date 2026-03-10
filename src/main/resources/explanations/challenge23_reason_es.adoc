@@ -1,0 +1,11 @@
+*Por qué tener secretos en el código frontend es una mala idea*
+
+Cuando ejecutas una aplicación móvil o SPA, debes intentar no codificar ningún secreto. Un atacante siempre puede hacer ingeniería inversa de la aplicación y encontrar el secreto real.
+
+*Por qué usar aplicaciones de una sola página o aplicaciones móviles para secretos de cliente es una mala idea*
+
+Como puedes ver, fácilmente puedes detectar cualquier secreto almacenado en una aplicación de una sola página o aplicación móvil.
+
+*Por qué la codificación Base64 no es cifrado*
+
+Fue bastante fácil decodificar el secreto del archivo de Challenge. Por eso Base64 y la codificación hexadecimal nunca deben considerarse un método para ocultar un secreto. Usa codificación Base64 y/o hexadecimal solo para transportar una secuencia binaria como String.
