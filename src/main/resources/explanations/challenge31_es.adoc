@@ -1,0 +1,5 @@
+=== Secreto en una página web
+
+Un usuario derrama accidentalmente la `salsa secreta` mientras agrega contenido a nuestro sitio web.
+
+¿Puedes detectar el secreto en nuestro https://owasp.org/www-project-wrongsecrets/[Sitio web]?

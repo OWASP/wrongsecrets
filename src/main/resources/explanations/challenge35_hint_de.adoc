@@ -1,0 +1,13 @@
+Dies ist eine Dokumentationsherausforderung, die gelöst werden kann, indem man zur Github Advisory geht.
+
+1. Komme zum Schlüssel über die Github-Sicherheitsempfehlung
+- Gehe zu https://github.com/OWASP/wrongsecrets/security/advisories/GHSA-vv4g-7gjw-fvqw[der Empfehlung].
+- Finde den Google API-Schlüssel.
+- Kopiere ihn in das Antwortfeld.
+
+2. Folge den Informationen der Github-Sicherheitsempfehlung
+- Gehe zu https://github.com/OWASP/wrongsecrets/security/advisories/GHSA-vv4g-7gjw-fvqw[der Empfehlung].
+- Finde die betroffene Version (1.6.8RC1).
+- Öffne den Tag auf https://github.com/OWASP/wrongsecrets/tree/1.6.8RC1[Github].
+- Finde den Google API-Schlüssel in Herausforderung 35.
+- Kopiere ihn in das Antwortfeld.

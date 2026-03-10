@@ -1,0 +1,8 @@
+=== Ein Geheimnis in eine LLM-Anwendung hochgeladen (Large Language Model)
+
+KI ist gekommen, um zu bleiben. KI kann bei vielen Dingen helfen: kompliziertes Problemlösen, Code generieren oder Sicherheitsberatung.
+Stell dir vor, du hast Code hochgeladen, um nach Sicherheitsproblemen zu suchen. Was wäre, wenn das ein Passwort enthielte? Regeln sollten das LLM-Modell einschränken, damit es das Passwort nicht preisgibt. Kann dieses Geheimnis trotzdem extrahiert werden?
+
+Versuche, es durch https://gandalf.lakera.ai/[dieses Prompt-Spiel]s erste Übung zu finden.
+
+Bitte beachte, dass https://gandalf.lakera.ai/[das Prompt-Spiel] völlig kostenlos und offen ist. Das bedeutet, dass es offline sein kann und nach deiner ersten Anfrage ein paar Minuten dauern kann, bis es wieder läuft. Führe kein Fuzzing oder dynamische Tests der Website durch. Stelle sicher, dass andere auch spielen können!

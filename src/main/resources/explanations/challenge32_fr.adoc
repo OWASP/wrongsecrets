@@ -1,0 +1,8 @@
+=== Un secret téléchargé vers une application LLM (Large Language Model)
+
+L'IA est là pour rester. L'IA peut aider pour beaucoup de choses: résolution de problèmes complexes, génération de code ou conseil en sécurité.
+Imaginez que vous avez téléchargé du code pour rechercher des problèmes de sécurité. Et si cela incluait un mot de passe? Les règles devraient limiter le modèle LLM pour l'empêcher de divulguer le mot de passe. Ce secret peut-il néanmoins être extrait?
+
+Essayez de le trouver grâce au premier exercice de https://gandalf.lakera.ai/[ce jeu de prompts].
+
+Veuillez noter que https://gandalf.lakera.ai/[le jeu de prompts] est entièrement gratuit et ouvert. Cela signifie qu'il peut être hors ligne et prendre quelques minutes pour redémarrer après votre première requête. Veuillez ne pas faire de fuzzing ou de tests dynamiques du site. Assurez-vous que d'autres peuvent y jouer aussi!

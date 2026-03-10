@@ -1,0 +1,4 @@
+=== Willekeurige sleutels genereren
+
+Veel beveiligingsexperts leren engineers om veilige sleutelafleidingsfuncties te gebruiken zoals https://en.wikipedia.org/wiki/PBKDF2[PBKDF2] wanneer een sleutel moet worden gegenereerd. Een ontwikkelaar volgde deze instructie en probeerde een sleutel te maken in `Challenge34.java`, wat nu veel veiliger zou moeten zijn dan een hardgecodeerde sleutel.
+Kun je de fout spotten? Kun je de waarde van de gegenereerde sleutel vinden?

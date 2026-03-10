@@ -1,0 +1,13 @@
+Diese Herausforderung kann gelöst werden, indem man sich die Metadaten des Secrets ansieht:
+
+1. Durch Code anschauen
+- Suche die Secret-Definition in git (Challenge33.yml)
+- Finde den Geheimniswert in den Metadaten.
+2. Durch Abrufen des Secrets
+- Verbinde mit dem k8s-Cluster mit kubectl
+- Rufe `kubectl get secret challenge33 -o yaml` auf, um alle erforderlichen Daten zu erhalten.
+- Finde den Geheimniswert in den Metadaten.
+3. Debugging beim Auflisten aller Secrets missbrauchen
+- Verbinde mit dem k8s-Cluster mit kubectl
+- Rufe `kubectl get secrets -v9` auf, um alle erforderlichen Daten zu erhalten
+- Finde den Geheimniswert in den Metadaten.

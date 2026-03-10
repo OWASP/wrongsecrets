@@ -62,8 +62,8 @@ class ChallengeUILocaleTest {
   @Test
   void frenchLocaleReturnsFallbackForUntranslatedChallenge() {
     LocaleContextHolder.setLocale(Locale.FRENCH);
-    var ui = challengeUIFor(3); // challenge3 has no French translation
-    assertThat(ui.getExplanation()).isEqualTo("explanations/challenge3.adoc");
+    var ui = challengeUIFor(70); // challenge61 (index 70) has no French translation
+    assertThat(ui.getExplanation()).isEqualTo("explanations/challenge61.adoc");
   }
 
   @Test
