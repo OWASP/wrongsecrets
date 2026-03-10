@@ -1,0 +1,5 @@
+= Desafío de mala configuración de secretos de Docker Compose
+
+*Por qué la gestión inadecuada de secretos en Docker Compose puede llevar a vulnerabilidades*
+
+En entornos contenerizados, la gestión de secretos es crítica para mantener la confidencialidad e integridad de información sensible como credenciales de bases de datos, claves API y otros secretos. Docker Compose ofrece una forma conveniente de definir y gestionar secretos, pero el manejo inadecuado de estos secretos puede exponer tu sistema a ataques.

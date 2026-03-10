@@ -1,0 +1,7 @@
+=== .ssh Bastion?
+
+We hebben veel zogenaamde "bastion containers" gezien. Hier maken mensen een Docker-container en sluiten het "geheim" in om te authenticeren bij de host in de container. Dit geheim is vaak een SSH-sleutelpaar dat wordt gebruikt om te authenticeren bij een host.
+
+Om de bastion container te laten werken, moet een SSH-configuratiebestand (`.ssh/config`) worden ingesloten om de SSH-verbinding te vereenvoudigen door hostspecifieke configuraties op te slaan.
+
+Kun je de privésleutel vinden? Plak de inhoud in het onderstaande antwoordvak.
