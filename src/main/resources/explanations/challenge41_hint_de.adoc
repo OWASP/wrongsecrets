@@ -1,0 +1,7 @@
+Diese Herausforderung kann mit den folgenden Schritten gelöst werden:
+
+1. Erstelle zwei Textdateien `old_hashes.txt` und `new_hashes.txt` mit nur den Hashes aus den Dump-Dateien.
+2. Mit `old_hashes.txt` als Passwortliste können wir hashcat verwenden, um MD5-Hashes zu prüfen, die mit den bcrypt-Hashes übereinstimmen.
+   - Installiere https://hashcat.net/hashcat/[Hashcat]
+   - Tippe `hashcat -m 3200 -a 0 new_hashes.txt old_hashes.txt --show`
+3. Mit `rockyou.txt` als Passwortliste können wir den erhaltenen MD5-Hash knacken.

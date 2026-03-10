@@ -1,0 +1,4 @@
+=== Défi de sous-clé Vault
+
+Parfois, tout ce que vous voulez, c'est avoir cette entrée concise dans votre système de gestion des secrets. Alors, que diriez-vous de stocker votre nom d'utilisateur et votre mot de passe dans la même entrée?
+Nous avons essayé de faire cela mais nous nous sommes retrouvés dans un nouveau problème! Avec Hashicorp Vault, vous pouvez configurer des politiques pour autoriser l'accès à une sous-clé. Pouvez-vous trouver le nom d'utilisateur très aléatoire que nous avons configuré pour ce défi?

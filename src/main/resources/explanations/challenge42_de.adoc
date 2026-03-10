@@ -1,0 +1,5 @@
+=== Spring Boot Actuator Audit-Event
+
+Die Entwickler entschieden sich, die Leistung von Spring Boot Actuator zu nutzen, um ihre Anwendung zu überwachen und zu prüfen. Das Projekt umfasste die Schnittstellenarbeit mit verschiedenen externen APIs, von denen jede einen eindeutigen Schlüssel für die Authentifizierung benötigte. Die Audit-Events schienen die perfekte Lösung.
+
+Das Team implementierte einen Protokollierungsmechanismus, der detaillierte Audit-Events enthielt.
