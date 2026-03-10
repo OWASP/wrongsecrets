@@ -1,0 +1,7 @@
+Vous pouvez résoudre ce défi en suivant les étapes suivantes:
+
+1. Trouvez le secret quand il est utilisé par l'application
+- Ouvrez les outils de développement du navigateur:
+- Sélectionnez l'onglet Réseau
+- Trouvez la requête avec le chemin `/token`
+- Trouvez dans le corps de la requête la clé `client_secret`

@@ -1,0 +1,5 @@
+*Pourquoi entrer des secrets dans bash est une mauvaise idée.*
+
+La ligne de commande peut sembler temporaire et sûre, mais elle est souvent enregistrée. C'est une fonctionnalité standard avec la plupart des shells. Certains ont des protections en place, et la plupart des outils qui demandent un secret ne l'imprimeront pas. Cependant, lors de l'écriture de commandes personnalisées, ces protections ne sont pas en place et vous pouvez facilement vous tirer dans le pied.
+
+Fuir des secrets est un peu difficile avec un Dockerfile lors de la création d'un conteneur. Cependant, si vous avez un conteneur que vous utilisez régulièrement, que vous ne le supprimez pas et que vous tapez des secrets en texte clair, alors un acteur malveillant pourrait utiliser votre conteneur docker apparemment inoffensif pour escalader les privilèges. Les amenant potentiellement à exploiter quelque chose de beaucoup plus important que votre PC.
