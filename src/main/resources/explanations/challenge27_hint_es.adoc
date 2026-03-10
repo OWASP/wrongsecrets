@@ -1,0 +1,7 @@
+Puedes encontrar la entrada correcta al método guess:
+
+1. Comparando hashes:
+- Busca el contrato en el explorador https://etherscan.io/[Etherscan].
+- Extrae el hash del almacenamiento del contrato.
+- Revisa las transacciones y luego abre la pestaña de entradas y decodifícalas como UTF-8.
+- Compara los hashes de las entradas de las transacciones con el valor de hash almacenado.

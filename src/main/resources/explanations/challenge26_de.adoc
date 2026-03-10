@@ -1,0 +1,5 @@
+=== Geheimnisse in Smart Contracts Teil 2
+
+Unser Smart-Contract-Entwickler erkannte, dass er ein Geheimnis in die Chain geschrieben hatte, und überschrieb es.
+
+In dieser Herausforderung musst du die Variable namens secret aus dem Vertrag `0xCe793D588cd1Ee091290b4A1aE1D586B2a748eB4` im Goerli EVM Testnet lesen, wie es war, bevor es geändert wurde.
