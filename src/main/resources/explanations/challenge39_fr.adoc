@@ -1,0 +1,5 @@
+=== Clé de chiffrement non sécurisée - Partie 1
+
+Un développeur a chiffré un secret en utilisant https://en.wikipedia.org/wiki/Advanced_Encryption_Standard[AES] et stocké sa valeur encodée en base64 dans un fichier. Mais où laisser la clé? Pourquoi ne pas simplement utiliser le nom du fichier comme clé de chiffrement? Ainsi, chaque secret peut facilement avoir sa propre clé! Pouvez-vous trouver le secret?
+
+Le fichier de défi s'appelle https://github.com/OWASP/wrongsecrets/blob/master/src/main/resources/executables/secrchallenge.md[secrchallenge.md] et peut être trouvé dans le https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables[dossier executables].

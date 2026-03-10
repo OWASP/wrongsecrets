@@ -1,0 +1,5 @@
+*Por qué necesitamos ser cuidadosos con las credenciales de seguridad en CI/CD*
+
+Las personas que pueden acceder a la configuración de tus comprobaciones de seguridad en tu entorno CI/CD pueden acceder fácilmente a cualquier credencial configurada allí. Estas credenciales pueden usarse para cualquier cosa.
+
+Es por eso que la seguridad debe ser muy cuidadosa al gestionar sus secretos: solo porque la credencial es usada por una herramienta de (seguridad) no significa que podamos tolerar menos seguridad.

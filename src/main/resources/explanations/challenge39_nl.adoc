@@ -1,0 +1,5 @@
+=== Onveilige versleutelingssleutel - Deel 1
+
+Een ontwikkelaar heeft een geheim versleuteld met https://en.wikipedia.org/wiki/Advanced_Encryption_Standard[AES] en de base64-gecodeerde waarde opgeslagen in een bestand. Maar waar de sleutel te laten? Waarom niet gewoon de bestandsnaam als versleutelingssleutel gebruiken? Zo kan elk geheim gemakkelijk zijn eigen sleutel hebben! Kun je het geheim vinden?
+
+Het uitdagingsbestand heet https://github.com/OWASP/wrongsecrets/blob/master/src/main/resources/executables/secrchallenge.md[secrchallenge.md] en kan worden gevonden in de https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables[executables map].

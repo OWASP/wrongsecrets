@@ -1,0 +1,8 @@
+Este desafío se puede resolver recuperando las cadenas almacenadas en los registros. Puedes usar cualquier herramienta de depuración. Mostramos cómo resolverlo con GDB y Radare2.
+
+Con GDB:
+1. `gdb -q wrongsecrets-advanced-c-windows.exe` para abrir GDB y cargar el ejecutable
+2. `disas main` para desensamblar la función `main`
+3. `b execute` para establecer un punto de interrupción en la función `execute`
+4. `set args 1234567812345678` para establecer los argumentos del programa
+5. `r` para ejecutar el programa

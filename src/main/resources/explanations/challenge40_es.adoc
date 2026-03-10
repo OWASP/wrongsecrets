@@ -1,0 +1,5 @@
+=== Clave de cifrado insegura - Parte 2
+
+Un desarrollador cifró un secreto usando https://en.wikipedia.org/wiki/Advanced_Encryption_Standard[AES] y almacenó su valor codificado en base64 en un archivo json. ¿Pero dónde dejar la clave? ¿Qué tal dejar simplemente la clave dentro del archivo con el secreto? ¡De esa forma, cada secreto puede tener su propia clave fácilmente! ¿Puedes encontrar el secreto?
+
+El archivo de desafío se llama https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/secrchallenge.json[secrchallenge.json] y puede encontrarse en la https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables[carpeta de ejecutables].
