@@ -1,7 +1,33 @@
-=== Centralized hardcoded password
+== Overview
+In many proof-of-concept applications developers hardcode passwords or secrets in the source code. 
+If these secrets are not removed before publishing the code, they can easily be discovered.
 
-When people write a Proof of Concept, they often start with hardcoded secrets, such as a `password` in code. What if we forget to remove these hardcoded secrets?
+== Objective
+The goal of this challenge is to find the hardcoded password inside the Java code.
 
-Can you spot the secret we are looking for in the https://github.com/OWASP/wrongsecrets/tree/master/src/main/java/org/owasp/wrongsecrets[Java code]? What about looking for it in the container?
+== Vulnerability
+The application contains a password stored directly in the source code. 
+Anyone who has access to the repository or container can search for it and retrieve the secret.
 
-Sometimes the simpler tools are the most effective. Try cloning the repo and use https://man7.org/linux/man-pages/man1/grep.1.html[*grep*] to see what you find. It is also possible to find with https://github.com/awslabs/git-secrets[*Git-secrets*] or https://github.com/trufflesecurity/trufflehog[*Trufflehog*]. Just dive into the code!
+Hardcoded secrets are dangerous because they can remain in the code history and be discovered later.
+
+== Exploitation
+One of the easiest ways to find secrets is by searching through the code.
+
+You can try simple tools like `grep`:
+
+----
+grep -r "password" .
+----
+
+You can also use secret scanning tools such as Git-secrets or Trufflehog to detect exposed credentials.
+
+== Mitigation
+To avoid this issue:
+
+- Do not store passwords or secrets in source code
+- Use environment variables or secret management tools
+- Regularly scan repositories for exposed secrets
+
+== Learning Outcome
+This challenge shows how easily hardcoded credentials can be discovered using simple tools.
