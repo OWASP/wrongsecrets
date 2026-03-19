@@ -1,0 +1,8 @@
+Deze uitdaging richt zich specifiek op een geheim in een .NET8-binary.
+
+Je kunt deze uitdaging oplossen met behulp van de volgende alternatieve oplossingen:
+
+1. Vind de geheimen met ILSpy.
+- verkrijg het wrongsecrets-dotnet-<platform> binaire bestand
+- haal het op uit de Docker-image
+- download het van de https://github.com/OWASP/wrongsecrets-binaries/releases[Wrongsecrets Binaries]

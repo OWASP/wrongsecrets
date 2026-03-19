@@ -1,0 +1,20 @@
+Diese Herausforderung befasst sich speziell mit MD5- und SHA1-Hashes ohne Salting. Sind diese unknackbar?
+
+Du kannst diese Herausforderung mit den folgenden Lösungen lösen:
+
+1. Für den ersten Hash (MD5):
+- Verwende ein Tool wie Hashcat:
+- Installiere https://hashcat.net/hashcat/[Hashcat]
+- Lade die https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt[rockyou.txt Passwortliste] herunter
+- Führe Hashcat auf dem Hash aus `hashcat -m 0 "2ab96390c7dbe3439de74d0c9b0b1767" /pfad/zur/datei/rockyou.txt`
+
+2. Für den zweiten Hash (SHA1):
+- Verwende ein Tool wie Hashcat:
+- Installiere https://hashcat.net/hashcat/[Hashcat]
+- Lade die https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt[rockyou.txt Passwortliste] herunter
+- Führe Hashcat auf dem Hash aus `hashcat -m 100 "F3BBBD66A63D4BF1747940578EC3D0103530E21D" /pfad/zur/datei/rockyou.txt`
+
+3. Für einen der Hashes:
+- Verwende einen Online-Hash-Cracking-Dienst:
+- Besuche `https://crackstation.net/`
+- Gib den Hash ein und klicke auf "Crack Hashes"

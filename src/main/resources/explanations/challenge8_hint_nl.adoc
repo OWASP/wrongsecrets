@@ -1,0 +1,5 @@
+Je kunt deze uitdaging oplossen met de volgende stappen:
+
+1. Haal het geheim op uit de logging:
+ - Gebruik je de Docker-container? Gebruik `docker logs <containerID>` om de logs te bekijken en de waarde voor challenge8 te vinden.
+ - Gebruik je K8s? Zoek de Pod (`kubectl get pods | grep secret`) en gebruik dan `kubectl logs -f <naamVanDePod>` om de logs te bekijken.

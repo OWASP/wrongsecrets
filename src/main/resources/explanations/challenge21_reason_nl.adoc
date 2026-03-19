@@ -1,0 +1,7 @@
+*Waarom het gebruik van binaries om een geheim te verbergen een aanvaller slechts vertraagt.*
+
+Met prachtige gratis reverse engineering-applicaties zoals Ghidra blijft er weinig veilig. Iedereen die de uitvoerbare in Ghidra of Radare2 kan laden, kan eenvoudig beginnen met verkenning en geheimen in je binary vinden.
+
+Het versleutelen van het geheim met een sleutel die in de binary is ingebed en andere grappige puzzels vertragen een aanvaller en maken het gewoon leuk om het geheim te vinden. Als het geheim door de uitvoerbare moet worden gebruikt, moet het uiteindelijk in het geheugen gereed zijn om te worden uitgevoerd.
+
+Heb je nog steeds een geheim in de binary nodig? Zorg ervoor dat het alleen op afstand kan worden opgehaald na authenticatie tegen een server.

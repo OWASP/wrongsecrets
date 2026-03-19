@@ -1,0 +1,5 @@
+Je kunt deze uitdaging oplossen door exec uit te voeren in de container:
+
+1. Bekijk de Dockerfile en zie welke COPY-bewerkingen plaatsvinden.
+2. Start de container lokaal met `docker run jeroenwillemsen/wrongsecrets:<TAGNAAM>`.
+3. Voer `docker exec -it <containerID> /bin/sh` uit en browse de gekopieerde bestanden.

@@ -1,0 +1,8 @@
+Je kunt deze uitdaging oplossen met de volgende stappen:
+
+1. Zoek het geheim in Vault met het gelogde root-token:
+ - Wanneer je de K8s-omgeving instelt, vertelt het script je de waarde van het root-token.
+ - Gebruik `vault login <token>` en vervolgens `vault kv get secret/wrongsecret`.
+
+2. Bekijk de configuratie voor fouten:
+ - Controleer de Vault-configuratiebestanden in de Git-repository op hardgecodeerde tokens.

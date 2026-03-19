@@ -1,0 +1,5 @@
+*Ce qu'il faut surveiller lors de l'utilisation de secrets aléatoires au démarrage*
+
+L'utilisation d'un secret aléatoire au démarrage peut fonctionner si le secret n'a pas besoin d'être consommé par d'autres systèmes que celui qui contient/génère le secret. Sinon, vous aurez besoin d'un mécanisme de synchronisation.
+
+Le mécanisme utilisé dans ce défi peut être observé dans d'autres systèmes, comme Jenkins. Cependant, journaliser le secret généré est un grand risque car toute personne ayant accès aux journaux peut lire le secret.

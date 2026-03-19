@@ -1,0 +1,7 @@
+Comme le dit le texte du défi, nous cherchons le secret dans une `capture d'écran` d'un `issue GitHub fermé` sur notre dépôt GitHub. Mais comment le trouver?
+
+Vous pouvez résoudre ce défi en suivant les étapes suivantes:
+
+1. Allez à l'onglet `issues` de notre GitHub, puis à la section fermée, pour obtenir tous les issues fermés.
+
+2. Parcourez tous les rapports de bugs et regardez spécifiquement les `captures d'écran` postées par les utilisateurs.

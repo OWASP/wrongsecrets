@@ -1,0 +1,7 @@
+Comme l'indique le défi, vous devez chercher des commandes Bash qui ont été exécutées dans le passé; quelle commande nous donnera cela?
+
+Vous pouvez résoudre ce défi en utilisant les étapes suivantes:
+
+1. Affichez le contenu de tout fichier .bash_history dans un conteneur en cours d'exécution:
+- Démarrez le conteneur avec `docker run -it --entrypoint sh jeroenwillemsen/wrongsecrets:<version>` (Remplacez `<version>` par la version du conteneur que vous souhaitez utiliser)
+- Lisez le contenu du fichier: `cat ~/.bash_history`. Une fois que vous avez ce fichier, vous pouvez utiliser grep ou tout autre outil de recherche pour affiner la réponse.

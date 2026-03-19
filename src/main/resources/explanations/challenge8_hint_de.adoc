@@ -1,0 +1,5 @@
+Du kannst diese Herausforderung mit den folgenden Schritten lösen:
+
+1. Hole das Geheimnis aus der Protokollierung:
+ - Verwendest du den Docker-Container? Verwende `docker logs <containerID>`, um die Protokolle abzurufen und den Wert für Challenge 8 zu finden.
+ - Verwendest du K8s? Finde den Pod (`kubectl get pods | grep secret`) und dann `kubectl logs -f <nameDesPods>` für die Protokolle.

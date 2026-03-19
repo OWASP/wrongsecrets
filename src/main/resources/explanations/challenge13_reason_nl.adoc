@@ -1,0 +1,5 @@
+*Waarom je voorzichtig moet zijn met CI/CD en geheimen*
+
+Bij het gebruik van CI/CD-tooling moet je de tooling (bijv. runner/agent die een taak uitvoert) vaak een geheim laten gebruiken om te authenticeren bij een secundaire service. Het exfiltreren van deze geheimen kan behoorlijk interessant worden.
+
+Zorg ervoor dat geheimen in CI/CD correct zijn geconfigureerd en beperkt zijn tot de juiste branches en pull requests.

@@ -1,0 +1,5 @@
+*Waarom mogen we de bestandsnaam niet als versleutelingssleutel gebruiken?*
+
+Er zijn meerdere scenario's geweest waarbij de inhoud van bestanden werd versleuteld met de bestandsnaam zelf, waardoor aanvallers de inhoud gemakkelijk kunnen ontsleutelen. Het wordt vaak gezien als een eenvoudige manier om de sleutel dicht bij de inhoud te houden.
+
+Maar zoals je nu kunt zien, is dit geen goed idee. Een aanvaller heeft de sleutel zodra het bestand in zijn bezit is.

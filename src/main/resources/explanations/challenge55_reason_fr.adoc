@@ -1,0 +1,5 @@
+=== Risques des données sensibles dans les fichiers de configuration SSH
+
+Les développeurs stockent fréquemment des configurations de connexion SSH dans des fichiers `.ssh/config`. Cependant, cette commodité peut conduire à l'inclusion accidentelle d'informations sensibles, comme des mots de passe ou des clés, qui pourraient être oubliées avec le temps.
+
+Les secrets oubliés indiquent des contrôles de sécurité insuffisants et de mauvaises pratiques de gestion des secrets.

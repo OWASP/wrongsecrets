@@ -1,0 +1,3 @@
+*Waarom we voorzichtig moeten zijn met kwetsbaarheidsrapporten*
+
+Wanneer je een kwetsbaarheid meldt of een beveiligingsadvies publiceert, wees dan altijd voorzichtig met de informatie die je daarmee verspreidt. Exacte waarden van gevonden hardgecodeerde geheimen, vooral degenen die moeilijker te roteren zijn, mogen niet in je beveiligingsrapport en/of de publicatie worden opgenomen.

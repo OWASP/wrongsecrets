@@ -1,0 +1,4 @@
+=== Vault Unterschlüssel-Herausforderung
+
+Manchmal möchte man einfach diesen prägnanten Eintrag in seinem Geheimnisverwaltungssystem haben. Was wäre also, wenn man Benutzername und Passwort im selben Eintrag speichert?
+Wir haben das versucht, aber ein neues Problem bekommen! Mit Hashicorp Vault kann man Richtlinien einrichten, um den Zugriff auf einen Unterschlüssel zu erlauben. Kannst du den sehr zufälligen Benutzernamen finden, den wir für diese Herausforderung eingerichtet haben?

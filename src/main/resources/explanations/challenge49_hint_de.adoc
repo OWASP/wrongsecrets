@@ -1,0 +1,5 @@
+Der einfachste Weg, die PIN in diesem Szenario zu knacken, ist ein Brute-Force-Angriff aufgrund des begrenzten Bereichs möglicher Werte (0 bis 99.999).
+
+- Iteriere über alle möglichen PINs (von 0 bis 99.999).
+- Berechne für jede PIN ihren MD5-Hash, um den Entschlüsselungsschlüssel zu erhalten, und versuche, den bereitgestellten Chiffretext zu entschlüsseln.
+- Wenn der entschlüsselte Text gleich `the answer` ist, hast du die richtige PIN gefunden.

@@ -1,0 +1,9 @@
+=== Hashing deficiente
+
+Este desarrollador tiene su contraseña almacenada en su computadora. No son tontos, la han hasheado dos veces usando los mismos sistemas que muchas de las empresas más grandes del mundo usan. Solo con un poco menos de condimentación. Nadie va a poder crackear esto...
+
+El primer hash es `2ab96390c7dbe3439de74d0c9b0b1767` y el segundo hash es `F3BBBD66A63D4BF1747940578EC3D0103530E21D`
+
+A pesar de que muchas grandes empresas usan estos hashes, ¿hay una manera de vencer el sistema?
+
+Crackear cualquiera de los hashes te dará la respuesta correcta. Como desafío adicional, intenta crackear ambos.

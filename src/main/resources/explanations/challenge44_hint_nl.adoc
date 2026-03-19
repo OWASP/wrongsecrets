@@ -1,0 +1,7 @@
+Deze uitdaging kan worden opgelost met de volgende stappen:
+
+1. Vind het geheim via de opdrachtregel
+- gebruik `kubectl exec vault-0 -n vault -- vault kv metadata get -mount=secret wrongsecret` en kijk naar de metadata: zie je een map met een `secret`? Dat is de waarde die je moet invoeren.
+
+2. Vind het geheim in Vault via het root-token:
+- Wanneer je de K8s-omgeving instelt, vertelt het script de waarde van het root-token.

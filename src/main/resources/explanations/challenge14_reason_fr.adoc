@@ -1,0 +1,5 @@
+*Pourquoi vous devez être prudent avec les mots de passe pour d'autres secrets*
+
+Que vous ayez un mot de passe pour un système de gestion de secrets d'entreprise ou un gestionnaire de mots de passe : vos facteurs d'authentification font la différence entre un système compromis et un système sécurisé.
+
+Ayez un mot de passe fort (par exemple, un long !), utilisez MFA si possible, et changez les mots de passe régulièrement.

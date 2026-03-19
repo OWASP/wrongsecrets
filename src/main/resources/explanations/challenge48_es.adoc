@@ -1,0 +1,5 @@
+=== Secreto sellado con clave accesible
+
+En este desafío, explorarás el uso de Kubernetes Sealed Secret. Los Sealed Secrets son una forma de cifrar tus secretos de Kubernetes y almacenarlos de forma segura, incluso en un repositorio público. Sin embargo, un desarrollador accidentalmente hizo accesible la clave privada para descifrar los secretos sellados dentro del mismo repositorio.
+
+¿Puedes encontrar y descifrar el secreto sellado para revelar la información sensible?

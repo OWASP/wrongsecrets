@@ -1,0 +1,9 @@
+Vous pouvez résoudre ce défi avec les solutions alternatives suivantes :
+
+1. Utilisez `docker history` :
+ - Téléchargez le conteneur.
+ - Exécutez `docker history --no-trunc jeroenwillemsen/wrongsecrets:<NOM_TAG>` pour trouver les arguments de compilation.
+ - Cherchez `ARG_BASED_PASSWORD`.
+
+2. Visitez le dépôt Docker en ligne :
+ - Allez sur https://hub.docker.com/r/jeroenwillemsen/wrongsecrets/tags et examinez les couches de l'image.

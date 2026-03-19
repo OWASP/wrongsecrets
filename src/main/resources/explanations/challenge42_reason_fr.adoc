@@ -1,0 +1,5 @@
+*Pourquoi cacher une clé API dans les événements d'audit n'est pas une bonne idée?*
+
+Dans un système sécurisé et bien conçu, la protection des informations sensibles telles que les clés API est cruciale. Les événements d'audit sont importants pour le suivi et la surveillance des activités au sein d'une application.
+
+Assurez-vous que les clés API ne sont pas visibles en texte clair dans les logs (d'audit) ou toute autre sortie.
