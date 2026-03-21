@@ -82,7 +82,7 @@
     <spring-boot.version>4.0.3</spring-boot.version>
     <spring-vault.version>4.0.1</spring-vault.version>
     <spring.cloud-version>2025.1.1</spring.cloud-version>
-    <spring.security.version>7.0.3</spring.security.version>
+    <spring.security.version>7.0.4</spring.security.version>
     <springdoc-maven.version>1.5</springdoc-maven.version>
     <springdoc.version>3.0.2</springdoc.version>
     <system-stubs-jupiter.version>2.1.8</system-stubs-jupiter.version>
