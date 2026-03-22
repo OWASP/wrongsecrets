@@ -19,7 +19,7 @@ class Challenge62McpControllerTest {
 
   private static final String DEFAULT_KEY =
       "if_you_see_this_configure_the_google_service_account_properly";
-  private static final String DEFAULT_DOC_ID = "1LPCHxPbRpRBrM1GaGLg-Ax_0gRCuDLiR";
+  private static final String DEFAULT_DOC_ID = "1PlZkwEd7GouyY4cdOxBuczm6XumQeuZN31LR2BXRgPs";
 
   @Test
   void initializeShouldReturnServerInfo() {

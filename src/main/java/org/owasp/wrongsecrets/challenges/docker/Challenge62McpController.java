@@ -57,7 +57,7 @@ public class Challenge62McpController {
       @Value(
               "${GOOGLE_SERVICE_ACCOUNT_KEY:if_you_see_this_configure_the_google_service_account_properly}")
           String serviceAccountKeyBase64,
-      @Value("${GOOGLE_DRIVE_DOCUMENT_ID:1LPCHxPbRpRBrM1GaGLg-Ax_0gRCuDLiR}")
+      @Value("${GOOGLE_DRIVE_DOCUMENT_ID:1PlZkwEd7GouyY4cdOxBuczm6XumQeuZN31LR2BXRgPs}")
           String documentId) {
     this(
         serviceAccountKeyBase64,

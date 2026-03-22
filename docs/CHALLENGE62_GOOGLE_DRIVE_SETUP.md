@@ -100,7 +100,7 @@ Set the following environment variables when running WrongSecrets:
 | Variable | Description | Example |
 |----------|-------------|---------|
 | `GOOGLE_SERVICE_ACCOUNT_KEY` | Base64-encoded service account JSON key | `eyJ0eXBlIjoic2VydmljZV9hY2...` |
-| `GOOGLE_DRIVE_DOCUMENT_ID` | Google Drive document ID | `1vfHmi5lGoHogcjD0wxClZAjDy_qml_i2BtVrjVaklHc` |
+| `GOOGLE_DRIVE_DOCUMENT_ID` | Google Drive document ID | `1PlZkwEd7GouyY4cdOxBuczm6XumQeuZN31LR2BXRgPs` |
 | `WRONGSECRETS_MCP_GOOGLEDRIVE_SECRET` | The secret stored in the document | `my_wrongsecrets_challenge62_answer` |
 
 ### Running with Docker
@@ -142,7 +142,7 @@ rm challenge62-key.json
 ## Using the Default OWASP Document (for testing)
 
 The default document ID configured in the application is the OWASP WrongSecrets Google Drive document:
-- Document: https://docs.google.com/document/d/1vfHmi5lGoHogcjD0wxClZAjDy_qml_i2BtVrjVaklHc/edit
+- Document: https://docs.google.com/document/d/1PlZkwEd7GouyY4cdOxBuczm6XumQeuZN31LR2BXRgPs/edit
 
 To use this document, your service account must have been granted read access to it by the OWASP WrongSecrets maintainers. For your own deployment, we recommend creating your own document as described above.
 
