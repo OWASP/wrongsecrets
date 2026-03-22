@@ -33,3 +33,6 @@ https://github.com/topics/secrets-detection
 
 # Helm docs are flaky in CI (connection resets)
 https://helm.sh/docs/intro/install/
+
+# Google Docs require authentication and always return 401 to link checkers
+https://docs.google.com/document/*
