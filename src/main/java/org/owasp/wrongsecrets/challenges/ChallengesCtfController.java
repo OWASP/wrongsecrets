@@ -39,6 +39,41 @@ public class ChallengesCtfController {
   }
 
   @GetMapping(
+      value = {"/api/Hints", "/api/hints"},
+      produces = MediaType.APPLICATION_JSON_VALUE)
+  @Operation(
+      summary =
+          "Gives all hints back in a jsonArray, to be used with the Juiceshop CTF cli v12+."
+              + " Each challenge contributes one hint entry.")
+  public String getHints() {
+    List<ChallengeDefinition> definitions = challenges.getDefinitions().challenges();
+    var json = JsonNodeFactory.instance.objectNode();
+    ArrayNode jsonArray = JsonNodeFactory.instance.arrayNode();
+    for (int i = 0; i < definitions.size(); i++) {
+      ChallengeDefinition definition = definitions.get(i);
+      String hintText =
+          definition
+              .source(runtimeEnvironment)
+              .map(s -> s.hint().contents().get())
+              .orElse(null);
+      if (hintText != null) {
+        int hintId = i + 1;
+        var jsonHint = JsonNodeFactory.instance.objectNode();
+        jsonHint.put("ChallengeId", hintId);
+        jsonHint.put("id", hintId);
+        jsonHint.put("text", hintText);
+        jsonHint.put("order", 1);
+        jsonHint.put("unlocked", true);
+        jsonArray.add(jsonHint);
+      }
+    }
+    json.set("data", jsonArray);
+    String result = json.toString();
+    log.trace("returning hints {}", result);
+    return result;
+  }
+
+  @GetMapping(
       value = {"/api/Challenges", "/api/challenges"},
       produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(
