@@ -2,6 +2,8 @@ package org.owasp.wrongsecrets.definitions;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Supplier;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FilenameUtils;
@@ -40,12 +42,18 @@ public class ChallengeConfig {
     return new StringToChallengeNameConverter();
   }
 
-  private record TextWithFileLocationConverter(TemplateGenerator templateGenerator)
+  private static final class TextWithFileLocationConverter
       implements Converter<String, TextWithFileLocation> {
+    private final TemplateGenerator templateGenerator;
+    private final Map<String, Supplier<String>> cache = new ConcurrentHashMap<>();
+
+    public TextWithFileLocationConverter(TemplateGenerator templateGenerator) {
+      this.templateGenerator = templateGenerator;
+    }
 
     @Override
     public TextWithFileLocation convert(String source) {
-      return new TextWithFileLocation(source, read(source));
+      return new TextWithFileLocation(source, cache.computeIfAbsent(source, this::read));
     }
 
     private Supplier<String> read(String name) {
@@ -78,7 +86,7 @@ public class ChallengeConfig {
         .filter(challenge -> challenge instanceof Challenge8)
         .findFirst()
         .get()
-        .spoiler(); // need early init to log the secret for debugging ;-).
+        .spoiler();
     return new Challenges(challengeDefinitions, challenges);
   }
 }
