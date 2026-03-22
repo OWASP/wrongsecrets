@@ -57,10 +57,7 @@ public class ChallengesCtfController {
       for (int i = 0; i < definitions.size(); i++) {
         ChallengeDefinition definition = definitions.get(i);
         String hintText =
-            definition
-                .source(runtimeEnvironment)
-                .map(s -> s.hint().contents().get())
-                .orElse(null);
+            definition.source(runtimeEnvironment).map(s -> s.hint().contents().get()).orElse(null);
         if (hintText != null) {
           int hintId = i + 1;
           var jsonHint = JsonNodeFactory.instance.objectNode();
