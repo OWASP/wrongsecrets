@@ -521,10 +521,12 @@ Initial creation of the zip file for CTFD requires you to visit [https://wrongse
 Follow the following steps:
 
 ```shell
-    npm install -g juice-shop-ctf-cli@10.0.1
-    juice-shop-ctf #choose ctfd and https://wrongsecrets-ctf.herokuapp.com as domain. No trailing slash! The key is 'TRwzkRJnHOTckssAeyJbysWgP!Qc2T', feel free to enable hints. We do not support snippets or links/urls to code or hints.
+    npm install -g juice-shop-ctf-cli@12.0.0
+    juice-shop-ctf #choose ctfd and https://wrongsecrets-ctf.herokuapp.com as domain. No trailing slash! The key is 'TRwzkRJnHOTckssAeyJbysWgP!Qc2T', feel free to enable hints.
     docker run -p 8001:8000 -it ctfd/ctfd:3.7.4
 ```
+
+> **Note:** Hints can only be generated if the WrongSecrets instance has hints enabled (`HINTS_ENABLED=true`). The Heroku CTF instance ([https://wrongsecrets-ctf.herokuapp.com](https://wrongsecrets-ctf.herokuapp.com)) runs with `HINTS_ENABLED=false`, so selecting "Free hints" or "Paid hints" will result in an empty hints list. To generate hints, run your own instance with `HINTS_ENABLED=true`.
 
 Now visit the CTFD instance at [http://localhost:8001](http://localhost:8001) and setup your CTF.
 Then use the administrative backup function to import the zipfile you created with the juice-shop-ctf command.

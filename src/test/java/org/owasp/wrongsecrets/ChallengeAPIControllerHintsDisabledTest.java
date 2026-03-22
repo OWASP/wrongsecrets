@@ -1,6 +1,7 @@
 package org.owasp.wrongsecrets;
 
 import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.not;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -11,31 +12,19 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.test.web.servlet.MockMvc;
 
-@SpringBootTest
+@SpringBootTest(
+    properties = {"hints_enabled=false"},
+    classes = WrongSecretsApplication.class)
 @AutoConfigureMockMvc
-class ChallengeAPiControllerTest {
+class ChallengeAPIControllerHintsDisabledTest {
 
   @Autowired private MockMvc mvc;
 
-  public ChallengeAPiControllerTest() {}
-
   @Test
-  void shouldGetListOfChallenges() throws Exception {
-    mvc.perform(get("/api/Challenges"))
-        .andExpect(status().isOk())
-        .andExpect(content().string(containsString("hint")));
-  }
-
-  @Test
-  void shouldGetListOfHints() throws Exception {
+  void shouldReturnEmptyHintsListWhenHintsDisabled() throws Exception {
     mvc.perform(get("/api/Hints"))
         .andExpect(status().isOk())
-        .andExpect(content().string(containsString("ChallengeId")))
-        .andExpect(content().string(containsString("text")))
-        .andExpect(content().string(containsString("unlocked")));
+        .andExpect(content().string(not(containsString("ChallengeId"))))
+        .andExpect(content().string(containsString("\"data\":[]")));
   }
 }
-
-/*
-"manageUrl" : "url", "memo" : "memo", "channel" : "channel", "time" : "time", "additionalData" : { "srcIp" : "source", "useragent" : "agent", "referer" : "referer", "location" : "location"}}
- */

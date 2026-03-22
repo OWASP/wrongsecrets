@@ -1,7 +1,7 @@
 # CTF Instructions
 
 So you want to play a CTF with WrongSecrets? This is the place to read up all about it.
-Our CTF setup makes use of the [Juice Shop CTF CLI extension](https://github.com/juice-shop/juice-shop-ctf), which you can read all about at [here](https://pwning.owasp-juice.shop/companion-guide/snapshot/part1/ctf.html).
+Our CTF setup makes use of the [Juice Shop CTF CLI extension](https://github.com/juice-shop/juice-shop-ctf), which is documented [here](https://pwning.owasp-juice.shop/companion-guide/latest/part4/ctf.html).
 
 The difference between Juiceshop and WrongSecrets, is that WrongSecrets is more of a secrets-hunter game.
 This means that your contestants will try to find the CTF key soon after a few challenges.
@@ -35,6 +35,8 @@ There are 3 flavors of CTF to be setup: Docker/Heroku, K8S, Cloud based.
 When doing a Docker or Heroku based CTF, you can follow the [instructions in the readme](https://github.com/OWASP/wrongsecrets#ctfd-support).
 If you want to use your own CTF key, you can build a container with the following arguments `CTF_ENABLED=true,HINTS_ENABLED=false,CTF_KEY=<YOURNEWKEYHERE>`. Just make sure you provide the same key
 to `juice-shop-ctf` when you run it.
+
+> **Note:** Hints for `juice-shop-ctf` can only be generated if the WrongSecrets instance has hints enabled (`HINTS_ENABLED=true`). When `HINTS_ENABLED=false` (the default for CTF containers), the `/api/Hints` endpoint returns an empty list, so selecting "Free hints" or "Paid hints" in `juice-shop-ctf` will produce challenges without hints. Set `HINTS_ENABLED=true` when building your container if you want hints to be included in the CTFd export.
 Host the Docker container somewhere, where your users can not access the container variables directly, so they cannot extract the CTF key that easily.
 Want to make it a little more exciting? Create your own custom Docker image for both the 'play-environment' and the 'CTF-scoring-environment', where you override certain values (e.g. the ARG, the docker ENV, etc.) with your preferred values, so that copying from any existing online solution no longer works!
 There are a few env-vars that you need to pay attention to when setting this up:
