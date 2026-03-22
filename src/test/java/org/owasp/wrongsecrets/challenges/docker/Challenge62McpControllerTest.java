@@ -1,18 +1,12 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 class Challenge62McpControllerTest {
@@ -24,7 +18,8 @@ class Challenge62McpControllerTest {
   @Test
   void initializeShouldReturnServerInfo() {
     var controller =
-        new Challenge62McpController(DEFAULT_KEY, DEFAULT_DOC_ID, mock(RestTemplate.class), new ObjectMapper());
+        new Challenge62McpController(
+            DEFAULT_KEY, DEFAULT_DOC_ID, mock(RestTemplate.class), new ObjectMapper());
     Map<String, Object> request = Map.of("jsonrpc", "2.0", "id", 1, "method", "initialize");
 
     Map<String, Object> response = controller.handleMcpRequest(request);
@@ -41,7 +36,8 @@ class Challenge62McpControllerTest {
   @Test
   void toolsListShouldExposeReadGoogleDriveDocumentTool() {
     var controller =
-        new Challenge62McpController(DEFAULT_KEY, DEFAULT_DOC_ID, mock(RestTemplate.class), new ObjectMapper());
+        new Challenge62McpController(
+            DEFAULT_KEY, DEFAULT_DOC_ID, mock(RestTemplate.class), new ObjectMapper());
     Map<String, Object> request = Map.of("jsonrpc", "2.0", "id", 1, "method", "tools/list");
 
     Map<String, Object> response = controller.handleMcpRequest(request);
@@ -57,7 +53,8 @@ class Challenge62McpControllerTest {
   @Test
   void readDocumentShouldReturnNotConfiguredMessageWhenKeyIsDefault() {
     var controller =
-        new Challenge62McpController(DEFAULT_KEY, DEFAULT_DOC_ID, mock(RestTemplate.class), new ObjectMapper());
+        new Challenge62McpController(
+            DEFAULT_KEY, DEFAULT_DOC_ID, mock(RestTemplate.class), new ObjectMapper());
     Map<String, Object> request =
         Map.of(
             "jsonrpc",
@@ -82,9 +79,9 @@ class Challenge62McpControllerTest {
   @Test
   void unknownMethodShouldReturnError() {
     var controller =
-        new Challenge62McpController(DEFAULT_KEY, DEFAULT_DOC_ID, mock(RestTemplate.class), new ObjectMapper());
-    Map<String, Object> request =
-        Map.of("jsonrpc", "2.0", "id", 1, "method", "unknown/method");
+        new Challenge62McpController(
+            DEFAULT_KEY, DEFAULT_DOC_ID, mock(RestTemplate.class), new ObjectMapper());
+    Map<String, Object> request = Map.of("jsonrpc", "2.0", "id", 1, "method", "unknown/method");
 
     Map<String, Object> response = controller.handleMcpRequest(request);
 
@@ -97,7 +94,8 @@ class Challenge62McpControllerTest {
   @Test
   void unknownToolShouldReturnError() {
     var controller =
-        new Challenge62McpController(DEFAULT_KEY, DEFAULT_DOC_ID, mock(RestTemplate.class), new ObjectMapper());
+        new Challenge62McpController(
+            DEFAULT_KEY, DEFAULT_DOC_ID, mock(RestTemplate.class), new ObjectMapper());
     Map<String, Object> request =
         Map.of(
             "jsonrpc",
@@ -123,7 +121,8 @@ class Challenge62McpControllerTest {
     // Provide a mock service account key (valid base64-encoded JSON structure)
     // We spy on readGoogleDriveDocument to avoid actual credential resolution
     var controller =
-        new Challenge62McpController(DEFAULT_KEY, DEFAULT_DOC_ID, restTemplate, new ObjectMapper()) {
+        new Challenge62McpController(
+            DEFAULT_KEY, DEFAULT_DOC_ID, restTemplate, new ObjectMapper()) {
           @Override
           String readGoogleDriveDocument(String docId) {
             return "secret_from_google_drive_document";
