@@ -2,11 +2,9 @@
     <h4>🔑 MCP Server with Google Service Account</h4>
     <p>An MCP (Model Context Protocol) server is running on this application. It exposes a <code>read_google_drive_document</code> tool that uses a Google Service Account to read a restricted document — even if you are not directly authorized to access it.</p>
 
-    <div class="mcp62-info" style="border: 1px solid #d1ecf1; border-radius: 6px; padding: 15px; margin: 15px 0; background-color: #d1ecf1;">
+    <div class="mcp62-warning" style="border: 1px solid #ffeaa7; border-radius: 6px; padding: 15px; margin: 15px 0;">
         <p><strong>⚠️ This MCP server demonstrates privilege escalation.</strong> The service account has more permissions than you (the caller). By calling the tool, you gain access to a document you are not directly authorized to read.</p>
-    </div>
 
-    <div class="mcp62-steps" style="border: 1px solid #ffeaa7; border-radius: 6px; padding: 15px; margin: 15px 0;">
         <p>Step 1 — Discover what tools the MCP server exposes:</p>
         <pre class="mcp62-code" style="padding: 10px; border-radius: 4px; overflow-x: auto; font-size: 13px;">curl -s -X POST http://localhost:8080/mcp62 \
   -H 'Content-Type: application/json' \
@@ -43,7 +41,20 @@ function mcp62Post(payload, outputId) {
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(payload)
     })
-    .then(function(r) { return r.json(); })
+    .then(function(r) {
+        if (!r.ok) {
+            return r.text().then(function(body) {
+                throw new Error('HTTP ' + r.status + ': ' + body.slice(0, 200));
+            });
+        }
+        return r.text().then(function(body) {
+            try {
+                return JSON.parse(body);
+            } catch (_) {
+                throw new Error('Expected JSON but got: ' + body.slice(0, 200));
+            }
+        });
+    })
     .then(function(data) { out.textContent = JSON.stringify(data, null, 2); })
     .catch(function(err) { out.textContent = 'Failed to communicate with MCP server: ' + (err.message || err); });
 }
