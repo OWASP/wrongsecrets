@@ -526,6 +526,8 @@ Follow the following steps:
     docker run -p 8001:8000 -it ctfd/ctfd:3.7.4
 ```
 
+> **Note:** Hints can only be generated if the WrongSecrets instance has hints enabled (`HINTS_ENABLED=true`). The Heroku CTF instance ([https://wrongsecrets-ctf.herokuapp.com](https://wrongsecrets-ctf.herokuapp.com)) runs with `HINTS_ENABLED=false`, so selecting "Free hints" or "Paid hints" will result in an empty hints list. To generate hints, run your own instance with `HINTS_ENABLED=true`.
+
 Now visit the CTFD instance at [http://localhost:8001](http://localhost:8001) and setup your CTF.
 Then use the administrative backup function to import the zipfile you created with the juice-shop-ctf command.
 Game on using [https://wrongsecrets-ctf.herokuapp.com](https://wrongsecrets-ctf.herokuapp.com)!

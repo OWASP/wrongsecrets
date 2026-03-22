@@ -11,6 +11,7 @@ import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.definitions.ChallengeDefinition;
 import org.owasp.wrongsecrets.definitions.ChallengeDefinitionsConfiguration;
 import org.owasp.wrongsecrets.definitions.Difficulty;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,16 +27,19 @@ public class ChallengesCtfController {
   private final Challenges challenges;
   private final ChallengeDefinitionsConfiguration wrongSecretsConfiguration;
   private final RuntimeEnvironment runtimeEnvironment;
+  private final boolean hintsEnabled;
 
   public ChallengesCtfController(
       ScoreCard scoreCard,
       Challenges challenges,
       RuntimeEnvironment runtimeEnvironment,
-      ChallengeDefinitionsConfiguration wrongSecretsConfiguration) {
+      ChallengeDefinitionsConfiguration wrongSecretsConfiguration,
+      @Value("${hints_enabled}") boolean hintsEnabled) {
     this.scoreCard = scoreCard;
     this.challenges = challenges;
     this.wrongSecretsConfiguration = wrongSecretsConfiguration;
     this.runtimeEnvironment = runtimeEnvironment;
+    this.hintsEnabled = hintsEnabled;
   }
 
   @GetMapping(
@@ -46,25 +50,27 @@ public class ChallengesCtfController {
           "Gives all hints back in a jsonArray, to be used with the Juiceshop CTF cli v12+."
               + " Each challenge contributes one hint entry.")
   public String getHints() {
-    List<ChallengeDefinition> definitions = challenges.getDefinitions().challenges();
     var json = JsonNodeFactory.instance.objectNode();
     ArrayNode jsonArray = JsonNodeFactory.instance.arrayNode();
-    for (int i = 0; i < definitions.size(); i++) {
-      ChallengeDefinition definition = definitions.get(i);
-      String hintText =
-          definition
-              .source(runtimeEnvironment)
-              .map(s -> s.hint().contents().get())
-              .orElse(null);
-      if (hintText != null) {
-        int hintId = i + 1;
-        var jsonHint = JsonNodeFactory.instance.objectNode();
-        jsonHint.put("ChallengeId", hintId);
-        jsonHint.put("id", hintId);
-        jsonHint.put("text", hintText);
-        jsonHint.put("order", 1);
-        jsonHint.put("unlocked", true);
-        jsonArray.add(jsonHint);
+    if (hintsEnabled) {
+      List<ChallengeDefinition> definitions = challenges.getDefinitions().challenges();
+      for (int i = 0; i < definitions.size(); i++) {
+        ChallengeDefinition definition = definitions.get(i);
+        String hintText =
+            definition
+                .source(runtimeEnvironment)
+                .map(s -> s.hint().contents().get())
+                .orElse(null);
+        if (hintText != null) {
+          int hintId = i + 1;
+          var jsonHint = JsonNodeFactory.instance.objectNode();
+          jsonHint.put("ChallengeId", hintId);
+          jsonHint.put("id", hintId);
+          jsonHint.put("text", hintText);
+          jsonHint.put("order", 1);
+          jsonHint.put("unlocked", true);
+          jsonArray.add(jsonHint);
+        }
       }
     }
     json.set("data", jsonArray);
