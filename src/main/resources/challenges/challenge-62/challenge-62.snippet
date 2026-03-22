@@ -1,0 +1,56 @@
+<div id="mcp62-challenge-container" style="border: 1px solid #ccc; border-radius: 8px; padding: 20px; margin: 20px; background-color: #f9f9f9;">
+    <h4>🔑 MCP Server with Google Service Account</h4>
+    <p>An MCP (Model Context Protocol) server is running on this application. It exposes a <code>read_google_drive_document</code> tool that uses a Google Service Account to read a restricted document — even if you are not directly authorized to access it.</p>
+
+    <div class="mcp62-info" style="border: 1px solid #d1ecf1; border-radius: 6px; padding: 15px; margin: 15px 0; background-color: #d1ecf1;">
+        <p><strong>⚠️ This MCP server demonstrates privilege escalation.</strong> The service account has more permissions than you (the caller). By calling the tool, you gain access to a document you are not directly authorized to read.</p>
+    </div>
+
+    <div class="mcp62-steps" style="border: 1px solid #ffeaa7; border-radius: 6px; padding: 15px; margin: 15px 0;">
+        <p>Step 1 — Discover what tools the MCP server exposes:</p>
+        <pre class="mcp62-code" style="padding: 10px; border-radius: 4px; overflow-x: auto; font-size: 13px;">curl -s -X POST http://localhost:8080/mcp62 \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'</pre>
+        <button class="btn btn-secondary btn-sm mcp62-btn" onclick="mcp62ListTools()">▶ Run: tools/list</button>
+        <pre id="mcp62-tools-output" class="mcp62-output" style="display:none; padding: 10px; border-radius: 4px; overflow-x: auto; font-size: 12px; margin-top: 8px; white-space: pre-wrap; word-break: break-word;"></pre>
+
+        <p style="margin-top: 12px;">Step 2 — Call <code>read_google_drive_document</code> to read the restricted document via the service account:</p>
+        <pre class="mcp62-code" style="padding: 10px; border-radius: 4px; overflow-x: auto; font-size: 13px;">curl -s -X POST http://localhost:8080/mcp62 \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"read_google_drive_document","arguments":{}}}'</pre>
+        <button class="btn btn-warning btn-sm mcp62-btn" onclick="mcp62ReadDocument()">▶ Run: read_google_drive_document</button>
+        <pre id="mcp62-doc-output" class="mcp62-output" style="display:none; padding: 10px; border-radius: 4px; overflow-x: auto; font-size: 12px; margin-top: 8px; white-space: pre-wrap; word-break: break-word;"></pre>
+
+        <p style="margin-top: 12px;"><small class="mcp62-tip">💡 The document's content contains the secret. Submit the secret content as your answer.</small></p>
+    </div>
+</div>
+
+<style>
+.mcp62-output {
+    background-color: #f8f9fa !important;
+    color: #212529 !important;
+    border: 1px solid #dee2e6 !important;
+}
+</style>
+
+<script>
+function mcp62Post(payload, outputId) {
+    const out = document.getElementById(outputId);
+    out.style.display = 'block';
+    out.textContent = 'Loading…';
+    fetch('/mcp62', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(payload)
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) { out.textContent = JSON.stringify(data, null, 2); })
+    .catch(function(err) { out.textContent = 'Failed to communicate with MCP server: ' + (err.message || err); });
+}
+function mcp62ListTools() {
+    mcp62Post({"jsonrpc":"2.0","id":1,"method":"tools/list"}, 'mcp62-tools-output');
+}
+function mcp62ReadDocument() {
+    mcp62Post({"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"read_google_drive_document","arguments":{}}}, 'mcp62-doc-output');
+}
+</script>
