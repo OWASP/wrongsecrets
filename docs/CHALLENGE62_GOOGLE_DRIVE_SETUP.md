@@ -1,0 +1,220 @@
+# Challenge 62: Google Service Account Setup Guide
+
+This guide explains how to configure Challenge 62, which demonstrates privilege escalation via an MCP (Model Context Protocol) server using a Google Service Account to access restricted Google Drive documents.
+
+## Overview
+
+Challenge 62 shows how an MCP server configured with an overly-privileged Google Service Account allows callers to read Google Drive documents they are not directly authorized to access. The service account acts as a privilege escalation proxy.
+
+## Runtime Behavior Notes
+
+- The challenge answer is parsed from document content between `<secret>` and `</secret>`.
+- The parsed answer is cached once in `Challenge62` and reused for answer validation.
+- `Challenge62McpController` caches Drive documents to reduce repeated API calls.
+- Cache policy: always retain the configured default document (`GOOGLE_DRIVE_DOCUMENT_ID`) plus up to 20 additional document ids.
+
+## Prerequisites
+
+- A Google Cloud project
+- Owner or Editor role on the Google Cloud project (to create service accounts)
+- A Google Drive document containing a secret
+
+## Step 1: Create a Google Cloud Project (if needed)
+
+If you don't have a Google Cloud project:
+
+```bash
+gcloud projects create YOUR_PROJECT_ID --name="WrongSecrets Challenge 62"
+gcloud config set project YOUR_PROJECT_ID
+```
+
+## Step 2: Enable the Google Drive API
+
+```bash
+gcloud services enable drive.googleapis.com
+```
+
+## Step 3: Create a Service Account
+
+```bash
+gcloud iam service-accounts create wrongsecrets-challenge62 \
+    --display-name="WrongSecrets Challenge 62 Drive Reader" \
+    --description="Service account for WrongSecrets Challenge 62 - demonstrates MCP privilege escalation"
+```
+
+## Step 4: Create and Download a Service Account Key
+
+```bash
+gcloud iam service-accounts keys create challenge62-key.json \
+    --iam-account=wrongsecrets-challenge62@YOUR_PROJECT_ID.iam.gserviceaccount.com
+```
+
+**⚠️ Security Warning**: Service account key files are sensitive credentials. Handle them carefully:
+- Do not commit key files to version control
+- Delete the key file after encoding it
+- Rotate keys regularly
+
+## Step 5: Create a Google Drive Document with the Secret
+
+1. Go to [Google Drive](https://drive.google.com) and create a new Google Doc
+2. Add your challenge secret as the document content (e.g., `my_wrongsecrets_challenge62_answer`)
+  - Recommended format: `<secret>my_wrongsecrets_challenge62_answer</secret>`
+3. Note the document ID from the URL:
+   - URL format: `https://docs.google.com/document/d/DOCUMENT_ID/edit`
+   - Copy the `DOCUMENT_ID` part
+
+## Step 6: Share the Document with the Service Account
+
+Share the Google Drive document with the service account's email address:
+
+1. Open the document in Google Drive
+2. Click **Share**
+3. Add the service account email: `wrongsecrets-challenge62@YOUR_PROJECT_ID.iam.gserviceaccount.com`
+4. Set the permission to **Viewer**
+5. Click **Send**
+
+Alternatively, use the Drive API via the CLI:
+```bash
+# Get the document ID from the URL
+DOCUMENT_ID="your_document_id_here"
+SA_EMAIL="wrongsecrets-challenge62@YOUR_PROJECT_ID.iam.gserviceaccount.com"
+
+# Share using the Drive API (requires OAuth2 token)
+curl -X POST "https://www.googleapis.com/drive/v3/files/${DOCUMENT_ID}/permissions" \
+  -H "Authorization: Bearer $(gcloud auth print-access-token)" \
+  -H "Content-Type: application/json" \
+  -d "{\"role\": \"reader\", \"type\": \"user\", \"emailAddress\": \"${SA_EMAIL}\"}"
+```
+
+## Step 7: Encode the Service Account Key
+
+Base64-encode the service account key file:
+
+```bash
+# On Linux/macOS:
+SERVICE_ACCOUNT_KEY_B64=$(base64 -w 0 challenge62-key.json)
+
+# On macOS (if the above doesn't work):
+SERVICE_ACCOUNT_KEY_B64=$(base64 -i challenge62-key.json | tr -d '\n')
+
+echo "Your base64-encoded key (use this as GOOGLE_SERVICE_ACCOUNT_KEY):"
+echo "${SERVICE_ACCOUNT_KEY_B64}"
+```
+
+## Step 8: Configure WrongSecrets
+
+Set the following environment variables when **running** WrongSecrets. These must be provided at container start time — do **not** bake real credentials into the image via `--build-arg`, as that embeds them in the image layer history.
+
+| Variable | Description | Default (placeholder) | Example override |
+|----------|-------------|----------------------|-----------------|
+| `GOOGLE_SERVICE_ACCOUNT_KEY` | Base64-encoded service account JSON key | `if_you_see_this_configure_the_google_service_account_properly` | `eyJ0eXBlIjoic2VydmljZV9hY2...` |
+| `GOOGLE_DRIVE_DOCUMENT_ID` | Google Drive document ID | `1PlZkwEd7GouyY4cdOxBuczm6XumQeuZN31LR2BXRgPs` | your document id |
+| `WRONGSECRETS_MCP_GOOGLEDRIVE_SECRET` | *(optional)* Static override — skips live Drive fetch | *(none — live fetch used)* | `my_wrongsecrets_challenge62_answer` |
+
+> **Why runtime-only?**
+> The `Dockerfile` and `Dockerfile.web` ship harmless placeholder defaults via `ENV`. Real credentials should only be injected at `docker run` time so they never appear in image layers or build logs.
+
+### Running with Docker (explicit values)
+
+```bash
+export SERVICE_ACCOUNT_KEY_B64=$(base64 -i challenge62-key.json | tr -d '\n')
+export DOCUMENT_ID="your_document_id_here"
+
+docker run -p 8080:8080 -p 8090:8090 \
+  -e GOOGLE_SERVICE_ACCOUNT_KEY="${SERVICE_ACCOUNT_KEY_B64}" \
+  -e GOOGLE_DRIVE_DOCUMENT_ID="${DOCUMENT_ID}" \
+  ghcr.io/owasp/wrongsecrets/wrongsecrets:latest-no-vault
+```
+
+### Running with Docker (inherit from host shell)
+
+If the variables are already exported in your shell, pass them through without a value — Docker inherits from the host:
+
+```bash
+export GOOGLE_SERVICE_ACCOUNT_KEY="${SERVICE_ACCOUNT_KEY_B64}"
+export GOOGLE_DRIVE_DOCUMENT_ID="your_document_id_here"
+
+docker run -p 8080:8080 -p 8090:8090 \
+  -e GOOGLE_SERVICE_ACCOUNT_KEY \
+  -e GOOGLE_DRIVE_DOCUMENT_ID \
+  ghcr.io/owasp/wrongsecrets/wrongsecrets:latest-no-vault
+```
+
+### Running with Docker using an env file
+
+Create a `.env` file (add it to `.gitignore`):
+
+```bash
+GOOGLE_SERVICE_ACCOUNT_KEY=<base64_encoded_key>
+GOOGLE_DRIVE_DOCUMENT_ID=<document_id>
+```
+
+Then run:
+
+```bash
+docker run -p 8080:8080 -p 8090:8090 \
+  --env-file .env \
+  ghcr.io/owasp/wrongsecrets/wrongsecrets:latest-no-vault
+```
+
+### Running with Spring Boot (local development)
+
+Set environment variables in your shell before running:
+
+```bash
+export GOOGLE_SERVICE_ACCOUNT_KEY="${SERVICE_ACCOUNT_KEY_B64}"
+export GOOGLE_DRIVE_DOCUMENT_ID="your_document_id"
+./mvnw spring-boot:run
+```
+
+Or add them to a **local-only** properties file that is not committed to version control:
+
+```properties
+# application-local.properties  (keep out of git)
+GOOGLE_SERVICE_ACCOUNT_KEY=<base64_encoded_key>
+GOOGLE_DRIVE_DOCUMENT_ID=<document_id>
+```
+
+## Step 9: Clean Up the Key File
+
+After encoding the key, delete the local key file:
+
+```bash
+rm challenge62-key.json
+```
+
+## Using the Default OWASP Document (for testing)
+
+The default document ID configured in the application is the OWASP WrongSecrets Google Drive document:
+- Document: https://docs.google.com/document/d/1PlZkwEd7GouyY4cdOxBuczm6XumQeuZN31LR2BXRgPs/edit
+
+To use this document, your service account must have been granted read access to it by the OWASP WrongSecrets maintainers. For your own deployment, we recommend creating your own document as described above.
+
+## Security Notes
+
+1. **This is intentionally insecure for educational purposes**: In a real system, you should always authenticate and authorize MCP callers before granting access to external resources.
+
+2. **Least Privilege**: The service account used in this challenge demonstrates what happens when you violate least privilege. In production, ensure service accounts only have the minimum permissions necessary.
+
+3. **Never use production credentials**: Do not use service accounts that have access to production data for this challenge.
+
+4. **Key rotation**: Regularly rotate service account keys to limit the window of exposure if a key is compromised.
+
+## Verification
+
+After configuration, verify the challenge works by calling the MCP endpoint:
+
+```bash
+curl -s -X POST http://localhost:8080/mcp62 \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"read_google_drive_document","arguments":{}}}'
+```
+
+The response should contain the document content with your secret.
+
+## Tests and Code References
+
+- Main challenge logic: `src/main/java/org/owasp/wrongsecrets/challenges/docker/Challenge62.java`
+- MCP controller and cache logic: `src/main/java/org/owasp/wrongsecrets/challenges/docker/Challenge62McpController.java`
+- Challenge tests: `src/test/java/org/owasp/wrongsecrets/challenges/docker/Challenge62Test.java`
+- MCP controller tests: `src/test/java/org/owasp/wrongsecrets/challenges/docker/Challenge62McpControllerTest.java`

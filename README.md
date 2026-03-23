@@ -161,8 +161,11 @@ docker run -p 8080:8080 -p 8090:8090 ghcr.io/owasp/wrongsecrets/wrongsecrets-mas
 ⚠️ **Warning**: This is a development version built from the latest master branch and may contain experimental features or instabilities.
 
 **📝 Note on Ports:**
-- Port **8080**: Main application (challenges 0-61)
+- Port **8080**: Main application (challenges 0-62)
 - Port **8090**: MCP server (required for Challenge 60)
+
+**📝 Note on Challenge 62 (Google Drive MCP):**
+Challenge 62 requires a Google Service Account to be configured for full functionality. See [docs/CHALLENGE62_GOOGLE_DRIVE_SETUP.md](docs/CHALLENGE62_GOOGLE_DRIVE_SETUP.md) for setup instructions. Without configuration, the challenge will show a placeholder message.
 
 Now you can try to find the secrets by means of solving the challenge offered at the links below
 <details>
@@ -218,6 +221,7 @@ Now you can try to find the secrets by means of solving the challenge offered at
 -   [localhost:8080/challenge/challenge-59](http://localhost:8080/challenge/challenge-59)
 -   [localhost:8080/challenge/challenge-60](http://localhost:8080/challenge/challenge-60)
 -   [localhost:8080/challenge/challenge-61](http://localhost:8080/challenge/challenge-61)
+-   [localhost:8080/challenge/challenge-62](http://localhost:8080/challenge/challenge-62)
 </details>
 
 Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look
@@ -246,7 +250,7 @@ If you want to host WrongSecrets on Railway, you can do so by deploying [this on
 
 ## Basic K8s exercise
 
-_Can be used for challenges 0-6, 8, 12-43, 48-61_
+_Can be used for challenges 0-6, 8, 12-43, 48-62_
 
 ### Minikube based
 
@@ -341,7 +345,7 @@ This is because if you run the start script again it will replace the secret in 
 
 ## Cloud Challenges
 
-_Can be used for challenges 0-61_
+_Can be used for challenges 0-62_
 
 **READ THIS**: Given that the exercises below contain IAM privilege escalation exercises,
 never run this on an account which is related to your production environment or can influence your account-over-arching
