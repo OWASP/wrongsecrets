@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -43,6 +44,7 @@ public class Challenge62McpController {
   private static final String JSONRPC_VERSION = "2.0";
   private static final String DEFAULT_KEY_PLACEHOLDER =
       "if_you_see_this_configure_the_google_service_account_properly";
+  private static final int MAX_ADDITIONAL_CACHED_DOCUMENTS = 20;
   private static final String DRIVE_SCOPE = "https://www.googleapis.com/auth/drive.readonly";
   private static final String DRIVE_EXPORT_URL =
       "https://www.googleapis.com/drive/v3/files/%s/export?mimeType=text/plain";
@@ -51,6 +53,10 @@ public class Challenge62McpController {
   private final String documentId;
   private final RestTemplate restTemplate;
   private final ObjectMapper objectMapper;
+  // Cache for fetched Google Drive documents. The configured default document is pinned.
+  private final Map<String, String> documentCache;
+  // Access-order tracker for non-default document ids to support bounded eviction.
+  private final LinkedHashMap<String, Boolean> additionalDocumentCacheOrder;
 
   @Autowired
   public Challenge62McpController(
@@ -71,6 +77,8 @@ public class Challenge62McpController {
     this.documentId = documentId;
     this.restTemplate = restTemplate;
     this.objectMapper = objectMapper;
+    this.documentCache = new ConcurrentHashMap<>();
+    this.additionalDocumentCacheOrder = new LinkedHashMap<>(16, 0.75f, true);
   }
 
   private static RestTemplate createDefaultRestTemplate() {
@@ -198,15 +206,52 @@ public class Challenge62McpController {
   /**
    * Reads a Google Drive document using the configured service account credentials.
    *
+   * <p>Caching behavior:
+   *
+   * <ul>
+   *   <li>The configured default document ({@code GOOGLE_DRIVE_DOCUMENT_ID}) is always cached and
+   *       never evicted.
+   *   <li>At most 20 additional document ids are cached using access-order eviction.
+   *   <li>When reading any non-default document, the configured default document is ensured to be
+   *       cached alongside it.
+   * </ul>
+   *
    * @param docId the Google Drive document ID
    * @return the plain text content of the document
    * @throws Exception if the document cannot be read
    */
   String readGoogleDriveDocument(String docId) throws Exception {
+    ensureConfiguredDocumentCached(docId);
+
+    String cachedDocument = documentCache.get(docId);
+    if (cachedDocument != null) {
+      recordDocumentAccess(docId);
+      return cachedDocument;
+    }
+
+    String documentContent = fetchGoogleDriveDocument(docId);
+    cacheDocument(docId, documentContent);
+    return documentContent;
+  }
+
+  private void ensureConfiguredDocumentCached(String requestedDocId) throws Exception {
+    if (documentId.equals(requestedDocId) || documentCache.containsKey(documentId)) {
+      return;
+    }
+
+    String configuredDocumentContent = fetchGoogleDriveDocument(documentId);
+    cacheDocument(documentId, configuredDocumentContent);
+  }
+
+  String fetchGoogleDriveDocument(String docId) throws Exception {
+    log.info("fetchGoogleDriveDocument called for docId: {}", sanitizeForLog(docId));
     String accessToken = getServiceAccountAccessToken();
     String exportUrl = String.format(DRIVE_EXPORT_URL, docId);
 
     HttpHeaders headers = new HttpHeaders();
+    /**
+     * Ensures the configured default document is cached when non-default documents are requested.
+     */
     headers.setBearerAuth(accessToken);
     HttpEntity<Void> entity = new HttpEntity<>(headers);
 
@@ -219,6 +264,36 @@ public class Challenge62McpController {
       log.error(
           "Challenge62: Failed to export Google Drive document {}: {}", docId, e.getMessage());
       throw new Exception("Unable to read document from Google Drive: " + e.getMessage(), e);
+    }
+  }
+
+  /** Adds a document to the bounded cache and evicts only from the non-default document set. */
+  private void cacheDocument(String docId, String documentContent) {
+    documentCache.put(docId, documentContent);
+    if (documentId.equals(docId)) {
+      return;
+    }
+
+    synchronized (additionalDocumentCacheOrder) {
+      additionalDocumentCacheOrder.put(docId, Boolean.TRUE);
+      if (additionalDocumentCacheOrder.size() > MAX_ADDITIONAL_CACHED_DOCUMENTS) {
+        String evictedDocId = additionalDocumentCacheOrder.keySet().iterator().next();
+        additionalDocumentCacheOrder.remove(evictedDocId);
+        documentCache.remove(evictedDocId);
+      }
+    }
+  }
+
+  /** Updates access order for non-default cached documents. */
+  private void recordDocumentAccess(String docId) {
+    if (documentId.equals(docId)) {
+      return;
+    }
+
+    synchronized (additionalDocumentCacheOrder) {
+      if (additionalDocumentCacheOrder.containsKey(docId)) {
+        additionalDocumentCacheOrder.get(docId);
+      }
     }
   }
 

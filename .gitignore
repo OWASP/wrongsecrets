@@ -82,6 +82,9 @@ src/main/resources/executables/wrongsecrets-dotnet*
 k8s/challenge53/executables/wrongsecrets-challenge53-c
 k8s/challenge53/executables/wrongsecrets-challenge53-c*
 
+# Challenge 62
+challenge62-key.json
+
 # Node JS
 js/node/
 js/node_modules/

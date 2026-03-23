@@ -6,6 +6,13 @@ This guide explains how to configure Challenge 62, which demonstrates privilege 
 
 Challenge 62 shows how an MCP server configured with an overly-privileged Google Service Account allows callers to read Google Drive documents they are not directly authorized to access. The service account acts as a privilege escalation proxy.
 
+## Runtime Behavior Notes
+
+- The challenge answer is parsed from document content between `<secret>` and `</secret>`.
+- The parsed answer is cached once in `Challenge62` and reused for answer validation.
+- `Challenge62McpController` caches Drive documents to reduce repeated API calls.
+- Cache policy: always retain the configured default document (`GOOGLE_DRIVE_DOCUMENT_ID`) plus up to 20 additional document ids.
+
 ## Prerequisites
 
 - A Google Cloud project
@@ -51,6 +58,7 @@ gcloud iam service-accounts keys create challenge62-key.json \
 
 1. Go to [Google Drive](https://drive.google.com) and create a new Google Doc
 2. Add your challenge secret as the document content (e.g., `my_wrongsecrets_challenge62_answer`)
+  - Recommended format: `<secret>my_wrongsecrets_challenge62_answer</secret>`
 3. Note the document ID from the URL:
    - URL format: `https://docs.google.com/document/d/DOCUMENT_ID/edit`
    - Copy the `DOCUMENT_ID` part
@@ -167,3 +175,10 @@ curl -s -X POST http://localhost:8080/mcp62 \
 ```
 
 The response should contain the document content with your secret.
+
+## Tests and Code References
+
+- Main challenge logic: `src/main/java/org/owasp/wrongsecrets/challenges/docker/Challenge62.java`
+- MCP controller and cache logic: `src/main/java/org/owasp/wrongsecrets/challenges/docker/Challenge62McpController.java`
+- Challenge tests: `src/test/java/org/owasp/wrongsecrets/challenges/docker/Challenge62Test.java`
+- MCP controller tests: `src/test/java/org/owasp/wrongsecrets/challenges/docker/Challenge62McpControllerTest.java`

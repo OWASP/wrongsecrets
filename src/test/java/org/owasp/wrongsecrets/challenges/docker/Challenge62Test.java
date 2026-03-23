@@ -8,20 +8,20 @@ import org.owasp.wrongsecrets.challenges.Spoiler;
 class Challenge62Test {
 
   @Test
-  void spoilerShouldReturnConfiguredSecret() {
-    var challenge = new Challenge62("my_google_drive_secret_42");
+  void spoilerShouldReturnExtractedConfiguredSecret() {
+    var challenge = new Challenge62("before <secret>my_google_drive_secret_42</secret> after");
     assertThat(challenge.spoiler()).isEqualTo(new Spoiler("my_google_drive_secret_42"));
   }
 
   @Test
   void answerCorrectShouldReturnTrueForCorrectAnswer() {
-    var challenge = new Challenge62("my_google_drive_secret_42");
+    var challenge = new Challenge62("before <secret>my_google_drive_secret_42</secret> after");
     assertThat(challenge.answerCorrect("my_google_drive_secret_42")).isTrue();
   }
 
   @Test
   void answerCorrectShouldReturnFalseForIncorrectAnswer() {
-    var challenge = new Challenge62("my_google_drive_secret_42");
+    var challenge = new Challenge62("before <secret>my_google_drive_secret_42</secret> after");
     assertThat(challenge.answerCorrect("wronganswer")).isFalse();
     assertThat(challenge.answerCorrect("")).isFalse();
     assertThat(challenge.answerCorrect(null)).isFalse();
@@ -29,8 +29,14 @@ class Challenge62Test {
 
   @Test
   void answerCorrectShouldTrimWhitespace() {
-    var challenge = new Challenge62("my_google_drive_secret_42");
+    var challenge = new Challenge62("before <secret>my_google_drive_secret_42</secret> after");
     assertThat(challenge.answerCorrect("  my_google_drive_secret_42  ")).isTrue();
+  }
+
+  @Test
+  void answerCorrectShouldReturnFalseWhenResolvedSecretHasNoSecretTags() {
+    var challenge = new Challenge62("my_google_drive_secret_42");
+    assertThat(challenge.answerCorrect("my_google_drive_secret_42")).isFalse();
   }
 
   @Test

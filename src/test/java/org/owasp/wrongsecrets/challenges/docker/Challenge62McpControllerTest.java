@@ -6,6 +6,7 @@ import static org.mockito.Mockito.mock;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.Test;
 import org.springframework.web.client.RestTemplate;
 
@@ -118,17 +119,6 @@ class Challenge62McpControllerTest {
   @Test
   void readDocumentShouldCallGoogleDriveApiWhenKeyIsConfigured() throws Exception {
     var restTemplate = mock(RestTemplate.class);
-    // Provide a mock service account key (valid base64-encoded JSON structure)
-    // We spy on readGoogleDriveDocument to avoid actual credential resolution
-    var controller =
-        new Challenge62McpController(
-            DEFAULT_KEY, DEFAULT_DOC_ID, restTemplate, new ObjectMapper()) {
-          @Override
-          String readGoogleDriveDocument(String docId) {
-            return "secret_from_google_drive_document";
-          }
-        };
-
     Map<String, Object> request =
         Map.of(
             "jsonrpc",
@@ -160,5 +150,76 @@ class Challenge62McpControllerTest {
     @SuppressWarnings("unchecked")
     List<Map<String, Object>> content = (List<Map<String, Object>>) result.get("content");
     assertThat(content.get(0).get("text")).isEqualTo("secret_from_google_drive_document");
+  }
+
+  @Test
+  void readGoogleDriveDocumentShouldUseCacheForConfiguredDocument() throws Exception {
+    var fetchCount = new AtomicInteger();
+    var controller =
+        new Challenge62McpController(
+            "dGVzdA==", DEFAULT_DOC_ID, mock(RestTemplate.class), new ObjectMapper()) {
+          @Override
+          String fetchGoogleDriveDocument(String docId) {
+            fetchCount.incrementAndGet();
+            return "cached_secret_for_" + docId;
+          }
+        };
+
+    String firstRead = controller.readGoogleDriveDocument(DEFAULT_DOC_ID);
+    String secondRead = controller.readGoogleDriveDocument(DEFAULT_DOC_ID);
+
+    assertThat(firstRead).isEqualTo("cached_secret_for_" + DEFAULT_DOC_ID);
+    assertThat(secondRead).isEqualTo("cached_secret_for_" + DEFAULT_DOC_ID);
+    assertThat(fetchCount.get()).isEqualTo(1);
+  }
+
+  @Test
+  void readGoogleDriveDocumentShouldAlsoCacheConfiguredDocumentWhenReadingOtherDocument()
+      throws Exception {
+    var fetchCount = new AtomicInteger();
+    var controller =
+        new Challenge62McpController(
+            "dGVzdA==", DEFAULT_DOC_ID, mock(RestTemplate.class), new ObjectMapper()) {
+          @Override
+          String fetchGoogleDriveDocument(String docId) {
+            fetchCount.incrementAndGet();
+            return "cached_secret_for_" + docId;
+          }
+        };
+
+    String otherDocumentRead = controller.readGoogleDriveDocument("doc-1");
+    String configuredDocumentRead = controller.readGoogleDriveDocument(DEFAULT_DOC_ID);
+    String secondOtherDocumentRead = controller.readGoogleDriveDocument("doc-1");
+
+    assertThat(otherDocumentRead).isEqualTo("cached_secret_for_doc-1");
+    assertThat(configuredDocumentRead).isEqualTo("cached_secret_for_" + DEFAULT_DOC_ID);
+    assertThat(secondOtherDocumentRead).isEqualTo("cached_secret_for_doc-1");
+    assertThat(fetchCount.get()).isEqualTo(2);
+  }
+
+  @Test
+  void readGoogleDriveDocumentShouldCacheOnlyTwentyAdditionalDocuments() throws Exception {
+    var fetchCount = new AtomicInteger();
+    var controller =
+        new Challenge62McpController(
+            "dGVzdA==", DEFAULT_DOC_ID, mock(RestTemplate.class), new ObjectMapper()) {
+          @Override
+          String fetchGoogleDriveDocument(String docId) {
+            fetchCount.incrementAndGet();
+            return "cached_secret_for_" + docId;
+          }
+        };
+
+    controller.readGoogleDriveDocument(DEFAULT_DOC_ID);
+    for (int index = 1; index <= 20; index++) {
+      controller.readGoogleDriveDocument("doc-" + index);
+    }
+
+    controller.readGoogleDriveDocument("doc-1");
+    controller.readGoogleDriveDocument("doc-21");
+    controller.readGoogleDriveDocument(DEFAULT_DOC_ID);
+    controller.readGoogleDriveDocument("doc-2");
+
+    assertThat(fetchCount.get()).isEqualTo(23);
   }
 }

@@ -32,6 +32,9 @@ curl -s -X POST http://localhost:8080/mcp62 \
 
 - The response contains the contents of a Google Drive document
 - The document contains the secret answer for this challenge
+- The answer validator uses the value between `<secret>` and `</secret>` from that content
 - Notice that you accessed a document you are not directly authorized to read — the MCP server's service account provided that access
+
+**Maintainer note:** The MCP controller keeps a bounded document cache to reduce repeated Drive API calls.
 
 **Remember:** This is an example of privilege escalation through an MCP server. The service account has more permissions than you (the caller) would have, and the MCP server does not enforce caller-level access controls.

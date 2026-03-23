@@ -36,3 +36,9 @@ curl -s -X POST http://localhost:8080/mcp62 \
 
 The server reads a Google Drive document using a configured service account. The document's content contains the secret you need to submit as your answer. The key security insight is that the MCP server's service account has privileged access that neither you nor your AI assistant would normally have — but the MCP server grants it implicitly to anyone who calls its tools.
 ****
+
+**Implementation details (for maintainers):**
+
+- The challenge answer is extracted from content between `<secret>` and `</secret>`.
+- Extraction is done once at secret load time and then cached for answer validation.
+- The MCP controller caches fetched documents, always retaining the configured default document plus up to 20 additional document ids.

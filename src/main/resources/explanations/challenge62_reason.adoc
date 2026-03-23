@@ -28,6 +28,14 @@ This challenge demonstrates the **Principle of Least Privilege** violation: the 
 4. **Audit all tool invocations**: Log the caller identity along with every tool call so access can be reviewed
 5. **Prefer impersonation over shared credentials**: Use caller-specific credentials or token exchange instead of a single shared service account
 
+**WrongSecrets implementation notes:**
+
+- Challenge answer parsing uses tagged content (`<secret>...</secret>`) and caches the extracted value to optimize its memory footprint.
+- MCP document retrieval uses a bounded cache to limit repeated outbound requests while preserving the configured default document.
+- Relevant tests:
+	- `Challenge62Test`
+	- `Challenge62McpControllerTest`
+
 **References:**
 
 - https://modelcontextprotocol.io/specification/2024-11-05/[MCP Specification]
