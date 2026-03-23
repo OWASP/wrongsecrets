@@ -1,7 +1,7 @@
 FROM bellsoft/liberica-openjre-debian:25-cds AS builder
 WORKDIR /builder
 
-ARG argBasedVersion="1.13.1"
+ARG argBasedVersion="1.13.2alpha1"
 
 COPY --chown=wrongsecrets target/wrongsecrets-${argBasedVersion}-SNAPSHOT.jar application.jar
 RUN java -Djarmode=tools -jar application.jar extract --layers --destination extracted
@@ -19,6 +19,10 @@ ENV DOCKER_ENV_PASSWORD="This is it"
 ENV AZURE_KEY_VAULT_ENABLED=false
 ENV CHALLENGE59_SLACK_WEBHOOK_URL=$challenge59_webhook_url
 ENV WRONGSECRETS_MCP_SECRET=MCPStolenSecret42!
+ARG GOOGLE_SERVICE_ACCOUNT_KEY="if_you_see_this_configure_the_google_service_account_properly"
+ARG GOOGLE_DRIVE_DOCUMENT_ID="1PlZkwEd7GouyY4cdOxBuczm6XumQeuZN31LR2BXRgPs"
+ENV GOOGLE_SERVICE_ACCOUNT_KEY=$GOOGLE_SERVICE_ACCOUNT_KEY
+ENV GOOGLE_DRIVE_DOCUMENT_ID=$GOOGLE_DRIVE_DOCUMENT_ID
 ENV SPRINGDOC_UI=false
 ENV SPRINGDOC_DOC=false
 ENV BASTIONHOSTPATH="/home/wrongsecrets/.ssh"

@@ -1,0 +1,40 @@
+=== Hint for Challenge 62
+
+This challenge demonstrates how an MCP server with an overly-privileged Google Service Account enables privilege escalation.
+
+**Where to look:**
+
+1. **An MCP server is running at `/mcp62`** on the main application port
+2. **The MCP server exposes a `read_google_drive_document` tool** that uses a Google Service Account to read a document
+3. **You do not need valid Google credentials** — the service account is already configured in the application
+
+**Step-by-step approach:**
+
+First, list the tools the MCP server offers:
+
+[source,bash]
+----
+curl -s -X POST http://localhost:8080/mcp62 \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+----
+
+Then call `read_google_drive_document` to read the document:
+
+[source,bash]
+----
+curl -s -X POST http://localhost:8080/mcp62 \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"read_google_drive_document","arguments":{}}}'
+----
+
+**What to look for:**
+
+- The response contains the contents of a Google Drive document
+- The document contains the secret answer for this challenge
+- The answer validator uses the value between `<secret>` and `</secret>` from that content
+- Notice that you accessed a document you are not directly authorized to read — the MCP server's service account provided that access
+
+**Maintainer note:** The MCP controller keeps a bounded document cache to reduce repeated Drive API calls.
+
+**Remember:** This is an example of privilege escalation through an MCP server. The service account has more permissions than you (the caller) would have, and the MCP server does not enforce caller-level access controls.
