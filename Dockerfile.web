@@ -39,6 +39,10 @@ ENV default_aws_value_challenge_11=$CHALLENGE_11_VALUE
 ENV BASTIONHOSTPATH="/home/wrongsecrets/.ssh"
 ENV PROJECTSPECPATH="/var/helpers/project-specification.mdc"
 ENV funnybunny="This is a funny bunny"
+ARG GOOGLE_SERVICE_ACCOUNT_KEY="if_you_see_this_configure_the_google_service_account_properly"
+ARG GOOGLE_DRIVE_DOCUMENT_ID="1PlZkwEd7GouyY4cdOxBuczm6XumQeuZN31LR2BXRgPs"
+ENV GOOGLE_SERVICE_ACCOUNT_KEY=$GOOGLE_SERVICE_ACCOUNT_KEY
+ENV GOOGLE_DRIVE_DOCUMENT_ID=$GOOGLE_DRIVE_DOCUMENT_ID
 # Keep memory usage within Heroku dyno limits (512MB dyno).
 # Hard cap heap to 250M, metaspace to 60M, disable expensive GC, exit on OOM immediately.
 ENV JAVA_TOOL_OPTIONS="-Xmx250M -Xms128M -XX:MetaspaceSize=40M -XX:MaxMetaspaceSize=60M -XX:CompressedClassSpaceSize=32M -XX:+UseG1GC -XX:MaxGCPauseMillis=50 -XX:+ExitOnOutOfMemoryError -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/tmp/heapdump.hprof"

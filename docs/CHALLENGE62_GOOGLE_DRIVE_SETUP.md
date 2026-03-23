@@ -103,40 +103,76 @@ echo "${SERVICE_ACCOUNT_KEY_B64}"
 
 ## Step 8: Configure WrongSecrets
 
-Set the following environment variables when running WrongSecrets:
+Set the following environment variables when **running** WrongSecrets. These must be provided at container start time — do **not** bake real credentials into the image via `--build-arg`, as that embeds them in the image layer history.
 
-| Variable | Description | Example |
-|----------|-------------|---------|
-| `GOOGLE_SERVICE_ACCOUNT_KEY` | Base64-encoded service account JSON key | `eyJ0eXBlIjoic2VydmljZV9hY2...` |
-| `GOOGLE_DRIVE_DOCUMENT_ID` | Google Drive document ID | `1PlZkwEd7GouyY4cdOxBuczm6XumQeuZN31LR2BXRgPs` |
-| `WRONGSECRETS_MCP_GOOGLEDRIVE_SECRET` | The secret stored in the document | `my_wrongsecrets_challenge62_answer` |
+| Variable | Description | Default (placeholder) | Example override |
+|----------|-------------|----------------------|-----------------|
+| `GOOGLE_SERVICE_ACCOUNT_KEY` | Base64-encoded service account JSON key | `if_you_see_this_configure_the_google_service_account_properly` | `eyJ0eXBlIjoic2VydmljZV9hY2...` |
+| `GOOGLE_DRIVE_DOCUMENT_ID` | Google Drive document ID | `1PlZkwEd7GouyY4cdOxBuczm6XumQeuZN31LR2BXRgPs` | your document id |
+| `WRONGSECRETS_MCP_GOOGLEDRIVE_SECRET` | *(optional)* Static override — skips live Drive fetch | *(none — live fetch used)* | `my_wrongsecrets_challenge62_answer` |
 
-### Running with Docker
+> **Why runtime-only?**
+> The `Dockerfile` and `Dockerfile.web` ship harmless placeholder defaults via `ENV`. Real credentials should only be injected at `docker run` time so they never appear in image layers or build logs.
+
+### Running with Docker (explicit values)
+
+```bash
+export SERVICE_ACCOUNT_KEY_B64=$(base64 -i challenge62-key.json | tr -d '\n')
+export DOCUMENT_ID="your_document_id_here"
+
+docker run -p 8080:8080 -p 8090:8090 \
+  -e GOOGLE_SERVICE_ACCOUNT_KEY="${SERVICE_ACCOUNT_KEY_B64}" \
+  -e GOOGLE_DRIVE_DOCUMENT_ID="${DOCUMENT_ID}" \
+  ghcr.io/owasp/wrongsecrets/wrongsecrets:latest-no-vault
+```
+
+### Running with Docker (inherit from host shell)
+
+If the variables are already exported in your shell, pass them through without a value — Docker inherits from the host:
+
+```bash
+export GOOGLE_SERVICE_ACCOUNT_KEY="${SERVICE_ACCOUNT_KEY_B64}"
+export GOOGLE_DRIVE_DOCUMENT_ID="your_document_id_here"
+
+docker run -p 8080:8080 -p 8090:8090 \
+  -e GOOGLE_SERVICE_ACCOUNT_KEY \
+  -e GOOGLE_DRIVE_DOCUMENT_ID \
+  ghcr.io/owasp/wrongsecrets/wrongsecrets:latest-no-vault
+```
+
+### Running with Docker using an env file
+
+Create a `.env` file (add it to `.gitignore`):
+
+```bash
+GOOGLE_SERVICE_ACCOUNT_KEY=<base64_encoded_key>
+GOOGLE_DRIVE_DOCUMENT_ID=<document_id>
+```
+
+Then run:
 
 ```bash
 docker run -p 8080:8080 -p 8090:8090 \
-  -e GOOGLE_SERVICE_ACCOUNT_KEY="${SERVICE_ACCOUNT_KEY_B64}" \
-  -e GOOGLE_DRIVE_DOCUMENT_ID="your_document_id" \
-  -e WRONGSECRETS_MCP_GOOGLEDRIVE_SECRET="your_secret_here" \
+  --env-file .env \
   ghcr.io/owasp/wrongsecrets/wrongsecrets:latest-no-vault
 ```
 
 ### Running with Spring Boot (local development)
 
-Add the following to your `application-local.properties` or set environment variables:
+Set environment variables in your shell before running:
 
-```properties
-GOOGLE_SERVICE_ACCOUNT_KEY=<base64_encoded_key>
-GOOGLE_DRIVE_DOCUMENT_ID=<document_id>
-WRONGSECRETS_MCP_GOOGLEDRIVE_SECRET=<secret_in_document>
-```
-
-Or set environment variables directly:
 ```bash
 export GOOGLE_SERVICE_ACCOUNT_KEY="${SERVICE_ACCOUNT_KEY_B64}"
 export GOOGLE_DRIVE_DOCUMENT_ID="your_document_id"
-export WRONGSECRETS_MCP_GOOGLEDRIVE_SECRET="your_secret_here"
 ./mvnw spring-boot:run
+```
+
+Or add them to a **local-only** properties file that is not committed to version control:
+
+```properties
+# application-local.properties  (keep out of git)
+GOOGLE_SERVICE_ACCOUNT_KEY=<base64_encoded_key>
+GOOGLE_DRIVE_DOCUMENT_ID=<document_id>
 ```
 
 ## Step 9: Clean Up the Key File
