@@ -39,3 +39,10 @@ jobs:
       - uses: actions/checkout@v5
       - name: Run compose and print out service
         run: export DOCKER_BUILDKIT=1 && cd src/main/resources/challenges/challenge-51 && docker compose -f challenge51docker-compose.yml build && docker compose -f challenge51docker-compose.yml run myservice
+  challenge_63_swift_test:
+    name: Challenge 63 Swift binary test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Build and run Swift binary in Alpine container
+        run: export DOCKER_BUILDKIT=1 && docker build -f src/main/resources/challenges/challenge-63/Dockerfile_challenge63 -t challenge63-test . && docker run --rm challenge63-test
