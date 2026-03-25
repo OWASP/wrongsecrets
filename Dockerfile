@@ -6,9 +6,7 @@ ARG argBasedVersion="1.13.2"
 COPY --chown=wrongsecrets target/wrongsecrets-${argBasedVersion}-SNAPSHOT.jar application.jar
 RUN java -Djarmode=tools -jar application.jar extract --layers --destination extracted
 
-FROM swift:6.0.3-slim AS swift-runtime
-
-FROM eclipse-temurin:25.0.2_10-jre-noble
+FROM eclipse-temurin:25.0.2_10-jre-alpine
 WORKDIR /application
 
 ARG argBasedPassword="default"
@@ -33,23 +31,7 @@ RUN echo "2vars"
 RUN echo "$ARG_BASED_PASSWORD"
 RUN echo "$argBasedPassword"
 
-RUN apt-get update && apt-get install -y --no-install-recommends libstdc++6 libicu-dev && rm -rf /var/lib/apt/lists/*
-
-# Copy only the specific Swift runtime libraries required to run the wrongsecrets-swift binary:
-# libswiftCore, libswift_Concurrency, libswift_StringProcessing, libswift_RegexParser (direct deps),
-# libdispatch (needed by libswift_Concurrency), libBlocksRuntime (needed by libdispatch),
-# libswiftGlibc (Swift's POSIX/glibc bindings module, needed by libswift_Concurrency et al.)
-# Swift 6.0.3 runtime requires glibc 2.38+ (__isoc23_* symbols). Ubuntu Noble (24.04) has glibc 2.39.
-RUN mkdir -p /usr/lib/swift/linux
-COPY --from=swift-runtime \
-    /usr/lib/swift/linux/libswiftCore.so \
-    /usr/lib/swift/linux/libswift_Concurrency.so \
-    /usr/lib/swift/linux/libswift_StringProcessing.so \
-    /usr/lib/swift/linux/libswift_RegexParser.so \
-    /usr/lib/swift/linux/libdispatch.so \
-    /usr/lib/swift/linux/libBlocksRuntime.so \
-    /usr/lib/swift/linux/libswiftGlibc.so \
-    /usr/lib/swift/linux/
+RUN apk add --no-cache libstdc++ icu-libs
 
 # Create the /var/run/secrets2 directory
 RUN mkdir -p /var/run/secrets2
@@ -90,7 +72,7 @@ RUN rm -rf /var/run/secrets/kubernetes.io
 # RUN java -Xshare:off -XX:DumpLoadedClassList=application.classlist -Dspring.context.exit=onRefresh -jar application.jar
 # RUN java -Xshare:dump -XX:SharedArchiveFile=application.jsa -XX:SharedClassListFile=application.classlist -Dspring.context.exit=onRefresh -cp application.jar
 
-RUN useradd -u 2000 -m wrongsecrets
+RUN adduser -u 2000 -D wrongsecrets
 USER wrongsecrets
 
 CMD java -jar -XX:SharedArchiveFile=application.jsa -Dspring.profiles.active=$(echo ${SPRING_PROFILES_ACTIVE}) -Dspringdoc.swagger-ui.enabled=${SPRINGDOC_UI} -Dspringdoc.api-docs.enabled=${SPRINGDOC_DOC} -D application.jar
