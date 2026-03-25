@@ -25,9 +25,7 @@ public class BinaryExecutionHelper {
   }
 
   private static final String[] SWIFT_LIB_PATHS = {
-    "/usr/share/swift/usr/lib/swift/linux",
-    "/usr/lib/swift/linux",
-    "/usr/local/lib/swift/linux"
+    "/usr/share/swift/usr/lib/swift/linux", "/usr/lib/swift/linux", "/usr/local/lib/swift/linux"
   };
 
   public static final String ERROR_EXECUTION = EXECUTION_ERROR;
