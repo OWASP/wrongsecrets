@@ -1,30 +1,14 @@
 # syntax=docker/dockerfile:1.21
-# Test that the wrongsecrets-swift binary runs correctly in an Alpine container
-# using only the specific Swift runtime libraries it needs.
+# Test that the wrongsecrets-swift binary runs correctly.
+# Uses swift:6.0.3-slim (Debian/Ubuntu-based with glibc 2.38+) which is required to run
+# the Swift 6.0.3 runtime libraries. Alpine's musl libc cannot satisfy the glibc 2.38+
+# symbols (e.g. __isoc23_strtol) that the Swift runtime depends on, even with gcompat.
 
-FROM swift:6.0.3-slim AS swift-runtime
-
-FROM eclipse-temurin:25.0.2_10-jre-alpine
-
-# Install gcompat to provide the glibc ELF interpreter on Alpine for glibc-linked Swift binaries
-RUN apk add --no-cache libstdc++ gcompat
-
-# Copy only the specific Swift runtime libraries required by the binary
-RUN mkdir -p /usr/lib/swift/linux
-COPY --from=swift-runtime \
-    /usr/lib/swift/linux/libswiftCore.so \
-    /usr/lib/swift/linux/libswift_Concurrency.so \
-    /usr/lib/swift/linux/libswift_StringProcessing.so \
-    /usr/lib/swift/linux/libswift_RegexParser.so \
-    /usr/lib/swift/linux/libdispatch.so \
-    /usr/lib/swift/linux/libBlocksRuntime.so \
-    /usr/lib/swift/linux/
+FROM swift:6.0.3-slim
 
 # Copy the Linux x86_64 binary (build context is the repo root)
 COPY src/main/resources/executables/wrongsecrets-swift-linux /wrongsecrets-swift
 RUN chmod +x /wrongsecrets-swift
-
-ENV LD_LIBRARY_PATH=/usr/lib/swift/linux
 
 # Run the binary and verify it produces non-empty output (the hardcoded secret)
 CMD ["/bin/sh", "-c", "OUTPUT=$(/wrongsecrets-swift) && [ -n \"$OUTPUT\" ] && echo \"Swift binary works: $OUTPUT\" || (echo 'Swift binary failed or produced no output' && exit 1)"]

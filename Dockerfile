@@ -37,7 +37,10 @@ RUN apk add --no-cache libstdc++ icu-libs gcompat  # gcompat provides glibc ELF 
 
 # Copy only the specific Swift runtime libraries required to run the wrongsecrets-swift binary:
 # libswiftCore, libswift_Concurrency, libswift_StringProcessing, libswift_RegexParser (direct deps),
-# libdispatch (needed by libswift_Concurrency), libBlocksRuntime (needed by libdispatch)
+# libdispatch (needed by libswift_Concurrency), libBlocksRuntime (needed by libdispatch),
+# libswiftGlibc (Swift's POSIX/glibc bindings module, needed by libswift_Concurrency et al.)
+# Note: Swift 6.0.3 runtime requires glibc 2.38+ (__isoc23_* symbols) which Alpine's musl
+# cannot provide even with gcompat. Challenge 63 therefore requires a glibc-based environment.
 RUN mkdir -p /usr/lib/swift/linux
 COPY --from=swift-runtime \
     /usr/lib/swift/linux/libswiftCore.so \
@@ -46,6 +49,7 @@ COPY --from=swift-runtime \
     /usr/lib/swift/linux/libswift_RegexParser.so \
     /usr/lib/swift/linux/libdispatch.so \
     /usr/lib/swift/linux/libBlocksRuntime.so \
+    /usr/lib/swift/linux/libswiftGlibc.so \
     /usr/lib/swift/linux/
 
 # Create the /var/run/secrets2 directory
