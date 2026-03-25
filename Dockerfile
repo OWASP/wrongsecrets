@@ -33,8 +33,9 @@ RUN echo "2vars"
 RUN echo "$ARG_BASED_PASSWORD"
 RUN echo "$argBasedPassword"
 
-RUN apk add --no-cache libstdc++ icu-libs gcompat
+RUN apk add --no-cache libstdc++ icu-libs gcompat  # gcompat provides glibc ELF interpreter compat for glibc-linked Swift binaries
 
+# Copy Swift runtime libraries needed by the wrongsecrets-swift binary
 RUN mkdir -p /usr/lib/swift/linux
 COPY --from=swift-runtime /usr/lib/swift/linux/libswiftCore.so /usr/lib/swift/linux/
 COPY --from=swift-runtime /usr/lib/swift/linux/libswift_Concurrency.so /usr/lib/swift/linux/
