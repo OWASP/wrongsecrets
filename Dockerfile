@@ -6,6 +6,8 @@ ARG argBasedVersion="1.13.2"
 COPY --chown=wrongsecrets target/wrongsecrets-${argBasedVersion}-SNAPSHOT.jar application.jar
 RUN java -Djarmode=tools -jar application.jar extract --layers --destination extracted
 
+FROM swift:6.0.3-slim AS swift-runtime
+
 FROM eclipse-temurin:25.0.2_10-jre-alpine
 WORKDIR /application
 
@@ -31,7 +33,13 @@ RUN echo "2vars"
 RUN echo "$ARG_BASED_PASSWORD"
 RUN echo "$argBasedPassword"
 
-RUN apk add --no-cache libstdc++ icu-libs
+RUN apk add --no-cache libstdc++ icu-libs gcompat
+
+RUN mkdir -p /usr/lib/swift/linux
+COPY --from=swift-runtime /usr/lib/swift/linux/libswiftCore.so /usr/lib/swift/linux/
+COPY --from=swift-runtime /usr/lib/swift/linux/libswift_Concurrency.so /usr/lib/swift/linux/
+COPY --from=swift-runtime /usr/lib/swift/linux/libswift_StringProcessing.so /usr/lib/swift/linux/
+COPY --from=swift-runtime /usr/lib/swift/linux/libswift_RegexParser.so /usr/lib/swift/linux/
 
 # Create the /var/run/secrets2 directory
 RUN mkdir -p /var/run/secrets2
