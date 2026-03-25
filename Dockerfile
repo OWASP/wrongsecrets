@@ -8,7 +8,7 @@ RUN java -Djarmode=tools -jar application.jar extract --layers --destination ext
 
 FROM swift:6.0.3-slim AS swift-runtime
 
-FROM eclipse-temurin:25.0.2_10-jre-alpine
+FROM eclipse-temurin:25.0.2_10-jre-noble
 WORKDIR /application
 
 ARG argBasedPassword="default"
@@ -33,14 +33,13 @@ RUN echo "2vars"
 RUN echo "$ARG_BASED_PASSWORD"
 RUN echo "$argBasedPassword"
 
-RUN apk add --no-cache libstdc++ icu-libs gcompat  # gcompat provides glibc ELF interpreter compat for glibc-linked Swift binaries
+RUN apt-get update && apt-get install -y --no-install-recommends libstdc++6 libicu-dev && rm -rf /var/lib/apt/lists/*
 
 # Copy only the specific Swift runtime libraries required to run the wrongsecrets-swift binary:
 # libswiftCore, libswift_Concurrency, libswift_StringProcessing, libswift_RegexParser (direct deps),
 # libdispatch (needed by libswift_Concurrency), libBlocksRuntime (needed by libdispatch),
 # libswiftGlibc (Swift's POSIX/glibc bindings module, needed by libswift_Concurrency et al.)
-# Note: Swift 6.0.3 runtime requires glibc 2.38+ (__isoc23_* symbols) which Alpine's musl
-# cannot provide even with gcompat. Challenge 63 therefore requires a glibc-based environment.
+# Swift 6.0.3 runtime requires glibc 2.38+ (__isoc23_* symbols). Ubuntu Noble (24.04) has glibc 2.39.
 RUN mkdir -p /usr/lib/swift/linux
 COPY --from=swift-runtime \
     /usr/lib/swift/linux/libswiftCore.so \
@@ -91,7 +90,7 @@ RUN rm -rf /var/run/secrets/kubernetes.io
 # RUN java -Xshare:off -XX:DumpLoadedClassList=application.classlist -Dspring.context.exit=onRefresh -jar application.jar
 # RUN java -Xshare:dump -XX:SharedArchiveFile=application.jsa -XX:SharedClassListFile=application.classlist -Dspring.context.exit=onRefresh -cp application.jar
 
-RUN adduser -u 2000 -D wrongsecrets
+RUN useradd -u 2000 -m wrongsecrets
 USER wrongsecrets
 
 CMD java -jar -XX:SharedArchiveFile=application.jsa -Dspring.profiles.active=$(echo ${SPRING_PROFILES_ACTIVE}) -Dspringdoc.swagger-ui.enabled=${SPRINGDOC_UI} -Dspringdoc.api-docs.enabled=${SPRINGDOC_DOC} -D application.jar
