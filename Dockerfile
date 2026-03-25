@@ -35,12 +35,9 @@ RUN echo "$argBasedPassword"
 
 RUN apk add --no-cache libstdc++ icu-libs gcompat  # gcompat provides glibc ELF interpreter compat for glibc-linked Swift binaries
 
-# Copy Swift runtime libraries needed by the wrongsecrets-swift binary
+# Copy Swift runtime libraries needed by the wrongsecrets-swift binary (all of /usr/lib/swift/linux/ to include transitive deps)
 RUN mkdir -p /usr/lib/swift/linux
-COPY --from=swift-runtime /usr/lib/swift/linux/libswiftCore.so /usr/lib/swift/linux/
-COPY --from=swift-runtime /usr/lib/swift/linux/libswift_Concurrency.so /usr/lib/swift/linux/
-COPY --from=swift-runtime /usr/lib/swift/linux/libswift_StringProcessing.so /usr/lib/swift/linux/
-COPY --from=swift-runtime /usr/lib/swift/linux/libswift_RegexParser.so /usr/lib/swift/linux/
+COPY --from=swift-runtime /usr/lib/swift/linux/ /usr/lib/swift/linux/
 
 # Create the /var/run/secrets2 directory
 RUN mkdir -p /var/run/secrets2
