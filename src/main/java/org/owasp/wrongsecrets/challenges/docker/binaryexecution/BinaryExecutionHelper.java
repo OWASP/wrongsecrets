@@ -24,6 +24,12 @@ public class BinaryExecutionHelper {
     Guess
   }
 
+  private static final String[] SWIFT_LIB_PATHS = {
+    "/usr/share/swift/usr/lib/swift/linux",
+    "/usr/lib/swift/linux",
+    "/usr/local/lib/swift/linux"
+  };
+
   public static final String ERROR_EXECUTION = EXECUTION_ERROR;
   private final int challengeNumber;
 
@@ -279,17 +285,12 @@ public class BinaryExecutionHelper {
   }
 
   private void configureSwiftLibraryPath(ProcessBuilder ps) {
-    String[] knownSwiftLibPaths = {
-      "/usr/share/swift/usr/lib/swift/linux",
-      "/usr/lib/swift/linux",
-      "/usr/local/lib/swift/linux"
-    };
     List<String> existingPaths = new ArrayList<>();
     String currentLdPath = ps.environment().get("LD_LIBRARY_PATH");
     if (!Strings.isNullOrEmpty(currentLdPath)) {
       existingPaths.add(currentLdPath);
     }
-    for (String path : knownSwiftLibPaths) {
+    for (String path : SWIFT_LIB_PATHS) {
       File dir = new File(path);
       if (dir.exists() && dir.isDirectory()) {
         log.info("Found Swift library path: {}", path);

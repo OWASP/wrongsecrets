@@ -15,4 +15,11 @@ class Challenge63Test {
     assertThat(challenge.spoiler()).isNotEqualTo(new Spoiler(EXECUTION_ERROR));
     assertThat(challenge.answerCorrect(challenge.spoiler().solution())).isTrue();
   }
+
+  @Test
+  void incorrectAnswerShouldNotSolveChallenge() {
+    var challenge = new Challenge63();
+
+    assertThat(challenge.answerCorrect("wrong answer")).isFalse();
+  }
 }
