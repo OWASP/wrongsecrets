@@ -354,12 +354,51 @@ build_update_pom() {
     cd ../.. && ./mvnw clean && ./mvnw --batch-mode release:update-versions -DdevelopmentVersion=${tag}-SNAPSHOT && ./mvnw spotless:apply && ./mvnw install -DskipTests
     cd .github/scripts
     echo "Removing unnecessary binaries from the jar file"
+    # macOS / non-Linux binaries (never used in the Alpine Docker container)
     zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-golang
     zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-golang-arm
+    zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-c
+    zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-c-arm
+    zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-advanced-c
+    zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-advanced-c-arm
+    zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-advanced-c-arm-stripped
+    zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-advanced-c-stripped
+    zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-cplus
+    zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-cplus-arm
+    zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-challenge52-c
+    zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-challenge52-c-arm
+    zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-challenge53-c
+    zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-challenge53-c-arm
+    zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-rust
+    zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-rust-arm
     zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-dotnet
     zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-dotnet-arm
+    zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-swift
+    zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-swift-arm
+    zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-swift-ctf
+    zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-swift-arm-ctf
+    # Linux glibc (non-musl) binaries (Alpine uses musl; golang uses glibc linux binary intentionally)
+    zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-c-linux
+    zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-c-linux-arm
+    zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-advanced-c-linux
+    zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-advanced-c-linux-arm
+    zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-advanced-c-linux-arm-stripped
+    zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-advanced-c-linux-stripped
+    zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-cplus-linux
+    zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-cplus-linux-arm
+    zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-challenge52-c-linux
+    zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-challenge52-c-linux-arm
+    zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-challenge53-c-linux
+    zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-challenge53-c-linux-arm
+    zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-rust-linux
+    zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-rust-linux-arm
     zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-dotnet-linux
     zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-dotnet-linux-arm
+    zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-swift-linux
+    zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-swift-linux-arm
+    zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-swift-linux-ctf
+    zip -d ../../target/*.jar BOOT-INF/classes/executables/wrongsecrets-swift-linux-arm-ctf
+    # Windows binaries
     zip -d ../../target/*.jar BOOT-INF/classes/executables/*.exe
     docker buildx create --name mybuilder
     docker buildx use mybuilder
