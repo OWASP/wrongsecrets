@@ -51,7 +51,7 @@
     <bootstrap.version>5.3.8</bootstrap.version>
     <checkstyle-maven.version>3.6.0</checkstyle-maven.version>
     <checkstyle.version>13.3.0</checkstyle.version>
-    <com.azure.spring.version>7.0.0</com.azure.spring.version>
+    <com.azure.spring.version>7.1.0</com.azure.spring.version>
     <cyclonedx-maven.version>2.9.1</cyclonedx-maven.version>
     <cyclonedx.core.version>12.1.0</cyclonedx.core.version>
     <datatables.version>2.3.7</datatables.version>
