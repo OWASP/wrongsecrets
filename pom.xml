@@ -76,7 +76,7 @@
     <maven.compiler.target>25</maven.compiler.target>
     <node.version>v24.14.0</node.version>
     <npm.version>11.8.0</npm.version>
-    <spotbugs-maven.version>4.9.8.2</spotbugs-maven.version>
+    <spotbugs-maven.version>4.9.8.3</spotbugs-maven.version>
     <spotbugs.version>4.9.8</spotbugs.version>
     <spotless-maven-plugin.version>3.2.1</spotless-maven-plugin.version>
     <spring-boot.version>4.0.3</spring-boot.version>
