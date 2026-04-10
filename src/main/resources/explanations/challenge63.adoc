@@ -1,0 +1,24 @@
+=== Hardcoded Encryption Key Challenge
+This challenge demonstrates a common but dangerous mistake: encrypting a secret while hardcoding the encryption key in the same source file.
+
+A developer has attempted to protect a secret by encrypting it with AES. However, both the encryption key and the initialization vector (IV) are hardcoded directly in the Java source code alongside the ciphertext. This makes the encryption completely ineffective — anyone with access to the source code can decrypt the secret trivially.
+
+**Your goal:**
+1. **Find the Java source file** for this challenge in the codebase
+2. **Locate the hardcoded AES key and IV** in the source code
+3. **Decrypt the ciphertext** using the key and IV you found
+4. **Submit the plaintext** as your answer
+
+**How to decrypt:**
+[source,bash]
+----
+echo "TDPwOvcLsbCWV5erlk6OHFnlFoXNtdQOt2JQeq+i4Ho=" | openssl enc -d -aes-128-cbc \
+  -K $(echo -n "SuperSecretKey12" | xxd -p) \
+  -iv $(echo -n "InitVector123456" | xxd -p) \
+  -base64
+----
+
+****
+*Note:*
+The key insight here is that encryption does NOT protect a secret if the key is stored alongside the ciphertext. This is equivalent to locking a box and taping the key to the outside.
+****

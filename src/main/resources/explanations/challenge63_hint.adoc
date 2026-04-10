@@ -1,0 +1,26 @@
+=== Hint for Challenge 63
+This challenge demonstrates bad encryption practices — specifically hardcoding an AES key in source code.
+
+**Where to look:**
+1. **Find the Challenge63 Java source file** in the `challenges/docker/challenge63/` directory
+2. **Look for static final String constants** near the top of the class
+3. **You will find the AES key, IV, and ciphertext** all in the same file
+
+**How to decrypt once you have the key:**
+[source,python]
+----
+from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+from cryptography.hazmat.backends import default_backend
+import base64
+
+key = b'SuperSecretKey12'
+iv  = b'InitVector123456'
+ciphertext = base64.b64decode("TDPwOvcLsbCWV5erlk6OHFnlFoXNtdQOt2JQeq+i4Ho=")
+
+cipher = Cipher(algorithms.AES(key), modes.CBC(iv), backend=default_backend())
+decryptor = cipher.decryptor()
+plaintext = decryptor.update(ciphertext) + decryptor.finalize()
+print(plaintext.strip())
+----
+
+**Remember:** If an attacker can read your source code, hardcoded keys offer zero protection.
