@@ -9,6 +9,12 @@ import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.stereotype.Component;
 
+/**
+ * Challenge demonstrating bad encryption practices: hardcoding both the encryption key and IV
+ * directly in source code. Even though the secret is encrypted, the key is right here in the code,
+ * making the encryption completely ineffective.
+ */
+@SuppressWarnings("java:S5542")
 @Slf4j
 @Component
 public class Challenge63 implements Challenge {
@@ -16,6 +22,10 @@ public class Challenge63 implements Challenge {
   private static final String HARDCODED_KEY = "SuperSecretKey12";
   private static final String HARDCODED_IV = "InitVector123456";
   private static final String CIPHERTEXT = "TDPwOvcLsbCWV5erlk6OHFnlFoXNtdQOt2JQeq+i4Ho=";
+
+  public Challenge63() {
+    // explicit constructor required
+  }
 
   @Override
   public Spoiler spoiler() {
@@ -34,6 +44,7 @@ public class Challenge63 implements Challenge {
       byte[] cipherBytes = Base64.getDecoder().decode(CIPHERTEXT);
       SecretKeySpec keySpec = new SecretKeySpec(keyBytes, "AES");
       IvParameterSpec ivSpec = new IvParameterSpec(ivBytes);
+      // Intentionally using CBC mode to demonstrate padding oracle vulnerability
       Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
       cipher.init(Cipher.DECRYPT_MODE, keySpec, ivSpec);
       byte[] decrypted = cipher.doFinal(cipherBytes);
