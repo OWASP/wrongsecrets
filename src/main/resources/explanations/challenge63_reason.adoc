@@ -16,7 +16,7 @@ This challenge highlights a widespread mistake in software development: using en
 **Real world examples:**
 This exact pattern has been found in numerous data breaches where developers believed their secrets were "safe" because they were encrypted, not realizing the key was equally exposed.
 
-Additionally, this challenge uses AES in CBC mode which is vulnerable to 
+Additionally, this challenge uses AES in CBC mode which is vulnerable to
 padding oracle attacks. Production code should use AES/GCM instead.
 
 **References:**
