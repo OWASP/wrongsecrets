@@ -17,4 +17,3 @@ echo "TDPwOvcLsbCWV5erlk6OHFnlFoXNtdQOt2JQeq+i4Ho=" | openssl enc -d -aes-128-cb
   -iv $(echo -n "InitVector123456" | xxd -p) \
   -base64
 ----
-
