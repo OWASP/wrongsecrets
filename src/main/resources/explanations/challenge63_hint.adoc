@@ -1,5 +1,5 @@
 === Hint for Challenge 63
-This challenge demonstrates bad encryption practices — specifically hardcoding an AES key in source code.
+This challenge demonstrates bad encryption practices — specifically hardcoding an encryption/decryption key in source code.
 
 **Where to look:**
 1. **Find the Challenge63 Java source file** in the `challenges/docker/challenge63/` directory
