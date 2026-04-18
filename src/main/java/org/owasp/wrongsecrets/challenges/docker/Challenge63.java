@@ -1,4 +1,4 @@
-package org.owasp.wrongsecrets.challenges.docker.challenge63;
+package org.owasp.wrongsecrets.challenges.docker;
 
 import static org.owasp.wrongsecrets.Challenges.ErrorResponses.DECRYPTION_ERROR;
 
@@ -9,9 +9,7 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import lombok.extern.slf4j.Slf4j;
-import com.google.common.base.Strings;
-import org.owasp.wrongsecrets.challenges.Challenge;
-import org.owasp.wrongsecrets.challenges.Spoiler;
+import org.owasp.wrongsecrets.challenges.FixedAnswerChallenge;
 import org.springframework.stereotype.Component;
 
 /**
@@ -21,38 +19,18 @@ import org.springframework.stereotype.Component;
  */
 @SuppressWarnings("java:S5542")
 @SuppressFBWarnings(
-  value = {"CIPHER_INTEGRITY", "PADDING_ORACLE"},
+    value = {"CIPHER_INTEGRITY", "PADDING_ORACLE"},
     justification = "Challenge intentionally demonstrates hardcoded key/IV and CBC weaknesses")
 @Slf4j
 @Component
-public class Challenge63 implements Challenge {
+public class Challenge63 extends FixedAnswerChallenge {
 
   private static final String HARDCODED_KEY = "SuperSecretKey12";
   private static final String HARDCODED_IV = "InitVector123456";
   private static final String CIPHERTEXT = "TDPwOvcLsbCWV5erlk6OHFnlFoXNtdQOt2JQeq+i4Ho=";
-  private String result;
-
-  public Challenge63() {
-    // explicit constructor required
-  }
 
   @Override
-  public Spoiler spoiler() {
-    if (Strings.isNullOrEmpty(result)) {
-      result = getAnswer();
-    }
-    return new Spoiler(result);
-  }
-
-  @Override
-  public boolean answerCorrect(String answer) {
-    if (Strings.isNullOrEmpty(result)) {
-      result = getAnswer();
-    }
-    return result.equals(answer);
-  }
-
-  private String getAnswer() {
+  public String getAnswer() {
     try {
       byte[] keyBytes = HARDCODED_KEY.getBytes(StandardCharsets.UTF_8);
       byte[] ivBytes = HARDCODED_IV.getBytes(StandardCharsets.UTF_8);
