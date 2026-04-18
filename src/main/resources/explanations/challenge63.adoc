@@ -18,7 +18,3 @@ echo "TDPwOvcLsbCWV5erlk6OHFnlFoXNtdQOt2JQeq+i4Ho=" | openssl enc -d -aes-128-cb
   -base64
 ----
 
-****
-*Note:*
-The key insight here is that encryption does NOT protect a secret if the key is stored alongside the ciphertext. This is equivalent to locking a box and taping the key to the outside.
-****
