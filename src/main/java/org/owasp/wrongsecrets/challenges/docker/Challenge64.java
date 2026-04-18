@@ -9,12 +9,12 @@ import org.springframework.stereotype.Component;
 /** This challenge is about finding a secret hardcoded in a Swift binary. */
 @Slf4j
 @Component
-public class Challenge63 extends FixedAnswerChallenge {
+public class Challenge64 extends FixedAnswerChallenge {
 
   @Override
   public String getAnswer() {
     BinaryExecutionHelper binaryExecutionHelper =
-        new BinaryExecutionHelper(63, new MuslDetectorImpl());
+        new BinaryExecutionHelper(64, new MuslDetectorImpl());
     return binaryExecutionHelper.executeCommand("", "wrongsecrets-swift");
   }
 }
