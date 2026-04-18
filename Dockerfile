@@ -45,6 +45,7 @@ COPY --chown=wrongsecrets .github/scripts/ /var/tmp/helpers
 COPY --chown=wrongsecrets .github/scripts/.bash_history /home/wrongsecrets/
 COPY --chown=wrongsecrets src/main/resources/executables/wrongsecrets*linux-musl* /home/wrongsecrets/
 COPY --chown=wrongsecrets src/main/resources/executables/wrongsecrets-golang-linux /home/wrongsecrets/
+COPY --chown=wrongsecrets src/main/resources/executables/wrongsecrets-golang-linux-arm /home/wrongsecrets/
 COPY --chown=wrongsecrets src/test/resources/alibabacreds.kdbx /var/tmp/helpers
 COPY --chown=wrongsecrets src/test/resources/RSAprivatekey.pem /var/tmp/helpers/
 COPY --chown=wrongsecrets .ssh/ /home/wrongsecrets/.ssh/

@@ -1,0 +1,13 @@
+# syntax=docker/dockerfile:1.21
+# Test that the wrongsecrets-swift musl binary runs correctly on Alpine.
+# The musl binaries are fully statically linked (Swift runtime embedded), so they
+# run natively on Alpine's musl libc without any extra shared libraries.
+
+FROM alpine:3.21
+
+# Copy the Linux musl x86_64 binary (build context is the repo root)
+COPY src/main/resources/executables/wrongsecrets-swift-linux-musl /wrongsecrets-swift
+RUN chmod +x /wrongsecrets-swift
+
+# Run the binary and verify it produces non-empty output (the hardcoded secret)
+CMD ["/bin/sh", "-c", "OUTPUT=$(/wrongsecrets-swift) && [ -n \"$OUTPUT\" ] && echo \"Swift binary works: $OUTPUT\" || (echo 'Swift binary failed or produced no output' && exit 1)"]
