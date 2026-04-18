@@ -51,7 +51,7 @@ public class Challenge63 implements Challenge {
       return new String(decrypted, "UTF-8").trim();
     } catch (Exception e) {
       log.error("Decryption failed", e);
-      return "decryption-error";
+      return ErrorResponses.DECRYPTION_ERROR;
     }
   }
 }
