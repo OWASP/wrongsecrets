@@ -1,4 +1,4 @@
-<!-- CRE Link: [223-780](https://www.opencre.org/cre/223-780?register=true&type=tool&tool_type=training&tags=secrets,training&description=With%20this%20app%2C%20we%20have%20packed%20various%20ways%20of%20how%20to%20not%20store%20your%20secrets.%20These%20can%20help%20you%20to%20realize%20whether%20your%20secret%20management%20is%20ok.%20The%20challenge%20is%20to%20find%20all%20the%20different%20secrets%20by%20means%20of%20various%20tools%20and%20techniques.%20Can%20you%20solve%20all%20the%2015%20challenges%3F) -->
+<!-- CRE Link: [223-780](https://www.opencre.org/cre/223-780?register=true&type=tool&tool_type=training&tags=secrets,training&description=With%20this%20app%2C%20we%20have%20packed%20various%20ways%20of%20how%20to%20not%20store%20your%20secrets.%20These%20can%20help%20you%20to%20realize%20whether%20your%20secret%20management%20is%20ok.%20The%20challenge%20is%20to%20find%20all%20the%20different%20secrets%20by%20means%20of%20various%20tools%20and%20techniques.%20Can%20you%20solve%20all%20the%2062%20challenges%3F) -->
 
 # OWASP WrongSecrets
 
@@ -16,7 +16,7 @@
 
 Welcome to the OWASP WrongSecrets game! The game is packed with real life examples of how to _not_ store secrets in your software. Each of these examples is captured in a challenge, which you need to solve using various tools and techniques. Solving these challenges will help you recognize common mistakes & can help you to reflect on your own secrets management strategy.
 
-Can you solve all the 61 challenges?
+Can you solve all the 62 challenges?
 
 Try some of them on [our Heroku demo environment](https://wrongsecrets.herokuapp.com/).
 
@@ -128,16 +128,16 @@ Not sure which setup is right for you? Here's a quick guide:
 
 | **I want to...** | **Recommended Setup** | **Challenges Available** |
 |------------------|----------------------|--------------------------|
-| Try it quickly online | [Container running on Heroku](https://www.wrongsecrets.com/) | Basic challenges (1-4, 8, 12-32, 34-43, 49-52, 54-60) |
+| Try it quickly online | [Container running on Heroku](https://www.wrongsecrets.com/) | Basic challenges (0-4, 8, 12-32, 34-43, 49-52, 54-61) |
 | Run locally with Docker | [Basic Docker](#basic-docker-exercises) | Same as above, but on your machine |
-| Learn Kubernetes secrets | [K8s/Minikube Setup](#basic-k8s-exercise) | Kubernetes challenges (1-6, 8, 12-43, 48-60) |
-| Practice with cloud secrets | [Cloud Challenges](#cloud-challenges) | All challenges (1-87) |
+| Learn Kubernetes secrets | [K8s/Minikube Setup](#basic-k8s-exercise) | Kubernetes challenges (0-6, 8, 12-43, 48-61) |
+| Practice with cloud secrets | [Cloud Challenges](#cloud-challenges) | All challenges (0-61) |
 | Run a workshop/CTF | [CTF Setup](#ctf) | Customizable challenge sets |
 | Contribute to the project | [Development Setup](#notes-on-development) | All challenges + development tools |
 
 ## Basic docker exercises
 
-_Can be used for challenges 1-4, 8, 12-32, 34, 35-43, 49-52, 54-60_
+_Can be used for challenges 0-4, 8, 12-32, 34-43, 49-52, 54-61_
 
 For the basic docker exercises you currently require:
 
@@ -161,14 +161,18 @@ docker run -p 8080:8080 -p 8090:8090 ghcr.io/owasp/wrongsecrets/wrongsecrets-mas
 ⚠️ **Warning**: This is a development version built from the latest master branch and may contain experimental features or instabilities.
 
 **📝 Note on Ports:**
-- Port **8080**: Main application (challenges 1-59)
+- Port **8080**: Main application (challenges 0-62)
 - Port **8090**: MCP server (required for Challenge 60)
+
+**📝 Note on Challenge 62 (Google Drive MCP):**
+Challenge 62 requires a Google Service Account to be configured for full functionality. See [docs/CHALLENGE62_GOOGLE_DRIVE_SETUP.md](docs/CHALLENGE62_GOOGLE_DRIVE_SETUP.md) for setup instructions. Without configuration, the challenge will show a placeholder message.
 
 Now you can try to find the secrets by means of solving the challenge offered at the links below
 <details>
     <summary>all the links for docker challenges (click triangle to open the block).
     </summary>
 
+-   [localhost:8080/challenge/challenge-0](http://localhost:8080/challenge/challenge-0)
 -   [localhost:8080/challenge/challenge-1](http://localhost:8080/challenge/challenge-1)
 -   [localhost:8080/challenge/challenge-2](http://localhost:8080/challenge/challenge-2)
 -   [localhost:8080/challenge/challenge-3](http://localhost:8080/challenge/challenge-3)
@@ -216,6 +220,8 @@ Now you can try to find the secrets by means of solving the challenge offered at
 -   [localhost:8080/challenge/challenge-58](http://localhost:8080/challenge/challenge-58)
 -   [localhost:8080/challenge/challenge-59](http://localhost:8080/challenge/challenge-59)
 -   [localhost:8080/challenge/challenge-60](http://localhost:8080/challenge/challenge-60)
+-   [localhost:8080/challenge/challenge-61](http://localhost:8080/challenge/challenge-61)
+-   [localhost:8080/challenge/challenge-62](http://localhost:8080/challenge/challenge-62)
 </details>
 
 Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look
@@ -244,7 +250,7 @@ If you want to host WrongSecrets on Railway, you can do so by deploying [this on
 
 ## Basic K8s exercise
 
-_Can be used for challenges 1-6, 8, 12-43, 48-58_
+_Can be used for challenges 0-6, 8, 12-43, 48-62_
 
 ### Minikube based
 
@@ -287,7 +293,7 @@ now you can use the provided IP address and port to further play with the K8s va
 -   [localhost:8080/challenge/challenge-6](http://localhost:8080/challenge/challenge-6)
 -   [localhost:8080/challenge/challenge-33](http://localhost:8080/challenge/challenge-33)
 -   [localhost:8080/challenge/challenge-48](http://localhost:8080/challenge/challenge-48)
--   [localhost:8080/challenge/challenge-48](http://localhost:8080/challenge/challenge-53)
+-   [localhost:8080/challenge/challenge-53](http://localhost:8080/challenge/challenge-53)
 
 ### k8s based
 
@@ -321,7 +327,7 @@ now you can use the provided IP address and port to further play with the K8s va
 
 ## Vault exercises with minikube
 
-_Can be used for challenges 1-8, 12-58_
+_Can be used for challenges 0-8, 12-61_
 Make sure you have the following installed:
 
 -   minikube with docker (or comment out line 8 and work at your own k8s setup),
@@ -332,14 +338,14 @@ Make sure you have the following installed:
 -   vault [Install from here](https://developer.hashicorp.com/vault/install),
 -   grep, Cat, and Sed
 
-Run `./k8s-vault-minikube-start.sh`, when the script is done, then the challenges will wait for you at <http://localhost:8080> . This will allow you to run challenges 1-8, 12-48.
+Run `./k8s-vault-minikube-start.sh`, when the script is done, then the challenges will wait for you at <http://localhost:8080> . This will allow you to run challenges 0-8, 12-61.
 
 When you stopped the `k8s-vault-minikube-start.sh` script and want to resume the port forward run: `k8s-vault-minikube-resume.sh`.
 This is because if you run the start script again it will replace the secret in the vault and not update the secret-challenge application with the new secret.
 
 ## Cloud Challenges
 
-_Can be used for challenges 1-58_
+_Can be used for challenges 0-62_
 
 **READ THIS**: Given that the exercises below contain IAM privilege escalation exercises,
 never run this on an account which is related to your production environment or can influence your account-over-arching
@@ -519,10 +525,12 @@ Initial creation of the zip file for CTFD requires you to visit [https://wrongse
 Follow the following steps:
 
 ```shell
-    npm install -g juice-shop-ctf-cli@10.0.1
-    juice-shop-ctf #choose ctfd and https://wrongsecrets-ctf.herokuapp.com as domain. No trailing slash! The key is 'TRwzkRJnHOTckssAeyJbysWgP!Qc2T', feel free to enable hints. We do not support snippets or links/urls to code or hints.
+    npm install -g juice-shop-ctf-cli@12.0.0
+    juice-shop-ctf #choose ctfd and https://wrongsecrets-ctf.herokuapp.com as domain. No trailing slash! The key is 'TRwzkRJnHOTckssAeyJbysWgP!Qc2T', feel free to enable hints.
     docker run -p 8001:8000 -it ctfd/ctfd:3.7.4
 ```
+
+> **Note:** Hints can only be generated if the WrongSecrets instance has hints enabled (`HINTS_ENABLED=true`). The Heroku CTF instance ([https://wrongsecrets-ctf.herokuapp.com](https://wrongsecrets-ctf.herokuapp.com)) runs with `HINTS_ENABLED=false`, so selecting "Free hints" or "Paid hints" will result in an empty hints list. To generate hints, run your own instance with `HINTS_ENABLED=true`.
 
 Now visit the CTFD instance at [http://localhost:8001](http://localhost:8001) and setup your CTF.
 Then use the administrative backup function to import the zipfile you created with the juice-shop-ctf command.
@@ -806,4 +814,4 @@ Want to learn more? Checkout the sources below:
 -   [OWASP SAMM on Secret Management](https://owaspsamm.org/model/implementation/secure-deployment/stream-b/)
 -   [The secret detection topic at Github](https://github.com/topics/secrets-detection)
 -   [OWASP Secretsmanagement Cheatsheet](https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Secrets_Management_Cheat_Sheet.md)
--   [OpenCRE on secrets management](https://www.opencre.org/cre/223-780?register=true&type=tool&tool_type=training&tags=secrets,training&description=With%20this%20app%2C%20we%20have%20packed%20various%20ways%20of%20how%20to%20not%20store%20your%20secrets.%20These%20can%20help%20you%20to%20realize%20whether%20your%20secret%20management%20is%20ok.%20The%20challenge%20is%20to%20find%20all%20the%20different%20secrets%20by%20means%20of%20various%20tools%20and%20techniques.%20Can%20you%20solve%20all%20the%2014%20challenges%3F&trk=flagship-messaging-web&messageThreadUrn=urn:li:messagingThread:2-YmRkNjRkZTMtNjRlYS00OWNiLWI2YmUtMDYwNzY3ZjI1MDcyXzAxMg==&lipi=urn:li:page:d_flagship3_feed;J58Sgd80TdanpKWFMH6z+w==)
+-   [OpenCRE on secrets management](https://www.opencre.org/cre/223-780?register=true&type=tool&tool_type=training&tags=secrets,training&description=With%20this%20app%2C%20we%20have%20packed%20various%20ways%20of%20how%20to%20not%20store%20your%20secrets.%20These%20can%20help%20you%20to%20realize%20whether%20your%20secret%20management%20is%20ok.%20The%20challenge%20is%20to%20find%20all%20the%20different%20secrets%20by%20means%20of%20various%20tools%20and%20techniques.%20Can%20you%20solve%20all%20the%2062%20challenges%3F&trk=flagship-messaging-web&messageThreadUrn=urn:li:messagingThread:2-YmRkNjRkZTMtNjRlYS00OWNiLWI2YmUtMDYwNzY3ZjI1MDcyXzAxMg==&lipi=urn:li:page:d_flagship3_feed;J58Sgd80TdanpKWFMH6z+w==)

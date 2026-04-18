@@ -8,6 +8,8 @@ import com.google.common.base.Strings;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
@@ -21,6 +23,10 @@ public class BinaryExecutionHelper {
     Spoil,
     Guess
   }
+
+  private static final String[] SWIFT_LIB_PATHS = {
+    "/usr/share/swift/usr/lib/swift/linux", "/usr/lib/swift/linux", "/usr/local/lib/swift/linux"
+  };
 
   public static final String ERROR_EXECUTION = EXECUTION_ERROR;
   private final int challengeNumber;
@@ -128,6 +134,9 @@ public class BinaryExecutionHelper {
       }
     }
     ps.redirectErrorStream(true);
+    if (execFile.getPath().contains("swift")) {
+      configureSwiftLibraryPath(ps);
+    }
     Process pr = ps.start();
     try (BufferedReader in =
         new BufferedReader(new InputStreamReader(pr.getInputStream(), StandardCharsets.UTF_8))) {
@@ -270,6 +279,26 @@ public class BinaryExecutionHelper {
   private void deleteFile(File execFile) {
     if (!execFile.delete()) {
       log.info("Deleting the file {} failed...", execFile.getPath());
+    }
+  }
+
+  private void configureSwiftLibraryPath(ProcessBuilder ps) {
+    List<String> existingPaths = new ArrayList<>();
+    String currentLdPath = ps.environment().get("LD_LIBRARY_PATH");
+    if (!Strings.isNullOrEmpty(currentLdPath)) {
+      existingPaths.add(currentLdPath);
+    }
+    for (String path : SWIFT_LIB_PATHS) {
+      File dir = new File(path);
+      if (dir.exists() && dir.isDirectory()) {
+        log.info("Found Swift library path: {}", path);
+        existingPaths.add(path);
+      }
+    }
+    if (!existingPaths.isEmpty()) {
+      String ldPath = String.join(":", existingPaths);
+      log.info("Setting LD_LIBRARY_PATH for Swift binary: {}", ldPath);
+      ps.environment().put("LD_LIBRARY_PATH", ldPath);
     }
   }
 }

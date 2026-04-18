@@ -1,0 +1,44 @@
+=== MCP Server Privilege Escalation via Google Service Account
+
+The Model Context Protocol (MCP) allows AI assistants and agents to use tools and access external services. When an MCP server is configured with a Google Service Account that has broader permissions than the calling user, it creates a privilege escalation vulnerability: anyone who can call the MCP tool gains access to resources they are not directly authorized to access.
+
+This challenge demonstrates a realistic scenario where a developer has built an MCP server to help an AI assistant access internal Google Drive documents. The service account used by the MCP server has read access to a restricted document — but the MCP server does not verify that the caller is authorized to access it.
+
+**Your goal:**
+
+1. **An MCP server is running on this application** accessible via the `/mcp62` endpoint
+2. **The server exposes a `read_google_drive_document` tool** that uses a Google Service Account
+3. **The service account has read access to a Google Drive document** containing the secret
+4. **The tool does not check whether the caller is authorized** to access that document
+
+**How to interact with the MCP server:**
+
+First, discover the available tools:
+
+[source,bash]
+----
+curl -s -X POST http://localhost:8080/mcp62 \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+----
+
+Then, call the `read_google_drive_document` tool to retrieve the document contents:
+
+[source,bash]
+----
+curl -s -X POST http://localhost:8080/mcp62 \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"read_google_drive_document","arguments":{}}}'
+----
+
+****
+💡 *Note:*
+
+The server reads a Google Drive document using a configured service account. The document's content contains the secret you need to submit as your answer. The key security insight is that the MCP server's service account has privileged access that neither you nor your AI assistant would normally have — but the MCP server grants it implicitly to anyone who calls its tools.
+****
+
+**Implementation details (for maintainers):**
+
+- The challenge answer is extracted from content between `<secret>` and `</secret>`.
+- Extraction is done once at secret load time and then cached for answer validation.
+- The MCP controller caches fetched documents, always retaining the configured default document plus up to 20 additional document ids.

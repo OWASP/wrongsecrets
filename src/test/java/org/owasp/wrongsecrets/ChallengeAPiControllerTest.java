@@ -25,6 +25,15 @@ class ChallengeAPiControllerTest {
         .andExpect(status().isOk())
         .andExpect(content().string(containsString("hint")));
   }
+
+  @Test
+  void shouldGetListOfHints() throws Exception {
+    mvc.perform(get("/api/Hints"))
+        .andExpect(status().isOk())
+        .andExpect(content().string(containsString("ChallengeId")))
+        .andExpect(content().string(containsString("text")))
+        .andExpect(content().string(containsString("unlocked")));
+  }
 }
 
 /*

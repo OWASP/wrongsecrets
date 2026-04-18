@@ -75,7 +75,7 @@ describe('Challenge Tests', () => {
     cy.get('@enabledChallengeNames').then((enabledChallengeNames) => {
       cy.wrap(enabledChallengeNames).each((challengeName) => {
         cy.visit(`/challenge/${challengeName}`)
-        cy.dataCy(ChallengesPage.ANSWER_TEXTBOX).type('X')
+        cy.dataCy(ChallengesPage.ANSWER_TEXTBOX).type('definitely-not-the-right-answer-12345')
         cy.dataCy(ChallengesPage.SUBMIT_TEXTBOX_BTN).click()
         cy.dataCy(ChallengesPage.INCORRECT_ALERT).should('contain', 'Your answer is incorrect, try harder ;-)')
       })

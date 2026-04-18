@@ -1,0 +1,24 @@
+=== Reason for Challenge 63
+This challenge highlights a widespread mistake in software development: using encryption while storing the key in the same location as the ciphertext.
+
+**Why this is dangerous:**
+- Encryption is only as strong as the secrecy of the key
+- Hardcoding the key in source code means anyone with repository access can decrypt the secret
+- Source code is often more widely accessible than developers realize — through Git history, leaked repos, or insider access
+- Many secret scanning tools will detect both the key and ciphertext patterns
+
+**The correct approach:**
+- Store encryption keys in a dedicated secrets manager (AWS Secrets Manager, HashiCorp Vault, etc.)
+- Never commit keys to version control
+- Use environment variables for keys, not source code constants
+- Consider whether encryption is even necessary if the key must live near the data
+
+**Real world examples:**
+This exact pattern has been found in numerous data breaches where developers believed their secrets were "safe" because they were encrypted, not realizing the key was equally exposed.
+
+Additionally, this challenge uses AES in CBC mode which is vulnerable to
+padding oracle attacks. Production code should use AES/GCM instead.
+
+**References:**
+- https://owasp.org/www-project-top-ten/[OWASP Top 10]
+- https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html[OWASP Secrets Management Cheat Sheet]
