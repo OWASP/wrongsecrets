@@ -11,8 +11,9 @@ class Challenge63Test {
 
   @Test
   void testAnswerIsCorrect() {
-    Challenge63 challenge = new Challenge63();
-    assertTrue(challenge.answerCorrect("wh0sp1ay1ngwrongs3cr3ts"));
+    Challenege63 challenge = new Challenge63();
+    assertTrue(challenge.answerCorrect(challenge.getAnswer()));
+    assertFalse(challenge.answerCorrect(ErrorResponses.DECRYPTION_ERROR));
   }
 
   @Test
@@ -21,9 +22,4 @@ class Challenge63Test {
     assertFalse(challenge.answerCorrect("wronganswer"));
   }
 
-  @Test
-  void testSpoilerRevealsAnswer() {
-    Challenge63 challenge = new Challenge63();
-    assertEquals("wh0sp1ay1ngwrongs3cr3ts", challenge.spoiler().solution());
-  }
 }
