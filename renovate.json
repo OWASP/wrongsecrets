@@ -95,6 +95,16 @@
             "enabled": true
         },
         {
+            "groupName": "sort-contibutors-go",
+            "matchManagers": [
+                "gomod"
+            ],
+            "matchFileNames": [
+                "scripts/sort_contibutors/go.mod"
+            ],
+            "enabled": true
+        },
+        {
             "groupName": "pre-commit",
             "matchFileNames": [
                 ".pre-commit-config.yaml"
