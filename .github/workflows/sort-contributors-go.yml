@@ -1,0 +1,56 @@
+name: Sort Contributors Go Checks
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "scripts/sort_contibutors/**"
+      - ".github/workflows/sort-contributors-go.yml"
+  pull_request:
+    branches: [master]
+    paths:
+      - "scripts/sort_contibutors/**"
+      - ".github/workflows/sort-contributors-go.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  go-checks:
+    name: build test lint security
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: scripts/sort_contibutors
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: scripts/sort_contibutors/go.mod
+          cache-dependency-path: scripts/sort_contibutors/go.mod
+
+      - name: Build
+        run: make build
+
+      - name: Test
+        run: make test
+
+      - name: Vet
+        run: make vet
+
+      - name: Install golangci-lint
+        run: |
+          go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+          echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
+
+      - name: Lint
+        run: make lint
+
+      - name: Security
+        run: make security
