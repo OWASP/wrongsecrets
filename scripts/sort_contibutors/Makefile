@@ -25,13 +25,13 @@ vet:
 	$(GO) vet ./...
 
 security:
-	@command -v gosec >/dev/null 2>&1 || { \
+	@if command -v gosec >/dev/null 2>&1; then \
+		gosec ./...; \
+	else \
 		echo "gosec not found. Installing with: go install github.com/securego/gosec/v2/cmd/gosec@latest"; \
 		GOBIN=$$(pwd)/.tools $(GO) install github.com/securego/gosec/v2/cmd/gosec@latest || exit 1; \
 		PATH=$$(pwd)/.tools:$$PATH gosec ./...; \
-		exit $$?; \
-	}; \
-	gosec ./...
+	fi
 
 clean:
 	rm -rf $(BUILD_DIR) .tools
