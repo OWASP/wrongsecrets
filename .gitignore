@@ -107,6 +107,8 @@ contributors_file*
 ##documentation
 scripts/sort_contibutors/.env
 scripts/sort_contibutors/contributors_file.*
+scripts/sort_contibutors/.tools/
+scripts/sort_contibutors/bin/
 
 #optimizations
 .github/scripts/binary_version.txt

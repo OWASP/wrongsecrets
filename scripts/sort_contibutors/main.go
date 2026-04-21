@@ -67,6 +67,8 @@ var excludedContributors = map[string]struct{}{
 	"commjoen":           {},
 	"bendehaan":          {},
 	"benno001":           {},
+	"copilot":            {},
+	"copilot-swe-agent":  {},
 }
 
 var knownNames = map[string]string{
