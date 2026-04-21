@@ -148,7 +148,7 @@ func TestWriteFile(t *testing.T) {
 	}
 }
 
-func TestParseContributorListExcludesBotsAndCopilotAccounts(t *testing.T) {
+func TestParseContributorListExcludesAutomatedAccounts(t *testing.T) {
 	t.Parallel()
 
 	a := &app{nameCache: map[string]string{}}
