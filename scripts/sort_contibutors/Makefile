@@ -30,7 +30,7 @@ security:
 		GOBIN=$$(pwd)/.tools $(GO) install github.com/securego/gosec/v2/cmd/gosec@latest || exit 1; \
 		PATH=$$(pwd)/.tools:$$PATH gosec ./...; \
 		exit $$?; \
-	}
+	}; \
 	gosec ./...
 
 clean:

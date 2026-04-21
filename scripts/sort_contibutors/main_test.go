@@ -147,3 +147,23 @@ func TestWriteFile(t *testing.T) {
 		t.Fatalf("unexpected file content: %s", string(b))
 	}
 }
+
+func TestParseContributorListExcludesBotsAndCopilot(t *testing.T) {
+	t.Parallel()
+
+	a := &app{nameCache: map[string]string{}}
+	input := []contributorAPI{
+		{Login: "some[bot]", Contributions: 10},
+		{Login: "copilot", Contributions: 10},
+		{Login: "copilot-swe-agent", Contributions: 10},
+		{Login: "f3rn0s", Contributions: 5},
+	}
+
+	got := a.parseContributorList(input)
+	if len(got) != 1 {
+		t.Fatalf("expected 1 contributor after filtering, got %d", len(got))
+	}
+	if got[0].Username != "f3rn0s" {
+		t.Fatalf("expected f3rn0s to remain, got %+v", got[0])
+	}
+}
