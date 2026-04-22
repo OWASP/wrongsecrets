@@ -1,0 +1,6 @@
+=== Was ist falsch?
+
+Das Hardcodieren von Telegram-Bot-Anmeldeinformationen im Quellcode ist eine ernsthafte Sicherheitsschwachstelle:
+
+**Sicherheitsprobleme:**
+1. **Offengelegte API-Anmeldeinformationen**: Bot-Tokens bieten vollständigen Zugriff auf die Telegram-Bot-Funktionalität
