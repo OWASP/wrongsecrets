@@ -1,0 +1,5 @@
+*Waarom je documentatie moet controleren op geheimen*
+
+Documentatie en specificatiebestanden worden vaak breed gedeeld en kunnen worden over het hoofd gezien tijdens beveiligingsbeoordelingen.
+Soms worden geheimen of gevoelige informatie toegevoegd als voorbeelden of instructies en worden ze niet verwijderd voor het delen of publiceren.
+Deze uitdaging benadrukt het belang van het beoordelen van alle projectbestanden — inclusief documentatie — op geheimen en gevoelige gegevens.

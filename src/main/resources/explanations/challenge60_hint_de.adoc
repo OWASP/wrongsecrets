@@ -1,0 +1,8 @@
+=== Hinweis für Herausforderung 60
+
+Diese Herausforderung demonstriert, wie ein unsicherer MCP (Model Context Protocol) Server Geheimnisse durchsickern lassen kann, die in Umgebungsvariablen gespeichert sind.
+
+**Wo zu suchen:**
+
+1. **Ein separater MCP-Server läuft auf Port 8090** — anders als der Hauptanwendungsport (8080)
+2. **Der MCP-Server implementiert das JSON-RPC 2.0-Protokoll** wie von der MCP-Spezifikation definiert

@@ -1,0 +1,9 @@
+=== Exposition de la chaîne de connexion à la base de données dans les messages d'erreur
+
+L'une des façons les plus courantes et dangereuses par lesquelles les secrets fuient dans les applications réelles est via les chaînes de connexion à la base de données contenant des identifiants intégrés. Lorsque les applications ne parviennent pas à se connecter aux bases de données, elles exposent souvent la chaîne de connexion complète (y compris les noms d'utilisateur et les mots de passe) dans les messages d'erreur, les journaux ou même les interfaces utilisateur.
+
+Ce défi démontre un scénario où un développeur :
+
+1. **Utilise des identifiants intégrés dans les chaînes de connexion** au lieu d'une gestion externe des secrets
+2. **A une mauvaise gestion des erreurs** qui expose la chaîne de connexion complète en cas d'échec de connexion à la base de données
+3. **Journalise des informations sensibles** sans d'abord assainir les identifiants

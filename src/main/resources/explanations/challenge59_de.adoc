@@ -1,0 +1,9 @@
+=== Finde die Slack Webhook-URL
+
+Willkommen bei dieser Herausforderung, die die Anfälligkeit von hartcodierten Slack Webhook-URLs in Umgebungsvariablen demonstriert!
+
+Diese Herausforderung simuliert ein reales Szenario, in dem:
+
+1. **Slack Webhook-URLs als Umgebungsvariablen gespeichert** werden für Anwendungsbenachrichtigungen
+2. **Die URLs verschleiert** sind, um die Erkennung durch Secret-Scanning-Tools zu vermeiden
+3. **Risiko durch Personalwechsel**: Wenn ein Mitarbeiter das Unternehmen verlässt, wird der Webhook möglicherweise nicht rotiert, was weiterhin Zugriff ermöglicht
