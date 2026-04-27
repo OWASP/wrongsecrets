@@ -1,0 +1,6 @@
+=== Qu'est-ce qui ne va pas ?
+
+Coder en dur les identifiants du bot Telegram dans le code source est une vulnérabilité de sécurité grave :
+
+**Problèmes de sécurité :**
+1. **Identifiants d'API exposés** : Les tokens de bot fournissent un accès complet à la fonctionnalité du bot Telegram

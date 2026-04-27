@@ -1,0 +1,5 @@
+=== Secret scellé avec clé accessible
+
+Dans ce défi, vous explorerez l'utilisation du Kubernetes Sealed Secret. Les Sealed Secrets sont un moyen de chiffrer vos secrets Kubernetes et de les stocker en toute sécurité, même dans un dépôt public. Cependant, un développeur a accidentellement rendu la clé privée pour déchiffrer les secrets scellés accessible dans le même dépôt.
+
+Pouvez-vous trouver et déchiffrer le secret scellé pour révéler les informations sensibles?

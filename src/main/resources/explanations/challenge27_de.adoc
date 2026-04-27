@@ -1,0 +1,5 @@
+=== Geheimnisse in Smart Contracts Teil 3
+
+Unser Smart-Contract-Entwickler wurde etwas klüger und speicherte nur ein gehashtes Geheimnis in seinem Vertrag. Er überprüft dann Eingabedaten gegen diesen Hash, um zu validieren, ob eine Transaktion true oder false zurückgibt. Er ist sicher, dass das Geheimnis, da es nie im internen Zustand des Vertrags gespeichert wird, nicht gefunden werden kann.
+
+In dieser Herausforderung musst du das korrekte Geheimnis finden, das die guess-Methode des Vertrags `0x8318d477f4BCae5a80BEA22E3c040cf8BaaFFe8B` im Goerli EVM Testnet true zurückgeben lässt.

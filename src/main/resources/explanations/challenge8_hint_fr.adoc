@@ -1,0 +1,5 @@
+Vous pouvez résoudre ce défi avec les étapes suivantes :
+
+1. Obtenez le secret depuis les journaux :
+ - Utilisez-vous le conteneur Docker ? Utilisez `docker logs <containerID>` pour obtenir les journaux et trouver la valeur pour le challenge 8.
+ - Utilisez-vous K8s ? Trouvez le Pod (`kubectl get pods | grep secret`) puis `kubectl logs -f <nomDuPod>` pour les journaux.

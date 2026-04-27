@@ -1,0 +1,7 @@
+=== Fuga de contenedor de depuración
+
+Los entornos de nube modernos a menudo dependen de herramientas de depuración para solucionar problemas en aplicaciones en ejecución. Sin embargo, cuando las capacidades de depuración se dejan abiertas en producción, pueden exponer información sensible.
+
+Una implementación de Kubernetes ha sido mal configurada https://github.com/OWASP/wrongsecrets/blob/master/k8s/challenge53/secret-challenge53.yml[challenge53], lo que permite a los desarrolladores adjuntar un contenedor de depuración a una aplicación en ejecución. Dentro de este pod, un binario mantiene un secreto en memoria. Normalmente, este secreto estaría protegido, pero debido al acceso de depuración, se vuelve recuperable.
+
+¿Puedes descubrir el secreto?

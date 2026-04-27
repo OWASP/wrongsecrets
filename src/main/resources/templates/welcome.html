@@ -4,36 +4,40 @@
 <body>
     <div layout:fragment="content">
         <div class="container-fluid mt-3 text-sm p-4 bg-light">
-            <div class="display-5">Welcome to OWASP WrongSecrets</div>
-            <p class="lead">
+            <div class="display-5" th:text="#{welcome.title}">Welcome to OWASP WrongSecrets</div>
+            <p class="lead" th:text="#{welcome.subtitle}">
                 Learn about secrets management by finding real secrets hidden in code, configuration files, and cloud infrastructure.
             </p>
             <hr class="my-2 my-lg-3" />
 
             <div class="alert alert-info" role="alert">
-                <h5 class="alert-heading">🎯 How to Play</h5>
-                <p class="mb-2"><strong>Your Mission:</strong> Find hidden secrets in this repository and enter them to score points!</p>
-                <p class="mb-2"><strong>Where to Look:</strong></p>
+                <h5 class="alert-heading" th:text="#{welcome.howtoplay.heading}">🎯 How to Play</h5>
+                <p class="mb-2"><strong th:text="#{welcome.mission.label}">Your Mission:</strong>
+                    <span th:text="#{welcome.mission.text}">Find hidden secrets in this repository and enter them to score points!</span></p>
+                <p class="mb-2"><strong th:text="#{welcome.where.label}">Where to Look:</strong></p>
                 <ul class="mb-2">
-                    <li>📁 Source code files (Java, JavaScript, etc.)</li>
-                    <li>🐳 Docker files and configurations</li>
-                    <li>☁️ Cloud deployment configurations (AWS, GCP, Azure)</li>
-                    <li>🔧 Environment variables and config files</li>
-                    <li>🗄️ Vault and secret management tools</li>
+                    <li th:text="#{welcome.where.source}">📁 Source code files (Java, JavaScript, etc.)</li>
+                    <li th:text="#{welcome.where.docker}">🐳 Docker files and configurations</li>
+                    <li th:text="#{welcome.where.cloud}">☁️ Cloud deployment configurations (AWS, GCP, Azure)</li>
+                    <li th:text="#{welcome.where.env}">🔧 Environment variables and config files</li>
+                    <li th:text="#{welcome.where.vault}">🗄️ Vault and secret management tools</li>
                 </ul>
-                <p class="mb-0"><strong>Getting Started:</strong> Check out the <a href="https://github.com/OWASP/wrongsecrets" target="_blank">GitHub repository</a> to examine the code and find the secrets!</p>
+                <p class="mb-0"><strong th:text="#{welcome.getting.started}">Getting Started:</strong>
+                    <a th:href="#{welcome.getting.started.link}" target="_blank"
+                       th:text="#{welcome.getting.started.text}">Check out the GitHub repository to examine the code and find the secrets!</a></p>
             </div>
 
             <p>
-                <strong>Pro Tip:</strong> Each challenge below has a different difficulty level and may require different environments.
-                Start with the easier ones and work your way up! 🚀
+                <strong th:text="#{welcome.protip}">Pro Tip:</strong>
+                <span th:text="#{welcome.protip.text}">Each challenge below has a different difficulty level and may require different environments.
+                Start with the easier ones and work your way up! 🚀</span>
             </p>
         </div>
         <div class="container-fluid text-sm p-2 p-lg-3 mt-lg-3">
             <div class="row">
                 <div class="col-12 col-lg-7">
                     <div class="mb-3">
-                        <small class="text">
+                        <small class="text" th:text="#{welcome.difficulty.legend}">
                             <strong>Difficulty:</strong> ⭐ (Easy) ⭐⭐ (Medium) ⭐⭐⭐ (Hard) ⭐⭐⭐⭐ (Expert) ⭐⭐⭐⭐⭐ (Master) |
                             <strong>Environment:</strong> Where the challenge can be solved
                         </small>
@@ -41,16 +45,16 @@
                     <table class="table table-responsive" id="challenge_overview" data-cy="challenge-overview">
                         <thead>
                             <tr>
-                                <th scope="col" class="d-none d-xl-table-cell">#</th>
-                                <th scope="col">&nbsp;Challenge&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                                <th scope="col">Focus&nbsp;&nbsp;&nbsp;</th>
+                                <th scope="col" class="d-none d-xl-table-cell" th:text="#{welcome.table.number}">#</th>
+                                <th scope="col">&nbsp;<span th:text="#{welcome.table.challenge}">Challenge</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                                <th scope="col"><span th:text="#{welcome.table.focus}">Focus</span>&nbsp;&nbsp;&nbsp;</th>
                                 <th scope="col" class="d-none d-md-table-cell">
-                                    Difficulty&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <span th:text="#{welcome.table.difficulty}">Difficulty</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 </th>
                                 <th scope="col"
-                                    th:text="'Runs on environment (current: '+${#strings.replace(environment,'_',' _')}+')'">
+                                    th:text="#{welcome.table.environment(${#strings.replace(environment,'_',' _')})}">
                                 </th>
-                                <th scope="col" class="d-none d-xl-table-cell">Solved</th>
+                                <th scope="col" class="d-none d-xl-table-cell" th:text="#{welcome.table.solved}">Solved</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -76,33 +80,40 @@
                             </tr>
                         </tbody>
                     </table>
-                    <p th:if="${ctfServerAddress == null}" th:text="'Total score: '+${totalScore}"
+                    <p th:if="${ctfServerAddress == null}"
+                        th:text="#{welcome.total.score(${totalScore})}"
                         th:attr="data-cy='total-score'"></p>
                     <p th:if="${ctfServerAddress != null}"
-                        th:text="'Scoring and progress keeping is disabled in CTF mode, have a look at '+${ctfServerAddress}+' for your actual score and progress'">
+                        th:text="#{welcome.ctf.mode.score(${ctfServerAddress})}">
                     </p>
 
                     <div class="alert alert-warning" role="alert">
-                        <h6 class="alert-heading">🚀 Ready to Start?</h6>
-                        <p class="mb-2">1. <strong>Choose a challenge</strong> from the table above</p>
-                        <p class="mb-2">2. <strong>Examine the repository</strong> - Look at the <a href="https://github.com/OWASP/wrongsecrets" target="_blank">source code, config files, and documentation</a></p>
-                        <p class="mb-2">3. <strong>Find the secret</strong> - It could be in plain text, encoded, or stored in environment variables</p>
-                        <p class="mb-0">4. <strong>Enter your answer</strong> - Submit the secret to score points!</p>
+                        <h6 class="alert-heading" th:text="#{welcome.ready.heading}">🚀 Ready to Start?</h6>
+                        <p class="mb-2" th:utext="#{welcome.ready.step1}">1. <strong>Choose a challenge</strong> from the table above</p>
+                        <p class="mb-2">
+                            <span th:utext="#{welcome.ready.step2.prefix}">2. <strong>Examine the repository</strong> - Look at the</span>
+                            <a href="https://github.com/OWASP/wrongsecrets" target="_blank"
+                               th:text="#{welcome.ready.step2.link}">source code, config files, and documentation</a>
+                        </p>
+                        <p class="mb-2" th:utext="#{welcome.ready.step3}">3. <strong>Find the secret</strong> - It could be in plain text, encoded, or stored in environment variables</p>
+                        <p class="mb-0" th:utext="#{welcome.ready.step4}">4. <strong>Enter your answer</strong> - Submit the secret to score points!</p>
                     </div>
 
                     <!--                <p th:text="'You are currently running on the following environment: '+${environment}"></p>-->
-                    <p>Hasty? Here is the Vault <a href="spoil/challenge-7"
-                            data-cy="show-secret-spoiler-link">secret;-)</a>
+                    <p>
+                        <span th:text="#{welcome.vault.spoiler}">Hasty? Here is the Vault</span>
+                        <a href="spoil/challenge-7" data-cy="show-secret-spoiler-link"
+                           th:text="#{welcome.vault.secret.link}">secret;-)</a>
                     </p>
                 </div>
                 <div class="col-12 col-lg-4 offset-lg-1">
                     <div class="border border-dark thank-you text-center">
-                        Like what you see? Please <br />
+                        <span th:text="#{welcome.github.star.like}">Like what you see? Please</span> <br />
                         <a class="github-button" href="https://github.com/OWASP/wrongsecrets" data-icon="octicon-star"
                             data-size="large" data-color-scheme="dark: light;" data-show-count="true"
-                            aria-label="Star commjoen/wrongsecrets on GitHub">Star us on Github</a>
-                        <div class="text-center">Note: The above button only takes you to the repository. Please ensure
-                            to
+                            aria-label="Star commjoen/wrongsecrets on GitHub"
+                            th:text="#{welcome.github.star.button}">Star us on Github</a>
+                        <div class="text-center" th:text="#{welcome.github.star.note}">Note: The above button only takes you to the repository. Please ensure to
                             star the repository once you are there!
                         </div>
                     </div>
@@ -112,18 +123,18 @@
                         <head></head>
 
                         <body>
-                            OWASP Project Leaders:
+                            <span th:text="#{welcome.project.leaders}">OWASP Project Leaders:</span>
                             <ul>
                                 <li><a href='https://www.github.com/bendehaan'>Ben de Haan @bendehaan</a></li>
                                 <li><a href='https://www.github.com/commjoen'>Jeroen Willemsen @commjoen</a></li>
                             </ul>
-                            Top Contributors:
+                            <span th:text="#{welcome.top.contributors}">Top Contributors:</span>
                             <ul>
                                 <li><a href='https://www.github.com/J12934'>Jannik Hollenbach @J12934</a></li>
                                 <li><a href='https://www.github.com/puneeth072003'>Puneeth Y @puneeth072003</a></li>
                                 <li><a href='https://www.github.com/RemakingEden'>Joss Sparkes @RemakingEden</a></li>
                             </ul>
-                            Contributors:
+                            <span th:text="#{welcome.contributors}">Contributors:</span>
                             <ul>
                                 <li><a href='https://www.github.com/nbaars'>Nanne Baars @nbaars</a></li>
                                 <li><a href='https://www.github.com/drnow4u'>Marcin Nowak @drnow4u</a></li>
@@ -162,14 +173,14 @@
                                 <li><a href='https://www.github.com/szh'>Shlomo Zalman Heigh @szh</a></li>
                                 <li><a href='https://www.github.com/Wind010'>Jeff Tong @Wind010</a></li>
                             </ul>
-                            Testers:
+                            <span th:text="#{welcome.testers}">Testers:</span>
                             <ul>
                                 <li><a href='https://www.github.com/davevs'>Dave van Stein @davevs</a></li>
                                 <li><a href='https://www.github.com/drnow4u'>Marcin Nowak @drnow4u</a></li>
                                 <li><a href='https://www.github.com/mchangsp'>Marc Chang Sing Pang @mchangsp</a></li>
                                 <li><a href='https://www.github.com/djvinnie'>Vineeth Jagadeesh @djvinnie</a></li>
                             </ul>
-                            Special mentions for helping out:
+                            <span th:text="#{welcome.special.mentions}">Special mentions for helping out:</span>
                             <ul>
                                 <li><a href='https://www.github.com/madhuakula'>Madhu Akula @madhuakula @madhuakula</a>
                                 </li>
@@ -184,7 +195,7 @@
                 </div>
                 <div class="col-12 col-lg-7">
                     <div class="border border-dark thank-you">
-                        Resources/further reading on secrets management:<br />
+                        <span th:text="#{welcome.resources.heading}">Resources/further reading on secrets management:</span><br />
                         <ul>
                             <li>
                                 <a
@@ -212,33 +223,35 @@
                         </ul>
                     </div>
                     <div class="border border-dark thank-you">
-                        Wondering what a secret is? A secret is often a confidential piece of information that is
+                        <span th:text="#{welcome.secret.definition.heading}">Wondering what a secret is?</span>
+                        <span th:text="#{welcome.secret.definition.text}">A secret is often a confidential piece of information that is
                         required to unlock certain functionalities or information. It can exists in many shapes or
-                        forms, for instance:
+                        forms, for instance:</span>
                         <ul>
-                            <li>2FA keys</li>
-                            <li>Activation/Callback links</li>
-                            <li>API keys</li>
-                            <li>Credentials</li>
-                            <li>Passwords</li>
-                            <li>Private keys (decryption, signing, TLS, SSH, GPG)</li>
-                            <li>Secret keys (symmetric encryption, HMAC)</li>
-                            <li>Session cookies</li>
-                            <li>Tokens (Session, Refresh, Authentication, Activation, etc.)</li>
+                            <li th:text="#{welcome.secret.types.2fa}">2FA keys</li>
+                            <li th:text="#{welcome.secret.types.callback}">Activation/Callback links</li>
+                            <li th:text="#{welcome.secret.types.api}">API keys</li>
+                            <li th:text="#{welcome.secret.types.credentials}">Credentials</li>
+                            <li th:text="#{welcome.secret.types.passwords}">Passwords</li>
+                            <li th:text="#{welcome.secret.types.private.keys}">Private keys (decryption, signing, TLS, SSH, GPG)</li>
+                            <li th:text="#{welcome.secret.types.secret.keys}">Secret keys (symmetric encryption, HMAC)</li>
+                            <li th:text="#{welcome.secret.types.sessions}">Session cookies</li>
+                            <li th:text="#{welcome.secret.types.tokens}">Tokens (Session, Refresh, Authentication, Activation, etc.)</li>
                         </ul>
                     </div>
                     <div class="border border-dark thank-you text-center">
-                        Want to see if your tool of choice detects all the secrets available in this project?
+                        <span th:text="#{welcome.detection.text}">Want to see if your tool of choice detects all the secrets available in this project?</span>
                         <br />
                         <a
-                            href="https://github.com/OWASP/wrongsecrets/#use-owasp-wrongsecrets-as-a-secret-detection-benchmark">
+                            href="https://github.com/OWASP/wrongsecrets/#use-owasp-wrongsecrets-as-a-secret-detection-benchmark"
+                            th:text="#{welcome.detection.link}">
                             Check the instructions in the README
                         </a>.
                     </div>
                     <div class="border border-dark thank-you text-center">
-                        Developing our solution in 3 clouds costs money. Want to help us to cover our cloud bills?
+                        <span th:text="#{welcome.donate.text}">Developing our solution in 3 clouds costs money. Want to help us to cover our cloud bills?</span>
                         <a href="https://owasp.org/donate/?reponame=www-project-wrongsecrets&title=OWASP+wrongsecrets"
-                            target="_blank">Donate</a>.
+                            target="_blank" th:text="#{welcome.donate.link}">Donate</a>.
                     </div>
                 </div>
             </div>

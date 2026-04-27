@@ -1,0 +1,5 @@
+*Waarom het overschrijven van geheimen op de blockchain ze niet verwijdert*
+
+De toestand van de chain kan voor elk tijdstip worden geverifieerd door de staatsupdates tot een bepaald blok uit te voeren.
+
+Het bijwerken van de toestand van de chain verwijdert geen eerdere wijzigingen aan de staat.

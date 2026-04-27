@@ -1,0 +1,5 @@
+*Warum das Vor-Hashing von Passwörtern keine gute Idee ist?*
+
+Obwohl das Vor-Hashing von Passwörtern eine einfache Möglichkeit ist, Legacy-Hashes zu aktualisieren, ist es anfällig für https://www.scottbrady91.com/authentication/beware-of-password-shucking[Password Shucking].
+
+Es ist eine Technik, bei der Angreifer die neueren sicheren Schichten eines aktualisierten Hashes entfernen und ihn auf seinen schwächeren älteren Gegenwert reduzieren. In diesem Fall konnten wir bcrypt-Hashes auf unsichere MD5-Hashes reduzieren und sie dann knacken.

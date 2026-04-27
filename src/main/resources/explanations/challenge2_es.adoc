@@ -1,0 +1,7 @@
+=== Contraseña hardcodeada parte 2
+
+En lugar de hardcodear la contraseña directamente, el desarrollador intentó ocultarla en el `application.properties` de Spring Boot.
+
+De esta manera, ya no se puede encontrar directamente en archivos `.java` o `.class` compilados. Entonces, ¿cómo puedes detectarlo?
+
+Puedes detectarlo fácilmente con soluciones SAST, como https://github.com/trufflesecurity/truffleHog[truffleHog] y https://github.com/awslabs/git-secrets[git-secrets], y mediante inspección manual de tu `application.properties`.

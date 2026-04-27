@@ -1,9 +1,12 @@
 package org.owasp.wrongsecrets.challenges;
 
 import java.util.List;
+import java.util.Locale;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import lombok.Getter;
+import org.apache.commons.io.FilenameUtils;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.definitions.ChallengeDefinition;
@@ -11,10 +14,19 @@ import org.owasp.wrongsecrets.definitions.Difficulty;
 import org.owasp.wrongsecrets.definitions.Environment;
 import org.owasp.wrongsecrets.definitions.Navigator;
 import org.owasp.wrongsecrets.definitions.Sources.ChallengeSource;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.core.io.ClassPathResource;
 
 /** Wrapper class to move logic from Thymeleaf to keep logic in code instead of the html file. */
 @Getter
 public class ChallengeUI {
+
+  /**
+   * Cache of classpath file existence results so that we only hit the filesystem once per unique
+   * locale-specific filename across all requests.
+   */
+  private static final ConcurrentHashMap<String, Boolean> FILE_EXISTS_CACHE =
+      new ConcurrentHashMap<>();
 
   private final DifficultyUI difficultyUI;
   private final List<Environment> environments;
@@ -87,6 +99,36 @@ public class ChallengeUI {
   }
 
   /**
+   * Resolves a locale-specific filename if available, falling back to the default (English) file.
+   * Checks both the raw .adoc source (used in dev mode) and the pre-compiled .html (used in
+   * production). If neither locale-specific file exists, the original filename is returned so the
+   * English content is shown. Results are cached to avoid repeated classpath lookups.
+   *
+   * @param defaultFileName the default (English) file path, e.g. "explanations/challenge1.adoc"
+   * @return locale-specific filename if it exists, otherwise the default filename
+   */
+  private String localizeFileName(String defaultFileName) {
+    if (defaultFileName == null || defaultFileName.isEmpty()) {
+      return defaultFileName;
+    }
+    Locale locale = LocaleContextHolder.getLocale();
+    if (Locale.ENGLISH.getLanguage().equals(locale.getLanguage())) {
+      return defaultFileName;
+    }
+    String ext = FilenameUtils.getExtension(defaultFileName);
+    String base = FilenameUtils.removeExtension(defaultFileName);
+    String localizedAdoc = base + "_" + locale.getLanguage() + (ext.isEmpty() ? "" : "." + ext);
+    String localizedHtml = base + "_" + locale.getLanguage() + ".html";
+    boolean exists =
+        FILE_EXISTS_CACHE.computeIfAbsent(
+            localizedAdoc,
+            key ->
+                new ClassPathResource(key).exists()
+                    || new ClassPathResource(localizedHtml).exists());
+    return exists ? localizedAdoc : defaultFileName;
+  }
+
+  /**
    * Returns the number of the next challenge (e.g current+1).
    *
    * @return int with next challenge number.
@@ -114,30 +156,30 @@ public class ChallengeUI {
   }
 
   /**
-   * Returns filename of the explanation of the challenge.
+   * Returns filename of the explanation of the challenge, locale-aware with English fallback.
    *
    * @return String with filename.
    */
   public String getExplanation() {
-    return documentation(s -> s.explanation().fileName());
+    return localizeFileName(documentation(s -> s.explanation().fileName()));
   }
 
   /**
-   * Returns filename of the hints for the challenge.
+   * Returns filename of the hints for the challenge, locale-aware with English fallback.
    *
    * @return String with filename.
    */
   public String getHint() {
-    return documentation(s -> s.hint().fileName());
+    return localizeFileName(documentation(s -> s.hint().fileName()));
   }
 
   /**
-   * Returns filename of the reasons of the challenge.
+   * Returns filename of the reasons of the challenge, locale-aware with English fallback.
    *
    * @return String with filename.
    */
   public String getReason() {
-    return documentation(s -> s.reason().fileName());
+    return localizeFileName(documentation(s -> s.reason().fileName()));
   }
 
   /**

@@ -1,0 +1,7 @@
+=== Offengelegte Docker Secrets Herausforderung
+
+In dieser Herausforderung erkundest du die Bedeutung der sicheren Verwaltung sensibler Informationen mit Docker Secrets in einer https://raw.githubusercontent.com/OWASP/wrongsecrets/refs/heads/master/src/main/resources/challenges/challenge-51/challenge51docker-compose.yml[Docker Compose Datei]. Docker Secrets sollen sensible Daten wie Passwörter, API-Schlüssel und Zertifikate sicher übertragen und speichern.
+
+*Acme Inc.*, eine schnell wachsende E-Commerce-Plattform, hatte zuletzt verdächtige Aktivitäten, die darauf hindeuten, dass sensible Kundendaten kompromittiert worden sein könnten. Ein internes Audit zeigt, dass ein Entwickler versehentlich Datenbankzugangsdaten offengelegt hat.
+
+Identifiziere die Fehlkonfigurationen und melde das Datenbankpasswort im untenstehenden Feld.

@@ -1,0 +1,9 @@
+Du kannst diese Herausforderung mit den folgenden alternativen Lösungen lösen:
+
+1. Verwende `docker history`:
+ - Lade den Container herunter.
+ - Führe `docker history --no-trunc jeroenwillemsen/wrongsecrets:<TAGNAME>` aus, um die Build-Argumente zu finden.
+ - Suche nach `ARG_BASED_PASSWORD`.
+
+2. Schau dir das Docker-Repository online an:
+ - Gehe zu https://hub.docker.com/r/jeroenwillemsen/wrongsecrets/tags und schaue dir die Image-Schichten an.

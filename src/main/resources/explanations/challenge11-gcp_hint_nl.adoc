@@ -1,0 +1,7 @@
+Je kunt deze uitdaging oplossen met de volgende stappen:
+
+1. Zoek het pad voor privilege-escalatie met Terraform:
+ - Er zou iets interessants moeten zijn in `aws/irsa.tf`.
+
+2. Zoek het pad voor privilege-escalatie met ScoutSuite:
+ - Controleer de rol `cant-read-secrets`. Je zult zien dat het `sts:AssumeRole` toestaat op `*`. Dit betekent dat het andere rollen kan aannemen.

@@ -1,0 +1,8 @@
+=== Indice pour le Défi 60
+
+Ce défi démontre comment un serveur MCP (Protocole de Contexte de Modèle) non sécurisé peut fuiter des secrets stockés dans des variables d'environnement.
+
+**Où chercher :**
+
+1. **Un serveur MCP séparé fonctionne sur le port 8090** — différent du port de l'application principale (8080)
+2. **Le serveur MCP implémente le protocole JSON-RPC 2.0** tel que défini par la spécification MCP

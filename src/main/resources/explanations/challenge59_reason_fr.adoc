@@ -1,0 +1,5 @@
+=== Pourquoi ce défi est important
+
+Ce défi démontre une vulnérabilité critique couramment trouvée dans les systèmes de production : **tokens API Slack codés en dur stockés dans des variables d'environnement avec une obfuscation inadéquate**.
+
+==== La vulnérabilité

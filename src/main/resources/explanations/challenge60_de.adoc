@@ -1,0 +1,10 @@
+=== MCP-Server-Umgebungsvariablen-Exposition
+
+Das Model Context Protocol (MCP), entwickelt von Anthropic, ist ein offener Standard, der es KI-Assistenten ermöglicht, sich mit Tools und Datenquellen zu verbinden. Während MCP leistungsstarke Integrationen ermöglicht, stellen schlecht gesicherte MCP-Server ein erhebliches Sicherheitsrisiko dar: Sie können sensible Geheimnisse, die in Umgebungsvariablen gespeichert sind, jedem zugänglich machen, der sie erreichen kann.
+
+Diese Herausforderung demonstriert ein realistisches Szenario, in dem ein Entwickler einen MCP-Server mit einem `execute_command`-Tool bereitgestellt hat. Dieser Typ von Tool ist in MCP-Servern üblich, die verwendet werden, um KI-Assistenten Shell-Zugriff zu geben — kann aber von jedem missbraucht werden, der den Endpunkt entdeckt.
+
+**Dein Ziel:**
+
+1. **Ein MCP-Server läuft auf einem dedizierten Port (8090)** getrennt von der Hauptanwendung
+2. **Der Server stellt ein `execute_command`-Tool bereit**, das die Prozessumgebungsvariablen zurückgibt

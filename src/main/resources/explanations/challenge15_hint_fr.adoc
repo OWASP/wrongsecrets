@@ -1,0 +1,7 @@
+Vous pouvez résoudre ce défi avec les solutions alternatives suivantes :
+
+1. Obtenez le secret à partir des commits plus anciens avec Trufflehog :
+ - Exécutez `trufflehog3 https://github.com/OWASP/wrongsecrets` et regardez la sortie : vous devriez trouver 3 valeurs `aws_secret_access_key`.
+
+2. Parcourez manuellement l'historique Git :
+ - Clonez le dépôt et utilisez `git log -p` pour rechercher des secrets dans les commits.

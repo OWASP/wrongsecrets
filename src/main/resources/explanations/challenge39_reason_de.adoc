@@ -1,0 +1,5 @@
+*Warum sollten wir den Dateinamen nicht als Verschlüsselungsschlüssel verwenden?*
+
+Es gab mehrere Szenarien, in denen der Inhalt von Dateien mit dem Dateinamen selbst verschlüsselt wurde, was Angreifern ermöglicht, den Inhalt leicht zu entschlüsseln. Es wird oft als einfache Methode angesehen, den Schlüssel nahe am Inhalt zu halten.
+
+Aber wie du jetzt erkennen kannst, ist das keine gute Idee. Ein Angreifer hat den Schlüssel, sobald die Datei in seinem Besitz ist.

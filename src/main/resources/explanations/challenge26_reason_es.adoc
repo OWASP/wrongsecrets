@@ -1,0 +1,5 @@
+*Por qué sobrescribir secretos en la blockchain no los elimina*
+
+El estado de la cadena puede verificarse para cualquier punto en el tiempo ejecutando las actualizaciones de estado hasta un cierto bloque.
+
+Actualizar el estado de la cadena no elimina cambios anteriores en el estado.

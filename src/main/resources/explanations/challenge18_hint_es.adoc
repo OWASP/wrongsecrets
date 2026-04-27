@@ -1,0 +1,20 @@
+Este desafío se centra específicamente en los hashes MD5 y SHA1 sin salting. ¿Son estos incrackeables?
+
+Puedes resolver este desafío usando las siguientes soluciones:
+
+1. Para el primer hash (MD5):
+- Usa una herramienta como Hashcat:
+- Instala https://hashcat.net/hashcat/[Hashcat]
+- Descarga la https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt[lista de contraseñas rockyou.txt]
+- Ejecuta Hashcat en el hash `hashcat -m 0 "2ab96390c7dbe3439de74d0c9b0b1767" /ruta/al/archivo/rockyou.txt`
+
+2. Para el segundo hash (SHA1):
+- Usa una herramienta como Hashcat:
+- Instala https://hashcat.net/hashcat/[Hashcat]
+- Descarga la https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt[lista de contraseñas rockyou.txt]
+- Ejecuta Hashcat en el hash `hashcat -m 100 "F3BBBD66A63D4BF1747940578EC3D0103530E21D" /ruta/al/archivo/rockyou.txt`
+
+3. Para cualquiera de los hashes:
+- Usa un servicio de crackeo de hashes en línea:
+- Visita `https://crackstation.net/`
+- Ingresa el hash y haz clic en "Crack Hashes"

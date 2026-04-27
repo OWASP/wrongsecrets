@@ -1,0 +1,6 @@
+Deze uitdaging kan worden opgelost door de sleutelafleiding opnieuw uit te voeren met de gegeven invoer.
+
+1. Voer de functie online uit
+- Zoek de parameters die worden gebruikt voor de sleutelafleiding in de `generateKey`-functie in `Challenge34.java`.
+- Kopieer de gebruikte parameters naar een online https://www.dcode.fr/pbkdf2-hash[generator] en voer het uit
+- De website retourneert de waarde van de sleutel.

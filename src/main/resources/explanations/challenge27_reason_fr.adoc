@@ -1,0 +1,4 @@
+*Pourquoi envoyer des secrets comme entrées aux contrats intelligents est une mauvaise idée même s'ils ne sont pas stockés*
+
+Les entrées de toutes les transactions aux contrats, comme l'état du stockage interne des contrats sur la chaîne, sont stockées pour toujours et sont faciles à interroger.
+Les entrées des transactions sont même visibles avant que ces transactions ne soient acceptées. Cela peut conduire au front-running par un tiers.

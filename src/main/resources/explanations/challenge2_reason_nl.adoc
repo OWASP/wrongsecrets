@@ -1,0 +1,7 @@
+*Waarom het gebruik van code om geheimen op te slaan een slecht idee is.*
+
+Zoals je kunt zien, hebben we een beetje meer flexibiliteit gekregen dan bij uitdaging 1. Maar: we hebben het wachtwoord nog steeds in code!
+
+Hoewel we de variabelen nu in een later stadium gemakkelijk kunnen overschrijven, zien we vaak dat geheimen worden opgeslagen als onderdeel van de Spring Config of Spring Cloud Config, zonder dit in een later stadium te overschrijven. Dit betekent dat iedereen met toegang tot de Spring Cloud Config nu kan weten wat het geheim is.
+
+Het gebruik van een gedistribueerde oplossing zoals https://cloud.spring.io/spring-cloud-config/reference/html/[Spring Cloud Config] voor extern beheer van applicatie-eigenschappen kan hetzelfde probleem hebben als je niet voorzichtig bent.

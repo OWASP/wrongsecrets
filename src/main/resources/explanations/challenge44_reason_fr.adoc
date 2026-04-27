@@ -1,0 +1,5 @@
+*Pourquoi stocker des données sensibles sous forme de métadonnées est une mauvaise idée*
+
+Parfois, les gens pensent que les données moins sensibles devraient être stockées en tant que métadonnées secrètes. Pensez, par exemple, à un nom d'utilisateur, moins sensible qu'un mot de passe, ou l'est-il?
+
+Dans de nombreux cas, ils sont tout aussi importants et devraient recevoir la même protection que le secret lui-même. Nous ne voulons souvent pas donner un accès en lecture aux secrets à nos employés, mais nous voulons donner un accès en lecture aux métadonnées. Si un secret est stocké dans les métadonnées, ce secret est alors compromis en interne.

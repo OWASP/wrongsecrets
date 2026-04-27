@@ -1,0 +1,5 @@
+=== Secretos en contratos inteligentes parte 2
+
+Nuestro desarrollador de contratos inteligentes se dio cuenta de que había escrito un secreto en la cadena y volvió a sobrescribirlo.
+
+En este desafío, necesitas leer la variable llamada secret del contrato `0xCe793D588cd1Ee091290b4A1aE1D586B2a748eB4` en el Goerli EVM Testnet tal como estaba antes de que fuera cambiada.

@@ -1,0 +1,5 @@
+=== Op K8s ConfigMap gebaseerd geheim
+
+Hardcoderen in Docker was niet slim. Maar wat dacht je van een config-map in de standaard namespace zonder RBAC?
+
+Als deze uitdaging is ingeschakeld, draai je dit vanuit een K8s-cluster. Kun je `kubectl` gebruiken om het geheim te vinden? Of kijk in de repository waar het cluster door geconfigureerd wordt? Je hebt het misschien ook al gezien als de configmap naar Git is gecommit.

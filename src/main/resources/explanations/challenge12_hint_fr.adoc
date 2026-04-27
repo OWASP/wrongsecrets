@@ -1,0 +1,5 @@
+Vous pouvez résoudre ce défi en exécutant dans le conteneur :
+
+1. Consultez le Dockerfile et voyez quelles opérations COPY se produisent.
+2. Démarrez le conteneur localement avec `docker run jeroenwillemsen/wrongsecrets:<NOM_TAG>`.
+3. Exécutez `docker exec -it <containerID> /bin/sh` et parcourez les fichiers copiés.

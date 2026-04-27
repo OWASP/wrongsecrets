@@ -1,0 +1,9 @@
+=== Herausforderung 56: Das Geheimnis in der Projektspezifikation finden
+
+Wir wollten sehen, ob KI eine Herausforderung für uns erstellen kann. Wie bei jeder WrongSecrets-Herausforderung braucht es ein "Geheimnis", das irgendwo offengelegt ist. KI musste diese Herausforderung anhand eines Beispiels eines agentischen Plans mit Geheimnissen erstellen.
+
+In dieser Herausforderung ist es deine Aufgabe, ein Geheimnis zu finden, das in der agentischen Plandokumentationsdatei des Projekts versteckt ist: https://github.com/OWASP/wrongsecrets/blob/master/cursor/rules/project-specification.mdc[`cursor/rules/project-specification.mdc`].
+
+Das Geheimnis ist als Beispielkonfigurationswert in die Spezifikationsdatei eingebettet. Schau dir die Dokumentation sorgfältig an — Geheimnisse in Spezifikationsdateien sind oft als Beispielwerte, Konfigurationsparameter oder Beispieldaten getarnt.
+
+**Hinweis:** Suche nach Verweisen auf "challenge 56" oder nach verdächtigen Konfigurationswerten, die als Beispiele verwendet werden.

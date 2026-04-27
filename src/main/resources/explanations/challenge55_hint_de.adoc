@@ -1,0 +1,7 @@
+Der private Schlüssel befindet sich im .ssh-Teil des Containers und wurde versehentlich in git gespeichert.
+
+Du kannst den Schlüssel finden durch:
+
+1. Abrufen aus git in der [`.ssh/wrongsecrets.keys`]()-Datei:
+- Klone das Repository mit `git clone https://github.com/OWASP/wrongsecrets`.
+- Gehe zum Projektstamm und navigiere in den `.ssh`-Ordner und finde die `wrongsecrets.keys`-Datei.

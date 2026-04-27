@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <body>
 <!--/*@thymesVar id="challenge" type="org.owasp.wrongsecrets.challenges.ChallengeUI"*/-->
 <div class="row" th:fragment="navigation">
     <div class="col-2 text-center">
         <a th:class="${challenge.previous()} == null ? 'disabled' : ''"
-           th:href="${challenge.previous()}">⬅️ Previous</a>
+           th:href="${challenge.previous()}" th:text="#{navigation.previous}">⬅️ Previous</a>
     </div>
     <div class="offset-2 col-4 text-center">
-        <a href="/">🏠 Main Page</a>
+        <a href="/" th:text="#{navigation.main.page}">🏠 Main Page</a>
     </div>
     <div class="offset-2 col-2 text-center">
         <a th:class="${challenge.next()} == null ? 'disabled' : ''"
-           th:href="${challenge.next()}">Next ➡️</a>
+           th:href="${challenge.next()}" th:text="#{navigation.next}">Next ➡️</a>
     </div>
 </div>
 </body>

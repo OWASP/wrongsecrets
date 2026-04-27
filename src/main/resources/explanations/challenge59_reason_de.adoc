@@ -1,0 +1,5 @@
+=== Warum diese Herausforderung wichtig ist
+
+Diese Herausforderung demonstriert eine kritische Schwachstelle, die in Produktionssystemen häufig vorkommt: **hartcodierte Slack API-Tokens in Umgebungsvariablen mit unzureichender Verschleierung**.
+
+==== Die Schwachstelle

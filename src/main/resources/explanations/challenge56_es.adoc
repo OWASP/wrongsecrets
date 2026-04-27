@@ -1,0 +1,9 @@
+=== Desafío 56: Encuentra el secreto en la especificación del proyecto
+
+Queríamos ver si la IA podía hacer un desafío para nosotros. Como cualquier desafío de WrongSecrets, necesita tener un "secreto" que esté expuesto en algún lugar. La IA tuvo que crear este desafío usando un ejemplo de un plan agéntico con secretos.
+
+En este desafío, tu tarea es encontrar un secreto que ha sido ocultado en el archivo de documentación del plan agéntico del proyecto: https://github.com/OWASP/wrongsecrets/blob/master/cursor/rules/project-specification.mdc[`cursor/rules/project-specification.mdc`].
+
+El secreto está incrustado como un valor de configuración de ejemplo dentro del archivo de especificación. Mira cuidadosamente a través de la documentación — los secretos en los archivos de especificación a menudo están disfrazados como valores de ejemplo, parámetros de configuración o datos de muestra.
+
+**Pista:** Busca referencias a "challenge 56" o busca valores de configuración de aspecto sospechoso que puedan usarse como ejemplos.

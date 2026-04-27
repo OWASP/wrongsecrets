@@ -1,0 +1,7 @@
+=== ¿Kubernetes StringData o Data?
+
+Kubernetes tiene 2 tipos de campos para datos en un secret. La `StringData` contiene los datos en texto plano, mientras que la `Data` contiene el valor codificado en base64.
+¿Qué pasa si quieres intercambiar el valor de StringData a un valor de Data para asegurarlo más?
+No tienes que hacerlo, siempre que hayas configurado RBAC correctamente. Pero, ¿qué pasa si pasas de secrets estándar a secrets sellados pero no los migras todos?
+Entonces podría ser bueno saber que los metadatos podrían contener el valor real de StringData.
+¿Puedes encontrar el secreto?

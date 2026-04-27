@@ -1,0 +1,5 @@
+=== Déchiffrement du chiffrement AES avec une clé MD5 faible
+
+Imaginez que vous êtes un analyste en sécurité enquêtant sur une application mobile qui gère des informations sensibles. Vous découvrez que le développeur utilise le chiffrement AES pour protéger un secret, mais au lieu d'utiliser une Fonction de Dérivation de Clé (KDF) solide, il s'appuie sur l'algorithme MD5 non sécurisé pour dériver les clés de chiffrement d'un PIN numérique simple.
+
+Vous avez obtenu une chaîne chiffrée: `k800mdwu8vlQoqeAgRMHDQ==`. La clé pour le chiffrement AES est dérivée en prenant le hash MD5 d'un PIN, qui est un nombre entre 0 et 99999. Votre tâche est de trouver le PIN correct.

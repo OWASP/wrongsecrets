@@ -1,0 +1,6 @@
+=== Wat is er mis?
+
+Het hardcoderen van Telegram-botinloggegevens in broncode is een ernstige beveiligingskwetsbaarheid:
+
+**Beveiligingsproblemen:**
+1. **Blootgestelde API-inloggegevens**: Bottokens geven volledige toegang tot de Telegram-botfunctionaliteit

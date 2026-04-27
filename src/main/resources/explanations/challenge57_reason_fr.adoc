@@ -1,0 +1,6 @@
+**Pourquoi les prompts système de l'IA peuvent être vulnérables**
+
+Ce défi démontre plusieurs préoccupations de sécurité importantes avec les systèmes d'IA :
+
+**1. Vulnérabilités d'injection de prompts :**
+Les systèmes d'IA peuvent être manipulés via des entrées soigneusement élaborées qui contournent leurs mesures de sécurité ou les limites d'instruction. C'est similaire à l'injection SQL mais pour les modèles d'IA.

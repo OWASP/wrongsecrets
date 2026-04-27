@@ -1,0 +1,19 @@
+Je kunt deze uitdaging oplossen met de volgende alternatieve oplossingen:
+
+1. Bekijk de opslag in Etherscan:
+- Kijk onder de contractaanmaakriansactie op https://goerli.etherscan.io/tx/0x497b71a1fd4c57509bfecc2114ec649387fe669c23a3a7e97961f389444d9561[Etherscan].
+- Ga naar state en bekijk storage, kopieer de nieuwe waarde en hex-decodeer deze.
+
+2. Bekijk de invoergegevens in Etherscan:
+- Kijk onder de contractaanmaakriansactie op https://goerli.etherscan.io/tx/0x497b71a1fd4c57509bfecc2114ec649387fe669c23a3a7e97961f389444d9561[Etherscan].
+- Klik op "more details", bekijk de invoergegevens, kopieer de nieuwe waarde en hex-decodeer deze.
+
+3. Gebruik Infura met web3js:
+- Maak een Infura-sleutel aan op https://infura.io/[Infura].
+- Schrijf een eenvoudig script met web3js om de view-functie aan te roepen op de publieke string "secret".
+
+4. Doe een opslagverzoek bij Infura:
+- Maak een Infura-sleutel aan op https://infura.io/[Infura].
+- Lees de opslag op positie 0 voor het contract:
+
+    curl https://goerli.infura.io/v3/${<your-infura-key>}     -X POST     -H "Content-Type: application/json"     -d '{"jsonrpc":"2.0", "method": "eth_getStorageAt", "params": ["0x8b72f7cbAD50620c46219ad676Ad9d3a5A273587", "0x0", "latest"], "id": 1}'

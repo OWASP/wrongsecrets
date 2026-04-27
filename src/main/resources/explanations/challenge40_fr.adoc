@@ -1,0 +1,5 @@
+=== Clé de chiffrement non sécurisée - Partie 2
+
+Un développeur a chiffré un secret en utilisant https://en.wikipedia.org/wiki/Advanced_Encryption_Standard[AES] et stocké sa valeur encodée en base64 dans un fichier json. Mais où laisser la clé? Pourquoi ne pas simplement laisser la clé à l'intérieur du fichier avec le secret? Ainsi, chaque secret peut facilement avoir sa propre clé! Pouvez-vous trouver le secret?
+
+Le fichier de défi s'appelle https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/secrchallenge.json[secrchallenge.json] et peut être trouvé dans le https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables[dossier executables].

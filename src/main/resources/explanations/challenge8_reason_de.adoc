@@ -1,0 +1,5 @@
+*Worauf du achten musst, wenn du zufällige Geheimnisse beim Start verwendest*
+
+Die Verwendung eines zufälligen Geheimnisses beim Start kann funktionieren, wenn das Geheimnis nicht von anderen Systemen als dem System, das das Geheimnis hält/generiert, verwendet werden muss. Andernfalls benötigst du einen Synchronisationsmechanismus.
+
+Der in dieser Herausforderung verwendete Mechanismus ist in anderen Systemen zu sehen, z.B. Jenkins. Das Protokollieren des generierten Geheimnisses ist jedoch ein großes Risiko, da jeder mit Zugang zu den Protokollen das Geheimnis lesen kann.

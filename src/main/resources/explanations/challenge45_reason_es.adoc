@@ -1,0 +1,5 @@
+*Por qué almacenar datos sensibles como claves es una mala idea*
+
+A veces, la gente razona que los datos menos sensibles deben almacenarse como una subclave del secreto real. De esa manera, tanto un nombre de usuario como una contraseña pueden combinarse en una sola entrada.
+
+En el caso de Vault, puedes acceder a una subclave (por ejemplo, el nombre de usuario), pero no al valor secreto en sí (por ejemplo, la contraseña), lo que ya filtраría el nombre de usuario. A menudo no queremos dar acceso de lectura a secretos a nuestros empleados, pero sí a las subclaves.

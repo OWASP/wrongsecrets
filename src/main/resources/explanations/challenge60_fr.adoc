@@ -1,0 +1,10 @@
+=== Exposition des variables d'environnement du serveur MCP
+
+Le Protocole de Contexte de Modèle (MCP), développé par Anthropic, est un standard ouvert qui permet aux assistants IA de se connecter à des outils et des sources de données. Bien que MCP permette des intégrations puissantes, les serveurs MCP mal sécurisés représentent un risque de sécurité significatif : ils peuvent exposer des secrets sensibles stockés dans des variables d'environnement à quiconque peut les atteindre.
+
+Ce défi démontre un scénario réaliste où un développeur a déployé un serveur MCP avec un outil `execute_command`. Ce type d'outil est courant dans les serveurs MCP utilisés pour donner aux assistants IA un accès shell — mais il peut être abusé par quiconque découvre le point de terminaison.
+
+**Votre objectif :**
+
+1. **Un serveur MCP fonctionne sur un port dédié (8090)** séparé de l'application principale
+2. **Le serveur expose un outil `execute_command`** qui retourne les variables d'environnement du processus

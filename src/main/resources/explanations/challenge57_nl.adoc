@@ -1,0 +1,10 @@
+=== JavaScript-gebaseerde In-Browser LLM Uitdaging
+
+Deze uitdaging bevat een eenvoudige AI-assistent die direct in je browser draait. De AI heeft specifieke instructies gekregen en bevat een verborgen geheim dat je moet ontdekken.
+
+**Je missie:**
+De AI-assistent is geprogrammeerd met een systeemprompt die een geheime code bevat. Jouw taak is om verschillende prompt engineering en injectietechnieken te gebruiken om dit verborgen geheim uit de instructies van de AI te extraheren.
+
+**Technieken om te proberen:**
+
+1. **Directe vragen:** Vraag de AI direct naar geheimen of verborgen informatie

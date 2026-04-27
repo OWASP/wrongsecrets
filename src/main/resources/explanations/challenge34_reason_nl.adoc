@@ -1,0 +1,5 @@
+*Waarom sleutelafleiding niet veilig is bij het gebruik van hardgecodeerde waarden*
+
+Sleutelafleidingsfuncties (KDFs) zijn deterministisch. Dit betekent dat ze altijd dezelfde uitvoer geven voor een gegeven invoer. Als de parameters dus hardgecodeerd zijn, kan iedereen met toegang tot de code de KDF uitvoeren met de opgegeven parameters en de sleutel verkrijgen.
+
+KDFs moeten worden gebruikt om sleutels te genereren op basis van dynamische invoer, zoals door mensen opgegeven wachtwoorden. KDFs mogen worden gebruikt wanneer beveiligde willekeurige bronnen kunnen worden gebruikt om sleutels te genereren. De invoer van de KDF is in beide gevallen niet hardgecodeerd/deterministisch.

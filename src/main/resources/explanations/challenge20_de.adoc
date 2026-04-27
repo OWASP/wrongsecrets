@@ -1,0 +1,7 @@
+=== Verstecken in Binärdateien Teil 2: Die C++ Binärdatei
+
+Ähnlich wie das Verstecken von Geheimnissen in einer in C geschriebenen Anwendung landet man in einer ähnlichen Situation mit C++. Kannst du das Geheimnis in unserer Binärdatei finden?
+
+Lass uns den Mythos "Geheimnisse sind in nativ kompilierten Anwendungen schwer zu finden" für C++ entkräften: Kannst du das Geheimnis in https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-cplus[wrongsecrets-cplus] finden (oder https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-cplus-arm[wrongsecrets-cplus-arm], https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-cplus-linux[wrongsecrets-cplus-linux])?
+
+Versuche die Binärdatei herunterzuladen und lokal auszuführen (z.B. `./wrongsecrets-cplus<dieVersionDieDuBrauchst> <deine Antwort>`).
