@@ -1,0 +1,5 @@
+=== Secrets dans les contrats intelligents partie 1
+
+Sur les blockchains publiques, tout ce qui est écrit on-chain est lisible dans le monde entier.
+
+Dans ce défi, vous devez lire la variable nommée secret du contrat `0x8b72f7cbAD50620c46219ad676Ad9d3a5A273587` sur le Goerli EVM Testnet.

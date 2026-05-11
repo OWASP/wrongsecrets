@@ -1,0 +1,6 @@
+Este desafío se puede resolver descifrando el secreto codificado en base64 en `secrchallenge.json`.
+
+1. Usando una herramienta de descifrado AES en línea como https://www.devglan.com/online-tools/aes-encryption-decryption[devglan]
+- Copia el valor de `secret` de `secrchallenge.json` y pégalo en el cuadro de texto.
+- Asegúrate de que el formato de entrada sea `Base64` y el modo de cifrado sea `ECB`.
+- Usa el valor de `key` de `secrchallenge.json` como clave de descifrado y haz clic en `Decrypt`.

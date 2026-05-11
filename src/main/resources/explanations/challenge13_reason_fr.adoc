@@ -1,0 +1,5 @@
+*Pourquoi vous devez être prudent avec CI/CD et les secrets*
+
+Lors de l'utilisation d'outils CI/CD, vous devez souvent laisser l'outil (par exemple, le runner/agent qui exécute un travail) utiliser un secret pour s'authentifier auprès d'un service secondaire. L'exfiltration de ces secrets peut devenir assez intéressante.
+
+Assurez-vous que les secrets en CI/CD sont correctement configurés et limités aux branches et pull requests appropriés.

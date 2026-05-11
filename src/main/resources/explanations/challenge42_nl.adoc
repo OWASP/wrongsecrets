@@ -1,0 +1,5 @@
+=== Spring Boot Actuator Audit Event
+
+De ontwikkelaars besloten de kracht van Spring Boot Actuator te benutten om hun applicatie te monitoren en te auditen. Het project omvatte interfacing met verschillende externe API's, elk vereiste een unieke sleutel voor authenticatie. De audit-events, gedetailleerd en informatief, leken de perfecte oplossing.
+
+Het team implementeerde een logmechanisme dat gedetailleerde audit-events bevatte.

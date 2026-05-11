@@ -1,0 +1,5 @@
+*Warum es eine schlechte Idee ist, Geheimnisse in Containern zu speichern*
+
+Wie du jetzt sehen kannst, kannst du jedes in einem Container gespeicherte Geheimnis leicht erkennen. Ob es sich um eine ENV, eine Datei oder eine andere Eigenschaft handelt: Wenn ein System sie lesen kann, kann es auch ein Mensch.
+
+Da es eine Best Practice ist, einen Container unveränderlich und versioniert zu halten, wird das Geheimnis oft für immer im Container bleiben. Das macht Container sehr schlecht geeignet für die Speicherung von Geheimnissen, auch beim Einsatz von Build-Argumenten.

@@ -1,0 +1,6 @@
+**Warum KI-Systemprompts anfällig sein können**
+
+Diese Herausforderung demonstriert mehrere wichtige Sicherheitsbedenken bei KI-Systemen:
+
+**1. Prompt-Injektionsschwachstellen:**
+KI-Systeme können durch sorgfältig erstellte Eingaben manipuliert werden, die ihre Sicherheitsmaßnahmen oder Anweisungsgrenzen umgehen. Dies ist ähnlich wie SQL-Injektion, aber für KI-Modelle.

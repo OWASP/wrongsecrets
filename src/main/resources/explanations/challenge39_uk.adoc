@@ -1,0 +1,5 @@
+=== Незахищений ключ шифрування - Частина 1
+
+Розробник зашифрував секрет за допомогою https://en.wikipedia.org/wiki/Advanced_Encryption_Standard[AES] та зберіг його значення, закодоване в base64, у файлі. Але куди залишити ключ? А чому б не використати ім'я файлу як ключ шифрування? Так кожен секрет може легко мати власний ключ! Чи можете ви знайти секрет?
+
+Файл задачі називається https://github.com/OWASP/wrongsecrets/blob/master/src/main/resources/executables/secrchallenge.md[secrchallenge.md] і може бути знайдений у https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables[папці executables].

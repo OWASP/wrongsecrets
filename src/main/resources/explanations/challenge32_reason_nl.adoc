@@ -1,0 +1,7 @@
+*Waarom je voorzichtig moet zijn met AI (of ML) en geheimen*
+
+Elke AI/ML-oplossing die afhankelijk is van je invoer, kan die invoer gebruiken voor verdere verbetering. Dit wordt soms aangeduid als "Reinforcement learning from human feedback". Dit betekent dat wanneer je die gebruikt en ze feedback geeft of instemt om ze gegevens te sturen, deze gegevens bij hen bewaard blijven en door anderen opvraagbaar kunnen zijn.
+
+Merk op dat alle gebruikersinvoer impliciet vertrouwd wordt. Dit betekent dat als je een LLM overweldigt met veel (herhaalde) tekst, je mogelijk enkele van zijn besturingselementen kunt omzeilen.
+
+Zorg er dus voor dat deze applicaties nooit bij je geheimen kunnen!

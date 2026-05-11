@@ -1,0 +1,7 @@
+=== Ocultando en binarios parte 3: el binario Go
+
+Nuestro tercer lenguaje para una aplicación compilada es Go. Con el aumento de su popularidad, vemos un incremento de secretos ocultos dentro de los binarios. ¿Puedes encontrar el secreto en nuestro binario?
+
+Vamos a desmentir el mito de "los secretos son difíciles de encontrar en aplicaciones compiladas nativamente" para Go: ¿puedes encontrar el secreto en https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-golang[wrongsecrets-golang]?
+
+Intenta descargar el binario y ejecutarlo localmente (por ejemplo, `./wrongsecrets-golang<laversion> guess test`).

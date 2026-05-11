@@ -1,0 +1,5 @@
+=== Secret dans une capture d'écran d'un issue GitHub
+
+Un utilisateur dépose sans le savoir un issue avec une `capture d'écran` d'un secret en signalant un bug, puis s'en rend compte et ferme cet issue.
+
+Pouvez-vous repérer le secret que nous cherchons dans nos https://github.com/OWASP/wrongsecrets/issues[issues GitHub]?

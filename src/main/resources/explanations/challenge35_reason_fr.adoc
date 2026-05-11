@@ -1,0 +1,3 @@
+*Pourquoi nous devons être prudents avec les rapports de vulnérabilité*
+
+Lorsque vous signalez une vulnérabilité ou publiez un avis de sécurité, soyez toujours prudent avec les informations que vous diffusez avec eux. Les valeurs exactes des secrets codés en dur trouvés, en particulier ceux plus difficiles à faire pivoter, ne doivent pas être mises dans votre rapport de sécurité et/ou la publication.

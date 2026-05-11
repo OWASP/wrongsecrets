@@ -1,0 +1,10 @@
+*Pourquoi le hachage MD5 et SHA1 seul n'est pas suffisant.*
+
+Les hachages MD5 et SHA1 ne sont plus considérés comme sûrs pour stocker les mots de passe seuls. La vitesse est ce qui rend les hachages MD5 et SHA1 si utiles, mais c'est aussi leur perte. Il ne faut que quelques minutes pour hacher des milliers de mots de passe; cela signifie aussi qu'il ne faut que quelques minutes pour hacher des milliers de mots de passe courants et utiliser ces hachages pour les comparer à un hachage obtenu.
+
+Les entreprises essaient différentes techniques pour renforcer les hachages MD5 et SHA1, comme les "saler". Il s'agit du processus d'ajout de caractères supplémentaires au mot de passe que seule la personne/entreprise qui devrait déchiffrer connaît. Malheureusement, cela ne suffit pas non plus avec l'essor des calculs basés sur GPU et ASIC. Par conséquent, les entreprises utilisant ces techniques peuvent mieux migrer vers https://en.wikipedia.org/wiki/Argon2[Argon2] ou https://en.wikipedia.org/wiki/Balloon_hashing[Balloon hashing].
+
+En tant qu'utilisateur, vous n'avez souvent pas le choix dans la façon dont vos mots de passe sont stockés; la seule chose que vous pouvez faire dans ce cas est d'essayer de rendre votre mot de passe plus long et plus complexe. Un mot de passe SHA1 de 7 caractères avec des caractères majuscules et minuscules prendra environ une minute ou 5 à brute forcer sur un GPU approprié, alors qu'un avec 25 caractères prendra beaucoup plus longtemps.
+
+Notez que, lorsque ce type de hachages est utilisé sur `HTTP` (sans TLS, c'est-à-dire sans `HTTPS`) dans le cadre d'une vérification d'intégrité, un Man in the Middle pourrait potentiellement intercepter le contenu, le modifier, calculer les hachages et les renvoyer également.
+Un attaquant pourrait même réutiliser les mêmes hachages et fournir un autre contenu basé sur une collision de hachages. Par conséquent: utilisez toujours des connexions sécurisées lors du transfert de contenu et ne vous fiez jamais uniquement aux hachages comme `MD5` ou `SHA1` pour l'intégrité des données.

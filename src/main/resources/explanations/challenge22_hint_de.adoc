@@ -1,0 +1,19 @@
+Diese Herausforderung befasst sich speziell mit einem Geheimnis in einer Rust-Binärdatei basierend auf einem https://doc.rust-lang.org/cargo/reference/profiles.html#release[Release-Profil].
+
+Du kannst diese Herausforderung mit den folgenden alternativen Lösungen lösen:
+
+1. Finde die Geheimnisse mit https://ghidra-sre.org/[Ghidra].
+- Installiere und starte Ghidra mit `ghidraRun`.
+- Lade `wrongsecrets-rust` in Ghidra und lass es analysieren.
+- Importiere das https://gist.github.com/str4d/e541f4c28e2bca80d222434ac1a204f4[Demangle-Skript] und führe es über den Ghidra Script Manager aus.
+- Suche die `main` Funktion im `rust` Namespace.
+- Finde das Argument, das verglichen werden muss.
+- Finde das Geheimnis.
+
+2. Finde die Geheimnisse mit https://www.radare.org[radare2].
+- Installiere radare2 und starte Analyse mit `$ r2 -AAA wrongsecrets-rust`
+- Drucke den Einstiegspunkt mit `s sym.rust::main::h66ace6a84e548891` und dann `pdf`.
+- Versuche herauszufinden, wie das Argument vorbereitet wird. Kannst du das Geheimnis finden?
+- Alternativ: nach dem Start von radare2, führe `iz | grep secret` aus und finde den String.
+
+Willst du die Tools nicht installieren? Sieh dir den https://github.com/OWASP/wrongsecrets/tree/master?tab=readme-ov-file#want-to-play-but-are-not-allowed-to-install-the-tools[WrongSecrets Desktop Container] an!

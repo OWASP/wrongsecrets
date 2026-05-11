@@ -1,0 +1,7 @@
+Este desafío se puede resolver con los siguientes pasos:
+
+1. Crea dos archivos txt `old_hashes.txt` y `new_hashes.txt` que contengan solo los hashes copiados de los archivos de volcado.
+2. Usando `old_hashes.txt` como lista de contraseñas podemos usar hashcat para verificar los hashes md5 que coincidan con los hashes bcrypt.
+   - Instala https://hashcat.net/hashcat/[Hashcat]
+   - Escribe `hashcat -m 3200 -a 0 new_hashes.txt old_hashes.txt --show`
+3. Usando `rockyou.txt` como lista de contraseñas podemos descifrar el hash md5 obtenido.

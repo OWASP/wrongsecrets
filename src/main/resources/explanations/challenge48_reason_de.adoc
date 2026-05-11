@@ -1,0 +1,5 @@
+*Warum ein korrekter Umgang mit Sealed Secrets wichtig ist?*
+
+Sealed Secrets bieten eine Möglichkeit, deine Kubernetes-Geheimnisse zu verschlüsseln und sicher zu speichern, auch in öffentlichen Repositories. Allerdings können unsachgemäße Handhabung und Fehlkonfiguration zu schwerwiegenden Sicherheitslücken führen.
+
+Wenn der private Schlüssel zum Entschlüsseln der versiegelten Geheimnisse im selben Repository offengelegt oder zugänglich ist, macht dies die durch die Sealed Secrets gebotene Sicherheit zunichte.

@@ -1,0 +1,5 @@
+*Waarom doen we dit?*
+
+Met dit project hopen we dat je plezier hebt met het zoeken naar geheimen. Tegelijkertijd hopen we dat je leert over de fouten die anderen maken op het gebied van geheimenbeheer, zodat jij dezelfde fouten niet maakt.
+
+Wist je dat we al deze uitdagingen in de praktijk zijn tegengekomen? Ze kunnen daarom een grote hulp zijn als je meer aan bug bounty wilt doen.

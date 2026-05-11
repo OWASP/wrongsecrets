@@ -1,0 +1,5 @@
+*Warum Schlüsselableitungsfunktionen mit hartcodierten Werten nicht sicher sind*
+
+Schlüsselableitungsfunktionen (KDFs) sind deterministisch. Das bedeutet, dass sie für eine gegebene Eingabe immer die gleiche Ausgabe liefern. Wenn also die Parameter hartcodiert sind, kann jeder mit Zugang zum Code die KDF mit den angegebenen Parametern ausführen und den Schlüssel erhalten.
+
+KDFs sollten verwendet werden, um Schlüssel basierend auf dynamischen Eingaben zu generieren, wie z.B. von Menschen bereitgestellte Passwörter. In beiden Fällen ist die Eingabe der KDF nicht hartcodiert/deterministisch.

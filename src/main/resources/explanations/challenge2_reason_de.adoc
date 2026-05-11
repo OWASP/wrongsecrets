@@ -1,0 +1,7 @@
+*Warum es eine schlechte Idee ist, Geheimnisse im Code zu speichern.*
+
+Wie du sehen kannst, haben wir etwas mehr Flexibilität als bei Herausforderung 1 erhalten. Aber: Das Passwort ist immer noch im Code!
+
+Obwohl wir die Variablen jetzt in einer späteren Phase leicht überladen können, sehen wir oft, dass Geheimnisse als Teil der Spring Config oder Spring Cloud Config gespeichert werden, ohne sie in einer späteren Phase zu überladen. Das bedeutet, dass jeder mit Zugang zur Spring Cloud Config nun erfahren kann, was das Geheimnis ist.
+
+Die Verwendung einer verteilten Lösung wie https://cloud.spring.io/spring-cloud-config/reference/html/[Spring Cloud Config] für die externe Verwaltung von Anwendungseigenschaften kann dasselbe Problem haben, wenn man nicht vorsichtig ist.

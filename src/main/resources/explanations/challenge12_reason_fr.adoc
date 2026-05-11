@@ -1,0 +1,3 @@
+*Pourquoi utiliser des conteneurs pour stocker des secrets est une mauvaise idée*
+
+Comme vous pouvez le constater, vous pouvez facilement détecter tout secret stocké dans un conteneur. Qu'il s'agisse d'un ENV, d'un fichier ou d'une autre propriété : si un système peut le lire, un humain le peut aussi.

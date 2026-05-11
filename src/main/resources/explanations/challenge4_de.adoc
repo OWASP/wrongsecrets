@@ -1,0 +1,5 @@
+=== Docker arg-basiertes Passwort
+
+Der Entwickler ist klüger geworden: Das Passwort wird nun nicht mehr durch ein ENV-Argument definiert, sondern durch ein Docker-Container-Build-Argument.
+
+Du kannst es leicht erkennen, indem du dir anschaust, wie die Schichten aufgebaut wurden.

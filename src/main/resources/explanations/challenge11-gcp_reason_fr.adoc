@@ -1,0 +1,3 @@
+*La gestion des secrets est plus que le stockage sécurisé :*
+
+Comme vous pouvez le voir maintenant, il existe de nombreuses façons d'accéder à un secret : qu'il soit codé en dur, stocké dans une solution tierce mal configurée, ou correctement stocké mais avec les mauvais droits d'accès IAM dans des comptes adjacents. Vous verrez maintenant pourquoi nous disons que "votre maturité en matière de sécurité se reflète dans votre gestion des secrets".

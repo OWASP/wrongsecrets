@@ -1,0 +1,5 @@
+*¿Por qué debes tener cuidado con las notas de Git?*
+
+1. Como todos los repositorios de Git, una vez que un secreto se filtra aquí es muy difícil/imposible eliminarlo de toda la historia.
+
+2. Las notas de Git parecen ser una característica raramente utilizada de Git, por lo que muchos de los escáneres de secretos no las verifican. Esto significa que puede pasarse por alto en CI.

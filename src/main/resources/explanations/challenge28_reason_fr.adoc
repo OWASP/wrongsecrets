@@ -1,0 +1,5 @@
+*Pourquoi stocker des secrets dans un issue GitHub fermé est une mauvaise idée?*
+
+Vous ne devriez jamais révéler de secret dans un issue GitHub car même quand l'issue est fermé, toutes les données sont publiques et très faciles à repérer.
+
+Alors vérifiez l'issue deux fois avant de le poster sur n'importe quel dépôt.

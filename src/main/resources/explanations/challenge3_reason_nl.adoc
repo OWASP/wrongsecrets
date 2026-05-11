@@ -1,0 +1,5 @@
+*Waarom het gebruik van containers om geheimen in op te slaan een slecht idee is*
+
+Zoals je nu kunt zien, kun je elk geheim dat in een container is opgeslagen gemakkelijk detecteren. Of het nu een ENV, een bestand of een andere eigenschap is: als een systeem het kan lezen, kan een mens dat ook.
+
+Gezien het een best practice is om een container onveranderlijk en versioned te laten zijn, zal het geheim vaak voor altijd in de container blijven, tenzij je het verwijdert. Dit maakt containers erg slecht geschikt voor het opslaan van geheimen.

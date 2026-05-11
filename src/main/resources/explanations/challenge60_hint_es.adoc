@@ -1,0 +1,8 @@
+=== Pista para el Desafío 60
+
+Este desafío demuestra cómo un servidor MCP (Protocolo de Contexto de Modelo) inseguro puede filtrar secretos almacenados en variables de entorno.
+
+**Dónde buscar:**
+
+1. **Un servidor MCP separado se ejecuta en el puerto 8090** — diferente del puerto de la aplicación principal (8080)
+2. **El servidor MCP implementa el protocolo JSON-RPC 2.0** como lo define la especificación MCP

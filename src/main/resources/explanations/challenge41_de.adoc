@@ -1,0 +1,7 @@
+=== Password Shucking (Passwort-Schälen)
+
+Eine Website verwendete https://en.wikipedia.org/wiki/MD5[MD5] für das Passwort-Hashing, und die Entwickler entdeckten kürzlich, dass jemand einen Dump ihrer Benutzerdaten veröffentlicht hatte.
+
+In dem Versuch, die Sicherheit zu verbessern, beschlossen sie, zu einem stärkeren Hashing-Algorithmus wie https://en.wikipedia.org/wiki/Bcrypt[bcrypt] zu migrieren.
+
+Die Entwickler entschieden, dass die schnellste Migrationsmethode darin besteht, die vorhandenen Hashes mit bcrypt zu hashen. Zwei Hashing-Algorithmen sind sicherer als einer, oder?

@@ -1,0 +1,8 @@
+=== Se cacher dans les binaires partie 1: le binaire C
+
+Nous devons mettre un secret dans une application mobile! Personne ne remarquera le secret dans notre code compilé!
+C'est une idée reçue que nous avons souvent rencontrée lors de présentations sur des sujets de sécurité mobile.
+
+Démystifions ce mythe pour C: pouvez-vous trouver le secret dans https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-c[wrongsecrets-c] (ou https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-c-arm[wrongsecrets-c-arm], https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-c-linux[wrongsecrets-c-linux])?
+
+Essayez de télécharger le binaire et de l'exécuter localement (par exemple, `./wrongsecrets-c<laversiondontvousa besoin> <votre réponse>`).

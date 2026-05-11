@@ -1,0 +1,9 @@
+Je kunt deze uitdaging oplossen met de volgende alternatieve oplossingen:
+
+1. Gebruik `docker history`:
+ - Download de container.
+ - Voer `docker history --no-trunc jeroenwillemsen/wrongsecrets:<TAGNAAM>` uit om de build-argumenten te vinden.
+ - Zoek naar `ARG_BASED_PASSWORD`.
+
+2. Bekijk de Docker-repository online:
+ - Ga naar https://hub.docker.com/r/jeroenwillemsen/wrongsecrets/tags en zoek de image lagen.

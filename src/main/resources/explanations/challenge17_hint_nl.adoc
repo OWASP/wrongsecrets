@@ -1,0 +1,7 @@
+Zoals de uitdaging zegt, moet je zoeken naar Bash-commando's die in het verleden zijn uitgevoerd; welk commando geeft ons dit?
+
+Je kunt deze uitdaging oplossen via de volgende stappen:
+
+1. Druk de inhoud af van elk .bash_history-bestand in een draaiende container:
+- Start de container met `docker run -it --entrypoint sh jeroenwillemsen/wrongsecrets:<versie>` (Vervang `<versie>` door de versie van de container die je wilt gebruiken)
+- Gebruik cat op de inhoud van het bestand: `cat ~/.bash_history`. Zodra je dit bestand hebt, kun je grep of een ander zoektool gebruiken om het antwoord te vinden.

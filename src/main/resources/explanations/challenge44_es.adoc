@@ -1,0 +1,7 @@
+=== Desafío de metadatos de Vault
+
+¡Los sistemas de gestión de secretos ahora a menudo tienen soporte de metadatos para sus secretos! Esto es genial, ya que te permite enriquecer el secreto con datos contextuales, haciendo que sea más fácil de recordar.
+
+Pero, ¿qué pasa si pones información confidencial/secreta en un secreto por error?
+
+Un desarrollador ha colocado metadatos secretos en un `wrongsecret` en Vault. ¿Puedes encontrarlo?

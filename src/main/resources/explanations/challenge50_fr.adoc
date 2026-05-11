@@ -1,0 +1,7 @@
+=== Cacher des secrets dans des binaires revisité: runtime autonome .NET
+
+Il est super facile de trouver un secret dans une DLL, mais sur MacOS ou Linux c'est beaucoup plus difficile. Alors je suis sûr qu'on peut en garder un là, non?
+
+Montrons-nous que nous ne devrions pas faire ça! Pouvez-vous trouver le secret dans https://github.com/OWASP/wrongsecrets-binaries/releases/download/0.1.0/wrongsecrets-dotnet[wrongsecrets-dotnet]?
+
+Essayez de télécharger le binaire et de l'exécuter localement (par exemple, `./wrongsecrets-dotnet<laversion> <votre réponse>`).

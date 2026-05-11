@@ -1,0 +1,5 @@
+=== Contraseña basada en ENV de Docker
+
+¿Sabías que también puedes usar ENV en los contenedores Docker para establecer la contraseña? ¡Qué gran idea compartirlo con todos!
+
+Puedes detectar fácilmente el secreto mirando cómo se construyeron las capas o detectándolo con una herramienta como https://github.com/goodwithtech/dockle[*Dockle*].

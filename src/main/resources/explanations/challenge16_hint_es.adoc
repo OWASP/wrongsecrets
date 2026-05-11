@@ -1,0 +1,7 @@
+Puedes resolver este desafío con los siguientes pasos:
+
+1. Encuentra el secreto cuando es utilizado por la aplicación
+- Abre las herramientas de desarrollo del navegador:
+- Selecciona la pestaña Red
+- Encuentra la solicitud con la ruta `/token`
+- Encuentra en el cuerpo de la solicitud la clave `client_secret`

@@ -1,0 +1,5 @@
+*Por qué almacenar secretos en la blockchain es una mala idea*
+
+Nunca debes comprometer ningún secreto con la blockchain. Todos los datos son públicos. Especialmente cuando una variable es pública, es muy fácil de leer.
+
+¿Todavía necesitas usar un secreto? Asegúrate de que sea parte de un sistema de soporte (por ejemplo, un servicio externo que creas).

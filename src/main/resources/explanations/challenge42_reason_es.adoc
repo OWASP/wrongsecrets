@@ -1,0 +1,5 @@
+*¿Por qué ocultar una clave API en los eventos de auditoría no es una buena idea?*
+
+En un sistema seguro y bien arquitecturado, proteger información sensible como las claves API es crucial. Los eventos de auditoría son importantes para rastrear y monitorear actividades dentro de una aplicación.
+
+Asegúrate de que las claves API no sean visibles en texto plano en los logs de (auditoría) o cualquier otra salida.

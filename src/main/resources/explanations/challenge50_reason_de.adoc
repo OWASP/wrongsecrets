@@ -1,0 +1,5 @@
+*Warum die Verwendung von Binärdateien zum Verstecken eines Geheimnisses einen Angreifer nur verzögert.*
+
+Mit wunderbaren kostenlosen Reverse-Engineering-Anwendungen wie ILSpy bleibt nicht viel sicher. Jeder, der die ausführbare Datei in solche Tools laden kann, kann leicht Aufklärung betreiben und Geheimnisse in deiner Binärdatei finden.
+
+Das Verschlüsseln des Geheimnisses mit einem in der Binärdatei eingebetteten Schlüssel verzögert einen Angreifer nur, hindert ihn aber nicht daran, das Geheimnis zu finden. Wenn das Geheimnis vom ausführbaren Programm verwendet werden muss, muss es letztendlich im Speicher vorhanden sein.

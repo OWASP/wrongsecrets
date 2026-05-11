@@ -1,0 +1,5 @@
+=== Clave de cifrado insegura - Parte 1
+
+Un desarrollador cifró un secreto usando https://en.wikipedia.org/wiki/Advanced_Encryption_Standard[AES] y almacenó su valor codificado en base64 en un archivo. ¿Pero dónde dejar la clave? ¿Qué tal usar simplemente el nombre del archivo como clave de cifrado? ¡De esa forma, cada secreto puede tener su propia clave fácilmente! ¿Puedes encontrar el secreto?
+
+El archivo de desafío se llama https://github.com/OWASP/wrongsecrets/blob/master/src/main/resources/executables/secrchallenge.md[secrchallenge.md] y puede encontrarse en la https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables[carpeta de ejecutables].
