@@ -2,6 +2,19 @@ This challenge uses an obfuscated Java CLI JAR.
 
 You can solve it by:
 
-1. Decompiling the classes and following the code that reconstructs the secret.
-2. Looking for encoded byte arrays, reflection, and helper methods that decode data at runtime.
-3. Running the JAR and tracing what happens when `spoil` is passed in.
+1. Decompile the JAR with a Java decompiler such as CFR, JADX, or IntelliJ IDEA:
+- Download `wrongsecrets-java-obfuscated.jar`.
+- Open it in your decompiler of choice.
+- Find the main class and trace what happens when the program receives the `spoil` argument.
+- Look for helper methods that rebuild the secret at runtime.
+
+2. Inspect the bytecode from the command line:
+- Run `jar tf wrongsecrets-java-obfuscated.jar` to list the classes in the JAR.
+- Extract it with `jar xf wrongsecrets-java-obfuscated.jar`.
+- Run `javap -c -p io/github/owasp/wrongsecrets/WrongSecretsObfuscated.class` on the extracted class.
+- Look for the encoded byte array, the XOR key, and the method that decodes the secret.
+
+3. Run the JAR locally and observe its behavior:
+- Execute `java -jar wrongsecrets-java-obfuscated.jar spoil`.
+- If you want to understand the guessing flow, also run `java -jar wrongsecrets-java-obfuscated.jar wronganswer`.
+- Compare the runtime behavior with what you found in the decompiled code to recover the secret.
