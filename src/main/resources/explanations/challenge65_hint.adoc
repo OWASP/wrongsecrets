@@ -1,0 +1,7 @@
+This challenge uses a plain Java CLI JAR.
+
+You can solve it by:
+
+1. Extracting the JAR and looking at the compiled classes or bundled metadata.
+2. Using tools like `strings`, CFR, `javap`, JADX, or IntelliJ's decompiler.
+3. Running the JAR with `spoil` or trying to understand how it compares your input.

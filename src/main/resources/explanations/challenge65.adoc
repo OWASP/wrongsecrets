@@ -1,0 +1,5 @@
+=== Hiding in binaries part 6: the plain Java CLI
+
+Compiled Java applications can hide secrets too, even when they are only distributed as runnable JARs. Can you find the secret in our plain Java CLI?
+
+Try downloading and inspecting https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-java.jar[wrongsecrets-java.jar]. Run it locally with `java -jar wrongsecrets-java.jar spoil` or `java -jar wrongsecrets-java.jar <your answer>`.

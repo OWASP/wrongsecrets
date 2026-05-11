@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.util.ResourceUtils;
 
 /** Helper for classes to execute binaries as part of the Binary challenges. */
@@ -111,6 +112,37 @@ public class BinaryExecutionHelper {
     }
   }
 
+  /**
+   * Execute a Java CLI packaged as a JAR with the actual guess.
+   *
+   * @param guess containing the guess
+   * @param fileName of the JAR to be used (pre-defined, make sure it is never user input
+   *     controlled)
+   * @return the actual answer
+   */
+  public String executeJavaJar(String guess, String fileName) {
+    BinaryInstructionForFile binaryInstructionForFile;
+    if (Strings.isNullOrEmpty(guess)) {
+      binaryInstructionForFile = BinaryInstructionForFile.Spoil;
+    } else {
+      binaryInstructionForFile = BinaryInstructionForFile.Guess;
+    }
+    try {
+      File jarFile = createTempJar(fileName);
+      String result = executeJavaJar(jarFile, binaryInstructionForFile, guess);
+      deleteFile(jarFile);
+      log.info(
+          "stdout challenge {}: {}",
+          challengeNumber,
+          result.lines().collect(Collectors.joining("")));
+      return result;
+    } catch (Exception e) {
+      log.warn("Error executing Java JAR:", e);
+      executionException = e;
+      return ERROR_EXECUTION;
+    }
+  }
+
   @SuppressFBWarnings(
       value = "COMMAND_INJECTION",
       justification = "We check for various injection methods and counter those")
@@ -137,6 +169,33 @@ public class BinaryExecutionHelper {
     if (execFile.getPath().contains("swift")) {
       configureSwiftLibraryPath(ps);
     }
+    Process pr = ps.start();
+    try (BufferedReader in =
+        new BufferedReader(new InputStreamReader(pr.getInputStream(), StandardCharsets.UTF_8))) {
+      String result = in.readLine();
+      pr.waitFor();
+      return result;
+    }
+  }
+
+  @SuppressFBWarnings(
+      value = "COMMAND_INJECTION",
+      justification = "We check for various injection methods and counter those")
+  private String executeJavaJar(File jarFile, BinaryInstructionForFile binaryInstructionForFile, String guess)
+      throws IOException, InterruptedException {
+    if (!jarFile.getPath().contains("wrongsecrets")
+        || stringContainsCommandChainToken(jarFile.getPath())
+        || stringContainsCommandChainToken(guess)) {
+      return BinaryExecutionHelper.ERROR_EXECUTION;
+    }
+
+    ProcessBuilder ps;
+    if (binaryInstructionForFile.equals(BinaryInstructionForFile.Spoil)) {
+      ps = new ProcessBuilder("java", "-jar", jarFile.getPath(), "spoil");
+    } else {
+      ps = new ProcessBuilder("java", "-jar", jarFile.getPath(), guess);
+    }
+    ps.redirectErrorStream(true);
     Process pr = ps.start();
     try (BufferedReader in =
         new BufferedReader(new InputStreamReader(pr.getInputStream(), StandardCharsets.UTF_8))) {
@@ -244,6 +303,17 @@ public class BinaryExecutionHelper {
           "We are on Mac os with ARM let's use  xattr -d com.apple.quarantine on {}",
           execFile.getPath());
       xattrMacOSExecFile(execFile);
+    }
+    return execFile;
+  }
+
+  private File createTempJar(String fileName) throws IOException {
+    File execFile = File.createTempFile("c-exec-" + fileName.replace('.', '-'), ".jar");
+    try {
+      FileUtils.copyInputStreamToFile(
+          new ClassPathResource("executables/" + fileName).getInputStream(), execFile);
+    } catch (IOException e) {
+      FileUtils.copyFile(retrieveFile(fileName), execFile);
     }
     return execFile;
   }

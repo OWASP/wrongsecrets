@@ -1,0 +1,7 @@
+This challenge uses an obfuscated Java CLI JAR.
+
+You can solve it by:
+
+1. Decompiling the classes and following the code that reconstructs the secret.
+2. Looking for encoded byte arrays, reflection, and helper methods that decode data at runtime.
+3. Running the JAR and tracing what happens when `spoil` is passed in.

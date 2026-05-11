@@ -1,0 +1,5 @@
+*Why shipping a secret inside a plain JAR is still shipping the secret to the attacker.*
+
+Java bytecode is straightforward to decompile. If a secret is embedded in a class, an attacker can recover it from the JAR with static analysis or by observing the program at runtime.
+
+If a client-side executable needs a secret to do its job, assume the secret can be extracted. Prefer retrieving secrets from a trusted backend after proper authentication and authorization.
