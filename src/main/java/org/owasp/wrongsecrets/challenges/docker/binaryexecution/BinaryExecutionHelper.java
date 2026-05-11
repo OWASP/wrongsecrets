@@ -6,7 +6,11 @@ import static org.owasp.wrongsecrets.Challenges.ErrorResponses.EXECUTION_ERROR;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Strings;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -181,7 +185,8 @@ public class BinaryExecutionHelper {
   @SuppressFBWarnings(
       value = "COMMAND_INJECTION",
       justification = "We check for various injection methods and counter those")
-  private String executeJavaJar(File jarFile, BinaryInstructionForFile binaryInstructionForFile, String guess)
+  private String executeJavaJar(
+      File jarFile, BinaryInstructionForFile binaryInstructionForFile, String guess)
       throws IOException, InterruptedException {
     if (!jarFile.getPath().contains("wrongsecrets")
         || stringContainsCommandChainToken(jarFile.getPath())
@@ -307,6 +312,9 @@ public class BinaryExecutionHelper {
     return execFile;
   }
 
+  @SuppressFBWarnings(
+      value = "PATH_TRAVERSAL_IN",
+      justification = "The jar file name is hardcoded at the caller level")
   private File createTempJar(String fileName) throws IOException {
     File execFile = File.createTempFile("c-exec-" + fileName.replace('.', '-'), ".jar");
     try {
