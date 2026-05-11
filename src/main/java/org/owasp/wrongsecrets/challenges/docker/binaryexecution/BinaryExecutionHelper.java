@@ -117,7 +117,7 @@ public class BinaryExecutionHelper {
   }
 
   /**
-   * Execute a Java CLI packaged as a JAR with the actual guess.
+   * Execute a Java CLI packaged as a JAR for either secret retrieval or guess validation.
    *
    * @param guess containing the guess
    * @param fileName of the JAR to be used (pre-defined, make sure it is never user input
@@ -316,7 +316,7 @@ public class BinaryExecutionHelper {
       value = "PATH_TRAVERSAL_IN",
       justification = "The jar file name is hardcoded at the caller level")
   private File createTempJar(String fileName) throws IOException {
-    File execFile = File.createTempFile("c-exec-" + fileName.replace('.', '-'), ".jar");
+    File execFile = File.createTempFile("java-jar-" + fileName.replace('.', '-'), ".jar");
     try {
       FileUtils.copyInputStreamToFile(
           new ClassPathResource("executables/" + fileName).getInputStream(), execFile);
