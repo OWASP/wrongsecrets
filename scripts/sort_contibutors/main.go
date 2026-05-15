@@ -163,6 +163,7 @@ func (a *app) run() error {
 		{Username: "devsecops", Name: "Dan Gora"},
 		{Username: "saragluna", Name: "Xiaolu Dai"},
 		{Username: "jonathanGiles", Name: "Jonathan Giles"},
+        {Username: "MayanK23YadaV", Name: "Mayank Yadav"},
 	}
 
 	topContributors, contributors, err := a.getContributorsList()
