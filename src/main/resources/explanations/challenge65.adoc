@@ -7,4 +7,4 @@ To solve it:
 . Download and inspect https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-java.jar[wrongsecrets-java.jar].
 . Decompile the JAR or inspect the main class with a Java decompiler such as CFR, JADX, IntelliJ IDEA, or `javap`.
 . Look for the class that returns the secret and identify the plain string embedded in the CLI.
-. Once you recover the secret, you can submit it in the box below or validate it with `java -jar wrongsecrets-java.jar <your answer>`.
+. Once you recover the exact secret value, you can submit it in the box below or validate it with `java -jar wrongsecrets-java.jar <your recovered secret>`.
