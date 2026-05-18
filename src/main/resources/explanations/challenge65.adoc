@@ -1,5 +1,7 @@
 === Hiding in binaries part 6: the plain Java CLI
 
-Compiled Java applications can hide secrets too, even when they are only distributed as runnable JARs. Can you find the secret in our plain Java CLI?
+Runnable JARs are not a safe place to hide secrets. Just like Android APKs, they are archives that ship bytecode and resources directly to the attacker, which makes embedded strings, constants, and helper methods straightforward to inspect with common reverse-engineering tools.
 
-Try downloading and inspecting https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-java.jar[wrongsecrets-java.jar]. Run it locally with `java -jar wrongsecrets-java.jar spoil` or `java -jar wrongsecrets-java.jar <your answer>`.
+If a client-side Java artifact needs a secret to work, assume that secret can be extracted once the file is downloaded. Keep real secrets on a trusted backend and only release them after proper authentication and authorization.
+
+If you want more Java and Android reverse-engineering practice, explore the https://github.com/OWASP/MASTG-Hacking-Playground[OWASP MASTG Hacking Playground].
