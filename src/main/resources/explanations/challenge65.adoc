@@ -1,7 +1,10 @@
 === Hiding in binaries part 6: the plain Java CLI
 
-Runnable JARs are not a safe place to hide secrets. Just like Android APKs, they are archives that ship bytecode and resources directly to the attacker, which makes embedded strings, constants, and helper methods straightforward to inspect with common reverse-engineering tools.
+Plain strings inside a Java CLI are easy to recover once the JAR is downloaded. Can you find the secret hidden in our plain Java CLI?
 
-If a client-side Java artifact needs a secret to work, assume that secret can be extracted once the file is downloaded. Keep real secrets on a trusted backend and only release them after proper authentication and authorization.
+To solve it:
 
-If you want more Java and Android reverse-engineering practice, explore the https://github.com/OWASP/MASTG-Hacking-Playground[OWASP MASTG Hacking Playground].
+. Download and inspect https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-java.jar[wrongsecrets-java.jar].
+. Decompile the JAR or inspect the main class with a Java decompiler such as CFR, JADX, IntelliJ IDEA, or `javap`.
+. Look for the class that returns the secret and identify the plain string embedded in the CLI.
+. Once you recover the secret, you can submit it in the box below or validate it with `java -jar wrongsecrets-java.jar <your answer>`.
