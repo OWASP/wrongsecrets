@@ -219,13 +219,12 @@ public class BinaryExecutionHelper {
         new BufferedReader(new InputStreamReader(pr.getInputStream(), StandardCharsets.UTF_8))) {
       List<String> outputLines = in.lines().toList();
       pr.waitFor();
-      String firstNonEmptyLine =
-          outputLines.stream().filter(line -> !Strings.isNullOrEmpty(line)).findFirst().orElse(null);
-      return outputLines.stream()
-          .filter(line -> !Strings.isNullOrEmpty(line))
+      List<String> nonEmptyOutputLines =
+          outputLines.stream().filter(line -> !Strings.isNullOrEmpty(line)).toList();
+      return nonEmptyOutputLines.stream()
           .filter(line -> !ignoreJavaToolOptions || !line.startsWith(JAVA_TOOL_OPTIONS_PREFIX))
           .findFirst()
-          .orElse(firstNonEmptyLine);
+          .orElse(nonEmptyOutputLines.stream().findFirst().orElse(null));
     }
   }
 

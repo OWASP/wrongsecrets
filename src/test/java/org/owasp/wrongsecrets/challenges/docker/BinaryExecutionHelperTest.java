@@ -15,7 +15,7 @@ import uk.org.webcompere.systemstubs.jupiter.SystemStub;
 import uk.org.webcompere.systemstubs.jupiter.SystemStubsExtension;
 
 @ExtendWith(SystemStubsExtension.class)
-class BinaryExectionHelperTest {
+class BinaryExecutionHelperTest {
 
   @SystemStub private EnvironmentVariables environmentVariables;
 
