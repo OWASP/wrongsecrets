@@ -1,4 +1,4 @@
-<!-- CRE Link: [223-780](https://www.opencre.org/cre/223-780?register=true&type=tool&tool_type=training&tags=secrets,training&description=With%20this%20app%2C%20we%20have%20packed%20various%20ways%20of%20how%20to%20not%20store%20your%20secrets.%20These%20can%20help%20you%20to%20realize%20whether%20your%20secret%20management%20is%20ok.%20The%20challenge%20is%20to%20find%20all%20the%20different%20secrets%20by%20means%20of%20various%20tools%20and%20techniques.%20Can%20you%20solve%20all%20the%2065%20challenges%3F) -->
+<!-- CRE Link: [223-780](https://www.opencre.org/cre/223-780?register=true&type=tool&tool_type=training&tags=secrets,training&description=With%20this%20app%2C%20we%20have%20packed%20various%20ways%20of%20how%20to%20not%20store%20your%20secrets.%20These%20can%20help%20you%20to%20realize%20whether%20your%20secret%20management%20is%20ok.%20The%20challenge%20is%20to%20find%20all%20the%20different%20secrets%20by%20means%20of%20various%20tools%20and%20techniques.%20Can%20you%20solve%20all%20the%2067%20challenges%3F) -->
 
 # OWASP WrongSecrets
 
@@ -16,7 +16,7 @@
 
 Welcome to the OWASP WrongSecrets game! The game is packed with real life examples of how to _not_ store secrets in your software. Each of these examples is captured in a challenge, which you need to solve using various tools and techniques. Solving these challenges will help you recognize common mistakes & can help you to reflect on your own secrets management strategy.
 
-Can you solve all the 65 challenges?
+Can you solve all the 67 challenges?
 
 Try some of them on [our Heroku demo environment](https://wrongsecrets.herokuapp.com/).
 
@@ -128,16 +128,16 @@ Not sure which setup is right for you? Here's a quick guide:
 
 | **I want to...** | **Recommended Setup** | **Challenges Available** |
 |------------------|----------------------|--------------------------|
-| Try it quickly online | [Container running on Heroku](https://www.wrongsecrets.com/) | Basic challenges (0-4, 8, 12-32, 34-43, 49-52, 54-64) |
+| Try it quickly online | [Container running on Heroku](https://www.wrongsecrets.com/) | Basic challenges (0-4, 8, 12-32, 34-43, 49-52, 54-66) |
 | Run locally with Docker | [Basic Docker](#basic-docker-exercises) | Same as above, but on your machine |
-| Learn Kubernetes secrets | [K8s/Minikube Setup](#basic-k8s-exercise) | Kubernetes challenges (0-6, 8, 12-43, 48-64) |
-| Practice with cloud secrets | [Cloud Challenges](#cloud-challenges) | All challenges (0-64) |
+| Learn Kubernetes secrets | [K8s/Minikube Setup](#basic-k8s-exercise) | Kubernetes challenges (0-6, 8, 12-43, 48-66) |
+| Practice with cloud secrets | [Cloud Challenges](#cloud-challenges) | All challenges (0-66) |
 | Run a workshop/CTF | [CTF Setup](#ctf) | Customizable challenge sets |
 | Contribute to the project | [Development Setup](#notes-on-development) | All challenges + development tools |
 
 ## Basic docker exercises
 
-_Can be used for challenges 0-4, 8, 12-32, 34-43, 49-52, 54-64_
+_Can be used for challenges 0-4, 8, 12-32, 34-43, 49-52, 54-66_
 
 For the basic docker exercises you currently require:
 
@@ -161,7 +161,7 @@ docker run -p 8080:8080 -p 8090:8090 ghcr.io/owasp/wrongsecrets/wrongsecrets-mas
 ⚠️ **Warning**: This is a development version built from the latest master branch and may contain experimental features or instabilities.
 
 **📝 Note on Ports:**
-- Port **8080**: Main application (challenges 0-64)
+- Port **8080**: Main application (challenges 0-66)
 - Port **8090**: MCP server (required for Challenge 60)
 
 **📝 Note on Challenge 62 (Google Drive MCP):**
@@ -224,6 +224,8 @@ Now you can try to find the secrets by means of solving the challenge offered at
 -   [localhost:8080/challenge/challenge-62](http://localhost:8080/challenge/challenge-62)
 -   [localhost:8080/challenge/challenge-63](http://localhost:8080/challenge/challenge-63)
 -   [localhost:8080/challenge/challenge-64](http://localhost:8080/challenge/challenge-64)
+-   [localhost:8080/challenge/challenge-65](http://localhost:8080/challenge/challenge-65)
+-   [localhost:8080/challenge/challenge-66](http://localhost:8080/challenge/challenge-66)
 </details>
 
 Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look
@@ -329,7 +331,7 @@ now you can use the provided IP address and port to further play with the K8s va
 
 ## Vault exercises with minikube
 
-_Can be used for challenges 0-8, 12-64_
+_Can be used for challenges 0-8, 12-66_
 Make sure you have the following installed:
 
 -   minikube with docker (or comment out line 8 and work at your own k8s setup),
@@ -340,14 +342,14 @@ Make sure you have the following installed:
 -   vault [Install from here](https://developer.hashicorp.com/vault/install),
 -   grep, Cat, and Sed
 
-Run `./k8s-vault-minikube-start.sh`, when the script is done, then the challenges will wait for you at <http://localhost:8080> . This will allow you to run challenges 0-8, 12-64.
+Run `./k8s-vault-minikube-start.sh`, when the script is done, then the challenges will wait for you at <http://localhost:8080> . This will allow you to run challenges 0-8, 12-66.
 
 When you stopped the `k8s-vault-minikube-start.sh` script and want to resume the port forward run: `k8s-vault-minikube-resume.sh`.
 This is because if you run the start script again it will replace the secret in the vault and not update the secret-challenge application with the new secret.
 
 ## Cloud Challenges
 
-_Can be used for challenges 0-64_
+_Can be used for challenges 0-66_
 
 **READ THIS**: Given that the exercises below contain IAM privilege escalation exercises,
 never run this on an account which is related to your production environment or can influence your account-over-arching
@@ -615,7 +617,7 @@ The plugin is configured in `pom.xml` under the `<build><plugins>` section:
     <nvdApiKey>...</nvdApiKey>
     <assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>
     <ossIndexServerId>ossindex</ossIndexServerId>
-    <ossindexAnalyzerEnabled>true</ossindexAnalyzerEnabled> <!-- SET THIS TO FALSE IF YOU HAVE NO SONATYPE ACCOUNT! -->
+    <ossIndexAnalyzerEnabled>true</ossIndexAnalyzerEnabled> <!-- SET THIS TO FALSE IF YOU HAVE NO SONATYPE ACCOUNT! -->
   </configuration>
   <executions>
     <execution>
@@ -629,7 +631,7 @@ The plugin is configured in `pom.xml` under the `<build><plugins>` section:
 
 - **nvdApiKey**: API key for accessing the NVD database (recommended for faster and more reliable scans).
 - **ossIndexServerId**: References credentials in your Maven `settings.xml` for OSS Index (see below).
-- **ossindexAnalyzerEnabled**: Set to `true` to enable OSS Index scanning. If you encounter authentication errors (401), set this to `false` to disable OSS Index.
+- **ossIndexAnalyzerEnabled**: Set to `true` to enable OSS Index scanning. If you encounter authentication errors (401), set this to `false` to disable OSS Index.
 
 #### Authenticating with OSS Index
 
@@ -649,7 +651,7 @@ Replace `YOUR_OSSINDEX_USERNAME` and `YOUR_OSSINDEX_API_TOKEN` with your OSS Ind
 
 #### Troubleshooting
 
-- If you see `401 Unauthorized` errors for OSS Index, check your credentials or disable OSS Index by setting `<ossindexAnalyzerEnabled>false</ossindexAnalyzerEnabled>` in `pom.xml`.
+- If you see `401 Unauthorized` errors for OSS Index, check your credentials or disable OSS Index by setting `<ossIndexAnalyzerEnabled>false</ossIndexAnalyzerEnabled>` in `pom.xml`.
 - You can always run the build without OSS Index if you prefer only NVD-based scanning.
 
 #### More Info
@@ -819,4 +821,4 @@ Want to learn more? Checkout the sources below:
 -   [OWASP SAMM on Secret Management](https://owaspsamm.org/model/implementation/secure-deployment/stream-b/)
 -   [The secret detection topic at Github](https://github.com/topics/secrets-detection)
 -   [OWASP Secretsmanagement Cheatsheet](https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Secrets_Management_Cheat_Sheet.md)
--   [OpenCRE on secrets management](https://www.opencre.org/cre/223-780?register=true&type=tool&tool_type=training&tags=secrets,training&description=With%20this%20app%2C%20we%20have%20packed%20various%20ways%20of%20how%20to%20not%20store%20your%20secrets.%20These%20can%20help%20you%20to%20realize%20whether%20your%20secret%20management%20is%20ok.%20The%20challenge%20is%20to%20find%20all%20the%20different%20secrets%20by%20means%20of%20various%20tools%20and%20techniques.%20Can%20you%20solve%20all%20the%2062%20challenges%3F&trk=flagship-messaging-web&messageThreadUrn=urn:li:messagingThread:2-YmRkNjRkZTMtNjRlYS00OWNiLWI2YmUtMDYwNzY3ZjI1MDcyXzAxMg==&lipi=urn:li:page:d_flagship3_feed;J58Sgd80TdanpKWFMH6z+w==)
+-   [OpenCRE on secrets management](https://www.opencre.org/cre/223-780?register=true&type=tool&tool_type=training&tags=secrets,training&description=With%20this%20app%2C%20we%20have%20packed%20various%20ways%20of%20how%20to%20not%20store%20your%20secrets.%20These%20can%20help%20you%20to%20realize%20whether%20your%20secret%20management%20is%20ok.%20The%20challenge%20is%20to%20find%20all%20the%20different%20secrets%20by%20means%20of%20various%20tools%20and%20techniques.%20Can%20you%20solve%20all%20the%2067%20challenges%3F&trk=flagship-messaging-web&messageThreadUrn=urn:li:messagingThread:2-YmRkNjRkZTMtNjRlYS00OWNiLWI2YmUtMDYwNzY3ZjI1MDcyXzAxMg==&lipi=urn:li:page:d_flagship3_feed;J58Sgd80TdanpKWFMH6z+w==)

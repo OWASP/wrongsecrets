@@ -51,7 +51,7 @@
     <bootstrap.version>5.3.8</bootstrap.version>
     <checkstyle-maven.version>3.6.0</checkstyle-maven.version>
     <checkstyle.version>13.4.2</checkstyle.version>
-    <com.azure.spring.version>7.1.0</com.azure.spring.version>
+    <com.azure.spring.version>7.2.0</com.azure.spring.version>
     <cyclonedx-maven.version>2.9.1</cyclonedx-maven.version>
     <cyclonedx.core.version>12.1.0</cyclonedx.core.version>
     <datatables.version>2.3.7</datatables.version>
@@ -65,7 +65,6 @@
     <google.cloud.libraries-bom.version>26.79.0</google.cloud.libraries-bom.version>
     <!-- Pin Groovy to 4.x for thymeleaf-layout-dialect compatibility (Spring Boot 4.0 manages 5.x) -->
     <groovy.version>4.0.25</groovy.version>
-    <io.netty.version>4.2.12.Final</io.netty.version>
     <java.version>25</java.version>
     <jquery.version>3.7.1</jquery.version>
     <jruby.version>10.0.5.0</jruby.version>
@@ -119,14 +118,6 @@
         <groupId>com.azure.spring</groupId>
         <artifactId>spring-cloud-azure-dependencies</artifactId>
         <version>${com.azure.spring.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-      <dependency>
-        <groupId>io.netty</groupId>
-        <artifactId>netty-bom</artifactId>
-        <version>${io.netty.version}</version>
-        <!-- Explicitly define the Netty version to be in sync with the Azure one, otherwise a warning is shown -->
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -291,6 +282,16 @@
     <dependency>
       <groupId>com.azure.spring</groupId>
       <artifactId>spring-cloud-azure-starter-keyvault-secrets</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>com.azure</groupId>
+          <artifactId>azure-core-http-netty</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>com.azure</groupId>
+      <artifactId>azure-core-http-jdk-httpclient</artifactId>
     </dependency>
 
     <dependency>
@@ -495,11 +496,11 @@
         <artifactId>dependency-check-maven</artifactId>
         <version>${dependency-check-maven.version}</version>
         <configuration>
-          <nvdApiKey>27a3071a-9d40-42f2-ac92-74bebbc4bdeb</nvdApiKey>
+          <nvdApiKey>${env.NVD_API_KEY}</nvdApiKey>
           <assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>
           <ossIndexServerId>ossindex</ossIndexServerId>
           <!-- server id configured in settings.xml-->
-          <ossindexAnalyzerEnabled>true</ossindexAnalyzerEnabled>
+          <ossIndexAnalyzerEnabled>true</ossIndexAnalyzerEnabled>
           <!--disable when getting 401 errors-->
         </configuration>
         <executions>
