@@ -24,6 +24,7 @@ RUN --mount=type=secret,id=mysecret \
 WORKDIR /config/Desktop
 
 COPY src/main/resources/executables/*linux-mus* /var/tmp/wrongsecrets/
+COPY src/main/resources/executables/wrongsecrets-java*.jar /var/tmp/wrongsecrets/
 COPY src/main/resources/executables/decrypt/ /var/tmp/wrongsecrets/decrypt/
 COPY src/main/resources/executables/wrongsecrets-advanced-c-windows.exe /var/tmp/wrongsecrets/
 COPY src/main/resources/executables/secrchallenge.md /var/tmp/wrongsecrets/

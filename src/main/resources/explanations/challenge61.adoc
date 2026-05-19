@@ -1,0 +1,7 @@
+=== Telegram Channel Secrets
+
+Many mobile applications and services use Telegram bots for notifications, monitoring, or user interaction. Developers often hardcode Telegram bot credentials directly in their application source code, making these secrets easily discoverable by anyone who has access to the codebase.
+
+In this challenge, a developer has embedded Telegram bot credentials in the application code to communicate with a control channel. The actual secret answer is posted in the Telegram channel that can be accessed using these credentials.
+
+Can you find the hardcoded Telegram bot token and use it to discover the secret in the associated channel?

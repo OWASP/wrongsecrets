@@ -1,0 +1,5 @@
+*Why obfuscation is only a speed bump.*
+
+Encoding, reflection, and light obfuscation can make reverse engineering less convenient, but they do not create real secrecy. The executable still contains everything it needs to recover the secret.
+
+If the application can derive the secret locally, a determined attacker can do the same. Protect secrets by moving trust decisions and secret material to controlled server-side systems.

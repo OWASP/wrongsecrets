@@ -140,6 +140,11 @@ public class Challenge60McpController {
     // expose when an attacker runs a command like "env" or "printenv"
     String envOutput =
         System.getenv().entrySet().stream()
+            .filter(
+                e ->
+                    !e.getKey()
+                        .equals("GOOGLE_SERVICE_ACCOUNT_KEY")) // we don't want to waste challenge62
+            // ;-).
             .map(e -> e.getKey() + "=" + e.getValue())
             .collect(Collectors.joining("\n"));
 

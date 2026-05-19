@@ -2,7 +2,6 @@ package org.owasp.wrongsecrets.challenges.docker;
 
 import com.google.api.client.util.Strings;
 import java.security.SecureRandom;
-import java.util.Random;
 import lombok.extern.slf4j.Slf4j;
 import org.owasp.wrongsecrets.challenges.FixedAnswerChallenge;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,7 +15,7 @@ public class Challenge8 extends FixedAnswerChallenge {
   private static final String alphabet =
       "0123456789QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm";
 
-  private final Random secureRandom = new SecureRandom();
+  private final SecureRandom secureRandom = new SecureRandom();
   private final String serverCode;
 
   public Challenge8(@Value("${challenge_acht_ctf_host_value}") String serverCode) {

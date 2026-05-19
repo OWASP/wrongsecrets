@@ -1,0 +1,43 @@
+=== Why Challenge 62 Matters: MCP Privilege Escalation via Google Service Account
+
+**The Problem:**
+
+MCP (Model Context Protocol) servers are increasingly used to give AI assistants access to external services and data sources. When these servers are configured with service accounts or API keys that have broader permissions than the calling user, they create a dangerous privilege escalation vector.
+
+This challenge demonstrates the **Principle of Least Privilege** violation: the MCP server's Google Service Account has access to a restricted Google Drive document, but the server grants that access to *any caller* without verifying whether the caller is authorized to see the document.
+
+**The Real-World Scenario:**
+
+1. A developer builds an MCP server to help an internal AI assistant access team documents in Google Drive
+2. The service account is granted read access to a sensitive document
+3. The developer does not implement any caller authentication or authorization checks on the MCP tools
+4. Anyone who discovers the MCP endpoint can now read documents they are not supposed to access — effectively using the service account as a privilege escalation proxy
+
+**Why This Is Dangerous:**
+
+- **Privilege escalation**: Callers gain the service account's permissions, not their own
+- **No audit trail**: Access via the MCP tool may not be logged with the caller's identity
+- **Broad attack surface**: Any MCP client (legitimate or malicious) can invoke the tool
+- **AI-assisted exploitation**: AI agents connected to this MCP server will execute the tool automatically when instructed, amplifying the risk
+
+**How to Fix:**
+
+1. **Authenticate MCP callers**: Require an authentication token on the MCP endpoint and verify caller identity before executing tools
+2. **Authorize at the tool level**: Check whether the authenticated caller is permitted to access the requested resource before calling the service account
+3. **Scope service account permissions narrowly**: The service account should have the minimum permissions necessary for legitimate use cases only
+4. **Audit all tool invocations**: Log the caller identity along with every tool call so access can be reviewed
+5. **Prefer impersonation over shared credentials**: Use caller-specific credentials or token exchange instead of a single shared service account
+
+**WrongSecrets implementation notes:**
+
+- Challenge answer parsing uses tagged content (`<secret>...</secret>`) and caches the extracted value to optimize its memory footprint.
+- MCP document retrieval uses a bounded cache to limit repeated outbound requests while preserving the configured default document.
+- Relevant tests:
+	- `Challenge62Test`
+	- `Challenge62McpControllerTest`
+
+**References:**
+
+- https://modelcontextprotocol.io/specification/2024-11-05/[MCP Specification]
+- https://owasp.org/www-project-top-ten/[OWASP Top 10]
+- https://cloud.google.com/iam/docs/best-practices-service-accounts[Google Service Account Best Practices]

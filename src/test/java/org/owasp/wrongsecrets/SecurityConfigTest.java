@@ -69,4 +69,13 @@ class SecurityConfigTest {
                 .with(httpBasic(challenge37BasicAuth.username(), challenge37BasicAuth.password())))
         .andExpect(status().isOk());
   }
+
+  @Test
+  void shouldAllowMcp62WithoutCsrfToken() throws Exception {
+    mvc.perform(
+            post("/mcp62")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/list\"}"))
+        .andExpect(status().isOk());
+  }
 }

@@ -63,6 +63,8 @@ public class Challenge49 implements Challenge {
       value = "WEAK_MESSAGE_DIGEST_MD5",
       justification = "This is to allow md5 hashing")
   private String hashWithMd5(String plainText) throws NoSuchAlgorithmException {
+    // codeql[java/weak-cryptographic-algorithm] Intentionally weak algorithm for educational
+    // challenge demonstrating weak KDF
     MessageDigest md = MessageDigest.getInstance("MD5");
 
     byte[] result = md.digest(plainText.getBytes(StandardCharsets.UTF_8));
@@ -82,6 +84,8 @@ public class Challenge49 implements Challenge {
 
       SecretKey secretKey = new SecretKeySpec(key.getBytes(StandardCharsets.UTF_8), "AES");
 
+      // codeql[java/weak-cryptographic-algorithm] Intentionally weak ECB mode for educational
+      // challenge demonstrating weak KDF
       Cipher cipher = Cipher.getInstance("AES");
       cipher.init(Cipher.DECRYPT_MODE, secretKey);
 

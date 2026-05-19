@@ -47,6 +47,8 @@ public class Challenge41 implements Challenge {
       value = "WEAK_MESSAGE_DIGEST_MD5",
       justification = "This is to allow md5 hashing")
   private String hashWithMd5(String plainText) throws NoSuchAlgorithmException {
+    // codeql[java/weak-cryptographic-algorithm] Intentionally weak algorithm for educational
+    // challenge demonstrating password shucking
     MessageDigest md = MessageDigest.getInstance("MD5");
 
     byte[] result = md.digest(plainText.getBytes(StandardCharsets.UTF_8));

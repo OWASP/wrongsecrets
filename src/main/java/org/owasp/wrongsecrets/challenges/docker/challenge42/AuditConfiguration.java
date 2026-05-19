@@ -1,9 +1,9 @@
 package org.owasp.wrongsecrets.challenges.docker.challenge42;
 
-import groovy.util.logging.Slf4j;
 import java.util.Map;
 import java.util.UUID;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.actuate.audit.AuditEvent;
 import org.springframework.boot.actuate.audit.InMemoryAuditEventRepository;
 import org.springframework.context.annotation.Bean;

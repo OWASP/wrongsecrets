@@ -1,0 +1,28 @@
+=== What's wrong?
+
+Hardcoding Telegram bot credentials in source code is a serious security vulnerability:
+
+**Security Issues:**
+1. **Exposed API Credentials**: Bot tokens provide full access to the Telegram bot functionality
+2. **Channel Compromise**: Anyone with the token can read messages, send messages, and potentially access private information
+3. **Source Code Exposure**: Credentials are visible to anyone with access to the codebase
+4. **Version Control History**: Tokens remain in git history even if later removed
+
+**Real-world Impact:**
+- Attackers can use bot tokens to send spam or malicious messages
+- Sensitive information shared in channels becomes accessible to unauthorized users
+- Bot functionality can be hijacked for malicious purposes
+- Compliance violations if the bot handles personal or sensitive data
+
+**How to fix:**
+1. **Environment Variables**: Store bot tokens in environment variables or secure configuration files
+2. **Secret Management**: Use dedicated secret management services (HashiCorp Vault, AWS Secrets Manager, etc.)
+3. **Token Rotation**: Regularly rotate bot tokens and revoke old ones
+4. **Access Controls**: Implement proper access controls for who can access bot credentials
+5. **Code Reviews**: Always review code for hardcoded secrets before committing
+
+**Detection:**
+- Use secret scanning tools in your CI/CD pipeline
+- Implement pre-commit hooks to catch hardcoded credentials
+- Regular security audits of codebase
+- Monitor for unexpected bot activity

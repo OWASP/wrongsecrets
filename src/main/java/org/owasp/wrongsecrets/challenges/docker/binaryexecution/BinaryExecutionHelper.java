@@ -6,21 +6,33 @@ import static org.owasp.wrongsecrets.Challenges.ErrorResponses.EXECUTION_ERROR;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Strings;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.util.ResourceUtils;
 
 /** Helper for classes to execute binaries as part of the Binary challenges. */
 @Slf4j
 public class BinaryExecutionHelper {
+  private static final String JAVA_TOOL_OPTIONS_PREFIX = "Picked up JAVA_TOOL_OPTIONS:";
 
   private enum BinaryInstructionForFile {
     Spoil,
     Guess
   }
+
+  private static final String[] SWIFT_LIB_PATHS = {
+    "/usr/share/swift/usr/lib/swift/linux", "/usr/lib/swift/linux", "/usr/local/lib/swift/linux"
+  };
 
   public static final String ERROR_EXECUTION = EXECUTION_ERROR;
   private final int challengeNumber;
@@ -105,6 +117,37 @@ public class BinaryExecutionHelper {
     }
   }
 
+  /**
+   * Execute a Java CLI packaged as a JAR for either secret retrieval or guess validation.
+   *
+   * @param guess containing the guess
+   * @param fileName of the JAR to be used (pre-defined, make sure it is never user input
+   *     controlled)
+   * @return the actual answer
+   */
+  public String executeJavaJar(String guess, String fileName) {
+    BinaryInstructionForFile binaryInstructionForFile;
+    if (Strings.isNullOrEmpty(guess)) {
+      binaryInstructionForFile = BinaryInstructionForFile.Spoil;
+    } else {
+      binaryInstructionForFile = BinaryInstructionForFile.Guess;
+    }
+    try {
+      File jarFile = createTempJar(fileName);
+      String result = executeJavaJar(jarFile, binaryInstructionForFile, guess);
+      deleteFile(jarFile);
+      log.info(
+          "stdout challenge {}: {}",
+          challengeNumber,
+          result.lines().collect(Collectors.joining("")));
+      return result;
+    } catch (Exception e) {
+      log.warn("Error executing Java JAR:", e);
+      executionException = e;
+      return ERROR_EXECUTION;
+    }
+  }
+
   @SuppressFBWarnings(
       value = "COMMAND_INJECTION",
       justification = "We check for various injection methods and counter those")
@@ -128,13 +171,34 @@ public class BinaryExecutionHelper {
       }
     }
     ps.redirectErrorStream(true);
-    Process pr = ps.start();
-    try (BufferedReader in =
-        new BufferedReader(new InputStreamReader(pr.getInputStream(), StandardCharsets.UTF_8))) {
-      String result = in.readLine();
-      pr.waitFor();
-      return result;
+    if (execFile.getPath().contains("swift")) {
+      configureSwiftLibraryPath(ps);
     }
+    Process pr = ps.start();
+    return readRelevantOutput(pr, false);
+  }
+
+  @SuppressFBWarnings(
+      value = "COMMAND_INJECTION",
+      justification = "We check for various injection methods and counter those")
+  private String executeJavaJar(
+      File jarFile, BinaryInstructionForFile binaryInstructionForFile, String guess)
+      throws IOException, InterruptedException {
+    if (!jarFile.getPath().contains("wrongsecrets")
+        || stringContainsCommandChainToken(jarFile.getPath())
+        || stringContainsCommandChainToken(guess)) {
+      return BinaryExecutionHelper.ERROR_EXECUTION;
+    }
+
+    ProcessBuilder ps;
+    if (binaryInstructionForFile.equals(BinaryInstructionForFile.Spoil)) {
+      ps = new ProcessBuilder("java", "-jar", jarFile.getPath(), "spoil");
+    } else {
+      ps = new ProcessBuilder("java", "-jar", jarFile.getPath(), guess);
+    }
+    ps.redirectErrorStream(true);
+    Process pr = ps.start();
+    return readRelevantOutput(pr, true);
   }
 
   private boolean stringContainsCommandChainToken(String testString) {
@@ -147,6 +211,21 @@ public class BinaryExecutionHelper {
       }
     }
     return found;
+  }
+
+  private String readRelevantOutput(Process pr, boolean ignoreJavaToolOptions)
+      throws IOException, InterruptedException {
+    try (BufferedReader in =
+        new BufferedReader(new InputStreamReader(pr.getInputStream(), StandardCharsets.UTF_8))) {
+      List<String> outputLines = in.lines().toList();
+      pr.waitFor();
+      List<String> nonEmptyOutputLines =
+          outputLines.stream().filter(line -> !Strings.isNullOrEmpty(line)).toList();
+      return nonEmptyOutputLines.stream()
+          .filter(line -> !ignoreJavaToolOptions || !line.startsWith(JAVA_TOOL_OPTIONS_PREFIX))
+          .findFirst()
+          .orElse(nonEmptyOutputLines.stream().findFirst().orElse(null));
+    }
   }
 
   @VisibleForTesting
@@ -240,6 +319,20 @@ public class BinaryExecutionHelper {
   }
 
   @SuppressFBWarnings(
+      value = "PATH_TRAVERSAL_IN",
+      justification = "The jar file name is hardcoded at the caller level")
+  private File createTempJar(String fileName) throws IOException {
+    File execFile = File.createTempFile("java-jar-" + fileName.replace('.', '-'), ".jar");
+    try {
+      FileUtils.copyInputStreamToFile(
+          new ClassPathResource("executables/" + fileName).getInputStream(), execFile);
+    } catch (IOException e) {
+      FileUtils.copyFile(retrieveFile(fileName), execFile);
+    }
+    return execFile;
+  }
+
+  @SuppressFBWarnings(
       value = "COMMAND_INJECTION",
       justification = "We check for various injection methods and counter those")
   private static void xattrMacOSExecFile(File execFile) {
@@ -270,6 +363,26 @@ public class BinaryExecutionHelper {
   private void deleteFile(File execFile) {
     if (!execFile.delete()) {
       log.info("Deleting the file {} failed...", execFile.getPath());
+    }
+  }
+
+  private void configureSwiftLibraryPath(ProcessBuilder ps) {
+    List<String> existingPaths = new ArrayList<>();
+    String currentLdPath = ps.environment().get("LD_LIBRARY_PATH");
+    if (!Strings.isNullOrEmpty(currentLdPath)) {
+      existingPaths.add(currentLdPath);
+    }
+    for (String path : SWIFT_LIB_PATHS) {
+      File dir = new File(path);
+      if (dir.exists() && dir.isDirectory()) {
+        log.info("Found Swift library path: {}", path);
+        existingPaths.add(path);
+      }
+    }
+    if (!existingPaths.isEmpty()) {
+      String ldPath = String.join(":", existingPaths);
+      log.info("Setting LD_LIBRARY_PATH for Swift binary: {}", ldPath);
+      ps.environment().put("LD_LIBRARY_PATH", ldPath);
     }
   }
 }

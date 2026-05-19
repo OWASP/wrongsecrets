@@ -1,0 +1,25 @@
+This challenge is specifically looking at a secret stored in a Swift binary as an array of characters.
+
+You can solve this challenge using the following alternative solutions:
+
+1. Find the secrets with https://ghidra-sre.org/[Ghidra].
+- Install https://ghidra-sre.org/[Ghidra].
+- Start it with `ghidraRun`.
+- Load the application `wrongsecrets-swift` into Ghidra by choosing a new project, then import the file and then double-click on it.
+- Allow Ghidra to analyze the application.
+- Look for the `getSecret` function - you can search for it in the Symbol Tree.
+- In the decompiled code, find the array of characters that make up the secret.
+- Alternatively: on macOS, use `nm -gUj wrongsecrets-swift | grep getSecret` and then `swift-demangle --expand "s5swift9getSecretSSyF"` to find the function.
+
+2. Find the secrets with https://www.radare.org[radare2].
+- Install https://www.radare.org[radare2] with either `brew install radare2` on Mac or follow these steps: `git clone https://github.com/radareorg/radare2; cd radare2 ; sys/install.sh`
+- Launch r2 analysis with `$ r2 -AAA wrongsecrets-swift`
+- Search for strings with `iz | grep -i secret` or `iz | grep -i "This"`.
+- Alternatively, look for the `getSecret` function: `afl | grep getSecret` and then print the function with `pdf @ <function_address>`.
+- Examine the character array construction in the decompiled or disassembled code.
+
+3. Find the secrets with https://binary.ninja[Binary Ninja] or similar tools:
+- Load the binary and navigate to the Swift mangled function `s5swift9getSecretSSyF`.
+- The secret is constructed from an array of characters.
+
+Don't want to install the tools? check the https://github.com/OWASP/wrongsecrets/tree/master?tab=readme-ov-file#want-to-play-but-are-not-allowed-to-install-the-tools[WrongSecrets Desktop container]!

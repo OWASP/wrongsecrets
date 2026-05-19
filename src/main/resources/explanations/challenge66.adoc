@@ -1,0 +1,10 @@
+=== Hiding in binaries part 7: the obfuscated Java CLI
+
+Obfuscation might slow someone down, but it does not stop them from recovering embedded secrets. Can you find the harder secret in our obfuscated Java CLI?
+
+To solve it:
+
+. Download and inspect https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-java-obfuscated.jar[wrongsecrets-java-obfuscated.jar].
+. Decompile the JAR with a Java decompiler such as CFR, JADX, or IntelliJ IDEA and trace the main class.
+. Look for the encoded byte array, XOR key, and helper methods that reconstruct the secret at runtime.
+. Once you recover the secret, submit it with `java -jar wrongsecrets-java-obfuscated.jar <your answer>`.

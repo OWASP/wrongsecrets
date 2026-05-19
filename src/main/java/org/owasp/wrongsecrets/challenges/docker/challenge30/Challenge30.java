@@ -2,7 +2,6 @@ package org.owasp.wrongsecrets.challenges.docker.challenge30;
 
 import com.google.common.base.Strings;
 import java.security.SecureRandom;
-import java.util.Random;
 import org.owasp.wrongsecrets.challenges.Challenge;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.stereotype.Component;
@@ -12,7 +11,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class Challenge30 implements Challenge {
-  private final Random secureRandom = new SecureRandom();
+  private final SecureRandom secureRandom = new SecureRandom();
   private static final String alphabet =
       "0123456789QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm";
   private String solution;

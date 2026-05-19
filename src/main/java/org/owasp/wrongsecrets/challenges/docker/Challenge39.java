@@ -51,6 +51,8 @@ public class Challenge39 extends FixedAnswerChallenge {
       SecretKey secretKey = new SecretKeySpec(decodedKey, "AES");
 
       // Initialize the Cipher for decryption
+      // codeql[java/weak-cryptographic-algorithm] Intentionally weak ECB mode for educational
+      // challenge about filename-as-key
       Cipher cipher = Cipher.getInstance("AES");
       cipher.init(Cipher.DECRYPT_MODE, secretKey);
 

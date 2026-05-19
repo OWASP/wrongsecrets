@@ -33,6 +33,8 @@ public class Challenge18 implements Challenge {
   private String calculateHash(String hash, String input) {
     try {
       if (md5Hash.equals(hash) || sha1Hash.equals(hash)) {
+        // codeql[java/weak-cryptographic-algorithm] Intentionally weak algorithm for educational
+        // challenge about weak hash mechanisms
         var md = MessageDigest.getInstance(hash);
         return new String(Hex.encode(md.digest(input.getBytes(StandardCharsets.UTF_8))));
       }
