@@ -23,6 +23,7 @@ import org.springframework.util.ResourceUtils;
 /** Helper for classes to execute binaries as part of the Binary challenges. */
 @Slf4j
 public class BinaryExecutionHelper {
+  private static final String JAVA_TOOL_OPTIONS_PREFIX = "Picked up JAVA_TOOL_OPTIONS:";
 
   private enum BinaryInstructionForFile {
     Spoil,
@@ -174,12 +175,7 @@ public class BinaryExecutionHelper {
       configureSwiftLibraryPath(ps);
     }
     Process pr = ps.start();
-    try (BufferedReader in =
-        new BufferedReader(new InputStreamReader(pr.getInputStream(), StandardCharsets.UTF_8))) {
-      String result = in.readLine();
-      pr.waitFor();
-      return result;
-    }
+    return readRelevantOutput(pr, false);
   }
 
   @SuppressFBWarnings(
@@ -202,12 +198,7 @@ public class BinaryExecutionHelper {
     }
     ps.redirectErrorStream(true);
     Process pr = ps.start();
-    try (BufferedReader in =
-        new BufferedReader(new InputStreamReader(pr.getInputStream(), StandardCharsets.UTF_8))) {
-      String result = in.readLine();
-      pr.waitFor();
-      return result;
-    }
+    return readRelevantOutput(pr, true);
   }
 
   private boolean stringContainsCommandChainToken(String testString) {
@@ -220,6 +211,21 @@ public class BinaryExecutionHelper {
       }
     }
     return found;
+  }
+
+  private String readRelevantOutput(Process pr, boolean ignoreJavaToolOptions)
+      throws IOException, InterruptedException {
+    try (BufferedReader in =
+        new BufferedReader(new InputStreamReader(pr.getInputStream(), StandardCharsets.UTF_8))) {
+      List<String> outputLines = in.lines().toList();
+      pr.waitFor();
+      List<String> nonEmptyOutputLines =
+          outputLines.stream().filter(line -> !Strings.isNullOrEmpty(line)).toList();
+      return nonEmptyOutputLines.stream()
+          .filter(line -> !ignoreJavaToolOptions || !line.startsWith(JAVA_TOOL_OPTIONS_PREFIX))
+          .findFirst()
+          .orElse(nonEmptyOutputLines.stream().findFirst().orElse(null));
+    }
   }
 
   @VisibleForTesting

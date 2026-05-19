@@ -1,14 +1,23 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.assertj.core.util.Strings;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.owasp.wrongsecrets.challenges.docker.binaryexecution.BinaryExecutionHelper;
 import org.owasp.wrongsecrets.challenges.docker.binaryexecution.MuslDetector;
 import org.owasp.wrongsecrets.challenges.docker.binaryexecution.MuslDetectorImpl;
+import uk.org.webcompere.systemstubs.environment.EnvironmentVariables;
+import uk.org.webcompere.systemstubs.jupiter.SystemStub;
+import uk.org.webcompere.systemstubs.jupiter.SystemStubsExtension;
 
-class BinaryExectionHelperTest {
+@ExtendWith(SystemStubsExtension.class)
+class BinaryExecutionHelperTest {
+
+  @SystemStub private EnvironmentVariables environmentVariables;
 
   private String osArch, osName;
 
@@ -84,6 +93,20 @@ class BinaryExectionHelperTest {
             return true;
           }
         });
+  }
+
+  @Test
+  void executeJavaJarShouldIgnoreJavaToolOptionsBanner() {
+    environmentVariables.set("JAVA_TOOL_OPTIONS", "-Xmx250M");
+
+    assertThat(
+            new BinaryExecutionHelper(65, new MuslDetectorImpl())
+                .executeJavaJar("", "wrongsecrets-java.jar"))
+        .isEqualTo("This is the secret in Java");
+    assertThat(
+            new BinaryExecutionHelper(66, new MuslDetectorImpl())
+                .executeJavaJar("", "wrongsecrets-java-obfuscated.jar"))
+        .isEqualTo("This is a harder secret in Java");
   }
 
   @AfterEach
