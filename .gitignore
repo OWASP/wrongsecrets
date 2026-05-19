@@ -78,6 +78,12 @@ src/main/resources/executables/decrypt/decrypt
 src/main/resources/executables/wrongsecrets-dotnet
 src/main/resources/executables/wrongsecrets-dotnet*
 
+# Challenge 65/66
+!src/main/resources/executables/wrongsecrets-java.jar
+!src/main/resources/executables/wrongsecrets-java-ctf.jar
+!src/main/resources/executables/wrongsecrets-java-obfuscated.jar
+!src/main/resources/executables/wrongsecrets-java-obfuscated-ctf.jar
+
 # Challenge 59
 k8s/challenge53/executables/wrongsecrets-challenge53-c
 k8s/challenge53/executables/wrongsecrets-challenge53-c*

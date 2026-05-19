@@ -1,0 +1,7 @@
+*Why runnable JARs and Android APKs should not be used to hide secrets.*
+
+Runnable JARs are not a safe place to hide secrets. Just like Android APKs, they are archives that ship bytecode and resources directly to the attacker, which makes embedded strings, constants, and helper methods straightforward to inspect with common reverse-engineering tools.
+
+If a client-side Java artifact needs a secret to work, assume that secret can be extracted once the file is downloaded. Keep real secrets on a trusted backend and only release them after proper authentication and authorization.
+
+If you want more Java and Android reverse-engineering practice, explore the https://github.com/OWASP/MASTG-Hacking-Playground[OWASP MASTG Hacking Playground].
