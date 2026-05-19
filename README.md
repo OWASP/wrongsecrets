@@ -252,7 +252,7 @@ If you want to host WrongSecrets on Railway, you can do so by deploying [this on
 
 ## Basic K8s exercise
 
-_Can be used for challenges 0-6, 8, 12-43, 48-64_
+_Can be used for challenges 0-6, 8, 12-43, 48-66_
 
 ### Minikube based
 
@@ -415,32 +415,32 @@ Contributors:
 - [za @za](https://www.github.com/za)
 - [Divyanshu Dev @Novice-expert](https://www.github.com/Novice-expert)
 - [Tibor Hercz @tiborhercz](https://www.github.com/tiborhercz)
-- [Chris Elbring Jr. @neatzsche](https://www.github.com/neatzsche)
 - [Adarsh A @adarsh-a-tw](https://www.github.com/adarsh-a-tw)
+- [Chris Elbring Jr. @neatzsche](https://www.github.com/neatzsche)
 - [Diamond Rivero @diamant3](https://www.github.com/diamant3)
 - [Norbert Wolniak @nwolniak](https://www.github.com/nwolniak)
 - [Robert Felber @rfelber](https://www.github.com/rfelber)
 - [Filip Chyla @fchyla](https://www.github.com/fchyla)
-- [Dmitry Litosh @Dlitosh](https://www.github.com/Dlitosh)
 - [Vineeth Jagadeesh @djvinnie](https://www.github.com/djvinnie)
+- [Dmitry Litosh @Dlitosh](https://www.github.com/Dlitosh)
 - [Mahaputra Ilham Awal @mahaputrailhamawal](https://www.github.com/mahaputrailhamawal)
 - [Turjo Chowdhury @turjoc120](https://www.github.com/turjoc120)
 - [SndR @SndR85](https://www.github.com/SndR85)
-- [Josh Grossman @tghosth](https://www.github.com/tghosth)
 - [alphasec @alphasecio](https://www.github.com/alphasecio)
 - [CaduRoriz @CaduRoriz](https://www.github.com/CaduRoriz)
+- [Josh Grossman @tghosth](https://www.github.com/tghosth)
 - [Madhu Akula @madhuakula](https://www.github.com/madhuakula)
 - [Mike Woudenberg @mikewoudenberg](https://www.github.com/mikewoudenberg)
 - [Spyros @northdpole](https://www.github.com/northdpole)
-- [Seershan Mitra @seershan](https://www.github.com/seershan)
 - [moeedrehman135 @moeedrehman135](https://www.github.com/moeedrehman135)
 - [RubenAtBinx @RubenAtBinx](https://www.github.com/RubenAtBinx)
+- [Seershan Mitra @seershan](https://www.github.com/seershan)
 - [Alex Bender @alex-bender](https://www.github.com/alex-bender)
 - [Danny Lloyd @dannylloyd](https://www.github.com/dannylloyd)
-- [Nicolas Humblot @nhumblot](https://www.github.com/nhumblot)
-- [Rick M @kingthorin](https://www.github.com/kingthorin)
-- [Shlomo Zalman Heigh @szh](https://www.github.com/szh)
 - [Fern @f3rn0s](https://www.github.com/f3rn0s)
+- [Rick M @kingthorin](https://www.github.com/kingthorin)
+- [Nicolas Humblot @nhumblot](https://www.github.com/nhumblot)
+- [Shlomo Zalman Heigh @szh](https://www.github.com/szh)
 - [Jeff Tong @Wind010](https://www.github.com/Wind010)
 
 Testers:
@@ -454,7 +454,7 @@ Special thanks:
 
 - [Madhu Akula @madhuakula @madhuakula](https://www.github.com/madhuakula)
 - [Nanne Baars @nbaars @nbaars](https://www.github.com/nbaars)
-- [Björn Kimminich @bkimminich](https://www.github.com/bkimminich)
+- [Bjorn Kimminich @bkimminich](https://www.github.com/bkimminich)
 - [Dan Gora @devsecops](https://www.github.com/devsecops)
 - [Xiaolu Dai @saragluna](https://www.github.com/saragluna)
 - [Jonathan Giles @jonathanGiles](https://www.github.com/jonathanGiles)

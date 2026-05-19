@@ -1,3 +1,3 @@
 module github.com/owasp/wrongsecrets/scripts/sort_contibutors
 
-go 1.26
+go 1.22

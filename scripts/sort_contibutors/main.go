@@ -67,8 +67,6 @@ var excludedContributors = map[string]struct{}{
 	"commjoen":           {},
 	"bendehaan":          {},
 	"benno001":           {},
-	"copilot":            {},
-	"copilot-swe-agent":  {},
 }
 
 var knownNames = map[string]string{
@@ -144,8 +142,6 @@ func (a *app) run() error {
 		return fmt.Errorf("create output directory: %w", err)
 	}
 
-	createdDate := time.Now().UTC().Format("2006-01-02")
-
 	leaders := []Contributor{
 		{Username: "bendehaan", Name: "Ben de Haan"},
 		{Username: "commjoen", Name: "Jeroen Willemsen"},
@@ -163,13 +159,14 @@ func (a *app) run() error {
 		{Username: "devsecops", Name: "Dan Gora"},
 		{Username: "saragluna", Name: "Xiaolu Dai"},
 		{Username: "jonathanGiles", Name: "Jonathan Giles"},
-        {Username: "MayanK23YadaV", Name: "Mayank Yadav"},
 	}
 
 	topContributors, contributors, err := a.getContributorsList()
 	if err != nil {
 		return err
 	}
+
+	createdDate := time.Now().Format("2006-01-02")
 
 	htmlOutputPath := filepath.Join(a.outputDir, outputHTMLFile)
 	fmt.Printf("[+] Print to HTML file: %s\n", htmlOutputPath)
@@ -180,8 +177,7 @@ func (a *app) run() error {
 
 	markdownOutputPath := filepath.Join(a.outputDir, outputMarkdownFile)
 	fmt.Printf("[+] Print to MD file: %s\n", markdownOutputPath)
-	mdPayload := renderCreatedComment(createdDate)
-	mdPayload += renderMarkdown(leaders, "Leaders")
+	mdPayload := renderMarkdown(leaders, "Leaders")
 	mdPayload += renderMarkdown(topContributors, "Top contributors")
 	mdPayload += renderMarkdown(contributors, "Contributors")
 	mdPayload += renderMarkdown(testers, "Testers")
@@ -308,6 +304,9 @@ func (a *app) parseContributorList(items []contributorAPI) []Contributor {
 			continue
 		}
 		if strings.Contains(item.Login, "[bot]") {
+			continue
+		}
+		if strings.Contains(strings.ToLower(item.Login), "copilot") {
 			continue
 		}
 		if _, excluded := excludedContributors[item.Login]; excluded {

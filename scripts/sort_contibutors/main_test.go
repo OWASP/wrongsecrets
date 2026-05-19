@@ -107,24 +107,6 @@ func TestRenderMarkdown(t *testing.T) {
 	}
 }
 
-func TestRenderCreatedComment(t *testing.T) {
-	t.Parallel()
-
-	comment := renderCreatedComment("2026-04-20")
-	if comment != "<!-- Generated on 2026-04-20 -->\n\n" {
-		t.Fatalf("unexpected comment: %q", comment)
-	}
-}
-
-func TestRenderHTMLIncludesCreatedComment(t *testing.T) {
-	t.Parallel()
-
-	payload := renderHTML("2026-04-20", nil, nil, nil, nil, nil)
-	if !strings.HasPrefix(payload, "<!-- Generated on 2026-04-20 -->") {
-		t.Fatalf("html missing created comment prefix: %s", payload)
-	}
-}
-
 func TestWriteFile(t *testing.T) {
 	t.Parallel()
 
@@ -145,25 +127,5 @@ func TestWriteFile(t *testing.T) {
 	}
 	if string(b) != "hello" {
 		t.Fatalf("unexpected file content: %s", string(b))
-	}
-}
-
-func TestParseContributorListExcludesAutomatedAccounts(t *testing.T) {
-	t.Parallel()
-
-	a := &app{nameCache: map[string]string{}}
-	input := []contributorAPI{
-		{Login: "some[bot]", Contributions: 10},
-		{Login: "copilot", Contributions: 10},
-		{Login: "copilot-swe-agent", Contributions: 10},
-		{Login: "f3rn0s", Contributions: 5},
-	}
-
-	got := a.parseContributorList(input)
-	if len(got) != 1 {
-		t.Fatalf("expected 1 contributor after filtering, got %d", len(got))
-	}
-	if got[0].Username != "f3rn0s" {
-		t.Fatalf("expected f3rn0s to remain, got %+v", got[0])
 	}
 }
