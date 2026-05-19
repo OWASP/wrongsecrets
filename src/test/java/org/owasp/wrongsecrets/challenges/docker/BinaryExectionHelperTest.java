@@ -92,14 +92,16 @@ class BinaryExectionHelperTest {
           public boolean isMusl() {
             return true;
           }
-         });
+        });
   }
 
   @Test
   void executeJavaJarShouldIgnoreJavaToolOptionsBanner() {
     environmentVariables.set("JAVA_TOOL_OPTIONS", "-Xmx250M");
 
-    assertThat(new BinaryExecutionHelper(65, new MuslDetectorImpl()).executeJavaJar("", "wrongsecrets-java.jar"))
+    assertThat(
+            new BinaryExecutionHelper(65, new MuslDetectorImpl())
+                .executeJavaJar("", "wrongsecrets-java.jar"))
         .isEqualTo("This is the secret in Java");
     assertThat(
             new BinaryExecutionHelper(66, new MuslDetectorImpl())
