@@ -1,0 +1,10 @@
+*Warum MD5 und SHA1 Hashing allein nicht ausreichen.*
+
+MD5- und SHA1-Hashes gelten nicht mehr als sicher für die alleinige Speicherung von Passwörtern. Geschwindigkeit ist das, was MD5- und SHA1-Hashes so nützlich macht, aber es ist auch ihr Untergang. Es dauert nur ein paar Minuten, Tausende von Passwörtern zu hashen; das bedeutet auch, dass es nur Minuten dauert, Tausende von gängigen Passwörtern zu hashen und diese Hashes mit einem erhaltenen Hash zu vergleichen.
+
+Unternehmen versuchen verschiedene Techniken, um MD5- und SHA1-Hashes zu härten, wie etwa das "Salzen". Dies ist der Prozess, dem Passwort zusätzliche Zeichen hinzuzufügen, die nur die Person/das Unternehmen kennt, die entschlüsseln soll. Leider reicht das mit dem Aufkommen von GPU- und ASIC-basierten Berechnungen auch nicht aus. Daher können Unternehmen, die diese Techniken verwenden, besser zu https://en.wikipedia.org/wiki/Argon2[Argon2] oder https://en.wikipedia.org/wiki/Balloon_hashing[Balloon Hashing] migrieren.
+
+Als Benutzer hast du oft keine Wahl, wie deine Passwörter gespeichert werden; das Einzige, was du in diesem Fall tun kannst, ist zu versuchen, dein Passwort länger und komplexer zu machen. Ein SHA1-Passwort mit 7 Zeichen mit Groß- und Kleinschreibung dauert auf einer guten GPU etwa eine Minute oder 5, um es zu knacken, während eines mit 25 Zeichen viel länger dauert.
+
+Beachte, dass, wenn diese Art von Hashes über `HTTP` (ohne TLS, d.h. kein `HTTPS`) als Teil einer Integritätsprüfung verwendet werden, ein Man-in-the-Middle möglicherweise den Inhalt abfangen und ändern, die Hashes berechnen und diese ebenfalls zurückgeben könnte.
+Ein Angreifer könnte sogar dieselben Hashes wiederverwenden und anderen Inhalt basierend auf einer Hash-Kollision bereitstellen. Verwende daher immer gesicherte Verbindungen beim Übertragen von Inhalten und verlasse dich niemals nur auf Hashes wie `MD5` oder `SHA1` für die Integrität der Daten.

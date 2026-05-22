@@ -1,0 +1,9 @@
+=== Uitdaging 56: Vind het geheim in de projectspecificatie
+
+We wilden zien of AI een uitdaging voor ons kon maken. Net als bij elke WrongSecrets-uitdaging moet er een "geheim" zijn dat ergens blootgesteld is. AI moest deze uitdaging maken aan de hand van een voorbeeld van een agentisch plan met geheimen.
+
+In deze uitdaging is het jouw taak om een geheim te vinden dat verborgen is in het agentische plandocumentatibestand van het project: https://github.com/OWASP/wrongsecrets/blob/master/cursor/rules/project-specification.mdc[`cursor/rules/project-specification.mdc`].
+
+Het geheim is ingebed als een voorbeeldconfiguratiewaarde in het specificatiebestand. Kijk zorgvuldig door de documentatie — geheimen in specificatiebestanden zijn vaak vermomd als voorbeeldwaarden, configuratieparameters of voorbeeldgegevens.
+
+**Hint:** Zoek naar verwijzingen naar "challenge 56" of zoek naar verdacht ogende configuratiewaarden die als voorbeelden worden gebruikt.

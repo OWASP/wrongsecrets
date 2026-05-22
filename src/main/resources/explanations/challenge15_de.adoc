@@ -1,0 +1,9 @@
+=== Git-Geschichte
+
+Einer der Fehler, die wir oft machen, wenn wir Geheimnisse in Git commiten, ist der Versuch, sie loszuwerden, ohne das Geheimnis zu rotieren.
+
+Was es schlimmer macht: Ohne den Commit mit dem Geheimnis ordnungsgemäß zu überschreiben und/oder den Commit zu entfernen, bleibt es für immer in der Geschichte.
+
+Also haben wir einige AWS-Zugriffsschlüssel in Git als "Fehler" aufbewahrt, kannst du sie finden?
+
+Hinweis: Die Antwort enthält eines der 3 AWS-Anmeldedatenprofile, die du in den Kommentaren eines Commits findest, aber ohne die Java-Kommentarformatierung als einzelne Zeile.

@@ -1,0 +1,9 @@
+Vous pouvez résoudre ce défi avec les solutions alternatives suivantes :
+
+1. Fouillez terraform.tfstate avec Trufflehog :
+ - Naviguez vers le répertoire cloud et exécutez `trufflehog3 --output=terraform-infra.json --format=json .`.
+ - Ouvrez le fichier et recherchez le mot de passe.
+
+2. Trouvez le secret dans la console cloud :
+ - Connectez-vous à la console cloud et accédez au gestionnaire de secrets.
+ - Trouvez la valeur du secret généré.

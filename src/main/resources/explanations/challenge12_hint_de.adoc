@@ -1,0 +1,5 @@
+Du kannst diese Herausforderung lösen, indem du in den Container exe:
+
+1. Schau dir die Dockerfile an und sieh, welche COPY-Operationen stattfinden.
+2. Starte den Container lokal mit `docker run jeroenwillemsen/wrongsecrets:<TAGNAME>`.
+3. Führe `docker exec -it <containerID> /bin/sh` aus und durchsuche die kopierten Dateien.

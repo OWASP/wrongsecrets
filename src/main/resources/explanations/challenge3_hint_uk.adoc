@@ -1,0 +1,9 @@
+Ви можете вирішити цей виклик такими альтернативними способами:
+
+1. Використайте `docker history`:
+ - Завантажте контейнер (`docker pull jeroenwillemsen/wrongsecrets:<ТЕГ>`).
+ - Виконайте `docker history --no-trunc jeroenwillemsen/wrongsecrets:<ТЕГ>`, щоб знайти аргументи, використані для контейнера.
+
+2. Використайте https://github.com/goodwithtech/dockle[*Dockle*]:
+ - Встановіть Dockle.
+ - Виконайте `dockle jeroenwillemsen/wrongsecrets:<ТЕГ>` і перегляньте виведення.

@@ -1,0 +1,5 @@
+*Por qué necesitas tener cuidado con CI/CD y los secretos*
+
+Al usar herramientas de CI/CD, a menudo necesitas que la herramienta (p. ej., el corredor/agente que ejecuta un trabajo) use un secreto para autenticarse con un servicio secundario. Exfiltrar estos secretos puede volverse bastante interesante.
+
+Asegúrate de que los secretos en CI/CD estén correctamente configurados y restringidos a las ramas y pull requests correctos.

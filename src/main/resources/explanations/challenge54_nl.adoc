@@ -1,0 +1,7 @@
+=== .gitignore Geheim Uitdaging
+
+`.gitignore`-bestanden helpen om per ongeluk vastleggen van gevoelige of irrelevante gegevens in versiebeheer te vermijden. Soms laten ontwikkelaars echter gevoelige gegevens of geheimen achter als opmerkingen of verborgen vermeldingen in `.gitignore`.
+
+In deze uitdaging heeft een ontwikkelaar een versleuteld geheim achtergelaten in een `.gitignore`-bestandsopmerking. Hoewel versleuteld, benadrukt dit hoe gemakkelijk het is om kritieke geheimen op toegankelijke locaties te vergeten.
+
+Jouw doel is dit vergeten geheim te vinden en te ontsleutelen.

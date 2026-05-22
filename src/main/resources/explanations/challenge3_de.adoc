@@ -1,0 +1,5 @@
+=== Docker ENV-basiertes Passwort
+
+Wusstest du, dass du in Docker-Containern auch die ENV-Variable verwenden kannst, um ein Passwort festzulegen? Was für eine tolle Idee, es mit allen zu teilen!
+
+Du kannst das Geheimnis leicht erkennen, indem du dir anschaust, wie die Schichten erstellt wurden, oder indem du es mit einem Tool wie https://github.com/goodwithtech/dockle[*Dockle*] erkennst.

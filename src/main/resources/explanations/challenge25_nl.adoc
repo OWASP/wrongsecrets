@@ -1,0 +1,5 @@
+=== Geheimen in smart contracts deel 1
+
+Op openbare blockchains is alles wat on-chain wordt geschreven wereldwijd leesbaar.
+
+In deze uitdaging moet je de variabele genaamd secret lezen uit het contract `0x8b72f7cbAD50620c46219ad676Ad9d3a5A273587` op het Goerli EVM Testnet.

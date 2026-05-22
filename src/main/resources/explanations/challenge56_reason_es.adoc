@@ -1,0 +1,5 @@
+*Por qué debes revisar la documentación en busca de secretos*
+
+Los archivos de documentación y especificación a menudo se comparten ampliamente y pueden pasarse por alto durante las revisiones de seguridad.
+A veces, los secretos o la información sensible se agregan como ejemplos o instrucciones y no se eliminan antes de compartir o publicar.
+Este desafío destaca la importancia de revisar todos los archivos del proyecto —incluida la documentación— en busca de secretos y datos sensibles.

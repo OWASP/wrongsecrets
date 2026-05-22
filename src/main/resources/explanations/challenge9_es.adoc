@@ -1,0 +1,5 @@
+=== AWS Secrets Manager
+
+Bien, ahora estamos generando un secreto a través de Terraform y almacenándolo en nuestro Proveedor de Nube. ¿Qué ocurre en el estado de Terraform?
+
+Puedes intentar encontrar el secreto husmeando tus archivos `terraform.tfstate` usando https://github.com/trufflesecurity/truffleHog[*Trufflehog*].

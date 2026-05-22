@@ -1,0 +1,5 @@
+= Défi de mauvaise configuration des secrets Docker Compose
+
+*Pourquoi une gestion incorrecte des secrets dans Docker Compose peut entraîner des vulnérabilités*
+
+Dans les environnements conteneurisés, la gestion des secrets est essentielle pour maintenir la confidentialité et l'intégrité des informations sensibles telles que les informations d'identification de base de données, les clés API et d'autres secrets. Docker Compose offre un moyen pratique de définir et gérer les secrets, mais une mauvaise gestion de ces secrets peut exposer votre système à des attaques.

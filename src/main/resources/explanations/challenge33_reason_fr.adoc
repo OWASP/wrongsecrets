@@ -1,0 +1,4 @@
+*Pourquoi vous devez être prudent lors de la migration des secrets*
+
+Lorsque vous mettez à jour un secret Kubernetes et migrez vers un autre format, les données d'origine font partie des métadonnées capturées dans la configuration d'origine.
+La migration des secrets vers "autre chose" devrait également inclure une étape de rotation pour garantir que l'ancienne valeur (moins bien protégée) est maintenant inutile.

@@ -1,0 +1,9 @@
+Du kannst diese Herausforderung mit den folgenden alternativen Lösungen lösen:
+
+1. Verwende `docker history`:
+ - Lade den Container herunter (`docker pull jeroenwillemsen/wrongsecrets:<TAGNAME>`).
+ - Führe `docker history --no-trunc jeroenwillemsen/wrongsecrets:<TAGNAME>` aus, um die für den Container verwendeten Argumente zu finden.
+
+2. Verwende https://github.com/goodwithtech/dockle[*Dockle*]:
+ - Installiere Dockle.
+ - Führe `dockle jeroenwillemsen/wrongsecrets:<TAGNAME>` aus und schau dir die Ausgabe an.

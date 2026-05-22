@@ -1,0 +1,5 @@
+=== Dando acceso a tus pruebas de seguridad
+
+Dado todos los hallazgos desafortunados que ya tenemos en este proyecto, decidimos implementar escaneo automatizado usando ZAP. Para hacer eso, necesitamos poder hacer fuzzing en el endpoint de este desafío: `/authenticated/challenge37` y por lo tanto configurar auth básica para ZAP. ¿Puedes encontrar el secreto devuelto en el endpoint?
+
+Pista: Usamos GitHub Actions.

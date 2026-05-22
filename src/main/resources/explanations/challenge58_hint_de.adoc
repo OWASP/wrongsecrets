@@ -1,0 +1,8 @@
+=== Hinweis für Herausforderung 58
+
+Diese Herausforderung demonstriert ein sehr verbreitetes Sicherheits-Antimuster: **Datenbankverbindungsstrings mit eingebetteten Anmeldeinformationen, die durch Fehlermeldungen durchsickern**.
+
+**Wo zu suchen:**
+
+1. **Probiere den Fehler-Endpunkt:** Besuche `/error-demo/database-connection`, um einen Datenbankverbindungsfehler auszulösen
+2. **Prüfe die Antwort:** Die Anwendung wird versuchen, sich mit einer Datenbank zu verbinden, und scheitern, wobei der Verbindungsstring offengelegt wird

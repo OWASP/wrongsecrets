@@ -1,0 +1,8 @@
+=== Приховування в бінарних файлах частина 1: бінарний файл C
+
+Нам потрібно помістити секрет у мобільний додаток! Ніхто не помітить секрет у нашому скомпільованому коді!
+Це хибне уявлення, з яким ми часто стикалися, коли представляли теми мобільної безпеки.
+
+Давайте розвінчаємо цей міф для C: чи можете ви знайти секрет у https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-c[wrongsecrets-c] (або https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-c-arm[wrongsecrets-c-arm], https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-c-linux[wrongsecrets-c-linux])?
+
+Спробуйте завантажити бінарний файл і запустити його локально (наприклад, `./wrongsecrets-c<версіяякавампотрібна> <ваша відповідь>`).

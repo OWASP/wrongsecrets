@@ -1,0 +1,5 @@
+*Zugriff auf das Administrator/Eigentümer-Konto:*
+
+Wenn du das AWS-Administratorkonto verwenden konntest, um auf die Daten zuzugreifen, kannst du sehen, warum dies für die Produktion eine schlechte Idee ist. Kurz gesagt, mit diesem Konto kannst du alles innerhalb des Kontos ändern und alle Geheimnisse leicht exfiltrieren.
+
+Nicht zuletzt konnten wir leicht in den Container exen, um den Mount mit dem Geheimnis zu grep-pen. Dies zeigt, dass auch korrekt gespeicherte Geheimnisse durch eine falsche Container-Konfiguration geleakt werden können.

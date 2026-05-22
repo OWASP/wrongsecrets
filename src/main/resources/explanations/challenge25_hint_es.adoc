@@ -1,0 +1,19 @@
+Puedes resolver este desafío usando las siguientes soluciones alternativas:
+
+1. Mira el almacenamiento en Etherscan:
+- Busca bajo la transacción de creación del contrato en https://goerli.etherscan.io/tx/0x497b71a1fd4c57509bfecc2114ec649387fe669c23a3a7e97961f389444d9561[Etherscan].
+- Ve a state y mira storage, copia el nuevo valor y decodifícalo en hexadecimal.
+
+2. Mira los datos de entrada en Etherscan:
+- Busca bajo la transacción de creación del contrato en https://goerli.etherscan.io/tx/0x497b71a1fd4c57509bfecc2114ec649387fe669c23a3a7e97961f389444d9561[Etherscan].
+- Haz clic en "more details", mira los datos de entrada, copia el nuevo valor y decodifícalo en hexadecimal.
+
+3. Usa Infura con web3js:
+- Crea una clave de Infura en https://infura.io/[Infura].
+- Escribe un script simple con web3js para llamar a la función de vista en el string público "secret".
+
+4. Haz una solicitud de almacenamiento en Infura:
+- Crea una clave de Infura en https://infura.io/[Infura].
+- Lee el almacenamiento en la posición 0 para el contrato:
+
+    curl https://goerli.infura.io/v3/${<your-infura-key>}     -X POST     -H "Content-Type: application/json"     -d '{"jsonrpc":"2.0", "method": "eth_getStorageAt", "params": ["0x8b72f7cbAD50620c46219ad676Ad9d3a5A273587", "0x0", "latest"], "id": 1}'

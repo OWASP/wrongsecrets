@@ -1,0 +1,7 @@
+Ce défi peut être résolu en suivant les étapes suivantes:
+
+1. Vérifiez les endpoints Actuator disponibles à "/actuator"
+
+2. Vérifiez les événements d'audit exposés à l'endpoint "/actuator/auditevents"
+
+3. Trouvez l'événement API_KEY_RECEIVED avec le secret exposé

@@ -1,0 +1,4 @@
+*Waarom het verzenden van geheimen als invoer naar smart contracts een slecht idee is, zelfs als ze niet worden opgeslagen*
+
+Invoer van alle transacties naar contracten, zoals de toestand van interne opslag van contracten op de chain, wordt voor altijd opgeslagen en is eenvoudig op te vragen.
+Invoer van transacties is zelfs zichtbaar voordat die transacties worden geaccepteerd. Dit kan leiden tot front-running door een derde partij.

@@ -1,0 +1,5 @@
+*¿Por qué no debemos usar el nombre del archivo como clave de cifrado?*
+
+Ha habido múltiples escenarios donde el contenido de los archivos fue cifrado usando el propio nombre del archivo, lo que permite a los atacantes descifrar fácilmente su contenido. A menudo se percibe como una forma fácil de mantener la clave cerca del contenido.
+
+Pero como ya puedes decir, esto no es una buena idea. Un atacante tiene la clave en el momento en que el archivo está en su posesión.

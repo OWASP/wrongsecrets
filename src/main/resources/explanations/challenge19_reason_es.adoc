@@ -1,0 +1,7 @@
+*Por qué usar binarios para ocultar un secreto solo retrasará a un atacante.*
+
+Con hermosas aplicaciones de ingeniería inversa gratuitas como Ghidra, no hay muchas cosas que permanezcan seguras. Cualquiera que pueda cargar el ejecutable en Ghidra o Radare2 puede comenzar fácilmente a hacer reconocimiento y encontrar secretos dentro de tu binario.
+
+Cifrar el secreto con una clave incorporada en el binario, y otros acertijos divertidos solo retrasan a un atacante y hacen que sea divertido encontrar el secreto. Ten en cuenta que, si el secreto debe ser usado por el ejecutable, eventualmente debe estar en la memoria listo para ser ejecutado.
+
+¿Todavía necesitas tener un secreto en el binario? Asegúrate de que solo se pueda recuperar de forma remota después de autenticarse en un servidor.

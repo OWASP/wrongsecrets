@@ -1,0 +1,7 @@
+=== Debug Container Lek
+
+Moderne cloudomgevingen vertrouwen vaak op debugging-tools om problemen in actieve applicaties op te lossen. Echter, wanneer debugging-mogelijkheden open blijven in productie, kunnen ze gevoelige informatie blootleggen.
+
+Een Kubernetes-implementatie is onjuist geconfigureerd https://github.com/OWASP/wrongsecrets/blob/master/k8s/challenge53/secret-challenge53.yml[challenge53], waardoor ontwikkelaars een debug-container aan een actieve applicatie kunnen koppelen. In deze pod houdt een binary een geheim in het geheugen. Normaal zou dit geheim beschermd zijn, maar door de debug-toegang kan het worden opgehaald.
+
+Kun je het geheim ontdekken?

@@ -1,0 +1,8 @@
+Vous pouvez résoudre ce défi avec les solutions alternatives suivantes :
+
+1. Vérifiez l'état de la configmap dans Git :
+ - Trouvez où dans Git nous avons stocké `secrets-config.yml`.
+ - Regardez le champ `Data` : qu'y trouvez-vous ?
+
+2. Demandez gentiment avec Kubectl :
+ - Exécutez `kubectl get configmap -n default` puis `kubectl describe configmap <nom>`.

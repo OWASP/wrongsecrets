@@ -1,0 +1,5 @@
+*Por qué las funciones de derivación de claves no son seguras cuando se usan valores codificados*
+
+Las funciones de derivación de claves (KDFs) son deterministas. Esto significa que siempre devolverán la misma salida para una entrada dada. Por lo tanto, si los parámetros están codificados, cualquier persona con acceso al código puede ejecutar la KDF con los parámetros especificados y obtener la clave.
+
+Las KDFs deben usarse para generar claves basadas en entradas dinámicas, como contraseñas proporcionadas por humanos. En ambos casos, la entrada de la KDF no está codificada/es determinista.

@@ -1,0 +1,5 @@
+*Waarom MD5 als KDF een slecht idee is*
+
+Het effectief beschermen van sleutels is cruciaal, en dit betekent het gebruik van de juiste sleutelafleidingsfuncties (KDFs) met aanvullende entropie, zoals benadrukt in de https://mas.owasp.org/MASTG/0x04g-Testing-Cryptography/#weak-key-generation-functions[Mobile Security Testing Guide (MSTG).]
+
+MD5 is te snel en eenvoudig te berekenen, waardoor aanvallers snel een groot aantal invoerwaarden (zoals PINs) kunnen proberen om de sleutel af te leiden. Bovendien is de collision-ruimte relatief klein.

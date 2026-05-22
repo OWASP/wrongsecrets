@@ -1,0 +1,7 @@
+=== Contraseña hardcodeada centralizada
+
+Cuando las personas escriben una prueba de concepto, a menudo comienzan con secretos hardcodeados, como una `contraseña` en el código. ¿Qué pasa si olvidamos eliminar estos secretos hardcodeados?
+
+¿Puedes encontrar el secreto en el https://github.com/OWASP/wrongsecrets/tree/master/src/main/java/org/owasp/wrongsecrets[código Java]? ¡También mira en el contenedor!
+
+A veces las herramientas más simples son las más efectivas. Intenta clonar el repositorio y usa https://man7.org/linux/man-pages/man1/grep.1.html[*grep*] para ver qué encuentras. También es posible encontrarlo con https://github.com/awslabs/git-secrets[*Git-secrets*] o https://github.com/trufflesecurity/trufflehog[*Trufflehog*]. ¡Sumérgete en el código!

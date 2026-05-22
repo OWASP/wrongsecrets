@@ -1,0 +1,7 @@
+*Warum du mit KI (oder ML) und Geheimnissen vorsichtig sein solltest*
+
+Jede KI/ML-Lösung, die auf deiner Eingabe basiert, könnte diese Eingabe zur weiteren Verbesserung verwenden. Dies wird manchmal als "Reinforcement learning from human feedback" bezeichnet. Das bedeutet, dass wenn du diese verwendest und ihnen Feedback gibst oder damit einverstanden bist, ihnen Daten zu senden, diese Daten bei ihnen verbleiben und von anderen abgefragt werden könnten.
+
+Beachte, dass alle Benutzereingaben implizit vertraut werden. Das bedeutet, dass du, wenn du eine LLM mit vielen (wiederholten) Texten überwältigst, möglicherweise einige ihrer Kontrollen umgehen kannst.
+
+Stelle also sicher, dass diese Anwendungen niemals an deine Geheimnisse gelangen können!

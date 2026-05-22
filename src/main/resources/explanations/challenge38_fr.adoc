@@ -1,0 +1,9 @@
+=== Notes Git
+
+Les messages de commit Git peuvent être un point de douleur constant.
+
+Il est acceptable d'utiliser un message court, du charabia inintelligible ou un simple écrasement de clavier dans un message git jusqu'à ce que vous ayez la malheureuse tâche de réviser. À ce stade, ces messages négligés peuvent être un cauchemar.
+
+Les notes Git sont là pour résoudre cela, elles existent depuis un bon moment mais sont souvent négligées. Ajoutez des métadonnées supplémentaires sur le commit sans affecter le message de commit lui-même.
+
+Comme tout dans Git, une fois l'information committée, il est très très difficile de supprimer toutes les références à celle-ci. Que pourrait-il bien se passer?

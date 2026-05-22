@@ -1,0 +1,10 @@
+=== Geheimnisse im Frontend-Code
+
+Wenn wir ein neues Projekt starten, konzentrieren wir uns normalerweise auf die Implementierung neuer Funktionen als auf den Sicherheitsaspekt.
+Manchmal benötigen Single-Page-Apps oder mobile Apps Zugriff auf Informationen für sich selbst und nicht im Namen eines Benutzers.
+Zu diesem Zweck bietet https://oauth.net/2/grant-types/client-credentials/[OAuth] den `client_credentials`-Flow zum Abrufen eines Zugriffstokens.
+In einer solchen Situation ist es einfach, Client-Geheimnisse im Frontend- oder mobilen Anwendungscode zu speichern. Obwohl du das Geheimnis im Code verschleiern kannst, musst du es letztendlich trotzdem verwenden.
+
+Diese Herausforderung wird versuchen, einen Server über den Client-Credentials-Flow zu kontaktieren. Kannst du sein Geheimnis finden?
+
+Wie wäre es, in den Entwicklertools des Browsers danach zu suchen?

@@ -1,0 +1,7 @@
+=== Se cacher dans les binaires partie 3: le binaire Go
+
+Notre troisième langage pour une application compilée est Go. Avec la montée en popularité, nous voyons une augmentation des secrets cachés dans les binaires. Pouvez-vous trouver le secret dans notre binaire?
+
+Démystifions le mythe des "secrets difficiles à trouver dans les applications compilées nativement" pour Go: pouvez-vous trouver le secret dans https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-golang[wrongsecrets-golang]?
+
+Essayez de télécharger le binaire et de l'exécuter localement (par exemple, `./wrongsecrets-golang<laversion> guess test`).

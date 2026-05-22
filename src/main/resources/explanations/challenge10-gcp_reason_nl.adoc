@@ -1,0 +1,5 @@
+*Toegang tot het Administrator/eigenaar-account:*
+
+Als je het AWS-beheerdersaccount kon gebruiken om toegang te krijgen tot de gegevens, dan kun je zien waarom dit een slecht idee is voor productie. Kortom, met dit account kun je alles in het account wijzigen en kun je gemakkelijk alle geheimen exfiltreren.
+
+Tot slot: we konden eenvoudig exec uitvoeren in de container om het mount met het geheim te grep-pen. Dit toont aan dat zelfs correct opgeslagen geheimen kunnen worden gelekt via de verkeerde container-configuratie.

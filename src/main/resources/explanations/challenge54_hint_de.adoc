@@ -1,0 +1,6 @@
+Das Geheimnis ist in der `.gitignore`-Datei als AES-256-CBC-verschlüsselt versteckt.
+
+Befolge diese Schritte, um das Geheimnis zu entschlüsseln:
+
+1. Suche den verschlüsselten Kommentar und den Schlüssel zum Entschlüsseln in `.gitignore`.
+2. Verwende OpenSSL zum Entschlüsseln.

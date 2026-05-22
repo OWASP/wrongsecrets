@@ -1,0 +1,10 @@
+Diese Herausforderung kann gelöst werden, indem das base64-kodierte Geheimnis in `secrchallenge.md` entschlüsselt wird.
+
+1. Mit einem Online-AES-Entschlüsselungstool wie https://www.devglan.com/online-tools/aes-encryption-decryption[devglan]
+- Kopiere den Inhalt der `secrchallenge.md`-Datei und füge ihn in das Textfeld ein.
+- Stelle sicher, dass das Eingabeformat `Base64` und der Chiffriermodus `ECB` ist.
+- Verwende `secrchallenge.md` als Entschlüsselungsschlüssel und klicke auf `Decrypt`, um das Geheimnis zu erhalten.
+
+2. Mit dem Terminal
+- Starte das Terminal im `executables`-Verzeichnis.
+- Gib `echo -n "secrchallenge.md" | xxd -p` ein, um den Klartextschlüssel in einen hexadezimalen Schlüssel umzuwandeln.

@@ -1,0 +1,7 @@
+=== Verstecken in Binärdateien Teil 3: Die Go-Binärdatei
+
+Unsere dritte Sprache für eine kompilierte Anwendung ist Go. Mit der steigenden Popularität sehen wir eine Zunahme von Geheimnissen, die in Binärdateien versteckt sind. Kannst du das Geheimnis in unserer Binärdatei finden?
+
+Lass uns den Mythos "Geheimnisse sind in nativ kompilierten Anwendungen schwer zu finden" für Go entkräften: Kannst du das Geheimnis in https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-golang[wrongsecrets-golang] finden?
+
+Versuche die Binärdatei herunterzuladen und lokal auszuführen (z.B. `./wrongsecrets-golang<dieVersion> guess test`).

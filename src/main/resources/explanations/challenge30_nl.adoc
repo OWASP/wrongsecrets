@@ -1,0 +1,3 @@
+=== Een andere clientgeheim
+
+De client ontvangt een willekeurige waarde van de server en moet deze retourneren als antwoord om te bewijzen dat het de server is. Dit gebeurt vaak wanneer je bijvoorbeeld een sessietoken moet opgeven. Het token wordt willekeurig gegenereerd bij het starten van de server, dus je kunt het niet in code vinden. Maar wat als we het onveilig opslaan bij de client?

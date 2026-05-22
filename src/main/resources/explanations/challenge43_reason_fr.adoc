@@ -1,0 +1,5 @@
+*Pourquoi ne devrait-on pas partager un secret sur les réseaux sociaux?*
+
+Partager un secret de votre application sur les réseaux sociaux est une très mauvaise pratique car il devient accessible au public pour être exploité si quelqu'un connaît le contexte.
+
+Bien que l'utilisateur ou la plateforme puissent souvent supprimer des commentaires/posts, le secret finit presque toujours dans une base de données qui pourrait être divulguée.

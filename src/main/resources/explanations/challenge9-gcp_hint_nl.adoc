@@ -1,0 +1,9 @@
+Je kunt deze uitdaging oplossen met de volgende alternatieve oplossingen:
+
+1. Doorzoek terraform.tfstate met Trufflehog:
+ - Navigeer naar de cloud-map en voer `trufflehog3 --output=terraform-infra.json --format=json .` uit.
+ - Open het bestand en zoek naar het wachtwoord.
+
+2. Zoek het geheim in de cloudconsole:
+ - Log in op de cloudconsole en ga naar de secrets manager.
+ - Vind de waarde van het gegenereerde geheim.

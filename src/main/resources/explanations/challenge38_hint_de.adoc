@@ -1,0 +1,9 @@
+Im Gegensatz zu anderen Git-Herausforderungen kann dies nicht durch die Fülle von Tools gelöst werden, die automatisch nach in Git-Repos geleakten Geheimnissen suchen.
+
+Versuche, die Herausforderung zu lösen, indem du die Git-Metadaten manuell durchsuchst.
+
+1. Klone das Repository - `git clone https://github.com/OWASP/wrongsecrets`.
+2. Navigiere zum Verzeichnis - `cd wrongsecrets`
+3. Rufe die Notes ab - `git fetch origin 'refs/notes/*:refs/notes/*'`
+4. Liste alle Notes im Repo auf - `git notes`
+5. Zeige mit der angezeigten Note-Referenz die Note an - `git notes show [ref]`
