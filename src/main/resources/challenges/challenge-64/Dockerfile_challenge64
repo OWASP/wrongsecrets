@@ -3,7 +3,7 @@
 # The musl binaries are fully statically linked (Swift runtime embedded), so they
 # run natively on Alpine's musl libc without any extra shared libraries.
 
-FROM alpine:3.23
+FROM alpine:3.24
 
 # Copy the Linux musl x86_64 binary (build context is the repo root)
 COPY src/main/resources/executables/wrongsecrets-swift-linux-musl /wrongsecrets-swift
