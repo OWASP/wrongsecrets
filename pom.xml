@@ -80,7 +80,7 @@
     <spotless-maven-plugin.version>3.5.0</spotless-maven-plugin.version>
     <spring-boot.version>4.0.3</spring-boot.version>
     <spring-vault.version>4.0.2</spring-vault.version>
-    <spring.cloud-version>2025.1.1</spring.cloud-version>
+    <spring.cloud-version>2025.1.2</spring.cloud-version>
     <spring.security.version>7.0.5</spring.security.version>
     <springdoc-maven.version>1.5</springdoc-maven.version>
     <springdoc.version>3.0.3</springdoc.version>
