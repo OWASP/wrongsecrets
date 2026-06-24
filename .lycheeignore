@@ -36,3 +36,9 @@ https://helm.sh/docs/intro/install/
 
 # Google Docs require authentication and always return 401 to link checkers
 https://docs.google.com/document/*
+
+# jcchouinard.com rejects lychee's content-type (415 false positive)
+https://www.jcchouinard.com/wget/
+
+# Railway deploy template links return 404 to link checkers
+https://railway.com/deploy/*
