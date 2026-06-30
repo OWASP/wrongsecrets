@@ -1,0 +1,5 @@
+*Waarom Vault Template Injectie niet altijd een goed idee is?*
+
+Hoewel vault agent-injectie via templates in bepaalde scenario's een handige manier kan zijn om geheimen te beheren, zijn er situaties waar dit misschien niet de beste aanpak is.
+
+Templates kunnen per ongeluk gevoelige informatie blootstellen in logs of tijdelijke bestanden.

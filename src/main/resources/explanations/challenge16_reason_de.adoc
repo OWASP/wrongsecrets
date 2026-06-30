@@ -1,0 +1,8 @@
+*Warum Geheimnisse im Frontend-Code eine schlechte Idee sind*
+
+Wenn du eine mobile App auf deinem Smart-Gerät oder eine SPA in deinem Webbrowser ausführst, solltest du versuchen, keine Geheimnisse darin hartcodiert zu haben. Ein Angreifer kann die App immer nehmen, sie reverse-engineeren und das eigentliche Geheimnis finden. Frage dich stattdessen, ob das Geheimnis nach der Authentifizierung sicher heruntergeladen oder auf eine andere Weise verwendet werden kann.
+
+*Warum die Verwendung von Single-Page-Apps oder mobilen Apps zum Speichern von Client-Geheimnissen eine schlechte Idee ist*
+
+Wie du inzwischen erkennen kannst, kannst du leicht jedes Geheimnis erkennen, das in einer Single-Page-App oder mobilen App gespeichert ist.
+Um eine solche Situation zu verhindern, wird Authorization Code Flow mit Proof Key for Code Exchange (PKCE) verwendet.

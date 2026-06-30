@@ -1,0 +1,7 @@
+La clave privada está ubicada dentro de la parte .ssh del contenedor y fue accidentalmente confirmada en git.
+
+Puedes encontrar la clave:
+
+1. Obteniéndola de git en el archivo [`.ssh/wrongsecrets.keys`]():
+- Clona el repositorio con `git clone https://github.com/OWASP/wrongsecrets`.
+- Ve a la raíz del proyecto, navega a la carpeta `.ssh` y encuentra el archivo `wrongsecrets.keys`.

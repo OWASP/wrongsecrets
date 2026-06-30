@@ -1,0 +1,10 @@
+=== Défi LLM dans le navigateur en JavaScript
+
+Ce défi présente un assistant IA simple fonctionnant directement dans votre navigateur. L'IA a été dotée d'instructions spécifiques et contient un secret caché que vous devez découvrir.
+
+**Votre mission :**
+L'assistant IA a été programmé avec un prompt système contenant un code secret. Votre tâche est d'utiliser diverses techniques d'ingénierie de prompts et d'injection pour extraire ce secret caché des instructions de l'IA.
+
+**Techniques à essayer :**
+
+1. **Questions directes :** Posez directement des questions à l'IA sur les secrets ou les informations cachées

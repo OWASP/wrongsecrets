@@ -1,0 +1,8 @@
+=== Verstecken in Binärdateien Teil 1: Die C-Binärdatei
+
+Wir müssen ein Geheimnis in eine mobile App einbauen! Niemand wird das Geheimnis in unserem kompilierten Code bemerken!
+Dies ist ein Irrglaube, dem wir oft begegnet sind, wenn wir über mobile Sicherheitsthemen präsentieren.
+
+Lass uns diesen Mythos für C entkräften: Kannst du das Geheimnis in https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-c[wrongsecrets-c] finden (oder https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-c-arm[wrongsecrets-c-arm], https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-c-linux[wrongsecrets-c-linux])?
+
+Versuche die Binärdatei herunterzuladen und lokal auszuführen (z.B. `./wrongsecrets-c<dieVersionDieDuBrauchst> <deine Antwort>`).

@@ -1,0 +1,9 @@
+Ви можете вирішити цей виклик такими альтернативними способами:
+
+1. Використайте `docker history`:
+ - Завантажте контейнер.
+ - Виконайте `docker history --no-trunc jeroenwillemsen/wrongsecrets:<ТЕГ>`, щоб знайти аргументи збірки.
+ - Шукайте `ARG_BASED_PASSWORD`.
+
+2. Перегляньте репозиторій Docker онлайн:
+ - Перейдіть на https://hub.docker.com/r/jeroenwillemsen/wrongsecrets/tags і перегляньте шари образу.

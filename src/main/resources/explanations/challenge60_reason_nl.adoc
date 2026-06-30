@@ -1,0 +1,5 @@
+=== Waarom Uitdaging 60 belangrijk is: MCP Prompt Injectie en Blootstelling van Omgevingsvariabelen
+
+**Het probleem:**
+
+MCP (Model Context Protocol) servers worden steeds populairder om AI-assistenten toegang te geven tot tools en gegevens. Echter, veel ontwikkelaars implementeren MCP-servers zonder adequate beveiligingscontroles. Erger nog, een *kwaadaardige* MCP-server kan actief de verbindende AI-client manipuleren via prompt-injectie.

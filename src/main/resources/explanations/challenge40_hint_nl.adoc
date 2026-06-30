@@ -1,0 +1,6 @@
+Deze uitdaging kan worden opgelost door het base64-gecodeerde geheim in `secrchallenge.json` te ontsleutelen.
+
+1. Met een online AES-ontsleutelingstool zoals https://www.devglan.com/online-tools/aes-encryption-decryption[devglan]
+- Kopieer de waarde van `secret` uit `secrchallenge.json` en plak het in het tekstvak.
+- Zorg ervoor dat het invoerformaat `Base64` is en de ciphermodus `ECB`.
+- Gebruik de waarde van `key` uit `secrchallenge.json` als ontsleutelingssleutel en klik op `Decrypt`.

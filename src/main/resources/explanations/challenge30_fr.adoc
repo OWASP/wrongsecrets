@@ -1,0 +1,3 @@
+=== Un autre secret client
+
+Le client reçoit une valeur aléatoire du serveur et doit la retourner comme réponse pour prouver qu'il est le serveur. Cela arrive souvent quand, par exemple, vous devez fournir un jeton de session. Le jeton est généré aléatoirement au démarrage du serveur, donc vous ne pouvez pas le trouver dans le code. Mais que se passe-t-il si nous le stockons de manière non sécurisée avec le client?

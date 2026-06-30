@@ -1,0 +1,7 @@
+=== Défi de secret dans .gitignore
+
+Les fichiers `.gitignore` aident à éviter les commits accidentels de données sensibles ou non pertinentes dans le contrôle de version. Cependant, parfois les développeurs laissent accidentellement des données sensibles ou des secrets sous forme de commentaires ou d'entrées cachées dans `.gitignore`.
+
+Dans ce défi, un développeur a laissé un secret chiffré dans un commentaire du fichier `.gitignore`. Bien que chiffré, cela met en évidence à quel point il est facile d'oublier des secrets critiques dans des endroits accessibles.
+
+Votre objectif est de trouver et de déchiffrer ce secret oublié.

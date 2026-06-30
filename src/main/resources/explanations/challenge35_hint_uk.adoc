@@ -1,0 +1,13 @@
+Це задача з документації, яку можна вирішити, перейшовши до рекомендації Github.
+
+1. Знайдіть ключ за допомогою рекомендації безпеки Github
+- Перейдіть до https://github.com/OWASP/wrongsecrets/security/advisories/GHSA-vv4g-7gjw-fvqw[рекомендації].
+- Знайдіть ключ API Google.
+- Скопіюйте його у поле відповіді.
+
+2. Дотримуйтесь інформації рекомендації безпеки Github
+- Перейдіть до https://github.com/OWASP/wrongsecrets/security/advisories/GHSA-vv4g-7gjw-fvqw[рекомендації].
+- Знайдіть версію, яка зазнала впливу (1.6.8RC1).
+- Відкрийте тег на https://github.com/OWASP/wrongsecrets/tree/1.6.8RC1[Github].
+- Знайдіть ключ API Google у задачі 35.
+- Скопіюйте його у поле відповіді.

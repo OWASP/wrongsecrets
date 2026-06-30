@@ -1,0 +1,6 @@
+Цю задачу можна вирішити, розшифрувавши закодований у base64 секрет у `secrchallenge.json`.
+
+1. Використовуючи онлайн інструмент розшифрування AES, наприклад https://www.devglan.com/online-tools/aes-encryption-decryption[devglan]
+- Скопіюйте значення `secret` з `secrchallenge.json` та вставте його у текстове поле.
+- Переконайтеся, що формат введення `Base64` та режим шифру `ECB`.
+- Використовуйте значення `key` з `secrchallenge.json` як ключ розшифрування та натисніть `Decrypt`.

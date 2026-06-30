@@ -1,0 +1,5 @@
+*Warum die Verwendung von ConfigMaps keine gute Idee ist*
+
+ConfigMaps wurden nie dafür entwickelt, Geheimnisse zu hosten. Sie wurden entwickelt, um zusätzliche Daten für deinen Job, Pod und andere K8s-Ressourcen zu hosten.
+
+ConfigMaps sind oft für jeden lesbar, der die Prozesse entwickeln/betreiben muss, die Daten aus der ConfigMap benötigen. Ohne RBAC-Einschränkungen sind ConfigMaps unsichere Speicherorte für Geheimnisse.

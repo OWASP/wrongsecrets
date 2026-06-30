@@ -1,0 +1,7 @@
+=== Docker COPY en WORKDIR
+
+Soms worden grote delen van het lokale bestandssysteem naar de container gekopieerd zodat ze beschikbaar zijn in de container voor het gemak van de auteur.
+
+In deze uitdaging hebben we ook wat COPY-bewerkingen gedaan en een sleutel verborgen. Merk op dat de sleutel bij elke generatie van de docker-container verandert, dus je kunt hem beter snel extraheren en gebruiken :).
+
+Probeer https://github.com/deepfence/SecretScanner[*deepfenceio/secretscanning*], `docker history` van de image, of gewoon `docker exec` tegen een actieve container.

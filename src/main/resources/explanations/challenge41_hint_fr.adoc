@@ -1,0 +1,7 @@
+Ce défi peut être résolu en suivant les étapes suivantes:
+
+1. Créez deux fichiers txt `old_hashes.txt` et `new_hashes.txt` contenant uniquement les hachages copiés des fichiers de dump.
+2. En utilisant `old_hashes.txt` comme liste de mots de passe, nous pouvons utiliser hashcat pour vérifier les hachages md5 qui correspondent aux hachages bcrypt.
+   - Installez https://hashcat.net/hashcat/[Hashcat]
+   - Tapez `hashcat -m 3200 -a 0 new_hashes.txt old_hashes.txt --show`
+3. En utilisant `rockyou.txt` comme liste de mots de passe, nous pouvons craquer le hachage md5 obtenu.

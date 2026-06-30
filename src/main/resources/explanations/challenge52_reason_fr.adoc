@@ -1,0 +1,5 @@
+= Défi de mauvaise configuration des secrets Docker Buildx
+
+*Pourquoi une gestion incorrecte des secrets dans les processus de build Docker peut entraîner des vulnérabilités*
+
+Dans les workflows DevOps modernes, Docker Buildx est un outil puissant pour construire efficacement des images Docker multi-plateformes. Il fournit un moyen sécurisé de transmettre des informations sensibles comme les clés API, les informations d'identification de base de données et les certificats pendant le processus de build en utilisant l'indicateur `--secret`. Cependant, une mauvaise gestion ou un mauvais stockage de ces secrets peut introduire des vulnérabilités critiques.

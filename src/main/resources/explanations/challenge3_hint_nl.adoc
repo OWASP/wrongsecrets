@@ -1,0 +1,9 @@
+Je kunt deze uitdaging oplossen met de volgende alternatieve oplossingen:
+
+1. Gebruik `docker history`:
+ - Download de container (`docker pull jeroenwillemsen/wrongsecrets:<TAGNAAM>`).
+ - Voer `docker history --no-trunc jeroenwillemsen/wrongsecrets:<TAGNAAM>` uit om de argumenten voor de container te vinden.
+
+2. Gebruik https://github.com/goodwithtech/dockle[*Dockle*]:
+ - Installeer Dockle.
+ - Voer `dockle jeroenwillemsen/wrongsecrets:<TAGNAAM>` uit en bekijk de uitvoer.

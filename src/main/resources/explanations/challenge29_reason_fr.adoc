@@ -1,0 +1,7 @@
+*Pourquoi poster des captures d'écran de logs dans un issue GitHub est une mauvaise idée*
+
+Vous ne devriez pas poster de captures d'écran de logs dans un issue GitHub parce que:
+1. Les données sont publiques (même sur un dépôt privé, souvent plus public que vous ne l'espérez)
+2. Les captures d'écran ne peuvent pas être expurgées comme du texte. Même quand le secret est flou, cela peut être réversible.
+
+Vérifiez les fuites de secrets dans la sortie et utilisez des blocs de code markdown pour poster des logs dans un issue GitHub.

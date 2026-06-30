@@ -1,0 +1,10 @@
+*Por qué el hashing con MD5 y SHA1 solo no es suficiente.*
+
+Los hashes MD5 y SHA1 ya no se consideran seguros para almacenar contraseñas por sí solos. La velocidad es lo que hace que los hashes MD5 y SHA1 sean tan útiles, pero también es su perdición. Solo tarda unos minutos en hashear miles de contraseñas; esto también significa que solo tarda minutos en hashear miles de contraseñas comunes y usar estos hashes para compararlos con un hash obtenido.
+
+Las empresas intentan diferentes técnicas para fortalecer los hashes MD5 y SHA1, como "salgarlos". Este es el proceso de agregar caracteres adicionales a la contraseña que solo la persona/empresa que debería descifrar conoce. Desafortunadamente, esto tampoco es suficiente con el auge de los cálculos basados en GPU y ASIC. Por lo tanto, las empresas que usan estas técnicas pueden migrar mejor a https://en.wikipedia.org/wiki/Argon2[Argon2] o https://en.wikipedia.org/wiki/Balloon_hashing[Balloon hashing].
+
+Como usuario, a menudo no tienes elección en cómo se almacenan tus contraseñas; lo único que puedes hacer en este caso es intentar hacer tu contraseña más larga y compleja. Una contraseña SHA1 de 7 caracteres con letras mayúsculas y minúsculas tardará aproximadamente un minuto o 5 en forzarla bruta en una GPU adecuada, mientras que una con 25 caracteres tardará mucho más.
+
+Ten en cuenta que, cuando este tipo de hashes se usan sobre `HTTP` (sin TLS, es decir, sin `HTTPS`) como parte de una verificación de integridad, un Man in the Middle podría posiblemente interceptar el contenido, modificarlo, calcular los hashes y devolverlos también.
+Un atacante podría incluso reutilizar los mismos hashes y proporcionar otro contenido basado en una colisión de hashes. Por lo tanto: siempre usa conexiones seguras al transferir contenido y nunca confíes solo en hashes como `MD5` o `SHA1` para la integridad de los datos.

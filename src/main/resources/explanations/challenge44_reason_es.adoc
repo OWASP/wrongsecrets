@@ -1,0 +1,5 @@
+*Por qué almacenar datos sensibles como metadatos es una mala idea*
+
+A veces, la gente razona que los datos menos sensibles deben almacenarse como metadatos secretos. Piensa, por ejemplo, en un nombre de usuario, menos sensible que una contraseña, ¿o no?
+
+En muchos de estos casos, son igualmente importantes y deben recibir la misma protección que el secreto mismo. A menudo no queremos dar acceso de lectura a secretos a nuestros empleados, pero sí acceso de lectura a metadatos. Si algún secreto está almacenado en los metadatos, ese secreto queda comprometido internamente.

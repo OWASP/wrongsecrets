@@ -1,0 +1,7 @@
+=== Debug-Container-Leck
+
+Moderne Cloud-Umgebungen verlassen sich oft auf Debugging-Tools, um Probleme in laufenden Anwendungen zu beheben. Wenn jedoch Debugging-Möglichkeiten in der Produktion offen bleiben, können sie sensible Informationen preisgeben.
+
+Eine Kubernetes-Deployment ist falsch konfiguriert https://github.com/OWASP/wrongsecrets/blob/master/k8s/challenge53/secret-challenge53.yml[challenge53], was Entwicklern ermöglicht, einen Debug-Container an eine laufende Anwendung anzuhängen. In diesem Pod hält eine Binärdatei ein Geheimnis im Speicher. Normalerweise wäre dieses Geheimnis geschützt, aber aufgrund des Debug-Zugriffs kann es abgerufen werden.
+
+Kannst du das Geheimnis entdecken?

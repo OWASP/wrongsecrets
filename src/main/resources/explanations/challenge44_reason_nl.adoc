@@ -1,0 +1,5 @@
+*Waarom het opslaan van gevoelige gegevens als metadata een slecht idee is*
+
+Soms redeneren mensen dat minder gevoelige gegevens als geheime metadata opgeslagen kunnen worden. Denk aan een gebruikersnaam - minder gevoelig dan een wachtwoord, of is dat zo?
+
+In veel van deze gevallen zijn ze even belangrijk en moeten ze evenveel bescherming krijgen als het geheim zelf. We willen werknemers vaak geen leestoegang tot geheimen geven, maar wel leestoegang tot metadata. Als een geheim in de metadata is opgeslagen, is dat geheim dan intern gecompromitteerd.

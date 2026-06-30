@@ -1,0 +1,7 @@
+Diese Herausforderung kann mit den folgenden Schritten gelöst werden:
+
+1. Überprüfe die verfügbaren Actuator-Endpunkte unter "/actuator"
+
+2. Überprüfe Audit-Events am "/actuator/auditevents"-Endpunkt
+
+3. Finde das API_KEY_RECEIVED-Event mit dem freigegebenen Geheimnis

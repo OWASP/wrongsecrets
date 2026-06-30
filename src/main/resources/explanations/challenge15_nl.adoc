@@ -1,0 +1,9 @@
+=== Git-geschiedenis
+
+Een van de fouten die we vaak maken als we geheimen naar Git commiten, is proberen ervan af te komen zonder het geheim te roteren.
+
+Wat het erger maakt, is dat zonder de commit met het geheim goed te overschrijven en/of de commit te verwijderen, het voor altijd in de geschiedenis blijft.
+
+Dus we hebben wat AWS-toegangssleutels in Git bewaard als een "vergissing", kun je ze vinden?
+
+Opmerking: het antwoord bevat een van de 3 AWS-inloggegevensprofielen die je in de comments van een commit vindt, maar dan zonder de Java-commentaaropmaak als een enkele regel.

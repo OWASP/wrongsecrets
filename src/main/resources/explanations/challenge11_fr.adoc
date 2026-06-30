@@ -1,0 +1,7 @@
+=== AWS SSM Parameter Store
+
+Nous avons maintenant utilisé Parameter Store directement depuis l'application, mais il y a un problème IAM...
+
+Assumez le rôle `cant-read-secrets` et essayez une escalade de privilèges IAM. Ne trichez pas en utilisant vos propres rôles :)
+
+C'est là que des outils comme https://github.com/nccgroup/ScoutSuite[ScoutSuite] peuvent vraiment aider à détecter les problèmes avec votre configuration IAM.

@@ -1,0 +1,5 @@
+*Warum das Überschreiben von Geheimnissen in der Blockchain sie nicht entfernt*
+
+Der Zustand der Chain kann für jeden Zeitpunkt verifiziert werden, indem die Zustandsaktualisierungen bis zu einem bestimmten Block ausgeführt werden.
+
+Das Aktualisieren des Zustands der Chain entfernt keine früheren Änderungen am Zustand.

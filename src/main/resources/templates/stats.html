@@ -3,16 +3,16 @@
       layout:decorate="~{index.html}">
 <body>
 <div class="container" layout:fragment="content">
-    <p class="h1 mt-2">Current Stats & Config</p>
+    <p class="h1 mt-2" th:text="#{stats.title}">Current Stats &amp; Config</p>
     <br/><br/>
 
     <div class="row">
         <div class="col-12 col-lg-6">
             <div class="border border-dark thank-you">
-                <p class="h2 mt-2 text-center">Stats</p>
+                <p class="h2 mt-2 text-center" th:text="#{stats.heading}">Stats</p>
                 <p>
-                    Number of active sessions: <span th:text="${sessioncounter}"></span><br/>
-                    Number of canary callbacks since boot: <span th:text="${canaryCounter}"></span><br/>
+                    <span th:text="#{stats.sessions}">Number of active sessions:</span> <span th:text="${sessioncounter}"></span><br/>
+                    <span th:text="#{stats.canary.callbacks}">Number of canary callbacks since boot:</span> <span th:text="${canaryCounter}"></span><br/>
                     <span class="d-none d-lg-block"><br/><br/></span>
                     <span class="d-none d-lg-block" th:if="${springdocenabled==true}"><br/><br/></span>
                 </p>
@@ -21,16 +21,16 @@
         </div>
         <div class="col-12 col-lg-6">
             <div class="border border-dark thank-you">
-                <p class="h2 mt-2 text-center">Config</p>
+                <p class="h2 mt-2 text-center" th:text="#{stats.config.heading}">Config</p>
                 <p>
-                    Hints enabled: <span th:text="${hintsEnabled}"></span><br/>
-                    Reason enabled: <span th:text="${reasonEnabled}"></span><br/>
-                    CTF-mode enabled: <span th:text="${ctfModeEnabled}"></span><br/>
-                    Spoilers enabled: <span th:text="${spoilingEnabled}"></span><br/>
-                    Springdoc enabled: <span th:text="${springdocenabled}"></span>
+                    <span th:text="#{stats.hints.enabled}">Hints enabled:</span> <span th:text="${hintsEnabled}"></span><br/>
+                    <span th:text="#{stats.reason.enabled}">Reason enabled:</span> <span th:text="${reasonEnabled}"></span><br/>
+                    <span th:text="#{stats.ctf.mode.enabled}">CTF-mode enabled:</span> <span th:text="${ctfModeEnabled}"></span><br/>
+                    <span th:text="#{stats.spoilers.enabled}">Spoilers enabled:</span> <span th:text="${spoilingEnabled}"></span><br/>
+                    <span th:text="#{stats.springdoc.enabled}">Springdoc enabled:</span> <span th:text="${springdocenabled}"></span>
                     <span th:if="${springdocenabled==true}">
-                        <br/>Swagger UI enabled: <span th:text="${swaggerUIEnabled}"></span>
-                        <br/>Swagger uri: <a th:href="${swaggerURI}" target="_blank" th:text="${swaggerURI}"></a>
+                        <br/><span th:text="#{stats.swagger.ui.enabled}">Swagger UI enabled:</span> <span th:text="${swaggerUIEnabled}"></span>
+                        <br/><span th:text="#{stats.swagger.uri}">Swagger uri:</span> <a th:href="${swaggerURI}" target="_blank" th:text="${swaggerURI}"></a>
                     </span>
                 </p>
             </div>
@@ -38,15 +38,15 @@
         <div class="col-12">
             <br/>
             <div class="border border-dark thank-you">
-                <p class="h2 mt-2 text-center">Canary callbacks</p>
-                <p>Number of canary callbacks since boot: <span th:text="${canaryCounter}"></span></p>
-                <p>Last canary token received:</p>
+                <p class="h2 mt-2 text-center" th:text="#{stats.canary.title}">Canary callbacks</p>
+                <p><span th:text="#{stats.canary.count}">Number of canary callbacks since boot:</span> <span th:text="${canaryCounter}"></span></p>
+                <p th:text="#{stats.canary.last.token}">Last canary token received:</p>
                 <p th:text="${lastCanaryToken}"></p>
-                <p>CanaryTokenUrlwebtoken in use:</p>
+                <p th:text="#{stats.canary.urls}">CanaryTokenUrlwebtoken in use:</p>
                 <ul style="word-wrap: break-word" th:each="canarytokenURL : ${canarytokenURLs}">
                     <li th:text="${canarytokenURL}"></li>
                 </ul>
-                <p>Note that, when accessing the URLs of the CanaryTokens, some of your data is being logged by the
+                <p th:text="#{stats.canary.note}">Note that, when accessing the URLs of the CanaryTokens, some of your data is being logged by the
                     Canarytoken service.</p>
             </div>
         </div>

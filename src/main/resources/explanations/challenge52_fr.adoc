@@ -1,0 +1,7 @@
+=== Défi des secrets Buildx exposés
+
+Acme Inc., une entreprise SaaS en pleine croissance, étend ses déploiements conteneurisés en utilisant Docker Buildx pour rationaliser les builds multi-plateformes. Cependant, une grave mauvaise configuration de sécurité s'est produite pendant le processus de build.
+
+Pendant leur processus Docker Buildx, un secret sensible, censé rester temporaire et sécurisé pendant la phase de construction du conteneur, a été accidentellement intégré dans le système de fichiers du conteneur en raison d'une mauvaise configuration.
+
+En tant que consultant en sécurité nouvellement embauché par Acme Inc., votre mission est claire: enquêtez sur le conteneur, identifiez le secret exposé et signalez-le à l'équipe.
