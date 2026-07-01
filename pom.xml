@@ -52,7 +52,7 @@
     <checkstyle-maven.version>3.6.0</checkstyle-maven.version>
     <checkstyle.version>13.6.0</checkstyle.version>
     <com.azure.spring.version>7.3.0</com.azure.spring.version>
-    <cyclonedx-maven.version>2.9.1</cyclonedx-maven.version>
+    <cyclonedx-maven.version>2.9.2</cyclonedx-maven.version>
     <cyclonedx.core.version>12.1.0</cyclonedx.core.version>
     <datatables.version>2.3.7</datatables.version>
     <dependency-check-maven.version>12.2.2</dependency-check-maven.version>
