@@ -50,7 +50,7 @@
     <aws.sdk.version>2.50.3</aws.sdk.version>
     <bootstrap.version>5.3.8</bootstrap.version>
     <checkstyle-maven.version>3.6.0</checkstyle-maven.version>
-    <checkstyle.version>13.8.0</checkstyle.version>
+    <checkstyle.version>13.9.0</checkstyle.version>
     <com.azure.spring.version>7.3.0</com.azure.spring.version>
     <cyclonedx-maven.version>2.9.3</cyclonedx-maven.version>
     <cyclonedx.core.version>12.2.0</cyclonedx.core.version>
