@@ -25,10 +25,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v5
 
-      - name: Set up JDK 25
+      - name: Set up JDK 26
         uses: actions/setup-java@v5
         with:
-          java-version: "25"
+          java-version: "26"
           distribution: "temurin"
           cache: "maven"
 
@@ -245,10 +245,10 @@ jobs:
           ref: master
           path: main-code
 
-      - name: Set up JDK 25 for PR build
+      - name: Set up JDK 26 for PR build
         uses: actions/setup-java@v5
         with:
-          java-version: "25"
+          java-version: "26"
           distribution: "temurin"
           cache: "maven"
 
@@ -274,10 +274,10 @@ jobs:
           docker build --build-arg argBasedVersion="${{ steps.extract-pr-version.outputs.docker_version }}" -t wrongsecrets-pr .
           echo "PR Docker image built successfully"
 
-      - name: Set up JDK 25 for main
+      - name: Set up JDK 26 for main
         uses: actions/setup-java@v5
         with:
-          java-version: "25"
+          java-version: "26"
           distribution: "temurin"
           cache: "maven"
 
@@ -335,7 +335,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: '24'
+          node-version: '26'
 
       - name: Install Playwright
         run: |
