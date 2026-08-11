@@ -17,7 +17,7 @@
     "mocha": "^10.8.2"
   },
   "dependencies": {
-    "mochawesome": "^7.1.3",
+    "mochawesome": "^8.0.1",
     "mochawesome-report-generator": "^6.2.0",
     "test": "^3.3.0"
   }
