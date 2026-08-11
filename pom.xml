@@ -65,15 +65,16 @@
     <google.cloud.libraries-bom.version>26.86.0</google.cloud.libraries-bom.version>
     <!-- Pin Groovy to 4.x for thymeleaf-layout-dialect compatibility (Spring Boot 4.0 manages 5.x) -->
     <groovy.version>4.0.25</groovy.version>
-    <java.version>25</java.version>
+    <java.version>26</java.version>
     <jquery.version>3.7.1</jquery.version>
     <jruby.version>10.0.5.0</jruby.version>
     <lombok.version>1.18.46</lombok.version>
     <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
     <maven-surefire-plugin.version>3.5.6</maven-surefire-plugin.version>
     <maven.compiler.proc>full</maven.compiler.proc>
-    <maven.compiler.target>25</maven.compiler.target>
-    <node.version>v24.14.0</node.version>
+    <maven.compiler.source>26</maven.compiler.source>
+    <maven.compiler.target>26</maven.compiler.target>
+    <node.version>v26.0.0</node.version>
     <npm.version>11.8.0</npm.version>
     <spotbugs-maven.version>4.10.3.0</spotbugs-maven.version>
     <spotbugs.version>4.9.8</spotbugs.version>
@@ -298,6 +299,12 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>com.vaadin.external.google</groupId>
+          <artifactId>android-json</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
 
     <dependency>

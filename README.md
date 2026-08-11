@@ -796,7 +796,7 @@ If you want to run WrongSecrets but without certain challenges you don't want to
 *_NOTE_* Please note that we do not deliver any support to your fork when you follow the process below. Please understand that license and copyright of the original application remain intact for your Fork.
 
 Requirements:
-- Have the JDK of Java 25 installed;
+- Have the JDK of Java 26 installed;
 - Have an account at a registry to which you can push your variant of the WrongSecrets container;
 
 Here are the steps you have to follow to create your own release of WrongSecrets with certain challenges disabled:

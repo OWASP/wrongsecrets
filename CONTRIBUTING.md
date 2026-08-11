@@ -300,9 +300,9 @@ Select **_google-java-format Settings_** and click enable.
 
 Open **_File > Project structure _**.
 
-In the tab `Project` make sure that an SDK of version `25` is selected (e.g. `openjdk-25`, `oraclejdk-25` or just `25` depending on which Java JDK variant you installed).
+In the tab `Project` make sure that an SDK of version `26` is selected (e.g. `openjdk-26`, `oraclejdk-26` or just `26` depending on which Java JDK variant you installed).
 
-In the tab `SDKs` make sure that an SDK of version `25` is selected.
+In the tab `SDKs` make sure that an SDK of version `26` is selected.
 
 
 ### Step 6: Reload the project
@@ -461,7 +461,7 @@ refer this block for reasons:
     With this challenge, we basically aim to help new contributors to better understand the code and encourage them to add new challenges for our end-user.
 ```
 
-Use this block as refrence for hints:
+Use this block as reference for hints:
 
 ```adoc
     Your secret is `Hello World`
