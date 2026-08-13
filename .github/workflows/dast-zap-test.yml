@@ -8,6 +8,9 @@ on:
 permissions:
   contents: read
 
+env:
+  NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
+
 jobs:
   test-dast:
     name: DAST test with ZAP

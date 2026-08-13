@@ -9,6 +9,11 @@ on:
     branches: [ master ]
 permissions:
   contents: read
+
+env:
+  NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
+
+
 jobs:
   javaDocGenerator:
     runs-on: ubuntu-latest

@@ -6,6 +6,10 @@ on:
       - 'src/main/resources/templates/**'
       - 'src/main/resources/static/**'
 
+env:
+  NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
+
+
 jobs:
   visual-diff:
     runs-on: ubuntu-latest
