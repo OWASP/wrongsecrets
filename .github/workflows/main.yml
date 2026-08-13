@@ -19,6 +19,11 @@ permissions:
   issues: read
   pull-requests: write
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
+
+env:
+  NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
+
+
 jobs:
   lint:
     name: lint javacode
