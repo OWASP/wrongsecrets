@@ -42,3 +42,6 @@ https://www.jcchouinard.com/wget/
 
 # Railway deploy template links return 404 to link checkers
 https://railway.com/deploy/*
+
+# Slack gives 403, but channels exists for a few years now 
+https://owasp.slack.com/*
