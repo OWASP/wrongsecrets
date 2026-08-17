@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FindBugsFilter>
+    <!-- Suppress NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE for Challenge62McpController
+         This is an intentional vulnerability pattern in the WrongSecrets project.
+         Spotbugs 4.10.3+ improved detection of null pointer dereferences from method return values.
+         This particular case in Challenge62McpController.getServiceAccountAccessToken() at line 322
+         is a real vulnerability that should be kept as an educational example. -->
+    <Match>
+        <Class name="org.owasp.wrongsecrets.challenges.docker.Challenge62McpController" />
+        <Bug pattern="NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE" />
+    </Match>
+</FindBugsFilter>
