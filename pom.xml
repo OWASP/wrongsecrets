@@ -393,7 +393,6 @@
           <version>${spotbugs-maven.version}</version>
           <configuration>
             <omitVisitors>FindReturnRef</omitVisitors>
-            <excludeFilterFile>config/spotbugs/excludeFilter.xml</excludeFilterFile>
             <plugins>
               <plugin>
                 <groupId>com.h3xstream.findsecbugs</groupId>
