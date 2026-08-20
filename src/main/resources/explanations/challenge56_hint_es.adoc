@@ -1,0 +1,1 @@
+Estás buscando un secreto que no está en el código, sino en la documentación. Verifica el plan agéntico en `cursor/rules/project-specification.mdc` para encontrar una instrucción de ejemplo que contenga el secreto para este desafío.

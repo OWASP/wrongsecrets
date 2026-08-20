@@ -1,0 +1,5 @@
+*Por qué los secretos necesitan tanto RBAC*
+
+Los secretos K8s están diseñados para alojar secretos. Como puedes ver al resolver el desafío, los secretos ya están codificados en `base64`.
+
+Los secretos no deben, a menos que estén cifrados, ser confirmados en Git. Si lo están, el secreto permanece en el historial de Git, incluso si lo eliminas. Usa siempre RBAC para restringir el acceso a los secretos K8s.

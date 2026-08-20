@@ -1,0 +1,5 @@
+*Warum das Speichern von Geheimnissen in geschlossenen GitHub-Issues eine schlechte Idee ist?*
+
+Du solltest niemals ein Geheimnis in einem GitHub-Issue preisgeben, denn selbst wenn das Issue geschlossen ist, sind alle Daten öffentlich und sehr leicht zu finden.
+
+Also überprüfe das Issue zweimal, bevor du es in einem Repository postest.

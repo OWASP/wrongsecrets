@@ -1,0 +1,5 @@
+*Waarom je voorzichtig moet zijn met Git notes?*
+
+1. Zoals alle Git-repositories, zodra een geheim hier is gelekt, is het heel moeilijk/onmogelijk om het uit alle geschiedenis te verwijderen.
+
+2. Git Notes lijkt een zelden gebruikte functie van Git te zijn, waardoor veel van de geheimscanning-tools deze niet controleren. Dit betekent dat het kan worden gemist in CI.

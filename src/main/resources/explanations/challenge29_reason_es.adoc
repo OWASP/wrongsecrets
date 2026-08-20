@@ -1,0 +1,7 @@
+*Por qué publicar capturas de pantalla de registros en un issue de GitHub es una mala idea*
+
+No debes publicar capturas de pantalla de registros en un issue de GitHub porque:
+1. Los datos son públicos (incluso en un repositorio privado, a menudo más público de lo que esperarías)
+2. Las capturas de pantalla no pueden editarse como el texto. Incluso cuando el secreto está difuminado, esto puede ser reversible.
+
+Verifica si hay fugas de secretos en la salida y usa bloques de código markdown para publicar registros en un issue de GitHub.

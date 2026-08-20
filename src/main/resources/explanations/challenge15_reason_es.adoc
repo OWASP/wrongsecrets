@@ -1,0 +1,9 @@
+*Por qué necesitas limpiar y rotar los secretos*
+
+Cuando tienes un secreto confirmado en Git por error, habrá formas de encontrarlo, a mano o con herramientas.
+
+Por lo tanto, cuando un secreto se compromete en Git por error:
+
+- Informa a cualquier autoridad de seguridad responsable en la organización
+- Asegúrate de rotar el secreto
+- Opcionalmente, limpia: usa https://github.com/rtyley/bfg-repo-cleaner[BFG repo-cleaner] o git filter-branch

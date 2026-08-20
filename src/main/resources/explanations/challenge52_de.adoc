@@ -1,0 +1,7 @@
+=== Offengelegte Buildx Secrets Herausforderung
+
+Acme Inc., ein schnell wachsendes SaaS-Unternehmen, erweitert seine containerisierten Deployments mit Docker Buildx, um Multi-Plattform-Builds zu optimieren. Jedoch ist während des Build-Prozesses eine ernsthafte Sicherheitsfehlkonfiguration aufgetreten.
+
+Während ihres Docker Buildx-Prozesses wurde ein sensibles Geheimnis, das während der Build-Phase des Containers temporär und sicher bleiben sollte, aufgrund einer Fehlkonfiguration versehentlich in das Dateisystem des Containers eingebettet.
+
+Als neu eingestellter Sicherheitsberater von Acme Inc. ist deine Aufgabe klar: Untersuche den Container, identifiziere das offengelegte Geheimnis und melde es dem Team.

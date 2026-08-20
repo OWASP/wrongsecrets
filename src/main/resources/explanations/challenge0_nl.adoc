@@ -1,0 +1,22 @@
+=== Openingsuitdaging
+
+Welkom bij de openingsuitdaging van OWASP WrongSecrets!
+
+In deze uitdaging leggen we je alles uit wat je nodig hebt om OWASP WrongSecrets te spelen.
+
+Elke uitdaging gaat over het vinden van een geheim dat niet goed verborgen en/of geconfigureerd is in onze https://github.com/OWASP/wrongsecrets[applicatiecode], https://hub.docker.com/r/jeroenwillemsen/wrongsecrets[Docker-container], of in een van de gerelateerde onderdelen van het https://github.com/OWASP/wrongsecrets#table-of-contents[systeem].
+
+Zodra je het geheim hebt gevonden, kun je het in het onderstaande invoervak plaatsen en op "Indienen" drukken. De knop "Wissen" maakt het invoervak leeg.
+Wil je de uitdaging opnieuw spelen? Druk op de knop "Opnieuw instellen".
+
+Het juiste antwoord hieronder is `The first answer`. Kopieer het in het invoervak en druk op "Indienen".
+
+Veel plezier met de moeilijkere uitdagingen ;-).
+
+Opmerking: sommige uitdagingen vereisen aanvullende tools. Wil je ze niet zelf installeren? Je kunt een container gebruiken:
+
+[source, shell]
+docker run -p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock jeroenwillemsen/wrongsecrets-desktop:latest
+
+
+Ga vervolgens in je browser naar http://localhost:3000[http://localhost:3000] om een webtop te vinden met alle benodigde tools.

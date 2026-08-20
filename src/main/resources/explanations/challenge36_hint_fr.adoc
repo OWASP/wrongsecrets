@@ -1,0 +1,8 @@
+Ce défi peut être résolu en récupérant les chaînes stockées dans les registres. Vous pouvez utiliser n'importe quel outil de débogage. Nous montrons comment le résoudre avec GDB et Radare2.
+
+Avec GDB:
+1. `gdb -q wrongsecrets-advanced-c-windows.exe` pour ouvrir GDB et charger l'exécutable
+2. `disas main` pour désassembler la fonction `main`
+3. `b execute` pour définir un point d'arrêt à la fonction `execute`
+4. `set args 1234567812345678` pour définir les arguments du programme
+5. `r` pour exécuter le programme

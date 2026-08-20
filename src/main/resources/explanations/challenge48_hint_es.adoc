@@ -1,0 +1,7 @@
+Este desafío se puede resolver de las siguientes maneras:
+
+- Descifra el secreto sellado usando la clave privada accesible en el repositorio:
+  1. Clona el repositorio que contiene los archivos del desafío.
+  2. Localiza el archivo `sealed-challenge48.json` en el repositorio.
+  3. Encuentra el archivo de clave privada sin cifrar llamado `main.key` en el repositorio.
+  4. Usa la herramienta `kubeseal` para descifrar el secreto sellado.

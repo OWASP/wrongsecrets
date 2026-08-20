@@ -1,0 +1,7 @@
+=== Secretos del Canal de Telegram
+
+Muchas aplicaciones móviles y servicios usan bots de Telegram para notificaciones, monitoreo o interacción con el usuario. Los desarrolladores a menudo codifican directamente las credenciales del bot de Telegram en el código fuente de su aplicación, haciendo que estos secretos sean fácilmente descubribles por cualquiera que tenga acceso al código base.
+
+En este desafío, un desarrollador ha incrustado credenciales de bot de Telegram en el código de la aplicación para comunicarse con un canal de control. La respuesta secreta real se publica en el canal de Telegram al que se puede acceder usando estas credenciales.
+
+¿Puedes encontrar el token del bot de Telegram codificado y usarlo para descubrir el secreto en el canal asociado?

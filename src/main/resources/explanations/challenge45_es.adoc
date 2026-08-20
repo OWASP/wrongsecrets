@@ -1,0 +1,4 @@
+=== Desafío de subclave de Vault
+
+A veces, todo lo que quieres es tener esa entrada concisa en tu sistema de gestión de secretos. ¿Entonces, qué tal almacenar tu nombre de usuario y contraseña en la misma entrada?
+¡Intentamos hacer eso pero nos metimos en un nuevo problema! Con Hashicorp Vault, puedes configurar políticas para permitir el acceso a una subclave. ¿Puedes encontrar el nombre de usuario muy aleatorio que configuramos para este desafío?

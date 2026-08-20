@@ -1,0 +1,5 @@
+=== Warum Herausforderung 58 wichtig ist: Datenbankverbindungsstring-Exposition
+
+**Das Problem:**
+
+Diese Herausforderung beleuchtet eines der häufigsten und gefährlichsten Szenarien für Geheimnisleaks in realen Anwendungen: **Datenbankverbindungsstrings mit eingebetteten Anmeldeinformationen, die durch schlechte Fehlerbehandlung offengelegt werden**.

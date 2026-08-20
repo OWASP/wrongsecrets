@@ -1,0 +1,4 @@
+*Waarom je voorzichtig moet zijn met geheimen in je cloud*
+
+Geheimen en Terraform state:
+Terraform state kan op veel plaatsen worden opgeslagen: lokaal, in de opslagoplossing van een cloudprovider, etc. Het kan gemakkelijk gebeuren dat geheimen in Terraform state terechtkomen. Zorg ervoor dat geheimen die in Terraform state zijn opgeslagen zelf ook versleuteld zijn. Gebruik een remote backend met versleuteling voor Terraform state.

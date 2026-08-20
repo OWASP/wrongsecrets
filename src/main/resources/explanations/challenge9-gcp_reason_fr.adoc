@@ -1,0 +1,4 @@
+*Pourquoi vous devez être prudent avec les secrets dans votre cloud*
+
+Secrets et état Terraform :
+L'état Terraform peut être stocké à de nombreux endroits : localement, dans la solution de stockage d'un fournisseur de cloud, etc. Il peut facilement arriver que des secrets se retrouvent dans l'état Terraform. Assurez-vous que les secrets stockés dans l'état Terraform sont également chiffrés. Utilisez un backend distant avec chiffrement pour l'état Terraform.

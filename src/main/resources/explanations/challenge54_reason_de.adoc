@@ -1,0 +1,6 @@
+=== Warum das Platzieren von Geheimnissen in .gitignore ein Sicherheitsrisiko ist?
+
+Entwickler aktualisieren regelmäßig Konfigurationsdateien wie `.gitignore`, wobei sie gelegentlich sensible Informationen hinterlassen, wie Passwörter, Tokens oder kritische Dateipfade. Diese Geheimnisse, auch wenn sie verschlüsselt sind, stellen Risiken dar:
+
+- Angreifer könnten die Geheimnisse entdecken und entschlüsseln.
+- Vergessene Geheimnisse in öffentlichen Dateien deuten auf schlechte Sicherheitspraktiken und ein schwaches Geheimnisverwaltung hin.

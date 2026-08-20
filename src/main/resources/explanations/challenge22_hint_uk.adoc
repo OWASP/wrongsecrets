@@ -1,0 +1,19 @@
+Ця задача конкретно розглядає секрет у бінарному файлі Rust на основі https://doc.rust-lang.org/cargo/reference/profiles.html#release[профілю випуску].
+
+Ви можете вирішити цю задачу, використовуючи наступні альтернативні рішення:
+
+1. Знайдіть секрети за допомогою https://ghidra-sre.org/[Ghidra].
+- Встановіть і запустіть Ghidra з `ghidraRun`.
+- Завантажте `wrongsecrets-rust` у Ghidra і дозвольте проаналізувати.
+- Імпортуйте https://gist.github.com/str4d/e541f4c28e2bca80d222434ac1a204f4[скрипт demangle] і запустіть його через Ghidra Script Manager.
+- Знайдіть функцію `main` у просторі імен `rust`.
+- Знайдіть аргумент, який потрібно порівняти.
+- Знайдіть секрет.
+
+2. Знайдіть секрети за допомогою https://www.radare.org[radare2].
+- Встановіть radare2 і запустіть аналіз з `$ r2 -AAA wrongsecrets-rust`
+- Виведіть точку входу з `s sym.rust::main::h66ace6a84e548891` потім `pdf`.
+- Спробуйте знайти, як підготовлено аргумент. Чи можете ви знайти секрет?
+- Альтернативно: після запуску radare2, виконайте `iz | grep secret` і знайдіть рядок.
+
+Не хочете встановлювати інструменти? Перегляньте https://github.com/OWASP/wrongsecrets/tree/master?tab=readme-ov-file#want-to-play-but-are-not-allowed-to-install-the-tools[контейнер WrongSecrets Desktop]!

@@ -1,0 +1,5 @@
+=== Événement d'audit Spring Boot Actuator
+
+Les développeurs ont décidé de tirer parti de Spring Boot Actuator pour surveiller et auditer leur application. Le projet impliquait d'interfacer avec diverses APIs externes, chacune nécessitant une clé unique pour l'authentification. Les événements d'audit, détaillés et informatifs, semblaient la solution parfaite.
+
+L'équipe a mis en œuvre un mécanisme de journalisation incluant des événements d'audit détaillés.

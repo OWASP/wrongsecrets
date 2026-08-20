@@ -1,0 +1,8 @@
+=== Een geheim geüpload naar een LLM-applicatie (Large Language Model)
+
+AI is here to stay. AI kan helpen bij allerlei dingen: complexe probleemoplossing, code genereren of beveiligingsadvies geven.
+Stel je voor dat je code hebt geüpload om naar beveiligingsproblemen te zoeken. Wat als dat een wachtwoord bevatte? Regels zouden het LLM-model moeten beperken om te voorkomen dat het het wachtwoord lekt. Kan dit geheim toch worden geëxtraheerd?
+
+Probeer het te vinden via https://gandalf.lakera.ai/[dit prompt-spel] eerste oefening.
+
+Houd er rekening mee dat https://gandalf.lakera.ai/[het prompt-spel] volledig gratis en open is. Dit betekent dat het offline kan zijn en een paar minuten kan duren om opnieuw te starten na je eerste verzoek. Voer geen fuzzing of dynamische tests uit op de website (gebruik bijvoorbeeld geen ZAP of Burp). Zorg ervoor dat anderen het ook kunnen spelen!

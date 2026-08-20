@@ -1,0 +1,3 @@
+=== Azure Key Vault parte 2
+
+El secreto ahora está aleatorizado y almacenado directamente en el gestor de secretos de la nube. Todavía lo montamos en el pod K8s a través del https://secrets-store-csi-driver.sigs.k8s.io[controlador CSI]... ¿Puedes acceder a él?

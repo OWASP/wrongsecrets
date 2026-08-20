@@ -1,0 +1,11 @@
+=== Geheimnisse im Frontend-Code Teil 2
+
+Manchmal möchten wir nicht vergessen, wie wir uns mit Testanmeldedaten anmelden können, während wir an unserem Frontend-Code arbeiten.
+Kannst du die Testanmeldedaten finden?
+
+Beachte, dass Testanmeldedaten manchmal im Code verschleiert werden, indem sie Base64-kodiert werden.
+
+++++
+<!-- test-credentials = WhyCommentsAsPassswordAreBad345_$"-->
+<!-- If you like this: check OWAWS Juiceshop for more awesome challenges!  https://juice-shop.herokuapp.com/#/score-board -->
+++++

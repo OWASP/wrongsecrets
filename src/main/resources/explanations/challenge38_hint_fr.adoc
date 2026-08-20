@@ -1,0 +1,9 @@
+Contrairement aux autres défis Git, celui-ci ne peut pas être résolu par la pléthore d'outils qui recherchent automatiquement les secrets divulgués dans les dépôts Git.
+
+Essayez de résoudre le défi en examinant manuellement les métadonnées Git.
+
+1. Clonez le dépôt - `git clone https://github.com/OWASP/wrongsecrets`.
+2. Naviguez vers le répertoire - `cd wrongsecrets`
+3. Récupérez les notes - `git fetch origin 'refs/notes/*:refs/notes/*'`
+4. Listez toutes les notes dans le dépôt - `git notes`
+5. En utilisant la référence de note affichée, affichez la note - `git notes show [ref]`

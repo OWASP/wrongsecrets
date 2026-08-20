@@ -1,0 +1,8 @@
+=== Hint voor Uitdaging 58
+
+Deze uitdaging demonstreert een heel gewoon beveiligings-antipatroon: **databaseverbindingsstrings met ingebedde referenties die lekken via foutmeldingen**.
+
+**Waar te zoeken:**
+
+1. **Probeer het fout-eindpunt:** Bezoek `/error-demo/database-connection` om een databaseverbindingsfout te activeren
+2. **Controleer de reactie:** De applicatie zal proberen verbinding te maken met een database en mislukken, waardoor de verbindingsstring wordt blootgesteld

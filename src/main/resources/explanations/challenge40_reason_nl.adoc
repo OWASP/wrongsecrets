@@ -1,0 +1,7 @@
+*Waarom mogen we de versleutelingssleutel en het geheim niet samen opslaan?*
+
+Het samen opslaan van een versleutelingssleutel en de gegevens die het versleutelt wordt over het algemeen beschouwd als een slechte praktijk omdat het de beveiliging door versleuteling ondermijnt.
+
+In dergelijke scenario's heeft een aanvaller de sleutel zodra het bestand in zijn bezit is.
+
+Het wordt altijd aanbevolen om je versleutelingssleutels veilig op te slaan.

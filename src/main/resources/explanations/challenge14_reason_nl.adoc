@@ -1,0 +1,5 @@
+*Waarom je voorzichtig moet zijn met wachtwoorden voor andere geheimen*
+
+Of je nu een wachtwoord hebt voor een enterprise secrets management systeem of een wachtwoordbeheerder: je authenticatiefactoren bepalen het verschil tussen een gecompromitteerd systeem en een veilig systeem.
+
+Heb een sterk wachtwoord (bijv. een lang wachtwoord!), gebruik MFA indien mogelijk, en verander wachtwoorden regelmatig.

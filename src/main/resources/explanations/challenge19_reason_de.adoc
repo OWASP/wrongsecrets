@@ -1,0 +1,7 @@
+*Warum die Verwendung von Binärdateien zum Verstecken eines Geheimnisses einen Angreifer nur verzögert.*
+
+Mit wunderschönen kostenlosen Reverse-Engineering-Anwendungen wie Ghidra bleibt nicht viel sicher. Jeder, der die ausführbare Datei in Ghidra oder Radare2 laden kann, kann leicht damit beginnen, Aufklärung zu betreiben und Geheimnisse in deiner Binärdatei zu finden.
+
+Das Verschlüsseln des Geheimnisses mit einem in der Binärdatei eingebetteten Schlüssel und andere lustige Rätsel verzögern einen Angreifer und machen es einfach Spaß, das Geheimnis zu finden. Sei dir bewusst, dass wenn das Geheimnis von der ausführbaren Datei verwendet werden muss, es letztendlich im Speicher bereit sein muss, um ausgeführt zu werden.
+
+Brauchst du immer noch ein Geheimnis in der Binärdatei? Stelle sicher, dass es nur remote nach der Authentifizierung gegen einen Server abgerufen werden kann.

@@ -1,0 +1,7 @@
+Ce défi peut être résolu en suivant les étapes suivantes:
+
+1. Trouvez le secret avec la ligne de commande
+- utilisez `kubectl exec vault-0 -n vault -- vault kv get secret/wrongsecret` pour trouver les données.
+
+2. Trouvez le secret dans Vault en utilisant le token root:
+- Lorsque vous configurez l'environnement K8s, le script vous indique la valeur du token root.

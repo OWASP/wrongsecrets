@@ -1,0 +1,6 @@
+=== Forkbare Github Actions
+
+Wenn du Geheimnisse in deiner CI/CD-Pipeline verwalten möchtest, solltest du dich immer fragen: Wer kann sie sehen?
+Kannst du das Geheimnis über die Github-Action finden?
+
+Hinweis: Diese Herausforderung ist gleichzeitig eine "schlechte Krypto"-Herausforderung, aber auf diese Weise etwas weniger einfach.

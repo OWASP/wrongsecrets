@@ -1,0 +1,5 @@
+*Waarom het invoeren van geheimen in bash een slecht idee is.*
+
+De opdrachtregel kan tijdelijk en veilig aanvoelen, maar wordt vaak gelogd. Dit is een standaardfunctie bij de meeste shells. Sommige hebben beschermingen op zijn plaats, en de meeste tools die een geheim aanvragen, zullen het niet afdrukken. Maar bij het schrijven van aangepaste commando's zijn deze beschermingen niet aanwezig en kun je jezelf eenvoudig in de voet schieten.
+
+Geheimen lekken is een beetje moeilijk met een Dockerfile bij het maken van een container. Als je echter een container hebt die je regelmatig gebruikt, hem niet verwijdert en geheimen in platte tekst intypt, dan kan een kwaadwillende actor je ogenschijnlijk onschuldige docker-container gebruiken om privileges te escaleren. Dit kan leiden tot het exploiteren van iets veel belangrijkers dan je pc.

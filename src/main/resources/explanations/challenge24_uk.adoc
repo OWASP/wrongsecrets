@@ -1,0 +1,11 @@
+=== Криптографічна задача частина 2
+
+Реалізація криптографії може бути дуже страшною. Тому є різні помилки, які можна знайти на https://twitter.com/d_feldman/status/1558309810801631233?s=20&t=z98ii6IPJEZq10cnsGAhpQ[Twitter]. Що якщо наші розробники зробили ту саму помилку?
+
+У цій задачі вам потрібно знайти ключ HMAC. Ми створили HMAC, дотримуючись https://csrc.nist.gov/CSRC/media/Projects/Cryptographic-Standards-and-Guidelines/documents/examples/HMAC_SHA1.pdf[специфікації NIST] крок за кроком! Чи можете ви надати нам ключ HMAC, використаний для створення HMAC?
+
+Використаний текст: `Sample message for keylen=blocklen`
+
+HMAC у Hex: `5FD596EE 78D5553C 8FF4E72D 266DFD19 2366DA29`
+
+Який ключ HMAC тут використовується?

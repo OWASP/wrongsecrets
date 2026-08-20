@@ -1,0 +1,5 @@
+=== Warum Herausforderung 60 wichtig ist: MCP-Prompt-Injektion und Umgebungsvariablen-Exposition
+
+**Das Problem:**
+
+MCP (Model Context Protocol) Server werden immer beliebter, um KI-Assistenten Zugriff auf Tools und Daten zu geben. Jedoch implementieren viele Entwickler MCP-Server ohne angemessene Sicherheitskontrollen. Schlimmer noch, ein *böswilliger* MCP-Server kann aktiv den verbindenden KI-Client durch Prompt-Injektion manipulieren.

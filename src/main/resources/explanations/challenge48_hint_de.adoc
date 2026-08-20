@@ -1,0 +1,7 @@
+Diese Herausforderung kann auf folgende Weise gelöst werden:
+
+- Entschlüssle das versiegelte Geheimnis mit dem zugänglichen privaten Schlüssel im Repository:
+  1. Klone das Repository mit den Herausforderungsdateien.
+  2. Suche die Datei `sealed-challenge48.json` im Repository.
+  3. Finde die unverschlüsselte private Schlüsseldatei namens `main.key` im Repository.
+  4. Verwende das `kubeseal`-Tool, um das versiegelte Geheimnis zu entschlüsseln.

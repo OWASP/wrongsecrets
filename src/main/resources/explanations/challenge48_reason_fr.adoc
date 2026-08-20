@@ -1,0 +1,5 @@
+*Pourquoi la gestion correcte des Secrets Scellés est importante?*
+
+Les Sealed Secrets offrent un moyen de chiffrer vos secrets Kubernetes et de les stocker en toute sécurité, même dans des dépôts publics. Cependant, une mauvaise gestion et des mauvaises configurations peuvent entraîner de graves vulnérabilités de sécurité.
+
+Si la clé privée utilisée pour déchiffrer les secrets scellés est exposée ou accessible dans le même dépôt, cela annule la sécurité fournie par les Sealed Secrets.

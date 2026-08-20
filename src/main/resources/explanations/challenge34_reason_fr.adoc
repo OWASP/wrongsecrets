@@ -1,0 +1,5 @@
+*Pourquoi les fonctions de dérivation de clés ne sont pas sûres avec des valeurs codées en dur*
+
+Les fonctions de dérivation de clés (KDFs) sont déterministes. Cela signifie qu'elles retourneront toujours la même sortie pour une entrée donnée. Donc, si les paramètres sont codés en dur, toute personne ayant accès au code peut exécuter la KDF avec les paramètres spécifiés et obtenir la clé.
+
+Les KDFs doivent être utilisées pour générer des clés basées sur des entrées dynamiques, telles que des mots de passe fournis par des humains. Dans les deux cas, l'entrée de la KDF n'est pas codée en dur/déterministe.

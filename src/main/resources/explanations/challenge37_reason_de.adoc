@@ -1,0 +1,5 @@
+*Warum wir mit Sicherheits-Credentials in CI/CD vorsichtig sein müssen*
+
+Personen, die Zugang zur Konfiguration deiner Sicherheitsprüfungen in deiner CI/CD-Umgebung haben, können leicht auf alle dort konfigurierten Credentials zugreifen. Diese Credentials können dann für alles verwendet werden.
+
+Deshalb sollte die Sicherheit sehr sorgfältig bei der Verwaltung ihrer Geheimnisse sein: Nur weil die Credential von einem (Sicherheits-)Tool verwendet wird, bedeutet das nicht, dass wir weniger Sicherheit tolerieren können.

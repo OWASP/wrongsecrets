@@ -1,0 +1,4 @@
+=== Vault subsleutel uitdaging
+
+Soms wil je gewoon die beknopte invoer in je geheimbeheer systeem. Dus, wat dacht je van het opslaan van je gebruikersnaam en wachtwoord in dezelfde invoer?
+We probeerden dat te doen, maar kwamen in een nieuw probleem terecht! Met Hashicorp Vault kun je beleidsregels instellen om toegang tot een subsleutel te verlenen. Kun je de zeer willekeurige gebruikersnaam vinden die we voor deze uitdaging hebben ingesteld?

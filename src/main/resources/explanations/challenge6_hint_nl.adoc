@@ -1,0 +1,9 @@
+Je kunt deze uitdaging oplossen met de volgende alternatieve oplossingen:
+
+1. Controleer de status van het geheim in Git:
+ - Zoek waar in Git we `secrets-secret.yml` hebben opgeslagen.
+ - Bekijk het veld `Data`: geheimen zijn base64-gecodeerd. Eenmaal gemonteerd in de workloads, worden ze gedecodeerd.
+
+2. Vraag vriendelijk via Kubectl:
+ - Voer `kubectl get secret -n default` en dan `kubectl describe secret <naam>` uit.
+ - Gebruik `echo <base64waarde> | base64 -d` om te decoderen.

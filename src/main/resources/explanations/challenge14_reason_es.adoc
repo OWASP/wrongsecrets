@@ -1,0 +1,5 @@
+*Por qué necesitas tener cuidado con las contraseñas para otros secretos*
+
+Ya sea que tengas una contraseña para un sistema de gestión de secretos empresarial o un gestor de contraseñas: tus factores de autenticación marcan la diferencia entre un sistema comprometido y uno seguro.
+
+Ten una contraseña fuerte (p. ej., ¡una larga!), usa MFA si es posible, y cambia las contraseñas regularmente.

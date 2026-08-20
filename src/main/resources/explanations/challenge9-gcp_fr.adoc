@@ -1,0 +1,5 @@
+=== GCP Secret Manager partie 1
+
+D'accord, maintenant nous générons un secret via Terraform et le stockons chez notre fournisseur Cloud. Que se passe-t-il dans l'état Terraform ?
+
+Vous pouvez essayer de trouver le secret en fouillant vos fichiers `terraform.tfstate` avec https://github.com/trufflesecurity/truffleHog[*Trufflehog*].

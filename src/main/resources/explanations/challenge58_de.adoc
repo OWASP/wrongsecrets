@@ -1,0 +1,9 @@
+=== Datenbankverbindungsstring-Exposition in Fehlermeldungen
+
+Eine der häufigsten und gefährlichsten Arten, wie Geheimnisse in realen Anwendungen durchsickern, sind Datenbankverbindungsstrings mit eingebetteten Anmeldeinformationen. Wenn Anwendungen keine Verbindung zu Datenbanken herstellen können, legen sie oft den vollständigen Verbindungsstring (einschließlich Benutzernamen und Passwörtern) in Fehlermeldungen, Logs oder sogar in Benutzeroberflächen offen.
+
+Diese Herausforderung demonstriert ein Szenario, in dem ein Entwickler:
+
+1. **Eingebettete Anmeldeinformationen in Verbindungsstrings verwendet** anstatt externer Geheimnisverwaltung
+2. **Schlechte Fehlerbehandlung hat**, die den vollständigen Verbindungsstring offenlegt, wenn Datenbankverbindungen fehlschlagen
+3. **Sensible Informationen protokolliert** ohne zuerst Anmeldeinformationen zu bereinigen

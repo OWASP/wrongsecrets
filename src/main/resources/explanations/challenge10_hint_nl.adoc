@@ -1,0 +1,9 @@
+Je kunt deze uitdaging oplossen met de volgende alternatieve oplossingen:
+
+1. Zoek het geheim direct in de cloud secrets manager (de goedkope manier):
+ - Log in op de cloudconsole en ga naar de secrets manager.
+ - Haal de gegevens op van het juiste geheim.
+
+2. Zoek het geheim door exec in de pod:
+ - Zorg ervoor dat je kubectl hebt geconfigureerd.
+ - Gebruik `kubectl exec -it <pod-naam> -- cat /mnt/secrets/wrongsecret`.

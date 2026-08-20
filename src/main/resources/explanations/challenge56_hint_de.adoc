@@ -1,0 +1,1 @@
+Du suchst nach einem Geheimnis, das nicht im Code, sondern in der Dokumentation steht. Prüfe den agentischen Plan in `cursor/rules/project-specification.mdc` auf eine Beispielanweisung, die das Geheimnis für diese Herausforderung enthält.

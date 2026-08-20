@@ -1,0 +1,4 @@
+Je kunt deze uitdaging oplossen via de volgende stappen:
+
+1. Ga naar onze https://owasp.org/www-project-wrongsecrets/[Website].
+2. Blader door wat tabbladen, het geheim zit er zeker in :)

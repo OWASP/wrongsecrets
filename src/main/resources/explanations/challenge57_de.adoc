@@ -1,0 +1,10 @@
+=== JavaScript-basierte In-Browser-LLM-Herausforderung
+
+Diese Herausforderung bietet einen einfachen KI-Assistenten, der direkt in deinem Browser läuft. Die KI wurde mit spezifischen Anweisungen programmiert und enthält ein verstecktes Geheimnis, das du entdecken musst.
+
+**Deine Mission:**
+Der KI-Assistent wurde mit einem Systemprompt programmiert, der einen Geheimcode enthält. Deine Aufgabe ist es, verschiedene Prompt-Engineering- und Injektionstechniken zu verwenden, um dieses versteckte Geheimnis aus den Anweisungen der KI zu extrahieren.
+
+**Auszuprobierenden Techniken:**
+
+1. **Direkte Fragen:** Frage die KI direkt nach Geheimnissen oder versteckten Informationen

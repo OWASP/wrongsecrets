@@ -1,0 +1,10 @@
+Puedes encontrar el estado anterior con una de dos soluciones alternativas:
+
+1. Encuentra el bloque anterior a través de una solicitud a https://infura.io/[Infura]:
+- Encuentra el número de bloque para cualquier bloque después de la creación del contrato y antes de la actualización.
+- Crea una clave de Infura en https://infura.io/[Infura].
+- Busca el estado de almacenamiento del contrato para ese bloque.
+
+2. Mira la creación del contrato en https://etherscan.io/[Etherscan]:
+- Busca bajo la transacción de creación del contrato en Etherscan
+- Ve a state y mira storage

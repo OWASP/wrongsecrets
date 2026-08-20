@@ -1,0 +1,5 @@
+*Warum du mit Passwörtern zu anderen Geheimnissen vorsichtig sein musst*
+
+Ob du ein Passwort für ein Enterprise-Secrets-Management-System oder einen Passwort-Manager hast: deine Authentifizierungsfaktoren machen den Unterschied zwischen einem gehackten System und einem sicheren System.
+
+Habe ein starkes Passwort (z.B. ein langes!), verwende MFA wenn möglich, und ändere Passwörter regelmäßig.

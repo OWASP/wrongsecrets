@@ -1,0 +1,8 @@
+Deze uitdaging kan worden opgelost door de strings op te halen die zijn opgeslagen in de registers. Je kunt elke debugging tool gebruiken. We laten je zien hoe je het kunt oplossen met GDB en Radare2.
+
+Met GDB:
+1. `gdb -q wrongsecrets-advanced-c-windows.exe` om GDB te openen en het uitvoerbare bestand te laden
+2. `disas main` om de `main`-functie te disassembleren
+3. `b execute` om een breekpunt in te stellen bij de `execute`-functie
+4. `set args 1234567812345678` om de programmaargumenten in te stellen
+5. `r` om het programma uit te voeren

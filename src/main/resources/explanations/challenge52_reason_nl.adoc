@@ -1,0 +1,5 @@
+= Docker Buildx Secrets Misconfiguratie Uitdaging
+
+*Waarom onjuist geheimenbeheer in Docker build-processen tot kwetsbaarheden kan leiden*
+
+In moderne DevOps-workflows is Docker Buildx een krachtig hulpmiddel voor het efficiënt bouwen van multi-platform Docker-images. Het biedt een veilige manier om gevoelige informatie te doorgeven tijdens het bouwproces met de `--secret`-vlag. Echter, onjuiste behandeling of opslag van deze geheimen tijdens of na het bouwproces kan kritieke kwetsbaarheden introduceren.

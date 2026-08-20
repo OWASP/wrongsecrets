@@ -1,0 +1,5 @@
+*Pourquoi utiliser des binaires pour cacher un secret ne fait que retarder un attaquant.*
+
+Avec de belles applications gratuites de rétro-ingénierie comme ILSpy, peu de choses restent sécurisées. Quiconque peut charger l'exécutable dans de tels outils peut facilement faire de la reconnaissance et trouver des secrets dans votre binaire.
+
+Chiffrer le secret avec une clé intégrée dans le binaire ne fait que retarder un attaquant. Notez que si le secret doit être utilisé par l'exécutable, il doit éventuellement être en mémoire prêt à être exécuté.

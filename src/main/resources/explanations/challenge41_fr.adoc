@@ -1,0 +1,7 @@
+=== Décorticage de mot de passe (Password Shucking)
+
+Un site web utilisait https://en.wikipedia.org/wiki/MD5[MD5] pour le hachage des mots de passe, et ses développeurs ont récemment découvert que quelqu'un avait publié un dump de leurs données utilisateur.
+
+Dans une tentative d'améliorer la sécurité, ils ont décidé de migrer vers un algorithme de hachage plus fort comme https://en.wikipedia.org/wiki/Bcrypt[bcrypt].
+
+Les développeurs ont décidé que la façon la plus rapide de migrer serait de hacher les hachages préexistants avec bcrypt. Utiliser deux algorithmes de hachage serait plus sécurisé qu'un seul, non?

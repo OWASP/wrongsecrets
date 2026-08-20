@@ -1,0 +1,7 @@
+Deze uitdaging kan op de volgende manieren worden opgelost:
+
+- Gebruik het docker-compose bestand (`challenge51docker-compose.yml`) om de containers te bouwen en het geheim te vinden
+  1. Kloon de repository met de uitdagingsbestanden.
+  2. Zoek het `challenge51docker-compose.yml`-bestand in de repository.
+  3. Identificeer referenties: In de environments-sectie, controleer op variabelen zoals:
+     * `db_user`

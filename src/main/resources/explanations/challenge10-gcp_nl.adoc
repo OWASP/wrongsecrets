@@ -1,0 +1,3 @@
+=== GCP Secret Manager deel 2
+
+Het geheim is nu gerandomiseerd en direct opgeslagen in de cloud secrets manager. We koppelen het nog steeds aan de K8s-pod via de https://secrets-store-csi-driver.sigs.k8s.io[CSI-driver]... Kun je het openen?

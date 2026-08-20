@@ -1,0 +1,7 @@
+Dit is een CI/CD-configuratie-uitdaging. Je kunt het antwoord vinden door de authenticatie naar het beveiligde eindpunt met basisauth te configureren:
+
+1. Gebruik een browser om het geheim te vinden:
+- Ga eerst naar de https://github.com/OWASP/wrongsecrets/blob/master/.github/workflows/dast-zap-test.yml[Github Workflow]
+- Zoek de omgevingsvariabele waarmee we basisauth voor ZAP configureren (`ZAP_AUTH_HEADER_VALUE`)
+- Decodeer de base64-gecodeerde waarde van de header
+- Navigeer naar `/authenticated/challenge37` en voer de gebruikersnaam en het wachtwoord in die je in de vorige stap hebt gevonden.

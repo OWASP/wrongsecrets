@@ -1,0 +1,4 @@
+=== Secreto en un issue cerrado de GitHub
+Un usuario revela accidentalmente la nueva `AWS Secret key` en una conversación entre él y su amigo en un issue de GitHub.
+
+¿Puedes detectar el secreto en nuestro repositorio de GitHub?

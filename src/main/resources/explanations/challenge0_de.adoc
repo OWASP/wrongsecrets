@@ -1,0 +1,22 @@
+=== Eröffnungsherausforderung
+
+Willkommen bei der Eröffnungsherausforderung von OWASP WrongSecrets!
+
+In dieser Herausforderung erklären wir dir alles, was du wissen musst, um OWASP WrongSecrets zu spielen.
+
+Bei jeder Herausforderung geht es darum, ein Geheimnis zu finden, das nicht gut versteckt und/oder konfiguriert wurde – in unserem https://github.com/OWASP/wrongsecrets[Anwendungscode], https://hub.docker.com/r/jeroenwillemsen/wrongsecrets[Docker-Container] oder in einem der verwandten Teile des https://github.com/OWASP/wrongsecrets#table-of-contents[Systems].
+
+Sobald du das Geheimnis gefunden hast, kannst du es in das Eingabefeld unten eingeben und auf "Einreichen" klicken. Mit der Schaltfläche "Löschen" wird das Eingabefeld geleert.
+Möchtest du die Herausforderung erneut spielen? Klicke auf die Schaltfläche "Zurücksetzen".
+
+Die richtige Antwort lautet `The first answer`. Kopiere sie in das Feld und klicke auf "Einreichen".
+
+Viel Spaß bei den schwierigeren Herausforderungen ;-).
+
+Hinweis: Einige der folgenden Herausforderungen erfordern zusätzliche Tools. Möchtest du sie nicht selbst installieren? Du kannst einen Container verwenden:
+
+[source, shell]
+docker run -p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock jeroenwillemsen/wrongsecrets-desktop:latest
+
+
+Gehe dann in deinem Browser zu http://localhost:3000[http://localhost:3000], um ein Webtop mit allen benötigten Tools zu finden.
