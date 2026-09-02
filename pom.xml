@@ -68,7 +68,7 @@
     <java.version>26</java.version>
     <jquery.version>3.7.1</jquery.version>
     <jruby.version>10.1.1.0</jruby.version>
-    <lombok.version>1.18.46</lombok.version>
+    <lombok.version>1.18.48</lombok.version>
     <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
     <maven-surefire-plugin.version>3.5.6</maven-surefire-plugin.version>
     <maven.compiler.proc>full</maven.compiler.proc>
