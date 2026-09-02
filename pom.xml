@@ -47,7 +47,7 @@
     <archunit.version>1.5.0</archunit.version>
     <asciidoctor.maven.plugin.version>3.2.0</asciidoctor.maven.plugin.version>
     <asciidoctorj.version>3.0.1</asciidoctorj.version>
-    <aws.sdk.version>2.54.9</aws.sdk.version>
+    <aws.sdk.version>2.54.11</aws.sdk.version>
     <bootstrap.version>5.3.8</bootstrap.version>
     <checkstyle-maven.version>3.6.0</checkstyle-maven.version>
     <checkstyle.version>13.11.0</checkstyle.version>
