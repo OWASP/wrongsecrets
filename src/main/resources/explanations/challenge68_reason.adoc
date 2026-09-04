@@ -1,0 +1,25 @@
+*Why a skill bundle needs the same review as your source code*
+
+A skill bundle is shipped software. It contains executable scripts, it runs on developer machines and in CI, and it is installed by people who did not write it. Treating it as "just some markdown" is how secrets end up being distributed at scale.
+
+Two failures stack up in this challenge:
+
+- The token is committed inside the bundle, so everyone who installs the skill receives a working shared credential.
+- The token is base64 encoded, which is *encoding*, not encryption. It stops a naive secret scanner from firing, and it stops nobody else. Anyone with the bundle can decode it in one command.
+
+The second point is the more dangerous of the two, because it converts a detectable problem into an undetectable one. The scanner goes quiet, the finding disappears from the backlog, and the credential stays valid for years.
+
+----
+What to do instead:
+
+- Read credentials from the environment or a secret manager at runtime, and fail loudly with a clear message when they are absent.
+- Never "fix" a secret scanner finding by encoding, splitting or obfuscating the value. Fix it by removing the secret and rotating it.
+- Review every file in a skill bundle, not just the `SKILL.md`. Scripts, reference documents and sample configuration are all part of the attack surface.
+- Verify the bundle in CI: unpack it and run your secret scanner over the extracted contents, including a base64-aware ruleset.
+- Publish bundles from a build pipeline that has no access to production credentials in the first place.
+----
+
+[NOTE]
+====
+Encoding is not a security control. If the only thing standing between an attacker and your credential is a `base64 -d`, the credential is public.
+====

@@ -1,0 +1,17 @@
+<div id="claude-skill-container" style="border: 1px solid #ccc; border-radius: 8px; padding: 20px; margin: 20px; background-color: #f9f9f9;">
+    <h4>📦 Claude skill bundle: <code>incident-reporter</code></h4>
+    <p>The skill files live in this application's resource folder. The backend packages them into a zip bundle on request, which is how a Claude skill is shared and installed.</p>
+
+    <div class="skill-warning" style="border: 1px solid #ffeaa7; border-radius: 6px; padding: 15px; margin: 15px 0;">
+        <p>Step 1 — download and unpack the bundle:</p>
+        <pre class="skill-code" style="padding: 10px; border-radius: 4px; overflow-x: auto; font-size: 13px;">curl -sO http://localhost:8080/skills/claude/incident-reporter.zip
+unzip incident-reporter.zip
+find incident-reporter -type f</pre>
+        <a class="btn btn-warning btn-sm skill-btn" href="/skills/claude/incident-reporter.zip">⬇ Download incident-reporter.zip</a>
+
+        <p style="margin-top: 12px;">Step 2 — the <code>SKILL.md</code> is clean. Look at what it tells the agent to run:</p>
+        <pre class="skill-code" style="padding: 10px; border-radius: 4px; overflow-x: auto; font-size: 13px;">grep -r TOKEN incident-reporter/</pre>
+
+        <p style="margin-top: 12px;"><small class="skill-tip">💡 The token you find is not the answer yet — the author "hid" it from the secret scanner. Submit the value the uploader actually authenticates with.</small></p>
+    </div>
+</div>

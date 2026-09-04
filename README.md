@@ -16,7 +16,7 @@
 
 Welcome to the OWASP WrongSecrets game! The game is packed with real life examples of how to _not_ store secrets in your software. Each of these examples is captured in a challenge, which you need to solve using various tools and techniques. Solving these challenges will help you recognize common mistakes & can help you to reflect on your own secrets management strategy.
 
-Can you solve all the 67 challenges?
+Can you solve all the 69 challenges?
 
 Try some of them on [our Heroku demo environment](https://wrongsecrets.herokuapp.com/).
 
@@ -161,7 +161,7 @@ docker run -p 8080:8080 -p 8090:8090 ghcr.io/owasp/wrongsecrets/wrongsecrets-mas
 ⚠️ **Warning**: This is a development version built from the latest master branch and may contain experimental features or instabilities.
 
 **📝 Note on Ports:**
-- Port **8080**: Main application (challenges 0-66)
+- Port **8080**: Main application (challenges 0-68)
 - Port **8090**: MCP server (required for Challenge 60)
 
 **📝 Note on Challenge 62 (Google Drive MCP):**
@@ -226,6 +226,8 @@ Now you can try to find the secrets by means of solving the challenge offered at
 -   [localhost:8080/challenge/challenge-64](http://localhost:8080/challenge/challenge-64)
 -   [localhost:8080/challenge/challenge-65](http://localhost:8080/challenge/challenge-65)
 -   [localhost:8080/challenge/challenge-66](http://localhost:8080/challenge/challenge-66)
+-   [localhost:8080/challenge/challenge-67](http://localhost:8080/challenge/challenge-67)
+-   [localhost:8080/challenge/challenge-68](http://localhost:8080/challenge/challenge-68)
 </details>
 
 Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look

@@ -1,0 +1,10 @@
+Download and unpack the bundle:
+
+----
+curl -sO http://localhost:8080/skills/claude/incident-reporter.zip
+unzip incident-reporter.zip
+----
+
+The `SKILL.md` only points at the bundled uploader. Open `incident-reporter/scripts/upload_report.py` and look at `UPLOAD_TOKEN_B64`.
+
+That value is not the answer yet: the author base64 encoded it to stop the secret scanner from complaining. Decode it, for example with `base64 -d`, and submit the decoded token.
