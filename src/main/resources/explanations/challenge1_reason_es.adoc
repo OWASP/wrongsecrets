@@ -1,0 +1,7 @@
+*Por qué usar código para almacenar secretos es una mala idea.*
+
+Puedes ver ahora que puedes detectar fácilmente muchos secretos almacenados dentro del código. Incluso cuando el código está compilado, todavía puedes aplicar ingeniería inversa para encontrar el secreto. Por eso los secretos hardcodeados nunca son una buena idea.
+
+A menudo caemos en la idea equivocada de que si yo no puedo hacer ingeniería inversa, un atacante tampoco puede. Por eso mucha gente cree que hardcodear en C/C++/Golang es más seguro que en Java. Para los que piensan eso: descompila una app con herramientas como https://ghidra-sre.org/[*Ghidra*].
+
+El secreto de un secreto en el código es una cosa. Otro desafío es la apertura: cualquiera con acceso al código y/o activos compilados puede aprender el secreto. Peor aún: si el desarrollador que hardcodeó el secreto deja la organización, ¡podría conocer el secreto ya que todavía está en el código!

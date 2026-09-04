@@ -1,0 +1,5 @@
+=== Por qué importa el Desafío 58: Exposición de cadena de conexión a base de datos
+
+**El problema:**
+
+Este desafío expone uno de los escenarios más frecuentes y peligrosos de filtración de secretos en aplicaciones del mundo real: **cadenas de conexión a bases de datos con credenciales incorporadas que se exponen a través de un manejo de errores deficiente**.

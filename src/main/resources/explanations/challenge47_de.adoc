@@ -1,0 +1,4 @@
+=== HashiCorp Vault Template-Injektion Teil 2
+
+Geheimnisse können aus Vault über den https://developer.hashicorp.com/vault/docs/platform/k8s/injector[Vault Agent] Sidecar-Container abgerufen werden. Ein Entwickler versuchte zu debuggen, warum seine Vault-Injektion nicht funktionierte. Also kodierte er die Geheimnisse "vorübergehend" direkt in das Vault-Template selbst.
+Kannst du das im Vault-Template hartcodierte Geheimnis finden?

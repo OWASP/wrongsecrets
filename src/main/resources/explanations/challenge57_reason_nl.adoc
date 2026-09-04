@@ -1,0 +1,6 @@
+**Waarom AI-systeemprompts kwetsbaar kunnen zijn**
+
+Deze uitdaging demonstreert verschillende belangrijke beveiligingszorgen bij AI-systemen:
+
+**1. Prompt injectie kwetsbaarheden:**
+AI-systemen kunnen worden gemanipuleerd via zorgvuldig samengestelde invoer die hun veiligheidsmaatregelen of instructiegrenzen omzeilt. Dit is vergelijkbaar met SQL-injectie maar voor AI-modellen.

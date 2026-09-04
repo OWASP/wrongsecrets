@@ -1,0 +1,8 @@
+*Por qué tener secretos en el código frontend es una mala idea*
+
+Cuando ejecutas una aplicación móvil en tu dispositivo inteligente o una SPA en tu navegador web, debes intentar no codificar ningún secreto en ellos. Un atacante siempre puede tomar la aplicación, hacer ingeniería inversa y encontrar el secreto real. En cambio, pregúntate si el secreto se puede descargar de forma segura después de la autenticación, o usar de una manera diferente.
+
+*Por qué usar aplicaciones de una sola página o aplicaciones móviles para colocar secretos de cliente es una mala idea*
+
+Como ya puedes ver, fácilmente puedes detectar cualquier secreto que esté almacenado dentro de una aplicación de una sola página o una aplicación móvil.
+Para prevenir tal situación, se utiliza el Authorization Code Flow con Proof Key for Code Exchange (PKCE).

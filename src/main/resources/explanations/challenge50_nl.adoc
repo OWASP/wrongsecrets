@@ -1,0 +1,7 @@
+=== Geheimen verbergen in binaire bestanden revisited: .NET self-contained runtime
+
+Het is super eenvoudig om een geheim te vinden in een DLL, maar op MacOS of Linux is het veel moeilijker. Dus ik ben er zeker van dat we er een kunnen bewaren, toch?
+
+Laat ons zien dat we dat niet zouden moeten doen! Kun je het geheim vinden in https://github.com/OWASP/wrongsecrets-binaries/releases/download/0.1.0/wrongsecrets-dotnet[wrongsecrets-dotnet]?
+
+Probeer het binaire bestand te downloaden en lokaal uit te voeren (bijv. `./wrongsecrets-dotnet<deversie> <jouw antwoord>`).

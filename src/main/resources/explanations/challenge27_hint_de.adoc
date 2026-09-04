@@ -1,0 +1,7 @@
+Du kannst die korrekte Eingabe für die guess-Methode finden durch:
+
+1. Hash-Vergleich:
+- Suche den Vertrag im https://etherscan.io/[Etherscan] Explorer.
+- Hole den Hash aus dem Vertragsspeicher.
+- Gehe die Transaktionen durch, öffne den Eingabe-Tab und dekodiere sie als UTF-8.
+- Vergleiche die Hashes der Eingaben aus den Transaktionen mit dem gespeicherten Hash-Wert.

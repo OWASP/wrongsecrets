@@ -1,0 +1,7 @@
+La clé privée est située dans la partie .ssh du conteneur et a été accidentellement commitée dans git.
+
+Vous pouvez trouver la clé en:
+
+1. La récupérant depuis git dans le fichier [`.ssh/wrongsecrets.keys`]():
+- Clonez le dépôt avec `git clone https://github.com/OWASP/wrongsecrets`.
+- Allez à la racine du projet, naviguez dans le dossier `.ssh` et trouvez le fichier `wrongsecrets.keys`.

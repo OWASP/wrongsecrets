@@ -1,0 +1,5 @@
+=== Historial de Bash
+
+Este desarrollador ha creado un contenedor y lo ha tenido funcionando durante un tiempo. Lo usa para mucho trabajo y tiene cuidado de no codificar ningún secreto. Cuando necesita usar secretos, simplemente los escribe en un comando de Bash al ejecutar; por lo tanto, desaparecen tan pronto como los escribe y permanecen secretos. ¿Verdad?
+
+Todos tenemos pequeños secretos escondidos en nuestro pasado, incluido Bash. Accede al contenedor y mira si puedes encontrar uno.

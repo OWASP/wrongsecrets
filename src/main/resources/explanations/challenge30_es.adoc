@@ -1,0 +1,3 @@
+=== Otro secreto de cliente
+
+El cliente recibe un valor aleatorio del servidor y necesita devolverlo como respuesta para demostrar que es el servidor. Esto sucede a menudo cuando, por ejemplo, necesitas proporcionar un token de sesión. El token se genera aleatoriamente en el inicio del servidor, por lo que no puedes encontrarlo en el código. Pero ¿qué pasa si lo almacenamos de forma insegura con el cliente?

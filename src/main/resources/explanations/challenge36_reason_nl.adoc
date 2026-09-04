@@ -1,0 +1,5 @@
+*Waarom moeten we voorzichtig zijn met constanten in het programma?*
+
+Constanten zijn vaste waarden die nuttig zijn voor het opslaan van waarden die niet hoeven te veranderen tijdens de uitvoering van het programma. Tijdens het reverse engineering-proces is binaire verkenning een techniek die bestaat uit het extraheren van maximale informatie uit de binary.
+
+Dit toont aan dat zelfs versleuteling een aanvaller slechts vertraagt maar niet blokkeert bij het vinden van de cruciale informatie. Overweeg daarom de cruciale informatie online te plaatsen in plaats van alleen beveiligd door offline versleuteling.

@@ -1,0 +1,7 @@
+*Pourquoi utiliser le code pour stocker des secrets est une mauvaise idée.*
+
+Vous pouvez maintenant constater que vous pouvez facilement détecter de nombreux secrets stockés dans le code. Même lorsque le code est compilé, vous pouvez toujours le désassembler pour trouver le secret. C'est pourquoi les secrets codés en dur ne sont jamais une bonne idée.
+
+Nous tombons souvent dans l'idée fausse que si je ne peux pas le désassembler, un attaquant ne le peut pas non plus. C'est pourquoi beaucoup de gens croient que coder en dur en C/C++/Golang est plus sûr qu'en Java. Pour ceux qui le pensent : désassemblez une application avec des outils comme https://ghidra-sre.org/[*Ghidra*].
+
+Le secret d'un secret dans le code est une chose. Un autre défi est l'ouverture : toute personne ayant accès au code et/ou aux actifs compilés peut apprendre le secret. Pire encore : si le développeur qui a codé en dur le secret quitte l'organisation, il pourrait connaître le secret car il est toujours dans le code !

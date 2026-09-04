@@ -1,0 +1,7 @@
+Diese Herausforderung kann auf folgende Weise gelöst werden:
+
+- Verwende die Docker-Compose-Datei (`challenge51docker-compose.yml`), um die Container zu erstellen und das Geheimnis zu finden
+  1. Klone das Repository mit den Herausforderungsdateien.
+  2. Suche die `challenge51docker-compose.yml`-Datei im Repository.
+  3. Identifiziere Zugangsdaten: Im Environments-Abschnitt, prüfe auf Variablen wie:
+     * `db_user`

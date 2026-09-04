@@ -1,0 +1,4 @@
+Du kannst diese Herausforderung mit den folgenden Schritten lösen:
+
+1. Gehe zu unserer https://owasp.org/www-project-wrongsecrets/[Website].
+2. Durchsuche einige Registerkarten, das Geheimnis steckt sicher darin :)

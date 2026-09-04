@@ -1,0 +1,3 @@
+*Por qué usar contenedores para almacenar secretos es una mala idea*
+
+Como puedes ver ahora, puedes detectar fácilmente cualquier secreto almacenado dentro de un contenedor. Ya sea un ENV, un archivo u otra propiedad: si un sistema puede leerlo, también puede hacerlo un humano.

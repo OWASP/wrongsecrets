@@ -1,0 +1,10 @@
+=== Secretos en el código frontend
+
+Cuando comenzamos un nuevo proyecto, generalmente nos enfocamos en la implementación de nuevas funcionalidades en lugar del aspecto de seguridad.
+A veces las aplicaciones de una sola página o las aplicaciones móviles necesitan acceder a información por sí mismas en lugar de en nombre de un usuario.
+Para este propósito, https://oauth.net/2/grant-types/client-credentials/[OAuth] proporciona el flujo `client_credentials` para obtener un token de acceso.
+En tal situación, es fácil almacenar secretos de cliente en el código de la aplicación frontend o móvil. Y aunque puedes ofuscar el secreto en el código, eventualmente tendrás que usarlo.
+
+Este desafío intentará contactar a un servidor utilizando el flujo de credenciales de cliente. ¿Puedes encontrar su secreto?
+
+¿Qué tal buscarlo en las Herramientas de Desarrollo del navegador?

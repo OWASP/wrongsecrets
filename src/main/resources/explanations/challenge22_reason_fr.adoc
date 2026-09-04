@@ -1,0 +1,7 @@
+*Pourquoi utiliser des binaires pour cacher un secret ne fera que retarder un attaquant.*
+
+Avec de belles applications gratuites de rétro-ingénierie comme Ghidra, peu de choses restent sûres. Quiconque peut charger l'exécutable peut trouver des secrets.
+
+Chiffrer le secret avec une clé intégrée ne fait que retarder un attaquant. Si le secret doit être utilisé, il doit éventuellement être en mémoire.
+
+Avez-vous encore besoin d'un secret dans le binaire? Assurez-vous qu'il ne peut être récupéré qu'à distance après authentification.

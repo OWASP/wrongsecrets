@@ -1,0 +1,7 @@
+*Pourquoi vous devez être prudent avec l'IA (ou le ML) et les secrets*
+
+Toute solution IA/ML qui repose sur vos entrées peut utiliser ces entrées pour s'améliorer davantage. C'est parfois appelé "Reinforcement learning from human feedback". Cela signifie que lorsque vous les utilisez et leur donnez des retours ou acceptez de leur envoyer des données, ces données restent chez eux et peuvent être consultables par d'autres.
+
+Notez que toutes les entrées utilisateur sont implicitement fiables. Cela signifie que si vous submergez un LLM avec beaucoup de texte (répété), vous pourriez être en mesure de contourner certains de ses contrôles.
+
+Donc: assurez-vous que ces applications ne puissent jamais accéder à vos secrets!

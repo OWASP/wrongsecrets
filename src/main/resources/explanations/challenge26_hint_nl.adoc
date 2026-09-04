@@ -1,0 +1,10 @@
+Je kunt de vorige staat vinden met een van de twee alternatieve oplossingen:
+
+1. Vind het vorige blok via een verzoek aan https://infura.io/[Infura]:
+- Vind het bloknummer voor een blok na het aanmaken van het contract en voor de update.
+- Maak een Infura-sleutel aan op https://infura.io/[Infura].
+- Zoek naar de opslaagtoestand van het contract voor dat blok.
+
+2. Bekijk de contractaanmaak op https://etherscan.io/[Etherscan]:
+- Kijk onder de contractaanmaakriansactie op Etherscan
+- Ga naar state en bekijk storage

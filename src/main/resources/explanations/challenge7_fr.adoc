@@ -1,0 +1,5 @@
+=== Un secret caché dans Vault
+
+Donc maintenant le secret n'est plus dans K8s ou dans le code... espère le développeur.
+Si ce défi est activé et que vous avez suivi les instructions dans `README.md`, vous devriez pouvoir exécuter le défi sur K8s/Minikube et maintenant vous pouvez chercher le secret.
+Quelle est l'erreur commise ici ? https://github.com/trufflesecurity/truffleHog[*Trufflehog*] aurait peut-être pu aider si l'entropie était un peu plus grande ;-).

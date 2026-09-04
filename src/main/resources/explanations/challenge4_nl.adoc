@@ -1,0 +1,5 @@
+=== Op Docker arg gebaseerd wachtwoord
+
+De ontwikkelaar is slimmer geworden: het wachtwoord is nu niet meer gedefinieerd door een ENV-argument, maar door middel van een docker container build-argument.
+
+Je kunt het eenvoudig spotten door te kijken hoe de lagen zijn opgebouwd.

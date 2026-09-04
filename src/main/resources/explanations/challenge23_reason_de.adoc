@@ -1,0 +1,11 @@
+*Warum Geheimnisse im Frontend-Code eine schlechte Idee sind*
+
+Wenn du eine mobile App oder SPA ausführst, solltest du versuchen, keine Geheimnisse zu hartcodieren. Ein Angreifer kann die App immer reverse-engineeren und das eigentliche Geheimnis finden.
+
+*Warum Single-Page-Apps oder mobile Apps für Client-Geheimnisse eine schlechte Idee sind*
+
+Wie du erkennen kannst, kannst du jedes Geheimnis in einer Single-Page-App oder mobilen App leicht erkennen.
+
+*Warum Base64-Kodierung keine Verschlüsselung ist*
+
+Es war ziemlich einfach, das Geheimnis aus der Challenge-Datei zu dekodieren. Deshalb sollte Base64 und Hex-Kodierung niemals als Methode zum Verstecken eines Geheimnisses betrachtet werden. Verwende Base64- und/oder Hex-Kodierung nur, um eine binäre Sequenz als String zu transportieren.

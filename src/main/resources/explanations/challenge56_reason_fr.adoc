@@ -1,0 +1,5 @@
+*Pourquoi vérifier la documentation pour les secrets*
+
+Les fichiers de documentation et de spécification sont souvent partagés largement et peuvent être négligés lors des revues de sécurité.
+Parfois, des secrets ou des informations sensibles sont ajoutés comme exemples ou instructions et ne sont pas supprimés avant le partage ou la publication.
+Ce défi souligne l'importance de vérifier tous les fichiers du projet — y compris la documentation — pour les secrets et les données sensibles.

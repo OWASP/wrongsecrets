@@ -1,0 +1,5 @@
+*¿Por qué la inyección de plantillas de Vault no siempre es una buena idea?*
+
+Si bien la inyección del agente de Vault a través de plantillas puede ser una forma conveniente de gestionar secretos en ciertos escenarios, hay situaciones en las que puede no ser el mejor enfoque.
+
+Las plantillas podrían exponer accidentalmente información sensible en logs o archivos temporales.

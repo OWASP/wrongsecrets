@@ -1,0 +1,6 @@
+Vous pouvez résoudre ce défi avec les étapes suivantes :
+
+1. Exfiltrez le secret en utilisant Github Actions :
+ - Connectez-vous à Github avec votre propre compte.
+ - Allez sur https://github.com/OWASP/wrongsecrets/actions et bifurquez le dépôt.
+ - Créez une pull request et regardez les secrets stockés dans le journal de Github Actions.

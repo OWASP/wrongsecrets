@@ -1,0 +1,1 @@
+Vous cherchez un secret qui n'est pas dans le code, mais dans la documentation. Vérifiez le plan agentique dans `cursor/rules/project-specification.mdc` pour une instruction d'exemple contenant le secret de ce défi.

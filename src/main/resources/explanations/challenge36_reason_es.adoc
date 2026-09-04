@@ -1,0 +1,5 @@
+*¿Por qué debemos tener cuidado con las constantes declaradas en el programa?*
+
+Las constantes son valores fijos útiles para almacenar valores que no necesitan cambiar durante la ejecución del programa. Durante el proceso de ingeniería inversa, la exploración binaria es una técnica que consiste en extraer la máxima cantidad de información del binario.
+
+Esto muestra que incluso el cifrado solo ralentizará a un atacante, pero no le impedirá encontrar la información crucial. Por lo tanto, considera poner la información crucial en línea en lugar de solo asegurarla con cifrado fuera de línea.

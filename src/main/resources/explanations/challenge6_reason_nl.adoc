@@ -1,0 +1,5 @@
+*Waarom geheimen RBAC zo hard nodig hebben*
+
+K8s Secrets zijn ontworpen om geheimen te hosten. Zoals je kunt zien door de uitdaging op te lossen, zijn geheimen al `base64`-gecodeerd.
+
+Geheimen mogen, tenzij versleuteld, uiteraard niet naar Git worden gecommit. Als ze dat wel zijn, blijft het geheim in Git-geschiedenis, zelfs als je het verwijdert. Gebruik altijd RBAC om de toegang tot K8s-geheimen te beperken.

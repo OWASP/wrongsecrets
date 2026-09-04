@@ -1,0 +1,5 @@
+=== Gestores de contraseñas
+
+Cuando le mostramos este proyecto a mi amigo Kees, preguntó: ¿no es lo mismo que tener una contraseña muy débil en tu gestor de contraseñas? Porque eso es lo que hizo mi colega.
+
+Así que aquí está: ¡el desafío del gestor de contraseñas! Hemos configurado un archivo Keepass en el contenedor Docker donde pusimos credenciales secretas de Alibabacloud. ¿Puedes conseguirlo?

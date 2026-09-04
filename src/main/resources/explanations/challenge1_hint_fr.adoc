@@ -1,0 +1,17 @@
+Comme le texte du défi le dit, nous recherchons un secret nommé `password` dans le code Java. Mais comment le trouver ?
+
+Vous pouvez résoudre ce défi par les solutions alternatives suivantes :
+
+1. Utilisez grep pour rechercher dans le code source :
+- Clonez le dépôt : `git clone https://github.com/OWASP/wrongsecrets`.
+- Naviguez vers `cd src/main/java/org/owasp/wrongsecrets/`.
+- Utilisez grep récursivement : `grep -r password`.
+
+2. Utilisez https://github.com/awslabs/git-secrets[*Git-secrets*] :
+- Clonez le dépôt et installez Git secrets.
+- Ajoutez une règle d'analyse : `git secrets --add 'password\s*=\s*.+'`.
+- Exécutez l'analyse : `git secrets --scan`.
+
+3. Utilisez https://github.com/trufflesecurity/trufflehog[*Trufflehog*] :
+- Clonez le dépôt et installez Trufflehog.
+- Analysez avec : `trufflehog filesystem --config=$PWD/generic.yml . | grep password`.

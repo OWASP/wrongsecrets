@@ -1,0 +1,7 @@
+=== Hartcodiertes Passwort Teil 2
+
+Anstatt das Passwort direkt hartcodiert zu speichern, hat der Entwickler versucht, es in der `application.properties` von Spring Boot zu verstecken.
+
+Auf diese Weise kann es nicht mehr direkt in `.java` oder kompilierten `.class`-Dateien gefunden werden. Wie kann man es also erkennen?
+
+Du kannst dies leicht mit SAST-Lösungen erkennen, wie https://github.com/trufflesecurity/truffleHog[truffleHog] und https://github.com/awslabs/git-secrets[git-secrets], sowie durch manuelle Inspektion deiner `application.properties`.

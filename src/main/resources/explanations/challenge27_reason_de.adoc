@@ -1,0 +1,4 @@
+*Warum das Senden von Geheimnissen als Eingaben an Smart Contracts eine schlechte Idee ist, auch wenn sie nicht gespeichert werden*
+
+Eingaben aller Transaktionen zu Verträgen, wie der Zustand der internen Speicherung von Verträgen auf der Chain, werden für immer gespeichert und sind leicht abzufragen.
+Eingaben zu Transaktionen sind sogar sichtbar, bevor diese Transaktionen akzeptiert werden. Dies kann zu Front-Running durch Dritte führen.

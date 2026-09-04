@@ -1,0 +1,6 @@
+=== ¿Qué está mal?
+
+Codificar directamente las credenciales del bot de Telegram en el código fuente es una vulnerabilidad de seguridad grave:
+
+**Problemas de seguridad:**
+1. **Credenciales de API expuestas**: Los tokens de bot proporcionan acceso completo a la funcionalidad del bot de Telegram

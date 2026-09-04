@@ -1,0 +1,7 @@
+*Waarom het plaatsen van screenshots van logs in een GitHub-issue een slecht idee is*
+
+Je mag geen screenshots van logs plaatsen in een GitHub-issue omdat:
+1. Gegevens zijn openbaar (zelfs in een privé-repository, vaak meer openbaar dan je zou hopen)
+2. Screenshots kunnen niet worden geredigeerd zoals tekst. Zelfs wanneer het geheim wordt vervaagd, kan dit reversibel zijn.
+
+Controleer op eventuele geheimen in de uitvoer en gebruik markdown codeblokken om logs te plaatsen in een GitHub-issue.

@@ -1,0 +1,5 @@
+*Warum du deine Secrets-Management-Lösung gut konfigurieren musst*
+
+https://www.vaultproject.io/[*Hashicorp Vault*] ist für die Verwaltung von Geheimnissen konzipiert. Vault schützt Geheimnisse, indem es sie verschlüsselt speichert und hat viele Sicherheitskontrollen, um (den Zugriff auf) die Geheimnisse zu sichern.
+
+Einige dieser Kontrollen können leicht falsch konfiguriert oder missbraucht werden. In dieser Herausforderung haben wir nur (Root-)Tokens zur Verwendung von Vault, und diese Tokens waren im Git-Repository oder den Logs zu finden.

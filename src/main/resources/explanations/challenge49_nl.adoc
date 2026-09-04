@@ -1,0 +1,5 @@
+=== AES-versleuteling kraken met een zwakke MD5-sleutel
+
+Stel je voor dat je een beveiligingsanalist bent die een mobiele app onderzoekt die gevoelige informatie verwerkt. Je ontdekt dat de ontwikkelaar AES-versleuteling gebruikt om een geheim te beschermen, maar in plaats van een sterke sleutelafleidingsfunctie (KDF) te gebruiken, vertrouwt hij op het onveilige MD5-algoritme om versleutelingssleutels af te leiden van een eenvoudige numerieke PIN.
+
+Je hebt een versleutelde string verkregen: `k800mdwu8vlQoqeAgRMHDQ==`. De sleutel voor AES-versleuteling wordt afgeleid door de MD5-hash te nemen van een PIN, dat een getal is tussen 0 en 99999. Jouw taak is de juiste PIN te vinden.

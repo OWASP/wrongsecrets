@@ -1,0 +1,7 @@
+=== Willekeurige waarden genereren
+
+Soms hebben we een geheim nodig dat willekeurig wordt gegenereerd bij het opstarten. Misschien ben je ze al tegengekomen: applicaties die een wachtwoord genereren voor de eerste aanmelding en dat afdrukken naar standaarduitvoer. Een voorbeeld is https://www.jenkins.io/doc/book/installing/linux/#unlocking-jenkins[Jenkins].
+
+In deze uitdaging doen we hetzelfde: we genereren willekeurig een geheim bij het opstarten van de applicatie en loggen het naar standaarduitvoer. Kun je het antwoord vinden?
+
+Tip: neem een kijkje in de logging van de applicatie bij het opstarten!

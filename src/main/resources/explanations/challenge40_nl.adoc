@@ -1,0 +1,5 @@
+=== Onveilige versleutelingssleutel - Deel 2
+
+Een ontwikkelaar heeft een geheim versleuteld met https://en.wikipedia.org/wiki/Advanced_Encryption_Standard[AES] en de base64-gecodeerde waarde opgeslagen in een json-bestand. Maar waar de sleutel te laten? Waarom de sleutel niet gewoon in het bestand bij het geheim laten? Zo kan elk geheim gemakkelijk zijn eigen sleutel hebben! Kun je het geheim vinden?
+
+Het uitdagingsbestand heet https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/secrchallenge.json[secrchallenge.json] en kan worden gevonden in de https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables[executables map].

@@ -1,0 +1,9 @@
+*Pourquoi vous devez nettoyer et faire tourner les secrets*
+
+Lorsque vous avez un secret commité dans Git par erreur, il y aura des moyens de le trouver, à la main ou avec des outils.
+
+Par conséquent, lorsqu'un secret est commité dans Git par erreur :
+
+- Informez toute autorité de sécurité responsable dans l'organisation
+- Assurez-vous de faire tourner le secret
+- Optionnellement, nettoyez : utilisez https://github.com/rtyley/bfg-repo-cleaner[BFG repo-cleaner] ou git filter-branch

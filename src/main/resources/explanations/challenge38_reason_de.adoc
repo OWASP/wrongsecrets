@@ -1,0 +1,5 @@
+*Warum du mit Git Notes vorsichtig sein solltest?*
+
+1. Wie bei allen Git-Repos, wenn ein Geheimnis hier einmal geleakt ist, ist es sehr schwer/unmöglich, es aus der gesamten Historie zu entfernen.
+
+2. Git Notes scheint eine selten verwendete Funktion von Git zu sein, daher prüfen viele der Secret-Scanner sie nicht. Das bedeutet, dass es in CI übersehen werden kann.

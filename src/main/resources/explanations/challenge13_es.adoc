@@ -1,0 +1,6 @@
+=== Acciones de Github bifurcables
+
+Cuando quieres gestionar secretos en tu pipeline de CI/CD, siempre debes preguntarte: ¿quién puede verlos?
+¿Puedes encontrar el secreto usando la acción de Github?
+
+Nota: este desafío es al mismo tiempo un desafío de "criptografía mala", pero un poco menos fácil de esa manera.

@@ -1,0 +1,5 @@
+*Warum sollten wir kein Geheimnis in sozialen Medien teilen?*
+
+Das Teilen eines Geheimnisses aus deiner Anwendung in sozialen Medien ist eine wirklich schlechte Praxis, da es öffentlich zugänglich wird, wenn jemand den Kontext kennt.
+
+Obwohl der Benutzer oder die Plattform oft Kommentare/Beiträge löschen können, landet das Geheimnis fast immer in einer Datenbank, die geleakt werden könnte.

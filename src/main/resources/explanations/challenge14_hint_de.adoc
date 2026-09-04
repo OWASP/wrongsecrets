@@ -1,0 +1,5 @@
+Hinweis: Diese Herausforderung erfordert, dass du https://www.keepassx.org/[Keepass(X)] auf deinem System installierst, um die kdbx-Datei zu öffnen. Alternativ kannst du https://github.com/OWASP/wrongsecrets?tab=readme-ov-file#want-to-play-but-are-not-allowed-to-install-the-tools[WrongSecrets Desktop] verwenden.
+
+1. Hole die Keepass-Datei:
+ - Exec in den Container und suche die .kdbx-Datei.
+2. Versuche die Datei mit KeePass zu öffnen und das Passwort brute-force zu knacken.
