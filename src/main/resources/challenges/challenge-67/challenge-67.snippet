@@ -1,0 +1,36 @@
+<div id="cursor-skill-container" style="border: 1px solid #ccc; border-radius: 8px; padding: 20px; margin: 20px; background-color: #f9f9f9;">
+    <h4>📄 Cursor skill: <code>deploy-preview</code></h4>
+    <p>This application ships a Cursor skill in its resource folder. The backend hosts it at <code>/skills/cursor/deploy-preview/SKILL.md</code>, which is exactly what an agent would read when the skill is installed.</p>
+
+    <div class="skill-warning" style="border: 1px solid #ffeaa7; border-radius: 6px; padding: 15px; margin: 15px 0;">
+        <p>Fetch the skill from the command line:</p>
+        <pre class="skill-code" style="padding: 10px; border-radius: 4px; overflow-x: auto; font-size: 13px;">curl -s http://localhost:8080/skills/cursor/deploy-preview/SKILL.md</pre>
+
+        <p style="margin-top: 12px;">…or read it right here:</p>
+        <button class="btn btn-warning btn-sm skill-btn" onclick="loadCursorSkill()">▶ Show SKILL.md</button>
+        <a class="btn btn-secondary btn-sm skill-btn" href="/skills/cursor/deploy-preview/SKILL.md" target="_blank" rel="noopener">Open in new tab</a>
+        <pre id="cursor-skill-output" class="skill-output" style="display:none; padding: 10px; border-radius: 4px; overflow-x: auto; font-size: 12px; margin-top: 8px; white-space: pre-wrap; word-break: break-word;"></pre>
+
+        <p style="margin-top: 12px;"><small class="skill-tip">💡 The author inlined the shared staging deploy token so the skill would be "self-contained". Submit that token.</small></p>
+    </div>
+</div>
+
+<style>
+.skill-output {
+    background-color: #f8f9fa !important;
+    color: #212529 !important;
+    border: 1px solid #dee2e6 !important;
+}
+</style>
+
+<script>
+function loadCursorSkill() {
+    const out = document.getElementById('cursor-skill-output');
+    out.style.display = 'block';
+    out.textContent = 'Loading…';
+    fetch('/skills/cursor/deploy-preview/SKILL.md')
+        .then(function(r) { return r.text(); })
+        .then(function(text) { out.textContent = text; })
+        .catch(function(err) { out.textContent = 'Failed to load the skill file: ' + (err.message || err); });
+}
+</script>

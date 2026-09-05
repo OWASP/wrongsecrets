@@ -1,0 +1,14 @@
+=== Challenge 68: Find the Secret in the Claude Skill Bundle
+
+Claude skills are distributed as a zip: a folder with a `SKILL.md` that describes when to use the skill, plus any scripts and reference material the skill needs. The whole bundle is unpacked on the machine that installs it.
+
+That makes a skill bundle a great hiding place, because reviewers tend to read the `SKILL.md` and stop there. The interesting part is usually in the files next to it.
+
+This application ships a Claude skill called `incident-reporter`. The skill files live in the resource folder and the backend serves them as a bundle at link:/skills/claude/incident-reporter.zip[`/skills/claude/incident-reporter.zip`].
+
+Download the bundle, unpack it, and work out the token the uploader authenticates with.
+
+[NOTE]
+====
+The `SKILL.md` is clean. Reading only the entry point of a skill is not a review.
+====

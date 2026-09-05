@@ -1,0 +1,12 @@
+=== Challenge 67: Find the Secret in the Cursor Skill
+
+Agent skills are becoming a popular way to share automation with a team: you drop a folder with a `SKILL.md` in it, the agent picks it up, and everybody gets the same workflow. Unfortunately that also makes them a very convenient place to "temporarily" park a shared credential.
+
+This application ships a Cursor skill called `deploy-preview`. The skill lives in the resource folder and is hosted by the backend at link:/skills/cursor/deploy-preview/SKILL.md[`/skills/cursor/deploy-preview/SKILL.md`].
+
+Read the skill and submit the staging deploy token that the author inlined "to keep the skill self-contained".
+
+[NOTE]
+====
+Nothing is encoded or encrypted here: this is exactly what a leaked skill looks like in the wild. A skill is documentation, and documentation gets copied into wikis, tickets, pull requests and chat messages.
+====

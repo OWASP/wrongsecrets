@@ -1,0 +1,24 @@
+*Why you should never put a secret in an agent skill*
+
+A skill is built to be shared. That is the whole point of it: you write the workflow once and every developer, agent and CI job reuses it. This means a secret in a skill has the worst possible properties:
+
+- It is copied to every machine that installs the skill, including personal laptops.
+- It ends up in the repository, so it is in the git history forever, even after you "remove" it.
+- It is published to skill marketplaces and registries, where it is indexed and searchable.
+- It is read by the agent and can therefore be echoed into chat transcripts, logs and telemetry belonging to third parties.
+- It is a *shared* credential, so it is almost never rotated and almost never scoped down.
+
+----
+What to do instead:
+
+- Keep credentials out of the skill and let the skill read them from the environment, for example `$STAGING_DEPLOY_TOKEN`.
+- Document *which* variable is required and *where* to obtain it, never the value itself.
+- Give every consumer their own short-lived, least-privilege credential instead of one shared team token.
+- Scan skill files with a secret scanner in pre-commit and CI, just like you scan source code.
+- Treat a secret that ever appeared in a skill as compromised and rotate it.
+----
+
+[NOTE]
+====
+Skills, rules, prompts, MCP server configurations and agent instruction files are all code as far as your secret management is concerned. If you would not hardcode a token in a `.java` file, do not hardcode it in a `SKILL.md` either.
+====
