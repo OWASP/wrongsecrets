@@ -1,0 +1,5 @@
+=== AI Chat Secret Leak
+
+Sharing chat sessions from AI tools like ChatGPT can be a great way to collaborate, but it's easy to forget that these shared links are public. If the chat contains sensitive information, anyone with the link can see it.
+
+Can you find the secret in this https://chatgpt.com/share/6a99237a-c2e0-83eb-9a09-a1cf76213ff5[shared ChatGPT session]?

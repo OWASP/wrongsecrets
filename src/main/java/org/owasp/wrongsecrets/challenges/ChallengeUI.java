@@ -87,6 +87,35 @@ public class ChallengeUI {
   }
 
   /**
+   * Returns an optimized "Look for" hint based on the challenge technology.
+   *
+   * @return string with the optimized hint.
+   */
+  public String getLookForHint() {
+    return switch (getTech()) {
+      case "Intro" -> "Configuration files, source code, or documentation.";
+      case "Git" -> "Commit history, branches, or git configuration.";
+      case "Docker" -> "Dockerfiles, docker-compose files, or container environment variables.";
+      case "Configmaps", "Secrets", "Vault", "CSI-Driver" ->
+          "Kubernetes manifests, ConfigMaps, Secrets, or Vault configurations.";
+      case "Terraform", "IAM privilege escalation" ->
+          "Cloud infrastructure settings, Terraform files, or IAM policies.";
+      case "Logging" -> "Application logs or system output.";
+      case "CI/CD" -> "Pipeline configurations or build scripts.";
+      case "Password Manager" -> "Password manager entries or credentials.";
+      case "Cryptography" -> "Cryptographic keys, algorithms, or encoded strings.";
+      case "Binary" -> "Binary files, decompiled code, or executable strings.";
+      case "Front-end" -> "JavaScript code, HTML source, or browser storage.";
+      case "Web3" -> "Smart contracts or blockchain transactions.";
+      case "Documentation" -> "Project documentation or comments.";
+      case "AI" -> "AI prompts, model configurations, or chat history.";
+      default ->
+          "Configuration files, source code, environment variables, Docker files, or cloud"
+              + " infrastructure related to this challenge.";
+    };
+  }
+
+  /**
    * Returns the number of the next challenge (e.g current+1).
    *
    * @return int with next challenge number.
