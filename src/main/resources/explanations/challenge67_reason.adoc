@@ -1,0 +1,8 @@
+=== Why sharing AI chats with secrets is dangerous
+
+AI models are often used to generate code, configuration, or even credentials. When a user shares a chat session, they are creating a public URL that anyone can access. If the session contains API keys, passwords, or proprietary logic, those secrets are now exposed.
+
+It is important to:
+- Never provide real secrets to AI tools.
+- Scrub any sensitive information from chats before sharing them.
+- Use enterprise versions of AI tools that offer better data protection and sharing controls.
