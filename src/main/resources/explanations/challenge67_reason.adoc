@@ -1,0 +1,17 @@
+*Why logging a secret to your cloud provider is a problem*
+
+Encoding is not encryption. Base64 keeps a credential out of sight during a quick code review, but anybody who can read the log sink can decode it in one command. Treat an encoded secret in a log line as a plain text secret.
+
+A few things that make this particularly nasty in a cloud setup:
+
+- the audience is much wider than you think. Log sinks are usually readable by the whole platform or SRE team, and often by any workload with a broad `logs:FilterLogEvents`, `roles/logging.viewer` or Log Analytics reader permission. The blast radius of the secret becomes the blast radius of your logging permissions.
+- retention outlives rotation. Logs are commonly kept for months and replicated into an archive bucket or a SIEM. Rotating the credential does not remove the old value from those copies, so you have to treat every downstream sink as compromised too.
+- structured logging makes it easy to leak by accident. Attaching a whole payload, request or MDC context to an "audit event" is convenient, and it pulls in whatever happens to be in that context, including tokens and keys.
+- log data leaves your trust boundary. Shipping logs to a third party observability vendor means the secret leaves your account, which is usually not covered by the threat model you wrote for that secret.
+
+What to do instead:
+
+- never put credentials in a log statement, not even encoded, and not even at `DEBUG`.
+- redact at the source. Filter sensitive keys before they reach the appender, for example with a Logback converter or a masking layout, so a future code change cannot reintroduce the leak.
+- scan for it. Secret detection tooling can run against log output as well as against source code.
+- if it did happen: rotate the secret, then clean up or expire every sink and archive that received it.
