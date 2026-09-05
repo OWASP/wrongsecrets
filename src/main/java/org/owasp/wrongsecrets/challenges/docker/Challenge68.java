@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 /** This challenge is about finding a secret shared in a ChatGPT chat link. */
 @Slf4j
 @Component
-public class Challenge67 extends FixedAnswerChallenge {
+public class Challenge68 extends FixedAnswerChallenge {
 
   private static final String CIPHERTEXT = "dagGnT4fdF7/z010sAHhhp1t6w2NsUQkHy9+Fx1LCG0=";
 
