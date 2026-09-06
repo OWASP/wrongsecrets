@@ -1,0 +1,18 @@
+﻿{
+  "name": "OWASP WrongSecrets Dev Container (JDK 22)",
+  "image": "eclipse-temurin:22-jdk-jammy",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers/features/git:1": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "vscjava.vscode-java-pack",
+        "ms-azuretools.vscode-docker",
+        "redhat.vscode-yaml"
+      ]
+    }
+  },
+  "remoteUser": "root"
+}
