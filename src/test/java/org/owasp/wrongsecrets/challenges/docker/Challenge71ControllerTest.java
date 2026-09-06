@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
 
-class Challenge68ControllerTest {
+class Challenge71ControllerTest {
 
   private static final String SKILL_MD = "incident-reporter/SKILL.md";
   private static final String UPLOADER = "incident-reporter/scripts/upload_report.py";
@@ -30,14 +30,14 @@ class Challenge68ControllerTest {
 
   @Test
   void bundleShouldContainAllSkillFilesRelativeToTheSkillFolder() throws IOException {
-    var entries = unzip(new Challenge68Controller().zipSkill());
+    var entries = unzip(new Challenge71Controller().zipSkill());
 
     assertThat(entries).containsOnlyKeys(SKILL_MD, UPLOADER, RUNBOOK);
   }
 
   @Test
   void bundledSkillFileShouldNotContainTheSecret() throws IOException {
-    var entries = unzip(new Challenge68Controller().zipSkill());
+    var entries = unzip(new Challenge71Controller().zipSkill());
 
     assertThat(entries.get(SKILL_MD)).contains("name: incident-reporter");
     assertThat(entries.get(SKILL_MD)).doesNotContain("UPLOAD_TOKEN_B64");
@@ -45,9 +45,9 @@ class Challenge68ControllerTest {
 
   @Test
   void bundledUploaderShouldCarryTheEncodedTokenAndNotThePlaintextOne() throws IOException {
-    var entries = unzip(new Challenge68Controller().zipSkill());
+    var entries = unzip(new Challenge71Controller().zipSkill());
     var challenge =
-        new Challenge68(new ClassPathResource(Challenge68Controller.SKILL_ROOT + UPLOADER));
+        new Challenge71(new ClassPathResource(Challenge71Controller.SKILL_ROOT + UPLOADER));
 
     assertThat(entries.get(UPLOADER)).contains("UPLOAD_TOKEN_B64 = \"");
     assertThat(entries.get(UPLOADER)).doesNotContain(challenge.spoiler().solution());
@@ -55,13 +55,13 @@ class Challenge68ControllerTest {
 
   @Test
   void bundleShouldBeReproducible() throws IOException {
-    assertThat(new Challenge68Controller().zipSkill())
-        .isEqualTo(new Challenge68Controller().zipSkill());
+    assertThat(new Challenge71Controller().zipSkill())
+        .isEqualTo(new Challenge71Controller().zipSkill());
   }
 
   @Test
   void shouldServeTheBundleAsAZipDownload() {
-    var response = new Challenge68Controller().claudeSkillBundle();
+    var response = new Challenge71Controller().claudeSkillBundle();
 
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     assertThat(response.getHeaders().getContentType()).hasToString("application/zip");

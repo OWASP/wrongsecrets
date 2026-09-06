@@ -1,4 +1,4 @@
-=== Challenge 67: Find the Secret in the Cursor Skill
+=== Challenge 70: Find the Secret in the Cursor Skill
 
 Agent skills are becoming a popular way to share automation with a team: you drop a folder with a `SKILL.md` in it, the agent picks it up, and everybody gets the same workflow. Unfortunately that also makes them a very convenient place to "temporarily" park a shared credential.
 

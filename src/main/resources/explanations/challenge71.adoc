@@ -1,4 +1,4 @@
-=== Challenge 68: Find the Secret in the Claude Skill Bundle
+=== Challenge 71: Find the Secret in the Claude Skill Bundle
 
 Claude skills are distributed as a zip: a folder with a `SKILL.md` that describes when to use the skill, plus any scripts and reference material the skill needs. The whole bundle is unpacked on the machine that installs it.
 

@@ -9,10 +9,10 @@ import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
-class Challenge67Test {
+class Challenge70Test {
 
   private static final String SKILL_LOCATION =
-      "challenges/challenge-67/cursor-skill/deploy-preview/SKILL.md";
+      "challenges/challenge-70/cursor-skill/deploy-preview/SKILL.md";
 
   private static Resource skillContaining(String content) {
     return new ByteArrayResource(content.getBytes(StandardCharsets.UTF_8));
@@ -20,7 +20,7 @@ class Challenge67Test {
 
   @Test
   void spoilerShouldGiveTheTokenFromTheShippedSkill() {
-    var challenge = new Challenge67(new ClassPathResource(SKILL_LOCATION));
+    var challenge = new Challenge70(new ClassPathResource(SKILL_LOCATION));
 
     assertThat(challenge.spoiler().solution()).isNotEmpty().isNotEqualTo(FILE_MOUNT_ERROR);
     assertThat(challenge.answerCorrect(challenge.spoiler().solution())).isTrue();
@@ -36,7 +36,7 @@ class Challenge67Test {
   @Test
   void shouldExtractTheTokenFromTheSkillFile() {
     var challenge =
-        new Challenge67(
+        new Challenge70(
             skillContaining(
                 """
                 ## Prerequisites
@@ -53,7 +53,7 @@ class Challenge67Test {
 
   @Test
   void incorrectAnswerShouldNotSolveChallenge() {
-    var challenge = new Challenge67(new ClassPathResource(SKILL_LOCATION));
+    var challenge = new Challenge70(new ClassPathResource(SKILL_LOCATION));
 
     assertThat(challenge.answerCorrect("wrong answer")).isFalse();
     assertThat(challenge.answerCorrect("")).isFalse();
@@ -61,7 +61,7 @@ class Challenge67Test {
 
   @Test
   void shouldReportAnErrorWhenTheSkillHasNoToken() {
-    var challenge = new Challenge67(skillContaining("# Deploy Preview\n\nNo secrets here.\n"));
+    var challenge = new Challenge70(skillContaining("# Deploy Preview\n\nNo secrets here.\n"));
 
     assertThat(challenge.spoiler().solution()).isEqualTo(FILE_MOUNT_ERROR);
   }
@@ -69,7 +69,7 @@ class Challenge67Test {
   @Test
   void shouldReportAnErrorWhenTheSkillCannotBeRead() {
     var challenge =
-        new Challenge67(new ClassPathResource("challenges/challenge-67/does-not-exist.md"));
+        new Challenge70(new ClassPathResource("challenges/challenge-70/does-not-exist.md"));
 
     assertThat(challenge.spoiler().solution()).isEqualTo(FILE_MOUNT_ERROR);
   }

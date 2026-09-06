@@ -17,15 +17,15 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
-public class Challenge67 extends FixedAnswerChallenge {
+public class Challenge70 extends FixedAnswerChallenge {
 
   private static final Pattern DEPLOY_TOKEN_PATTERN =
       Pattern.compile("STAGING_DEPLOY_TOKEN=\"([^\"]+)\"");
 
   private final Resource skillFile;
 
-  public Challenge67(
-      @Value("classpath:challenges/challenge-67/cursor-skill/deploy-preview/SKILL.md")
+  public Challenge70(
+      @Value("classpath:challenges/challenge-70/cursor-skill/deploy-preview/SKILL.md")
           Resource skillFile) {
     this.skillFile = skillFile;
   }
@@ -36,12 +36,12 @@ public class Challenge67 extends FixedAnswerChallenge {
       var skillContent = skillFile.getContentAsString(StandardCharsets.UTF_8);
       var matcher = DEPLOY_TOKEN_PATTERN.matcher(skillContent);
       if (!matcher.find()) {
-        log.warn("Could not find the deploy token in the Cursor skill of challenge 67");
+        log.warn("Could not find the deploy token in the Cursor skill of challenge 70");
         return FILE_MOUNT_ERROR;
       }
       return matcher.group(1);
     } catch (IOException e) {
-      log.warn("Exception while reading the Cursor skill of challenge 67", e);
+      log.warn("Exception while reading the Cursor skill of challenge 70", e);
       return FILE_MOUNT_ERROR;
     }
   }

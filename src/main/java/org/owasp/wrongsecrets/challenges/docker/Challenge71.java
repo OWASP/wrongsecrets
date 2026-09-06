@@ -19,16 +19,16 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
-public class Challenge68 extends FixedAnswerChallenge {
+public class Challenge71 extends FixedAnswerChallenge {
 
   private static final Pattern UPLOAD_TOKEN_PATTERN =
       Pattern.compile("UPLOAD_TOKEN_B64\\s*=\\s*\"([^\"]+)\"");
 
   private final Resource uploaderScript;
 
-  public Challenge68(
+  public Challenge71(
       @Value(
-              "classpath:challenges/challenge-68/claude-skill/incident-reporter/scripts/upload_report.py")
+              "classpath:challenges/challenge-71/claude-skill/incident-reporter/scripts/upload_report.py")
           Resource uploaderScript) {
     this.uploaderScript = uploaderScript;
   }
@@ -39,15 +39,15 @@ public class Challenge68 extends FixedAnswerChallenge {
       var scriptContent = uploaderScript.getContentAsString(StandardCharsets.UTF_8);
       var matcher = UPLOAD_TOKEN_PATTERN.matcher(scriptContent);
       if (!matcher.find()) {
-        log.warn("Could not find the upload token in the Claude skill of challenge 68");
+        log.warn("Could not find the upload token in the Claude skill of challenge 71");
         return FILE_MOUNT_ERROR;
       }
       return new String(Base64.getDecoder().decode(matcher.group(1)), StandardCharsets.UTF_8);
     } catch (IOException e) {
-      log.warn("Exception while reading the Claude skill of challenge 68", e);
+      log.warn("Exception while reading the Claude skill of challenge 71", e);
       return FILE_MOUNT_ERROR;
     } catch (IllegalArgumentException e) {
-      log.warn("The upload token in the Claude skill of challenge 68 is not valid base64", e);
+      log.warn("The upload token in the Claude skill of challenge 71 is not valid base64", e);
       return FILE_MOUNT_ERROR;
     }
   }

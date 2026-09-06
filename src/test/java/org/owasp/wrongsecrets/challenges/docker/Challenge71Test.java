@@ -10,10 +10,10 @@ import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
-class Challenge68Test {
+class Challenge71Test {
 
   private static final String UPLOADER_LOCATION =
-      "challenges/challenge-68/claude-skill/incident-reporter/scripts/upload_report.py";
+      "challenges/challenge-71/claude-skill/incident-reporter/scripts/upload_report.py";
 
   private static Resource uploaderContaining(String content) {
     return new ByteArrayResource(content.getBytes(StandardCharsets.UTF_8));
@@ -26,7 +26,7 @@ class Challenge68Test {
 
   @Test
   void spoilerShouldGiveTheDecodedTokenFromTheShippedSkill() {
-    var challenge = new Challenge68(new ClassPathResource(UPLOADER_LOCATION));
+    var challenge = new Challenge71(new ClassPathResource(UPLOADER_LOCATION));
 
     assertThat(challenge.spoiler().solution()).isNotEmpty().isNotEqualTo(FILE_MOUNT_ERROR);
     assertThat(challenge.answerCorrect(challenge.spoiler().solution())).isTrue();
@@ -36,7 +36,7 @@ class Challenge68Test {
   void answerShouldNotBeTheEncodedValueThatIsInTheBundle() throws Exception {
     var uploader =
         new ClassPathResource(UPLOADER_LOCATION).getContentAsString(StandardCharsets.UTF_8);
-    var challenge = new Challenge68(new ClassPathResource(UPLOADER_LOCATION));
+    var challenge = new Challenge71(new ClassPathResource(UPLOADER_LOCATION));
 
     assertThat(uploader).contains("UPLOAD_TOKEN_B64 = \"");
     assertThat(uploader).doesNotContain(challenge.spoiler().solution());
@@ -44,7 +44,7 @@ class Challenge68Test {
 
   @Test
   void shouldDecodeTheTokenFromTheUploaderScript() {
-    var challenge = new Challenge68(uploaderWithToken("t0k3n-from-the-bundle"));
+    var challenge = new Challenge71(uploaderWithToken("t0k3n-from-the-bundle"));
 
     assertThat(challenge.spoiler().solution()).isEqualTo("t0k3n-from-the-bundle");
     assertThat(challenge.answerCorrect("t0k3n-from-the-bundle")).isTrue();
@@ -52,7 +52,7 @@ class Challenge68Test {
 
   @Test
   void incorrectAnswerShouldNotSolveChallenge() {
-    var challenge = new Challenge68(new ClassPathResource(UPLOADER_LOCATION));
+    var challenge = new Challenge71(new ClassPathResource(UPLOADER_LOCATION));
 
     assertThat(challenge.answerCorrect("wrong answer")).isFalse();
     assertThat(challenge.answerCorrect("")).isFalse();
@@ -60,14 +60,14 @@ class Challenge68Test {
 
   @Test
   void shouldReportAnErrorWhenTheUploaderHasNoToken() {
-    var challenge = new Challenge68(uploaderContaining("TRACKER_URL = \"https://example.com\"\n"));
+    var challenge = new Challenge71(uploaderContaining("TRACKER_URL = \"https://example.com\"\n"));
 
     assertThat(challenge.spoiler().solution()).isEqualTo(FILE_MOUNT_ERROR);
   }
 
   @Test
   void shouldReportAnErrorWhenTheTokenIsNotValidBase64() {
-    var challenge = new Challenge68(uploaderContaining("UPLOAD_TOKEN_B64 = \"not base64 %%\"\n"));
+    var challenge = new Challenge71(uploaderContaining("UPLOAD_TOKEN_B64 = \"not base64 %%\"\n"));
 
     assertThat(challenge.spoiler().solution()).isEqualTo(FILE_MOUNT_ERROR);
   }
@@ -75,7 +75,7 @@ class Challenge68Test {
   @Test
   void shouldReportAnErrorWhenTheUploaderCannotBeRead() {
     var challenge =
-        new Challenge68(new ClassPathResource("challenges/challenge-68/does-not-exist.py"));
+        new Challenge71(new ClassPathResource("challenges/challenge-71/does-not-exist.py"));
 
     assertThat(challenge.spoiler().solution()).isEqualTo(FILE_MOUNT_ERROR);
   }

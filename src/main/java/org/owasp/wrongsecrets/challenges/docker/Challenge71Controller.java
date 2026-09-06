@@ -15,15 +15,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Hosts the Claude skill of challenge 68. The skill files live in the resource folder and are
+ * Hosts the Claude skill of challenge 71. The skill files live in the resource folder and are
  * zipped on request, so participants download the same kind of bundle that is passed around when a
  * skill is shared.
  */
 @Slf4j
 @RestController
-public class Challenge68Controller {
+public class Challenge71Controller {
 
-  static final String SKILL_ROOT = "challenges/challenge-68/claude-skill/";
+  static final String SKILL_ROOT = "challenges/challenge-71/claude-skill/";
   private static final String BUNDLE_NAME = "incident-reporter.zip";
   private static final MediaType ZIP = new MediaType("application", "zip");
   // Fixed timestamp (2024-01-01T00:00:00Z) so the generated bundle is reproducible.
@@ -48,7 +48,7 @@ public class Challenge68Controller {
                       ContentDisposition.attachment().filename(BUNDLE_NAME).build()))
           .body(zipSkill());
     } catch (IOException e) {
-      log.warn("Unable to package the Claude skill of challenge 68", e);
+      log.warn("Unable to package the Claude skill of challenge 71", e);
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
   }

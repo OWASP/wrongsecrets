@@ -12,20 +12,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Hosts the Cursor skill of challenge 67 straight from the resource folder, so participants can
+ * Hosts the Cursor skill of challenge 70 straight from the resource folder, so participants can
  * read the skill the same way an agent would.
  */
 @Slf4j
 @RestController
-public class Challenge67Controller {
+public class Challenge70Controller {
 
   private static final MediaType MARKDOWN =
       new MediaType("text", "markdown", StandardCharsets.UTF_8);
 
   private final Resource skillFile;
 
-  public Challenge67Controller(
-      @Value("classpath:challenges/challenge-67/cursor-skill/deploy-preview/SKILL.md")
+  public Challenge70Controller(
+      @Value("classpath:challenges/challenge-70/cursor-skill/deploy-preview/SKILL.md")
           Resource skillFile) {
     this.skillFile = skillFile;
   }
@@ -38,7 +38,7 @@ public class Challenge67Controller {
           .contentType(MARKDOWN)
           .body(skillFile.getContentAsString(StandardCharsets.UTF_8));
     } catch (IOException e) {
-      log.warn("Unable to serve the Cursor skill of challenge 67", e);
+      log.warn("Unable to serve the Cursor skill of challenge 70", e);
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
   }

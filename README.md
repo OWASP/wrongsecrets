@@ -226,8 +226,8 @@ Now you can try to find the secrets by means of solving the challenge offered at
 -   [localhost:8080/challenge/challenge-64](http://localhost:8080/challenge/challenge-64)
 -   [localhost:8080/challenge/challenge-65](http://localhost:8080/challenge/challenge-65)
 -   [localhost:8080/challenge/challenge-66](http://localhost:8080/challenge/challenge-66)
--   [localhost:8080/challenge/challenge-67](http://localhost:8080/challenge/challenge-67)
--   [localhost:8080/challenge/challenge-68](http://localhost:8080/challenge/challenge-68)
+-   [localhost:8080/challenge/challenge-70](http://localhost:8080/challenge/challenge-70)
+-   [localhost:8080/challenge/challenge-71](http://localhost:8080/challenge/challenge-71)
 </details>
 
 Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look
