@@ -1,0 +1,5 @@
+*Waarom het opslaan van gevoelige gegevens als sleutels een slecht idee is*
+
+Soms redeneren mensen dat minder gevoelige gegevens als een subsleutel van het daadwerkelijke geheim opgeslagen kunnen worden. Op die manier kunnen zowel een gebruikersnaam als een wachtwoord worden gecombineerd in één invoer.
+
+In Vault's geval kun je een subsleutel benaderen (bijv. de gebruikersnaam), maar niet de geheime waarde zelf (bijv. het wachtwoord), wat de gebruikersnaam al zou lekken. We willen werknemers vaak geen leestoegang tot geheimen geven, maar wel tot subsleutels.

@@ -1,0 +1,7 @@
+=== Binaries zonder leesbare tekstreeksen
+
+We horen nog steeds van ontwikkelaars die trucs en obfuscatie gebruiken om een geheim in een binary te verbergen. Wat als we symbolen strippen? Wat als we het geheim versleutelen? Deze uitdagingen kunnen het moeilijker maken om het verborgen geheim te vinden, maar niet onmogelijk.
+
+Het uitdagingsbestand heet https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-advanced-c[wrongsecrets-advanced-c] en kan in vele varianten worden gevonden in de https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables[executables map].
+
+Probeer het binaire bestand te downloaden en lokaal uit te voeren (bijv. `./wrongsecrets-advanced-c<deversie> <jouw antwoord>`).

@@ -1,0 +1,8 @@
+Puedes resolver este desafío con los siguientes pasos:
+
+1. Encuentra el secreto en Vault usando el token raíz registrado:
+ - Cuando configuras el entorno K8s, el script te dice el valor del token raíz.
+ - Usa `vault login <token>` y luego `vault kv get secret/wrongsecret`.
+
+2. Revisa la configuración en busca de errores:
+ - Verifica los archivos de configuración de Vault en el repositorio Git para ver si hay tokens hardcodeados.

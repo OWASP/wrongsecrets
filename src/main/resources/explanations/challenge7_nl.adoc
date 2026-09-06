@@ -1,0 +1,5 @@
+=== Een geheim verborgen in Vault
+
+Dus nu is het geheim niet meer in K8s of code... hoopt de ontwikkelaar.
+Als deze uitdaging is ingeschakeld en je de instructies in `README.md` hebt gevolgd, zou je de uitdaging op K8s/Minikube moeten kunnen draaien en nu naar het geheim kunnen zoeken.
+Wat is de gemaakte fout hier? https://github.com/trufflesecurity/truffleHog[*Trufflehog*] had misschien kunnen helpen als de entropie iets groter was ;-).

@@ -1,0 +1,8 @@
+=== Indice pour le Défi 59
+
+Vous cherchez l'URL du webhook Slack ? Voici quelques indices :
+
+==== Où chercher
+
+1. **Variables d'environnement** : L'URL du webhook est stockée dans une variable d'environnement appelée `CHALLENGE59_SLACK_WEBHOOK_URL`
+2. **Vérifiez l'application** : Vous pouvez inspecter les variables d'environnement via l'application ou le conteneur

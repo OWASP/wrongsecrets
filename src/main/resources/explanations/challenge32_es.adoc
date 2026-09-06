@@ -1,0 +1,8 @@
+=== Un secreto subido a una aplicación LLM (Large Language Model)
+
+La IA está aquí para quedarse. La IA puede ayudar con muchas cosas: resolución de problemas complejos, generación de código o asesoramiento en seguridad.
+Imagina que has subido código para buscar problemas de seguridad. ¿Qué pasa si incluía una contraseña? Las reglas deberían limitar el modelo LLM para evitar que filtre la contraseña. ¿Puede extraerse este secreto de todos modos?
+
+Intenta encontrarlo a través del primer ejercicio de https://gandalf.lakera.ai/[este juego de prompts].
+
+Ten en cuenta que https://gandalf.lakera.ai/[el juego de prompts] es completamente gratuito y abierto. Esto significa que puede estar fuera de línea y tardar unos minutos en volver a funcionar después de tu primera solicitud. Por favor, no hagas fuzzing o pruebas dinámicas del sitio web. ¡Asegúrate de que otros también puedan jugarlo!

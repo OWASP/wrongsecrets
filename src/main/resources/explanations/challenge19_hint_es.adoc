@@ -1,0 +1,20 @@
+Este desafío se centra específicamente en un secreto en un binario C.
+
+Puedes resolver este desafío usando las siguientes soluciones alternativas:
+
+1. Encuentra los secretos con https://ghidra-sre.org/[Ghidra].
+- Instala https://ghidra-sre.org/[Ghidra].
+- Inícialo con `ghidraRun`.
+- Carga la aplicación `wrongsecrets-c` en ghidra eligiendo un nuevo proyecto, luego importa el archivo y haz doble clic en él.
+- Permite que Ghidra analice la aplicación.
+- Busca el secreto: Ve a `Functions` en el lado izquierdo, selecciona `_secret`. Ahora en la pantalla del lado derecho puedes ver el secreto. Esto es un string en C.
+- Busca el mismo secreto, que está "oculto" como un array de char: Ve a `Functions` en el lado izquierdo, selecciona `_secret2`. Observa que esto devuelve una etiqueta en tu lado derecho. Ahora abre `Labels` en el lado izquierdo, selecciona la etiqueta devuelta por `_secret2` (`_secret2.label`) y encuentra la respuesta en el centro. Esto es un array de Char en C.
+
+2. Encuentra los secretos con https://www.radare.org[radare2].
+- Instala https://www.radare.org[radare2] con `brew install radare2` en Mac o sigue estos pasos: `git clone https://github.com/radareorg/radare2; cd radare2 ; sys/install.sh`
+- Lanza el análisis r2 con `$ r2 -A wrongsecrets-c`
+- Filtra funciones por el término `secret` usando afl: `afl~secret`, obtén la lista de funciones
+- Usa el comando `pdf @ sym._secret` para ver la salida desmontada de la función que devuelve el secreto
+- Usa el comando `pdf @ sym._secret2` para ver la salida desmontada de la función que devuelve secret2
+
+¿No quieres instalar las herramientas? ¡Consulta el https://github.com/OWASP/wrongsecrets/tree/master?tab=readme-ov-file#want-to-play-but-are-not-allowed-to-install-the-tools[contenedor WrongSecrets Desktop]!

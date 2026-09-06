@@ -1,0 +1,7 @@
+=== Binaires sans chaînes en clair
+
+Nous entendons encore des développeurs introduire des astuces et de l'obfuscation pour cacher un secret dans un binaire. Et si on supprime les symboles? Et si on chiffre le secret? Ces défis peuvent rendre plus difficile la recherche du secret caché, mais pas impossible.
+
+Le fichier de défi s'appelle https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-advanced-c[wrongsecrets-advanced-c] et peut être trouvé dans de nombreuses variantes dans le https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables[dossier executables].
+
+Essayez de télécharger le binaire et de l'exécuter localement (par exemple, `./wrongsecrets-advanced-c<laversion> <votre réponse>`).

@@ -1,0 +1,5 @@
+= Docker Compose Secrets Misconfiguratie Uitdaging
+
+*Waarom onjuist geheimenbeheer in Docker Compose tot kwetsbaarheden kan leiden*
+
+In gecontaineriseerde omgevingen is geheimenbeheer van cruciaal belang voor het behoud van de vertrouwelijkheid en integriteit van gevoelige informatie zoals databasereferenties, API-sleutels en andere geheimen. Docker Compose biedt een handige manier om geheimen te definiëren en beheren, maar onjuiste behandeling van deze geheimen kan je systeem blootstellen aan aanvallen.

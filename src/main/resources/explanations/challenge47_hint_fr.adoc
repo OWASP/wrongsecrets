@@ -1,0 +1,8 @@
+Ce défi peut être résolu de la manière suivante:
+
+- Obtenez les données du sidecar en regardant les fichiers créés par le sidecar Vault Agent:
+  1. Exécutez `kubectl get pods -A` et trouvez le nom du pod de secret-challenge-xxx
+  2. Exécutez `kubectl exec secret-challenge-xxx -c secret-challenge -n default -- cat /vault/secrets/challenge47` pour afficher la valeur codée en dur
+
+- Obtenez les données en vérifiant les logs du pod Wrongsecrets:
+  1. Exécutez `kubectl get pods -A` et trouvez le nom du pod de secret-challenge-xxx

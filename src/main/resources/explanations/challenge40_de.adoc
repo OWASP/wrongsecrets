@@ -1,0 +1,5 @@
+=== Unsicherer Verschlüsselungsschlüssel - Teil 2
+
+Ein Entwickler hat ein Geheimnis mit https://en.wikipedia.org/wiki/Advanced_Encryption_Standard[AES] verschlüsselt und den base64-kodierten Wert in einer JSON-Datei gespeichert. Aber wo soll der Schlüssel bleiben? Was, wenn der Schlüssel einfach im Datei beim Geheimnis gelassen wird? So kann jedes Geheimnis leicht seinen eigenen Schlüssel haben! Kannst du das Geheimnis finden?
+
+Die Herausforderungsdatei heißt https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/secrchallenge.json[secrchallenge.json] und kann im https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables[executables-Ordner] gefunden werden.

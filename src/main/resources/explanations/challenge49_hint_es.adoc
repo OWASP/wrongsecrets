@@ -1,0 +1,5 @@
+La forma más sencilla de descifrar el PIN en este escenario es realizar un ataque de fuerza bruta debido al rango limitado de valores posibles (0 a 99.999).
+
+- Itera sobre todos los PINs posibles (de 0 a 99.999).
+- Para cada PIN, calcula su hash MD5 para obtener la clave de descifrado y trata de descifrar el texto cifrado proporcionado.
+- Si el texto descifrado es igual a `the answer`, has encontrado el PIN correcto.

@@ -1,0 +1,8 @@
+=== Pista para el Desafío 58
+
+Este desafío demuestra un antipatrón de seguridad muy común: **cadenas de conexión a bases de datos con credenciales incorporadas que se filtran a través de mensajes de error**.
+
+**Dónde buscar:**
+
+1. **Prueba el endpoint de error:** Visita `/error-demo/database-connection` para desencadenar un fallo de conexión a la base de datos
+2. **Verifica la respuesta:** La aplicación intentará conectarse a una base de datos y fallará, exponiendo la cadena de conexión

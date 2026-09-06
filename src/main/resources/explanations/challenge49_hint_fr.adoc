@@ -1,0 +1,5 @@
+La façon la plus simple de trouver le PIN dans ce scénario est d'effectuer une attaque par force brute en raison de la plage limitée de valeurs possibles (0 à 99 999).
+
+- Itérez sur tous les PINs possibles (de 0 à 99 999).
+- Pour chaque PIN, calculez son hash MD5 pour obtenir la clé de déchiffrement et essayez de déchiffrer le texte chiffré fourni.
+- Si le texte déchiffré est égal à `the answer`, vous avez trouvé le PIN correct.

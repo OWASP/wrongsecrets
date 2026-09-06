@@ -1,0 +1,5 @@
+*¿Por qué el manejo adecuado de los Secretos Sellados es importante?*
+
+Los Secretos Sellados proporcionan una forma de cifrar tus secretos de Kubernetes y almacenarlos de forma segura, incluso en repositorios públicos. Sin embargo, el manejo inadecuado y la mala configuración pueden llevar a serias vulnerabilidades de seguridad.
+
+Si la clave privada usada para descifrar los secretos sellados está expuesta o es accesible dentro del mismo repositorio, anula la seguridad proporcionada por los Secretos Sellados.

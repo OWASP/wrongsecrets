@@ -1,0 +1,7 @@
+=== Blootgestelde Buildx Secrets Uitdaging
+
+Acme Inc., een snel groeiend SaaS-bedrijf, breidt zijn gecontaineriseerde implementaties uit met Docker Buildx om multi-platform builds te stroomlijnen. Echter, een ernstige beveiligingsmisconfiguratie heeft plaatsgevonden tijdens het bouwproces.
+
+Tijdens hun Docker Buildx-proces werd een gevoelig geheim, dat tijdelijk en veilig moest blijven tijdens de buildfase van de container, per ongeluk ingebed in het bestandssysteem van de container als gevolg van een misconfiguratie.
+
+Als de nieuw aangestelde beveiligingsconsultant van Acme Inc. is jouw taak duidelijk: onderzoek de container, identificeer het blootgestelde geheim en rapporteer het aan het team.

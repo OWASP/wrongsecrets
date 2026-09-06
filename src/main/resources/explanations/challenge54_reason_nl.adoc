@@ -1,0 +1,6 @@
+=== Waarom het plaatsen van geheimen in .gitignore een beveiligingsrisico is?
+
+Ontwikkelaars werken regelmatig configuratiebestanden zoals `.gitignore` bij, waarbij ze soms gevoelige informatie achterlaten, zoals wachtwoorden, tokens of kritieke bestandspaden. Deze geheimen, zelfs als ze versleuteld zijn, vormen risico's:
+
+- Aanvallers kunnen de geheimen ontdekken en ontsleutelen.
+- Vergeten geheimen in openbare bestanden wijzen op slechte beveiligingspraktijken en zwak geheimenbeheer.

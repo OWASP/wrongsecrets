@@ -1,0 +1,7 @@
+=== Бінарні файли без рядків відкритого тексту
+
+Ми досі чуємо від розробників, які вводять трюки та обфускацію для приховування секрету у бінарному файлі. Що якщо видалити символи? Що якщо зашифрувати секрет? Ці виклики можуть ускладнити пошук прихованого секрету, але не зробити це неможливим.
+
+Файл задачі називається https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-advanced-c[wrongsecrets-advanced-c] і може бути знайдений у багатьох варіантах у https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables[папці executables].
+
+Спробуйте завантажити бінарний файл і запустити його локально (наприклад, `./wrongsecrets-advanced-c<версія> <ваша відповідь>`).

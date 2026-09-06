@@ -1,0 +1,5 @@
+*Qué tener en cuenta al usar secretos aleatorios en el inicio*
+
+Usar un secreto aleatorio en el inicio puede funcionar si el secreto no necesita ser consumido por otros sistemas además del sistema que lo contiene/genera. De lo contrario, necesitarás algún tipo de mecanismo de sincronización.
+
+El mecanismo utilizado en este desafío se puede ver en otros sistemas, como Jenkins. Sin embargo, registrar el secreto generado es un gran riesgo, ya que cualquier persona con acceso a los registros puede leer el secreto.

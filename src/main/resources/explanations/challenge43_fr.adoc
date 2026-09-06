@@ -1,0 +1,7 @@
+=== Bourde sur Reddit
+
+Les gens font facilement des erreurs. Ils peuvent, par exemple, partager un morceau de données "innocent" sur les réseaux sociaux qui s'avère plus tard être un secret. Ou ils peuvent publier quelque chose sur le "mauvais écran" et le soumettre.
+
+De même, un développeur de la communauté OWASP qui était aussi un redditor actif, a laissé un secret sur la plateforme "par erreur".
+
+Pouvez-vous trouver le secret?

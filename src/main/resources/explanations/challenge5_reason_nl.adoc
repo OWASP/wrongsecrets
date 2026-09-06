@@ -1,0 +1,5 @@
+*Waarom het gebruik van configmaps geen goed idee is*
+
+Configmaps zijn nooit ontworpen om geheimen te hosten. Ze zijn ontworpen om aanvullende gegevens te hosten voor je Job, Pod en andere K8s-bronnen.
+
+Configmaps zijn vaak leesbaar voor iedereen die de processen moet ontwikkelen/beheren die gegevens uit de configmap nodig hebben. Zonder RBAC-beperkingen zijn configmaps onveilige opslagplaatsen voor geheimen.

@@ -1,0 +1,19 @@
+Ce défi examine spécifiquement un secret dans un binaire Rust basé sur un https://doc.rust-lang.org/cargo/reference/profiles.html#release[profil de version].
+
+Vous pouvez résoudre ce défi en utilisant les solutions alternatives suivantes:
+
+1. Trouvez les secrets avec https://ghidra-sre.org/[Ghidra].
+- Installez et démarrez Ghidra avec `ghidraRun`.
+- Chargez `wrongsecrets-rust` dans Ghidra et laissez-le analyser.
+- Importez le https://gist.github.com/str4d/e541f4c28e2bca80d222434ac1a204f4[script demangle] et exécutez-le via le Ghidra Script Manager.
+- Trouvez la fonction `main` dans le namespace `rust`.
+- Trouvez l'argument qui doit être comparé.
+- Trouvez le secret.
+
+2. Trouvez les secrets avec https://www.radare.org[radare2].
+- Installez radare2 et lancez l'analyse avec `$ r2 -AAA wrongsecrets-rust`
+- Imprimez le point d'entrée avec `s sym.rust::main::h66ace6a84e548891` puis `pdf`.
+- Essayez de trouver comment l'argument est préparé. Pouvez-vous repérer le secret?
+- Alternativement: après avoir lancé radare2, exécutez `iz | grep secret` et trouvez la chaîne.
+
+Vous ne voulez pas installer les outils? Consultez le https://github.com/OWASP/wrongsecrets/tree/master?tab=readme-ov-file#want-to-play-but-are-not-allowed-to-install-the-tools[conteneur WrongSecrets Desktop]!

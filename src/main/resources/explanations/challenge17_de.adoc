@@ -1,0 +1,5 @@
+=== Bash-Verlauf
+
+Dieser Entwickler hat einen Container erstellt und ihn eine Weile laufen lassen. Er verwendet ihn für viel Arbeit und ist vorsichtig, keine Geheimnisse zu hardcodieren. Wenn er Geheimnisse verwenden muss, schreibt er sie einfach in einen Bash-Befehl bei der Ausführung; sie verschwinden also, sobald er sie schreibt und bleiben geheim. Richtig?
+
+Wir alle haben kleine Geheimnisse in unserer Vergangenheit versteckt, einschließlich Bash. Greife auf den Container zu und sieh, ob du eines finden kannst.

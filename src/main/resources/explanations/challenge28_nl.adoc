@@ -1,0 +1,4 @@
+=== Geheim in een gesloten GitHub-issue
+Een gebruiker onthult per ongeluk de nieuwe `AWS Secret key` in een gesprek tussen hem en zijn vriend in een GitHub-issue.
+
+Kun je het geheim spotten in onze GitHub-repository?

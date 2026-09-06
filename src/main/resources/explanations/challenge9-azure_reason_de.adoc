@@ -1,0 +1,4 @@
+*Warum du mit Geheimnissen in deiner Cloud vorsichtig sein musst*
+
+Geheimnisse und Terraform-Status:
+Der Terraform-Status kann an vielen Orten gespeichert werden: lokal, in der Speicherlösung eines Cloud-Anbieters usw. Es kann leicht passieren, dass Geheimnisse im Terraform-Status landen. Stelle sicher, dass im Terraform-Status gespeicherte Geheimnisse selbst auch verschlüsselt sind. Verwende ein Remote-Backend mit Verschlüsselung für den Terraform-Status.

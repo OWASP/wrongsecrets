@@ -1,0 +1,7 @@
+*Waarom het gebruik van code om geheimen op te slaan een slecht idee is.*
+
+Je kunt nu zien dat je gemakkelijk veel geheimen kunt detecteren die in code zijn opgeslagen. Zelfs als de code gecompileerd is, kun je het nog steeds reverse-engineeren om het geheim te vinden. Daarom zijn hardgecodeerde geheimen nooit een goed idee.
+
+We vallen vaak voor de misvatting dat als ik het niet kan reverse-engineeren, een aanvaller dat ook niet kan. Dat is waarom veel mensen denken dat hardcoderen in C/C++/Golang veiliger is dan in Java. Voor degenen die dat denken: decompileer een app met tools zoals https://ghidra-sre.org/[*Ghidra*].
+
+De geheimhouding van een geheim in code is één ding. Een andere uitdaging is openheid: iedereen met toegang tot de code en/of gecompileerde bestanden kan het geheim leren kennen. Nog erger: als de ontwikkelaar die het geheim hardcodeerde de organisatie verlaat, kent hij het geheim mogelijk nog steeds omdat het nog in de code staat!

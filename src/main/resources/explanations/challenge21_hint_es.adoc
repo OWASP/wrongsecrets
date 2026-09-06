@@ -1,0 +1,19 @@
+Este desafío se centra específicamente en un secreto en un binario Go.
+
+Este es un poco más difícil, ya que usamos Cobra para crear el CLI.
+Puedes resolver este desafío usando las siguientes soluciones alternativas:
+
+1. Encuentra los secretos con https://ghidra-sre.org/[Ghidra].
+- Instala e inicia Ghidra con `ghidraRun`.
+- Carga `wrongsecrets-golang` en Ghidra.
+- Permite que Ghidra analice. Esto lleva más tiempo ya que el binario es más grande.
+- Ve al administrador de tipos de datos en la parte inferior izquierda, filtra por `string`, haz clic derecho en `string` como miembro de `wrongsecrets-golang` y selecciona `find uses of`.
+- Filtra por palabras clave conocidas: ¡ahora deberías poder encontrar el secreto fácilmente!
+
+2. Encuentra los secretos con https://www.radare.org[radare2].
+- Instala radare2
+- Lanza el análisis r2 con `$ r2 -A wrongsecrets-golang`
+- Inicia una búsqueda de la cadena con `/w secret`
+- Ahora busca posibles respuestas, por ejemplo `/w his is the secret in Golang`. Deberías poder encontrar el secreto ahora.
+
+¿No quieres instalar las herramientas? ¡Consulta el https://github.com/OWASP/wrongsecrets/tree/master?tab=readme-ov-file#want-to-play-but-are-not-allowed-to-install-the-tools[contenedor WrongSecrets Desktop]!

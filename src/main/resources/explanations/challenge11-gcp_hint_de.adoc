@@ -1,0 +1,7 @@
+Du kannst diese Herausforderung mit den folgenden Schritten lösen:
+
+1. Finde den Privilege-Eskalations-Pfad mit Terraform:
+ - Es sollte etwas Interessantes in `aws/irsa.tf` geben.
+
+2. Finde den Privilege-Eskalations-Pfad mit ScoutSuite:
+ - Überprüfe die Rolle `cant-read-secrets`. Du wirst sehen, dass sie `sts:AssumeRole` auf `*` erlaubt. Das bedeutet, sie kann andere Rollen übernehmen.

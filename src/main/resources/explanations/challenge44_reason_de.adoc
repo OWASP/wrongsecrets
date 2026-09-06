@@ -1,0 +1,5 @@
+*Warum das Speichern sensibler Daten als Metadaten eine schlechte Idee ist*
+
+Manchmal argumentieren Menschen, dass weniger sensible Daten als Geheimnis-Metadaten gespeichert werden sollten. Denke zum Beispiel an einen Benutzernamen - weniger sensibel als ein Passwort, oder?
+
+In vielen dieser Fälle sind sie gleich wichtig und sollten denselben Schutz erhalten wie das Geheimnis selbst. Wir wollen Mitarbeitern oft keinen Lesezugriff auf Geheimnisse geben, aber Lesezugriff auf Metadaten. Wenn ein Geheimnis in den Metadaten gespeichert ist, ist dieses Geheimnis intern kompromittiert.

@@ -1,0 +1,9 @@
+*Waarom je geheimen moet opruimen en roteren*
+
+Als je per ongeluk een geheim naar Git hebt gecommit, zijn er manieren om het te vinden, met de hand of met tools.
+
+Daarom, als een geheim per ongeluk naar Git is gecommit:
+
+- Informeer de verantwoordelijke beveiligingsautoriteit in de organisatie
+- Zorg ervoor dat je het geheim roteert
+- Optioneel - opruimen: gebruik https://github.com/rtyley/bfg-repo-cleaner[BFG repo-cleaner] of git filter-branch

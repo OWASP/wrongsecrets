@@ -1,0 +1,4 @@
+=== Injection de modèle HashiCorp Vault Partie 2
+
+Les secrets peuvent être récupérés depuis Vault en utilisant le conteneur sidecar https://developer.hashicorp.com/vault/docs/platform/k8s/injector[Vault Agent]. Un développeur a essayé de déboguer pourquoi son injection vault ne fonctionnait pas. Il a donc codé en dur les secrets "temporairement" dans le modèle Vault lui-même.
+Pouvez-vous trouver le secret codé en dur dans le modèle Vault?

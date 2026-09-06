@@ -1,0 +1,7 @@
+De privésleutel bevindt zich in het .ssh-gedeelte van de container en is per ongeluk vastgelegd in git.
+
+Je kunt de sleutel vinden door:
+
+1. Het ophalen uit git in het [`.ssh/wrongsecrets.keys`]()-bestand:
+- Kloon de repo met `git clone https://github.com/OWASP/wrongsecrets`.
+- Ga naar de projectsroot en navigeer naar de `.ssh`-map en zoek het `wrongsecrets.keys`-bestand.

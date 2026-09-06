@@ -1,0 +1,5 @@
+*Pourquoi ne devrait-on pas utiliser le nom du fichier comme clé de chiffrement?*
+
+Il y a eu plusieurs scénarios où le contenu des fichiers était chiffré en utilisant le nom du fichier lui-même, ce qui permet aux attaquants de déchiffrer facilement son contenu. C'est souvent perçu comme un moyen facile de garder la clé près du contenu.
+
+Mais comme vous pouvez le voir maintenant, ce n'est pas une bonne idée. Un attaquant a la clé dès que le fichier est en sa possession.

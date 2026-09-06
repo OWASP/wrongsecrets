@@ -1,0 +1,7 @@
+Deze uitdaging kan worden opgelost met de volgende stappen:
+
+1. Maak twee tekstbestanden `old_hashes.txt` en `new_hashes.txt` met alleen de hashes uit de dump-bestanden.
+2. Met `old_hashes.txt` als wachtwoordlijst kunnen we hashcat gebruiken om MD5-hashes te controleren die overeenkomen met de bcrypt-hashes.
+   - Installeer https://hashcat.net/hashcat/[Hashcat]
+   - Typ `hashcat -m 3200 -a 0 new_hashes.txt old_hashes.txt --show`
+3. Met `rockyou.txt` als wachtwoordlijst kunnen we de verkregen MD5-hash kraken.

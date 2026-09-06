@@ -1,0 +1,5 @@
+= Docker Buildx Secrets Fehlkonfigurationsherausforderung
+
+*Warum unsachgemäße Geheimnisverwaltung in Docker Build-Prozessen zu Schwachstellen führen kann*
+
+In modernen DevOps-Workflows ist Docker Buildx ein leistungsstarkes Werkzeug für das effiziente Erstellen von Multi-Plattform-Docker-Images. Es bietet eine sichere Möglichkeit, sensible Informationen wie API-Schlüssel, Datenbankzugangsdaten und Zertifikate während des Build-Prozesses mit dem `--secret`-Flag zu übergeben. Jedoch kann unsachgemäße Handhabung oder Speicherung dieser Geheimnisse kritische Schwachstellen einführen.

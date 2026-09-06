@@ -1,0 +1,6 @@
+Ce défi peut être résolu en rejouant la fonction de dérivation de clé avec les entrées données.
+
+1. Exécutez la fonction en ligne
+- Localisez les paramètres utilisés pour la fonction de dérivation de clé dans la fonction `generateKey` dans `Challenge34.java`.
+- Copiez les paramètres utilisés vers un https://www.dcode.fr/pbkdf2-hash[générateur] en ligne et exécutez-le
+- Le site web retournera la valeur de la clé.

@@ -1,0 +1,7 @@
+Wie der Text der Herausforderung besagt, suchen wir nach dem Geheimnis in einem `Screenshot` eines `geschlossenen GitHub-Issues` auf unserem GitHub-Repository. Aber wie finden wir es?
+
+Du kannst diese Herausforderung mit den folgenden Schritten lösen:
+
+1. Gehe zur `Issues`-Registerkarte unseres GitHub, dann zum geschlossenen Abschnitt, um alle geschlossenen Issues zu erhalten.
+
+2. Gehe alle Fehlerberichte durch und schaue speziell auf `Screenshots`, die von Benutzern gepostet wurden.

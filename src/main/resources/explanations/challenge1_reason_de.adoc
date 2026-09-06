@@ -1,0 +1,7 @@
+*Warum es eine schlechte Idee ist, Geheimnisse im Code zu speichern.*
+
+Du kannst nun sehen, dass du viele Geheimnisse, die im Code gespeichert sind, leicht erkennen kannst. Selbst wenn der Code kompiliert ist, kann man ihn noch reverse-engineeren, um das Geheimnis zu finden. Deshalb sind hartcodierte Geheimnisse niemals eine gute Idee.
+
+Wir verfallen oft dem Irrglauben, dass wenn ich es nicht reverse-engineeren kann, ein Angreifer es auch nicht kann. Deshalb glauben viele, dass Hardcoding in C/C++/Golang sicherer ist als in Java. Für diejenigen, die das denken: Dekompiliere eine App mit Tools wie https://ghidra-sre.org/[*Ghidra*].
+
+Die Geheimhaltung eines Geheimnisses im Code ist eine Sache. Eine andere Herausforderung ist die Offenheit: Jeder mit Zugang zum Code und/oder den kompilierten Assets kann das Geheimnis erfahren. Noch schlimmer: Wenn der Entwickler, der das Geheimnis hartcodiert hat, die Organisation verlässt, könnte er das Geheimnis noch kennen, da es noch im Code ist!

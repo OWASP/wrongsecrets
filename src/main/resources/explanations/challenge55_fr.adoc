@@ -1,0 +1,7 @@
+=== .ssh Bastion?
+
+Nous avons vu de nombreux "conteneurs bastion". Ici, les gens créent un conteneur Docker et intègrent le "secret" pour s'authentifier auprès de l'hôte à l'intérieur du conteneur. Ce secret est souvent une paire de clés SSH utilisée pour s'authentifier auprès d'un hôte.
+
+Pour que le conteneur bastion fonctionne, il faut intégrer un fichier de configuration SSH (`.ssh/config`) pour simplifier la configuration de la connexion SSH en stockant des configurations spécifiques à l'hôte.
+
+Pouvez-vous trouver la clé privée? Collez son contenu dans le champ de réponse ci-dessous.

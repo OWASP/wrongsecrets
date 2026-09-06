@@ -1,0 +1,9 @@
+=== Défi 56 : Trouver le secret dans la spécification du projet
+
+Nous voulions voir si l'IA pouvait créer un défi pour nous. Comme tout défi WrongSecrets, il doit avoir un "secret" exposé quelque part. L'IA a dû créer ce défi en utilisant un exemple de plan agentique avec des secrets.
+
+Dans ce défi, votre tâche est de trouver un secret caché dans le fichier de documentation du plan agentique du projet : https://github.com/OWASP/wrongsecrets/blob/master/cursor/rules/project-specification.mdc[`cursor/rules/project-specification.mdc`].
+
+Le secret est intégré comme valeur de configuration d'exemple dans le fichier de spécification. Regardez attentivement la documentation — les secrets dans les fichiers de spécification sont souvent déguisés en valeurs d'exemple, paramètres de configuration ou données d'exemple.
+
+**Indice :** Recherchez des références à "challenge 56" ou cherchez des valeurs de configuration suspectes pouvant être utilisées comme exemples.

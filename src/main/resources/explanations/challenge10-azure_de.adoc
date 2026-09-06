@@ -1,0 +1,3 @@
+=== Azure Key Vault Teil 2
+
+Das Geheimnis ist nun randomisiert und direkt im Cloud-Secrets-Manager gespeichert. Wir binden es noch über den https://secrets-store-csi-driver.sigs.k8s.io[CSI-Treiber] an den K8s-Pod... Kannst du darauf zugreifen?

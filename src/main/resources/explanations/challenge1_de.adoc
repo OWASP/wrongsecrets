@@ -1,0 +1,7 @@
+=== Zentralisiertes hartcodiertes Passwort
+
+Wenn Menschen einen Proof of Concept schreiben, beginnen sie oft mit hartcodierten Geheimnissen, wie einem `Passwort` im Code. Was passiert, wenn wir vergessen, diese hartcodierten Geheimnisse zu entfernen?
+
+Kannst du das Geheimnis im https://github.com/OWASP/wrongsecrets/tree/master/src/main/java/org/owasp/wrongsecrets[Java-Code] finden? Schau auch im Container nach!
+
+Manchmal sind die einfacheren Werkzeuge am wirkungsvollsten. Versuche, das Repository zu klonen, und verwende https://man7.org/linux/man-pages/man1/grep.1.html[*grep*], um zu sehen, was du findest. Es ist auch möglich, es mit https://github.com/awslabs/git-secrets[*Git-secrets*] oder https://github.com/trufflesecurity/trufflehog[*Trufflehog*] zu finden. Tauche einfach in den Code ein!

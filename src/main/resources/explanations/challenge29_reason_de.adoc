@@ -1,0 +1,7 @@
+*Warum das Posten von Screenshots von Logs in einem GitHub-Issue eine schlechte Idee ist*
+
+Du solltest keine Screenshots von Logs in einem GitHub-Issue posten, weil:
+1. Daten sind öffentlich (sogar in einem privaten Repository, oft öffentlicher als du hoffen würdest)
+2. Screenshots können nicht wie Text redigiert werden. Selbst wenn das Geheimnis unkenntlich gemacht wird, kann dies reversibel sein.
+
+Überprüfe auf etwaige Geheimnis-Lecks in der Ausgabe und verwende Markdown-Codeblöcke zum Posten von Logs in einem GitHub-Issue.

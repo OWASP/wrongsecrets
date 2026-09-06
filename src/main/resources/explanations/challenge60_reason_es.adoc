@@ -1,0 +1,5 @@
+=== Por qué importa el Desafío 60: Inyección de prompts MCP y exposición de variables de entorno
+
+**El problema:**
+
+Los servidores MCP (Protocolo de Contexto de Modelo) son cada vez más populares para dar a los asistentes de IA acceso a herramientas y datos. Sin embargo, muchos desarrolladores despliegan servidores MCP sin controles de seguridad adecuados. Peor aún, un servidor MCP *malicioso* puede manipular activamente al cliente de IA que se conecta mediante inyección de prompts.

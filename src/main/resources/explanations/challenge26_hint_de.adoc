@@ -1,0 +1,10 @@
+Du kannst den vorherigen Zustand mit einer von zwei alternativen Lösungen finden:
+
+1. Finde den vorherigen Block über eine Anfrage an https://infura.io/[Infura]:
+- Finde die Blocknummer für einen Block nach der Vertragserstellung und vor dem Update.
+- Erstelle einen Infura-Schlüssel auf https://infura.io/[Infura].
+- Suche nach dem Speicherzustand des Vertrags für diesen Block.
+
+2. Sieh dir die Vertragserstellung auf https://etherscan.io/[Etherscan] an:
+- Sieh unter der Vertragserstellungstransaktion auf Etherscan
+- Gehe zu state und sieh dir storage an

@@ -1,0 +1,7 @@
+Deze uitdaging kan worden opgelost met de volgende stappen:
+
+1. Controleer beschikbare Actuator-eindpunten op "/actuator"
+
+2. Controleer audit-events op het "/actuator/auditevents"-eindpunt
+
+3. Zoek het API_KEY_RECEIVED-event met het blootgestelde geheim

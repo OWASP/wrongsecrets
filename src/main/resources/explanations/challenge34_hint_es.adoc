@@ -1,0 +1,6 @@
+Este desafío se puede resolver reproduciendo la función de derivación de clave con las entradas dadas.
+
+1. Ejecuta la función en línea
+- Localiza los parámetros utilizados para la función de derivación de clave en la función `generateKey` en `Challenge34.java`.
+- Copia los parámetros utilizados a un https://www.dcode.fr/pbkdf2-hash[generador] en línea y ejecútalo
+- El sitio web devolverá el valor de la clave.

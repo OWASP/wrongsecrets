@@ -1,0 +1,11 @@
+*Waarom geheimen in front-end code een slecht idee is*
+
+Wanneer je een mobiele app of SPA uitvoert, moet je proberen geen geheimen te hardcoderen. Een aanvaller kan de app altijd reverse-engineeren en het werkelijke geheim vinden.
+
+*Waarom het gebruik van Single-Page apps of mobiele apps voor clientgeheimen een slecht idee is*
+
+Zoals je kunt zien, kun je elk geheim in een Single-Page app of mobiele app eenvoudig detecteren.
+
+*Waarom Base64-codering geen versleuteling is*
+
+Het was vrij eenvoudig om het geheim te decoderen uit het Challengebestand. Daarom mag Base64 en Hex-codering nooit worden beschouwd als methode om een geheim te verbergen. Gebruik Base64- en/of Hex-codering alleen om een binaire reeks als String te transporteren.

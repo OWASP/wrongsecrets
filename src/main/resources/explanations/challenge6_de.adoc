@@ -1,0 +1,5 @@
+=== K8s Geheimnisse
+
+Eine ConfigMap hat also nicht gereicht. Aber was ist mit einem https://kubernetes.io/docs/concepts/configuration/secret/[K8s Secret] im Standard-Namespace ohne RBAC?
+
+Wenn diese Herausforderung aktiviert ist, läuft diese aus einem K8s-Cluster. Kannst du `kubectl` verwenden, um das Geheimnis zu finden? Bitte beachte, dass Geheimnisse base64-kodiert sind, bevor sie in die Workload eingebunden werden. Wir suchen nach der dekodierten Variante.

@@ -1,0 +1,7 @@
+=== .ssh Bastion?
+
+Wir haben viele sogenannte "Bastion-Container" gesehen. Hier erstellen Menschen einen Docker-Container und bettet das "Geheimnis" zur Authentifizierung beim Host in den Container ein. Dieses Geheimnis ist oft ein SSH-Schlüsselpaar zur Authentifizierung bei einem Host.
+
+Damit der Bastion-Container funktioniert, muss eine SSH-Konfigurationsdatei (`.ssh/config`) eingebettet werden, um die SSH-Verbindungseinrichtung durch Speicherung hostspezifischer Konfigurationen zu vereinfachen.
+
+Kannst du den privaten Schlüssel finden? Füge den Inhalt in das Antwortfeld unten ein.

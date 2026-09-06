@@ -1,0 +1,5 @@
+=== Donner accès à vos tests de sécurité
+
+Étant donné toutes les conclusions malheureuses que nous avons déjà dans ce projet, nous avons décidé de mettre en œuvre un scanning automatisé avec ZAP. Pour ce faire, nous devons pouvoir fuzzer le point de terminaison de ce défi: `/authenticated/challenge37` et donc configurer l'authentification de base pour ZAP. Pouvez-vous trouver le secret retourné au point de terminaison?
+
+Indication: Nous utilisons GitHub Actions.

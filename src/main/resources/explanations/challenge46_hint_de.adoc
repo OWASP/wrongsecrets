@@ -1,0 +1,8 @@
+Diese Herausforderung kann auf folgende Weise gelöst werden:
+
+- Hole die Daten des Sidecars durch Ansicht der vom Vault Agent Sidecar erstellten Dateien:
+  1. Führe `kubectl get pods -A` aus und finde den Pod-Namen von secret-challenge-xxx
+  2. Führe `kubectl exec secret-challenge-xxx -c secret-challenge -n default -- cat vault/secrets/challenge46` aus, um injizierte Geheimnisse aus Vault auszugeben
+
+- Hole die Daten durch Prüfung der Logs des Wrongsecrets-Pods:
+  1. Führe `kubectl get pods -A` aus und finde den Pod-Namen von secret-challenge-xxx

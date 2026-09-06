@@ -1,0 +1,5 @@
+*Pourquoi utiliser MD5 comme KDF est une mauvaise idée*
+
+Protéger les clés efficacement est crucial, et cela signifie utiliser les bonnes Fonctions de Dérivation de Clé (KDFs) avec une entropie supplémentaire, comme souligné dans le https://mas.owasp.org/MASTG/0x04g-Testing-Cryptography/#weak-key-generation-functions[Guide de Test de Sécurité Mobile (MSTG).]
+
+MD5 est trop rapide et facile à calculer, permettant aux attaquants d'essayer rapidement un grand nombre d'entrées (comme des PINs) pour dériver la clé. De plus, l'espace de collision est relativement petit.

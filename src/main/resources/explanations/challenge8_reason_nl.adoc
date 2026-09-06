@@ -1,0 +1,5 @@
+*Waar je op moet letten bij het gebruik van willekeurige geheimen bij het opstarten*
+
+Het gebruik van een willekeurig geheim bij het opstarten kan werken als het geheim niet hoeft te worden gebruikt door andere systemen dan het systeem dat het geheim bevat/genereert. Anders heb je een soort synchronisatiemechanisme nodig.
+
+Het mechanisme dat in deze uitdaging wordt gebruikt, is in andere systemen te zien, zoals Jenkins. Het loggen van het gegenereerde geheim is echter een groot risico, omdat iedereen met toegang tot de logs het geheim kan lezen.

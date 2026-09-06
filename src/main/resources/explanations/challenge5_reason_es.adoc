@@ -1,0 +1,5 @@
+*Por qué usar configmaps no es una buena idea*
+
+Los configmaps nunca fueron diseñados para alojar secretos. Fueron diseñados para alojar datos adicionales para tu Job, Pod y otros recursos K8s.
+
+Los configmaps a menudo son legibles por todos los que necesitan desarrollar/operar los procesos que requieren datos del configmap. Sin restricciones RBAC, los configmaps son lugares de almacenamiento inseguros para secretos.

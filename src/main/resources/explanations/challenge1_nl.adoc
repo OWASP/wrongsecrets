@@ -1,0 +1,7 @@
+=== Gecentraliseerd hardgecodeerd wachtwoord
+
+Wanneer mensen een proof of concept schrijven, beginnen ze vaak met hardgecodeerde geheimen, zoals een `wachtwoord` in de code. Wat als we vergeten deze hardgecodeerde geheimen te verwijderen?
+
+Kun je het geheim vinden in de https://github.com/OWASP/wrongsecrets/tree/master/src/main/java/org/owasp/wrongsecrets[Java-code]? Kijk ook in de container!
+
+Soms zijn de eenvoudigste tools het meest effectief. Probeer de repo te klonen en gebruik https://man7.org/linux/man-pages/man1/grep.1.html[*grep*] om te zien wat je vindt. Het is ook mogelijk om te vinden met https://github.com/awslabs/git-secrets[*Git-secrets*] of https://github.com/trufflesecurity/trufflehog[*Trufflehog*]. Duik gewoon in de code!

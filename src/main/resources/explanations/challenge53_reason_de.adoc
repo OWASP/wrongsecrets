@@ -1,0 +1,5 @@
+=== Debug-Container und Speichergeheimnisse
+
+Debugging-Tools sind mächtig, aber wenn sie in Produktionsumgebungen verfügbar bleiben, können sie sensible Informationen preisgeben. Diese Herausforderung zeigt, wie ein Angreifer mit Debug-Zugriff Geheimnisse aus dem Speicher abrufen kann.
+
+Das Szenario beinhaltet einen Kubernetes-Pod, der eine kompilierte Binärdatei ausführt, die ein Geheimnis im Speicher hält. Aufgrund einer Fehlkonfiguration kann ein Debug-Container angehängt werden, um es zu inspizieren. Dies stellt ein reales Szenario dar, bei dem falsch konfigurierte Debug-Berechtigungen zu Sicherheitsrisiken führen können.

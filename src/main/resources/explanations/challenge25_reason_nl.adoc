@@ -1,0 +1,5 @@
+*Waarom het opslaan van geheimen op de blockchain een slecht idee is*
+
+Je mag nooit een geheim op de blockchain committen. Alle gegevens zijn openbaar. Vooral wanneer een variabele publiek is, is het erg eenvoudig om te lezen.
+
+Heb je toch een geheim nodig? Zorg ervoor dat het deel uitmaakt van een ondersteunend systeem (bijv. een externe dienst die je maakt).

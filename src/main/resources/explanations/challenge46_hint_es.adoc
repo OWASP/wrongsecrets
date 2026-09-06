@@ -1,0 +1,8 @@
+Este desafío se puede resolver de las siguientes maneras:
+
+- Obtén los datos del sidecar mirando los archivos creados por el sidecar de Vault Agent:
+  1. Ejecuta `kubectl get pods -A` y encuentra el nombre del pod de secret-challenge-xxx
+  2. Ejecuta `kubectl exec secret-challenge-xxx -c secret-challenge -n default -- cat vault/secrets/challenge46` para imprimir los secretos inyectados desde vault
+
+- Obtén los datos verificando los logs del pod de Wrongsecrets:
+  1. Ejecuta `kubectl get pods -A` y encuentra el nombre del pod de secret-challenge-xxx

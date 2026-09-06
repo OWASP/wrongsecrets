@@ -1,0 +1,10 @@
+*Waarom MD5 en SHA1 hashing alleen niet genoeg zijn.*
+
+MD5 en SHA1 hashes worden niet langer als veilig beschouwd voor het alleen opslaan van wachtwoorden. Snelheid is wat MD5 en SHA1 hashes zo nuttig maakt, maar het is ook hun ondergang. Het duurt slechts een paar minuten om duizenden wachtwoorden te hashen; dit betekent ook dat het slechts minuten duurt om duizenden veelgebruikte wachtwoorden te hashen en deze hashes te vergelijken met een verkregen hash.
+
+Bedrijven proberen verschillende technieken om MD5 en SHA1 hashes te versterken, zoals ze "salten". Dit is het proces van het toevoegen van extra tekens aan het wachtwoord die alleen de persoon/het bedrijf dat zou moeten ontsleutelen, kent. Helaas is dit ook niet genoeg met de opkomst van GPU- en ASIC-berekeningen. Daarom kunnen bedrijven die deze technieken gebruiken beter migreren naar https://en.wikipedia.org/wiki/Argon2[Argon2] of https://en.wikipedia.org/wiki/Balloon_hashing[Balloon hashing].
+
+Als gebruiker heb je vaak geen keuze in hoe je wachtwoorden worden opgeslagen; het enige wat je in dit geval kunt doen is proberen je wachtwoord langer en complexer te maken. Een SHA1-wachtwoord van 7 tekens met hoofd- en kleine letters duurt ongeveer een minuut of 5 om te brute forcen op een goede GPU, terwijl een wachtwoord van 25 tekens veel langer duurt.
+
+Merk op dat, wanneer dit type hashes via `HTTP` wordt gebruikt (zonder TLS, d.w.z. geen `HTTPS`) als onderdeel van een integriteitscontrole, een Man in the Middle mogelijk de inhoud kan onderscheppen en wijzigen, de hashes kan berekenen en deze ook kan retourneren.
+Een aanvaller kan zelfs dezelfde hashes hergebruiken en andere inhoud leveren op basis van een hash-botsing. Gebruik daarom altijd beveiligde verbindingen bij het overdragen van inhoud en vertrouw nooit alleen op hashes zoals `MD5` of `SHA1` voor de integriteit van de gegevens.

@@ -1,0 +1,5 @@
+*Waarom het opslaan van geheimen in gesloten GitHub-issues een slecht idee is?*
+
+Je mag nooit een geheim onthullen in een GitHub-issue, want zelfs wanneer het issue is gesloten, zijn alle gegevens openbaar en zijn ze heel eenvoudig te zien.
+
+Ga dus de issue twee keer door voordat je het op een repository plaatst.

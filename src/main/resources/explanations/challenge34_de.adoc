@@ -1,0 +1,4 @@
+=== Zufällige Schlüssel generieren
+
+Viele Sicherheitsexperten lehren Ingenieure, sichere Schlüsselableitungsfunktionen wie https://en.wikipedia.org/wiki/PBKDF2[PBKDF2] zu verwenden, wenn ein Schlüssel generiert werden muss. Ein Entwickler folgte dieser Anweisung und versuchte, einen Schlüssel in `Challenge34.java` zu erstellen, der nun weit sicherer sein sollte als ein hartcodierter Schlüssel.
+Kannst du den Fehler erkennen? Kannst du den Wert des generierten Schlüssels finden?

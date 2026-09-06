@@ -1,0 +1,22 @@
+=== Défi d'ouverture
+
+Bienvenue dans le défi d'ouverture d'OWASP WrongSecrets !
+
+Dans ce défi, nous vous expliquons tout ce que vous devez savoir pour jouer à OWASP WrongSecrets.
+
+Chaque défi consiste à trouver un secret qui n'a pas été bien caché et/ou configuré dans notre https://github.com/OWASP/wrongsecrets[code d'application], https://hub.docker.com/r/jeroenwillemsen/wrongsecrets[conteneur Docker] ou dans l'une des parties connexes du https://github.com/OWASP/wrongsecrets#table-of-contents[système].
+
+Une fois que vous avez trouvé le secret, vous pouvez le saisir dans le champ ci-dessous et cliquer sur « Soumettre ». Le bouton « Effacer » nettoiera le champ de saisie.
+Vous souhaitez rejouer le défi ? Cliquez sur le bouton « Réinitialiser ».
+
+La bonne réponse ci-dessous est `The first answer`. Copiez-la dans le champ et cliquez sur « Soumettre ».
+
+Amusez-vous bien avec les défis plus difficiles ;-).
+
+Remarque : certains des défis suivants nécessitent des outils supplémentaires. Vous ne voulez pas les installer vous-même ? Vous pouvez utiliser un conteneur :
+
+[source, shell]
+docker run -p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock jeroenwillemsen/wrongsecrets-desktop:latest
+
+
+Puis, dans votre navigateur, accédez à http://localhost:3000[http://localhost:3000] pour trouver un webtop avec tous les outils requis.

@@ -1,0 +1,8 @@
+=== Indice pour le Défi 58
+
+Ce défi démontre un anti-modèle de sécurité très courant : **chaînes de connexion à la base de données avec des identifiants intégrés qui fuient via des messages d'erreur**.
+
+**Où chercher :**
+
+1. **Essayez le point de terminaison d'erreur :** Visitez `/error-demo/database-connection` pour déclencher une erreur de connexion à la base de données
+2. **Vérifiez la réponse :** L'application tentera de se connecter à une base de données et échouera, exposant la chaîne de connexion

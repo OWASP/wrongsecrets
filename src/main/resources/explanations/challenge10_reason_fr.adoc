@@ -1,0 +1,5 @@
+*Accès au compte Administrateur/propriétaire :*
+
+Si vous avez pu utiliser le compte administrateur AWS pour accéder aux données, vous pouvez voir pourquoi c'est une mauvaise idée pour la production. En bref, avec ce compte vous pouvez tout modifier dans le compte et exfiltrer facilement tous les secrets.
+
+Enfin : nous avons pu facilement exécuter dans le conteneur pour grep le montage avec le secret. Cela montre que même les secrets correctement stockés peuvent être divulgués via une mauvaise configuration du conteneur.

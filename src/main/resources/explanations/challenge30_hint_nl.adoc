@@ -1,0 +1,11 @@
+Er zijn twee manieren om deze uitdaging op te lossen:
+
+1. Door de opslag te bekijken:
+- Navigeer naar "localhost:8080" in je webbrowser.
+- Open de ontwikkelaarsconsole door te inspecteren.
+- Navigeer naar de sectie Applicaties van de ontwikkelaarsconsole.
+- De waarde gekoppeld aan de sleutel "secret" is je antwoord!
+2. Door het netwerkverkeer te bekijken:
+- Navigeer naar WrongSecrets in je webbrowser.
+- Open de ontwikkelaarsconsole.
+- Controleer het netwerktabblad: kun je de extra aanroep voor deze uitdaging en de retourwaarde zien?

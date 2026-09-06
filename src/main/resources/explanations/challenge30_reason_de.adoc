@@ -1,0 +1,8 @@
+*Warum du localStorage nicht für geheime Informationen verwenden solltest*
+
+LocalStorage speichert Informationen sitzungsübergreifend und ist leicht über JavaScript zugänglich. Dies bedeutet, dass es verschiedene Möglichkeiten gibt, darin gespeicherte geheime Informationen zu erhalten.
+
+Es gibt verschiedene Möglichkeiten, das Durchsickern von Geheimnissen hier zu verhindern:
+- Wenn du es nicht tun musst: Speichere das Geheimnis nicht beim Client: Bewahre es auf dem Server auf.
+- Wenn der Client ein Geheimnis für einen Zustand innerhalb einer Domäne benötigt: Verwende die SessionStorage, die an eine bestimmte Domäne gebunden ist.
+- Wenn ein Geheimnis über mehrere Domänen geteilt werden muss, aber vom Client nicht bekannt sein muss: Verschlüssele das Geheimnis.

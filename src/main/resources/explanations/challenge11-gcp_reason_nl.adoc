@@ -1,0 +1,3 @@
+*Secrets management is meer dan veilige opslag:*
+
+Zoals je nu kunt zien, zijn er veel manieren om bij een geheim te komen: of het nu hardgecodeerd is, opgeslagen in een verkeerd geconfigureerde oplossing van derden, of correct opgeslagen maar met de verkeerde IAM-toegangsrechten in naastliggende accounts. Je zult nu begrijpen waarom we zeggen dat "je beveiligingsvolwassenheid weerspiegelt in je secrets management".

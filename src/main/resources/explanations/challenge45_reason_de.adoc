@@ -1,0 +1,5 @@
+*Warum das Speichern sensibler Daten als Schlüssel eine schlechte Idee ist*
+
+Manchmal argumentieren Menschen, dass weniger sensible Daten als Unterschlüssel des eigentlichen Geheimnisses gespeichert werden sollten. So können beispielsweise Benutzername und Passwort in einem einzigen Eintrag kombiniert werden.
+
+Im Fall von Vault kann man einen Unterschlüssel (z.B. den Benutzernamen) zugreifen, aber nicht den geheimen Wert selbst (z.B. das Passwort), was bereits den Benutzernamen preisgeben würde. Wir wollen Mitarbeitern oft keinen Lesezugriff auf Geheimnisse geben, aber auf Unterschlüssel.

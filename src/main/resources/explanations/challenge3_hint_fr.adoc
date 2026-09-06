@@ -1,0 +1,9 @@
+Vous pouvez résoudre ce défi avec les solutions alternatives suivantes :
+
+1. Utilisez `docker history` :
+ - Téléchargez le conteneur (`docker pull jeroenwillemsen/wrongsecrets:<NOM_TAG>`).
+ - Exécutez `docker history --no-trunc jeroenwillemsen/wrongsecrets:<NOM_TAG>` pour trouver les arguments utilisés pour le conteneur.
+
+2. Utilisez https://github.com/goodwithtech/dockle[*Dockle*] :
+ - Installez Dockle.
+ - Exécutez `dockle jeroenwillemsen/wrongsecrets:<NOM_TAG>` et regardez la sortie.

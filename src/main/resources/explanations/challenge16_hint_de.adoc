@@ -1,0 +1,7 @@
+Du kannst diese Herausforderung mit den folgenden Schritten lösen:
+
+1. Finde das Geheimnis, wenn es von der App verwendet wird
+- Öffne die Entwicklertools des Browsers:
+- Wähle die Registerkarte Netzwerk
+- Suche die Anfrage mit dem Pfad `/token`
+- Suche im Anfragekörper nach dem Schlüssel `client_secret`

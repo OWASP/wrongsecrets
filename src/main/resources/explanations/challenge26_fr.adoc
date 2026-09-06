@@ -1,0 +1,5 @@
+=== Secrets dans les contrats intelligents partie 2
+
+Notre développeur de contrats intelligents a réalisé qu'il avait écrit un secret sur la chaîne et est retourné pour l'écraser.
+
+Dans ce défi, vous devez lire la variable nommée secret du contrat `0xCe793D588cd1Ee091290b4A1aE1D586B2a748eB4` sur le Goerli EVM Testnet tel qu'il était avant d'être modifié.

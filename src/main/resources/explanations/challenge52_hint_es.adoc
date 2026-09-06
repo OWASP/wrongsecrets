@@ -1,0 +1,8 @@
+Este desafío se puede resolver de las siguientes maneras:
+
+- Usa el contenedor en sí:
+  1. Clona el repositorio que contiene los archivos del desafío:
+     ```
+     git clone https://github.com/OWASP/wrongsecrets.git
+     cd wrongsecrets
+     ```

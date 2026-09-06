@@ -1,0 +1,8 @@
+Du kannst diese Herausforderung mit den folgenden alternativen Lösungen lösen:
+
+1. Finde das Geheimnis im Frontend
+- Verwende die Entwicklertools des Browsers, um den HTML-Code dieser Herausforderung zu sehen.
+- Gehe zum Ende der Herausforderungsbeschreibung und suche nach Kommentaren.
+2. Dekodiere das Base64-kodierte Geheimnis
+- Gehe zum Quellcode von Challenge23 und finde die eigentliche Base64-kodierte Antwort
+- Verwende einen Online-/Offline-Decoder, um den Base64-String zu dekodieren, dann Hex-dekodieren und erneut Base64-dekodieren.

@@ -1,0 +1,5 @@
+*Waarom we voorzichtig moeten zijn met beveiligingscredentials in CI/CD*
+
+Mensen die toegang hebben tot de configuratie van je beveiligingscontroles in je CI/CD-omgeving, hebben eenvoudig toegang tot alle daarin geconfigureerde credentials. Deze credentials kunnen dan voor alles worden gebruikt.
+
+Dit is waarom beveiliging erg voorzichtig moet zijn bij het beheren van hun geheimen: alleen omdat de credential wordt gebruikt door een (beveiligings)tool betekent niet dat we minder beveiliging kunnen tolereren.

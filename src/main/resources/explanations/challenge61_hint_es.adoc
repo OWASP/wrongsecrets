@@ -1,0 +1,7 @@
+Puedes resolver este desafío mediante las siguientes soluciones alternativas:
+
+1. Encuentra el token del bot en el código fuente
+- Mira la clase Challenge61 en el código fuente
+- Encuentra el token del bot codificado en el método `getBotToken()`
+- Decodifica la cadena codificada en Base64 (está doblemente codificada)
+- El formato del token es: `BOTID:TOKEN_STRING`

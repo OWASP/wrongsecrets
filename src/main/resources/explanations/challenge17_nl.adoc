@@ -1,0 +1,5 @@
+=== Bash-geschiedenis
+
+Deze ontwikkelaar heeft een container gemaakt en die al een tijdje laten draaien. Hij gebruikt hem voor veel werk en is voorzichtig om geen geheimen te hardcoderen. Wanneer hij geheimen moet gebruiken, schrijft hij ze gewoon in een Bash-commando bij uitvoering; ze verdwijnen dus zodra hij ze schrijft en blijven geheim. Toch?
+
+We hebben allemaal kleine geheimen verborgen in ons verleden, inclusief Bash. Ga naar de container en kijk of je er een kunt vinden.

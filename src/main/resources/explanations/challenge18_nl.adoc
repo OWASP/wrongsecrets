@@ -1,0 +1,9 @@
+=== Slechte hashing
+
+Deze ontwikkelaar heeft zijn wachtwoord op zijn computer opgeslagen. Ze zijn niet dom, ze hebben het twee keer gehasht met dezelfde systemen die veel van de grootste bedrijven ter wereld gebruiken. Alleen met iets minder kruidering. Niemand gaat dit kunnen kraken...
+
+De eerste hash is `2ab96390c7dbe3439de74d0c9b0b1767` en de tweede hash is `F3BBBD66A63D4BF1747940578EC3D0103530E21D`
+
+Ondanks dat veel grote bedrijven deze hashes gebruiken, is er een manier om het systeem te verslaan?
+
+Het kraken van een van de hashes geeft je het juiste antwoord. Als extra uitdaging, probeer beide te kraken.

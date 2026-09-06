@@ -1,0 +1,7 @@
+Vous pouvez trouver la bonne entrée pour la méthode guess en:
+
+1. Comparant les hachages:
+- Cherchez le contrat dans l'explorateur https://etherscan.io/[Etherscan].
+- Extrayez le hash du stockage du contrat.
+- Parcourez les transactions puis ouvrez l'onglet des entrées et décodez-les en UTF-8.
+- Comparez les hachages des entrées des transactions avec la valeur de hash stockée.

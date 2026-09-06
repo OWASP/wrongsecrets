@@ -1,0 +1,9 @@
+=== Mauvais hachage
+
+Ce développeur a son mot de passe stocké sur son ordinateur. Il n'est pas idiot, il l'a haché deux fois en utilisant les mêmes systèmes qu'utilisent beaucoup des plus grandes entreprises du monde. Juste avec un peu moins d'assaisonnement. Personne ne va pouvoir cracker ça...
+
+Le premier hash est `2ab96390c7dbe3439de74d0c9b0b1767` et le second hash est `F3BBBD66A63D4BF1747940578EC3D0103530E21D`
+
+Malgré le fait que de nombreuses grandes entreprises utilisent ces hachages, y a-t-il un moyen de battre le système?
+
+Craquer l'un ou l'autre des hachages vous donnera la bonne réponse. Comme défi supplémentaire, essayez de craquer les deux.

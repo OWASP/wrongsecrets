@@ -1,0 +1,5 @@
+=== Geheimnisse in Smart Contracts Teil 1
+
+Auf öffentlichen Blockchains ist alles, was on-chain geschrieben wird, weltweit lesbar.
+
+In dieser Herausforderung musst du die Variable namens secret aus dem Vertrag `0x8b72f7cbAD50620c46219ad676Ad9d3a5A273587` im Goerli EVM Testnet lesen.

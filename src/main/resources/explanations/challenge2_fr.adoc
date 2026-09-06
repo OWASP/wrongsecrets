@@ -1,0 +1,7 @@
+=== Mot de passe codé en dur partie 2
+
+Au lieu de coder le mot de passe directement en dur, le développeur a essayé de le cacher dans le fichier `application.properties` de Spring Boot.
+
+De cette façon, il ne peut plus être trouvé directement dans les fichiers `.java` ou les fichiers `.class` compilés. Alors, comment le détecter ?
+
+Vous pouvez facilement le détecter avec des solutions SAST, comme https://github.com/trufflesecurity/truffleHog[truffleHog] et https://github.com/awslabs/git-secrets[git-secrets], et par inspection manuelle de votre `application.properties`.

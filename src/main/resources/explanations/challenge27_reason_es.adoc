@@ -1,0 +1,4 @@
+*Por qué enviar secretos como entradas a contratos inteligentes es una mala idea incluso si no se almacenan*
+
+Las entradas de todas las transacciones a contratos, como el estado del almacenamiento interno de contratos en la cadena, se almacenan para siempre y son fáciles de consultar.
+Las entradas a transacciones son incluso visibles antes de que esas transacciones sean aceptadas. Esto puede llevar a front-running por parte de un tercero.

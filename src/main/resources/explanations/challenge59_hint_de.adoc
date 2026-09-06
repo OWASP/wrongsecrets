@@ -1,0 +1,8 @@
+=== Hinweis für Herausforderung 59
+
+Suchst du nach der Slack Webhook-URL? Hier sind einige Hinweise:
+
+==== Wo zu suchen
+
+1. **Umgebungsvariablen**: Die Webhook-URL ist in einer Umgebungsvariablen namens `CHALLENGE59_SLACK_WEBHOOK_URL` gespeichert
+2. **Überprüfe die Anwendung**: Du kannst Umgebungsvariablen über die Anwendung oder den Container inspizieren

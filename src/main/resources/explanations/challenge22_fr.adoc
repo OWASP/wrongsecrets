@@ -1,0 +1,7 @@
+=== Se cacher dans les binaires partie 4: le binaire Rust
+
+Similaire à cacher des secrets dans une application écrite en C, vous pouvez faire cela en Rust. Cependant, Ghidra n'est pas très bon pour analyser Rust par défaut... Pouvez-vous trouver le secret dans notre binaire?
+
+Démystifions le mythe pour Rust: pouvez-vous trouver le secret dans https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-rust[wrongsecrets-rust]?
+
+Essayez de télécharger le binaire et de l'exécuter localement (par exemple, `./wrongsecrets-rust<laversion> <votre réponse>`).

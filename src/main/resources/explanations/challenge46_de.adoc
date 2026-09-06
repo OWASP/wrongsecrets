@@ -1,0 +1,6 @@
+=== HashiCorp Vault Template-Injektion
+
+Geheimnisse können aus Vault über den https://developer.hashicorp.com/vault/docs/platform/k8s/injector[Vault Agent] Sidecar-Container abgerufen werden, der neben deinem Hauptanwendungscontainer läuft. Dieser Sidecar kann die Geheimnisse in die Umgebung deiner Anwendungen injizieren.
+Einer der Wege ist, die Geheimnisse als Datei zu rendern. Der Entwickler war sich jedoch unsicher, ob die Datei aufgenommen wurde, also gab er statt des Exports als Umgebungsvariable ein `echo` aus.
+
+Kannst du das in die Anwendungsumgebung injizierte Geheimnis finden?

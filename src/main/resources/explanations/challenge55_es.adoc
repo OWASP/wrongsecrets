@@ -1,0 +1,7 @@
+=== ¿.ssh Bastión?
+
+Hemos visto muchos llamados "contenedores bastión". Aquí la gente crea un contenedor Docker e incrusta el "secreto" para autenticarse en el host dentro del contenedor. Este secreto es a menudo un par de claves SSH utilizado para autenticarse contra un host.
+
+Para que el contenedor bastión funcione, hay que incrustar un archivo de configuración SSH (`.ssh/config`) para simplificar la configuración de la conexión SSH almacenando configuraciones específicas del host.
+
+¿Puedes encontrar la clave privada? Pega su contenido en el cuadro de respuesta de abajo.

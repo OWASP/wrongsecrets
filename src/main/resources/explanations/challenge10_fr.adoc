@@ -1,0 +1,3 @@
+=== AWS Secrets Manager via pilote CSI
+
+Le secret est maintenant aléatoire et stocké directement dans le gestionnaire de secrets cloud. Nous le montons toujours dans le pod K8s via le https://secrets-store-csi-driver.sigs.k8s.io[pilote CSI]... Pouvez-vous y accéder ?

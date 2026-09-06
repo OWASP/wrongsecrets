@@ -1,0 +1,6 @@
+Por defecto, el desafío se ejecuta sin un sidecar de depuración. Tu objetivo es analizar el binario que se ejecuta dentro del pod y descubrir el secreto.
+
+1. Despliega el desafío sin el sidecar:
+   ```
+   kubectl apply -f k8s/challenge53/secret-challenge53.yml
+   ```

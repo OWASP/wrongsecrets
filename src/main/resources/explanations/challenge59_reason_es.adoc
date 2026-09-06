@@ -1,0 +1,5 @@
+=== Por qué importa este desafío
+
+Este desafío demuestra una vulnerabilidad crítica comúnmente encontrada en sistemas de producción: **tokens de API de Slack codificados almacenados en variables de entorno con ofuscación inadecuada**.
+
+==== La vulnerabilidad

@@ -1,0 +1,7 @@
+=== Verbergen in binaries deel 2: het C++ binair bestand
+
+Net als bij het verbergen van geheimen in een applicatie geschreven in C, eindig je in een vergelijkbare situatie met C++. Kun je het geheim vinden in ons binair bestand?
+
+Laten we de mythe "geheimen zijn moeilijk te vinden in native gecompileerde applicaties" voor C++ ontkrachten: kun je het geheim vinden in https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-cplus[wrongsecrets-cplus] (of https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-cplus-arm[wrongsecrets-cplus-arm], https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-cplus-linux[wrongsecrets-cplus-linux])?
+
+Probeer het binaire bestand te downloaden en lokaal uit te voeren (bijv. `./wrongsecrets-cplus<deversiediejjenoodighebt> <jouw antwoord>`).

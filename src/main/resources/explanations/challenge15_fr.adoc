@@ -1,0 +1,9 @@
+=== Historique Git
+
+L'une des erreurs que nous faisons souvent lorsque nous committons des secrets dans Git est d'essayer de s'en débarrasser sans faire tourner le secret.
+
+Ce qui aggrave les choses, c'est que sans écraser correctement le commit avec le secret et/ou supprimer le commit, il restera dans l'historique pour toujours.
+
+Donc, nous avons conservé quelques clés d'accès AWS dans Git comme une "erreur", pouvez-vous les trouver ?
+
+Remarque : la réponse contient l'un des 3 profils d'identifiants AWS que vous trouvez dans les commentaires d'un commit, mais sans le balisage de commentaire Java en une seule ligne.

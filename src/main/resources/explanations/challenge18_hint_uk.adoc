@@ -1,0 +1,20 @@
+Ця задача конкретно розглядає хеші MD5 і SHA1 без солення. Чи є вони незламними?
+
+Ви можете вирішити цю задачу, використовуючи наступні рішення:
+
+1. Для першого хешу (MD5):
+- Використовуйте інструмент, наприклад Hashcat:
+- Встановіть https://hashcat.net/hashcat/[Hashcat]
+- Завантажте https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt[список паролів rockyou.txt]
+- Запустіть Hashcat на хеші `hashcat -m 0 "2ab96390c7dbe3439de74d0c9b0b1767" /шлях/до/файлу/rockyou.txt`
+
+2. Для другого хешу (SHA1):
+- Використовуйте інструмент, наприклад Hashcat:
+- Встановіть https://hashcat.net/hashcat/[Hashcat]
+- Завантажте https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt[список паролів rockyou.txt]
+- Запустіть Hashcat на хеші `hashcat -m 100 "F3BBBD66A63D4BF1747940578EC3D0103530E21D" /шлях/до/файлу/rockyou.txt`
+
+3. Для будь-якого з хешів:
+- Використовуйте онлайн-сервіс зламу хешів:
+- Відвідайте `https://crackstation.net/`
+- Введіть хеш і натисніть "Crack Hashes"

@@ -1,0 +1,6 @@
+Standaard werkt de uitdaging zonder een debug-sidecar. Jouw doel is de binary te analyseren die in de pod draait en het geheim te onthullen.
+
+1. Deploy de uitdaging zonder de sidecar:
+   ```
+   kubectl apply -f k8s/challenge53/secret-challenge53.yml
+   ```

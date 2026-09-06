@@ -1,17 +1,20 @@
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
       layout:decorate="~{index.html}">
 <html lang="en">
 <body>
 <div class="container" layout:fragment="content">
     <div class="container-fluid mt-3 text-sm p-5 bg-light">
-        <h1 class="display-2">WHOOOOPS</h1>
-        <p class="lead">Something went wrong!</p>
+        <h1 class="display-2" th:text="#{error.title}">WHOOOOPS</h1>
+        <p class="lead" th:text="#{error.subtitle}">Something went wrong!</p>
         <hr class="my-4">
-        It seems you ended up here after an error.
+        <span th:text="#{error.text}">It seems you ended up here after an error.</span>
         <br/>
-        <button class="btn btn-primary btn-lg" type="button" onclick='javascript:history.back();return false;'>Go Back
+        <button class="btn btn-primary btn-lg" type="button" onclick='javascript:history.back();return false;'
+                th:text="#{error.go.back}">Go Back
         </button>
-        <a class="btn btn-secondary btn-lg" type="button" href="/">Go Home</a>
+        <a class="btn btn-secondary btn-lg" type="button" href="/"
+           th:text="#{error.go.home}">Go Home</a>
     </div>
 </div>
 </body>

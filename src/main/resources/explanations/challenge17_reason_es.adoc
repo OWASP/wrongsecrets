@@ -1,0 +1,5 @@
+*Por qué ingresar secretos en bash es una mala idea.*
+
+La línea de comandos puede sentirse temporal y segura, pero a menudo se registra. Esta es una función estándar con la mayoría de los shells. Algunos tienen protecciones implementadas, y la mayoría de las herramientas que solicitan un secreto no lo imprimirán. Sin embargo, al escribir comandos personalizados, estas protecciones no están vigentes y puedes dispararte fácilmente en el pie.
+
+Filtrar secretos es un poco difícil con un Dockerfile al crear un contenedor. Sin embargo, si tienes un contenedor que usas regularmente, no lo eliminas y escribes secretos en texto plano, entonces un actor malicioso podría usar tu contenedor docker aparentemente inofensivo para escalar privilegios. Potencialmente llevándolos a explotar algo mucho más importante que tu PC.

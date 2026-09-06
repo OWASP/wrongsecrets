@@ -1,0 +1,7 @@
+=== Défi de métadonnées Vault
+
+Les systèmes de gestion des secrets prennent désormais souvent en charge les métadonnées pour leurs secrets! C'est formidable, car cela vous permet d'enrichir le secret avec des données contextuelles, le rendant plus facile à retenir.
+
+Mais que se passe-t-il si vous mettez accidentellement des informations confidentielles/secrètes dans un secret?
+
+Un développeur a mis des métadonnées secrètes sur un `wrongsecret` dans Vault. Pouvez-vous le trouver?

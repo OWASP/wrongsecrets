@@ -1,0 +1,8 @@
+=== Hint voor Uitdaging 60
+
+Deze uitdaging demonstreert hoe een onveilige MCP (Model Context Protocol) server geheimen kan lekken die zijn opgeslagen in omgevingsvariabelen.
+
+**Waar te zoeken:**
+
+1. **Een afzonderlijke MCP-server draait op poort 8090** — anders dan de hoofdapplicatiepoort (8080)
+2. **De MCP-server implementeert het JSON-RPC 2.0-protocol** zoals gedefinieerd door de MCP-specificatie

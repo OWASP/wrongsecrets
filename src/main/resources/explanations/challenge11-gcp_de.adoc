@@ -1,0 +1,7 @@
+=== GCP Secret Manager Teil 3
+
+Wir haben jetzt den Parameter Store direkt aus der App verwendet, aber es gibt ein IAM-Problem...
+
+Übernimm die Rolle `cant-read-secrets` und versuche eine IAM-Privilege-Eskalation. Betrüge nicht mit deinen eigenen Rollen :)
+
+Hier können Tools wie https://github.com/nccgroup/ScoutSuite[ScoutSuite] wirklich helfen, Probleme mit deiner IAM-Einrichtung zu erkennen.

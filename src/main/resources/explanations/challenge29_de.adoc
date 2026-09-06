@@ -1,0 +1,5 @@
+=== Geheimnis in einem Screenshot eines GitHub-Issues
+
+Ein Benutzer reicht unwissentlich ein Issue mit einem `Screenshot` eines Geheimnisses ein, während er einen Fehler meldet, erkennt es dann und schließt das Issue.
+
+Kannst du das Geheimnis, das wir suchen, in unseren https://github.com/OWASP/wrongsecrets/issues[GitHub Issues] finden?

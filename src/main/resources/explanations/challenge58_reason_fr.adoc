@@ -1,0 +1,5 @@
+=== Pourquoi le Défi 58 est important : Exposition de la chaîne de connexion à la base de données
+
+**Le problème :**
+
+Ce défi expose l'un des scénarios les plus fréquents et dangereux de fuite de secrets dans les applications réelles : **chaînes de connexion à la base de données avec des identifiants intégrés qui sont exposés par une mauvaise gestion des erreurs**.

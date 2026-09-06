@@ -1,0 +1,5 @@
+=== Descifrado de encriptación AES con una clave MD5 débil
+
+Imagina que eres un analista de seguridad investigando una app móvil que maneja información sensible. Descubres que el desarrollador usa encriptación AES para proteger un secreto, pero en lugar de usar una Función de Derivación de Clave (KDF) fuerte, se basa en el inseguro algoritmo MD5 para derivar claves de encriptación de un PIN numérico simple.
+
+Has obtenido una cadena encriptada: `k800mdwu8vlQoqeAgRMHDQ==`. La clave para la encriptación AES se deriva tomando el hash MD5 de un PIN, que es un número entre 0 y 99999. Tu tarea es encontrar el PIN correcto.

@@ -1,0 +1,20 @@
+Deze uitdaging kijkt specifiek naar MD5- en SHA1-hashes zonder salting. Zijn deze onkraakbaar?
+
+Je kunt deze uitdaging oplossen met de volgende oplossingen:
+
+1. Voor de eerste hash (MD5):
+- Gebruik een tool zoals Hashcat:
+- Installeer https://hashcat.net/hashcat/[Hashcat]
+- Download de https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt[rockyou.txt wachtwoordlijst]
+- Voer Hashcat uit op de hash `hashcat -m 0 "2ab96390c7dbe3439de74d0c9b0b1767" /pad/naar/bestand/rockyou.txt`
+
+2. Voor de tweede hash (SHA1):
+- Gebruik een tool zoals Hashcat:
+- Installeer https://hashcat.net/hashcat/[Hashcat]
+- Download de https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt[rockyou.txt wachtwoordlijst]
+- Voer Hashcat uit op de hash `hashcat -m 100 "F3BBBD66A63D4BF1747940578EC3D0103530E21D" /pad/naar/bestand/rockyou.txt`
+
+3. Voor een van de hashes:
+- Gebruik een online hash-kraakdienst:
+- Bezoek `https://crackstation.net/`
+- Voer de hash in en klik op "Crack Hashes"

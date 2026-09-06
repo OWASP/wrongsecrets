@@ -1,0 +1,5 @@
+=== Versiegeltes Geheimnis mit zugänglichem Schlüssel
+
+In dieser Herausforderung erkundest du die Verwendung von Kubernetes Sealed Secret. Sealed Secrets sind eine Möglichkeit, deine Kubernetes-Geheimnisse zu verschlüsseln und sicher zu speichern, auch in einem öffentlichen Repository. Ein Entwickler hat jedoch versehentlich den privaten Schlüssel zum Entschlüsseln der versiegelten Geheimnisse im selben Repository zugänglich gemacht.
+
+Kannst du das versiegelte Geheimnis finden und entschlüsseln, um die sensiblen Informationen zu enthüllen?
