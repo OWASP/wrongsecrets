@@ -74,8 +74,8 @@
     <maven.compiler.proc>full</maven.compiler.proc>
     <maven.compiler.source>26</maven.compiler.source>
     <maven.compiler.target>26</maven.compiler.target>
-    <node.version>v26.0.0</node.version>
-    <npm.version>11.8.0</npm.version>
+    <node.version>v26.8.1</node.version>
+    <npm.version>11.19.0</npm.version>
     <spotbugs-maven.version>4.10.4.0</spotbugs-maven.version>
     <spotbugs.version>4.10.4</spotbugs.version>
     <spotless-maven-plugin.version>3.10.1</spotless-maven-plugin.version>
@@ -597,8 +597,8 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>${maven-compiler-plugin.version}</version>
         <configuration>
-          <source>25</source>
-          <target>25</target>
+          <source>${maven.compiler.source}</source>
+          <target>${maven.compiler.target}</target>
           <compilerArgs>
             <arg>-Xlint:deprecation</arg>
           </compilerArgs>
