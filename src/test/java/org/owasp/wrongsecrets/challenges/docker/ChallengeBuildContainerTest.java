@@ -1,4 +1,4 @@
-﻿package org.owasp.wrongsecrets.challenges.docker;
+package org.owasp.wrongsecrets.challenges.docker;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

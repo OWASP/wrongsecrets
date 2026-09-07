@@ -1,18 +1,48 @@
-﻿{
-  "name": "OWASP WrongSecrets Dev Container (JDK 22)",
-  "image": "eclipse-temurin:22-jdk-jammy",
+{
+  "name": "OWASP WrongSecrets (Java 26)",
+  "image": "eclipse-temurin:26-jdk-jammy",
   "features": {
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
-    "ghcr.io/devcontainers/features/git:1": {}
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+      "enableOnStartup": true
+    },
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installZsh": true,
+      "configureZshAsDefaultShell": true
+    }
+  },
+  "forwardPorts": [8080, 8090],
+  "portsAttributes": {
+    "8080": {
+      "label": "WrongSecrets Web UI",
+      "onAutoForward": "notify"
+    },
+    "8090": {
+      "label": "WrongSecrets Vault UI",
+      "onAutoForward": "silent"
+    }
   },
   "customizations": {
     "vscode": {
       "extensions": [
         "vscjava.vscode-java-pack",
         "ms-azuretools.vscode-docker",
-        "redhat.vscode-yaml"
-      ]
+        "redhat.vscode-yaml",
+        "redhat.vscode-xml",
+        "eamodio.gitlens"
+      ],
+      "settings": {
+        "java.configuration.runtimes": [
+          {
+            "name": "JavaSE-26",
+            "path": "/opt/java/openjdk",
+            "default": true
+          }
+        ],
+        "java.compile.nullAnalysis.mode": "automatic"
+      }
     }
   },
+  "postCreateCommand": "chmod +x ./mvnw && ./mvnw dependency:resolve",
   "remoteUser": "root"
 }
