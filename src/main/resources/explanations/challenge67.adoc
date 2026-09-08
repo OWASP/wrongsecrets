@@ -1,0 +1,9 @@
+=== Injected Build Container Secret
+
+In multi-stage container builds, passing secrets with build arguments (`ARG`) or intermediate build layers can persist in image history or intermediate artifacts. Can you inspect the container build layers to find the leaked build-time secret?
+
+To solve it:
+
+. Inspect the container image layers and build history using `docker history --no-trunc` or container inspection tools.
+. Identify the build argument or layer where the secret was injected during build time.
+. Submit the discovered secret in the input field below.

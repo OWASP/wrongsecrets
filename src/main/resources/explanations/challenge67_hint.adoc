@@ -1,0 +1,8 @@
+You can solve this challenge by using:
+
+1. `docker history`:
+- Run `docker history --no-trunc jeroenwillemsen/wrongsecrets:<TAGNAME-HERE>` to inspect the build arguments and instructions for each layer.
+- Look for `ARG` or build-time environment configurations carrying secrets.
+
+2. Inspecting intermediate layers or using container analysis tools:
+- Use tools like https://github.com/wagoodman/dive[dive] or https://github.com/goodwithtech/dockle[dockle] to analyze layer contents and discover build artifact remnants.

@@ -1,0 +1,7 @@
+*Why secrets in container build stages and build arguments are a security risk*
+
+Using `ARG` or plain files to pass secrets into multi-stage container builds often leaks sensitive data into the container image metadata or intermediate layer cache. Anyone with access to the container image can run `docker history` or inspect image layers to recover build-time credentials.
+
+*Remediation:*
+- Use **Docker BuildKit Secret Mounts** (`--mount=type=secret`) which ensure secrets are only available during the specific build command and never written into any image layer.
+- Never write raw credentials to build-time property files or build arguments.

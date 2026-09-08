@@ -165,6 +165,25 @@ Pull requests should be as small/atomic as possible. Large, wide-sweeping change
 
 ## How to set up your Contributor Environment
 
+### Using Dev Containers
+
+Here is how you can use the Dev Container to build and run the entire application completely:
+
+#### 1. Open in Dev Container
+- **In VS Code**: Press `Ctrl+Shift+P` (or `Cmd+Shift+P` on macOS) -> select **"Dev Containers: Reopen in Container"** (or click the green prompt in the bottom-left corner).
+- **In GitHub Codespaces**: Select **Code** -> **Codespaces** -> **Create codespace on this branch**.
+
+*(The container will automatically set up Java, Docker-in-Docker, forwarded ports, and run the Maven setup).*
+
+#### 2. Build the Complete App
+Inside the integrated Dev Container terminal, run:
+
+```bash
+./mvnw clean install
+```
+
+### Manual Setup
+
 1. Create a GitHub account. Multiple different GitHub subscription plans are available, but you only need a free one. Follow [these steps](https://help.github.com/en/articles/signing-up-for-a-new-github-account "Signing up for a new GitHub account") to set up your account.
 2. Fork the repository. Creating a fork means creating a copy of the repository on your own account, which you can modify without any impact on this repository. GitHub has an [article that describes all the needed steps](https://help.github.com/en/articles/fork-a-repo "Fork a repo").
 3. Clone your own repository to your host computer so that you can make modifications. If you followed the GitHub tutorial from step 2, you have already done this.
