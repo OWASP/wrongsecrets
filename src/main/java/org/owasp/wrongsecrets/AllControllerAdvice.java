@@ -61,6 +61,7 @@ public class AllControllerAdvice {
   @ModelAttribute
   public void addRequest(Model model, HttpServletRequest request) {
     model.addAttribute("requestURI", request.getRequestURI());
+    model.addAttribute("httpServletRequest", request);
   }
 
   @ModelAttribute

@@ -4,6 +4,7 @@ import java.time.Duration;
 import org.owasp.wrongsecrets.challenges.kubernetes.Vaultinjected;
 import org.owasp.wrongsecrets.challenges.kubernetes.Vaultpassword;
 import org.owasp.wrongsecrets.definitions.ChallengeDefinitionsConfiguration;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -36,7 +37,8 @@ public class WrongSecretsApplication {
   }
 
   @Bean
-  public RestClient restClient(RestClient.Builder builder) {
+  public RestClient restClient(ObjectProvider<RestClient.Builder> builderProvider) {
+    RestClient.Builder builder = builderProvider.getIfAvailable(RestClient::builder);
     SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
     factory.setConnectTimeout(Duration.ofSeconds(5));
     factory.setReadTimeout(Duration.ofSeconds(10));

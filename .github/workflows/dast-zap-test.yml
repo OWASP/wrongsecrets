@@ -8,16 +8,19 @@ on:
 permissions:
   contents: read
 
+env:
+  NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
+
 jobs:
   test-dast:
     name: DAST test with ZAP
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - name: Set up JDK 25
+      - name: Set up JDK 26
         uses: actions/setup-java@v5
         with:
-          java-version: "25"
+          java-version: "26"
           distribution: "temurin"
       - name: Clean install
         run: ./mvnw --no-transfer-progress clean install -DskipTests -Ddependency-check.skip -Dcyclonedx.skip=true -Dexec.skip

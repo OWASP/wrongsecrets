@@ -6,11 +6,7 @@ import com.google.auth.oauth2.ServiceAccountCredentials;
 import java.io.ByteArrayInputStream;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
-import java.util.Base64;
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -319,7 +315,7 @@ public class Challenge62McpController {
           (ServiceAccountCredentials)
               credentials.createScoped(Collections.singletonList(DRIVE_SCOPE));
       scopedCredentials.refreshIfExpired();
-      return scopedCredentials.getAccessToken().getTokenValue();
+      return Objects.requireNonNull(scopedCredentials.getAccessToken()).getTokenValue();
     } catch (IllegalArgumentException e) {
       throw new Exception("Invalid base64 encoding for GOOGLE_SERVICE_ACCOUNT_KEY", e);
     }

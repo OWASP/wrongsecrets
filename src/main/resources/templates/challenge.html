@@ -12,7 +12,7 @@
     <div class="alert alert-primary" role="alert">
         <h6 class="alert-heading">🔍 Your Task</h6>
         <p class="mb-2">Find the secret hidden in the <strong><a href="https://github.com/OWASP/wrongsecrets" target="_blank">WrongSecrets repository</a></strong>. This challenge focuses on <strong th:text="${challenge.tech}">secret management</strong>.</p>
-        <p class="mb-0">💡 <strong>Look for:</strong> Configuration files, source code, environment variables, Docker files, or cloud infrastructure related to this challenge.</p>
+        <p class="mb-0">💡 <strong>Look for:</strong> <span th:text="${challenge.lookForHint}">Configuration files, source code, environment variables, Docker files, or cloud infrastructure related to this challenge.</span></p>
     </div>
     <div class="row">
         <div class="offset-lg-1 col-lg-10 col-md-12" th:attr="data-cy=challenge-description">

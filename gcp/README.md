@@ -60,7 +60,7 @@ The bucket name should be in the output. Please use that to configure the Terraf
 
 ### GKE ingres for shared deployment
 
-By default the deployment uses a nodePort tunneled to localhost. For a larger audience deployment the wrongsecrets app can deployed with a GKE ingress, run `k8s-vault-gcp-ingress-start.sh`
+By default the deployment uses a nodePort tunneled to localhost. For a larger audience deployment the wrongsecrets app can be deployed with a GKE ingress, run `k8s-vault-gcp-ingress-start.sh`
 Please note that the GKE ingress can take a few minues to deploy and is publicly available. A connection URL will be returned once the ingress is available. Note that, after the connection URL is returned, a first lookup might still take a minute, after which it is much faster.
 
 Your GKE cluster should be visible in [EU-West4](https://console.cloud.google.com/kubernetes?referrer=search&project=wrongsecrets) by default. Want a different region? You can modify `terraform.tfvars` or input it directly using the `region` variable in plan/apply.
