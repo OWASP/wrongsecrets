@@ -64,12 +64,6 @@ Heroku_publish_demo() {
     heroku container:login
     echo "heroku deployment to demo"
     cd ../..
-# <<<<<<< HEAD
-#     heroku container:push web --arg argBasedVersion=${tag} --app arcane-scrubland-42646
-#     heroku container:release web --app arcane-scrubland-42646
-#     heroku container:push --recursive --arg argBasedVersion=${tag}heroku,CTF_ENABLED=true,HINTS_ENABLED=false --app wrongsecrets-ctf
-#     heroku container:release web --app wrongsecrets-ctf
-# =======
     git add Dockerfile.web
     git commit --no-verify -m "Fix Heroku deploy"
     git push heroku HEAD:master
@@ -77,7 +71,6 @@ Heroku_publish_demo() {
     # heroku container:release web --app arcane-scrubland-42646
     # heroku container:push --recursive --arg argBasedVersion=${tag}heroku,CTF_ENABLED=true,HINTS_ENABLED=false --app wrongsecrets-ctf
     # heroku container:release web --app wrongsecrets-ctf
-# >>>>>>> master
     echo "wait for contianer to come up"
     until curl --output /dev/null --silent --head --fail https://arcane-scrubland-42646.herokuapp.com/; do
         printf '.'
@@ -463,7 +456,7 @@ restore_temp_change() {
 commit_and_tag() {
     if [[ "$script_mode" == "publish" ]]; then
         echo "committing changes and new pom file with version ${tag}"
-        git commit -am "Update POM file with new version: ${tag}"
+        git commit --no-verify -am "Update POM file with new version: ${tag}"
         git push
         if [[ "$disable_tagging_in_git" == "true" ]]; then
           echo "Skip git tagging"
