@@ -12,9 +12,9 @@ The project maintains version consistency between:
 ## Version Schema
 
 ```
-pom.xml version:        1.14.0RC1-SNAPSHOT
-Dockerfile version:     1.14.0RC1
-Dockerfile.web version: 1.14.0RC1-no-vault
+pom.xml version:        1.14.0RC2-SNAPSHOT
+Dockerfile version:     1.14.0RC2
+Dockerfile.web version: 1.14.0RC2-no-vault
 ```
 
 ## Automated Solutions
