@@ -50,8 +50,9 @@ class Challenge71ControllerTest {
     var response = new Challenge71Controller().claudeSkillBundle();
 
     var entries = unzip(response.getBody());
-    var challenge = new Challenge71(
-        new ClassPathResource(Challenge71Controller.SKILL_ROOT + "incident-reporter.skill"));
+    var challenge =
+        new Challenge71(
+            new ClassPathResource(Challenge71Controller.SKILL_ROOT + "incident-reporter.skill"));
 
     assertThat(entries.get(UPLOADER)).contains("UPLOAD_TOKEN_B64 = \"");
     assertThat(entries.get(UPLOADER)).doesNotContain(challenge.spoiler().solution());

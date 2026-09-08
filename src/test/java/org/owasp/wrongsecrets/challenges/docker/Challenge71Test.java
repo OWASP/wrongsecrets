@@ -52,8 +52,8 @@ class Challenge71Test {
     var skillResource = new ClassPathResource(SKILL_BUNDLE);
     var challenge = new Challenge71(skillResource);
 
-    var zip = new java.util.zip.ZipInputStream(
-        skillResource.getInputStream(), StandardCharsets.UTF_8);
+    var zip =
+        new java.util.zip.ZipInputStream(skillResource.getInputStream(), StandardCharsets.UTF_8);
     String scriptContent = null;
     for (var entry = zip.getNextEntry(); entry != null; entry = zip.getNextEntry()) {
       if (entry.getName().endsWith("upload_report.py")) {
