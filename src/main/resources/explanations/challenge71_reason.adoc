@@ -5,6 +5,7 @@ A skill bundle is shipped software. It contains executable scripts, it runs on d
 Two failures stack up in this challenge:
 
 - The token is committed inside the bundle, so everyone who installs the skill receives a working shared credential.
+- When sharing the skill inside Claude, everyone with access to the skill, will have access to the secret.
 - The token is base64 encoded, which is *encoding*, not encryption. It stops a naive secret scanner from firing, and it stops nobody else. Anyone with the bundle can decode it in one command.
 
 The second point is the more dangerous of the two, because it converts a detectable problem into an undetectable one. The scanner goes quiet, the finding disappears from the backlog, and the credential stays valid for years.
