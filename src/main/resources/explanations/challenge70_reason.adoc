@@ -3,7 +3,7 @@
 A skill is built to be shared. That is the whole point of it: you write the workflow once and every developer, agent and CI job reuses it. This means a secret in a skill has the worst possible properties:
 
 - It is copied to every machine that installs the skill, including personal laptops.
-- It ends up in the repository, so it is in the git history forever, even after you "remove" it.
+- It ends up in the repository, so it is in the git history forever, even after you "remove" it, forcing you to rotate the secret.
 - It is published to skill marketplaces and registries, where it is indexed and searchable.
 - It is read by the agent and can therefore be echoed into chat transcripts, logs and telemetry belonging to third parties.
 - It is a *shared* credential, so it is almost never rotated and almost never scoped down.
