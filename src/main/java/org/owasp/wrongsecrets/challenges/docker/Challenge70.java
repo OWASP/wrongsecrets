@@ -4,7 +4,9 @@ import static org.owasp.wrongsecrets.Challenges.ErrorResponses.FILE_MOUNT_ERROR;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.regex.Pattern;
+import java.util.zip.ZipInputStream;
 import lombok.extern.slf4j.Slf4j;
 import org.owasp.wrongsecrets.challenges.FixedAnswerChallenge;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,36 +14,46 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
 /**
- * Challenge based on a secret that is hardcoded in a Cursor skill. The skill is shipped as a plain
- * {@code SKILL.md} file, so the secret is readable for anybody who receives the skill.
+ * Challenge based on a secret that is hardcoded in a Claude skill. The skill is distributed as an
+ * exported {@code .skill} zip bundle, and the token does not sit in the {@code SKILL.md} itself but
+ * in one of the bundled scripts, base64 encoded to keep secret scanners quiet.
  */
 @Slf4j
 @Component
 public class Challenge70 extends FixedAnswerChallenge {
 
-  private static final Pattern DEPLOY_TOKEN_PATTERN =
-      Pattern.compile("STAGING_DEPLOY_TOKEN=\"([^\"]+)\"");
+  private static final Pattern UPLOAD_TOKEN_PATTERN =
+      Pattern.compile("UPLOAD_TOKEN_B64\\s*=\\s*\"([^\"]+)\"");
 
-  private final Resource skillFile;
+  private final Resource skillBundle;
 
   public Challenge70(
-      @Value("classpath:challenges/challenge-70/cursor-skill/deploy-preview/SKILL.md")
-          Resource skillFile) {
-    this.skillFile = skillFile;
+      @Value("classpath:challenges/challenge-70/claude-skill/incident-reporter.skill")
+          Resource skillBundle) {
+    this.skillBundle = skillBundle;
   }
 
   @Override
   public String getAnswer() {
-    try {
-      var skillContent = skillFile.getContentAsString(StandardCharsets.UTF_8);
-      var matcher = DEPLOY_TOKEN_PATTERN.matcher(skillContent);
-      if (!matcher.find()) {
-        log.warn("Could not find the deploy token in the Cursor skill of challenge 70");
-        return FILE_MOUNT_ERROR;
+    try (var zip = new ZipInputStream(skillBundle.getInputStream(), StandardCharsets.UTF_8)) {
+      for (var entry = zip.getNextEntry(); entry != null; entry = zip.getNextEntry()) {
+        if (entry.getName().endsWith("upload_report.py")) {
+          var scriptContent = new String(zip.readAllBytes(), StandardCharsets.UTF_8);
+          var matcher = UPLOAD_TOKEN_PATTERN.matcher(scriptContent);
+          if (!matcher.find()) {
+            log.warn("Could not find the upload token in the Claude skill of challenge 71");
+            return FILE_MOUNT_ERROR;
+          }
+          return new String(Base64.getDecoder().decode(matcher.group(1)), StandardCharsets.UTF_8);
+        }
       }
-      return matcher.group(1);
+      log.warn("upload_report.py not found in the Claude skill bundle of challenge 71");
+      return FILE_MOUNT_ERROR;
     } catch (IOException e) {
-      log.warn("Exception while reading the Cursor skill of challenge 70", e);
+      log.warn("Exception while reading the Claude skill of challenge 71", e);
+      return FILE_MOUNT_ERROR;
+    } catch (IllegalArgumentException e) {
+      log.warn("The upload token in the Claude skill of challenge 71 is not valid base64", e);
       return FILE_MOUNT_ERROR;
     }
   }

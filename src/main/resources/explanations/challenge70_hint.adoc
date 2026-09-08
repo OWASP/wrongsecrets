@@ -1,3 +1,10 @@
-Open link:/skills/cursor/deploy-preview/SKILL.md[`/skills/cursor/deploy-preview/SKILL.md`] and look at the *Prerequisites* section. The value of `STAGING_DEPLOY_TOKEN` is the answer.
+Download and unpack the exported skill bundle:
 
-The same file is in the source tree at `src/main/resources/challenges/challenge-70/cursor-skill/deploy-preview/SKILL.md`.
+----
+curl -sO http://localhost:8080/skills/claude/incident-reporter.zip
+unzip incident-reporter.zip
+----
+
+The `SKILL.md` only points at the bundled uploader. Open `incident-reporter/scripts/upload_report.py` and look at `UPLOAD_TOKEN_B64`.
+
+That value is not the answer yet: the author base64 encoded it to stop the secret scanner from complaining. Decode it, for example with `base64 -d`, and submit the decoded token.
