@@ -116,7 +116,7 @@ The documentation below is auto-generated to give insight on what's created via 
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [azurerm_key_vault.vault](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault) | resource |
 | [azurerm_key_vault_access_policy.extra_identity_access](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_access_policy) | resource |
 | [azurerm_key_vault_access_policy.identity_access](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_access_policy) | resource |
@@ -140,7 +140,7 @@ The documentation below is auto-generated to give insight on what's created via 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | The AKS cluster name | `string` | `"wrongsecrets-exercise-cluster"` | no |
 | <a name="input_cluster_version"></a> [cluster\_version](#input\_cluster\_version) | The AKS cluster version to use | `string` | `"1.34"` | no |
 | <a name="input_region"></a> [region](#input\_region) | The Azure region to use | `string` | `"East US"` | no |
@@ -148,7 +148,7 @@ The documentation below is auto-generated to give insight on what's created via 
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_aad_extra_pod_identity_client_id"></a> [aad\_extra\_pod\_identity\_client\_id](#output\_aad\_extra\_pod\_identity\_client\_id) | Client ID for the Managed Identity for AAD Pod Identity |
 | <a name="output_aad_extra_pod_identity_resource_id"></a> [aad\_extra\_pod\_identity\_resource\_id](#output\_aad\_extra\_pod\_identity\_resource\_id) | Resource ID for the Managed Identity for AAD Pod Identity |
 | <a name="output_aad_pod_identity_client_id"></a> [aad\_pod\_identity\_client\_id](#output\_aad\_pod\_identity\_client\_id) | Client ID for the Managed Identity for AAD Pod Identity |

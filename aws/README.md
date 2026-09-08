@@ -120,7 +120,7 @@ The documentation below is auto-generated to give insight on what's created via 
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [aws_iam_policy.secret_deny](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
 | [aws_iam_policy.secret_manager](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
 | [aws_iam_role.irsa_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
@@ -146,7 +146,7 @@ The documentation below is auto-generated to give insight on what's created via 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | The EKS cluster name | `string` | `"wrongsecrets"` | no |
 | <a name="input_cluster_version"></a> [cluster\_version](#input\_cluster\_version) | The EKS cluster version to use | `string` | `"1.34"` | no |
 | <a name="input_region"></a> [region](#input\_region) | The AWS region to use | `string` | `"eu-west-1"` | no |
@@ -155,7 +155,7 @@ The documentation below is auto-generated to give insight on what's created via 
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_cluster_endpoint"></a> [cluster\_endpoint](#output\_cluster\_endpoint) | Endpoint for EKS control plane. |
 | <a name="output_cluster_id"></a> [cluster\_id](#output\_cluster\_id) | The id of the cluster |
 | <a name="output_cluster_security_group_id"></a> [cluster\_security\_group\_id](#output\_cluster\_security\_group\_id) | Security group ids attached to the cluster control plane. |
