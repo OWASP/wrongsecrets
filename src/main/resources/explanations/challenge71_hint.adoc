@@ -1,4 +1,4 @@
-Download and unpack the bundle:
+Download and unpack the exported skill bundle:
 
 ----
 curl -sO http://localhost:8080/skills/claude/incident-reporter.zip

@@ -30,33 +30,31 @@ class Challenge71ControllerTest {
 
   @Test
   void bundleShouldContainAllSkillFilesRelativeToTheSkillFolder() throws IOException {
-    var entries = unzip(new Challenge71Controller().zipSkill());
+    var response = new Challenge71Controller().claudeSkillBundle();
 
+    var entries = unzip(response.getBody());
     assertThat(entries).containsOnlyKeys(SKILL_MD, UPLOADER, RUNBOOK);
   }
 
   @Test
   void bundledSkillFileShouldNotContainTheSecret() throws IOException {
-    var entries = unzip(new Challenge71Controller().zipSkill());
+    var response = new Challenge71Controller().claudeSkillBundle();
 
+    var entries = unzip(response.getBody());
     assertThat(entries.get(SKILL_MD)).contains("name: incident-reporter");
     assertThat(entries.get(SKILL_MD)).doesNotContain("UPLOAD_TOKEN_B64");
   }
 
   @Test
   void bundledUploaderShouldCarryTheEncodedTokenAndNotThePlaintextOne() throws IOException {
-    var entries = unzip(new Challenge71Controller().zipSkill());
-    var challenge =
-        new Challenge71(new ClassPathResource(Challenge71Controller.SKILL_ROOT + UPLOADER));
+    var response = new Challenge71Controller().claudeSkillBundle();
+
+    var entries = unzip(response.getBody());
+    var challenge = new Challenge71(
+        new ClassPathResource(Challenge71Controller.SKILL_ROOT + "incident-reporter.skill"));
 
     assertThat(entries.get(UPLOADER)).contains("UPLOAD_TOKEN_B64 = \"");
     assertThat(entries.get(UPLOADER)).doesNotContain(challenge.spoiler().solution());
-  }
-
-  @Test
-  void bundleShouldBeReproducible() throws IOException {
-    assertThat(new Challenge71Controller().zipSkill())
-        .isEqualTo(new Challenge71Controller().zipSkill());
   }
 
   @Test

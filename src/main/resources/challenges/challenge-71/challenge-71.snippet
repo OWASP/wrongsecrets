@@ -1,11 +1,12 @@
 <div id="claude-skill-container" style="border: 1px solid #ccc; border-radius: 8px; padding: 20px; margin: 20px; background-color: #f9f9f9;">
     <h4>📦 Claude skill bundle: <code>incident-reporter</code></h4>
-    <p>The skill files live in this application's resource folder. The backend packages them into a zip bundle on request, which is how a Claude skill is shared and installed.</p>
+    <p>This application ships an exported Claude skill bundle. The backend serves the exported <code>.skill</code> file as a zip download at <code>/skills/claude/incident-reporter.zip</code>.</p>
 
     <div class="skill-warning" style="border: 1px solid #ffeaa7; border-radius: 6px; padding: 15px; margin: 15px 0;">
         <p>Step 1 — download and unpack the bundle:</p>
-        <pre class="skill-code" style="padding: 10px; border-radius: 4px; overflow-x: auto; font-size: 13px;">curl -sO http://localhost:8080/skills/claude/incident-reporter.zip
-unzip incident-reporter.zip
+        <pre class="skill-code" style="padding: 10px; border-radius: 4px; overflow-x: auto; font-size: 13px;"
+             th:text="'curl -sO ' + ${#httpServletRequest.scheme} + '://' + ${#httpServletRequest.serverName} + (${#httpServletRequest.serverPort == 80 || #httpServletRequest.serverPort == 443 ? '' : ':' + #httpServletRequest.serverPort}) + '/skills/claude/incident-reporter.zip'">curl -sO http://localhost:8080/skills/claude/incident-reporter.zip</pre>
+        <pre class="skill-code" style="padding: 10px; border-radius: 4px; overflow-x: auto; font-size: 13px;">unzip incident-reporter.zip
 find incident-reporter -type f</pre>
         <a class="btn btn-warning btn-sm skill-btn" href="/skills/claude/incident-reporter.zip">⬇ Download incident-reporter.zip</a>
 

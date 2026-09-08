@@ -4,6 +4,8 @@ Agent skills are becoming a popular way to share automation with a team: you dro
 
 This application ships a Cursor skill called `deploy-preview`. The skill lives in the resource folder and is hosted by the backend at link:/skills/cursor/deploy-preview/SKILL.md[`/skills/cursor/deploy-preview/SKILL.md`].
 
+The skill source is also available on GitHub at link:https://github.com/OWASP/wrongsecrets/blob/master/src/main/resources/challenges/challenge-70/cursor-skill/deploy-preview/SKILL.md[`src/main/resources/challenges/challenge-70/cursor-skill/deploy-preview/SKILL.md`].
+
 Read the skill and submit the staging deploy token that the author inlined "to keep the skill self-contained".
 
 [NOTE]

@@ -4,7 +4,9 @@
 
     <div class="skill-warning" style="border: 1px solid #ffeaa7; border-radius: 6px; padding: 15px; margin: 15px 0;">
         <p>Fetch the skill from the command line:</p>
-        <pre class="skill-code" style="padding: 10px; border-radius: 4px; overflow-x: auto; font-size: 13px;">curl -s http://localhost:8080/skills/cursor/deploy-preview/SKILL.md</pre>
+        <pre class="skill-code"
+             style="padding: 10px; border-radius: 4px; overflow-x: auto; font-size: 13px;"
+             th:text="'curl -s ' + ${#httpServletRequest.scheme} + '://' + ${#httpServletRequest.serverName} + (${#httpServletRequest.serverPort == 80 || #httpServletRequest.serverPort == 443 ? '' : ':' + #httpServletRequest.serverPort}) + '/skills/cursor/deploy-preview/SKILL.md'">curl -s http://localhost:8080/skills/cursor/deploy-preview/SKILL.md</pre>
 
         <p style="margin-top: 12px;">…or read it right here:</p>
         <button class="btn btn-warning btn-sm skill-btn" onclick="loadCursorSkill()">▶ Show SKILL.md</button>
