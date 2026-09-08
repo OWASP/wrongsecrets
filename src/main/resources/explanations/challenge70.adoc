@@ -1,14 +1,16 @@
-=== Challenge 70: Find the Secret in the Cursor Skill
+=== Challenge 70: Find the Secret in the Claude Skill Bundle
 
-Agent skills are becoming a popular way to share automation with a team: you drop a folder with a `SKILL.md` in it, the agent picks it up, and everybody gets the same workflow. Unfortunately that also makes them a very convenient place to "temporarily" park a shared credential.
+Claude skills are distributed as exported `.skill` bundles: a zip archive containing a folder with a `SKILL.md` that describes when to use the skill, plus any scripts and reference material the skill needs. The whole bundle is unpacked on the machine that installs it.
 
-This application ships a Cursor skill called `deploy-preview`. The skill lives in the resource folder and is hosted by the backend at link:/skills/cursor/deploy-preview/SKILL.md[`/skills/cursor/deploy-preview/SKILL.md`].
+That makes a skill bundle a great hiding place, because reviewers tend to read the `SKILL.md` and stop there. The interesting part is usually in the files next to it.
 
-The skill source is also available on GitHub at link:https://github.com/OWASP/wrongsecrets/blob/master/src/main/resources/challenges/challenge-70/cursor-skill/deploy-preview/SKILL.md[`src/main/resources/challenges/challenge-70/cursor-skill/deploy-preview/SKILL.md`].
+This application ships a Claude skill called `incident-reporter`. The exported skill bundle lives in the resource folder and is served as a download at link:/skills/claude/incident-reporter.zip[`/skills/claude/incident-reporter.zip`].
 
-Read the skill and submit the staging deploy token that the author inlined "to keep the skill self-contained".
+Download the bundle, unpack it, and work out the token the uploader authenticates with.
+
+The skill source is also available on GitHub at link:https://github.com/OWASP/wrongsecrets/blob/master/src/main/resources/challenges/challenge-70/claude-skill/incident-reporter.skill[`src/main/resources/challenges/challenge-70/claude-skill/incident-reporter.skill`].
 
 [NOTE]
 ====
-Nothing is encoded or encrypted here: this is exactly what a leaked skill looks like in the wild. A skill is documentation, and documentation gets copied into wikis, tickets, pull requests and chat messages.
+The `SKILL.md` is clean. Reading only the entry point of a skill is not a review.
 ====
