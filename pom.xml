@@ -11,7 +11,7 @@
 
   <groupId>org.owasp</groupId>
   <artifactId>wrongsecrets</artifactId>
-  <version>1.13.5-SNAPSHOT</version>
+  <version>1.14.0RC3-SNAPSHOT</version>
 
   <name>OWASP WrongSecrets</name>
   <description>Examples with how to not use secrets</description>
@@ -74,12 +74,12 @@
     <maven.compiler.proc>full</maven.compiler.proc>
     <maven.compiler.source>26</maven.compiler.source>
     <maven.compiler.target>26</maven.compiler.target>
-    <node.version>v26.0.0</node.version>
-    <npm.version>11.8.0</npm.version>
+    <node.version>v26.8.1</node.version>
+    <npm.version>11.19.0</npm.version>
     <spotbugs-maven.version>4.10.4.0</spotbugs-maven.version>
     <spotbugs.version>4.10.4</spotbugs.version>
     <spotless-maven-plugin.version>3.10.1</spotless-maven-plugin.version>
-    <spring-boot.version>4.0.3</spring-boot.version>
+    <spring-boot.version>4.1.1</spring-boot.version>
     <spring-vault.version>4.1.0</spring-vault.version>
     <spring.cloud-version>2025.1.3</spring.cloud-version>
     <spring.security.version>7.0.6</spring.security.version>
@@ -597,8 +597,8 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>${maven-compiler-plugin.version}</version>
         <configuration>
-          <source>25</source>
-          <target>25</target>
+          <source>${maven.compiler.source}</source>
+          <target>${maven.compiler.target}</target>
           <compilerArgs>
             <arg>-Xlint:deprecation</arg>
           </compilerArgs>

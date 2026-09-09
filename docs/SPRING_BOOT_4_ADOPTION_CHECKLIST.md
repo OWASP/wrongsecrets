@@ -1,6 +1,6 @@
 # Spring Boot 4 Adoption Checklist (WrongSecrets)
 
-This checklist is tailored to the current `wrongsecrets` codebase (Spring Boot `4.0.3`, Java `25`).
+This checklist is tailored to the current `wrongsecrets` codebase (Spring Boot `4.1.1`, Java `26`).
 
 ## How to use this document
 
@@ -10,8 +10,8 @@ This checklist is tailored to the current `wrongsecrets` codebase (Spring Boot `
 
 ## Current baseline (already in place)
 
-- [x] Spring Boot `4.0.3` is configured in `pom.xml`.
-- [x] Spring Cloud line is aligned (`2025.1.1`).
+- [x] Spring Boot `4.1.1` is configured in `pom.xml`.
+- [x] Spring Cloud line is aligned (`2025.1.3`).
 - [x] `@ConfigurationProperties` is already used in multiple places.
 - [x] Mockito inline-mock-maker warning addressed by passing Mockito as Java agent in Surefire.
 

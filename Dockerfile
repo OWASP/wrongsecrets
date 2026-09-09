@@ -1,7 +1,7 @@
 FROM bellsoft/liberica-openjre-debian:26-cds AS builder
 WORKDIR /builder
 
-ARG argBasedVersion="1.13.5"
+ARG argBasedVersion="1.14.0RC3"
 
 COPY --chown=wrongsecrets target/wrongsecrets-${argBasedVersion}-SNAPSHOT.jar application.jar
 RUN java -Djarmode=tools -jar application.jar extract --layers --destination extracted

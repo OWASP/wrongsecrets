@@ -16,7 +16,7 @@
 
 Welcome to the OWASP WrongSecrets game! The game is packed with real life examples of how to _not_ store secrets in your software. Each of these examples is captured in a challenge, which you need to solve using various tools and techniques. Solving these challenges will help you recognize common mistakes & can help you to reflect on your own secrets management strategy.
 
-Can you solve all the 68 challenges?
+Can you solve all the 70 challenges?
 
 Try some of them on [our Heroku demo environment](https://wrongsecrets.herokuapp.com/).
 
@@ -161,7 +161,7 @@ docker run -p 8080:8080 -p 8090:8090 ghcr.io/owasp/wrongsecrets/wrongsecrets-mas
 ⚠️ **Warning**: This is a development version built from the latest master branch and may contain experimental features or instabilities.
 
 **📝 Note on Ports:**
-- Port **8080**: Main application (challenges 0-66)
+- Port **8080**: Main application (challenges 0-68)
 - Port **8090**: MCP server (required for Challenge 60)
 
 **📝 Note on Challenge 62 (Google Drive MCP):**
@@ -226,6 +226,9 @@ Now you can try to find the secrets by means of solving the challenge offered at
 -   [localhost:8080/challenge/challenge-64](http://localhost:8080/challenge/challenge-64)
 -   [localhost:8080/challenge/challenge-65](http://localhost:8080/challenge/challenge-65)
 -   [localhost:8080/challenge/challenge-66](http://localhost:8080/challenge/challenge-66)
+-   [localhost:8080/challenge/challenge-68](http://localhost:8080/challenge/challenge-70)
+-   [localhost:8080/challenge/challenge-69](http://localhost:8080/challenge/challenge-70)
+-   [localhost:8080/challenge/challenge-70](http://localhost:8080/challenge/challenge-70)
 </details>
 
 Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look
@@ -254,7 +257,7 @@ If you want to host WrongSecrets on Railway, you can do so by deploying [this on
 
 ## Basic K8s exercise
 
-_Can be used for challenges 0-6, 8, 12-43, 48-66_
+_Can be used for challenges 0-6, 8, 12-43, 48-70_
 
 ### Minikube based
 
@@ -331,7 +334,7 @@ now you can use the provided IP address and port to further play with the K8s va
 
 ## Vault exercises with minikube
 
-_Can be used for challenges 0-8, 12-66_
+_Can be used for challenges 0-8, 12-70_
 Make sure you have the following installed:
 
 -   minikube with docker (or comment out line 8 and work at your own k8s setup),
@@ -349,7 +352,7 @@ This is because if you run the start script again it will replace the secret in 
 
 ## Cloud Challenges
 
-_Can be used for challenges 0-67_
+_Can be used for challenges 0-70_
 
 **READ THIS**: Given that the exercises below contain IAM privilege escalation exercises,
 never run this on an account which is related to your production environment or can influence your account-over-arching
@@ -411,7 +414,7 @@ Contributors:
 - [Nanne Baars @nbaars](https://www.github.com/nbaars)
 - [Marcin Nowak @drnow4u](https://www.github.com/drnow4u)
 - [Rodolfo Neves @roddas](https://www.github.com/roddas)
-- [Osama Magdy @osamamagdy](https://www.github.com/osamamagdy)
+- [O @osamamagdy](https://www.github.com/osamamagdy)
 - [Pastekitoo @Pastekitoo](https://www.github.com/Pastekitoo)
 - [Shubham Patel @Shubham-Patel07](https://www.github.com/Shubham-Patel07)
 - [za @za](https://www.github.com/za)
@@ -422,22 +425,27 @@ Contributors:
 - [Diamond Rivero @diamant3](https://www.github.com/diamant3)
 - [Norbert Wolniak @nwolniak](https://www.github.com/nwolniak)
 - [Robert Felber @rfelber](https://www.github.com/rfelber)
+- [Sandeep @youknowme19](https://www.github.com/youknowme19)
 - [Filip Chyla @fchyla](https://www.github.com/fchyla)
+- [Seershan Mitra @seershan](https://www.github.com/seershan)
 - [Vineeth Jagadeesh @djvinnie](https://www.github.com/djvinnie)
 - [Dmitry Litosh @Dlitosh](https://www.github.com/Dlitosh)
 - [Mahaputra Ilham Awal @mahaputrailhamawal](https://www.github.com/mahaputrailhamawal)
 - [Turjo Chowdhury @turjoc120](https://www.github.com/turjoc120)
 - [SndR @SndR85](https://www.github.com/SndR85)
+- [Anirban Ghosh @kekubhai](https://www.github.com/kekubhai)
 - [alphasec @alphasecio](https://www.github.com/alphasecio)
 - [CaduRoriz @CaduRoriz](https://www.github.com/CaduRoriz)
 - [Josh Grossman @tghosth](https://www.github.com/tghosth)
 - [Madhu Akula @madhuakula](https://www.github.com/madhuakula)
 - [Mike Woudenberg @mikewoudenberg](https://www.github.com/mikewoudenberg)
 - [Spyros @northdpole](https://www.github.com/northdpole)
-- [moeedrehman135 @moeedrehman135](https://www.github.com/moeedrehman135)
+- [Muhammad Moeed Ur Rehman Khan @moeedrehman135](https://www.github.com/moeedrehman135)
 - [RubenAtBinx @RubenAtBinx](https://www.github.com/RubenAtBinx)
-- [Seershan Mitra @seershan](https://www.github.com/seershan)
+- [Satyam Pandey @SatyamPandey-07](https://www.github.com/SatyamPandey-07)
 - [Alex Bender @alex-bender](https://www.github.com/alex-bender)
+- [Arpit Jain @arpitjain099](https://www.github.com/arpitjain099)
+- [Tuer·maimaitiaili Ba @bte808](https://www.github.com/bte808)
 - [Danny Lloyd @dannylloyd](https://www.github.com/dannylloyd)
 - [Fern @f3rn0s](https://www.github.com/f3rn0s)
 - [Rick M @kingthorin](https://www.github.com/kingthorin)
@@ -660,11 +668,11 @@ See [Dependency-Check Maven Plugin Documentation](https://jeremylong.github.io/D
 
 ### Get the project started in IntelliJ IDEA
 
-Requirements: make sure you have the following tools installed: [Docker](https://www.docker.com/products/docker-desktop/), [Java25 JDK](https://jdk.java.net/25/), [NodeJS 24](https://nodejs.org/en/download/current) and [IntelliJ IDEA](https://www.jetbrains.com/idea/download).
+Requirements: make sure you have the following tools installed: [Docker](https://www.docker.com/products/docker-desktop/), [Java26 JDK](https://jdk.java.net/26/), [NodeJS 26](https://nodejs.org/en/download/current) and [IntelliJ IDEA](https://www.jetbrains.com/idea/download).
 
 1. Fork and clone the project as described in the [documentation](https://github.com/OWASP/wrongsecrets/blob/master/CONTRIBUTING.md).
 2. Import the project in IntelliJ (e.g. import as mvn project / local sources)
-3. Go to the project settings and make sure it uses Java25 (And that the JDK can be found)
+3. Go to the project settings and make sure it uses Java26 (And that the JDK can be found)
 4. Go to the IDE settings>Language & Frameworks > Lombok and make sure Lombok processing is enabled
 5. Open the Maven Tab in your IDEA and run "Reload All Maven Projects" to make the system sync and download everything. Next, in that same tab use the "install" option as part of the OWASP WrongSecrets Lifecycle to genereate the asciidoc and such.
 6. Now run the `main` method in `org.owasp.wrongsecrets.WrongSecretsApplication.java`. This should fail with a stack trace.
