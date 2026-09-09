@@ -35,8 +35,7 @@ public class Challenge71 extends FixedAnswerChallenge {
   @Override
   public String getAnswer() {
     try {
-      var transcriptContent =
-          transcriptFile.getContentAsString(StandardCharsets.UTF_8);
+      var transcriptContent = transcriptFile.getContentAsString(StandardCharsets.UTF_8);
       var matcher = DEPLOY_TOKEN_PATTERN.matcher(transcriptContent);
       if (!matcher.find()) {
         log.warn("Could not find the deploy token in the Codex transcript of challenge 71");
