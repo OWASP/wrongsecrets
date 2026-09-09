@@ -25,7 +25,7 @@ env:
 jobs:
   generate-static-preview:
     runs-on: ubuntu-latest
-    if: github.event.action != 'closed'
+    if: github.event.action != 'closed' && github.event.pull_request.head.repo.full_name == github.repository
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}pr-${{ github.event.number }}/
