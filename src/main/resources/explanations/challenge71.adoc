@@ -1,0 +1,11 @@
+=== Dev Container Secret Leak
+
+Development containers (Dev Containers) allow teams to define reproducible development environments using containerization tools like VS Code Remote - Containers and GitHub Codespaces. By encapsulating tools, runtimes, and dependencies within `.devcontainer/devcontainer.json`, developers can get started without installing complex local software stacks.
+
+However, developers frequently make the mistake of embedding sensitive tokens, passwords, API keys, or private registry access credentials directly into `.devcontainer/devcontainer.json` (such as in `containerEnv`, `remoteEnv`, or lifecycle scripts) and committing them to version control.
+
+To solve this challenge:
+
+. Inspect the `.devcontainer/devcontainer.json` configuration file in the project repository or review the configuration snippet in the UI.
+. Identify the leaked `DEVCONTAINER_SECRET` or token defined in the container environment.
+. Submit the discovered secret in the input field below.

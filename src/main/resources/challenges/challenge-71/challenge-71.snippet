@@ -1,0 +1,20 @@
+<div id="devcontainer-challenge-container" style="border: 1px solid #ccc; border-radius: 8px; padding: 20px; margin: 20px; background-color: #f9f9f9;">
+    <h4>🐳 Dev Container Configuration Inspector</h4>
+    <p>Development containers allow teams to share reproducible development environments. However, committing hardcoded environment variables or secrets into <code>.devcontainer/devcontainer.json</code> can expose sensitive credentials to anyone with repository access.</p>
+
+    <div style="background-color: #1e1e1e; color: #d4d4d4; padding: 15px; border-radius: 6px; font-family: monospace; font-size: 13px; overflow-x: auto; margin-top: 15px;">
+        <span style="color: #6a9955;">// .devcontainer/devcontainer.json excerpt</span><br>
+        {<br>
+        &nbsp;&nbsp;<span style="color: #9cdcfe;">"name"</span>: <span style="color: #ce9178;">"OWASP WrongSecrets (Java 26 &amp; Node.js 26 Dev Container)"</span>,<br>
+        &nbsp;&nbsp;<span style="color: #9cdcfe;">"image"</span>: <span style="color: #ce9178;">"eclipse-temurin:26-jdk-jammy"</span>,<br>
+        &nbsp;&nbsp;<span style="color: #9cdcfe;">"containerEnv"</span>: {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #9cdcfe;">"DEVCONTAINER_SECRET"</span>: <span style="color: #ce9178;">"WSECR-devcontainer-token-774921"</span><br>
+        &nbsp;&nbsp;},<br>
+        &nbsp;&nbsp;<span style="color: #9cdcfe;">"postCreateCommand"</span>: <span style="color: #ce9178;">"chmod +x ./mvnw &amp;&amp; ./mvnw dependency:resolve -DskipTests &amp;&amp; npm install &amp;&amp; pip install pre-commit &amp;&amp; pre-commit install"</span><br>
+        }
+    </div>
+
+    <div class="devcontainer-tip" style="margin-top: 15px; font-size: 12px; color: #666;">
+        💡 Tip: Check the <code>DEVCONTAINER_SECRET</code> environment variable defined in the Dev Container configuration.
+    </div>
+</div>

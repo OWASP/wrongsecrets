@@ -165,6 +165,40 @@ Pull requests should be as small/atomic as possible. Large, wide-sweeping change
 
 ## How to set up your Contributor Environment
 
+### Using Dev Containers (Zero Local Dependencies)
+
+The project includes a fully configured Dev Container for **VS Code** and **GitHub Codespaces**. You do not need to install Java, Maven, Node.js, Python, or Terraform tools locally on your machine—everything is self-contained inside the Dev Container.
+
+The Dev Container environment automatically provides:
+- **JDK 26** & **Maven Wrapper** (`./mvnw`)
+- **Node.js 26** & **npm** (for commitlint, ESLint, and frontend build)
+- **Python 3** & **pre-commit** hooks
+- **Terraform**, **tflint**, and **terraform-docs** (for pre-commit validation)
+- **Docker-in-Docker** (for running Docker-based challenge environments)
+- Pre-configured VS Code extensions and settings
+
+#### 1. Open in Dev Container
+- **In VS Code**: Press `Ctrl+Shift+P` (or `Cmd+Shift+P` on macOS) -> select **"Dev Containers: Reopen in Container"** (or click the prompt in the bottom-left corner).
+- **In GitHub Codespaces**: Select **Code** -> **Codespaces** -> **Create codespace on this branch**.
+
+*(The container automatically installs all dependencies, configures pre-commit hooks, and runs dependency resolution on launch).*
+
+#### 2. Build and Test the Application
+Inside the Dev Container integrated terminal, run:
+
+```bash
+# Compile and run tests
+./mvnw clean compile test
+
+# Start the application
+./mvnw spring-boot:run
+
+# Run pre-commit checks across all files
+pre-commit run --all-files
+```
+
+### Manual Setup
+
 1. Create a GitHub account. Multiple different GitHub subscription plans are available, but you only need a free one. Follow [these steps](https://help.github.com/en/articles/signing-up-for-a-new-github-account "Signing up for a new GitHub account") to set up your account.
 2. Fork the repository. Creating a fork means creating a copy of the repository on your own account, which you can modify without any impact on this repository. GitHub has an [article that describes all the needed steps](https://help.github.com/en/articles/fork-a-repo "Fork a repo").
 3. Clone your own repository to your host computer so that you can make modifications. If you followed the GitHub tutorial from step 2, you have already done this.
