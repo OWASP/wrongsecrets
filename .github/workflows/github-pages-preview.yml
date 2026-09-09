@@ -13,7 +13,7 @@ permissions:
   pages: write
   id-token: write
   pull-requests: write
-  
+
 # Allow only one concurrent deployment per PR, but allow multiple PRs to deploy
 concurrency:
   group: "pages-pr-${{ github.event.number }}"

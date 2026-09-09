@@ -11,7 +11,7 @@ public class Challenge71 extends FixedAnswerChallenge {
   private final String devcontainerSecret;
 
   /**
-   * Constructor for creating a new Challenge67 object.
+   * Constructor for creating a new Challenge71 object.
    *
    * @param devcontainerSecret The secret configured in the Dev Container environment.
    */

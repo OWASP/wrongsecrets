@@ -11,7 +11,7 @@ class Challenge71Test {
 
   @Test
   void spoilerShouldRevealAnswer() {
-    var challenge = new Challenge67(DEFAULT_SECRET);
+    var challenge = new Challenge71(DEFAULT_SECRET);
 
     assertThat(challenge.spoiler()).isEqualTo(new Spoiler(DEFAULT_SECRET));
   }
@@ -25,7 +25,7 @@ class Challenge71Test {
 
   @Test
   void incorrectAnswerShouldNotSolveChallenge() {
-    var challenge = new Challenge67(DEFAULT_SECRET);
+    var challenge = new Challenge71(DEFAULT_SECRET);
 
     assertThat(challenge.answerCorrect("wrong-secret-token")).isFalse();
   }
