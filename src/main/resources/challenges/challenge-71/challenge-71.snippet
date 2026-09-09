@@ -1,0 +1,38 @@
+<div id="codex-transcript-container" style="border: 1px solid #ccc; border-radius: 8px; padding: 20px; margin: 20px; background-color: #f9f9f9;">
+    <h4>🤖 Codex session transcript</h4>
+    <p>This application ships a Codex session transcript where a developer asked the agent to investigate a failing staging deployment. The transcript captures the agent reading configuration files and outputting their contents — including a deploy token.</p>
+
+    <div class="skill-warning" style="border: 1px solid #ffeaa7; border-radius: 6px; padding: 15px; margin: 15px 0;">
+        <p>Fetch the transcript:</p>
+        <pre class="skill-code"
+             style="padding: 10px; border-radius: 4px; overflow-x: auto; font-size: 13px;"
+    th:text="'curl -sO ' + ${httpServletRequest.scheme} + '://' + ${httpServletRequest.serverName} + (${httpServletRequest.serverPort == 80 || httpServletRequest.serverPort == 443 ? '' : ':' + ${httpServletRequest.serverPort}) + '/challenges/challenge-71/codex-session-transcript.md'">curl -sO http://localhost:8080/challenges/challenge-71/codex-session-transcript.md</pre>
+
+        <p style="margin-top: 12px;">…or read it right here:</p>
+        <button class="btn btn-warning btn-sm skill-btn" onclick="loadTranscript()">▶ Show transcript</button>
+        <a class="btn btn-secondary btn-sm skill-btn" href="/challenges/challenge-71/codex-session-transcript.md" target="_blank" rel="noopener">Open in new tab</a>
+        <pre id="transcript-output" class="transcript-output" style="display:none; padding: 10px; border-radius: 4px; overflow-x: auto; font-size: 12px; margin-top: 8px; white-space: pre-wrap; word-break: break-word;"></pre>
+
+        <p style="margin-top: 12px;"><small class="skill-tip">💡 The agent read a staging config file and echoed its contents — including a deploy token. Find that token in the transcript output.</small></p>
+    </div>
+</div>
+
+<style>
+.transcript-output {
+    background-color: #f8f9fa !important;
+    color: #212529 !important;
+    border: 1px solid #dee2e6 !important;
+}
+</style>
+
+<script>
+function loadTranscript() {
+    const out = document.getElementById('transcript-output');
+    out.style.display = 'block';
+    out.textContent = 'Loading…';
+    fetch('/challenges/challenge-71/codex-session-transcript.md')
+        .then(function(r) { return r.text(); })
+        .then(function(text) { out.textContent = text; })
+        .catch(function(err) { out.textContent = 'Failed to load the transcript: ' + (err.message || err); });
+}
+</script>
