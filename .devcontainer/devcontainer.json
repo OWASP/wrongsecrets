@@ -1,7 +1,18 @@
 {
-  "name": "OWASP WrongSecrets (Java 26)",
+  "name": "OWASP WrongSecrets (Java 26 & Node.js 26 Dev Container)",
   "image": "eclipse-temurin:26-jdk-jammy",
   "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "26"
+    },
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.12"
+    },
+    "ghcr.io/devcontainers/features/terraform:1": {
+      "version": "latest",
+      "tflint": "latest"
+    },
+    "ghcr.io/devcontainers-contrib/features/terraform-docs:1": {},
     "ghcr.io/devcontainers/features/docker-in-docker:2": {
       "enableOnStartup": true
     },
@@ -10,6 +21,9 @@
       "installZsh": true,
       "configureZshAsDefaultShell": true
     }
+  },
+  "containerEnv": {
+    "DEVCONTAINER_SECRET": "WSECR-devcontainer-token-774921"
   },
   "forwardPorts": [8080, 8090],
   "portsAttributes": {
@@ -29,7 +43,11 @@
         "ms-azuretools.vscode-docker",
         "redhat.vscode-yaml",
         "redhat.vscode-xml",
-        "eamodio.gitlens"
+        "eamodio.gitlens",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "asciidoctor.asciidoctor-vscode",
+        "hashicorp.terraform"
       ],
       "settings": {
         "java.configuration.runtimes": [
@@ -43,6 +61,6 @@
       }
     }
   },
-  "postCreateCommand": "chmod +x ./mvnw && ./mvnw dependency:resolve",
+  "postCreateCommand": "chmod +x ./mvnw && ./mvnw dependency:resolve -DskipTests && npm install && pip install pre-commit && pre-commit install && pre-commit install --hook-type commit-msg",
   "remoteUser": "root"
 }

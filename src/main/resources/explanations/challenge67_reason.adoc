@@ -1,7 +1,16 @@
-*Why secrets in container build stages and build arguments are a security risk*
+= Dev Container Configuration Secret Exposure
 
-Using `ARG` or plain files to pass secrets into multi-stage container builds often leaks sensitive data into the container image metadata or intermediate layer cache. Anyone with access to the container image can run `docker history` or inspect image layers to recover build-time credentials.
+*Why Hardcoding Secrets in Dev Containers is a Critical Security Risk*
 
-*Remediation:*
-- Use **Docker BuildKit Secret Mounts** (`--mount=type=secret`) which ensure secrets are only available during the specific build command and never written into any image layer.
-- Never write raw credentials to build-time property files or build arguments.
+Dev Containers are shared development environments configured via `.devcontainer/devcontainer.json`. Because these files are typically tracked in version control, hardcoding secrets into devcontainer definitions presents several security dangers:
+
+1. **Exposure to All Repository Readers**: Anyone with read access to the source repository (or public forks and clones in open-source projects) can read secrets hardcoded in `.devcontainer/devcontainer.json`.
+2. **Environment Variable Leakage**: Credentials defined in `containerEnv` or `remoteEnv` are injected into every process inside the container, making them accessible to any script, child process, or diagnostic tool running in the container.
+3. **Persistent in Git History**: Once committed, removing the secret requires git history rewrites, and stale keys often remain valid indefinitely if rotation is not performed.
+
+*Remediation and Best Practices:*
+
+- **Use GitHub Codespaces Secrets / VS Code Dev Container Secrets**: Inject secrets dynamically via Codespaces repository/user secrets or VS Code settings rather than hardcoding them in configuration files.
+- **Use Local Environment Substitution**: Reference host environment variables dynamically in `devcontainer.json` using `${localEnv:MY_SECRET}` syntax.
+- **Use `.env` files with `.gitignore`**: Place development secrets in local `.env` files that are explicitly excluded from version control in `.gitignore`.
+- **Adopt Secret Management Solutions**: Fetch secrets at runtime using dedicated secret managers (e.g., HashiCorp Vault, AWS Secrets Manager, Azure Key Vault, GCP Secret Manager).

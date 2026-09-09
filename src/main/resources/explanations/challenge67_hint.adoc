@@ -1,8 +1,10 @@
-You can solve this challenge by using:
+You can solve this challenge using the following steps:
 
-1. `docker history`:
-- Run `docker history --no-trunc jeroenwillemsen/wrongsecrets:<TAGNAME-HERE>` to inspect the build arguments and instructions for each layer.
-- Look for `ARG` or build-time environment configurations carrying secrets.
+1. Inspect the Dev Container configuration file:
+- Open the `.devcontainer/devcontainer.json` file in the root of the repository.
+- Look for the `containerEnv` or `remoteEnv` sections where environment variables are defined.
 
-2. Inspecting intermediate layers or using container analysis tools:
-- Use tools like https://github.com/wagoodman/dive[dive] or https://github.com/goodwithtech/dockle[dockle] to analyze layer contents and discover build artifact remnants.
+2. Inspect the running container environment:
+- If running inside a dev container or Docker container, check the environment variables with `printenv DEVCONTAINER_SECRET` or `echo $DEVCONTAINER_SECRET`.
+
+3. Review the UI snippet provided on this challenge page for the exposed configuration.

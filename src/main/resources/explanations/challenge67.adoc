@@ -1,9 +1,11 @@
-=== Injected Build Container Secret
+=== Dev Container Secret Leak
 
-In multi-stage container builds, passing secrets with build arguments (`ARG`) or intermediate build layers can persist in image history or intermediate artifacts. Can you inspect the container build layers to find the leaked build-time secret?
+Development containers (Dev Containers) allow teams to define reproducible development environments using containerization tools like VS Code Remote - Containers and GitHub Codespaces. By encapsulating tools, runtimes, and dependencies within `.devcontainer/devcontainer.json`, developers can get started without installing complex local software stacks.
 
-To solve it:
+However, developers frequently make the mistake of embedding sensitive tokens, passwords, API keys, or private registry access credentials directly into `.devcontainer/devcontainer.json` (such as in `containerEnv`, `remoteEnv`, or lifecycle scripts) and committing them to version control.
 
-. Inspect the container image layers and build history using `docker history --no-trunc` or container inspection tools.
-. Identify the build argument or layer where the secret was injected during build time.
+To solve this challenge:
+
+. Inspect the `.devcontainer/devcontainer.json` configuration file in the project repository or review the configuration snippet in the UI.
+. Identify the leaked `DEVCONTAINER_SECRET` or token defined in the container environment.
 . Submit the discovered secret in the input field below.

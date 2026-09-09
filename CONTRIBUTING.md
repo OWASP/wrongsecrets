@@ -165,21 +165,36 @@ Pull requests should be as small/atomic as possible. Large, wide-sweeping change
 
 ## How to set up your Contributor Environment
 
-### Using Dev Containers
+### Using Dev Containers (Zero Local Dependencies)
 
-Here is how you can use the Dev Container to build and run the entire application completely:
+The project includes a fully configured Dev Container for **VS Code** and **GitHub Codespaces**. You do not need to install Java, Maven, Node.js, Python, or Terraform tools locally on your machine—everything is self-contained inside the Dev Container.
+
+The Dev Container environment automatically provides:
+- **JDK 26** & **Maven Wrapper** (`./mvnw`)
+- **Node.js 26** & **npm** (for commitlint, ESLint, and frontend build)
+- **Python 3** & **pre-commit** hooks
+- **Terraform**, **tflint**, and **terraform-docs** (for pre-commit validation)
+- **Docker-in-Docker** (for running Docker-based challenge environments)
+- Pre-configured VS Code extensions and settings
 
 #### 1. Open in Dev Container
-- **In VS Code**: Press `Ctrl+Shift+P` (or `Cmd+Shift+P` on macOS) -> select **"Dev Containers: Reopen in Container"** (or click the green prompt in the bottom-left corner).
+- **In VS Code**: Press `Ctrl+Shift+P` (or `Cmd+Shift+P` on macOS) -> select **"Dev Containers: Reopen in Container"** (or click the prompt in the bottom-left corner).
 - **In GitHub Codespaces**: Select **Code** -> **Codespaces** -> **Create codespace on this branch**.
 
-*(The container will automatically set up Java, Docker-in-Docker, forwarded ports, and run the Maven setup).*
+*(The container automatically installs all dependencies, configures pre-commit hooks, and runs dependency resolution on launch).*
 
-#### 2. Build the Complete App
-Inside the integrated Dev Container terminal, run:
+#### 2. Build and Test the Application
+Inside the Dev Container integrated terminal, run:
 
 ```bash
-./mvnw clean install
+# Compile and run tests
+./mvnw clean compile test
+
+# Start the application
+./mvnw spring-boot:run
+
+# Run pre-commit checks across all files
+pre-commit run --all-files
 ```
 
 ### Manual Setup
