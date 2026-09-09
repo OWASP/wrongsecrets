@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 /** Challenge for finding secrets leaked in Dev Container configurations and environments. */
 @Component
-public class Challenge67 extends FixedAnswerChallenge {
+public class Challenge71 extends FixedAnswerChallenge {
 
   private final String devcontainerSecret;
 
@@ -15,7 +15,7 @@ public class Challenge67 extends FixedAnswerChallenge {
    *
    * @param devcontainerSecret The secret configured in the Dev Container environment.
    */
-  public Challenge67(
+  public Challenge71(
       @Value("${DEVCONTAINER_SECRET:WSECR-devcontainer-token-774921}") String devcontainerSecret) {
     this.devcontainerSecret = devcontainerSecret;
   }
