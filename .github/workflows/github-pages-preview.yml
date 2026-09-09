@@ -13,15 +13,14 @@ permissions:
   pages: write
   id-token: write
   pull-requests: write
-
-# Allow only one concurrent deployment per PR, but allow multiple PRs to deploy simultaneously
+  
+# Allow only one concurrent deployment per PR, but allow multiple PRs to deploy
 concurrency:
   group: "pages-pr-${{ github.event.number }}"
   cancel-in-progress: true
 
 env:
   NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
-
 
 jobs:
   generate-static-preview:
