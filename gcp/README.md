@@ -112,7 +112,7 @@ The documentation below is auto-generated to give insight on what's created via 
 ## Resources
 
 | Name | Type |
-| ---- | ---- |
+|------|------|
 | [google-beta_google_iam_workload_identity_pool.pool](https://registry.terraform.io/providers/hashicorp/google-beta/latest/docs/resources/google_iam_workload_identity_pool) | resource |
 | [google_compute_network.vpc](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_network) | resource |
 | [google_compute_subnetwork.master_subnet](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_subnetwork) | resource |
@@ -137,7 +137,7 @@ The documentation below is auto-generated to give insight on what's created via 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-| ---- | ----------- | ---- | ------- | :------: |
+|------|-------------|------|---------|:--------:|
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | The GKE cluster name | `string` | `"wrongsecrets-exercise-cluster"` | no |
 | <a name="input_cluster_version"></a> [cluster\_version](#input\_cluster\_version) | The GKE cluster version to use | `string` | `"1.34"` | no |
 | <a name="input_project_id"></a> [project\_id](#input\_project\_id) | project id | `string` | n/a | yes |
@@ -146,7 +146,7 @@ The documentation below is auto-generated to give insight on what's created via 
 ## Outputs
 
 | Name | Description |
-| ---- | ----------- |
+|------|-------------|
 | <a name="output_gke_config"></a> [gke\_config](#output\_gke\_config) | config string for the cluster credentials |
 | <a name="output_kubernetes_cluster_host"></a> [kubernetes\_cluster\_host](#output\_kubernetes\_cluster\_host) | GKE Cluster Host |
 | <a name="output_kubernetes_cluster_name"></a> [kubernetes\_cluster\_name](#output\_kubernetes\_cluster\_name) | GKE Cluster Name |
