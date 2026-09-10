@@ -36,6 +36,7 @@ public class Challenge67 extends FixedAnswerChallenge {
 
   private final SecureRandom secureRandom = new SecureRandom();
   private final String configuredSecret;
+  private String secret;
 
   /**
    * Cloud challenge which leaks a Base64 encoded secret towards the log sink of the cloud provider.
