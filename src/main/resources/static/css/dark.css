@@ -152,12 +152,18 @@
     color: var(--bs-gray-300) !important;
 }
 
+.dark-mode #cursor-skill-container,
+.dark-mode #claude-skill-container,
 .dark-mode #database-challenge-container {
     background-color: #1f1f1f !important;
     border-color: var(--bs-gray-700) !important;
     color: var(--bs-body-color);
 }
 
+.dark-mode #cursor-skill-container h4,
+.dark-mode #cursor-skill-container p,
+.dark-mode #claude-skill-container h4,
+.dark-mode #claude-skill-container p,
 .dark-mode #database-challenge-container h4,
 .dark-mode #database-challenge-container p {
     color: var(--bs-body-color);
