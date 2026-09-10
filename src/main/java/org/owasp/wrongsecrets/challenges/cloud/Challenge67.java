@@ -50,7 +50,7 @@ public class Challenge67 extends FixedAnswerChallenge {
 
   @Override
   public String getAnswer() {
-    String secret = resolveSecret();
+    secret = resolveSecret();
     leakSecretToCloudLogging(secret);
     return secret;
   }
