@@ -131,7 +131,7 @@ Not sure which setup is right for you? Here's a quick guide:
 | Try it quickly online | [Container running on Heroku](https://www.wrongsecrets.com/) | Basic challenges (0-4, 8, 12-32, 34-43, 49-52, 54-66) |
 | Run locally with Docker | [Basic Docker](#basic-docker-exercises) | Same as above, but on your machine |
 | Learn Kubernetes secrets | [K8s/Minikube Setup](#basic-k8s-exercise) | Kubernetes challenges (0-6, 8, 12-43, 48-66) |
-| Practice with cloud secrets | [Cloud Challenges](#cloud-challenges) | All challenges (0-67) |
+| Practice with cloud secrets | [Cloud Challenges](#cloud-challenges) | All challenges (0-70) |
 | Run a workshop/CTF | [CTF Setup](#ctf) | Customizable challenge sets |
 | Contribute to the project | [Development Setup](#notes-on-development) | All challenges + development tools |
 
