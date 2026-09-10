@@ -56,9 +56,7 @@ public class Challenge67 extends FixedAnswerChallenge {
   }
 
   private String resolveSecret() {
-    if (configuredSecret == null
-        || configuredSecret.isBlank()
-        || NOT_SET.equals(configuredSecret)) {
+    if (Strings.IsNullOrEmpty(configuredSecret) || NOT_SET.equals(configuredSecret)) {
       return generateRandomSecret();
     }
     return configuredSecret;
