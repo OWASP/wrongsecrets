@@ -1,0 +1,17 @@
+You can solve this challenge by the following steps:
+
+1. Find the log group of the WrongSecrets container in https://console.aws.amazon.com/cloudwatch/[*CloudWatch Logs*]. With the EKS setup from the `aws` folder the logs of the pod are shipped to a log group named after the cluster, for example `/aws/containerinsights/<clustername>/application`.
+2. Query the log group for the audit event, for instance with CloudWatch Logs Insights:
++
+[source,shell]
+----
+aws logs start-query \
+  --log-group-name "/aws/containerinsights/<clustername>/application" \
+  --start-time $(($(date +%s) - 3600)) \
+  --end-time $(date +%s) \
+  --query-string 'fields @message | filter @message like /encoded credential/'
+----
+3. Alternatively tail it directly: `aws logs tail "/aws/containerinsights/<clustername>/application" --follow --filter-pattern "encoded credential"`.
+4. Take the Base64 blob from the message and decode it: `echo '<blob>' | base64 -d`. That decoded value is the answer.
+
+Not seeing anything yet? The event is emitted the first time the challenge is opened, so hit the page once and query again.
