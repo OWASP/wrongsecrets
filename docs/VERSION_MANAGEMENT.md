@@ -70,7 +70,7 @@ The `version-sync-check.yml` workflow:
 
 1. **Update pom.xml version**:
    ```xml
-   <version>1.13.0-SNAPSHOT</version>
+   <version>1.14.0-SNAPSHOT</version>
    ```
 
 2. **Run sync script**:
@@ -86,7 +86,7 @@ The `version-sync-check.yml` workflow:
 4. **Commit all changes**:
    ```bash
    git add pom.xml Dockerfile Dockerfile.web
-   git commit -m "Bump version to 1.13.0"
+   git commit -m "Bump version to 1.14.0"
    ```
 
 ## Workflow Integration
@@ -189,8 +189,8 @@ docker run --rm wrongsecrets:ci-test ls -la /tmp/wrongsecrets-*.jar
 
 ```bash
 # Run this script to verify everything is synchronized
-./scripts/check-version-sync.sh 2>/dev/null || {
-  echo "Version sync check script not found, running manual check:"
+./scripts/validate-versions.sh 2>/dev/null || {
+  echo "Version validation script failed or not found, running manual check:"
   MAVEN_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
   echo "Maven version: $MAVEN_VERSION"
   echo "Checking Dockerfiles for hard-coded versions..."
