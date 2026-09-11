@@ -315,13 +315,13 @@ Press the **_Reload_** button as shown below and allow the project to Reload.
 
 ![Click the 'Reload' button in the Maven tab.](images/reload-maven-5.2.png)
 
-Further use the **_OWASP WrongSecrets --> Lifecycle --> install_** step to load all the depedencies
+Further use the **_OWASP WrongSecrets --> Lifecycle --> install_** step to load all the dependencies
 
 **NOTE:** Indians and other Asia-Pacific countries users may have to use **VPN** if you encounter this exception `org.owasp.dependencycheck.utils.DownloadFailedException: TLS Connection Reset`.
 
 ### Step 7: Running the Project.
 
-Open the **_WrongSecretsApplication_** by following the path **_main>java>org.owasp.wrongsecrets>WrongSecretApplication_**.
+Open the **_WrongSecretsApplication_** by following the path **_main>java>org.owasp.wrongsecrets>WrongSecretsApplication_**.
 
 ![Click on the 'WrongSecretsApplication' file located at main > java > org.owasp.wrongsecrets > WrongSecretApplication](images/open-application-6.1.png)
 
