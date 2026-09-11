@@ -1,0 +1,32 @@
+*Why AI coding-agent transcripts are a secret-leakage risk*
+
+AI coding agents read your files, execute your commands, and produce session logs. When a developer asks an agent to debug an issue, the agent may read configuration files, environment variables, or secrets managers — and output those values in its transcript. This is exactly what happened in this challenge: the agent read a `.env.staging` file and echoed the deploy token into its session output.
+
+The transcript becomes a persistent artifact that can be:
+
+- Committed to version control if the developer saves it
+- Shared with teammates for context or handoff
+- Uploaded to support channels when reporting bugs
+- Stored in agent history files on the developer's machine
+- Indexed by IDE plugins or local search tools
+
+Three failures compound in this scenario:
+
+- The secret exists in a plaintext configuration file, making it trivially readable by any tool or agent.
+- The agent's debugging process naturally surfaces the secret in its output, creating a secondary copy of the credential.
+- The transcript is likely to be saved, shared, or committed without review, since it "looks like" debug output rather than sensitive data.
+
+----
+What to do instead:
+
+- Never store secrets in plaintext configuration files. Use a secret manager or environment variables injected at runtime.
+- Configure agents to redact sensitive values before outputting them. Many agent tools support output filtering or sandboxing.
+- Review agent transcripts before saving or sharing them, just as you would review a pull request.
+- Treat any transcript that read from a secrets source as potentially compromised, and rotate the exposed credentials.
+- Use short-lived, scoped tokens for staging deployments so that exposure has limited blast radius.
+----
+
+[NOTE]
+====
+AI coding agents are powerful tools, but they operate on the same files and environment you do. If a human developer would copy-paste a secret into a chat log, an agent will do the same — except the agent produces a structured transcript that is even easier to search and share.
+====
