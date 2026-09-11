@@ -1,12 +1,12 @@
-=== Challenge 71: Find the Secret in the AI Coding-Agent Transcript
+=== Challenge 72: Find the Secret in the AI Coding-Agent Transcript
 
 AI coding agents like Codex, Claude Code, and Cursor read files, run commands, and produce detailed session transcripts. When a developer asks an agent to debug a deployment issue, the agent may read configuration files containing secrets and echo those values into its session output.
 
 This application ships a Codex session transcript where a developer asked the agent to investigate a failing staging deployment. The transcript captures the agent reading a `.env.staging` file and outputting its contents — including the deploy token — as part of normal debugging workflow.
 
-Download the transcript from link:/challenges/challenge-71/codex-session-transcript.md[`/challenges/challenge-71/codex-session-transcript.md`] and find the staging deploy token that was exposed during the session.
+Download the transcript from link:/challenges/challenge-72/codex-session-transcript.md[`/challenges/challenge-72/codex-session-transcript.md`] and find the staging deploy token that was exposed during the session.
 
-The source is also available at link:https://github.com/OWASP/wrongsecrets/blob/master/src/main/resources/challenges/challenge-71/codex-session-transcript.md[`src/main/resources/challenges/challenge-71/codex-session-transcript.md`].
+The source is also available at link:https://github.com/OWASP/wrongsecrets/blob/master/src/main/resources/challenges/challenge-72/codex-session-transcript.md[`src/main/resources/challenges/challenge-72/codex-session-transcript.md`].
 
 [NOTE]
 ====

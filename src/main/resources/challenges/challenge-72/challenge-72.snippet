@@ -6,11 +6,11 @@
         <p>Fetch the transcript:</p>
         <pre class="skill-code"
              style="padding: 10px; border-radius: 4px; overflow-x: auto; font-size: 13px;"
-    th:text="'curl -sO ' + ${httpServletRequest.scheme} + '://' + ${httpServletRequest.serverName} + (${httpServletRequest.serverPort == 80 || httpServletRequest.serverPort == 443 ? '' : ':' + ${httpServletRequest.serverPort}) + '/challenges/challenge-71/codex-session-transcript.md'">curl -sO http://localhost:8080/challenges/challenge-71/codex-session-transcript.md</pre>
+    th:text="'curl -sO ' + ${httpServletRequest.scheme} + '://' + ${httpServletRequest.serverName} + (${httpServletRequest.serverPort == 80 || httpServletRequest.serverPort == 443 ? '' : ':' + ${httpServletRequest.serverPort}) + '/challenges/challenge-72/codex-session-transcript.md'">curl -sO http://localhost:8080/challenges/challenge-72/codex-session-transcript.md</pre>
 
         <p style="margin-top: 12px;">…or read it right here:</p>
         <button class="btn btn-warning btn-sm skill-btn" onclick="loadTranscript()">▶ Show transcript</button>
-        <a class="btn btn-secondary btn-sm skill-btn" href="/challenges/challenge-71/codex-session-transcript.md" target="_blank" rel="noopener">Open in new tab</a>
+        <a class="btn btn-secondary btn-sm skill-btn" href="/challenges/challenge-72/codex-session-transcript.md" target="_blank" rel="noopener">Open in new tab</a>
         <pre id="transcript-output" class="transcript-output" style="display:none; padding: 10px; border-radius: 4px; overflow-x: auto; font-size: 12px; margin-top: 8px; white-space: pre-wrap; word-break: break-word;"></pre>
 
         <p style="margin-top: 12px;"><small class="skill-tip">💡 The agent read a staging config file and echoed its contents — including a deploy token. Find that token in the transcript output.</small></p>
@@ -30,7 +30,7 @@ function loadTranscript() {
     const out = document.getElementById('transcript-output');
     out.style.display = 'block';
     out.textContent = 'Loading…';
-    fetch('/challenges/challenge-71/codex-session-transcript.md')
+    fetch('/challenges/challenge-72/codex-session-transcript.md')
         .then(function(r) { return r.text(); })
         .then(function(text) { out.textContent = text; })
         .catch(function(err) { out.textContent = 'Failed to load the transcript: ' + (err.message || err); });

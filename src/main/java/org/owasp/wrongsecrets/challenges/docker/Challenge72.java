@@ -19,15 +19,15 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
-public class Challenge71 extends FixedAnswerChallenge {
+public class Challenge72 extends FixedAnswerChallenge {
 
   private static final Pattern DEPLOY_TOKEN_PATTERN =
       Pattern.compile("DEPLOY_TOKEN=([A-Za-z0-9_]+)");
 
   private final Resource transcriptFile;
 
-  public Challenge71(
-      @Value("classpath:challenges/challenge-71/codex-session-transcript.md")
+  public Challenge72(
+      @Value("classpath:challenges/challenge-72/codex-session-transcript.md")
           Resource transcriptFile) {
     this.transcriptFile = transcriptFile;
   }
@@ -39,12 +39,12 @@ public class Challenge71 extends FixedAnswerChallenge {
           transcriptFile.getContentAsString(StandardCharsets.UTF_8);
       var matcher = DEPLOY_TOKEN_PATTERN.matcher(transcriptContent);
       if (!matcher.find()) {
-        log.warn("Could not find the deploy token in the Codex transcript of challenge 71");
+        log.warn("Could not find the deploy token in the Codex transcript of challenge 72");
         return FILE_MOUNT_ERROR;
       }
       return matcher.group(1);
     } catch (IOException e) {
-      log.warn("Exception while reading the Codex transcript of challenge 71", e);
+      log.warn("Exception while reading the Codex transcript of challenge 72", e);
       return FILE_MOUNT_ERROR;
     }
   }

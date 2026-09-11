@@ -9,10 +9,10 @@ import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
-class Challenge71Test {
+class Challenge72Test {
 
   private static final String TRANSCRIPT_LOCATION =
-      "challenges/challenge-71/codex-session-transcript.md";
+      "challenges/challenge-72/codex-session-transcript.md";
 
   private static Resource transcriptContaining(String content) {
     return new ByteArrayResource(content.getBytes(StandardCharsets.UTF_8));
@@ -20,7 +20,7 @@ class Challenge71Test {
 
   @Test
   void spoilerShouldGiveTheTokenFromTheShippedTranscript() {
-    var challenge = new Challenge71(new ClassPathResource(TRANSCRIPT_LOCATION));
+    var challenge = new Challenge72(new ClassPathResource(TRANSCRIPT_LOCATION));
 
     assertThat(challenge.spoiler().solution()).isNotEmpty().isNotEqualTo(FILE_MOUNT_ERROR);
     assertThat(challenge.answerCorrect(challenge.spoiler().solution())).isTrue();
@@ -37,7 +37,7 @@ class Challenge71Test {
   @Test
   void shouldExtractTheTokenFromTheTranscript() {
     var challenge =
-        new Challenge71(
+        new Challenge72(
             transcriptContaining(
                 """
                 succeeded in 438ms:
@@ -55,7 +55,7 @@ class Challenge71Test {
 
   @Test
   void incorrectAnswerShouldNotSolveChallenge() {
-    var challenge = new Challenge71(new ClassPathResource(TRANSCRIPT_LOCATION));
+    var challenge = new Challenge72(new ClassPathResource(TRANSCRIPT_LOCATION));
 
     assertThat(challenge.answerCorrect("wrong answer")).isFalse();
     assertThat(challenge.answerCorrect("")).isFalse();
@@ -64,7 +64,7 @@ class Challenge71Test {
   @Test
   void shouldReportAnErrorWhenTheTranscriptHasNoToken() {
     var challenge =
-        new Challenge71(transcriptContaining("# Session transcript\n\nNo secrets here.\n"));
+        new Challenge72(transcriptContaining("# Session transcript\n\nNo secrets here.\n"));
 
     assertThat(challenge.spoiler().solution()).isEqualTo(FILE_MOUNT_ERROR);
   }
@@ -72,7 +72,7 @@ class Challenge71Test {
   @Test
   void shouldReportAnErrorWhenTheTranscriptCannotBeRead() {
     var challenge =
-        new Challenge71(new ClassPathResource("challenges/challenge-71/does-not-exist.md"));
+        new Challenge72(new ClassPathResource("challenges/challenge-72/does-not-exist.md"));
 
     assertThat(challenge.spoiler().solution()).isEqualTo(FILE_MOUNT_ERROR);
   }
