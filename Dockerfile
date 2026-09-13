@@ -9,6 +9,9 @@ RUN java -Djarmode=tools -jar application.jar extract --layers --destination ext
 FROM eclipse-temurin:26-jre-alpine
 WORKDIR /application
 
+LABEL org.opencontainers.image.title="OWASP WrongSecrets"
+LABEL org.opencontainers.image.source="https://github.com/OWASP/wrongsecrets"
+
 ARG argBasedPassword="default"
 ARG spring_profile=""
 ARG challenge59_webhook_url="YUhSMGNITTZMeTlvYjI5cmN5NXpiR0ZqYXk1amIyMHZjMlZ5ZG1salpYTXZWREEwVkRRd1RraFlMMEl3T1VSQlRrb3lUamRMTDJNeWFqYzFSVEUzVjFrd2NFeE5SRXRvU0RsbGQzZzBhdz09"
