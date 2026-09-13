@@ -3,6 +3,8 @@ package org.owasp.wrongsecrets.challenges.cloud;
 import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import java.util.Base64;
+
+import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
 import org.owasp.wrongsecrets.challenges.FixedAnswerChallenge;
 import org.slf4j.MDC;
@@ -51,13 +53,15 @@ public class Challenge67 extends FixedAnswerChallenge {
 
   @Override
   public String getAnswer() {
-    secret = resolveSecret();
-    leakSecretToCloudLogging(secret);
+    if (Strings.isNullOrEmpty(secret)){
+      secret = resolveSecret();
+      leakSecretToCloudLogging(secret);
+    }
     return secret;
   }
 
   private String resolveSecret() {
-    if (Strings.IsNullOrEmpty(configuredSecret) || NOT_SET.equals(configuredSecret)) {
+    if (Strings.isNullOrEmpty(configuredSecret) || NOT_SET.equals(configuredSecret)) {
       return generateRandomSecret();
     }
     return configuredSecret;
