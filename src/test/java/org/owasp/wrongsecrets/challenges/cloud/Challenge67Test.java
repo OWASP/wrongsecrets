@@ -59,7 +59,7 @@ class Challenge67Test {
 
   @Test
   void spoilerShouldRevealGeneratedSecretWhenConfiguredValueIsBlank() {
-    var challenge = new Challenge67("   ");
+    var challenge = new Challenge67("");
 
     var answer = challenge.spoiler().solution();
 
