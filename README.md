@@ -816,8 +816,8 @@ Here are the steps you have to follow to create your own release of WrongSecrets
 ```sh
    docker buildx create --name mybuilder
    docker buildx use mybuilder
-   docker buildx build --platform linux/amd64,linux/arm64 -t <registry/container-name>:<yourtag>-no-vault --build-arg "argBasedPassword='this is on your command line'" --build-arg "PORT=8081" --build-arg "argBasedVersion=<yourtag>" --build-arg "spring_profile=without-vault" --push
-   docker buildx build --platform linux/amd64,linux/arm64 -t <registry/container-name>:<yourtag>-kubernetes-vault--build-arg "argBasedPassword='this is on your command line'" --build-arg "PORT=8081" --build-arg "argBasedVersion=<yourtag>" --build-arg "spring_profile=kubernetes-vault" --push
+   docker buildx build --platform linux/amd64,linux/arm64 -t <registry/container-name>:<yourtag>-no-vault --build-arg "argBasedPassword='this is on your command line'" --build-arg "PORT=8081" --build-arg "argBasedVersion=<yourtag>" --build-arg "spring_profile=without-vault" --push .
+   docker buildx build --platform linux/amd64,linux/arm64 -t <registry/container-name>:<yourtag>-kubernetes-vault --build-arg "argBasedPassword='this is on your command line'" --build-arg "PORT=8081" --build-arg "argBasedVersion=<yourtag>" --build-arg "spring_profile=kubernetes-vault" --push .
 ```
 
 

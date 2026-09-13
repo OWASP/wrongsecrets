@@ -1,0 +1,72 @@
+{
+  "name": "OWASP WrongSecrets (Java 26 & Node.js 26 Dev Container)",
+  "image": "eclipse-temurin:26-jdk-resolute", //resolute
+  "features": {
+    "ghcr.io/devcontainers/features/node:2": {
+      "version": "26",
+      "npmVersion": "11.19.0"
+    },
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.12"
+    },
+    "ghcr.io/devcontainers/features/terraform:1.5.0": {
+      "version": "latest",
+      "tflint": "latest"
+    },
+    "ghcr.io/devcontainers-extra/features/terraform-docs:1": {},
+    "ghcr.io/devcontainers/features/docker-in-docker:4.1.0": {
+      "enableOnStartup": true,
+      "version": "latest",
+        "moby": false
+    },
+    "ghcr.io/devcontainers/features/go:1": {
+        "version": "1.22"
+    },
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installZsh": true,
+      "configureZshAsDefaultShell": true
+    }
+  },
+  "containerEnv": {
+    "DEVCONTAINER_SECRET": "WSECR-devcontainer-token-774921"
+  },
+  "forwardPorts": [8080, 8090],
+  "portsAttributes": {
+    "8080": {
+      "label": "WrongSecrets Web UI",
+      "onAutoForward": "notify"
+    },
+    "8090": {
+      "label": "WrongSecrets Vault UI",
+      "onAutoForward": "silent"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "vscjava.vscode-java-pack",
+        "ms-azuretools.vscode-docker",
+        "redhat.vscode-yaml",
+        "redhat.vscode-xml",
+        "eamodio.gitlens",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "asciidoctor.asciidoctor-vscode",
+        "hashicorp.terraform"
+      ],
+      "settings": {
+        "java.configuration.runtimes": [
+          {
+            "name": "JavaSE-26",
+            "path": "/opt/java/openjdk",
+            "default": true
+          }
+        ],
+        "java.compile.nullAnalysis.mode": "automatic"
+      }
+    }
+  },
+  "postCreateCommand": "chmod +x ./mvnw && ./mvnw dependency:resolve -DskipTests && npm install && pip install pre-commit && pre-commit install && pre-commit install --hook-type commit-msg",
+  "remoteUser": "root"
+}
