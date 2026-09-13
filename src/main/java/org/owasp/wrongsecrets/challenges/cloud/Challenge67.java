@@ -1,10 +1,9 @@
 package org.owasp.wrongsecrets.challenges.cloud;
 
+import com.google.common.base.Strings;
 import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import java.util.Base64;
-
-import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
 import org.owasp.wrongsecrets.challenges.FixedAnswerChallenge;
 import org.slf4j.MDC;
@@ -53,7 +52,7 @@ public class Challenge67 extends FixedAnswerChallenge {
 
   @Override
   public String getAnswer() {
-    if (Strings.isNullOrEmpty(secret)){
+    if (Strings.isNullOrEmpty(secret)) {
       secret = resolveSecret();
       leakSecretToCloudLogging(secret);
     }
