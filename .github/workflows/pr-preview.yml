@@ -26,7 +26,7 @@ jobs:
       image-digest: ${{ steps.build.outputs.digest }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
 
       - name: Set up JDK 26
         uses: actions/setup-java@v5
@@ -238,12 +238,12 @@ jobs:
     if: github.event.action != 'closed'
     steps:
       - name: Checkout PR code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
         with:
           path: pr-code
 
       - name: Checkout main branch
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
         with:
           ref: master
           path: main-code
