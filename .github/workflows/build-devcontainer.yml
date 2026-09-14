@@ -90,6 +90,8 @@ jobs:
       # so DO NOT put a tag in imageName here.
       - name: Build Dev Container
         uses: devcontainers/ci@v0.3
+        env:
+          BUILDX_BUILDER: default
         with:
           imageName: devcontainer-${{ matrix.arch }}-${{ github.sha }}
           push: never
