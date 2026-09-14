@@ -14,7 +14,7 @@ permissions:
   id-token: write
   pull-requests: write
 
-# Allow only one concurrent deployment per PR, but allow multiple PRs to deploy simultaneously
+# Allow only one concurrent deployment per PR, but allow multiple PRs to deploy
 concurrency:
   group: "pages-pr-${{ github.event.number }}"
   cancel-in-progress: true
@@ -22,11 +22,10 @@ concurrency:
 env:
   NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
 
-
 jobs:
   generate-static-preview:
     runs-on: ubuntu-latest
-    if: github.event.action != 'closed'
+    if: github.event.action != 'closed' && github.event.pull_request.head.repo.full_name == github.repository
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}pr-${{ github.event.number }}/

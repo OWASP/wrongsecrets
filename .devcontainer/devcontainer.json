@@ -1,0 +1,68 @@
+{
+  "name": "WrongSecrets",
+
+  "image": "ghcr.io/owasp/wrongsecrets-devcontainer:26-resolute",
+
+  "workspaceFolder": "/workspaces",
+
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installZsh": true,
+      "configureZshAsDefaultShell": true
+    },
+
+    "ghcr.io/devcontainers/features/docker-in-docker:4.1.0": {
+      "enableOnStartup": true,
+      "version": "latest",
+      "moby": false
+    }
+  },
+
+  "containerEnv": {
+    "DEVCONTAINER_SECRET": "WSECR-devcontainer-token-774921"
+  },
+
+  "forwardPorts": [
+    8080,
+    8090
+  ],
+
+  "portsAttributes": {
+    "8080": {
+      "label": "WrongSecrets Web UI",
+      "onAutoForward": "notify"
+    },
+    "8090": {
+      "label": "WrongSecrets Vault UI",
+      "onAutoForward": "silent"
+    }
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "vscjava.vscode-java-pack",
+        "ms-azuretools.vscode-docker",
+        "redhat.vscode-yaml",
+        "redhat.vscode-xml",
+        "eamodio.gitlens",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "asciidoctor.asciidoctor-vscode",
+        "hashicorp.terraform"
+      ],
+      "settings": {
+        "java.configuration.runtimes": [
+          {
+            "name": "JavaSE-26",
+            "path": "/opt/java/openjdk",
+            "default": true
+          }
+        ],
+        "java.compile.nullAnalysis.mode": "automatic"
+      }
+    }
+  },
+
+  "postCreateCommand": ".devcontainer/post-create.sh"
+}
