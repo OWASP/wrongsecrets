@@ -3,7 +3,7 @@
 
   "image": "ghcr.io/owasp/wrongsecrets-devcontainer:26-resolute",
 
-  "workspaceFolder": "/workspace",
+  "workspaceFolder": "/workspaces",
 
   "features": {
     "ghcr.io/devcontainers/features/common-utils:2": {
