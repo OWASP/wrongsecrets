@@ -19,19 +19,34 @@ on:
 
 permissions:
   contents: read
-  packages: write
+
+env:
+  IMAGE_NAME: ghcr.io/owasp/wrongsecrets-devcontainer
 
 jobs:
   build:
-    name: Build dev container
-    runs-on: ubuntu-latest
+    name: Build (${{ matrix.arch }})
+    runs-on: ${{ matrix.runner }}
+
+    permissions:
+      contents: read
+      packages: write
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: amd64
+            platform: linux/amd64
+            runner: ubuntu-latest
+
+          - arch: arm64
+            platform: linux/arm64
+            runner: ubuntu-24.04-arm
 
     steps:
       - name: Checkout
         uses: actions/checkout@v5
-
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -48,25 +63,74 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ghcr.io/owasp/wrongsecrets-devcontainer
+          images: ${{ env.IMAGE_NAME }}
           tags: |
             type=raw,value=26-resolute
             type=sha
 
-      - name: Build and push
+      - name: Build and push architecture image
         uses: docker/build-push-action@v6
         with:
           context: .
           file: .devcontainer/Dockerfile
 
-          platforms: |
-            linux/amd64
-            linux/arm64
+          platforms: ${{ matrix.platform }}
 
           push: ${{ github.event_name != 'pull_request' }}
 
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: |
+            ${{ env.IMAGE_NAME }}:${{ matrix.arch }}-${{ github.sha }}
+
           labels: ${{ steps.meta.outputs.labels }}
 
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-from: type=gha,scope=devcontainer-${{ matrix.arch }}
+          cache-to: type=gha,mode=max,scope=devcontainer-${{ matrix.arch }}
+
+      - name: Pull image for scanning
+        if: github.event_name != 'pull_request'
+        run: |
+          docker pull "${IMAGE_NAME}:${{ matrix.arch }}-${{ github.sha }}"
+
+      - name: Scan image
+        if: github.event_name != 'pull_request'
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          image-ref: "${{ env.IMAGE_NAME }}:${{ matrix.arch }}-${{ github.sha }}"
+          format: sarif
+          output: "trivy-${{ matrix.arch }}.sarif"
+          severity: CRITICAL,HIGH
+
+      - name: Upload scan results
+        if: always() && github.event_name != 'pull_request'
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: "trivy-${{ matrix.arch }}.sarif"
+
+  manifest:
+    name: Create multi-arch manifest
+    needs: build
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create and push multi-arch manifest
+        run: |
+          docker buildx imagetools create \
+            --tag "${IMAGE_NAME}:26-resolute" \
+            --tag "${IMAGE_NAME}:${GITHUB_SHA}" \
+            "${IMAGE_NAME}:amd64-${GITHUB_SHA}" \
+            "${IMAGE_NAME}:arm64-${GITHUB_SHA}"
