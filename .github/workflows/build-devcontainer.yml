@@ -12,7 +12,6 @@ on:
 
   pull_request:
     paths:
-
       - ".devcontainer/Dockerfile"
       - ".devcontainer/devcontainer.json"
       - ".devcontainer/post-create.sh"
@@ -76,42 +75,53 @@ jobs:
           cache-from: type=gha,scope=devcontainer-base-${{ matrix.arch }}
           cache-to: type=gha,mode=max,scope=devcontainer-base-${{ matrix.arch }}
 
-      # Make the base image available under the name used by
-      # devcontainer.json.
+      # The devcontainer.json refers to 26-resolute-base.
+      # Make the architecture-specific base image available
+      # locally under that exact name.
       - name: Tag base image
         run: |
           docker tag \
             "${IMAGE_NAME}:26-resolute-base-${{ matrix.arch }}-${{ github.sha }}" \
             "${IMAGE_NAME}:26-resolute-base"
 
-      # Build the ACTUAL Dev Container.
+      # Build the actual Dev Container.
       #
-      # This reads .devcontainer/devcontainer.json,
-      # installs the configured features and produces the
-      # final Dev Container image.
+      # devcontainers/ci automatically adds :latest to imageName,
+      # so DO NOT put a tag in imageName here.
       - name: Build Dev Container
         uses: devcontainers/ci@v0.3
         with:
-          imageName: ${{ env.IMAGE_NAME }}:${{ matrix.arch }}-${{ github.sha }}
-          push: false
+          imageName: devcontainer-${{ matrix.arch }}-${{ github.sha }}
+          push: never
 
-      # Scan the FINAL Dev Container, not the Dockerfile base image.
+      # devcontainers/ci produced:
+      #
+      #   devcontainer-${arch}-${sha}:latest
+      #
+      # Retag it with the image name we actually want to publish/scan.
+      - name: Tag final Dev Container
+        run: |
+          docker tag \
+            "devcontainer-${{ matrix.arch }}-${{ github.sha }}:latest" \
+            "${IMAGE_NAME}:${{ matrix.arch }}-${{ github.sha }}"
+
+      # Scan the FINAL Dev Container, including all features.
       - name: Scan Dev Container
         uses: aquasecurity/trivy-action@v0.36.0
         with:
-          image-ref: ${{ env.IMAGE_NAME }}:${{ matrix.arch }}-${{ github.sha }}
+          image-ref: "${{ env.IMAGE_NAME }}:${{ matrix.arch }}-${{ github.sha }}"
           format: sarif
-          output: trivy-${{ matrix.arch }}.sarif
+          output: "trivy-${{ matrix.arch }}.sarif"
           severity: CRITICAL,HIGH
           exit-code: 1
 
       - name: Upload scan results
-        if: always()
-        uses: github/codeql-action/upload-sarif@v3
+        if: always() && hashFiles(format('trivy-{0}.sarif', matrix.arch)) != ''
+        uses: github/codeql-action/upload-sarif@v4
         with:
-          sarif_file: trivy-${{ matrix.arch }}.sarif
+          sarif_file: "trivy-${{ matrix.arch }}.sarif"
 
-      # Only publish after the final image has passed Trivy.
+      # Only publish the final Dev Container after it passed Trivy.
       - name: Push final Dev Container
         if: github.event_name != 'pull_request'
         run: |
