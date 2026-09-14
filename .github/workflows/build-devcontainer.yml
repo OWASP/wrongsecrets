@@ -7,66 +7,165 @@ on:
     paths:
       - ".devcontainer/Dockerfile"
       - ".devcontainer/devcontainer.json"
+      - ".devcontainer/post-create.sh"
       - ".github/workflows/build-devcontainer.yml"
 
   pull_request:
     paths:
       - ".devcontainer/Dockerfile"
       - ".devcontainer/devcontainer.json"
+      - ".devcontainer/post-create.sh"
       - ".github/workflows/build-devcontainer.yml"
 
   workflow_dispatch:
 
 permissions:
   contents: read
-  packages: write
+
+env:
+  IMAGE_NAME: ghcr.io/owasp/wrongsecrets-devcontainer
 
 jobs:
-  build:
-    name: Build dev container
-    runs-on: ubuntu-latest
+  build-and-scan:
+    name: Build and scan (${{ matrix.arch }})
+    runs-on: ${{ matrix.runner }}
+
+    permissions:
+      contents: read
+      packages: write
+      security-events: write
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: amd64
+            platform: linux/amd64
+            runner: ubuntu-latest
+
+          - arch: arm64
+            platform: linux/arm64
+            runner: ubuntu-24.04-arm
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
-
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
+        uses: actions/checkout@v7
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@v4
 
       - name: Log in to GHCR
         if: github.event_name != 'pull_request'
-        uses: docker/login-action@v3
+        uses: docker/login-action@v4
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Docker metadata
-        id: meta
-        uses: docker/metadata-action@v5
-        with:
-          images: ghcr.io/owasp/wrongsecrets-devcontainer
-          tags: |
-            type=raw,value=26-resolute
-            type=sha
-
-      - name: Build and push
-        uses: docker/build-push-action@v6
+      # Build the base image from the Dockerfile.
+      - name: Build base image
+        uses: docker/build-push-action@v7
         with:
           context: .
           file: .devcontainer/Dockerfile
+          platforms: ${{ matrix.platform }}
+          load: true
+          tags: |
+            ${{ env.IMAGE_NAME }}:26-resolute-base-${{ matrix.arch }}-${{ github.sha }}
+          cache-from: type=gha,scope=devcontainer-base-${{ matrix.arch }}
+          cache-to: type=gha,mode=max,scope=devcontainer-base-${{ matrix.arch }}
 
-          platforms: |
-            linux/amd64
-            linux/arm64
+      # The devcontainer.json refers to 26-resolute-base.
+      # Make the architecture-specific base image available
+      # locally under that exact name.
+      - name: Tag base image
+        run: |
+          docker tag \
+            "${IMAGE_NAME}:26-resolute-base-${{ matrix.arch }}-${{ github.sha }}" \
+            "${IMAGE_NAME}:26-resolute-base"
 
-          push: ${{ github.event_name != 'pull_request' }}
+      # Build the actual Dev Container.
+      #
+      # devcontainers/ci automatically adds :latest to imageName,
+      # so DO NOT put a tag in imageName here.
+      - name: Build Dev Container
+        uses: devcontainers/ci@v0.3
+        env:
+          BUILDX_BUILDER: default
+        with:
+          imageName: devcontainer-${{ matrix.arch }}-${{ github.sha }}
+          push: never
 
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+      # devcontainers/ci produced:
+      #
+      #   devcontainer-${arch}-${sha}:latest
+      #
+      # Retag it with the image name we actually want to publish/scan.
+      - name: Tag final Dev Container
+        run: |
+          docker tag \
+            "devcontainer-${{ matrix.arch }}-${{ github.sha }}:latest" \
+            "${IMAGE_NAME}:${{ matrix.arch }}-${{ github.sha }}"
 
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+      # Scan the FINAL Dev Container, including all features.
+      - name: Scan Dev Container
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          image-ref: "${{ env.IMAGE_NAME }}:${{ matrix.arch }}-${{ github.sha }}"
+          format: sarif
+          output: "trivy-${{ matrix.arch }}.sarif"
+          severity: CRITICAL,HIGH,MEDIM
+          exit-code: 0
+
+      - name: Upload scan results
+        if: always() && hashFiles(format('trivy-{0}.sarif', matrix.arch)) != ''
+        uses: github/codeql-action/upload-sarif@v4
+        with:
+          sarif_file: "trivy-${{ matrix.arch }}.sarif"
+
+      # Only publish the final Dev Container after it passed Trivy.
+      - name: Push final Dev Container
+        if: github.event_name != 'pull_request'
+        run: |
+          docker push \
+            "${IMAGE_NAME}:${{ matrix.arch }}-${{ github.sha }}"
+
+      # Publish the base image separately.
+      - name: Push base image
+        if: github.event_name != 'pull_request'
+        run: |
+          docker tag \
+            "${IMAGE_NAME}:26-resolute-base-${{ matrix.arch }}-${{ github.sha }}" \
+            "${IMAGE_NAME}:26-resolute-base-${{ matrix.arch }}"
+
+          docker push \
+            "${IMAGE_NAME}:26-resolute-base-${{ matrix.arch }}"
+
+  manifest:
+    name: Create multi-arch manifest
+    needs: build-and-scan
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v4
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create final Dev Container manifest
+        run: |
+          docker buildx imagetools create \
+            --tag "${IMAGE_NAME}:26-resolute" \
+            --tag "${IMAGE_NAME}:${GITHUB_SHA}" \
+            "${IMAGE_NAME}:amd64-${GITHUB_SHA}" \
+            "${IMAGE_NAME}:arm64-${GITHUB_SHA}"

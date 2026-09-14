@@ -16,7 +16,7 @@ jobs:
     name: Test with podman
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - name: run container
         run: |
           podman run -dt -p 8080:8080 -p 8090:8090 docker.io/jeroenwillemsen/wrongsecrets:latest-no-vault && \

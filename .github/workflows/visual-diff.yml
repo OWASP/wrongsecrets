@@ -15,12 +15,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout PR code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
         with:
           path: pr-code
 
       - name: Checkout main branch
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
         with:
           ref: master
           path: main-code
