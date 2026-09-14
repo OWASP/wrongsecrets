@@ -1,7 +1,7 @@
 {
   "name": "WrongSecrets",
 
-  "image": "ghcr.io/owasp/wrongsecrets-devcontainer:26-resolute",
+  "image": "ghcr.io/owasp/wrongsecrets-devcontainer:26-resolute-base",
 
   "workspaceFolder": "/workspaces",
 

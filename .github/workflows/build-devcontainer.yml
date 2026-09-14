@@ -7,12 +7,15 @@ on:
     paths:
       - ".devcontainer/Dockerfile"
       - ".devcontainer/devcontainer.json"
+      - ".devcontainer/post-create.sh"
       - ".github/workflows/build-devcontainer.yml"
 
   pull_request:
     paths:
+
       - ".devcontainer/Dockerfile"
       - ".devcontainer/devcontainer.json"
+      - ".devcontainer/post-create.sh"
       - ".github/workflows/build-devcontainer.yml"
 
   workflow_dispatch:
@@ -24,7 +27,7 @@ env:
   IMAGE_NAME: ghcr.io/owasp/wrongsecrets-devcontainer
 
 jobs:
-  build:
+  build-and-scan:
     name: Build and scan (${{ matrix.arch }})
     runs-on: ${{ matrix.runner }}
 
@@ -60,39 +63,45 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Docker metadata
-        id: meta
-        uses: docker/metadata-action@v6
-        with:
-          images: ${{ env.IMAGE_NAME }}
-          tags: |
-            type=raw,value=26-resolute
-            type=sha
-
-      - name: Build image
+      # Build the base image from the Dockerfile.
+      - name: Build base image
         uses: docker/build-push-action@v7
         with:
           context: .
           file: .devcontainer/Dockerfile
           platforms: ${{ matrix.platform }}
-
-          push: ${{ github.event_name != 'pull_request' }}
-          load: ${{ github.event_name == 'pull_request' }}
-
+          load: true
           tags: |
-            ${{ env.IMAGE_NAME }}:${{ matrix.arch }}-${{ github.sha }}
+            ${{ env.IMAGE_NAME }}:26-resolute-base-${{ matrix.arch }}-${{ github.sha }}
+          cache-from: type=gha,scope=devcontainer-base-${{ matrix.arch }}
+          cache-to: type=gha,mode=max,scope=devcontainer-base-${{ matrix.arch }}
 
-          labels: ${{ steps.meta.outputs.labels }}
+      # Make the base image available under the name used by
+      # devcontainer.json.
+      - name: Tag base image
+        run: |
+          docker tag \
+            "${IMAGE_NAME}:26-resolute-base-${{ matrix.arch }}-${{ github.sha }}" \
+            "${IMAGE_NAME}:26-resolute-base"
 
-          cache-from: type=gha,scope=devcontainer-${{ matrix.arch }}
-          cache-to: type=gha,mode=max,scope=devcontainer-${{ matrix.arch }}
+      # Build the ACTUAL Dev Container.
+      #
+      # This reads .devcontainer/devcontainer.json,
+      # installs the configured features and produces the
+      # final Dev Container image.
+      - name: Build Dev Container
+        uses: devcontainers/ci@v0.3
+        with:
+          imageName: ${{ env.IMAGE_NAME }}:${{ matrix.arch }}-${{ github.sha }}
+          push: false
 
-      - name: Scan image
+      # Scan the FINAL Dev Container, not the Dockerfile base image.
+      - name: Scan Dev Container
         uses: aquasecurity/trivy-action@v0.36.0
         with:
-          image-ref: "${{ env.IMAGE_NAME }}:${{ matrix.arch }}-${{ github.sha }}"
+          image-ref: ${{ env.IMAGE_NAME }}:${{ matrix.arch }}-${{ github.sha }}
           format: sarif
-          output: "trivy-${{ matrix.arch }}.sarif"
+          output: trivy-${{ matrix.arch }}.sarif
           severity: CRITICAL,HIGH
           exit-code: 1
 
@@ -100,11 +109,29 @@ jobs:
         if: always()
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: "trivy-${{ matrix.arch }}.sarif"
+          sarif_file: trivy-${{ matrix.arch }}.sarif
+
+      # Only publish after the final image has passed Trivy.
+      - name: Push final Dev Container
+        if: github.event_name != 'pull_request'
+        run: |
+          docker push \
+            "${IMAGE_NAME}:${{ matrix.arch }}-${{ github.sha }}"
+
+      # Publish the base image separately.
+      - name: Push base image
+        if: github.event_name != 'pull_request'
+        run: |
+          docker tag \
+            "${IMAGE_NAME}:26-resolute-base-${{ matrix.arch }}-${{ github.sha }}" \
+            "${IMAGE_NAME}:26-resolute-base-${{ matrix.arch }}"
+
+          docker push \
+            "${IMAGE_NAME}:26-resolute-base-${{ matrix.arch }}"
 
   manifest:
     name: Create multi-arch manifest
-    needs: build
+    needs: build-and-scan
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
 
@@ -123,7 +150,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Create and push multi-arch manifest
+      - name: Create final Dev Container manifest
         run: |
           docker buildx imagetools create \
             --tag "${IMAGE_NAME}:26-resolute" \
