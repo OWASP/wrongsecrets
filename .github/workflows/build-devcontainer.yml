@@ -25,12 +25,13 @@ env:
 
 jobs:
   build:
-    name: Build (${{ matrix.arch }})
+    name: Build and scan (${{ matrix.arch }})
     runs-on: ${{ matrix.runner }}
 
     permissions:
       contents: read
       packages: write
+      security-events: write
 
     strategy:
       fail-fast: false
@@ -61,22 +62,22 @@ jobs:
 
       - name: Docker metadata
         id: meta
-        uses: docker/metadata-action@v5
+        uses: docker/metadata-action@v6
         with:
           images: ${{ env.IMAGE_NAME }}
           tags: |
             type=raw,value=26-resolute
             type=sha
 
-      - name: Build and push architecture image
-        uses: docker/build-push-action@v6
+      - name: Build image
+        uses: docker/build-push-action@v7
         with:
           context: .
           file: .devcontainer/Dockerfile
-
           platforms: ${{ matrix.platform }}
 
           push: ${{ github.event_name != 'pull_request' }}
+          load: ${{ github.event_name == 'pull_request' }}
 
           tags: |
             ${{ env.IMAGE_NAME }}:${{ matrix.arch }}-${{ github.sha }}
@@ -86,23 +87,18 @@ jobs:
           cache-from: type=gha,scope=devcontainer-${{ matrix.arch }}
           cache-to: type=gha,mode=max,scope=devcontainer-${{ matrix.arch }}
 
-      - name: Pull image for scanning
-        if: github.event_name != 'pull_request'
-        run: |
-          docker pull "${IMAGE_NAME}:${{ matrix.arch }}-${{ github.sha }}"
-
       - name: Scan image
-        if: github.event_name != 'pull_request'
         uses: aquasecurity/trivy-action@v0.36.0
         with:
           image-ref: "${{ env.IMAGE_NAME }}:${{ matrix.arch }}-${{ github.sha }}"
           format: sarif
           output: "trivy-${{ matrix.arch }}.sarif"
           severity: CRITICAL,HIGH
+          exit-code: 1
 
       - name: Upload scan results
-        if: always() && github.event_name != 'pull_request'
-        uses: github/codeql-action/upload-sarif@v4
+        if: always()
+        uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: "trivy-${{ matrix.arch }}.sarif"
 
