@@ -4,7 +4,7 @@
 
 [![Tweet](https://img.shields.io/badge/-Twitter-%232B90D9?style=for-the-badge&logo=x&logoColor=white)](https://twitter.com/intent/tweet?text=Want%20to%20dive%20into%20secrets%20management%20and%20do%20some%20hunting?%20try%20this&url=https://github.com/OWASP/wrongsecrets&hashtags=secretsmanagement,secrets,hunting,p0wnableapp,OWASP,WrongSecrets) [<img src="https://img.shields.io/badge/-MASTODON-%232B90D9?style=for-the-badge&logo=mastodon&logoColor=white">](https://tootpick.org/#text=Want%20to%20dive%20into%20secrets%20management%20and%20do%20some%20hunting?%20try%20this%0A%0Ahttps://github.com/OWASP/wrongsecrets%20%23secretsmanagement,%20%23secrets,%20%23hunting,%20%23p0wnableapp,%20%23OWASP,%20%23WrongSecrets) [<img src="https://img.shields.io/badge/-BLUESKY-%230085FF?style=for-the-badge&logo=bluesky&logoColor=white">](https://bsky.app/intent/compose?text=Want%20to%20dive%20into%20secrets%20management%20and%20do%20some%20hunting?%20try%20this%0A%0Ahttps://github.com/OWASP/wrongsecrets%20%23secretsmanagement%20%23secrets%20%23hunting%20%23p0wnableapp%20%23OWASP%20%23WrongSecrets) [<img src="https://img.shields.io/badge/-LINKEDIN-0077B5?style=for-the-badge&logo=linkedin&logoColor=white">](https://www.linkedin.com/shareArticle/?url=https://www.github.com/OWASP/wrongsecrets&title=OWASP%20WrongSecrets)
 
-[![Java checkstyle and testing](https://github.com/OWASP/wrongsecrets/actions/workflows/main.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/main.yml) [![Pre-commit](https://github.com/OWASP/wrongsecrets/actions/workflows/pre-commit.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/pre-commit.yml) [![Terraform FMT](https://github.com/OWASP/wrongsecrets/actions/workflows/terraform.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/terraform.yml) [![CodeQL](https://github.com/OWASP/wrongsecrets/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/codeql-analysis.yml) [![Dead Link Checker](https://github.com/OWASP/wrongsecrets/actions/workflows/link_checker.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/link_checker.yml) [![Javadoc and Swaggerdoc generator](https://github.com/OWASP/wrongsecrets/actions/workflows/java_swagger_doc.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/java_swagger_doc.yml) [![Test Heroku with cypress](https://github.com/OWASP/wrongsecrets/actions/workflows/heroku_tests.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/heroku_tests.yml)
+[![Java checkstyle and testing](https://github.com/OWASP/wrongsecrets/actions/workflows/main.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/main.yml) [![Pre-commit](https://github.com/OWASP/wrongsecrets/actions/workflows/pre-commit.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/pre-commit.yml) [![Terraform FMT](https://github.com/OWASP/wrongsecrets/actions/workflows/terraform.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/terraform.yml) [![CodeQL](https://github.com/OWASP/wrongsecrets/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/codeql-analysis.yml) [![Dead Link Checker](https://github.com/OWASP/wrongsecrets/actions/workflows/link_checker.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/link_checker.yml) [![Javadoc and Swaggerdoc generator](https://github.com/OWASP/wrongsecrets/actions/workflows/java_swagger_doc.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/java_swagger_doc.yml) [![Test Heroku with cypress](https://github.com/OWASP/wrongsecrets/actions/workflows/heroku_tests.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/heroku_tests.yml) [![Build Dev Container](https://github.com/OWASP/wrongsecrets/actions/workflows/build-devcontainer.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/build-devcontainer.yml)
 
 [![Test minikube script (k8s)](https://github.com/OWASP/wrongsecrets/actions/workflows/minikube-k8s-test.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/minikube-k8s-test.yml) [![Test minikube script (k8s&vault)](https://github.com/OWASP/wrongsecrets/actions/workflows/minikube-vault-test.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/minikube-vault-test.yml) [![Docker container test](https://github.com/OWASP/wrongsecrets/actions/workflows/container_test.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/container_test.yml) [![Test container on podman](https://github.com/OWASP/wrongsecrets/actions/workflows/container-alts-test.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/container-alts-test.yml)
 [![DAST with ZAP](https://github.com/OWASP/wrongsecrets/actions/workflows/dast-zap-test.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/dast-zap-test.yml) [![PR Preview and Visual Diff](https://github.com/OWASP/wrongsecrets/actions/workflows/pr-preview.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/pr-preview.yml) [![Build Preview](https://github.com/OWASP/wrongsecrets/actions/workflows/build-preview.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/build-preview.yml) [![Visual Diff](https://github.com/OWASP/wrongsecrets/actions/workflows/visual-diff.yml/badge.svg)](https://github.com/OWASP/wrongsecrets/actions/workflows/visual-diff.yml)
@@ -16,7 +16,7 @@
 
 Welcome to the OWASP WrongSecrets game! The game is packed with real life examples of how to _not_ store secrets in your software. Each of these examples is captured in a challenge, which you need to solve using various tools and techniques. Solving these challenges will help you recognize common mistakes & can help you to reflect on your own secrets management strategy.
 
-Can you solve all the 69 challenges?
+Can you solve all the 71 challenges?
 
 Try some of them on [our Heroku demo environment](https://wrongsecrets.herokuapp.com/).
 
@@ -226,9 +226,10 @@ Now you can try to find the secrets by means of solving the challenge offered at
 -   [localhost:8080/challenge/challenge-64](http://localhost:8080/challenge/challenge-64)
 -   [localhost:8080/challenge/challenge-65](http://localhost:8080/challenge/challenge-65)
 -   [localhost:8080/challenge/challenge-66](http://localhost:8080/challenge/challenge-66)
--   [localhost:8080/challenge/challenge-68](http://localhost:8080/challenge/challenge-70)
--   [localhost:8080/challenge/challenge-69](http://localhost:8080/challenge/challenge-70)
+-   [localhost:8080/challenge/challenge-68](http://localhost:8080/challenge/challenge-68)
+-   [localhost:8080/challenge/challenge-69](http://localhost:8080/challenge/challenge-69)
 -   [localhost:8080/challenge/challenge-70](http://localhost:8080/challenge/challenge-70)
+-   [localhost:8080/challenge/challenge-71](http://localhost:8080/challenge/challenge-71)
 </details>
 
 Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look
@@ -257,7 +258,7 @@ If you want to host WrongSecrets on Railway, you can do so by deploying [this on
 
 ## Basic K8s exercise
 
-_Can be used for challenges 0-6, 8, 12-43, 48-70_
+_Can be used for challenges 0-6, 8, 12-43, 48-71_
 
 ### Minikube based
 
@@ -816,8 +817,8 @@ Here are the steps you have to follow to create your own release of WrongSecrets
 ```sh
    docker buildx create --name mybuilder
    docker buildx use mybuilder
-   docker buildx build --platform linux/amd64,linux/arm64 -t <registry/container-name>:<yourtag>-no-vault --build-arg "argBasedPassword='this is on your command line'" --build-arg "PORT=8081" --build-arg "argBasedVersion=<yourtag>" --build-arg "spring_profile=without-vault" --push
-   docker buildx build --platform linux/amd64,linux/arm64 -t <registry/container-name>:<yourtag>-kubernetes-vault--build-arg "argBasedPassword='this is on your command line'" --build-arg "PORT=8081" --build-arg "argBasedVersion=<yourtag>" --build-arg "spring_profile=kubernetes-vault" --push
+   docker buildx build --platform linux/amd64,linux/arm64 -t <registry/container-name>:<yourtag>-no-vault --build-arg "argBasedPassword='this is on your command line'" --build-arg "PORT=8081" --build-arg "argBasedVersion=<yourtag>" --build-arg "spring_profile=without-vault" --push .
+   docker buildx build --platform linux/amd64,linux/arm64 -t <registry/container-name>:<yourtag>-kubernetes-vault --build-arg "argBasedPassword='this is on your command line'" --build-arg "PORT=8081" --build-arg "argBasedVersion=<yourtag>" --build-arg "spring_profile=kubernetes-vault" --push .
 ```
 
 

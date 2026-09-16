@@ -20,14 +20,14 @@ jobs:
     runs-on: ubuntu-latest
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: eLco/setup-vault@v1.0.4
       - name: Start minikube
         uses: medyagh/setup-minikube@master
         with:
-          minikube-version: 1.38.1
+          minikube-version: 1.39.0
           driver: docker
-          kubernetes-version: v1.34.0
+          kubernetes-version: v1.36.0
       - name: Setup helm
         uses: azure/setup-helm@v4
         id: install
@@ -40,14 +40,14 @@ jobs:
     runs-on: ubuntu-latest
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: eLco/setup-vault@v1.0.4
       - name: Start minikube
         uses: medyagh/setup-minikube@master
         with:
-          minikube-version: 1.38.1
+          minikube-version: 1.39.0
           driver: docker
-          kubernetes-version: v1.34.0
+          kubernetes-version: v1.36.0
       - name: Setup helm
         uses: azure/setup-helm@v4
         id: install
