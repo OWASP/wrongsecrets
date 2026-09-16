@@ -56,7 +56,7 @@
     <cyclonedx.core.version>12.2.0</cyclonedx.core.version>
     <datatables.version>2.3.8</datatables.version>
     <dependency-check-maven.version>12.2.2</dependency-check-maven.version>
-    <exec-maven-plugin.version>3.6.3</exec-maven-plugin.version>
+    <exec-maven-plugin.version>3.6.4</exec-maven-plugin.version>
     <findsecbugs.version>1.14.0</findsecbugs.version>
     <frontend-maven-plugin.version>2.0.2</frontend-maven-plugin.version>
     <gatling-maven-plugin.version>4.21.12</gatling-maven-plugin.version>
@@ -85,13 +85,13 @@
     <spring.cloud-version>2025.1.3</spring.cloud-version>
     <spring.security.version>7.0.6</spring.security.version>
     <springdoc-maven.version>1.5</springdoc-maven.version>
-    <springdoc.version>3.1.0</springdoc.version>
+    <springdoc.version>3.1.1</springdoc.version>
     <system-stubs-jupiter.version>2.1.8</system-stubs-jupiter.version>
     <testcontainers-cypress.version>1.10.0</testcontainers-cypress.version>
     <testcontainers.version>1.21.4</testcontainers.version>
     <thymeleaf-extras-springsecurity6.version>3.1.5.RELEASE</thymeleaf-extras-springsecurity6.version>
     <thymeleaf.layout.version>3.4.0</thymeleaf.layout.version>
-    <tidy-maven-plugin.version>1.4.0</tidy-maven-plugin.version>
+    <tidy-maven-plugin.version>1.4.1</tidy-maven-plugin.version>
   </properties>
 
   <dependencyManagement>
