@@ -1,0 +1,9 @@
+=== Secrets shipped to your cloud log sink
+
+Applications rarely log a secret on purpose. What happens far more often is that an "audit event", a request dump, or a structured log field carries a credential along with it. Because the value is encoded, nobody notices it during code review: it just looks like an opaque blob.
+
+In this challenge the application writes such an audit event to standard out. It never returns the secret through an endpoint, never mounts it as a file, and never puts it in an environment variable. The only place the value shows up is the log stream that your cloud provider collects for you, so you will have to go and query the log sink of the cloud you are running on.
+
+Note that the logged value is Base64 encoded, so finding the line is only half of the work.
+
+Tip: this is not the same as challenge 8. There the answer is logged in plain text and you can read it straight from your local container logs.
