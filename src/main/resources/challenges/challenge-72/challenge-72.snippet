@@ -6,7 +6,7 @@
         <p>Fetch the transcript:</p>
         <pre class="skill-code"
              style="padding: 10px; border-radius: 4px; overflow-x: auto; font-size: 13px;"
-    th:text="'curl -sO ' + ${httpServletRequest.scheme} + '://' + ${httpServletRequest.serverName} + (${httpServletRequest.serverPort == 80 || httpServletRequest.serverPort == 443 ? '' : ':' + ${httpServletRequest.serverPort}) + '/challenges/challenge-72/codex-session-transcript.md'">curl -sO http://localhost:8080/challenges/challenge-72/codex-session-transcript.md</pre>
+    th:text="'curl -sO ' + ${httpServletRequest.scheme} + '://' + ${httpServletRequest.serverName} + (${httpServletRequest.serverPort == 80 || httpServletRequest.serverPort == 443 ? '' : ':' + httpServletRequest.serverPort}) + '/challenges/challenge-72/codex-session-transcript.md'">curl -sO http://localhost:8080/challenges/challenge-72/codex-session-transcript.md</pre>
 
         <p style="margin-top: 12px;">…or read it right here:</p>
         <button class="btn btn-warning btn-sm skill-btn" onclick="loadTranscript()">▶ Show transcript</button>
