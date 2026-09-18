@@ -6,6 +6,6 @@ However, developers frequently make the mistake of embedding sensitive tokens, p
 
 To solve this challenge:
 
-. Inspect the `.devcontainer/devcontainer.json` configuration file in the project repository or review the configuration snippet in the UI.
+. Inspect the https://github.com/OWASP/wrongsecrets/tree/master/.devcontainer/devcontainer.json[`.devcontainer/devcontainer.json`] devcontainer configuration file in the project repository or review the configuration snippet in the UI.
 . Identify the leaked `DEVCONTAINER_SECRET` or token defined in the container environment.
 . Submit the discovered secret in the input field below.
