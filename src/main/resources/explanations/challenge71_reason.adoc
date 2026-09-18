@@ -7,6 +7,7 @@ Dev Containers are shared development environments configured via `.devcontainer
 1. **Exposure to All Repository Readers**: Anyone with read access to the source repository (or public forks and clones in open-source projects) can read secrets hardcoded in `.devcontainer/devcontainer.json`.
 2. **Environment Variable Leakage**: Credentials defined in `containerEnv` or `remoteEnv` are injected into every process inside the container, making them accessible to any script, child process, or diagnostic tool running in the container.
 3. **Persistent in Git History**: Once committed, removing the secret requires git history rewrites, and stale keys often remain valid indefinitely if rotation is not performed.
+4. **Harder to detect**: Many secret & container inspectors do still not pick up the `devcontainer.json` as it behaves differently than a `Dockerfile`.
 
 *Remediation and Best Practices:*
 
