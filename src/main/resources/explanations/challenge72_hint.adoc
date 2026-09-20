@@ -1,0 +1,3 @@
+Open link:/challenges/challenge-72/codex-session-transcript.md[`/challenges/challenge-72/codex-session-transcript.md`] and search for the line containing `DEPLOY_TOKEN=`. The value after the equals sign is the answer.
+
+The same file is in the source tree at `src/main/resources/challenges/challenge-72/codex-session-transcript.md`.
