@@ -26,8 +26,7 @@ class Challenge73Test {
       Files.writeString(file, "# " + fileName + "\n\nNo secrets here.\n");
     }
     Files.writeString(
-        dir.resolve("CLAUDE.md"),
-        "# CLAUDE.md\n\nexport STAGING_DEPLOY_TOKEN=\"" + token + "\"\n");
+        dir.resolve("CLAUDE.md"), "# CLAUDE.md\n\nexport STAGING_DEPLOY_TOKEN=\"" + token + "\"\n");
   }
 
   @Test
