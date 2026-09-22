@@ -9,6 +9,14 @@ az monitor log-analytics query \
   --workspace <workspaceId> \
   --analytics-query "ContainerLogV2 | where LogMessage contains 'encoded credential' | project TimeGenerated, LogMessage | take 5"
 ----
+or use:
+[source, shell]
+----
+ContainerLogV2
+| where LogMessage contains "encoded credential"
+| project TimeGenerated, LogMessage
+| take 5
+----
 3. On older workspaces the table is called `ContainerLog` and the column `LogEntry`, so use `ContainerLog | where LogEntry contains 'encoded credential'` instead.
 4. Take the Base64 blob from the message and decode it: `echo '<blob>' | base64 -d`. That decoded value is the answer.
 

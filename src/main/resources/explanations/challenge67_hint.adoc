@@ -11,6 +11,7 @@ aws logs start-query \
   --end-time $(date +%s) \
   --query-string 'fields @message | filter @message like /encoded credential/'
 ----
+Note: in this example the application generated the secret in the last hour, so if it is up and running longer: select a longer start-time!
 3. Alternatively tail it directly: `aws logs tail "/aws/containerinsights/<clustername>/application" --follow --filter-pattern "encoded credential"`.
 4. Take the Base64 blob from the message and decode it: `echo '<blob>' | base64 -d`. That decoded value is the answer.
 
