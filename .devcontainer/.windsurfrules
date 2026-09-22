@@ -1,0 +1,8 @@
+# Windsurf rules
+
+- Use the Java 26 toolchain that ships with the dev container.
+- Run `./mvnw test -Dtest=ChallengeNNTest` for the challenge you touched.
+- Follow the challenge conventions documented in `AGENTS.md`.
+- Do not commit real credentials. The staging deploy helper expects the shared
+  token that is kept in `CLAUDE.md`; import it rather than hardcoding your own.
+- Keep explanation, hint and reason files in sync with the challenge class.
