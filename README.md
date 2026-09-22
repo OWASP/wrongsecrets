@@ -16,7 +16,7 @@
 
 Welcome to the OWASP WrongSecrets game! The game is packed with real life examples of how to _not_ store secrets in your software. Each of these examples is captured in a challenge, which you need to solve using various tools and techniques. Solving these challenges will help you recognize common mistakes & can help you to reflect on your own secrets management strategy.
 
-Can you solve all the 71 challenges?
+Can you solve all the 72 challenges?
 
 Try some of them on [our Heroku demo environment](https://wrongsecrets.herokuapp.com/).
 
@@ -128,16 +128,16 @@ Not sure which setup is right for you? Here's a quick guide:
 
 | **I want to...** | **Recommended Setup** | **Challenges Available** |
 |------------------|----------------------|--------------------------|
-| Try it quickly online | [Container running on Heroku](https://www.wrongsecrets.com/) | Basic challenges (0-4, 8, 12-32, 34-43, 49-52, 54-66) |
+| Try it quickly online | [Container running on Heroku](https://www.wrongsecrets.com/) | Basic challenges (0-4, 8, 12-32, 34-43, 49-52, 54-66, 68-72) |
 | Run locally with Docker | [Basic Docker](#basic-docker-exercises) | Same as above, but on your machine |
-| Learn Kubernetes secrets | [K8s/Minikube Setup](#basic-k8s-exercise) | Kubernetes challenges (0-6, 8, 12-43, 48-66) |
-| Practice with cloud secrets | [Cloud Challenges](#cloud-challenges) | All challenges (0-70) |
+| Learn Kubernetes secrets | [K8s/Minikube Setup](#basic-k8s-exercise) | Kubernetes challenges (0-6, 8, 12-43, 48-66, 68-72) |
+| Practice with cloud secrets | [Cloud Challenges](#cloud-challenges) | All challenges (0-72) |
 | Run a workshop/CTF | [CTF Setup](#ctf) | Customizable challenge sets |
 | Contribute to the project | [Development Setup](#notes-on-development) | All challenges + development tools |
 
 ## Basic docker exercises
 
-_Can be used for challenges 0-4, 8, 12-32, 34-43, 49-52, 54-66_
+_Can be used for challenges 0-4, 8, 12-32, 34-43, 49-52, 54-66, 68-72_
 
 For the basic docker exercises you currently require:
 
@@ -161,7 +161,7 @@ docker run -p 8080:8080 -p 8090:8090 ghcr.io/owasp/wrongsecrets/wrongsecrets-mas
 ⚠️ **Warning**: This is a development version built from the latest master branch and may contain experimental features or instabilities.
 
 **📝 Note on Ports:**
-- Port **8080**: Main application (challenges 0-68)
+- Port **8080**: Main application (challenges 0-72)
 - Port **8090**: MCP server (required for Challenge 60)
 
 **📝 Note on Challenge 62 (Google Drive MCP):**
@@ -230,6 +230,7 @@ Now you can try to find the secrets by means of solving the challenge offered at
 -   [localhost:8080/challenge/challenge-69](http://localhost:8080/challenge/challenge-69)
 -   [localhost:8080/challenge/challenge-70](http://localhost:8080/challenge/challenge-70)
 -   [localhost:8080/challenge/challenge-71](http://localhost:8080/challenge/challenge-71)
+-   [localhost:8080/challenge/challenge-72](http://localhost:8080/challenge/challenge-72)
 </details>
 
 Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look
@@ -258,7 +259,7 @@ If you want to host WrongSecrets on Railway, you can do so by deploying [this on
 
 ## Basic K8s exercise
 
-_Can be used for challenges 0-6, 8, 12-43, 48-71_
+_Can be used for challenges 0-6, 8, 12-43, 48-72_
 
 ### Minikube based
 
@@ -335,7 +336,7 @@ now you can use the provided IP address and port to further play with the K8s va
 
 ## Vault exercises with minikube
 
-_Can be used for challenges 0-8, 12-70_
+_Can be used for challenges 0-8, 12-46, 48-72_
 Make sure you have the following installed:
 
 -   minikube with docker (or comment out line 8 and work at your own k8s setup),
@@ -353,7 +354,7 @@ This is because if you run the start script again it will replace the secret in 
 
 ## Cloud Challenges
 
-_Can be used for challenges 0-70_
+_Can be used for challenges 0-72_
 
 **READ THIS**: Given that the exercises below contain IAM privilege escalation exercises,
 never run this on an account which is related to your production environment or can influence your account-over-arching
@@ -417,16 +418,19 @@ Contributors:
 - [Rodolfo Neves @roddas](https://www.github.com/roddas)
 - [O @osamamagdy](https://www.github.com/osamamagdy)
 - [Pastekitoo @Pastekitoo](https://www.github.com/Pastekitoo)
-- [Shubham Patel @Shubham-Patel07](https://www.github.com/Shubham-Patel07)
 - [za @za](https://www.github.com/za)
 - [Divyanshu Dev @Novice-expert](https://www.github.com/Novice-expert)
 - [Tibor Hercz @tiborhercz](https://www.github.com/tiborhercz)
+- [sandeshkuldharme1 @sandeshkuldharme1](https://www.github.com/sandeshkuldharme1)
+- [Shubham Patel @Shubham-Patel07](https://www.github.com/Shubham-Patel07)
 - [Adarsh A @adarsh-a-tw](https://www.github.com/adarsh-a-tw)
 - [Chris Elbring Jr. @neatzsche](https://www.github.com/neatzsche)
+- [Sandeep @youknowme19](https://www.github.com/youknowme19)
 - [Diamond Rivero @diamant3](https://www.github.com/diamant3)
 - [Norbert Wolniak @nwolniak](https://www.github.com/nwolniak)
+- [Jeffy123-zhu @Jeffy123-zhu](https://www.github.com/Jeffy123-zhu)
+- [Anirban Ghosh @kekubhai](https://www.github.com/kekubhai)
 - [Robert Felber @rfelber](https://www.github.com/rfelber)
-- [Sandeep @youknowme19](https://www.github.com/youknowme19)
 - [Filip Chyla @fchyla](https://www.github.com/fchyla)
 - [Seershan Mitra @seershan](https://www.github.com/seershan)
 - [Vineeth Jagadeesh @djvinnie](https://www.github.com/djvinnie)
@@ -434,16 +438,15 @@ Contributors:
 - [Mahaputra Ilham Awal @mahaputrailhamawal](https://www.github.com/mahaputrailhamawal)
 - [Turjo Chowdhury @turjoc120](https://www.github.com/turjoc120)
 - [SndR @SndR85](https://www.github.com/SndR85)
-- [Anirban Ghosh @kekubhai](https://www.github.com/kekubhai)
 - [alphasec @alphasecio](https://www.github.com/alphasecio)
 - [CaduRoriz @CaduRoriz](https://www.github.com/CaduRoriz)
 - [Josh Grossman @tghosth](https://www.github.com/tghosth)
 - [Madhu Akula @madhuakula](https://www.github.com/madhuakula)
 - [Mike Woudenberg @mikewoudenberg](https://www.github.com/mikewoudenberg)
 - [Spyros @northdpole](https://www.github.com/northdpole)
+- [Satyam Pandey @SatyamPandey-07](https://www.github.com/SatyamPandey-07)
 - [Muhammad Moeed Ur Rehman Khan @moeedrehman135](https://www.github.com/moeedrehman135)
 - [RubenAtBinx @RubenAtBinx](https://www.github.com/RubenAtBinx)
-- [Satyam Pandey @SatyamPandey-07](https://www.github.com/SatyamPandey-07)
 - [Alex Bender @alex-bender](https://www.github.com/alex-bender)
 - [Arpit Jain @arpitjain099](https://www.github.com/arpitjain099)
 - [Tuer·maimaitiaili Ba @bte808](https://www.github.com/bte808)
