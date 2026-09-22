@@ -58,6 +58,7 @@ jobs:
         run: |
           cd src/test/K8s-tests
           npm install
+          npx cypress install
           npx cypress run
       - uses: actions/upload-artifact@v4
         if: success() || failure()
