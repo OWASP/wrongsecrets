@@ -1,5 +1,5 @@
-
- function secret() {
- var password = "LfcOC4Y=" + 9 + "trCD" + 6 + "O9Q=" + 2 + "LVtb" + 7;
+// eslint-disable-next-line no-unused-vars
+ function secret() { 
+ var password = "w5m2t5A=" + 9 + "ldQb" + 6 + "R/I=" + 2 + "puC5" + 7;
  return password;
  }
