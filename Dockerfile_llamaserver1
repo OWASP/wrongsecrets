@@ -1,0 +1,25 @@
+FROM ghcr.io/ggml-org/llama.cpp:server
+
+ARG MODEL_URL="https://huggingface.co/QuantFactory/SmolLM-135M-Instruct-GGUF/resolve/main/SmolLM-135M-Instruct.Q4_K_M.gguf"
+
+USER root
+
+RUN mkdir -p /models /config \
+    && curl -L --fail --retry 3 \
+       "${MODEL_URL}" \
+       -o /models/model.gguf \
+    && chmod 0444 /models/model.gguf
+
+COPY wrongsecret-lama-resources/llama-prompt.txt /config/personality.txt
+
+RUN chmod 0444 /config/personality.txt
+
+COPY wrongsecret-lama-resources/llama-entrypoint.sh /usr/local/bin/llama-entrypoint.sh
+
+RUN chmod 0555 /usr/local/bin/llama-entrypoint.sh
+
+USER 1000
+
+EXPOSE 1234
+
+ENTRYPOINT ["/usr/local/bin/llama-entrypoint.sh"]
