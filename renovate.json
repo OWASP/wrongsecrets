@@ -77,6 +77,30 @@
             ],
             "depNameTemplate": "node",
             "datasourceTemplate": "node-version"
+        },
+        {
+            "customType": "regex",
+            "description": "Track Go version in the devcontainer Dockerfile",
+            "managerFilePatterns": [
+                "/^\\.devcontainer/Dockerfile$/"
+            ],
+            "matchStrings": [
+                "ARG GO_VERSION=(?<currentValue>.*)"
+            ],
+            "depNameTemplate": "golang",
+            "datasourceTemplate": "golang-version"
+        },
+        {
+            "customType": "regex",
+            "description": "Track Node.js major version installed via nodesource in the devcontainer Dockerfile",
+            "managerFilePatterns": [
+                "/^\\.devcontainer/Dockerfile$/"
+            ],
+            "matchStrings": [
+                "setup_(?<currentValue>\\d+)\\.x"
+            ],
+            "depNameTemplate": "node",
+            "datasourceTemplate": "node-version"
         }
     ],
     "packageRules": [
@@ -190,6 +214,13 @@
             "matchPackageNames": [
                 "/^playwright/",
                 "/^@babel//"
+            ]
+        },
+        {
+            "groupName": "Dev Container",
+            "matchFileNames": [
+                ".devcontainer/devcontainer.json",
+                ".devcontainer/Dockerfile"
             ]
         }
     ]
