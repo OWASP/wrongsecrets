@@ -2,7 +2,6 @@ package org.owasp.wrongsecrets.challenges.docker;
 
 import static org.owasp.wrongsecrets.Challenges.ErrorResponses.FILE_MOUNT_ERROR;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -41,9 +40,6 @@ public class Challenge73 extends FixedAnswerChallenge {
   }
 
   @Override
-  @SuppressFBWarnings(
-      value = "PATH_TRAVERSAL_IN",
-      justification = "The path is a configured location of the agent context files.")
   public String getAnswer() {
     var basePath = Path.of(agentContextPath);
     for (var fileName : AGENT_CONTEXT_FILES) {
