@@ -67,13 +67,13 @@ jobs:
           header: llama-preview-instructions
           message: |
             ### 🦙 Llama Container Preview Ready!
-            
+
             You can test this container preview locally using the following commands:
-            
+
             ```bash
             # 1. Log in to GitHub Container Registry (if not already authenticated)
             echo "YOUR_GITHUB_TOKEN" | docker login ghcr.io -u \${{ github.actor }} --password-stdin
-            
+
             # 2. Run the preview container
             docker run --rm \
               --name wrongsecrets-llama \
@@ -81,5 +81,5 @@ jobs:
               -p 1234:1234 \
               ghcr.io/ github.repository /wrongsecrets-pr:pr-{{ github.event.pull_request.number }}
             ```
-            
+
             *Note: The specific tag for this specific commit is also available using the commit-SHA suffix if needed.*
