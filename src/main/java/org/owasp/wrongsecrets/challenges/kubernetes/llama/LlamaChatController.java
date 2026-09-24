@@ -44,7 +44,8 @@ public class LlamaChatController {
         HttpRequest.newBuilder()
             .uri(URI.create(llamaUrl + "/v1/chat/completions"))
             .header("Content-Type", "application/json")
-            .POST(HttpRequest.BodyPublishers.ofString(objectMapper.writeValueAsString(llamaRequest)))
+            .POST(
+                HttpRequest.BodyPublishers.ofString(objectMapper.writeValueAsString(llamaRequest)))
             .build();
 
     var response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
