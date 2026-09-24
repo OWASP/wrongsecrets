@@ -4,14 +4,13 @@ on:
   push:
     branches:
       - master
+
   workflow_dispatch:
 
 permissions:
   contents: read
   packages: write
 
-env:
-  NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
 
 jobs:
   build-and-publish-desktop:
@@ -84,9 +83,9 @@ jobs:
           echo "**Standard LLaMA Server:**" >> $GITHUB_STEP_SUMMARY
           echo "\`\`\`bash" >> $GITHUB_STEP_SUMMARY
           echo "docker pull ghcr.io/${{ github.repository }}/wrongsecrets-llamaserver:latest-master" >> $GITHUB_STEP_SUMMARY
-          echo "docker run -d -p 3000:3000 ghcr.io/${{ github.repository }}/wrongsecrets-llamaserver:latest-master" >> $GITHUB_STEP_SUMMARY
+          echo "docker run -d -p 1234:1234 ghcr.io/${{ github.repository }}/wrongsecrets-llamaserver:latest-master" >> $GITHUB_STEP_SUMMARY
           echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "\`\`\`bash" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "Then visit: http://localhost:3000" >> $GITHUB_STEP_SUMMARY
+          echo "Then visit: http://localhost:1234" >> $GITHUB_STEP_SUMMARY
