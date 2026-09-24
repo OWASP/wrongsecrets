@@ -19,12 +19,11 @@ public class LlamaChatController {
 
   private final HttpClient httpClient = HttpClient.newHttpClient();
   private final ObjectMapper objectMapper;
+  private final String llamaUrl;
 
-  @Value("${http://localhost:1234}")
-  private String llamaUrl;
-
-  public LlamaChatController(ObjectMapper objectMapper) {
+  public LlamaChatController(ObjectMapper objectMapper, @Value("${LLAMAURL}")String llamaUrl) {
     this.objectMapper = objectMapper;
+    this.llamaUrl = llamaUrl;
   }
 
   @PostMapping(
