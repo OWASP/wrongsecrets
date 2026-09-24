@@ -10,6 +10,7 @@ RUN mkdir -p /models /config \
        -o /models/model.gguf \
     && chmod 0444 /models/model.gguf
 
+RUN echo 123
 COPY wrongsecret-lama-resources/llama-prompt.txt /config/personality.txt
 
 RUN chmod 0444 /config/personality.txt

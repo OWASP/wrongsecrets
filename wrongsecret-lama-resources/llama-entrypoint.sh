@@ -7,6 +7,7 @@ exec /app/llama-server \
   -m /models/model.gguf \
   --host 0.0.0.0 \
   --port 1234 \
+  --system-prompt "$SYSTEM_PROMPT" \
   -c 512 \
   -n 128 \
   -np 1 \
