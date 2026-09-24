@@ -4,7 +4,7 @@ on:
   pull_request:
     types: [opened, synchronize, reopened, closed]
     paths:
-      - 'wrongsecret-lama-resources'
+      - 'wrongsecret-lama-resources/*'
       - 'Dockerfile_llamaserver1'
 
 permissions:
