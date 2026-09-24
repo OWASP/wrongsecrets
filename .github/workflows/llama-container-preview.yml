@@ -1,0 +1,85 @@
+name: llama-container-preview
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    paths:
+      - 'wrongsecret-lama-resources'
+      - 'Dockerfile_llamaserver1'
+
+permissions:
+  contents: read
+  packages: write
+  pull-requests: write
+
+jobs:
+  build-preview:
+    runs-on: ubuntu-latest
+    if: github.event.action != 'closed' && github.event.pull_request.head.repo.full_name == github.repository
+    strategy:
+      matrix:
+        container:
+          - name: "llamaserver"
+            dockerfile: "Dockerfile_llamaserver1"
+            image_name: "wrongsecrets-llamaserver"
+    outputs:
+      image-tag: ${{ steps.meta.outputs.tags }}
+      image-digest: ${{ steps.build.outputs.digest }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository }}/wrongsecrets-pr
+          tags: |
+            type=ref,event=pr,suffix=-{{sha}}
+            type=ref,event=pr
+
+      - name: Build and push Docker image
+        id: build
+        uses: docker/build-push-action@v6
+        with:
+          platforms: linux/amd64,linux/arm64
+          context: .
+          file: ${{ matrix.container.dockerfile }}
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha,scope=${{ matrix.container.name }}
+          cache-to: type=gha,mode=max,scope=${{ matrix.container.name }}
+
+      - name: Post PR Comment with Preview Instructions
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: llama-preview-instructions
+          message: |
+            ### 🦙 Llama Container Preview Ready!
+            
+            You can test this container preview locally using the following commands:
+            
+            ```bash
+            # 1. Log in to GitHub Container Registry (if not already authenticated)
+            echo "YOUR_GITHUB_TOKEN" | docker login ghcr.io -u \${{ github.actor }} --password-stdin
+            
+            # 2. Run the preview container
+            docker run --rm \
+              --name wrongsecrets-llama \
+              --memory=2g \
+              -p 1234:1234 \
+              ghcr.io/ github.repository /wrongsecrets-pr:pr-{{ github.event.pull_request.number }}
+            ```
+            
+            *Note: The specific tag for this specific commit is also available using the commit-SHA suffix if needed.*

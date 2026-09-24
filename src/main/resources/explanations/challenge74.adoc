@@ -1,0 +1,12 @@
+=== Challenge 74: Convince the AI Assistant to Reveal the Secret
+
+AI assistants can be given system instructions containing confidential information. If those instructions are not properly protected, prompt injection may cause the assistant to reveal information that it was explicitly told to keep secret.
+
+This application provides a small AI assistant. The assistant has been given confidential information in its instructions and has been told never to reveal it.
+
+Chat with the assistant and find a way to convince it to reveal the confidential information.
+
+[NOTE]
+====
+The assistant has been explicitly instructed not to reveal the confidential information. Try different prompts and techniques to see whether you can get it to disclose its instructions or the secret.
+====
