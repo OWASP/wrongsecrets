@@ -43,7 +43,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ghcr.io/${{ github.repository }}/wrongsecrets-pr
+          images: ghcr.io/${{ github.repository }}/wrongsecrets-llamaserver-pr
           tags: |
             type=ref,event=pr,suffix=-{{sha}}
             type=ref,event=pr
@@ -79,7 +79,7 @@ jobs:
               --name wrongsecrets-llama \
               --memory=2g \
               -p 1234:1234 \
-              ghcr.io/ github.repository /wrongsecrets-pr:pr-{{ github.event.pull_request.number }}
+              ghcr.io/github.repository/wrongsecrets-llamaserver-pr:pr-{{ github.event.pull_request.number }}
             ```
 
             *Note: The specific tag for this specific commit is also available using the commit-SHA suffix if needed.*
