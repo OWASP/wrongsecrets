@@ -4,14 +4,13 @@ on:
   push:
     branches:
       - master
+
   workflow_dispatch:
 
 permissions:
   contents: read
   packages: write
 
-env:
-  NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
 
 jobs:
   build-and-publish-desktop:
