@@ -21,7 +21,7 @@ public class LlamaChatController {
   private final ObjectMapper objectMapper;
   private final String llamaUrl;
 
-  public LlamaChatController(ObjectMapper objectMapper, @Value("${LLAMAURL}")String llamaUrl) {
+  public LlamaChatController(ObjectMapper objectMapper, @Value("${LLAMAURL}") String llamaUrl) {
     this.objectMapper = objectMapper;
     this.llamaUrl = llamaUrl;
   }
