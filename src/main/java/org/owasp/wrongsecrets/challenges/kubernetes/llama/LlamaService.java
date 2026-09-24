@@ -1,67 +1,49 @@
 package org.owasp.wrongsecrets.challenges.kubernetes.llama;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
-import java.util.List;
-
 @Service
 public class LlamaService {
 
-    private final RestClient restClient;
+  private final RestClient restClient;
 
-    public LlamaService(
-        @Value("${llama.url:http://localhost:1234}") String llamaUrl) {
+  public LlamaService(@Value("${llama.url:http://localhost:1234}") String llamaUrl) {
 
-        this.restClient = RestClient.builder()
-            .baseUrl(llamaUrl)
-            .build();
-    }
+    this.restClient = RestClient.builder().baseUrl(llamaUrl).build();
+  }
 
-    public String chat(String systemPrompt, String userMessage) {
-        ChatRequest request = new ChatRequest(
+  public String chat(String systemPrompt, String userMessage) {
+    ChatRequest request =
+        new ChatRequest(
             "local-model",
-            List.of(
-                new Message("system", systemPrompt),
-                new Message("user", userMessage)
-            ),
-            0.1
-        );
+            List.of(new Message("system", systemPrompt), new Message("user", userMessage)),
+            0.1);
 
-        ChatResponse response = restClient.post()
+    ChatResponse response =
+        restClient
+            .post()
             .uri("/v1/chat/completions")
             .contentType(MediaType.APPLICATION_JSON)
             .body(request)
             .retrieve()
             .body(ChatResponse.class);
 
-        if (response == null
-            || response.choices() == null
-            || response.choices().isEmpty()) {
-            throw new IllegalStateException("No response received from llama-server");
-        }
-
-        return response.choices().getFirst().message().content();
+    if (response == null || response.choices() == null || response.choices().isEmpty()) {
+      throw new IllegalStateException("No response received from llama-server");
     }
 
-    public record ChatRequest(
-        String model,
-        List<Message> messages,
-        double temperature) {
-    }
+    return response.choices().getFirst().message().content();
+  }
 
-    public record Message(
-        String role,
-        String content) {
-    }
+  public record ChatRequest(String model, List<Message> messages, double temperature) {}
 
-    public record ChatResponse(
-        List<Choice> choices) {
-    }
+  public record Message(String role, String content) {}
 
-    public record Choice(
-        Message message) {
-    }
+  public record ChatResponse(List<Choice> choices) {}
+
+  public record Choice(Message message) {}
 }
