@@ -16,7 +16,7 @@
 
 Welcome to the OWASP WrongSecrets game! The game is packed with real life examples of how to _not_ store secrets in your software. Each of these examples is captured in a challenge, which you need to solve using various tools and techniques. Solving these challenges will help you recognize common mistakes & can help you to reflect on your own secrets management strategy.
 
-Can you solve all the 72 challenges?
+Can you solve all the 73 challenges?
 
 Try some of them on [our Heroku demo environment](https://wrongsecrets.herokuapp.com/).
 
@@ -231,6 +231,7 @@ Now you can try to find the secrets by means of solving the challenge offered at
 -   [localhost:8080/challenge/challenge-70](http://localhost:8080/challenge/challenge-70)
 -   [localhost:8080/challenge/challenge-71](http://localhost:8080/challenge/challenge-71)
 -   [localhost:8080/challenge/challenge-72](http://localhost:8080/challenge/challenge-72)
+-   [localhost:8080/challenge/challenge-73](http://localhost:8080/challenge/challenge-73)
 </details>
 
 Note that these challenges are still very basic, and so are their explanations. Feel free to file a PR to make them look

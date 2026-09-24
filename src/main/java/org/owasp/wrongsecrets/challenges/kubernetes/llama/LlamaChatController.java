@@ -2,6 +2,7 @@ package org.owasp.wrongsecrets.challenges.kubernetes.llama;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -32,26 +33,19 @@ public class LlamaChatController {
       produces = MediaType.APPLICATION_JSON_VALUE)
   public ChatResponse chat(@RequestBody ChatRequest request) throws Exception {
 
-    var llamaRequest =
-        """
-        {
-          "messages": [
-            {
-              "role": "user",
-              "content": %s
-            }
-          ],
-          "temperature": 0.1,
-          "max_tokens": 128
-        }
-        """
-            .formatted(objectMapper.writeValueAsString(request.message()));
+    ObjectNode llamaRequest = objectMapper.createObjectNode();
+    llamaRequest.put("temperature", 0.1);
+    llamaRequest.put("max_tokens", 128);
+    var userMessage = llamaRequest.putArray("messages").addObject();
+    userMessage.put("role", "user");
+    userMessage.put("content", request.message());
 
     var httpRequest =
         HttpRequest.newBuilder()
             .uri(URI.create(llamaUrl + "/v1/chat/completions"))
             .header("Content-Type", "application/json")
-            .POST(HttpRequest.BodyPublishers.ofString(llamaRequest))
+            .POST(
+                HttpRequest.BodyPublishers.ofString(objectMapper.writeValueAsString(llamaRequest)))
             .build();
 
     var response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());

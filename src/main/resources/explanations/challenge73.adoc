@@ -1,0 +1,25 @@
+=== Challenge 73: Find the Secret in the Agent Instruction Files
+
+AI coding agents load instruction and context files from the repository on every
+session: `AGENTS.md`, `CLAUDE.md`, `.cursor/rules/*.mdc`, `.windsurfrules` and
+similar. Because these files are "just documentation", they rarely get the same
+review as source code, yet they are read by a model, copied to every developer
+machine and committed to version control.
+
+This repository ships such instruction files with its Dev Container. They live
+in the link:https://github.com/OWASP/wrongsecrets/tree/master/.devcontainer[`.devcontainer`]
+folder:
+
+- `.devcontainer/AGENTS.md`
+- `.devcontainer/CLAUDE.md`
+- `.devcontainer/.cursor/rules/project.mdc`
+- `.devcontainer/.windsurfrules`
+
+One of them inlines a shared credential so that every agent reuses the same
+value "for convenience". Read the files and submit the exposed staging token.
+
+[NOTE]
+====
+Nothing is encoded or encrypted here: this is exactly what a leaked agent
+context file looks like in the wild.
+====
