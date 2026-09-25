@@ -1,11 +1,13 @@
 package org.owasp.wrongsecrets.challenges.kubernetes.llama;
 
 import java.util.List;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
+@Slf4j
 @Service
 public class LlamaService {
 
@@ -22,6 +24,7 @@ public class LlamaService {
             "local-model",
             List.of(new Message("system", systemPrompt), new Message("user", userMessage)),
             0.1);
+    log.info("Request messages: {}", request.messages());
 
     ChatResponse response =
         restClient
@@ -36,7 +39,10 @@ public class LlamaService {
       throw new IllegalStateException("No response received from llama-server");
     }
 
-    return response.choices().getFirst().message().content();
+    Message responseMessage = response.choices().getFirst().message();
+    log.info("Response message: {}", responseMessage);
+
+    return responseMessage.content();
   }
 
   public record ChatRequest(String model, List<Message> messages, double temperature) {}
