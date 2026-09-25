@@ -55,7 +55,7 @@ public class SecurityConfig {
                 "/canaries/tokencallbackdebug",
                 "/token",
                 "/mcp",
-                "/api/challenges/llama/chat",
+                "/api/challenge/74/chat",
                 "/mcp62"));
   }
 
