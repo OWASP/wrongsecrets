@@ -24,7 +24,7 @@ public class LlamaService {
             "local-model",
             List.of(new Message("system", systemPrompt), new Message("user", userMessage)),
             0.1);
-    log.info("Request messages: {}", request.messages());
+    log.info("User request messages: {}", userMessage);
 
     ChatResponse response =
         restClient
