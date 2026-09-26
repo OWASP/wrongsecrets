@@ -10,5 +10,5 @@ exec /app/llama-server \
   -n 128 \
   -np 1 \
   --temp 0.1 \
-  --cache-ram 256 \
+  --cache-ram 512 \
   --ctx-checkpoints 2
