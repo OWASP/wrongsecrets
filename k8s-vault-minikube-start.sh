@@ -171,14 +171,16 @@ kubectl exec vault-0 -n vault -- vault write auth/kubernetes/role/secret-challen
   vault kv put secret/application vaultpassword.password="$(openssl rand -base64 16)"
 kubectl create serviceaccount vault
 
-# echo "Deploy wrongsecrets-llama app"
-# kubectl apply -f k8s/wrongsecrets-llama-deployment.yaml
-# while [[ $(kubectl get pods -l app=wrongsecrets-llama -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do
-#   echo "waiting for wrongsecrets-llama" && sleep 2
-# done
-# kubectl get pods -l app=wrongsecrets-llama
-# kubectl logs deployment/wrongsecrets-llama
-#kubectl apply -f k8s/wrongsecrets-llama-service.yaml
+ echo "Deploy wrongsecrets-llama app"
+ kubectl apply -f k8s/challenge74/wrongsecrets-llama-secret.yaml
+ kubectl apply -f k8s/challenge74/wrongsecrets-llama-service.yaml
+ kubectl apply -f k8s/challenge74/wrongsecrets-llama-deployment.yaml
+ while [[ $(kubectl get pods -l app=challenge74-llama -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do
+   echo "waiting for wrongsecrets-llama" && sleep 2
+ done
+ kubectl get pods -l app=challenge74-llama
+ kubectl logs deployment/challenge74-llama
+
 
 echo "Deploy secret challenge app"
 kubectl apply -f k8s/secret-challenge-vault-deployment.yml

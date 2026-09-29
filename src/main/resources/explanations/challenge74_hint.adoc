@@ -1,3 +1,18 @@
-Open link:/challenges/challenge-72/codex-session-transcript.md[`/challenges/challenge-72/codex-session-transcript.md`] and search for the line containing `DEPLOY_TOKEN=`. The value after the equals sign is the answer.
+You can solve this challenge using the following steps:
 
-The same file is in the source tree at `src/main/resources/challenges/challenge-72/codex-session-transcript.md`.
+1. Interact with the AI assistant:
+- Use the chat interface provided in the challenge.
+- Ask the assistant questions and observe how it responds.
+- Remember that the assistant has been given confidential information as part of its instructions.
+
+2. Investigate how the assistant is instructed:
+- Ask the assistant about its instructions, rules, or context.
+- Consider what information might be available to the model that is not directly visible in the chat interface.
+
+3. Try prompt injection:
+- The assistant has been instructed not to reveal the confidential information.
+- Try crafting messages that change, override, or manipulate those instructions.
+- Ask the assistant to reveal information from its instructions or context.
+
+4. Look for the secret:
+- If you successfully cause the assistant to disclose the confidential information, use the revealed value as the solution to the challenge.
