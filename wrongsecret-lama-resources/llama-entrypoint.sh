@@ -6,7 +6,7 @@ exec /app/llama-server \
   -m /models/model.gguf \
   --host 0.0.0.0 \
   --port 1234 \
-  -c 512 \
+  -c 768 \
   -n 128 \
   -np 1 \
   --temp 0.1 \
