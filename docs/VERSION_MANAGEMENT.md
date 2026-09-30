@@ -12,9 +12,9 @@ The project maintains version consistency between:
 ## Version Schema
 
 ```
-pom.xml version:        1.14.0-SNAPSHOT
-Dockerfile version:     1.14.0
-Dockerfile.web version: 1.14.0-no-vault
+pom.xml version:        1.14.1RC2-SNAPSHOT
+Dockerfile version:     1.14.1RC2
+Dockerfile.web version: 1.14.1RC2-no-vault
 ```
 
 ## Automated Solutions
@@ -70,7 +70,7 @@ The `version-sync-check.yml` workflow:
 
 1. **Update pom.xml version**:
    ```xml
-   <version>1.14.0-SNAPSHOT</version>
+   <version>1.14.1RC2-SNAPSHOT</version>
    ```
 
 2. **Run sync script**:
@@ -86,7 +86,7 @@ The `version-sync-check.yml` workflow:
 4. **Commit all changes**:
    ```bash
    git add pom.xml Dockerfile Dockerfile.web
-   git commit -m "Bump version to 1.14.0"
+   git commit -m "Bump version to 1.14.1RC2"
    ```
 
 ## Workflow Integration
