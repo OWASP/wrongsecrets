@@ -1,0 +1,17 @@
+---
+description: Project rules for the WrongSecrets dev container
+globs: ["**/*.java", "**/*.yaml", "**/*.adoc"]
+alwaysApply: true
+---
+
+# WrongSecrets project rules
+
+- Challenge classes live in
+  `org.owasp.wrongsecrets.challenges.<environment>` (docker, kubernetes, cloud).
+- Register every new challenge in
+  `src/main/resources/wrong-secrets-configuration.yaml`.
+- Add `challengeNN.adoc`, `challengeNN_hint.adoc` and `challengeNN_reason.adoc`
+  under `src/main/resources/explanations/`.
+- Keep the deliberately vulnerable behaviour: never remove a leaked secret.
+- Reuse the shared staging credentials documented in `CLAUDE.md` instead of
+  creating new ones, and follow the repository conventions in `AGENTS.md`.

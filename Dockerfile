@@ -54,6 +54,9 @@ COPY --chown=wrongsecrets src/test/resources/RSAprivatekey.pem /var/tmp/helpers/
 COPY --chown=wrongsecrets .ssh/ /home/wrongsecrets/.ssh/
 COPY cursor/rules/project-specification.mdc /var/helpers/project-specification.mdc
 ENV PROJECT_SPEC_PATH=/var/helpers/project-specification.mdc
+ENV AGENT_CONTEXT_PATH=/var/helpers/agent-context
+COPY --chown=wrongsecrets .devcontainer/AGENTS.md .devcontainer/CLAUDE.md .devcontainer/.windsurfrules /var/helpers/agent-context/
+COPY --chown=wrongsecrets .devcontainer/.cursor /var/helpers/agent-context/.cursor
 
 COPY --from=builder /builder/extracted/dependencies/ ./
 COPY --from=builder /builder/extracted/spring-boot-loader/ ./

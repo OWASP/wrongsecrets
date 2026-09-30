@@ -1,0 +1,39 @@
+*Why you should never put a secret in an agent instruction file*
+
+`AGENTS.md`, `CLAUDE.md`, `.cursor/rules/*.mdc`, `.windsurfrules` and the many
+other agent context formats are loaded automatically by coding agents. That
+makes them convenient, and that convenience is exactly what turns them into a
+secret management problem:
+
+- They are committed to the repository, so the secret is in the git history
+  forever and has to be rotated the moment it appears.
+- They are copied to every machine that checks out the repository, including
+  forks, CI runners and personal laptops.
+- They are loaded into the model context, so the value can end up in chat
+  transcripts, telemetry and logs owned by third parties.
+- They usually carry a *shared* credential, which is rarely scoped down and
+  even more rarely rotated.
+- Many secret scanners treat documentation files as low priority, so the leak
+  survives review for a long time.
+
+----
+What to do instead:
+
+- Keep credentials out of the instruction files and let the agent read them
+  from the environment, for example `$STAGING_DEPLOY_TOKEN`.
+- Document *which* variable is required and *where* to obtain it, never the
+  value itself.
+- Give every consumer a short-lived, least-privilege credential instead of one
+  shared token.
+- Scan agent instruction files with a secret scanner in pre-commit and CI, just
+  like you scan source code.
+- Treat any secret that ever appeared in agent context as compromised and
+  rotate it.
+----
+
+[NOTE]
+====
+Skills, rules, prompts, MCP server configurations and agent instruction files
+are all code as far as your secret management is concerned. If you would not
+hardcode a token in a `.java` file, do not hardcode it in a `CLAUDE.md` either.
+====

@@ -1,0 +1,15 @@
+The agent instruction files are shipped with the Dev Container in the
+`.devcontainer` folder:
+
+- `.devcontainer/AGENTS.md`
+- `.devcontainer/CLAUDE.md`
+- `.devcontainer/.cursor/rules/project.mdc`
+- `.devcontainer/.windsurfrules`
+
+Three of them only point at where the shared credential lives. One of them
+inlines the value of `STAGING_DEPLOY_TOKEN` in a shell snippet. That value is
+the answer.
+
+If you are not using the Dev Container, you can also read the same files
+straight from the repository in the link:https://github.com/OWASP/wrongsecrets/tree/master/.devcontainer[`.devcontainer`]
+folder.
