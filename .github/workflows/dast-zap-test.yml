@@ -22,6 +22,7 @@ jobs:
         with:
           java-version: "26"
           distribution: "temurin"
+          cache: maven
       - name: Clean install
         run: ./mvnw --no-transfer-progress clean install -DskipTests -Ddependency-check.skip -Dcyclonedx.skip=true -Dexec.skip
       - name: Start wrongsecrets
