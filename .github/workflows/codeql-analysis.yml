@@ -74,6 +74,7 @@ jobs:
         with:
           java-version: "26"
           distribution: "temurin"
+          cache: maven
       - name: run mvn clean package
         run: ./mvnw clean package -Ddependency-check.skip=true -Dmaven.test.skip=true
       - name: Perform CodeQL Analysis
