@@ -55,7 +55,8 @@ repos:
     hooks:
       - id: maven
         args: ["clean compile"]
-      - id: maven-spotless-apply
+      - id: maven
+        args: ["spotless:apply"]
   - repo: https://github.com/psf/black
     rev: 26.5.1
     hooks:
