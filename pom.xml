@@ -63,7 +63,7 @@
     <gatling.version>3.15.1</gatling.version>
     <github.button.version>2.14.1</github.button.version>
     <google-java-format.version>1.36.0</google-java-format.version>
-    <google.cloud.libraries-bom.version>26.87.0</google.cloud.libraries-bom.version>
+    <google.cloud.libraries-bom.version>26.89.0</google.cloud.libraries-bom.version>
     <!-- Pin Groovy to 4.x for thymeleaf-layout-dialect compatibility (Spring Boot 4.x manages 5.x) -->
     <groovy.version>4.0.25</groovy.version>
     <java.version>26</java.version>
