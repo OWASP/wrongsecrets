@@ -32,6 +32,7 @@ jobs:
         with:
           distribution: "temurin"
           java-version: "26"
+          cache: maven
       - name: Install npm dependencies
         run: npm install
       - uses: actions/cache@v4

@@ -215,6 +215,7 @@ jobs:
         with:
           java-version: '26'
           distribution: 'temurin'
+          cache: maven
 
       - name: Cache Maven dependencies
         uses: actions/cache@v5
