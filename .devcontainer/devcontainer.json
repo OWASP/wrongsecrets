@@ -11,7 +11,7 @@
       "configureZshAsDefaultShell": true
     },
 
-    "ghcr.io/devcontainers/features/docker-in-docker:4.1.0": {
+    "ghcr.io/devcontainers/features/docker-in-docker:4.1.2": {
       "enableOnStartup": true,
       "version": "latest",
       "moby": false
