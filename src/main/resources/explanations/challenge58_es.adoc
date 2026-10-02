@@ -1,0 +1,9 @@
+=== Exposición de cadena de conexión a base de datos en mensajes de error
+
+Una de las formas más comunes y peligrosas en que los secretos se filtran en aplicaciones del mundo real es a través de cadenas de conexión a bases de datos que contienen credenciales incorporadas. Cuando las aplicaciones no pueden conectarse a las bases de datos, a menudo exponen la cadena de conexión completa (incluidos nombres de usuario y contraseñas) en mensajes de error, registros o incluso interfaces de usuario.
+
+Este desafío demuestra un escenario donde un desarrollador:
+
+1. **Usa credenciales incorporadas en cadenas de conexión** en lugar de gestión de secretos externa
+2. **Tiene un manejo de errores deficiente** que expone la cadena de conexión completa cuando fallan las conexiones a la base de datos
+3. **Registra información sensible** sin sanear primero las credenciales

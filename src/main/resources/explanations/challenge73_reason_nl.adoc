@@ -1,0 +1,39 @@
+*Waarom je nooit een geheim in een agent-instructiebestand mag plaatsen*
+
+`AGENTS.md`, `CLAUDE.md`, `.cursor/rules/*.mdc`, `.windsurfrules` en de vele
+andere agent-contextformaten worden automatisch geladen door codingagents. Dat
+maakt ze handig, en juist dat gemak verandert ze in een
+probleem met secretmanagement:
+
+- Ze worden gecommit in de repository, waardoor het geheim voorgoed in de git-geschiedenis
+  staat en geroteerd moet worden zodra het opduikt.
+- Ze worden gekopieerd naar elke machine die de repository uitcheckt, inclusief
+  forks, CI-runners en laptops van developers.
+- Ze worden in de modelcontext geladen, waardoor de waarde kan belanden in chat-
+  transcripts, telemetrie en logs die van derden zijn.
+- Ze bevatten meestal een *gedeelde* inloggegeven, die zelden aan een scope wordt gebonden
+  en nog zeldzamer wordt geroteerd.
+- Veel secretscanners behandelen documentatiebestanden als laag prioriteit, waardoor het lek
+  lang onopgemerkt blijft bij beoordeling.
+
+----
+Wat je liever doet:
+
+- Houd inloggegevens buiten de instructiebestanden en laat de agent ze uit
+  de omgeving lezen, bijvoorbeeld `$STAGING_DEPLOY_TOKEN`.
+- Documenteer *welke* variabele nodig is en *waar* je die verkrijgt, nooit de
+  waarde zelf.
+- Geef elke consument een korte inloggegeven met de minste rechten in plaats van één
+  gedeelde token.
+- Scan agent-instructiebestanden met een secretscanner in pre-commit en CI, net
+  zoals je broncode scant.
+- Behandel elk geheim dat ooit in een agent-context is verschenen als gecompromitteerd en
+  roteer het.
+----
+
+[NOTE]
+====
+Skills, regels, prompts, MCP-serverconfiguraties en agent-instructiebestanden
+zijn allemaal code als het om jouw secretmanagement gaat. Als je een token niet
+hardcoded in een `.java`-bestand, doe dat dan ook niet in een `CLAUDE.md`.
+====

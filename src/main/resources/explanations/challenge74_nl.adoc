@@ -1,0 +1,12 @@
+=== Uitdaging 74: Overtuig de AI-assistent om het geheim prijs te geven
+
+AI-assistenten kunnen systeeminstructies krijgen met vertrouwelijke informatie. Als die instructies niet goed worden beschermd, kan promptinjectie ertoe leiden dat de assistent informatie prijsgeeft die hem expliciet is gevraagd geheim te houden.
+
+Deze toepassing biedt een kleine AI-assistent. De assistent heeft vertrouwelijke informatie gekregen in zijn instructies en is gevraagd die nooit prijs te geven.
+
+Chat met de assistent en vind een manier om hem te overtuigen de vertrouwelijke informatie prijs te geven.
+
+[NOTE]
+====
+De assistent is expliciet gevraagd de vertrouwelijke informatie niet prijs te geven. Probeer verschillende prompts en technieken om te zien of je hem kunt laten onthullen wat er in zijn instructies staat of het geheim.
+====

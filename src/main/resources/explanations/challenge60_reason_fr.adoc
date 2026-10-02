@@ -1,0 +1,5 @@
+=== Pourquoi le Défi 60 est important : Injection de prompt MCP et exposition des variables d'environnement
+
+**Le problème :**
+
+Les serveurs MCP (Protocole de Contexte de Modèle) sont de plus en plus populaires pour donner aux assistants IA accès aux outils et données. Cependant, de nombreux développeurs déploient des serveurs MCP sans contrôles de sécurité adéquats. Pire encore, un serveur MCP *malveillant* peut activement manipuler le client IA qui se connecte via l'injection de prompts.

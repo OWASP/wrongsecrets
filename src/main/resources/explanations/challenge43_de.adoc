@@ -1,0 +1,7 @@
+=== Reddit-Fauxpas
+
+Menschen machen leicht Fehler. Sie können beispielsweise ein "unschuldiges" Datenstück über soziale Medien teilen, das sich später als Geheimnis herausstellt. Oder sie können etwas auf dem "falschen Bildschirm" posten und absenden.
+
+Ähnlich hinterließ ein Entwickler in der OWASP-Community, der auch ein aktiver Redditor war, versehentlich ein Geheimnis auf der Plattform.
+
+Kannst du das Geheimnis finden?

@@ -1,0 +1,5 @@
+*Por qué usar binarios para ocultar un secreto solo retrasa a un atacante.*
+
+Con hermosas aplicaciones gratuitas de ingeniería inversa como ILSpy, pocas cosas permanecen seguras. Cualquiera que pueda cargar el ejecutable en tales herramientas puede fácilmente hacer reconocimiento y encontrar secretos dentro de tu binario.
+
+Cifrar el secreto con una clave integrada en el binario solo retrasa a un atacante. Ten en cuenta que si el secreto necesita ser usado por el ejecutable, eventualmente necesita estar en memoria listo para ser ejecutado.

@@ -1,0 +1,4 @@
+*Por qué necesitas tener cuidado con los secretos en tu nube*
+
+Secretos y estado de Terraform:
+El estado de Terraform se puede almacenar en muchos lugares: localmente, en la solución de almacenamiento de un proveedor de nube, etc. Puede suceder fácilmente que los secretos terminen en el estado de Terraform. Asegúrate de que los secretos almacenados en el estado de Terraform también estén cifrados. Usa un backend remoto con cifrado para el estado de Terraform.

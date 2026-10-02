@@ -1,0 +1,5 @@
+*Pourquoi faisons-nous cela ?*
+
+Avec ce projet, nous espérons que vous prendrez plaisir à chasser les secrets. En même temps, nous espérons que vous apprendrez des erreurs des autres en matière de gestion des secrets, afin de ne pas commettre les mêmes erreurs.
+
+Saviez-vous que nous avons repéré tous ces défis dans la pratique ? Ils peuvent donc être d'une grande aide si vous souhaitez faire davantage de chasse aux bugs.

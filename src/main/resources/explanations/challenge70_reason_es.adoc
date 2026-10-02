@@ -1,0 +1,26 @@
+*Por qué un paquete de skills necesita la misma revisión que tu código fuente*
+
+Un paquete de skills es software distribuido. Contiene scripts ejecutables, se ejecuta en máquinas de desarrollo y en CI, y lo instalan personas que no lo escribieron. Tratarlo como "solo un poco de markdown" es cómo los secretos acaban distribuyéndose a gran escala.
+
+Dos fallos se acumulan en este desafío:
+
+- El token se incluye dentro del paquete, así que todo el que instala la skill recibe una credencial compartida y funcional.
+- Al compartir la skill dentro de Claude, todo el que tenga acceso a la skill tendrá acceso al secreto.
+- El token está codificado en base64, lo cual es *codificación*, no cifrado. Impide que un detector de secretos ingenuo se dispare, y no impide nada a los demás. Cualquiera con el paquete puede descodificarlo con un solo comando.
+
+El segundo punto es el más peligroso de los dos, porque convierte un problema detectable en uno indetectable. El detector se queda callado, el hallazgo desaparece del backlog y la credencial sigue siendo válida durante años.
+
+----
+Qué hacer en su lugar:
+
+- Lee las credenciales del entorno o de un gestor de secretos en tiempo de ejecución, y falla ruidosamente con un mensaje claro cuando falten.
+- Nunca "arregles" un hallazgo de un detector de secretos codificando, dividiendo u ofuscando el valor. Arréglalo eliminando el secreto y rotándolo.
+- Revisa cada archivo de un paquete de skills, no solo el `SKILL.md`. Los scripts, los documentos de referencia y la configuración de ejemplo son parte de la superficie de ataque.
+- Verifica el paquete en CI: descomprímelo y ejecuta tu detector de secretos sobre el contenido extraído, incluyendo un conjunto de reglas consciente de base64.
+- Publica paquetes desde una pipeline de construcción que, en primer lugar, no tenga acceso a credenciales de producción.
+----
+
+[NOTE]
+====
+Codificar no es un control de seguridad. Si entre un atacante y tu credencial solo hay un `base64 -d`, la credencial es pública.
+====

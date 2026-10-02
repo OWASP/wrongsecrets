@@ -1,0 +1,23 @@
+Du kannst diese Challenge mit den folgenden Schritten lösen:
+
+1. Stelle sicher, dass Container Insights für deinen AKS-Cluster aktiviert ist, damit die Container-Ausgabe in deinem https://portal.azure.com[*Log Analytics*]-Arbeitsbereich landet.
+2. Durchsuche die Tabelle `ContainerLogV2` nach dem Audit Event, entweder im Portal oder über die CLI:
++
+[source,shell]
+----
+az monitor log-analytics query \
+  --workspace <workspaceId> \
+  --analytics-query "ContainerLogV2 | where LogMessage contains 'encoded credential' | project TimeGenerated, LogMessage | take 5"
+----
+oder verwende:
+[source, shell]
+----
+ContainerLogV2
+| where LogMessage contains "encoded credential"
+| project TimeGenerated, LogMessage
+| take 5
+----
+3. In älteren Arbeitsbereichen heißt die Tabelle `ContainerLog` und die Spalte `LogEntry`. Verwende stattdessen `ContainerLog | where LogEntry contains 'encoded credential'`.
+4. Nimm den Base64-Blob aus der Nachricht und dekodiere ihn: `echo '<blob>' | base64 -d`. Dieser dekodierte Wert ist die Antwort.
+
+Noch nichts gesehen? Das Ereignis wird zum ersten Mal ausgelöst, wenn die Challenge geöffnet wird. Rufe die Seite also einmal auf und frag erneut ab.

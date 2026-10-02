@@ -1,0 +1,3 @@
+Відкрийте link:/challenges/challenge-72/codex-session-transcript.md[`/challenges/challenge-72/codex-session-transcript.md`] і знайдіть рядок, що містить `DEPLOY_TOKEN=`. Значення після знака дорівнює — це відповідь.
+
+Той самий файл міститься у дереві вихідного коду за адресою `src/main/resources/challenges/challenge-72/codex-session-transcript.md`.

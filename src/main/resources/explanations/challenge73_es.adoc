@@ -1,0 +1,24 @@
+=== Desafío 73: Encuentra el secreto en los archivos de instrucciones del agente
+
+Los agentes de codificación de IA cargan en cada
+sesión los archivos de instrucciones y contexto del repositorio: `AGENTS.md`, `CLAUDE.md`, `.cursor/rules/*.mdc`, `.windsurfrules` y
+similares. Como estos archivos son "solo documentación", rara vez reciben la misma
+revisión que el código fuente, aunque los lee un modelo, se copian en cada máquina
+de desarrollo y se hacen commit en el control de versiones.
+
+Este repositorio incluye dichos archivos de instrucciones con su Dev Container. Están
+en la carpeta link:https://github.com/OWASP/wrongsecrets/tree/master/.devcontainer[`.devcontainer`]:
+
+- `.devcontainer/AGENTS.md`
+- `.devcontainer/CLAUDE.md`
+- `.devcontainer/.cursor/rules/project.mdc`
+- `.devcontainer/.windsurfrules`
+
+Uno de ellos incrusta una credencial compartida para que todos los agentes reutilicen el mismo
+valor "por comodidad". Lee los archivos y envía el token de staging expuesto.
+
+[NOTE]
+====
+Aquí no hay nada codificado ni cifrado: así es exactamente como se ve un archivo
+de contexto de agente filtrado en la vida real.
+====

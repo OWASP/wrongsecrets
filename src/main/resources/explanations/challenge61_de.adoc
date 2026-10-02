@@ -1,0 +1,7 @@
+=== Telegram-Kanal-Geheimnisse
+
+Viele mobile Anwendungen und Dienste verwenden Telegram-Bots für Benachrichtigungen, Überwachung oder Benutzerinteraktion. Entwickler hardcodieren oft Telegram-Bot-Anmeldeinformationen direkt in ihrem Anwendungsquellcode, wodurch diese Geheimnisse für jeden leicht auffindbar sind, der Zugang zur Codebasis hat.
+
+In dieser Herausforderung hat ein Entwickler Telegram-Bot-Anmeldeinformationen in den Anwendungscode eingebettet, um mit einem Kontrollkanal zu kommunizieren. Die tatsächliche geheime Antwort wird im Telegram-Kanal gepostet, auf den mit diesen Anmeldeinformationen zugegriffen werden kann.
+
+Kannst du das hartcodierte Telegram-Bot-Token finden und es verwenden, um das Geheimnis im zugehörigen Kanal zu entdecken?

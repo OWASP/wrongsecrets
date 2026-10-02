@@ -1,0 +1,10 @@
+=== Verbergen in binaire bestanden deel 6: de gewone Java-CLI
+
+Gewone tekenreeksen in een Java-CLI zijn eenvoudig terug te vinden zodra de JAR is gedownload. Kun je het geheim vinden dat verborgen zit in onze gewone Java-CLI?
+
+Om het op te lossen:
+
+. Download en inspecteer https://github.com/OWASP/wrongsecrets/raw/master/src/main/resources/executables/wrongsecrets-java.jar[wrongsecrets-java.jar].
+. Decompileer de JAR of inspecteer de hoofdklasse met een Java-decompiler zoals CFR, JADX, IntelliJ IDEA of `javap`.
+. Zoek naar de klasse die het geheim teruggeeft en identificeer de gewone tekenreeks die in de CLI is ingebed.
+. Zodra je de exacte geheime waarde hebt teruggevonden, kun je die hieronder in het vak indienen of valideren met `java -jar wrongsecrets-java.jar <jouw teruggevonden geheim>`.

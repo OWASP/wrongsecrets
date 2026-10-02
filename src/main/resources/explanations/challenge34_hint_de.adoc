@@ -1,0 +1,6 @@
+Diese Herausforderung kann gelöst werden, indem die Schlüsselableitungsfunktion mit den gegebenen Eingaben wiederholt wird.
+
+1. Führe die Funktion online aus
+- Suche die Parameter, die für die Schlüsselableitungsfunktion in der `generateKey`-Funktion in `Challenge34.java` verwendet werden.
+- Kopiere die verwendeten Parameter zu einem Online-https://www.dcode.fr/pbkdf2-hash[Generator] und führe ihn aus
+- Die Website gibt den Wert des Schlüssels zurück.

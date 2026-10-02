@@ -1,0 +1,7 @@
+*Waarom uitvoerbare JARs en Android-APK's niet geschikt zijn om geheimen in te verbergen.*
+
+Uitvoerbare JARs zijn geen veilige plek om geheimen te verbergen. Net als Android-APK's zijn het archieven die bytecode en resources direct aan de aanvaller leveren, waardoor ingebedde tekenreeksen, constanten en hulpmethoden eenvoudig te inspecteren zijn met gangbare reverse-engineeringtools.
+
+Als een client-side Java-artefact een geheim nodig heeft om te werken, ga er dan vanuit dat dat geheim kan worden uitgelezen zodra het bestand is gedownload. Bewaar echte geheimen op een betrouwbare backend en geef ze alleen vrij na passende authenticatie en autorisatie.
+
+Wil je meer oefening met reverse engineering van Java en Android? Bekijk dan de https://github.com/OWASP/MASTG-Hacking-Playground[OWASP MASTG Hacking Playground].

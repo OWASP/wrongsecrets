@@ -1,0 +1,7 @@
+=== Приховування в бінарних файлах частина 2: бінарний файл C++
+
+Подібно до приховування секретів у застосунку, написаному на C, ви опиняєтеся в схожій ситуації з C++. Чи можете ви знайти секрет у нашому бінарному файлі?
+
+Давайте розвінчаємо міф "секрети важко знайти в нативно скомпільованих застосунках" для C++: чи можете ви знайти секрет у https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-cplus[wrongsecrets-cplus] (або https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-cplus-arm[wrongsecrets-cplus-arm], https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-cplus-linux[wrongsecrets-cplus-linux])?
+
+Спробуйте завантажити бінарний файл і запустити його локально (наприклад, `./wrongsecrets-cplus<версіяякавампотрібна> <ваша відповідь>`).

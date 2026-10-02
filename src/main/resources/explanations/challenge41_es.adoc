@@ -1,0 +1,7 @@
+=== Descascarado de contraseñas (Password Shucking)
+
+Un sitio web usaba https://en.wikipedia.org/wiki/MD5[MD5] para hacer hash de contraseñas, y sus desarrolladores descubrieron recientemente que alguien lanzó un volcado de sus datos de usuario.
+
+En un intento de mejorar la seguridad, decidieron migrar a un algoritmo de hash más fuerte como https://en.wikipedia.org/wiki/Bcrypt[bcrypt].
+
+Los desarrolladores decidieron que la forma más rápida de migrar sería hashear los hashes preexistentes usando bcrypt. Usar dos algoritmos de hash sería más seguro que usar uno, ¿verdad?

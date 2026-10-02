@@ -1,0 +1,9 @@
+=== Geheimnisse, die in deinen Cloud-Log-Sink gelangen
+
+Anwendungen protokollieren selten absichtlich ein Geheimnis. Viel häufiger passiert es, dass ein „Audit Event“, ein Request-Dump oder ein strukturierter Log-Eintrag ein Credential mitführt. Da der Wert kodiert ist, fällt er bei der Codeprüfung niemandem auf – er sieht einfach wie ein undurchsichtiger Blob aus.
+
+In dieser Challenge schreibt die Anwendung ein solches Audit Event auf die Standardausgabe. Sie gibt das Geheimnis nie über einen Endpunkt zurück und montiert es nie als Datei. Der einzige Ort, an dem der Wert auftaucht, ist der Log-Stream, den dein Cloud-Anbieter für dich einsammelt. Du musst also den Log-Sink der Cloud abfragen, auf der du läufst.
+
+Beachte, dass der geloggte Wert Base64-kodiert ist. Die Zeile zu finden ist also erst die halbe Arbeit.
+
+Tipp: Das ist nicht dasselbe wie Challenge 8. Dort wird die Antwort im Klartext protokolliert und du kannst sie direkt aus deinen lokalen Container-Logs lesen.

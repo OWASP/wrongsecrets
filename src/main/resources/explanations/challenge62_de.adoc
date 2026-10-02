@@ -1,0 +1,44 @@
+=== MCP-Server-Privilegieskalation über ein Google Service Account
+
+Das Model Context Protocol (MCP) ermöglicht es KI-Assistenten und Agents, Tools zu nutzen und auf externe Dienste zuzugreifen. Wenn ein MCP-Server mit einem Google Service Account konfiguriert ist, der breitere Rechte als der aufrufende Benutzer hat, entsteht eine Lücke zur Privilegieskalation: Jeder, der das MCP-Tool aufrufen kann, erhält Zugriff auf Ressourcen, auf die er nicht direkt berechtigt ist.
+
+Diese Challenge zeigt ein realistisches Szenario, in dem ein Entwickler einen MCP-Server gebaut hat, um einem KI-Assistenten den Zugriff auf interne Google-Dokumente in Google Drive zu ermöglichen. Das vom MCP-Server verwendete Service Account hat Lesezugriff auf ein eingeschränktes Dokument – aber der MCP-Server prüft nicht, ob der Aufrufende berechtigt ist, darauf zuzugreifen.
+
+**Dein Ziel:**
+
+1. **Ein MCP-Server läuft in dieser Anwendung** und ist über den Endpunkt `/mcp62` erreichbar
+2. **Der Server stellt ein `read_google_drive_document`-Tool bereit**, das ein Google Service Account verwendet
+3. **Das Service Account hat Lesezugriff auf ein Google-Drive-Dokument**, das das Geheimnis enthält
+4. **Das Tool prüft nicht, ob der Aufrufende berechtigt ist**, auf dieses Dokument zuzugreifen
+
+**So interagierst du mit dem MCP-Server:**
+
+Ermittle zuerst die verfügbaren Tools:
+
+[source,bash]
+----
+curl -s -X POST http://localhost:8080/mcp62 \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+----
+
+Rufe dann das `read_google_drive_document`-Tool auf, um den Dokumentinhalt abzurufen:
+
+[source,bash]
+----
+curl -s -X POST http://localhost:8080/mcp62 \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"read_google_drive_document","arguments":{}}}'
+----
+
+****
+💡 *Hinweis:*
+
+Der Server liest ein Google-Drive-Dokument mit einem konfigurierten Service Account. Der Inhalt dieses Dokuments enthält das Geheimnis, das du als Antwort einreichen musst. Die zentrale Erkenntnis ist, dass das Service Account des MCP-Server privilegierten Zugriff hat, den weder du noch dein KI-Assistent normalerweise hätten – aber der MCP-Server gewährt ihn implizit jedem, der seine Tools aufruft.
+****
+
+**Implementierungsdetails (für Maintainer):**
+
+- Die Challenge-Antwort wird aus dem Inhalt zwischen `<secret>` und `</secret>` extrahiert.
+- Die Extraktion erfolgt einmalig beim Laden des Geheimnisses und wird anschließend für die Antwortvalidierung zwischengespeichert.
+- Der MCP-Controller cached abgerufene Dokumente und behält stets das konfigurierte Standarddokument sowie bis zu 20 weitere Dokument-IDs.

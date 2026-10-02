@@ -1,0 +1,8 @@
+=== Pourquoi partager des chats IA contenant des secrets est dangereux
+
+Les modèles IA sont souvent utilisés pour générer du code, de la configuration ou même des habilitations. Lorsqu'un utilisateur partage une session de chat, il crée une URL publique que n'importe qui peut consulter. Si la session contient des clés API, des mots de passe ou une logique propriétaire, ces secrets sont désormais exposés.
+
+Il est important de :
+- Ne jamais fournir de vrais secrets aux outils IA.
+- Retirer toute information sensible des chats avant de les partager.
+- Utiliser les versions entreprise des outils IA offrant une meilleure protection des données et des contrôles de partage.

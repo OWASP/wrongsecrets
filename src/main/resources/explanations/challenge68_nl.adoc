@@ -1,0 +1,5 @@
+=== Lek van een geheim in een AI-chatsessie
+
+Chatsessies van AI-tools zoals ChatGPT delen kan een geweldige manier zijn om samen te werken, maar het is makkelijk te vergeten dat deze gedeelde links publiek zijn. Als de chat gevoelige informatie bevat, kan iedereen met de link het zien.
+
+Kun jij het geheim vinden in deze https://chatgpt.com/share/6a99237a-c2e0-83eb-9a09-a1cf76213ff5[gedeelde ChatGPT-sessie]?

@@ -1,0 +1,20 @@
+Je kunt deze uitdaging oplossen met de volgende stappen:
+
+1. Controleer de status van het geheim in Git:
+- Kun je zien waar in git we `secrets-secret.yml` hebben opgeslagen? Zo niet, doe dan gewoon een zoekopdracht.
+- Bekijk het veld `Data`: wat kun je daar vinden? Houd er rekening mee dat geheimens base64-gecodeerd zijn. Zodra ze in de workloads zijn gemount, worden ze ontcijferd.
+
+LET OP: De volgende opties werken alleen wanneer je toegang hebt tot de K8s API. In deze gehoste versie van WrongSecrets heb je die toegang niet. Wanneer je een CTF draait: vraag de organisator om toegang tot de beoogde K8s API.
+
+1. Vraag vriendelijk met Kubectl:
+- Zorg ervoor dat Kubectl is geïnstalleerd zoals omschreven in de README.MD & zorg ervoor dat kubectl is geconfigureerd om commando's naar de juiste cluster te sturen.
+- Voer nu `kubectl get secrets` uit. Hier zie je alle configmaps die actief zijn in de namespace waarin je je bevindt, die voor deze app normaal `default` is (tenzij anders gespecificeerd door je beheerder/trainer).
+- Voer nu `kubectl get secret funnystuff -o Yaml` uit. Kun je het geheim zien?
+2. Exec in de pod en haal de gegevens op:
+- Zorg ervoor dat Kubectl is geïnstalleerd zoals omschreven in de README.MD & zorg ervoor dat kubectl is geconfigureerd om commando's naar de juiste cluster te sturen.
+- Voer nu `kubectl get pods` uit. Hier zie je alle Pods die actief zijn in de namespace waarin je je bevindt, die voor deze app normaal `default` is (tenzij anders gespecificeerd door je beheerder/trainer).
+- Voer nu voor je instantie van de WrongSecrets-pod `kubectl exec -it secret-challenge-<rest of the name of the pod from the prev.step> -- sh` uit.
+- Voer nu `env | grep SPECIAL_SPECIAL_K8S_SECRET` uit en daar is je geheim.
+
+
+Opmerking: `kubectl get <item> -A` geeft je een overzicht van alle items over alle namespaces waartoe je toegang hebt. Het is belangrijk om mensen *niet* toegang te geven tot elke namespace in je cluster, omdat dit kan leiden tot het lekken van belangrijke configuratie/items.

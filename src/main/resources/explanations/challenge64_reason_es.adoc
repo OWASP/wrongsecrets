@@ -1,0 +1,9 @@
+*Por qué usar binarios para ocultar un secreto solo retrasará a un atacante.*
+
+Con aplicaciones de ingeniería inversa tan bonitas y gratuitas como Ghidra, no queda mucho a salvo. Cualquiera que pueda cargar el ejecutable en Ghidra o Radare2 puede empezar fácilmente a hacer un reconocimiento y encontrar secretos en tu binario de Swift.
+
+Los binarios de Swift, aunque usan ofuscación de nombres (puedes usar `swift-demangle` para desofuscar los nombres de símbolos de Swift), siguen siendo susceptibles de ingeniería inversa. Los secretos almacenados como matrices de caracteres o literales de cadena pueden encontrarse en la sección de datos del binario.
+
+Cifrar el secreto con una clave incrustada en el binario y otros acertijos ingeniosos sí retrasan a un atacante y hacen que encontrar el secreto resulte divertido. Ten en cuenta que, si el secreto debe ser usado por el ejecutable, acabará teniendo que estar en memoria listo para ejecutarse.
+
+¿Sigue siendo necesario tener un secreto en el binario? Asegúrate de que solo se pueda obtener de forma remota después de autenticarse contra un servidor.

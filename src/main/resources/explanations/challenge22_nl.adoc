@@ -1,0 +1,7 @@
+=== Verbergen in binaries deel 4: het Rust-binair bestand
+
+Net als bij het verbergen van geheimen in C kun je dit doen in Rust. Ghidra is echter standaard niet zo goed in het analyseren van Rust... Kun je het geheim vinden in ons binair bestand?
+
+Laten we de mythe voor Rust ontkrachten: kun je het geheim vinden in https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-rust[wrongsecrets-rust]?
+
+Probeer het binaire bestand te downloaden en lokaal uit te voeren (bijv. `./wrongsecrets-rust<deversie> <jouw antwoord>`).

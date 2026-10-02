@@ -1,0 +1,15 @@
+Ви можете вирішити цей виклик за допомогою таких кроків:
+
+1. Відкрийте https://console.cloud.google.com/logs/query[*Cloud Logging*] (раніше Stackdriver) для проєкту, у якому розміщено ваш кластер GKE.
+2. Запитайте подію аудиту, яку надсилає застосунок:
++
+[source,shell]
+----
+gcloud logging read \
+  'resource.type="k8s_container" AND textPayload:"encoded credential"' \
+  --limit=5 --format='value(textPayload)'
+----
+3. У консолі можна використати той самий фільтр у полі запиту Log Explorer: `resource.type="k8s_container"` у поєднанні з `textPayload:"encoded credential"`.
+4. Візьміть Base64-блоб із повідомлення та розшифруйте його: `echo '<blob>' | base64 -d`. Розшифроване значення і є відповіддю.
+
+Досі нічого не видно? Подію надсилається під час першого відкриття виклику, тож відкрийте сторінку один раз і запитайте ще раз.

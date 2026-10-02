@@ -1,0 +1,5 @@
+*Warum du die Dokumentation auf Geheimnisse prüfen solltest*
+
+Dokumentations- und Spezifikationsdateien werden oft weit verbreitet und können bei Sicherheitsüberprüfungen übersehen werden.
+Manchmal werden Geheimnisse oder sensible Informationen als Beispiele oder Anweisungen hinzugefügt und vor dem Teilen oder Veröffentlichen nicht entfernt.
+Diese Herausforderung unterstreicht die Bedeutung der Überprüfung aller Projektdateien — einschließlich der Dokumentation — auf Geheimnisse und sensible Daten.

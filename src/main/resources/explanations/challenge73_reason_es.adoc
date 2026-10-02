@@ -1,0 +1,40 @@
+*Por qué nunca debes poner un secreto en un archivo de instrucciones de un agente*
+
+`AGENTS.md`, `CLAUDE.md`, `.cursor/rules/*.mdc`, `.windsurfrules` y los muchos
+otros formatos de contexto de agente se cargan automáticamente con los agentes de
+codificación. Eso los hace cómodos, y esa comodidad es exactamente lo que los convierte
+en un problema de gestión de secretos:
+
+- Se hacen commit en el repositorio, por lo que el secreto queda para siempre en el
+  historial de git y hay que rotarlo en cuanto aparece.
+- Se copian en cada máquina que hace checkout del repositorio, incluidos
+  forks, ejecutores de CI y portátiles personales.
+- Se cargan en el contexto del modelo, así que el valor puede acabar en transcripciones
+  de chat, telemetría y registros propiedad de terceros.
+- Suelen llevar una credencial *compartida*, que rara vez se limita en alcance
+  y aún más rara vez se rota.
+- Muchos escáneres de secretos tratan los archivos de documentación como de baja
+  prioridad, por lo que la fuga sobrevive mucho tiempo sin revisarse.
+
+----
+Qué hacer en su lugar:
+
+- Mantén las credenciales fuera de los archivos de instrucciones y deja que el agente las
+  lea del entorno, por ejemplo `$STAGING_DEPLOY_TOKEN`.
+- Documenta *qué* variable se necesita y *dónde* obtenerla, nunca el
+  valor en sí.
+- Dale a cada consumidor una credencial de corta duración y con el mínimo privilegio en
+  lugar de un único token compartido.
+- Analiza los archivos de instrucciones del agente con un escáner de secretos en pre-commit y CI,
+  igual que analizas el código fuente.
+- Trata cualquier secreto que haya aparecido en el contexto de un agente como comprometido
+  y rótalo.
+----
+
+[NOTE]
+====
+Las skills, las reglas, los prompts, las configuraciones de servidores MCP y los
+archivos de instrucciones de agentes son todo código en lo que respecta a tu gestión
+de secretos. Si no codificarías un token en duro en un archivo `.java`, tampoco lo hagas
+en un `CLAUDE.md`.
+====

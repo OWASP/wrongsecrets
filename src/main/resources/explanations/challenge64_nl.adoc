@@ -1,0 +1,7 @@
+=== Verbergen in binaire bestanden deel 5: de Swift-binary
+
+Net als het verbergen van geheimen in een in C geschreven toepassing, kun je dit ook in Swift doen! Swift is de moderne, gecompileerde programmeertaal van Apple die op Apple-platforms en Linux wordt gebruikt. Kun je het geheim vinden in onze binary?
+
+Laten we de mythe dat "geheimen moeilijk te vinden zijn in native gecompileerde toepassingen" ontkrachten voor Swift: kun je het geheim vinden in https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-swift[wrongsecrets-swift] (of https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-swift-arm[wrongsecrets-swift-arm], https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-swift-linux[wrongsecrets-swift-linux])?
+
+Probeer de binary te downloaden en lokaal uit te voeren (bijv. `./wrongsecrets-swift<deversie die je nodig hebt> <jouw antwoord>`).

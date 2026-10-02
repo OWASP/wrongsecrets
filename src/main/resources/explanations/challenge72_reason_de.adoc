@@ -1,0 +1,32 @@
+*Warum KI-Coding-Agenten-Transkripte ein Geheimnis-Leckagerisiko darstellen*
+
+KI-Coding-Agenten lesen deine Dateien, führen deine Befehle aus und erstellen Sitzungsprotokolle. Wenn ein Entwickler einen Agenten bittet, ein Problem zu debuggen, kann der Agent Konfigurationsdateien, Umgebungsvariablen oder Secret-Manager lesen — und diese Werte in seinem Transkript ausgeben. Genau das ist in dieser Herausforderung passiert: Der Agent hat eine `.env.staging`-Datei gelesen und den Deploy-Token in seiner Sitzungsausgabe ausgegeben.
+
+Das Transkript wird zu einem dauerhaften Artefakt, das:
+
+- in die Versionsverwaltung committet wird, wenn der Entwickler es speichert
+- für Kontext oder Übergabe an Teamkollegen weitergegeben wird
+- beim Melden von Fehlern an Supportkanäle hochgeladen wird
+- in Agent-Historiedateien auf dem Rechner des Entwicklers gespeichert wird
+- von IDE-Plug-ins oder lokalen Suchwerkzeugen indexiert wird
+
+Drei Fehlschläge verstärken sich in diesem Szenario:
+
+- Das Geheimnis existiert in einer Klartext-Konfigurationsdatei und ist damit trivial für jedes Werkzeug oder jeden Agenten lesbar.
+- Der Debugging-Prozess des Agenten bringt das Geheimnis ganz natürlich in seiner Ausgabe ans Licht und erzeugt eine zweite Kopie der Zugangsdaten.
+- Das Transkript wird wahrscheinlich ohne Prüfung gespeichert, geteilt oder gecommitet, weil es „wie Debug-Ausgabe aussieht" und nicht wie sensible Daten.
+
+----
+Was du stattdessen tun solltest:
+
+- Speichere Geheimnisse niemals in Klartext-Konfigurationsdateien. Verwende einen Secret-Manager oder zur Laufzeit injizierte Umgebungsvariablen.
+- Konfiguriere Agenten so, dass sie sensible Werte vor der Ausgabe schwärzen. Viele Agenten-Werkzeuge unterstützen Ausgabefilterung oder Sandboxing.
+- Prüfe Agenten-Transkripte, bevor du sie speicherst oder teilst, so wie du einen Pull Request prüfen würdest.
+- Behandle jedes Transkript, das aus einer Secret-Quelle gelesen hat, als möglicherweise kompromittiert, und rotiere die offengelegten Zugangsdaten.
+- Verwende kurzlebige, scopete Tokens für Staging-Deployments, damit die Offenlegung eine begrenzte Sprengkraft hat.
+----
+
+[NOTE]
+====
+KI-Coding-Agenten sind leistungsfähige Werkzeuge, arbeiten aber mit denselben Dateien und derselben Umgebung wie du. Wenn ein menschlicher Entwickler ein Geheimnis in ein Chat-Protokoll kopieren und einfügen würde, tut dasselbe auch ein Agent — nur erzeugt der Agent ein strukturiertes Transkript, das sich noch leichter durchsuchen und teilen lässt.
+====

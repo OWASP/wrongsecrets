@@ -1,0 +1,5 @@
+*Pourquoi l'obfuscation n'est qu'un speed bump.*
+
+Le codage, la réflexion et l'obfuscation légère peuvent rendre l'ingénierie inverse moins pratique, mais ils ne créent pas de confidentialité réelle. L'exécutable contient toujours tout ce dont il a besoin pour récupérer le secret.
+
+Si l'application peut dériver le secret localement, un attaquant déterminé peut faire de même. Protégez les secrets en déplaçant les décisions de confiance et le matériau secret vers des systèmes serveur contrôlés.

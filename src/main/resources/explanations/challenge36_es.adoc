@@ -1,0 +1,7 @@
+=== Binarios sin cadenas de texto en claro
+
+Todavía escuchamos a desarrolladores que introducen trucos y ofuscación para ocultar un secreto en un binario. ¿Qué pasa si eliminamos símbolos? ¿Qué pasa si ciframos el secreto? Estos desafíos pueden hacer más difícil encontrar el secreto oculto, pero no imposible.
+
+El archivo de desafío se llama https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-advanced-c[wrongsecrets-advanced-c] y se puede encontrar en muchas variantes en la https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables[carpeta de ejecutables].
+
+Intenta descargar el binario y ejecutarlo localmente (por ejemplo, `./wrongsecrets-advanced-c<laversion> <tu respuesta>`).
