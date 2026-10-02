@@ -1,0 +1,3 @@
+*Warum wir bei Schwachstellenberichten vorsichtig sein müssen*
+
+Wenn du eine Sicherheitslücke meldest oder eine Sicherheitsempfehlung veröffentlichst, sei immer vorsichtig mit den Informationen, die du damit verbreitest. Genaue Werte von gefundenen hartcodierten Geheimnissen, insbesondere solche, die schwerer zu rotieren sind, sollten nicht in deinen Sicherheitsbericht und/oder die Veröffentlichung aufgenommen werden.

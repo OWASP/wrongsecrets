@@ -1,0 +1,7 @@
+=== .gitignore Geheimnis-Herausforderung
+
+`.gitignore`-Dateien helfen, das versehentliche Einbinden sensibler oder irrelevanter Daten in die Versionskontrolle zu vermeiden. Manchmal hinterlassen Entwickler jedoch sensible Daten oder Geheimnisse als Kommentare oder versteckte Einträge in `.gitignore`.
+
+In dieser Herausforderung hat ein Entwickler ein verschlüsseltes Geheimnis in einem `.gitignore`-Dateikommentar hinterlassen. Obwohl verschlüsselt, zeigt dies, wie einfach es ist, kritische Geheimnisse an zugänglichen Stellen zu vergessen.
+
+Dein Ziel ist es, dieses vergessene Geheimnis zu finden und zu entschlüsseln.

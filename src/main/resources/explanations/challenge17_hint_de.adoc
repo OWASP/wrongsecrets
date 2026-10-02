@@ -1,0 +1,7 @@
+Wie die Herausforderung besagt, musst du nach Bash-Befehlen suchen, die in der Vergangenheit ausgeführt wurden; welcher Befehl gibt uns das?
+
+Du kannst diese Herausforderung mit den folgenden Schritten lösen:
+
+1. Gib den Inhalt einer .bash_history-Datei innerhalb eines laufenden Containers aus:
+- Starte den Container mit `docker run -it --entrypoint sh jeroenwillemsen/wrongsecrets:<version>` (Ersetze `<version>` durch die Version des Containers, den du verwenden möchtest)
+- Lies den Inhalt der Datei mit cat: `cat ~/.bash_history`. Sobald du diese Datei hast, kannst du grep oder ein anderes Suchwerkzeug verwenden, um die Antwort einzugrenzen.

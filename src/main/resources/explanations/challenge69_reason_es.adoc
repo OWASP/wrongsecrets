@@ -1,0 +1,24 @@
+*Por qué nunca debes poner un secreto en una skill de agente*
+
+Una skill está creada para compartirse. Ese es todo su propósito: escribes el flujo de trabajo una vez y cada desarrollador, agente y trabajo de CI lo reutiliza. Esto significa que un secreto en una skill tiene las peores propiedades posibles:
+
+- Se copia en cada máquina que instala la skill, incluidos los portátiles personales.
+- Acaba en el repositorio, así que queda para siempre en el historial de git, incluso después de que lo "elimines", lo que te obliga a rotar el secreto.
+- Se publica en marketplaces y registros de skills, donde se indexa y se puede buscar.
+- Lo lee el agente y por ello puede acabar en transcripciones de chat, registros y telemetría de terceros.
+- Es una credencial *compartida*, así que casi nunca se rotea y casi nunca se acota.
+
+----
+Qué hacer en su lugar:
+
+- Mantén las credenciales fuera de la skill y deja que la skill las lea del entorno, por ejemplo `$STAGING_DEPLOY_TOKEN`.
+- Documenta *qué* variable es necesaria y *dónde* obtenerla, nunca el valor en sí.
+- Dale a cada consumidor su propia credencial de corta duración y mínimo privilegio en lugar de un único token de equipo compartido.
+- Escanea los archivos de las skills con un detector de secretos en pre-commit y CI, igual que escaneas el código fuente.
+- Trata como comprometido cualquier secreto que haya aparecido en una skill y rótailo.
+----
+
+[NOTE]
+====
+Las skills, reglas, prompts, configuraciones de servidores MCP y archivos de instrucciones de agentes son todo código en lo que respecta a la gestión de secretos. Si no codificarías un token en un archivo `.java`, tampoco lo codifiques en un `SKILL.md`.
+====

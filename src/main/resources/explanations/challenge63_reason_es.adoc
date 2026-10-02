@@ -1,0 +1,24 @@
+=== Motivo del desafío 63
+Este desafío destaca un error generalizado en el desarrollo de software: usar cifrado mientras la clave se guarda en el mismo lugar que el texto cifrado.
+
+**Por qué es peligroso:**
+- El cifrado solo es tan fuerte como la confidencialidad de la clave
+- Codificar de forma fija la clave en el código fuente significa que cualquiera con acceso al repositorio puede descifrar el secreto
+- El código fuente suele ser más accesible de lo que los desarrolladores creen: a través del historial de Git, repositorios filtrados o accesos de personas internas
+- Muchas herramientas de escaneo de secretos detectan tanto los patrones de clave como los de texto cifrado
+
+**El enfoque correcto:**
+- Guardar las claves de cifrado en un gestor de secretos dedicado (AWS Secrets Manager, HashiCorp Vault, etc.)
+- Nunca hacer commit de claves al control de versiones
+- Usar variables de entorno para las claves, no constantes del código fuente
+- Plantearse si el cifrado es siquiera necesario si la clave debe vivir junto a los datos
+
+**Ejemplos reales:**
+Este mismo patrón se ha encontrado en numerosas filtraciones de datos en las que los desarrolladores creían que sus secretos estaban "seguros" porque estaban cifrados, sin darse cuenta de que la clave estaba igualmente expuesta.
+
+Además, este desafío usa AES en modo CBC, que es vulnerable a ataques de oráculo de relleno.
+El código de producción debería usar AES/GCM en su lugar.
+
+**Referencias:**
+- https://owasp.org/www-project-top-ten/[OWASP Top 10]
+- https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html[OWASP Secrets Management Cheat Sheet]

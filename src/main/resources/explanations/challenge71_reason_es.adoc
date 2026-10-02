@@ -1,0 +1,17 @@
+= Exposición de secretos en la configuración del Dev Container
+
+*Por qué codificar secretos en duro en los Dev Containers es un riesgo de seguridad crítico*
+
+Los Dev Containers son entornos de desarrollo compartidos configurados mediante `.devcontainer/devcontainer.json`. Como estos archivos suelen estar bajo control de versiones, codificar secretos en duro en las definiciones del devcontainer plantea varios peligros de seguridad:
+
+1. **Exposición a todos los lectores del repositorio**: Cualquiera con acceso de lectura al repositorio de origen (o forks y clones públicos en proyectos de código abierto) puede leer los secretos codificados en duro en `.devcontainer/devcontainer.json`.
+2. **Fuga de variables de entorno**: Las credenciales definidas en `containerEnv` o `remoteEnv` se inyectan en cada proceso dentro del contenedor, lo que las hace accesibles para cualquier script, proceso secundario o herramienta de diagnóstico que se ejecute en el contenedor.
+3. **Persistente en el historial de Git**: Una vez hecho el commit, eliminar el secreto requiere reescribir el historial de git, y las claves obsoletas suelen seguir siendo válidas indefinidamente si no se realiza una rotación.
+4. **Más difícil de detectar**: Muchos inspectores de secretos y contenedores todavía no detectan el `devcontainer.json`, ya que se comporta de forma diferente a un `Dockerfile`.
+
+*Remediación y mejores prácticas:*
+
+- **Usa GitHub Codespaces Secrets / VS Code Dev Container Secrets**: Inyecta secretos dinámicamente mediante los secretos de repositorio/usuario de Codespaces o la configuración de VS Code, en lugar de codificarlos en duro en los archivos de configuración.
+- **Usa sustitución de entorno local**: Referencia las variables de entorno del host dinámicamente en `devcontainer.json` usando la sintaxis `${localEnv:MY_SECRET}`.
+- **Usa archivos `.env` con `.gitignore`**: Coloca los secretos de desarrollo en archivos `.env` locales que se excluyan explícitamente del control de versiones en `.gitignore`.
+- **Adopta soluciones de gestión de secretos**: Obtén los secretos en tiempo de ejecución usando gestores de secretos dedicados (p. ej., HashiCorp Vault, AWS Secrets Manager, Azure Key Vault, GCP Secret Manager).

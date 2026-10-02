@@ -1,0 +1,24 @@
+*Pourquoi vous ne devez jamais mettre un secret dans une skill d'agent*
+
+Une skill est faite pour être partagée. C'est tout son intérêt : vous écrivez le workflow une fois et chaque développeur, agent et job CI le réutilise. Un secret dans une skill a donc les pires propriétés possibles :
+
+- Il est copié sur chaque machine qui installe la skill, ordinateurs portables personnels compris.
+- Il atterrit dans le dépôt, donc il reste pour toujours dans l'historique git, même après que vous l'avez « supprimé », ce qui vous oblige à faire tourner le secret.
+- Il est publié sur les marketplaces et registries de skills, où il est indexé et consultable.
+- Il est lu par l'agent et peut donc se retrouver dans des transcriptions de chat, des journaux et de la télémétrie appartenant à des tiers.
+- C'est une habilitation *partagée*, elle n'est donc presque jamais tournée ni jamais restreinte.
+
+----
+Ce qu'il faut faire à la place :
+
+- Gardez les habilitations hors de la skill et laissez la skill les lire depuis l'environnement, par exemple `$STAGING_DEPLOY_TOKEN`.
+- Documentez *quelle* variable est requise et *où* l'obtenir, jamais la valeur elle-même.
+- Donnez à chaque consommateur sa propre habilitation éphémère et au privilège minimal plutôt qu'un unique token d'équipe partagé.
+- Analysez les fichiers de skill avec un scanner de secrets en pre-commit et en CI, comme vous le faites pour le code source.
+- Considérez comme compromis tout secret qui est apparu dans une skill et faites-le tourner.
+----
+
+[NOTE]
+====
+Les skills, règles, prompts, configurations de serveurs MCP et fichiers d'instructions d'agents sont du code pour ce qui concerne votre gestion des secrets. Si vous ne coderiez pas en dur un token dans un fichier `.java`, ne le faites pas non plus dans un `SKILL.md`.
+====

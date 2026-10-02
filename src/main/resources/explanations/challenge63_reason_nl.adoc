@@ -1,0 +1,24 @@
+=== Reden voor uitdaging 63
+Deze uitdaging legt een wijdverbreide fout in softwareontwikkeling bloot: encryptie gebruiken terwijl de sleutel op dezelfde plaats als de ciphertext wordt opgeslagen.
+
+**Waarom dit gevaarlijk is:**
+- Encryptie is slechts zo sterk als de geheimhouding van de sleutel
+- De sleutel in broncode hardcoderen betekent dat iedereen met toegang tot de repository het geheim kan ontsleutelen
+- Broncode is vaak breder toegankelijk dan ontwikkelaars beseffen — via Git-geschiedenis, gelekte repo's of toegang van binnenuit
+- Veel secret-scanningtools detecteren zowel de sleutel- als de ciphertextpatronen
+
+**De juiste aanpak:**
+- Sla encryptiesleutels op in een dedicated secretsmanager (AWS Secrets Manager, HashiCorp Vault, etc.)
+- Commit sleutels nooit naar version control
+- Gebruik omgevingsvariabelen voor sleutels, geen broncode-constanten
+- Overweeg of encryptie überhaupt nodig is als de sleutel naast de data moet leven
+
+**Praktijkvoorbeelden:**
+Dit exacte patroon is gevonden bij talloze datalekken waarbij ontwikkelaars dachten dat hun geheimen "veilig" waren omdat ze versleuteld waren, niet beseffend dat de sleutel evenzeer blootstond.
+
+Bovendien gebruikt deze uitdaging AES in CBC-modus, wat vatbaar is voor padding-oracle-aanvallen.
+Productiecode zou in plaats daarvan AES/GCM moeten gebruiken.
+
+**Referenties:**
+- https://owasp.org/www-project-top-ten/[OWASP Top 10]
+- https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html[OWASP Secrets Management Cheat Sheet]

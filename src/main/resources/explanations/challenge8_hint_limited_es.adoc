@@ -1,0 +1,7 @@
+Puedes resolver este desafío con los siguientes pasos:
+
+1. Obtén el secreto de los registros
+ - ¿Estás usando el contenedor docker? Usa `docker logs <containerID>` para obtener los registros y encontrar el valor del challenge8.
+ - ¿Estás usando K8s? Encuentra el Pod (`kubectl get pods | grep secret`) y luego ejecuta `kubectl logs -f <nameOfThePod>` para obtener los registros y encontrar el valor del challenge 8.
+
+TEN EN CUENTA: estás ejecutando este desafío en una versión alojada de WrongSecrets. Si no lo alojas tú mismo, es posible que no tengas acceso a las salidas definidas anteriormente. Cuando organices un CTF: pide al organizador acceso a los registros.

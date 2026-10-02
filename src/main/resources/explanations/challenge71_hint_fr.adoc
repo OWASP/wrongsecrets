@@ -1,0 +1,12 @@
+Vous pouvez résoudre ce défi en suivant les étapes ci-dessous :
+
+1. Inspectez le fichier de configuration du Dev Container :
+- Ouvrez le fichier `.devcontainer/devcontainer.json` à la racine du [dépôt](https://github.com/OWASP/wrongsecrets/tree/master/.devcontainer).
+- Recherchez les sections `containerEnv` ou `remoteEnv` dans lesquelles les variables d'environnement sont définies.
+
+2. Inspectez l'environnement du conteneur en cours d'exécution :
+- Clonez le dépôt sur votre ordinateur.
+- Ouvrez le projet dans un devcontainer :
+  . Dans VS Code : appuyez sur Ctrl+Shift+P (ou Cmd+Shift+P sur macOS) -> sélectionnez "Dev Containers: Reopen in Container" (ou cliquez sur l'invite en bas à gauche).
+  . Dans Intellij Idea, cliquez sur la fenêtre contextuelle "open in devcontainer".
+- Une fois le projet ouvert dans le devcontainer, vérifiez les variables d'environnement avec `printenv DEVCONTAINER_SECRET` ou `echo $DEVCONTAINER_SECRET`.

@@ -1,0 +1,7 @@
+Deze uitdaging kan op de volgende manieren worden opgelost:
+
+- Ontsleutel het verzegelde geheim met de toegankelijke privésleutel in de repository:
+  1. Kloon de repository met de uitdagingsbestanden.
+  2. Zoek het `sealed-challenge48.json`-bestand in de repository.
+  3. Zoek het onversleutelde privésleutelbestand genaamd `main.key` in de repository.
+  4. Gebruik de `kubeseal`-tool om het verzegelde geheim te ontsleutelen.

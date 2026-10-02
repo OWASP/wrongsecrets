@@ -1,0 +1,10 @@
+=== Verbergen in binaire bestanden deel 7: de geobfusceerde Java-CLI
+
+Obfuscatie kan iemand vertragen, maar het verhindert niet dat ingebedde geheimen worden teruggevonden. Kun je het moeilijkere geheim vinden in onze geobfusceerde Java-CLI?
+
+Om het op te lossen:
+
+. Download en inspecteer https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-java-obfuscated.jar[wrongsecrets-java-obfuscated.jar].
+. Decompileer de JAR met een Java-decompiler zoals CFR, JADX of IntelliJ IDEA en volg de hoofdklasse.
+. Zoek naar de gecodeerde byte-array, de XOR-sleutel en de hulpmethoden die het geheim op runtime reconstrueren.
+. Zodra je het geheim hebt teruggevonden, dien je het in met `java -jar wrongsecrets-java-obfuscated.jar <jouw antwoord>`.

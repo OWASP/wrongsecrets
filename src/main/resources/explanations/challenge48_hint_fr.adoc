@@ -1,0 +1,7 @@
+Ce défi peut être résolu de la manière suivante:
+
+- Déchiffrez le secret scellé en utilisant la clé privée accessible dans le dépôt:
+  1. Clonez le dépôt contenant les fichiers du défi.
+  2. Localisez le fichier `sealed-challenge48.json` dans le dépôt.
+  3. Trouvez le fichier de clé privée non chiffré nommé `main.key` dans le dépôt.
+  4. Utilisez l'outil `kubeseal` pour déchiffrer le secret scellé.

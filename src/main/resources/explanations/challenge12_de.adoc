@@ -1,0 +1,7 @@
+=== Docker COPY und WORKDIR
+
+Manchmal werden große Teile des lokalen Dateisystems in den Container kopiert, damit sie für den Autor bequem verfügbar sind.
+
+In dieser Herausforderung haben wir auch einige COPY-Operationen durchgeführt und einen Schlüssel versteckt. Beachte, dass sich der Schlüssel bei jeder Generierung des Docker-Containers ändert, also solltest du ihn schnell extrahieren und verwenden :).
+
+Versuche https://github.com/deepfence/SecretScanner[*deepfenceio/secretscanning*], `docker history` des Images oder einfach `docker exec` gegen einen laufenden Container.

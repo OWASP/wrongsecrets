@@ -1,0 +1,5 @@
+Примітка: цей виклик вимагає встановлення https://www.keepassx.org/[Keepass(X)] на вашій системі для відкриття файлу kdbx. Як альтернативу можна використати https://github.com/OWASP/wrongsecrets?tab=readme-ov-file#want-to-play-but-are-not-allowed-to-install-the-tools[WrongSecrets Desktop].
+
+1. Отримайте файл Keepass:
+ - Виконайте команду в контейнері та знайдіть файл .kdbx.
+2. Спробуйте відкрити файл за допомогою KeePass і зробіть брутфорс пароля.

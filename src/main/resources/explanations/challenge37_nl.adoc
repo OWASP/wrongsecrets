@@ -1,0 +1,5 @@
+=== Je beveiligingstests toegang geven
+
+Gezien alle domme bevindingen die we al hebben in dit project, hebben we besloten geautomatiseerde scanning te implementeren met ZAP. Daarvoor moeten we het eindpunt van deze uitdaging kunnen fuzzen: `/authenticated/challenge37` en dus basisbasisauthenticatie configureren voor ZAP. Kun je het geheim vinden dat wordt geretourneerd op het eindpunt?
+
+Hint: We gebruiken GitHub actions.

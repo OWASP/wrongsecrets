@@ -1,0 +1,10 @@
+=== Cacher dans les binaires partie 6 : le CLI Java simple
+
+Les chaînes en clair à l'intérieur d'un CLI Java sont faciles à récupérer une fois le JAR téléchargé. Pouvez-vous trouver le secret caché dans notre CLI Java simple ?
+
+Pour le résoudre :
+
+. Téléchargez et inspectez https://github.com/OWASP/wrongsecrets/raw/master/src/main/resources/executables/wrongsecrets-java.jar[wrongsecrets-java.jar].
+. Décompilez le JAR ou inspectez la classe principale avec un décompilateur Java comme CFR, JADX, IntelliJ IDEA ou `javap`.
+. Cherchez la classe qui renvoie le secret et identifiez la chaîne en clair incorporée dans le CLI.
+. Une fois la valeur exacte du secret récupérée, vous pouvez la soumettre dans le champ ci-dessous ou la valider avec `java -jar wrongsecrets-java.jar <votre secret récupéré>`.

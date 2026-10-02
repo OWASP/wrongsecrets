@@ -1,0 +1,5 @@
+*Waarom obfuscatie alleen een snelheidsdrempel is.*
+
+Coderen, reflectie en lichte obfuscatie kunnen reverse engineering minder gemakkelijk maken, maar ze creëren geen echte geheimhouding. Het uitvoerbare bestand bevat nog steeds alles wat nodig is om het geheim te herstellen.
+
+Als de toepassing het geheim lokaal kan afleiden, kan een vastberaden aanvaller hetzelfde doen. Bescherm geheimen door beslissingen over vertrouwen en geheim materiaal naar gecontroleerde serversystemen te verplaatsen.

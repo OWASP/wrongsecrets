@@ -1,0 +1,26 @@
+=== Pista para el desafío 63
+Este desafío demuestra prácticas de cifrado deficientes, en concreto codificar de forma fija una clave de cifrado/descifrado en el código fuente.
+
+**Dónde buscar:**
+1. **Encuentra el archivo fuente de Java Challenge63** en el directorio `challenges/docker/challenge63/`
+2. **Busca constantes static final String** cerca del inicio de la clase
+3. **Encontrarás la clave AES, el IV y el texto cifrado** todos en el mismo archivo
+
+**Cómo descifrar cuando ya tengas la clave:**
+[source,python]
+----
+from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+from cryptography.hazmat.backends import default_backend
+import base64
+
+key = b'SuperSecretKey12'
+iv  = b'InitVector123456'
+ciphertext = base64.b64decode("TDPwOvcLsbCWV5erlk6OHFnlFoXNtdQOt2JQeq+i4Ho=")
+
+cipher = Cipher(algorithms.AES(key), modes.CBC(iv), backend=default_backend())
+decryptor = cipher.decryptor()
+plaintext = decryptor.update(ciphertext) + decryptor.finalize()
+print(plaintext.strip())
+----
+
+**Recuerda:** Si un atacante puede leer tu código fuente, las claves codificadas de forma fija no ofrecen ninguna protección.

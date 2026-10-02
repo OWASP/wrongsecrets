@@ -1,0 +1,10 @@
+=== MCP Server Omgevingsvariabele Blootstelling
+
+Het Model Context Protocol (MCP), ontwikkeld door Anthropic, is een open standaard waarmee AI-assistenten verbinding kunnen maken met tools en gegevensbronnen. Hoewel MCP krachtige integraties mogelijk maakt, vormen slecht beveiligde MCP-servers een aanzienlijk beveiligingsrisico: ze kunnen gevoelige geheimen die zijn opgeslagen in omgevingsvariabelen blootstellen aan iedereen die ze kan bereiken.
+
+Deze uitdaging demonstreert een realistisch scenario waarbij een ontwikkelaar een MCP-server heeft geïmplementeerd met een `execute_command`-tool. Dit type tool is gebruikelijk in MCP-servers die worden gebruikt om AI-assistenten shell-toegang te geven — maar het kan worden misbruikt door iedereen die het eindpunt ontdekt.
+
+**Je doel:**
+
+1. **Een MCP-server draait op een speciale poort (8090)** afzonderlijk van de hoofdapplicatie
+2. **De server legt een `execute_command`-tool bloot** die de procesomgevingsvariabelen teruggeeft

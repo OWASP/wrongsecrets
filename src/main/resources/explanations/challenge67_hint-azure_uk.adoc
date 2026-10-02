@@ -1,0 +1,23 @@
+Ви можете вирішити цей виклик за допомогою таких кроків:
+
+1. Переконайтеся, що Container Insights увімкнено для вашого кластера AKS, щоб вивід контейнера потрапив у ваш робочий простір https://portal.azure.com[*Log Analytics*].
+2. Запитайте таблицю `ContainerLogV2` щодо події аудиту — у порталі або з CLI:
++
+[source,shell]
+----
+az monitor log-analytics query \
+  --workspace <workspaceId> \
+  --analytics-query "ContainerLogV2 | where LogMessage contains 'encoded credential' | project TimeGenerated, LogMessage | take 5"
+----
+або скористайтеся:
+[source, shell]
+----
+ContainerLogV2
+| where LogMessage contains "encoded credential"
+| project TimeGenerated, LogMessage
+| take 5
+----
+3. У старих робочих просторах таблиця називається `ContainerLog`, а стовпець — `LogEntry`, тож використовуйте натомість `ContainerLog | where LogEntry contains 'encoded credential'`.
+4. Візьміть Base64-блоб із повідомлення та розшифруйте його: `echo '<blob>' | base64 -d`. Розшифроване значення і є відповіддю.
+
+Досі нічого не видно? Подію надсилається під час першого відкриття виклику, тож відкрийте сторінку один раз і запитайте ще раз.

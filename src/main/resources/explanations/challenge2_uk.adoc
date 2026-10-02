@@ -1,0 +1,7 @@
+=== Жорстко закодований пароль частина 2
+
+Замість того щоб жорстко кодувати пароль безпосередньо, розробник спробував приховати його у файлі `application.properties` Spring Boot.
+
+Таким чином його більше не можна знайти безпосередньо у файлах `.java` або скомпільованих файлах `.class`. То як же його виявити?
+
+Ви можете легко виявити це за допомогою SAST-рішень, таких як https://github.com/trufflesecurity/truffleHog[truffleHog] та https://github.com/awslabs/git-secrets[git-secrets], а також шляхом ручного огляду вашого `application.properties`.

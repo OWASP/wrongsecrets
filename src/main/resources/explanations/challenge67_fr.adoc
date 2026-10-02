@@ -1,0 +1,9 @@
+=== Secrets envoyés vers votre sink de journaux cloud
+
+Les applications enregistrent rarement un secret volontairement. Ce qui arrive beaucoup plus souvent, c'est qu'un « événement d'audit », un dump de requête ou un champ de journal structuré transporte une habilitation avec lui. Comme la valeur est encodée, personne ne le remarque lors de la revue de code : cela ressemble simplement à un blob opaque.
+
+Dans ce challenge, l'application écrit un tel événement d'audit vers la sortie standard. Elle ne renvoie jamais le secret via un point de terminaison et ne le monte jamais en fichier. Le seul endroit où la valeur apparaît est le flux de journaux que votre fournisseur cloud collecte pour vous ; vous devrez donc interroger le sink de journaux du cloud sur lequel vous tournez.
+
+Notez que la valeur journalisée est encodée en Base64 : trouver la ligne n'est donc que la moitié du travail.
+
+Astuce : ce n'est pas la même chose que le challenge 8. Là, la réponse est journalisée en clair et vous pouvez la lire directement depuis les journaux de votre conteneur local.

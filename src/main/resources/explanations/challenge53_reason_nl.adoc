@@ -1,0 +1,5 @@
+=== Debug Containers en Geheugengeheimen
+
+Debug-tools zijn krachtig, maar wanneer ze beschikbaar blijven in productieomgevingen, kunnen ze gevoelige informatie blootstellen. Deze uitdaging laat zien hoe een aanvaller met debug-toegang geheimen uit het geheugen kan ophalen.
+
+Het scenario omvat een Kubernetes pod die een gecompileerde binary draait die een geheim in het geheugen houdt. Door een misconfiguratie kan een debug-container worden gekoppeld om het te inspecteren. Dit vertegenwoordigt een scenario uit de echte wereld waarbij onjuist geconfigureerde debug-rechten tot beveiligingsrisico's kunnen leiden.

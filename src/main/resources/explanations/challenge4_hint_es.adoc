@@ -1,0 +1,9 @@
+Puedes resolver este desafío con las siguientes soluciones alternativas:
+
+1. Usa `docker history`:
+ - Descarga el contenedor.
+ - Ejecuta `docker history --no-trunc jeroenwillemsen/wrongsecrets:<NOMBRE_TAG>` para encontrar los argumentos de compilación.
+ - Busca `ARG_BASED_PASSWORD`.
+
+2. Visita el repositorio Docker en línea:
+ - Ve a https://hub.docker.com/r/jeroenwillemsen/wrongsecrets/tags y examina las capas de la imagen.

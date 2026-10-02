@@ -1,0 +1,18 @@
+Ви можете вирішити цей виклик за допомогою таких кроків:
+
+1. Знайдіть групу логів контейнера WrongSecrets у https://console.aws.amazon.com/cloudwatch/[*CloudWatch Logs*]. У конфігурації EKS із теки `aws` логи пода передаються до групи логів, названої на честь кластера, наприклад `/aws/containerinsights/<clustername>/application`.
+2. Запитайте групу логів щодо події аудиту, наприклад за допомогою CloudWatch Logs Insights:
++
+[source,shell]
+----
+aws logs start-query \
+  --log-group-name "/aws/containerinsights/<clustername>/application" \
+  --start-time $(($(date +%s) - 3600)) \
+  --end-time $(date +%s) \
+  --query-string 'fields @message | filter @message like /encoded credential/'
+----
+Примітка: у цьому прикладі застосунок згенерував секрет за останню годину, тож якщо він працює довше: виберіть довший start-time!
+3. Або стежте за логами напряму: `aws logs tail "/aws/containerinsights/<clustername>/application" --follow --filter-pattern "encoded credential"`.
+4. Візьміть Base64-блоб із повідомлення та розшифруйте його: `echo '<blob>' | base64 -d`. Розшифроване значення і є відповіддю.
+
+Досі нічого не видно? Подію надсилається під час першого відкриття виклику, тож відкрийте сторінку один раз і запитайте ще раз.

@@ -1,0 +1,7 @@
+=== Ocultando en binarios parte 4: el binario Rust
+
+Similar a ocultar secretos en una aplicación escrita en C, puedes hacer esto en Rust. Sin embargo, Ghidra no es tan bueno analizando Rust por defecto... ¿Puedes encontrar el secreto en nuestro binario?
+
+Vamos a desmentir el mito para Rust: ¿puedes encontrar el secreto en https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-rust[wrongsecrets-rust]?
+
+Intenta descargar el binario y ejecutarlo localmente (por ejemplo, `./wrongsecrets-rust<laversion> <tu respuesta>`).

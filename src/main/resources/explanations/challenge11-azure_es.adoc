@@ -1,0 +1,7 @@
+=== Azure Key Vault parte 3
+
+Ahora hemos usado Parameter Store directamente desde la app, pero hay un problema de IAM...
+
+Asume el rol `cant-read-secrets` e intenta una escalada de privilegios de IAM. No hagas trampa usando tus propios roles :)
+
+Aquí es donde herramientas como https://github.com/nccgroup/ScoutSuite[ScoutSuite] pueden realmente ayudar a detectar problemas con tu configuración de IAM.

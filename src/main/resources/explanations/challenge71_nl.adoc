@@ -1,0 +1,11 @@
+=== Lek van een geheim in de Dev Container
+
+Ontwikkelcontainers (Dev Containers) stellen teams in staat om reproduceerbare ontwikkelomgevingen te definiëren met containerisatietools zoals VS Code Remote - Containers en GitHub Codespaces. Door tools, runtime's en afhankelijkheden te verpakken in `.devcontainer/devcontainer.json`, kunnen developers direct aan de slag zonder complexe lokale softwarestacks te installeren.
+
+Toch maken developers vaak de fout om gevoelige tokens, wachtwoorden, API-sleutels of inloggegevens voor een privé-registry rechtstreeks in `.devcontainer/devcontainer.json` te verwerken (zoals in `containerEnv`, `remoteEnv` of lifecycle-scripts) en deze aan het versiebeheer te committen.
+
+Om deze uitdaging op te lossen:
+
+. Bekijk het devcontainer-configuratiebestand https://github.com/OWASP/wrongsecrets/tree/master/.devcontainer/devcontainer.json[`.devcontainer/devcontainer.json`] in de projectrepository of bekijk het configuratiefragment in de UI.
+. Identificeer het gelekte `DEVCONTAINER_SECRET` of de token die in de containeromgeving is gedefinieerd.
+. Dien het gevonden geheim in in het invoerveld hieronder.

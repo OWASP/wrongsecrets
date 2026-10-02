@@ -1,0 +1,18 @@
+Du kannst diese Challenge mit den folgenden Schritten lösen:
+
+1. Finde die Log-Gruppe des WrongSecrets-Containers in https://console.aws.amazon.com/cloudwatch/[*CloudWatch Logs*]. Mit dem EKS-Setup aus dem Ordner `aws` werden die Logs des Pods an eine Log-Gruppe gesendet, die nach dem Cluster benannt ist, zum Beispiel `/aws/containerinsights/<clustername>/application`.
+2. Durchsuche die Log-Gruppe nach dem Audit Event, zum Beispiel mit CloudWatch Logs Insights:
++
+[source,shell]
+----
+aws logs start-query \
+  --log-group-name "/aws/containerinsights/<clustername>/application" \
+  --start-time $(($(date +%s) - 3600)) \
+  --end-time $(date +%s) \
+  --query-string 'fields @message | filter @message like /encoded credential/'
+----
+Beachte: In diesem Beispiel hat die Anwendung das Geheimnis in der letzten Stunde erzeugt. Wenn sie also schon länger läuft: Wähle eine längere start-time!
+3. Oder folge den Logs direkt: `aws logs tail "/aws/containerinsights/<clustername>/application" --follow --filter-pattern "encoded credential"`.
+4. Nimm den Base64-Blob aus der Nachricht und dekodiere ihn: `echo '<blob>' | base64 -d`. Dieser dekodierte Wert ist die Antwort.
+
+Noch nichts gesehen? Das Ereignis wird zum ersten Mal ausgelöst, wenn die Challenge geöffnet wird. Rufe die Seite also einmal auf und frag erneut ab.

@@ -1,0 +1,10 @@
+=== Ocultar en binarios parte 6: la CLI de Java simple
+
+Las cadenas de texto en claro dentro de una CLI de Java son fáciles de recuperar una vez descargado el JAR. ¿Puedes encontrar el secreto oculto en nuestra CLI de Java simple?
+
+Para resolverlo:
+
+. Descarga e inspecciona https://github.com/OWASP/wrongsecrets/raw/master/src/main/resources/executables/wrongsecrets-java.jar[wrongsecrets-java.jar].
+. Decompila el JAR o inspecciona la clase principal con un decompilador de Java como CFR, JADX, IntelliJ IDEA o `javap`.
+. Busca la clase que devuelve el secreto e identifica la cadena de texto en claro incrustada en la CLI.
+. Una vez que recuperes el valor exacto del secreto, puedes enviarlo en el cuadro de abajo o validarlo con `java -jar wrongsecrets-java.jar <tu secreto recuperado>`.

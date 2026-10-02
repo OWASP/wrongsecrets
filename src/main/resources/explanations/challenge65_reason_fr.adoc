@@ -1,0 +1,7 @@
+*Pourquoi les JAR exécutables et les APK Android ne doivent pas servir à cacher des secrets.*
+
+Les JAR exécutables ne sont pas un endroit sûr pour cacher des secrets. Comme les APK Android, ce sont des archives qui livrent directement du bytecode et des ressources à l'attaquant, ce qui rend les chaînes, constantes et méthodes auxiliaires incorporées faciles à inspecter avec des outils d'ingénierie inverse courants.
+
+Si un artefact Java côté client a besoin d'un secret pour fonctionner, considérez que ce secret pourra être extrait dès que le fichier est téléchargé. Conservez les vrais secrets sur un backend de confiance et ne les libérez qu'après une authentification et une autorisation appropriées.
+
+Vous voulez plus de pratique en ingénierie inverse Java et Android ? Explorez le https://github.com/OWASP/MASTG-Hacking-Playground[OWASP MASTG Hacking Playground].

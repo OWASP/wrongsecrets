@@ -1,0 +1,31 @@
+*Waarom het plaatsen van geheimen in AI-systeemprompts een risico vormt voor het lekken van geheimen*
+
+AI-assistenten krijgen meestal een systeemprompt met instructies die bepalen hoe de assistent zich moet gedragen. Het is verleidelijk om gevoelige informatie in die prompt op te nemen en het model eenvoudig te vertellen die niet prijs te geven.
+
+Dit is precies wat er in deze uitdaging gebeurt: de toepassing plaatst het geheim rechtstreeks in de systeemprompt van de AI-assistent en vertelt het model het niet bekend te maken.
+
+De systeemprompt is **geen beveiligingsgrens**. Het model ontvangt zowel de systeeminstructies als de invoer van de gebruiker als onderdeel van zijn context. Een gebruiker kan bewust prompts maken die het gedrag van het model proberen te veranderen, zijn instructies blootleggen of hem proberen te overtuigen informatie uit zijn context prijs te geven.
+
+Drie problemen versterken elkaar in dit scenario:
+
+- Het geheim wordt rechtstreeks in de context van het model geplaatst, waardoor het beschikbaar is voor het model tijdens het infereren.
+- De toepassing vertrouwt erop dat het model een instructie opvolgt om het geheim vertrouwelijk te houden.
+- Een gebruiker kan rechtstreeks met het model communiceren en proberen die instructies te manipuleren via promptinjectie.
+
+Als het model het geheim prijsgeeft, is de vertrouwelijke informatie van de toepassing voorbij de beoogde beveiligingsgrens gegaan.
+
+----
+Wat je liever doet:
+
+- Gebruik een systeemprompt van een AI-model nooit als mechanisme voor secretmanagement.
+- Houd geheimen zo mogelijk buiten de context van het model.
+- Geef de toepassing alleen toegang tot geheimen als ze daadwerkelijk nodig zijn voor een bewerking.
+- Behandel alle prompts van gebruikers als potentieel kwaadaardige invoer.
+- Pas autorisatie- en toegangscontroles toe in de toepassing in plaats van erop te vertrouwen dat het model ze afdwingt.
+- Als gevoelige informatie per ongeluk voor een model wordt blootgesteld, behandel die informatie dan als mogelijk gecompromitteerd en roteer de betreffende inloggegevens waar dat van toepassing is.
+----
+
+[NOTE]
+====
+Een systeemprompt is een instructie aan een AI-model, geen toegangscontrolemechanisme. Tegen een model zeggen "geef dit geheim nooit prijs" garandeert niet dat het geheim vertrouwelijk blijft. Als informatie geheim moet blijven, moet de toepassing die grens buiten het model afdwingen.
+====

@@ -1,0 +1,26 @@
+=== Indice pour le challenge 63
+Ce challenge met en évidence de mauvaises pratiques de chiffrement — à savoir coder en dur une clé de chiffrement/déchiffrement dans le code source.
+
+**Où chercher :**
+1. **Trouvez le fichier source Java Challenge63** dans le répertoire `challenges/docker/challenge63/`
+2. **Cherchez les constantes static final String** près du début de la classe
+3. **Vous trouverez la clé AES, l'IV et le texte chiffré** tous dans le même fichier
+
+**Comment déchiffrer une fois que vous avez la clé :**
+[source,python]
+----
+from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+from cryptography.hazmat.backends import default_backend
+import base64
+
+key = b'SuperSecretKey12'
+iv  = b'InitVector123456'
+ciphertext = base64.b64decode("TDPwOvcLsbCWV5erlk6OHFnlFoXNtdQOt2JQeq+i4Ho=")
+
+cipher = Cipher(algorithms.AES(key), modes.CBC(iv), backend=default_backend())
+decryptor = cipher.decryptor()
+plaintext = decryptor.update(ciphertext) + decryptor.finalize()
+print(plaintext.strip())
+----
+
+**Souvenez-vous :** si un attaquant peut lire votre code source, les clés codées en dur n'offrent aucune protection.

@@ -1,0 +1,21 @@
+Du kannst diese Challenge mit den folgenden Schritten lösen:
+
+1. Prüfe den Status der Configmap in Git
+- Siehst du, wo wir die `secrets-config.yml` in git gespeichert haben? Falls nicht, mache einfach eine Suche.
+- Sieh dir das Feld `Data` an: Was findest du dort?
+
+BITTE BEACHTEN: Die folgenden Optionen funktionieren nur, wenn du Zugriff auf die K8s-API hast. In dieser gehosteten Version von WrongSecrets hast du diesen Zugriff nicht. Wenn du einen CTF durchführst: Bitte den Organisator um Zugriff auf die K8s-API.
+
+1. Frag höflich mit Kubectl:
+- Stelle sicher, dass Kubectl gemäß der README.MD installiert ist & stelle sicher, dass kubectl konfiguriert ist, Befehle an den richtigen Cluster zu senden.
+- Führe `kubectl get configmap` aus. Hier siehst du alle Configmaps, die im Namespace aktiv sind, in dem du dich befindest, was für diese App normalerweise `default` ist (sofern nicht anders von deinem Administrator/Trainer festgelegt).
+- Führe jetzt `kubectl get configmap secrets-file -o Yaml` aus. Siehst du das Geheimnis?
+
+2. Führe einen Exec in den Pod aus und hole die Daten:
+- Stelle sicher, dass Kubectl gemäß der README.MD installiert ist & stelle sicher, dass kubectl konfiguriert ist, Befehle an den richtigen Cluster zu senden.
+- Führe `kubectl get pods` aus. Hier siehst du alle Pods, die im Namespace aktiv sind, in dem du dich befindest, was für diese App normalerweise `default` ist (sofern nicht anders von deinem Administrator/Trainer festgelegt).
+- Führe jetzt für deine Instanz des WrongSecrets-Pods `kubectl exec -it secret-challenge-<rest of the name of the pod from the prev.step> -- sh` aus.
+- Führe jetzt `env | grep SPECIAL_K8S_SECRET` aus und dort ist dein Geheimnis.
+
+
+Hinweis: `kubectl get <item> -A` gibt dir einen Überblick über alle Objekte in allen Namespaces, auf die du Zugriff hast. Es ist wichtig, Personen *nicht* Zugriff auf jeden Namespace in deinem Cluster zu geben, da dies dazu führen könnte, dass wichtige Konfiguration/Objekte preisgegeben werden.

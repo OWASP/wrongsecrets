@@ -1,0 +1,5 @@
+=== Secreto basado en ConfigMap de K8s
+
+Hardcodear en Docker no fue inteligente. ¿Pero qué pasa con un config-map en el namespace predeterminado sin RBAC?
+
+Si este desafío está habilitado, estás ejecutando esto desde un clúster K8s. ¿Puedes usar `kubectl` para encontrar el secreto? ¿O miras en el repositorio donde está configurado el clúster? Puede que también lo hayas visto si el configmap fue confirmado en Git.

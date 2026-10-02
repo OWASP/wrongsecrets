@@ -1,0 +1,12 @@
+Wie der Text der Herausforderung sagt: Wir suchen nach einem Geheimnis in der Konfiguration der Spring Boot-Anwendung namens `Application.properties`.
+
+Du kannst diese Herausforderung auf folgende Wege lösen:
+
+1. Verwende https://github.com/trufflesecurity/truffleHog[*Trufflehog*]:
+- Installiere Trufflehog und führe es auf unserem Repository aus: `trufflehog https://github.com/OWASP/wrongsecrets`.
+
+2. Überprüfe die `Application.properties`:
+- Öffne die Datei `Application.properties` im Ordner `src/resources` im https://github.com/OWASP/wrongsecrets[*Ziel-Repository*] und suche das Geheimnis.
+
+3. Wenn du den Quellcode nicht verfügbar hast:
+- Kopiere die Jar-Datei aus dem Container und öffne sie in https://java-decompiler.github.io/[*JD-GUI*] oder https://github.com/skylot/jadx[*jadx-gui*]. Suche die `application.properties` in `Resources/BOOT-INF`.

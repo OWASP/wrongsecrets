@@ -1,0 +1,24 @@
+=== Raison du challenge 63
+Ce challenge met en évidence une erreur répandue dans le développement logiciel : utiliser le chiffrement tout en stockant la clé au même endroit que le texte chiffré.
+
+**Pourquoi c'est dangereux :**
+- Le chiffrement n'est aussi solide que la confidentialité de la clé
+- Coder en dur la clé dans le code source signifie que quiconque a accès au dépôt peut déchiffrer le secret
+- Le code source est souvent plus accessible que les développeurs ne le croient — via l'historique Git, des dépôts fuités ou un accès interne
+- De nombreux outils de scan de secrets détectent à la fois les motifs de clé et de texte chiffré
+
+**L'approche correcte :**
+- Stocker les clés de chiffrement dans un gestionnaire de secrets dédié (AWS Secrets Manager, HashiCorp Vault, etc.)
+- Ne jamais committer les clés dans le contrôle de version
+- Utiliser des variables d'environnement pour les clés, et non des constantes du code source
+- Se demander si le chiffrement est même nécessaire si la clé doit vivre à côté des données
+
+**Exemples concrets :**
+Ce motif exact a été trouvé dans de nombreuses fuites de données où les développeurs pensaient que leurs secrets étaient « sûrs » parce qu'ils étaient chiffrés, sans réaliser que la clé était tout autant exposée.
+
+Par ailleurs, ce challenge utilise AES en mode CBC, qui est vulnérable aux attaques par oracle de remplissage.
+Le code de production devrait utiliser AES/GCM à la place.
+
+**Références :**
+- https://owasp.org/www-project-top-ten/[OWASP Top 10]
+- https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html[OWASP Secrets Management Cheat Sheet]

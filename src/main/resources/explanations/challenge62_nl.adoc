@@ -1,0 +1,44 @@
+=== MCP-serverprivilege-escalatie via een Google Service Account
+
+Het Model Context Protocol (MCP) stelt AI-assistenten en agents in staat om tools te gebruiken en externe services te benaderen. Wanneer een MCP-server is geconfigureerd met een Google Service Account die bredere rechten heeft dan de aanroepende gebruiker, ontstaat een kwetsbaarheid voor privilege escalation: iedereen die de MCP-tool kan aanroepen krijgt toegang tot resources waartoe diegene niet rechtstreeks geautoriseerd is.
+
+Deze uitdaging toont een realistisch scenario waarin een ontwikkelaar een MCP-server heeft gebouwd om een AI-assistent toegang te geven tot interne Google Drive-documenten. Het service account dat de MCP-server gebruikt, heeft leestoegang tot een beperkt document — maar de MCP-server controleert niet of de aanroeper geautoriseerd is om het te benaderen.
+
+**Jouw doel:**
+
+1. **Er draait een MCP-server op deze toepassing** die bereikbaar is via het `/mcp62`-eindpunt
+2. **De server onthult een `read_google_drive_document`-tool** die een Google Service Account gebruikt
+3. **Het service account heeft leestoegang tot een Google Drive-document** waarin het geheim staat
+4. **De tool controleert niet of de aanroeper geautoriseerd is** om dat document te lezen
+
+**Hoe je met de MCP-server communiceert:**
+
+Ontdek eerst de beschikbare tools:
+
+[source,bash]
+----
+curl -s -X POST http://localhost:8080/mcp62 \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+----
+
+Roep daarna de `read_google_drive_document`-tool op om de documentinhoud op te halen:
+
+[source,bash]
+----
+curl -s -X POST http://localhost:8080/mcp62 \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"read_google_drive_document","arguments":{}}}'
+----
+
+****
+💡 *Let op:*
+
+De server leest een Google Drive-document met een geconfigureerd service account. De inhoud van dat document bevat het geheim dat je als antwoord moet indienen. De belangrijkste beveiligingsles is dat het service account van de MCP-server verhoogde rechten heeft die noch jij noch je AI-assistent normaal gesproken zou hebben — maar de MCP-server verleent die impliciet aan iedereen die zijn tools aanroept.
+****
+
+**Implementatiedetails (voor maintainers):**
+
+- Het antwoord op de uitdaging wordt uit de inhoud tussen `<secret>` en `</secret>` gehaald.
+- De extractie gebeurt één keer bij het laden van het geheim en wordt daarna in een cache bewaard voor antwoordvalidatie.
+- De MCP-controller bewaart opgehaalde documenten in een cache, waarbij altijd het geconfigureerde standaarddocument plus maximaal 20 extra document-id's worden behouden.

@@ -1,0 +1,5 @@
+*Warum die Eingabe von Geheimnissen in Bash eine schlechte Idee ist.*
+
+Die Befehlszeile kann sich temporär und sicher anfühlen, wird aber oft protokolliert. Dies ist eine Standardfunktion bei den meisten Shells. Einige haben Schutzmaßnahmen, und die meisten Tools, die ein Geheimnis anfordern, werden es nicht ausgeben. Wenn du jedoch benutzerdefinierte Befehle schreibst, sind diese Schutzmaßnahmen nicht vorhanden und du kannst dich leicht selbst ins Bein schießen.
+
+Das Durchsickern von Geheimnissen ist etwas schwierig mit einem Dockerfile beim Erstellen eines Containers. Wenn du jedoch einen Container hast, den du regelmäßig verwendest, ihn nicht löschst und Geheimnisse im Klartext eingibst, könnte ein böswilliger Akteur deinen scheinbar harmlosen Docker-Container nutzen, um Privilegien zu eskalieren. Dies könnte dazu führen, dass etwas viel Wichtigeres als dein PC ausgenutzt wird.

@@ -1,0 +1,10 @@
+Descarga y descomprime el paquete de skill exportado:
+
+----
+curl -sO http://localhost:8080/skills/claude/incident-reporter.zip
+unzip incident-reporter.zip
+----
+
+El `SKILL.md` solo apunta al cargador incluido. Abre `incident-reporter/scripts/upload_report.py` y mira `UPLOAD_TOKEN_B64`.
+
+Ese valor todavía no es la respuesta: el autor lo codificó en base64 para que el detector de secretos no se quejese. Descodifícalo, por ejemplo con `base64 -d`, y envía el token descodificado.

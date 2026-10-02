@@ -1,0 +1,3 @@
+Ouvrez link:/challenges/challenge-72/codex-session-transcript.md[`/challenges/challenge-72/codex-session-transcript.md`] et recherchez la ligne contenant `DEPLOY_TOKEN=`. La valeur après le signe égal est la réponse.
+
+Ce même fichier se trouve dans l'arborescence des sources à l'emplacement `src/main/resources/challenges/challenge-72/codex-session-transcript.md`.

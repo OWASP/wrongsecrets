@@ -1,0 +1,7 @@
+Je kunt deze uitdaging oplossen met de volgende stappen:
+
+1. Haal het geheim op uit de logging
+ - Gebruik je de docker-container? Gebruik `docker logs <containerID>` om de logs te krijgen en de waarde voor challenge8 te vinden.
+ - Gebruik je K8s? Vind de Pod (`kubectl get pods | grep secret`) en voer dan `kubectl logs -f <nameOfThePod>` uit om de logs te krijgen en de waarde voor challenge 8 te vinden.
+
+LET OP: je draait deze uitdaging op een gehoste versie van WrongSecrets. Als je het niet zelf host, heb je mogelijk geen toegang tot de hierboven genoemde uitvoer. Wanneer je een CTF draait: vraag de organisator om toegang tot de logging.

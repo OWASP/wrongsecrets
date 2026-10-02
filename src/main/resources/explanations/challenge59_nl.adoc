@@ -1,0 +1,9 @@
+=== Vind de Slack Webhook URL
+
+Welkom bij deze uitdaging die de kwetsbaarheid van hardgecodeerde Slack webhook-URL's in omgevingsvariabelen demonstreert!
+
+Deze uitdaging simuleert een scenario uit de echte wereld waarbij:
+
+1. **Slack webhook-URL's worden opgeslagen als omgevingsvariabelen** voor toepassingsmeldingen
+2. **De URL's worden verhuld** om detectie door tools voor het scannen op geheimen te vermijden
+3. **Risico van personeelsverloop**: Wanneer een werknemer vertrekt, wordt de webhook mogelijk niet geroteerd, waardoor voortdurende toegang mogelijk is

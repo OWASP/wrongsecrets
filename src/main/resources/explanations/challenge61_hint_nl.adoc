@@ -1,0 +1,7 @@
+Je kunt deze uitdaging oplossen via de volgende alternatieve oplossingen:
+
+1. Vind het bottoken in de broncode
+- Kijk naar de Challenge61-klasse in de broncode
+- Vind het gecodeerde bottoken in de `getBotToken()`-methode
+- Decodeer de Base64-gecodeerde string (het is dubbel gecodeerd)
+- Het tokenformaat is: `BOTID:TOKEN_STRING`

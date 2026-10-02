@@ -1,0 +1,5 @@
+*Pourquoi devez-vous être prudent avec les notes Git?*
+
+1. Comme tous les dépôts Git, une fois qu'un secret est divulgué ici, il est très difficile/impossible de le supprimer de tout l'historique.
+
+2. Les notes Git semblent être une fonctionnalité rarement utilisée de Git, donc beaucoup de scanners de secrets ne les vérifient pas. Cela signifie qu'ils peuvent être manqués dans CI.

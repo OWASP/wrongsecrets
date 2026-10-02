@@ -1,0 +1,14 @@
+=== Desafío 69: Encuentra el secreto en la skill de Cursor
+
+Las skills de agentes se están convirtiendo en una forma popular de compartir automatización con un equipo: dejas una carpeta con un `SKILL.md` dentro, el agente lo recoge y todos obtienen el mismo flujo de trabajo. Por desgracia, eso también las convierte en un lugar muy conveniente para "aparcar temporalmente" una credencial compartida.
+
+Esta aplicación incluye una skill de Cursor llamada `deploy-preview`. La skill vive en la carpeta de recursos y la aloja el backend en link:/skills/cursor/deploy-preview/SKILL.md[`/skills/cursor/deploy-preview/SKILL.md`].
+
+El código fuente de la skill también está disponible en GitHub: link:https://github.com/OWASP/wrongsecrets/blob/master/src/main/resources/challenges/challenge-70/cursor-skill/deploy-preview/SKILL.md[`src/main/resources/challenges/challenge-70/cursor-skill/deploy-preview/SKILL.md`].
+
+Lee la skill y envía el token de despliegue de staging que el autor incluyó "para que la skill sea autosuficiente".
+
+[NOTE]
+====
+Aquí no hay nada codificado ni cifrado: esto es exactamente lo que parece una skill filtrada en su estado natural. Una skill es documentación, y la documentación se copia en wikis, tickets, pull requests y mensajes de chat.
+====
