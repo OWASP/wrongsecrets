@@ -1,0 +1,26 @@
+=== Hinweis zu Challenge 63
+Diese Challenge zeigt schlechte Verschlüsselungspraktiken – insbesondere das Hartkodieren eines Encryption-/Decryption-Schlüssels im Quellcode.
+
+**Wo du suchen solltest:**
+1. **Finde die Java-Quelldatei Challenge63** im Verzeichnis `challenges/docker/challenge63/`
+2. **Suche nach static-final-String-Konstanten** nahe dem Anfang der Klasse
+3. **Du wirst AES-Schlüssel, IV und Chiffretext** alle in derselben Datei finden
+
+**So entschlüsselst du, sobald du den Schlüssel hast:**
+[source,python]
+----
+from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+from cryptography.hazmat.backends import default_backend
+import base64
+
+key = b'SuperSecretKey12'
+iv  = b'InitVector123456'
+ciphertext = base64.b64decode("TDPwOvcLsbCWV5erlk6OHFnlFoXNtdQOt2JQeq+i4Ho=")
+
+cipher = Cipher(algorithms.AES(key), modes.CBC(iv), backend=default_backend())
+decryptor = cipher.decryptor()
+plaintext = decryptor.update(ciphertext) + decryptor.finalize()
+print(plaintext.strip())
+----
+
+**Denk daran:** Wenn ein Angreifer deinen Quellcode lesen kann, bieten hartkodierte Schlüssel null Schutz.

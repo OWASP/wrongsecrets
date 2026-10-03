@@ -1,0 +1,40 @@
+=== Hint voor uitdaging 62
+
+Deze uitdaging toont hoe een MCP-server met een te ruimhartig geconfigureerd Google Service Account privilege escalation mogelijk maakt.
+
+**Waar te kijken:**
+
+1. **Er draait een MCP-server op `/mcp62`** op de hoofdpoort van de toepassing
+2. **De MCP-server onthult een `read_google_drive_document`-tool** die een Google Service Account gebruikt om een document te lezen
+3. **Je hebt geen geldige Google-credentials nodig** — het service account is al in de toepassing geconfigureerd
+
+**Stap-voor-stap-aanpak:**
+
+List eerst de tools die de MCP-server aanbiedt:
+
+[source,bash]
+----
+curl -s -X POST http://localhost:8080/mcp62 \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+----
+
+Roep daarna `read_google_drive_document` op om het document te lezen:
+
+[source,bash]
+----
+curl -s -X POST http://localhost:8080/mcp62 \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"read_google_drive_document","arguments":{}}}'
+----
+
+**Waar je op moet letten:**
+
+- Het antwoord bevat de inhoud van een Google Drive-document
+- Het document bevat het geheime antwoord op deze uitdaging
+- De antwoordvalidator gebruikt de waarde tussen `<secret>` en `</secret>` in die inhoud
+- Merk op dat je een document hebt geopend waarvan je niet rechtstreeks leestoegang hebt — het service account van de MCP-server heeft die toegang verleend
+
+**Opmerking voor maintainers:** De MCP-controller houdt een begrensde documentcache bij om herhaalde Drive API-aanroepen te beperken.
+
+**Onthoud:** Dit is een voorbeeld van privilege escalation via een MCP-server. Het service account heeft meer rechten dan jij (de aanroeper) zou hebben, en de MCP-server handhaaft geen toegangscontroles op aanroeperniveau.

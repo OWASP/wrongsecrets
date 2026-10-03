@@ -1,0 +1,32 @@
+*Waarom transcripts van AI-codingagents een risico vormen voor het lekken van geheimen*
+
+AI-codingagents lezen je bestanden, voeren je opdrachten uit en maken sessielogs. Wanneer een developer een agent vraagt om een probleem te debuggen, kan de agent configuratiebestanden, omgevingsvariabelen of secretmanagers lezen — en die waarden weergeven in zijn transcript. Dit is precies wat er in deze uitdaging gebeurde: de agent las een `.env.staging`-bestand en gaf de deploytoken door in de uitvoer van zijn sessie.
+
+Het transcript wordt een blijvend artefact dat het volgende kan zijn:
+
+- Gecommit in het versiebeheer als de developer het opslaat
+- Gedeeld met teamleden voor context of overdracht
+- Geüpload naar supportkanalen bij het melden van bugs
+- Opgeslagen in agent-geschiedenisbestanden op de machine van de developer
+- Geïndexeerd door IDE-plugins of lokale zoektools
+
+Drie problemen versterken elkaar in dit scenario:
+
+- Het geheim bestaat in een plaintext-configuratiebestand, waardoor het eenvoudig leesbaar is door elke tool of agent.
+- Het debugproces van de agent legt het geheim vanzelfsprekend bloot in de uitvoer, waardoor er een secundaire kopie van de inloggegevens ontstaat.
+- Het transcript wordt waarschijnlijk opgeslagen, gedeeld of gecommit zonder beoordeling, omdat het "op debuguitvoer lijkt" in plaats van op gevoelige data.
+
+----
+Wat je liever doet:
+
+- Bewaar secrets nooit in plaintext-configuratiebestanden. Gebruik een secretmanager of omgevingsvariabelen die tijdens het uitvoeren worden geïnjecteerd.
+- Configureer agents om gevoelige waarden te maskeren voordat ze deze weergeven. Veel agent-tools ondersteunen uitvoerfiltering of sandboxing.
+- Beoordeel agent-transcripts voordat je ze opslaat of deelt, net zoals je een pull request zou beoordelen.
+- Behandel elk transcript dat uit een secretbron heeft gelezen als mogelijk gecompromitteerd en roteer de blootgestelde inloggegevens.
+- Gebruik korte, scope-beperkte tokens voor staging-implementaties zodat de blootstelling een beperkte impact heeft.
+----
+
+[NOTE]
+====
+AI-codingagents zijn krachtige tools, maar ze werken met dezelfde bestanden en omgeving als jij. Als een menselijke developer een geheim zou kopiëren en plakken in een chatlog, doet een agent hetzelfde — alleen produceert een agent een gestructureerd transcript dat nog gemakkelijker te doorzoeken en te delen is.
+====

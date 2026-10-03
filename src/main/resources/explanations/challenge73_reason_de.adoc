@@ -1,0 +1,39 @@
+*Warum du niemals ein Geheimnis in eine Agent-Anweisungsdatei legen solltest*
+
+`AGENTS.md`, `CLAUDE.md`, `.cursor/rules/*.mdc`, `.windsurfrules` und die vielen
+anderen Agent-Kontextformate werden von Coding-Agenten automatisch geladen. Das
+macht sie bequem, und genau diese Bequemlichkeit macht sie zu einem
+Problem beim Secret-Management:
+
+- Sie werden in das Repository committet, sodass das Geheimnis für immer in der Git-Historie
+  liegt und rotiert werden muss, sobald es auftaucht.
+- Sie werden auf jede Maschine kopiert, die das Repository auscheckt, einschließlich
+  Forks, CI-Runner und persönlicher Laptops.
+- Sie werden in den Modellkontext geladen, sodass der Wert in Chat-
+  Transkripte, Telemetrie und Logs von Drittanbietern geraten kann.
+- Sie enthalten normalerweise eine *gemeinsam genutzte* Zugangsdaten, die selten eingeschränkt
+  und noch seltener rotiert wird.
+- Viele Secret-Scanner behandeln Dokumentationsdateien als gering priorisiert, sodass das Leck
+  lange Zeit unentdeckt bleibt.
+
+----
+Was du stattdessen tun solltest:
+
+- Halte Zugangsdaten von den Anweisungsdateien fern und lass den Agenten sie
+  aus der Umgebung lesen, zum Beispiel `$STAGING_DEPLOY_TOKEN`.
+- Dokumentiere, *welche* Variable benötigt wird und *wo* man sie erhält, niemals den
+  Wert selbst.
+- Gib jedem Verbraucher eine kurzlebige Zugangsdaten mit den geringsten Rechten statt eines
+  gemeinsam genutzten Tokens.
+- Scanne Agent-Anweisungsdateien mit einem Secret-Scanner in Pre-Commit und CI, genau
+  wie du Quellcode scannst.
+- Behandle jedes Geheimnis, das jemals in einem Agent-Kontext aufgetaucht ist, als kompromittiert, und
+  rotiere es.
+----
+
+[NOTE]
+====
+Skills, Regeln, Prompts, MCP-Serverkonfigurationen und Agent-Anweisungsdateien
+sind alles Code, was dein Secret-Management betrifft. Wenn du ein Token nicht hart
+in eine `.java`-Datei kodierst, kodiere es auch nicht in eine `CLAUDE.md`.
+====

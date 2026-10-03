@@ -1,0 +1,14 @@
+Die Agent-Anweisungsdateien werden mit dem Dev Container im
+Ordner `.devcontainer` geliefert:
+
+- `.devcontainer/AGENTS.md`
+- `.devcontainer/CLAUDE.md`
+- `.devcontainer/.cursor/rules/project.mdc`
+- `.devcontainer/.windsurfrules`
+
+Drei von ihnen verweisen nur darauf, wo die gemeinsam genutzte Zugangsdaten liegt. Eine von ihnen
+bettet den Wert von `STAGING_DEPLOY_TOKEN` in ein Shell-Snippet ein. Dieser Wert ist
+die Antwort.
+
+Wenn du den Dev Container nicht verwendest, kannst du dieselben Dateien auch direkt
+aus dem Repository im Ordner link:https://github.com/OWASP/wrongsecrets/tree/master/.devcontainer[`.devcontainer`].

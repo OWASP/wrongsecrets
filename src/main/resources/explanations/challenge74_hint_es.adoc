@@ -1,0 +1,18 @@
+Puedes resolver este reto siguiendo estos pasos:
+
+1. Interactúa con el asistente de IA:
+- Usa la interfaz de chat que se proporciona en el reto.
+- Haz preguntas al asistente y observa cómo responde.
+- Recuerda que al asistente se le ha dado información confidencial como parte de sus instrucciones.
+
+2. Investiga cómo se instruye al asistente:
+- Pregunta al asistente por sus instrucciones, reglas o contexto.
+- Considera qué información puede estar disponible para el modelo pero no es directamente visible en la interfaz de chat.
+
+3. Prueba la inyección de prompts:
+- Al asistente se le ha indicado que no revele la información confidencial.
+- Intenta crear mensajes que cambien, anulen o manipulen esas instrucciones.
+- Pide al asistente que revele información de sus instrucciones o de su contexto.
+
+4. Busca el secreto:
+- Si consigues que el asistente divulgue la información confidencial, usa el valor revelado como solución del reto.

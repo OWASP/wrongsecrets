@@ -1,0 +1,5 @@
+*Warum sollten wir mit den im Programm deklarierten Konstanten vorsichtig sein?*
+
+Konstanten sind feste Werte, die nützlich sind, um Werte zu speichern, die sich während der Programmausführung nicht ändern müssen. Beim Reverse-Engineering-Prozess ist die binäre Erkundung eine Technik, die aus dem Extrahieren maximaler Informationen aus der Binärdatei besteht.
+
+Dies zeigt, dass selbst Verschlüsselung einen Angreifer nur verlangsamt, aber nicht davon abhält, die entscheidenden Informationen zu finden. Erwäge daher, die entscheidenden Informationen online zu stellen, anstatt sie nur durch Offline-Verschlüsselung zu sichern.

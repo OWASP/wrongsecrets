@@ -1,0 +1,31 @@
+*Pourquoi placer des secrets dans les prompts système d'une IA constitue un risque de fuite de secrets*
+
+Les assistants IA reçoivent généralement un prompt système contenant des instructions définissant comment l'assistant doit se comporter. Il est tentant d'inclure des informations sensibles dans ce prompt et de simplement demander au modèle de ne pas les révéler.
+
+C'est exactement ce qui se passe dans ce défi : l'application place le secret directement dans le prompt système de l'assistant IA et indique au modèle de ne pas le divulguer.
+
+Le prompt système n'est **pas une frontière de sécurité**. Le modèle reçoit à la fois les instructions système et la saisie de l'utilisateur dans le cadre de son contexte. Un utilisateur peut délibérément construire des prompts visant à modifier le comportement du modèle, exposer ses instructions ou le convaincre de divulguer des informations issues de son contexte.
+
+Trois défaillances se cumulent dans ce scénario :
+
+- Le secret est placé directement dans le contexte du modèle, ce qui le rend disponible pour le modèle pendant l'inférence.
+- L'application s'appuie sur le fait que le modèle suit une instruction pour garder le secret confidentiel.
+- Un utilisateur peut interagir directement avec le modèle et tenter de manipuler ces instructions par injection de prompt.
+
+Si le modèle révèle le secret, les informations confidentielles de l'application ont franchi sa frontière de sécurité prévue.
+
+----
+Ce qu'il faut faire à la place :
+
+- N'utilisez jamais le prompt système d'un modèle IA comme mécanisme de gestion des secrets.
+- Gardez les secrets hors du contexte du modèle autant que possible.
+- Ne donnez à l'application accès aux secrets que lorsqu'ils sont réellement nécessaires à une opération.
+- Traitez tous les prompts fournis par l'utilisateur comme des entrées potentiellement malveillantes.
+- Appliquez l'autorisation et les contrôles d'accès dans l'application plutôt que de compter sur le modèle pour les faire respecter.
+- Si des informations sensibles sont accidentellement exposées à un modèle, traitez-les comme potentiellement compromises et faites tourner l'identifiant concerné le cas échéant.
+----
+
+[NOTE]
+====
+Un prompt système est une instruction destinée à un modèle IA, pas un mécanisme de contrôle d'accès. Dire à un modèle « ne révèle jamais ce secret » ne garantit pas que le secret restera confidentiel. Si des informations doivent rester secrètes, l'application doit faire respecter cette frontière en dehors du modèle.
+====

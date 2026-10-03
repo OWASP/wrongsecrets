@@ -1,0 +1,12 @@
+=== Desafío 74: Convence al asistente de IA para que revele el secreto
+
+A los asistentes de IA se les pueden dar instrucciones de sistema que contienen información confidencial. Si esas instrucciones no están debidamente protegidas, una inyección de prompts puede hacer que el asistente revele información que se le dijo explícitamente que debía mantener en secreto.
+
+Esta aplicación ofrece un pequeño asistente de IA. Al asistente se le ha dado información confidencial en sus instrucciones y se le ha dicho que nunca la revele.
+
+Chatea con el asistente y encuentra una forma de convencerlo de que revele la información confidencial.
+
+[NOTE]
+====
+Al asistente se le ha indicado explícitamente que no revele la información confidencial. Prueba distintos prompts y técnicas para ver si puedes lograr que divulgue sus instrucciones o el secreto.
+====

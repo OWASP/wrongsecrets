@@ -1,0 +1,26 @@
+*Pourquoi un bundle de skill nécessite la même revue que votre code source*
+
+Un bundle de skill est un logiciel livré. Il contient des scripts exécutables, il tourne sur les machines des développeurs et en CI, et il est installé par des personnes qui ne l'ont pas écrit. Le traiter comme « juste un peu de markdown » est la façon dont les secrets finissent par être distribués à grande échelle.
+
+Deux échecs s'accumulent dans ce challenge :
+
+- Le token est commité à l'intérieur du bundle : celui qui installe la skill reçoit donc une habilitation partagée et fonctionnelle.
+- Lors du partage de la skill dans Claude, tout ayant accès à la skill aura accès au secret.
+- Le token est encodé en base64, ce qui est de l'*encodage*, pas du chiffrement. Cela empêche un scanner de secrets naïf de se déclencher, et n'empêche personne d'autre. Quiconque dispose du bundle peut le décoder en une commande.
+
+Le second point est le plus dangereux des deux, car il transforme un problème détectable en un problème indétectable. Le scanner se tait, la découverte disparaît du backlog et l'habilitation reste valide pendant des années.
+
+----
+Ce qu'il faut faire à la place :
+
+- Lisez les habilitations depuis l'environnement ou un gestionnaire de secrets à l'exécution, et échouez bruyamment avec un message clair lorsqu'elles sont absentes.
+- Ne « réparez » jamais un constat de scanner de secrets en encodant, en découpant ou en brouillant la valeur. Réparez-le en supprimant le secret et en le faisant tourner.
+- Revoyez chaque fichier d'un bundle de skill, pas seulement le `SKILL.md`. Scripts, documents de référence et configuration d'exemple font partie de la surface d'attaque.
+- Vérifiez le bundle en CI : décompressez-le et faites passer votre scanner de secrets sur le contenu extrait, avec un jeu de règles compatible base64.
+- Publiez les bundles depuis une chaîne de build qui n'a de toute façon aucun accès aux habilitations de production.
+----
+
+[NOTE]
+====
+L'encodage n'est pas un contrôle de sécurité. Si entre un attaquant et votre habilitation il n'y a qu'un `base64 -d`, l'habilitation est publique.
+====

@@ -1,0 +1,7 @@
+=== Génération de valeurs aléatoires
+
+Parfois, nous avons besoin d'un secret généré aléatoirement au démarrage. Vous les avez peut-être déjà rencontrés : des applications qui génèrent un mot de passe pour la première connexion et l'impriment sur la sortie standard. Un exemple est https://www.jenkins.io/doc/book/installing/linux/#unlocking-jenkins[Jenkins].
+
+Dans ce défi, nous ferons la même chose : nous générons aléatoirement un secret au démarrage de l'application et le journalisons dans la sortie standard. Pouvez-vous trouver la réponse ?
+
+Conseil : regardez la journalisation de l'application au démarrage !

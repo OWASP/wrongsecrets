@@ -1,0 +1,10 @@
+=== Приховування в бінарних файлах, частина 7: обфускована Java CLI
+
+Обфускація може сповільнити когось, але не заважає відновити вбудовані секрети. Чи зможеш ти знайти складніший секрет у нашій обфускованій Java CLI?
+
+Щоб розв'язати завдання:
+
+. Завантаж і перевір https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-java-obfuscated.jar[wrongsecrets-java-obfuscated.jar].
+. Декомпілюй JAR за допомогою декомпілятора Java, як-от CFR, JADX чи IntelliJ IDEA, і простеж основний клас.
+. Знайди закодований масив байтів, ключ XOR і допоміжні методи, які відтворюють секрет під час виконання.
+. Коли відновиш секрет, надішли його командою `java -jar wrongsecrets-java-obfuscated.jar <твоя відповідь>`.

@@ -1,0 +1,8 @@
+=== Waarom het delen van AI-chats met geheimen gevaarlijk is
+
+AI-modellen worden vaak gebruikt om code, configuratie of zelfs credentials te genereren. Wanneer een gebruiker een chatsessie deelt, maakt die een publieke URL waartoe iedereen toegang heeft. Als de sessie API-sleutels, wachtwoorden of bedrijfseigen logica bevat, zijn die geheimen nu blootgelegd.
+
+Het is belangrijk om:
+- nooit echte geheimen aan AI-tools te geven.
+- gevoelijke informatie uit chats te verwijderen voordat je ze deelt.
+- bedrijfsversies van AI-tools te gebruiken die betere gegevensbescherming en deelcontroles bieden.

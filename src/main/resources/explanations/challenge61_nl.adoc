@@ -1,0 +1,7 @@
+=== Telegram Kanaalgeheimen
+
+Veel mobiele applicaties en services gebruiken Telegram-bots voor meldingen, monitoring of gebruikersinteractie. Ontwikkelaars hardcoderen vaak Telegram-botinloggegevens direct in hun applicatiebroncode, waardoor deze geheimen eenvoudig vindbaar zijn voor iedereen die toegang heeft tot de codebase.
+
+In deze uitdaging heeft een ontwikkelaar Telegram-botinloggegevens ingebed in de applicatiecode om met een controlekanaal te communiceren. Het werkelijke geheime antwoord is geplaatst in het Telegram-kanaal dat toegankelijk is via deze inloggegevens.
+
+Kun je het hardgecodeerde Telegram-bottoken vinden en het gebruiken om het geheim in het bijbehorende kanaal te ontdekken?

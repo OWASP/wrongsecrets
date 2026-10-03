@@ -1,0 +1,43 @@
+=== Por qué el desafío 62 es importante: escalada de privilegios en MCP mediante una cuenta de servicio de Google
+
+**El problema:**
+
+Los servidores MCP (Model Context Protocol) se usan cada vez más para dar a los asistentes de IA acceso a servicios externos y fuentes de datos. Cuando estos servidores se configuran con cuentas de servicio o claves de API con permisos más amplios que el usuario que los invoca, crean un vector peligroso de escalada de privilegios.
+
+Este desafío demuestra una vulneración del **Principio de mínimo privilegio**: la cuenta de servicio de Google del servidor MCP tiene acceso a un documento restringido de Google Drive, pero el servidor concede ese acceso a *cualquier invocador* sin verificar si ese invocador está autorizado a ver el documento.
+
+**El escenario del mundo real:**
+
+1. Un desarrollador crea un servidor MCP para ayudar a un asistente de IA interno a acceder a documentos del equipo en Google Drive
+2. A la cuenta de servicio se le concede acceso de lectura a un documento sensible
+3. El desarrollador no implementa ninguna comprobación de autenticación o autorización de los invocadores en las herramientas MCP
+4. Cualquiera que descubra el punto de acceso MCP puede ahora leer documentos a los que no debería acceder, usando la cuenta de servicio como proxy de escalada de privilegios
+
+**Por qué es peligroso:**
+
+- **Escalada de privilegios**: los invocadores obtienen los permisos de la cuenta de servicio, no los suyos propios
+- **Sin rastro de auditoría**: el acceso mediante la herramienta MCP puede no registrarse con la identidad del invocador
+- **Superficie de ataque amplia**: cualquier cliente MCP (legítimo o malicioso) puede invocar la herramienta
+- **Explotación asistida por IA**: los agentes de IA conectados a este servidor MCP ejecutarán la herramienta automáticamente cuando se les indique, amplificando el riesgo
+
+**Cómo solucionarlo:**
+
+1. **Autenticar a los invocadores MCP**: exigir un token de autenticación en el punto de acceso MCP y verificar la identidad del invocador antes de ejecutar herramientas
+2. **Autorizar a nivel de herramienta**: comprobar si el invocador autenticado tiene permiso para acceder al recurso solicitado antes de llamar a la cuenta de servicio
+3. **Limitar estrechamente los permisos de la cuenta de servicio**: la cuenta de servicio solo debe tener los permisos mínimos necesarios para los casos de uso legítimos
+4. **Auditar todas las invocaciones de herramientas**: registrar la identidad del invocador junto con cada llamada a una herramienta para que el acceso pueda revisarse
+5. **Preferir la suplantación sobre las credenciales compartidas**: usar credenciales específicas del invocador o intercambio de tokens en lugar de una única cuenta de servicio compartida
+
+**Notas de implementación de WrongSecrets:**
+
+- El análisis de la respuesta del desafío usa contenido etiquetado (`<secret>...</secret>`) y almacena en caché el valor extraído para optimizar su huella de memoria.
+- La obtención de documentos MCP usa una caché limitada para reducir las solicitudes salientes repetidas y conservar el documento predeterminado configurado.
+- Pruebas relevantes:
+	- `Challenge62Test`
+	- `Challenge62McpControllerTest`
+
+**Referencias:**
+
+- https://modelcontextprotocol.io/specification/2024-11-05/[MCP Specification]
+- https://owasp.org/www-project-top-ten/[OWASP Top 10]
+- https://cloud.google.com/iam/docs/best-practices-service-accounts[Google Service Account Best Practices]

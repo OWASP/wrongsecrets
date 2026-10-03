@@ -1,0 +1,3 @@
+Відкрийте link:/skills/cursor/deploy-preview/SKILL.md[`/skills/cursor/deploy-preview/SKILL.md`] і подивіться на розділ *Передумови*. Значення `STAGING_DEPLOY_TOKEN` і є відповіддю.
+
+Той самий файл знаходиться у вихідному дереві за шляхом `src/main/resources/challenges/challenge-69/cursor-skill/deploy-preview/SKILL.md`.

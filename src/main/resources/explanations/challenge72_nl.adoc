@@ -1,0 +1,14 @@
+=== Uitdaging 72: Vind het geheim in het transcript van de AI-codingagent
+
+AI-codingagents zoals Codex, Claude Code en Cursor lezen bestanden, voeren opdrachten uit en maken gedetailleerde sessietranscripts. Wanneer een developer een agent vraagt om een implementatieprobleem te debuggen, kan de agent configuratiebestanden met secrets lezen en die waarden doorgeven in de uitvoer van zijn sessie.
+
+Deze toepassing bevat een Codex-sessietranscript waarin een developer de agent vroeg een mislukte staging-implementatie te onderzoeken. Het transcript legt vast hoe de agent een `.env.staging`-bestand leest en de inhoud — inclusief de deploytoken — weergeeft als onderdeel van het normale debugproces.
+
+Download het transcript van link:/challenges/challenge-72/codex-session-transcript.md[`/challenges/challenge-72/codex-session-transcript.md`] en zoek de staging-deploytoken die tijdens de sessie werd blootgesteld.
+
+De broncode is ook beschikbaar op link:https://github.com/OWASP/wrongsecrets/blob/master/src/main/resources/challenges/challenge-72/codex-session-transcript.md[`src/main/resources/challenges/challenge-72/codex-session-transcript.md`].
+
+[NOTE]
+====
+De token komt vanzelfsprekend voor in de uitvoer van het transcript — de agent had niet de bedoeling hem te lekken; het las simpelweg een bestand als onderdeel van zijn debugproces.
+====

@@ -1,0 +1,5 @@
+=== Waarom Uitdaging 58 belangrijk is: Blootstelling van databaseverbindingsstrings
+
+**Het probleem:**
+
+Deze uitdaging belicht een van de meest frequente en gevaarlijke scenario's van geheimenlekken in echte applicaties: **databaseverbindingsstrings met ingebedde referenties die worden blootgesteld via slechte foutafhandeling**.

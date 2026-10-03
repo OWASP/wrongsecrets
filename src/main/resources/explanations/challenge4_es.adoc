@@ -1,0 +1,5 @@
+=== Contraseña basada en arg de Docker
+
+El desarrollador se ha vuelto más inteligente: ahora la contraseña ya no está definida por un argumento ENV, sino por medio de un argumento de compilación del contenedor Docker.
+
+Puedes detectarlo fácilmente mirando cómo se construyeron las capas.

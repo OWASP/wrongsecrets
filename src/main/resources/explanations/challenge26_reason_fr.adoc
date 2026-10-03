@@ -1,0 +1,5 @@
+*Pourquoi écraser des secrets sur la blockchain ne les supprime pas*
+
+L'état de la chaîne peut être vérifié pour tout point dans le temps en exécutant les mises à jour d'état jusqu'à un certain bloc.
+
+Mettre à jour l'état de la chaîne ne supprime pas les changements d'état précédents.

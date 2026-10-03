@@ -1,0 +1,6 @@
+=== Injection de modèle HashiCorp Vault
+
+Les secrets peuvent être récupérés depuis Vault en utilisant le conteneur sidecar https://developer.hashicorp.com/vault/docs/platform/k8s/injector[Vault Agent], qui s'exécute à côté de votre conteneur d'application principal. Ce sidecar peut injecter les secrets dans l'environnement de vos applications.
+Une façon de faire cela est de rendre les secrets sous forme de fichier. Cependant, le développeur n'était pas sûr que le fichier était récupéré, alors au lieu d'exporter le secret comme variable d'environnement, il l'a fait avec `echo`.
+
+Pouvez-vous trouver le secret injecté dans l'environnement de l'application?

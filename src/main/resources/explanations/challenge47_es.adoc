@@ -1,0 +1,4 @@
+=== Inyección de plantilla HashiCorp Vault Parte 2
+
+Los secretos se pueden recuperar de Vault usando el contenedor sidecar https://developer.hashicorp.com/vault/docs/platform/k8s/injector[Vault Agent]. Un desarrollador intentó depurar por qué su inyección de vault no funcionaba. Así que codificó los secretos "temporalmente" en la propia plantilla de Vault.
+¿Puedes encontrar el secreto codificado en la plantilla de Vault?

@@ -1,0 +1,7 @@
+=== Zufallswerte generieren
+
+Manchmal brauchen wir ein Geheimnis, das zufällig beim Start generiert wird. Vielleicht bist du ihnen schon begegnet: Anwendungen, die beim ersten Login ein Passwort generieren und dieses auf die Standardausgabe drucken. Ein Beispiel ist https://www.jenkins.io/doc/book/installing/linux/#unlocking-jenkins[Jenkins].
+
+In dieser Herausforderung machen wir dasselbe: Wir generieren beim Start der Anwendung zufällig ein Geheimnis und loggen es auf die Standardausgabe. Kannst du die Antwort finden?
+
+Tipp: Schau dir die Protokollierung der Anwendung beim Start an!

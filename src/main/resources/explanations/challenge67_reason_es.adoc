@@ -1,0 +1,17 @@
+*Por qué registrar un secreto en tu proveedor de la nube es un problema*
+
+Codificar no es cifrar. Base64 mantiene una credencial fuera de la vista durante una revisión rápida del código, pero cualquiera que pueda leer el sumidero de registros puede descodificarla con un comando. Trata un secreto codificado en una línea de registro como un secreto en texto plano.
+
+Algunas cosas que hacen que esto sea particularmente desagradable en una configuración en la nube:
+
+- el público es mucho mayor de lo que crees. Los sumideros de registros suelen ser legibles por todo el equipo de plataforma o SRE, y a menudo por cualquier carga de trabajo con un amplio permiso `logs:FilterLogEvents`, `roles/logging.viewer` o lector de Log Analytics. El alcance del secreto se convierte en el alcance de tus permisos de registro.
+- la retención sobrevive a la rotación. Los registros se conservan durante meses y se replican en un bucket de archivo o un SIEM. Rotar la credencial no elimina el valor antiguo de esas copias, así que debes tratar cada sumidero posterior como comprometido también.
+- el registro estructurado facilita la fuga accidental. Adjuntar todo un payload, una solicitud o un contexto MDC a un "evento de auditoría" es cómodo, y arrastra todo lo que haya en ese contexto, incluidos tokens y claves.
+- el registro puede mover el secreto a sistemas de almacenamiento adicionales, archivos o plataformas de observabilidad de terceros. Esto normalmente no está cubierto por el modelo de amenazas que escribiste para ese secreto.
+
+Qué hacer en su lugar:
+
+- nunca pongas credenciales en una sentencia de registro, ni siquiera codificadas, ni siquiera en `DEBUG`.
+- oculta en el origen. Filtra las claves sensibles antes de que lleguen al appender, por ejemplo con un convertidor de Logback o un diseño de enmascaramiento, para que un cambio de código futuro no pueda reintroducir la fuga.
+- escanea en busca de él. Las herramientas de detección de secretos pueden ejecutarse tanto sobre la salida de los registros como sobre el código fuente.
+- si ocurrió: rota el secreto y luego limpia o caduca cada sumidero y archivo que lo recibió.

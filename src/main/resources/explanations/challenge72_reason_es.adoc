@@ -1,0 +1,32 @@
+*Por qué las transcripciones de los agentes de codificación de IA suponen un riesgo de fuga de secretos*
+
+Los agentes de codificación de IA leen tus archivos, ejecutan tus comandos y producen registros de sesión. Cuando un desarrollador pide a un agente que depure un problema, el agente puede leer archivos de configuración, variables de entorno o gestores de secretos —y devolver esos valores en su transcripción. Esto es exactamente lo que ocurrió en este reto: el agente leyó un archivo `.env.staging` y mostró el token de despliegue en la salida de su sesión.
+
+La transcripción se convierte en un artefacto persistente que puede:
+
+- Hacerse commit en el control de versiones si el desarrollador la guarda
+- Compartirse con compañeros para dar contexto o hacer una transferencia
+- Subirse a canales de soporte al informar errores
+- Almacenarse en archivos de historial del agente en la máquina del desarrollador
+- Indexarse mediante complementos de IDE o herramientas de búsqueda locales
+
+Tres fallos se combinan en este escenario:
+
+- El secreto existe en un archivo de configuración en texto plano, lo que lo hace trivialmente legible para cualquier herramienta o agente.
+- El proceso de depuración del agente pone de manifiesto el secreto en su salida, creando una copia secundaria de la credencial.
+- Es probable que la transcripción se guarde, se comparta o se haga commit sin revisión, ya que "parece" salida de depuración y no datos sensibles.
+
+----
+Qué hacer en su lugar:
+
+- Nunca almacenes secretos en archivos de configuración en texto plano. Usa un gestor de secretos o variables de entorno inyectadas en tiempo de ejecución.
+- Configura los agentes para que oculten los valores sensibles antes de mostrarlos. Muchas herramientas de agentes admiten filtrado de salida o sandboxing.
+- Revisa las transcripciones de los agentes antes de guardarlas o compartirlas, igual que revisarías una pull request.
+- Trata cualquier transcripción que haya leído de una fuente de secretos como potencialmente comprometida y rota las credenciales expuestas.
+- Usa tokens de corta duración y con alcance limitado para los despliegues de staging, de modo que la exposición tenga un radio de impacto limitado.
+----
+
+[NOTE]
+====
+Los agentes de codificación de IA son herramientas potentes, pero operan con los mismos archivos y el mismo entorno que tú. Si un desarrollador humano copiara y pegara un secreto en un registro de chat, un agente hará lo mismo — solo que el agente produce una transcripción estructurada aún más fácil de buscar y compartir.
+====

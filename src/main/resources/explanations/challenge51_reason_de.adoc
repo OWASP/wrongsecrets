@@ -1,0 +1,5 @@
+= Docker Compose Secrets Fehlkonfigurationsherausforderung
+
+*Warum unsachgemäße Geheimnisverwaltung in Docker Compose zu Schwachstellen führen kann*
+
+In containerisierten Umgebungen ist das Geheimnisverwaltung entscheidend für die Aufrechterhaltung der Vertraulichkeit und Integrität sensibler Informationen wie Datenbankzugangsdaten, API-Schlüssel und andere Geheimnisse. Docker Compose bietet eine bequeme Möglichkeit, Geheimnisse zu definieren und zu verwalten, aber unsachgemäße Handhabung dieser Geheimnisse kann dein System Angriffen aussetzen.

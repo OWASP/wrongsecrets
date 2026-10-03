@@ -1,0 +1,31 @@
+*Warum das Platzieren von Geheimnissen in KI-Systemprompts ein Geheimnis-Leckagerisiko darstellt*
+
+KI-Assistenten erhalten normalerweise einen Systemprompt mit Anweisungen, die festlegen, wie sich der Assistent verhalten soll. Es ist verlockend, sensible Informationen in diesen Prompt aufzunehmen und dem Modell einfach zu sagen, sie nicht preiszugeben.
+
+Genau das passiert in dieser Herausforderung: Die Anwendung setzt das Geheimnis direkt in den Systemprompt des KI-Assistenten und teilt dem Modell mit, es nicht offenzulegen.
+
+Der Systemprompt ist **keine Sicherheitsgrenze**. Das Modell erhält sowohl die Systemanweisungen als auch die Eingabe des Benutzers als Teil seines Kontexts. Ein Benutzer kann gezielt Prompts erstellen, die das Verhalten des Modells ändern, seine Anweisungen offenlegen oder es dazu bewegen sollen, Informationen aus seinem Kontext preiszugeben.
+
+Drei Fehlschläge verstärken sich in diesem Szenario:
+
+- Das Geheimnis wird direkt in den Kontext des Modells gelegt und ist damit während der Inferenz für das Modell verfügbar.
+- Die Anwendung vertraut darauf, dass das Modell einer Anweisung folgt, das Geheimnis vertraulich zu halten.
+- Ein Benutzer kann direkt mit dem Modell interagieren und versuchen, diese Anweisungen durch Prompt-Injection zu manipulieren.
+
+Wenn das Modell das Geheimnis preisgibt, haben die vertraulichen Informationen der Anwendung ihre beabsichtigte Sicherheitsgrenze überschritten.
+
+----
+Was du stattdessen tun solltest:
+
+- Verwende den Systemprompt eines KI-Modells niemals als Mechanismus zum Secret-Management.
+- Halte Geheimnisse nach Möglichkeit außerhalb des Modellkontexts.
+- Gib der Anwendung nur dann Zugriff auf Geheimnisse, wenn sie tatsächlich für einen Vorgang benötigt werden.
+- Behandle alle vom Benutzer bereitgestellten Prompts als potenziell feindliche Eingaben.
+- Wende Autorisierungs- und Zugriffskontrollen in der Anwendung an, anstatt dich darauf zu verlassen, dass das Modell sie durchsetzt.
+- Wenn sensible Informationen versehentlich einem Modell ausgesetzt werden, betrachte die Informationen als möglicherweise kompromittiert und rotiere die betroffenen Zugangsdaten, sofern zutreffend.
+----
+
+[NOTE]
+====
+Ein Systemprompt ist eine Anweisung an ein KI-Modell, kein Zugriffskontrollmechanismus. Dem Modell zu sagen „Gib dieses Geheimnis niemals preis" garantiert nicht, dass das Geheimnis vertraulich bleibt. Wenn Informationen geheim bleiben müssen, sollte die Anwendung diese Grenze außerhalb des Modells durchsetzen.
+====

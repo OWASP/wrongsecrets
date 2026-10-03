@@ -1,0 +1,11 @@
+=== Fuga de secretos en el Dev Container
+
+Los contenedores de desarrollo (Dev Containers) permiten a los equipos definir entornos de desarrollo reproducibles mediante herramientas de contenedores como VS Code Remote - Containers y GitHub Codespaces. Al encapsular las herramientas, los tiempos de ejecución y las dependencias en `.devcontainer/devcontainer.json`, los desarrolladores pueden empezar sin tener que instalar complejas pilas de software locales.
+
+Sin embargo, los desarrolladores cometen con frecuencia el error de incrustar tokens sensibles, contraseñas, claves API o credenciales de acceso a registros privados directamente en `.devcontainer/devcontainer.json` (por ejemplo, en `containerEnv`, `remoteEnv` o scripts de ciclo de vida) y hacerlos commit en el control de versiones.
+
+Para resolver este reto:
+
+. Inspecciona el archivo de configuración del devcontainer https://github.com/OWASP/wrongsecrets/tree/master/.devcontainer/devcontainer.json[`.devcontainer/devcontainer.json`] en el repositorio del proyecto o revisa el fragmento de configuración en la interfaz.
+. Identifica el `DEVCONTAINER_SECRET` filtrado o el token definido en el entorno del contenedor.
+. Envía el secreto descubierto en el campo de entrada de abajo.

@@ -1,0 +1,10 @@
+=== Ocultar en binarios parte 7: la CLI de Java ofuscada
+
+La ofuscación puede frenar a alguien, pero no impide que recupere los secretos incrustados. ¿Puedes encontrar el secreto más difícil en nuestra CLI de Java ofuscada?
+
+Para resolverlo:
+
+. Descarga e inspecciona https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-java-obfuscated.jar[wrongsecrets-java-obfuscated.jar].
+. Decompila el JAR con un decompilador de Java como CFR, JADX o IntelliJ IDEA y sigue la clase principal.
+. Busca la matriz de bytes codificada, la clave XOR y los métodos auxiliares que reconstruyen el secreto en tiempo de ejecución.
+. Una vez que recuperes el secreto, envíalo con `java -jar wrongsecrets-java-obfuscated.jar <tu respuesta>`.

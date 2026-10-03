@@ -1,0 +1,25 @@
+Este desafío busca específicamente un secreto almacenado en un binario de Swift como una matriz de caracteres.
+
+Puedes resolver este desafío con las siguientes soluciones alternativas:
+
+1. Encuentra los secretos con https://ghidra-sre.org/[Ghidra].
+- Instala https://ghidra-sre.org/[Ghidra].
+- Inícialo con `ghidraRun`.
+- Carga la aplicación `wrongsecrets-swift` en Ghidra eligiendo un proyecto nuevo, luego importa el archivo y después haz doble clic en él.
+- Permite que Ghidra analice la aplicación.
+- Busca la función `getSecret`: puedes buscarla en el Symbol Tree.
+- En el código descompilado, encuentra la matriz de caracteres que forman el secreto.
+- Alternativamente: en macOS, usa `nm -gUj wrongsecrets-swift | grep getSecret` y después `swift-demangle --expand "s5swift9getSecretSSyF"` para encontrar la función.
+
+2. Encuentra los secretos con https://www.radare.org[radare2].
+- Instala https://www.radare.org[radare2] con `brew install radare2` en Mac o sigue estos pasos: `git clone https://github.com/radareorg/radare2; cd radare2 ; sys/install.sh`
+- Lanza el análisis de r2 con `$ r2 -AAA wrongsecrets-swift`
+- Busca cadenas con `iz | grep -i secret` o `iz | grep -i "This"`.
+- Alternativamente, busca la función `getSecret`: `afl | grep getSecret` y después imprime la función con `pdf @ <function_address>`.
+- Examina la construcción de la matriz de caracteres en el código descompilado o desensamblado.
+
+3. Encuentra los secretos con https://binary.ninja[Binary Ninja] o herramientas similares:
+- Carga el binario y navega a la función de Swift con nombres ofuscados `s5swift9getSecretSSyF`.
+- El secreto se construye a partir de una matriz de caracteres.
+
+¿No quieres instalar las herramientas? ¡Echa un vistazo al https://github.com/OWASP/wrongsecrets/tree/master?tab=readme-ov-file#want-to-play-but-are-not-allowed-to-install-the-tools[WrongSecrets Desktop container]!

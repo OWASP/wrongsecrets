@@ -1,0 +1,7 @@
+=== Wachtwoord afschillen (Password Shucking)
+
+Een website gebruikte https://en.wikipedia.org/wiki/MD5[MD5] voor het hashen van wachtwoorden, en de ontwikkelaars ontdekten onlangs dat iemand een dump van hun gebruikersgegevens had vrijgegeven.
+
+In een poging de beveiliging te verbeteren, besloten ze te migreren naar een sterker hash-algoritme zoals https://en.wikipedia.org/wiki/Bcrypt[bcrypt].
+
+De ontwikkelaars besloten dat de snelste manier om te migreren zou zijn de reeds bestaande hashes te hashen met bcrypt. Twee hash-algoritmen gebruiken is veiliger dan één, toch?

@@ -1,0 +1,5 @@
+=== Geheimnis-Leak durch einen KI-Chat
+
+Chatsessions aus KI-Tools wie ChatGPT zu teilen, kann eine großartige Möglichkeit zur Zusammenarbeit sein. Aber man vergisst leicht, dass diese geteilten Links öffentlich sind. Wenn der Chat sensible Informationen enthält, kann sie jeder mit dem Link sehen.
+
+Kannst du das Geheimnis in dieser https://chatgpt.com/share/6a99237a-c2e0-83eb-9a09-a1cf76213ff5[geteilten ChatGPT-Session] finden?

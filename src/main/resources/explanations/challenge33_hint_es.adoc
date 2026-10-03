@@ -1,0 +1,13 @@
+Este desafío se puede resolver mirando los metadatos del secret:
+
+1. Mirarlo a través del código
+- Localiza la definición del secret en git (Challenge33.yml)
+- Encuentra el valor secreto en los metadatos.
+2. Mirarlo obteniendo el secret
+- Conéctate al clúster k8s con kubectl
+- Llama a `kubectl get secret challenge33 -o yaml` para obtener todos los datos requeridos.
+- Encuentra el valor secreto en los metadatos.
+3. Abusar del debugging al listar todos los secrets
+- Conéctate al clúster k8s con kubectl
+- Llama a `kubectl get secrets -v9` para obtener todos los datos requeridos
+- Encuentra el valor secreto en los metadatos.

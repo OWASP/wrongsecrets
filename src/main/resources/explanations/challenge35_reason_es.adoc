@@ -1,0 +1,3 @@
+*Por qué necesitamos ser cuidadosos con los informes de vulnerabilidades*
+
+Cuando informas una vulnerabilidad o publicas un aviso de seguridad, siempre sé cuidadoso con la información que difundes con ellos. Los valores exactos de los secretos codificados encontrados, especialmente los más difíciles de rotar, no deben incluirse en tu informe de seguridad y/o la publicación.

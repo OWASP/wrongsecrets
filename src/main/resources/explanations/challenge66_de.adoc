@@ -1,0 +1,10 @@
+=== Geheimen in Binärdateien verstecken, Teil 7: die obfuskierte Java-CLI
+
+Obfuskierung kann jemanden aufhalten, aber sie hindert ihn nicht daran, eingebettete Geheimnisse wiederzuerlangen. Kannst du das schwerere Geheimnis in unserer obfuskierten Java-CLI finden?
+
+So löst du es:
+
+. Lade https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-java-obfuscated.jar[wrongsecrets-java-obfuscated.jar] herunter und untersuche es.
+. Decompiliere das JAR mit einem Java-Decompiler wie CFR, JADX oder IntelliJ IDEA und verfolge die Hauptklasse.
+. Suche nach dem codierten Byte-Array, dem XOR-Schlüssel und den Hilfsmethoden, die das Geheimnis zur Laufzeit rekonstruieren.
+. Sobald du das Geheimnis wiederhergestellt hast, reiche es mit `java -jar wrongsecrets-java-obfuscated.jar <deine Antwort>` ein.

@@ -1,0 +1,3 @@
+*Secrets-Management ist mehr als sichere Speicherung:*
+
+Wie du jetzt sehen kannst, gibt es viele Wege zu einem Geheimnis: ob es hartcodiert, in einer falsch konfigurierten Lösung eines Drittanbieters gespeichert oder korrekt gespeichert ist, aber mit den falschen IAM-Zugriffsrechten in benachbarten Konten. Du siehst jetzt, warum wir sagen, dass "deine Sicherheitsreife sich in deinem Secrets-Management widerspiegelt".

@@ -1,0 +1,9 @@
+=== Geheimen die naar je cloud-log-sink worden gestuurd
+
+Toepassingen loggen zelden met opzet een geheim. Wat veel vaker gebeurt, is dat een "audit event", een dump van een verzoek of een gestructureerd logveld een credential met zich meedraagt. Omdat de waarde gecodeerd is, valt niemand het op tijdens een codereview: het oogt gewoon als een ondoorzichtige blob.
+
+In deze uitdaging schrijft de toepassing zo'n audit event naar standaard uit. Het geeft het geheim nooit terug via een endpoint en mount het nooit als bestand. De enige plek waar de waarde opduikt is de logstroom die je cloudprovider voor je verzamelt, dus je moet de log sink van de cloud waarop je draait bevragen.
+
+Let op: de gelogde waarde is Base64-gecodeerd, dus de regel vinden is pas de helft van het werk.
+
+Tip: dit is niet hetzelfde als uitdaging 8. Daar wordt het antwoord in platte tekst gelogd en kun je het rechtstreeks lezen uit je lokale containerlogs.

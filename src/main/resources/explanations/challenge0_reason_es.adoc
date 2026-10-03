@@ -1,0 +1,5 @@
+*¿Por qué hacemos esto?*
+
+Con este proyecto, esperamos que te diviertas buscando secretos. Al mismo tiempo, esperamos que aprendas de los errores de otras personas en la gestión de secretos, para que no cometas los mismos errores.
+
+¿Sabías que hemos visto todos estos desafíos en la práctica? Por lo tanto, pueden ser de gran ayuda si quieres hacer más caza de recompensas.

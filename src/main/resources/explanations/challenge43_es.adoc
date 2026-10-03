@@ -1,0 +1,7 @@
+=== Metedura de pata en Reddit
+
+La gente fácilmente comete errores. Por ejemplo, pueden compartir un fragmento de datos "inocente" en redes sociales que luego resulta ser un secreto. O pueden publicar algo en la "pantalla incorrecta" y enviarlo.
+
+De manera similar, un desarrollador en la comunidad OWASP que también era un redditor activo, dejó un secreto en la plataforma "por error".
+
+¿Puedes encontrar el secreto?

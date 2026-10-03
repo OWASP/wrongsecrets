@@ -1,0 +1,11 @@
+=== Desafío criptográfico parte 2
+
+Implementar criptografía puede ser muy desalentador. Por eso hay varios errores que puedes encontrar en https://twitter.com/d_feldman/status/1558309810801631233?s=20&t=z98ii6IPJEZq10cnsGAhpQ[Twitter]. ¿Qué pasa si nuestros desarrolladores cometieron el mismo error?
+
+En este desafío, necesitas encontrar la clave HMAC. ¡Creamos un HMAC siguiendo la https://csrc.nist.gov/CSRC/media/Projects/Cryptographic-Standards-and-Guidelines/documents/examples/HMAC_SHA1.pdf[especificación de NIST] paso a paso! ¿Puedes proporcionarnos la clave HMAC utilizada para crear el HMAC?
+
+Texto utilizado: `Sample message for keylen=blocklen`
+
+HMAC producido en Hex: `5FD596EE 78D5553C 8FF4E72D 266DFD19 2366DA29`
+
+¿Cuál es la clave HMAC utilizada aquí?

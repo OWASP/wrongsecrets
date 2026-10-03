@@ -1,0 +1,5 @@
+=== Geheimen in smart contracts deel 2
+
+Onze smart contract-ontwikkelaar realiseerde dat hij een geheim naar de chain had geschreven en ging terug om het te overschrijven.
+
+In deze uitdaging moet je de variabele genaamd secret lezen uit het contract `0xCe793D588cd1Ee091290b4A1aE1D586B2a748eB4` op het Goerli EVM Testnet zoals het was voordat het werd gewijzigd.

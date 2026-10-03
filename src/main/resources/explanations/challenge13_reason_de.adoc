@@ -1,0 +1,5 @@
+*Warum du mit CI/CD und Geheimnissen vorsichtig sein musst*
+
+Beim Einsatz von CI/CD-Tooling musst du das Tooling (z.B. Runner/Agent, der einen Job ausführt) oft ein Geheimnis verwenden lassen, um sich bei einem sekundären Dienst zu authentifizieren. Das Exfiltrieren dieser Geheimnisse kann durchaus interessant werden.
+
+Stelle sicher, dass Geheimnisse in CI/CD korrekt konfiguriert und auf die richtigen Branches und Pull-Requests beschränkt sind.

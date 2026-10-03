@@ -1,0 +1,20 @@
+Vous pouvez résoudre ce défi avec les étapes suivantes :
+
+1. Vérifiez l'état du secret dans Git :
+- Voyez-vous où nous avons stocké le `secrets-secret.yml` dans git ? Sinon, faites simplement une recherche.
+- Regardez le champ `Data` : qu'y trouvez-vous ? Veuillez noter que les secrets sont encodés en base64. Une fois montés dans les charges de travail, ils sont décodés.
+
+VEUILLEZ NOTER : Les options suivantes ne fonctionneront que si vous avez accès à l'API K8s. Dans cette version hébergée de WrongSecrets, vous n'avez pas cet accès. Lorsque vous organisez un CTF : demandez à l'organisateur l'accès à l'API K8s ciblée.
+
+1. Demandez poliment avec Kubectl :
+- Assurez-vous que Kubectl est installé comme indiqué dans le README.MD & assurez-vous que kubectl est configuré pour envoyer les commandes au bon cluster.
+- Exécutez maintenant `kubectl get secrets`. Vous voyez ici tous les configmaps actifs dans le namespace où vous vous trouvez, qui est pour cette application normalement `default` (sauf indication contraire de votre administrateur/formateur).
+- Exécutez maintenant `kubectl get secret funnystuff -o Yaml`. Voyez-vous le secret ?
+2. Faites un exec dans le pod et récupérez les données :
+- Assurez-vous que Kubectl est installé comme indiqué dans le README.MD & assurez-vous que kubectl est configuré pour envoyer les commandes au bon cluster.
+- Exécutez maintenant `kubectl get pods`. Vous voyez ici tous les Pods actifs dans le namespace où vous vous trouvez, qui est pour cette application normalement `default` (sauf indication contraire de votre administrateur/formateur).
+- Maintenant, pour votre instance du pod WrongSecrets, exécutez `kubectl exec -it secret-challenge-<rest of the name of the pod from the prev.step> -- sh`.
+- Exécutez ensuite `env | grep SPECIAL_SPECIAL_K8S_SECRET` et voilà votre secret.
+
+
+Remarque : `kubectl get <item> -A` vous donne un aperçu de tous les éléments dans tous les namespaces auxquels vous avez accès. Il est important de *ne pas* donner aux gens accès à tous les namespaces de votre cluster, car cela pourrait entraîner la fuite de configuration/éléments importants.

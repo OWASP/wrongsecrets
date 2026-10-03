@@ -1,0 +1,26 @@
+=== Підказка до завдання 63
+Це завдання демонструє погані практики шифрування — зокрема зашиття ключа шифрування/розшифрування у вихідний код.
+
+**Де шукати:**
+1. **Знайди вихідний файл Java Challenge63** у каталозі `challenges/docker/challenge63/`
+2. **Пошукай константи static final String** біля початку класу
+3. **Ти знайдеш ключ AES, IV і шифротекст** — усе в одному файлі
+
+**Як розшифрувати, коли маєш ключ:**
+[source,python]
+----
+from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+from cryptography.hazmat.backends import default_backend
+import base64
+
+key = b'SuperSecretKey12'
+iv  = b'InitVector123456'
+ciphertext = base64.b64decode("TDPwOvcLsbCWV5erlk6OHFnlFoXNtdQOt2JQeq+i4Ho=")
+
+cipher = Cipher(algorithms.AES(key), modes.CBC(iv), backend=default_backend())
+decryptor = cipher.decryptor()
+plaintext = decryptor.update(ciphertext) + decryptor.finalize()
+print(plaintext.strip())
+----
+
+**Пам'ятай:** якщо атакувальник може читати твій вихідний код, зашиті ключі не дають жодного захисту.

@@ -1,0 +1,17 @@
+*Waarom het loggen van een geheim naar je cloudprovider een probleem is*
+
+Coderen is geen versleuteling. Base64 houdt een credential buiten beeld bij een snelle codereview, maar iedereen die de log sink kan lezen, kan het met één opdracht decoderen. Behandel een gecodeerd geheim in een logregel als een geheim in platte tekst.
+
+Een paar dingen die dit bijzonder vervelend maken in een cloud-opzet:
+
+- het publiek is veel groter dan je denkt. Log sinks zijn meestal leesbaar voor het hele platform- of SRE-team, en vaak voor elke workload met een brede `logs:FilterLogEvents`, `roles/logging.viewer`- of Log Analytics reader-recht. De blast radius van het geheim wordt de blast radius van je logrechten.
+- bewaartermijnen overleven rotatie. Logs worden vaak maandenlang bewaard en gerepliceerd naar een archiefbucket of een SIEM. Het roteren van de credential verwijdert de oude waarde niet uit die kopieën, dus je moet elke downstream sink ook als gecompromitteerd behandelen.
+- gestructureerd loggen maakt het per ongeluk lekken makkelijk. Een hele payload, een verzoek of een MDC-context aan een "audit event" hangen is handig, en het trekt alles mee wat toevallig in die context zit, inclusief tokens en sleutels.
+- loggen kan het geheim verplaatsen naar extra opslagsystemen, archieven of observability-platformen van derden. Dat valt doorgaans niet onder het dreigingsmodel dat je voor dat geheim hebt opgesteld.
+
+Wat je in plaats daarvan moet doen:
+
+- stop nooit credentials in een logstatement, ook niet gecodeerd, en ook niet op `DEBUG`.
+- maskeer aan de bron. Filter gevoelige sleutels voordat ze de appender bereiken, bijvoorbeeld met een Logback-converter of een masking layout, zodat een toekomstige codeaanpassing het lek niet opnieuw kan introduceren.
+- scan ernaar. Secret-detection-tools kunnen ook tegen logoutput draaien, niet alleen tegen broncode.
+- als het toch gebeurd is: roteer het geheim en ruim daarna elke sink en elk archief dat het heeft ontvangen op of laat ze verlopen.
