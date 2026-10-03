@@ -6,7 +6,7 @@
     <title>OWASP WrongSecrets</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" th:href="@{/webjars/datatables/2.3.8/css/dataTables.bootstrap5.min.css}" />
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.8/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/dark.css}" />
 
@@ -18,34 +18,32 @@
         <th:block layout:fragment="content"></th:block>
     </div>
 
-    <script th:src="@{/webjars/bootstrap/5.3.8/js/bootstrap.bundle.min.js}"></script>
-    <script th:src="@{/webjars/github-buttons/2.14.1/dist/buttons.min.js}"></script>
-    <script th:src="@{/webjars/jquery/3.7.1/jquery.min.js}"></script>
-    <script th:src="@{/webjars/datatables/2.3.8/js/dataTables.min.js}"></script>
-    <script th:src="@{/webjars/datatables/2.3.8/js/dataTables.bootstrap5.min.js}"></script>
+    <script defer th:src="@{/webjars/bootstrap/5.3.8/js/bootstrap.bundle.min.js}"></script>
+    <script defer th:src="@{/webjars/github-buttons/2.14.1/dist/buttons.min.js}"></script>
+    <script defer th:src="@{/webjars/jquery/3.7.1/jquery.min.js}"></script>
+    <script defer th:src="@{/webjars/datatables/2.3.8/js/dataTables.min.js}"></script>
+    <script defer th:src="@{/webjars/datatables/2.3.8/js/dataTables.bootstrap5.min.js}"></script>
     <script th:if="${allCompleted} eq 'party'">
-        window.addEventListener("load", function () {
+        document.addEventListener("DOMContentLoaded", function () {
             new bootstrap.Modal(document.getElementById('finishedModal'), {}).toggle()
         });
     </script>
-    <script th:src="@{/theme-toggle.js}"></script>
+    <script defer th:src="@{/theme-toggle.js}"></script>
 
     <!-- Replaces a possible UI snippet (JS) dynamically -->
     <div th:replace="~{ui-snippet:__${challenge?.uiSnippet}__}"></div>
 </body>
 
 <script>
-
-    $.extend(true, $.fn.dataTable.defaults, {
-        searching: true,
-        ordering: true,
-    });
-    $(document).ready(function () {
+    document.addEventListener("DOMContentLoaded", function () {
+        $.extend(true, $.fn.dataTable.defaults, {
+            searching: true,
+            ordering: true,
+        });
         $('#challenge_overview').DataTable({
             lengthMenu: [ [30, 50, -1], [30, 50, "All"] ]
         });
     });
 </script>
-
 
 </html>
