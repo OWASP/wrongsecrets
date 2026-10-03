@@ -157,8 +157,8 @@ public class ChallengeUI {
    * Resolves a locale-specific filename if available, falling back to the default (English) file.
    * Checks both the raw .adoc source (used in dev mode) and the pre-compiled .html (used in
    * production). If neither locale-specific file exists, the original filename is returned so the
-   * English content is shown. Results are cached to avoid repeated classpath lookups. Must be called
-   * at render time as {@link ChallengeUI} instances are cached across requests.
+   * English content is shown. Results are cached to avoid repeated classpath lookups. Must be
+   * called at render time as {@link ChallengeUI} instances are cached across requests.
    *
    * @param defaultFileName the default (English) file path, e.g. "explanations/challenge1.adoc"
    * @return locale-specific filename if it exists, otherwise the default filename
@@ -179,7 +179,9 @@ public class ChallengeUI {
     boolean exists =
         LOCALIZED_FILE_EXISTS_CACHE.computeIfAbsent(
             localizedAdoc,
-            key -> new ClassPathResource(key).exists() || new ClassPathResource(localizedHtml).exists());
+            key ->
+                new ClassPathResource(key).exists()
+                    || new ClassPathResource(localizedHtml).exists());
     return exists ? localizedAdoc : defaultFileName;
   }
 

@@ -13,7 +13,9 @@ import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
 
-@SpringBootTest(properties = {"K8S_ENV=DOCKER"}, classes = WrongSecretsApplication.class)
+@SpringBootTest(
+    properties = {"K8S_ENV=DOCKER"},
+    classes = WrongSecretsApplication.class)
 @AutoConfigureMockMvc
 class LanguageToggleTest {
 
