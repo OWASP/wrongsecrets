@@ -17,8 +17,8 @@ import org.springframework.core.io.ClassPathResource;
 
 /**
  * Verifies that every challenge content file referenced by the configuration (explanation, hint and
- * reason of all 75 challenges, including cloud and limited-hint variants) has a translation for each
- * supported locale (nl, de, es, fr, uk).
+ * reason of all 75 challenges, including cloud and limited-hint variants) has a translation for
+ * each supported locale (nl, de, es, fr, uk).
  */
 @SpringBootTest
 class ChallengeContentLocalizationCoverageTest {

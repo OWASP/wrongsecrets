@@ -16,7 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.i18n.LocaleContextHolder;
 
-@SpringBootTest(properties = {"K8S_ENV=DOCKER"}, classes = WrongSecretsApplication.class)
+@SpringBootTest(
+    properties = {"K8S_ENV=DOCKER"},
+    classes = WrongSecretsApplication.class)
 class ChallengeUILocaleTest {
 
   private static final List<String> SUPPORTED_LANGUAGES = List.of("nl", "de", "es", "fr", "uk");
