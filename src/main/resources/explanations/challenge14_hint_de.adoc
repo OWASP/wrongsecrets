@@ -2,4 +2,4 @@ Hinweis: Diese Herausforderung erfordert, dass du https://www.keepassx.org/[Keep
 
 1. Hole die Keepass-Datei:
  - Exec in den Container und suche die .kdbx-Datei.
-2. Versuche die Datei mit KeePass zu öffnen und das Passwort brute-force zu knacken.
+2. Versuche die Datei mit KeePass zu öffnen und das Passwort per brute-force zu knacken.

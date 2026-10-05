@@ -1,6 +1,6 @@
 Du kannst diese Herausforderung mit den folgenden alternativen Lösungen lösen:
 
-1. Finde das Geheimnis direkt im Cloud-Secrets-Manager (der günstige Weg):
+1. Finde das Geheimnis direkt im Cloud-Secrets-Manager (dies ist der einfache Ausweg, probiere den anderen):
  - Melde dich bei der Cloud-Konsole an und gehe zum Secrets-Manager.
  - Rufe die Daten des entsprechenden Geheimnisses ab.
 
