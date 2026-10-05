@@ -1,0 +1,17 @@
+You can solve this challenge using the following steps:
+
+1. Open the committed Maven settings file:
+- In the repository: `src/main/resources/challenges/challenge-75/settings.xml`
+- Or online: link:https://github.com/OWASP/wrongsecrets/blob/master/src/main/resources/challenges/challenge-75/settings.xml[`src/main/resources/challenges/challenge-75/settings.xml`]
+
+2. Look at the `<servers>` section:
+- It contains a `<server>` entry with `<id>central</id>`.
+- It contains a `<server>` entry with `<id>wrongsecrets-nexus</id>`, the entry that
+  authenticates against the fictional Nexus repository manager. The same id is used
+  for the repository and plugin repository of the `wrongsecrets-deploy` profile.
+
+3. Read the `<password>` element of the `<server>` entry with the id
+   `wrongsecrets-nexus`. That value is the answer.
+
+Nothing has to be decrypted or installed: the file is committed in plain text,
+which is exactly the problem this challenge is about.
