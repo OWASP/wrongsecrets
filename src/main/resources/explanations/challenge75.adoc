@@ -1,0 +1,28 @@
+=== Challenge 75: Find the Nexus Deployment Credentials in Maven settings.xml
+
+Maven keeps repository credentials in a `settings.xml`. The `<servers>` section of
+that file maps a server id to the username and password that Maven uses when it
+talks to a repository manager such as Nexus, including the password of the account
+that is allowed to deploy releases. Those passwords are plaintext, so a
+`settings.xml` must never be committed to version control. It happens anyway: the
+file is copied into a project "so that the build works on every machine" and is
+then pushed along with the rest of the code.
+
+This repository ships exactly such a file. It contains the deployment credentials
+of a fictional Nexus repository manager:
+
+`src/main/resources/challenges/challenge-75/settings.xml`
+
+The file is also available in the source tree on
+link:https://github.com/OWASP/wrongsecrets/blob/master/src/main/resources/challenges/challenge-75/settings.xml[GitHub].
+
+The `<servers>` section holds more than one `<server>` entry. Every entry has an
+`<id>` that must match the id of the repository it belongs to. Find the server
+entry that belongs to the Nexus repository manager and submit the value of its
+`<password>` element.
+
+[NOTE]
+====
+The Nexus server and every credential in this challenge are fictional. No network
+connection is made: the application only reads the committed file.
+====

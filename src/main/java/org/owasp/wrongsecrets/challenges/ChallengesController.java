@@ -17,6 +17,7 @@ import org.owasp.wrongsecrets.ChallengeConfigurationException;
 import org.owasp.wrongsecrets.Challenges;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
+import org.owasp.wrongsecrets.challenges.cloud.Challenge67;
 import org.owasp.wrongsecrets.challenges.docker.Challenge8;
 import org.owasp.wrongsecrets.challenges.docker.SlackNotificationService;
 import org.owasp.wrongsecrets.challenges.docker.authchallenge.Challenge37;
@@ -43,6 +44,9 @@ public class ChallengesController {
   private final Challenges challenges;
   private final SlackNotificationService slackNotificationService;
 
+  /** Per-challenge CTF answers of challenges 8, 30, 37 and 67. */
+  private final CtfAnswerConfiguration ctfAnswerConfiguration;
+
   @Value("${hints_enabled}")
   private boolean hintsEnabled;
 
@@ -57,15 +61,6 @@ public class ChallengesController {
   @Value("${ctf_key}")
   private String ctfKey;
 
-  @Value("${challenge_acht_ctf_to_provide_to_host_value}")
-  private String keyToProvideToHost;
-
-  @Value("${challenge_thirty_ctf_to_provide_to_host_value}")
-  private String keyToProvideToHostForChallenge30;
-
-  @Value("${challenge_rando_key_ctf_to_provide_to_host_value}")
-  private String getKeyToProvideToHostChallenge37;
-
   @Value("${CTF_SERVER_ADDRESS}")
   private String ctfServerAddress;
 
@@ -74,11 +69,13 @@ public class ChallengesController {
       Challenges challenges,
       RuntimeEnvironment runtimeEnvironment,
       @Autowired(required = false) SlackNotificationService slackNotificationService,
+      CtfAnswerConfiguration ctfAnswerConfiguration,
       @Value("${spoiling_enabled}") boolean spoilingEnabled) {
     this.scoreCard = scoreCard;
     this.challenges = challenges;
     this.runtimeEnvironment = runtimeEnvironment;
     this.slackNotificationService = slackNotificationService;
+    this.ctfAnswerConfiguration = ctfAnswerConfiguration;
     this.spoilingEnabled = spoilingEnabled;
   }
 
@@ -237,44 +234,13 @@ public class ChallengesController {
         if (ctfModeEnabled) {
           if (!Strings.isNullOrEmpty(ctfServerAddress) && !ctfServerAddress.equals("not_set")) {
             if (challenge instanceof Challenge8) {
-              if (!Strings.isNullOrEmpty(keyToProvideToHost)
-                  && !keyToProvideToHost.equals(
-                      "not_set")) { // this means that it was overriden with a code that needs to be
-                // returned to the ctf key exchange host.
-                model.addAttribute(
-                    "answerCorrect",
-                    "Your answer is correct! "
-                        + "fill in the following answer in the CTF instance at "
-                        + ctfServerAddress
-                        + "for which you get your code: "
-                        + keyToProvideToHost);
-              }
+              addConfiguredCtfAnswer(model, ctfAnswerConfiguration.challenge8());
             } else if (challenge instanceof Challenge30) {
-              if (!Strings.isNullOrEmpty(keyToProvideToHostForChallenge30)
-                  && !keyToProvideToHostForChallenge30.equals(
-                      "not_set")) { // this means that it was overriden with a code that needs to be
-                // returned to the ctf key exchange host.
-                model.addAttribute(
-                    "answerCorrect",
-                    "Your answer is correct! "
-                        + "fill in the following answer in the CTF instance at "
-                        + ctfServerAddress
-                        + "for which you get your code: "
-                        + keyToProvideToHostForChallenge30);
-              }
+              addConfiguredCtfAnswer(model, ctfAnswerConfiguration.challenge30());
             } else if (challenge instanceof Challenge37) {
-              if (!Strings.isNullOrEmpty(getKeyToProvideToHostChallenge37)
-                  && !keyToProvideToHostForChallenge30.equals(
-                      "not_set")) { // this means that it was overriden with a code that needs to be
-                // returned to the ctf key exchange hos
-                model.addAttribute(
-                    "answerCorrect",
-                    "Your answer is correct! "
-                        + "fill in the following answer in the CTF instance at "
-                        + ctfServerAddress
-                        + "for which you get your code: "
-                        + getKeyToProvideToHostChallenge37);
-              }
+              addConfiguredCtfAnswer(model, ctfAnswerConfiguration.challenge37());
+            } else if (challenge instanceof Challenge67) {
+              addConfiguredCtfAnswer(model, ctfAnswerConfiguration.challenge67());
             } else {
               model.addAttribute(
                   "answerCorrect",
@@ -301,6 +267,29 @@ public class ChallengesController {
 
     fireEnding(model);
     return "challenge";
+  }
+
+  /**
+   * Shows the CTF answer which is configured for a single challenge when a player solved that
+   * challenge in CTF mode against a CTF-server. Each challenge has its own configuration: when the
+   * value of the given challenge is missing, blank or still its default placeholder, no answer is
+   * added, which means that the default of that challenge stays active.
+   *
+   * @param model exchanged with the FE
+   * @param answer the configuration of the challenge that was just solved
+   */
+  private void addConfiguredCtfAnswer(Model model, CtfAnswerConfiguration.CtfAnswer answer) {
+    if (answer.isConfigured()) {
+      // the challenge was overriden with a code that needs to be returned to the ctf key exchange
+      // host.
+      model.addAttribute(
+          "answerCorrect",
+          "Your answer is correct! "
+              + "fill in the following answer in the CTF instance at "
+              + ctfServerAddress
+              + "for which you get your code: "
+              + answer.value());
+    }
   }
 
   // TODO extract this to the challenge definition @see ChallengeAPIController with nested if

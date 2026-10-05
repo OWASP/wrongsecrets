@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+  <!-- NOTE: all credentials in this file are fictional and only exist for the WrongSecrets challenge. -->
+
+  <servers>
+    <server>
+      <id>central</id>
+      <username>deployment</username>
+      <password>mirror-publish-token-not-the-nexus-one</password>
+    </server>
+    <server>
+      <id>wrongsecrets-nexus</id>
+      <username>wrongsecrets-deployer</username>
+      <password>N3xus_D3pl0y_P@ssw0rd_F4k3</password>
+      <configuration>
+        <httpConfiguration>
+          <all>
+            <usePreemptive>true</usePreemptive>
+          </all>
+        </httpConfiguration>
+      </configuration>
+    </server>
+  </servers>
+
+  <profiles>
+    <profile>
+      <id>wrongsecrets-deploy</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <repositories>
+        <repository>
+          <id>wrongsecrets-nexus</id>
+          <name>WrongSecrets Nexus releases</name>
+          <url>https://nexus.example.internal/repository/maven-releases/</url>
+          <releases>
+            <enabled>true</enabled>
+            <updatePolicy>daily</updatePolicy>
+          </releases>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+        </repository>
+      </repositories>
+      <pluginRepositories>
+        <pluginRepository>
+          <id>wrongsecrets-nexus</id>
+          <name>WrongSecrets Nexus plugins</name>
+          <url>https://nexus.example.internal/repository/maven-public/</url>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+        </pluginRepository>
+      </pluginRepositories>
+    </profile>
+  </profiles>
+
+  <activeProfiles>
+    <activeProfile>wrongsecrets-deploy</activeProfile>
+  </activeProfiles>
+
+</settings>
