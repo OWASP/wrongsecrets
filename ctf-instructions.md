@@ -24,7 +24,26 @@ Want to make sure you don't need to bug your users to copy paste values twice to
 
 Now users can directly use your Wrongsecrets setup together with the CTF-platform to play challenges without having to copy answers and flags twice!
 
-Note: make sure that you do set `CTF_SERVER_ADDRESS` to point to the address where you are running your CTF-platform (E.g. CTFD/Facebook CTF) and that you set `challenge_acht_ctf_to_provide_to_host_value`, `challenge_rando_key_ctf_to_provide_to_host_value`, and `challenge_thirty_ctf_to_provide_to_host_value` to the flag you store in your CTF-platform.
+Note: make sure that you do set `CTF_SERVER_ADDRESS` to point to the address where you are running your CTF-platform (E.g. CTFD/Facebook CTF) and that you set `challenge_acht_ctf_to_provide_to_host_value`, `challenge_rando_key_ctf_to_provide_to_host_value`, `challenge_thirty_ctf_to_provide_to_host_value`, and `challenge_sixty_seven_ctf_to_provide_to_host_value` to the flag you store in your CTF-platform. See [Per-challenge CTF answers](#per-challenge-ctf-answers) for the full list, the defaults and the startup warnings.
+
+## Per-challenge CTF answers
+
+Challenges 8, 30, 37 and 67 generate a random answer, so your CTF-scoring-environment cannot derive their flag on its own. Each of these challenges therefore has its own configuration entry, which is shown to the player as the answer to fill in in the CTF-platform as soon as they have solved that challenge:
+
+| Challenge | Configuration entry                                  |
+| --------- | ---------------------------------------------------- |
+| 8         | `challenge_acht_ctf_to_provide_to_host_value`        |
+| 30        | `challenge_thirty_ctf_to_provide_to_host_value`      |
+| 37        | `challenge_rando_key_ctf_to_provide_to_host_value`   |
+| 67        | `challenge_sixty_seven_ctf_to_provide_to_host_value` |
+
+Everything you need to know about these entries:
+
+- Each entry is independent: configure only the challenges you actually offer and leave the others alone, they will simply show no answer after they have been solved. All four entries are shown only when CTF mode is enabled (`ctf_enabled=true`) together with a `CTF_SERVER_ADDRESS`; without a `CTF_SERVER_ADDRESS` the HMAC based flags described above are used instead.
+- The entries are meant to be set in the 'play-environment'. Their default value is `not_set`, which means that the default placeholder of that challenge is still active.
+- On startup, while CTF mode is enabled, WrongSecrets checks these four entries and logs a warning for every entry which is missing, blank, or still `not_set`, naming the configuration entry whose default placeholder is active. Such a default is never a reason to stop: the application keeps running and the challenge just does not show an answer to submit. Configured values are secrets for your CTF-platform, so they are never written to the log. While CTF mode is disabled no warnings are logged, as the defaults are the expected setup for a normal WrongSecrets instance.
+- Challenge 8 additionally uses `challenge_acht_ctf_host_value`, which is configured in your CTF-scoring-environment as described below.
+- Challenge 67 is only offered in the cloud environments (AWS, GCP and Azure), just like challenges 9, 10 and 11.
 
 ## Setting up CTFs
 
@@ -41,7 +60,7 @@ Host the Docker container somewhere, where your users can not access the contain
 Want to make it a little more exciting? Create your own custom Docker image for both the 'play-environment' and the 'CTF-scoring-environment', where you override certain values (e.g. the ARG, the docker ENV, etc.) with your preferred values, so that copying from any existing online solution no longer works!
 There are a few env-vars that you need to pay attention to when setting this up:
 - `CTF_SERVER_ADDRESS` in the 'play-environment' to be set to the URL of the 'CTF-scoring-environment' (e.g. your instance of wrongsecrets-ctf.herokuapp.com), and in the 2-domain approach that would be your CTF-platform. Note that in the domain where your users exchange answers for flags for your CTF-platform, you can set it to the URL where your CTF-platform lives.
-- `challenge_acht_ctf_to_provide_to_host_value` and `challenge_thirty_ctf_to_provide_to_host_value` need to be set to a sufficiently long value at the 'play-environment' where your players interact with WrongSecrets to hack around. The value of this entry is returned to the players when they have found the randomly generated value in the logs. If you have the 2-domain approach: make sure that this value is actually the flag-entry for challenge 8 in your CTF-platform, if you have the normal setup, make sure that your 'CTF-scoring-environment' where people provide answers in exchange for flags has the same value stored under `challenge_acht_ctf_host_value`.
+- `challenge_acht_ctf_to_provide_to_host_value` and `challenge_thirty_ctf_to_provide_to_host_value` need to be set to a sufficiently long value at the 'play-environment' where your players interact with WrongSecrets to hack around. The value of this entry is returned to the players when they have found the randomly generated value in the logs. If you have the 2-domain approach: make sure that this value is actually the flag-entry for challenge 8 in your CTF-platform, if you have the normal setup, make sure that your 'CTF-scoring-environment' where people provide answers in exchange for flags has the same value stored under `challenge_acht_ctf_host_value`. The same applies to `challenge_rando_key_ctf_to_provide_to_host_value` for challenge 37 and `challenge_sixty_seven_ctf_to_provide_to_host_value` for challenge 67, see [Per-challenge CTF answers](#per-challenge-ctf-answers).
 - `challenge_acht_ctf_host_value` needs to be set in your 'ctf scoring environment' where players exchange answers for CTF flags to the same value as `challenge_acht_ctf_to_provide_to_host_value` in the environment players play around. Note that this value is not required in a 2-domain approach.
 
 ### K8s based CTF
@@ -59,7 +78,7 @@ When you take the 2-domain approach, make sure that the decoded K8S Secret entry
 
 If you are interested in setting up a Cloud-based CTF in AWS, you might want to look at [WrongSecrets CTF party](https://github.com/OWASP/wrongsecrets-ctf-party) instead. Still want to take a different approach than using that? Please read the rest of the paragraph.
 
-When you take the 2-domain approach, make sure that the decoded K8S Secret entry and the Configmap value are stored correctly in the CTF-platform, next: make sure that the values used for Challenge 9,10 & 11 are stored there correctly as well.
+When you take the 2-domain approach, make sure that the decoded K8S Secret entry and the Configmap value are stored correctly in the CTF-platform, next: make sure that the values used for Challenge 9,10 & 11 are stored there correctly as well. Challenge 67 is part of the cloud based CTFs as well: store its flag under `challenge_sixty_seven_ctf_to_provide_to_host_value`, see [Per-challenge CTF answers](#per-challenge-ctf-answers).
 
 Note: if you want to support challenge 11 at your CTF: make sure players don't share the same cloud-account together, or make sure that the privilege escalation path can only be done to the given account described in the challenge code and not to a role/user with more administrative access, as this would allow your players to wreak havoc to your CTF setup. We rather recommend disabling challenge 11 in your CTF setups.
 
