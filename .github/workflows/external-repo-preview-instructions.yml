@@ -44,8 +44,8 @@ jobs:
             git checkout -b test-pr-${prNumber} origin/${headBranch}
             \`\`\`
 
-            **PR:** #${prNumber}  
-            **Branch:** \`${headBranch}\`  
+            **PR:** #${prNumber}
+            **Branch:** \`${headBranch}\`
             **Repository:** \`${headRepo}\`
             `;
 
