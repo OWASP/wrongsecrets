@@ -7,5 +7,5 @@ Beachte, dass Testanmeldedaten manchmal im Code verschleiert werden, indem sie B
 
 ++++
 <!-- test-credentials = WhyCommentsAsPassswordAreBad345_$"-->
-<!-- If you like this: check OWAWS Juiceshop for more awesome challenges!  https://juice-shop.herokuapp.com/#/score-board -->
+<!-- Wenn dir diese Herausforderungen Spaß machen: Schaue dir den OWASP Juiceshop für weitere spannende Herausforderungen an!  https://juice-shop.herokuapp.com/#/score-board -->
 ++++
