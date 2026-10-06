@@ -1,0 +1,79 @@
+name: External PR Test Instructions
+
+on:
+  pull_request_target:
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+permissions:
+  pull-requests: write
+
+jobs:
+  instructions:
+    if: github.event.pull_request.head.repo.full_name != github.repository
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Add/update PR test instructions
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+            const marker = '<!-- pr-test-instructions -->';
+
+            const prNumber = pr.number;
+            const headRepo = pr.head.repo.full_name;
+            const headBranch = pr.head.ref;
+
+            const body = `${marker}
+            ## 🧪 Testing this PR locally
+
+            ### If you already have the repository
+
+            \`\`\`bash
+            git fetch upstream pull/${prNumber}/head:pr-${prNumber}
+            git checkout pr-${prNumber}
+            \`\`\`
+
+            ### Or, if you want the contributor branch directly
+
+            \`\`\`bash
+            git fetch origin
+            git checkout -b test-pr-${prNumber} origin/${headBranch}
+            \`\`\`
+
+            **PR:** #${prNumber}
+            **Branch:** \`${headBranch}\`
+            **Repository:** \`${headRepo}\`
+            `;
+
+            const { owner, repo } = context.repo;
+
+            const { data: comments } =
+              await github.rest.issues.listComments({
+                owner,
+                repo,
+                issue_number: prNumber,
+              });
+
+            const existing = comments.find(comment =>
+              comment.body?.includes(marker)
+            );
+
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner,
+                repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number: prNumber,
+                body,
+              });
+            }
