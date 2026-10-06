@@ -1,0 +1,17 @@
+Je kunt deze uitdaging oplossen met de volgende stappen:
+
+1. Open het gecommit Maven-settingsbestand:
+- In de repository: `src/main/resources/challenges/challenge-75/settings.xml`
+- Of online: link:https://github.com/OWASP/wrongsecrets/blob/master/src/main/resources/challenges/challenge-75/settings.xml[`src/main/resources/challenges/challenge-75/settings.xml`]
+
+2. Bekijk het gedeelte `<servers>`:
+- Het bevat een `<server>`-ingang met `<id>central</id>`.
+- Het bevat een `<server>`-ingang met `<id>wrongsecrets-nexus</id>`, de ingang die
+  die zich authenticeert bij de fictieve Nexus-repositorybeheerder. Dezelfde id wordt gebruikt
+  voor de repository en de pluginrepository van het profiel `wrongsecrets-deploy`.
+
+3. Lees het `<password>`-element van de `<server>`-ingang met de id
+   `wrongsecrets-nexus`. Die waarde is het antwoord.
+
+Er hoeft niets te worden ontsleuteld of geïnstalleerd: het bestand staat als platte
+tekst gecommit, en dat is precies het probleem van deze uitdaging.

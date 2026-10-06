@@ -1,0 +1,17 @@
+=== Uitdaging 75: Vind de Nexus-deploymentsgegevens in de Maven settings.xml
+
+Maven bewaart repositorygegevens in een `settings.xml`. Het gedeelte `<servers>` van dat bestand koppelt een server-id aan de gebruikersnaam en het wachtwoord dat Maven gebruikt wanneer het praat met een repositorybeheerder zoals Nexus, inclusief het wachtwoord van het account dat releases mag uitbrengen. Die wachtwoorden staan als platte tekst, dus een `settings.xml` mag nooit worden gecommit. Toch gebeurt het: het bestand wordt in een project gekopieerd "zodat de build op elke machine werkt" en vervolgens samen met de rest van de code gepusht.
+
+Deze repository bevat precies zo'n bestand. Het bevat de deploymentsgegevens van een fictieve Nexus-repositorybeheerder:
+
+`src/main/resources/challenges/challenge-75/settings.xml`
+
+Het bestand staat ook in de broncode op
+link:https://github.com/OWASP/wrongsecrets/blob/master/src/main/resources/challenges/challenge-75/settings.xml[GitHub].
+
+Het gedeelte `<servers>` bevat meer dan één `<server>`-ingang. Elke ingang heeft een `<id>` die overeen moet komen met de id van de repository waar die bij hoort. Zoek de serveringang die bij de Nexus-repositorybeheerder hoort en geef de waarde van het `<password>`-element op.
+
+[NOTE]
+====
+De Nexus-server en alle inloggegevens in deze uitdaging zijn fictief. Er wordt geen netwerkverbinding gemaakt: de toepassing leest alleen het gecommit bestand.
+====

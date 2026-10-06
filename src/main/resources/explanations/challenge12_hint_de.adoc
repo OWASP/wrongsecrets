@@ -1,4 +1,4 @@
-Du kannst diese Herausforderung lösen, indem du per exec in den Container einloggst.
+Du kannst diese Herausforderung lösen, indem du dich per exec in den Container einloggst.
 
 1. Schau dir die Dockerfile an und sieh, welche COPY-Operationen stattfinden.
 2. Starte den Container lokal mit `docker run jeroenwillemsen/wrongsecrets:<TAGNAME>`.

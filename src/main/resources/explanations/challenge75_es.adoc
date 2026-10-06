@@ -1,0 +1,17 @@
+=== Reto 75: Encuentra las credenciales de despliegue de Nexus en el settings.xml de Maven
+
+Maven guarda las credenciales del repositorio en un `settings.xml`. La sección `<servers>` de ese archivo asigna un id de servidor al usuario y la contraseña que Maven utiliza cuando habla con un gestor de repositorios como Nexus, incluida la contraseña de la cuenta que tiene permiso para desplegar releases. Esas contraseñas están en texto plano, así que un `settings.xml` nunca debe enviarse al control de versiones. Aun así ocurre: el archivo se copia en un proyecto "para que la build funcione en cualquier máquina" y luego se sube junto con el resto del código.
+
+Este repositorio incluye exactamente un archivo así. Contiene las credenciales de despliegue de un gestor de repositorios Nexus ficticio:
+
+`src/main/resources/challenges/challenge-75/settings.xml`
+
+El archivo también está disponible en el árbol de código fuente en
+link:https://github.com/OWASP/wrongsecrets/blob/master/src/main/resources/challenges/challenge-75/settings.xml[GitHub].
+
+La sección `<servers>` contiene más de una entrada `<server>`. Cada entrada tiene un `<id>` que debe coincidir con el id del repositorio al que pertenece. Encuentra la entrada del servidor que pertenece al gestor de repositorios Nexus y envía el valor de su elemento `<password>`.
+
+[NOTE]
+====
+El servidor Nexus y todas las credenciales de este reto son ficticias. No se establece ninguna conexión de red: la aplicación solo lee el archivo enviado al repositorio.
+====

@@ -17,7 +17,7 @@ import org.springframework.core.io.ClassPathResource;
 
 /**
  * Verifies that every challenge content file referenced by the configuration (explanation, hint and
- * reason of all 75 challenges, including cloud and limited-hint variants) has a translation for
+ * reason of all 76 challenges, including cloud and limited-hint variants) has a translation for
  * each supported locale (nl, de, es, fr, uk).
  */
 @SpringBootTest
@@ -41,8 +41,8 @@ class ChallengeContentLocalizationCoverageTest {
       }
     }
 
-    assertThat(definitions.challenges()).hasSize(75);
-    assertThat(referencedFiles).hasSize(248);
+    assertThat(definitions.challenges()).hasSize(76);
+    assertThat(referencedFiles).hasSize(251);
 
     for (String fileName : referencedFiles) {
       assertThat(new ClassPathResource(fileName).exists())

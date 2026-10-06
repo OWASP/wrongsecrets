@@ -1,0 +1,29 @@
+*Waarom het committen van een Maven settings.xml deploymentsgegevens lekt*
+
+Een `settings.xml` is het bestand dat Maven leest om te weten waar het afhankelijkheden moet downloaden en hoe het zich moet authenticeren bij de repositories die een login vereisen. Het gedeelte `<servers>` bevat de gebruikersnaam en het wachtwoord in platte tekst van elke geconfigureerde server, en voor een deploymentsaccount geeft dat wachtwoord meestal het recht om artefacten te publiceren.
+
+Zo'n bestand committen voelt onschuldig, omdat de build opeens voor iedereen werkt, en dat is precies de fout die deze uitdaging laat zien:
+
+- De inloggegevens blijven voor altijd in de git-geschiedenis. Het bestand in een latere commit verwijderen haalt het niet uit de geschiedenis, dus het wachtwoord moet vanaf het moment dat het is gepusht als gecompromitteerd worden beschouwd.
+- Elke persoon en elk systeem dat de repository kan lezen, krijgt ook de inloggegevens: forks, mirrors, CI-runners, ontwikkel laptops en elk hulpmiddel met leesrechten.
+- Deploymentsgegevens zijn zeer waardevol voor supply-chain-aanvallen. Daarmee kan een aanvaller een kwaadaardige versie van de projectartefacten publiceren, waarna elke consument van die repository stilletjes de vergiftigde build overneemt.
+- Server-ids zoals de Nexus-id in deze uitdaging zijn helemaal niet geheim. Ze zeggen alleen bij welke repository inloggegevens horen; ze beschermen de inloggegevens zelf nooit.
+- Secret-scanners negeren XML-bestanden vaak of herkennen Maven-settings niet, waardoor de leak lang onopgemerkt kan blijven.
+- Mavens eigen wachtwoordversleuteling verbergt het wachtwoord alleen in een keystore die vlak naast het bestand ligt, en is dus geen bescherming voor iets dat gecommit wordt.
+
+----
+Beter zo:
+
+- Bewaar `settings.xml` in `$HOME/.m2/` en voeg `settings.xml` toe aan `.gitignore` zodat het niet per ongeluk gecommit kan worden.
+- Verwijs naar inloggegevens via omgevingsvariabelen of property-interpolatie, bijvoorbeeld `<password>${env.NEXUS_PASSWORD}</password>`, en lever de waarde tijdens het uitvoeren.
+- Injecteer in de CI de inloggegevens uit de secret store van de CI in plaats van ze in het repository van de pipeline te zetten.
+- Geef elke consument een kortlevend token met de minste rechten dat alleen naar één repository mag deployen, en beperk het token tot een vast tijdsvenster.
+- Geef de voorkeur aan functies van de repositorybeheerder die lange wachtwoorden vermijden, zoals bearer tokens of workload identity federation.
+- Roteer de inloggegevens zodra ze in een commit voorkomen en verwijder ze uit de geschiedenis waar je platform dat toestaat.
+- Scan de repository, inclusief XML- en buildbestanden, met een secret scanner in pre-commit hooks en in de CI.
+----
+
+[NOTE]
+====
+Een `settings.xml` in de repository is een voorraad aan inloggegevens midden op straat. Alles wat in een `.java`-bestand onacceptabel zou zijn, is dat ook in een Maven-settingsbestand.
+====
