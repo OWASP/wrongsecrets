@@ -284,7 +284,7 @@ The K8S setup currently is based on using Minikube for local fun. You can use th
     kubectl delete pod -n kube-system -l name=sealed-secrets-controller
     kubectl create -f k8s/sealed-challenge48.json
     echo "finishing up the sealed secret controler part"
-    wait 10 #or check whether secret48 is there
+    kubectl -n kube-system wait --for=condition=ready pod -l name=sealed-secrets-controller --timeout=60s
     kubectl apply -f k8s/secret-challenge-deployment.yml
     while [[ $(kubectl get pods -l app=secret-challenge -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do echo "waiting for secret-challenge" && sleep 2; done
     kubectl expose deployment secret-challenge --type=LoadBalancer --port=8080
@@ -319,7 +319,7 @@ Want to run vanilla on your own k8s? Use the commands below:
     kubectl delete pod -n kube-system -l name=sealed-secrets-controller
     kubectl create -f k8s/sealed-challenge48.json
     echo "finishing up the sealed secret controler part"
-    wait 10 #or check whether secret48 is there
+    kubectl -n kube-system wait --for=condition=ready pod -l name=sealed-secrets-controller --timeout=60s
     kubectl apply -f k8s/challenge33.yml
     kubectl apply -f k8s/secret-challenge-deployment.yml
     while [[ $(kubectl get pods -l app=secret-challenge -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do echo "waiting for secret-challenge" && sleep 2; done
