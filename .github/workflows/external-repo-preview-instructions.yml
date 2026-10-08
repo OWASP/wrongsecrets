@@ -59,6 +59,25 @@ jobs:
             git checkout -b test-pr-${prNumber} origin/${headBranch}
             \`\`\`
 
+            ### 🧹 Cleaning up after testing
+
+            When you are finished testing, you can remove the local PR branch:
+
+            \`\`\`bash
+            git checkout main
+            git branch -D pr-${prNumber}
+            \`\`\`
+
+            If you added the \`wrongsecrets-upstream\` remote specifically for testing
+            this PR and no longer need it, remove it with:
+
+            \`\`\`bash
+            git remote remove wrongsecrets-upstream
+            \`\`\`
+
+            > ⚠️ Only remove \`wrongsecrets-upstream\` if you added it for this test.
+            > If you already had this remote before testing, keep it.
+
             **PR:** #${prNumber}
             **Branch:** \`${headBranch}\`
             **Repository:** \`${headRepo}\`
