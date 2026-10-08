@@ -1,0 +1,114 @@
+name: External PR Test Instructions
+
+on:
+  pull_request_target:
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+permissions:
+  pull-requests: write
+
+jobs:
+  instructions:
+    if: github.event.pull_request.head.repo.full_name != github.repository
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Add/update PR test instructions
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+            const marker = '<!-- pr-test-instructions -->';
+
+            const prNumber = pr.number;
+            const headRepo = pr.head.repo.full_name;
+            const headBranch = pr.head.ref;
+
+            const body = `${marker}
+            ## 🧪 Testing this PR locally
+
+            ### If you already have the repository
+
+            First, make sure the official OWASP WrongSecrets repository is configured
+            as the \`wrongsecrets-upstream\` remote:
+
+            \`\`\`bash
+            git remote get-url wrongsecrets-upstream >/dev/null 2>&1 || \\
+              git remote add wrongsecrets-upstream https://github.com/OWASP/wrongsecrets.git
+            \`\`\`
+
+            Then fetch and check out this PR:
+
+            \`\`\`bash
+            git fetch wrongsecrets-upstream pull/${prNumber}/head:pr-${prNumber}
+            git checkout pr-${prNumber}
+            \`\`\`
+
+            > If you already have a \`wrongsecrets-upstream\` remote, the first command
+            > leaves it unchanged.
+
+            ### Or, if you want the contributor branch directly
+
+            If the contributor repository is already configured as \`origin\`:
+
+            \`\`\`bash
+            git fetch origin
+            git checkout -b test-pr-${prNumber} origin/${headBranch}
+            \`\`\`
+
+            ### 🧹 Cleaning up after testing
+
+            When you are finished testing, you can remove the local PR branch:
+
+            \`\`\`bash
+            git checkout main
+            git branch -D pr-${prNumber}
+            \`\`\`
+
+            If you added the \`wrongsecrets-upstream\` remote specifically for testing
+            this PR and no longer need it, remove it with:
+
+            \`\`\`bash
+            git remote remove wrongsecrets-upstream
+            \`\`\`
+
+            > ⚠️ Only remove \`wrongsecrets-upstream\` if you added it for this test.
+            > If you already had this remote before testing, keep it.
+
+            **PR:** #${prNumber}
+            **Branch:** \`${headBranch}\`
+            **Repository:** \`${headRepo}\`
+            `;
+
+            const { owner, repo } = context.repo;
+
+            const { data: comments } =
+              await github.rest.issues.listComments({
+                owner,
+                repo,
+                issue_number: prNumber,
+              });
+
+            const existing = comments.find(comment =>
+              comment.body?.includes(marker)
+            );
+
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner,
+                repo,
+                issue_number: prNumber,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number: prNumber,
+                body,
+              });
+            }
