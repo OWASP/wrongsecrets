@@ -1,21 +1,21 @@
-*Warum du niemals ein Geheimnis in einer Agent-Skill ablegen solltest*
+*Warum du niemals ein Geheimnis in einem Agent-Skill ablegen solltest*
 
-Eine Skill ist zum Teilen gebaut. Das ist der ganze Sinn dahinter: Du schreibst den Workflow einmal und jeder Entwickler, jeder Agent und jeder CI-Job nutzt ihn wieder. Das bedeutet: Ein Geheimnis in einer Skill hat die denkbar schlechtesten Eigenschaften:
+Ein Skill ist zum Teilen gebaut. Das ist der ganze Sinn dahinter: Du schreibst den Workflow einmal und jeder Entwickler, jeder Agent und jeder CI-Job nutzt ihn wieder. Das bedeutet: Ein Geheimnis in einem Skill hat die denkbar schlechtesten Eigenschaften:
 
-- Es wird auf jede Maschine kopiert, auf der die Skill installiert wird, einschließlich persönlicher Laptops.
-- Es landet im Repository und ist damit für immer in der Git-Historie, auch nachdem du es „entfernt“ hast – du musst das Geheimnis also rotieren.
-- Es wird auf Skill-Marktplätzen und in Registries veröffentlicht, wo es indexiert und durchsuchbar ist.
-- Es wird vom Agenten gelesen und kann so in Chat-Transkripte, Logs und Telemetrie Dritter geraten.
-- Es ist eine *geteilte* Credential und wird deshalb fast nie rotiert und fast nie eingeschränkt.
+- Er wird auf jede Maschine kopiert, auf der der Skill installiert wird, einschließlich persönlicher Laptops.
+- Er landet im Repository und ist damit für immer in der Git-Historie, auch nachdem du es „entfernt“ hast – du musst das Geheimnis also rotieren.
+- Er wird auf Skill-Marktplätzen und in Registries veröffentlicht, wo er indexiert und durchsuchbar ist.
+- Er wird vom Agenten gelesen und kann so in Chat-Transkripte, Logs und Telemetrie Dritter geraten.
+- Er ist ein *geteiltes* Credential und wird deshalb fast nie rotiert und fast nie eingeschränkt.
 
 ----
 Was du stattdessen tun solltest:
 
-- Halte Credentials aus der Skill heraus und lass die Skill sie aus der Umgebung lesen, zum Beispiel `$STAGING_DEPLOY_TOKEN`.
+- Halte Credentials aus dem Skill heraus und lasse den Skill diese aus der Umgebung lesen, zum Beispiel `$STAGING_DEPLOY_TOKEN`.
 - Dokumentiere, *welche* Variable gebraucht wird und *wo* man sie bekommt, niemals den Wert selbst.
-- Gib jedem Verbraucher eine eigene kurzlebige Credential mit den geringsten Rechten statt eines gemeinsamen Team-Tokens.
+- Gib jedem Verbraucher ein eigenes kurzlebiges Credential mit den geringsten Rechten statt eines gemeinsamen Team-Tokens.
 - Scanne Skill-Dateien mit einem Secret-Scanner in pre-commit und CI, ganz wie du Quellcode scannst.
-- Behandle ein Geheimnis, das jemals in einer Skill stand, als kompromittiert und rotiere es.
+- Behandle ein Geheimnis, das jemals in einem Skill stand, als kompromittiert und rotiere es.
 ----
 
 [NOTE]

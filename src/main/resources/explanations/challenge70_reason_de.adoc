@@ -4,11 +4,11 @@ Ein Skill-Bundle ist ausgelieferte Software. Es enthält ausführbare Skripte, l
 
 Zwei Fehler türmen sich in dieser Challenge:
 
-- Das Token wird im Bundle committet, sodass jeder, der die Skill installiert, eine funktionierende geteilte Credential erhält.
-- Wenn du die Skill innerhalb von Claude teilst, hat jeder mit Zugriff auf die Skill Zugriff auf das Geheimnis.
+- Das Token wird im Bundle committet, sodass jeder, der den Skill installiert, ein funktionierendes geteiltes Credential erhält.
+- Wenn du den Skill innerhalb von Claude teilst, hat jeder mit Zugriff auf den Skill Zugriff auf das Geheimnis.
 - Das Token ist base64-kodiert, was *Kodierung* ist, keine Verschlüsselung. Es hindert einen naiven Secret-Scanner daran zu feuern, und es hindert sonst niemanden. Jeder mit dem Bundle kann es mit einem Befehl dekodieren.
 
-Der zweite Punkt ist der gefährlichere der beiden, weil er ein erkennbares Problem in ein unerkennbares verwandelt. Der Scanner wird still, der Fund verschwindet aus dem Backlog und die Credential bleibt jahrelang gültig.
+Der zweite Punkt ist der gefährlichere der beiden, weil er ein erkennbares Problem in ein unerkennbares verwandelt. Der Scanner wird still, der Fund verschwindet aus dem Backlog und die Credentials bleiben jahrelang gültig.
 
 ----
 Was du stattdessen tun solltest:

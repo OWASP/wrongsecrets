@@ -2,13 +2,13 @@
 
 Agent-Skills werden zu einer beliebten Möglichkeit, Automatisierung im Team zu teilen: Du legst einen Ordner mit einer `SKILL.md` darin ab, der Agent pickt sie auf und alle haben denselben Workflow. Leider macht das Skills auch zu einem sehr bequemen Ort, um eine geteilte Credential „vorübergehend“ abzulegen.
 
-Diese Anwendung enthält eine Cursor-Skill namens `deploy-preview`. Die Skill liegt im Resource-Ordner und wird vom Backend unter link:/skills/cursor/deploy-preview/SKILL.md[`/skills/cursor/deploy-preview/SKILL.md`] bereitgestellt.
+Diese Anwendung enthält einen Cursor-Skill namens `deploy-preview`. Der Skill liegt im Resource-Ordner und wird vom Backend unter link:/skills/cursor/deploy-preview/SKILL.md[`/skills/cursor/deploy-preview/SKILL.md`] bereitgestellt.
 
 Der Skill-Quellcode ist auch auf GitHub verfügbar: link:https://github.com/OWASP/wrongsecrets/blob/master/src/main/resources/challenges/challenge-70/cursor-skill/deploy-preview/SKILL.md[`src/main/resources/challenges/challenge-70/cursor-skill/deploy-preview/SKILL.md`].
 
-Lies die Skill und reiche das Staging-Deploy-Token ein, das der Autor „damit die Skill eigenständig bleibt“ direkt hineingeschrieben hat.
+Lies den Skill und reiche das Staging-Deploy-Token ein, das der Autor „damit der Skill eigenständig bleibt“ direkt hineingeschrieben hat.
 
 [NOTE]
 ====
-Hier ist nichts kodiert oder verschlüsselt: So sieht ein geleakter Skill in der Wildnis aus. Eine Skill ist Dokumentation, und Dokumentation wird in Wikis, Tickets, Pull Requests und Chat-Nachrichten kopiert.
+Hier ist nichts kodiert oder verschlüsselt: So sieht ein geleakter Skill in der Wildnis aus. Ein Skill ist Dokumentation, und Dokumentation wird in Wikis, Tickets, Pull Requests und Chat-Nachrichten kopiert.
 ====
