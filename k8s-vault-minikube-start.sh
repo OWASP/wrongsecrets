@@ -28,7 +28,9 @@ kubectl apply -f k8s/main.key
 echo "Setting up challenge 53"
 kubectl apply -f k8s/challenge53/secret-challenge53.yml
 kubectl delete pod -n kube-system -l name=sealed-secrets-controller
+kubectl -n kube-system wait --for=condition=ready pod -l name=sealed-secrets-controller --timeout=60s
 kubectl create -f k8s/sealed-challenge48.json
+kubectl wait --for=create secret/secret48 --timeout=60s
 echo "finishing up the sealed secret controler part"
 echo "do you need to decrypt and/or handle things for the sealed secret use kubeseal"
 
