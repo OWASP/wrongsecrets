@@ -32,17 +32,51 @@ jobs:
 
             ### If you already have the repository
 
+            First, make sure the official OWASP WrongSecrets repository is configured
+            as the \`wrongsecrets-upstream\` remote:
+
             \`\`\`bash
-            git fetch upstream pull/${prNumber}/head:pr-${prNumber}
+            git remote get-url wrongsecrets-upstream >/dev/null 2>&1 || \\
+              git remote add wrongsecrets-upstream https://github.com/OWASP/wrongsecrets.git
+            \`\`\`
+
+            Then fetch and check out this PR:
+
+            \`\`\`bash
+            git fetch wrongsecrets-upstream pull/${prNumber}/head:pr-${prNumber}
             git checkout pr-${prNumber}
             \`\`\`
 
+            > If you already have a \`wrongsecrets-upstream\` remote, the first command
+            > leaves it unchanged.
+
             ### Or, if you want the contributor branch directly
+
+            If the contributor repository is already configured as \`origin\`:
 
             \`\`\`bash
             git fetch origin
             git checkout -b test-pr-${prNumber} origin/${headBranch}
             \`\`\`
+
+            ### 🧹 Cleaning up after testing
+
+            When you are finished testing, you can remove the local PR branch:
+
+            \`\`\`bash
+            git checkout main
+            git branch -D pr-${prNumber}
+            \`\`\`
+
+            If you added the \`wrongsecrets-upstream\` remote specifically for testing
+            this PR and no longer need it, remove it with:
+
+            \`\`\`bash
+            git remote remove wrongsecrets-upstream
+            \`\`\`
+
+            > ⚠️ Only remove \`wrongsecrets-upstream\` if you added it for this test.
+            > If you already had this remote before testing, keep it.
 
             **PR:** #${prNumber}
             **Branch:** \`${headBranch}\`
@@ -66,6 +100,7 @@ jobs:
               await github.rest.issues.updateComment({
                 owner,
                 repo,
+                issue_number: prNumber,
                 comment_id: existing.id,
                 body,
               });
