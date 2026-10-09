@@ -1,0 +1,5 @@
+*¿Por qué el pre-hashing de contraseñas no es una buena idea?*
+
+Aunque el pre-hashing de contraseñas es una forma fácil de actualizar hashes heredados, se vuelve propenso al https://www.scottbrady91.com/authentication/beware-of-password-shucking[Password shucking].
+
+Es una técnica en la que los atacantes eliminan las capas seguras más nuevas de un hash actualizado, reduciéndolo a su contraparte antigua más débil. En este caso, pudimos reducir los hashes bcrypt a hashes md5 inseguros y luego descifrarlos.

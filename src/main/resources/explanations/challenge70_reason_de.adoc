@@ -1,0 +1,26 @@
+*Warum ein Skill-Bundle dieselbe Prüfung braucht wie dein Quellcode*
+
+Ein Skill-Bundle ist ausgelieferte Software. Es enthält ausführbare Skripte, läuft auf Entwicklermaschinen und in CI und wird von Menschen installiert, die es nicht geschrieben haben. Es als „nur ein bisschen Markdown“ zu behandeln, ist der Grund, warum Geheimnisse im großen Stil verbreitet werden.
+
+Zwei Fehler türmen sich in dieser Challenge:
+
+- Das Token wird im Bundle committet, sodass jeder, der den Skill installiert, ein funktionierendes geteiltes Credential erhält.
+- Wenn du den Skill innerhalb von Claude teilst, hat jeder mit Zugriff auf den Skill Zugriff auf das Geheimnis.
+- Das Token ist base64-kodiert, was *Kodierung* ist, keine Verschlüsselung. Es hindert einen naiven Secret-Scanner daran zu feuern, und es hindert sonst niemanden. Jeder mit dem Bundle kann es mit einem Befehl dekodieren.
+
+Der zweite Punkt ist der gefährlichere der beiden, weil er ein erkennbares Problem in ein unerkennbares verwandelt. Der Scanner wird still, der Fund verschwindet aus dem Backlog und die Credentials bleiben jahrelang gültig.
+
+----
+Was du stattdessen tun solltest:
+
+- Lies Credentials zur Laufzeit aus der Umgebung oder einem Secret-Manager und scheitere laut mit einer klaren Meldung, wenn sie fehlen.
+- „Repariere" einen Secret-Scanner-Fund niemals durch Kodieren, Teilen oder Verschleiern des Werts. Repariere ihn, indem du das Geheimnis entfernst und rotierst.
+- Prüfe jede Datei in einem Skill-Bundle, nicht nur die `SKILL.md`. Skripte, Referenzdokumente und Beispielkonfigurationen sind Teil der Angriffsfläche.
+- Überprüfe das Bundle in CI: Entpacke es und lasse deinen Secret-Scanner über den entpackten Inhalt laufen, inklusive eines base64-fähigen Regelwerks.
+- Veröffentliche Bundles aus einer Build-Pipeline, die ohnehin keinen Zugriff auf Produktions-Credentials hat.
+----
+
+[NOTE]
+====
+Kodierung ist keine Sicherheitskontrolle. Wenn nur noch ein `base64 -d` zwischen einem Angreifer und deiner Credential steht, ist die Credential öffentlich.
+====

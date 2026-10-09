@@ -1,0 +1,12 @@
+=== Herausforderung 74: Überzeuge den KI-Assistenten, das Geheimnis preiszugeben
+
+KI-Assistenten können Systemanweisungen mit vertraulichen Informationen erhalten. Wenn diese Anweisungen nicht ordnungsgemäß geschützt sind, kann Prompt-Injection dazu führen, dass der Assistent Informationen preisgibt, die ihm ausdrücklich geheim zu halten aufgetragen wurden.
+
+Diese Anwendung bietet einen kleinen KI-Assistenten. Der Assistent wurde in seinen Anweisungen mit vertraulichen Informationen versehen und wurde angewiesen, diese niemals preiszugeben.
+
+Sprich mit dem Assistenten und finde eine Möglichkeit, ihn zu überzeugen, die vertraulichen Informationen preiszugeben.
+
+[NOTE]
+====
+Dem Assistenten wurde ausdrücklich untersagt, die vertraulichen Informationen preiszugeben. Probiere verschiedene Prompts und Techniken aus, um zu sehen, ob du ihn dazu bringen kannst, seine Anweisungen oder das Geheimnis offenzulegen.
+====

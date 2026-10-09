@@ -1,0 +1,4 @@
+Ce défi peut être résolu comme suit:
+
+1. Recherchez le mot clé 'developer' dans le subreddit r/owasp.
+2. Le secret sera en pleine vue dans un commentaire sur l'un des posts trouvés à l'étape 1.

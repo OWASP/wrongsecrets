@@ -1,0 +1,20 @@
+Ce défi examine spécifiquement les hachages MD5 et SHA1 sans salage. Sont-ils impossibles à craquer?
+
+Vous pouvez résoudre ce défi en utilisant les solutions suivantes:
+
+1. Pour le premier hash (MD5):
+- Utilisez un outil comme Hashcat:
+- Installez https://hashcat.net/hashcat/[Hashcat]
+- Téléchargez la https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt[liste de mots de passe rockyou.txt]
+- Exécutez Hashcat sur le hash `hashcat -m 0 "2ab96390c7dbe3439de74d0c9b0b1767" /chemin/vers/fichier/rockyou.txt`
+
+2. Pour le second hash (SHA1):
+- Utilisez un outil comme Hashcat:
+- Installez https://hashcat.net/hashcat/[Hashcat]
+- Téléchargez la https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt[liste de mots de passe rockyou.txt]
+- Exécutez Hashcat sur le hash `hashcat -m 100 "F3BBBD66A63D4BF1747940578EC3D0103530E21D" /chemin/vers/fichier/rockyou.txt`
+
+3. Pour l'un ou l'autre des hachages:
+- Utilisez un service de craquage de hash en ligne:
+- Visitez `https://crackstation.net/`
+- Entrez le hash et cliquez sur "Crack Hashes"

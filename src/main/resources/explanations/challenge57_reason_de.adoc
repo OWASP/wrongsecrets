@@ -1,0 +1,38 @@
+**Warum KI-Systemprompts anfällig sein können**
+
+Diese Herausforderung demonstriert mehrere wichtige Sicherheitsbedenken bei KI-Systemen:
+
+**1. Prompt-Injektionsschwachstellen:**
+KI-Systeme können durch sorgfältig erstellte Eingaben manipuliert werden, die ihre Sicherheitsmaßnahmen oder Anweisungsgrenzen umgehen. Dies ist ähnlich wie SQL-Injektion, aber für KI-Modelle.
+
+**2. Offenlegung des Systemprompts:**
+Wenn sensible Informationen in Systemprompts eingebettet sind, besteht das Risiko, dass diese Informationen mit verschiedenen Techniken extrahiert werden. Systemprompts sollten niemals Geheimnisse, Zugangsdaten oder sensible Daten enthalten.
+
+**3. KI-Jailbreaking:**
+Damit sind Techniken gemeint, mit denen die eingebauten Einschränkungen oder Sicherheitsmaßnahmen einer KI umgangen werden. Angreifer könnten soziale Ingenieurskunst, Rollenspiel oder das Überschreiben von Anweisungen einsetzen.
+
+**4. Informationsleck:**
+KI-Systeme könnten versehentlich Informationen preisgeben, obwohl ihnen aufgetragen wurde, diese verborgen zu halten, insbesondere wenn sie ausgefeilten Fragetechniken ausgesetzt sind.
+
+**Auswirkungen in der Praxis:**
+
+- **API-Schlüssel in Prompts:** Bette niemals API-Schlüssel, Passwörter oder Tokens in KI-Systemprompts ein
+- **Sensible Geschäftslogik:** Nimm keine vertraulichen Geschäftsregeln oder -prozesse in Prompts auf
+- **Persönliche Daten:** Vermeide es, personenbezogene Daten (PII) oder sensible Benutzerdaten in Systemanweisungen aufzunehmen
+- **Sicherheitsmaßnahmen:** Vertraue nicht allein auf promptbasierte Einschränkungen für die Sicherheit
+
+**Bewährte Verfahren:**
+- Verwende ordnungsgemäße Authentifizierung und Autorisierung außerhalb des KI-Systems
+- Implementiere Sicherheitskontrollen auf Anwendungsebene, nicht nur in Prompts
+- Teste KI-Systeme regelmäßig auf Prompt-Injektionsschwachstellen
+- Überwache KI-Interaktionen auf mögliche Sicherheitsprobleme
+- Verwende Sicherheits-Frameworks und -Richtlinien für KI
+
+**Erkennung und Prävention:**
+- Implementiere Eingabevalidierung und -bereinigung
+- Verwende Systeme zur Inhaltsfilterung
+- Überwache verdächtige Prompt-Muster
+- Implementiere Ratenbegrenzung und Missbrauchserkennung
+- Regelmäßige Sicherheitsbewertungen von KI-Implementierungen
+
+Diese Herausforderung zeigt, warum es unzureichend ist, KI-Systemprompts als Sicherheitsgrenze zu behandeln - richtige Sicherheit muss auf mehreren Ebenen umgesetzt werden.

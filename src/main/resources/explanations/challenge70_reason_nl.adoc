@@ -1,0 +1,26 @@
+*Waarom een skill-bundle dezelfde review nodig heeft als je broncode*
+
+Een skill-bundle is uitgebrachte software. Het bevat uitvoerbare scripts, draait op ontwikkelaarsmachines en in CI, en wordt geïnstalleerd door mensen die het niet hebben geschreven. Het behandelen als "gewoon wat markdown" is hoe geheimen op grote schaal verspreid raken.
+
+Twee fouten stapelen zich op in deze uitdaging:
+
+- De token wordt in de bundle gecommit, dus iedereen die de skill installeert krijgt een werkende gedeelde credential.
+- Bij het delen van de skill binnen Claude krijgt iedereen met toegang tot de skill toegang tot het geheim.
+- De token is base64-gecodeerd, wat *coderen* is, geen versleuteling. Het voorkomt dat een naïeve secret scanner afgaat, en het stopt verder niemand. Iedereen met de bundle kan het met één opdracht decoderen.
+
+Het tweede punt is het gevaarlijkste van de twee, omdat het een detecteerbaar probleem ondetecteerbaar maakt. De scanner zwijgt, de bevinding verdwijnt uit de backlog en de credential blijft jarenlang geldig.
+
+----
+Wat je in plaats daarvan moet doen:
+
+- Lees credentials runtime uit de omgeving of uit een secret manager, en faal luid met een duidelijk bericht wanneer ze ontbreken.
+- Los een bevinding van een secret scanner nooit "op" door de waarde te coderen, te splitsen of te obfusceren. Los het op door het geheim te verwijderen en te roteren.
+- Controleer elk bestand in een skill-bundle, niet alleen de `SKILL.md`. Scripts, referentiedocumenten en voorbeeldconfiguratie maken allemaal deel uit van het aanvalsvlak.
+- Verifieer de bundle in CI: pak hem uit en draai je secret scanner over de uitgepakte inhoud, inclusief een base64-bewuste ruleset.
+- Publiceer bundles vanuit een buildpipeline die sowieso geen toegang heeft tot productiecredentials.
+----
+
+[NOTE]
+====
+Coderen is geen beveiligingsmaatregel. Als er alleen een `base64 -d` tussen een aanvaller en je credential staat, is de credential openbaar.
+====

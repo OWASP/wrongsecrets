@@ -1,0 +1,7 @@
+C'est un défi de configuration CI/CD. Vous pouvez trouver la réponse en vous authentifiant au point de terminaison protégé avec l'authentification de base:
+
+1. Utilisez un navigateur pour obtenir le secret:
+- D'abord, allez au https://github.com/OWASP/wrongsecrets/blob/master/.github/workflows/dast-zap-test.yml[Github Workflow]
+- Trouvez la variable d'environnement avec laquelle nous configurons l'auth de base pour ZAP (`ZAP_AUTH_HEADER_VALUE`)
+- Décodez la valeur encodée en base64 du header
+- Naviguez vers `/authenticated/challenge37` et entrez le nom d'utilisateur et le mot de passe que vous avez récupérés à l'étape précédente.

@@ -1,0 +1,25 @@
+Deze uitdaging kijkt specifiek naar een geheim dat is opgeslagen in een Swift-binary als een array van tekens.
+
+Je kunt deze uitdaging oplossen met de volgende alternatieve oplossingen:
+
+1. Vind de geheimen met https://ghidra-sre.org/[Ghidra].
+- Installeer https://ghidra-sre.org/[Ghidra].
+- Start het met `ghidraRun`.
+- Laad de toepassing `wrongsecrets-swift` in Ghidra door een nieuw project te kiezen, daarna het bestand te importeren en er vervolgens dubbel op te klikken.
+- Sta Ghidra toe de toepassing te analyseren.
+- Zoek naar de `getSecret`-functie — je kunt ernaar zoeken in de Symbol Tree.
+- Vind in de gecompileerde code de array van tekens waaruit het geheim bestaat.
+- Alternatief: gebruik op macOS `nm -gUj wrongsecrets-swift | grep getSecret` en daarna `swift-demangle --expand "s5swift9getSecretSSyF"` om de functie te vinden.
+
+2. Vind de geheimen met https://www.radare.org[radare2].
+- Installeer https://www.radare.org[radare2] met `brew install radare2` op Mac of volg deze stappen: `git clone https://github.com/radareorg/radare2; cd radare2 ; sys/install.sh`
+- Start de r2-analyse met `$ r2 -AAA wrongsecrets-swift`
+- Zoek naar tekenreeksen met `iz | grep -i secret` of `iz | grep -i "This"`.
+- Alternatief: zoek naar de `getSecret`-functie: `afl | grep getSecret` en print de functie daarna met `pdf @ <function_address>`.
+- Onderzoek de constructie van de tekenarray in de gecompileerde of gedisassembleerde code.
+
+3. Vind de geheimen met https://binary.ninja[Binary Ninja] of vergelijkbare tools:
+- Laad de binary en navigeer naar de Swift-mangled functie `s5swift9getSecretSSyF`.
+- Het geheim wordt opgebouwd uit een array van tekens.
+
+Wil je de tools niet installeren? Bekijk dan de https://github.com/OWASP/wrongsecrets/tree/master?tab=readme-ov-file#want-to-play-but-are-not-allowed-to-install-the-tools[WrongSecrets Desktop container]!

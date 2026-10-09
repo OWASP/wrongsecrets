@@ -1,0 +1,29 @@
+*Pourquoi le commit d'un settings.xml de Maven divulgue les identifiants de déploiement*
+
+Un `settings.xml` est le fichier que Maven lit pour savoir où télécharger les dépendances et comment s'authentifier auprès des dépôts qui exigent une connexion. Sa section `<servers>` contient le nom d'utilisateur et le mot de passe en clair de chaque serveur configuré, et pour un compte de déploiement, ce mot de passe donne en général le droit de publier des artefacts.
+
+Commiter un tel fichier semble inoffensif puisque la build fonctionne soudainement pour tout le monde, et c'est exactement la faille que ce défi illustre :
+
+- Les identifiants restent dans l'historique git pour toujours. Supprimer le fichier dans un commit ultérieur ne le retire pas de l'historique, donc le mot de passe doit être considéré comme compromis dès qu'il a été poussé.
+- Toute personne et tout système capable de lire le dépôt reçoit également les identifiants : forks, miroirs, exécutants de CI, ordinateurs portables de développement et tout outil avec un accès en lecture.
+- Les identifiants de déploiement ont une grande valeur pour les attaques de la chaîne d'approvisionnement. Avec eux, un attaquant peut publier une version malveillante des artefacts du projet, après quoi chaque consommateur de ce dépôt récupère silencieusement la build empoisonnée.
+- Les id de serveur, comme l'id Nexus de ce défi, ne sont pas du tout secrets. Ils indiquent seulement à quel dépôt appartient un identifiant ; ils ne protègent jamais l'identifiant lui-même.
+- Les scanners de secrets ignorent souvent les fichiers XML ou ne reconnaissent pas la configuration Maven, si bien que la fuite peut passer inaperçue longtemps.
+- Le chiffrement des mots de passe de Maven lui-même cache le mot de passe dans un magasin de clés obscurci situé juste à côté du fichier : ce n'est donc aucune protection pour ce qui est commité.
+
+----
+À faire à la place :
+
+- Conservez `settings.xml` dans `$HOME/.m2/` et ajoutez `settings.xml` à `.gitignore` pour qu'il ne puisse pas être commité par erreur.
+- Référencez les identifiants via des variables d'environnement ou l'interpolation de propriétés, par exemple `<password>${env.NEXUS_PASSWORD}</password>`, et fournissez la valeur à l'exécution.
+- Dans la CI, injectez les identifiants depuis le magasin de secrets de la CI plutôt que de les versionner dans le dépôt du pipeline.
+- Donnez à chaque consommateur un jeton éphémère et au moindre privilège qui ne peut déployer que vers un seul dépôt, et limitez le jeton à une fenêtre temporelle fixe.
+- Préférez les fonctions du gestionnaire de dépôts qui évitent les mots de passe durables, comme les jetons bearer ou la fédération d'identité de workloads.
+- Faites pivoter l'identifiant dès qu'il apparaît dans un commit et purgez-le de l'historique là où votre plateforme le permet.
+- Scannez le dépôt, y compris les fichiers XML et de build, avec un scanner de secrets dans les hooks pre-commit et dans la CI.
+----
+
+[NOTE]
+====
+Un `settings.xml` dans le dépôt est un cache d'identifiants en pleine vue. Tout ce qui serait inacceptable dans un fichier `.java` l'est aussi dans un fichier de configuration Maven.
+====

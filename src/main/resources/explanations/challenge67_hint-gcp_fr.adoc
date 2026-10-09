@@ -1,0 +1,15 @@
+Vous pouvez résoudre ce challenge en suivant les étapes suivantes :
+
+1. Ouvrez https://console.cloud.google.com/logs/query[*Cloud Logging*] (anciennement Stackdriver) pour le projet qui héberge votre cluster GKE.
+2. Interrogez l'événement d'audit émis par l'application :
++
+[source,shell]
+----
+gcloud logging read \
+  'resource.type="k8s_container" AND textPayload:"encoded credential"' \
+  --limit=5 --format='value(textPayload)'
+----
+3. Dans la console, vous pouvez utiliser le même filtre dans la zone de requête de Log Explorer : `resource.type="k8s_container"` combiné à `textPayload:"encoded credential"`.
+4. Récupérez le blob Base64 du message et décodez-le : `echo '<blob>' | base64 -d`. Cette valeur décodée est la réponse.
+
+Vous ne voyez toujours rien ? L'événement est émis la première fois que le challenge est ouvert ; ouvrez donc la page une fois puis relancez la requête.

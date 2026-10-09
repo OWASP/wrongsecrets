@@ -1,0 +1,7 @@
+=== Binärdateien ohne Klartextstrings
+
+Wir hören immer noch von Entwicklern, die Tricks und Verschleierung einsetzen, um ein Geheimnis in einer Binärdatei zu verstecken. Was, wenn wir Symbole entfernen? Was, wenn wir das Geheimnis verschlüsseln? Diese Herausforderungen können es schwieriger machen, das versteckte Geheimnis zu finden, aber nicht unmöglich.
+
+Die Herausforderungsdatei heißt https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-advanced-c[wrongsecrets-advanced-c] und kann in vielen Varianten im https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables[executables-Ordner] gefunden werden.
+
+Versuche, die Binärdatei herunterzuladen und lokal auszuführen (z.B. `./wrongsecrets-advanced-c<dieVersion> <deine Antwort>`).

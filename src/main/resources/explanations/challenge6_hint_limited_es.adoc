@@ -1,0 +1,20 @@
+Puedes resolver este desafío con los siguientes pasos:
+
+1. Comprueba el estado del secreto en Git:
+- ¿Puedes ver dónde almacenamos el `secrets-secret.yml` en git? Si no, simplemente haz una búsqueda.
+- Echa un vistazo al campo `Data`: ¿qué puedes encontrar ahí? Ten en cuenta que los secretos están codificados en base64. Una vez montados en las cargas de trabajo, se decodifican.
+
+TEN EN CUENTA: Las siguientes opciones solo funcionarán cuando tengas acceso a la API de K8s. En esta versión alojada de WrongSecrets no tienes ese acceso. Cuando organices un CTF: pide al organizador acceso a la API de K8s a la que se apunta.
+
+1. Pide amablemente usando Kubectl:
+- Asegúrate de tener Kubectl instalado según se indica en el README.MD & asegúrate de que kubectl esté configurado para enviar comandos al clúster correcto.
+- Ahora ejecuta `kubectl get secrets`. Aquí ves todos los configmaps activos en el namespace en el que estás, que para esta aplicación normalmente es `default` (a menos que tu administrador/formador indique lo contrario).
+- Ahora ejecuta `kubectl get secret funnystuff -o Yaml`. ¿Puedes ver el secreto?
+2. Haz exec en el pod y obtén los datos:
+- Asegúrate de tener Kubectl instalado según se indica en el README.MD & asegúrate de que kubectl esté configurado para enviar comandos al clúster correcto.
+- Ahora ejecuta `kubectl get pods`. Aquí ves todos los Pods activos en el namespace en el que estás, que para esta aplicación normalmente es `default` (a menos que tu administrador/formador indique lo contrario).
+- Ahora, para tu instancia del pod de WrongSecrets, ejecuta `kubectl exec -it secret-challenge-<rest of the name of the pod from the prev.step> -- sh`.
+- Ahora ejecuta `env | grep SPECIAL_SPECIAL_K8S_SECRET` y ahí está tu secreto.
+
+
+Nota: `kubectl get <item> -A` te da una visión de todos los elementos en todos los namespaces a los que tienes acceso. Es importante *no* dar a las personas acceso a todos los namespaces de tu clúster, ya que esto podría filtrar configuración/artículos importantes.

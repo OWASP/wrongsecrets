@@ -1,0 +1,9 @@
+*Warum du Geheimnisse aufräumen und rotieren musst*
+
+Wenn du ein Geheimnis versehentlich in Git committed hast, gibt es Möglichkeiten, es zu finden, per Hand oder mit Tools.
+
+Daher, wenn ein Geheimnis versehentlich in Git committed wurde:
+
+- Informiere jede verantwortliche Sicherheitsbehörde in der Organisation
+- Stelle sicher, dass du das Geheimnis rotierst
+- Optional - aufräumen: Verwende https://github.com/rtyley/bfg-repo-cleaner[BFG repo-cleaner] oder git filter-branch

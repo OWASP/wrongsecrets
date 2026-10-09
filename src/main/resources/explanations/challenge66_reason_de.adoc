@@ -1,0 +1,5 @@
+*Warum Obfuskierung nur eine Geschwindigkeitsbremse ist.*
+
+Codierung, Reflektion und leichte Obfuskierung können Reverse Engineering weniger bequem machen, aber sie schaffen keine echte Geheimhaltung. Die ausführbare Datei enthält weiterhin alles, was benötigt wird, um das Geheimnis wiederherzustellen.
+
+Wenn die Anwendung das Geheimnis lokal ableiten kann, kann ein entschlossener Angreifer dasselbe tun. Schütze Geheimnisse, indem du Vertrauensentscheidungen und Geheimmaterial auf kontrollierte serverseitige Systeme verlagerst.

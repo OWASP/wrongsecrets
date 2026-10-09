@@ -1,0 +1,40 @@
+=== Hinweis zu Challenge 62
+
+Diese Challenge zeigt, wie ein MCP-Server mit einem zu weitreichend konfigurierten Google Service Account eine Privilegieskalation ermöglicht.
+
+**Wo du suchen solltest:**
+
+1. **Ein MCP-Server läuft unter `/mcp62`** auf dem Hauptport der Anwendung
+2. **Der MCP-Server stellt ein `read_google_drive_document`-Tool bereit**, das ein Google Service Account zum Lesen eines Dokuments verwendet
+3. **Du benötigst keine gültigen Google-Zugangsdaten** – das Service Account ist bereits in der Anwendung konfiguriert
+
+**Vorgehensweise Schritt für Schritt:**
+
+Liste zuerst die Tools auf, die der MCP-Server anbietet:
+
+[source,bash]
+----
+curl -s -X POST http://localhost:8080/mcp62 \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+----
+
+Rufe dann `read_google_drive_document` auf, um das Dokument zu lesen:
+
+[source,bash]
+----
+curl -s -X POST http://localhost:8080/mcp62 \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"read_google_drive_document","arguments":{}}}'
+----
+
+**Worauf du achten solltest:**
+
+- Die Antwort enthält den Inhalt eines Google-Drive-Dokuments
+- Das Dokument enthält die geheime Antwort auf diese Challenge
+- Der Antwortvalidierer verwendet den Wert zwischen `<secret>` und `</secret>` in diesem Inhalt
+- Beachte, dass du auf ein Dokument zugegriffen hast, auf das du nicht direkt berechtigt bist – der Zugriff wurde durch das Service Account des MCP-Server gewährt
+
+**Maintainer-Hinweis:** Der MCP-Controller führt einen begrenzten Dokument-Cache, um wiederholte Drive-API-Aufrufe zu reduzieren.
+
+**Denk daran:** Dies ist ein Beispiel für Privilegieskalation über einen MCP-Server. Das Service Account hat mehr Rechte, als du (der Aufrufende) hättest, und der MCP-Server erzwingt keine Zugriffskontrollen auf Aufruferebene.

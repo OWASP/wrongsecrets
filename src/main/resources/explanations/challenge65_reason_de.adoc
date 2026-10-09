@@ -1,0 +1,7 @@
+*Warum ausführbare JARs und Android-APKs nicht zum Verstecken von Geheimnissen geeignet sind.*
+
+Ausführbare JARs sind kein sicherer Ort, um Geheimnisse zu verstecken. Wie Android-APKs sind es Archive, die Bytecode und Ressourcen direkt an den Angreifer liefern, wodurch eingebettete Zeichenketten, Konstanten und Hilfsmethoden mit gängigen Reverse-Engineering-Werkzeugen einfach zu untersuchen sind.
+
+Wenn ein Java-Artefakt auf Clientseite ein Geheimnis benötigt, um zu funktionieren, gehe davon aus, dass dieses Geheimnis extrahiert werden kann, sobald die Datei heruntergeladen wurde. Bewahre echte Geheimnisse auf einem vertrauenswürdigen Backend auf und gib sie erst nach ordnungsgemäßer Authentifizierung und Autorisierung frei.
+
+Du möchtest mehr Übung im Reverse Engineering von Java und Android? Sieh dir den https://github.com/OWASP/MASTG-Hacking-Playground[OWASP MASTG Hacking Playground] an.

@@ -1,0 +1,11 @@
+Es gibt zwei Möglichkeiten, diese Herausforderung zu lösen:
+
+1. Durch Betrachten des Speichers:
+- Navigiere in deinem Webbrowser zu "localhost:8080".
+- Öffne die Entwicklerkonsole durch Inspektion.
+- Navigiere zum Abschnitt Anwendungen der Entwicklerkonsole.
+- Der Wert, der dem Schlüssel "secret" zugeordnet ist, ist deine Antwort!
+2. Durch Betrachten des Netzwerkverkehrs:
+- Navigiere in deinem Webbrowser zu WrongSecrets.
+- Öffne die Entwicklerkonsole.
+- Überprüfe den Netzwerk-Tab: Kannst du den zusätzlichen Aufruf für diese Herausforderung und seinen Rückgabewert erkennen?

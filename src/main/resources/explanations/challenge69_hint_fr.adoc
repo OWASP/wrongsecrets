@@ -1,0 +1,3 @@
+Ouvrez link:/skills/cursor/deploy-preview/SKILL.md[`/skills/cursor/deploy-preview/SKILL.md`] et consultez la section *Prérequis*. La valeur de `STAGING_DEPLOY_TOKEN` est la réponse.
+
+Le même fichier se trouve dans l'arborescence source à `src/main/resources/challenges/challenge-69/cursor-skill/deploy-preview/SKILL.md`.

@@ -1,0 +1,43 @@
+=== Waarom uitdaging 62 belangrijk is: MCP privilege escalation via een Google Service Account
+
+**Het probleem:**
+
+MCP (Model Context Protocol)-servers worden steeds vaker gebruikt om AI-assistenten toegang te geven tot externe services en databronnen. Wanneer deze servers zijn geconfigureerd met service accounts of API-sleutels die bredere rechten hebben dan de aanroepende gebruiker, ontstaat er een gevaarlijke vector voor privilege escalation.
+
+Deze uitdaging toont een schending van het **Principe van minste rechten**: het Google Service Account van de MCP-server heeft toegang tot een beperkt Google Drive-document, maar de server verleent die toegang aan *elke aanroeper* zonder te controleren of die aanroeper geautoriseerd is om het document te zien.
+
+**Het echte scenario:**
+
+1. Een ontwikkelaar bouwt een MCP-server om een interne AI-assistent toegang te geven tot teamdocumenten in Google Drive
+2. Het service account krijgt leestoegang tot een gevoelig document
+3. De ontwikkelaar implementeert geen enkele authenticatie- of autorisatiecontrole op de MCP-tools
+4. Iedereen die het MCP-eindpunt ontdekt, kan nu documenten lezen die diegene niet zou mogen — waarbij het service account effectief als proxy voor privilege escalation wordt gebruikt
+
+**Waarom dit gevaarlijk is:**
+
+- **Privilege escalation**: aanlopers krijgen de rechten van het service account, niet die van henzelf
+- **Geen audit trail**: toegang via de MCP-tool wordt mogelijk niet gelogd met de identiteit van de aanroeper
+- **Groot aanvalsoppervlak**: elke MCP-client (legitiem of kwaadaardig) kan de tool aanroepen
+- **AI-gestuurde exploitatie**: AI-agents die met deze MCP-server zijn verbonden, voeren de tool automatisch uit wanneer ze daartoe worden aangezet, waardoor het risico wordt versterkt
+
+**Hoe je het oplost:**
+
+1. **Authenticeer MCP-aanlopers**: vereis een authenticatietoken op het MCP-eindpunt en verifieer de identiteit van de aanroeper voordat tools worden uitgevoerd
+2. **Autoriseer op toolniveau**: controleer of de geauthenticeerde aanroeper de toegang tot de gevraagde resource heeft voordat het service account wordt aangeroepen
+3. **Beperk de rechten van het service account nauwkeurig**: het service account mag alleen de minimale rechten hebben die nodig zijn voor legitieme use cases
+4. **Auditeer alle tool-aanroepen**: log de identiteit van de aanroeper samen met elke tool-aanroep zodat toegang kan worden gecontroleerd
+5. **Geef de voorkeur aan impersonatie boven gedeelde credentials**: gebruik credentials of token-uitwisseling per aanroeper in plaats van één gedeeld service account
+
+**WrongSecrets-implementatienotities:**
+
+- Het parsen van het antwoord op de uitdaging gebruikt getagde inhoud (`<secret>...</secret>`) en cacht de geëxtraheerde waarde om het geheugenverbruik te optimaliseren.
+- Het ophalen van MCP-documenten gebruikt een begrensde cache om herhaalde uitgaande verzoeken te beperken terwijl het geconfigureerde standaarddocument behouden blijft.
+- Relevante tests:
+	- `Challenge62Test`
+	- `Challenge62McpControllerTest`
+
+**Referenties:**
+
+- https://modelcontextprotocol.io/specification/2024-11-05/[MCP Specification]
+- https://owasp.org/www-project-top-ten/[OWASP Top 10]
+- https://cloud.google.com/iam/docs/best-practices-service-accounts[Google Service Account Best Practices]

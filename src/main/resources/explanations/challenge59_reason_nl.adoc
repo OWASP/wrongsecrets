@@ -1,0 +1,5 @@
+=== Waarom deze uitdaging belangrijk is
+
+Deze uitdaging demonstreert een kritieke kwetsbaarheid die veel voorkomt in productiesystemen: **hardgecodeerde Slack API-tokens opgeslagen in omgevingsvariabelen met onvoldoende verduistering**.
+
+==== De kwetsbaarheid

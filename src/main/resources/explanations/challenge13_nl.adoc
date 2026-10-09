@@ -1,0 +1,6 @@
+=== Forkbare Github Actions
+
+Als je geheimen wilt beheren in je CI/CD-pipeline, moet je je altijd afvragen: wie kan ze zien?
+Kun je het geheim vinden via de Github action?
+
+Opmerking: deze uitdaging is tegelijkertijd een "slechte crypto"-uitdaging, maar iets minder eenvoudig op die manier.

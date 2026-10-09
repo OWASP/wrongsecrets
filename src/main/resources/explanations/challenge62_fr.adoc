@@ -1,0 +1,44 @@
+=== Escalade de privilèges sur le serveur MCP via un compte de service Google
+
+Le Model Context Protocol (MCP) permet aux assistants IA et aux agents d'utiliser des outils et d'accéder à des services externes. Lorsqu'un serveur MCP est configuré avec un compte de service Google dont les permissions sont plus larges que celles de l'utilisateur qui l'appelle, cela crée une faille d'escalade de privilèges : quiconque peut appeler l'outil MCP obtient accès à des ressources auxquelles il n'est pas directement autorisé.
+
+Ce challenge illustre un scénario réaliste dans lequel un développeur a construit un serveur MCP pour aider un assistant IA à accéder à des documents Google Drive internes. Le compte de service utilisé par le serveur MCP dispose d'un accès en lecture à un document restreint — mais le serveur MCP ne vérifie pas que l'appelant soit autorisé à y accéder.
+
+**Votre objectif :**
+
+1. **Un serveur MCP s'exécute sur cette application**, accessible via le point d'entrée `/mcp62`
+2. **Le serveur expose un outil `read_google_drive_document`** qui utilise un compte de service Google
+3. **Le compte de service a un accès en lecture à un document Google Drive** contenant le secret
+4. **L'outil ne vérifie pas si l'appelant est autorisé** à accéder à ce document
+
+**Comment interagir avec le serveur MCP :**
+
+Découvrez d'abord les outils disponibles :
+
+[source,bash]
+----
+curl -s -X POST http://localhost:8080/mcp62 \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+----
+
+Appelez ensuite l'outil `read_google_drive_document` pour récupérer le contenu du document :
+
+[source,bash]
+----
+curl -s -X POST http://localhost:8080/mcp62 \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"read_google_drive_document","arguments":{}}}'
+----
+
+****
+💡 *Remarque :*
+
+Le serveur lit un document Google Drive à l'aide d'un compte de service configuré. Le contenu de ce document contient le secret que vous devez soumettre comme réponse. L'enseignement de sécurité clé est que le compte de service du serveur MCP dispose d'un accès privilégié que ni vous ni votre assistant IA n'auriez normalement — mais le serveur MCP l'accorde implicitement à quiconque appelle ses outils.
+****
+
+**Détails d'implémentation (pour les mainteneurs) :**
+
+- La réponse du challenge est extraite du contenu situé entre `<secret>` et `</secret>`.
+- L'extraction est effectuée une seule fois au chargement du secret, puis mise en cache pour la validation de la réponse.
+- Le contrôleur MCP met en cache les documents récupérés, conservant toujours le document par défaut configuré ainsi que jusqu'à 20 identifiants de documents supplémentaires.

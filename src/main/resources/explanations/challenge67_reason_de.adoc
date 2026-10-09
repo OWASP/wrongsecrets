@@ -1,0 +1,17 @@
+*Warum das Protokollieren eines Geheimnisses bei deinem Cloud-Anbieter ein Problem ist*
+
+Kodierung ist keine Verschlüsselung. Base64 verbirgt ein Credential bei einer schnellen Codeprüfung, aber jeder, der den Log-Sink lesen kann, kann es mit einem Befehl dekodieren. Behandle ein kodiertes Geheimnis in einer Log-Zeile wie ein Geheimnis im Klartext.
+
+Ein paar Dinge, die das in einer Cloud-Umgebung besonders übel machen:
+
+- Das Publikum ist viel größer, als du denkst. Log-Sinks sind normalerweise für das gesamte Plattform- oder SRE-Team lesbar und oft für jeden Workload mit einer breiten `logs:FilterLogEvents`, `roles/logging.viewer`- oder Log-Analytics-Reader-Berechtigung. Der Blast Radius des Geheimnisses wird zum Blast Radius deiner Log-Berechtigungen.
+- Aufbewahrung überlebt Rotation. Logs werden üblicherweise monatelang aufbewahrt und in einen Archiv-Bucket oder ein SIEM repliziert. Das Rotieren des Credentials entfernt den alten Wert aus diesen Kopien nicht, du musst also jeden nachgelagerten Sink als kompromittiert behandeln.
+- Strukturiertes Loggen macht versehentliche Lecks einfach. Ein ganzes Payload, eine Anfrage oder ein MDC-Kontext an ein „Audit Event“ anzuhängen ist bequem und zieht alles mit, was zufällig in diesem Kontext liegt, einschließlich Tokens und Schlüsseln.
+- Loggen kann das Geheimnis in zusätzliche Speichersysteme, Archive oder Observability-Plattformen Dritter verschieben. Das ist in der Regel nicht von dem Threat Model abgedeckt, das du für dieses Geheimnis geschrieben hast.
+
+Was du stattdessen tun solltest:
+
+- Lege niemals Credentials in eine Log-Anweisung, auch nicht kodiert und nicht einmal auf `DEBUG`.
+- Schwärze an der Quelle. Filtere sensible Schlüssel, bevor sie den Appender erreichen, zum Beispiel mit einem Logback-Konverter oder einem Masking-Layout, damit eine spätere Codeänderung das Leck nicht erneut einführt.
+- Scanne danach. Secret-Detection-Tools können gegen Log-Ausgaben ebenso laufen wie gegen Quellcode.
+- Falls es doch passiert ist: Rotiere das Geheimnis und räume danach jeden Sink und jedes Archiv auf, das es erhalten hat, oder lass sie ablaufen.

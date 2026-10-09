@@ -1,0 +1,9 @@
+=== Blootstelling van databaseverbindingsstring in foutmeldingen
+
+Een van de meest voorkomende en gevaarlijke manieren waarop geheimen in echte applicaties lekken, is via databaseverbindingsstrings die ingebedde referenties bevatten. Wanneer applicaties geen verbinding kunnen maken met databases, leggen ze vaak de volledige verbindingsstring (inclusief gebruikersnamen en wachtwoorden) bloot in foutmeldingen, logs of zelfs gebruikersinterfaces.
+
+Deze uitdaging demonstreert een scenario waarbij een ontwikkelaar:
+
+1. **Ingebedde referenties in verbindingsstrings gebruikt** in plaats van extern geheimenbeheer
+2. **Slechte foutafhandeling heeft** die de volledige verbindingsstring blootlegt wanneer databaseverbindingen mislukken
+3. **Gevoelige informatie logt** zonder eerst referenties te saneren

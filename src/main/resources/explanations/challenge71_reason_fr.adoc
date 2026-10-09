@@ -1,0 +1,17 @@
+= Exposition des secrets de configuration du Dev Container
+
+*Pourquoi coder en dur des secrets dans les Dev Containers constitue un risque de sécurité critique*
+
+Les Dev Containers sont des environnements de développement partagés configurés via `.devcontainer/devcontainer.json`. Ces fichiers étant généralement suivis par le contrôle de version, le fait d'y coder en dur des secrets présente plusieurs dangers de sécurité :
+
+1. **Exposition à tous les lecteurs du dépôt** : Toute personne ayant un accès en lecture au dépôt source (ou aux forks et clones publics dans les projets open source) peut lire les secrets codés en dur dans `.devcontainer/devcontainer.json`.
+2. **Fuite des variables d'environnement** : Les identifiants définis dans `containerEnv` ou `remoteEnv` sont injectés dans chaque processus à l'intérieur du conteneur, ce qui les rend accessibles à tout script, processus enfant ou outil de diagnostic s'exécutant dans le conteneur.
+3. **Persistants dans l'historique Git** : Une fois commités, la suppression du secret nécessite de réécrire l'historique git, et les clés obsolètes restent souvent valides indéfiniment si aucune rotation n'est effectuée.
+4. **Plus difficile à détecter** : De nombreux inspecteurs de secrets et de conteneurs ne détectent toujours pas le `devcontainer.json`, car il se comporte différemment d'un `Dockerfile`.
+
+*Remédiation et bonnes pratiques :*
+
+- **Utilisez les GitHub Codespaces Secrets / VS Code Dev Container Secrets** : Injectez les secrets dynamiquement via les secrets de dépôt/utilisateur de Codespaces ou les paramètres VS Code plutôt que de les coder en dur dans les fichiers de configuration.
+- **Utilisez la substitution d'environnement locale** : Référencez les variables d'environnement de l'hôte dynamiquement dans `devcontainer.json` en utilisant la syntaxe `${localEnv:MY_SECRET}`.
+- **Utilisez des fichiers `.env` avec `.gitignore`** : Placez les secrets de développement dans des fichiers `.env` locaux explicitement exclus du contrôle de version dans `.gitignore`.
+- **Adoptez des solutions de gestion des secrets** : Récupérez les secrets à l'exécution à l'aide de gestionnaires de secrets dédiés (p. ex. HashiCorp Vault, AWS Secrets Manager, Azure Key Vault, GCP Secret Manager).

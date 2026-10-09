@@ -1,0 +1,17 @@
+= Offenlegung eines Geheimnisses in der Dev-Container-Konfiguration
+
+*Warum das harte Kodieren von Geheimnissen in Dev Containers ein kritisches Sicherheitsrisiko ist*
+
+Dev Containers sind gemeinsam genutzte Entwicklungsumgebungen, die über `.devcontainer/devcontainer.json` konfiguriert werden. Da diese Dateien normalerweise in der Versionsverwaltung nachgehalten werden, birgt das Harte-Kodieren von Geheimnissen in Dev-Container-Definitionen mehrere Sicherheitsgefahren:
+
+1. **Offenlegung für alle Leser des Repositorys**: Jeder mit Lesezugriff auf das Quell-Repository (oder öffentliche Forks und Klonen in Open-Source-Projekten) kann Geheimnisse lesen, die hart in `.devcontainer/devcontainer.json` kodiert sind.
+2. **Leckage von Umgebungsvariablen**: In `containerEnv` oder `remoteEnv` definierte Zugangsdaten werden in jeden Prozess im Container injiziert und sind damit für jedes Skript, jeden Kindprozess und jedes Diagnosetool zugänglich, das im Container läuft.
+3. **Bleibend in der Git-Historie**: Nach dem Commit erfordert das Entfernen des Geheimnisses ein Umschreiben der Git-Historie, und veraltete Schlüssel bleiben oft unbefristet gültig, wenn keine Rotation erfolgt.
+4. **Schwerer zu erkennen**: Viele Secret- und Container-Inspektoren erfassen `devcontainer.json` immer noch nicht, da es sich anders verhält als ein `Dockerfile`.
+
+*Behebung und bewährte Praktiken:*
+
+- **Verwende GitHub Codespaces Secrets / VS Code Dev Container Secrets**: Injiziere Geheimnisse dynamisch über Codespaces Repository-/Benutzersecrets oder VS Code-Einstellungen, anstatt sie hart in Konfigurationsdateien zu kodieren.
+- **Verwende lokale Umgebungsermittlung**: Referenziere Host-Umgebungsvariablen dynamisch in `devcontainer.json` mit der Syntax `${localEnv:MY_SECRET}`.
+- **Verwende `.env`-Dateien mit `.gitignore`**: Lege Entwicklungsgeheimnisse in lokale `.env`-Dateien, die in `.gitignore` explizit von der Versionsverwaltung ausgeschlossen sind.
+- **Übernimm Secret-Management-Lösungen**: Rufe Geheimnisse zur Laufzeit mit dedizierten Secret-Managern ab (z. B. HashiCorp Vault, AWS Secrets Manager, Azure Key Vault, GCP Secret Manager).

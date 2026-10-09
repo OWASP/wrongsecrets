@@ -1,0 +1,7 @@
+=== Ocultamiento de secretos en binarios revisitado: runtime autocontenido de .NET
+
+Es muy fácil encontrar un secreto en una DLL, pero en MacOS o Linux es mucho más difícil. ¡Así que estoy seguro de que podemos mantener uno ahí, verdad?
+
+¡Demuéstranos que no deberíamos hacer eso! ¿Puedes encontrar el secreto en https://github.com/OWASP/wrongsecrets-binaries/releases/download/0.1.0/wrongsecrets-dotnet[wrongsecrets-dotnet]?
+
+Intenta descargar el binario y ejecutarlo localmente (por ejemplo, `./wrongsecrets-dotnet<laversion> <tu respuesta>`).

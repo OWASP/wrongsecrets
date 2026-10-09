@@ -1,0 +1,7 @@
+Vous pouvez résoudre ce défi avec les étapes suivantes :
+
+1. Trouvez le chemin d'escalade de privilèges avec Terraform :
+ - Il devrait y avoir quelque chose d'intéressant dans `aws/irsa.tf`.
+
+2. Trouvez le chemin d'escalade de privilèges avec ScoutSuite :
+ - Vérifiez le rôle `cant-read-secrets`. Vous verrez qu'il permet `sts:AssumeRole` sur `*`. Cela signifie qu'il peut assumer d'autres rôles.

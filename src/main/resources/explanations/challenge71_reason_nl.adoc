@@ -1,0 +1,17 @@
+= Blootstelling van het Dev Container-configuratiegeheim
+
+*Waarom hardcoded secrets in Dev Containers een kritiek beveiligingsrisico zijn*
+
+Dev Containers zijn gedeelde ontwikkelomgevingen die worden geconfigureerd via `.devcontainer/devcontainer.json`. Omdat deze bestanden doorgaans worden bijgehouden in het versiebeheer, brengt het hardcoded plaatsen van secrets in devcontainer-definities verschillende beveiligingsgevaren met zich mee:
+
+1. **Blootstelling aan alle lezers van de repository**: Iedereen met leestoegang tot de bronrepository (of publieke forks en klonen in open-sourceprojecten) kan secrets lezen die hardcoded staan in `.devcontainer/devcontainer.json`.
+2. **Lekken van omgevingsvariabelen**: Inloggegevens die zijn gedefinieerd in `containerEnv` of `remoteEnv` worden geïnjecteerd in elk proces in de container, waardoor ze toegankelijk zijn voor elk script, elk kindproces of elke diagnose-tool die in de container draait.
+3. **Blijvend in de Git-geschiedenis**: Na het committen vereist het verwijderen van het geheim een herschrijving van de git-geschiedenis, en verouderde sleutels blijven vaak onbeperkt geldig als er geen rotatie wordt uitgevoerd.
+4. **Moeilijker te detecteren**: Veel secret- en containerinspecties nemen `devcontainer.json` nog steeds niet mee, omdat dit zich anders gedraagt dan een `Dockerfile`.
+
+*Remediëring en beste praktijken:*
+
+- **Gebruik GitHub Codespaces Secrets / VS Code Dev Container Secrets**: Injecteer secrets dynamisch via Codespaces repository-/usersecrets of VS Code-instellingen in plaats van ze hardcoded in configuratiebestanden te plaatsen.
+- **Gebruik lokale omgevingssubstitutie**: Verwijs dynamisch naar host-omgevingsvariabelen in `devcontainer.json` met de syntaxis `${localEnv:MY_SECRET}`.
+- **Gebruik `.env`-bestanden met `.gitignore`**: Plaats ontwikkel-secrets in lokale `.env`-bestanden die expliciet worden uitgesloten van het versiebeheer in `.gitignore`.
+- **Neem secretmanagement-oplossingen aan**: Haal secrets op tijdens het uitvoeren met behulp van speciale secretmanagers (bijv. HashiCorp Vault, AWS Secrets Manager, Azure Key Vault, GCP Secret Manager).

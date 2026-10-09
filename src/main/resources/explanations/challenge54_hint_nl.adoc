@@ -1,0 +1,6 @@
+Het geheim is verborgen in het `.gitignore`-bestand als AES-256-CBC versleuteld.
+
+Volg deze stappen om het geheim te ontsleutelen:
+
+1. Zoek de versleutelde opmerking en de sleutel om het te ontsleutelen in `.gitignore`.
+2. Gebruik OpenSSL om te ontsleutelen.

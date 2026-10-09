@@ -1,0 +1,5 @@
+*Por qué la ofuscación solo es un badén.*
+
+La codificación, la reflexión y la ofuscación ligera pueden hacer que la ingeniería inversa sea menos cómoda, pero no crean confidencialidad real. El ejecutable sigue conteniendo todo lo necesario para recuperar el secreto.
+
+Si la aplicación puede derivar el secreto localmente, un atacante determinado puede hacer lo mismo. Protege los secretos trasladando las decisiones de confianza y el material secreto a sistemas controlados en el servidor.

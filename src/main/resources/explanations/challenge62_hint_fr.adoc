@@ -1,0 +1,40 @@
+=== Indice pour le challenge 62
+
+Ce challenge montre comment un serveur MCP doté d'un compte de service Google trop permissif permet l'escalade de privilèges.
+
+**Où chercher :**
+
+1. **Un serveur MCP s'exécute sur `/mcp62`** sur le port principal de l'application
+2. **Le serveur MCP expose un outil `read_google_drive_document`** qui utilise un compte de service Google pour lire un document
+3. **Vous n'avez pas besoin d'identifiants Google valides** — le compte de service est déjà configuré dans l'application
+
+**Approche pas à pas :**
+
+Listez d'abord les outils proposés par le serveur MCP :
+
+[source,bash]
+----
+curl -s -X POST http://localhost:8080/mcp62 \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+----
+
+Appelez ensuite `read_google_drive_document` pour lire le document :
+
+[source,bash]
+----
+curl -s -X POST http://localhost:8080/mcp62 \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"read_google_drive_document","arguments":{}}}'
+----
+
+**Ce qu'il faut chercher :**
+
+- La réponse contient le contenu d'un document Google Drive
+- Le document contient la réponse secrète de ce challenge
+- Le validateur de réponse utilise la valeur située entre `<secret>` et `</secret>` dans ce contenu
+- Remarquez que vous avez accédé à un document pour lequel vous n'êtes pas directement autorisé — le compte de service du serveur MCP a fourni cet accès
+
+**Note pour les mainteneurs :** Le contrôleur MCP maintient un cache de documents borné afin de réduire les appels répétés à l'API Drive.
+
+**Souvenez-vous :** c'est un exemple d'escalade de privilèges via un serveur MCP. Le compte de service dispose de permissions supérieures à celles que vous (l'appelant) auriez, et le serveur MCP n'applique aucun contrôle d'accès au niveau de l'appelant.

@@ -1,0 +1,19 @@
+=== Challenge mit hartkodiertem Encryption-Schlüssel
+Diese Challenge zeigt einen häufigen, aber gefährlichen Fehler: Ein Geheimnis wird verschlüsselt, während der Encryption-Schlüssel in derselben Quelldatei hartkodiert wird.
+
+Ein Entwickler hat versucht, ein Geheimnis zu schützen, indem er es mit AES verschlüsselt hat. Sowohl der Encryption-Schlüssel als auch der Initialisierungsvektor (IV) sind jedoch direkt im Java-Quellcode hartkodiert, zusammen mit dem Chiffretext. Dadurch ist die Verschlüsselung völlig wirkungslos – jeder, der Zugriff auf den Quellcode hat, kann das Geheimnis mühelos entschlüsseln.
+
+**Dein Ziel:**
+1. **Finde die Java-Quelldatei** für diese Challenge im Codebase
+2. **Lokalisiere den hartkodierten AES-Schlüssel und IV** im Quellcode
+3. **Entschlüssele den Chiffretext** mit dem gefundenen Schlüssel und IV
+4. **Reiche den Klartext** als deine Antwort ein
+
+**So entschlüsselst du:**
+[source,bash]
+----
+echo "TDPwOvcLsbCWV5erlk6OHFnlFoXNtdQOt2JQeq+i4Ho=" | openssl enc -d -aes-128-cbc \
+  -K $(echo -n "SuperSecretKey12" | xxd -p) \
+  -iv $(echo -n "InitVector123456" | xxd -p) \
+  -base64
+----

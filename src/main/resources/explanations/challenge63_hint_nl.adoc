@@ -1,0 +1,26 @@
+=== Hint voor uitdaging 63
+Deze uitdaging toont slechte encryptiepraktijken — in het bijzonder het hardcoden van een encryptie-/ontcryptiesleutel in broncode.
+
+**Waar te kijken:**
+1. **Vind het Java-bronbestand Challenge63** in de map `challenges/docker/challenge63/`
+2. **Zoek naar static final String-constanten** nabij het begin van de klasse
+3. **Je vindt de AES-sleutel, IV en ciphertext** allemaal in hetzelfde bestand
+
+**Hoe te ontsleutelen zodra je de sleutel hebt:**
+[source,python]
+----
+from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+from cryptography.hazmat.backends import default_backend
+import base64
+
+key = b'SuperSecretKey12'
+iv  = b'InitVector123456'
+ciphertext = base64.b64decode("TDPwOvcLsbCWV5erlk6OHFnlFoXNtdQOt2JQeq+i4Ho=")
+
+cipher = Cipher(algorithms.AES(key), modes.CBC(iv), backend=default_backend())
+decryptor = cipher.decryptor()
+plaintext = decryptor.update(ciphertext) + decryptor.finalize()
+print(plaintext.strip())
+----
+
+**Onthoud:** Als een aanvaller je broncode kan lezen, bieden hardgecodeerde sleutels nul bescherming.

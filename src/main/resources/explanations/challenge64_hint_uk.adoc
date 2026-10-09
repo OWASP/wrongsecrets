@@ -1,0 +1,25 @@
+Це завдання шукає саме секрет, збережений у бінарному файлі Swift у вигляді масиву символів.
+
+Ти можеш розв'язати це завдання за допомогою таких альтернативних рішень:
+
+1. Знайди секрети за допомогою https://ghidra-sre.org/[Ghidra].
+- Встанови https://ghidra-sre.org/[Ghidra].
+- Запусти її командою `ghidraRun`.
+- Завантаж застосунок `wrongsecrets-swift` у Ghidra, вибравши новий проєкт, потім імпортувавши файл і натиснувши на нього подвійним клацанням.
+- Дозволь Ghidra проаналізувати застосунок.
+- Знайди функцію `getSecret` — її можна пошукати в Symbol Tree.
+- У декомпільованому коді знайди масив символів, з якого складається секрет.
+- Альтернатива: використай у macOS `nm -gUj wrongsecrets-swift | grep getSecret`, а потім `swift-demangle --expand "s5swift9getSecretSSyF"`, щоб знайти функцію.
+
+2. Знайди секрети за допомогою https://www.radare.org[radare2].
+- Встанови https://www.radare.org[radare2] командою `brew install radare2` на Mac або виконай ці кроки: `git clone https://github.com/radareorg/radare2; cd radare2 ; sys/install.sh`
+- Запусти аналіз r2 командою `$ r2 -AAA wrongsecrets-swift`
+- Шукай рядки за допомогою `iz | grep -i secret` або `iz | grep -i "This"`.
+- Альтернатива: знайди функцію `getSecret`: `afl | grep getSecret`, а потім виведи функцію через `pdf @ <function_address>`.
+- Розгляни побудову масиву символів у декомпільованому або дизасембльованому коді.
+
+3. Знайди секрети за допомогою https://binary.ninja[Binary Ninja] або подібних інструментів:
+- Завантаж бінарний файл і перейди до функції Swift зі змішаними іменами `s5swift9getSecretSSyF`.
+- Секрет будується з масиву символів.
+
+Не хочеш встановлювати інструменти? Переглянь https://github.com/OWASP/wrongsecrets/tree/master?tab=readme-ov-file#want-to-play-but-are-not-allowed-to-install-the-tools[WrongSecrets Desktop container]!

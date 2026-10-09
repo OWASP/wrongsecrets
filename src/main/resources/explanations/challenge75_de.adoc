@@ -1,0 +1,17 @@
+=== Herausforderung 75: Finde die Nexus-Deployment-Zugangsdaten in der Maven-settings.xml
+
+Maven speichert Repository-Zugangsdaten in einer `settings.xml`. Der Abschnitt `<servers>` dieser Datei ordnet einer Server-ID den Benutzernamen und das Passwort zu, die Maven verwendet, wenn es mit einem Repository-Manager wie Nexus spricht, einschließlich des Passworts des Kontos, das Releases deployen darf. Diese Passwörter liegen im Klartext, deshalb darf eine `settings.xml` niemals in die Versionsverwaltung eingecheckt werden. Trotzdem passiert es: Die Datei wird in ein Projekt kopiert, "damit der Build auf jedem Rechner funktioniert", und dann zusammen mit dem übrigen Code gepusht.
+
+Dieses Repository enthält genau eine solche Datei. Sie enthält die Deployment-Zugangsdaten eines fiktiven Nexus-Repository-Managers:
+
+`src/main/resources/challenges/challenge-75/settings.xml`
+
+Die Datei liegt auch im Quellcode auf
+link:https://github.com/OWASP/wrongsecrets/blob/master/src/main/resources/challenges/challenge-75/settings.xml[GitHub].
+
+Der Abschnitt `<servers>` enthält mehr als einen `<server>`-Eintrag. Jeder Eintrag hat eine `<id>`, die mit der ID des Repositorys übereinstimmen muss, zu dem er gehört. Finde den Server-Eintrag, der zum Nexus-Repository-Manager gehört, und gib den Wert seines `<password>`-Elements an.
+
+[NOTE]
+====
+Der Nexus-Server und alle Zugangsdaten in dieser Herausforderung sind fiktiv. Es wird keine Netzwerkverbindung hergestellt: Die Anwendung liest nur die eingecheckte Datei.
+====

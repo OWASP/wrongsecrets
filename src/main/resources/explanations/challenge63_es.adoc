@@ -1,0 +1,19 @@
+=== Desafío de clave de cifrado codificada de forma fija
+Este desafío demuestra un error común pero peligroso: cifrar un secreto mientras la clave de cifrado queda codificada de forma fija en el mismo archivo fuente.
+
+Un desarrollador ha intentado proteger un secreto cifrándolo con AES. Sin embargo, tanto la clave de cifrado como el vector de inicialización (IV) están codificados de forma fija directamente en el código fuente de Java, junto al texto cifrado. Esto hace que el cifrado sea completamente ineficaz: cualquier persona con acceso al código fuente puede descifrar el secreto sin dificultad.
+
+**Tu objetivo:**
+1. **Encuentra el archivo fuente de Java** de este desafío en el código
+2. **Localiza la clave AES y el IV codificados de forma fija** en el código fuente
+3. **Descifra el texto cifrado** con la clave y el IV que encontraste
+4. **Envía el texto plano** como tu respuesta
+
+**Cómo descifrar:**
+[source,bash]
+----
+echo "TDPwOvcLsbCWV5erlk6OHFnlFoXNtdQOt2JQeq+i4Ho=" | openssl enc -d -aes-128-cbc \
+  -K $(echo -n "SuperSecretKey12" | xxd -p) \
+  -iv $(echo -n "InitVector123456" | xxd -p) \
+  -base64
+----

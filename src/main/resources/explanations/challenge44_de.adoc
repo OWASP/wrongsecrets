@@ -1,0 +1,7 @@
+=== Vault Metadaten-Herausforderung
+
+Geheimnisverwaltungssysteme unterstützen jetzt oft Metadaten für ihre Geheimnisse! Das ist großartig, da es dir ermöglicht, das Geheimnis mit kontextuellen Daten anzureichern und es leichter zu merken.
+
+Aber was, wenn du vertrauliche/geheime Informationen versehentlich in ein Geheimnis einträgst?
+
+Ein Entwickler hat geheime Metadaten auf einem `wrongsecret` in Vault hinterlegt. Kannst du es finden?

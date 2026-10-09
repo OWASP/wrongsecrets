@@ -1,0 +1,12 @@
+Ви можете вирішити це завдання, виконавши такі дії:
+
+1. Перегляньте файл конфігурації Dev Container:
+- Відкрийте файл `.devcontainer/devcontainer.json` у корені [репозиторію](https://github.com/OWASP/wrongsecrets/tree/master/.devcontainer).
+- Пошукайте розділи `containerEnv` або `remoteEnv`, у яких визначені змінні середовища.
+
+2. Перегляньте середовище запущеного контейнера:
+- Клонуйте репозиторій на свій комп'ютер.
+- Відкрийте проєкт у devcontainer:
+  . У VS Code: натисніть Ctrl+Shift+P (або Cmd+Shift+P на macOS) -> виберіть "Dev Containers: Reopen in Container" (або натисніть на підказку в лівому нижньому куті).
+  . В Intellij Idea натисніть на спливаюче вікно "open in devcontainer".
+- Коли проєкт відкриється в devcontainer, перевірте змінні середовища командами `printenv DEVCONTAINER_SECRET` або `echo $DEVCONTAINER_SECRET`.

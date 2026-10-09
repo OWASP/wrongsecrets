@@ -1,0 +1,1 @@
+Je zoekt naar een geheim dat niet in de code staat, maar in de documentatie. Controleer het agentische plan in `cursor/rules/project-specification.mdc` op een voorbeeldinstructie die het geheim voor deze uitdaging bevat.

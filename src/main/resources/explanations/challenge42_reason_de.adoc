@@ -1,0 +1,5 @@
+*Warum das Verstecken eines API-Schlüssels in den Audit-Events keine gute Idee ist?*
+
+In einem sicheren und gut konzipierten System ist der Schutz vertraulicher Informationen wie API-Schlüssel entscheidend. Audit-Events sind wichtig für die Verfolgung und Überwachung von Aktivitäten in einer Anwendung.
+
+Stelle sicher, dass API-Schlüssel nicht im Klartext in den (Audit-)Logs oder anderen Ausgaben sichtbar sind.

@@ -1,0 +1,24 @@
+=== Herausforderung 73: Finde das Geheimnis in den Agent-Anweisungsdateien
+
+KI-Coding-Agenten laden bei jeder
+Sitzung Anweisungs- und Kontextdateien aus dem Repository: `AGENTS.md`, `CLAUDE.md`, `.cursor/rules/*.mdc`, `.windsurfrules` und
+ähnliche. Da diese Dateien „nur Dokumentation" sind, erhalten sie selten dieselbe
+Prüfung wie Quellcode, werden aber trotzdem von einem Modell gelesen, auf jeden Entwickler-
+rechner kopiert und in die Versionsverwaltung committet.
+
+Dieses Repository liefert solche Anweisungsdateien mit seinem Dev Container. Sie befinden
+sich im Ordner link:https://github.com/OWASP/wrongsecrets/tree/master/.devcontainer[`.devcontainer`]:
+
+- `.devcontainer/AGENTS.md`
+- `.devcontainer/CLAUDE.md`
+- `.devcontainer/.cursor/rules/project.mdc`
+- `.devcontainer/.windsurfrules`
+
+Eine von ihnen bettet eine gemeinsam genutzte Zugangsdaten ein, damit jeder Agent denselben
+Wert „der Einfachheit halber" wiederverwendet. Lies die Dateien und gib den offengelegten Staging-Token ein.
+
+[NOTE]
+====
+Hier ist nichts kodiert oder verschlüsselt: So sieht eine geleakte Agent-
+Kontextdatei in der Praxis aus.
+====

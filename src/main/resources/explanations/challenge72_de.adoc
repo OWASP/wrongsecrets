@@ -1,0 +1,14 @@
+=== Herausforderung 72: Finde das Geheimnis im Transkript des KI-Coding-Agenten
+
+KI-Coding-Agenten wie Codex, Claude Code und Cursor lesen Dateien, führen Befehle aus und erstellen detaillierte Sitzungstranskripte. Wenn ein Entwickler einen Agenten bittet, ein Deploymentsproblem zu debuggen, kann der Agent Konfigurationsdateien mit Geheimnissen lesen und diese Werte in seiner Sitzungsausgabe ausgeben.
+
+Diese Anwendung enthält ein Codex-Sitzungstranskript, in dem ein Entwickler den Agenten bat, ein fehlgeschlagenes Staging-Deployment zu untersuchen. Das Transkript zeigt, wie der Agent eine `.env.staging`-Datei liest und deren Inhalt — einschließlich des Deploy-Tokens — als Teil des normalen Debugging-Workflows ausgibt.
+
+Lade das Transkript von link:/challenges/challenge-72/codex-session-transcript.md[`/challenges/challenge-72/codex-session-transcript.md`] herunter und finde den Staging-Deploy-Token, der während der Sitzung offengelegt wurde.
+
+Der Quellcode ist außerdem verfügbar unter link:https://github.com/OWASP/wrongsecrets/blob/master/src/main/resources/challenges/challenge-72/codex-session-transcript.md[`src/main/resources/challenges/challenge-72/codex-session-transcript.md`].
+
+[NOTE]
+====
+Das Token erscheint ganz natürlich in der Transkriptausgabe — der Agent beabsichtigte nicht, es preiszugeben; er hat lediglich im Rahmen seiner Debugging-Arbeit eine Datei gelesen.
+====

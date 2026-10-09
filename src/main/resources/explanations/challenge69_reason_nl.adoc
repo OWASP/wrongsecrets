@@ -1,0 +1,24 @@
+*Waarom je nooit een geheim in een agent-skill moet plaatsen*
+
+Een skill is gebouwd om te delen. Dat is precies het punt: je schrijft de workflow een keer en elke ontwikkelaar, agent en CI-job hergebruikt hem. Een geheim in een skill heeft daardoor de slechtst mogelijke eigenschappen:
+
+- Het wordt gekopieerd naar elke machine waarop de skill wordt geïnstalleerd, inclusief persoonlijke laptops.
+- Het belandt in de repository, dus het zit voor altijd in de git-geschiedenis, ook nadat je het hebt "verwijderd", waardoor je het geheim moet roteren.
+- Het wordt gepubliceerd op skill-marktplaatsen en registries, waar het wordt geïndexeerd en doorzoekbaar is.
+- Het wordt gelezen door de agent en kan daardoor in chattranscripts, logs en telemetrie van derden terechtkomen.
+- Het is een *gedeelde* credential, dus die wordt bijna nooit geroteerd en bijna nooit ingeperkt.
+
+----
+Wat je in plaats daarvan moet doen:
+
+- Houd credentials buiten de skill en laat de skill ze uit de omgeving lezen, bijvoorbeeld `$STAGING_DEPLOY_TOKEN`.
+- Documenteer *welke* variabele nodig is en *waar* je die kunt ophalen, nooit de waarde zelf.
+- Geef elke consument zijn eigen korte, minimaal vereiste credential in plaats van één gedeeld teamtoken.
+- Scan skill-bestanden met een secret scanner in pre-commit en CI, net zoals je broncode scant.
+- Behandel een geheim dat ooit in een skill heeft gestaan als gecompromitteerd en roteer het.
+----
+
+[NOTE]
+====
+Skills, regels, prompts, MCP-serverconfiguraties en agent-instructiebestanden zijn allemaal code als het om je secretbeheer gaat. Als je een token niet in een `.java`-bestand zou hardcoden, doe dat dan ook niet in een `SKILL.md`.
+====

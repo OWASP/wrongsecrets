@@ -1,0 +1,14 @@
+Файли інструкцій агента постачаються з Dev Container у
+теці `.devcontainer`:
+
+- `.devcontainer/AGENTS.md`
+- `.devcontainer/CLAUDE.md`
+- `.devcontainer/.cursor/rules/project.mdc`
+- `.devcontainer/.windsurfrules`
+
+Три з них лише вказують, де зберігаються спільні облікові дані. Один із них
+вставляє значення `STAGING_DEPLOY_TOKEN` у фрагмент shell-команди. Саме це значення
+і є відповіддю.
+
+Якщо ви не використовуєте Dev Container, ви також можете прочитати ті самі файли
+безпосередньо з репозиторію в теці link:https://github.com/OWASP/wrongsecrets/tree/master/.devcontainer[`.devcontainer`].

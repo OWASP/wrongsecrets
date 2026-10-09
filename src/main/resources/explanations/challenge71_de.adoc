@@ -1,0 +1,11 @@
+=== Geheimnis-Leck im Dev Container
+
+Entwicklungscontainer (Dev Containers) ermöglichen es Teams, reproduzierbare Entwicklungsumgebungen mit Containerisierungswerkzeugen wie VS Code Remote - Containers und GitHub Codespaces zu definieren. Indem Tools, Laufzeitumgebungen und Abhängigkeiten in `.devcontainer/devcontainer.json` gekapselt werden, können Entwickler loslegen, ohne komplexe lokale Software-Stacks zu installieren.
+
+Allerdings machen Entwickler häufig den Fehler, sensible Tokens, Passwörter, API-Schlüssel oder Zugangsdaten für private Registries direkt in `.devcontainer/devcontainer.json` einzubetten (z. B. in `containerEnv`, `remoteEnv` oder Lifecycle-Skripte) und diese in die Versionsverwaltung zu committen.
+
+So löst du diese Herausforderung:
+
+. Untersuche die Dev-Container-Konfigurationsdatei https://github.com/OWASP/wrongsecrets/tree/master/.devcontainer/devcontainer.json[`.devcontainer/devcontainer.json`] im Projekt-Repository oder prüfe den Konfigurationsausschnitt in der UI.
+. Identifiziere das geleakte `DEVCONTAINER_SECRET` oder den in der Containerumgebung definierten Token.
+. Gib das gefundene Geheimnis im Eingabefeld unten ein.

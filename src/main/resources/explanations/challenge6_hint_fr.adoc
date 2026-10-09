@@ -1,0 +1,9 @@
+Vous pouvez résoudre ce défi avec les solutions alternatives suivantes :
+
+1. Vérifiez l'état du secret dans Git :
+ - Trouvez où dans Git nous avons stocké `secrets-secret.yml`.
+ - Regardez le champ `Data` : les secrets sont encodés en base64. Une fois montés dans les charges de travail, ils sont décodés.
+
+2. Demandez gentiment avec Kubectl :
+ - Exécutez `kubectl get secret -n default` puis `kubectl describe secret <nom>`.
+ - Utilisez `echo <valeurbase64> | base64 -d` pour décoder.

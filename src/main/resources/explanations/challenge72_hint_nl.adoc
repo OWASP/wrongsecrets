@@ -1,0 +1,3 @@
+Open link:/challenges/challenge-72/codex-session-transcript.md[`/challenges/challenge-72/codex-session-transcript.md`] en zoek naar de regel die `DEPLOY_TOKEN=` bevat. De waarde na het gelijkteken is het antwoord.
+
+Hetzelfde bestand staat in de broncodeboom onder `src/main/resources/challenges/challenge-72/codex-session-transcript.md`.

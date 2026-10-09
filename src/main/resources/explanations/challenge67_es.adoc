@@ -1,0 +1,9 @@
+=== Secretos enviados a tu sumidero de registros en la nube
+
+Las aplicaciones rara vez registran un secreto a propósito. Lo que ocurre mucho más a menudo es que un "evento de auditoría", un volcado de una solicitud o un campo de registro estructurado transporta una credencial junto con él. Como el valor está codificado, nadie lo nota durante la revisión de código: simplemente parece un blob opaco.
+
+En este desafío, la aplicación escribe un evento de auditoría en la salida estándar. Nunca devuelve el secreto a través de un endpoint ni lo monta como archivo. El único lugar donde aparece el valor es el flujo de registros que tu proveedor de la nube recopila para ti, así que tendrás que consultar el sumidero de registros de la nube en la que te ejecutas.
+
+Ten en cuenta que el valor registrado está codificado en Base64, así que encontrar la línea es solo la mitad del trabajo.
+
+Consejo: esto no es lo mismo que el desafío 8. Allí la respuesta se registra en texto plano y puedes leerla directamente desde los registros locales de tu contenedor.

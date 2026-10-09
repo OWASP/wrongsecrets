@@ -1,0 +1,7 @@
+=== Ocultar en binarios parte 5: el binario de Swift
+
+Al igual que ocultar secretos en una aplicación escrita en C, ¡puedes hacerlo también en Swift! Swift es el moderno lenguaje compilado de Apple utilizado en todas las plataformas de Apple y en Linux. ¿Puedes encontrar el secreto en nuestro binario?
+
+Desmintamos el mito de que "los secretos son difíciles de encontrar en aplicaciones compiladas de forma nativa" para Swift: ¿puedes encontrar el secreto en https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-swift[wrongsecrets-swift] (o en https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-swift-arm[wrongsecrets-swift-arm], https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-swift-linux[wrongsecrets-swift-linux])?
+
+Prueba a descargar el binario y ejecutarlo localmente (p. ej. `./wrongsecrets-swift<la versión que necesites> <tu respuesta>`).

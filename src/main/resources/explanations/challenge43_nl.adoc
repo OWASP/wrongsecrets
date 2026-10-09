@@ -1,0 +1,7 @@
+=== Reddit-blunder
+
+Mensen maken gemakkelijk fouten. Ze kunnen bijvoorbeeld een "onschuldig" stukje gegevens delen op sociale media, dat later een geheim blijkt te zijn. Of ze kunnen iets op het "verkeerde scherm" plaatsen en het indienen.
+
+Op dezelfde manier liet een ontwikkelaar in de OWASP-gemeenschap die ook een actieve redditor was, een geheim achter op het platform 'per ongeluk'.
+
+Kun je het geheim vinden?
