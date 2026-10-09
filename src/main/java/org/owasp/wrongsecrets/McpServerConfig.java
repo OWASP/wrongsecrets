@@ -1,11 +1,14 @@
 package org.owasp.wrongsecrets;
 
 import org.apache.catalina.connector.Connector;
+import org.apache.tomcat.util.threads.VirtualThreadExecutor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.thread.Threading;
 import org.springframework.boot.tomcat.TomcatWebServerFactory;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 
 /**
  * Configures an additional HTTP connector so the MCP server endpoint is also available on a
@@ -20,11 +23,15 @@ public class McpServerConfig {
 
   /** Adds a secondary Tomcat connector on the MCP port when the port value is positive. */
   @Bean
-  public WebServerFactoryCustomizer<TomcatWebServerFactory> mcpConnectorCustomizer() {
+  public WebServerFactoryCustomizer<TomcatWebServerFactory> mcpConnectorCustomizer(
+      Environment environment) {
     return factory -> {
       if (mcpPort > 0) {
         Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
         connector.setPort(mcpPort);
+        if (Threading.VIRTUAL.isActive(environment)) {
+          connector.getProtocolHandler().setExecutor(new VirtualThreadExecutor("tomcat-mcp-handler-"));
+        }
         factory.addAdditionalConnectors(connector);
       }
     };
