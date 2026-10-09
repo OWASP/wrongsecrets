@@ -1,0 +1,14 @@
+You can solve this challenge using the following steps:
+
+1. Open the unauthenticated search endpoint of the simulated vector store:
+- `http://localhost:8080/rag/search`
+- It returns all four indexed text chunks as JSON.
+
+2. Read the chunks and look for the one that mentions a credential:
+- The chunk with the "Draft API note" contains the credential of the nightly
+  embedding job.
+
+3. Submit that credential (everything after "uses the credential ") as the answer.
+
+You can also narrow the search, for example with `q=credential`, but the secret is
+only exposed because the chunk was indexed before the draft note was scrubbed.

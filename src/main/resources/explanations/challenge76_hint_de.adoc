@@ -1,0 +1,16 @@
+Du kannst diese Challenge mit den folgenden Schritten lösen:
+
+1. Öffne den unauthentifizierten Suchendpoint des simulierten Vektorstores:
+- `http://localhost:8080/rag/search`
+- Er gibt alle vier indizierten Textchunks als JSON zurück.
+
+2. Lies die Chunks und suche nach demjenigen, der ein Zugangscredential erwähnt:
+- Der Chunk mit der "Draft API note" enthält das Zugangscredential des nächtlichen
+  Embedding-Jobs.
+
+3. Reiche dieses Zugangscredential als Antwort ein (alles nach
+  "uses the credential ").
+
+Du kannst die Suche auch eingrenzen, zum Beispiel mit `q=credential`, aber das
+Geheimnis liegt nur offen, weil der Chunk indiziert wurde, bevor die Entwurfsnotiz
+bereinigt wurde.

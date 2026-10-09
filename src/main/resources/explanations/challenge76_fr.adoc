@@ -1,0 +1,30 @@
+=== Challenge 76 : Trouvez le secret indexé dans le magasin vectoriel RAG
+
+Les pipelines de génération augmentée par récupération (RAG) répondent aux
+questions en recherchant d'abord les passages pertinents dans un magasin vectoriel,
+puis en alimentant ces passages avec un grand modèle de langage. Pour construire ce
+magasin, les documents sont découpés en fragments, convertis en embeddings et
+indexés. Les fragments eux-mêmes restent lisibles : un point d'accès de recherche
+renvoie le texte original de chaque fragment jugé pertinent.
+
+C'est exactement ce qui s'est mal passé dans ce challenge. Une équipe de
+développement a indexé ses runbooks, comptes rendus de réunion et documentation API
+de brouillon dans un magasin vectoriel accessible depuis l'application sans aucune
+authentification :
+
+`GET /rag/search`
+
+Le point d'accès accepte un paramètre de requête optionnel `q` et renvoie les
+fragments de texte indexés qui le contiennent. Sans requête, il renvoie tous les
+fragments indexés. L'un des fragments a été indexé alors qu'il contenait encore une
+note de brouillon avec l'identifiant du travail d'embedding nocturne.
+
+Parcourez les fragments indexés via le point d'accès et soumettez l'identifiant que
+vous y trouvez.
+
+[NOTE]
+====
+Le magasin vectoriel, le point d'accès et tous les identifiants de ce challenge
+sont simulés et fictifs. Rien n'est envoyé sur le réseau : l'application ne fait
+que chercher dans son propre index en mémoire.
+====

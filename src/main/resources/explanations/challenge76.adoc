@@ -1,0 +1,28 @@
+=== Challenge 76: Find the Secret Indexed in the RAG Vector Store
+
+Retrieval augmented generation (RAG) pipelines answer questions by first looking
+up relevant passages in a vector store and then feeding those passages to a large
+language model. To build that store, documents are split into chunks, turned into
+embeddings and indexed. The chunks themselves stay readable: a search endpoint
+returns the original text of every chunk it considers relevant.
+
+That is exactly what went wrong in this challenge. A development team indexed its
+runbooks, meeting notes and draft API documentation into a vector store that is
+reachable from the application without any authentication:
+
+`GET /rag/search`
+
+The endpoint takes an optional query parameter `q` and returns the indexed text
+chunks that contain it. Without a query it returns every indexed chunk. One of the
+chunks was indexed while it still contained a draft note with the credential of
+the nightly embedding job.
+
+Browse the indexed chunks through the endpoint and submit the credential you find
+in them.
+
+[NOTE]
+====
+The vector store, the endpoint and every credential in this challenge are
+simulated and fictional. Nothing is sent over the network: the application only
+searches its own in-memory index.
+====

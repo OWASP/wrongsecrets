@@ -1,0 +1,16 @@
+Vous pouvez résoudre ce challenge en suivant les étapes suivantes :
+
+1. Ouvrez le point d'accès de recherche non authentifié du magasin vectoriel simulé :
+- `http://localhost:8080/rag/search`
+- Il renvoie les quatre fragments de texte indexés au format JSON.
+
+2. Lisez les fragments et cherchez celui qui mentionne un identifiant :
+- Le fragment contenant la « Draft API note » contient l'identifiant du travail
+  d'embedding nocturne.
+
+3. Soumettez cet identifiant comme réponse (tout ce qui suit
+  « uses the credential »).
+
+Vous pouvez aussi affiner la recherche, par exemple avec `q=credential`, mais le
+secret n'est exposé que parce que le fragment a été indexé avant que la note de
+brouillon ne soit nettoyée.

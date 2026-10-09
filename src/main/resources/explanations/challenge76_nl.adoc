@@ -1,0 +1,28 @@
+=== Uitdaging 76: Vind het geheim in de RAG-vectorstore
+
+Pipelines voor retrieval augmented generation (RAG) beantwoorden vragen door eerst
+relevante passages op te zoeken in een vectorstore en die passages vervolgens aan
+een groot taalmodel te voeren. Om die store op te bouwen, worden documenten in
+brokken gesplitst, omgezet in embeddings en geïndexeerd. De brokken zelf blijven
+leesbaar: een zoekendpoint retourneert de oorspronkelijke tekst van elke brok die
+relevant wordt geacht.
+
+Dat is precies wat er in deze uitdaging misging. Een ontwikkelteam.indexeerde zijn runbooks, vergadernotulen en concept-API-documentatie in een
+vectorstore die vanuit de toepassing bereikbaar is zonder enige authenticatie:
+
+`GET /rag/search`
+
+Het endpoint accepteert een optionele queryparameter `q` en retourneert de
+geïndexeerde tekstbrokken die die query bevatten. Zonder query retourneert het
+elke geïndexeerde brok. Eén van die brokken werd geïndexeerd terwijl hij nog een
+conceptnotitie bevatte met het inloggegeven van de nachtelijke embedding-job.
+
+Doorblader de geïndexeerde brokken via het endpoint en dien het inloggegeven dat
+je daarin vindt in.
+
+[NOTE]
+====
+De vectorstore, het endpoint en alle inloggegevens in deze uitdaging zijn
+gesimuleerd en fictief. Er wordt niets over het netwerk verstuurd: de toepassing
+doorzoekt alleen zijn eigen index in het geheugen.
+====
