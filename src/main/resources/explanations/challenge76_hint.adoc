@@ -1,0 +1,14 @@
+The answer is the plaintext password of the target user displayed on this page - not the MD5 hash and not the ciphertext.
+
+1. Download the database: `curl -sO http://localhost:8080/challenges/challenge-76/wrongsecrets-users.sqlite`
+2. Dump the stored values of your target user: `sqlite3 wrongsecrets-users.sqlite "SELECT hash_algorithm, password_hash, cipher_algorithm, password_encrypted FROM users WHERE username = 'YOUR_TARGET_USER';"`
+3. `password_encrypted` is a base64 encoded AES-128-ECB ciphertext. The database does not contain the key: it is hardcoded in the application source code, in the `ENCRYPTION_KEY` constant of `src/main/java/org/owasp/wrongsecrets/challenges/docker/Challenge76.java`, which you can read from the link:https://github.com/OWASP/wrongsecrets[WrongSecrets repository].
+4. Base64 decode the ciphertext and decrypt it with that 16 character key.
+5. Verify your result against the weak hash: `printf '%s' 'THE_RECOVERED_PASSWORD' | md5sum` has to match `password_hash`. Since the hash is plain MD5 without a salt, this check works for every user in the database and also for any other password candidate you want to test offline.
+
+An example of step 4 with `openssl`, fill in the two values you collected in the steps above:
+
+....
+key=$(printf '%s' 'THE_VALUE_OF_ENCRYPTION_KEY' | xxd -p -c 256)
+printf '%s' 'THE_PASSWORD_ENCRYPTED_VALUE' | base64 -d | openssl enc -d -aes-128-ecb -K "$key" -nosalt
+....
