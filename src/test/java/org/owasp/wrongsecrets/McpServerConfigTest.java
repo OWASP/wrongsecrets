@@ -29,7 +29,8 @@ class McpServerConfigTest {
     ReflectionTestUtils.setField(config, "mcpPort", 8090);
     var environment =
         new MockEnvironment()
-            .withProperty("spring.threads.virtual.enabled", Boolean.toString(virtualThreadsEnabled));
+            .withProperty(
+                "spring.threads.virtual.enabled", Boolean.toString(virtualThreadsEnabled));
     var factory = new TomcatWebServerFactory() {};
     config.mcpConnectorCustomizer(environment).customize(factory);
     return factory.getAdditionalConnectors().getFirst();

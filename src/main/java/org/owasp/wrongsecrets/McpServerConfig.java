@@ -30,7 +30,9 @@ public class McpServerConfig {
         Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
         connector.setPort(mcpPort);
         if (Threading.VIRTUAL.isActive(environment)) {
-          connector.getProtocolHandler().setExecutor(new VirtualThreadExecutor("tomcat-mcp-handler-"));
+          connector
+              .getProtocolHandler()
+              .setExecutor(new VirtualThreadExecutor("tomcat-mcp-handler-"));
         }
         factory.addAdditionalConnectors(connector);
       }
