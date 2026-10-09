@@ -1,6 +1,8 @@
 package org.owasp.wrongsecrets.challenges;
 
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import lombok.Getter;
@@ -16,22 +18,17 @@ import org.owasp.wrongsecrets.definitions.Sources.ChallengeSource;
 @Getter
 public class ChallengeUI {
 
+  private static final Map<DifficultyKey, DifficultyUI> DIFFICULTY_UI_CACHE =
+      new ConcurrentHashMap<>();
+
   private final DifficultyUI difficultyUI;
   private final List<Environment> environments;
   private final Navigator navigation;
+  private final String runtimeEnvironmentCategory;
 
-  /** Wrapper class to express the difficulty level into a UI representation. */
-  private record DifficultyUI(int difficulty, int totalOfDifficultyLevels) {
+  private record DifficultyKey(int level, int totalOfDifficultyLevels) {}
 
-    public String minimal() {
-      return "☆".repeat(difficulty);
-    }
-
-    public String scale() {
-      String fullScale = "★".repeat(difficulty) + "☆".repeat(totalOfDifficultyLevels);
-      return fullScale.substring(0, totalOfDifficultyLevels);
-    }
-  }
+  private record DifficultyUI(String minimal, String scale) {}
 
   private final ChallengeDefinition challengeDefinition;
   private final ScoreCard scoreCard;
@@ -52,7 +49,15 @@ public class ChallengeUI {
     this.environments = environments;
     this.navigation = navigation;
     this.difficultyUI =
-        new DifficultyUI(challengeDefinition.difficulty(difficulties), difficulties.size());
+        DIFFICULTY_UI_CACHE.computeIfAbsent(
+            new DifficultyKey(challengeDefinition.difficulty(difficulties), difficulties.size()),
+            key -> {
+              String fullScale =
+                  "★".repeat(key.level()) + "☆".repeat(key.totalOfDifficultyLevels());
+              return new DifficultyUI(
+                  "☆".repeat(key.level()), fullScale.substring(0, key.totalOfDifficultyLevels()));
+            });
+    this.runtimeEnvironmentCategory = calculateRuntimeEnvironmentCategory();
   }
 
   /**
@@ -176,7 +181,7 @@ public class ChallengeUI {
    */
   public String requiredEnv() {
     return challengeDefinition.supportedEnvironments().stream()
-        .map(e -> e.name())
+        .map(Environment::name)
         .limit(1)
         .collect(Collectors.joining())
         .toUpperCase();
@@ -246,20 +251,20 @@ public class ChallengeUI {
   public String getUiSnippet() {
     return challengeDefinition
         .source(runtimeEnvironment)
-        .map(source -> source.uiSnippet())
+        .map(ChallengeSource::uiSnippet)
         .orElse("");
   }
 
-  public String getRuntimeEnvironmentCategory() {
+  private String calculateRuntimeEnvironmentCategory() {
     var challengeEnvironmentsOverviewNames =
-        challengeDefinition.supportedEnvironments().stream().map(env -> env.overview()).toList();
+        challengeDefinition.supportedEnvironments().stream().map(Environment::overview).toList();
     if (challengeEnvironmentsOverviewNames.size() == 1) {
-      return challengeEnvironmentsOverviewNames.iterator().next();
+      return challengeEnvironmentsOverviewNames.getFirst();
     } else {
       // Now if we have multiple we select the lowest one for our global environment definition
-      var allEnvironmentsOverviewNames = environments.stream().map(env -> env.overview()).toList();
+      var allEnvironmentsOverviewNames = environments.stream().map(Environment::overview).toList();
       return allEnvironmentsOverviewNames.stream()
-          .filter(name -> challengeEnvironmentsOverviewNames.contains(name))
+          .filter(challengeEnvironmentsOverviewNames::contains)
           .findFirst()
           .orElse("Unknown");
     }

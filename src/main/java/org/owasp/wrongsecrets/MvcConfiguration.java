@@ -35,7 +35,7 @@ public class MvcConfiguration implements WebMvcConfigurer {
     resolver.setSuffix(".html");
     resolver.setTemplateMode(TemplateMode.HTML);
     resolver.setOrder(2);
-    resolver.setCacheable(false);
+    resolver.setCacheable(true);
     resolver.setCharacterEncoding(UTF8);
     resolver.setApplicationContext(applicationContext);
     return resolver;
