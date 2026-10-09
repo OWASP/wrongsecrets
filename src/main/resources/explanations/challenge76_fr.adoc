@@ -15,16 +15,18 @@ authentification :
 `GET /rag/search`
 
 Le point d'accès accepte un paramètre de requête optionnel `q` et renvoie les
-fragments de texte indexés qui le contiennent. Sans requête, il renvoie tous les
-fragments indexés. L'un des fragments a été indexé alors qu'il contenait encore une
-note de brouillon avec l'identifiant du travail d'embedding nocturne.
+fragments de texte indexés que le magasin juge pertinents par rapport à elle. Sans
+requête, il renvoie tous les fragments indexés. L'un des fragments a été indexé
+alors qu'il contenait encore une note de brouillon avec l'identifiant du travail
+d'embedding nocturne.
 
 Parcourez les fragments indexés via le point d'accès et soumettez l'identifiant que
 vous y trouvez.
 
 [NOTE]
 ====
-Le magasin vectoriel, le point d'accès et tous les identifiants de ce challenge
-sont simulés et fictifs. Rien n'est envoyé sur le réseau : l'application ne fait
-que chercher dans son propre index en mémoire.
+Le point d'accès et tous les identifiants de ce challenge sont fictifs. Rien n'est
+envoyé sur le réseau : l'application convertit les fragments en embeddings et les
+indexe dans son propre index vectoriel en mémoire au démarrage, puis ne fait que
+chercher dans celui-ci.
 ====

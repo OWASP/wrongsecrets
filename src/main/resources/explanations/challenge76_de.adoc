@@ -15,16 +15,18 @@ ist:
 `GET /rag/search`
 
 Der Endpoint akzeptiert einen optionalen Query-Parameter `q` und gibt die
-indizierten Textchunks zurück, die ihn enthalten. Ohne Query gibt er jeden
-indizierten Chunk zurück. Einer der Chunks wurde indiziert, als er noch eine
-Entwurfsnotiz mit dem Zugangscredential des nächtlichen Embedding-Jobs enthielt.
+indizierten Textchunks zurück, die der Store dafür als relevant bewertet. Ohne
+Query gibt er jeden indizierten Chunk zurück. Einer der Chunks wurde indiziert,
+als er noch eine Entwurfsnotiz mit dem Zugangscredential des nächtlichen
+Embedding-Jobs enthielt.
 
 Durchsuche die indizierten Chunks über den Endpoint und reiche das darin gefundene
 Zugangscredential ein.
 
 [NOTE]
 ====
-Der Vektorstore, der Endpoint und jedes Zugangscredential in dieser Challenge sind
-simuliert und fiktiv. Nichts wird über das Netzwerk gesendet: Die Anwendung
-durchsucht nur ihren eigenen Index im Speicher.
+Der Endpoint und jedes Zugangscredential in dieser Challenge sind fiktiv. Nichts
+wird über das Netzwerk gesendet: Die Anwendung wandelt die Chunks beim Start in
+Embeddings um, indiziert sie im eigenen Vektorindex im Speicher und durchsucht
+ausschließlich diesen.
 ====

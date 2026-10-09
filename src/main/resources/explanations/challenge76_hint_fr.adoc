@@ -1,6 +1,6 @@
 Vous pouvez résoudre ce challenge en suivant les étapes suivantes :
 
-1. Ouvrez le point d'accès de recherche non authentifié du magasin vectoriel simulé :
+1. Ouvrez le point d'accès de recherche non authentifié du magasin vectoriel en mémoire :
 - `http://localhost:8080/rag/search`
 - Il renvoie les quatre fragments de texte indexés au format JSON.
 

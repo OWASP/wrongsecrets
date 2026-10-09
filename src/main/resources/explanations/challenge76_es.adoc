@@ -14,16 +14,17 @@ vectorial que es accesible desde la aplicación sin ninguna autenticación:
 `GET /rag/search`
 
 El endpoint acepta un parámetro de consulta opcional `q` y devuelve los fragmentos
-de texto indexados que lo contienen. Sin una consulta devuelve todos los fragmentos
-indexados. Uno de los fragmentos fue indexado mientras aún contenía una nota en
-borrador con la credencial del trabajo nocturno de embeddings.
+de texto indexados que el almacén considera relevantes para la consulta. Sin una
+consulta devuelve todos los fragmentos indexados. Uno de los fragmentos fue
+indexado mientras aún contenía una nota en borrador con la credencial del trabajo
+nocturno de embeddings.
 
 Recorre los fragmentos indexados a través del endpoint y envía la credencial que
 encuentres en ellos.
 
 [NOTE]
 ====
-El almacén vectorial, el endpoint y todas las credenciales de este desafío son
-simulados y ficticios. No se envía nada por la red: la aplicación solo busca en su
-propio índice en memoria.
+El endpoint y todas las credenciales de este desafío son ficticios. No se envía
+nada por la red: la aplicación convierte los fragmentos en embeddings y los indexa
+en su propio índice vectorial en memoria al iniciarse, y solo busca en él.
 ====

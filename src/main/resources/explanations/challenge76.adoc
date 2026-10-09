@@ -13,7 +13,8 @@ reachable from the application without any authentication:
 `GET /rag/search`
 
 The endpoint takes an optional query parameter `q` and returns the indexed text
-chunks that contain it. Without a query it returns every indexed chunk. One of the
+chunks that the vector store scores as relevant to it. Without a query it returns
+every indexed chunk. One of the
 chunks was indexed while it still contained a draft note with the credential of
 the nightly embedding job.
 
@@ -22,7 +23,7 @@ in them.
 
 [NOTE]
 ====
-The vector store, the endpoint and every credential in this challenge are
-simulated and fictional. Nothing is sent over the network: the application only
-searches its own in-memory index.
+The endpoint and every credential in this challenge are fictional. Nothing is
+sent over the network: the application embeds the chunks and searches its own
+in-memory vector index at startup.
 ====

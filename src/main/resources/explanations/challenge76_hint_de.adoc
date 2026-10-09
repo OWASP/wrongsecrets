@@ -1,6 +1,6 @@
 Du kannst diese Challenge mit den folgenden Schritten lösen:
 
-1. Öffne den unauthentifizierten Suchendpoint des simulierten Vektorstores:
+1. Öffne den unauthentifizierten Suchendpoint des Vektorstores im Speicher:
 - `http://localhost:8080/rag/search`
 - Er gibt alle vier indizierten Textchunks als JSON zurück.
 

@@ -13,16 +13,18 @@ vectorstore die vanuit de toepassing bereikbaar is zonder enige authenticatie:
 `GET /rag/search`
 
 Het endpoint accepteert een optionele queryparameter `q` en retourneert de
-geïndexeerde tekstbrokken die die query bevatten. Zonder query retourneert het
-elke geïndexeerde brok. Eén van die brokken werd geïndexeerd terwijl hij nog een
-conceptnotitie bevatte met het inloggegeven van de nachtelijke embedding-job.
+geïndexeerde tekstbrokken die de store als relevant voor die query beoordeelt.
+Zonder query retourneert het elke geïndexeerde brok. Eén van die brokken werd
+geïndexeerd terwijl hij nog een conceptnotitie bevatte met het inloggegeven van
+de nachtelijke embedding-job.
 
 Doorblader de geïndexeerde brokken via het endpoint en dien het inloggegeven dat
 je daarin vindt in.
 
 [NOTE]
 ====
-De vectorstore, het endpoint en alle inloggegevens in deze uitdaging zijn
-gesimuleerd en fictief. Er wordt niets over het netwerk verstuurd: de toepassing
-doorzoekt alleen zijn eigen index in het geheugen.
+Het endpoint en alle inloggegevens in deze uitdaging zijn fictief. Er wordt niets
+over het netwerk verstuurd: de toepassing zet de brokken om in embeddings en
+indexeert ze bij het starten in zijn eigen vectorindex in het geheugen; alleen
+die index wordt doorzocht.
 ====

@@ -1,6 +1,6 @@
 Puedes resolver este desafío con los siguientes pasos:
 
-1. Abre el endpoint de búsqueda sin autenticación del almacén vectorial simulado:
+1. Abre el endpoint de búsqueda sin autenticación del almacén vectorial en memoria:
 - `http://localhost:8080/rag/search`
 - Devuelve los cuatro fragmentos de texto indexados como JSON.
 

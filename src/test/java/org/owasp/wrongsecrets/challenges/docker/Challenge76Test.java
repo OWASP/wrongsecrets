@@ -76,6 +76,26 @@ class Challenge76Test {
   }
 
   @Test
+  void searchShouldReturnTheSecretChunkForQueriesAboutIt() {
+    var challenge = new Challenge76();
+
+    var results = challenge.search("nightly embedding credential");
+
+    assertThat(results).hasSize(1);
+    assertThat(results.getFirst().text()).contains(Challenge76.DEVELOPMENT_SECRET);
+  }
+
+  @Test
+  void searchShouldMatchIndexedTermsInsteadOfArbitrarySubstrings() {
+    var challenge = new Challenge76();
+
+    assertThat(challenge.search("ecret")).isEmpty();
+    assertThat(challenge.search("e5c91a7b")).hasSize(1);
+    assertThat(challenge.search("e5c91a7b").getFirst().text())
+        .contains(Challenge76.DEVELOPMENT_SECRET);
+  }
+
+  @Test
   void searchEndpointShouldBeUnauthenticatedAndLeakTheSecret() throws Exception {
     mvc.perform(get("/rag/search"))
         .andExpect(status().isOk())

@@ -69,6 +69,7 @@
     <java.version>26</java.version>
     <jquery.version>3.7.1</jquery.version>
     <jruby.version>10.1.2.0</jruby.version>
+    <jvector.version>3.0.6</jvector.version>
     <lombok.version>1.18.48</lombok.version>
     <maven-compiler-plugin.version>3.16.0</maven-compiler-plugin.version>
     <maven-dependency-plugin.version>3.11.0</maven-dependency-plugin.version>
@@ -327,6 +328,12 @@
       <artifactId>gatling-charts-highcharts</artifactId>
       <version>${gatling.version}</version>
       <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>io.github.jbellis</groupId>
+      <artifactId>jvector</artifactId>
+      <version>${jvector.version}</version>
     </dependency>
 
     <dependency>

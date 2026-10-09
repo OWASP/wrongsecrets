@@ -1,6 +1,6 @@
 You can solve this challenge using the following steps:
 
-1. Open the unauthenticated search endpoint of the simulated vector store:
+1. Open the unauthenticated search endpoint of the in-memory vector store:
 - `http://localhost:8080/rag/search`
 - It returns all four indexed text chunks as JSON.
 
