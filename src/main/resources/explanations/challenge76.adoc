@@ -1,0 +1,24 @@
+=== Challenge 76: Crack the Leaked User Database
+
+A web application kept its user accounts in a SQLite database and "protected" every password twice: an unsalted https://en.wikipedia.org/wiki/MD5[MD5] hash was stored in the `password_hash` column and an https://en.wikipedia.org/wiki/Advanced_Encryption_Standard[AES-128-ECB] ciphertext was stored in the `password_encrypted` column. The same developer who built the database also shipped it together with the application source code.
+
+This application ships such a database: 2000 entirely synthetic user records with usernames and passwords that were generated for this challenge only. Your target user for this challenge is:
+
+++++
+<p>Your target user: <strong th:text="${@challenge76.targetUsername}">user_0000</strong></p>
+++++
+
+Download the database from link:/challenges/challenge-76/wrongsecrets-users.sqlite[`/challenges/challenge-76/wrongsecrets-users.sqlite`] and recover the plaintext password that belongs to that user:
+
+....
+sqlite3 wrongsecrets-users.sqlite "SELECT hash_algorithm, password_hash, cipher_algorithm, password_encrypted FROM users WHERE username = 'YOUR_TARGET_USER';"
+....
+
+Submit the recovered plaintext password as the answer. It is not the hash and it is not the ciphertext: the whole point of this challenge is that both stored representations can be turned back into the original password, completely offline.
+
+The same file is part of the source tree at link:https://github.com/OWASP/wrongsecrets/blob/master/src/main/resources/challenges/challenge-76/wrongsecrets-users.sqlite[`src/main/resources/challenges/challenge-76/wrongsecrets-users.sqlite`].
+
+[NOTE]
+====
+All 2000 users can be recovered the same way, but only the password of the target user listed above is accepted as the answer.
+====
