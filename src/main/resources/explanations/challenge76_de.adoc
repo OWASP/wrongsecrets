@@ -1,0 +1,32 @@
+=== Challenge 76: Finde das Geheimnis im RAG-Vektorstore
+
+Retrieval-Augmented-Generation-(RAG)-Pipelines beantworten Fragen, indem sie zuerst
+relevante Passagen in einem Vektorstore nachschlagen und diese Passagen dann an ein
+großes Sprachmodell übergeben. Um diesen Store aufzubauen, werden Dokumente in
+Chunks zerlegt, in Embeddings umgewandelt und indiziert. Die Chunks selbst bleiben
+lesbar: Ein Suchendpoint gibt den Originaltext jedes Chunks zurück, der als relevant
+gilt.
+
+Genau das ist in dieser Challenge schiefgegangen. Ein Entwicklungsteam hat seine
+Runbooks, Meeting-Notizen und API-Entwurfsdokumentation in einem Vektorstore
+indiziert, der aus der Anwendung heraus ohne jegliche Authentifizierung erreichbar
+ist:
+
+`GET /rag/search`
+
+Der Endpoint akzeptiert einen optionalen Query-Parameter `q` und gibt die
+indizierten Textchunks zurück, die der Store dafür als relevant bewertet. Ohne
+Query gibt er jeden indizierten Chunk zurück. Einer der Chunks wurde indiziert,
+als er noch eine Entwurfsnotiz mit dem Zugangscredential des nächtlichen
+Embedding-Jobs enthielt.
+
+Durchsuche die indizierten Chunks über den Endpoint und reiche das darin gefundene
+Zugangscredential ein.
+
+[NOTE]
+====
+Der Endpoint und jedes Zugangscredential in dieser Challenge sind fiktiv. Nichts
+wird über das Netzwerk gesendet: Die Anwendung wandelt die Chunks beim Start in
+Embeddings um, indiziert sie im eigenen Vektorindex im Speicher und durchsucht
+ausschließlich diesen.
+====

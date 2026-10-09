@@ -1,0 +1,15 @@
+Je kunt deze uitdaging oplossen met de volgende stappen:
+
+1. Open het niet-geauthenticeerde zoekendpoint van de vectorstore in het geheugen:
+- `http://localhost:8080/rag/search`
+- Het retourneert alle vier geïndexeerde tekstbrokken als JSON.
+
+2. Lees de brokken en zoek degene die een inloggegeven noemt:
+- De brok met de "Draft API note" bevat het inloggegeven van de nachtelijke
+  embedding-job.
+
+3. Dien dat inloggegeven in als antwoord (alles na "uses the credential ").
+
+Je kunt de zoekopdracht ook verfijnen, bijvoorbeeld met `q=credential`, maar het
+geheim komt alleen bloot te liggen omdat de brok werd geïndexeerd voordat de
+conceptnotitie werd schoongeveegd.

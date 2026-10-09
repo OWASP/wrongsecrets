@@ -1,0 +1,48 @@
+*Pourquoi un magasin vectoriel RAG fuit les secrets des documents qu'il a indexés*
+
+La génération augmentée par récupération stocke le texte des documents afin qu'une
+recherche puisse le renvoyer plus tard. Ce texte ne disparaît pas grâce à l'étape
+d'embedding : les embeddings sont calculés à partir des fragments, mais les
+fragments eux-mêmes restent entièrement lisibles et chaque recherche les renvoie
+verbatim. Indexez un document qui contient un secret et le secret devient partie
+intégrante du corpus de récupération.
+
+La faille de ce challenge est typique :
+
+- Les documents sont indexés en masse, sans examen de leur contenu. Les notes de
+  brouillon, les runbooks et les comptes rendus de réunion sont exactement le type
+  de texte informel qui accumule des identifiants « juste pour le moment ».
+- Le magasin vectoriel de développement a été ouvert « pour que tout le monde
+  puisse essayer le RAG », sans authentification sur le point d'accès de recherche.
+  Les interfaces de récupération sont rarement traitées avec le même soin que les
+  connexions aux bases de données, alors qu'elles renvoient le même contenu.
+- Le découpage en fragments divise les documents à des frontières arbitraires, si
+  bien qu'un secret se retrouve souvent au milieu d'un fragment anodin. Scanner
+  uniquement les premières lignes d'un document ne suffit pas.
+- Les magasins vectoriels conservent leurs métadonnées : le document d'origine
+  d'un fragment, sa date d'indexation et son téléverseur. Ces métadonnées indiquent
+  exactement à un attaquant quelle fuite vaut la peine d'être exfiltrée.
+
+----
+Ce qu'il faut faire à la place :
+
+- Traitez le magasin vectoriel comme des données de production : exigez une
+  authentification sur chaque point d'accès de récupération et autorisez par
+  collection ou locataire.
+- Analysez et nettoyez les documents avant de les indexer, de la même manière que
+  les dépôts et les tickets sont analysés à la recherche de secrets.
+- Gardez les identifiants entièrement hors du corpus : référencez-les par leur nom
+  et résolvez-les à l'exécution, afin qu'une réindexation ne puisse pas les révéler.
+- Journalisez et surveillez les requêtes de récupération ; un motif de requêtes
+  inhabituel est souvent le premier signe que quelqu'un parcourt le corpus à la
+  recherche de secrets.
+- Révoquez et remplacez tout identifiant ayant fait partie d'un document indexé,
+  même une fois le document supprimé : des copies du fragment peuvent subsister
+  dans les sauvegardes et les répliques.
+----
+
+[NOTE]
+====
+Tout ce qui serait inacceptable dans un dépôt git l'est aussi dans un magasin
+vectoriel. Un fragment indexé est une copie du document, avec tous ses secrets.
+====
