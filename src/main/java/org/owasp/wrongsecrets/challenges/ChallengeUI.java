@@ -38,21 +38,21 @@ public class ChallengeUI {
   private final RuntimeEnvironment runtimeEnvironment;
   private final List<Difficulty> difficulties;
 
-  public ChallengeUI(
+  private ChallengeUI(
       ChallengeDefinition challengeDefinition,
       ScoreCard scoreCard,
       RuntimeEnvironment runtimeEnvironment,
       List<Difficulty> difficulties,
       List<Environment> environments,
-      Navigator navigation) {
+      Navigator navigation,
+      DifficultyUI difficultyUI) {
     this.challengeDefinition = challengeDefinition;
     this.scoreCard = scoreCard;
     this.runtimeEnvironment = runtimeEnvironment;
     this.difficulties = difficulties;
     this.environments = environments;
     this.navigation = navigation;
-    this.difficultyUI =
-        new DifficultyUI(challengeDefinition.difficulty(difficulties), difficulties.size());
+    this.difficultyUI = difficultyUI;
   }
 
   /**
@@ -272,7 +272,9 @@ public class ChallengeUI {
       List<Difficulty> difficulties,
       List<Environment> environments,
       Navigator navigation) {
+    var difficultyUI =
+        new DifficultyUI(definition.difficulty(difficulties), difficulties.size());
     return new ChallengeUI(
-        definition, scoreCard, environment, difficulties, environments, navigation);
+        definition, scoreCard, environment, difficulties, environments, navigation, difficultyUI);
   }
 }
