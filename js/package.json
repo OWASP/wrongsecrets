@@ -26,5 +26,11 @@
     "minimatch": ">=10.0.1",
     "purgecss": "^8.0.0",
     "terser": "^5.51.2"
+  },
+  "allowScripts": {
+    "fsevents@2.3.3": true
+  },
+  "overrides": {
+    "glob": "^13.0.6"
   }
 }
