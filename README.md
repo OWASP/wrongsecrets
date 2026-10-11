@@ -470,6 +470,12 @@ Testers:
 - [Marc Chang Sing Pang @mchangsp](https://www.github.com/mchangsp)
 - [Vineeth Jagadeesh @djvinnie](https://www.github.com/djvinnie)
 
+Translators:
+
+- [LittlePrimate @LittlePrimate](https://www.github.com/LittlePrimate)
+- [S3DFX-CYBER @S3DFX-CYBER](https://www.github.com/S3DFX-CYBER)
+- [Bhushan Agrawal @bhushan4work](https://www.github.com/bhushan4work)
+
 Special thanks:
 
 - [Madhu Akula @madhuakula @madhuakula](https://www.github.com/madhuakula)
