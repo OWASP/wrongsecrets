@@ -35,29 +35,23 @@ public class ChallengeUI {
   private final RuntimeEnvironment runtimeEnvironment;
   private final List<Difficulty> difficulties;
 
-  public ChallengeUI(
+  private ChallengeUI(
       ChallengeDefinition challengeDefinition,
       ScoreCard scoreCard,
       RuntimeEnvironment runtimeEnvironment,
       List<Difficulty> difficulties,
       List<Environment> environments,
-      Navigator navigation) {
+      Navigator navigation,
+      DifficultyUI difficultyUI,
+      String runtimeEnvironmentCategory) {
     this.challengeDefinition = challengeDefinition;
     this.scoreCard = scoreCard;
     this.runtimeEnvironment = runtimeEnvironment;
     this.difficulties = difficulties;
     this.environments = environments;
     this.navigation = navigation;
-    this.difficultyUI =
-        DIFFICULTY_UI_CACHE.computeIfAbsent(
-            new DifficultyKey(challengeDefinition.difficulty(difficulties), difficulties.size()),
-            key -> {
-              String fullScale =
-                  "★".repeat(key.level()) + "☆".repeat(key.totalOfDifficultyLevels());
-              return new DifficultyUI(
-                  "☆".repeat(key.level()), fullScale.substring(0, key.totalOfDifficultyLevels()));
-            });
-    this.runtimeEnvironmentCategory = calculateRuntimeEnvironmentCategory();
+    this.difficultyUI = difficultyUI;
+    this.runtimeEnvironmentCategory = runtimeEnvironmentCategory;
   }
 
   /**
@@ -255,7 +249,8 @@ public class ChallengeUI {
         .orElse("");
   }
 
-  private String calculateRuntimeEnvironmentCategory() {
+  private static String calculateRuntimeEnvironmentCategory(
+      ChallengeDefinition challengeDefinition, List<Environment> environments) {
     var challengeEnvironmentsOverviewNames =
         challengeDefinition.supportedEnvironments().stream().map(Environment::overview).toList();
     if (challengeEnvironmentsOverviewNames.size() == 1) {
@@ -277,7 +272,26 @@ public class ChallengeUI {
       List<Difficulty> difficulties,
       List<Environment> environments,
       Navigator navigation) {
+    int difficulty = definition.difficulty(difficulties);
+    var difficultyUI =
+        DIFFICULTY_UI_CACHE.computeIfAbsent(
+            new DifficultyKey(difficulty, difficulties.size()),
+            key -> {
+              String fullScale =
+                  "★".repeat(key.level()) + "☆".repeat(key.totalOfDifficultyLevels());
+              return new DifficultyUI(
+                  "☆".repeat(key.level()), fullScale.substring(0, key.totalOfDifficultyLevels()));
+            });
+    String runtimeEnvironmentCategory =
+        calculateRuntimeEnvironmentCategory(definition, environments);
     return new ChallengeUI(
-        definition, scoreCard, environment, difficulties, environments, navigation);
+        definition,
+        scoreCard,
+        environment,
+        difficulties,
+        environments,
+        navigation,
+        difficultyUI,
+        runtimeEnvironmentCategory);
   }
 }
