@@ -200,13 +200,15 @@ jobs:
                 body: comment
               });
             } catch (error) {
-              if (error.status === 401 || error.status === 403) {
+              const status = error.status ?? error.response?.status;
+              if (status === 401 || status === 403) {
                 core.warning(
-                  `Skipping visual diff comment: the workflow token has no write access (${error.status} ${error.message}). ` +
-                  'This is expected for pull requests from forks, where GITHUB_TOKEN is read-only. ' +
-                  'The screenshots are still available as workflow artifacts.'
+                  `Could not post the visual diff comment on the PR (HTTP ${status}: ${error.message}). ` +
+                  'The workflow token has no comment permission here (expected for pull requests from forks, where GITHUB_TOKEN is read-only), so the result is published to the job summary instead. ' +
+                  `Artifacts: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}`
                 );
-                return;
+                await core.summary.addRaw(comment).write();
+              } else {
+                throw error;
               }
-              throw error;
             }
