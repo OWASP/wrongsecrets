@@ -509,8 +509,8 @@
           <assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>
           <ossIndexServerId>ossindex</ossIndexServerId>
           <!-- server id configured in settings.xml-->
-          <ossIndexAnalyzerEnabled>true</ossIndexAnalyzerEnabled>
-          <!--disable when getting 401 errors-->
+          <ossIndexAnalyzerEnabled>false</ossIndexAnalyzerEnabled>
+          <!-- disabled due to Sonatype OSS Index API returning 402 Payment Required -->
         </configuration>
         <executions>
           <execution>
