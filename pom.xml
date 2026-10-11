@@ -566,33 +566,23 @@
               <workingDirectory>js</workingDirectory>
             </configuration>
           </execution>
+          <execution>
+            <id>npm run build</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <phase>process-classes</phase>
+            <configuration>
+              <arguments>run build</arguments>
+              <workingDirectory>js</workingDirectory>
+            </configuration>
+          </execution>
         </executions>
       </plugin>
       <plugin>
         <groupId>org.springdoc</groupId>
         <artifactId>springdoc-openapi-maven-plugin</artifactId>
         <version>${springdoc-maven.version}</version>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>exec-maven-plugin</artifactId>
-        <version>${exec-maven-plugin.version}</version>
-        <configuration>
-          <executable>./js/node_modules/.bin/javascript-obfuscator${script.extension}</executable>
-          <arguments>
-            <argument>./js/index.js</argument>
-            <argument>--output</argument>
-            <argument>./target/classes/static/js/index.js</argument>
-          </arguments>
-        </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>exec</goal>
-            </goals>
-            <phase>generate-resources</phase>
-          </execution>
-        </executions>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
