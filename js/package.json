@@ -7,7 +7,7 @@
     "node": ">=26.0.0"
   },
   "scripts": {
-    "build": "./node_modules/.bin/javascript-obfuscator index.js --output ../target/classes/static/js/index.js"
+    "build": "javascript-obfuscator index.js --output ../target/classes/static/js/index.js && purgecss --css node_modules/bootstrap/dist/css/bootstrap.min.css --content '../src/main/resources/templates/**/*.html' '../src/main/resources/static/**/*.js' 'node_modules/bootstrap/dist/js/**/*.js' 'node_modules/datatables.net-bs5/**/*.js' 'node_modules/datatables.net/**/*.js' --output ../target/classes/static/css/ && cleancss -o ../target/classes/static/css/dark.css ../src/main/resources/static/css/dark.css && cleancss -o ../target/classes/static/css/style.css ../src/main/resources/static/css/style.css && terser ../src/main/resources/static/theme-toggle.js -o ../target/classes/static/theme-toggle.js"
   },
   "keywords": [
     "secrets"
@@ -18,7 +18,13 @@
     "minimatch": ">=10.0.1"
   },
   "devDependencies": {
+    "bootstrap": "^5.3.3",
+    "clean-css-cli": "^5.6.3",
+    "datatables.net": "^2.1.8",
+    "datatables.net-bs5": "^2.1.8",
+    "javascript-obfuscator": "^4.1.1",
     "minimatch": ">=10.0.1",
-    "javascript-obfuscator": "^4.1.1"
+    "purgecss": "^8.0.0",
+    "terser": "^5.51.2"
   }
 }
