@@ -19,15 +19,18 @@
   },
   "devDependencies": {
     "bootstrap": "^5.3.3",
-    "clean-css-cli": "^5.4.2",
+    "clean-css-cli": "^5.6.3",
     "datatables.net": "^2.1.8",
     "datatables.net-bs5": "^2.1.8",
     "javascript-obfuscator": "^4.1.1",
     "minimatch": ">=10.0.1",
-    "purgecss": "^7.0.2",
+    "purgecss": "^8.0.0",
     "terser": "^5.51.2"
   },
   "allowScripts": {
     "fsevents@2.3.3": true
+  },
+  "overrides": {
+    "glob": "^13.0.6"
   }
 }
