@@ -118,7 +118,7 @@ scripts/sort_contibutors/bin/
 
 ## translations
 scripts/do_translate/explanations_bundle*
-scripts/do_translate/bin/
+scripts/do_translate/bin/*
 
 #optimizations
 .github/scripts/binary_version.txt
