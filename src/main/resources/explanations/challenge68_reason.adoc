@@ -6,3 +6,4 @@ It is important to:
 - Never provide real secrets to AI tools.
 - Scrub any sensitive information from chats before sharing them.
 - Use enterprise versions of AI tools that offer better data protection and sharing controls.
+- If a credential was shared, revoke or rotate it immediately and remove the shared chat where possible; assume it may have been copied.
