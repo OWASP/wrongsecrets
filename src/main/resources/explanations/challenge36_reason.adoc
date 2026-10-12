@@ -2,4 +2,4 @@
 
 Constants are fixed values useful for storing values that don't need to change during program execution. During the reverse engineering process, binary exploration is a technique that consists of extracting the maximum amount of information from the binary to understand the logic of the program. However, some crucial information must be encrypted in such a way as to make said information challenging to read.
 
-This shows that even encryption will slow an attacker down but not block him from finding the crucial information. Therefore, consider putting the crucial information online instead of only secured by offline encryption.
+This shows that even encryption will slow an attacker down but not block him from finding the crucial information. Do not embed secrets in the binary; if an application needs one, retrieve it from a server-side service that authenticates and authorizes the request rather than relying on offline encryption alone.

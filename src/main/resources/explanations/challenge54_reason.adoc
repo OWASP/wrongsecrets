@@ -6,3 +6,7 @@ Developers regularly update configuration files like `.gitignore`, occasionally 
 - Forgotten secrets in public files indicate poor security practices and weak secret management.
 
 This challenge demonstrates the importance of code reviews and ensuring secrets are never accidentally committed or left behind.
+
+What to do instead:
+- Do not use `.gitignore` as a place to store secrets. Keep credentials in a secrets manager; if local development requires a file, keep it out of version control and restrict its filesystem access. Scan the repository for accidental disclosures.
+- If a secret has been committed, remove it from the file and rotate or revoke it; deleting it in a later commit does not remove it from Git history.

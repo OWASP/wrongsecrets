@@ -3,3 +3,7 @@
 People who can access the configuration of your security checks in your CI/CD environment can easily access any credentials configured there. These credentials can then be used for anything.
 
 This is why security should be very careful in managing their secrets: just because the credential is used by (a) security (tool) does not mean we can tolerate less security ;-).
+
+What to do instead:
+- Store CI/CD credentials in the platform's protected secret store or use short-lived workload identity, and grant each job only the permissions it needs.
+- Restrict who can change pipeline configuration or access its logs, mask sensitive output, and rotate credentials that may have been exposed.
