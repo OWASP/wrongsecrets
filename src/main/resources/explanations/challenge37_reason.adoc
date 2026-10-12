@@ -6,4 +6,5 @@ This is why security should be very careful in managing their secrets: just beca
 
 What to do instead:
 - Store CI/CD credentials in the platform's protected secret store or use short-lived workload identity, and grant each job only the permissions it needs.
-- Restrict who can change pipeline configuration or access its logs, mask sensitive output, and rotate credentials that may have been exposed.
+- Restrict who can change pipeline configuration: make sure configuration files (Workflows of ci files) are having CODE-OWNERS, require to be set on a protected branch, and limit maintainer/owner access to a repository.
+- Restrict who can see a pipeline its logs, mask sensitive output, and rotate credentials that may have been exposed.
