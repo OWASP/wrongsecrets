@@ -33,7 +33,7 @@ Step 5: open https://translate.google.com/?sl=en&tl=nl&op=docs select a target l
 
 Step 6: open the translated doc and copy the contents to a txt file. e.g. `explanations_bundle_nl.txt` and make sure the `@@@@ FILE:` part is not translated (if it is, reconstruct it to FILE again).
 
-step 7: now deconstruct the new file (e.g. `explanations_bundle_nl`) with 
+step 7: now deconstruct the new file (e.g. `explanations_bundle_nl`) with
 
 ` ./bin/translate -bundle explanations_bundle_nl.txt -destruct  -language nl`
 
