@@ -4051,4 +4051,3 @@ We are running outside a K8s cluster with Vault. Please run this in the K8s clus
 https://github.com/OWASP/wrongsecrets#vault-exercises-with-minikube[README.md]
 
 There might still be supported challenges after this one. Please try another challenge instead!
-
