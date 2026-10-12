@@ -4,4 +4,4 @@ As you can tell by now: there are many ways to get to a secret: whether hardcode
 
 In this specific case, this kind of role assumption should be impossible given the proper configuration, but it's a good idea to monitor for these events and flag them as suspicious.
 
-Restrict role trust policies to the intended principals and required conditions, and grant each role only the permissions its workload needs. Monitor role-assumption events and investigate unexpected principals or sessions.
+Restrict role trust policies to the intended principals and required conditions, and grant each role only the permissions its workload needs. Monitor role-assumption events and investigate unexpected principals or sessions. Note: this holds both for services as well as for humans.
