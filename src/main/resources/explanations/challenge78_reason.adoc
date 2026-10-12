@@ -1,0 +1,20 @@
+*Why a world readable backup bucket is a problem*
+
+A bucket policy with `Principal: "*"` and `s3:GetObject` turns every object in that bucket into a public web page. The data is then no longer protected by IAM, by the network, or by the fact that "nobody knows it is there": it is protected by nothing at all.
+
+Why this goes wrong so often:
+
+- bucket names are a shared namespace. Names are global, predictable and easy to brute force, and public bucket names are collected in wordlists and found by scanners that continuously probe object storage for open buckets. Obscurity is not a control.
+- backups are a worst case secret store. A backup of a build machine, a deployment folder or a configuration directory tends to contain exactly the key material you did not bother to remove: ssh keys, cloud credentials, tokens. One readable object can be the full compromise of whatever that key can reach.
+- the exposure was meant to be prevented by infrastructure as code, and it silently was not. If the deny policy never made it into the plan, every environment that was applied since then shares the same hole. Drift and unreviewed changes are how "private by default" buckets end up public.
+- server side encryption does not help here. The object is decrypted for whoever is allowed to read it, and in this case that is everybody.
+
+What to do instead:
+
+- switch on Block Public Access at the account level, so a single bucket policy or ACL cannot make data public by accident.
+- keep object ownership at `BucketOwnerEnforced` (ACLs disabled) and never grant object permissions to `Principal: "*"`; access should always be granted to a specific role, user or service principal.
+- keep backups out of key material altogether. Keys belong in a secrets manager or a dedicated key store, backups belong in a separate account with restricted access.
+- if temporary read access is needed, use short lived pre-signed URLs or a workload role instead of a public policy, and enable CloudTrail data events plus access logging so you can see who fetched the object.
+- if a key did end up in a bucket like this, treat it as a compromise: rotate the key, review what it could reach and check the access logs before you delete anything.
+
+In this exercise the key is a dedicated non-production key, but the bucket and the misconfigured policy are very real.
