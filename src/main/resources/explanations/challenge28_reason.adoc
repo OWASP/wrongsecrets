@@ -1,5 +1,5 @@
 *Why storing secrets in closed GitHub issue is a bad idea?*
 
-You should never reveal any secret in a GitHub issue because even when the issue is closed all data is public and is very easy to spot.
+Do not put secrets in issues. Issue visibility depends on repository settings, and closing an issue does not erase its history or copies. Share necessary details through an approved, access-restricted disclosure channel instead.
 
-So go through the issue twice before posting it on any repository.
+Review issue content before posting. If a credential is disclosed, revoke or rotate it immediately and remove the exposed content where possible.

@@ -5,3 +5,5 @@ Storing an encryption key and the data it encrypts together is generally conside
 In such scenarios, an attacker has the key the moment the file is in his possession.
 
 It is always recommended to store your encryption keys securely.
+
+Keep keys separate from the data they protect, for example in a dedicated key-management service or hardware security module, and restrict and audit access to them.

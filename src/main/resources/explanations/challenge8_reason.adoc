@@ -9,3 +9,7 @@ Though nothing might be necessarily wrong with this approach, there are a few th
 - anybody with access to the logs, now has access to this secret. So be careful where you send your logs off to, and be careful who you allow to read the logs in your production system.
 - if the system does not restart for a very long time, the secret becomes stale. If you have to reboot often, so will the secret be rotated.
 - the moment you start persisting the secret, you will often end up with challenges like the ones you faced in this app.
+
+What to do instead:
+- Do not print generated secrets to logs. If other systems need the value, store and distribute it through a secrets manager with restricted access.
+- Rotate the secret through an explicit lifecycle process rather than relying on application restarts.

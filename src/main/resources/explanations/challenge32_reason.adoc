@@ -5,7 +5,7 @@ This means that when you use those and give them feedback or agree on sending th
 
 Note that all user input is implicitly trusted. This means that if you overwhelm an LLM with loads of (repeated) text, you might be able to bypass some of its controls and tell it what to do.
 
-Hence: make sure that these applications can never reach your secrets!
+Do not submit secrets or sensitive data to AI services unless the service and its data-handling controls are approved for that information. Redact inputs, limit the tools and secret access available to an AI-enabled application, and rotate any credential that was exposed.
 
 As all user input is implicitly trusted by the system. This means that when you use an LLM for coding, you could be tricked into having bad secrets management practices as well ;-). After all: if someone told the LLM to use an insecure method many times, it will tell you to do the same.
 
