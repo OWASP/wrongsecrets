@@ -87,6 +87,7 @@
     <spring.security.version>7.0.6</spring.security.version>
     <springdoc-maven.version>1.5</springdoc-maven.version>
     <springdoc.version>3.1.1</springdoc.version>
+    <sqlite-jdbc.version>3.53.4.0</sqlite-jdbc.version>
     <system-stubs-jupiter.version>2.1.8</system-stubs-jupiter.version>
     <testcontainers-cypress.version>1.10.0</testcontainers-cypress.version>
     <testcontainers.version>1.21.4</testcontainers.version>
@@ -217,6 +218,11 @@
       <groupId>org.linguafranca.pwdb</groupId>
       <artifactId>KeePassJava2</artifactId>
       <version>${KeePassJava2.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.xerial</groupId>
+      <artifactId>sqlite-jdbc</artifactId>
+      <version>${sqlite-jdbc.version}</version>
     </dependency>
     <dependency>
       <groupId>org.asciidoctor</groupId>
