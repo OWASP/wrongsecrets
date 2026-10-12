@@ -35,6 +35,12 @@ Step 6: open the translated doc and copy the contents to a txt file. e.g. `expla
 
 step 7: now deconstruct the new file (e.g. `explanations_bundle_nl`) with 
 
+` ./bin/translate -bundle explanations_bundle_nl.txt -destruct  -language nl`
+
+Made a mistake? if you copied the wrong nl files in the `-destruct` from step 7, use the following command to remove them again:
+
+` rm      ../../src/main/resources/explanations/*nl.adoc  `
+
 ## Configure authentication when doing cloud based translation
 
 Using the Google Cloud CLI:
