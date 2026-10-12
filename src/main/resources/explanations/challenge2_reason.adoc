@@ -8,4 +8,4 @@ Using a distributed solution like https://cloud.spring.io/spring-cloud-config/re
 
 What to do instead:
 - Do not keep plaintext secrets in application properties or configuration repositories. Retrieve them from a secrets manager at deployment or runtime.
-- If Spring Cloud Config must handle secrets, enable its supported encryption and authentication, restrict access to authorized workloads and operators, and audit access.
+- If Spring Cloud Config must handle secrets, try to inject them through safe patterns using secrets managers as their sources (e.g. inject a secret with a vault side-car container). If this is not possible: enable Spring Cloud its supported encryption and authentication, restrict access to authorized workloads and operators, and audit access.
