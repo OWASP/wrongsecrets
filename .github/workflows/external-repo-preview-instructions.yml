@@ -26,6 +26,13 @@ jobs:
             const prNumber = pr.number;
             const headRepo = pr.head.repo.full_name;
             const headBranch = pr.head.ref;
+            const { owner: baseOwner, repo: baseRepo } = context.repo;
+            const reviewParams = new URLSearchParams({
+              repo: headRepo,
+              ref: headBranch,
+              lang: 'nl',
+            });
+            const reviewUrl = `https://${baseOwner.toLowerCase()}.github.io/${baseRepo}/review-translate/?${reviewParams}`;
 
             const body = `${marker}
             ## 🧪 Testing this PR locally
@@ -58,6 +65,12 @@ jobs:
             git fetch origin
             git checkout -b test-pr-${prNumber} origin/${headBranch}
             \`\`\`
+
+            ### 🌍 Reviewing translations
+
+            Compare the translated files of this PR side by side with the originals:
+            [open the translation review](${reviewUrl}).
+            Change the \`lang\` parameter in the URL to review another language.
 
             ### 🧹 Cleaning up after testing
 
