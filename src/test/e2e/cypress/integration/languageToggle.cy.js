@@ -27,7 +27,7 @@ describe('Language Toggle Tests', () => {
     cy.url().should('contain', 'lang=fr')
     cy.dataCy(LanguageTogglePage.LANGUAGE_SELECTOR).find(LanguageTogglePage.LANGUAGE_TOGGLE)
       .should('have.text', LanguageTogglePage.FRENCH_LABEL)
-    cy.dataCy(ChallengesPage.CHALLENGE_DESCRIPTION).should('contain', 'Bienvenue dans le défi')
+    cy.dataCy(ChallengesPage.CHALLENGE_DESCRIPTION).should('contain', 'Bienvenue dans OWASP WrongSecrets')
     cy.visit('/')
     cy.dataCy(LanguageTogglePage.LANGUAGE_SELECTOR).find(LanguageTogglePage.LANGUAGE_TOGGLE)
       .should('have.text', LanguageTogglePage.FRENCH_LABEL)
