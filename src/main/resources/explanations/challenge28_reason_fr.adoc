@@ -1,0 +1,5 @@
+*Pourquoi est-il déconseillé de stocker des secrets dans un ticket GitHub fermé ?*
+
+Ne placez pas de secret dans les issues. La visibilité d'une issue dépend des paramètres du dépôt, et fermer une issue n'efface ni son historique ni ses copies. Partagez plutôt les détails nécessaires via un canal de divulgation approuvé et restreint par accès.
+
+Relisez le contenu de l'issue avant de la publier. Si un identifiant est divulgué, révoquez-le ou régénérez-le immédiatement et supprimez le contenu exposé dans la mesure du possible.

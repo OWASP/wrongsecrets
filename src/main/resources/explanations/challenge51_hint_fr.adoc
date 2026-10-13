@@ -1,0 +1,20 @@
+Ce défi peut être relevé de différentes manières :
+
+- Utilisez le fichier docker-compose (`challenge51docker-compose.yml`) pour créer les conteneurs et trouver le secret.
+  1. Clonez le dépôt contenant les fichiers du défi.
+  2. Localisez le fichier `challenge51docker-compose.yml` dans le dépôt et accédez à cet emplacement.
+  3. Identifier les qualifications :
+    Dans la section « environments » du fichier challenge51docker-compose.yml, recherchez des variables telles que :
+     * `db_user`
+     * `db_password`
+     * `db_name`
+  4. Vous pouvez maintenant exécuter les commandes Docker Compose pour construire et exécuter votre service :
+     * `export DOCKER_BUILDKIT=1`
+     * `docker compose -f challenge51docker-compose.yml build`
+     * `docker compose -f challenge51docker-compose.yml run myservice`
+  5. La réponse se trouve dans le résultat.
+
+- Trouvez les secrets directement dans le système de fichiers :
+   1. Clonez le dépôt contenant les fichiers du défi.
+   2. Utilisez les références de fichiers dans `challenge51docker-compose.yml` pour localiser les fichiers contenant les secrets.
+   3. Ouvrez le fichier pour trouver le secret.

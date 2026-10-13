@@ -1,0 +1,12 @@
+Vous pouvez relever ce défi grâce aux solutions alternatives suivantes :
+
+1. Trouvez le secret dans Azure Key Vault (c'est la méthode la plus simple, essayez l'autre :) ) :
+- Connectez-vous à Azure https://portal.azure.com[cloud] avec le compte avec lequel vous avez créé la configuration WrongSecrets.
+- Accédez au coffre à clés
+- Récupérer les données de wrongsecret2
+
+2. Découvrez le secret en exécutant dans le POD
+- Assurez-vous d'avoir installé Kubectl comme indiqué dans le fichier README.MD et que kubectl est configuré pour envoyer des commandes au bon cluster.
+- Exécutez maintenant `kubectl get pods`. Vous verrez alors tous les pods actifs dans l'espace de noms actuel, qui est généralement `default` pour cette application (sauf indication contraire de votre administrateur/formateur).
+- pour votre instance du pod WrongSecrets, exécutez `kubectl exec -it secret-challenge-<rest of the name of the pod from the prev.step> -- sh`.
+- examinez les données que vous pouvez trouver dans `/mnt/secrets-store`

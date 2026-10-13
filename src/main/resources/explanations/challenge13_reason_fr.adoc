@@ -1,0 +1,22 @@
+*Pourquoi il faut être prudent avec l'intégration continue/déploiement continu et la gestion des secrets*
+
+Lorsqu'on utilise des outils CI/CD, il est souvent nécessaire de permettre à ces outils (par exemple, l'exécuteur/agent qui lance une tâche) d'utiliser un secret pour s'authentifier auprès d'un service secondaire. L'exfiltration de ces secrets peut s'avérer très intéressante.
+Il existe différentes façons de procéder :
+
+- exécuter un outil CI/CD en mode débogage, ou demander plus de variables d'environnement, qui, à leur tour, pourraient être lisibles par tous ceux qui ont accès au journal de compilation.
+- utiliser des techniques d'exfiltration telles que celles utiles dans ce défi pour obtenir le secret, qui pourrait être lisible par toute personne ayant accès au journal de compilation.
+- Utilisez vos droits d'accès en tant qu'administrateur/responsable de dépôt ou de projet pour obtenir les secrets.
+
+Il est donc essentiel que vous :
+
+- Limiter l'accès aux secrets des exécutions de tâches, à leur configuration et aux informations sensibles.
+- Consigner toutes les actions du système et alerter en cas d'exfiltration.
+- Assurez-vous qu'aucun secret persistant ne figure dans votre configuration CI/CD.
+
+Vous voulez en savoir plus ? Consultez les ressources sur la page d’accueil de l’application.
+
+*Pourquoi les cryptomonnaies restent encore très difficiles à appréhender*
+
+Comme vous pouvez le constater dans le code source du Challenge13 : nous avons sélectionné un vecteur d’initialisation prédéfini. Nous avons procédé ainsi afin de garantir que nous obtiendrions systématiquement le même texte chiffré.
+On pourrait dire qu'il s'agit d'un mauvais exemple de https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Secrets_Management_Cheat_Sheet.md#72-convergent-encryption[Chiffrement convergent].
+Ce chiffrement convergent présente un avantage : il permet de détecter toute modification d'un secret à partir d'une clé et d'un vecteur d'initialisation fixes. Cependant, cela peut poser problème avec des secrets trop courts. En effet, la tentative de reconstitution du texte clair par chiffrement de différents fragments aboutira inévitablement à une collision.

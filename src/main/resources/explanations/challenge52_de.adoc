@@ -1,0 +1,7 @@
+=== Herausforderung: Aufgedeckte Buildx-Geheimnisse
+
+Acme Inc., ein schnell wachsendes SaaS-Unternehmen, erweitert seine containerisierten Bereitstellungen mithilfe von Docker Buildx, um plattformübergreifende Builds zu optimieren. Dabei ist es jedoch zu einer schwerwiegenden Sicherheitsfehlkonfiguration gekommen.
+
+Während des Docker Buildx-Prozesses (https://github.com/OWASP/wrongsecrets/blob/master/.github/scripts/docker-create.sh#L365) wurde versehentlich ein sensibles Geheimnis, das während der Build-Phase des Containers temporär und sicher bleiben sollte, aufgrund einer Fehlkonfiguration in das Dateisystem des Containers eingebettet. Dieses Geheimnis ist nun im laufenden Container zugänglich und in dessen Build-Skripten sichtbar. Sollte es ausgenutzt werden, stellt dies ein erhebliches Sicherheitsrisiko dar.
+
+Als neu eingestellter Sicherheitsberater bei Acme Inc. ist Ihre Aufgabe klar: Untersuchen Sie den Container, identifizieren Sie das offengelegte Geheimnis und melden Sie es dem Team. Durch das Aufdecken dieser Schwachstelle helfen Sie Acme Inc., die Risiken zu verstehen und bessere Vorgehensweisen zur Absicherung ihrer Bereitstellungspipeline zu implementieren.

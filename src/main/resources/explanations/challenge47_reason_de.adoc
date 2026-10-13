@@ -1,0 +1,16 @@
+*Warum die Verwendung von Vault-Vorlagen nicht immer eine gute Idee ist?*
+
+Während die Einbindung von Vault-Agenten über Vorlagen in bestimmten Szenarien eine bequeme Methode zur Verwaltung von Geheimnissen sein kann.
+Es gibt Situationen, in denen dies möglicherweise nicht die beste Vorgehensweise ist.
+
+Vorlagen könnten versehentlich sensible Informationen in Protokollen oder temporären Dateien offenlegen.
+Wenn Geheimnisse nicht ordnungsgemäß konfiguriert sind, können sie an Orten landen, wo sie von nicht autorisierten Benutzern oder Prozessen zugänglich gemacht werden können.
+
+Betrachten wir ein Beispiel, bei dem es um einen Template-Injection-Angriff in einer Skriptsprache wie PHP geht:
+
+. Stellen Sie sich ein Szenario vor, in dem eine PHP-Anwendung eine Vorlage mit sensiblen Informationen verwendet.
+* wobei die Vorlage wie folgt aussehen kann: $password = "'; system('rm -rf /'); //"
+. Wenn die Vorlage verarbeitet wird, kann sie Folgendes ergeben:
+* $connection = "password='; system('rm -rf /'); //"
+
+Um solche Probleme zu vermeiden, fügen Sie keine Geheimniswerte in ausführbaren Quellcode ein und werten Sie sie nicht als Vorlagenausdrücke aus. Übergeben Sie Geheimnisse nach Möglichkeit als Laufzeitkonfiguration an die Anwendung; andernfalls verwenden Sie ein kontextgemäßes Escaping, schränken Sie den Zugriff auf gerenderte Dateien ein und achten Sie darauf, dass Geheimnisse nicht in Protokolle geschrieben werden.

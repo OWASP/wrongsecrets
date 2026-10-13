@@ -1,0 +1,7 @@
+=== Azure Key Vault parte 3
+
+En nuestro clúster de AKS, existen dos enlaces de identidad de Azure. Azure los utiliza para inyectar metadatos. En nuestro caso, los usamos para acceder a Azure Key Vault.
+
+Lo interesante de Key Vault es que establece permisos por Key Vault, en lugar de por secreto. Lamentablemente, los desarrolladores solo tienen un Key Vault para dos identidades...
+
+Sugerencia: Existe una vinculación con `separate-workload-pod-id`. Intente crear un pod con las etiquetas correctas para robar wrongsecret-3 (consulte también https://docs.microsoft.com/en-us/azure/aks/use-azure-ad-pod-identity#run-a-sample-application[la documentación de aks]).

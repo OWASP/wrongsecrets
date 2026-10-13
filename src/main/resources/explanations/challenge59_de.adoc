@@ -1,0 +1,40 @@
+=== Slack-Webhook-URL finden
+
+Willkommen zu dieser Herausforderung, die die Anfälligkeit von fest codierten Slack-Webhook-URLs in Umgebungsvariablen aufzeigt!
+
+Diese Herausforderung simuliert ein reales Szenario, in dem:
+
+1. **Slack-Webhook-URLs werden als Umgebungsvariablen gespeichert** für Anwendungsbenachrichtigungen
+2. **Die URLs wurden verschleiert,** um die Erkennung durch geheime Scan-Tools zu verhindern.
+3. **Risiko durch Mitarbeiterfluktuation**: Wenn ein Mitarbeiter ausscheidet, wird der Webhook möglicherweise nicht rotiert, wodurch der Zugriff weiterhin möglich ist.
+
+==== Ihre Mission
+
+In diesem Szenario hat ein Entwickler eine Slack-Webhook-URL als Umgebungsvariable `CHALLENGE59_SLACK_WEBHOOK_URL` gespeichert. Die URL wurde mittels doppelter Base64-Kodierung verschleiert, um die Geheimnisprüfung von Slack zu umgehen.
+
+Ihre Aufgabe ist es:
+
+1. Ermitteln Sie die verschleierte Slack-Webhook-URL in der Umgebungsvariablen.
+2. Entschlüsseln Sie die URL, um die ursprüngliche URL anzuzeigen.
+3. Reichen Sie die entschlüsselte Webhook-URL als Ihre Antwort ein.
+
+==== Auswirkungen in der Praxis
+
+Diese Schwachstelle verdeutlicht die spezifischen Risiken offengelegter Slack-Webhook-URLs:
+
+- **Unautorisierte Nachrichtenveröffentlichung**: Angreifer können schädliche Nachrichten an Ihre Slack-Kanäle senden.
+- **Social-Engineering-Angriffe**: Gefälschte Ankündigungen oder Phishing-Versuche über vertrauenswürdige Kanäle
+- **Offenlegung von Informationen**: Sensible Kanalnamen und Arbeitsbereichsinformationen offengelegt
+- **Reputationsschaden**: Spam oder unangemessene Inhalte, die unter dem Namen Ihrer Organisation veröffentlicht werden.
+- **Verschleierung ist keine Sicherheit**: Base64-Kodierung bietet keinen wirklichen Schutz.
+- **Webhook-Persistenz**: Im Gegensatz zu Tokens können Webhooks über längere Zeiträume aktiv bleiben.
+
+==== Pädagogischer Hinweis
+
+In Produktionsumgebungen:
+- Verwenden Sie ein geeignetes Geheimnismanagementsystem (AWS Secrets Manager, Azure Key Vault, HashiCorp Vault).
+- Webhook-Rotationsrichtlinien implementieren, wenn Mitarbeiter das Unternehmen verlassen
+- Überwachen Sie die Nutzung von Webhooks und richten Sie Warnmeldungen für ungewöhnliche Aktivitäten ein.
+- Webhooks sofort widerrufen und neu generieren, wenn Mitarbeiter das Unternehmen verlassen
+- Geheimnisse sollten aus Sicherheitsgründen niemals verschleiert werden.
+- Erwägen Sie die Verwendung von Webhook-Signaturgeheimnissen zur zusätzlichen Validierung

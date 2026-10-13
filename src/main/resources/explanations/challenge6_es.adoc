@@ -1,0 +1,7 @@
+=== Secretos de K8s
+
+Entonces, un ConfigMap no funcionó. Pero ¿qué pasa con un https://kubernetes.io/docs/concepts/configuration/secret/[secreto de K8s] en el espacio de nombres predeterminado sin RBAC?
+
+Si este desafío está habilitado, estás ejecutando esto desde un clúster de Kubernetes. ¿Puedes usar `kubectl` para encontrar el secreto? ¿O qué tal si revisas el repositorio donde se configuró el clúster? También podrías haberlo visto si el configmap se hubiera subido a Git.
+
+Tenga en cuenta que los secretos se codifican en base64 antes de integrarse en la carga de trabajo. Buscamos la versión decodificada del secreto ;-).

@@ -1,0 +1,8 @@
+*Warum das Senden von Geheimnissen als Eingaben an Smart Contracts eine schlechte Idee ist, selbst wenn sie nicht gespeichert werden*
+
+Die Eingaben für alle Transaktionen mit Verträgen, wie der Zustand des internen Speichers von Verträgen in der Blockchain, werden dauerhaft gespeichert und sind leicht abzufragen.
+Die Eingaben zu Transaktionen sind sogar sichtbar, bevor diese Transaktionen akzeptiert werden. Dies kann zu Front-Running durch Dritte führen, die Zugriff auf den Transaktionspool haben und eine Transaktion (mit höheren Gasgebühren) senden können, die von der bekannten nachfolgenden Transaktion profitiert.
+
+Was Sie stattdessen tun sollten:
+- Senden Sie keine Geheimniswerte oder Vermutungen in Transaktionseingaben. Führen Sie die von Geheimnissen abhängige Verifizierung außerhalb der Kette durch oder verwenden Sie ein sorgfältig entworfenes Zero-Knowledge-Protokoll, wenn eine Verifizierung auf der Kette erforderlich ist.
+- Betrachten Sie Werte, die in Transaktionen übermittelt oder in einem öffentlichen Transaktionspool offengelegt wurden, als öffentlich, selbst wenn der Vertrag sie nicht speichert.

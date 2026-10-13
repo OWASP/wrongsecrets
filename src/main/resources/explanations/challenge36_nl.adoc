@@ -1,0 +1,9 @@
+=== Binaire bestanden zonder platte-tekststrings
+
+We horen nog steeds dat ontwikkelaars trucs en obfuscatie inzetten om een geheim in een binair bestand te verbergen. Wat als we symbolen strippen? Wat als we het geheim versleutelen? Deze uitdagingen kunnen het moeilijker maken om het verborgen geheim te vinden, maar niet onmogelijk.
+
+[@roddas](https://github.com/roddas) nam contact met ons op met een "nieuw grappig binair bestand" waarin hij het geheim had versleuteld, en vroeg zich af of we er iets mee konden doen. Dit was precies het type uitdaging dat je zou moeten proberen! Dus vroegen we hem er een uitdaging van te maken en die op te lossen. Hij loste het op met GDB en Radare2, wat hem veel leerde over reverse engineering! Kun jij hetzelfde doen?
+
+Het uitdagingbestand heet https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-advanced-c[wrongsecrets-advanced-c] en is in veel varianten te vinden in de https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables[executables-map].
+
+Probeer het binaire bestand te downloaden en lokaal uit te voeren (bijv. `./wrongsecrets-advanced-c<theversion you need> <your answer>`).

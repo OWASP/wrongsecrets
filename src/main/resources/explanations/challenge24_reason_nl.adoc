@@ -1,0 +1,10 @@
+*Waarom het kopiëren van specs een slecht idee is*
+
+Wanneer je cryptografische controls probeert te implementeren, kan dat heel ontmoedigend zijn: er zijn heel veel details waar je op moet letten.
+Je weet inmiddels dat het niet aan te raden is om elke primitive van een voorbeeld te kopiëren voor je eigen implementatie. In dit voorbeeld hebben we de HMAC-sleutel uit een NIST-spec gekopieerd, wat iedereen had kunnen proberen te gebruiken om de gebruikte HMAC-sleutel te brute-forcen.
+
+Houd er rekening mee dat het kopiëren van sleutels uit specs/voorbeelden niet alleen voor HMACs geldt, maar voor elke cryptografische bewerking (tekenen, versleutelen, ontsleutelen, etc.).
+
+Toch een sleutel nodig? Zorg er in plaats daarvan voor dat je een Secure Random generator en de juiste library voor je runtime gebruikt om de sleutel te genereren.
+
+Om het nog veiliger te maken, gebruik je een setup voor sleutelgeneratie en/of -afleiding waarbij elk nieuw bericht een andere sleutel heeft. Op die manier heb je "Perfect Forward secrecy". Dit zorgt ervoor dat oudere berichten niet kunnen worden ontsleuteld wanneer één sleutel gecompromitteerd raakt.

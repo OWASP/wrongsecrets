@@ -1,0 +1,5 @@
+*Geheimnismanagement ist mehr als nur sichere Aufbewahrung:*
+
+Wie Sie inzwischen feststellen konnten, gibt es viele Wege, an ein Geheimnis zu gelangen: ob fest codiert, in einer falsch konfigurierten Drittanbieterlösung gespeichert oder korrekt gespeichert, aber mit falschen IAM-Zugriffsrechten in benachbarten Konten. Sie werden nun verstehen, warum wir sagen: „Ihre Sicherheitsreife spiegelt sich in Ihrem Geheimnismanagement wider.“
+
+In diesem konkreten Fall konnten zwei separate Arbeitslasten auf die Geheimnisse der jeweils anderen zugreifen. Dies hätte durch die Einrichtung unterschiedlicher Schlüsselspeicher für verschiedene Zwecke verhindert werden können.

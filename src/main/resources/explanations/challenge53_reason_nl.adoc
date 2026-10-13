@@ -1,0 +1,10 @@
+=== Debugcontainers en geheimen in het geheugen
+
+Debugtools zijn krachtig, maar wanneer ze in productieomgevingen beschikbaar blijven, kunnen ze gevoelige informatie blootstellen. Deze uitdaging laat zien hoe een aanvaller met debugtoegang met behulp van debugtechnieken geheimen uit het geheugen kan ophalen.
+
+Het scenario gaat over een Kubernetes-pod die een gecompileerd binair bestand uitvoert waarin een geheim in het geheugen zit. Het binaire bestand is onderdeel van een applicatie, maar door een verkeerde configuratie kan een debugcontainer eraan worden gekoppeld om het te inspecteren. Dit komt overeen met een praktijksituatie waarin verkeerd ingestelde debugrechten tot beveiligingsrisico's kunnen leiden.
+
+Organisaties moeten zich realiseren dat:
+- Het toestaan van onbeperkte debugtools in productieomgevingen het aanvalsoppervlak vergroot.
+- Geheimen die in het geheugen zijn opgeslagen, met debugtechnieken kunnen worden geëxtraheerd.
+- Best practices inhouden dat debugrechten worden beperkt, dat tijdelijke secrets worden gebruikt en dat gevoelige gegevens in het geheugen worden versleuteld.

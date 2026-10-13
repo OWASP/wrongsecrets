@@ -1,0 +1,13 @@
+Se trata de un problema de documentación que puede resolverse consultando el servicio de asesoramiento de Github.
+
+1. Acceda a la clave utilizando el aviso de seguridad de Github.
+- Vaya a https://github.com/OWASP/wrongsecrets/security/advisories/GHSA-vv4g-7gjw-fvqw[el aviso].
+- Encuentra la clave API de Google.
+- Cópialo en el cuadro de respuesta.
+
+2. Siga la información del aviso de seguridad de Github.
+- Vaya a https://github.com/OWASP/wrongsecrets/security/advisories/GHSA-vv4g-7gjw-fvqw[el aviso].
+- Localiza la versión afectada (1.6.8RC1).
+- Abra la etiqueta en https://github.com/OWASP/wrongsecrets/tree/1.6.8RC1[Github].
+- Encuentra la clave API de Google en el desafío 35.
+- Cópialo en el cuadro de respuesta.

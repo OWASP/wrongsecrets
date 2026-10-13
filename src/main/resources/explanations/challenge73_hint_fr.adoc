@@ -1,0 +1,15 @@
+Les fichiers d'instructions de l'agent sont fournis avec le conteneur de développement dans le
+dossier `.devcontainer` :
+
+- `.devcontainer/AGENTS.md`
+- `.devcontainer/CLAUDE.md`
+- `.devcontainer/.cursor/rules/project.mdc`
+- `.devcontainer/.windsurfrules`
+
+Trois d'entre eux indiquent seulement l'emplacement du certificat partagé. L'un d'eux
+insère la valeur de `STAGING_DEPLOY_TOKEN` dans un extrait de code shell. Cette valeur est
+la réponse.
+
+Si vous n'utilisez pas le conteneur de développement, vous pouvez également lire les mêmes fichiers.
+directement depuis le dépôt du lien : link:https://github.com/OWASP/wrongsecrets/tree/master/.devcontainer[`.devcontainer`]
+dossier.

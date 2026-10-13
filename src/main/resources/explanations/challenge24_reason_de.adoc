@@ -1,0 +1,10 @@
+*Warum das Kopieren von Spezifikationen eine schlechte Idee ist*
+
+Die Implementierung kryptografischer Kontrollen kann sehr entmutigend sein: Es gibt viele Details, auf die man achten muss.
+Sie wissen inzwischen, dass es nicht empfehlenswert ist, alle Grundelemente eines Beispiels für die eigene Implementierung zu kopieren. In diesem Beispiel haben wir den HMAC-Schlüssel aus einer NIST-Spezifikation kopiert, die jeder hätte verwenden können, um den verwendeten HMAC-Schlüssel per Brute-Force-Angriff zu knacken.
+
+Bitte beachten Sie, dass das Kopieren von Schlüsseln aus Spezifikationen/Beispielen nicht nur für HMACs gilt, sondern für jede kryptografische Operation (Signieren, Verschlüsseln, Entschlüsseln usw.).
+
+Sie müssen immer noch einen Schlüssel generieren? Verwenden Sie stattdessen unbedingt einen sicheren Zufallsgenerator und die passende Bibliothek für Ihre Laufzeitumgebung, um den Schlüssel zu generieren.
+
+Um die Sicherheit weiter zu erhöhen, verwenden Sie ein Schlüsselgenerierungs- und/oder -ableitungsverfahren, bei dem jede neue Nachricht einen anderen Schlüssel erhält. Dadurch erreichen Sie „Perfect Forward Secrecy“. Dies stellt sicher, dass ältere Nachrichten nicht entschlüsselt werden können, selbst wenn ein Schlüssel kompromittiert wurde.

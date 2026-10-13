@@ -1,0 +1,11 @@
+Ви можете вирішити цю проблему за допомогою таких альтернативних рішень:
+
+1. Виконайте в контейнері та перегляньте файли:
+- Спочатку перевірте фактичний Dockerfile та подивіться, які операції КОПІЮВАННЯ відбуваються. Зверніть увагу, що ви можете отримати ці дані за допомогою `docker history` (див. також завдання 3 та 4), коли у вас немає Dockerfile, а є лише зображення.
+- Запустіть контейнер локально за допомогою `docker run jeroenwillemsen/wrongsecrets:<TAGNAME-HERE>`
+- Знайдіть ідентифікатор контейнера, виконавши команду `docker ps` у наступному терміналі
+- Виконайте команду `docker exec -it <container id> "sh"`
+- У контейнері перейдіть до цільового каталогу операції COPY та знайдіть секрет. Забули, який це був секрет? https://github.com/OWASP/wrongsecrets/blob/master/src/main/java/org/owasp/wrongsecrets/challenges/docker/Challenge12.java [Перевірте код challenge12]!
+2. Використовуйте https://github.com/deepfence/SecretScanner[Сканер секретів Deepfence]
+- Завантажте цільову версію контейнера wrongsecrets: `docker pull jeroenwillemsen/wrongsecrets:<VERSION YOU ARE PLAYING-HERE>`
+- Виконати `docker run -it --rm --name=deepfence-secretscanner -v $(pwd):/home/deepfence/output -v /var/run/docker.sock:/var/run/docker.sock -v /usr/bin/docker:/usr/bin/docker deepfenceio/secretscanning -image-name jeroenwillemsen/wrongsecrets:<VERSION YOU ARE PLAYING-HERE>`

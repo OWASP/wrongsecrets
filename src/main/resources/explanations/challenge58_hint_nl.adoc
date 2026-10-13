@@ -1,0 +1,25 @@
+=== Hint voor uitdaging 58
+
+Deze uitdaging laat een heel vaak voorkomend beveiligingsantipatroon zien: **database-connectionstrings met ingebedde inloggegevens die lekken via foutmeldingen**.
+
+**Waar je moet kijken:**
+
+1. **Probeer het fout-endpoint:** Bezoek `/error-demo/database-connection` om een databaseverbindingsfout te triggeren
+2. **Bekijk het antwoord:** De applicatie probeert verbinding met een database te maken en faalt, waarbij de connectionstring wordt blootgesteld
+3. **Kijk in de logs:** De applicatie logt de fout ook met de blootgestelde inloggegevens
+
+**Waar je op moet letten:**
+
+- JDBC-verbindings-URL's bevatten vaak gevoelige informatie
+- Zoek naar patronen als `jdbc:postgresql://...?user=USERNAME&password=PASSWORD`
+- De foutmelding toont de volledige connectionstring wanneer de databaseverbinding faalt
+
+**Praktijkcontext:**
+
+Dit is een van de meest voorkomende manieren waarop secrets in productie lekken:
+- Mislukte databaseverbindingen tijdens het opstarten van de applicatie
+- Mislukte healthchecks in containerorchestratie
+- Ontwikkelomgevingen met zeer gedetailleerde foutmeldingen
+- CI/CD-pipelines waarin databaseverbindingen falen
+
+**Onthoud:** Het doel is het database-wachtwoord te vinden dat in de foutmelding wordt blootgesteld wanneer de verbinding faalt.

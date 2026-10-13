@@ -1,0 +1,11 @@
+Il existe deux façons de relever ce défi :
+
+1. En examinant le stockage :
+- Accédez à « localhost:8080 » dans votre navigateur web.
+- Ouvrez la console de développement en inspectant.
+- Accédez à la section Applications de la console développeur.
+- La valeur associée à la clé « secret » est votre réponse !
+2. En analysant le trafic réseau :
+- Accédez à WrongSecrets dans votre navigateur web.
+- Ouvrez la console de développement.
+- Consultez l'onglet Réseau : pouvez-vous repérer l'appel supplémentaire pour ce défi donné et sa valeur de retour ?

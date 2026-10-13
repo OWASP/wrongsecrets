@@ -1,0 +1,28 @@
+=== Herausforderung 75: Finden Sie die Nexus-Bereitstellungs-Anmeldeinformationen in der Maven-Datei settings.xml
+
+Maven speichert die Zugangsdaten für das Repository in einer `settings.xml`. Der Abschnitt `<servers>` von
+dieser Datei ordnet einer Server-ID den Benutzernamen und das Passwort zu, die Maven verwendet, wenn es
+mit einem Repository-Manager wie Nexus kommuniziert, einschließlich des Passworts des Kontos,
+das Releases bereitstellen darf. Diese Passwörter sind im Klartext, daher darf eine
+`settings.xml` niemals in die Versionskontrolle eingecheckt werden. Es passiert trotzdem: Die
+Datei wird in ein Projekt kopiert, „damit der Build auf jedem Rechner funktioniert“, und wird
+dann zusammen mit dem übrigen Code eingecheckt.
+
+Dieses Repository enthält genau eine solche Datei. Sie enthält die Bereitstellungszugangsdaten
+eines fiktiven Nexus-Repository-Managers:
+
+`src/main/resources/challenges/challenge-75/settings.xml`
+
+Die Datei ist auch im Quellbaum verfügbar auf
+Link: link:https://github.com/OWASP/wrongsecrets/blob/master/src/main/resources/challenges/challenge-75/settings.xml[GitHub].
+
+Der Abschnitt `<servers>` enthält mehrere `<server>`-Einträge. Jeder Eintrag hat eine
+`<id>`, die mit der ID des zugehörigen Repositorys übereinstimmen muss. Finden Sie den
+Servereintrag, der zum Nexus-Repository-Manager gehört, und übermitteln Sie den Wert seines
+`<password>`-Elements.
+
+[NOTE]
+====
+Der Nexus-Server und alle Zugangsdaten in dieser Challenge sind fiktiv. Es wird keine
+Netzwerkverbindung hergestellt: Die Anwendung liest nur die eingecheckte Datei.
+====

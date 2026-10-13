@@ -1,0 +1,38 @@
+**Warum KI-Systemaufforderungen angreifbar sein können**
+
+Diese Herausforderung verdeutlicht mehrere wichtige Sicherheitsbedenken im Zusammenhang mit KI-Systemen:
+
+**1. Schwachstellen durch Prompt-Injection:**
+KI-Systeme lassen sich durch gezielt entwickelte Eingaben manipulieren, die ihre Sicherheitsvorkehrungen oder Befehlsgrenzen umgehen. Dies ähnelt SQL-Injection, betrifft aber KI-Modelle.
+
+**2. Anzeige der Systemaufforderung:**
+Wenn sensible Informationen in Systemabfragen eingebettet sind, besteht die Gefahr, dass diese Informationen mithilfe verschiedener Techniken extrahiert werden können. Systemabfragen sollten niemals Geheimnisse, Zugangsdaten oder sensible Daten enthalten.
+
+**3. KI-Jailbreaking:**
+Dies bezieht sich auf Techniken, die dazu verwendet werden, die eingebauten Beschränkungen oder Sicherheitsmaßnahmen einer KI zu umgehen. Angreifer können Social Engineering, Rollenspiele oder Techniken zur Befehlsüberschreibung einsetzen.
+
+**4. Informationsleck:**
+KI-Systeme könnten unbeabsichtigt Informationen preisgeben, die sie eigentlich geheim halten sollten, insbesondere wenn sie mit ausgeklügelten Fragetechniken konfrontiert werden.
+
+**Reale Auswirkungen:**
+
+- **API-Schlüssel in Eingabeaufforderungen:** API-Schlüssel, Passwörter oder Token dürfen niemals in Eingabeaufforderungen von KI-Systemen eingebettet werden.
+- **Sensible Geschäftslogik:** Geben Sie in den Eingabeaufforderungen keine vertraulichen Geschäftsregeln oder -prozesse an.
+- **Persönliche Daten:** Vermeiden Sie die Aufnahme personenbezogener Daten oder sensibler Benutzerdaten in Systemanweisungen.
+- **Sicherheitsmaßnahmen:** Verlassen Sie sich für die Sicherheit nicht ausschließlich auf zeitgesteuerte Einschränkungen.
+
+**Bewährte Vorgehensweisen:**
+- Verwenden Sie außerhalb des KI-Systems geeignete Authentifizierungs- und Autorisierungsverfahren.
+- Implementieren Sie Sicherheitskontrollen auf Anwendungsebene, nicht nur in Eingabeaufforderungen.
+- KI-Systeme regelmäßig auf Schwachstellen durch Prompt-Injection testen
+- KI-Interaktionen auf potenzielle Sicherheitsprobleme überwachen
+- KI-Sicherheitsrahmen und -richtlinien nutzen
+
+**Erkennung und Prävention:**
+- Eingabevalidierung und -bereinigung implementieren
+- Inhaltsfiltersysteme verwenden
+- Auf verdächtige Eingabeaufforderungsmuster achten
+- Implementierung von Ratenbegrenzung und Missbrauchserkennung
+- Regelmäßige Sicherheitsbewertungen von KI-Implementierungen
+
+Diese Herausforderung zeigt, warum es nicht ausreicht, KI-Systemaufforderungen als Sicherheitsgrenze zu betrachten – eine angemessene Sicherheit muss auf mehreren Ebenen implementiert werden.

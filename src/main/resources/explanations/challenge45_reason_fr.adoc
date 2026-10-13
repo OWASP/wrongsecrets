@@ -1,0 +1,8 @@
+*Pourquoi utiliser des données sensibles comme clés est une mauvaise idée*
+
+Parfois, on considère qu'il est préférable de stocker les données les moins sensibles comme sous-clé de la clé secrète principale. Ainsi, un nom d'utilisateur et un mot de passe, par exemple, peuvent être combinés dans une seule entrée.
+Dans de nombreux cas, ces informations confidentielles sont tout aussi importantes et devraient bénéficier de la même protection que l'information confidentielle elle-même (par exemple, le mot de passe). Dans le cas de Vault, vous pouvez accéder à une sous-clé (par exemple, le nom d'utilisateur), mais pas à la valeur confidentielle elle-même (par exemple, le mot de passe), qui révélerait déjà le nom d'utilisateur.
+
+Nous préférons généralement ne pas accorder à nos employés un accès en lecture aux secrets, mais nous souhaitons plutôt leur permettre d'accéder aux sous-clés. Si un secret est stocké dans une sous-clé, il est alors compromis en interne.
+
+Conservez les valeurs sensibles dans la valeur secrète protégée plutôt que dans des sous-clés lisibles, et n'accordez pas aux composants d'un identifiant un accès plus large qu'à l'identifiant lui-même.

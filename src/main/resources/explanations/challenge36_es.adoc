@@ -1,0 +1,9 @@
+=== Binarios sin cadenas de texto plano
+
+Todavía vemos desarrolladores que recurren a trucos y técnicas de ofuscación para ocultar secretos en un archivo binario. ¿Qué pasaría si eliminamos los símbolos? ¿Y si ciframos el secreto? Estos desafíos pueden dificultar la búsqueda del secreto oculto, pero no la hacen imposible.
+
+[@roddas](https://github.com/roddas) nos contactó con un "nuevo y divertido binario" donde había cifrado el secreto, preguntándonos si podíamos usarlo. ¡Este era precisamente el tipo de desafío que deberías intentar! Así que le pedimos que creara un desafío a partir de él y lo resolviera. Lo resolvió con GDB y Radare2, ¡lo que le enseñó mucho sobre ingeniería inversa! ¿Puedes hacer lo mismo?
+
+El archivo del desafío se llama https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-advanced-c[wrongsecrets-advanced-c] y se puede encontrar en muchas variantes en la carpeta https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables[executables].
+
+Intenta descargar el binario y ejecutarlo localmente (por ejemplo, `./wrongsecrets-advanced-c<theversion you need> <your answer>`).

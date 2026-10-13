@@ -1,0 +1,26 @@
+=== Uitdaging 73: Vind het geheim in de agent-instructiebestanden
+
+AI-codeagents laden instructie- en contextbestanden uit de repository bij elke
+sessie: `AGENTS.md`, `CLAUDE.md`, `.cursor/rules/*.mdc`, `.windsurfrules` en
+vergelijkbare bestanden. Omdat deze bestanden "gewoon documentatie" zijn,
+krijgen ze zelden dezelfde review als broncode, terwijl ze wel door een model
+worden gelezen, naar elke developer-machine worden gekopieerd en aan
+versiebeheer worden gecommit.
+
+Deze repository bevat dergelijke instructiebestanden bij de Dev Container. Ze
+staan in de map link:https://github.com/OWASP/wrongsecrets/tree/master/.devcontainer[`.devcontainer`]:
+
+- `.devcontainer/AGENTS.md`
+- `.devcontainer/CLAUDE.md`
+- `.devcontainer/.cursor/rules/project.mdc`
+- `.devcontainer/.windsurfrules`
+
+Eén ervan zet een gedeelde referentie erin zodat elke agent "om het gemak"
+dezelfde waarde hergebruikt. Lees de bestanden en dien het blootgestelde
+staging-token in.
+
+[NOTE]
+====
+Hier is niets gecodeerd of versleuteld: dit is precies hoe een gelekte
+agentcontextfile er in het wild uitziet.
+====

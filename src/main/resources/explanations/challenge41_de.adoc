@@ -1,0 +1,13 @@
+=== Passwortknacken
+
+Eine Website nutzte https://en.wikipedia.org/wiki/MD5[MD5] zum Hashen von Passwörtern, und ihre Entwickler stellten kürzlich fest, dass jemand einen Dump ihrer Benutzerdaten veröffentlicht hatte.
+
+Um die Sicherheit zu verbessern, beschlossen sie, auf einen stärkeren Hash-Algorithmus wie https://en.wikipedia.org/wiki/Bcrypt[bcrypt] umzusteigen.
+
+Die Entwickler entschieden, dass die schnellste Migrationsmethode darin bestünde, die bereits vorhandenen Hashwerte mit bcrypt zu hashen. Die Verwendung zweier Hash-Algorithmen wäre sicherer als die Verwendung nur eines Algorithmus, richtig? Anscheinend schon.
+
+Leider kam es erneut zu einem Datenleck, und dieses Mal enthielt der Dump die mit bcrypt gehashten Passwörter. Wenigstens sind sie diesmal sicher, oder?
+
+Für diese Aufgabe erhalten Sie zwei Datenbank-Dumps mit Benutzernamen und Passwörtern. Die Dump-Datei https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/db-dumps/db-dump.txt[db-dump.txt] wurde vor der Migration erstellt, die zweite Dump-Datei https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/db-dumps/db-dump-2.txt[db-dump-2.txt] nach der Migration. Beide Dump-Dateien befinden sich im Ordner https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/db-dumps[db-dumps folder].
+
+Angenommen, alle Benutzer außer einem haben ihre Passwörter geändert, können Sie das unveränderte Passwort finden?

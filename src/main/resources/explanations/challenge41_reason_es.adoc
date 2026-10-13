@@ -1,0 +1,9 @@
+*¿Por qué no es buena idea aplicar un hash previo a las contraseñas?*
+
+Aunque el pre-hashing de contraseñas es una forma sencilla de actualizar los hashes heredados, se vuelve vulnerable a https://www.scottbrady91.com/authentication/beware-of-password-shucking[Password shucking].
+
+Se trata de una técnica en la que los atacantes eliminan las capas de seguridad más recientes de un hash actualizado, reduciéndolo a su versión anterior, que es más vulnerable. En este caso, pudimos reducir hashes bcrypt a hashes md5 inseguros y, posteriormente, descifrarlos.
+
+La forma más segura de evitar esto es restablecer las contraseñas de todos los usuarios y cifrar las nuevas contraseñas con el algoritmo más reciente. Sin embargo, este método no es fácil de usar.
+
+La mejor manera de actualizarlo es superponiendo los hashes inicialmente y reemplazándolos con hashes directos de las contraseñas de los usuarios la próxima vez que inicien sesión.

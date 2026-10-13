@@ -1,0 +1,5 @@
+Wir betreiben unser System außerhalb eines K8s-Clusters.
+Bitte führen Sie dies im K8s-Cluster aus, wie in der Anleitung beschrieben.
+https://github.com/OWASP/wrongsecrets?tab=readme-ov-file#basic-k8s-exercise[README.md]
+
+Es gibt nach dieser Herausforderung noch weitere unterstützte Aufgaben. Bitte versuchen Sie stattdessen eine andere!

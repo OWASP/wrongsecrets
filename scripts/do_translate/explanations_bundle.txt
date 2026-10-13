@@ -121,6 +121,11 @@ Last but not least: we could easily exec into the container, to grep the mount w
 *Access to the Administrator/owner account:*
 If you were able to use the AWS administrator account to access the data, then you can see why this is a bad idea for production. In short, with this account you can change anything within the account, and you can easily exfiltrate any of the secrets.
 
+What to do instead:
+- Use a separate, least-privilege identity for each workload and grant it only the permissions it needs. Prefer short-lived credentials obtained through workload identity over long-lived access keys.
+- Give humans their own role that strictly fits into their daily operations, without allowing them to read secrets or exec into workloads, unless really necessary.
+- Reserve the root or administrator account for tightly controlled break-glass use, protect it with MFA, and monitor its activity.
+
 Last but not least: we could easily exec into the container, to grep the mount with the secret. This has to do with 3 things:
 
 - we are allowed to do so by means of RBAC, which should not be your normal case in PRD: otherwise everybody of your organization can poke around in the container.
@@ -261,6 +266,8 @@ As you can tell by now: there are many ways to get to a secret: whether hardcode
 
 In this specific case, this kind of role assumption should be impossible given the proper configuration, but it's a good idea to monitor for these events and flag them as suspicious.
 
+Restrict role trust policies to the intended principals and required conditions, and grant each role only the permissions its workload needs. Monitor role-assumption events and investigate unexpected principals or sessions. Note: this holds both for services as well as for humans.
+
 @@@@ FILE: challenge12.adoc @@@@
 === Docker COPY and WORKDIR
 
@@ -291,6 +298,8 @@ As you can tell by now, you can easily detect any secret that stored within a co
 Given it is a best practice to let a container be immutable and versioned, you will often end up with the secret within a container forever, unless you remove it again from the registry.
 
 Note: when you reduce the amount of executables in a container (so no shell is possible), don't forget about `Openssl client` and simple binaries like `ls` and `cat` that might have to be removed as well. This helps to prevent an attacker going through the contents of your container.
+
+Keep secrets out of image layers and provide them at runtime through a secrets manager or platform secret mechanism, with access limited to the workload that needs them. Rotate any secret that was included in an image.
 
 @@@@ FILE: challenge13.adoc @@@@
 === Github Forkable actions
@@ -473,6 +482,10 @@ The command line can feel temporary and safe, but it is often being logged. This
 
 Leaking secrets is a little hard to do with a Dockerfile when creating a container. However, if you have a container that you are using regularly, you do not delete it and you are typing in secrets in plaintext, then a malicious actor could use your seemingly innocuous docker container to escalate privileges. Potentially leading them to exploit something a lot more important than your PC.
 
+What to do instead:
+- Avoid entering secrets as command-line arguments or in commands that may be saved in shell history, process listings, or logs. Use a secrets manager or a tool's protected prompt or standard-input mechanism instead.
+- Do not save a secret in a reusable container or image; inject it only into the process that needs it, and rotate it if it may have been exposed.
+
 @@@@ FILE: challenge18.adoc @@@@
 === Bad hashing
 
@@ -511,7 +524,7 @@ You can solve this challenge using the following solutions:
 
 MD5 and SHA1 hash are no longer considered safe to store passwords on their own. Speed is what makes MD5 and SHA1 hashes so useful, but it is also their downfall. It only takes a few minutes to hash thousands of passwords; this also means that it only takes minutes to hash thousands of common passwords and use these hashes to compare against a hash that has been obtained.
 
-Companies try different techniques to harden MD5 and SHA1 hashes, such as "salting" them. This is the process of adding additional characters to the password that only the person/company that should be decrypting knows. Unfortunately this is not enough either with the rise of GPU and ASIC based computations. Therefore, companies using these techniques can better migrate to https://en.wikipedia.org/wiki/Argon2[Argon2] or https://en.wikipedia.org/wiki/Balloon_hashing[Balloon hashing].
+Salts help prevent precomputed attacks, but they are not secret and do not make a fast hash safe for password storage. Use a dedicated password-hashing function such as Argon2id with a unique, randomly generated salt for each password and an appropriate work factor.
 
 As a user you often have no choice in how your passwords are stored; the only thing you can do in this case is try to make your password longer and more complex. A password SHA1 that is 7 characters long with upper and lowercase characters will take roughly a minute or 5 to brute force on a proper GPU, whereas one with 25 characters will take much longer.
 
@@ -599,6 +612,10 @@ You can solve this challenge by the following alternative solutions:
 You can tell by now that you can easily detect many secrets stored within code. Even when the code is compiled, you can still reverse-engineer it to find the secret. That's why hardcoded secrets are never a good idea. We often fall for the misconception that if I cannot reverse-engineer it, so can't an attacker, which is why many people believe that hardcoding in C/C++/Golang is safer than in Java. For those that think this: please decompile an app with tools like https://ghidra-sre.org/[*Ghidra*].
 
 Secrecy of a secret in code is one thing. Another challenge is openness: anyone with access to the code and/or compiled assets can learn the secret. To make it worse: if the developer who hardcoded the secret leaves the organization, he might know the secret as it is still in code! Similarly, when code leaks or the asset leaks, the secret will be compromised, and rotating will be hard. Besides: do you still know where this password is after a few years?
+
+What to do instead:
+- Keep secrets out of source code and compiled assets. Retrieve them at runtime from a secrets manager or through a workload identity with narrowly scoped access.
+- Scan repositories and build artifacts for secrets, and rotate any credential that has been committed or shipped.
 
 @@@@ FILE: challenge2.adoc @@@@
 === Hardcoded password part 2
@@ -765,6 +782,7 @@ Whenever you run a mobile app on your smart-device or a SPA on your web-browser,
 *Why using Single-Page apps or Mobile apps to put client secret in is a bad idea*
 
 As you can tell by now, you can easily detect any secret that is stored within a Single-Page app or mobile app.
+Treat browser and mobile applications as public clients: never embed client secrets or other shared credentials in them. For OAuth, use Authorization Code Flow with PKCE; keep privileged operations and their credentials on a trusted backend.
 
 *Why Base64 encoding is no encryption*
 
@@ -872,6 +890,10 @@ The state of the chain can be verified for any point in time by executing the st
 
 Updating the state of the chain does not remove previous changes to state.
 
+What to do instead:
+- Never put a secret on a public or immutable blockchain. Keep secret values off-chain in a system with access controls, and use the chain only for non-sensitive references or proofs.
+- Treat any value already written to a public chain as permanently exposed and rotate or revoke the affected credential.
+
 @@@@ FILE: challenge27.adoc @@@@
 === Secrets in smart contracts part 3
 
@@ -894,6 +916,10 @@ You can find the correct input to the guess method by:
 Inputs to all transactions to contracts, like the state of internal storage of contracts on the chain are stored forever and are easy to query.
 Inputs to transactions are even visible before those transactions are accepted. This can lead to front-running by a 3rd party who has access to the pool of transactions and can send a transaction (with higher gas) that benefits from the known transaction running after it.
 
+What to do instead:
+- Do not send secret values or guesses in transaction inputs. Keep secret-dependent verification off-chain, or use a carefully designed zero-knowledge protocol when on-chain verification is required.
+- Treat values submitted in transactions or exposed in a public transaction pool as public, even if the contract does not store them.
+
 @@@@ FILE: challenge28.adoc @@@@
 === Secret in a closed github issue
 A user accidentally reveals the new `AWS Secret key` in conversation between him and his friend in a GitHub issue.
@@ -912,9 +938,9 @@ You can solve this challenge by the following steps:
 @@@@ FILE: challenge28_reason.adoc @@@@
 *Why storing secrets in closed GitHub issue is a bad idea?*
 
-You should never reveal any secret in a GitHub issue because even when the issue is closed all data is public and is very easy to spot.
+Do not put secrets in issues. Issue visibility depends on repository settings, and closing an issue does not erase its history or copies. Share necessary details through an approved, access-restricted disclosure channel instead.
 
-So go through the issue twice before posting it on any repository.
+Review issue content before posting. If a credential is disclosed, revoke or rotate it immediately and remove the exposed content where possible.
 
 @@@@ FILE: challenge29.adoc @@@@
 === Secret in a screenshot of a GitHub issue
@@ -940,6 +966,7 @@ You shouldn't post screenshots of logs in a GitHub issue because:
 2. Screenshots can't be redacted like text. Even when the secret is blurred, this can be reversible.
 
 Check for any secret leaks in the output and leverage code block markdown to post logs in a GitHub issue. This is also much nicer for the maintainers trying to help you debug :).
+If a credential is exposed, revoke or rotate it immediately and remove the post or attachment where possible; assume it may already have been copied.
 
 @@@@ FILE: challenge2_hint.adoc @@@@
 As the text of the challenges is saying: we are looking for a secret in the configuration of the Spring Boot application, with the name `Application.properties`.
@@ -964,6 +991,10 @@ As you can tell, we got a little more flexibility than with challenge1. However:
 Though we can now easily overload the variables in a later stage - as you can see in the next challenges, we often see that secrets are stored as part of the Spring Config or Spring Cloud config, without overriding it in a later stage. This means that everybody with the access to the Spring Cloud config can now learn what the secret is.
 
 Using a distributed solution like https://cloud.spring.io/spring-cloud-config/reference/html/[Spring Cloud Config] where you manage your application properties externally can have the same problem if you are not careful. Take a close look at the https://cloud.spring.io/spring-cloud-config/reference/html/#_security[security section] before using Spring Cloud Config.
+
+What to do instead:
+- Do not keep plaintext secrets in application properties or configuration repositories. Retrieve them from a secrets manager at deployment or runtime.
+- If Spring Cloud Config must handle secrets, try to inject them through safe patterns using secrets managers as their sources (e.g. inject a secret with a vault side-car container). If this is not possible: enable Spring Cloud its supported encryption and authentication, restrict access to authorized workloads and operators, and audit access.
 
 @@@@ FILE: challenge3.adoc @@@@
 === Docker ENV based password
@@ -997,8 +1028,8 @@ LocalStorage persists information across sessions and is easily accessible by ja
 
 There are various ways to prevent leaking secrets here:
 - If you don’t have to: don’t store the secret with the client: keep it on the server.
-- If the client requires a secret for a state within one domain: use the SessionStorage, which is bound to a given domain.
-- If a secret must be shared over multiple domains but does not need to be known by the client (e.g. the client just forwards it between an identity provider and multiple servers, for instance, at different domains): encrypt the secret. Alternatively, make sure servers can connect to each other on behalf of the client, so that the client does not need to send the secret along.
+- SessionStorage is also accessible to JavaScript, so it does not protect secrets from cross-site scripting. For browser sessions, prefer an opaque session identifier in a `Secure`, `HttpOnly`, `SameSite` cookie, with the session state kept server-side.
+- Do not rely on client-side encryption for a secret the client must use; the client also needs access to the decryption key. For cross-domain flows, use a server-side exchange or a short-lived, narrowly scoped token instead of storing a reusable secret in browser storage.
 
 @@@@ FILE: challenge31.adoc @@@@
 === Secret in a web page
@@ -1015,6 +1046,10 @@ You can solve this challenge by the following steps:
 
 @@@@ FILE: challenge31_reason.adoc @@@@
 For several reasons, "hiding" secrets on a web page is not a good idea, even if it is only for internal use. First and foremost, websites are often accessible to a variety of parties, including employees, contractors and vendors. Keeping secrets on a website increases the risk that unauthorized parties will gain access to them through any vector. The possibility of a hacker pivoting after any compromise is greatly increased.
+
+What to do instead:
+- Do not put secrets in page content, source, or client-side configuration. Keep them on the server and perform the required operation there.
+- Require authentication and authorization for access to sensitive operations, and rotate any secret that has already been published.
 
 @@@@ FILE: challenge32.adoc @@@@
 === A Secret uploaded to an LLM (Large Language Model) application
@@ -1049,7 +1084,7 @@ This means that when you use those and give them feedback or agree on sending th
 
 Note that all user input is implicitly trusted. This means that if you overwhelm an LLM with loads of (repeated) text, you might be able to bypass some of its controls and tell it what to do.
 
-Hence: make sure that these applications can never reach your secrets!
+Do not submit secrets or sensitive data to AI services unless the service and its data-handling controls are approved for that information. Redact inputs, limit the tools and secret access available to an AI-enabled application, and rotate any credential that was exposed.
 
 As all user input is implicitly trusted by the system. This means that when you use an LLM for coding, you could be tricked into having bad secrets management practices as well ;-). After all: if someone told the LLM to use an insecure method many times, it will tell you to do the same.
 
@@ -1107,7 +1142,7 @@ This challenge can be solved by replaying the Key derivation function with the g
 
 Key Derivation Functions (KDFs) are deterministic. This means that they will always give back the same output for a given input. So, if the parameters are hardcoded, anyone with access to the code can run the KDF with the specified parameters and get the key.
 
-KDFs should be used to generate keys based on dynamic input, such as human-supplied passwords. KDFs might be used when secure random sources can be used to generate keys. Again, the KDF's input is not hardcoded/deterministic in both cases.
+Use a KDF such as Argon2id with a unique random salt and appropriate cost parameters when deriving a key from a password. For machine-generated keys, use a cryptographically secure random number generator instead of a KDF, and store the key separately from the encrypted data.
 
 @@@@ FILE: challenge35.adoc @@@@
 === Reporting on Vulnerabilities
@@ -1133,6 +1168,10 @@ This is a documentation challenge, which can be solved by going to the Github Ad
 *Why we need to be careful with vulnerability reports*
 
 When you report a vulnerability or publish a security advisory, always be careful with the information you spread with them. Exact values of found hardcoded secrets, especially those harder to rotate, should not be put into your security report and/or the publication.
+
+What to do instead:
+- Redact the secret from reports and public advisories; share any necessary evidence through a restricted, approved disclosure channel.
+- If a credential has already been disclosed, notify its owner and arrange for it to be revoked or rotated immediately.
 
 @@@@ FILE: challenge36.adoc @@@@
 === Binaries without plaintext strings
@@ -1210,7 +1249,7 @@ To accomplish the task with Radare2, open the terminal and type:
 
 Constants are fixed values useful for storing values that don't need to change during program execution. During the reverse engineering process, binary exploration is a technique that consists of extracting the maximum amount of information from the binary to understand the logic of the program. However, some crucial information must be encrypted in such a way as to make said information challenging to read.
 
-This shows that even encryption will slow an attacker down but not block him from finding the crucial information. Therefore, consider putting the crucial information online instead of only secured by offline encryption.
+This shows that even encryption will slow an attacker down but not block him from finding the crucial information. Do not embed secrets in the binary; if an application needs one, retrieve it from a server-side service that authenticates and authorizes the request rather than relying on offline encryption alone.
 
 @@@@ FILE: challenge37.adoc @@@@
 === Giving your security tests access
@@ -1239,6 +1278,11 @@ This is a CI/CD configuration challenge. You can find the answer by authenticati
 People who can access the configuration of your security checks in your CI/CD environment can easily access any credentials configured there. These credentials can then be used for anything.
 
 This is why security should be very careful in managing their secrets: just because the credential is used by (a) security (tool) does not mean we can tolerate less security ;-).
+
+What to do instead:
+- Store CI/CD credentials in the platform's protected secret store or use short-lived workload identity, and grant each job only the permissions it needs.
+- Restrict who can change pipeline configuration: make sure configuration files (Workflows of ci files) are having CODE-OWNERS, require to be set on a protected branch, and limit maintainer/owner access to a repository.
+- Restrict who can see a pipeline its logs, mask sensitive output, and rotate credentials that may have been exposed.
 
 @@@@ FILE: challenge38.adoc @@@@
 === Git Notes
@@ -1271,6 +1315,10 @@ Try solving the challenge by manually combing the Git metadata.
 
 **Concern 2 is currently being researched by the team at WrongSecrets, we are sampling the biggest open source projects to understand if Git notes is used. If it is used we may try to contribute to secret scanners to accommodate this, if it is not used we may recommend simply not using this feature of Git to ensure no issues arise. Keep an eye out on the WrongSecrets Slack for the progression of this project.**
 
+What to do instead:
+- Do not store secrets in Git notes. Include Git notes in repository secret-scanning and review processes rather than assuming scanners inspect them.
+- If a secret is committed in a note, revoke or rotate it and treat it as exposed even if the note is later removed.
+
 @@@@ FILE: challenge39.adoc @@@@
 === Insecure Encryption Key - Part 1
 
@@ -1298,6 +1346,8 @@ This challenge can be solved by decrypting the base64 encoded secret in `secrcha
 There have been multiple scenarios where the contents of files were encrypted using the filename itself, which allows attackers to easily decrypt its contents easily. It is often perceived as an easy way to keep the key close to the content, without reusing the same encryption key everywhere.
 
 But as you can tell by now, this is not a good idea. An attacker has the key the moment the file is in his possession.
+
+Generate encryption keys with a cryptographically secure random number generator and store them in a separate secrets manager or key-management service. Keep key access narrowly scoped, and rotate or re-encrypt data if a key is exposed.
 
 @@@@ FILE: challenge3_hint.adoc @@@@
 You can solve this challenge by the following alternative solutions:
@@ -1333,6 +1383,10 @@ As you can tell by now, you can easily detect any secret that stored within a co
 Given it is a best practice to let a container be immutable and versioned, you will often end up with the secret within a container forever, unless you remove it again from the registry.
 
 Interesting ENV vars for you to have a look at can be found at this https://github.com/Puliczek/awesome-list-of-secrets-in-environment-variables[list].
+
+What to do instead:
+- Keep secrets out of image layers and build arguments. Provide them at runtime through a secrets manager or platform secret mechanism, with access limited to the workload that needs them.
+- If a secret was included in an image, remove the image from registries where possible and rotate the credential.
 
 @@@@ FILE: challenge4.adoc @@@@
 === Docker arg based password
@@ -1370,6 +1424,8 @@ Storing an encryption key and the data it encrypts together is generally conside
 In such scenarios, an attacker has the key the moment the file is in his possession.
 
 It is always recommended to store your encryption keys securely.
+
+Keep keys separate from the data they protect, for example in a dedicated key-management service or hardware security module, and restrict and audit access to them.
 
 @@@@ FILE: challenge41.adoc @@@@
 === Password Shucking
@@ -1439,6 +1495,8 @@ Audit events are significant in tracking and monitoring activities within an app
 
 Ensure that API keys are not visible in plain text in the (audit) logs or any other output.
 
+Log the event and necessary non-sensitive metadata instead of the credential itself. Redact sensitive fields before data reaches log storage, restrict log access, and rotate any key that has already been recorded.
+
 @@@@ FILE: challenge43.adoc @@@@
 === Reddit Blunder
 
@@ -1463,6 +1521,7 @@ Sharing a secret from your application on social media is a really bad practice 
 Although the user or platform can often delete comments/posts, the secret almost always ends up in some database that could get leaked.
 
 Never share any secrets, personal or work-related, on social media!
+If a secret is posted, revoke or rotate it immediately and ask the platform to remove the post. Treat it as exposed even after deletion, since others may have copied or archived it.
 
 @@@@ FILE: challenge44.adoc @@@@
 === Vault Metadata Challenge
@@ -1512,6 +1571,8 @@ In many of these cases, these are equally important and should get equal protect
 
 We often don't want to give read access to secrets to our employees, but we do want to give read access to metadata instead. If any secret is stored in the metadata, that secret is then compromised internally.
 
+Keep sensitive values, including usernames when they enable account access, in the protected secret value rather than metadata. Apply the same access policy to the full credential as to the password.
+
 @@@@ FILE: challenge45.adoc @@@@
 === Vault subkey challenge
 
@@ -1555,6 +1616,8 @@ In many cases, these secrets are equally important and should get equal protecti
 
 We often don't want to give read access to secrets to our employees, but we do want to provide read access to subkeys instead. If any secret is stored in the subkeys, that secret is then compromised internally.
 
+Keep sensitive values in the protected secret value rather than readable subkeys, and do not grant broader access to a credential's components than to the credential itself.
+
 @@@@ FILE: challenge46.adoc @@@@
 === HashiCorp Vault Template Injection
 
@@ -1592,7 +1655,7 @@ Let's consider an example involving a template injection attack in a scripted la
 . When the template is processed it can become:
 * $connection = "password='; system('rm -rf /'); //"
 
-To prevent such issues its crucial to ensure that the values retrieved from Vault are properly validated.
+To prevent such issues, do not insert secret values into executable source code or evaluate them as template expressions. Pass secrets to the application as runtime configuration where possible; otherwise, use context-appropriate escaping, restrict access to rendered files, and ensure secrets are not written to logs.
 
 @@@@ FILE: challenge47.adoc @@@@
 === HashiCorp Vault Template Injection Part 2
@@ -1630,7 +1693,7 @@ Let's consider an example involving a template injection attack in a scripted la
 . When the template is processed it can become:
 * $connection = "password='; system('rm -rf /'); //"
 
-To prevent such issues it is crucial to ensure that the values retrieved from Vault are properly validated.
+To prevent such issues, do not insert secret values into executable source code or evaluate them as template expressions. Pass secrets to the application as runtime configuration where possible; otherwise, use context-appropriate escaping, restrict access to rendered files, and ensure secrets are not written to logs.
 
 @@@@ FILE: challenge48.adoc @@@@
 === Sealed Secret with Accessible Key
@@ -1748,6 +1811,10 @@ You can solve this challenge by the following alternative solutions:
 As you can tell by now, you can easily detect any secret that stored within a container. Whether it is an ENV, a file, or another property: if a system can read it, so can a human.
 
 Given it is a best practice to let a container be immutable and versioned, you will often end up with the secret within a container forever, unless you remove it again from the registry.
+
+What to do instead:
+- Keep secrets out of image layers and build arguments. Provide them at runtime through a secrets manager or platform secret mechanism, with access limited to the workload that needs them.
+- If a secret was included in an image, remove the image from registries where possible and rotate the credential.
 
 @@@@ FILE: challenge5.adoc @@@@
 === K8s Configmap based secret
@@ -2044,6 +2111,10 @@ Developers regularly update configuration files like `.gitignore`, occasionally 
 
 This challenge demonstrates the importance of code reviews and ensuring secrets are never accidentally committed or left behind.
 
+What to do instead:
+- Do not use `.gitignore` as a place to store secrets. Keep credentials in a secrets manager; if local development requires a file, keep it out of version control and restrict its filesystem access. Scan the repository for accidental disclosures.
+- If a secret has been committed, remove it from the file and rotate or revoke it; deleting it in a later commit does not remove it from Git history.
+
 @@@@ FILE: challenge55.adoc @@@@
 === .ssh Bastion?
 
@@ -2077,6 +2148,10 @@ Developers frequently store SSH connection configurations in `.ssh/config` files
 Forgotten secrets indicate inadequate security checks and poor secret management practices.
 
 This challenge emphasizes the importance of secure storage practices and periodic auditing of sensitive configuration files.
+
+What to do instead:
+- Keep private keys and passwords out of `.ssh/config` and container images. Use a protected key store or SSH agent, and prefer short-lived SSH certificates where available.
+- Restrict access to key files and use a separate, narrowly scoped identity for each host. Rotate credentials that have been committed or distributed.
 
 @@@@ FILE: challenge56.adoc @@@@
 === Challenge 56: Find the Secret in the Project Specification
@@ -3295,6 +3370,7 @@ It is important to:
 - Never provide real secrets to AI tools.
 - Scrub any sensitive information from chats before sharing them.
 - Use enterprise versions of AI tools that offer better data protection and sharing controls.
+- If a credential was shared, revoke or rotate it immediately and remove the shared chat where possible; assume it may have been copied.
 
 @@@@ FILE: challenge69.adoc @@@@
 === Challenge 69: Find the Secret in the Cursor Skill
@@ -3396,6 +3472,7 @@ Secrets should, unless encrypted (and better yet, even not then), obviously not 
 Most importantly: RBAC should be really tight around secrets: only the processes which requires the actual secret should be able to read it and a very limited of other roles to maintain the secret.
 
 And then there is the storage of the K8s cluster where the secrets are now hosted by. This is not encrypted at the moment and could be misused as well.
+Enable encryption at rest for Kubernetes Secrets with a managed key, keep RBAC narrowly scoped to the specific secrets each workload needs, and audit access. Encryption at rest does not replace access controls.
 
 So: K8S secrets are not a _bad_ idea. They do, however, require a proper configuration of the K8s cluster hosting them in order to be more effectively secured.
 
@@ -3901,6 +3978,10 @@ Though nothing might be necessarily wrong with this approach, there are a few th
 - if the system does not restart for a very long time, the secret becomes stale. If you have to reboot often, so will the secret be rotated.
 - the moment you start persisting the secret, you will often end up with challenges like the ones you faced in this app.
 
+What to do instead:
+- Do not print generated secrets to logs. If other systems need the value, store and distribute it through a secrets manager with restricted access.
+- Rotate the secret through an explicit lifecycle process rather than relying on application restarts.
+
 @@@@ FILE: challenge9-azure.adoc @@@@
 === Azure Key Vault part 1
 
@@ -4019,9 +4100,11 @@ Secrets and terraform state:
 Terraform state can be stored in many places: locally, on a cloud provider its storage solution, etc.. It can easily happen that secrets end up in Terraform state, as the systems which are created by it often needs to communicate with other systems for which it requires authentication. So, ensure that secrets are always encrypted in terraform state, or ensure that all secrets are stored in a secrets management system. Alternatively, ensure the secret is created in Terraform, but the value is set and managed through a different process.
 
 Note that secrets are not the only reason not to let people access terraform state. TF state read access can expose configuration details to unauthorized eyes, while terraform write access can allow an attacker to setup a bogus state which, on the next terraform apply-run ends up with unauthorized changes.
+Use a protected remote state backend with encryption and locking, and restrict both read and write access. Marking a Terraform value as `sensitive` only hides it from normal CLI output; it does not remove it from state. If credentials reach state, rotate them.
 
 Access to the Administrator/owner account:
 If you were able to use the AWS administrator account to access the data, then you can see why this is a bad idea for production. Because with this account you can change anything within the account, and you can easily exfiltrate any of the secrets.
+Use separate least-privilege identities for workloads and people, and reserve the administrator account for monitored, MFA-protected break-glass use.
 
 Last but not least: we could easily exec into the container, to grep the mount with the secret. This has to do with 3 things:
 

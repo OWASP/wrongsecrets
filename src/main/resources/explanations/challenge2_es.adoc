@@ -1,0 +1,7 @@
+=== Contraseña codificada, parte 2
+
+En lugar de codificar la contraseña directamente, el desarrollador intentó ocultarla en el archivo `application.properties` de Spring Boot.
+
+De esta forma, ya no se puede encontrar directamente en los archivos `.java` ni en los archivos `.class` compilados. Entonces, ¿cómo se puede detectar?
+
+Puedes detectarlo fácilmente con soluciones SAST, como https://github.com/trufflesecurity/truffleHog[truffleHog] y https://github.com/awslabs/git-secrets[git-secrets], y mediante la inspección manual de tu `application.properties`.

@@ -1,0 +1,15 @@
+Vous pouvez relever ce défi grâce aux solutions alternatives suivantes :
+
+Notez que ce défi nécessite l'installation de Keepass(X) (https://www.keepassx.org/) sur votre système pour ouvrir le fichier kdbx. Vous pouvez également utiliser WrongSecrets Desk (https://github.com/OWASP/wrongsecrets?tab=readme-ov-file#want-to-play-but-are-not-allowed-to-install-the-tools) pour le résoudre.
+
+1. Récupérez le fichier KeePass depuis le conteneur Docker et ouvrez-le.
+ - Consultez le fichier Dockerfile pour voir où le fichier KeePass a été copié.
+ - Suivez les instructions de https://docs.docker.com/engine/reference/commandline/cp/[la documentation Docker] pour copier le fichier KeePass depuis la racine du conteneur vers votre système de fichiers local.
+- Ouvrez le fichier avec KeePassX. Une invite de mot de passe s'affichera.
+- Commencez par consulter le code de `Challenge14.java` sur https://github.com/OWASP/wrongsecrets/blob/master/src/main/java/org/owasp/wrongsecrets/challenges/docker/Challenge14.java[github] afin de repérer l'emplacement potentiel du mot de passe. Ouvrez ensuite le fichier `Application.properties` situé dans le dossier `src/resources` du dépôt cible https://github.com/OWASP/wrongsecrets[*le dépôt cible*] et recherchez la propriété contenant le mot de passe KeePass.
+- Utilisez maintenant le mot de passe trouvé pour ouvrir le fichier KeePass. Son contenu devrait vous permettre de trouver vos identifiants pour Alibaba Cloud. Voilà la solution !
+2. Récupérez le fichier KeePass à partir des ressources de test : nous avons eu la mauvaise idée de placer le même fichier dans `src/test/resources/alibabacreds.kdbx`, vous pouvez donc également l'ouvrir.
+ - Récupérez le projet à l'aide de git et ouvrez le fichier, ou téléchargez-le depuis https://github.com/OWASP/wrongsecrets/blob/master/src/test/resources/alibabacreds.kdbx[Github]
+ - Ouvrez le fichier avec KeePassX. Une invite de mot de passe s'affichera.
+ - Commencez par consulter le code de `Challenge14.java` sur https://github.com/OWASP/wrongsecrets/blob/master/src/main/java/org/owasp/wrongsecrets/challenges/docker/Challenge14.java[github] afin de repérer l'emplacement potentiel du mot de passe. Ouvrez ensuite le fichier `Application.properties` situé dans le dossier `src/resources` du dépôt cible https://github.com/OWASP/wrongsecrets[*le dépôt cible*] et recherchez la propriété contenant le mot de passe KeePass.
+- Utilisez maintenant le mot de passe trouvé pour ouvrir le fichier KeePass. Son contenu devrait vous permettre de trouver vos identifiants pour Alibaba Cloud. Voilà la solution !

@@ -1,0 +1,12 @@
+=== Spring Boot Actuator Audit-Ereignis
+
+Die Entwickler beschlossen, die Leistungsfähigkeit des Spring Boot Actuators zu nutzen.
+um ihre Anwendung zu überwachen und zu prüfen. Das Projekt umfasste die Anbindung an verschiedene externe APIs,
+Für jede dieser Authentifizierungen war ein eindeutiger Schlüssel erforderlich. Die detaillierten und informativen Prüfereignisse schienen wie
+Die perfekte Lösung zur Überwachung der inneren Abläufe ihres Systems.
+
+Das Team implementierte einen Protokollierungsmechanismus, der detaillierte Prüfereignisse umfasste.
+Ohne ihr Wissen enthielten diese Protokolle Spuren des heiligen API-Schlüssels, der darin verborgen war.
+die Prüfungsereignisse.
+
+Können Sie diesen API-Schlüssel finden?

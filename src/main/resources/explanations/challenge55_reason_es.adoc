@@ -1,0 +1,11 @@
+=== Riesgos de los datos confidenciales en los archivos de configuración SSH
+
+Los desarrolladores suelen almacenar las configuraciones de conexión SSH en archivos `.ssh/config`. Sin embargo, esta comodidad puede conllevar la inclusión accidental de información confidencial, como contraseñas o claves, que podrían olvidarse con el tiempo.
+
+Los secretos olvidados son un indicio de controles de seguridad inadecuados y malas prácticas en la gestión de secretos.
+
+Este desafío subraya la importancia de las prácticas de almacenamiento seguro y la auditoría periódica de los archivos de configuración confidenciales.
+
+Qué hacer en su lugar:
+- Mantén las claves privadas y las contraseñas fuera de `.ssh/config` y de las imágenes de contenedores. Utiliza un almacén de claves protegido o un agente SSH y prefiere certificados SSH de vida corta cuando estén disponibles.
+- Restringe el acceso a los archivos de clave y utiliza una identidad independiente y de alcance limitado para cada host. Rota las credenciales que se hayan committeado o distribuido.

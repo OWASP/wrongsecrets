@@ -1,0 +1,9 @@
+=== Uitdaging met Vault-metadata
+
+Geheimenbeheersystemen bieden nu vaak metadata-ondersteuning voor hun geheimen! Geweldig, want hiermee kun je het geheim verrijken met contextgegevens, zodat je het geheim makkelijker onthoudt.
+
+Maar wat als je per ongeluk vertrouwelijke/geheime informatie in een geheim stopt?
+
+Een ontwikkelaar heeft geheime metadata toegevoegd aan een `wrongsecret` in Vault. Kun jij die vinden?
+
+Tip: bekijk de policies wanneer vault is geïnstalleerd; je ziet dat de applicatie alleen de metadata mag gebruiken ;-).

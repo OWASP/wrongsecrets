@@ -1,0 +1,2 @@
+Ми працюємо поза межами Docker-контейнера.
+Будь ласка, запустіть це в контейнері, як описано в https://github.com/OWASP/wrongsecrets#basic-docker-exercises[README]

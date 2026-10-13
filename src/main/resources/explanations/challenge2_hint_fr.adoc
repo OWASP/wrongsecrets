@@ -1,0 +1,13 @@
+Comme l'indique le texte des défis : nous recherchons un secret dans la configuration de l'application Spring Boot, sous le nom de `Application.properties`.
+Vous pouvez relever ce défi grâce aux solutions alternatives suivantes :
+
+1. Utilisez https://github.com/trufflesecurity/truffleHog[*Trufflehog*] :
+- Consultez les instructions de l'outil sur https://github.com/trufflesecurity/truffleHog[Trufflehog] et installez-le en utilisant `pip install truffleHog` ou utilisez son conteneur docker.
+- Exécutez maintenant Trufflehog sur notre dépôt : `trufflehog https://github.com/OWASP/wrongsecrets`. Pouvez-vous trouver la valeur de `password` dans le résultat ?
+
+2. Examinez le fichier `Application.properties` dans le dossier src/resources :
+- Ouvrez simplement le fichier `Application.properties` dans le dossier `src/resources` du dépôt cible https://github.com/OWASP/wrongsecrets et examinez-le. Pouvez-vous y trouver le secret ?
+
+3. Lorsque vous ne disposez pas du code source :
+- Suivez les instructions de https://docs.docker.com/engine/reference/commandline/cp/[la documentation Docker] pour copier le fichier Jar depuis la racine du conteneur vers votre système de fichiers local.
+- Ouvrez le fichier JAR dans https://java-decompiler.github.io/[*JD-GUI*] ou https://github.com/skylot/jadx[*jadx-gui*], trouvez le `application.properties` dans `Resources/BOOT-INF` et recherchez un mot de passe !

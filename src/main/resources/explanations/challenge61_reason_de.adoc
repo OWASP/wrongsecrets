@@ -1,0 +1,28 @@
+=== Was ist los?
+
+Das Festcodieren der Zugangsdaten für den Telegram-Bot im Quellcode stellt eine schwerwiegende Sicherheitslücke dar:
+
+**Sicherheitsprobleme:**
+1. **Offengelegte API-Zugangsdaten**: Bot-Tokens ermöglichen den vollen Zugriff auf die Funktionen des Telegram-Bots.
+2. **Kanalkompromittierung**: Jeder, der im Besitz des Tokens ist, kann Nachrichten lesen, Nachrichten senden und möglicherweise auf private Informationen zugreifen.
+3. **Offenlegung des Quellcodes**: Die Zugangsdaten sind für jeden sichtbar, der Zugriff auf die Codebasis hat.
+4. **Versionsverlauf**: Tokens bleiben im Git-Verlauf erhalten, selbst wenn sie später entfernt werden.
+
+**Auswirkungen in der Praxis:**
+- Angreifer können Bot-Tokens verwenden, um Spam oder schädliche Nachrichten zu versenden.
+- Sensible Informationen, die in Kanälen geteilt werden, werden für unbefugte Nutzer zugänglich.
+- Die Funktionalität des Bots kann für böswillige Zwecke missbraucht werden.
+- Verstöße gegen die Compliance-Richtlinien, wenn der Bot personenbezogene oder sensible Daten verarbeitet
+
+**So beheben Sie das Problem:**
+1. **Umgebungsvariablen**: Bot-Tokens in Umgebungsvariablen oder sicheren Konfigurationsdateien speichern.
+2. **Geheimnisverwaltung**: Nutzen Sie spezialisierte Geheimnisverwaltungsdienste (HashiCorp Vault, AWS Secrets Manager usw.).
+3. **Token-Rotation**: Bot-Token regelmäßig rotieren und alte Token widerrufen.
+4. **Zugriffskontrollen**: Implementieren Sie geeignete Zugriffskontrollen, um festzulegen, wer auf die Zugangsdaten des Bots zugreifen darf.
+5. **Code-Reviews**: Überprüfen Sie den Code vor dem Einchecken immer auf fest codierte Geheimnisse.
+
+**Erkennung:**
+- Verwenden Sie geheime Scanning-Tools in Ihrer CI/CD-Pipeline
+- Implementieren Sie Pre-Commit-Hooks, um fest codierte Anmeldeinformationen abzufangen.
+- Regelmäßige Sicherheitsüberprüfungen der Codebasis
+- Überwachung auf unerwartete Bot-Aktivitäten

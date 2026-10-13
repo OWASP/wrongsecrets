@@ -1,0 +1,7 @@
+*Waarom we voorzichtig moeten zijn met rapporten over kwetsbaarheden*
+
+Wanneer je een kwetsbaarheid rapporteert of een security advisory publiceert, wees dan altijd voorzichtig met de informatie die je daarmee verspreidt. Exacte waarden van gevonden hardgecodeerde geheimen, vooral de moeilijker te roteren, horen niet in je beveiligingsrapport en/of de publicatie te komen.
+
+Wat u in plaats daarvan kunt doen:
+- Neem het geheim weg uit rapporten en openbare advisories; deel eventueel noodzakelijk bewijs via een beperkt, goedgekeurd meldkanaal.
+- Als een referentie al is bekendgemaakt, stel de eigenaar daarvan dan op de hoogte en zorg ervoor dat die onmiddellijk wordt ingetrokken of geroteerd.

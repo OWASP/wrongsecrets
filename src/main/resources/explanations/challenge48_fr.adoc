@@ -1,0 +1,7 @@
+=== Secret scellé avec clé accessible
+
+Dans ce défi, vous découvrirez l'utilisation des secrets scellés Kubernetes. Les secrets scellés permettent de chiffrer vos secrets Kubernetes et de les stocker en toute sécurité, même dans un dépôt public. Toutefois, une mauvaise gestion de ces secrets peut présenter un risque pour la sécurité.
+
+Un développeur a accidentellement rendu accessible, au sein du même dépôt que le secret scellé, la clé privée permettant de le déchiffrer. Votre tâche consiste à trouver et à déchiffrer le secret scellé à l'aide de cette clé privée.
+
+Parviendrez-vous à trouver et à décrypter le secret scellé pour révéler les informations sensibles ?

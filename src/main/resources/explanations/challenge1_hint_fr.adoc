@@ -1,0 +1,31 @@
+Comme l'indique l'énoncé du défi, nous recherchons un secret appelé `password` dans le code Java. Mais comment le trouver ?
+
+Vous pouvez relever ce défi grâce aux solutions alternatives suivantes :
+
+1. Lorsque vous avez accès au code source, vous pouvez trouver les chaînes de caractères codées en dur en effectuant une simple recherche dans le code. L'utilitaire grep peut faciliter cette recherche, car il permet de trouver des motifs dans de grands blocs de texte. Suivez les étapes ci-dessous pour trouver la réponse :
+- Accédez à un terminal avec https://man7.org/linux/man-pages/man1/grep.1.html[*grep*] et https://git-scm.com/[*git*] installés.
+- Clonez le dépôt avec `git clone https://github.com/OWASP/wrongsecrets`.
+- Accédez au code Java où la vérification de la bonne réponse a lieu `cd src/main/java/org/owasp/wrongsecrets/`.
+- Utilisez grep de manière récursive pour rechercher la chaîne de mot de passe `grep -r password`.
+
+2. Un outil automatisé comme https://github.com/awslabs/git-secrets[*Git-secrets*] peut souvent s'avérer utile. Dans ce cas, il est nécessaire de le configurer avec une règle spécifique :
+- Clonez le dépôt avec `git clone https://github.com/OWASP/wrongsecrets`.
+- Suivez les instructions https://github.com/awslabs/git-secrets[ici] pour installer Git secrets.
+- Ajouter une nouvelle analyse pour rechercher la chaîne `git secrets --add 'password\s*=\s*.+'`.
+- Exécutez maintenant cette analyse : `git secrets --scan`.
+
+3. Si vous ne disposez pas du code source, essayez d'obtenir l'application elle-même afin de la rétroconcevoir. Dans ce cas, l'application est un fichier JAR, qui contient un ensemble de fichiers de classes Java ainsi que quelques ressources.
+- Suivez les instructions de https://docs.docker.com/engine/reference/commandline/cp/[la documentation Docker] pour copier le fichier Jar de la racine du conteneur vers votre système de fichiers local.
+- Ouvrez le fichier JAR dans https://java-decompiler.github.io/[*JD-GUI*] ou https://github.com/skylot/jadx[*jadx-gui*], puis recherchez le `String password` !
+
+4. Vous pouvez analyser le dépôt avec https://github.com/trufflesecurity/trufflehog[*Trufflehog*].
+- Clonez le dépôt avec `git clone https://github.com/OWASP/wrongsecrets`.
+- Suivez les instructions https://github.com/trufflesecurity/trufflehog[ici] pour installer Trufflehog.
+- Suivez ces instructions pour télécharger le fichier https://github.com/trufflesecurity/trufflehog/blob/4afc224c635d10e732119f715f93788af1502ce4/examples/README.md[détecteur générique].
+- Téléchargez le détecteur générique Trufflehog `wget https://raw.githubusercontent.com/trufflesecurity/trufflehog/main/examples/generic.yml`.
+- Analysez les fichiers à l'aide de la commande `trufflehog filesystem --config=$PWD/generic.yml . | grep password` ; le mot de passe figurera dans le résultat.
+
+5. Autre solution : vous pouvez utiliser l’ancienne version de Trufflehog 2 :
+- Assurez-vous que Python et pip3 sont installés, puis exécutez `pip3 install trufflehog` pour installer Trufflehog 2.
+- Analysez les fichiers à l'aide de `trufflehog . | grep password` et le mot de passe figurera dans le résultat.
+- Veuillez noter que Trufflehog 2 a été publié il y a plus de 5 ans (https://github.com/trufflesecurity/trufflehog/tags?after=v3.0.0) et n'est plus maintenu (https://github.com/trufflesecurity/trufflehog/issues/2328).

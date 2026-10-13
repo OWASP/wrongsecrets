@@ -1,0 +1,11 @@
+*Waarom moet je voorzichtig zijn met Git notes?*
+
+1. Zoals bij alle Git repo's, zodra een geheim hier is gelekt, is het heel erg moeilijk/onmogelijk om het uit alle geschiedenis te verwijderen.
+
+2. Git Notes blijkt een zelden gebruikte functie van Git te zijn, daarom controleren veel van de secret scanners ze niet. Dit betekent dat het in de CI gemist kan worden.*
+
+**Punt 2 wordt momenteel onderzocht door het team van WrongSecrets; we nemen steekproeven bij de grootste open source-projecten om te begrijpen of Git notes wordt gebruikt. Als het wordt gebruikt, proberen we mogelijk bij te dragen aan secret scanners om hier rekening mee te houden; als het niet wordt gebruikt, raden we mogelijk aan deze functie van Git simpelweg niet te gebruiken om problemen te voorkomen. Houd de WrongSecrets Slack in de gaten voor de voortgang van dit project.**
+
+Wat u in plaats daarvan kunt doen:
+- Bewaar geen geheimen in Git notes. Neem Git notes op in de processen voor secret-scanning en review van repositories in plaats van ervan uit te gaan dat scanners ze inspecteren.
+- Als een geheim in een note wordt gecommit, trek het in of roteer het en behandel het als blootgesteld, zelfs als de note later wordt verwijderd.

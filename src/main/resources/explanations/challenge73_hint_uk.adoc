@@ -1,0 +1,15 @@
+Файли інструкцій агента постачаються разом із контейнером розробника в
+Папка `.devcontainer`:
+
+- `.devcontainer/AGENTS.md`
+- `.devcontainer/CLAUDE.md`
+- `.devcontainer/.cursor/rules/project.mdc`
+- `.devcontainer/.windsurfrules`
+
+Три з них вказують лише на місцезнаходження спільних повноважень. Один з них
+вбудовує значення `STAGING_DEPLOY_TOKEN` у фрагмент оболонки. Це значення
+відповідь.
+
+Якщо ви не використовуєте контейнер розробника, ви також можете читати ті самі файли
+безпосередньо з репозиторію за посиланням: link:https://github.com/OWASP/wrongsecrets/tree/master/.devcontainer[`.devcontainer`]
+папку.

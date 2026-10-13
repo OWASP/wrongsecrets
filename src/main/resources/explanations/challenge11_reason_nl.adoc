@@ -1,0 +1,7 @@
+*Geheimenbeheer is meer dan veilige opslag:*
+
+Zoals u inmiddels kunt zien: er zijn veel manieren om bij een geheim te komen: of het nu hardgecodeerd is, opgeslagen in een verkeerd geconfigureerde oplossing van een derde partij, of correct opgeslagen, maar met de verkeerde IAM-toegangsrechten in de accounts ernaast. U zult inmiddels begrijpen waarom we zeggen dat "uw volwassenheid op het gebied van beveiliging tot uiting komt in uw geheimenbeheer".
+
+In dit specifieke geval zou dit soort rolaanname onmogelijk moeten zijn gezien de juiste configuratie, maar het is een goed idee om deze gebeurtenissen in de gaten te houden en ze als verdacht te markeren.
+
+Beperk het rolvertrouwensbeleid tot de beoogde opdrachtgevers en vereiste voorwaarden, en verleen elke rol alleen de machtigingen die de werkbelasting nodig heeft. Bewaak gebeurtenissen op het gebied van rolaanname en onderzoek onverwachte opdrachtgevers of sessies. Let op: dit geldt zowel voor diensten als voor mensen.

@@ -1,0 +1,12 @@
+Este es un desafío de configuración de CI/CD. Puedes encontrar la respuesta autenticándote en el punto final protegido con autenticación básica y obteniendo el valor:
+
+1. Usa un navegador para obtener el secreto:
+- Primero, vaya a https://github.com/OWASP/wrongsecrets/blob/master/.github/workflows/dast-zap-test.yml[Github Workflow]
+- Encuentra la variable de entorno con la que configuramos la autenticación básica para ZAP (`ZAP_AUTH_HEADER_VALUE`)
+- Decodificar el valor codificado en base64 del encabezado
+- Navegue hasta `/authenticated/challenge37` e ingrese el nombre de usuario y la contraseña que obtuvo en el paso anterior.
+
+2. Usa CURL para obtener el secreto
+- Primero, vaya a https://github.com/OWASP/wrongsecrets/blob/master/.github/workflows/dast-zap-test.yml[Github Workflow]
+- Encuentra la variable de entorno con la que configuramos la autenticación básica para ZAP (`ZAP_AUTH_HEADER_VALUE`)
+- En tu terminal, ejecuta `curl <domain where this is run>/authenticated/challenge37 -H "<basic_auth header of previous step>"` donde `<basic_auth header of previous step>` es el valor de `ZAP_AUTH_HEADER_VALUE` que encontraste.

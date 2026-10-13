@@ -1,0 +1,32 @@
+*Pourquoi les transcriptions des agents de codage IA présentent un risque de fuite de secrets*
+
+Les agents de programmation IA lisent vos fichiers, exécutent vos commandes et génèrent des journaux de session. Lorsqu'un développeur demande à un agent de déboguer un problème, celui-ci peut lire des fichiers de configuration, des variables d'environnement ou des gestionnaires de secrets, et consigner ces valeurs dans son journal. C'est précisément ce qui s'est produit dans ce défi : l'agent a lu un fichier `.env.staging` et a affiché le jeton de déploiement dans sa sortie de session.
+
+La transcription devient un artefact persistant qui peut être :
+
+- S'engage à utiliser le contrôle de version si le développeur l'enregistre.
+- Partagé avec les coéquipiers pour plus de contexte ou pour passer le relais
+- Téléversé sur les canaux de support lors du signalement des bugs
+- Stocké dans les fichiers d'historique de l'agent sur la machine du développeur
+- Indexé par les plugins IDE ou les outils de recherche locaux
+
+Dans ce scénario, trois défaillances s'accumulent :
+
+- Le secret réside dans un fichier de configuration en clair, ce qui le rend trivialement lisible par n'importe quel outil ou agent.
+- Le processus de débogage de l'agent fait naturellement apparaître le secret dans sa sortie, créant ainsi une copie secondaire des informations d'identification.
+- La transcription sera probablement enregistrée, partagée ou validée sans vérification, car elle « ressemble » à une sortie de débogage plutôt qu'à des données sensibles.
+
+----
+Que faire à la place :
+
+- Ne stockez jamais de secrets en clair dans des fichiers de configuration. Utilisez un gestionnaire de secrets ou des variables d'environnement injectées lors de l'exécution.
+- Configurez les agents pour masquer les valeurs sensibles avant leur affichage. De nombreux outils d'agent prennent en charge le filtrage ou la mise en quarantaine des données de sortie.
+- Examinez les transcriptions des agents avant de les enregistrer ou de les partager, comme vous le feriez pour une demande de fusion.
+- Considérez toute transcription provenant d'une source secrète comme potentiellement compromise et faites tourner les identifiants exposés.
+- Utilisez des jetons à durée de vie limitée et à portée restreinte pour les déploiements de test afin que l'exposition ait un rayon d'action limité.
+----
+
+[NOTE]
+====
+Les agents de codage IA sont des outils puissants, mais ils fonctionnent avec les mêmes fichiers et dans le même environnement que vous. Si un développeur humain copiait-collait un secret dans un journal de discussion, un agent ferait de même, à la différence qu'il produirait une transcription structurée, encore plus facile à rechercher et à partager.
+====

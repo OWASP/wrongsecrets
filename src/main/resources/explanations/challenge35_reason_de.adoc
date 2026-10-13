@@ -1,0 +1,7 @@
+*Warum wir bei Sicherheitslückenberichten vorsichtig sein müssen*
+
+Wenn Sie eine Sicherheitslücke melden oder eine Sicherheitswarnung veröffentlichen, gehen Sie stets sorgsam mit den Informationen um, die Sie weitergeben. Genaue Werte gefundener, fest codierter Geheimnisse, insbesondere solcher, die schwer zu ändern sind, sollten nicht in Ihren Sicherheitsbericht und/oder die Veröffentlichung aufgenommen werden.
+
+Was Sie stattdessen tun sollten:
+- Schwärzen Sie das Geheimnis in Berichten und öffentlichen Warnmeldungen ab; teilen Sie notwendige Beweise über einen eingeschränkten, genehmigten Offenlegungskanal.
+- Falls Zugangsdaten bereits offengelegt wurden, benachrichtigen Sie deren Eigentümer und veranlassen Sie sofort den Widerruf oder die Rotation.

@@ -1,0 +1,31 @@
+Zoals de tekst van de uitdaging zegt, zijn we op zoek naar een geheim met de naam `password` in de Java-code. Maar hoe vinden we het?
+
+Je kunt deze uitdaging oplossen met de volgende alternatieve oplossingen:
+
+1. Als je de broncode beschikbaar hebt, kun je hardgecodeerde tekenreeksen eenvoudig vinden door door de code te zoeken. Grep kan helpen bij dit proces, omdat het naar patronen zoekt in grote blokken tekst. Gebruik de onderstaande stappen om het antwoord te vinden:
+- Open een terminal met https://man7.org/linux/man-pages/man1/grep.1.html[*grep*] en https://git-scm.com/[*git*] geïnstalleerd.
+- Kloon de repo met `git clone https://github.com/OWASP/wrongsecrets`.
+- Ga naar de Java-code waar de controle op het juiste antwoord plaatsvindt: `cd src/main/java/org/owasp/wrongsecrets/`.
+- Gebruik grep recursief om naar de wachtwoordtekenreeks te zoeken: `grep -r password`.
+
+2. Een geautomatiseerde tool zoals https://github.com/awslabs/git-secrets[*Git-secrets*] kan vaak uitkomst bieden. In dit geval moet hij worden ingesteld met een specifieke regel:
+- Kloon de repo met `git clone https://github.com/OWASP/wrongsecrets`.
+- Volg de instructies https://github.com/awslabs/git-secrets[hier] om Git secrets te installeren.
+- Voeg een nieuwe scan toe om naar de tekenreeks `git secrets --add 'password\s*=\s*.+'` te zoeken.
+- Voer nu die scan uit: `git secrets --scan`.
+
+3. Als je de broncode niet beschikbaar hebt, probeer dan de daadwerkelijke applicatie te bemachtigen om die te reverse-engineeren. De applicatie is in dit geval een Jar-bestand: een verzameling java-classbestanden samen met enkele resources.
+- Volg de instructies van https://docs.docker.com/engine/reference/commandline/cp/[de Docker-documentatie] om het Jar-bestand vanaf de root van de container naar je lokale bestandssysteem te kopiëren.
+- Open het JAR-bestand in https://java-decompiler.github.io/[*JD-GUI*] of https://github.com/skylot/jadx[*jadx-gui*] en zoek nu naar de `String password`!
+
+4. Je kunt de repository scannen met https://github.com/trufflesecurity/trufflehog[*Trufflehog*].
+- Kloon de repo met `git clone https://github.com/OWASP/wrongsecrets`.
+- Volg de instructies https://github.com/trufflesecurity/trufflehog[hier] om Trufflehog te installeren.
+- Volg deze instructies om het bestand https://github.com/trufflesecurity/trufflehog/blob/4afc224c635d10e732119f715f93788af1502ce4/examples/README.md[algemene detector] te downloaden
+- Download de trufflehog generic detector: `wget https://raw.githubusercontent.com/trufflesecurity/trufflehog/main/examples/generic.yml`.
+- Scan de bestanden met `trufflehog filesystem --config=$PWD/generic.yml . | grep password` en het wachtwoord staat in de uitvoer.
+
+5. Als alternatief kun je de oudere Trufflehog 2 gebruiken:
+- Zorg dat python en pip3 geïnstalleerd zijn en voer `pip3 install trufflehog` uit om Trufflehog 2 te installeren.
+- Scan de bestanden met `trufflehog . | grep password` en het wachtwoord staat in de uitvoer.
+- Houd er rekening mee dat Trufflehog 2 [meer dan 5 jaar geleden](https://github.com/trufflesecurity/trufflehog/tags?after=v3.0.0) is uitgebracht en niet langer [wordt onderhouden](https://github.com/trufflesecurity/trufflehog/issues/2328).

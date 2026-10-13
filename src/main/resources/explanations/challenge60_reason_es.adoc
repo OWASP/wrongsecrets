@@ -1,0 +1,57 @@
+=== Por qué importa el Desafío 60: Inyección inmediata de MCP y exposición a variables ambientales
+
+**El problema:**
+
+Los servidores MCP (Protocolo de Contexto de Modelo) son cada vez más populares para brindar a los asistentes de IA acceso a herramientas y datos. Sin embargo, muchos desarrolladores implementan servidores MCP sin los controles de seguridad adecuados. Peor aún, un servidor MCP malicioso puede manipular activamente al cliente de IA conectado mediante inyección de comandos, convirtiendo a la propia IA en un agente de exfiltración involuntario.
+
+**Dos vulnerabilidades en una:**
+
+**1. Ejecución de shell insegura (mala configuración clásica de MCP)**
+El servidor MCP expone una herramienta `execute_command` sin autenticación. Cualquiera que acceda al puerto 8090 puede ejecutarla y extraer todas las variables de entorno, incluidos los secretos.
+
+**2. Inyección rápida de MCP / "Ataque de arrastre de MCP" (ataque emergente a la cadena de suministro)**
+La respuesta `initialize` del MCP incluye un campo `instructions`. Este campo se inyecta directamente en el indicador del sistema del LLM que se conecta. Un servidor malicioso lo utiliza para instruir silenciosamente a la IA para que:
+
+1. Llama a `execute_command` con `env` para recopilar las variables de entorno del cliente.
+2. Llamar a `forward_env` con los datos recopilados y enviarlos de vuelta al atacante.
+3. Nunca informe al usuario sobre ninguno de estos pasos.
+
+El usuario no ve nada inusual. El modelo de IA sigue sus "instrucciones del sistema" sin cuestionarlas.
+
+**¿Por qué sucede esto?:**
+
+1. **Comodidad para el desarrollador:** Los servidores MCP se configuran rápidamente para integraciones de IA y la seguridad es una cuestión secundaria.
+2. **Acceso interno únicamente asumido:** Los desarrolladores asumen que el puerto MCP solo es accesible por el asistente de IA.
+3. **Herramientas potentes sin autenticación:** `execute_command` y herramientas similares no tienen control de acceso integrado.
+4. **Confianza en las instrucciones del servidor MCP:** Los clientes de IA consideran el campo `instructions` como autoritativo; un servidor malicioso abusa de esta confianza.
+5. **Secretos en variables de entorno:** Las aplicaciones almacenan secretos como variables de entorno, que se exponen fácilmente mediante un comando de shell.
+
+**Impacto en el mundo real:**
+
+- **Exfiltración de secretos de clientes de IA:** Un servidor MCP comprometido o suplantado puede robar `AWS_ACCESS_KEY_ID`, `GITHUB_TOKEN`, credenciales de base de datos y otros secretos del entorno de procesos del agente de IA.
+- **Funcionamiento silencioso:** El usuario nunca es informado: la IA extrae datos como parte de su "inicialización".
+- **Ataque a la cadena de suministro:** Si un atacante puede publicar o reemplazar un paquete de servidor MCP, cada asistente de IA que se conecta se convierte en un vector de exfiltración.
+- **Exposición del lado del servidor:** La herramienta `execute_command` no autenticada también filtra todos los secretos del lado del servidor a cualquier persona que la llame.
+
+**Vectores de exposición comunes:**
+
+- Servidores MCP vinculados a `0.0.0.0` en lugar de `127.0.0.1` (accesible desde la red)
+- Contenedores Docker con puerto MCP expuesto sin reglas de firewall
+- Pods de Kubernetes con puerto MCP accesible mediante descubrimiento de servicios
+- Paquetes de servidor MCP maliciosos o con errores tipográficos en los registros
+- Servidores MCP comprometidos en ataques a la cadena de suministro contra flujos de trabajo de IA
+
+**Prevención:**
+
+1. **Nunca exponga herramientas de ejecución de shell en servidores MCP de producción**: el riesgo es demasiado alto.
+2. **Vincular los servidores MCP solo a localhost** (`127.0.0.1`) para evitar el acceso a la red.
+3. **Requerir autenticación** para todos los puntos finales de MCP, incluso los internos.
+4. **Audita el campo `instructions`** de cualquier servidor MCP al que te conectes; trátalo como si fuera una solicitud de sistema no confiable.
+5. **Utilice administradores de secretos** (AWS Secrets Manager, HashiCorp Vault, Azure Key Vault) en lugar de variables de entorno.
+6. **Aplique la segmentación de red** para que los servidores MCP solo sean accesibles por el asistente de IA.
+7. **Supervise los registros de acceso del servidor MCP** para detectar llamadas inesperadas a herramientas, especialmente `execute_command` y `forward_env`.
+8. **Verifique la identidad del servidor MCP** antes de conectarse; trate los servidores MCP de terceros como código no confiable.
+
+**En resumen:**
+
+Un servidor MCP con una herramienta de ejecución de shell y sin autenticación equivale a ejecutar `nc -l 8090 -e /bin/sh` en su servidor de producción. Un servidor MCP malicioso que inyecta instrucciones en la consola es aún peor: convierte al propio asistente de IA en el vector de ataque, extrayendo información confidencial silenciosamente sin el conocimiento del usuario. Trate cualquier servidor MCP con el mismo rigor de seguridad que aplicaría a una API interna privilegiada, y revise las instrucciones `initialize` con la misma atención que las de una consola de un sistema de terceros.

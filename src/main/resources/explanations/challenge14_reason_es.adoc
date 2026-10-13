@@ -1,0 +1,10 @@
+*Por qué debes tener cuidado con la contraseña de otros secretos*
+
+Tanto si utiliza una contraseña para un sistema de gestión de secretos empresariales como para un gestor de contraseñas, sus factores de autenticación marcan la diferencia entre un sistema vulnerado y un sistema seguro.
+
+En términos sencillos, cuando te autenticas directamente en tu gestor de contraseñas:
+- Utiliza una contraseña segura (¡Por ejemplo, una larga!).
+- Utilice la autenticación multifactor (MFA) si es posible.
+- Habilitar cualquier tipo de alerta cuando un nuevo dispositivo y/o IP intente acceder a él.
+
+Si utiliza SSO: asegúrese de que el sistema al que se autentica admita los mismos controles: permita contraseñas largas y seguras, autenticación multifactor (MFA) y alertas de seguridad adecuadas cuando ocurra algo sospechoso.

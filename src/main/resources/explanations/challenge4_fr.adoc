@@ -1,0 +1,4 @@
+=== Mot de passe basé sur les arguments Docker
+Le développeur est devenu plus malin : désormais, le mot de passe n’est plus défini par un argument ENV, mais par un argument de construction du conteneur Docker.
+
+On peut facilement le repérer en observant la construction des couches.
