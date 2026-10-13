@@ -1,18 +1,21 @@
 package org.owasp.wrongsecrets.challenges.docker;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.not;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.io.UncheckedIOException;
 import org.junit.jupiter.api.Test;
 import org.owasp.wrongsecrets.Challenges;
 import org.owasp.wrongsecrets.challenges.Spoiler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
@@ -49,6 +52,30 @@ class Challenge76Test {
   }
 
   @Test
+  void datasetLoadingShouldPopulateChunksWithMetadataAndSecret() {
+    var challenge = new Challenge76();
+
+    var chunks = challenge.search(null);
+    assertThat(chunks).hasSize(300);
+
+    var secretChunk =
+        chunks.stream().filter(c -> c.text().contains(Challenge76.DEVELOPMENT_SECRET)).findFirst();
+    assertThat(secretChunk).isPresent();
+    assertThat(secretChunk.get().id()).isEqualTo("chunk-2");
+    assertThat(secretChunk.get().metadata()).containsKey("source");
+    assertThat(secretChunk.get().metadata()).containsKey("category");
+    assertThat(secretChunk.get().metadata()).containsKey("author");
+  }
+
+  @Test
+  void datasetLoadingWithInvalidResourceShouldThrowException() {
+    var invalidResource = new ByteArrayResource("not valid json".getBytes());
+    var challenge = new Challenge76(invalidResource);
+
+    assertThatThrownBy(() -> challenge.search(null)).isInstanceOf(UncheckedIOException.class);
+  }
+
+  @Test
   void searchShouldReturnTheChunkThatContainsTheSecret() {
     var challenge = new Challenge76();
 
@@ -62,8 +89,8 @@ class Challenge76Test {
   void searchWithoutQueryShouldReturnAllIndexedChunks() {
     var challenge = new Challenge76();
 
-    assertThat(challenge.search(null)).hasSize(4);
-    assertThat(challenge.search("  ")).hasSize(4);
+    assertThat(challenge.search(null)).hasSize(300);
+    assertThat(challenge.search("  ")).hasSize(300);
   }
 
   @Test
@@ -93,6 +120,19 @@ class Challenge76Test {
     assertThat(challenge.search("e5c91a7b")).hasSize(1);
     assertThat(challenge.search("e5c91a7b").getFirst().text())
         .contains(Challenge76.DEVELOPMENT_SECRET);
+  }
+
+  @Test
+  void searchShouldMatchSpecificEngineeringTopics() {
+    var challenge = new Challenge76();
+
+    var kafkaResults = challenge.search("kafka");
+    assertThat(kafkaResults).isNotEmpty();
+    assertThat(kafkaResults.getFirst().text().toLowerCase()).contains("kafka");
+
+    var k8sResults = challenge.search("kubernetes");
+    assertThat(k8sResults).isNotEmpty();
+    assertThat(k8sResults.getFirst().text().toLowerCase()).contains("kubernetes");
   }
 
   @Test
