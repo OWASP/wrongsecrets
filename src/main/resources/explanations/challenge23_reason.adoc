@@ -5,6 +5,7 @@ Whenever you run a mobile app on your smart-device or a SPA on your web-browser,
 *Why using Single-Page apps or Mobile apps to put client secret in is a bad idea*
 
 As you can tell by now, you can easily detect any secret that is stored within a Single-Page app or mobile app.
+Treat browser and mobile applications as public clients: never embed client secrets or other shared credentials in them. For OAuth, use Authorization Code Flow with PKCE; keep privileged operations and their credentials on a trusted backend.
 
 *Why Base64 encoding is no encryption*
 

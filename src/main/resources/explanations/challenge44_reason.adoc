@@ -4,3 +4,5 @@ Sometimes, people reason that less sensitive data should be stored as secret met
 In many of these cases, these are equally important and should get equal protection as the secret (e.g. the password) itself.
 
 We often don't want to give read access to secrets to our employees, but we do want to give read access to metadata instead. If any secret is stored in the metadata, that secret is then compromised internally.
+
+Keep sensitive values, including usernames when they enable account access, in the protected secret value rather than metadata. Apply the same access policy to the full credential as to the password.

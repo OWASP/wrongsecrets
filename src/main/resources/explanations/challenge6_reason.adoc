@@ -7,6 +7,7 @@ Secrets should, unless encrypted (and better yet, even not then), obviously not 
 Most importantly: RBAC should be really tight around secrets: only the processes which requires the actual secret should be able to read it and a very limited of other roles to maintain the secret.
 
 And then there is the storage of the K8s cluster where the secrets are now hosted by. This is not encrypted at the moment and could be misused as well.
+Enable encryption at rest for Kubernetes Secrets with a managed key, keep RBAC narrowly scoped to the specific secrets each workload needs, and audit access. Encryption at rest does not replace access controls.
 
 So: K8S secrets are not a _bad_ idea. They do, however, require a proper configuration of the K8s cluster hosting them in order to be more effectively secured.
 

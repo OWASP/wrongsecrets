@@ -16,6 +16,8 @@ public class InMemoryScoreCard implements ScoreCard {
   private final Challenges challenges;
   private final Map<Difficulty, Integer> difficultyLevelsToInt;
 
+  private int cachedTotalReceivedPoints = 0;
+
   public InMemoryScoreCard(Challenges challenges) {
     this.challenges = challenges;
     var difficulties = challenges.difficulties();
@@ -27,7 +29,9 @@ public class InMemoryScoreCard implements ScoreCard {
 
   @Override
   public void completeChallenge(ChallengeDefinition challengeDefinition) {
-    solvedChallenges.add(challengeDefinition);
+    if (solvedChallenges.add(challengeDefinition)) {
+      cachedTotalReceivedPoints += calculatePoints(challengeDefinition);
+    }
   }
 
   @Override
@@ -42,16 +46,18 @@ public class InMemoryScoreCard implements ScoreCard {
 
   @Override
   public int getTotalReceivedPoints() {
-    return solvedChallenges.stream()
-        .map(
-            challenge ->
-                difficultyLevelsToInt.get(challenge.difficulty())
-                    * (100 + (difficultyLevelsToInt.get(challenge.difficulty()) - 1) * 25))
-        .reduce(0, Integer::sum);
+    return cachedTotalReceivedPoints;
   }
 
   @Override
   public void reset(ChallengeDefinition challenge) {
-    solvedChallenges.remove(challenge);
+    if (solvedChallenges.remove(challenge)) {
+      cachedTotalReceivedPoints -= calculatePoints(challenge);
+    }
+  }
+
+  private int calculatePoints(ChallengeDefinition challenge) {
+    int level = difficultyLevelsToInt.get(challenge.difficulty());
+    return level * (100 + (level - 1) * 25);
   }
 }

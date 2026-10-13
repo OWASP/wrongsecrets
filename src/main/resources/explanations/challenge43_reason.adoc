@@ -5,3 +5,4 @@ Sharing a secret from your application on social media is a really bad practice 
 Although the user or platform can often delete comments/posts, the secret almost always ends up in some database that could get leaked.
 
 Never share any secrets, personal or work-related, on social media!
+If a secret is posted, revoke or rotate it immediately and ask the platform to remove the post. Treat it as exposed even after deletion, since others may have copied or archived it.
