@@ -79,7 +79,7 @@
     <node.version>v26.8.1</node.version>
     <npm.version>11.19.0</npm.version>
     <spotbugs-maven.version>4.10.5.0</spotbugs-maven.version>
-    <spotbugs.version>4.10.4</spotbugs.version>
+    <spotbugs.version>4.10.5</spotbugs.version>
     <spotless-maven-plugin.version>3.10.4</spotless-maven-plugin.version>
     <spring-boot.version>4.1.1</spring-boot.version>
     <spring-vault.version>4.1.0</spring-vault.version>
