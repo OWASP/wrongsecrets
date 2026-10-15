@@ -43,7 +43,7 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
-          terraform_version: 1.9.8
+          terraform_version: v1.16.6
       - name: Setup TFLint
         uses: terraform-linters/setup-tflint@v6
         with:
