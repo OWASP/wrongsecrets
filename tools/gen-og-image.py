@@ -192,8 +192,8 @@ def main() -> None:
     x, y = draw_centered(draw, 480, "WrongSecrets", f_title, WHITE)
     draw.text((x, y), "WrongSecrets", font=f_title, fill=WHITE)
 
-    x, y = draw_centered(draw, 590, "Find hardcoded secrets in code", f_tag, LIGHT_GREY)
-    draw.text((x, y), "Find hardcoded secrets in code", font=f_tag, fill=LIGHT_GREY)
+    x, y = draw_centered(draw, 590, "Can you find all the secrets?", f_tag, LIGHT_GREY)
+    draw.text((x, y), "Can you find all the secrets?", font=f_tag, fill=LIGHT_GREY)
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
     bg.convert("RGB").save(out_path, optimize=True)
