@@ -1,0 +1,45 @@
+*Waarom een RAG-vectorstore de geheimen lekt van de documenten die hij indexeerde*
+
+Retrieval augmented generation slaat de tekst van documenten op zodat een zoekopdracht
+die tekst later kan retourneren. Die tekst verdwijnt niet door de embedding-stap: de
+embeddings worden uit de brokken berekend, maar de brokken zelf blijven volledig
+leesbaar en worden door elke zoekopdracht letterlijk teruggegeven. Indexeer een
+document dat een geheim bevat en het geheim wordt onderdeel van de retrieval-corpus.
+
+De fout in deze uitdaging is typisch:
+
+- Documenten worden in bulk geïndexeerd, zonder controle van wat ze bevatten.
+  Conceptnotities, runbooks en vergadernotulen zijn precies het soort informele
+  tekst dat inloggegevens verzamelt "voor even".
+- De ontwikkelvectorstore werd opengesteld "zodat iedereen RAG kan proberen", zonder
+  authenticatie op het zoekendpoint. Retrieval-interfaces worden zelden met dezelfde
+  zorg behandeld als database-inloggegevens, terwijl ze dezelfde inhoud teruggeven.
+- Chunking splitst documenten op willekeurige grenzen, waardoor een geheim vaak in
+  het midden van een onschuldig uitziende brok belandt. Alleen de eerste regels van
+  een document scannen is niet genoeg.
+- Vectorstores bewaren hun metadata: uit welk document een brok komt, wanneer die werd
+  geïndexeerd en wie die heeft geüpload. Die metadata vertelt een aanvaller precies
+  welke lek het waard is om te exfiltreren.
+
+----
+Wat je beter kunt doen:
+
+- Behandel de vectorstore als productiedata: eis authenticatie op elk
+  retrieval-endpoint en autoriseer per collectie of tenant.
+- Scan en reinig documenten voordat ze worden geïndexeerd, op dezelfde manier waarop
+  repositories en tickets op geheimen worden gescand.
+- Houd inloggegevens volledig buiten het corpus: verwijs ernaar op naam en los ze op
+  runtime op, zodat herindexeren ze niet kan lekken.
+- Log en monitor retrieval-query's; een ongebruikelijk querypatroon is vaak het eerste
+  teken dat iemand door het corpus bladert op zoek naar geheimen.
+- Roteer elk inloggegeven dat ooit deel uitmaakte van een geïndexeerd document, ook
+  nadat het document is verwijderd: kopieën van de brok kunnen in backups en replicas
+  blijven bestaan.
+----
+
+[NOTE]
+====
+Alles wat in een git-repository onacceptabel zou zijn, is in een vectorstore ook
+onacceptabel. Een geïndexeerde brok is een kopie van het document, met al zijn
+geheimen.
+====
