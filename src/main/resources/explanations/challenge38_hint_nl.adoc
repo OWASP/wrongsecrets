@@ -1,0 +1,9 @@
+In tegenstelling tot andere Git-uitdagingen kan deze niet worden opgelost met de overvloed aan tools die automatisch zoeken naar geheimen die in Git-repos zijn gelekt.
+
+Probeer de uitdaging op te lossen door handmatig de Git-metadata door te nemen.
+
+1. Clone de repository - `git clone https://github.com/OWASP/wrongsecrets`.
+2. Navigeer naar de map - `cd wrongsecrets`
+3. Haal de notes op - `git fetch origin pass:['refs/notes/*:refs/notes/*']`
+4. Toon alle notes in de repo - `git notes`
+5. Gebruik de note reference die wordt weergegeven om de note te tonen - `git notes show [ref]` (er worden 2 referenties getoond voor elke note, de tweede is de note reference)

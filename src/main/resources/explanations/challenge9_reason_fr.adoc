@@ -1,0 +1,18 @@
+*Pourquoi vous devez faire attention aux données confidentielles stockées dans votre cloud :*
+
+Secrets et état de terraformation :
+
+L'état Terraform peut être stocké à différents endroits : localement, chez un fournisseur cloud, etc. Il arrive fréquemment que des secrets se retrouvent dans cet état, car les systèmes créés par Terraform doivent souvent communiquer avec d'autres systèmes nécessitant une authentification. Par conséquent, assurez-vous que les secrets sont toujours chiffrés dans l'état Terraform, ou qu'ils sont stockés dans un système de gestion des secrets. Vous pouvez également créer le secret dans Terraform, mais définir et gérer sa valeur via un processus distinct.
+
+Il est important de noter que les secrets ne sont pas la seule raison de restreindre l'accès à l'état Terraform. L'accès en lecture à l'état Terraform peut exposer des détails de configuration à des personnes non autorisées, tandis que l'accès en écriture peut permettre à un attaquant de créer un état falsifié qui, lors de la prochaine exécution de `terraform apply-run`, contiendra des modifications non autorisées.
+Utilisez un backend d'état distant protégé avec chiffrement et verrouillage, et restreignez l'accès en lecture comme en écriture. Marquer une valeur Terraform comme `sensitive` ne fait que la masquer à la sortie normale de la CLI ; cela ne la retire pas de l'état. Si des identifiants atteignent l'état, renouvelez-les.
+
+Accès au compte Administrateur/Propriétaire :
+Si vous avez pu utiliser le compte administrateur AWS pour accéder aux données, vous comprenez pourquoi c'est une très mauvaise idée en production. En effet, ce compte permet de modifier n'importe quel élément et d'exfiltrer facilement les données confidentielles.
+Utilisez des identités distinctes au moindre privilège pour les charges de travail et pour les personnes, et réservez le compte administrateur à un usage de secours supervisé et protégé par la MFA.
+
+Enfin, et surtout : nous pourrions facilement accéder au conteneur pour rechercher le point de montage contenant le secret. Cela est lié à trois choses :
+
+- nous sommes autorisés à le faire grâce au RBAC, ce qui ne devrait pas être votre cas normal en PRD : sinon, n’importe qui dans votre organisation pourrait fouiller dans le conteneur.
+- Nous avons des exécutables (sh/openssl/etc.) dans le conteneur, que nous pouvons lancer pour établir un shell. Supprimer tout binaire non essentiel de votre conteneur permet de réduire la surface d'attaque et de compliquer la tâche d'un attaquant ayant réussi une exécution de code à distance (RCE) sur votre conteneur, qui pourrait ainsi accéder à d'autres parties du système et exécuter davantage de commandes.
+- Nous avons exposé la ConfigMap comme une variable d'environnement. Cela signifie que toute personne ayant accès à l'environnement d'exécution du conteneur au sein du pod peut désormais extraire le secret. Nous avons rapproché le secret de l'utilisateur, mais peut-être pas encore suffisamment (par exemple, uniquement de l'application).

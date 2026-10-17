@@ -1,0 +1,19 @@
+*Waarom geheimen zo hard RBAC nodig hebben*
+
+K8s Secrets zijn ontworpen om geheimen in te hosten. Zoals je kunt zien door de uitdaging op te lossen en zorgvuldig te reconnoiteren, zijn geheimen al `base64`-gecodeerd zodat ze versleutelde binaire gegevens kunnen bevatten.
+
+Geheimen zouden — tenzij versleuteld, en beter nog: ook dan niet — uiteraard niet aan git gecommit moeten worden, wat een van de eerste fouten is die hier worden gemaakt, want dan krijgen we dezelfde problemen als beschreven in de vorige uitdagingen.
+
+Belangrijkste: RBAC moet echt strak om geheimen heen zitten: alleen de processen die het daadwerkelijke geheim nodig hebben moeten het kunnen lezen, en slechts zeer beperkt andere rollen om het geheim te beheren.
+
+En dan is er nog de opslag van het K8s-cluster waarin de geheimen nu worden gehost. Die is op dit moment niet versleuteld en kan ook worden misbruikt.
+Schakel encryption at rest in voor Kubernetes Secrets met een beheerde sleutel, houd RBAC nauwkeurig afgebakken op de specifieke geheimen die elke workload nodig heeft, en audit de toegang. Encryption at rest vervangt geen toegangscontroles.
+
+K8S-geheimen zijn dus geen _slecht_ idee. Ze vereisen echter een goede configuratie van het K8s-cluster dat ze host om effectiever beveiligd te zijn.
+
+
+Tot slot: we konden eenvoudig in de container exec'en om de ENV-vars met het geheim te grep'en. Dit heeft te maken met 3 dingen:
+
+- we mogen dit doen middels RBAC, wat in PRD niet je normale geval zou moeten zijn: anders kan iedereen in je organisatie in de container rondneuzen.
+- we hebben uitvoerbare bestanden in de container (sh/openssl/etc) die we kunnen uitvoeren om een shell op te zetten. Je container ontdoen van alle niet-nodige binaries kan helpen om het aanvalsoppervlak te verkleinen en het moeilijker te maken voor een aanvaller die een RCE op je container heeft uitgevoerd om naar andere plekken binnen de container te springen en zo verdere uitvoering te krijgen.
+- we hebben de configmap blootgelegd als een ENV. Dit betekent dat iedereen die de containerruntime binnen de pod heeft bereikt, nu het geheim kan dumpen. We hebben het geheim dicht bij de consument gebracht, maar misschien nog niet dichtbij genoeg (bijv. alleen de app).

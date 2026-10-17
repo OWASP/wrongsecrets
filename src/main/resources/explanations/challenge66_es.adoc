@@ -1,0 +1,10 @@
+=== Ocultándose en binarios, parte 7: la interfaz de línea de comandos Java ofuscada
+
+La ofuscación puede ralentizar el proceso, pero no impide recuperar los secretos ocultos. ¿Podrás encontrar el secreto más difícil en nuestra interfaz de línea de comandos Java ofuscada?
+
+Para resolverlo:
+
+. Descargue e inspeccione https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-java-obfuscated.jar[wrongsecrets-java-obfuscated.jar].
+. Descompila el archivo JAR con un descompilador de Java como CFR, JADX o IntelliJ IDEA y rastrea la clase principal.
+. Busque la matriz de bytes codificada, la clave XOR y los métodos auxiliares que reconstruyen el secreto en tiempo de ejecución.
+. Una vez que recuperes el secreto, envíalo con `java -jar wrongsecrets-java-obfuscated.jar <your answer>`.

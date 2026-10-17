@@ -1,0 +1,8 @@
+Vous pouvez relever ce défi grâce aux solutions alternatives suivantes :
+
+1. Trouvez le secret dans l'interface utilisateur.
+- Utilisez les outils de développement de votre navigateur pour consulter le code HTML de ce défi.
+- Rendez-vous à la fin de la description du défi et recherchez les commentaires.
+2. Décodez le secret encodé en base64
+- Rendez-vous à la source du défi 23 et trouvez la réponse encodée en Base64.
+- Utilisez n'importe quel décodeur en ligne/hors ligne pour décoder la chaîne Base64, puis décodez-la en hexadécimal, et enfin décodez-la à nouveau en Base64.

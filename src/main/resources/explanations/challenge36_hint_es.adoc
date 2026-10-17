@@ -1,0 +1,58 @@
+Este desafío se puede resolver recuperando las cadenas almacenadas en los registros. Puedes usar cualquier herramienta de depuración. En las siguientes instrucciones te mostraremos cómo resolverlo usando GDB y Radare2.
+Tenga en cuenta que solo lo mostramos para el ejecutable de Windows. Los demás ejecutables tendrán una disposición diferente, pero la idea principal del ejercicio será similar.
+
+Para realizar la tarea con GDB, abre la terminal y escribe:
+
+1. `gdb -q wrongsecrets-advanced-c-windows.exe` para abrir GDB y cargar el ejecutable.
+2. `disas main`, para desensamblar la función `main`, que es el punto de entrada del programa.
+3. `b execute` para establecer un punto de interrupción en la función `execute`.
+4. `set args 1234567812345678` para establecer los argumentos del programa. Puede establecer una cadena aleatoria de 16 caracteres.
+5. Presione `r` para ejecutar el programa. Esto podría fallar en macOS; en ese caso, consulte https://sourceware.org/gdb/wiki/PermissionsDarwin[gdb wiki].
+6. `disas execute` para desensamblar la función `execute`.
+7. `b compare` para establecer un punto de interrupción en la función `compare`. Para obtener la clave:
+- a. `b get_key` para establecer un punto de interrupción en la función `get_key`.
+- b. `disas get_key` para desensamblar la función `get_key`
+- c. Busque la instrucción `movabs xxx, %rax` y copie los valores hexadecimales sin 0x.
+- d. Repítalo para la instrucción `movabs xxx, %rdx`.
+Luego, necesitamos verificar el orden de bytes de la arquitectura de la CPU para descifrar el código correcto. Para ello, abre la terminal de Python3 y escribe:
+- e. `from sys import byteorder`
+- f. `print(byteorder)`
+- g. Si el endianness es igual a `little`, https://blockchain-academy.hs-mittweida.de/litte-big-endian-converter/[haga clic aquí] para convertir de little endian a big endian.
+
+8. Copie cada cadena y concatene las dos cadenas después de la conversión. Ejemplo:
+- a. `big_endian_a = '69676F74616C6C74'`
+- b. `big_endian_b = '68656B6579737373'`
+- c. `big_endian_result = '69676F74616C6C7468656B6579737373'`, y obtuviste la clave para descifrar. Cierra el programa y ábrelo de nuevo para obtener el mensaje secreto.
+
+9. `b get_secret_message` para establecer un punto de interrupción en la función `get_secret_message`.
+- a. `c` para continuar el flujo de ejecución del programa
+- b. `disas get_secret_message` para desensamblar la función `get_secret_message`.
+- c. Busque la instrucción `movabs xxx, %rax` y copie los valores hexadecimales sin 0x.
+- d. Repítalo para la instrucción `movabs xxx, %rdx`.
+- e. Compruebe el orden de bytes de la arquitectura de su CPU, utilizando los pasos `7.e`, `7.f` y `7.g`. Como resultado: `big_endian_result = 'E49F2F331A9A251974E1BA7F724C3B7F'`
+10. Descarga la carpeta `decrypt`, abre la terminal y escribe:
+- Utilice `gcc decrypt.c -o decrypt` para compilar el código, o puede compilarlo según su sistema operativo.
+
+11. `./decrypt E49F2F331A9A251974E1BA7F724C3B7F 69676F74616C6C7468656B6579737373` y tendrás la clave secreta que es la respuesta al desafío.
+
+Para realizar la tarea con Radare2, abre la terminal y escribe:
+
+1. `r2 -A wrongsecrets-advanced-c-windows.exe` para cargar el binario y analizar todo el código referenciado.
+2. `pdf @ sym.get_key` para desensamblar la función `get_key`.
+3. Busque la instrucción `movabs %rax,xxx` y copie los valores hexadecimales sin 0x.
+4. Repítelo para la instrucción `movabs %rdx,xxx`. Luego, debemos verificar el orden de bytes de la arquitectura de la CPU para descifrar el código correcto. Para ello, abre la terminal de Python3 y escribe:
+- a. `from sys import byteorder`
+- b. `print(byteorder)`
+- c. Si el endianness es igual a `little`, https://blockchain-academy.hs-mittweida.de/litte-big-endian-converter/[haga clic aquí] para convertir de little endian a big endian.
+5. Copie cada cadena y concatene las dos cadenas después de la conversión. Ejemplo:
+- a. `big_endian_a = '69676F74616C6C74'`
+- b. `big_endian_b = '68656B6579737373'`
+- c. `big_endian_result = '69676F74616C6C7468656B6579737373'`, y obtuviste la clave para descifrar.
+
+6. `pdf @ sym.get_secret_message` para desensamblar la función `get_secret_message`.
+7. Busque la instrucción `movabs %rax,xxxx` y copie los valores hexadecimales sin 0x.
+8. Repita los pasos del `3` al `5` para obtener los valores. Como resultado: `big_endian_result = 'E49F2F331A9A251974E1BA7F724C3B7F'`
+9. Salga del programa, descargue la carpeta `decrypt`, abra la terminal y escriba:
+- Utilice `gcc decrypt.c -o decrypt` para compilar el código, o puede compilarlo según su sistema operativo.
+
+10. `./decrypt E49F2F331A9A251974E1BA7F724C3B7F 69676F74616C6C7468656B6579737373` y tendrás la clave secreta que es la respuesta al desafío.

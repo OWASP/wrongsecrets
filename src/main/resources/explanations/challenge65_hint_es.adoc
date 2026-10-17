@@ -1,0 +1,18 @@
+Este desafío utiliza un archivo JAR de Java CLI estándar.
+
+Puedes resolverlo de la siguiente manera:
+
+1. Encuentra la clase compilada que contiene el secreto:
+- Descarga `wrongsecrets-java.jar`.
+- Ejecute `jar tf wrongsecrets-java.jar` y localice `io/github/owasp/wrongsecrets/WrongSecretsPlain.class`.
+- Abra esa clase en CFR, JADX, IntelliJ IDEA u otro descompilador.
+
+2. Inspeccione cómo se almacena el secreto:
+- Ejecuta `javap -c -p -classpath wrongsecrets-java.jar io.github.owasp.wrongsecrets.WrongSecretsPlain`.
+- Busca el método `getSecret()` y observa la instrucción `ldc` que utiliza.
+- Observe que el secreto se almacena como una cadena de caracteres simple en lugar de estar ofuscado.
+
+3. Recupere el valor y envíelo:
+- Copie la cadena devuelta por `getSecret()` desde la salida del descompilador o del código de bytes.
+- Si desea realizar otra comprobación rápida, herramientas como `strings wrongsecrets-java.jar` también pueden ayudar a exponer constantes legibles.
+- Envíe la cadena recuperada como respuesta.

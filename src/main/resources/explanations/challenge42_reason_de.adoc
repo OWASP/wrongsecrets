@@ -1,0 +1,8 @@
+*Warum es keine gute Idee ist, den API-Schlüssel in den Audit-Ereignissen zu verbergen?*
+
+In einem sicheren und gut konzipierten System ist der Schutz sensibler Informationen wie API-Schlüssel von entscheidender Bedeutung.
+Audit-Ereignisse sind von großer Bedeutung für die Nachverfolgung und Überwachung von Aktivitäten innerhalb einer Anwendung.
+
+Stellen Sie sicher, dass API-Schlüssel nicht im Klartext in den (Audit-)Protokollen oder anderen Ausgaben sichtbar sind.
+
+Protokollieren Sie das Ereignis und die notwendigen, nicht sensiblen Metadaten anstelle der Zugangsdaten selbst. Schwärzen Sie sensible Felder, bevor die Daten den Protokollspeicher erreichen, schränken Sie den Protokollzugriff ein und rotieren Sie jeden Schlüssel, der bereits aufgezeichnet wurde.

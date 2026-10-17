@@ -1,0 +1,8 @@
+*Pourquoi il est déconseillé d'inclure des données sensibles dans les métadonnées*
+
+Parfois, on considère que les données les moins sensibles devraient être stockées sous forme de métadonnées secrètes. Prenons l'exemple d'un nom d'utilisateur : est-il moins sensible qu'un mot de passe ?
+Dans bon nombre de ces cas, ces éléments sont tout aussi importants et devraient bénéficier de la même protection que le secret (par exemple, le mot de passe) lui-même.
+
+Nous préférons généralement ne pas donner à nos employés un accès en lecture aux données confidentielles, mais nous souhaitons plutôt leur donner accès aux métadonnées. Si une donnée confidentielle est stockée dans les métadonnées, elle est alors compromise en interne.
+
+Conservez les valeurs sensibles, y compris les noms d'utilisateur lorsqu'ils permettent l'accès au compte, dans la valeur secrète protégée plutôt que dans les métadonnées. Appliquez la même politique d'accès à l'identifiant complet qu'au mot de passe.

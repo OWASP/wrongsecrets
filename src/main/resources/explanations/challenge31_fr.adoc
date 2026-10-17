@@ -1,0 +1,5 @@
+=== Un secret dans une page web
+
+Un utilisateur a accidentellement divulgué la « recette secrète » en ajoutant du contenu à notre site web.
+
+Pouvez-vous repérer le secret sur notre site web : https://owasp.org/www-project-wrongsecrets/[Website] ?

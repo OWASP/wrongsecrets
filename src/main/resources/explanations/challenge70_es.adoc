@@ -1,0 +1,16 @@
+=== Desafío 70: Encuentra el secreto en el paquete de habilidades de Claude
+
+Las habilidades de Claude se distribuyen como paquetes exportados `.skill`: un archivo zip que contiene una carpeta con un archivo `SKILL.md` que describe cuándo usar la habilidad, además de los scripts y el material de referencia necesarios. El paquete completo se descomprime en la máquina donde se instala.
+
+Eso convierte a un paquete de habilidades en un excelente escondite, ya que los revisores suelen leer el archivo `SKILL.md` y se detienen ahí. La parte interesante generalmente se encuentra en los archivos contiguos.
+
+Esta aplicación incluye una habilidad de Claude llamada `incident-reporter`. El paquete de habilidades exportado se encuentra en la carpeta de recursos y se puede descargar en link:/skills/claude/incident-reporter.zip[`/skills/claude/incident-reporter.zip`].
+
+Descarga el paquete, descomprímelo y averigua el token con el que se autentica quien lo sube.
+
+El código fuente de la habilidad también está disponible en GitHub en el siguiente enlace: link:https://github.com/OWASP/wrongsecrets/blob/master/src/main/resources/challenges/challenge-70/claude-skill/incident-reporter.skill[`src/main/resources/challenges/challenge-70/claude-skill/incident-reporter.skill`].
+
+[NOTE]
+====
+El archivo `SKILL.md` está limpio. Leer solo el punto de entrada de una habilidad no constituye una revisión.
+====

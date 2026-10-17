@@ -1,0 +1,12 @@
+Je kunt deze uitdaging op de volgende alternatieve manieren oplossen:
+
+1. Zoek het geheim in AWS Secrets Manager (dit is de goedkope manier; probeer ook de andere eens :) ):
+- Log in op de AWS https://console.aws.com/[Console] met het account waarmee je de WrongSecrets-omgeving hebt opgezet.
+- Ga naar AWS Secrets Manager.
+- Haal de gegevens op uit `wrongsecrets2`.
+
+2. Zoek het geheim door een shell-sessie te starten in de pod (via `exec`):
+- Zorg ervoor dat je `kubectl` hebt geïnstalleerd zoals beschreven in de `README.md` en dat `kubectl` zo is geconfigureerd dat commando's naar het juiste cluster worden gestuurd.
+- Voer nu `kubectl get pods` uit. Je ziet hier alle actieve pods in de huidige namespace; voor deze app is dat doorgaans `default` (tenzij je beheerder of trainer anders heeft aangegeven).
+- Voer voor jouw exemplaar van de WrongSecrets-pod het volgende commando uit: `kubectl exec -it secret-challenge-<rest of the name of the pod from the prev.step> -- sh`.
+- Bekijk vervolgens de gegevens in de map `/mnt/secrets-store`.

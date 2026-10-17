@@ -1,0 +1,24 @@
+Puedes resolver este desafío mediante las siguientes soluciones alternativas:
+
+1. Utilice `docker history`:
+ - Descarga el contenedor (`docker pull jeroenwillemsen/wrongsecrets:<TAGNAME-HERE>` donde la etiqueta puede ser `latest-no-vault` o una versión específica que estés usando ahora),
+- Ejecuta `docker history --no-trunc  jeroenwillemsen/wrongsecrets:<TAGNAME-HERE>` con el que podrás encontrar los argumentos utilizados para el contenedor con la etiqueta dada.
+- Ahora intenta encontrar la `DOCKER_ENV_PASSWORD`.
+
+2. Visite el repositorio de Docker en línea:
+- Ve a https://hub.docker.com/r/jeroenwillemsen/wrongsecrets[*Repositorio Docker de WrongSecrets*]
+- Echa un vistazo a la etiqueta que te corresponda. Allí encontrarás todos los comandos utilizados para componer el contenedor. ¿Cuál es el valor de `DOCKER_ENV_PASSWORD`?
+
+3. Usa Dockle https://github.com/goodwithtech/dockle[*Dockle*]:
+ - Instale Dockle como se describe en su página de Github: https://github.com/goodwithtech/dockle
+ - Ejecuta `dockle jeroenwillemsen/wrongsecrets:<TAGNAME-HERE>` y usa su resultado para tu búsqueda de secretos.
+
+4. Acceda al contenedor y muestre las variables de entorno:
+ - Inicia el contenedor localmente con `docker run jeroenwillemsen/wrongsecrets:<TAGNAME-HERE>`
+ - Encuentra el ID del contenedor ejecutando `docker ps` en una terminal de Next.js.
+ - Ejecuta `docker exec -it <container id> sh`
+ - En el contenedor, ejecuta `env`.
+
+5. Utilice `docker inspect` para encontrar las variables de entorno:
+- Descarga el contenedor,
+- Ejecuta `docker inspect jeroenwillemsen/wrongsecrets:<TAGNAME-HERE>` e intenta encontrar la sección `Config` y luego la sección `Env`. ¿Cuál es el valor de `DOCKER_ENV_PASSWORD`? ¿Sabías que si usas https://stedolan.github.io/jq/[JQ] podrías usar `docker inspect jeroenwillemsen/wrongsecrets:<TAGNAME-HERE> | jq '.[] | .Config.Env[]' en su lugar para encontrarlo mucho más rápido?

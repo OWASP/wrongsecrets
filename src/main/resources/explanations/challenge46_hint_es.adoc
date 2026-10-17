@@ -1,0 +1,11 @@
+Este desafío se puede resolver utilizando las siguientes formas:
+
+- Obtenga los datos del sidecar examinando los archivos creados por el sidecar del agente de Vault:
+  1. Ejecuta `kubectl get pods -A` y busca el nombre del pod secret-challenge-xxx.
+  2. Ejecute `kubectl exec secret-challenge-xxx -c secret-challenge -n default -- cat vault/secrets/challenge46` donde `xxx` es el resto del nombre del pod generado aleatoriamente para imprimir los secretos inyectados desde vault.
+
+- Obtenga los datos revisando los registros del pod Wrongsecrets mientras se ejecuta el comando `echo`:
+  1. Ejecuta `kubectl get pods -A` y busca el nombre del pod secret-challenge-xxx.
+  2. Ejecute `kubectl logs secret-challenge-xxx` donde `xxx` es el resto del nombre del pod generado aleatoriamente para imprimir los registros, incluida la instrucción `echo`.
+
+Nota: si está ejecutando esto en un entorno alojado, donde no tiene acceso al clúster de Kubernetes, pida al organizador de la solución alojada que ejecute los comandos por usted y le devuelva los resultados.

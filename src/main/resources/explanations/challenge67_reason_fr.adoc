@@ -1,0 +1,17 @@
+*Pourquoi le fait de consigner un secret chez votre fournisseur de cloud pose problème*
+
+L'encodage n'est pas du chiffrement. Base64 masque les informations d'identification lors d'une revue de code rapide, mais toute personne ayant accès aux journaux peut les décoder en une seule commande. Traitez un secret encodé dans une ligne de journal comme un secret en clair.
+
+Voici quelques éléments qui rendent la situation particulièrement problématique dans un environnement cloud :
+
+- L'audience est bien plus large que vous ne le pensez. Les journaux de connexion sont généralement accessibles à l'ensemble de la plateforme ou de l'équipe SRE, et souvent à toute charge de travail disposant d'une autorisation étendue de type `logs:FilterLogEvents`, `roles/logging.viewer` ou lecteur Log Analytics. La portée de cette information secrète correspond à celle de vos autorisations de journalisation.
+- La durée de conservation est supérieure à la durée de rotation. Les journaux sont généralement conservés pendant des mois et répliqués dans un compartiment d'archivage ou un SIEM. La rotation des identifiants ne supprime pas l'ancienne valeur de ces copies ; il faut donc considérer chaque point de destination en aval comme compromis.
+- La journalisation structurée peut facilement entraîner des fuites accidentelles. Il est pratique d'associer une charge utile complète, une requête ou un contexte MDC à un « événement d'audit », car cela récupère tout ce qui se trouve dans ce contexte, y compris les jetons et les clés.
+- L'enregistrement des données peut déplacer le secret vers des systèmes de stockage supplémentaires, des archives ou des plateformes d'observabilité tierces. Ce cas de figure n'est généralement pas couvert par le modèle de menaces que vous avez défini pour ce secret.
+
+Que faire à la place :
+
+- Ne jamais inclure d'informations d'identification dans une instruction de journalisation, même encodées, et même pas au niveau `DEBUG`.
+- Supprimez les données sensibles à la source. Filtrez les clés sensibles avant qu'elles n'atteignent l'appender, par exemple avec un convertisseur Logback ou un masquage, afin qu'une modification ultérieure du code ne puisse pas réintroduire la fuite.
+- Recherchez-le. Les outils de détection de secrets peuvent être exécutés aussi bien sur les journaux que sur le code source.
+- Si cela s'est produit : faites tourner le secret, puis supprimez ou supprimez tous les récepteurs et archives qui l'ont reçu.

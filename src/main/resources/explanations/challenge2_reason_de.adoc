@@ -1,0 +1,11 @@
+*Warum es eine schlechte Idee ist, Geheimnisse im Code zu speichern.*
+
+Wie Sie sehen, haben wir etwas mehr Flexibilität als bei Herausforderung 1. Allerdings: Das Passwort ist weiterhin im Code enthalten!
+
+Obwohl wir die Variablen später problemlos überschreiben können – wie Sie in den nächsten Aufgaben sehen werden – werden Geheimnisse häufig in der Spring- oder Spring-Cloud-Konfiguration gespeichert, ohne sie später zu überschreiben. Das bedeutet, dass jeder mit Zugriff auf die Spring-Cloud-Konfiguration das Geheimnis erfahren kann.
+
+Die Verwendung einer verteilten Lösung wie https://cloud.spring.io/spring-cloud-config/reference/html/[Spring Cloud Config], bei der Sie die Eigenschaften Ihrer Anwendung extern verwalten, kann bei unvorsichtiger Vorgehensweise zu demselben Problem führen. Lesen Sie daher vor der Verwendung von Spring Cloud Config unbedingt den Abschnitt „Sicherheit“ unter https://cloud.spring.io/spring-cloud-config/reference/html/#_security[security] durch.
+
+Was Sie stattdessen tun sollten:
+- Bewahren Sie keine Geheimnisse im Klartext in Anwendungsproperties oder Konfigurationsrepositories auf. Rufen Sie sie bei der Bereitstellung oder zur Laufzeit aus einem Secrets Manager ab.
+- Falls Spring Cloud Config Geheimnisse verwalten muss, injizieren Sie diese nach Möglichkeit über sichere Muster mit Secrets Managern als Quelle (z. B. ein Geheimnis über einen Vault-Sidecar-Container). Falls das nicht möglich ist: Aktivieren Sie die von Spring Cloud unterstützte Verschlüsselung und Authentifizierung, schränken Sie den Zugriff auf autorisierte Workloads und Bediener ein und überwachen Sie den Zugriff.

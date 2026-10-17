@@ -1,0 +1,4 @@
+Nous utilisons Vault en dehors d'un cluster Kubernetes. Veuillez exécuter cette application dans le cluster Kubernetes comme indiqué dans la documentation.
+https://github.com/OWASP/wrongsecrets#vault-exercises-with-minikube[README.md]
+
+Il se peut que d'autres défis soient pris en charge après celui-ci. Veuillez essayer un autre défi !

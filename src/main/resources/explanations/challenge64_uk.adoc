@@ -1,0 +1,7 @@
+=== Приховування у бінарних файлах, частина 5: бінарний файл Swift
+
+Подібно до приховування секретів у програмі, написаній на C, ви можете зробити це в Swift! Swift — це сучасна компільована мова Apple, яка використовується на платформах Apple та Linux. Чи можете ви знайти секрет у нашому двійковому файлі?
+
+Давайте розвінчаємо міф про те, що «секрети важко знайти в нативних скомпільованих програмах» для Swift: чи можна знайти секрет у https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-swift[wrongsecrets-swift ] (або https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-swift-arm[wrongsecrets-swift-arm], https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-swift-linux[wrongsecrets-swift-linux])?
+
+Спробуйте завантажити бінарний файл та запустити його локально (наприклад, `./wrongsecrets-swift<theversion you need> <your answer>`).

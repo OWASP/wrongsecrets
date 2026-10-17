@@ -1,0 +1,6 @@
+Puedes resolver este desafío siguiendo estos pasos:
+
+1. Utilizando el HMAC de la especificación:
+- Abra el documento https://csrc.nist.gov/CSRC/media/Projects/Cryptographic-Standards-and-Guidelines/documents/examples/HMAC_SHA1.pdf[especificación del NIST].
+- Encuentra el texto de entrada y el HMAC coincidentes en la especificación.
+- Ahora decodifica en hexadecimal el resultado encontrado (`00010203 04050607 08090A0B 0C0D0E0F 10111213 14151617 18191A1B 1C1D1E1F 20212223 24252627 28292A2B 2C2D2E2F 30313233 34353637 38393A3B 3C3D3E3F`) y úsalo como respuesta.

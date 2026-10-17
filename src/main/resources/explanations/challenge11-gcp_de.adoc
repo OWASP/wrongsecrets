@@ -1,0 +1,11 @@
+=== GCP Secret Manager Teil 3
+
+In unserem GKE-Cluster gibt es ein Servicekonto für Workloads, das einem Servicekonto in Kubernetes zugeordnet ist.
+
+Leider haben die Entwickler nur ein einziges GCP-Dienstkonto verwendet, um mehrere Kubernetes-Dienstkonten zu verknüpfen. Das bedeutet, dass ein anderer Pod auf unsere Geheimnisse zugreifen kann.
+
+Versuchen Sie, `wrongsecret-3` mit einem Pod mit dem Dienstkonto `default` im Standard-Namespace bereitzustellen.
+
+
+Hinweis: Sie könnten einen Job mit dem Image `gcr.io/google.com/cloudsdktool/cloud-sdk:latest` verwenden und die `gcloud`-Befehlszeilenschnittstelle nutzen.
+Weitere Informationen finden Sie unter https://cloud.google.com/secret-manager/docs/creating-and-accessing-secrets#a_note_on_resource_consistency[accessing a secret].

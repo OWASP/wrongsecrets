@@ -1,0 +1,21 @@
+Este desafío consiste específicamente en analizar un secreto en un binario de C.
+
+Puedes resolver este desafío utilizando las siguientes soluciones alternativas:
+
+1. Descubre los secretos con https://ghidra-sre.org/[Ghidra].
+- Instale https://ghidra-sre.org/[Ghidra].
+- Inícialo con `ghidraRun`.
+- Cargue la aplicación `wrongsecrets-c` en ghidra eligiendo un nuevo proyecto, luego importe el archivo y haga doble clic en él.
+- Permita que Ghidra analice la aplicación.
+- Busca el secreto: Ve a `Functions` en el lado izquierdo, selecciona `_secret`. Ahora, en la pantalla del lado derecho, podrás ver el secreto. Se trata de una cadena de texto en C.
+- Busca el mismo secreto, que está "oculto" como un array de caracteres: Ve a `Functions` en el panel izquierdo y selecciona `_secret2`. Verás que aparece una etiqueta en el panel derecho. Ahora abre `Labels` en el panel izquierdo, selecciona la etiqueta devuelta por `_secret2` (`_secret2.label`) y encontrarás la respuesta en el centro. Se trata de un array de caracteres en C.
+
+2. Descubre los secretos con https://www.radare.org[radare2].
+- Instala https://www.radare.org[radare2] con `brew install radare2` en Mac o sigue estos pasos: `git clone https://github.com/radareorg/radare2; cd radare2 ; sys/install.sh`
+- Inicie el análisis r2 con `$ r2 -A wrongsecrets-c`
+- Filtrar funciones por el término `secret` usando afl: `afl~secret`, obtener la lista de funciones
+- Utilice el comando `pdf @ sym._secret` para ver la salida desensamblada de la función que devuelve el secreto.
+- Utilice el comando `pdf @ sym._secret2` para ver la salida desensamblada de la función que devuelve secret2.
+
+
+¿No quieres instalar las herramientas? ¡Consulta el archivo https://github.com/OWASP/wrongsecrets/tree/master?tab=readme-ov-file#want-to-play-but-are-not-allowed-to-install-the-tools[WrongSecrets Desktop container]!

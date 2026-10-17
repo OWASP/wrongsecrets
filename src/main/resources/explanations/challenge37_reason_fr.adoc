@@ -1,0 +1,10 @@
+*Pourquoi faut-il être prudent avec les identifiants de sécurité dans l'intégration continue et la livraison continue (CI/CD) ?*
+
+Les personnes ayant accès à la configuration de vos contrôles de sécurité dans votre environnement CI/CD peuvent facilement accéder à toutes les informations d'identification qui y sont configurées. Ces informations d'identification peuvent ensuite être utilisées à des fins malveillantes.
+
+C’est pourquoi la sécurité doit être très prudente dans la gestion de ses secrets : ce n’est pas parce que l’identifiant est utilisé par (un) outil de sécurité que nous pouvons tolérer moins de sécurité ;-).
+
+Que faire à la place :
+- Stockez les identifiants CI/CD dans le coffre de secrets protégé de la plateforme ou utilisez une identité de charge de travail de courte durée, et n'accordez à chaque job que les permissions dont il a besoin.
+- Restreignez qui peut modifier la configuration du pipeline : assurez-vous que les fichiers de configuration (workflows ou fichiers CI) disposent d'un CODE-OWNERS, imposez-les sur une branche protégée et limitez l'accès des maintainers et owners au dépôt.
+- Restreignez qui peut voir les journaux d'un pipeline, masquez les sorties sensibles et renouvelez les identifiants qui ont pu être exposés.

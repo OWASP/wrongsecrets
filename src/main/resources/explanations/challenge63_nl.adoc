@@ -1,0 +1,19 @@
+=== Uitdaging met hardgecodeerde encryptiesleutel
+Deze uitdaging illustreert een veelvoorkomende maar gevaarlijke fout: een geheim versleutelen terwijl je de encryptiesleutel in hetzelfde bronbestand hardcodeert.
+
+Een developer heeft geprobeerd een geheim te beschermen door het met AES te versleutelen. Zowel de encryptiesleutel als de initialisatievector (IV) staan echter hardgecodeerd in de Java-broncode, naast de ciphertext. Daardoor is de versleuteling volledig ineffectief — iedereen met toegang tot de broncode kan het geheim moeiteloos ontsleutelen.
+
+**Jouw doel:**
+1. **Vind het Java-bronbestand** voor deze uitdaging in de codebase
+2. **Zoek de hardgecodeerde AES-sleutel en IV** in de broncode
+3. **Ontsleutel de ciphertext** met de sleutel en IV die je hebt gevonden
+4. **Dien de plaintext in** als jouw antwoord
+
+**Hoe je ontsleutelt:**
+[source,bash]
+----
+echo "TDPwOvcLsbCWV5erlk6OHFnlFoXNtdQOt2JQeq+i4Ho=" | openssl enc -d -aes-128-cbc \
+  -K $(echo -n "SuperSecretKey12" | xxd -p) \
+  -iv $(echo -n "InitVector123456" | xxd -p) \
+  -base64
+----

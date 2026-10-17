@@ -1,0 +1,7 @@
+=== Défi des secrets Docker exposés
+
+Dans ce défi, vous explorerez l'importance de la gestion sécurisée des informations sensibles à l'aide des secrets Docker dans un fichier Docker Compose (https://raw.githubusercontent.com/OWASP/wrongsecrets/refs/heads/master/src/main/resources/challenges/challenge-51/challenge51docker-compose.yml). Les secrets Docker sont conçus pour transmettre et stocker en toute sécurité des données sensibles telles que les mots de passe, les clés API et les certificats au sein des services Docker. Cependant, une mauvaise gestion ou une configuration incorrecte peut exposer ces secrets par inadvertance, engendrant ainsi des risques de sécurité potentiels.
+
+Acme Inc., une plateforme de commerce électronique en pleine expansion, a récemment constaté des activités suspectes laissant présager une possible compromission de données clients sensibles. Un audit interne révèle qu'un développeur a involontairement exposé des identifiants de base de données en conservant des fichiers secrets dans un dépôt et en les transférant vers un dépôt Git public. De plus, l'application n'utilisait pas correctement les secrets Docker, ce qui a entraîné l'exposition en clair d'informations sensibles au sein des conteneurs en cours d'exécution.
+
+Vous avez été embauché(e) comme consultant(e) en sécurité technique. Votre mission est de sécuriser les données sensibles exposées. Veuillez identifier les erreurs de configuration et indiquer le mot de passe de la base de données dans le champ ci-dessous afin de mettre en évidence le problème.

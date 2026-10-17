@@ -1,0 +1,10 @@
+Завантажте та розпакуйте експортований пакет навичок:
+
+----
+curl -sO http://localhost:8080/skills/claude/incident-reporter.zip
+unzip incident-reporter.zip
+----
+
+Файл `SKILL.md` вказує лише на вбудований завантажувач. Відкрийте `incident-reporter/scripts/upload_report.py` та перегляньте `UPLOAD_TOKEN_B64`.
+
+Це значення ще не є відповіддю: автор закодував його в base64, щоб сканер секрету не скаржився. Розшифруйте його, наприклад, за допомогою `base64 -d`, та надішліть розшифрований токен.

@@ -1,0 +1,7 @@
+=== Débogage d'une fuite de conteneur
+
+Les environnements cloud modernes s'appuient souvent sur des outils de débogage pour résoudre les problèmes des applications en cours d'exécution. Cependant, lorsque les fonctionnalités de débogage restent activées en production, elles peuvent exposer des informations sensibles.
+
+Un déploiement Kubernetes a été mal configuré [challenge53](https://github.com/OWASP/wrongsecrets/blob/master/k8s/challenge53/secret-challenge53.yml), permettant aux développeurs d'attacher un conteneur de débogage à une application en cours d'exécution. Dans ce pod, un binaire stocke un secret en mémoire. Normalement, ce secret serait protégé, mais grâce à l'accès de débogage, il devient accessible.
+
+Parviendrez-vous à percer le secret ?

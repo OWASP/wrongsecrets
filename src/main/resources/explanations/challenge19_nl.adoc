@@ -1,0 +1,8 @@
+=== Verbergen in binaries deel 1: de C-binary
+
+We moeten een geheim in een mobiele app plaatsen! Niemand zal het geheim in onze gecompileerde code opmerken!
+Dit is een misvatting die we vaak tegenkomen wanneer we presenteren over mobiele beveiliging.
+
+Laten we deze mythe voor C ontkrachten: kun je het geheim vinden in https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-c[wrongsecrets-c] (of https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-c-arm[wrongsecrets-c-arm], https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-c-linux[wrongsecrets-c-linux])?
+
+Probeer de binary te downloaden en lokaal uit te voeren (bijv. `./wrongsecrets-c<theversion you need> <your answer>`).

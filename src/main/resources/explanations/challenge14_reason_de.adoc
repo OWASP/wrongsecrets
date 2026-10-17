@@ -1,0 +1,10 @@
+*Warum Sie bei Passwörtern für andere Geheimnisse vorsichtig sein sollten*
+
+Ob Sie ein Passwort für ein unternehmensweites Geheimnisverwaltungssystem oder einen Passwortmanager verwenden: Ihre Authentifizierungsfaktoren machen den Unterschied zwischen einem kompromittierten und einem sicheren System aus.
+
+Vereinfacht ausgedrückt: Wenn Sie sich direkt bei Ihrem Passwort-Manager authentifizieren,
+- Verwenden Sie ein sicheres Passwort (z. B. ein langes!)
+- MFA verwenden, wenn möglich
+- jegliche Art von Benachrichtigung aktivieren, wenn ein neues Gerät und/oder eine neue IP-Adresse versucht, darauf zuzugreifen.
+
+Wenn Sie SSO verwenden: Stellen Sie sicher, dass das System, bei dem Sie sich authentifizieren, die gleichen Kontrollmechanismen bietet: Ermöglichen Sie lange, sichere Passwörter, MFA und geben Sie entsprechende Sicherheitswarnungen aus, wenn etwas Verdächtiges passiert.

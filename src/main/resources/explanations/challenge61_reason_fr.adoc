@@ -1,0 +1,28 @@
+=== Qu'est-ce qui ne va pas ?
+
+Intégrer en dur les identifiants d'un bot Telegram dans le code source constitue une grave faille de sécurité :
+
+**Problèmes de sécurité :**
+1. **Identifiants API exposés** : Les jetons du bot donnent un accès complet aux fonctionnalités du bot Telegram
+2. **Compromission du canal** : Toute personne possédant le jeton peut lire et envoyer des messages, et potentiellement accéder à des informations privées.
+3. **Exposition du code source** : Les identifiants sont visibles par toute personne ayant accès au code source.
+4. **Historique du contrôle de version** : Les jetons restent dans l’historique Git même s’ils sont supprimés ultérieurement.
+
+**Impact concret :**
+- Les attaquants peuvent utiliser des jetons de bot pour envoyer des spams ou des messages malveillants.
+- Les informations sensibles partagées sur les canaux deviennent accessibles aux utilisateurs non autorisés
+- Les fonctionnalités des bots peuvent être détournées à des fins malveillantes
+- Violations de la conformité si le bot traite des données personnelles ou sensibles
+
+**Comment résoudre ce problème :**
+1. **Variables d'environnement** : Stockez les jetons du bot dans des variables d'environnement ou des fichiers de configuration sécurisés.
+2. **Gestion des secrets** : Utilisez des services de gestion des secrets dédiés (HashiCorp Vault, AWS Secrets Manager, etc.).
+3. **Rotation des jetons** : Faites régulièrement tourner les jetons du bot et révoquez les anciens.
+4. **Contrôles d'accès** : Mettez en place des contrôles d'accès appropriés pour déterminer qui peut accéder aux identifiants du bot.
+5. **Revues de code** : Vérifiez systématiquement la présence de secrets codés en dur dans le code avant de le valider.
+
+**Détection:**
+- Utilisez des outils de détection de secrets dans votre pipeline CI/CD
+- Mettre en place des hooks de pré-commit pour détecter les identifiants codés en dur
+- Audits de sécurité réguliers du code source
+- Surveiller l'activité inattendue des bots

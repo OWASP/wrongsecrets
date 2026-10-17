@@ -1,0 +1,1 @@
+Vous cherchez un secret qui ne se trouve pas dans le code, mais dans la documentation. Consultez le plan d'exécution dans `cursor/rules/project-specification.mdc` pour un exemple d'instruction contenant le secret de ce défi.

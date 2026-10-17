@@ -1,0 +1,9 @@
+*Warum die Verwendung von Binärdateien zum Verbergen eines Geheimnisses einen Angreifer nur aufhält.*
+
+Dank kostenloser Reverse-Engineering-Anwendungen wie Ghidra ist kaum noch etwas sicher. Jeder, der die ausführbare Datei in Ghidra oder Radare2 laden kann, kann problemlos mit der Analyse beginnen und Geheimnisse in Ihrer Swift-Binärdatei aufdecken.
+
+Swift-Binärdateien sind trotz Namensmangling (mit `swift-demangle` lassen sich Swift-Symbolnamen entschlüsseln) weiterhin anfällig für Reverse Engineering. Die als Zeichenketten oder Stringliterale gespeicherten Geheimnisse befinden sich im Datenbereich der Binärdatei.
+
+Die Verschlüsselung des Geheimnisses mit einem im Binärcode eingebetteten Schlüssel und andere lustige Rätsel verzögern einen Angreifer und machen es schlichtweg unterhaltsamer, das Geheimnis zu finden. Beachten Sie, dass das Geheimnis, falls es von der ausführbaren Datei benötigt wird, letztendlich im Speicher verfügbar sein muss.
+
+Muss das Geheimnis weiterhin in der Binärdatei enthalten sein? Stellen Sie sicher, dass es nur nach erfolgreicher Authentifizierung an einem Server remote abgerufen werden kann.

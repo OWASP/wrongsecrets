@@ -1,0 +1,5 @@
+*La gestion des secrets ne se limite pas au stockage sécurisé :*
+
+Comme vous pouvez le constater, il existe de nombreuses façons d'accéder à un secret : qu'il soit codé en dur, stocké dans une solution tierce mal configurée, ou correctement stocké, mais avec des droits d'accès IAM inappropriés sur les comptes associés. Vous comprenez désormais pourquoi nous affirmons que « votre maturité en matière de sécurité se reflète dans la gestion de vos secrets ».
+
+Dans ce cas précis, il serait imprudent d'accorder ce type d'accès à la production sans déclencher une procédure d'urgence et des alertes appropriées. De plus, tout ce qui enregistre explicitement des données confidentielles est dangereux. Si vous repérez du code enregistrant des données confidentielles, signalez-le !

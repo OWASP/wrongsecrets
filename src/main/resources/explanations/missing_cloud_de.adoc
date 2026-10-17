@@ -1,0 +1,4 @@
+Wir befinden uns außerhalb einer ordnungsgemäß konfigurierten Cloud-Umgebung. Bitte führen Sie dies in einer AWS-/Azure-/GCP-Umgebung aus.
+Wie in der README.md-Datei unter https://github.com/OWASP/wrongsecrets#cloud-challenges erläutert,
+
+Es gibt nach dieser Herausforderung noch weitere unterstützte Aufgaben. Bitte versuchen Sie stattdessen eine andere!

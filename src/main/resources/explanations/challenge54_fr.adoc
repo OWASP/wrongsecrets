@@ -1,0 +1,17 @@
+=== Défi secret .gitignore
+
+Les fichiers `.gitignore` permettent d'éviter l'inclusion accidentelle de données sensibles ou non pertinentes dans le système de contrôle de version. Cependant, il arrive que des développeurs ajoutent par erreur des données sensibles ou des secrets en tant que commentaires ou entrées cachées dans `.gitignore`.
+
+Dans ce défi, un développeur a laissé un secret chiffré dans un commentaire d'un fichier `.gitignore`. Malgré le chiffrement, ce secret illustre la facilité avec laquelle on peut oublier des informations critiques à des emplacements accessibles.
+
+Votre objectif est de trouver et de décrypter ce secret oublié.
+
+==== Note
+Le secret est chiffré à l'aide d'AES-256-CBC et d'un vecteur d'initialisation. Utilisez la clé trouvée dans ".gitignore" pour le déchiffrer.
+Nous avons utilisé la commande suivante pour le chiffrement :
+
+```bash
+echo -n "<you will have to find out>" | openssl enc -aes-256-cbc -K <you will have to find out> \
+  -iv 30313233343536373839616263646566 \
+  -nosalt -base64 -e
+```

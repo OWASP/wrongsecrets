@@ -1,0 +1,13 @@
+Ce défi peut être relevé en déchiffrant le secret encodé en base64 dans `secrchallenge.json`. Vous pouvez procéder de deux manières :
+
+1. Utiliser un outil de décryptage AES en ligne comme https://www.devglan.com/online-tools/aes-encryption-decryption[https://www.devglan.com/online-tools/aes-encryption-decryption]
+- Copiez la valeur de `secret` depuis `secrchallenge.json` et collez-la dans la zone de texte du déchiffreur.
+- Assurez-vous que le format d'entrée est `Base64` et que le mode de chiffrement est `ECB`.
+- Utilisez la valeur de `key` du fichier `secrchallenge.json` comme clé de déchiffrement et cliquez sur `Decrypt` pour obtenir le secret.
+
+2. Utilisation du terminal
+- Lancez le terminal depuis le répertoire `executables`.
+- Copiez la valeur de `key` depuis `secrchallenge.json` et saisissez `echo -n "3Ulyfmfgro6uh1cN" | xxd -p`. Vous obtiendrez ainsi la clé de déchiffrement au format hexadécimal.
+- Copiez la valeur de `secret` depuis `secrchallenge.json`.
+- Ensuite, utilisez la clé de déchiffrement obtenue pour déchiffrer le fichier en saisissant `echo "7RwunHeLkY7c0TCTLRMOGCIeX0jWiYibAexA0unYGDI=" | openssl enc -a -d -aes-128-ecb -K 33556c79666d6667726f36756831634e -out decrypted.md`
+- Copiez le secret du fichier `decrypted.md` dans le dossier `executables`.

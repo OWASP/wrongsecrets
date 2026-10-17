@@ -1,0 +1,8 @@
+*Waarom gevoelige gegevens als sleutels opslaan een slecht idee is*
+
+Soms redeneren mensen dat minder gevoelige gegevens als subkey van het eigenlijke geheim moeten worden opgeslagen. Op die manier kun je bijvoorbeeld een gebruikersnaam en een wachtwoord in één vermelding combineren.
+In veel gevallen zijn deze geheimen even belangrijk en moeten ze dezelfde bescherming krijgen als het geheim (bijvoorbeeld het wachtwoord) zelf. En in het geval van Vault kun je wel een subkey (bijvoorbeeld de gebruikersnaam) benaderen, maar niet de geheimwaarde zelf (bijvoorbeeld het wachtwoord), en dat zou de gebruikersnaam al lekken.
+
+We willen medewerkers vaak geen leestoegang geven tot geheimen, maar we willen ze soms juist wel leestoegang geven tot subkeys. Als er een geheim in de subkeys wordt opgeslagen, is dat geheim intern dus al gecompromitteerd.
+
+Bewaar gevoelige waarden in de beveiligde geheimwaarde en niet in leesbare subkeys, en verleen niet bredere toegang tot de onderdelen van inloggegevens dan tot de inloggegevens zelf.

@@ -1,0 +1,18 @@
+Diese Herausforderung lässt sich durch folgende alternative Lösungsansätze bewältigen:
+
+1. Suchen Sie das Bot-Token im Quellcode.
+- Schauen Sie sich die Klasse Challenge61 im Quellcode an.
+- Das kodierte Bot-Token finden Sie in der Methode `getBotToken()`.
+- Dekodieren Sie die Base64-kodierte Zeichenkette (sie ist doppelt kodiert)
+- Das Token-Format ist: `BOTID:TOKEN_STRING`.
+
+2. Verwenden Sie das Bot-Token, um auf den Telegram-Kanal zuzugreifen.
+- Das Bot-Token kann mit der Telegram Bot API verwendet werden.
+- Besuchen Sie https://t.me/WrongsecretsBot, um den Kanal zu sehen.
+- Suche im Kanal nach Nachrichten, die das Geheimnis enthalten.
+- Das Geheimnis für diese Herausforderung lautet: `telegram_secret_found_in_channel`
+
+3. Analysieren Sie die Codestruktur
+- Die Herausforderung folgt dem gleichen Muster wie andere Social-Media-Herausforderungen.
+- Überprüfen Sie die Funktionsweise der Methode `getTelegramSecret()`.
+- Suchen Sie nach fest codierten Rückgabewerten, die die erwartete Antwort darstellen.

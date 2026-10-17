@@ -1,0 +1,12 @@
+=== Git-geschiedenis
+
+Een van de fouten die we vaak maken als we geheimen in Git committen, is proberen ze kwijt te raken zonder het geheim te roteren.
+Wat het nog erger maakt, is dat zonder de commit op de juiste manier te overschrijven met het geheim en/of de commit te verwijderen, deze voor altijd in de geschiedenis zal blijven.
+
+We hebben dus een aantal AWS-toegangssleutels in git bewaard als een "fout", kun je ze vinden?
+
+Opmerking: het antwoord bevat een van de 3 aws-credentialprofielen die je in een commit aantreft met zijn Java-opmerkingen, maar dan zonder de Java-commentaaropmaak als een enkele regel.
+Als alternatief kun je gewoon de geheime toegangssleutel opgeven die we zoeken.
+
+Opmerking 2: Wist je dat dit werkende toegangssleutels zijnfootnote:disclaimer[Dit zijn geen "normale" AWS-toegangssleutels: het zijn canary tokens! Je kunt er wel `aws sts get-caller-identity` mee uitvoeren. Wanneer je ze gebruikt, wordt een deel van je gegevens (IP/agent) gelogd.]?!
+Ga naar https://wrongsecrets.herokuapp.com/stats[statistieken] wanneer je ze hebt geprobeerd om meer te weten te komen!

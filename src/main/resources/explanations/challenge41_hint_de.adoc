@@ -1,0 +1,9 @@
+Diese Herausforderung lässt sich mit folgenden Schritten lösen:
+
+1. Erstellen Sie zwei Textdateien `old_hashes.txt` und `new_hashes.txt`, die nur die aus den Dump-Dateien kopierten Hashes enthalten.
+2. Mit `old_hashes.txt` als Passwortliste können wir hashcat verwenden, um MD5-Hashes zu überprüfen, die mit den bcrypt-Hashes übereinstimmen.
+   - Installieren Sie https://hashcat.net/hashcat/[Hashcat]
+   - Geben Sie `hashcat -m 3200 -a 0 new_hashes.txt old_hashes.txt --show` ein. Sie finden dann einen einzelnen bcrypt-Hash, der einem MD5-Hash zugeordnet ist.
+3. Mit der Datei `rockyou.txt` als Passwortliste können wir den erhaltenen MD5-Hash knacken.
+   - Laden Sie die Datei https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt[rockyou.txt password list] herunter.
+   - Geben Sie `hashcat -m 0 -a 0 82080600934821faf0bc59cba79964bc rockyou.txt --show` ein, um das geknackte Passwort zu finden.

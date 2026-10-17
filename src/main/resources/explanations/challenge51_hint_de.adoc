@@ -1,0 +1,20 @@
+Diese Herausforderung kann auf folgende Weise gelöst werden:
+
+- Verwenden Sie die docker-compose-Datei (`challenge51docker-compose.yml`), um die Container zu erstellen und das Geheimnis zu finden.
+  1. Klonen Sie das Repository, das die Challenge-Dateien enthält.
+  2. Suchen Sie die Datei `challenge51docker-compose.yml` im Repository und navigieren Sie zu diesem Speicherort.
+  3. Anmeldeinformationen identifizieren:
+    Überprüfen Sie im Abschnitt „environments“ der Datei challenge51docker-compose.yml auf Variablen wie:
+     * `db_user`
+     * `db_password`
+     * `db_name`
+  4. Jetzt können Sie die Docker Compose-Befehle ausführen, um Ihren Dienst zu erstellen und auszuführen:
+     * `export DOCKER_BUILDKIT=1`
+     * `docker compose -f challenge51docker-compose.yml build`
+     * `docker compose -f challenge51docker-compose.yml run myservice`
+  5. Die Antwort befindet sich in der Ausgabe.
+
+- Die Geheimnisse direkt im Dateisystem finden:
+   1. Klonen Sie das Repository, das die Challenge-Dateien enthält.
+   2. Verwenden Sie die Dateiverweise in `challenge51docker-compose.yml`, um die Dateien zu finden, die die Geheimnisse enthalten.
+   3. Öffne die Datei, um das Geheimnis zu finden.

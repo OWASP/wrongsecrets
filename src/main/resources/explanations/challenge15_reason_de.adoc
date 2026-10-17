@@ -1,0 +1,20 @@
+*Warum Sie Ihre Geheimnisse reinigen und rotieren sollten*
+
+Wenn Sie versehentlich ein Geheimnis in Git eingecheckt haben, gibt es Möglichkeiten, es wiederzufinden, entweder manuell oder mithilfe von Tools.
+
+Wenn also versehentlich ein Geheimnis in Git eingetragen wird:
+
+- Informieren Sie die zuständige Sicherheitsbehörde in der Organisation.
+- Achte darauf, dass du das Geheimnis drehst
+- Optionale Bereinigung: Entweder verwenden Sie https://github.com/rtyley/bfg-repo-cleaner[BFG repo-cleaner] oder versuchen Sie, den fehlerhaften Commit auf andere Weise zu entfernen.
+
+Es gibt viele Möglichkeiten, das Committen eines Geheimnisses zu verhindern, beispielsweise durch die Konfiguration des Pre-Commit-Hooks https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks mit Secret-Detection-Controls.
+
+Hinweis: Das "Verstecken" eines fehlerhaften Commits durch Hinzufügen weiterer Commits, sodass er bei einem Pull Request nicht angezeigt wird, verschlimmert die Situation nur.
+Im besten Fall sollten Sie dann den fehlerhaften Commit mit dem Lösch-Commit zusammenführen, sodass sich das Geheimnis nur noch in Ihrem Branch befindet.
+
+Hinweis 2: Wenn Sie ein Geheimnis übertragen haben, beachten Sie, dass alle Kollegen/Bots, die es abrufen, es möglicherweise auch lokal haben.
+
+Hinweis 3: Die in diesem Projekt versteckten AWS-Schlüssel sind tatsächliche Canary-Token. Wenn Sie diese verwenden, wird ein Aufruf an unsere Datei https://github.com/OWASP/wrongsecrets/blob/master/src/main/java/org/owasp/wrongsecrets/canaries/CanariesController.java[CanariesController] durchgeführt.
+Dies kann Systeme und/oder Daten darauf aufmerksam machen, dass die Anmeldeinformationen/Canary-Tokens verwendet wurden. Den Inhalt des letzten Aufrufs dieses Endpunkts finden Sie an unserem Statistik-Endpunkt für Heroku- und Docker-Setups unter http://wrongsecrets.herokuapp.com/stats[stats].
+Wir erstellen und verwalten unsere Canary-Tokens über https://canarytokens.org/[Canarytokens.org]. Stellen Sie sich vor, was Sie mit Canary-Tokens in Ihrem Unternehmen alles erreichen können!

@@ -1,0 +1,10 @@
+*Por qué el hash MD5 y SHA1 por sí solos no son suficientes.*
+
+Los algoritmos hash MD5 y SHA1 ya no se consideran seguros para almacenar contraseñas por sí solos. Su velocidad es lo que los hace tan útiles, pero también su desventaja. Calcular el hash de miles de contraseñas solo lleva unos minutos; esto significa que también se tarda solo unos minutos en calcular el hash de miles de contraseñas comunes y compararlo con el hash obtenido previamente.
+
+Las sales ayudan a prevenir ataques precalculados, pero no son secretas y no hacen que un hash rápido sea seguro para almacenar contraseñas. Utilice una función de hash de contraseñas dedicada como Argon2id con una sal única generada aleatoriamente para cada contraseña y un factor de trabajo adecuado.
+
+Como usuario, a menudo no tienes control sobre cómo se almacenan tus contraseñas; lo único que puedes hacer es intentar que sean más largas y complejas. Una contraseña SHA1 de 7 caracteres, con mayúsculas y minúsculas, tardará aproximadamente entre 5 y 1 minuto en ser descifrada por fuerza bruta en una GPU adecuada, mientras que una de 25 caracteres tardará mucho más.
+
+Tenga en cuenta que, cuando este tipo de hashes se utilizan a través de `HTTP` (sin TLS, es decir, sin `HTTPS`) como parte de una comprobación de integridad, un atacante intermediario podría interceptar el contenido y alterarlo, calcular los hashes y devolverlos también.
+Un atacante podría incluso reutilizar los mismos hashes y proporcionar otro contenido basándose en una colisión de hashes. Por lo tanto: utilice siempre conexiones seguras al transferir contenido y nunca confíe únicamente en hashes como `MD5` o `SHA1` para la integridad de los datos.

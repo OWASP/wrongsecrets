@@ -1,0 +1,9 @@
+=== Binärdateien ohne Klartextzeichenketten
+
+Immer noch hört man von Entwicklern, die Tricks und Verschleierungsmethoden einsetzen, um ein Geheimnis in Binärdateien zu verbergen. Was passiert, wenn wir Symbole entfernen? Was passiert, wenn wir das Geheimnis verschlüsseln? Solche Herausforderungen können das Auffinden des verborgenen Geheimnisses erschweren, aber nicht unmöglich machen.
+
+[@roddas](https://github.com/roddas) kontaktierte uns mit einer „neuen, spannenden Binärdatei“, in der er das Geheimnis verschlüsselt hatte, und fragte, ob wir sie verwenden könnten. Genau solche Herausforderungen sollte man sich stellen! Also baten wir ihn, daraus eine Aufgabe zu erstellen und sie zu lösen. Er löste sie mit GDB und Radare2, wodurch er viel über Reverse Engineering lernte! Schafft ihr das auch?
+
+Die Challenge-Datei heißt https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-advanced-c[wrongsecrets-advanced-c] und ist in vielen Varianten im Ordner https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables[executables folder] zu finden.
+
+Versuchen Sie, die Binärdatei herunterzuladen und lokal auszuführen (z. B. `./wrongsecrets-advanced-c<theversion you need> <your answer>`).

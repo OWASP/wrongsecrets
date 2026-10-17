@@ -1,0 +1,11 @@
+Vous pouvez relever ce défi grâce aux solutions alternatives suivantes :
+
+1. Accédez au conteneur et parcourez les fichiers :
+- Commencez par examiner le Dockerfile et observez les opérations COPY effectuées. Notez que vous pouvez obtenir ces informations avec `docker history` (voir également les défis 3 et 4) si vous ne disposez que d'une image et non d'un Dockerfile.
+- Démarrez le conteneur localement avec `docker run jeroenwillemsen/wrongsecrets:<TAGNAME-HERE>`
+- Trouvez l'identifiant du conteneur en exécutant la commande `docker ps` dans un autre terminal.
+- Exécutez `docker exec -it <container id> "sh"`
+- Dans le conteneur, accédez au répertoire cible de l'opération COPY et recherchez le secret. Vous avez oublié de quel secret il s'agissait ? https://github.com/OWASP/wrongsecrets/blob/master/src/main/java/org/owasp/wrongsecrets/challenges/docker/Challenge12.java [Consultez le code du défi 12] !
+2. Utilisez https://github.com/deepfence/SecretScanner [Scanner secret Deepfence]
+- Téléchargez la version cible du conteneur wrongsecrets : `docker pull jeroenwillemsen/wrongsecrets:<VERSION YOU ARE PLAYING-HERE>`
+- Exécutez `docker run -it --rm --name=deepfence-secretscanner -v $(pwd):/home/deepfence/output -v /var/run/docker.sock:/var/run/docker.sock -v /usr/bin/docker:/usr/bin/docker deepfenceio/secretscanning -image-name jeroenwillemsen/wrongsecrets:<VERSION YOU ARE PLAYING-HERE>`

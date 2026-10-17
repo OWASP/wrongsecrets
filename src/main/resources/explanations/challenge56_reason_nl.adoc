@@ -1,0 +1,29 @@
+*Waarom je documentatie moet controleren op secrets*
+
+Documentatie- en specificatiebestanden worden vaak breed gedeeld en kunnen tijdens beveiligingsreviews over het hoofd worden gezien.
+Soms worden secrets of gevoelige informatie toegevoegd als voorbeeld of instructie en niet verwijderd voordat er mee wordt gedeeld of gepubliceerd.
+Deze uitdaging benadrukt het belang van het controleren van alle projectbestanden—inclusief documentatie—op secrets en gevoelige gegevens.
+
+----
+In een echt project neem je altijd expliciete beveiligingseisen op in je projectspecificatie of agentic plan. Dit betekent:
+- Opsommen hoe secrets moeten worden beheerd, opgeslagen en vernieuwd.
+- Definiëren wie toegang heeft tot gevoelige bestanden en hoe die toegang wordt beheerd.
+- Aangeven welke tools of processen gebruikt moeten worden om in alle bestanden, inclusief documentatie, naar secrets te scannen.
+- Eisen dat zowel code als documentatie regelmatig wordt gecontroleerd op per ongeluk gelekte secrets.
+
+Door deze eisen toe te voegen, zorg je ervoor dat beveiliging vanaf het begin meegenomen wordt en verlaag je het risico op blootstelling van gevoelige gegevens door bestanden die over het hoofd worden gezien of slechte praktijken.
+----
+
+[NOTE]
+====
+Neem in echte projecten altijd beveiligingsinstructies op over:
+- Het gebruik van TLS/SSL voor alle netwerkcommunicatie
+- Versleuteling van gevoelige gegevens rustend en onderweg
+- Inputvalidatie en -sanitatie om injectieaanvallen te voorkomen
+- Veilige authenticatie- en autorisatiemechanismen
+- Regelmatig scannen op afhankelijkheden en kwetsbaarheden
+- Logging en monitoring op verdachte activiteit
+- Het juiste model en de juiste taal voor het juiste probleem
+
+Deze praktijken zijn essentieel om je applicatie en de gegevens ervan te beschermen.
+====

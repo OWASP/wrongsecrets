@@ -1,0 +1,9 @@
+=== Hashing incorrecto
+
+Este desarrollador tiene su contraseña almacenada en su ordenador. No es ningún tonto, la ha cifrado dos veces utilizando los mismos sistemas que emplean muchas de las empresas más grandes del mundo. Solo que con un poco menos de experiencia. Nadie va a poder descifrarla...
+
+El primer hash es `2ab96390c7dbe3439de74d0c9b0b1767` y el segundo hash es `F3BBBD66A63D4BF1747940578EC3D0103530E21D`.
+
+A pesar de que muchas grandes empresas utilizan estos hashes, ¿existe alguna forma de burlar el sistema?
+
+Descifrar cualquiera de los dos hashes te dará la respuesta correcta. Como desafío adicional, intenta descifrar ambos.

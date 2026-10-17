@@ -1,0 +1,5 @@
+=== Historial de Bash
+
+Este desarrollador ha creado un contenedor y lo ha tenido en funcionamiento durante un tiempo. Lo usa para mucho trabajo y tiene cuidado de no incluir información confidencial directamente en el código. Cuando necesita usar información confidencial, simplemente la escribe en un comando de Bash al ejecutarlo; por lo tanto, desaparece en cuanto la escribe y permanece confidencial. ¿Verdad?
+
+Todos guardamos pequeños secretos en nuestro pasado, incluido Bash. Accede al contenedor y comprueba si puedes encontrar alguno.

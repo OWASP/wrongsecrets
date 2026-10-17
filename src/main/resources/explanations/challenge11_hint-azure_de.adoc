@@ -1,0 +1,32 @@
+Diese Herausforderung lässt sich mit folgenden Schritten lösen:
+
+- Überprüfen Sie Ihren Tresornamen mit `terraform output vault_name`.
+
+- Erstellen Sie eine neue Pod-Datei `pod.yaml` mit folgendem Inhalt (ersetzen Sie den Vault-Namen durch die Ausgabe aus dem vorherigen Schritt):
+
+```yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: wrongsecret-3
+  labels:
+    aadpodidbinding: separate-workload-pod-id
+spec:
+  template:
+    metadata:
+      name: wrongsecret3job
+      labels:
+        aadpodidbinding: separate-workload-pod-id
+    spec:
+      containers:
+      - name: az
+        image: mcr.microsoft.com/azure-cli:latest
+        command:
+            [
+              "sleep", "7200"
+            ]
+      restartPolicy: Never
+```
+- Wenden Sie den Job mit `kubectl apply -f job.yaml` an.
+
+Sie können sich nun im Pod anmelden und beispielsweise `az login --identity --allow-no-subscriptions && az keyvault secret show --name wrongsecret-3 --vault-name wrongsecrets-vault-00000` ausführen. Beachten Sie, dass Sie den tatsächlichen Wert von `wrongsecrets-vault-00000` im Terraform-Status finden. Da der Job auf denselben Vault wie der Secret-Challenge-Pod zugreifen kann, hat er auch Zugriff auf dessen Secrets.

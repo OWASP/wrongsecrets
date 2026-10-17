@@ -1,0 +1,28 @@
+= Docker Compose Secrets Fehlkonfigurationsherausforderung
+
+*Warum unsachgemäße Geheimnisverwaltung in Docker Compose zu Sicherheitslücken führen kann*
+
+In containerisierten Umgebungen ist die Geheimnisverwaltung entscheidend für die Wahrung der Vertraulichkeit und Integrität sensibler Informationen wie Datenbankzugangsdaten, API-Schlüssel und anderer Geheimnisse. Docker Compose bietet eine komfortable Möglichkeit, Geheimnisse zu definieren und zu verwalten. Eine unsachgemäße Handhabung dieser Geheimnisse kann Ihr System jedoch Angriffen aussetzen.
+
+Ein häufiger Fehler ist es, Geheimnisse direkt über Umgebungsvariablen zu übergeben oder geheime Dateien in die Versionskontrolle einzuchecken. Dieser Ansatz ist fehlerhaft, weil:
+
+1. **Geheimnisse sind in der Umgebung sichtbar**: Umgebungsvariablen lassen sich leicht mit einfachen Systembefehlen oder durch Protokollierung überprüfen, was zu einer unbeabsichtigten Offenlegung führen kann.
+2. **Hardcodierung von Geheimnissen in Dockerfiles**: Werden Geheimnisse in die Dockerfile oder die `docker-compose.yml` eingebettet, werden sie Teil des Build-Prozesses und in die Image-Layer aufgenommen. Jeder, der Zugriff auf das Image hat, kann diese Layer untersuchen und das Geheimnis abrufen.
+3. **Übertragung geheimer Dateien in die Versionskontrolle**: Die Speicherung von Geheimnissen in Dateien und deren Übertragung in Git oder andere Versionskontrollsysteme birgt erhebliche Risiken, da jeder, der Zugriff auf das Repository hat, die Geheimnisse erhalten kann.
+
+*Warum diese Herausforderung?*
+
+Ziel dieser Aufgabe ist es, die Risiken einer unsachgemäßen Geheimnisverwaltung in Docker Compose aufzuzeigen. Insbesondere werden die Gefahren einer fehlerhaften Verwendung von Umgebungsvariablen und dateibasierten Geheimnissen verdeutlicht. Obwohl Docker Compose Mechanismen zur sicheren Geheimnisverwaltung bietet, wie beispielsweise Docker Secrets und externe Lösungen, werden diese Funktionen aus Bequemlichkeitsgründen oft vernachlässigt.
+
+Diese Aufgabe simuliert ein Szenario, in dem:
+
+- Die Datenbankzugangsdaten (`db_user`, `db_password` und `db_name`) werden in einer geheimen Datei gespeichert und in der `docker-compose` referenziert.
+- Diese Geheimnisse werden nicht ordnungsgemäß verwaltet und können leicht von jedem aufgedeckt werden, der Zugriff auf die Umgebung oder das Repository hat.
+
+*Wichtigste Lernpunkte:*
+
+- **Vermeiden Sie die Verwendung von Umgebungsvariablen für Geheimnisse:** Obwohl sie praktisch sind, eignen sie sich nicht zur sicheren Verwaltung sensibler Informationen. Verwenden Sie stattdessen Docker Secrets oder externe Tools wie Vault oder AWS Secrets Manager.
+- **Geheimnisse nicht in die Versionskontrolle einchecken**: Halten Sie geheime Dateien immer von Ihrem Repository fern, indem Sie `.gitignore` oder sichere Lösungen zur Geheimnisverwaltung verwenden.
+- **Sicherstellen, dass Geheimnisse nicht in Images eingebettet werden**: Geheimnisse sollten nicht im Docker-Image selbst eingebettet sein; sie sollten zur Laufzeit eingefügt oder sicher über einen externen Dienst abgerufen werden.
+
+Durch das Absolvieren dieser Aufgabe lernen Sie, wie einfach Angreifer Zugang zu unsachgemäß verwalteten Geheimnissen erlangen können und welche Best Practices für die Sicherung von Geheimnissen in Docker Compose-Umgebungen gelten.

@@ -1,0 +1,75 @@
+=== Waarom deze uitdaging ertoe doet
+
+Deze uitdaging demonstreert een kritieke kwetsbaarheid die vaak voorkomt in productiesystemen: **hardcoded Slack-API-tokens die in omgevingsvariabelen zijn opgeslagen met onvoldoende obfuscatie**.
+
+==== De kwetsbaarheid
+
+**Oorzaak**: Developers slaan API-tokens vaak op in omgevingsvariabelen in de veronderstelling dat dat veilig is, en obfusceren ze soms in de veronderstelling dat dat beveiliging biedt.
+
+**Het probleem**:
+1. **Omgevingsvariabelen zijn eenvoudig toegankelijk** voor iedereen met systeemtoegang
+2. **Obfuscatie ≠ beveiliging**: Base64-encoding is eenvoudig terug te draaien
+3. **Risico op personeelsverloop**: Tokens worden vaak niet vernieuwd wanneer medewerkers vertrekken
+4. **Containerinspectie**: Omgevingsvariabelen zijn zichtbaar in containermetadata
+
+==== Aanvalsscenario's uit de praktijk
+
+**Scenario 1 - Toegang van ex-medewerker**:
+- Developer vertrekt bij het bedrijf
+- Slack-token wordt niet vernieuwd
+- De ex-medewerker kan het token nog steeds gebruiken om:
+  - Privéberichten te lezen
+  - Kwaadaardige inhoud te plaatsen
+  - Vertrouwelijke informatie op te vragen
+  - Zich als de applicatie voor te doen
+
+**Scenario 2 - Containerinbraak**:
+- Aanvaller krijgt toegang tot de productieomgeving
+- Inspecteert de omgevingsvariabelen van de container
+- Vindt de geobfusceerde Slack-token
+- Obfusceert die eenvoudig terug en krijgt toegang tot Slack
+
+**Scenario 3 - Blootstelling via logs**:
+- Omgevingsvariabelen worden per ongeluk gelogd
+- Logs worden op onveilige locaties opgeslagen
+- Geobfusceerde tokens worden blootgesteld maar eenvoudig gedecodeerd
+
+==== Beveiligingsbest practices
+
+**✅ Oplossingen die goed zijn**:
+
+1. **Gebruik secretbeheer**:
+   - AWS Secrets Manager
+   - Azure Key Vault
+   - HashiCorp Vault
+   - Kubernetes Secrets (met encryptie op rust)
+
+2. **Implementeer het vernieuwen van tokens**:
+   - Regelmatig automatisch vernieuwen
+   - Direct vernieuwen wanneer een medewerker vertrekt
+   - Tokens met korte levensduur waar mogelijk
+
+3. **Toegangscontroles**:
+   - Principieel minste rechten
+   - Rollengebaseerde toegang tot secrets
+   - Auditlogs voor toegang tot secrets
+
+4. **Obfusceer nooit voor beveiliging**:
+   - Gebruik in plaats daarvan goede encryptie
+   - Obfuscatie biedt geen beveiligingsvoordeel
+   - Kan een vals gevoel van veiligheid geven
+
+**❌ Wat je niet moet doen**:
+- Secrets opslaan in omgevingsvariabelen
+- Obfuscatie gebruiken als beveiligingsmaatregel
+- Tokens actief laten nadat een medewerker vertrekt
+- Secrets in welke vorm dan ook hardcoden
+
+==== Impactbeoordeling
+
+**Vertrouwelijkheid**: Hoog - Slack-gesprekken en blootstelling van gegevens
+**Integriteit**: Hoog - Mogelijkheid om kwaadaardige inhoud te plaatsen
+**Beschikbaarheid**: Gemiddeld - Mogelijkheid van storingen in de dienst
+**Naleving**: Kritiek - Schending van gegevensbeschermingsregelgeving
+
+Dit type kwetsbaarheid is in talloze beveiligingsaudits gevonden en weerspiegelt een fundamenteel misverstand over best practices voor secretbeheer.

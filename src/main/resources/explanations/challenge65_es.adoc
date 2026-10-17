@@ -1,0 +1,10 @@
+=== Ocultándose en binarios, parte 6: la CLI de Java simple
+
+Las cadenas de texto simples dentro de una interfaz de línea de comandos de Java son fáciles de recuperar una vez que se descarga el archivo JAR. ¿Puedes encontrar el secreto oculto en nuestra interfaz de línea de comandos de Java?
+
+Para resolverlo:
+
+. Descargue e inspeccione https://github.com/OWASP/wrongsecrets/raw/master/src/main/resources/executables/wrongsecrets-java.jar[wrongsecrets-java.jar].
+. Descompile el archivo JAR o inspeccione la clase principal con un descompilador de Java como CFR, JADX, IntelliJ IDEA o `javap`.
+. Busque la clase que devuelve el secreto e identifique la cadena simple incrustada en la CLI.
+. Una vez que recupere el valor secreto exacto, puede enviarlo en el cuadro a continuación o validarlo con `java -jar wrongsecrets-java.jar <your recovered secret>`.

@@ -1,0 +1,4 @@
+Wir betreiben das Ganze außerhalb eines Kubernetes-Clusters mit Vault. Bitte führen Sie es im Kubernetes-Cluster aus, wie in der Anleitung beschrieben.
+https://github.com/OWASP/wrongsecrets#vault-exercises-with-minikube[README.md]
+
+Möglicherweise gibt es nach dieser Herausforderung noch weitere unterstützte Herausforderungen. Bitte versuchen Sie stattdessen eine andere Herausforderung!

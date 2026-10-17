@@ -1,0 +1,10 @@
+=== Verstecken in Binärdateien Teil 6: Die einfache Java-Befehlszeilenschnittstelle
+
+Einfache Zeichenketten in einer Java-CLI lassen sich nach dem Herunterladen der JAR-Datei leicht wiederherstellen. Können Sie das in unserer einfachen Java-CLI verborgene Geheimnis finden?
+
+Um das Problem zu lösen:
+
+. Laden Sie die Datei https://github.com/OWASP/wrongsecrets/raw/master/src/main/resources/executables/wrongsecrets-java.jar[wrongsecrets-java.jar] herunter und untersuchen Sie sie.
+. Dekompilieren Sie die JAR-Datei oder untersuchen Sie die Hauptklasse mit einem Java-Dekompiler wie CFR, JADX, IntelliJ IDEA oder `javap`.
+. Suchen Sie nach der Klasse, die das Geheimnis zurückgibt, und identifizieren Sie die im CLI eingebettete Klartextzeichenfolge.
+. Sobald Sie den genauen geheimen Wert wiederhergestellt haben, können Sie ihn im unten stehenden Feld eingeben oder mit `java -jar wrongsecrets-java.jar <your recovered secret>` überprüfen.

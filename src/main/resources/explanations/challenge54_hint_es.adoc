@@ -1,0 +1,13 @@
+El secreto está oculto en el archivo `.gitignore` como un cifrado AES-256-CBC.
+
+Sigue estos pasos para descifrar el secreto:
+
+1. Localiza el comentario cifrado y la clave para descifrarlo en `.gitignore`.
+2. Utilice OpenSSL para descifrar:
++
+[source,bash]
+----
+ echo "h0vRDUS3VDN2gwfd1oftcMtD/YlKE0YfHLTvyk/lrY4=" | openssl enc -aes-256-cbc -K 6b3b913c09d62238b9b8c0cc78904e7e1f9a99fd0a04ebae50a8a9881d452bbd \
+  -iv 30313233343536373839616263646566 \
+  -nosalt -base64 -d
+----

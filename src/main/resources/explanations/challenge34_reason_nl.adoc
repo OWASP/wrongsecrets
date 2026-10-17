@@ -1,0 +1,5 @@
+*Waarom Key Derivation Functions niet veilig zijn bij hardgecodeerde waarden*
+
+Key Derivation Functions (KDFs) zijn deterministisch. Dit betekent dat ze voor een gegeven invoer altijd dezelfde output teruggeven. Dus als de parameters hardgecodeerd zijn, kan iedereen met toegang tot de code de KDF uitvoeren met de gespecificeerde parameters en zo de sleutel krijgen.
+
+Gebruik een KDF zoals Argon2id met een unieke willekeurige salt en passende kostenparameters wanneer je een sleutel uit een wachtwoord afleidt. Voor machinegenereerde sleutels gebruik je in plaats van een KDF een cryptografisch veilige willekeurige getalgenerator, en bewaar je de sleutel apart van de versleutelde data.

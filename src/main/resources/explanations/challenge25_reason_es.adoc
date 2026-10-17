@@ -1,0 +1,5 @@
+*Por qué almacenar secretos en la cadena de bloques es una mala idea*
+
+Nunca debes guardar ningún secreto en la cadena de bloques. Todos los datos son públicos. Especialmente cuando una variable es pública, es muy fácil de leer.
+
+¿Aún necesitas usar una clave secreta? Asegúrate de que forme parte de un sistema de soporte (por ejemplo, un servicio externo que hayas creado).

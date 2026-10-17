@@ -1,0 +1,3 @@
+=== Gestionnaire de secrets GCP, partie 2
+
+Le secret est désormais aléatoire et stocké directement dans le gestionnaire de secrets GCP. Nous le montons toujours sur le pod Kubernetes via le pilote CSI (https://secrets-store-csi-driver.sigs.k8s.io) pour GCP (https://github.com/GoogleCloudPlatform/secrets-store-csi-driver-provider-gcp). Pouvez-vous y accéder ?
