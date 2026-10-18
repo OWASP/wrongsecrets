@@ -21,7 +21,7 @@ jobs:
       - name: Setup python
         uses: actions/setup-python@v6
         with:
-          python-version: "3.14"
+          python-version: "3.15"
       - name: Format python code with black
         uses: psf/black@stable
       - uses: actions/setup-node@v6
@@ -43,7 +43,7 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
-          terraform_version: 1.9.8
+          terraform_version: v1.16.6
       - name: Setup TFLint
         uses: terraform-linters/setup-tflint@v6
         with:

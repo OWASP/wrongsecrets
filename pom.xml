@@ -43,11 +43,11 @@
   <!--        </snapshotRepository>-->
   <!--    </distributionManagement>-->
   <properties>
-    <KeePassJava2.version>2.2.4</KeePassJava2.version>
+    <KeePassJava2.version>2.2.6</KeePassJava2.version>
     <archunit.version>1.5.1</archunit.version>
     <asciidoctor.maven.plugin.version>3.2.0</asciidoctor.maven.plugin.version>
     <asciidoctorj.version>3.0.1</asciidoctorj.version>
-    <aws.sdk.version>2.55.10</aws.sdk.version>
+    <aws.sdk.version>2.56.0</aws.sdk.version>
     <bootstrap.version>5.3.8</bootstrap.version>
     <checkstyle-maven.version>3.6.0</checkstyle-maven.version>
     <checkstyle.version>13.11.0</checkstyle.version>
@@ -72,15 +72,15 @@
     <lombok.version>1.18.48</lombok.version>
     <maven-compiler-plugin.version>3.16.0</maven-compiler-plugin.version>
     <maven-dependency-plugin.version>3.11.0</maven-dependency-plugin.version>
-    <maven-surefire-plugin.version>3.5.6</maven-surefire-plugin.version>
+    <maven-surefire-plugin.version>3.6.0</maven-surefire-plugin.version>
     <maven.compiler.proc>full</maven.compiler.proc>
     <maven.compiler.source>26</maven.compiler.source>
     <maven.compiler.target>26</maven.compiler.target>
     <node.version>v26.8.1</node.version>
     <npm.version>11.19.0</npm.version>
-    <spotbugs-maven.version>4.10.4.1</spotbugs-maven.version>
-    <spotbugs.version>4.10.4</spotbugs.version>
-    <spotless-maven-plugin.version>3.10.3</spotless-maven-plugin.version>
+    <spotbugs-maven.version>4.10.5.0</spotbugs-maven.version>
+    <spotbugs.version>4.10.5</spotbugs.version>
+    <spotless-maven-plugin.version>3.10.4</spotless-maven-plugin.version>
     <spring-boot.version>4.1.1</spring-boot.version>
     <spring-vault.version>4.1.0</spring-vault.version>
     <spring.cloud-version>2025.1.3</spring.cloud-version>
