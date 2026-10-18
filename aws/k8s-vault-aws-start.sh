@@ -91,6 +91,16 @@ aws ssm put-parameter --name wrongsecretvalue --overwrite --type SecureString --
 echo "Apply secretsmanager storage volume"
 kubectl apply -f./k8s/secret-volume.yml
 
+echo "Deploy wrongsecrets-llama app for challenge 74"
+kubectl apply -f ../k8s/challenge74/wrongsecrets-llama-secret.yaml
+kubectl apply -f ../k8s/challenge74/wrongsecrets-llama-service.yaml
+kubectl apply -f ../k8s/challenge74/wrongsecrets-llama-deployment.yaml
+while [[ $(kubectl get pods -l app=challenge74-llama -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do
+  echo "waiting for wrongsecrets-llama" && sleep 2
+done
+kubectl get pods -l app=challenge74-llama
+kubectl logs deployment/challenge74-llama
+
 source ../scripts/apply-and-portforward.sh
 
 echo "Run terraform destroy to clean everything up."
