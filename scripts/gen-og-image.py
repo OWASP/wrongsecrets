@@ -182,18 +182,20 @@ def main() -> None:
     logo_y = 92
     bg.alpha_composite(logo_scaled, (logo_x, logo_y))
 
-    # Wordmark
+    # Wordmark — text block sits ~30px higher than the original draft so the
+    # tagline keeps a comfortable bottom margin (maintainer feedback: card was
+    # crowded at the bottom, tagline nearly touched the 630px edge).
     f_eyebrow = load_font("semi_bold", 30)
     f_title = load_font("extra_bold", 86)
     f_tag = load_font("regular", 34)
 
-    x, y = draw_centered(draw, 440, "OWASP", f_eyebrow, BRAND_LIGHT_BLUE)
+    x, y = draw_centered(draw, 410, "OWASP", f_eyebrow, BRAND_LIGHT_BLUE)
     draw.text((x, y), "OWASP", font=f_eyebrow, fill=BRAND_LIGHT_BLUE)
 
-    x, y = draw_centered(draw, 480, "WrongSecrets", f_title, WHITE)
+    x, y = draw_centered(draw, 450, "WrongSecrets", f_title, WHITE)
     draw.text((x, y), "WrongSecrets", font=f_title, fill=WHITE)
 
-    x, y = draw_centered(draw, 590, "Can you find them all?", f_tag, LIGHT_GREY)
+    x, y = draw_centered(draw, 560, "Can you find them all?", f_tag, LIGHT_GREY)
     draw.text((x, y), "Can you find them all?", font=f_tag, fill=LIGHT_GREY)
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
