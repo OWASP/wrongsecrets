@@ -144,6 +144,13 @@ spec:
               value: "http://vault.vault.svc.cluster.local:8200"
             - name: JWT_PATH
               value: "/var/run/secrets/kubernetes.io/serviceaccount/token"
+            - name: CHALLENGE_74_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: challenge74-secret
+                  key: CHALLENGE_74_SECRET
+            - name: LLAMA_URL
+              value: "http://challenge74-llama:1234"
           volumeMounts:
             - name: secrets-store-inline
               mountPath: "/mnt/secrets-store"
