@@ -100,9 +100,14 @@ echo "Deploy wrongsecrets-llama app for challenge 74"
 kubectl apply -f ../k8s/challenge74/wrongsecrets-llama-secret.yaml
 kubectl apply -f ../k8s/challenge74/wrongsecrets-llama-service.yaml
 kubectl apply -f ../k8s/challenge74/wrongsecrets-llama-deployment.yaml
-while [[ $(kubectl get pods -l app=challenge74-llama -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do
-  echo "waiting for wrongsecrets-llama" && sleep 2
-done
+# request the full limit so EKS Auto Mode provisions a node with enough memory for llama and the app
+kubectl set resources deployment/challenge74-llama --requests=memory=2Gi
+if ! kubectl rollout status deployment/challenge74-llama --timeout=30m; then
+  echo "challenge74-llama deployment did not become ready within 30 minutes" >&2
+  kubectl describe deployment challenge74-llama
+  kubectl describe pod -l app=challenge74-llama
+  exit 1
+fi
 kubectl get pods -l app=challenge74-llama
 kubectl logs deployment/challenge74-llama
 
