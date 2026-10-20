@@ -51,10 +51,18 @@ fi
 kubectl create ns vault
 helm upgrade --install vault hashicorp/vault --version 0.30.0 --namespace vault --values k8s/helm-vault-values.yml
 
-isvaultrunning=$(kubectl get pods -n vault --field-selector=status.phase=Running)
-while [[ $isvaultrunning != *"vault-0"* ]]; do echo "waiting for Vault1" && sleep 2 && isvaultrunning=$(kubectl get pods -n vault --field-selector=status.phase=Running); done
-while [[ $isvaultrunning != *"vault-1"* ]]; do echo "waiting for Vault2" && sleep 2 && isvaultrunning=$(kubectl get pods -n vault --field-selector=status.phase=Running); done
-while [[ $isvaultrunning != *"vault-2"* ]]; do echo "waiting for Vault3" && sleep 2 && isvaultrunning=$(kubectl get pods -n vault --field-selector=status.phase=Running); done
+wait_for_vault_pod() {
+  local pod_name="$1"
+  if ! kubectl wait --for=create "pod/${pod_name}" -n vault --timeout=10m ||
+    ! kubectl wait --for=jsonpath='{.status.phase}'=Running "pod/${pod_name}" -n vault --timeout=10m; then
+    echo "Vault pod ${pod_name} did not start within 10 minutes" >&2
+    kubectl describe statefulset vault -n vault
+    kubectl describe pods -n vault
+    return 1
+  fi
+}
+
+wait_for_vault_pod vault-0 || exit 1
 echo "Setting up port forwarding"
 kubectl port-forward vault-0 8200:8200 -n vault &
 echo "Unsealing Vault"
@@ -69,10 +77,12 @@ echo "Unsealing Vault 0"
 kubectl exec -it vault-0 -n vault -- vault operator unseal $VAULT_UNSEAL_KEY
 
 echo "Joining & unsealing Vault 1"
+wait_for_vault_pod vault-1 || exit 1
 kubectl exec -it vault-1 -n vault -- vault operator raft join http://vault-0.vault-internal:8200
 kubectl exec -it vault-1 -n vault -- vault operator unseal $VAULT_UNSEAL_KEY
 
 echo "Joining & unsealing Vault 2"
+wait_for_vault_pod vault-2 || exit 1
 kubectl exec -it vault-2 -n vault -- vault operator raft join http://vault-0.vault-internal:8200
 kubectl exec -it vault-2 -n vault -- vault operator unseal $VAULT_UNSEAL_KEY
 
@@ -177,9 +187,12 @@ kubectl create serviceaccount vault
  kubectl apply -f k8s/challenge74/wrongsecrets-llama-secret.yaml
  kubectl apply -f k8s/challenge74/wrongsecrets-llama-service.yaml
  kubectl apply -f k8s/challenge74/wrongsecrets-llama-deployment.yaml
- while [[ $(kubectl get pods -l app=challenge74-llama -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do
-   echo "waiting for wrongsecrets-llama" && sleep 2
- done
+ if ! kubectl rollout status deployment/challenge74-llama --timeout=10m; then
+   echo "challenge74-llama deployment did not become ready within 10 minutes" >&2
+   kubectl describe deployment challenge74-llama
+   kubectl describe pod -l app=challenge74-llama
+   exit 1
+ fi
  kubectl get pods -l app=challenge74-llama
  kubectl logs deployment/challenge74-llama
 
@@ -187,21 +200,12 @@ kubectl create serviceaccount vault
 echo "Deploy secret challenge app"
 kubectl apply -f k8s/secret-challenge-vault-deployment.yml
 echo "Waiting setting up secret challenge..."
-golivecounter=0
-while [[ $(kubectl get pods -l app=secret-challenge -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do
-  echo "waiting for secret-challenge" && sleep 2
-  ((golivecounter += 1))
-  if [ $((golivecounter % 10)) -eq 0 ]; then
-    kubectl describe deployment secret-challenge
-  else
-    echo "waiting for secret-challenge, step $golivecounter"s
-  fi
-  if [ $((golivecounter % 15)) -eq 0 ]; then
-    kubectl describe pod -l app=secret-challenge
-  else
-    echo "waiting for secret-challenge, step $golivecounter"
-  fi
-done
+if ! kubectl rollout status deployment/secret-challenge --timeout=10m; then
+  echo "secret-challenge pod did not become ready within 10 minutes" >&2
+  kubectl describe deployment secret-challenge
+  kubectl describe pod -l app=secret-challenge
+  exit 1
+fi
 kubectl logs -l app=secret-challenge -f >>pod.log &
 kubectl expose deployment secret-challenge --type=LoadBalancer --port=8080
 kubectl port-forward \

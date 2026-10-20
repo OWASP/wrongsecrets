@@ -17,7 +17,7 @@ fi
 if test -n "${CLUSTERNAME-}"; then
   echo "CLUSTERNAME is set to <$CLUSTERNAME>"
 else
-  CLUSTERNAME=wrongsecrets
+  CLUSTERNAME=wrongsecrets-exercise-cluster
   echo "CLUSTERNAME is not set or empty, defaulting to ${CLUSTERNAME}"
 fi
 
@@ -88,16 +88,26 @@ aws secretsmanager put-secret-value --secret-id wrongsecret-2 --secret-string "$
 echo "Generate Parameter store challenge secret"
 aws ssm put-parameter --name wrongsecretvalue --overwrite --type SecureString --value "$(openssl rand -base64 24)" --region $AWS_REGION --output json --no-cli-pager
 
+echo "patching csi driver for secrets store"
+
 echo "Apply secretsmanager storage volume"
 kubectl apply -f./k8s/secret-volume.yml
+
+kubectl patch csidriver secrets-store.csi.k8s.io --type=merge \
+  -p '{"spec":{"tokenRequests":[{"audience":"sts.amazonaws.com"},{"audience":"pods.eks.amazonaws.com"}]}}'
 
 echo "Deploy wrongsecrets-llama app for challenge 74"
 kubectl apply -f ../k8s/challenge74/wrongsecrets-llama-secret.yaml
 kubectl apply -f ../k8s/challenge74/wrongsecrets-llama-service.yaml
 kubectl apply -f ../k8s/challenge74/wrongsecrets-llama-deployment.yaml
-while [[ $(kubectl get pods -l app=challenge74-llama -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do
-  echo "waiting for wrongsecrets-llama" && sleep 2
-done
+# request the full limit so EKS Auto Mode provisions a node with enough memory for llama and the app
+kubectl set resources deployment/challenge74-llama --requests=memory=2Gi
+if ! kubectl rollout status deployment/challenge74-llama --timeout=30m; then
+  echo "challenge74-llama deployment did not become ready within 30 minutes" >&2
+  kubectl describe deployment challenge74-llama
+  kubectl describe pod -l app=challenge74-llama
+  exit 1
+fi
 kubectl get pods -l app=challenge74-llama
 kubectl logs deployment/challenge74-llama
 

@@ -58,7 +58,7 @@ spec:
             volumeAttributes:
               secretProviderClass: "wrongsecrets-gcp-secretsmanager"
       containers:
-        - image: jeroenwillemsen/wrongsecrets:1.14.2RC2-k8s-vault
+        - image: jeroenwillemsen/wrongsecrets:1.14.2RC3-k8s-vault
           imagePullPolicy: IfNotPresent
           name: secret-challenge
           command: ["/bin/sh"]
@@ -135,6 +135,13 @@ spec:
               value: "http://vault.vault.svc.cluster.local:8200"
             - name: JWT_PATH
               value: "/var/run/secrets/kubernetes.io/serviceaccount/token"
+            - name: CHALLENGE_74_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: challenge74-secret
+                  key: CHALLENGE_74_SECRET
+            - name: LLAMA_URL
+              value: "http://challenge74-llama:1234"
           volumeMounts:
             - name: secrets-store-inline
               mountPath: "/mnt/secrets-store"
