@@ -88,8 +88,13 @@ aws secretsmanager put-secret-value --secret-id wrongsecret-2 --secret-string "$
 echo "Generate Parameter store challenge secret"
 aws ssm put-parameter --name wrongsecretvalue --overwrite --type SecureString --value "$(openssl rand -base64 24)" --region $AWS_REGION --output json --no-cli-pager
 
+echo "patching csi driver for secrets store"
+
 echo "Apply secretsmanager storage volume"
 kubectl apply -f./k8s/secret-volume.yml
+
+kubectl patch csidriver secrets-store.csi.k8s.io --type=merge \
+  -p '{"spec":{"tokenRequests":[{"audience":"sts.amazonaws.com"},{"audience":"pods.eks.amazonaws.com"}]}}'
 
 echo "Deploy wrongsecrets-llama app for challenge 74"
 kubectl apply -f ../k8s/challenge74/wrongsecrets-llama-secret.yaml
