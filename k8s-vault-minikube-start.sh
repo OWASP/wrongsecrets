@@ -187,21 +187,12 @@ kubectl create serviceaccount vault
 echo "Deploy secret challenge app"
 kubectl apply -f k8s/secret-challenge-vault-deployment.yml
 echo "Waiting setting up secret challenge..."
-golivecounter=0
-while [[ $(kubectl get pods -l app=secret-challenge -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do
-  echo "waiting for secret-challenge" && sleep 2
-  ((golivecounter += 1))
-  if [ $((golivecounter % 10)) -eq 0 ]; then
-    kubectl describe deployment secret-challenge
-  else
-    echo "waiting for secret-challenge, step $golivecounter"s
-  fi
-  if [ $((golivecounter % 15)) -eq 0 ]; then
-    kubectl describe pod -l app=secret-challenge
-  else
-    echo "waiting for secret-challenge, step $golivecounter"
-  fi
-done
+if ! kubectl wait --for=condition=ready pod -l app=secret-challenge --timeout=10m; then
+  echo "secret-challenge pod did not become ready within 10 minutes" >&2
+  kubectl describe deployment secret-challenge
+  kubectl describe pod -l app=secret-challenge
+  exit 1
+fi
 kubectl logs -l app=secret-challenge -f >>pod.log &
 kubectl expose deployment secret-challenge --type=LoadBalancer --port=8080
 kubectl port-forward \
