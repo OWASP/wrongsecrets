@@ -17,7 +17,7 @@ fi
 if test -n "${CLUSTERNAME-}"; then
   echo "CLUSTERNAME is set to <$CLUSTERNAME>"
 else
-  CLUSTERNAME=wrongsecrets
+  CLUSTERNAME=wrongsecrets-exercise-cluster
   echo "CLUSTERNAME is not set or empty, defaulting to ${CLUSTERNAME}"
 fi
 
