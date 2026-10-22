@@ -8,7 +8,7 @@ Une erreur fréquente consiste à transmettre directement des secrets via des va
 
 1. **Les secrets sont visibles dans l'environnement** : Les variables d'environnement sont faciles à inspecter à l'aide de commandes système de base ou de la journalisation, ce qui peut conduire à une exposition involontaire.
 2. **Intégration en dur de secrets dans les Dockerfiles** : Lorsque des secrets sont intégrés au Dockerfile ou au fichier `docker-compose.yml`, ils font partie du processus de construction et sont inclus dans les couches de l’image. Toute personne ayant accès à l’image peut alors examiner ces couches et récupérer le secret.
-3. **Commiting secret files to version control**: Stocking secret in files and commit them to Git or other version control systems introduces significant risks, as anyone having access to the repository can get the secrets.
+3. **Validation de fichiers de secrets dans le contrôle de version** : Stocker des secrets dans des fichiers et les valider dans Git ou d'autres systèmes de contrôle de version introduit des risques importants, car toute personne ayant accès au dépôt peut obtenir les secrets.
 
 *Pourquoi ce défi ?*
 
@@ -22,7 +22,7 @@ Ce défi simule un scénario où :
 *Points clés à retenir :*
 
 - **Évitez d'utiliser des variables d'environnement pour les secrets :** Bien que pratiques, les variables d'environnement ne sont pas sécurisées pour la gestion d'informations sensibles. Utilisez plutôt les secrets Docker ou des outils externes comme Vault ou AWS Secrets Manager.
-- **Ne commettez pas de secrets dans le système de contrôle de version** : Gardez toujours les fichiers secrets hors de votre dépôt en utilisant `.gitignore` ou des solutions de gestion de secrets sécurisées.
+- **Ne validez pas de secrets dans le système de contrôle de version** : Gardez toujours les fichiers secrets hors de votre dépôt en utilisant `.gitignore` ou des solutions de gestion de secrets sécurisées.
 - **Veillez à ce que les secrets ne soient pas intégrés aux images** : les secrets ne doivent pas être intégrés à l’image Docker elle-même ; ils doivent être injectés lors de l’exécution ou récupérés de manière sécurisée via un service externe.
 
 En relevant ce défi, vous découvrirez à quel point il est facile pour les attaquants d'accéder à des secrets mal gérés, ainsi que les meilleures pratiques pour sécuriser les secrets dans les environnements Docker Compose.

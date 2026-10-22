@@ -1,4 +1,4 @@
-=== Motif de la contestation 63
+=== Raison d'être du défi 63
 Ce défi met en lumière une erreur fréquente dans le développement logiciel : l’utilisation du chiffrement tout en stockant la clé au même emplacement que le texte chiffré.
 
 **Pourquoi c'est dangereux :**

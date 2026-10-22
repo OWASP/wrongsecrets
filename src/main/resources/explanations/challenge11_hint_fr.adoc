@@ -4,7 +4,7 @@ Vous pouvez relever ce défi en suivant les étapes suivantes :
   - Il devrait y avoir quelque chose d'intéressant dans `aws/irsa.tf`.
 
 2. Trouvez le chemin d'élévation de privilèges en utilisant https://github.com/nccgroup/ScoutSuite[ScoutSuite]
-- Quelle que soit la méthode utilisée, vérifiez le rôle `cant-read-secrets`. Vous constaterez qu'il autorise `sts:AssumeRole` sur `*`. Cela signifie qu'il permet d'assumer **n'importe quel** rôle du compte.
+- Quelle que soit la méthode utilisée, vérifiez le rôle `cant-read-secrets`. Vous constaterez qu'il autorise `sts:AssumeRole` sur `*`. Cela signifie qu'il permet d'endosser **n'importe quel** rôle du compte.
 - Les rôles sont également liés par une relation de confiance, et celui de notre pod (`wrongsecrets-secret-manager`) est mal configuré. Il autorise `arn:aws:iam::<account id>:root`, ce qui équivaut à « tout utilisateur de ce compte AWS disposant des autorisations IAM ». Cela signifie que nous pouvons usurper ce rôle depuis `cant-read-secrets` !
 
 Après être passé de `cant-read-secrets` à `wrongsecrets-secret-manager`, nous pouvons simplement exécuter `aws ssm get-parameter --name wrongsecretvalue --with-decryption`.

@@ -1,7 +1,7 @@
-=== Un secret téléchargé sur une application LLM (Large Language Model)
+=== Un secret téléversé sur une application LLM (Large Language Model)
 
 L'IA est là pour durer. Elle peut être utile dans de nombreux domaines : résolution de problèmes complexes, génération de code ou conseils en matière de sécurité.
-Imaginez que vous ayez téléchargé du code pour rechercher des failles de sécurité. Que se passe-t-il si ce code contient un mot de passe ? Des règles devraient limiter le modèle LLM afin d'empêcher la divulgation du mot de passe. Ce secret peut-il néanmoins être extrait ?
+Imaginez que vous ayez téléversé du code pour rechercher des failles de sécurité. Que se passe-t-il si ce code contient un mot de passe ? Des règles devraient limiter le modèle LLM afin d'empêcher la divulgation du mot de passe. Ce secret peut-il néanmoins être extrait ?
 
 Essayez de le trouver dans le premier exercice de ce jeu d'incitation : https://gandalf.lakera.ai/[this prompting game].
 

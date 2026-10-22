@@ -16,7 +16,7 @@ tout le monde, et c’est précisément l’échec que démontre ce défi :
   identifiants : forks, miroirs, exécuteurs CI, ordinateurs portables de développeurs et tout outil avec
   accès en lecture.
 - Les identifiants de déploiement sont très précieux pour les attaques ciblant la chaîne d'approvisionnement. Grâce à eux,
-  une attaquant peut publier une version malveillante des artefacts du projet, après quoi
+  un attaquant peut publier une version malveillante des artefacts du projet, après quoi
   chaque utilisateur de ce dépôt récupère silencieusement la version corrompue.
 - Les identifiants de serveur, tels que l'identifiant Nexus dans ce défi, ne sont absolument pas secrets.
   Ils indiquent seulement à quel dépôt appartient un identifiant d'accès ; ils ne protègent jamais

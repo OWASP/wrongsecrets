@@ -15,7 +15,7 @@ Il est donc essentiel que vous :
 
 Vous voulez en savoir plus ? Consultez les ressources sur la page d’accueil de l’application.
 
-*Pourquoi les cryptomonnaies restent encore très difficiles à appréhender*
+*Pourquoi la cryptographie reste encore très difficile à appréhender*
 
 Comme vous pouvez le constater dans le code source du Challenge13 : nous avons sélectionné un vecteur d’initialisation prédéfini. Nous avons procédé ainsi afin de garantir que nous obtiendrions systématiquement le même texte chiffré.
 On pourrait dire qu'il s'agit d'un mauvais exemple de https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Secrets_Management_Cheat_Sheet.md#72-convergent-encryption[Chiffrement convergent].

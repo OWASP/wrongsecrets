@@ -6,4 +6,4 @@ Garantir la confidentialité d'un secret dans le code est une chose. L'ouverture
 
 Que faire à la place :
 - Gardez les secrets hors du code source et des artefacts compilés. Récupérez-les à l'exécution depuis un gestionnaire de secrets ou via une identité de charge de travail au périmètre étroit.
-- Analysez les dépôts et les artefacts de build à la recherche de secrets et renouvelez tout identifiant qui a été committe ou livré.
+- Analysez les dépôts et les artefacts de build à la recherche de secrets et renouvelez tout identifiant qui a été validé ou livré.

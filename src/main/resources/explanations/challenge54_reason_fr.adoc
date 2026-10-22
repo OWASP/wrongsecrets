@@ -9,4 +9,4 @@ Ce défi démontre l'importance des revues de code et de la nécessité de s'ass
 
 Que faire à la place :
 - N'utilisez pas `.gitignore` comme endroit pour stocker des secrets. Conservez les identifiants dans un gestionnaire de secrets ; si le développement local nécessite un fichier, gardez-le hors du contrôle de version et restreignez son accès au système de fichiers. Analysez le dépôt pour détecter d'éventuelles divulgations accidentelles.
-- Si un secret a été committe, retirez-le du fichier et renouvelez-le ou révoquez-le ; le supprimer dans un commit ultérieur ne l'efface pas de l'historique Git.
+- Si un secret a été validé, retirez-le du fichier et renouvelez-le ou révoquez-le ; le supprimer dans un commit ultérieur ne l'efface pas de l'historique Git.

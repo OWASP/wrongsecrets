@@ -14,4 +14,4 @@ Que faire à la place :
 - Ne jamais inclure d'informations d'identification dans une instruction de journalisation, même encodées, et même pas au niveau `DEBUG`.
 - Supprimez les données sensibles à la source. Filtrez les clés sensibles avant qu'elles n'atteignent l'appender, par exemple avec un convertisseur Logback ou un masquage, afin qu'une modification ultérieure du code ne puisse pas réintroduire la fuite.
 - Recherchez-le. Les outils de détection de secrets peuvent être exécutés aussi bien sur les journaux que sur le code source.
-- Si cela s'est produit : faites tourner le secret, puis supprimez ou supprimez tous les récepteurs et archives qui l'ont reçu.
+- Si cela s'est produit : faites tourner le secret, puis nettoyez ou faites expirer tous les récepteurs et archives qui l'ont reçu.

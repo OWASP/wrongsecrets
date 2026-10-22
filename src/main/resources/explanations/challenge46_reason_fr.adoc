@@ -1,7 +1,7 @@
 *Pourquoi l'injection de modèles Vault n'est-elle pas toujours une bonne idée ?*
 
 Bien que l'injection d'agents Vault via des modèles puisse être un moyen pratique de gérer les secrets dans certains scénarios,
-Il existe des situations où ce n'est peut-être pas la meilleure approche.
+il existe des situations où ce n'est peut-être pas la meilleure approche.
 
 Les modèles peuvent accidentellement exposer des informations sensibles dans les journaux ou les fichiers temporaires.
 En cas de configuration incorrecte, les secrets pourraient se retrouver dans des endroits où ils sont accessibles à des utilisateurs ou des processus non autorisés.

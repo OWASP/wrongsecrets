@@ -8,4 +8,4 @@ Ce défi souligne l'importance des pratiques de stockage sécurisées et de l'au
 
 Que faire à la place :
 - Gardez les clés privées et les mots de passe hors de `.ssh/config` et des images de conteneurs. Utilisez un magasin de clés protégé ou un agent SSH, et préférez des certificats SSH de courte durée lorsque c'est possible.
-- Restreignez l'accès aux fichiers de clés et utilisez une identité distincte à périmètre étroit pour chaque hôte. Renouvelez les identifiants qui ont été committe ou distribués.
+- Restreignez l'accès aux fichiers de clés et utilisez une identité distincte à périmètre étroit pour chaque hôte. Renouvelez les identifiants qui ont été validés ou distribués.

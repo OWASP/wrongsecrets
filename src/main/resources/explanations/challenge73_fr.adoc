@@ -15,7 +15,7 @@ avec le contenu suivant :
 - `.devcontainer/.cursor/rules/project.mdc`
 - `.devcontainer/.windsurfrules`
 
-L'un d'eux intègre un identifiant partagé afin que chaque agent réutilise le même
+L'un d'eux intègre un identifiant partagé afin que chaque agent réutilise la même
 valeur « par commodité ». Lisez les fichiers et soumettez le jeton de déploiement de staging exposé.
 
 [NOTE]

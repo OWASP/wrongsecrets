@@ -4,4 +4,4 @@ Comme vous pouvez le constater, il existe de nombreuses façons d'accéder à un
 
 Dans ce cas précis, ce type d'usurpation de rôle devrait être impossible avec une configuration adéquate, mais il est judicieux de surveiller ces événements et de les signaler comme suspects.
 
-Restreignez les politiques de confiance des rôles aux acteurs prévus et aux conditions requises, et n'accordez à chaque rôle que les permissions dont sa charge de travail a besoin. Surveillez les événements d'assumption de rôle et enquêtez sur les acteurs ou les sessions inattendus. Notez que cela vaut pour les services comme pour les personnes.
+Restreignez les politiques de confiance des rôles aux acteurs prévus et aux conditions requises, et n'accordez à chaque rôle que les permissions dont sa charge de travail a besoin. Surveillez les événements de prise de rôle et enquêtez sur les acteurs ou les sessions inattendus. Notez que cela vaut pour les services comme pour les personnes.

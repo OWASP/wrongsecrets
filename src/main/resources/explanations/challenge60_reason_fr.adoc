@@ -1,15 +1,15 @@
-=== Pourquoi le Défi 60 est important : Injection rapide MCP et exposition aux variables environnementales
+=== Pourquoi le Défi 60 est important : Injection de prompt MCP et exposition aux variables environnementales
 
 **Le problème :**
 
-Les serveurs MCP (Model Context Protocol) sont de plus en plus utilisés pour permettre aux assistants IA d'accéder à des outils et des données. Cependant, de nombreux développeurs déploient ces serveurs sans contrôles de sécurité adéquats. Pire encore, un serveur MCP malveillant peut manipuler activement le client IA connecté par injection de requêtes, transformant ainsi l'IA elle-même en un agent d'exfiltration involontaire.
+Les serveurs MCP (Model Context Protocol) sont de plus en plus utilisés pour permettre aux assistants IA d'accéder à des outils et des données. Cependant, de nombreux développeurs déploient ces serveurs sans contrôles de sécurité adéquats. Pire encore, un serveur MCP malveillant peut manipuler activement le client IA connecté par injection de prompt, transformant ainsi l'IA elle-même en un agent d'exfiltration involontaire.
 
 **Deux vulnérabilités en une :**
 
 **1. Exécution de shell non sécurisée (erreur classique de configuration MCP)**
 Le serveur MCP expose un outil `execute_command` sans authentification. Quiconque accède au port 8090 peut l'appeler et extraire toutes les variables d'environnement, y compris les données sensibles.
 
-**2. Injection d'invite MCP / « MCP Rug Pull » (attaque émergente de la chaîne d'approvisionnement)**
+**2. Injection de prompt MCP / « MCP Rug Pull » (attaque émergente de la chaîne d'approvisionnement)**
 La réponse `initialize` du MCP inclut un champ `instructions`. Ce champ est injecté directement dans l'invite système du LLM connecté. Un serveur malveillant l'utilise pour ordonner silencieusement à l'IA de :
 
 1. Appelez `execute_command` avec `env` pour récupérer les variables d'environnement du client.
@@ -54,4 +54,4 @@ L'utilisateur ne remarque rien d'inhabituel. Le modèle d'IA suit ses « instruc
 
 **En résumé :**
 
-Un serveur MCP doté d'un outil d'exécution de commandes shell et dépourvu d'authentification équivaut à exécuter `nc -l 8090 -e /bin/sh` sur votre serveur de production. Un serveur MCP malveillant qui injecte des instructions dans l'invite de commandes est encore plus dangereux : il transforme l'assistant IA lui-même en vecteur d'attaque, exfiltrant silencieusement des données confidentielles à l'insu de l'utilisateur. Traitez tout serveur MCP avec la même rigueur de sécurité qu'une API interne privilégiée et examinez les instructions `initialize` avec autant d'attention que celles d'une invite de commandes tierce.
+Un serveur MCP doté d'un outil d'exécution de commandes shell et dépourvu d'authentification équivaut à exécuter `nc -l 8090 -e /bin/sh` sur votre serveur de production. Un serveur MCP malveillant qui injecte des instructions dans le prompt système est encore plus dangereux : il transforme l'assistant IA lui-même en vecteur d'attaque, exfiltrant silencieusement des données confidentielles à l'insu de l'utilisateur. Traitez tout serveur MCP avec la même rigueur de sécurité qu'une API interne privilégiée et examinez les instructions `initialize` avec autant d'attention que celles d'un prompt système tiers.

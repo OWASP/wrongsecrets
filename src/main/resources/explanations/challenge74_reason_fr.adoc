@@ -22,7 +22,7 @@ Que faire à la place :
 - N'accordez à l'application l'accès aux secrets que lorsqu'ils sont réellement nécessaires à une opération.
 - Considérez toutes les invites fournies par l'utilisateur comme des entrées potentiellement hostiles.
 - Appliquer les autorisations et les contrôles d'accès dans l'application plutôt que de s'appuyer sur le modèle pour les appliquer.
-- Si des informations sensibles sont accidentellement exposées à un mannequin, considérez ces informations comme potentiellement compromises et remplacez les identifiants concernés le cas échéant.
+- Si des informations sensibles sont accidentellement exposées à un modèle, considérez ces informations comme potentiellement compromises et remplacez les identifiants concernés le cas échéant.
 ----
 
 [NOTE]

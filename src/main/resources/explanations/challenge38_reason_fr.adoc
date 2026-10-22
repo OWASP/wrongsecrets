@@ -8,4 +8,4 @@
 
 Que faire à la place :
 - Ne stockez pas de secret dans les notes Git. Intégrez les notes Git aux processus d'analyse de secrets et de revue du dépôt plutôt que de supposer que les scanners les examinent.
-- Si un secret a été committe dans une note, révoquez-le ou régénérez-le et considérez-le comme exposé, même si la note est supprimée par la suite.
+- Si un secret a été validé dans une note, révoquez-le ou régénérez-le et considérez-le comme exposé, même si la note est supprimée par la suite.

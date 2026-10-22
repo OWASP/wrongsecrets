@@ -4,7 +4,7 @@ Les agents de programmation IA lisent vos fichiers, exécutent vos commandes et 
 
 La transcription devient un artefact persistant qui peut être :
 
-- S'engage à utiliser le contrôle de version si le développeur l'enregistre.
+- Validée dans le contrôle de version si le développeur l'enregistre.
 - Partagé avec les coéquipiers pour plus de contexte ou pour passer le relais
 - Téléversé sur les canaux de support lors du signalement des bugs
 - Stocké dans les fichiers d'historique de l'agent sur la machine du développeur
