@@ -1,0 +1,14 @@
+You can solve this challenge by the following steps:
+
+1. Find the backup bucket. It is named `backupchallenge`, and because S3 bucket names are globally unique your deployment may carry a short suffix (for example the AWS account id), so look for `backupchallenge-<suffix>` as well.
+2. Download the key object. Listing the bucket is deliberately not part of the public exposure, but the object itself can be fetched anonymously:
++
+[source,shell]
+----
+curl https://backupchallenge.s3.eu-west-1.amazonaws.com/backups/id_ed25519
+----
++
+The path style variant works too: `https://s3.eu-west-1.amazonaws.com/backupchallenge/backups/id_ed25519`.
+3. Paste the complete contents of the key file into the answer box and submit. Line breaks, tabs and spaces are ignored while checking, so it does not matter when your browser or terminal flattens the pasted key into a single line.
+
+Not seeing the object? Then the operators used a suffix on the bucket name, so replace `backupchallenge` in the URL with the name the bucket actually got.

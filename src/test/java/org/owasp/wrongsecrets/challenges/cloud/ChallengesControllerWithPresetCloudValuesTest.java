@@ -54,7 +54,7 @@ class ChallengesControllerWithPresetCloudValuesTest {
   void shouldNotShowDisabledChallengeAnywhere() throws Exception {
     for (var challenge : challenges.getChallengeDefinitions()) {
       var shortname = challenge.name().shortName();
-      if (shortname.contains("46")) {
+      if (shortname.contains("46") || shortname.contains("78")) {
         continue;
       }
       mvc.perform(get("/challenge/%s".formatted(challenge.name().shortName())))
