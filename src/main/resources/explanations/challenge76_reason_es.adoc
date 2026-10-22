@@ -1,0 +1,48 @@
+*Por qué un almacén vectorial RAG filtra los secretos de los documentos que indexó*
+
+La generación aumentada por recuperación almacena el texto de los documentos para
+que una búsqueda pueda devolverlo después. Ese texto no desaparece por el paso de
+embedding: los embeddings se calculan a partir de los fragmentos, pero los
+fragmentos en sí permanecen totalmente legibles y cada búsqueda los devuelve
+literalmente. Indexa un documento que contenga un secreto y el secreto pasa a
+formar parte del corpus de recuperación.
+
+El fallo de este desafío es típico:
+
+- Los documentos se indexan en masa, sin revisar qué contienen. Las notas en
+  borrador, los runbooks y las actas de reunión son exactamente el tipo de texto
+  informal que acumula credenciales "solo por ahora".
+- El almacén vectorial de desarrollo se abrió "para que todos pudieran probar RAG",
+  sin autenticación en el endpoint de búsqueda. A las interfaces de recuperación
+  rara vez se les presta el mismo cuidado que a los inicios de sesión de bases de
+  datos, aunque devuelven el mismo contenido.
+- El chunking divide los límites de los documentos de forma arbitraria, por lo que
+  un secreto a menudo termina en medio de un fragmento que parece inofensivo.
+  Escanear solo las primeras líneas de un documento no es suficiente.
+- Los almacenes vectoriales conservan sus metadatos: de qué documento procede un
+  fragmento, cuándo se indexó y quién lo subió. Esos metadatos le dicen a un
+  atacante exactamente qué filtración vale la pena exfiltrar.
+
+----
+Qué hacer en su lugar:
+
+- Trata el almacén vectorial como datos de producción: exige autenticación en cada
+  endpoint de recuperación y autoriza por colección o inquilino.
+- Escanea y limpia los documentos antes de indexarlos, de la misma forma en que se
+  escanean repositorios y tickets en busca de secretos.
+- Mantén las credenciales completamente fuera del corpus: refléjalas por nombre y
+  resuélvelas en tiempo de ejecución, para que la reindexación no pueda filtrarlas.
+- Registra y supervisa las consultas de recuperación; un patrón de consultas inusual
+  suele ser la primera señal de que alguien está explorando el corpus en busca de
+  secretos.
+- Rota cualquier credencial que haya formado parte de un documento indexado, incluso
+  después de borrar el documento: pueden quedar copias del fragmento en copias de
+  seguridad y réplicas.
+----
+
+[NOTE]
+====
+Cualquier cosa que sería inaceptable en un repositorio git también es inaceptable
+en un almacén vectorial. Un fragmento indexado es una copia del documento, con
+todos sus secretos.
+====
