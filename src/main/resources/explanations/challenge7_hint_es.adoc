@@ -1,0 +1,18 @@
+Puedes resolver este desafío siguiendo estos pasos:
+
+1. Encuentra el secreto en Vault usando el token raíz registrado:
+  - Al configurar el entorno de K8s, el script le indica el valor del token raíz como se muestra a continuación:
+
+    Key                  Value
+    ---                  -----
+    token                s.Jqka4lSy8ayQw2LFsvyAgnTI
+    token_accessor       HEr9RYa3OcZNDOHeFRXIMYCV
+    token_duration       ∞
+    token_renewable      false
+    token_policies       ["root"]
+    identity_policies    []
+    policies             ["root"]
+
+
+  - Utilice el token para iniciar sesión en Vault, accesible a través del puerto 8200.
+  - Echa un vistazo a tu alrededor: ¿puedes encontrar la ubicación del secreto en la lista de secretos?

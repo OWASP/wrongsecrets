@@ -1,0 +1,5 @@
+=== Geheim op een webpagina
+
+Een gebruiker morst per ongeluk de `secret sauce` terwijl hij inhoud aan onze website toevoegt.
+
+Kan jij het geheim vinden op onze https://owasp.org/www-project-wrongsecrets/[Website]?

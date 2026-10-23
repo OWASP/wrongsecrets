@@ -1,0 +1,12 @@
+Dies ist eine Herausforderung im Bereich der CI/CD-Konfiguration. Die Lösung finden Sie, indem Sie sich mit Basisauthentifizierung am geschützten Endpunkt authentifizieren und den Wert abrufen:
+
+1. Verwenden Sie einen Browser, um das Geheimnis zu erhalten:
+- Gehen Sie zunächst zu https://github.com/OWASP/wrongsecrets/blob/master/.github/workflows/dast-zap-test.yml[Github Workflow]
+- Ermitteln Sie die Umgebungsvariable, mit der wir die Basisauthentifizierung für ZAP konfigurieren (`ZAP_AUTH_HEADER_VALUE`)
+- Dekodieren Sie den Base64-kodierten Wert des Headers
+- Navigieren Sie zu `/authenticated/challenge37` und geben Sie den Benutzernamen und das Passwort ein, die Sie im vorherigen Schritt erhalten haben.
+
+2. Verwenden Sie CURL, um das Geheimnis zu erhalten.
+- Gehen Sie zunächst zu https://github.com/OWASP/wrongsecrets/blob/master/.github/workflows/dast-zap-test.yml[Github Workflow]
+- Ermitteln Sie die Umgebungsvariable, mit der wir die Basisauthentifizierung für ZAP konfigurieren (`ZAP_AUTH_HEADER_VALUE`)
+- Führen Sie in Ihrem Terminal den Befehl `curl <domain where this is run>/authenticated/challenge37 -H "<basic_auth header of previous step>"` aus, wobei `<basic_auth header of previous step>` der Wert von `ZAP_AUTH_HEADER_VALUE` ist, den Sie ermittelt haben.

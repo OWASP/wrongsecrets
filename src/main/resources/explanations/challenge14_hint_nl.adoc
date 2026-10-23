@@ -1,0 +1,15 @@
+Je kunt deze uitdaging oplossen met de volgende alternatieve oplossingen:
+
+Let op: voor deze uitdaging moet je https://www.keepassx.org/[Keepass(X)] op je systeem installeren om het kdbx-bestand te openen. Als alternatief kun je de https://github.com/OWASP/wrongsecrets?tab=readme-ov-file#want-to-play-but-are-not-allowed-to-install-the-tools[WrongSecrets Desktop] gebruiken om de uitdaging op te lossen.
+
+1. Haal het Keepass-bestand uit de Docker-container en open het.
+ - Bekijk de Dockerfile om te zien waar het KeePass-bestand naartoe is gekopieerd.
+ - Volg de instructies van https://docs.docker.com/engine/reference/commandline/cp/[de Docker-documentatie] om het Keepass-bestand van de root van de container naar je lokale bestandssysteem te kopiëren.
+- Open het bestand met KeepassX. Er verschijnt een wachtwoordprompt.
+- Controleer eerst de code van `Challenge14.java` in https://github.com/OWASP/wrongsecrets/blob/master/src/main/java/org/owasp/wrongsecrets/challenges/docker/Challenge14.java[github] om te zien waar het wachtwoord mogelijk wordt opgeslagen. Open daarna het bestand `Application.properties` in de map `src/resources` op https://github.com/OWASP/wrongsecrets[*de doelrepo*]  en bekijk de property waarin het KeePass-wachtwoord staat.
+- Gebruik nu het wachtwoord dat je hebt gevonden om het Keepass-bestand te openen. De inhoud stelt je in staat om inloggegevens voor Alibaba Cloud te vinden. Dat is het antwoord!
+2. Haal het Keepass-bestand uit de testresources: we waren zo slim om hetzelfde bestand in `src/test/resources/alibabacreds.kdbx` te plaatsen, zodat je dat ook kunt openen.
+ - Check het project uit met git en open het bestand, of haal het van https://github.com/OWASP/wrongsecrets/blob/master/src/test/resources/alibabacreds.kdbx[Github]
+ - Open het bestand met KeepassX. Er verschijnt een wachtwoordprompt.
+ - Controleer eerst de code van `Challenge14.java` in https://github.com/OWASP/wrongsecrets/blob/master/src/main/java/org/owasp/wrongsecrets/challenges/docker/Challenge14.java[github] om te zien waar het wachtwoord mogelijk wordt opgeslagen. Open daarna het bestand `Application.properties` in de map `src/resources` op https://github.com/OWASP/wrongsecrets[*de doelrepo*]  en bekijk de property waarin het KeePass-wachtwoord staat.
+- Gebruik nu het wachtwoord dat je hebt gevonden om het Keepass-bestand te openen. De inhoud stelt je in staat om inloggegevens voor Alibaba Cloud te vinden. Dat is het antwoord!

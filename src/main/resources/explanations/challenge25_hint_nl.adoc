@@ -1,0 +1,22 @@
+Je kunt deze uitdaging oplossen met de volgende alternatieve oplossingen:
+
+1. Bekijk de storage in Etherscan:
+- Kijk onder de contract creation transaction op https://goerli.etherscan.io/tx/0x497b71a1fd4c57509bfecc2114ec649387fe669c23a3a7e97961f389444d9561[Etherscan]. Let op: als het een fout geeft, voer dan gewoon `https://goerli.etherscan.io/tx/0x497b71a1fd4c57509bfecc2114ec649387fe669c23a3a7e97961f389444d9561` in in het zoekvak.
+- Ga naar state en bekijk de storage, kopieer de nieuwe waarde en decodeer die als hex.
+
+2. Bekijk de input data in Etherscan:
+- Kijk onder de contract creation transaction op https://goerli.etherscan.io/tx/0x497b71a1fd4c57509bfecc2114ec649387fe669c23a3a7e97961f389444d9561[Etherscan]. Let op: als het een fout geeft, voer dan gewoon `https://goerli.etherscan.io/tx/0x497b71a1fd4c57509bfecc2114ec649387fe669c23a3a7e97961f389444d9561` in in het zoekvak.
+- Klik op "more details", bekijk de input data, kopieer de nieuwe waarde en decodeer die als hex.
+
+3. Gebruik Infura met web3js bij Infura:
+- Maak een Infura-sleutel aan op https://infura.io/[Infura].
+- Schrijf een eenvoudig script met web3js om de view-functie op de publieke string "secret" aan te roepen
+
+4. Doe een storage-request bij Infura:
+- Maak een Infura-sleutel aan op https://infura.io/[Infura].
+- Lees de storage op positie 0 voor het contract als volgt:
+
+    curl https://goerli.infura.io/v3/${<your-infura-key>} \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc":"2.0", "method": "eth_getStorageAt", "params": ["0x8b72f7cbAD50620c46219ad676Ad9d3a5A273587", "0x0", "latest"], "id": 1}'

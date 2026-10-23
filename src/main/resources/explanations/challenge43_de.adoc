@@ -1,0 +1,8 @@
+=== Reddit-Fehler
+
+Menschen machen leicht Fehler. Sie können beispielsweise eine „harmlose“ Information in sozialen Medien teilen, die sich später als Geheimnis herausstellt.
+Oder sie können etwas auf der „falschen Seite“ eingeben und absenden. Außerdem füllen manche Passwortmanager Passwörter automatisch aus oder fügen sie auf beliebigen Seiten oder Bildschirmen ein.
+
+Ein Entwickler aus der OWASP-Community, der zufällig auch ein aktiver Redditor war, hinterließ versehentlich ein Geheimnis auf der Plattform.
+
+Kannst du das Geheimnis lüften?

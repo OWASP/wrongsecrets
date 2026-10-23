@@ -1,0 +1,8 @@
+*Por qué es una mala idea incluir datos confidenciales como metadatos*
+
+A veces, se argumenta que los datos menos sensibles deberían almacenarse como metadatos secretos. Pensemos, por ejemplo, en un nombre de usuario: menos sensible que una contraseña, ¿o no?
+En muchos de estos casos, estos elementos son igualmente importantes y deberían recibir la misma protección que el secreto (por ejemplo, la contraseña) en sí.
+
+A menudo, no queremos dar acceso de lectura a los secretos a nuestros empleados, pero sí queremos darles acceso de lectura a los metadatos. Si algún secreto se almacena en los metadatos, ese secreto queda comprometido internamente.
+
+Mantén los valores sensibles, incluidos los nombres de usuario cuando permiten el acceso a la cuenta, en el valor secreto protegido y no en los metadatos. Aplica la misma política de acceso a la credencial completa que a la contraseña.

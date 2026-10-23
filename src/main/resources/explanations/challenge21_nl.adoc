@@ -1,0 +1,7 @@
+=== Verbergen in binaries deel 3: de Go-binary
+
+Onze derde taal naar keuze voor een gecompileerde applicatie is Go. Nu de populariteit daarvan toeneemt, zien we ook meer geheimen die in de binaries zijn verstopt. Kun jij het geheim vinden in onze binary?
+
+Laten we de mythe "geheimen zijn moeilijk te vinden in native gecompileerde applicaties" voor Go ontkrachten: kun jij het geheim vinden in https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-golang[wrongsecrets-golang] (of https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-golang-arm[wrongsecrets-golang-arm], https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-golang-linux[wrongsecrets-golang-linux])?
+
+Probeer de binary te downloaden en hem lokaal uit te voeren (bijv. `./wrongsecrets-golang<theversion you need> guess test`).

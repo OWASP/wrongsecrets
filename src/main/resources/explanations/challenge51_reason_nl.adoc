@@ -1,0 +1,28 @@
+= Uitdaging: verkeerde configuratie van Docker Compose-secreten
+
+*Waarom onjuist secretbeheer in Docker Compose tot kwetsbaarheden kan leiden*
+
+In gecontaineriseerde omgevingen is secretbeheer van cruciaal belang voor het behoud van de vertrouwelijkheid en integriteit van gevoelige informatie zoals databasegegevens, API-sleutels en andere geheimen. Docker Compose biedt een manier om secrets te definiëren en te beheren, maar onjuiste verwerking van deze secrets kan je systeem blootstellen aan aanvallen.
+
+Een veelgemaakte fout is om secrets rechtstreeks via omgevingsvariabelen door te geven of secretbestanden aan de versiebeheer toe te voegen. Deze aanpak is gebrekkig omdat:
+
+1. **Secrets zijn zichtbaar in de omgeving**: Omgevingsvariabelen zijn eenvoudig te inspecteren met basiscommando's van het systeem of via logging, wat kan leiden tot onbedoelde blootstelling.
+2. **Secrets hardcoded in Dockerfiles**: Wanneer secrets zijn ingebed in de Dockerfile of `docker-compose.yml`, maken ze deel uit van het bouwproces en worden ze opgenomen in de imagelagen. Iedereen met toegang tot het image kan deze lagen inspecteren en het geheim ophalen.
+3. **Secretbestanden toevoegen aan versiebeheer**: Secrets opslaan in bestanden en deze commiten naar Git of andere versiebeheersystemen brengt grote risico's met zich mee, omdat iedereen met toegang tot de repository de geheimen kan verkrijgen.
+
+*Waarom deze uitdaging?*
+
+Het doel van deze uitdaging is de risico's van onjuist secretbeheer in Docker Compose onder de aandacht te brengen. Concreet laat het de gevaren zien van het verkeerd gebruiken van omgevingsvariabelen en bestandsgebonden secrets. Hoewel Docker Compose mechanismen biedt om secrets veilig te behandelen, zoals Docker secrets en externe secretbeheeroplossingen, laten developers deze functies vaak uit gemak over het hoofd.
+
+Deze uitdaging simuleert een scenario waarin:
+
+- Databasegegevens (`db_user`, `db_password` en `db_name`) zijn opgeslagen in een secretbestand en worden aangehaald in de `docker-compose`.
+- Deze secrets worden onjuist beheerd en kunnen eenvoudig worden blootgesteld door iedereen met toegang tot de omgeving of de repository.
+
+*Belangrijkste leerpunten:*
+
+- **Gebruik geen omgevingsvariabelen voor secrets**: Hoewel handig, zijn omgevingsvariabelen niet veilig voor het beheren van gevoelige informatie. Gebruik in plaats daarvan Docker secrets of externe tools zoals Vault of AWS Secrets Manager.
+- **Commit secrets nooit naar versiebeheer**: Houd secretbestanden altijd buiten je repository door `.gitignore` te gebruiken of veilige secretbeheeroplossingen.
+- **Zorg dat secrets niet in images worden ingebakken**: Secrets horen niet in het Docker-image zelf te zitten; ze moeten tijdens het uitvoeren worden geïnjecteerd of veilig worden opgehaald via een externe dienst.
+
+Door deze uitdaging te voltooien, leer je hoe eenvoudig het is voor aanvallers om toegang te krijgen tot slecht beheerde secrets en welke best practices er zijn om secrets te beveiligen in Docker Compose-omgevingen.

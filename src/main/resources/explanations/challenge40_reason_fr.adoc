@@ -1,0 +1,9 @@
+*Pourquoi ne devrions-nous pas stocker la clé de chiffrement et le secret ensemble ?*
+
+Stocker ensemble une clé de chiffrement et les données qu'elle chiffre est généralement considéré comme une mauvaise pratique car cela compromet la sécurité assurée par le chiffrement.
+
+Dans de tels scénarios, un attaquant détient la clé dès l'instant où le fichier est en sa possession.
+
+Il est toujours recommandé de stocker vos clés de chiffrement en lieu sûr.
+
+Conservez les clés séparément des données qu'elles protègent, par exemple dans un service de gestion de clés dédié ou un module de sécurité matériel, et restreignez l'accès à celles-ci tout en le consignant.

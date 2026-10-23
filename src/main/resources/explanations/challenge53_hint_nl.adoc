@@ -1,0 +1,41 @@
+Standaard draait de uitdaging zonder een debug-sidecar. Je doel is het binaire bestand dat in de pod draait te analyseren en het geheim te achterhalen.
+
+Deze uitdaging kun je met de volgende stappen oplossen:
+
+1. Deploy de uitdaging zonder de sidecar:
+   ```
+   kubectl apply -f k8s/challenge53/secret-challenge53.yml
+   ```
+   Controleer dat de pod draait:
+   ```
+   kubectl get pods
+   ```
+
+2. Realiseer dat de pod alleen geen debugmogelijkheden biedt. Vervang nu de deployment door een die een sidecar bevat:
+   ```
+   kubectl apply -f k8s/challenge53/secret-challenge53-sidecar.yml
+   ```
+
+3. Start de debugcontainer die aan de draaiende pod is gekoppeld:
+   ```
+   kubectl exec -it <pod-name> -c sidecar -- /bin/sh
+   ```
+
+4. Ga naar de gedeelde map waarin het binaire bestand staat:
+   ```
+   cd /shared-data
+   ```
+
+5. Gebruik `gdb` om het binaire bestand te inspecteren en uit te voeren:
+   ```
+   gdb wrongsecrets-challenge53-c-linux
+   run &
+   ```
+
+6. Zoek het geheugenadres van het geheim op:
+   ```
+   print &secret
+   x/s <memory-address>
+   ```
+
+Door het geheugen te analyseren, leg je de hardcoded secret bloot die in het binaire bestand is opgeslagen.

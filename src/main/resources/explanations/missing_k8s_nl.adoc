@@ -1,0 +1,5 @@
+We are running outside a K8s cluster.
+Please run this in the K8s cluster as explained in the
+https://github.com/OWASP/wrongsecrets?tab=readme-ov-file#basic-k8s-exercise[README.md]
+
+There are still supported challenges after this one. Please try another challenge instead!

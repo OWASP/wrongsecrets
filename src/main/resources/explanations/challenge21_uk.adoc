@@ -1,0 +1,7 @@
+=== Приховування у двійкових файлах, частина 3: двійковий файл Go
+
+Наша третя мова програмування для компільованих застосунків – це Go. Зі зростанням її популярності ми бачимо збільшення кількості секретів, прихованих у бінарних файлах. Чи можете ви знайти секрет у нашому бінарному файлі?
+
+Давайте розвінчаємо міф про те, що «секрети важко знайти в нативних скомпільованих програмах» для Go: чи можна знайти секрет у https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-golang[wrongsecrets-golang] (або https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-golang-arm[wrongsecrets-golang-arm], https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-golang-linux[wrongsecrets-golang-linux])?
+
+Спробуйте завантажити бінарний файл та запустити його локально (наприклад, `./wrongsecrets-golang<theversion you need> guess test`).

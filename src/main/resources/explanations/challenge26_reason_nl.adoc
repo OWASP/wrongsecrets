@@ -1,0 +1,9 @@
+*Waarom geheimen overschrijven op de blockchain ze niet verwijdert*
+
+De staat van de chain kan voor elk moment worden geverifieerd door de state updates uit te voeren tot en met een bepaald blok.
+
+Het bijwerken van de staat van de chain verwijdert eerdere wijzigingen van de staat niet.
+
+Wat je in plaats daarvan moet doen:
+- Zet nooit een geheim op een publieke of onveranderlijke blockchain. Houd geheimwaarden off-chain in een systeem met toegangscontroles en gebruik de chain alleen voor niet-gevoelige referenties of bewijzen.
+- Behandel elke waarde die al naar een publieke chain is geschreven als permanent blootgelegd en roteer of herroep het betreffende inloggegeven.

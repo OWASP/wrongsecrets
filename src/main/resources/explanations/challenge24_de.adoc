@@ -1,0 +1,11 @@
+=== Kryptografische Herausforderung Teil 2
+
+Die Implementierung von Kryptografie kann sehr komplex sein. Auf https://twitter.com/d_feldman/status/1558309810801631233?s=20&t=z98ii6IPJEZq10cnsGAhpQ[Twitter] finden sich zahlreiche Fehler. Was wäre, wenn unsere Entwickler denselben Fehler gemacht hätten?
+
+In dieser Aufgabe müssen Sie den HMAC-Schlüssel finden. Wir haben den HMAC gemäß der Spezifikation des NIST (https://csrc.nist.gov/CSRC/media/Projects/Cryptographic-Standards-and-Guidelines/documents/examples/HMAC_SHA1.pdf) Schritt für Schritt erstellt. Können Sie uns den HMAC-Schlüssel zur Verfügung stellen, mit dem der HMAC erstellt wurde?
+
+Verwendeter Text: `Sample message for keylen=blocklen`
+
+HMAC in Hexadezimaldarstellung: `5FD596EE 78D5553C 8FF4E72D 266DFD19 2366DA29`
+
+Welcher HMAC-Schlüssel wird hier verwendet?

@@ -1,0 +1,10 @@
+*Pourquoi il est essentiel de bien configurer votre solution de gestion des secrets*
+
+HashiCorp Vault (https://www.vaultproject.io/) est conçu pour gérer les secrets. Vault les protège en les chiffrant et met en œuvre de nombreux contrôles de sécurité pour en sécuriser l'accès.
+
+Certains de ces contrôles peuvent facilement être mal configurés ou mal utilisés. Dans ce défi, nous ne disposons que de jetons racine pour utiliser Vault et nous risquons de les divulguer, même accidentellement à Git. Ces jetons ne devraient jamais être utilisés comme méthode d'authentification par défaut auprès de Vault. Il est préférable d'activer l'authentification LDAP (https://www.vaultproject.io/docs/auth/ldap) ou Azure (https://www.vaultproject.io/docs/auth/azure).
+
+Ensuite, le secret lui-même ne comporte aucune métadonnée indiquant son utilisation, ce qui complique sa conservation dans le temps.
+
+Lorsque vous utilisez une solution tierce, comme Hashicorp Vault ou toute autre : assurez-vous de bien lire la documentation et de sécuriser le système.
+De plus, effectuez un exercice de modélisation des menaces afin de comprendre les risques liés à une mauvaise utilisation.

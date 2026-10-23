@@ -1,0 +1,25 @@
+Este desafío consiste específicamente en examinar un secreto en un binario de Rust basado en un perfil de lanzamiento: https://doc.rust-lang.org/cargo/reference/profiles.html#release[release profile].
+
+Puedes resolver este desafío utilizando las siguientes soluciones alternativas:
+
+1. Descubre los secretos con https://ghidra-sre.org/[Ghidra].
+- Instale https://ghidra-sre.org/[Ghidra].
+- Inícialo con `ghidraRun`.
+- Cargue la aplicación `wrongsecrets-rust` en ghidra eligiendo un nuevo proyecto, luego importe el archivo y haga doble clic en él.
+- Permita que Ghidra analice la aplicación.
+- Ahora importa https://gist.github.com/str4d/e541f4c28e2bca80d222434ac1a204f4[demangle script] y ejecútalo a través del administrador de scripts de Ghidra para descomponer las funciones.
+- Encuentra la función `main` en el espacio de nombres `rust`.
+- Encuentra el argumento que necesita ser comparado (en nuestro ejemplo, ese es `local_80` tal como se define en `std::env::args((env *)&local_80);`)
+- Encuentra dónde se compara el argumento (en nuestro ejemplo, eso es `iVar1 = __stubs::_memcmp(local_80,puVar2,0x3b);`)
+- Ahora busca la entrada y compárala con (`puVar2`) su valor. ¿Puedes encontrar el secreto?
+- Como alternativa: ve al administrador de tipos de datos en la esquina inferior izquierda, filtra por `string`, haz clic derecho en `string` como miembro de `wrongsecrets-rust` y selecciona `find uses of`. Luego, filtra por palabras clave conocidas: ¡ahora deberías poder encontrar el secreto fácilmente!
+
+2. Descubre los secretos con https://www.radare.org[radare2].
+- Instala https://www.radare.org[radare2] con `brew install radare2` en Mac o sigue estos pasos: `git clone https://github.com/radareorg/radare2; cd radare2 ; sys/install.sh`
+- Inicie el análisis r2 con `$ r2 -AAA wrongsecrets-rust`
+- Imprime el punto de entrada `s sym.rust::main::h66ace6a84e548891` y luego `pdf`. (¡no el `main` predeterminado!)
+- Encuentra el argumento que debe compararse con `pdf | grep memcmp` (en nuestro ejemplo es `r12`).
+- Intenta descubrir cómo se prepara este argumento. ¿Puedes encontrar el secreto?
+- Alternativamente: después de iniciar radare2, ejecute `iz | grep secret` y busque la cadena.
+
+¿No quieres instalar las herramientas? ¡Consulta el archivo https://github.com/OWASP/wrongsecrets/tree/master?tab=readme-ov-file#want-to-play-but-are-not-allowed-to-install-the-tools[WrongSecrets Desktop container]!

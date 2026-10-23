@@ -1,0 +1,14 @@
+Der private Schlüssel befindet sich im .ssh-Teil des Containers und wurde in diesem Fall versehentlich in Git eingecheckt ;-).
+
+Den Schlüssel finden Sie wie folgt:
+
+1. Abrufen aus Git in der Datei [`.ssh/wrongsecrets.keys`]():
+- Klonen Sie das Repository mit `git clone https://github.com/OWASP/wrongsecrets`.
+- Wechseln Sie in das Projektverzeichnis und wechseln Sie in den Ordner `.ssh`. Dort finden Sie die Datei `wrongsecrets.keys`.
+
+2. Abrufen aus dem Docker-Container:
+- Starten Sie den Container lokal mit `docker run jeroenwillemsen/wrongsecrets:<TAGNAME-HERE>`
+ - Ermitteln Sie die Container-ID, indem Sie in einem neuen Terminal `docker ps` ausführen.
+ - Führe `docker exec -it <container id> sh` aus
+ - Gehe zu /home/wrongsecrets/.ssh/
+ - do `cat wrongsecrets.keys`

@@ -1,0 +1,28 @@
+= Desafío de configuración incorrecta de secretos de Docker Compose
+
+*Por qué una gestión inadecuada de secretos en Docker Compose puede generar vulnerabilidades*
+
+En entornos de contenedores, la gestión de secretos es fundamental para mantener la confidencialidad e integridad de información sensible, como credenciales de bases de datos, claves API y otros secretos. Docker Compose ofrece una forma práctica de definir y gestionar secretos, pero un manejo inadecuado de estos puede exponer su sistema a ataques.
+
+Un error común es pasar secretos directamente a través de variables de entorno o incluir archivos secretos en el control de versiones. Este enfoque es defectuoso porque:
+
+1. **Los secretos son visibles en el entorno**: Las variables de entorno son fáciles de inspeccionar usando comandos básicos del sistema o registros, lo que puede llevar a una exposición no intencionada.
+2. **Inclusión de secretos en el código Dockerfile**: Cuando los secretos se incluyen en el Dockerfile o en `docker-compose.yml`, forman parte del proceso de compilación y se incorporan a las capas de la imagen. Cualquier persona con acceso a la imagen puede inspeccionar estas capas y recuperar el secreto.
+3. **Incorporar archivos secretos al control de versiones**: Almacenar secretos en archivos e incorporarlos a Git u otros sistemas de control de versiones conlleva riesgos significativos, ya que cualquier persona con acceso al repositorio puede obtener los secretos.
+
+*¿Por qué este reto?*
+
+El objetivo de este desafío es resaltar los riesgos asociados con una gestión inadecuada de secretos en Docker Compose. En concreto, demuestra los peligros de usar incorrectamente variables de entorno y secretos basados en archivos. Si bien Docker Compose proporciona mecanismos para gestionar secretos de forma segura, como los secretos de Docker y soluciones externas de gestión de secretos, los desarrolladores suelen pasar por alto estas funciones por comodidad.
+
+Este desafío simula un escenario en el que:
+
+- Las credenciales de la base de datos (`db_user`, `db_password` y `db_name`) se almacenan en un archivo secreto y se referencian en el archivo `docker-compose`.
+- Estos secretos no se gestionan adecuadamente y pueden ser expuestos fácilmente por cualquier persona con acceso al entorno o al repositorio.
+
+*Puntos clave de aprendizaje:*
+
+- **Evite usar variables de entorno para secretos**: Si bien son prácticas, las variables de entorno no son seguras para gestionar información confidencial. En su lugar, utilice secretos de Docker o herramientas externas como Vault o AWS Secrets Manager.
+- **No incluyas información secreta en el control de versiones**: Mantén siempre los archivos secretos fuera de tu repositorio utilizando `.gitignore` o soluciones seguras de gestión de secretos.
+- **Asegúrese de que los secretos no estén integrados en las imágenes**: Los secretos no deben estar incrustados en la propia imagen de Docker; deben inyectarse en tiempo de ejecución o recuperarse de forma segura a través de un servicio externo.
+
+Al completar este desafío, aprenderá lo fácil que es para los atacantes acceder a secretos gestionados de forma inadecuada y las mejores prácticas para proteger los secretos en entornos Docker Compose.

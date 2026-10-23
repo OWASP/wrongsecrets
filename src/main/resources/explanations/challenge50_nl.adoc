@@ -1,0 +1,7 @@
+=== Opnieuw geheimen verbergen in binaries: .NET self-contained runtime
+
+Het is supermakkelijk om een geheim in een DLL te vinden, maar als je op MacOS of Linux zit, is dat veel moeilijker. Dus ik ben ervan overtuigd dat we er gewoon één kunnen laten zitten, toch?
+
+Laat ons zien dat we dat niet moeten doen! Kun jij het geheim vinden in https://github.com/OWASP/wrongsecrets-binaries/releases/download/0.1.0/wrongsecrets-dotnet[wrongsecrets-dotnet] (of https://github.com/OWASP/wrongsecrets-binaries/releases/download/0.1.0/wrongsecrets-dotnet-arm[wrongsecrets-dotnet-arm], https://github.com/OWASP/wrongsecrets-binaries/releases/download/0.1.0/wrongsecrets-dotnet-linux[wrongsecrets-dotnet-linux])?
+
+Probeer de binary te downloaden en lokaal uit te voeren (bijv. `./wrongsecrets-dotnet<theversion you need> <your answer>`).

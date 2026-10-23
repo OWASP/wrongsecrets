@@ -1,0 +1,26 @@
+*Pourquoi un ensemble de compétences nécessite la même évaluation que votre code source*
+
+Un ensemble de compétences est un logiciel distribué. Il contient des scripts exécutables, s'exécute sur les machines des développeurs et dans l'environnement d'intégration continue, et est installé par des personnes qui ne l'ont pas écrit. Le traiter comme un simple fichier Markdown est ainsi que des secrets finissent par être distribués à grande échelle.
+
+Deux échecs s'accumulent dans ce défi :
+
+- Le jeton est intégré au package, de sorte que chaque personne qui installe la compétence reçoit une authentification partagée fonctionnelle.
+- Lorsqu'on partage la compétence au sein de Claude, tous ceux qui y ont accès auront accès au secret.
+- Le jeton est encodé en base64, ce qui constitue un *encodage*, et non un chiffrement. Cela empêche un scanner de secrets basique de le déclencher, et n'empêche personne d'autre. Toute personne possédant le package peut le décoder en une seule commande.
+
+Le second point est le plus dangereux des deux, car il transforme un problème détectable en un problème indétectable. Le scanner se tait, le résultat disparaît de la liste d'attente et le certificat reste valide pendant des années.
+
+----
+Que faire à la place :
+
+- Lire les informations d'identification à partir de l'environnement ou d'un gestionnaire de secrets lors de l'exécution, et signaler une erreur claire en cas d'absence de celles-ci.
+- Ne jamais « corriger » une découverte de scanner secret en encodant, en divisant ou en obscurcissant la valeur. La corriger consiste à supprimer le secret et à le faire pivoter.
+- Examinez chaque fichier d'un ensemble de compétences, et pas seulement le fichier `SKILL.md`. Les scripts, les documents de référence et les exemples de configuration font tous partie de la surface d'attaque.
+- Vérifiez le bundle dans CI : décompressez-le et exécutez votre scanner de secrets sur le contenu extrait, y compris un ensemble de règles prenant en charge base64.
+- Publier des bundles à partir d'un pipeline de build qui n'a initialement aucun accès aux identifiants de production.
+----
+
+[NOTE]
+====
+L'encodage n'est pas une mesure de sécurité. Si le seul obstacle entre un attaquant et vos identifiants est un encodage `base64 -d`, ces identifiants sont publics.
+====

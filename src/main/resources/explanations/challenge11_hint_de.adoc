@@ -1,0 +1,10 @@
+Diese Herausforderung lässt sich mit folgenden Schritten lösen:
+
+1. Ermitteln Sie den Pfad zur Rechteausweitung ausschließlich mit Terraform:
+  - In `aws/irsa.tf` sollte etwas Interessantes stehen.
+
+2. Ermitteln Sie den Pfad zur Rechteausweitung mithilfe von https://github.com/nccgroup/ScoutSuite[ScoutSuite]
+- Unabhängig von der verwendeten Methode sollten Sie die Rolle `cant-read-secrets` überprüfen. Sie erlaubt `sts:AssumeRole` für `*`. Das bedeutet, dass Sie damit **jede** Rolle im Konto annehmen können.
+- Rollen verfügen über eine Vertrauensbeziehung, und die für unseren Pod (`wrongsecrets-secret-manager`) ist falsch konfiguriert. Sie erlaubt `arn:aws:iam::<account id>:root`, was bedeutet, dass jeder innerhalb dieses AWS-Kontos Zugriff hat, sofern er über IAM-Berechtigungen verfügt. Das heißt, wir können diese Rolle von `cant-read-secrets` übernehmen!
+
+Nach dem Wechsel von `cant-read-secrets` zu `wrongsecrets-secret-manager` können wir einfach `aws ssm get-parameter --name wrongsecretvalue --with-decryption` ausführen.

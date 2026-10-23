@@ -1,0 +1,18 @@
+Diese Herausforderung lässt sich mit folgenden Schritten lösen:
+
+1. Ermitteln Sie das Geheimnis im Vault mithilfe des protokollierten Root-Tokens:
+  - Beim Einrichten der K8s-Umgebung zeigt Ihnen das Skript den Wert des Root-Tokens wie folgt an:
+
+    Key                  Value
+    ---                  -----
+    token                s.Jqka4lSy8ayQw2LFsvyAgnTI
+    token_accessor       HEr9RYa3OcZNDOHeFRXIMYCV
+    token_duration       ∞
+    token_renewable      false
+    token_policies       ["root"]
+    identity_policies    []
+    policies             ["root"]
+
+
+  - Verwenden Sie das Token, um sich bei Vault anzumelden, das über Port 8200 zugänglich ist.
+  - Schau dich um: Kannst du den Ort des Geheimnisses in der Geheimnisübersicht finden?

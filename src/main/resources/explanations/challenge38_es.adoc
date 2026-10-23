@@ -1,0 +1,9 @@
+=== Notas de Git
+
+Los mensajes de confirmación de Git pueden ser un problema constante.
+
+No hay problema en usar un mensaje corto, un galimatías ininteligible o simplemente teclear sin sentido en un mensaje de Git hasta que te toque la desafortunada tarea de revisarlo. En ese momento, estos mensajes descuidados pueden convertirse en una pesadilla.
+
+Las notas de Git están aquí para solucionar esto; llevan mucho tiempo en uso, pero a menudo se pasan por alto. Permiten añadir metadatos adicionales sobre la confirmación sin afectar al mensaje de confirmación en sí.
+
+Como ocurre con todo en Git, una vez que se confirma la información, es muy, muy difícil eliminar todas las referencias a ella. ¿Qué podría salir mal?

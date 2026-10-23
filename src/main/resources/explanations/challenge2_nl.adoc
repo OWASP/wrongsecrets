@@ -1,0 +1,7 @@
+=== Hardcoded wachtwoord, deel 2
+
+In plaats van het wachtwoord rechtstreeks hard te coderen, heeft de ontwikkelaar geprobeerd het te verbergen in de `application.properties` van Spring Boot.
+
+Op deze manier is het niet langer direct terug te vinden in `.java`- of gecompileerde `.class`-bestanden. Hoe kun je het dan ontdekken?
+
+Dit kun je eenvoudig detecteren met SAST-oplossingen, zoals https://github.com/trufflesecurity/truffleHog[truffleHog] en https://github.com/awslabs/git-secrets[git-secrets], en door handmatige inspectie van je `application.properties`.

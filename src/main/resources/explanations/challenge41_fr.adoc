@@ -1,0 +1,13 @@
+=== Déverrouillage du mot de passe
+
+Un site web utilisait https://en.wikipedia.org/wiki/MD5[MD5] pour hacher les mots de passe, et ses développeurs ont récemment découvert que quelqu'un avait publié une copie de leurs données utilisateur.
+
+Dans le but d’améliorer la sécurité, ils ont décidé de migrer vers un algorithme de hachage plus fort comme https://en.wikipedia.org/wiki/Bcrypt[bcrypt].
+
+Les développeurs ont décidé que la méthode de migration la plus rapide consistait à hacher les hachages existants avec bcrypt. Utiliser deux algorithmes de hachage serait plus sûr qu'un seul, n'est-ce pas ? Il semblerait que oui.
+
+Malheureusement, une nouvelle fuite de données s'est produite et cette fois-ci, les données divulguées contenaient les mots de passe hachés avec bcrypt. Au moins, cette fois-ci, ils sont en sécurité, n'est-ce pas ?
+
+Pour ce défi, deux sauvegardes de base de données contenant les noms d'utilisateur et les mots de passe vous sont fournies. Le fichier de sauvegarde https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/db-dumps/db-dump.txt[db-dump.txt] a été généré avant la migration, et le second fichier de sauvegarde https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/db-dumps/db-dump-2.txt[db-dump-2.txt] a été généré après la migration. Ces deux fichiers de sauvegarde sont disponibles dans le dossier https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/db-dumps[db-dumps].
+
+Maintenant, en supposant que tous les utilisateurs sauf un aient changé leur mot de passe, pouvez-vous trouver le mot de passe qui n'a pas été modifié ?

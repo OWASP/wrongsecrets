@@ -1,0 +1,11 @@
+=== Filtración de secretos del contenedor de desarrollo
+
+Los contenedores de desarrollo (Dev Containers) permiten a los equipos definir entornos de desarrollo reproducibles mediante herramientas de contenerización como VS Code Remote - Containers y GitHub Codespaces. Al encapsular herramientas, entornos de ejecución y dependencias en `.devcontainer/devcontainer.json`, los desarrolladores pueden empezar a trabajar sin necesidad de instalar pilas de software locales complejas.
+
+Sin embargo, los desarrolladores suelen cometer el error de insertar tokens confidenciales, contraseñas, claves de API o credenciales de acceso a registros privados directamente en `.devcontainer/devcontainer.json` (como en `containerEnv`, `remoteEnv` o scripts de ciclo de vida) y de incluirlos en el control de versiones.
+
+Para resolver este desafío:
+
+. Inspeccione el archivo de configuración devcontainer https://github.com/OWASP/wrongsecrets/tree/master/.devcontainer/devcontainer.json[`.devcontainer/devcontainer.json`] en el repositorio del proyecto o revise el fragmento de configuración en la interfaz de usuario.
+. Identifique el `DEVCONTAINER_SECRET` filtrado o el token definido en el entorno del contenedor.
+. Introduce el secreto descubierto en el campo de entrada que aparece a continuación.

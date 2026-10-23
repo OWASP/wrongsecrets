@@ -1,0 +1,39 @@
+*Warum Sie niemals ein Geheimnis in eine Agentenanweisungsdatei aufnehmen sollten*
+
+`AGENTS.md`, `CLAUDE.md`, `.cursor/rules/*.mdc`, `.windsurfrules` und die vielen
+anderen Formate für Agentenkontexte werden von Codierungsagenten automatisch geladen. Das
+macht sie praktisch, und genau diese Bequemlichkeit macht sie zu einem
+Problem für das Geheimnismanagement:
+
+- Sie sind im Repository eingecheckt, daher befindet sich das Geheimnis für immer
+  in der Git-Historie und muss rotiert werden, sobald es auftaucht.
+- Sie werden auf jeden Rechner kopiert, auf dem das Repository ausgecheckt wird, einschließlich
+  von Forks, CI-Läufern und persönlichen Laptops.
+- Sie werden in den Modellkontext geladen, sodass der Wert in Chattranskripten,
+  Telemetriedaten und Protokollen von Drittanbietern landen kann.
+- Sie enthalten üblicherweise *gemeinsame* Anmeldeinformationen, deren Geltungsbereich selten eingeschränkt wird und
+  die noch seltener rotiert werden.
+- Viele Secret-Scanner behandeln Dokumentationsdateien als nachrangig, sodass das Leck
+  lange Zeit unentdeckt bleibt.
+
+----
+Was Sie stattdessen tun sollten:
+
+- Halten Sie die Anmeldeinformationen von den Anweisungsdateien fern und lassen Sie den Agenten sie
+aus der Umgebung lesen, zum Beispiel `$STAGING_DEPLOY_TOKEN`.
+- Dokumentieren Sie, *welche* Variable benötigt wird und *wo* sie zu erhalten ist, niemals
+den Wert selbst.
+- Geben Sie jedem Verbraucher ein eigenes, kurzlebiges Berechtigungszertifikat mit minimalen Berechtigungen anstelle eines
+gemeinsamen Tokens.
+- Scannen Sie Agenten-Anweisungsdateien mit einem Secret Scanner in Pre-Commit und CI,
+genau wie Sie Quellcode scannen.
+- Behandeln Sie jedes Geheimnis, das jemals im Agentenkontext aufgetaucht ist, als kompromittiert und
+rotieren Sie es.
+----
+
+[NOTE]
+====
+Skills, Regeln, Prompts, MCP-Serverkonfigurationen und Agentenanweisungsdateien sind
+aus Sicht des Geheimnismanagements alles Code. Wenn Sie kein Token
+in einer `.java`-Datei fest codieren würden, codieren Sie es auch nicht in einer `CLAUDE.md` fest.
+====

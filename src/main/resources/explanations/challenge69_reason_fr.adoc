@@ -1,0 +1,24 @@
+*Pourquoi vous ne devriez jamais inclure un secret dans une compétence d'agent*
+
+Une skill est conçue pour être partagée. C'est son principe même : vous écrivez le workflow une seule fois et chaque développeur, agent et tâche d'intégration continue le réutilise. Cela signifie qu'un secret dans une skill présente les pires caractéristiques possibles :
+
+- Il est copié sur chaque machine sur laquelle la compétence est installée, y compris les ordinateurs portables personnels.
+- Il se retrouve dans le dépôt, donc il reste dans l'historique Git pour toujours, même après que vous l'ayez « supprimé », vous obligeant à faire tourner le secret.
+- Il est publié sur les plateformes et registres de compétences, où il est indexé et consultable.
+- Elle est lue par l'agent et peut donc être reflétée dans les transcriptions de conversations, les journaux et les données de télémétrie appartenant à des tiers.
+- Il s'agit d'une authentification *partagée*, elle n'est donc presque jamais renouvelée et son utilisation n'est presque jamais restreinte.
+
+----
+Que faire à la place :
+
+- Évitez d'inclure les informations d'identification dans la compétence et laissez celle-ci les lire depuis l'environnement, par exemple `$STAGING_DEPLOY_TOKEN`.
+- Indiquez *quelle* variable est requise et *où* la trouver, jamais sa valeur elle-même.
+- Attribuez à chaque consommateur ses propres identifiants éphémères et à privilèges minimaux, au lieu d'un jeton d'équipe partagé.
+- Analysez les fichiers de compétences avec un scanner secret lors des phases de pré-commit et d'intégration continue, de la même manière que vous analysez le code source.
+- Considérez comme compromis tout secret ayant jamais figuré dans une compétence et faites-la tourner.
+----
+
+[NOTE]
+====
+Les compétences, les règles, les invites, les configurations du serveur MCP et les fichiers d'instructions de l'agent sont tous considérés comme du code en ce qui concerne la gestion des secrets. Si vous n'intégreriez pas un jeton directement dans un fichier `.java`, ne l'intégrez pas non plus dans un fichier `SKILL.md`.
+====

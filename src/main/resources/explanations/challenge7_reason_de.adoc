@@ -1,0 +1,10 @@
+*Warum Sie Ihre Geheimnisverwaltungslösung gut konfigurieren müssen*
+
+https://www.vaultproject.io/[*Hashicorp Vault*] dient der Verwaltung von Geheimnissen. Vault schützt Geheimnisse durch Verschlüsselung und verfügt über zahlreiche Sicherheitskontrollen, um den Zugriff darauf zu sichern.
+
+Einige dieser Kontrollmechanismen können leicht falsch konfiguriert oder missbraucht werden. In dieser Challenge stehen uns lediglich (Root-)Tokens für die Nutzung von Vault zur Verfügung, und es besteht die Gefahr, dass diese versehentlich sogar an Git weitergegeben werden. Diese Tokens sollten niemals als Standardmethode zur Authentifizierung bei Vault verwendet werden. Stattdessen empfiehlt es sich, die Authentifizierung über https://www.vaultproject.io/docs/auth/ldap[LDAP] oder https://www.vaultproject.io/docs/auth/azure[Azure] zu aktivieren.
+
+Darüber hinaus verfügt das Geheimnis selbst über keine Metadaten zu dem Bereich, in dem es verwendet wird. Dies erschwert die langfristige Aufrechterhaltung des Geheimnisses.
+
+Bei der Verwendung einer Drittanbieterlösung, wie beispielsweise Hashicorp Vault oder einer anderen: Lesen Sie die Dokumentation sorgfältig durch und sichern Sie das System ab.
+Führen Sie außerdem eine Bedrohungsmodellierung durch, um zu verstehen, welche Risiken bei unsachgemäßer Verwendung bestehen.

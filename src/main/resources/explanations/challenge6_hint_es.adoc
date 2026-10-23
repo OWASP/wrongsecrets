@@ -1,0 +1,19 @@
+Puedes resolver este desafío mediante las siguientes soluciones alternativas:
+
+1. Comprueba el estado del secreto en Git:
+- ¿Puedes ver dónde almacenamos el archivo `secrets-secret.yml` en Git? Si no, simplemente realiza una búsqueda.
+- Echa un vistazo al campo `Data`: ¿qué puedes encontrar allí? Ten en cuenta que los secretos están codificados en base64. Una vez montados en las cargas de trabajo, se decodifican.
+
+2. Pídelo amablemente usando Kubectl:
+- Asegúrese de tener Kubectl instalado como se define en el archivo README.MD y asegúrese de que kubectl esté configurado para enviar comandos al clúster correcto.
+- Ahora ejecuta `kubectl get secrets`. Aquí verás todos los configmaps activos en el espacio de nombres en el que te encuentras, que para esta aplicación normalmente es `default` (a menos que tu administrador/tutor especifique lo contrario).
+- Ahora ejecuta `kubectl get secret funnystuff -o Yaml`. ¿Puedes ver el secreto? ¿Cuál es su valor una vez que lo decodificas en base64?
+
+3. Acceda al pod y obtenga los datos:
+- Asegúrese de tener Kubectl instalado como se define en el archivo README.MD y asegúrese de que kubectl esté configurado para enviar comandos al clúster correcto.
+- Ahora ejecuta `kubectl get pods`. Aquí verás todos los Pods activos en el espacio de nombres en el que te encuentras, que para esta aplicación normalmente es `default` (a menos que tu administrador/tutor especifique lo contrario).
+- Ahora, para tu instancia del pod WrongSecrets, ejecuta `kubectl exec -it secret-challenge-<rest of the name of the pod from the prev.step> -- sh`.
+- Ahora ejecuta `env | grep SPECIAL_SPECIAL_K8S_SECRET` y ahí está tu secreto. Ten en cuenta que no es necesario descifrarlo, ya que el secreto está montado.
+
+
+Por cierto: con `kubectl get <resourcetype> -A` se obtiene una visión general de todas las instancias de ese tipo de recurso en todos los espacios de nombres a los que tienes acceso. Esto demuestra la importancia de no dar acceso a todos los espacios de nombres del clúster, ya que esto podría implicar la filtración de configuraciones o elementos importantes.

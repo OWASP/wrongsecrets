@@ -1,0 +1,5 @@
+Estamos trabajando fuera de un clúster de Kubernetes.
+Ejecute esto en el clúster K8s como se explica en el
+https://github.com/OWASP/wrongsecrets?tab=readme-ov-file#basic-k8s-exercise[README.md]
+
+Aún quedan desafíos disponibles después de este. ¡Intenta con otro desafío!

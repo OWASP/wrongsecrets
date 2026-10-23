@@ -1,0 +1,8 @@
+*Warum sollten wir ein Geheimnis nicht in den sozialen Medien teilen?*
+
+Das Teilen eines Geheimnisses aus Ihrer Anwendung in sozialen Medien ist eine wirklich schlechte Praxis, da es öffentlich zugänglich wird und von jedem missbraucht werden kann, wenn er den Kontext erfährt, in dem das Geheimnis verwendet wird.
+
+Auch wenn der Nutzer oder die Plattform Kommentare/Beiträge oft löschen kann, landen die Geheimnisse fast immer in irgendeiner Datenbank, die durchgesickert sein könnte.
+
+Teile niemals Geheimnisse, weder private noch berufliche, in den sozialen Medien!
+Falls ein Geheimnis gepostet wurde, widerrufen oder rotieren Sie es sofort und bitten Sie die Plattform, den Beitrag zu entfernen. Behandeln Sie es auch nach dem Löschen als offengelegt, da andere es kopiert oder archiviert haben könnten.

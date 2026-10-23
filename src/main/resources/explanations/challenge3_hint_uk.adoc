@@ -1,0 +1,24 @@
+Ви можете вирішити цю проблему за допомогою таких альтернативних рішень:
+
+1. Використовуйте `docker history`:
+ - Завантажте контейнер (`docker pull jeroenwillemsen/wrongsecrets:<TAGNAME-HERE>`, де тегом може бути `latest-no-vault` або конкретна версія, яку ви зараз використовуєте),
+- Виконайте команду `docker history --no-trunc  jeroenwillemsen/wrongsecrets:<TAGNAME-HERE>`, за допомогою якої можна знайти аргументи, що використовуються для контейнера з заданим тегом.
+- Тепер спробуйте знайти `DOCKER_ENV_PASSWORD`.
+
+2. Відвідайте онлайн-репозиторій Docker:
+- Перейдіть до https://hub.docker.com/r/jeroenwillemsen/wrongsecrets[*репозиторій Docker WrongSecrets*]
+- Перегляньте відповідний для вас тег. Там ви можете знайти всі команди, що використовуються для створення контейнера. Яке значення має `DOCKER_ENV_PASSWORD`?
+
+3. Використовуйте Dockle https://github.com/goodwithtech/dockle[*Dockle*]:
+ - Встановіть Dockle, як описано на сторінці https://github.com/goodwithtech/dockle [сторінка Github]
+ - Запустіть команду `dockle jeroenwillemsen/wrongsecrets:<TAGNAME-HERE>` та використовуйте її вивід для пошуку секретів.
+
+4. Виконайте в контейнері та викопуйте ENV-змінні:
+ - Запустіть контейнер локально за допомогою `docker run jeroenwillemsen/wrongsecrets:<TAGNAME-HERE>`
+ - Знайдіть ідентифікатор контейнера, виконавши команду `docker ps` у наступному терміналі
+ - Виконайте команду `docker exec -it <container id> sh`
+ - У контейнері виконайте `env`.
+
+5. Використайте `docker inspect`, щоб знайти ENV-змінні:
+- Завантажте контейнер,
+- Запустіть `docker inspect jeroenwillemsen/wrongsecrets:<TAGNAME-HERE>` та спробуйте знайти розділ `Config`, а потім розділ `Env`. Яке значення має `DOCKER_ENV_PASSWORD`? Чи знаєте ви, що якщо ви використовуєте https://stedolan.github.io/jq/[JQ], ви можете використовувати `docker inspect jeroenwillemsen/wrongsecrets:<TAGNAME-HERE> | jq '.[] | .Config.Env[]' замість цього, щоб знайти його набагато швидше?

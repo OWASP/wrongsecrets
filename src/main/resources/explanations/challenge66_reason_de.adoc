@@ -1,0 +1,5 @@
+*Warum Verschleierung nur eine vorübergehende Hürde ist.*
+
+Verschlüsselung, Reflexion und Lichtverschleierung erschweren zwar das Reverse Engineering, schaffen aber keine wirkliche Geheimhaltung. Die ausführbare Datei enthält weiterhin alles, was zur Entschlüsselung des Geheimnisses benötigt wird.
+
+Kann die Anwendung das Geheimnis lokal ermitteln, kann ein entschlossener Angreifer dasselbe tun. Schützen Sie Geheimnisse, indem Sie Vertrauensentscheidungen und geheime Informationen auf kontrollierte serverseitige Systeme auslagern.

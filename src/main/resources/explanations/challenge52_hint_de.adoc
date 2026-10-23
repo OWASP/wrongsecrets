@@ -1,0 +1,42 @@
+Diese Herausforderung kann auf folgende Weise gelöst werden:
+
+- Verwenden Sie den Container selbst:
+
+  1. Klonen Sie das Repository, das die Challenge-Dateien enthält:
+```
+     git clone https://github.com/OWASP/wrongsecrets.git
+     cd wrongsecrets
+```
+
+  2. Suchen Sie die Datei `docker-create.sh` im Repository. Diese Datei enthält die Build-Logik, die von Acme Inc. zum Erstellen des Docker-Containers verwendet wird.
+
+  3. Erstellen Sie das Docker-Image, indem Sie das Skript `docker-create.sh` ausführen:
+```
+     ./docker-create.sh
+```
+
+  4. Starten Sie den Docker-Container mithilfe des erstellten Images, um auf seine Umgebung zuzugreifen:
+```
+     docker run -it jeroenwillemsen/wrongsecrets:local-test-no-vault sh
+```
+
+  5. Untersuchen Sie das Container-Dateisystem, um die geheime Datei zu finden:
+```
+     / $ cat var/run/secrets2/secret.txt
+```
+
+  6. Der Inhalt der Datei `secret.txt` ist Ihre Antwort.
+
+- Finde das Geheimnis im buildx-Skript:
+
+1. Klonen Sie das Repository, das die Challenge-Dateien enthält:
+```
+     git clone https://github.com/OWASP/wrongsecrets.git
+     cd wrongsecrets
+```
+2. Suchen Sie die Datei `docker-create.sh` im Repository. Diese Datei enthält die Build-Logik, die von Acme Inc. zum Erstellen des Docker-Containers verwendet wird.
+
+3. Sie finden den fest codierten geheimen Wert, der im Container `$SECRET_VALUE` in der Funktion `create_containers` eingefügt wurde.
+
+
+Die Fehlkonfiguration verdeutlicht, wie Geheimnisse, die während des Docker-Build-Prozesses mit `--secret` sicher übergeben wurden, offengelegt werden können, wenn sie im Container unsachgemäß gespeichert werden. Ihre Erkenntnisse werden Acme Inc. helfen, dieses kritische Problem zu verstehen und zu beheben.

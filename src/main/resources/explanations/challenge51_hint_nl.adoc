@@ -1,0 +1,20 @@
+Deze uitdaging kun je op de volgende manieren oplossen:
+
+- Gebruik het docker-compose-bestand (`challenge51docker-compose.yml`) om de containers te bouwen en het geheim te vinden
+  1. Clone de repository met de bestanden van de uitdaging.
+  2. Zoek het bestand `challenge51docker-compose.yml` in de repository en ga naar die locatie.
+  3. Zoek de inloggegevens op:
+    Controleer in het gedeelte environments van challenge51docker-compose.yml variabelen zoals:
+     * `db_user`
+     * `db_password`
+     * `db_name`
+  4. Nu kun je de Docker Compose-commando's uitvoeren om je service te bouwen en te starten:
+     * `export DOCKER_BUILDKIT=1`
+     * `docker compose -f challenge51docker-compose.yml build`
+     * `docker compose -f challenge51docker-compose.yml run myservice`
+  5. Het antwoord staat in de uitvoer
+
+- Zoek de geheimen rechtstreeks op het bestandssysteem:
+   1. Clone de repository met de bestanden van de uitdaging.
+   2. Gebruik de bestandsverwijzingen in `challenge51docker-compose.yml` om de bestanden met de geheimen te vinden.
+   3. Open het bestand om het geheim te vinden.

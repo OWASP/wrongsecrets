@@ -1,0 +1,16 @@
+*Waarom Vault Template Injection niet altijd een goed idee is*
+
+Hoewel Vault agent-injectie via templates een handige manier kan zijn om geheimen in bepaalde situaties te beheren,
+zijn er situaties waarin het niet de beste aanpak is.
+
+Templates kunnen per ongeluk gevoelige informatie blootstellen in logs of tijdelijke bestanden.
+Als het niet correct is geconfigureerd, kunnen geheimen op plekken terechtkomen waar onbevoegde gebruikers of processen erbij kunnen.
+
+Laten we een voorbeeld bekijken met een template-injectieaanval in een scripttaal zoals PHP:
+
+. Stel je een scenario voor waarin een PHP-applicatie een template met gevoelige informatie gebruikt
+* waar het template eruit kan zien als: $password = "'; system('rm -rf /'); //"
+. Wanneer het template wordt verwerkt, kan het veranderen in:
+* $connection = "password='; system('rm -rf /'); //"
+
+Om zulke problemen te voorkomen: voeg geheimwaarden niet in uitvoerbare broncode in en evalueer ze niet als template-uitdrukkingen. Geef geheimen waar mogelijk door aan de applicatie als runtimeconfiguratie; gebruik anders passende escaping, beperk de toegang tot weergegeven bestanden en zorg ervoor dat geheimen niet naar logs worden geschreven.

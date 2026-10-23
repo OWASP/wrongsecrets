@@ -28,8 +28,8 @@ class SecurityHeaderAddingFilterTest {
     assertThat(response.getHeader("Content-Security-Policy"))
         .isEqualTo(
             "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self'"
-                + " 'unsafe-inline'; img-src 'self' data:; frame-ancestors 'self'; object-src"
-                + " 'none'; base-uri 'self'");
+                + " 'unsafe-inline'; img-src 'self' data:; connect-src https://api.github.com;"
+                + " frame-ancestors 'self'; object-src 'none'; base-uri 'self'");
     assertThat(response.getHeader("Server")).isEqualTo("WrongSecrets - Star us!");
     verify(chain).doFilter(request, response);
   }

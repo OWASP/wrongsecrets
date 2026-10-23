@@ -1,0 +1,20 @@
+Diese Herausforderung befasst sich speziell mit einem Geheimnis in einer Go-Binärdatei.
+
+Diese Aufgabe ist etwas schwieriger, da wir Cobra zur Erstellung der CLI verwendet haben, was einen zusätzlichen Aufwand mit sich bringt.
+Diese Herausforderung lässt sich mit den folgenden alternativen Lösungsansätzen bewältigen:
+
+1. Entdecken Sie die Geheimnisse mit https://ghidra-sre.org/[Ghidra].
+- Installieren Sie https://ghidra-sre.org/[Ghidra].
+- Starten Sie es mit `ghidraRun`.
+- Laden Sie die Anwendung `wrongsecrets-golang` in Ghidra, indem Sie ein neues Projekt auswählen, dann die Datei importieren und anschließend darauf doppelklicken.
+- Erlauben Sie Ghidra, die Anwendung zu analysieren. Beachten Sie, dass dies wesentlich länger dauert, da unsere Binärdatei deutlich größer ist.
+- Gehen Sie zum Datentypmanager unten links, filtern Sie nun nach `string`, klicken Sie dann mit der rechten Maustaste auf `string` als Mitglied von `wrongsecrets-golang` und wählen Sie `find uses of`.
+- Filtern Sie nun nach bekannten Schlüsselwörtern: Sie sollten das Geheimnis jetzt ganz einfach finden können!
+
+2. Entdecken Sie die Geheimnisse mit https://www.radare.org[radare2].
+- Installieren Sie https://www.radare.org[radare2] entweder mit `brew install radare2` auf einem Mac oder folgen Sie diesen Schritten: `git clone https://github.com/radareorg/radare2; cd radare2 ; sys/install.sh`
+- Starten Sie die r2-Analyse mit `$ r2 -A wrongsecrets-golang`
+- Starten Sie eine Suche nach der Zeichenkette mit `/w secret`
+- Nimm nun die Ergebnisse und suche nach möglichen Antworten. Wie wäre es mit `/w his is the secret in Golang`? Du solltest das Geheimnis jetzt finden können.
+
+Sie möchten die Tools nicht installieren? Dann schauen Sie sich den https://github.com/OWASP/wrongsecrets/tree/master?tab=readme-ov-file#want-to-play-but-are-not-allowed-to-install-the-tools[WrongSecrets Desktop container] an!

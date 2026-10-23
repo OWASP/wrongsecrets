@@ -1,0 +1,7 @@
+*Por qué no se deben usar archivos JAR ejecutables ni APK de Android para ocultar secretos.*
+
+Los archivos JAR ejecutables no son un lugar seguro para ocultar secretos. Al igual que los APK de Android, son archivos que envían código de bytes y recursos directamente al atacante, lo que facilita la inspección de cadenas, constantes y métodos auxiliares incrustados con herramientas comunes de ingeniería inversa.
+
+Si un artefacto Java del lado del cliente necesita una clave secreta para funcionar, asuma que dicha clave se puede extraer una vez descargado el archivo. Guarde las claves secretas reales en un servidor de confianza y solo revelelas tras la autenticación y autorización correspondientes.
+
+Si deseas practicar más la ingeniería inversa de Java y Android, explora https://github.com/OWASP/MASTG-Hacking-Playground[OWASP MASTG Hacking Playground].

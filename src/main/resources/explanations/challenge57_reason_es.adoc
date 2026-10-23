@@ -1,0 +1,38 @@
+**¿Por qué las indicaciones de los sistemas de IA pueden ser vulnerables?**
+
+Este desafío pone de manifiesto varias preocupaciones importantes en materia de seguridad relacionadas con los sistemas de IA:
+
+**1. Vulnerabilidades de inyección de mensajes:**
+Los sistemas de IA pueden ser manipulados mediante entradas cuidadosamente diseñadas que eluden sus medidas de seguridad o límites de instrucciones. Esto es similar a la inyección SQL, pero aplicada a modelos de IA.
+
+**2. Exposición de mensajes del sistema:**
+Cuando se incluye información confidencial en las indicaciones del sistema, existe el riesgo de que esta información pueda extraerse mediante diversas técnicas. Las indicaciones del sistema nunca deben contener secretos, credenciales ni datos confidenciales.
+
+**3. Desbloqueo mediante IA:**
+Esto se refiere a las técnicas utilizadas para eludir las restricciones o medidas de seguridad integradas de una IA. Los atacantes pueden emplear técnicas de ingeniería social, simulación de roles o manipulación de instrucciones.
+
+**4. Fuga de información:**
+Los sistemas de IA podrían revelar inadvertidamente información que se les ordenó mantener oculta, especialmente cuando se enfrentan a técnicas de interrogatorio sofisticadas.
+
+**Implicaciones en el mundo real:**
+
+- **Claves API en las solicitudes:** Nunca incluyas claves API, contraseñas o tokens en las solicitudes de los sistemas de IA.
+- **Lógica empresarial sensible:** No incluya reglas o procesos empresariales confidenciales en las indicaciones.
+- **Datos personales:** Evite incluir información personal identificable o datos confidenciales del usuario en las instrucciones del sistema.
+- **Medidas de seguridad:** No confíe únicamente en las restricciones basadas en avisos para la seguridad.
+
+**Mejores prácticas:**
+- Utilice la autenticación y autorización adecuadas fuera del sistema de IA.
+- Implementar controles de seguridad a nivel de aplicación, no solo en las indicaciones.
+- Realizar pruebas periódicas a los sistemas de IA para detectar vulnerabilidades de inyección rápida.
+- Supervisar las interacciones de la IA para detectar posibles problemas de seguridad.
+- Utilizar marcos y directrices de seguridad de la IA
+
+**Detección y prevención:**
+- Implementar la validación y el saneamiento de los datos de entrada.
+- Utilizar sistemas de filtrado de contenido
+- Monitorear patrones de avisos sospechosos
+- Implementar la limitación de velocidad y la detección de abusos.
+- Evaluaciones de seguridad periódicas de las implementaciones de IA
+
+Este desafío demuestra por qué tratar las indicaciones de los sistemas de IA como un límite de seguridad es insuficiente: la seguridad adecuada debe implementarse en múltiples capas.

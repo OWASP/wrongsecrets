@@ -1,0 +1,28 @@
+=== ¿Qué ocurre?
+
+Incluir las credenciales de un bot de Telegram directamente en el código fuente es una grave vulnerabilidad de seguridad:
+
+**Problemas de seguridad:**
+1. **Credenciales de API expuestas**: Los tokens del bot proporcionan acceso completo a la funcionalidad del bot de Telegram.
+2. **Compromiso del canal**: Cualquier persona con el token puede leer mensajes, enviar mensajes y potencialmente acceder a información privada.
+3. **Exposición del código fuente**: Las credenciales son visibles para cualquier persona con acceso al código fuente.
+4. **Historial de control de versiones**: Los tokens permanecen en el historial de Git incluso si se eliminan posteriormente.
+
+**Impacto en el mundo real:**
+- Los atacantes pueden usar tokens de bot para enviar spam o mensajes maliciosos.
+- La información confidencial compartida en los canales se vuelve accesible a usuarios no autorizados.
+- La funcionalidad del bot puede ser secuestrada con fines maliciosos.
+- Infracciones de cumplimiento si el bot maneja datos personales o sensibles.
+
+**Cómo solucionarlo:**
+1. **Variables de entorno**: Almacene los tokens del bot en variables de entorno o archivos de configuración seguros.
+2. **Gestión de secretos**: Utilice servicios dedicados a la gestión de secretos (HashiCorp Vault, AWS Secrets Manager, etc.).
+3. **Rotación de tokens**: Rote regularmente los tokens del bot y revoque los antiguos.
+4. **Controles de acceso**: Implemente controles de acceso adecuados para determinar quién puede acceder a las credenciales del bot.
+5. **Revisiones de código**: Siempre revise el código en busca de secretos codificados antes de confirmar los cambios.
+
+**Detección:**
+- Utilice herramientas de escaneo de secretos en su canalización de CI/CD.
+- Implementar ganchos de pre-commit para capturar credenciales codificadas
+- Auditorías de seguridad periódicas del código fuente
+- Monitorear la actividad inesperada de los bots

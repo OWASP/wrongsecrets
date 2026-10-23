@@ -1,0 +1,11 @@
+=== Een geheim geüpload naar een LLM-toepassing (Large Language Model)
+
+AI is er om te blijven. AI kan bij veel dingen helpen: ingewikkelde probleemoplossing, code genereren of advies geven over veiligheid.
+Stel je voor dat je code hebt geüpload om naar veiligheidsproblemen te zoeken. Wat als daar een wachtwoord in stond? Regels moeten het LLM-model beperken om te voorkomen dat het het wachtwoord lekt. Kan dit geheim desondanks toch worden achterhaald?
+
+Probeer het te vinden via de eerste oefening van https://gandalf.lakera.ai/[dit prompting-spel].
+
+
+Houd er rekening mee dat https://gandalf.lakera.ai/[het prompting-spel] volledig gratis en open is. Dit betekent dat het offline kan zijn en dat het een paar minuten kan duren voordat het na je eerste verzoek weer draait. Voer geen fuzzing of dynamische testen uit op de website (gebruik bijvoorbeeld niet ZAP of Burp). Zorg ervoor dat anderen er ook mee kunnen spelen!
+
+Let op: we gebruikten vroeger https://gpa.43z.one/[een ander prompting-spel] dat vanwege de kosten is stopgezet, dus het zou kunnen dat LLM/AI niet voor alles zal blijven bestaan ;-).

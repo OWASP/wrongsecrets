@@ -1,0 +1,75 @@
+=== Warum diese Herausforderung wichtig ist
+
+Diese Herausforderung verdeutlicht eine kritische Schwachstelle, die häufig in Produktionssystemen auftritt: **fest codierte Slack-API-Tokens, die in Umgebungsvariablen mit unzureichender Verschleierung gespeichert sind**.
+
+==== Die Schwachstelle
+
+**Ursache**: Entwickler speichern API-Tokens oft in Umgebungsvariablen, weil sie denken, dass diese sicher sind, und verschleiern sie manchmal auch, weil sie glauben, dass dies für Sicherheit sorgt.
+
+**Das Problem**:
+1. **Umgebungsvariablen sind für jeden mit Systemzugriff leicht zugänglich.**
+2. **Verschleierung ≠ Sicherheit**: Base64-Kodierung lässt sich trivial umkehren.
+3. **Risiko durch Mitarbeiterfluktuation**: Wertmarken werden beim Ausscheiden von Mitarbeitern oft nicht ausgetauscht.
+4. **Containerprüfung**: Umgebungsvariablen sind in den Container-Metadaten sichtbar.
+
+==== Reale Angriffsszenarien
+
+**Szenario 1 – Zugriff durch ehemalige Mitarbeiter**:
+- Entwickler verlässt das Unternehmen
+- Slack-Token nicht rotiert
+- Der ehemalige Mitarbeiter kann den Token weiterhin verwenden, um:
+  - Private Nachrichten lesen
+  - Schädlichen Inhalt veröffentlichen
+  - Zugriff auf vertrauliche Informationen
+  - Die Anwendung imitieren
+
+**Szenario 2 – Container-Einbruch**:
+- Angreifer erlangt Zugang zur Produktionsumgebung
+- Überprüft Container-Umgebungsvariablen
+- Findet verschleierte Slack-Token
+- Entschlüsselt problemlos und ermöglicht den Zugriff auf Slack
+
+**Szenario 3 - Protokollbelichtung**:
+- Umgebungsvariablen versehentlich protokolliert
+- Protokolle werden an unsicheren Orten gespeichert
+- Verschleierte Tokens aufgedeckt, aber leicht zu entschlüsseln
+
+==== Bewährte Sicherheitspraktiken
+
+** ✅ Geeignete Lösungen**:
+
+1. **Verwenden Sie Geheimnismanagement**:
+   - AWS Secrets Manager
+   - Azure Key Vault
+   - HashiCorp Vault
+   - Kubernetes Secrets (mit Verschlüsselung ruhender Daten)
+
+2. **Tokenrotation implementieren**:
+   - Regelmäßige automatische Rotation
+   - Sofortige Rotation bei Ausscheiden eines Mitarbeiters
+   - Kurzlebige Token, wo möglich
+
+3. **Zugriffskontrollen**:
+   - Prinzip der geringsten Privilegien
+   - Rollenbasierter Zugriff auf Geheimnisse
+   - Audit-Protokolle für geheime Zugriffe
+
+4. **Sicherheitsgründe: Niemals verschleiern**:
+   - Verwenden Sie stattdessen eine ordnungsgemäße Verschlüsselung.
+   - Verschleierung bietet keinen Sicherheitsvorteil
+   - Kann ein falsches Sicherheitsgefühl erzeugen.
+
+** ❌ Was Sie nicht tun sollten **:
+- Geheimnisse in Umgebungsvariablen speichern
+- Verschleierung als Sicherheitsmaßnahme nutzen
+- Tokens nach Ausscheiden des Mitarbeiters aktiv lassen
+- Fest codierte Geheimnisse in jeglicher Form
+
+==== Folgenabschätzung
+
+**Vertraulichkeit**: Hoch – Slack-Konversationen und Datenzugriff
+**Integrität**: Hoch – Fähigkeit, schädliche Inhalte zu veröffentlichen
+**Verfügbarkeit**: Mittel – Es besteht die Möglichkeit von Serviceausfällen.
+**Compliance**: Kritisch – Verstoß gegen Datenschutzbestimmungen
+
+Diese Art von Schwachstelle wurde in zahlreichen Sicherheitsaudits festgestellt und stellt ein grundlegendes Missverständnis der Best Practices im Bereich des Geheimnismanagements dar.

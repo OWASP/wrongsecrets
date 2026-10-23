@@ -1,0 +1,7 @@
+=== Desafío de secretos de Buildx al descubierto
+
+Acme Inc., una empresa SaaS de rápido crecimiento, está ampliando sus implementaciones en contenedores mediante Docker Buildx para optimizar las compilaciones multiplataforma. Sin embargo, se ha producido una grave falla de configuración de seguridad durante el proceso de compilación.
+
+Durante el proceso de compilación de Docker (Docker Buildx), un secreto confidencial, que debía permanecer temporal y seguro durante la fase de compilación del contenedor, se incrustó accidentalmente en el sistema de archivos del contenedor debido a una configuración incorrecta. Este secreto, ahora accesible dentro del contenedor en ejecución y visible en sus scripts de compilación, representa un riesgo de seguridad significativo si se explota.
+
+Como consultor de seguridad recién contratado por Acme Inc., tu tarea es clara: investigar el contenedor, identificar el secreto expuesto e informar al equipo. Al descubrir esta vulnerabilidad, ayudarás a Acme Inc. a comprender los riesgos e implementar mejores prácticas para proteger su infraestructura de despliegue.

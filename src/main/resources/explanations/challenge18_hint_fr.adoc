@@ -1,0 +1,20 @@
+Ce défi porte spécifiquement sur les hachages MD5 et SHA1 sans salage. Sont-ils incassables ?
+
+Vous pouvez résoudre ce défi en utilisant les solutions suivantes :
+
+1. Pour le premier hachage (MD5) :
+- Utilisez un outil tel que Hashcat :
+- Installez https://hashcat.net/hashcat/[Hashcat]
+- Téléchargez le fichier https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt [liste de mots de passe rockyou.txt]
+- Exécutez Hashcat sur le hachage `hashcat -m 0 "2ab96390c7dbe3439de74d0c9b0b1767" /path/to/file/rockyou.txt`
+
+2. Pour le deuxième hachage (SHA1) :
+- Utilisez un outil tel que Hashcat :
+- Installez https://hashcat.net/hashcat/[Hashcat]
+- Téléchargez le fichier https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt [liste de mots de passe rockyou.txt]
+- Exécutez Hashcat sur le hachage `hashcat -m 100 "F3BBBD66A63D4BF1747940578EC3D0103530E21D" /path/to/file/rockyou.txt`
+
+3. Pour l'un ou l'autre des hachages :
+- Utilisez un service de craquage de hachage en ligne pour faire le gros du travail à votre place :
+- Visitez `https://crackstation.net/`
+- Saisissez le hachage et cliquez sur « Déchiffrer les hachages ».

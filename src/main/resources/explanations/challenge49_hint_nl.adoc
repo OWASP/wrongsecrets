@@ -1,0 +1,5 @@
+De eenvoudigste manier om de PIN in dit scenario te kraken is een brute-force-aanval uit te voeren, omdat het bereik van mogelijke waarden beperkt is (0 tot 99.999).
+
+- Doorloop alle mogelijke PIN's (van 0 tot 99.999).
+- Bereken voor elke PIN de MD5-hash om de ontsleutelingssleutel te krijgen en probeer de gegeven ciphertext te ontsleutelen.
+- Als de ontsleutelde tekst gelijk is aan `the answer`, heb je de juiste PIN gevonden.

@@ -1,0 +1,4 @@
+=== Génération de clés aléatoires
+
+De nombreux experts en sécurité enseignent aux ingénieurs à utiliser des fonctions de dérivation de clés sécurisées comme PBKDF2 (https://en.wikipedia.org/wiki/PBKDF2) lorsqu'une clé doit être générée. Un développeur a suivi cette instruction et a tenté de créer une clé dans `Challenge34.java`, qui devrait désormais être bien plus sécurisée qu'une clé codée en dur.
+Pouvez-vous repérer l'erreur ? Pouvez-vous trouver la valeur de la clé générée ?

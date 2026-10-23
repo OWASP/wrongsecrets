@@ -1,0 +1,18 @@
+Deze uitdaging gebruikt een gewone Java CLI JAR.
+
+Je kunt hem oplossen door:
+
+1. De gecompileerde klasse te vinden waarin het geheim zit:
+- Download het bestand `wrongsecrets-java.jar`.
+- Voer `jar tf wrongsecrets-java.jar` uit en lokaliseer `io/github/owasp/wrongsecrets/WrongSecretsPlain.class`.
+- Open die klasse in CFR, JADX, IntelliJ IDEA of een andere decompiler.
+
+2. Te onderzoeken hoe het geheim is opgeslagen:
+- Voer `javap -c -p -classpath wrongsecrets-java.jar io.github.owasp.wrongsecrets.WrongSecretsPlain` uit.
+- Zoek de methode `getSecret()` en bekijk de `ldc`-instructie die deze gebruikt.
+- Merk op dat het geheim als een gewone stringconstante is opgeslagen in plaats van dat het is verhuld (obfuscatie).
+
+3. De waarde terug te winnen en in te dienen:
+- Kopieer de string die `getSecret()` teruggeeft uit de output van de decompiler of de bytecode.
+- Als je nog een snelle controle wilt, kunnen tools als `strings wrongsecrets-java.jar` ook helpen om leesbare constanten zichtbaar te maken.
+- Dien de teruggewonnen string in als het antwoord.

@@ -1,0 +1,7 @@
+=== Перегляд приховування у двійкових файлах: автономне середовище виконання .NET
+
+Знайти секрет у DLL дуже легко, але в MacOS або Linux це набагато складніше. Тож я впевнений, що ми можемо його там зберегти, чи не так?
+
+Покажіть нам, що ми не повинні цього робити! Чи можете ви знайти секрет у https://github.com/OWASP/wrongsecrets-binaries/releases/download/0.1.0/wrongsecrets-dotnet[wrongsecrets-dotnet] (або https://github.com/OWASP/wrongsecrets-binaries/releases/download/0.1.0/wrongsecrets-dotnet-arm[wrongsecrets-dotnet-arm], https://github.com/OWASP/wrongsecrets-binaries/releases/download/0.1.0/wrongsecrets-dotnet-linux[wrongsecrets-dotnet-linux])?
+
+Спробуйте завантажити бінарний файл та запустити його локально (наприклад, `./wrongsecrets-dotnet<theversion you need> <your answer>`).

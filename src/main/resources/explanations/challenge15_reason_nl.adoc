@@ -1,0 +1,20 @@
+*Waarom je geheimen moet opschonen en roteren*
+
+Als je per ongeluk een geheim in Git hebt vastgelegd, zijn er manieren om het te vinden, met de hand of met tools.
+
+Daarom, wanneer een geheim per ongeluk aan Git wordt vastgelegd:
+
+- Informeer elke verantwoordelijke beveiligingsautoriteit in de organisatie
+- Zorg ervoor dat je het geheim roteert
+- Optioneel opschonen: gebruik https://github.com/rtyley/bfg-repo-cleaner[BFG repo-cleaner], of probeer de foutieve commit op een andere manier te verwijderen.
+
+Er zijn veel manieren om te voorkomen dat je een geheim commit, door bijvoorbeeld https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks[een pre-commit-hook] te configureren met controles die geheimen detecteren.
+
+Opmerking: een foute commit "verbergen" door er meer commits aan toe te voegen zodat hij niet tijdens een PR verschijnt, maakt het alleen maar erger.
+Het beste kun je de foutieve commit dan samenvoegen (squashen) met de verwijderingscommit, zodat het geheim alleen in je branch zit.
+
+Opmerking 2: als je een geheim hebt gepusht, houd er dan rekening mee dat al je collega's/bots die pullen het mogelijk ook lokaal hebben.
+
+Opmerking 3: de AWS-sleutels die in dit project zijn verborgen, zijn echte canary tokens. Wanneer je ze gebruikt, wordt er een call gedaan naar onze https://github.com/OWASP/wrongsecrets/blob/master/src/main/java/org/owasp/wrongsecrets/canaries/CanariesController.java[CanariesController],
+die systemen en/of data mogelijk kan waarschuwen dat de inloggegevens/canary tokens zijn gebruikt. De inhoud van de laatste call naar dit endpoint is te vinden op ons stats-endpoint; voor Heroku- en Docker-opzetten is dat http://wrongsecrets.herokuapp.com/stats[statistieken].
+Wij maken en beheren onze canarytokens via https://canarytokens.org/[Canarytokens.org]. Bedenk wat je kunt doen met Canary tokens in je organisatie!

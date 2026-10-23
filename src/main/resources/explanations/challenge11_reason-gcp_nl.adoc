@@ -1,0 +1,5 @@
+*Geheimenbeheer is meer dan veilige opslag:*
+
+Zoals u inmiddels kunt zien: er zijn veel manieren om bij een geheim te komen: of het nu hardgecodeerd is, opgeslagen in een verkeerd geconfigureerde oplossing van een derde partij, of correct opgeslagen, maar met de verkeerde IAM-toegangsrechten in de accounts ernaast. U zult inmiddels begrijpen waarom we zeggen dat "uw volwassenheid op het gebied van beveiliging tot uiting komt in uw geheimenbeheer".
+
+In dit specifieke geval zou het een slecht idee zijn om dit soort productietoegang te hebben zonder een "glasbreuk"-procedure en passende alarmen in werking te stellen. Bovendien is alles dat expliciet geheimen registreert gevaarlijk. Als u coderegistratiegeheimen tegenkomt, markeer deze dan!

@@ -1,0 +1,7 @@
+Como indica el desafío, debes buscar comandos de Bash que se hayan ejecutado en el pasado; ¿qué comando nos proporcionará esta información?
+
+Puedes resolver este desafío siguiendo estos pasos:
+
+1. Imprime el contenido de cualquier archivo .bash_history dentro de un contenedor en ejecución:
+- Inicie el contenedor con `docker run -it --entrypoint sh jeroenwillemsen/wrongsecrets:<version>` (Reemplace `<version>` con la versión del contenedor que desea utilizar).
+- Muestra el contenido del archivo: `cat ~/.bash_history`. Una vez que tengas este archivo, puedes usar grep o cualquier otra herramienta de búsqueda para acotar la respuesta.

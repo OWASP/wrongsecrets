@@ -1,0 +1,20 @@
+*Pourquoi vous devez nettoyer et faire tourner les secrets*
+
+Lorsqu'un secret est enregistré par erreur dans Git, il existe des moyens de le retrouver, manuellement ou à l'aide d'outils.
+
+Par conséquent, lorsqu'un secret est enregistré par erreur dans Git :
+
+- Informer toute autorité de sécurité compétente au sein de l'organisation
+- Assurez-vous de faire tourner le secret
+- Nettoyage optionnel : utilisez https://github.com/rtyley/bfg-repo-cleaner[BFG repo-cleaner] ou essayez de supprimer le commit incriminé d’une autre manière.
+
+Il existe de nombreuses façons d'empêcher la validation d'un secret, par exemple en configurant https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks[un hook de pré-validation] avec des contrôles de détection de secrets.
+
+Remarque : « masquer » un commit erroné en ajoutant d'autres commits pour qu'il ne s'affiche pas lors d'une PR ne fera qu'empirer les choses.
+Dans le meilleur des cas, vous devriez fusionner le commit fautif avec le commit de suppression, afin que le secret ne se trouve que dans votre branche.
+
+Note-2 : si vous avez poussé un secret, notez que tous les collègues/bots qui le récupèrent pourraient également l’avoir localement.
+
+Note 3 : les clés AWS cachées dans ce projet sont de véritables jetons de test. Lorsque vous les utilisez, un appel est effectué vers notre https://github.com/OWASP/wrongsecrets/blob/master/src/main/java/org/owasp/wrongsecrets/canaries/CanariesController.java[CanariesController],
+Ce système peut alerter les systèmes et/ou les données de l'utilisation des identifiants/jetons de test. Le contenu du dernier appel à ce point de terminaison est disponible à l'adresse http://wrongsecrets.herokuapp.com/stats[stats] pour les configurations Heroku et Docker.
+Nous créons et gérons nos jetons Canary via https://canarytokens.org/[Canarytokens.org]. Imaginez tout ce que vous pouvez faire avec les jetons Canary au sein de votre organisation !

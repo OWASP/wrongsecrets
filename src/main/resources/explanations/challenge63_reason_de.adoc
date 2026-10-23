@@ -1,0 +1,24 @@
+=== Grund für Herausforderung 63
+Diese Herausforderung verdeutlicht einen weit verbreiteten Fehler in der Softwareentwicklung: die Verwendung von Verschlüsselung bei gleichzeitiger Speicherung des Schlüssels am selben Ort wie der Chiffretext.
+
+**Warum das gefährlich ist:**
+- Die Verschlüsselung ist nur so stark wie die Geheimhaltung des Schlüssels.
+- Die feste Codierung des Schlüssels im Quellcode bedeutet, dass jeder mit Zugriff auf das Repository das Geheimnis entschlüsseln kann.
+- Der Quellcode ist oft viel leichter zugänglich, als Entwickler annehmen – etwa durch die Git-Historie, durchgesickerte Repositories oder Insiderzugriffe.
+- Viele geheime Scan-Tools erkennen sowohl den Schlüssel als auch die Chiffretextmuster.
+
+**Die richtige Vorgehensweise:**
+- Speichern Sie die Verschlüsselungsschlüssel in einem dedizierten Geheimnismanager (AWS Secrets Manager, HashiCorp Vault usw.).
+- Schlüssel niemals in die Versionskontrolle einchecken
+- Verwenden Sie Umgebungsvariablen als Schlüssel, nicht Quellcodekonstanten.
+- Überlegen Sie, ob Verschlüsselung überhaupt notwendig ist, wenn der Schlüssel in der Nähe der Daten gespeichert werden muss.
+
+**Beispiele aus der Praxis:**
+Genau dieses Muster wurde bei zahlreichen Datenpannen festgestellt, bei denen Entwickler glaubten, ihre Geheimnisse seien "sicher", weil sie verschlüsselt seien, und nicht erkannten, dass der Schlüssel gleichermaßen offengelegt wurde.
+
+Darüber hinaus verwendet diese Herausforderung AES im CBC-Modus, der anfällig ist für
+Padding-Oracle-Angriffe. Im Produktivcode sollte stattdessen AES/GCM verwendet werden.
+
+**Referenzen:**
+- https://owasp.org/www-project-top-ten/[OWASP Top 10]
+- https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html[OWASP Secrets Management Cheat Sheet]

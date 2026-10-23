@@ -1,0 +1,10 @@
+Je kunt deze uitdaging oplossen door de volgende stappen te volgen:
+
+1. Vind het pad voor de escalatie van bevoegdheden met alleen Terraform:
+  - Er zou iets sappigs in `aws/irsa.tf` moeten zitten.
+
+2. Zoek het pad voor de escalatie van bevoegdheden met behulp van https://github.com/nccgroup/ScoutSuite[ScoutSuite]
+- Ongeacht welke methode u gebruikt, bekijk de rol `cant-read-secrets`. Je zult zien dat `sts:AssumeRole` op `*` is toegestaan. Dit betekent dat het mogelijk is om **elke** rol in het account aan te nemen.
+- Rollen hebben ook een vertrouwensrelatie, en die voor onze pod (`wrongsecrets-secret-manager`) is verkeerd geconfigureerd. Het staat `arn:aws:iam::<account id>:root` toe, wat gelijk staat aan 'iedereen binnen dit AWS-account, zolang ze IAM-rechten hebben'. Dit betekent dat wij die rol vanuit `cant-read-secrets` kunnen overnemen!
+
+Nadat we vanuit `cant-read-secrets` naar `wrongsecrets-secret-manager` zijn gesprongen, kunnen we eenvoudigweg `aws ssm get-parameter --name wrongsecretvalue --with-decryption` uitvoeren.

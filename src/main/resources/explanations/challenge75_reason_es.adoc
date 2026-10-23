@@ -1,0 +1,55 @@
+*¿Por qué se filtran las credenciales de despliegue al confirmar un archivo settings.xml de Maven?*
+
+Un archivo `settings.xml` es el archivo que Maven lee para saber dónde descargar las dependencias
+y cómo autenticarse contra los repositorios que requieren un inicio de sesión. Su
+sección `<servers>` contiene el nombre de usuario y la contraseña en texto plano de cada servidor configurado,
+y para una cuenta de despliegue esa contraseña generalmente conlleva el derecho a
+publicar artefactos.
+
+Incorporar un archivo así parece inofensivo porque la compilación de repente funciona para
+todos, y ese es precisamente el fallo que demuestra este desafío:
+
+- Las credenciales permanecen en el historial de Git para siempre. Eliminar el archivo en una versión posterior
+  no lo elimina del historial, por lo que la contraseña debe tratarse como
+  comprometida desde el momento en que se envió.
+- Cada persona y sistema que puede leer el repositorio también recibe el
+  credenciales: bifurcaciones, espejos, ejecutores de CI, portátiles de desarrolladores y cualquier herramienta con
+  acceso de lectura.
+- Las credenciales de despliegue son de gran valor para los ataques a la cadena de suministro. Con ellas,
+  un atacante puede publicar una versión maliciosa de los artefactos del proyecto, tras lo cual
+  cada consumidor de ese repositorio descarga silenciosamente la compilación contaminada.
+- Los identificadores de servidor, como el identificador Nexus en este desafío, no son secretos en absoluto.
+  solo dicen a qué repositorio pertenece una credencial; nunca protegen
+  la credencial en sí.
+- Los escáneres de secretos a menudo ignoran los archivos XML o no reconocen la configuración de Maven, por lo que
+  la filtración puede resistir la revisión durante mucho tiempo.
+- El cifrado de contraseñas propio de Maven solo oculta la contraseña en un almacén
+  de claves ofuscado que se encuentra justo al lado del archivo, por lo que no es una protección
+  para nada que se haya incorporado.
+
+----
+Qué hacer en su lugar:
+
+- Mantenga `settings.xml` en `$HOME/.m2/` y agregue `settings.xml` a `.gitignore` para que
+no pueda incorporarse por accidente.
+- Referenciar credenciales a través de variables de entorno o interpolación de propiedades,
+por ejemplo `<password>${env.NEXUS_PASSWORD}</password>`, y proporcione el valor
+en tiempo de ejecución.
+- En CI, inyecte las credenciales del almacén de secretos de CI en lugar de incorporarlas
+en el repositorio de la canalización.
+- Entregue a cada consumidor un token de corta duración y con privilegios mínimos que solo pueda
+implementarse en un único repositorio, y limite el token a un período de tiempo fijo.
+- Prefiera las funciones del gestor de repositorios que evitan las contraseñas de larga duración, como
+tokens de portador o federación de identidad de carga de trabajo.
+- Rote la credencial inmediatamente cuando aparezca en un commit y purgueala
+del historial donde su plataforma lo permita.
+- Escanee el repositorio, incluidos los archivos XML y de compilación, con un escáner secreto en
+ganchos de pre-commit e CI.
+----
+
+[NOTE]
+====
+Un archivo `settings.xml` en el repositorio es un escondite de credenciales a plena vista. Cualquier cosa
+que sería inaceptable en un archivo `.java` también es inaceptable en un archivo de
+configuración de Maven.
+====

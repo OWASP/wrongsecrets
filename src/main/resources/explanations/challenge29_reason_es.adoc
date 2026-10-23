@@ -1,0 +1,8 @@
+*Por qué publicar capturas de pantalla de registros en un problema de GitHub es una mala idea*
+
+No deberías publicar capturas de pantalla de registros en un problema de GitHub porque:
+1. Los datos son públicos (incluso en un repositorio privado, a menudo más públicos de lo que uno esperaría).
+2. Las capturas de pantalla no se pueden censurar como el texto. Incluso cuando el secreto aparece borroso, esto puede revertirse.
+
+Comprueba si hay fugas de información confidencial en la salida y utiliza Markdown para publicar los registros en un problema de GitHub. Esto también facilita mucho el trabajo de los responsables del mantenimiento que intentan ayudarte con la depuración :).
+Si se ha expuesto una credencial, revócala o rótala de inmediato y elimina la publicación o el adjunto si es posible; da por hecho que ya puede haber sido copiada.

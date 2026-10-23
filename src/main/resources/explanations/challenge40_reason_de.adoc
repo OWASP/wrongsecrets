@@ -1,0 +1,9 @@
+*Warum sollten wir den Verschlüsselungsschlüssel und das Geheimnis nicht zusammen speichern?*
+
+Es gilt allgemein als schlechte Praxis, einen Verschlüsselungsschlüssel und die damit zu verschlüsselnden Daten zusammen zu speichern, da dies die durch die Verschlüsselung gewährleistete Sicherheit untergräbt.
+
+In solchen Szenarien hat ein Angreifer den Schlüssel, sobald er die Datei besitzt.
+
+Es wird stets empfohlen, Ihre Verschlüsselungsschlüssel sicher aufzubewahren.
+
+Halten Sie Schlüssel getrennt von den Daten, die sie schützen, zum Beispiel in einem eigenen Key-Management-Dienst oder Hardware-Sicherheitsmodul, und beschränken Sie den Zugriff darauf sowie überwachen Sie ihn.
