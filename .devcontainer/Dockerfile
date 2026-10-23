@@ -43,7 +43,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_26.x | bash - \
 # Go
 # ---------------------------------------------------------------------------
 
-ARG GO_VERSION=1.27.2
+ARG GO_VERSION=1.27.3
 
 RUN curl -fsSL "https://go.dev/dl/go${GO_VERSION}.linux-$(dpkg --print-architecture).tar.gz" \
         -o /tmp/go.tar.gz \
