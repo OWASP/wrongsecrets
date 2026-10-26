@@ -16,6 +16,7 @@ What to do instead:
 - Give every consumer their own short-lived, least-privilege credential instead of one shared team token.
 - Scan skill files with a secret scanner in pre-commit and CI, just like you scan source code.
 - Treat a secret that ever appeared in a skill as compromised and rotate it.
+- In case of (autonomous and/or remote) agents: always use something like a secrets proxy pattern.
 ----
 
 [NOTE]
