@@ -24,6 +24,7 @@ What to do instead:
 - Review agent transcripts before saving or sharing them, just as you would review a pull request.
 - Treat any transcript that read from a secrets source as potentially compromised, and rotate the exposed credentials.
 - Use short-lived, scoped tokens for staging deployments so that exposure has limited blast radius.
+- In case of (autonomous and/or remote) agents: always use something like a secrets proxy pattern.
 ----
 
 [NOTE]
