@@ -1,0 +1,11 @@
+=== Cryptografische uitdaging deel 2
+
+Cryptografie implementeren kan heel ontmoedigend zijn. Er zijn dan ook diverse fouten te vinden op https://twitter.com/d_feldman/status/1558309810801631233?s=20&t=z98ii6IPJEZq10cnsGAhpQ[Twitter]. Wat als onze developers dezelfde fout hebben gemaakt?
+
+In deze uitdaging moet je de HMAC-sleutel vinden. Houd er rekening mee dat we een HMAC hebben gemaakt door de https://csrc.nist.gov/CSRC/media/Projects/Cryptographic-Standards-and-Guidelines/documents/examples/HMAC_SHA1.pdf[spec van NIST] stap voor stap te volgen! Kun je ons de HMAC-sleutel geven die is gebruikt om de HMAC te maken?
+
+Gebruikte tekst: `Sample message for keylen=blocklen`
+
+HMAC geproduceerd in Hex: `5FD596EE 78D5553C 8FF4E72D 266DFD19 2366DA29`
+
+Wat is de hier gebruikte HMAC-sleutel?

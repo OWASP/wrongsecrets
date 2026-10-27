@@ -1,0 +1,5 @@
+=== Unsicherer Verschlüsselungsschlüssel - Teil 1
+
+Ein Entwickler hat ein Geheimnis mit dem Advanced Encryption Standard (AES) verschlüsselt und den Base64-kodierten Wert in einer Datei gespeichert. Doch wo soll der Schlüssel aufbewahrt werden? Wäre es nicht sinnvoll, einfach den Dateinamen als Verschlüsselungsschlüssel zu verwenden? So hätte jedes Geheimnis seinen eigenen Schlüssel! Kannst du das Geheimnis entschlüsseln?
+
+Die Herausforderungsdatei heißt https://github.com/OWASP/wrongsecrets/blob/master/src/main/resources/executables /secrchallenge.md[secrchallenge.md] und befindet sich im Ordner https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables[executables folder].

@@ -1,0 +1,5 @@
+=== Waarom?
+
+Wist je dat iedere uitdaging in deze app een voorbeeld uit de praktijk is? Ze kunnen daarom een grote hulp zijn als je meer aan bug bounty wilt doen.
+
+In de praktijk zien we vaak dat organisaties per ongeluk geheimen vastleggen in code repositories of Docker containers. Deze uitdaging helpt je begrijpen hoe je dergelijke fouten kunt opsporen en voorkomen.

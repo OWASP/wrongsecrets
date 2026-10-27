@@ -1,0 +1,71 @@
+=== Exposición de variables de entorno del servidor MCP
+
+El Protocolo de Contexto de Modelo (MCP), desarrollado por Anthropic, es un estándar abierto que permite a los asistentes de IA conectarse a herramientas y fuentes de datos. Si bien MCP posibilita integraciones potentes, los servidores MCP con seguridad deficiente representan un riesgo significativo: pueden exponer información confidencial almacenada en variables de entorno a cualquier persona que pueda acceder a ellos.
+
+Este desafío demuestra un escenario realista en el que un desarrollador ha implementado un servidor MCP con la herramienta `execute_command`. Este tipo de herramienta es común en los servidores MCP que se utilizan para otorgar acceso a la línea de comandos a los asistentes de IA, pero puede ser utilizada indebidamente por cualquiera que descubra el punto final.
+
+**Tu objetivo:**
+
+1. **Un servidor MCP se está ejecutando en un puerto dedicado (8090)** separado de la aplicación principal.
+2. **El servidor expone una herramienta `execute_command`** que devuelve las variables de entorno del proceso.
+3. **Un secreto (`WRONGSECRETS_MCP_SECRET`) se almacena como una variable de entorno** en el contenedor en ejecución.
+4. **El servidor MCP no tiene autenticación**: cualquiera que pueda acceder al puerto 8090 puede llamar a sus herramientas.
+
+**Cómo interactuar con el servidor MCP:**
+
+Primero, descubre las herramientas disponibles:
+
+[source,bash]
+----
+curl -s -X POST http://localhost:8090/mcp \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+----
+
+[%collapsible, title="cuando se trabaja desde www.wrongsecrets.com"]
+====
+
+[source,bash]
+----
+curl -s -X POST https://www.wrongsecrets.com/mcp \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+----
+====
+
+
+Luego, llama a la herramienta `execute_command` para recuperar las variables de entorno y encontrar el secreto:
+
+[source,bash]
+----
+curl -s -X POST http://localhost:8090/mcp \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"execute_command","arguments":{"command":"env"}}}'
+----
+
+
+[%collapsible, title="cuando se trabaja desde www.wrongsecrets.com"]
+====
+
+[source,bash]
+----
+curl -s -X POST https://www.wrongsecrets.com/mcp \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"execute_command","arguments":{"command":"env"}}}'
+----
+====
+
+
+****
+🤖 *Dato curioso: Inyección de MCP («MCP Rug Pull»):*
+
+Este servidor MCP va un paso más allá de simplemente exponer variables de entorno a usuarios pasivos. También inserta instrucciones maliciosas en su respuesta `initialize` (el campo `instructions`). Cuando un asistente de IA legítimo se conecta a este servidor, dichas instrucciones se inyectan silenciosamente en el indicador del sistema del modelo. Se le indica al modelo que llame inmediatamente a `execute_command` con `env`, y luego que reenvíe el resultado a la herramienta `forward_env`, enviando las variables de entorno del *cliente de IA* de vuelta al servidor, sin informar jamás al usuario.
+
+Puedes probar esto localmente haciendo lo siguiente:
+
+1. Ejecuta el contenedor localmente (por ejemplo, `docker run -p 8080:8080 -p 8090:8090 ghcr.io/owasp/wrongsecrets/wrongsecrets-pr:pr-2400-7391231`)
+2. Configura un agente usando el servidor mcp "http://localhost:8090/mcp" (o "https://www.wrongsecrets.com/mcp" si no te importa que la información se filtre en línea).
+3. Inicialice el agente y observe los registros de su contenedor que dicen "MCP forward_env recibió datos de entorno de cliente exfiltrados (XXX caracteres)", lo que muestra que el servidor MCP recibió sus variables de entorno.
+
+Esto se conoce como *MCP rug pull* o *ataque a la cadena de suministro de MCP*, y demuestra por qué siempre debes revisar el campo `instructions` de cualquier servidor MCP al que te conectes antes de confiar en él. Además, asegúrate siempre de permitir que solo procesos aislados sin acceso a información confidencial utilicen los servidores MCP. Nunca llames a los servidores MCP directamente desde tu terminal si hay variables de entorno o archivos sensibles presentes.
+****

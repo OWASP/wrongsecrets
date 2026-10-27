@@ -1,0 +1,8 @@
+=== Generando valores aleatorios
+
+A veces, necesitamos tener un secreto que se genere aleatoriamente al iniciar. Quizás ya te hayas encontrado con aplicaciones que generan una contraseña para el primer inicio de sesión y la imprimen en la salida estándar. Un ejemplo es https://www.jenkins.io/doc/book/installing/linux/#unlocking-jenkins[Jenkins].
+
+En este desafío, haremos lo mismo: generaremos aleatoriamente un secreto al iniciar la aplicación y lo registraremos en la salida estándar. ¿Puedes encontrar la respuesta?
+¿Cómo podemos usar esto en la próxima startup ;-)?
+
+Consejo: ¡echa un vistazo al registro de actividad de la aplicación al iniciarse!

@@ -1,0 +1,14 @@
+La clave privada se encuentra dentro de la parte .ssh del contenedor y, en este caso, se incluyó accidentalmente en git ;-).
+
+Puedes encontrar la llave de la siguiente manera:
+
+1. Obteniéndolo de git en el archivo [`.ssh/wrongsecrets.keys`]():
+- Clona el repositorio con `git clone https://github.com/OWASP/wrongsecrets`.
+- Acceda a la raíz del proyecto, vaya a la carpeta `.ssh` y busque el archivo `wrongsecrets.keys`.
+
+2. Obteniéndolo del contenedor Docker:
+- Inicia el contenedor localmente con `docker run jeroenwillemsen/wrongsecrets:<TAGNAME-HERE>`
+ - Encuentra el ID del contenedor ejecutando `docker ps` en una terminal de Next.js.
+ - Ejecuta `docker exec -it <container id> sh`
+ - vaya a /home/wrongsecrets/.ssh/
+ - hacer `cat wrongsecrets.keys`

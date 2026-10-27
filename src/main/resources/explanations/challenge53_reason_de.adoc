@@ -1,0 +1,10 @@
+=== Debugging von Containern und Speichergeheimnissen
+
+Debugging-Tools sind leistungsstark, können aber, wenn sie in Produktionsumgebungen verfügbar bleiben, sensible Informationen preisgeben. Diese Herausforderung verdeutlicht, wie ein Angreifer mit Debugging-Zugriff mithilfe von Debugging-Techniken Geheimnisse aus dem Speicher extrahieren kann.
+
+Das Szenario umfasst einen Kubernetes-Pod, der eine kompilierte Binärdatei ausführt, welche ein Geheimnis im Speicher enthält. Die Binärdatei ist Teil einer Anwendung, kann aber aufgrund einer Fehlkonfiguration von einem Debugging-Container untersucht werden. Dies stellt ein reales Szenario dar, in dem falsch konfigurierte Debugging-Berechtigungen zu Sicherheitsrisiken führen können.
+
+Organisationen sollten sich darüber im Klaren sein, dass:
+- Die Zulassung uneingeschränkter Debugging-Tools in Produktionsumgebungen vergrößert die Angriffsfläche.
+- Mit Hilfe von Debugging-Techniken können im Speicher gespeicherte Geheimnisse extrahiert werden.
+- Zu den bewährten Vorgehensweisen gehören die Einschränkung von Debug-Berechtigungen, die Verwendung von temporären Geheimnissen und die Sicherstellung, dass sensible Daten im Speicher verschlüsselt werden.

@@ -1,0 +1,5 @@
+*Warum sollten wir bei den im Programm deklarierten Konstanten vorsichtig sein?*
+
+Konstanten sind feste Werte, die sich eignen, um Werte zu speichern, die sich während der Programmausführung nicht ändern müssen. Beim Reverse Engineering ist die Binäranalyse eine Technik, die darin besteht, möglichst viele Informationen aus dem Binärcode zu extrahieren, um die Programmlogik zu verstehen. Einige wichtige Informationen müssen jedoch so verschlüsselt werden, dass sie schwer lesbar sind.
+
+Dies zeigt, dass selbst Verschlüsselung einen Angreifer verlangsamt, ihn aber nicht daran hindert, die entscheidenden Informationen zu finden. Bette keine Geheimnisse in die Binärdatei ein; falls eine Anwendung eines benötigt, rufe es über einen serverseitigen Dienst ab, der die Anfrage authentifiziert und autorisiert, anstatt sich allein auf eine Offline-Verschlüsselung zu verlassen.

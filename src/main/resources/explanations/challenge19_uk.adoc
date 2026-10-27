@@ -1,0 +1,8 @@
+=== Приховування у двійкових файлах, частина 1: двійковий файл на C
+
+Нам потрібно помістити секрет у мобільний додаток! Ніхто не помітить секрет у нашому скомпільованому коді!
+З таким помилковим уявленням ми часто стикалися під час презентацій на теми мобільної безпеки.
+
+Давайте розвінчаємо цей міф для C: чи можете ви знайти секрет у https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-c[wrongsecrets-c] (або https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-c-arm[wrongsecrets-c-arm], https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-c-linux[wrongsecrets-c-linux])?
+
+Спробуйте завантажити бінарний файл та запустити його локально (наприклад, `./wrongsecrets-c<theversion you need> <your answer>`).

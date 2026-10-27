@@ -1,0 +1,14 @@
+Diese Aufgabe befasst sich speziell mit einem Geheimnis in einer .NET8-Binärdatei.
+
+Diese Herausforderung lässt sich mit den folgenden alternativen Lösungsansätzen bewältigen:
+
+1. Entdecke die Geheimnisse mit ILSpy.
+- Beschaffe dir die Binärdatei wrongsecrets-dotnet-<platform>. Dazu kannst du:
+- aus dem Docker-Image abrufen
+- Lade es von https://github.com/OWASP/wrongsecrets-binaries/releases[Wrongsecrets Binaries] herunter.
+- Installiere .NET 8 und das .NET 8 SDK.
+- Installiere https://github.com/icsharpcode/ILSpy/tree/master/ICSharpCode.ILSpyCmd[ilspycmd]
+- optional: Installiere `sfextract`: `dotnet tool install -g sfextract`
+- Entpacke die eigenständige Binärdatei: `sfextract wrongsecrets-dotnet -o \./tmp`. Alternativ kannst du ilspy verwenden: `mkdir tmp && ilspycmd -d wrongsecrets-dotnet-linux -o ~/tmp`
+- Wechsle in den Ordner tmp und führe den Befehl `ilspycmd dotnetproject.dll` aus, um die DLL zu dekompilieren und das Geheimnis zu finden.
+Du möchtest die Tools nicht installieren? Dann schau dir den https://github.com/OWASP/wrongsecrets/tree/master?tab=readme-ov-file#want-to-play-but-are-not-allowed-to-install-the-tools[WrongSecrets Desktop container] an!

@@ -1,0 +1,9 @@
+=== Geheimen die in je cloud-logsink terechtkomen
+
+Applicaties loggen zelden met opzet een geheim. Wat veel vaker gebeurt, is dat een "audit-gebeurtenis", een requestdump of een gestructureerd logveld een referentie meestuurt. Omdat de waarde gecodeerd is, valt het tijdens een codereview niemand op: het lijkt gewoon op een ondoorzichtige blob.
+
+In deze uitdaging schrijft de applicatie zo'n audit-gebeurtenis naar standard out. Het geheim wordt nooit via een endpoint teruggegeven en nooit als bestand gemount. De enige plek waar de waarde opduikt, is de logstream die je cloudprovider voor je verzamelt, dus je zult de logsink van de cloud waarop je draait moeten bevragen.
+
+Merk op dat de gelogde waarde Base64-gecodeerd is, dus de regel vinden is slechts de helft van het werk.
+
+Tip: dit is niet hetzelfde als uitdaging 8. Daar wordt het antwoord in platte tekst gelogd en kun je het rechtstreeks uit je lokale containerlogs lezen.

@@ -1,0 +1,40 @@
+=== Hinweis für Herausforderung 62
+
+Diese Herausforderung demonstriert, wie ein MCP-Server mit einem übermäßig privilegierten Google-Dienstkonto eine Rechteausweitung ermöglicht.
+
+**Wo man suchen sollte:**
+
+1. **Ein MCP-Server läuft unter `/mcp62`** auf dem Hauptanwendungsport
+2. **Der MCP-Server stellt ein Tool namens `read_google_drive_document` bereit, das ein Google-Dienstkonto verwendet, um ein Dokument zu lesen.
+3. **Du benötigst keine gültigen Google-Anmeldedaten** – das Dienstkonto ist bereits in der Anwendung konfiguriert.
+
+**Schritt-für-Schritt-Anleitung:**
+
+Zunächst eine Liste der vom MCP-Server angebotenen Tools:
+
+[source,bash]
+----
+curl -s -X POST http://localhost:8080/mcp62 \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+----
+
+Rufe anschließend `read_google_drive_document` auf, um das Dokument zu lesen:
+
+[source,bash]
+----
+curl -s -X POST http://localhost:8080/mcp62 \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"read_google_drive_document","arguments":{}}}'
+----
+
+**Worauf du achten solltest:**
+
+- Die Antwort enthält den Inhalt eines Google Drive-Dokuments.
+- Das Dokument enthält die geheime Antwort auf diese Herausforderung.
+- Der Antwortvalidator verwendet den Wert zwischen `<secret>` und `</secret>` aus diesem Inhalt.
+- Beachte, dass du auf ein Dokument zugegriffen hast, für dessen Lektüre du nicht direkt berechtigt bist – der Zugriff wurde vom Dienstkonto des MCP-Servers ermöglicht.
+
+**Hinweis des Entwicklers:** Der MCP-Controller verwaltet einen begrenzten Dokumentencache, um wiederholte Drive-API-Aufrufe zu reduzieren.
+
+**Wichtig:** Dies ist ein Beispiel für eine Rechteausweitung über einen MCP-Server. Das Dienstkonto verfügt über mehr Berechtigungen, als du (der Aufrufer) hättest, und der MCP-Server erzwingt keine Zugriffskontrollen auf Aufruferebene.

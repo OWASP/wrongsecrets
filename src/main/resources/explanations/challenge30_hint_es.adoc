@@ -1,0 +1,11 @@
+Hay dos maneras de resolver este desafío:
+
+1. Observando el almacenamiento:
+- Acceda a "localhost:8080" en su navegador web.
+- Abra la consola del desarrollador inspeccionando.
+- Navegue a la sección Aplicaciones de la consola del desarrollador.
+- ¡El valor asociado a la clave "secreto" es tu respuesta!
+2. Observando el tráfico de la red:
+- Acceda a WrongSecrets en su navegador web.
+- Abre la consola del desarrollador.
+- Comprueba la pestaña de red: ¿puedes detectar la llamada adicional para este desafío y su valor de retorno?

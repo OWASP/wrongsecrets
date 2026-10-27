@@ -1,0 +1,13 @@
+*Toegang tot het beheerders-/eigenaarsaccount:*
+Als u het AWS-beheerdersaccount kon gebruiken om toegang te krijgen tot de gegevens, dan begrijpt u waarom dit een slecht idee is voor productie. Kortom, met dit account kun je alles binnen het account wijzigen en kun je gemakkelijk alle geheimen ontfutselen.
+
+Wat u in plaats daarvan kunt doen:
+- Gebruik voor elke werkbelasting een afzonderlijke identiteit met de minste bevoegdheden en verleen deze alleen de machtigingen die deze nodig heeft. Geef de voorkeur aan kortstondige referenties die zijn verkregen via de identiteit van de werkbelasting boven toegangssleutels met een lange levensduur.
+- Geef mensen hun eigen rol die strikt past in hun dagelijkse activiteiten, zonder hen toe te staan geheimen of executies in werklasten in te lezen, tenzij dit echt nodig is.
+- Reserveer het root- of beheerdersaccount voor streng gecontroleerd break-glass-gebruik, bescherm het met MFA en controleer de activiteit ervan.
+
+Tot slot: we konden gemakkelijk de container ingaan, om de berg met het geheim te pakken. Dit heeft met 3 dingen te maken:
+
+- dat mag bij ons via RBAC, wat bij PRD niet normaal zou moeten zijn: anders kan iedereen van uw organisatie in de container rondneuzen.
+- we hebben uitvoerbare bestanden in de container (sh/openssl/etc) die we kunnen uitvoeren om een shell in te stellen. Het verwijderen van niet-noodzakelijke binaire bestanden in uw container kan helpen het aanvalsoppervlak te verkleinen en het voor een aanvaller die een RCE in uw container heeft uitgevoerd moeilijker te maken om naar andere plaatsen in de container te springen om verder uitvoering te krijgen.
+- we hebben de configuratiemap weergegeven als een ENV. Dit betekent dat iedereen die de containerruntime binnen de pod heeft bereikt, nu het geheim kan dumpen. We hebben het geheim dichtbij de consument gebracht, maar misschien nog niet dichtbij genoeg (bijvoorbeeld alleen via de app).

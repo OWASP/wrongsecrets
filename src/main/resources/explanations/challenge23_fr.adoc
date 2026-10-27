@@ -1,0 +1,11 @@
+=== Les secrets du code front-end, partie 2
+
+Parfois, nous ne voulons pas oublier comment nous connecter avec des identifiants de test lorsque nous travaillons sur notre code front-end.
+Pouvez-vous trouver les identifiants de test ?
+
+Notez que les identifiants de test sont parfois masqués dans le code par un encodage Base64.
+
+++++
+<!-- test-credentials = WhyCommentsAsPassswordAreBad345_$"-->
+<!-- Si vous aimez ça : découvrez OWAWS Juiceshop pour d'autres défis géniaux ! https://juice-shop.herokuapp.com/#/score-board -->
+++++

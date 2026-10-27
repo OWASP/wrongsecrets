@@ -1,0 +1,8 @@
+*Zugriff auf das Administrator-/Inhaberkonto:*
+Wenn du mit dem Azure-Cloud-Administrator-/Besitzerkonto auf die Daten zugreifen konntest, verstehst du sicher, warum dies für die Produktivumgebung keine gute Idee ist. Kurz gesagt: Mit diesem Konto kannst du alles innerhalb des Kontos ändern und problemlos alle Geheimnisse exfiltrieren.
+
+Nicht zuletzt konnten wir leicht per exec auf den Container zugreifen, um dort mittels grep nach dem Einhängepunkt (Mount) mit dem Secret zu suchen. Dies hängt mit drei Dingen zusammen:
+
+- Dies ist uns mittels RBAC gestattet, was in PRD nicht der Normalfall sein sollte: Andernfalls kann jeder in deiner Organisation im Container herumstöbern.
+- Wir haben ausführbare Dateien im Container (sh/openssl/etc.), die wir ausführen können, um eine Shell einzurichten. Das Entfernen aller unnötigen Binärdateien aus dem Container kann die Angriffsfläche verringern und es Angreifern, die eine Remote Code Execution (RCE) im Container durchgeführt haben, erschweren, auf andere Stellen im Container zuzugreifen und dort weitere Ausführungsrechte zu erlangen.
+- Wir haben die ConfigMap als Umgebungsvariable freigegeben. Das bedeutet, dass jeder, der Zugriff auf die Container-Laufzeitumgebung innerhalb des Pods hat, das Geheimnis nun auslesen kann. Wir haben das Geheimnis zwar in die Nähe des Nutzers gebracht, aber möglicherweise noch nicht nah genug (z. B. nur in die Anwendung).

@@ -1,0 +1,20 @@
+*Warum du deine Geheimnisse reinigen und rotieren solltest*
+
+Wenn du versehentlich ein Geheimnis in Git eingecheckt hast, gibt es Möglichkeiten, es wiederzufinden, entweder manuell oder mithilfe von Tools.
+
+Wenn also versehentlich ein Geheimnis in Git eingetragen wird:
+
+- Informiere die zuständige Sicherheitsbehörde in der Organisation.
+- Achte darauf, dass du das Geheimnis drehst
+- Optionale Bereinigung: Entweder verwendest du https://github.com/rtyley/bfg-repo-cleaner[BFG repo-cleaner] oder du versuchst, den fehlerhaften Commit auf andere Weise zu entfernen.
+
+Es gibt viele Möglichkeiten, das Committen eines Geheimnisses zu verhindern, beispielsweise durch die Konfiguration des Pre-Commit-Hooks https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks mit Secret-Detection-Controls.
+
+Hinweis: Das "Verstecken" eines fehlerhaften Commits durch Hinzufügen weiterer Commits, sodass er bei einem Pull Request nicht angezeigt wird, verschlimmert die Situation nur.
+Im besten Fall solltest du dann den fehlerhaften Commit mit dem Lösch-Commit zusammenführen, sodass sich das Geheimnis nur noch in deinem Branch befindet.
+
+Hinweis 2: Wenn du ein Geheimnis übertragen hast, beachte, dass alle Kollegen/Bots, die es abrufen, es möglicherweise auch lokal haben.
+
+Hinweis 3: Die in diesem Projekt versteckten AWS-Schlüssel sind tatsächliche Canary-Token. Wenn du diese verwendest, wird ein Aufruf an unsere Datei https://github.com/OWASP/wrongsecrets/blob/master/src/main/java/org/owasp/wrongsecrets/canaries/CanariesController.java[CanariesController] durchgeführt.
+Dies kann Systeme und/oder Daten darauf aufmerksam machen, dass die Anmeldeinformationen/Canary-Tokens verwendet wurden. Den Inhalt des letzten Aufrufs dieses Endpunkts findest du an unserem Statistik-Endpunkt für Heroku- und Docker-Setups unter http://wrongsecrets.herokuapp.com/stats[stats].
+Wir erstellen und verwalten unsere Canary-Tokens über https://canarytokens.org/[Canarytokens.org]. Stell dir vor, was du mit Canary-Tokens in deinem Unternehmen alles erreichen kannst!

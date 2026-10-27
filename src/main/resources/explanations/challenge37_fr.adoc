@@ -1,0 +1,5 @@
+=== Donner accès à vos tests de sécurité
+
+Compte tenu de toutes les anomalies déjà constatées dans ce projet, nous avons décidé d'implémenter une analyse automatisée avec ZAP. Pour ce faire, nous devons tester la robustesse du point de terminaison de ce défi : `/authenticated/challenge37` et ainsi configurer l'authentification de base pour ZAP. Saurez-vous trouver le secret renvoyé par ce point de terminaison ?
+
+Indice : Nous utilisons GitHub Actions.

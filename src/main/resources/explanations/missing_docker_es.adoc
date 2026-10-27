@@ -1,0 +1,2 @@
+Estamos ejecutando el programa fuera de un contenedor Docker.
+Ejecute esto en un contenedor como se explica en https://github.com/OWASP/wrongsecrets#basic-docker-exercises[README]

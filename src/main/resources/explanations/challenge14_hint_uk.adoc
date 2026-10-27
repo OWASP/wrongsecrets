@@ -1,0 +1,15 @@
+Ви можете вирішити цю проблему за допомогою таких альтернативних рішень:
+
+Зверніть увагу, що для цього завдання вам потрібно встановити https://www.keepassx.org/[Keepass(X)] на вашу систему, щоб відкрити файл kdbx. Або ж ви можете скористатися https://github.com/OWASP/wrongsecrets?tab=readme-ov-file#want-to-play-but-are-not-allowed-to-install-the-tools[WrongSecrets Deskop] для вирішення завдання.
+
+1. Отримайте файл Keepass з контейнера Docker та відкрийте його.
+ - перегляньте Dockerfile, щоб побачити, куди було скопійовано файл KeePass.
+ - Дотримуйтесь інструкцій на сторінці https://docs.docker.com/engine/reference/commandline/cp/[документація Docker], щоб скопіювати файл Keepass з кореневого каталогу контейнера до вашої локальної файлової системи.
+- Відкрийте файл за допомогою KeepassX. З’явиться запит на пароль.
+- Спочатку перевірте код `Challenge14.java` на https://github.com/OWASP/wrongsecrets/blob/master/src/main/java/org/owasp/wrongsecrets/challenges/docker/Challenge14.java[github], щоб побачити, де може зберігатися пароль. Потім відкрийте файл `Application.properties` у папці `src/resources` на https://github.com/OWASP/wrongsecrets[*цільовий репозиторій*] та перегляньте властивість, яка містить пароль KeePass.
+- Тепер скористайтеся знайденим паролем, щоб відкрити файл Keepass. Його вміст має дозволити вам знайти облікові дані для Alibaba Cloud. Ось і відповідь!
+2. Отримайте файл Keepass з тестових ресурсів: ми були настільки нерозумні, що помістили той самий файл у `src/test/resources/alibabacreds.kdbx`, щоб ви також могли відкрити його.
+ - Перегляньте проєкт за допомогою git та відкрийте файл або отримайте його з https://github.com/OWASP/wrongsecrets/blob/master/src/test/resources/alibabacreds.kdbx[Github]
+ - Відкрийте файл за допомогою KeepassX. З’явиться запит на пароль.
+ - Спочатку перевірте код `Challenge14.java` на https://github.com/OWASP/wrongsecrets/blob/master/src/main/java/org/owasp/wrongsecrets/challenges/docker/Challenge14.java[github], щоб побачити, де може зберігатися пароль. Потім відкрийте файл `Application.properties` у папці `src/resources` на https://github.com/OWASP/wrongsecrets[*цільовий репозиторій*] та перегляньте властивість, яка містить пароль KeePass.
+- Тепер скористайтеся знайденим паролем, щоб відкрити файл Keepass. Його вміст має дозволити вам знайти облікові дані для Alibaba Cloud. Ось і відповідь!

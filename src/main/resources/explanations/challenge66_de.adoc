@@ -1,0 +1,10 @@
+=== Verstecken in Binärdateien Teil 7: Die verschleierte Java-CLI
+
+Verschleierung mag jemanden zwar verlangsamen, aber sie hindert ihn nicht daran, eingebettete Geheimnisse aufzudecken. Kannst du das schwierigere Geheimnis in unserer verschleierten Java-CLI finden?
+
+Um das Problem zu lösen:
+
+. Lade die Datei https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-java-obfuscated.jar[wrongsecrets-java-obfuscated.jar] herunter und untersuche sie.
+. Dekompiliere die JAR-Datei mit einem Java-Dekompiler wie CFR, JADX oder IntelliJ IDEA und verfolge die Hauptklasse.
+. Suche nach dem kodierten Byte-Array, dem XOR-Schlüssel und den Hilfsmethoden, die das Geheimnis zur Laufzeit wiederherstellen.
+. Sobald du das Geheimnis wiederhergestellt hast, übermittle es mit `java -jar wrongsecrets-java-obfuscated.jar <your answer>`.

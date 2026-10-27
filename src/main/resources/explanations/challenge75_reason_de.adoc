@@ -1,0 +1,55 @@
+*Warum das Einchecken einer Maven settings.xml-Datei die Bereitstellungszugangsdaten preisgibt*
+
+Eine `settings.xml`-Datei ist die Datei, die Maven liest, um zu erfahren, woher Abhängigkeiten
+heruntergeladen werden und wie man sich bei den Repositories authentifiziert, die eine Anmeldung erfordern. Dein
+Abschnitt `<servers>` enthält den Benutzernamen und das Passwort im Klartext für jeden konfigurierten
+Server, und für ein Bereitstellungskonto beinhaltet dieses Passwort normalerweise das Recht,
+Artefakte zu veröffentlichen.
+
+Das Einchecken einer solchen Datei erscheint harmlos, weil der Build plötzlich für
+jeden funktioniert, und genau dieses Versagen demonstriert diese Herausforderung:
+
+- Die Zugangsdaten bleiben dauerhaft im Git-Verlauf. Das Löschen der Datei in einem späteren
+  Commit entfernt sie nicht aus dem Verlauf, daher muss das Passwort als
+  von Anfang an kompromittiert behandelt werden.
+- Jede Person und jedes System, das das Repository lesen kann, erhält auch die
+  Zugangsdaten: Forks, Mirrors, CI-Runner, Entwickler-Laptops und alle Tools mit
+  Lesezugriff.
+- Bereitstellungszugangsdaten sind bei Lieferkettenangriffen von hohem Wert. Mit ihnen kann
+  ein Angreifer eine manipulierte Version der Projektartefakte veröffentlichen, wonach
+  jeder Nutzer dieses Repositorys stillschweigend die manipulierte Version übernimmt.
+- Server-IDs wie die Nexus-ID in dieser Challenge sind überhaupt nicht geheim. Sie
+  Sie geben lediglich an, zu welchem Repository eine Anmeldeinformation gehört; sie schützen niemals
+  die Anmeldeinformation selbst.
+- Secret-Scanner ignorieren oft XML-Dateien oder erkennen Maven-Einstellungen nicht, daher
+  kann das Leck eine Überprüfung lange überstehen.
+- Die Passwortverschlüsselung von Maven verbirgt das Passwort lediglich in einem
+  verschleiernden Schlüsselspeicher, der sich direkt neben der Datei befindet und daher keinen Schutz
+  für alles bietet, was eingecheckt wird.
+
+----
+Was du stattdessen tun solltest:
+
+- Bewahre die Datei `settings.xml` in `$HOME/.m2/` auf und füge `settings.xml` zu `.gitignore` hinzu, damit
+sie nicht versehentlich eingecheckt wird.
+- Referenzierung von Anmeldeinformationen über Umgebungsvariablen oder Eigenschaftsinterpolation,
+zum Beispiel `<password>${env.NEXUS_PASSWORD}</password>`, und gib den Wert an.
+zur Laufzeit.
+- In CI sollten die Anmeldeinformationen aus dem CI-Geheimnisspeicher eingefügt werden, anstatt sie
+in das Repository der Pipeline einzuchecken.
+- Gib jedem Verbraucher ein kurzlebiges Token mit minimalen Berechtigungen, das nur in
+ein einzelnes Repository bereitgestellt werden kann, und beschränke das Token auf ein festes Zeitfenster.
+- Bevorzuge Repository-Manager-Funktionen, die langlebige Passwörter vermeiden, wie z. B.
+Bearer-Tokens oder Workload-Identitätsföderation.
+- Rotiere die Anmeldeinformationen sofort, sobald sie in einem Commit auftauchen, und entferne sie aus
+dem Verlauf, sofern deine Plattform dies zulässt.
+- Scanne das Repository, einschließlich der XML- und Build-Dateien, mit einem geheimen Scanner in
+Pre-Commit-Hooks und CI.
+----
+
+[NOTE]
+====
+Eine `settings.xml`-Datei im Repository ist ein offen sichtbarer Speicher für Anmeldeinformationen. Alles,
+was in einer `.java`-Datei inakzeptabel wäre, ist auch in einer
+Maven-Einstellungsdatei inakzeptabel.
+====

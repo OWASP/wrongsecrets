@@ -1,0 +1,7 @@
+=== Приховування у бінарних файлах, частина 4: бінарний файл Rust
+
+Подібно до приховування секретів у застосунку, написаному на C, ви можете зробити це в Rust. Однак Ghidra не дуже добре аналізує Rust за замовчуванням... Чи можете ви знайти секрет у нашому бінарному файлі?
+
+Давайте розвінчаємо міф про те, що «секрети важко знайти в нативних скомпільованих програмах» для Rust: чи можете ви знайти секрет у https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-rust[wrongsecrets-rust] (або https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-rust-arm[wrongsecrets-rust-arm], https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-rust-linux[wrongsecrets-rust-linux])?
+
+Спробуйте завантажити бінарний файл та запустити його локально (наприклад, `./wrongsecrets-rust<theversion you need> <your answer>`).

@@ -1,0 +1,24 @@
+*Warum ist der sachgemäße Umgang mit Geheimgeheimnissen wichtig?*
+
+Sealed Secrets bieten eine Möglichkeit, deine Kubernetes-Secrets zu verschlüsseln und sicher zu speichern, selbst in öffentlichen Repositories.
+Unsachgemäße Handhabung und Fehlkonfiguration können jedoch zu schwerwiegenden Sicherheitslücken führen.
+
+Wird der private Schlüssel, der zum Entschlüsseln der versiegelten Geheimnisse verwendet wird, innerhalb desselben Repositorys offengelegt oder zugänglich gemacht, so wird die durch die versiegelten Geheimnisse gewährleistete Sicherheit zunichte gemacht.
+Jeder, der Zugriff auf das Datenrepository hat, kann die Geheimnisse entschlüsseln, was zu potenziellen Datenschutzverletzungen und unberechtigtem Zugriff führen kann.
+
+Betrachten wir ein Beispiel:
+
+. Stell dir ein Szenario vor, in dem ein Entwickler den privaten Schlüssel, der zur Entschlüsselung versiegelter Geheimnisse verwendet wird, im selben Repository speichert:
+* Das Repository enthält die Datei `sealed-challenge48.json` und den privaten Schlüssel `main.key`.
+. Diese Situation ist vergleichbar damit, eine Tür abzuschließen und den Schlüssel unter der Fußmatte zu verstecken:
+* Ein Angreifer kann leicht den Schlüssel finden und die Tür öffnen, wodurch er Zugang zu allem im Inneren erhält.
+
+Um solche Probleme zu vermeiden, ist es entscheidend, sicherzustellen, dass die privaten Schlüssel sicher und getrennt von den verschlüsselten Daten aufbewahrt werden.
+Halte dich stets an die bewährten Verfahren für den Umgang mit Geheimnissen und vermeide die Offenlegung sensibler Informationen in deinen Repositories.
+
+*Denkanstöße zum Thema streng gehütete Geheimnisse*
+Versiegelte Geheimnisse bergen einige Probleme, selbst wenn man den privaten Schlüssel vom Repository fernhält.
+1. Wenn du RBAC oder ABAC nicht korrekt konfigurierst, kann jeder, der Zugriff auf den Cluster hat, weiterhin auf das Geheimnis zugreifen.
+2. Versiegelte Geheimnisse sind eine Art fest codiertes Geheimnis, was die Überprüfung erschwert. Wer oder was hat auf ein Geheimnis zugegriffen und von wo aus?
+3. Wenn du deinen Versiegelungsschlüssel rotierst, musst du alle mit diesem Schlüssel verschlüsselten Geheimnisse rotieren – möglicherweise über Dutzende von Repositories verteilt (warum, siehe die Git-History-Herausforderung). Wie findest du diese Geheimnisse? Und wie identifizierst du, welche Geheimnisse mit welchem Schlüssel verschlüsselt wurden? Wie stellst du sicher, dass die vorherige Version eines Geheimnisses sicher zugänglich ist?
+4. Versiegelte Geheimnisse können Offline-Angriffen ausgesetzt sein, deren Erfolg von der verwendeten Verschlüsselungsmethode abhängt. Fallen dir ungeeignete Verschlüsselungsverfahren ein?

@@ -1,0 +1,58 @@
+Diese Herausforderung lässt sich lösen, indem man die in den Registern gespeicherten Zeichenketten ausliest. Du kannst jedes beliebige Debugging-Tool verwenden. In den folgenden Anweisungen zeigen wir dir, wie du die Aufgabe mit GDB und Radare2 löst.
+Bitte beachte, dass wir dies nur für die Windows-Anwendung zeigen. Jede andere Anwendung hat ein anderes Layout, aber das Grundprinzip der Übung bleibt ähnlich.
+
+Um die Aufgabe mit GDB auszuführen, öffne das Terminal und gib Folgendes ein:
+
+1. Mit dem Befehl `gdb -q wrongsecrets-advanced-c-windows.exe` wird GDB geöffnet und die ausführbare Datei geladen.
+2. `disas main`, um die `main`-Funktion zu disassemblieren, die den Einstiegspunkt des Programms darstellt.
+3. Mit `b execute` wird ein Haltepunkt an der Funktion `execute` gesetzt.
+4. Mit `set args 1234567812345678` kannst du die Programmargumente festlegen. Du kannst eine zufällige Zeichenkette der Länge 16 angeben.
+5. Gib `r` ein, um das Programm auszuführen. Dies kann unter macOS fehlschlagen. Konsultiere in diesem Fall bitte das GDB-Wiki unter https://sourceware.org/gdb/wiki/PermissionsDarwin.
+6. `disas execute` zum Disassemblieren der `execute`-Funktion
+7. `b compare` zum Setzen eines Haltepunkts in der Funktion `compare`. Um den Schlüssel zu erhalten:
+- a. `b get_key`, um einen Haltepunkt in der Funktion `get_key` zu setzen
+- b. `disas get_key` zum Disassemblieren der Funktion `get_key`
+- c. Suche nach der Anweisung `movabs xxx, %rax` und kopiere die Hexadezimalwerte ohne 0x.
+- d. Wiederhole dies für die Anweisung `movabs xxx, %rdx`.
+Als Nächstes müssen wir die Byte-Reihenfolge (Endianness) der CPU-Architektur überprüfen, um den richtigen Code zu entschlüsseln. Öffne dazu das Python3-Terminal und gib Folgendes ein:
+- z. B. `from sys import byteorder`
+- f. `print(byteorder)`
+- g. Falls die Byte-Reihenfolge `little` ist, verwende bitte den Konverter https://blockchain-academy.hs-mittweida.de/litte-big-endian-converter/[hier klicken], um von Little-Endian in Big-Endian zu konvertieren.
+
+8. Kopiere jede Zeichenkette und verkette die beiden Zeichenketten nach der Konvertierung. Beispiel:
+- a. `big_endian_a = '69676F74616C6C74'`
+- b. `big_endian_b = '68656B6579737373'`
+- c. `big_endian_result = '69676F74616C6C7468656B6579737373'`, und du hast den Schlüssel zum Entschlüsseln erhalten. Beende das Programm und öffne es erneut, um die geheime Nachricht zu erhalten.
+
+9. `b get_secret_message` zum Setzen eines Haltepunkts in der Funktion `get_secret_message`.
+- a. `c`, um den Programmablauf fortzusetzen
+- b. `disas get_secret_message` zum Disassemblieren der Funktion `get_secret_message`
+- c. Suche nach der Anweisung `movabs xxx, %rax` und kopiere die Hexadezimalwerte ohne 0x.
+- d. Wiederhole dies für die Anweisung `movabs xxx, %rdx`.
+- e. Überprüfe die Byte-Reihenfolge (Endianness) deiner CPU-Architektur mithilfe der Schritte `7.e`, `7.f` und `7.g`. Ergebnis: `big_endian_result = 'E49F2F331A9A251974E1BA7F724C3B7F'`
+10. Lade den Ordner `decrypt` herunter, öffne das Terminal und gib Folgendes ein:
+- Führe `gcc decrypt.c -o decrypt` aus, um den Code zu kompilieren, oder kompiliere den Code entsprechend deinem Betriebssystem.
+
+11. `./decrypt E49F2F331A9A251974E1BA7F724C3B7F 69676F74616C6C7468656B6579737373` und du hast den geheimen Schlüssel, der die Antwort auf die Herausforderung ist.
+
+Um die Aufgabe mit Radare2 auszuführen, öffne das Terminal und gib Folgendes ein:
+
+1. `r2 -A wrongsecrets-advanced-c-windows.exe` zum Laden der Binärdatei und zur Analyse des gesamten referenzierten Codes.
+2. `pdf @ sym.get_key` zum Disassemblieren der Funktion `get_key`
+3. Suche nach der Anweisung `movabs %rax,xxx` und kopiere die Hexadezimalwerte ohne 0x.
+4. Wiederhole dies für die Anweisung `movabs %rdx,xxx`. Anschließend müssen wir die Byte-Reihenfolge (Endianness) der CPU-Architektur überprüfen, um den richtigen Code zu entschlüsseln. Öffne dazu das Python3-Terminal und gib Folgendes ein:
+- a. `from sys import byteorder`
+- b. `print(byteorder)`
+- c. Falls die Byte-Reihenfolge `little` ist, verwende bitte den Konverter https://blockchain-academy.hs-mittweida.de/litte-big-endian-converter/[hier klicken], um von Little-Endian in Big-Endian zu konvertieren.
+5. Kopiere jede Zeichenkette und verkette die beiden Zeichenketten nach der Konvertierung. Beispiel:
+- a. `big_endian_a = '69676F74616C6C74'`
+- b. `big_endian_b = '68656B6579737373'`
+- c. `big_endian_result = '69676F74616C6C7468656B6579737373'`, und du hast den Schlüssel zum Entschlüsseln erhalten.
+
+6. `pdf @ sym.get_secret_message` zum Disassemblieren der Funktion `get_secret_message`.
+7. Suche nach der Anweisung `movabs %rax,xxxx` und kopiere die Hexadezimalwerte ohne 0x.
+8. Wiederhole die Schritte `3` bis `5`, um die Werte zu erhalten. Ergebnis: `big_endian_result = 'E49F2F331A9A251974E1BA7F724C3B7F'`
+9. Beende das Programm, lade den Ordner `decrypt` herunter, öffne das Terminal und gib Folgendes ein:
+- Führe `gcc decrypt.c -o decrypt` aus, um den Code zu kompilieren, oder kompiliere den Code entsprechend deinem Betriebssystem.
+
+10. `./decrypt E49F2F331A9A251974E1BA7F724C3B7F 69676F74616C6C7468656B6579737373` und du hast den geheimen Schlüssel, der die Antwort auf die Herausforderung ist.

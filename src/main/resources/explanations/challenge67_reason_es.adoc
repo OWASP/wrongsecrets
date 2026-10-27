@@ -1,0 +1,17 @@
+*¿Por qué es un problema registrar un secreto en tu proveedor de nube?*
+
+La codificación no es lo mismo que el cifrado. Base64 mantiene una credencial oculta durante una revisión rápida del código, pero cualquiera que pueda leer el registro de transacciones puede decodificarla con un solo comando. Trate un secreto codificado en una línea de registro como si fuera un secreto en texto plano.
+
+Algunos aspectos que hacen que esto sea particularmente problemático en una configuración en la nube:
+
+- La audiencia es mucho más amplia de lo que piensas. Los sumideros de registros suelen ser legibles por toda la plataforma o el equipo de SRE, y a menudo por cualquier carga de trabajo con un permiso amplio de lectura de `logs:FilterLogEvents`, `roles/logging.viewer` o Log Analytics. El alcance del secreto se convierte en el alcance de tus permisos de registro.
+- La retención de datos es más importante que la rotación. Los registros suelen conservarse durante meses y replicarse en un depósito de archivo o en un SIEM. La rotación de las credenciales no elimina el valor anterior de esas copias, por lo que también hay que considerar que todos los destinos posteriores están comprometidos.
+- El registro estructurado facilita las filtraciones accidentales. Adjuntar una carga útil completa, una solicitud o un contexto MDC a un "evento de auditoría" es conveniente, y extrae todo lo que se encuentre en ese contexto, incluidos tokens y claves.
+- El registro de eventos puede trasladar el secreto a sistemas de almacenamiento adicionales, archivos o plataformas de observabilidad de terceros. Esto generalmente no está contemplado en el modelo de amenazas que usted definió para ese secreto.
+
+Qué hacer en su lugar:
+
+- Nunca incluyas credenciales en un registro, ni siquiera codificadas, y ni siquiera en el modo `DEBUG`.
+- Redactar en el origen. Filtrar las claves confidenciales antes de que lleguen al appender, por ejemplo, con un convertidor de Logback o un diseño de enmascaramiento, para que un cambio de código futuro no pueda reintroducir la fuga.
+- Escanee en busca de ello. Las herramientas de detección de secretos pueden ejecutarse tanto en la salida de registros como en el código fuente.
+- Si ocurriera: rote el secreto y luego limpie o elimine todos los sumideros y archivos que lo recibieron.

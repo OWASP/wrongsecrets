@@ -1,0 +1,75 @@
+=== Por qué este desafío es importante
+
+Este desafío demuestra una vulnerabilidad crítica que se encuentra comúnmente en los sistemas de producción: **tokens de la API de Slack codificados directamente en variables de entorno con una ofuscación inadecuada**.
+
+==== La vulnerabilidad
+
+**Causa principal**: Los desarrolladores suelen almacenar tokens de API en variables de entorno pensando que son seguras, y a veces los ofuscan creyendo que esto proporciona seguridad.
+
+**El problema**:
+1. **Las variables de entorno son fácilmente accesibles** para cualquier persona con acceso al sistema.
+2. **Ofuscación ≠ Seguridad**: La codificación Base64 es trivial de revertir.
+3. **Riesgo de rotación de personal**: Los tokens a menudo no se rotan cuando el personal se va.
+4. **Inspección de contenedores**: Las variables de entorno son visibles en los metadatos del contenedor.
+
+==== Escenarios de ataque en el mundo real
+
+**Escenario 1 - Acceso de exempleados**:
+- El desarrollador abandona la empresa.
+- El token de Slack no se ha rotado.
+- El exempleado aún puede usar el token para:
+  - Leer mensajes privados
+  - Publicar contenido malicioso
+  - Acceso a información confidencial
+  - Suplantar la identidad de la aplicación
+
+**Escenario 2 - Violación de seguridad de contenedores**:
+- El atacante obtiene acceso al entorno de producción.
+- Inspecciona las variables de entorno del contenedor.
+- Encuentra token de Slack ofuscado
+- Descifra fácilmente y obtiene acceso a Slack
+
+**Escenario 3 - Exposición de registros**:
+- Variables de entorno registradas accidentalmente
+- Registros almacenados en ubicaciones no seguras
+- Tokens ofuscados expuestos pero fácilmente decodificados
+
+==== Mejores prácticas de seguridad
+
+** ✅ Soluciones adecuadas**:
+
+1. **Utilice la gestión de secretos**:
+   - Administrador de secretos de AWS
+   - Azure Key Vault
+   - Bóveda de HashiCorp
+   - Secretos de Kubernetes (con cifrado en reposo)
+
+2. **Implementar la rotación de tokens**:
+   - Rotación automática regular
+   - Rotación inmediata al marcharse el empleado.
+   - Fichas de corta duración siempre que sea posible
+
+3. **Controles de acceso**:
+   - Principio del mínimo privilegio
+   - Acceso a secretos basado en roles
+   - Registros de auditoría para acceso secreto
+
+4. **Nunca ocultes información por motivos de seguridad**:
+   - Utilice un cifrado adecuado en su lugar.
+   - La ofuscación no proporciona ningún beneficio en materia de seguridad.
+   - Puede crear una falsa sensación de seguridad.
+
+** ❌ Lo que no debes hacer**:
+- Almacenar secretos en variables de entorno
+- Utilizar la ofuscación como medida de seguridad
+- Dejar los tokens activos después de la salida del empleado.
+- Secretos codificados de forma rígida en cualquier formato.
+
+==== Evaluación de impacto
+
+**Confidencialidad**: Alta - Conversaciones de Slack y exposición de datos
+**Integridad**: Alta - Capacidad para publicar contenido malicioso
+**Disponibilidad**: Media - Posibilidad de interrupción del servicio
+**Cumplimiento**: Crítico - Infracción de la normativa de protección de datos
+
+Este tipo de vulnerabilidad se ha detectado en numerosas auditorías de seguridad y representa una falta de comprensión fundamental de las mejores prácticas en la gestión de secretos.

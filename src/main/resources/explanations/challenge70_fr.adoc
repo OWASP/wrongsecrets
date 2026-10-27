@@ -1,0 +1,16 @@
+=== Défi 70 : Trouvez le secret du pack de compétences Claude
+
+Les compétences Claude sont distribuées sous forme de fichiers `.skill` exportés : une archive ZIP contenant un dossier avec un fichier `SKILL.md` décrivant quand utiliser la compétence, ainsi que tous les scripts et documents de référence nécessaires. L'ensemble du fichier est décompressé sur la machine où il est installé.
+
+Cela fait d'un pack de compétences une excellente cachette, car les relecteurs ont tendance à lire le fichier `SKILL.md` et à s'arrêter là. La partie intéressante se trouve généralement dans les fichiers adjacents.
+
+Cette application intègre une compétence Claude appelée `incident-reporter`. Le fichier de compétence exporté se trouve dans le dossier des ressources et est disponible en téléchargement à l'adresse link:/skills/claude/incident-reporter.zip[`/skills/claude/incident-reporter.zip`].
+
+Téléchargez le fichier, décompressez-le et déterminez le jeton utilisé par l'utilisateur pour s'authentifier.
+
+Le code source de la compétence est également disponible sur GitHub à l'adresse : link:https://github.com/OWASP/wrongsecrets/blob/master/src/main/resources/challenges/challenge-70/claude-skill/incident-reporter.skill[`src/main/resources/challenges/challenge-70/claude-skill/incident-reporter.skill`].
+
+[NOTE]
+====
+Le fichier `SKILL.md` est propre. Se contenter de lire le point d'entrée d'une compétence ne constitue pas une évaluation.
+====

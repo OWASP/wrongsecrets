@@ -1,0 +1,14 @@
+=== Desafío 72: Encuentra el secreto en la transcripción del agente de codificación de IA
+
+Los agentes de codificación de IA, como Codex, Claude Code y Cursor, leen archivos, ejecutan comandos y generan transcripciones detalladas de las sesiones. Cuando un desarrollador solicita a un agente que depure un problema de implementación, este puede leer archivos de configuración que contienen información confidencial y mostrar esos valores en la salida de la sesión.
+
+Esta aplicación incluye una transcripción de una sesión de Codex en la que un desarrollador solicitó al agente que investigara un fallo en el despliegue de prueba. La transcripción muestra al agente leyendo un archivo `.env.staging` y generando su contenido, incluido el token de despliegue, como parte del flujo de trabajo de depuración habitual.
+
+Descargue la transcripción desde link:/challenges/challenge-72/codex-session-transcript.md[`/challenges/challenge-72/codex-session-transcript.md`] y encuentre el token de despliegue de staging que se expuso durante la sesión.
+
+El código fuente también está disponible en el siguiente enlace: link:https://github.com/OWASP/wrongsecrets/blob/master/src/main/resources/challenges/challenge-72/codex-session-transcript.md[`src/main/resources/challenges/challenge-72/codex-session-transcript.md`].
+
+[NOTE]
+====
+El token aparece de forma natural en la transcripción de salida; el agente no tenía intención de filtrarlo, simplemente leyó un archivo como parte de su proceso de depuración.
+====

@@ -1,0 +1,15 @@
+Vous pouvez trouver l'état précédent dans l'une des deux solutions alternatives suivantes :
+
+1. Trouvez le bloc précédent via une requête à https://infura.io/[Infura] :
+- Trouvez le numéro de bloc pour n'importe quel bloc postérieur à la création du contrat et antérieur à sa mise à jour.
+- Créez une clé Infura sur https://infura.io/[Infura].
+- Recherchez l'état de stockage du contrat pour ce bloc. La commande ci-dessous est un exemple comparée à l'API Infura :
+
+    curl https://goerli.infura.io/v3/${votre-clé-infura} \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc":"2.0", "method": "eth_getStorageAt", "params": ["${contract address}", "0x0", "${blocknumber}"], "id": 1}'
+
+2. Consultez la création du contrat sur https://etherscan.io/[Etherscan] :
+- Consultez la transaction de création de contrat sur Etherscan.
+- Allez dans l'État et consultez les espaces de stockage

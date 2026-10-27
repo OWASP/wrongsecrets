@@ -1,0 +1,7 @@
+*Pourquoi faut-il être prudent avec les rapports de vulnérabilité ?*
+
+Lorsque vous signalez une vulnérabilité ou publiez un avis de sécurité, soyez toujours vigilant quant aux informations diffusées. Les valeurs exactes des secrets codés en dur découverts, en particulier ceux difficiles à modifier, ne doivent pas figurer dans votre rapport de sécurité ni dans la publication.
+
+Que faire à la place :
+- Masquez le secret dans les rapports et les avis publics ; partagez tout élément de preuve nécessaire via un canal de divulgation restreint et approuvé.
+- Si un identifiant a déjà été divulgué, informez son propriétaire et organisez sa révocation ou son renouvellement immédiat.

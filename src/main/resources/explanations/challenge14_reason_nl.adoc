@@ -1,0 +1,10 @@
+*Waarom je voorzichtig moet zijn met het wachtwoord voor andere geheimen*
+
+Of je nu een wachtwoord hebt voor een bedrijfsgeheimenbeheersysteem of een wachtwoordbeheerder: je authenticatiefactoren maken het verschil tussen een gehackt systeem en een veilig systeem.
+
+Dus in eenvoudige bewoordingen, wanneer je je rechtstreeks bij je wachtwoordbeheerder authenticeert:
+- zorg voor een sterk wachtwoord (bijvoorbeeld een lang wachtwoord!)
+- gebruik indien mogelijk MFA
+- schakel elke vorm van waarschuwing in wanneer een nieuw apparaat en/of IP het probeert aan te raken.
+
+Gebruik je SSO: zorg er dan voor dat het systeem waarmee je je authenticeert dezelfde beheersmaatregelen biedt: sta lange, sterke wachtwoorden toe, MFA, en behoorlijke beveiligingswaarschuwingen wanneer er iets verdachts gebeurt.

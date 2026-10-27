@@ -1,0 +1,29 @@
+*Por qué deberías consultar la documentación para detectar secretos*
+
+Los archivos de documentación y especificaciones suelen compartirse ampliamente y pueden pasar desapercibidos durante las revisiones de seguridad.
+En ocasiones, se añaden secretos o información sensible a modo de ejemplos o instrucciones, y no se eliminan antes de compartirlos o publicarlos.
+Este desafío pone de relieve la importancia de revisar todos los archivos del proyecto, incluida la documentación, en busca de secretos y datos confidenciales.
+
+----
+En un proyecto real, siempre debes incluir requisitos de seguridad explícitos en la especificación del proyecto o en el plan de agentes. Esto significa:
+- Detallar cómo se deben gestionar, almacenar y rotar los secretos.
+- Definir quién tiene acceso a archivos confidenciales y cómo se controla dicho acceso.
+- Indicar qué herramientas o procesos deben utilizarse para escanear en busca de información confidencial en todos los archivos, incluida la documentación.
+- Exigir revisiones periódicas tanto del código como de la documentación para detectar fugas accidentales de información confidencial.
+
+La inclusión de estos requisitos ayuda a garantizar que la seguridad se tenga en cuenta desde el principio y reduce el riesgo de exposición de datos confidenciales debido a archivos que se hayan pasado por alto o a malas prácticas.
+----
+
+[NOTE]
+====
+En proyectos reales, incluya siempre instrucciones de seguridad sobre:
+- Uso de TLS/SSL para todas las comunicaciones de red.
+- Cifrado de datos sensibles en reposo y en tránsito
+- Validación y saneamiento de entradas para prevenir ataques de inyección.
+- Mecanismos seguros de autenticación y autorización
+- Análisis periódico de dependencias y vulnerabilidades
+- Registro y monitoreo de actividades sospechosas
+- Utilizar el modelo y el lenguaje adecuados para el problema adecuado.
+
+Estas prácticas son esenciales para proteger su aplicación y sus datos.
+====

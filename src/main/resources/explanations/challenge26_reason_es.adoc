@@ -1,0 +1,9 @@
+*Por qué sobrescribir los secretos en la cadena de bloques no los elimina*
+
+El estado de la cadena se puede verificar en cualquier momento ejecutando las actualizaciones de estado hasta un bloque determinado.
+
+Actualizar el estado de la cadena no elimina los cambios de estado realizados anteriormente.
+
+Qué hacer en su lugar:
+- Nunca coloques un secreto en una cadena de bloques pública o inmutable. Mantén los valores secretos fuera de la cadena en un sistema con controles de acceso y utiliza la cadena solo para referencias o pruebas que no sean sensibles.
+- Trata cualquier valor ya escrito en una cadena pública como expuesto de forma permanente y rota o revoca la credencial afectada.

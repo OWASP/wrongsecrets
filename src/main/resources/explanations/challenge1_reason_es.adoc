@@ -1,0 +1,9 @@
+*Por qué usar código para guardar secretos es una mala idea.*
+
+Como ya habrás notado, es fácil detectar muchos secretos ocultos en el código. Incluso compilado, se puede aplicar ingeniería inversa para descubrirlos. Por eso, codificar secretos directamente en el código nunca es una buena idea. A menudo caemos en el error de pensar que si yo no puedo aplicar ingeniería inversa, un atacante tampoco, razón por la cual muchos creen que codificar secretos directamente en C/C++/Golang es más seguro que en Java. Para quienes piensen así: descompilen una aplicación con herramientas como https://ghidra-sre.org/[*Ghidra*].
+
+Mantener un secreto en el código es una cosa. Otro desafío es la transparencia: cualquiera con acceso al código o a los archivos compilados puede descubrir el secreto. Para empeorar las cosas, si el desarrollador que lo incluyó en el código abandona la organización, podría conocerlo, ¡ya que sigue presente en el código! De igual manera, si se filtra el código o los archivos, el secreto se verá comprometido y será difícil rotarlo. Además, ¿seguirás sabiendo dónde está esa contraseña después de unos años?
+
+Qué hacer en su lugar:
+- No mantengas secretos en el código fuente ni en los artefactos compilados. Obténlos en tiempo de ejecución desde un gestor de secretos o mediante una identidad de carga de trabajo con acceso estrechamente limitado.
+- Escanea los repositorios y los artefactos de compilación en busca de secretos y rota cualquier credencial que se haya committeado o distribuido.

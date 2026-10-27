@@ -1,0 +1,12 @@
+=== Pourquoi placer des secrets dans .gitignore représente-t-il un risque de sécurité ?
+
+Les développeurs mettent régulièrement à jour des fichiers de configuration comme `.gitignore`, y laissant parfois des informations sensibles, telles que des mots de passe, des jetons ou des chemins d'accès à des fichiers critiques. Ces informations confidentielles, même chiffrées, présentent des risques :
+
+- Les attaquants pourraient découvrir et décrypter les secrets.
+- Les secrets oubliés dans les dossiers publics témoignent de mauvaises pratiques de sécurité et d'une gestion des secrets défaillante.
+
+Ce défi démontre l'importance des revues de code et de la nécessité de s'assurer qu'aucun secret ne soit accidentellement divulgué ou oublié.
+
+Que faire à la place :
+- N'utilisez pas `.gitignore` comme endroit pour stocker des secrets. Conservez les identifiants dans un gestionnaire de secrets ; si le développement local nécessite un fichier, gardez-le hors du contrôle de version et restreignez son accès au système de fichiers. Analysez le dépôt pour détecter d'éventuelles divulgations accidentelles.
+- Si un secret a été validé, retirez-le du fichier et renouvelez-le ou révoquez-le ; le supprimer dans un commit ultérieur ne l'efface pas de l'historique Git.

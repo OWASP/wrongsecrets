@@ -1,0 +1,15 @@
+*À quoi faire attention lorsqu'on utilise des secrets aléatoires au démarrage*
+
+L'utilisation d'un secret aléatoire au démarrage peut fonctionner si ce secret n'a pas besoin d'être utilisé par d'autres systèmes que celui qui le stocke ou le génère. Sinon, un mécanisme de synchronisation sera nécessaire.
+
+Le mécanisme utilisé ici dans ce défi peut être observé dans divers autres systèmes, comme Jenkins par exemple, où nous avions l'habitude de voir le mot de passe administrateur de Jenkins dans les journaux lors du premier démarrage.
+
+Bien que cette approche ne soit pas nécessairement mauvaise en soi, il y a quelques points auxquels il faut prêter attention :
+
+- Toute personne ayant accès aux journaux a désormais accès à ce secret. Soyez donc vigilant quant à l'endroit où vous envoyez vos journaux et quant aux personnes autorisées à les consulter dans votre système de production.
+- Si le système ne redémarre pas pendant une période prolongée, le secret devient obsolète. Si vous devez redémarrer fréquemment, le secret sera également renouvelé.
+- Dès que vous commencerez à garder le secret, vous vous retrouverez souvent confronté à des difficultés similaires à celles rencontrées dans cette application.
+
+Que faire à la place :
+- N'imprimez pas les secrets générés dans les journaux. Si d'autres systèmes ont besoin de la valeur, stockez-la et distribuez-la via un gestionnaire de secrets à accès restreint.
+- Renouvelez le secret via un processus de cycle de vie explicite plutôt que de compter sur les redémarrages de l'application.

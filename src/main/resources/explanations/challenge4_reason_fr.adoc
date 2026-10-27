@@ -1,0 +1,9 @@
+*Pourquoi utiliser des conteneurs pour y mettre des secrets est une mauvaise idée*
+
+Comme vous pouvez le constater, il est facile de détecter tout secret stocké dans un conteneur. Qu'il s'agisse d'une variable d'environnement, d'un fichier ou d'une autre propriété : si un système peut la lire, un humain le peut aussi.
+
+Étant donné qu'il est recommandé de laisser un conteneur immuable et versionné, vous vous retrouverez souvent avec le secret à l'intérieur d'un conteneur pour toujours, à moins de le supprimer à nouveau du registre.
+
+Que faire à la place :
+- Gardez les secrets hors des couches d'image et des arguments de build. Fournissez-les à l'exécution via un gestionnaire de secrets ou un mécanisme propre à la plateforme, avec un accès limité à la charge de travail qui en a besoin.
+- Si un secret a été inclus dans une image, retirez l'image des registres dans la mesure du possible et renouvelez l'identifiant.

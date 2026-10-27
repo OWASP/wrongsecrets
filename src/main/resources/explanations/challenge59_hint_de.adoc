@@ -1,0 +1,38 @@
+=== Hinweis für Herausforderung 59
+
+Suchst du die Slack-Webhook-URL? Hier sind einige Tipps für den Einstieg:
+
+==== Wo man suchen sollte
+
+1. **Umgebungsvariablen**: Die Webhook-URL ist in einer Umgebungsvariablen namens `CHALLENGE59_SLACK_WEBHOOK_URL` gespeichert.
+2. **Anwendung prüfen**: Du kannst Umgebungsvariablen über die Anwendung oder den Container überprüfen.
+
+==== Entschlüsselungsprozess
+
+Die Webhook-URL wurde mit einer gängigen Technik verschleiert:
+
+1. **Doppelte Base64-Kodierung**: Die ursprüngliche URL wurde zweimal Base64-kodiert.
+2. **Prozess**: Original → Base64 → erneut Base64
+3. **Zum Dekodieren**: Den Vorgang umkehren (Base64 zweimal dekodieren).
+
+==== Was du suchst
+
+- Slack-Webhook-URLs folgen folgendem Muster: `https://hooks.slack.com/services/...`
+- Sie enthalten drei Pfadsegmente nach `/services/`
+- Beispielformat: `https://hooks.slack.com/services/T123456789/B123456789/abcdefghijklmnopqrstuvwx`
+- Die URL-Segmente repräsentieren: Team-ID / Kanal-ID / Geheimes Token
+
+==== Werkzeuge, die du verwenden kannst
+
+- **Base64-Decoder**: Beliebiger Online-Base64-Decoder oder Kommandozeilen-Tool
+- **Befehlszeile**: `echo "encoded_string" | base64 -d`
+- **Browserkonsole**: `atob("encoded_string")` in JavaScript
+
+==== Sicherheitslernen
+
+Diese Herausforderung lehrt dich etwas über die spezifischen Risiken von Webhooks:
+- Wie Angreifer verschleierte Webhook-URLs finden können
+- Warum Webhook-URLs sensible Zugangsdaten sind, die Schutz benötigen
+- Das Potenzial für unautorisierte Nachrichtenveröffentlichung und Social Engineering
+- Risiko von fest codierten Webhook-URLs in Umgebungsvariablen
+- Wie ungeschützte Webhooks zu Reputationsschäden und Informationslecks führen können – wie ungeschützte Webhooks zu Reputationsschäden und Offenlegung von Informationen führen können

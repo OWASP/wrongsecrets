@@ -1,0 +1,7 @@
+Wir suchen das Geheimnis in einem geschlossenen GitHub-Issue in unserem GitHub-Repository. Aber wie finden wir es?
+
+Diese Herausforderung lässt sich mit folgenden Schritten lösen:
+
+1. Klicke auf der Registerkarte „Issues“ unseres GitHub-Repositorys https://github.com/OWASP/wrongsecrets/issues auf die Option `Closed`, um alle bis heute geschlossenen Issues anzuzeigen.
+
+2. Gehe alle Punkte durch, die dir verdächtig vorkommen, und du wirst das Geheimnis entdecken.

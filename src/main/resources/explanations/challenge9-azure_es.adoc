@@ -1,0 +1,5 @@
+=== Azure Key Vault parte 1
+
+Bien, ahora estamos generando un secreto a través de Terraform y almacenándolo con nuestro proveedor de nube. ¿Qué sucede en el estado de Terraform?
+
+Puedes intentar encontrar el secreto analizando tus archivos `terraform.tfstate` usando https://github.com/trufflesecurity/truffleHog[*Trufflehog*].

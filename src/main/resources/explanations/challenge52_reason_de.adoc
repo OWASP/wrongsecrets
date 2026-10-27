@@ -1,0 +1,30 @@
+= Docker Buildx Secrets Fehlkonfigurationsherausforderung
+
+*Warum unsachgemäßes Geheimnismanagement in Docker-Build-Prozessen zu Sicherheitslücken führen kann*
+
+In modernen DevOps-Workflows ist Docker Buildx ein leistungsstarkes Tool zum effizienten Erstellen plattformübergreifender Docker-Images. Es bietet eine sichere Möglichkeit, sensible Informationen wie API-Schlüssel, Datenbankzugangsdaten und Zertifikate während des Build-Prozesses mithilfe des Flags `--secret` zu übergeben. Eine unsachgemäße Handhabung oder Speicherung dieser Informationen während oder nach dem Build-Prozess kann jedoch kritische Sicherheitslücken verursachen.
+
+Ein häufiger Fehler besteht darin, diese Geheimnisse im Container-Dateisystem zu speichern oder sie in Build-Skripten offenzulegen. Dieser Ansatz ist fehlerhaft, weil:
+
+1. **Geheimnisse werden Teil des Container-Images:** Werden Geheimnisse während der Build-Phase in das Dateisystem des Containers geschrieben, sind sie Bestandteil des endgültigen Images. Jeder, der Zugriff auf das Image hat, kann diese Geheimnisse extrahieren, indem er die Containerebenen untersucht oder auf das Dateisystem zugreift.
+2. **Fest kodierte Geheimnisse in Build-Skripten**: Entwickler können Geheimnisse in Skripten, die zum Erstellen von Images verwendet werden, fest kodieren. Wenn diese Skripte in Versionskontrollsystemen gespeichert werden, sind die Geheimnisse für jeden mit Zugriff auf das Repository zugänglich.
+3. **Mangelnde Bereinigung während des Build-Prozesses**: Selbst wenn Geheimnisse nur vorübergehend verwendet werden, können sie ungeschützt bleiben, wenn sie vor der endgültigen Erstellung des Images nicht sicher bereinigt oder entfernt werden.
+
+*Warum diese Herausforderung?*
+
+Ziel dieser Challenge ist es, die Risiken einer unsachgemäßen Handhabung von Geheimnissen in Docker Buildx-Workflows aufzuzeigen. Konkret wird demonstriert, wie Geheimnisse, die während des Build-Prozesses nur temporär gespeichert werden sollen, aufgrund von Fehlkonfigurationen dauerhaft im Dateisystem des Containers abgelegt werden können.
+
+Diese Aufgabe simuliert ein Szenario, in dem:
+
+- Ein sensibles Geheimnis wird mithilfe des Flags `--secret` an den Docker-Build-Prozess übergeben.
+- Aufgrund einer Fehlkonfiguration wird das Geheimnis während der Build-Phase in eine Datei im Dateisystem des Containers geschrieben (`/app/secret.txt`).
+- Das resultierende Image enthält dieses Geheimnis und ist somit für jeden zugänglich, der den Container ausführen oder untersuchen kann.
+
+*Wichtigste Lernpunkte:*
+
+- **Vermeide das Einbetten von Geheimnissen in Container-Images:** Geheimnisse sollten niemals fest in Docker-Images integriert werden. Verwende Mechanismen wie Laufzeitumgebungsvariablen oder externe Tools zur Geheimnisverwaltung, um Geheimnisse dynamisch bereitzustellen.
+- **Sichere den Build-Prozess ab**: Stelle auch bei Tools wie `--secret` sicher, dass Geheimnisse nicht dauerhaft in Zwischen- oder Endbildebenen gespeichert werden.
+- **Geheimnisse dürfen nicht fest in Build-Skripten codiert werden.** Build-Skripte sollten keine sensiblen Informationen enthalten. Speichere sensible Werte sicher und greife während des Build-Prozesses dynamisch darauf zu.
+- **Implementiere Aufräummechanismen**: Wenn Geheimnisse während des Build-Prozesses in temporäre Dateien geschrieben werden müssen, stelle sicher, dass diese sicher entfernt werden, bevor das Image finalisiert wird.
+
+Durch die Bewältigung dieser Herausforderung wirst du die Folgen einer unsachgemäßen Handhabung von Geheimnissen während Docker-Builds verstehen und Best Practices für die sichere Verwaltung von Geheimnissen in containerisierten Umgebungen kennenlernen.

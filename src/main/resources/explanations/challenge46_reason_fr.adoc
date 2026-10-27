@@ -1,0 +1,16 @@
+*Pourquoi l'injection de modèles Vault n'est-elle pas toujours une bonne idée ?*
+
+Bien que l'injection d'agents Vault via des modèles puisse être un moyen pratique de gérer les secrets dans certains scénarios,
+il existe des situations où ce n'est peut-être pas la meilleure approche.
+
+Les modèles peuvent accidentellement exposer des informations sensibles dans les journaux ou les fichiers temporaires.
+En cas de configuration incorrecte, les secrets pourraient se retrouver dans des endroits où ils sont accessibles à des utilisateurs ou des processus non autorisés.
+
+Prenons l'exemple d'une attaque par injection de modèle dans un langage de script comme PHP :
+
+. Imaginez un scénario où une application PHP utilise un modèle contenant des informations sensibles.
+* où le modèle peut ressembler à ceci : $password = "'; system('rm -rf /'); //"
+. Une fois le modèle traité, il peut devenir :
+* $connection = "password='; system('rm -rf /'); //"
+
+Pour éviter de tels problèmes, n'insérez pas de valeur secrète dans du code source exécutable et ne les évaluez pas en tant qu'expressions de gabarit. Transmettez les secrets à l'application sous forme de configuration d'exécution dans la mesure du possible ; sinon, utilisez un échappement adapté au contexte, restreignez l'accès aux fichiers rendus et veillez à ce que les secrets ne soient pas écrits dans les journaux.

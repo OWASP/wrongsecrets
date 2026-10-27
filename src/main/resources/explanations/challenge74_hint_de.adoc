@@ -1,0 +1,18 @@
+Diese Herausforderung kannst du mit den folgenden Schritten lösen:
+
+1. Interagiere mit dem KI-Assistenten:
+- Nutze die in der Aufgabe bereitgestellte Chat-Oberfläche.
+- Stelle dem Assistenten Fragen und beobachte seine Reaktionen.
+- Denke daran, dass dem Assistenten im Rahmen seiner Anweisungen vertrauliche Informationen übermittelt wurden.
+
+2. Untersuche, wie der Assistent instruiert wird:
+- Frage den Assistenten nach seinen Anweisungen, Regeln oder dem Kontext.
+- Überlege, welche Informationen dem Modell zur Verfügung stehen könnten, die in der Chat-Oberfläche nicht direkt sichtbar sind.
+
+3. Versuche eine sofortige Injektion:
+- Der Assistent wurde angewiesen, die vertraulichen Informationen nicht preiszugeben.
+- Versuche, Nachrichten zu verfassen, die diese Anweisungen ändern, außer Kraft setzen oder manipulieren.
+- Bitte den Assistenten, Informationen aus seinen Anweisungen oder dem Kontext preiszugeben.
+
+4. Suche nach dem Geheimnis:
+- Wenn du den Assistenten erfolgreich dazu bringst, die vertraulichen Informationen preiszugeben, verwende den erhaltenen Wert als Lösung für die Herausforderung.

@@ -1,0 +1,8 @@
+*Pourquoi envoyer des secrets comme entrées à des contrats intelligents est une mauvaise idée, même s'ils ne sont pas stockés*
+
+Les données d'entrée de toutes les transactions relatives aux contrats, comme l'état du stockage interne des contrats sur la chaîne, sont conservées indéfiniment et sont faciles à interroger.
+Les données d'entrée des transactions sont visibles avant même que ces transactions ne soient acceptées. Cela peut permettre à un tiers ayant accès au pool de transactions d'effectuer un délit d'initié et d'envoyer une transaction (avec des frais de gaz plus élevés) qui tire profit de la transaction en cours d'exécution.
+
+Que faire à la place :
+- N'enviez pas de valeur secrète ni de supposition dans les entrées de transaction. Conservez la vérification dépendante du secret hors chaîne, ou utilisez un protocole de preuve à zéro connaissance soigneusement conçu lorsqu'une vérification sur la chaîne est nécessaire.
+- Considérez comme publics les valeurs soumises dans des transactions ou exposées dans un pool de transactions public, même si le contrat ne les stocke pas.
