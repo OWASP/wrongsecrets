@@ -6,17 +6,17 @@ In dieser Challenge erklären wir euch alles, was ihr zum Spielen von OWASP Wron
 
 Bei jeder Challenge geht es darum, ein Geheimnis zu finden, das nicht gut versteckt und/oder konfiguriert wurde in unserem https://github.com/OWASP/wrongsecrets[Anwendungscode], https://hub.docker.com/r/jeroenwillemsen/wrongsecrets[Docker-Container] oder in einem der zugehörigen Teile des https://github.com/OWASP/wrongsecrets#table-of-contents[System].
 
-Sobald Sie das Geheimnis gefunden haben, können Sie es in das Feld unten eingeben und auf „Absenden“ klicken. Mit dem Button „Löschen“ wird das Eingabefeld geleert.
+Sobald du das Geheimnis gefunden hast, kannst du es in das Feld unten eingeben und auf „Absenden“ klicken. Mit dem Button „Löschen“ wird das Eingabefeld geleert.
 Möchtest du die Herausforderung erneut spielen? Drücke die „Zurücksetzen“-Taste.
 
-Die richtige Antwort unten lautet `The first answer`. Kopieren Sie sie in das Feld und klicken Sie auf „Absenden“.
+Die richtige Antwort unten lautet `The first answer`. Kopiere sie in das Feld und klicke auf „Absenden“.
 
 Viel Spaß bei den schwierigeren Herausforderungen ;-).
 
-Hinweis: Für einige der folgenden Herausforderungen benötigen Sie zusätzliche Tools. Dazu benötigen Sie einen Computer, auf dem alle Tools installiert sind. Sie möchten diese nicht selbst installieren? Dann können Sie einen Container verwenden, um alle Tools gleichzeitig nutzen zu können.
+Hinweis: Für einige der folgenden Herausforderungen brauchst du zusätzliche Tools. Dafür brauchst du einen Computer, auf dem alle Tools installiert sind. Du möchtest diese nicht selbst installieren? Dann kannst du einen Container verwenden, um alle Tools gleichzeitig nutzen zu können.
 
 [source, shell]
 docker run -p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock jeroenwillemsen/wrongsecrets-desktop:latest
 
 
-Rufen Sie anschließend in Ihrem Browser http://localhost:3000 auf, um einen Webtop mit allen benötigten Tools vorzufinden.
+Rufe anschließend in deinem Browser http://localhost:3000 auf, um ein Webtop mit allen benötigten Tools zu finden.

@@ -5,9 +5,9 @@ Diese Herausforderung lässt sich lösen, indem man die Metadaten des Geheimniss
 - Finde den geheimen Wert in den Metadaten.
 2. Es durch die Betrachtung des Geheimnisses zu verstehen
 - Verbindung zum Kubernetes-Cluster mit kubectl herstellen
-- Rufen Sie `kubectl get secret challenge33 -o yaml` auf, um alle benötigten Daten zu erhalten.
+- Rufe `kubectl get secret challenge33 -o yaml` auf, um alle benötigten Daten zu erhalten.
 - Finde den geheimen Wert in den Metadaten.
 3. Missbrauch des Debugging-Modus beim Auflisten aller Geheimnisse
 - Verbindung zum Kubernetes-Cluster mit kubectl herstellen
-- Rufen Sie `kubectl get secrets -v9` auf, um alle benötigten Daten zu erhalten.
+- Rufe `kubectl get secrets -v9` auf, um alle benötigten Daten zu erhalten.
 - Finde den geheimen Wert in den Metadaten.

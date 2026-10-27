@@ -1,20 +1,20 @@
 Diese Herausforderung lässt sich durch folgende alternative Lösungsansätze bewältigen:
 
-1. Überprüfen Sie den Speicher in Etherscan:
-- Suchen Sie unter https://goerli.etherscan.io/tx/0x497b71a1fd4c57509bfecc2114ec649387fe669c23a3a7e97961f389444d9561[Etherscan] nach der Transaktion zur Vertragserstellung. Hinweis: Falls ein Fehler auftritt, geben Sie einfach `https://goerli.etherscan.io/tx/0x497b71a1fd4c57509bfecc2114ec649387fe669c23a3a7e97961f389444d9561` in das Suchfeld ein.
+1. Überprüfe den Speicher in Etherscan:
+- Suche unter https://goerli.etherscan.io/tx/0x497b71a1fd4c57509bfecc2114ec649387fe669c23a3a7e97961f389444d9561[Etherscan] nach der Transaktion zur Vertragserstellung. Hinweis: Falls ein Fehler auftritt, gib einfach `https://goerli.etherscan.io/tx/0x497b71a1fd4c57509bfecc2114ec649387fe669c23a3a7e97961f389444d9561` in das Suchfeld ein.
 - Gehe zum Status und sieh dir den Speicher an, kopiere den neuen Wert und dekodiere ihn hexadezimal.
 
-2. Überprüfen Sie die Eingabedaten in Etherscan:
-- Suchen Sie unter https://goerli.etherscan.io/tx/0x497b71a1fd4c57509bfecc2114ec649387fe669c23a3a7e97961f389444d9561[Etherscan] nach der Transaktion zur Vertragserstellung. Hinweis: Falls ein Fehler auftritt, geben Sie einfach `https://goerli.etherscan.io/tx/0x497b71a1fd4c57509bfecc2114ec649387fe669c23a3a7e97961f389444d9561` in das Suchfeld ein.
-- Klicken Sie auf „Mehr Details“. Sehen Sie sich die Eingabedaten an, kopieren Sie den neuen Wert und dekodieren Sie ihn hexadezimal.
+2. Überprüfe die Eingabedaten in Etherscan:
+- Suche unter https://goerli.etherscan.io/tx/0x497b71a1fd4c57509bfecc2114ec649387fe669c23a3a7e97961f389444d9561[Etherscan] nach der Transaktion zur Vertragserstellung. Hinweis: Falls ein Fehler auftritt, gib einfach `https://goerli.etherscan.io/tx/0x497b71a1fd4c57509bfecc2114ec649387fe669c23a3a7e97961f389444d9561` in das Suchfeld ein.
+- Klicke auf „Mehr Details“. Sieh dir die Eingabedaten an, kopiere den neuen Wert und dekodiere ihn hexadezimal.
 
-3. Verwenden Sie Infura mit web3js bei Infura:
-- Erstellen Sie einen Infura-Schlüssel unter https://infura.io/[Infura].
-- Schreiben Sie ein einfaches Skript mit web3js, um die View-Funktion für die öffentliche Zeichenkette "secret" aufzurufen.
+3. Verwende Infura mit web3js bei Infura:
+- Erstelle einen Infura-Schlüssel unter https://infura.io/[Infura].
+- Schreibe ein einfaches Skript mit web3js, um die View-Funktion für die öffentliche Zeichenkette "secret" aufzurufen.
 
-4. Stellen Sie eine Speicheranfrage bei Infura:
-- Erstellen Sie einen Infura-Schlüssel unter https://infura.io/[Infura].
-- Lesen Sie den Speicher an Position 0 für den Vertrag wie folgt:
+4. Stelle eine Speicheranfrage bei Infura:
+- Erstelle einen Infura-Schlüssel unter https://infura.io/[Infura].
+- Lies den Speicher an Position 0 für den Vertrag wie folgt:
 
     curl https://goerli.infura.io/v3/${<your-infura-key>} \
     -X POST \

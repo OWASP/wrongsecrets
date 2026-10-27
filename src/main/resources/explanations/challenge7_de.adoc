@@ -1,5 +1,5 @@
 === Ein im Tresor verborgenes Geheimnis
 
 Das Geheimnis liegt nun also nicht mehr in K8s oder im Code... hofft der Entwickler.
-Wenn diese Herausforderung aktiviert ist und Sie die Anweisungen in der `README.md` befolgt haben, dann sollte die Herausforderung auf K8s/Minikube ausgeführt werden können, und jetzt können Sie nach dem Geheimnis suchen.
+Wenn diese Herausforderung aktiviert ist und du die Anweisungen in der `README.md` befolgt hast, dann sollte die Herausforderung auf K8s/Minikube ausgeführt werden können, und jetzt kannst du nach dem Geheimnis suchen.
 Welcher Fehler wurde hier gemacht? https://github.com/trufflesecurity/truffleHog[*Trufflehog*] hätte vielleicht helfen können, wenn die Entropie etwas höher wäre ;-).

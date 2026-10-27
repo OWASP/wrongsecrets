@@ -1,20 +1,20 @@
 Diese Aufgabe verwendet eine verschleierte Java CLI JAR-Datei.
 
-Sie können es lösen, indem Sie:
+Du kannst es lösen, indem du:
 
-1. Ermitteln Sie, wo sich die verschleierten Daten befinden:
-- Laden Sie `wrongsecrets-java-obfuscated.jar` herunter.
-- Führen Sie `jar tf wrongsecrets-java-obfuscated.jar` aus und suchen Sie nach `io/github/owasp/wrongsecrets/WrongSecretsObfuscated.class`.
-- Öffnen Sie diese Klasse in CFR, JADX, IntelliJ IDEA oder einem anderen Dekompiler.
-- Suchen Sie nach den statischen Feldern, die den XOR-Schlüssel und die kodierten geheimen Bytes enthalten.
+1. Ermittle, wo sich die verschleierten Daten befinden:
+- Lade `wrongsecrets-java-obfuscated.jar` herunter.
+- Führe `jar tf wrongsecrets-java-obfuscated.jar` aus und suche nach `io/github/owasp/wrongsecrets/WrongSecretsObfuscated.class`.
+- Öffne diese Klasse in CFR, JADX, IntelliJ IDEA oder einem anderen Dekompiler.
+- Suche nach den statischen Feldern, die den XOR-Schlüssel und die kodierten geheimen Bytes enthalten.
 
-2. Überprüfen Sie die genaue Dekodierungslogik:
-- Führen Sie `javap -c -p -classpath wrongsecrets-java-obfuscated.jar io.github.owasp.wrongsecrets.WrongSecretsObfuscated` aus.
-- Suchen Sie in der Ausgabe nach dem `static { ... }`-Block, der `XOR_KEY_CHARS` und `ENCODED_SECRET` füllt.
-- Suchen Sie dann nach `decodeSecret()` und beachten Sie, dass jedes codierte Byte mit einem Byte des Schlüssels per XOR verknüpft wird, wobei der Schlüssel mit Modulo-Arithmetik wiederholt wird.
+2. Überprüfe die genaue Dekodierungslogik:
+- Führe `javap -c -p -classpath wrongsecrets-java-obfuscated.jar io.github.owasp.wrongsecrets.WrongSecretsObfuscated` aus.
+- Suche in der Ausgabe nach dem `static { ... }`-Block, der `XOR_KEY_CHARS` und `ENCODED_SECRET` füllt.
+- Suche dann nach `decodeSecret()` und beachte, dass jedes codierte Byte mit einem Byte des Schlüssels per XOR verknüpft wird, wobei der Schlüssel mit Modulo-Arithmetik wiederholt wird.
 
-3. Bauen Sie das Geheimnis selbst wieder auf:
+3. Baue das Geheimnis selbst wieder auf:
 - Konvertiere die `XOR_KEY_CHARS`-Werte in Bytes.
-- Kopieren Sie die `ENCODED_SECRET`-Bytewerte aus dem Bytecode oder dem dekompilierten Quellcode.
+- Kopiere die `ENCODED_SECRET`-Bytewerte aus dem Bytecode oder dem dekompilierten Quellcode.
 - Jedes codierte Byte wird mit dem entsprechenden Schlüsselbyte per XOR verknüpft, wobei der Vorgang wiederholt wird, sobald das Ende des Schlüssels erreicht ist.
-- Dekodieren Sie das resultierende Byte-Array als UTF-8, um das Geheimnis wiederherzustellen, und übermitteln Sie diesen Wert dann als Antwort.
+- Dekodiere das resultierende Byte-Array als UTF-8, um das Geheimnis wiederherzustellen, und übermittle diesen Wert dann als Antwort.

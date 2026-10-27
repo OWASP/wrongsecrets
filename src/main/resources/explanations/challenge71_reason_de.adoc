@@ -11,7 +11,7 @@ Dev-Container sind gemeinsam genutzte Entwicklungsumgebungen, die über die Date
 
 *Sanierungsmaßnahmen und bewährte Verfahren:*
 
-- **Verwenden Sie GitHub Codespaces Secrets / VS Code Dev Container Secrets**: Fügen Sie Geheimnisse dynamisch über Codespaces-Repository-/Benutzergeheimnisse oder VS Code-Einstellungen ein, anstatt sie in Konfigurationsdateien fest zu codieren.
+- **Verwende GitHub Codespaces Secrets / VS Code Dev Container Secrets**: Füge Geheimnisse dynamisch über Codespaces-Repository-/Benutzergeheimnisse oder VS Code-Einstellungen ein, anstatt sie in Konfigurationsdateien fest zu codieren.
 - **Lokale Umgebungssubstitution verwenden**: Host-Umgebungsvariablen dynamisch in `devcontainer.json` mit der Syntax `${localEnv:MY_SECRET}` referenzieren.
-- **Verwenden Sie `.env`-Dateien mit `.gitignore`**: Platzieren Sie Entwicklungsgeheimnisse in lokalen `.env`-Dateien, die explizit von der Versionskontrolle in `.gitignore` ausgeschlossen sind.
-- **Verwenden Sie Lösungen für das Geheimnismanagement**: Rufen Sie Geheimnisse zur Laufzeit mithilfe dedizierter Geheimnismanager ab (z. B. HashiCorp Vault, AWS Secrets Manager, Azure Key Vault, GCP Secret Manager).
+- **Verwende `.env`-Dateien mit `.gitignore`**: Platziere Entwicklungsgeheimnisse in lokalen `.env`-Dateien, die explizit von der Versionskontrolle in `.gitignore` ausgeschlossen sind.
+- **Verwende Lösungen für das Geheimnismanagement**: Rufe Geheimnisse zur Laufzeit mithilfe dedizierter Geheimnismanager ab (z. B. HashiCorp Vault, AWS Secrets Manager, Azure Key Vault, GCP Secret Manager).

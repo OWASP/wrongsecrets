@@ -1,12 +1,12 @@
 *Warum Geheimnisse im Frontend-Code eine schlechte Idee sind*
 
-Wenn Sie eine mobile App auf Ihrem Smartphone oder eine Single-Page-Anwendung (SPA) in Ihrem Webbrowser ausführen, sollten Sie möglichst keine Geheimnisse fest im Code verankern. Ein Angreifer kann die App jederzeit analysieren, den Code zurückentwickeln und das eigentliche Geheimnis herausfinden. Überlegen Sie sich stattdessen, ob das Geheimnis nach der Authentifizierung sicher heruntergeladen oder auf andere Weise verwendet werden kann.
+Wenn du eine mobile App auf deinem Smartphone oder eine Single-Page-Anwendung (SPA) in deinem Webbrowser ausführst, solltest du möglichst keine Geheimnisse fest im Code verankern. Ein Angreifer kann die App jederzeit analysieren, den Code zurückentwickeln und das eigentliche Geheimnis herausfinden. Überlege dir stattdessen, ob das Geheimnis nach der Authentifizierung sicher heruntergeladen oder auf andere Weise verwendet werden kann.
 
 *Warum die Verwendung von Single-Page-Anwendungen oder mobilen Apps zur Speicherung des Clientgeheimnisses eine schlechte Idee ist*
 
-Wie Sie inzwischen feststellen können, lassen sich alle in einer Single-Page-Anwendung oder einer mobilen Anwendung gespeicherten Geheimnisse leicht aufspüren.
-Betrachten Sie Browser- und Mobile-Anwendungen als öffentliche Clients: Betten Sie niemals Client-Geheimnisse oder andere gemeinsam genutzte Zugangsdaten in ihnen ein. Verwenden Sie für OAuth den Authorization Code Flow mit PKCE; behalten Sie privilegierte Operationen und die zugehörigen Zugangsdaten auf einem vertrauenswürdigen Backend.
+Wie du inzwischen feststellen kannst, lassen sich alle in einer Single-Page-Anwendung oder einer mobilen Anwendung gespeicherten Geheimnisse leicht aufspüren.
+Betrachte Browser- und Mobile-Anwendungen als öffentliche Clients: Bette niemals Client-Geheimnisse oder andere gemeinsam genutzte Zugangsdaten in ihnen ein. Verwende für OAuth den Authorization Code Flow mit PKCE; behalte privilegierte Operationen und die zugehörigen Zugangsdaten auf einem vertrauenswürdigen Backend.
 
 *Warum Base64-Kodierung keine Verschlüsselung ist*
 
-Wie Sie inzwischen feststellen konnten, war es recht einfach, das Geheimnis aus der Challenge-Datei zu entschlüsseln. Daher sollten Base64- und Hexadezimalkodierung niemals als Methode zum Verbergen eines Geheimnisses betrachtet werden. Verwenden Sie Base64- und/oder Hexadezimalkodierung ausschließlich, um sicherzustellen, dass Sie eine Binärsequenz als Zeichenkette übertragen können.
+Wie du inzwischen feststellen konntest, war es recht einfach, das Geheimnis aus der Challenge-Datei zu entschlüsseln. Daher sollten Base64- und Hexadezimalkodierung niemals als Methode zum Verbergen eines Geheimnisses betrachtet werden. Verwende Base64- und/oder Hexadezimalkodierung ausschließlich, um sicherzustellen, dass du eine Binärsequenz als Zeichenkette übertragen kannst.

@@ -3,13 +3,13 @@ Diese Aufgabe verdeutlicht einen häufigen, aber gefährlichen Fehler: die Versc
 
 Ein Entwickler hat versucht, ein Geheimnis durch AES-Verschlüsselung zu schützen. Allerdings sind sowohl der Verschlüsselungsschlüssel als auch der Initialisierungsvektor (IV) zusammen mit dem Chiffretext direkt im Java-Quellcode fest codiert. Dadurch ist die Verschlüsselung völlig wirkungslos – jeder, der Zugriff auf den Quellcode hat, kann das Geheimnis problemlos entschlüsseln.
 
-**Ihr Ziel:**
-1. **Finden Sie die Java-Quelldatei** für diese Aufgabe im Quellcode.
-2. **Suchen Sie den fest codierten AES-Schlüssel und Initialisierungsvektor** im Quellcode.
-3. **Entschlüsseln Sie den Geheimtext** mithilfe des gefundenen Schlüssels und Initialisierungsvektors.
-4. **Reichen Sie den Klartext** als Ihre Antwort ein.
+**Dein Ziel:**
+1. **Finde die Java-Quelldatei** für diese Aufgabe im Quellcode.
+2. **Suche den fest codierten AES-Schlüssel und Initialisierungsvektor** im Quellcode.
+3. **Entschlüssele den Geheimtext** mithilfe des gefundenen Schlüssels und Initialisierungsvektors.
+4. **Reiche den Klartext** als deine Antwort ein.
 
-**So entschlüsseln Sie:**
+**So entschlüsselst du:**
 [source,bash]
 ----
 echo "TDPwOvcLsbCWV5erlk6OHFnlFoXNtdQOt2JQeq+i4Ho=" | openssl enc -d -aes-128-cbc \

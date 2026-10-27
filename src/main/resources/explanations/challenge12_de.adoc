@@ -4,4 +4,4 @@ Manchmal werden große Teile des lokalen Dateisystems in den Container kopiert, 
 
 In dieser Challenge haben wir auch einige COPY-Operationen durchgeführt und dabei einen Schlüssel versteckt. Beachte, dass sich der Schlüssel bei jeder Generation des Docker-Containers ändert. Du solltest ihn also schnell extrahieren und verwenden :).
 
-Versuchen Sie es mit https://github.com/deepfence/SecretScanner[*deepfenceio/secretscanning*], `docker history` des Images oder einfach mit `docker exec` gegen einen laufenden Container.
+Versuche es mit https://github.com/deepfence/SecretScanner[*deepfenceio/secretscanning*], `docker history` des Images oder einfach mit `docker exec` gegen einen laufenden Container.

@@ -1,7 +1,7 @@
 === Kubernetes StringData oder Data?
 
 Kubernetes kennt zwei Feldtypen für Daten in einem Secret. Das Feld `StringData` enthält die Klartextdaten, während das Feld `Data` den Base64-kodierten Wert enthält.
-Was aber, wenn Sie den StringData-Wert durch einen Data-Wert ersetzen möchten, um ihn besser zu schützen?
-Das ist nicht nötig, solange RBAC korrekt eingerichtet ist. Schließlich sollten beide Werte nicht sichtbar sein, wenn ein Geheimnis aufgelistet oder beschrieben wird. Was aber, wenn Sie von Standard- zu versiegelten Geheimnissen wechseln, aber nicht alle migrieren?
+Was aber, wenn du den StringData-Wert durch einen Data-Wert ersetzen möchtest, um ihn besser zu schützen?
+Das ist nicht nötig, solange RBAC korrekt eingerichtet ist. Schließlich sollten beide Werte nicht sichtbar sein, wenn ein Geheimnis aufgelistet oder beschrieben wird. Was aber, wenn du von Standard- zu versiegelten Geheimnissen wechselst, aber nicht alle migrierst?
 Dann wäre es vielleicht gut zu wissen, dass die Metadaten möglicherweise den tatsächlichen Wert der StringData enthalten.
 Kannst du das Geheimnis lüften?

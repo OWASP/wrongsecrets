@@ -1,5 +1,5 @@
 *Warum es eine schlechte Idee ist, Geheimnisse in geschlossenen GitHub-Issues zu speichern?*
 
-Legen Sie keine Geheimnisse in Issues ab. Die Sichtbarkeit von Issues hängt von den Einstellungen des Repositories ab, und das Schließen eines Issues löscht weder dessen Verlauf noch Kopien davon. Teilen Sie notwendige Details stattdessen über einen genehmigten, auf den Zugriff beschränkten Offenlegungskanal.
+Lege keine Geheimnisse in Issues ab. Die Sichtbarkeit von Issues hängt von den Einstellungen des Repositories ab, und das Schließen eines Issues löscht weder dessen Verlauf noch Kopien davon. Teile notwendige Details stattdessen über einen genehmigten, auf den Zugriff beschränkten Offenlegungskanal.
 
-Prüfen Sie den Inhalt des Issues, bevor Sie ihn veröffentlichen. Falls Zugangsdaten offengelegt wurden, widerrufen oder rotieren Sie sie sofort und entfernen Sie die offengelegten Inhalte, wenn möglich.
+Prüfe den Inhalt des Issues, bevor du ihn veröffentlichst. Falls Zugangsdaten offengelegt wurden, widerrufe oder rotiere sie sofort und entferne die offengelegten Inhalte, wenn möglich.

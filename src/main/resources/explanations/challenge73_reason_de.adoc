@@ -1,4 +1,4 @@
-*Warum Sie niemals ein Geheimnis in eine Agentenanweisungsdatei aufnehmen sollten*
+*Warum du niemals ein Geheimnis in eine Agentenanweisungsdatei aufnehmen solltest*
 
 `AGENTS.md`, `CLAUDE.md`, `.cursor/rules/*.mdc`, `.windsurfrules` und die vielen
 anderen Formate für Agentenkontexte werden von Codierungsagenten automatisch geladen. Das
@@ -17,23 +17,23 @@ Problem für das Geheimnismanagement:
   lange Zeit unentdeckt bleibt.
 
 ----
-Was Sie stattdessen tun sollten:
+Was du stattdessen tun solltest:
 
-- Halten Sie die Anmeldeinformationen von den Anweisungsdateien fern und lassen Sie den Agenten sie
+- Halte die Anmeldeinformationen von den Anweisungsdateien fern und lass den Agenten sie
 aus der Umgebung lesen, zum Beispiel `$STAGING_DEPLOY_TOKEN`.
-- Dokumentieren Sie, *welche* Variable benötigt wird und *wo* sie zu erhalten ist, niemals
+- Dokumentiere, *welche* Variable benötigt wird und *wo* sie zu erhalten ist, niemals
 den Wert selbst.
-- Geben Sie jedem Verbraucher ein eigenes, kurzlebiges Berechtigungszertifikat mit minimalen Berechtigungen anstelle eines
+- Gib jedem Verbraucher ein eigenes, kurzlebiges Berechtigungszertifikat mit minimalen Berechtigungen anstelle eines
 gemeinsamen Tokens.
-- Scannen Sie Agenten-Anweisungsdateien mit einem Secret Scanner in Pre-Commit und CI,
-genau wie Sie Quellcode scannen.
-- Behandeln Sie jedes Geheimnis, das jemals im Agentenkontext aufgetaucht ist, als kompromittiert und
-rotieren Sie es.
+- Scanne Agenten-Anweisungsdateien mit einem Secret Scanner in Pre-Commit und CI,
+genau wie du Quellcode scannst.
+- Behandle jedes Geheimnis, das jemals im Agentenkontext aufgetaucht ist, als kompromittiert und
+rotiere es.
 ----
 
 [NOTE]
 ====
 Skills, Regeln, Prompts, MCP-Serverkonfigurationen und Agentenanweisungsdateien sind
-aus Sicht des Geheimnismanagements alles Code. Wenn Sie kein Token
-in einer `.java`-Datei fest codieren würden, codieren Sie es auch nicht in einer `CLAUDE.md` fest.
+aus Sicht des Geheimnismanagements alles Code. Wenn du kein Token
+in einer `.java`-Datei fest codieren würdest, codierst du es auch nicht in einer `CLAUDE.md` fest.
 ====

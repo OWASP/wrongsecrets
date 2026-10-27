@@ -26,8 +26,8 @@ Diese Aufgabe veranschaulicht ein Szenario, in dem ein Entwickler:
 
 **So wird der Fehler ausgelöst:**
 
-Drücken Sie die Schaltfläche am unteren Bildschirmrand oder rufen Sie den Endpunkt `/error-demo/database-connection` auf, um einen Datenbankverbindungsfehler zu simulieren. Dieser Endpunkt versucht, mithilfe einer Verbindungszeichenfolge mit eingebetteten Anmeldeinformationen eine Verbindung zu einer Datenbank herzustellen. Schlägt dies fehl, werden die Anmeldeinformationen sowohl in der HTTP-Antwort als auch in den Anwendungsprotokollen offengelegt.
+Drücke die Schaltfläche am unteren Bildschirmrand oder rufe den Endpunkt `/error-demo/database-connection` auf, um einen Datenbankverbindungsfehler zu simulieren. Dieser Endpunkt versucht, mithilfe einer Verbindungszeichenfolge mit eingebetteten Anmeldeinformationen eine Verbindung zu einer Datenbank herzustellen. Schlägt dies fehl, werden die Anmeldeinformationen sowohl in der HTTP-Antwort als auch in den Anwendungsprotokollen offengelegt.
 
-Können Sie das Datenbankpasswort finden, das offengelegt wird, wenn die Anwendung versucht, eine Verbindung zur Datenbank herzustellen?
+Kannst du das Datenbankpasswort finden, das offengelegt wird, wenn die Anwendung versucht, eine Verbindung zur Datenbank herzustellen?
 
-**Hinweis:** Achten Sie auf Datenbankverbindungsfehlermeldungen, die mehr preisgeben, als sie sollten.
+**Hinweis:** Achte auf Datenbankverbindungsfehlermeldungen, die mehr preisgeben, als sie sollten.

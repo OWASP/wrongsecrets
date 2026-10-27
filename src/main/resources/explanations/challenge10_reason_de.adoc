@@ -1,13 +1,13 @@
 *Zugriff auf das Administrator-/Inhaberkonto:*
-Wenn Sie mit dem AWS-Administratorkonto auf die Daten zugreifen konnten, verstehen Sie sicher, warum dies für die Produktivumgebung keine gute Idee ist. Kurz gesagt: Mit diesem Konto können Sie beliebige Änderungen vornehmen und alle Geheimnisse problemlos exfiltrieren.
+Wenn du mit dem AWS-Administratorkonto auf die Daten zugreifen konntest, verstehst du sicher, warum dies für die Produktivumgebung keine gute Idee ist. Kurz gesagt: Mit diesem Konto kannst du beliebige Änderungen vornehmen und alle Geheimnisse problemlos exfiltrieren.
 
-Was Sie stattdessen tun sollten:
-- Verwenden Sie für jede Workload eine eigene Identität mit den geringstmöglichen Berechtigungen und gewähren Sie ihr nur die benötigten Rechte. Bevorzugen Sie kurzlebige Zugangsdaten, die über eine Workload-Identity bezogen werden, gegenüber langlebigen Zugriffsschlüsseln.
-- Geben Sie Personen eine eigene Rolle, die genau zu ihrer täglichen Arbeit passt, ohne ihnen das Lesen von Geheimnissen oder das Ausführen von Befehlen in Workloads zu erlauben, es sei denn, es ist wirklich notwendig.
-- Reservieren Sie das Root- oder Administratorkonto für streng kontrollierte Notfallnutzung, schützen Sie es mit MFA und überwachen Sie seine Aktivität.
+Was du stattdessen tun solltest:
+- Verwende für jede Workload eine eigene Identität mit den geringstmöglichen Berechtigungen und gewähre ihr nur die benötigten Rechte. Bevorzuge kurzlebige Zugangsdaten, die über eine Workload-Identity bezogen werden, gegenüber langlebigen Zugriffsschlüsseln.
+- Gib Personen eine eigene Rolle, die genau zu ihrer täglichen Arbeit passt, ohne ihnen das Lesen von Geheimnissen oder das Ausführen von Befehlen in Workloads zu erlauben, es sei denn, es ist wirklich notwendig.
+- Reserviere das Root- oder Administratorkonto für streng kontrollierte Notfallnutzung, schütze es mit MFA und überwache seine Aktivität.
 
 Nicht zuletzt konnten wir leicht per exec auf den Container zugreifen, um dort mittels grep nach dem Einhängepunkt (Mount) mit dem Secret zu suchen. Dies hängt mit drei Dingen zusammen:
 
-- Dies ist uns mittels RBAC gestattet, was in PRD nicht der Normalfall sein sollte: Andernfalls kann jeder in Ihrer Organisation im Container herumstöbern.
+- Dies ist uns mittels RBAC gestattet, was in PRD nicht der Normalfall sein sollte: Andernfalls kann jeder in deiner Organisation im Container herumstöbern.
 - Wir haben ausführbare Dateien im Container (sh/openssl/etc.), die wir ausführen können, um eine Shell einzurichten. Das Entfernen aller unnötigen Binärdateien aus dem Container kann die Angriffsfläche verringern und es Angreifern, die eine Remote Code Execution (RCE) im Container durchgeführt haben, erschweren, auf andere Stellen im Container zuzugreifen und dort weitere Ausführungsrechte zu erlangen.
 - Wir haben die ConfigMap als Umgebungsvariable freigegeben. Das bedeutet, dass jeder, der Zugriff auf die Container-Laufzeitumgebung innerhalb des Pods hat, das Geheimnis nun auslesen kann. Wir haben das Geheimnis zwar in die Nähe des Nutzers gebracht, aber möglicherweise noch nicht nah genug (z. B. nur in die Anwendung).

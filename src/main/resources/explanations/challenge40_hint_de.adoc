@@ -1,13 +1,13 @@
 Diese Herausforderung lässt sich lösen, indem man das Base64-kodierte Geheimnis in `secrchallenge.json` entschlüsselt. Dies kann man auf folgende Weise tun:
 
 1. Verwendung eines Online-AES-Entschlüsselungstools wie z. B. https://www.devglan.com/online-tools/aes-encryption-decryption[https://www.devglan.com/online-tools/aes-encryption-decryption]
-- Kopieren Sie den Wert von `secret` aus `secrchallenge.json` und fügen Sie ihn in das Textfeld des Entschlüsselers ein.
-- Stellen Sie sicher, dass das Eingabeformat `Base64` und der Verschlüsselungsmodus `ECB` ist.
-- Verwenden Sie den Wert von `key` aus `secrchallenge.json` als Entschlüsselungsschlüssel und klicken Sie auf `Decrypt`, um das Geheimnis zu erhalten.
+- Kopiere den Wert von `secret` aus `secrchallenge.json` und füge ihn in das Textfeld des Entschlüsselers ein.
+- Stelle sicher, dass das Eingabeformat `Base64` und der Verschlüsselungsmodus `ECB` ist.
+- Verwende den Wert von `key` aus `secrchallenge.json` als Entschlüsselungsschlüssel und klicke auf `Decrypt`, um das Geheimnis zu erhalten.
 
 2. Verwendung des Terminals
-- Starten Sie das Terminal, während Sie sich im Verzeichnis `executables` befinden.
-- Kopieren Sie den Wert von `key` aus `secrchallenge.json` und geben Sie `echo -n "3Ulyfmfgro6uh1cN" | xxd -p` ein. Dadurch erhalten Sie den Entschlüsselungsschlüssel im Hexadezimalformat.
+- Starte das Terminal, während du dich im Verzeichnis `executables` befindest.
+- Kopiere den Wert von `key` aus `secrchallenge.json` und gib `echo -n "3Ulyfmfgro6uh1cN" | xxd -p` ein. Dadurch erhältst du den Entschlüsselungsschlüssel im Hexadezimalformat.
 - Kopiere den Wert von `secret` aus `secrchallenge.json`.
-- Verwenden Sie anschließend den erhaltenen Entschlüsselungsschlüssel, um die Datei zu entschlüsseln, indem Sie `echo "7RwunHeLkY7c0TCTLRMOGCIeX0jWiYibAexA0unYGDI=" | openssl enc -a -d -aes-128-ecb -K 33556c79666d6667726f36756831634e -out decrypted.md` eingeben.
-- Kopieren Sie das Geheimnis aus der Datei `decrypted.md` im Ordner `executables`.
+- Verwende anschließend den erhaltenen Entschlüsselungsschlüssel, um die Datei zu entschlüsseln, indem du `echo "7RwunHeLkY7c0TCTLRMOGCIeX0jWiYibAexA0unYGDI=" | openssl enc -a -d -aes-128-ecb -K 33556c79666d6667726f36756831634e -out decrypted.md` eingibst.
+- Kopiere das Geheimnis aus der Datei `decrypted.md` im Ordner `executables`.

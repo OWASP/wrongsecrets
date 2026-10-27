@@ -1,9 +1,9 @@
 === Knacken der AES-Verschlüsselung mit einem schwachen MD5-Schlüssel
 
-Stellen Sie sich vor, Sie sind Sicherheitsanalyst und untersuchen eine mobile App, die sensible Daten verarbeitet. Sie entdecken, dass der Entwickler zwar AES-Verschlüsselung zum Schutz eines Geheimnisses verwendet, aber anstatt einer sicheren Schlüsselerzeugungsfunktion (KDF) den unsicheren MD5-Algorithmus nutzt, um Verschlüsselungsschlüssel aus einer einfachen numerischen PIN abzuleiten.
+Stell dir vor, du bist Sicherheitsanalyst und untersuchst eine mobile App, die sensible Daten verarbeitet. Du entdeckst, dass der Entwickler zwar AES-Verschlüsselung zum Schutz eines Geheimnisses verwendet, aber anstatt einer sicheren Schlüsselerzeugungsfunktion (KDF) den unsicheren MD5-Algorithmus nutzt, um Verschlüsselungsschlüssel aus einer einfachen numerischen PIN abzuleiten.
 
-Sie haben eine verschlüsselte Zeichenkette erhalten: `k800mdwu8vlQoqeAgRMHDQ==`. Sie wissen, dass diese Zeichenkette nach der Entschlüsselung den Text `the answer` ergibt.
+Du hast eine verschlüsselte Zeichenkette erhalten: `k800mdwu8vlQoqeAgRMHDQ==`. Du weißt, dass diese Zeichenkette nach der Entschlüsselung den Text `the answer` ergibt.
 
-Der für die AES-Verschlüsselung verwendete Schlüssel wird durch Berechnung des MD5-Hashs einer PIN ermittelt, einer Zahl zwischen 0 und 99999. Ihre Aufgabe ist es, die korrekte PIN zu finden, die zur Ermittlung des Verschlüsselungsschlüssels verwendet wurde, und das Geheimnis zu entschlüsseln.
+Der für die AES-Verschlüsselung verwendete Schlüssel wird durch Berechnung des MD5-Hashs einer PIN ermittelt, einer Zahl zwischen 0 und 99999. Deine Aufgabe ist es, die korrekte PIN zu finden, die zur Ermittlung des Verschlüsselungsschlüssels verwendet wurde, und das Geheimnis zu entschlüsseln.
 
-Können Sie die richtige PIN herausfinden und das Geheimnis lüften?
+Kannst du die richtige PIN herausfinden und das Geheimnis lüften?

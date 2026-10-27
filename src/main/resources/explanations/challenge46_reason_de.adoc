@@ -8,9 +8,9 @@ Wenn Geheimnisse nicht ordnungsgemäß konfiguriert sind, können sie an Orten l
 
 Betrachten wir ein Beispiel, bei dem es um einen Template-Injection-Angriff in einer Skriptsprache wie PHP geht:
 
-. Stellen Sie sich ein Szenario vor, in dem eine PHP-Anwendung eine Vorlage mit sensiblen Informationen verwendet.
+. Stell dir ein Szenario vor, in dem eine PHP-Anwendung eine Vorlage mit sensiblen Informationen verwendet.
 * wobei die Vorlage wie folgt aussehen kann: $password = "'; system('rm -rf /'); //"
 . Wenn die Vorlage verarbeitet wird, kann sie Folgendes ergeben:
 * $connection = "password='; system('rm -rf /'); //"
 
-Um solche Probleme zu vermeiden, fügen Sie keine Geheimniswerte in ausführbaren Quellcode ein und werten Sie sie nicht als Vorlagenausdrücke aus. Übergeben Sie Geheimnisse nach Möglichkeit als Laufzeitkonfiguration an die Anwendung; andernfalls verwenden Sie ein kontextgemäßes Escaping, schränken Sie den Zugriff auf gerenderte Dateien ein und achten Sie darauf, dass Geheimnisse nicht in Protokolle geschrieben werden.
+Um solche Probleme zu vermeiden, füge keine Geheimniswerte in ausführbaren Quellcode ein und werte sie nicht als Vorlagenausdrücke aus. Übergib Geheimnisse nach Möglichkeit als Laufzeitkonfiguration an die Anwendung; andernfalls verwende ein kontextgemäßes Escaping, schränke den Zugriff auf gerenderte Dateien ein und achte darauf, dass Geheimnisse nicht in Protokolle geschrieben werden.

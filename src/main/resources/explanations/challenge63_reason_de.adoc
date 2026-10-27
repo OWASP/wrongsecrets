@@ -8,10 +8,10 @@ Diese Herausforderung verdeutlicht einen weit verbreiteten Fehler in der Softwar
 - Viele geheime Scan-Tools erkennen sowohl den Schlüssel als auch die Chiffretextmuster.
 
 **Die richtige Vorgehensweise:**
-- Speichern Sie die Verschlüsselungsschlüssel in einem dedizierten Geheimnismanager (AWS Secrets Manager, HashiCorp Vault usw.).
+- Speichere die Verschlüsselungsschlüssel in einem dedizierten Geheimnismanager (AWS Secrets Manager, HashiCorp Vault usw.).
 - Schlüssel niemals in die Versionskontrolle einchecken
-- Verwenden Sie Umgebungsvariablen als Schlüssel, nicht Quellcodekonstanten.
-- Überlegen Sie, ob Verschlüsselung überhaupt notwendig ist, wenn der Schlüssel in der Nähe der Daten gespeichert werden muss.
+- Verwende Umgebungsvariablen als Schlüssel, nicht Quellcodekonstanten.
+- Überlege, ob Verschlüsselung überhaupt notwendig ist, wenn der Schlüssel in der Nähe der Daten gespeichert werden muss.
 
 **Beispiele aus der Praxis:**
 Genau dieses Muster wurde bei zahlreichen Datenpannen festgestellt, bei denen Entwickler glaubten, ihre Geheimnisse seien "sicher", weil sie verschlüsselt seien, und nicht erkannten, dass der Schlüssel gleichermaßen offengelegt wurde.

@@ -2,24 +2,24 @@ Bei dieser Herausforderung geht es speziell darum, ein Geheimnis in einer Rust-B
 
 Diese Herausforderung lässt sich mit den folgenden alternativen Lösungsansätzen bewältigen:
 
-1. Entdecken Sie die Geheimnisse mit https://ghidra-sre.org/[Ghidra].
-- Installieren Sie https://ghidra-sre.org/[Ghidra].
-- Starten Sie es mit `ghidraRun`.
-- Laden Sie die Anwendung `wrongsecrets-rust` in Ghidra, indem Sie ein neues Projekt auswählen, dann die Datei importieren und anschließend darauf doppelklicken.
-- Erlauben Sie Ghidra, die Anwendung zu analysieren.
-- Importieren Sie nun https://gist.github.com/str4d/e541f4c28e2bca80d222434ac1a204f4[demangle script] und führen Sie es über den Ghidra Script Manager aus, um die Funktionen zu demanglen.
+1. Entdecke die Geheimnisse mit https://ghidra-sre.org/[Ghidra].
+- Installiere https://ghidra-sre.org/[Ghidra].
+- Starte es mit `ghidraRun`.
+- Lade die Anwendung `wrongsecrets-rust` in Ghidra, indem du ein neues Projekt auswählst, dann die Datei importierst und anschließend darauf doppelklickst.
+- Erlaube Ghidra, die Anwendung zu analysieren.
+- Importiere nun https://gist.github.com/str4d/e541f4c28e2bca80d222434ac1a204f4[demangle script] und führe es über den Ghidra Script Manager aus, um die Funktionen zu demanglen.
 - Finde die `main`-Funktion im `rust`-Namespace
 - Finde das Argument, das verglichen werden muss (in unserem Beispiel ist das `local_80`, wie in `std::env::args((env *)&local_80);` definiert).
 - Finde heraus, wo das Argument verglichen wird (in unserem Beispiel ist das `iVar1 = __stubs::_memcmp(local_80,puVar2,0x3b);`)
 - Suche nun den Eingabewert und vergleiche ihn mit dem Wert von `puVar2`. Kannst du das Geheimnis lüften?
-- Alternativ: Gehen Sie unten links zum Datentypmanager, filtern Sie nach `string`, klicken Sie mit der rechten Maustaste auf `string` als Mitglied von `wrongsecrets-rust` und wählen Sie `find uses of`. Filtern Sie anschließend nach bekannten Schlüsselwörtern: Sie sollten das Geheimnis nun problemlos finden können!
+- Alternativ: Gehe unten links zum Datentypmanager, filtere nach `string`, klicke mit der rechten Maustaste auf `string` als Mitglied von `wrongsecrets-rust` und wähle `find uses of`. Filtere anschließend nach bekannten Schlüsselwörtern: Du solltest das Geheimnis nun problemlos finden können!
 
-2. Entdecken Sie die Geheimnisse mit https://www.radare.org[radare2].
-- Installieren Sie https://www.radare.org[radare2] entweder mit `brew install radare2` auf einem Mac oder folgen Sie diesen Schritten: `git clone https://github.com/radareorg/radare2; cd radare2 ; sys/install.sh`
-- Starten Sie die r2-Analyse mit `$ r2 -AAA wrongsecrets-rust`
+2. Entdecke die Geheimnisse mit https://www.radare.org[radare2].
+- Installiere https://www.radare.org[radare2] entweder mit `brew install radare2` auf einem Mac oder folge diesen Schritten: `git clone https://github.com/radareorg/radare2; cd radare2 ; sys/install.sh`
+- Starte die r2-Analyse mit `$ r2 -AAA wrongsecrets-rust`
 - Gib den Einstiegspunkt `s sym.rust::main::h66ace6a84e548891` und anschließend `pdf` aus. (Nicht die Standard-`main`-Datei!)
 - Finde das Argument, das mit `pdf | grep memcmp` verglichen werden muss (in unserem Beispiel ist das `r12`).
-- Versuchen Sie herauszufinden, wie dieses Argument vorbereitet ist. Können Sie das Geheimnis lüften?
-- Alternativ: Nach dem Start von radare2 führen Sie `iz | grep secret` aus und suchen Sie nach der Zeichenkette.
+- Versuche herauszufinden, wie dieses Argument vorbereitet ist. Kannst du das Geheimnis lüften?
+- Alternativ: Nach dem Start von radare2 führe `iz | grep secret` aus und suche nach der Zeichenkette.
 
-Sie möchten die Tools nicht installieren? Dann schauen Sie sich den https://github.com/OWASP/wrongsecrets/tree/master?tab=readme-ov-file#want-to-play-but-are-not-allowed-to-install-the-tools[WrongSecrets Desktop container] an!
+Du möchtest die Tools nicht installieren? Dann schau dir den https://github.com/OWASP/wrongsecrets/tree/master?tab=readme-ov-file#want-to-play-but-are-not-allowed-to-install-the-tools[WrongSecrets Desktop container] an!

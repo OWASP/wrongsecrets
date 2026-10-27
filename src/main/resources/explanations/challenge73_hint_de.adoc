@@ -10,6 +10,6 @@ Drei davon verweisen lediglich auf den Speicherort der gemeinsamen Anmeldeinform
 Der Wert von `STAGING_DEPLOY_TOKEN` wird in einem Shell-Snippet inline eingefügt. Dieser Wert ist
 die Antwort.
 
-Wenn Sie den Entwicklungscontainer nicht verwenden, können Sie dieselben Dateien auch so lesen.
+Wenn du den Entwicklungscontainer nicht verwendest, kannst du dieselben Dateien auch so lesen.
 direkt aus dem Repository unter folgendem Link: link:https://github.com/OWASP/wrongsecrets/tree/master/.devcontainer[`.devcontainer`]
 Ordner.

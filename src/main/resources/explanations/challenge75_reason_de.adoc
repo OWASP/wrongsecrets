@@ -1,7 +1,7 @@
 *Warum das Einchecken einer Maven settings.xml-Datei die Bereitstellungszugangsdaten preisgibt*
 
 Eine `settings.xml`-Datei ist die Datei, die Maven liest, um zu erfahren, woher Abhängigkeiten
-heruntergeladen werden und wie man sich bei den Repositories authentifiziert, die eine Anmeldung erfordern. Ihr
+heruntergeladen werden und wie man sich bei den Repositories authentifiziert, die eine Anmeldung erfordern. Dein
 Abschnitt `<servers>` enthält den Benutzernamen und das Passwort im Klartext für jeden konfigurierten
 Server, und für ein Bereitstellungskonto beinhaltet dieses Passwort normalerweise das Recht,
 Artefakte zu veröffentlichen.
@@ -28,22 +28,22 @@ jeden funktioniert, und genau dieses Versagen demonstriert diese Herausforderung
   für alles bietet, was eingecheckt wird.
 
 ----
-Was Sie stattdessen tun sollten:
+Was du stattdessen tun solltest:
 
-- Bewahren Sie die Datei `settings.xml` in `$HOME/.m2/` auf und fügen Sie `settings.xml` zu `.gitignore` hinzu, damit
+- Bewahre die Datei `settings.xml` in `$HOME/.m2/` auf und füge `settings.xml` zu `.gitignore` hinzu, damit
 sie nicht versehentlich eingecheckt wird.
 - Referenzierung von Anmeldeinformationen über Umgebungsvariablen oder Eigenschaftsinterpolation,
-zum Beispiel `<password>${env.NEXUS_PASSWORD}</password>`, und geben Sie den Wert an.
+zum Beispiel `<password>${env.NEXUS_PASSWORD}</password>`, und gib den Wert an.
 zur Laufzeit.
 - In CI sollten die Anmeldeinformationen aus dem CI-Geheimnisspeicher eingefügt werden, anstatt sie
 in das Repository der Pipeline einzuchecken.
-- Geben Sie jedem Verbraucher ein kurzlebiges Token mit minimalen Berechtigungen, das nur in
-ein einzelnes Repository bereitgestellt werden kann, und beschränken Sie das Token auf ein festes Zeitfenster.
-- Bevorzugen Sie Repository-Manager-Funktionen, die langlebige Passwörter vermeiden, wie z. B.
+- Gib jedem Verbraucher ein kurzlebiges Token mit minimalen Berechtigungen, das nur in
+ein einzelnes Repository bereitgestellt werden kann, und beschränke das Token auf ein festes Zeitfenster.
+- Bevorzuge Repository-Manager-Funktionen, die langlebige Passwörter vermeiden, wie z. B.
 Bearer-Tokens oder Workload-Identitätsföderation.
-- Rotieren Sie die Anmeldeinformationen sofort, sobald sie in einem Commit auftauchen, und entfernen Sie sie aus
-dem Verlauf, sofern Ihre Plattform dies zulässt.
-- Scannen Sie das Repository, einschließlich der XML- und Build-Dateien, mit einem geheimen Scanner in
+- Rotiere die Anmeldeinformationen sofort, sobald sie in einem Commit auftauchen, und entferne sie aus
+dem Verlauf, sofern deine Plattform dies zulässt.
+- Scanne das Repository, einschließlich der XML- und Build-Dateien, mit einem geheimen Scanner in
 Pre-Commit-Hooks und CI.
 ----
 

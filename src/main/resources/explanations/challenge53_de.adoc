@@ -4,4 +4,4 @@ Moderne Cloud-Umgebungen nutzen häufig Debugging-Tools zur Fehlerbehebung in la
 
 Eine Kubernetes-Bereitstellung wurde falsch konfiguriert [challenge53](https://github.com/OWASP/wrongsecrets/blob/master/k8s/challenge53/secret-challenge53.yml). Dadurch können Entwickler einen Debugging-Container an eine laufende Anwendung anhängen. In diesem Container befindet sich eine Binärdatei, die ein Geheimnis im Speicher hält. Normalerweise wäre dieses Geheimnis geschützt, aber durch den Debugging-Zugriff ist es nun auslesbar.
 
-Können Sie das Geheimnis lüften?
+Kannst du das Geheimnis lüften?

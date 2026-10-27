@@ -6,7 +6,7 @@ Diese Herausforderung demonstriert, wie ein MCP-Server mit einem übermäßig pr
 
 1. **Ein MCP-Server läuft unter `/mcp62`** auf dem Hauptanwendungsport
 2. **Der MCP-Server stellt ein Tool namens `read_google_drive_document` bereit, das ein Google-Dienstkonto verwendet, um ein Dokument zu lesen.
-3. **Sie benötigen keine gültigen Google-Anmeldedaten** – das Dienstkonto ist bereits in der Anwendung konfiguriert.
+3. **Du benötigst keine gültigen Google-Anmeldedaten** – das Dienstkonto ist bereits in der Anwendung konfiguriert.
 
 **Schritt-für-Schritt-Anleitung:**
 
@@ -19,7 +19,7 @@ curl -s -X POST http://localhost:8080/mcp62 \
   -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
 ----
 
-Rufen Sie anschließend `read_google_drive_document` auf, um das Dokument zu lesen:
+Rufe anschließend `read_google_drive_document` auf, um das Dokument zu lesen:
 
 [source,bash]
 ----
@@ -28,13 +28,13 @@ curl -s -X POST http://localhost:8080/mcp62 \
   -d '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"read_google_drive_document","arguments":{}}}'
 ----
 
-**Worauf Sie achten sollten:**
+**Worauf du achten solltest:**
 
 - Die Antwort enthält den Inhalt eines Google Drive-Dokuments.
 - Das Dokument enthält die geheime Antwort auf diese Herausforderung.
 - Der Antwortvalidator verwendet den Wert zwischen `<secret>` und `</secret>` aus diesem Inhalt.
-- Beachten Sie, dass Sie auf ein Dokument zugegriffen haben, für dessen Lektüre Sie nicht direkt berechtigt sind – der Zugriff wurde vom Dienstkonto des MCP-Servers ermöglicht.
+- Beachte, dass du auf ein Dokument zugegriffen hast, für dessen Lektüre du nicht direkt berechtigt bist – der Zugriff wurde vom Dienstkonto des MCP-Servers ermöglicht.
 
 **Hinweis des Entwicklers:** Der MCP-Controller verwaltet einen begrenzten Dokumentencache, um wiederholte Drive-API-Aufrufe zu reduzieren.
 
-**Wichtig:** Dies ist ein Beispiel für eine Rechteausweitung über einen MCP-Server. Das Dienstkonto verfügt über mehr Berechtigungen als Sie (der Aufrufer) hätten, und der MCP-Server erzwingt keine Zugriffskontrollen auf Aufruferebene.
+**Wichtig:** Dies ist ein Beispiel für eine Rechteausweitung über einen MCP-Server. Das Dienstkonto verfügt über mehr Berechtigungen, als du (der Aufrufer) hättest, und der MCP-Server erzwingt keine Zugriffskontrollen auf Aufruferebene.

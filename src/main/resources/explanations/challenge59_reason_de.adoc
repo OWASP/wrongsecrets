@@ -38,7 +38,7 @@ Diese Herausforderung verdeutlicht eine kritische Schwachstelle, die häufig in 
 
 ** ✅ Geeignete Lösungen**:
 
-1. **Verwenden Sie Geheimnismanagement**:
+1. **Verwende Geheimnismanagement**:
    - AWS Secrets Manager
    - Azure Key Vault
    - HashiCorp Vault
@@ -55,11 +55,11 @@ Diese Herausforderung verdeutlicht eine kritische Schwachstelle, die häufig in 
    - Audit-Protokolle für geheime Zugriffe
 
 4. **Sicherheitsgründe: Niemals verschleiern**:
-   - Verwenden Sie stattdessen eine ordnungsgemäße Verschlüsselung.
+   - Verwende stattdessen eine ordnungsgemäße Verschlüsselung.
    - Verschleierung bietet keinen Sicherheitsvorteil
    - Kann ein falsches Sicherheitsgefühl erzeugen.
 
-** ❌ Was Sie nicht tun sollten **:
+** ❌ Was du nicht tun solltest **:
 - Geheimnisse in Umgebungsvariablen speichern
 - Verschleierung als Sicherheitsmaßnahme nutzen
 - Tokens nach Ausscheiden des Mitarbeiters aktiv lassen

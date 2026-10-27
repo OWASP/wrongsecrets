@@ -4,7 +4,7 @@ KI-Programmieragenten wie Codex, Claude Code und Cursor lesen Dateien, führen B
 
 Diese Anwendung liefert ein Codex-Sitzungsprotokoll, in dem ein Entwickler den Agenten mit der Untersuchung einer fehlgeschlagenen Staging-Bereitstellung beauftragt hat. Das Protokoll erfasst, wie der Agent eine `.env.staging`-Datei liest und deren Inhalt – einschließlich des Bereitstellungstokens – im Rahmen des normalen Debugging-Workflows ausgibt.
 
-Laden Sie das Protokoll von link:/challenges/challenge-72/codex-session-transcript.md[`/challenges/challenge-72/codex-session-transcript.md`] herunter und finden Sie das Staging-Deploy-Token, das während der Sitzung angezeigt wurde.
+Lade das Protokoll von link:/challenges/challenge-72/codex-session-transcript.md[`/challenges/challenge-72/codex-session-transcript.md`] herunter und finde das Staging-Deploy-Token, das während der Sitzung angezeigt wurde.
 
 Der Quellcode ist auch unter folgendem Link verfügbar: link:https://github.com/OWASP/wrongsecrets/blob/master/src/main/resources/challenges/challenge-72/codex-session-transcript.md[`src/main/resources/challenges/challenge-72/codex-session-transcript.md`].
 

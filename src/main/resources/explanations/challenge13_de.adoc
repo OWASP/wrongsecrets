@@ -1,6 +1,6 @@
 === GitHub-Forkbare Aktionen
 
-Wenn Sie Geheimnisse in Ihrer CI/CD-Pipeline verwalten möchten, sollten Sie sich immer fragen: Wer kann sie einsehen?
+Wenn du Geheimnisse in deiner CI/CD-Pipeline verwalten möchtest, solltest du dich immer fragen: Wer kann sie einsehen?
 Kannst du das Geheimnis mithilfe der GitHub-Aktion herausfinden?
 
 Anmerkung: Diese Herausforderung ist gleichzeitig eine „schlechte Krypto-Herausforderung“, aber dadurch etwas schwieriger.

@@ -4,4 +4,4 @@ Wir haben schon viele sogenannte „Bastion-Container“ gesehen. Dabei wird ein
 
 Damit der Bastion-Container funktioniert, müssen wir eine SSH-Konfigurationsdatei (`.ssh/config`) einbetten, um die Einrichtung der SSH-Verbindung durch Speichern hostspezifischer Konfigurationen zu vereinfachen.
 
-Können Sie den privaten Schlüssel finden? Fügen Sie dessen Inhalt in das untenstehende Antwortfeld ein.
+Kannst du den privaten Schlüssel finden? Füge dessen Inhalt in das untenstehende Antwortfeld ein.

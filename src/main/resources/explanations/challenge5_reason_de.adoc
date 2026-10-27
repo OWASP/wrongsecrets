@@ -1,18 +1,18 @@
 *Warum die Verwendung von ConfigMaps keine gute Idee ist*
 
-ConfigMaps waren nie dafür gedacht, Geheimnisse zu speichern. Stattdessen wurden sie entwickelt, um zusätzliche Daten für Ihren Job oder Pod und andere K8s-Ressourcen zu speichern.
-ConfigMaps sind oft für alle lesbar, die Prozesse entwickeln oder betreiben müssen, welche Daten aus der ConfigMap benötigen. Trotzdem können Sie mithilfe von RBAC (Role-Based Access Control) einschränken, wer die ConfigMap lesen darf. Im Produktivbetrieb ist es vielleicht sinnvoll, den Lesezugriff zu beschränken: Wie wäre es zum Beispiel mit „Nicht jeder“?
+ConfigMaps waren nie dafür gedacht, Geheimnisse zu speichern. Stattdessen wurden sie entwickelt, um zusätzliche Daten für deinen Job oder Pod und andere K8s-Ressourcen zu speichern.
+ConfigMaps sind oft für alle lesbar, die Prozesse entwickeln oder betreiben müssen, welche Daten aus der ConfigMap benötigen. Trotzdem kannst du mithilfe von RBAC (Role-Based Access Control) einschränken, wer die ConfigMap lesen darf. Im Produktivbetrieb ist es vielleicht sinnvoll, den Lesezugriff zu beschränken: Wie wäre es zum Beispiel mit „Nicht jeder“?
 Außerdem werden ConfigMaps oft in Git gespeichert, um die Entwicklung zu beschleunigen, was bedeutet, dass die Daten insgesamt recht exponiert sind.
 
 Da ConfigMaps nur mit Zeichenketten arbeiten, lassen sie sich nicht ohne Weiteres verschlüsseln, außer durch eine eigene Implementierung. Natürlich kann man den Speicherort der ConfigMap nach der Bereitstellung verschlüsseln, aber dadurch bleibt sie in Git weiterhin lesbar.
 
 Dies macht eine ConfigMap zu einem ungeeigneten Element für die Speicherung eines Geheimnisses, insbesondere ohne strikte RBAC: Viele Personen innerhalb der Organisation, die Zugriff darauf haben, können es trotzdem lesen.
 
-Daher: Vermeiden Sie die Verwendung von ConfigMaps für Geheimnisse und stellen Sie sicher, dass Sie RBAC ordnungsgemäß anwenden!
+Daher: Vermeide die Verwendung von ConfigMaps für Geheimnisse und stelle sicher, dass du RBAC ordnungsgemäß anwendest!
 
 Zu guter Letzt: Wir könnten uns problemlos in den Container einloggen, um die Umgebungsvariablen nach dem Geheimnis zu durchsuchen. Dies hängt mit drei Dingen zusammen:
 
-- Dies ist uns mittels RBAC gestattet, was in PRD nicht der Normalfall sein sollte: Andernfalls kann jeder in Ihrer Organisation im Container herumstöbern.
+- Dies ist uns mittels RBAC gestattet, was in PRD nicht der Normalfall sein sollte: Andernfalls kann jeder in deiner Organisation im Container herumstöbern.
 - Wir haben ausführbare Dateien im Container (sh/openssl/etc.), die wir ausführen können, um eine Shell einzurichten. Das Entfernen aller unnötigen Binärdateien aus dem Container kann die Angriffsfläche verringern und es Angreifern, die eine Remote Code Execution (RCE) im Container durchgeführt haben, erschweren, auf andere Stellen im Container zuzugreifen und dort weitere Ausführungsrechte zu erlangen.
 - Wir haben die ConfigMap als Umgebungsvariable freigegeben. Das bedeutet, dass jeder, der Zugriff auf die Container-Laufzeitumgebung innerhalb des Pods hat, das Geheimnis nun auslesen kann. Wir haben das Geheimnis zwar in die Nähe des Nutzers gebracht, aber möglicherweise noch nicht nah genug (z. B. nur in die Anwendung).
 
@@ -62,5 +62,5 @@ rules:
   verbs: ["get", "watch", "list"]
 ```
 
-- Weitere Details finden Sie unter [RBAC-Fehlkonfiguration der minimalen Berechtigungen](https://madhuakula.com/kubernetes-goat/docs/scenarios/scenario-16).
+- Weitere Details findest du unter [RBAC-Fehlkonfiguration der minimalen Berechtigungen](https://madhuakula.com/kubernetes-goat/docs/scenarios/scenario-16).
 - Die offizielle Kubernetes-Dokumentation zu RBAC [https://kubernetes.io/docs/reference/access-authn-authz/rbac/](https://kubernetes.io/docs/reference/access-authn-authz/rbac/)

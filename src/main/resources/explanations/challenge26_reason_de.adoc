@@ -4,6 +4,6 @@ Der Zustand der Blockchain kann für jeden beliebigen Zeitpunkt überprüft werd
 
 Durch die Aktualisierung des Zustands der Kette werden vorherige Zustandsänderungen nicht entfernt.
 
-Was Sie stattdessen tun sollten:
-- Platzieren Sie niemals ein Geheimnis auf einer öffentlichen oder unveränderlichen Blockchain. Halten Sie Geheimniswerte außerhalb der Kette in einem System mit Zugriffskontrollen und verwenden Sie die Kette nur für nicht sensible Verweise oder Nachweise.
-- Behandeln Sie jeden Wert, der bereits auf einer öffentlichen Kette geschrieben wurde, als dauerhaft offengelegt, und rotieren oder widerrufen Sie die betroffenen Zugangsdaten.
+Was du stattdessen tun solltest:
+- Platziere niemals ein Geheimnis auf einer öffentlichen oder unveränderlichen Blockchain. Halte Geheimniswerte außerhalb der Kette in einem System mit Zugriffskontrollen und verwende die Kette nur für nicht sensible Verweise oder Nachweise.
+- Behandle jeden Wert, der bereits auf einer öffentlichen Kette geschrieben wurde, als dauerhaft offengelegt, und rotiere oder widerrufe die betroffenen Zugangsdaten.

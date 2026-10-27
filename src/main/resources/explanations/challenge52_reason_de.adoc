@@ -22,9 +22,9 @@ Diese Aufgabe simuliert ein Szenario, in dem:
 
 *Wichtigste Lernpunkte:*
 
-- **Vermeiden Sie das Einbetten von Geheimnissen in Container-Images:** Geheimnisse sollten niemals fest in Docker-Images integriert werden. Verwenden Sie Mechanismen wie Laufzeitumgebungsvariablen oder externe Tools zur Geheimnisverwaltung, um Geheimnisse dynamisch bereitzustellen.
-- **Sichern Sie den Build-Prozess ab**: Stellen Sie auch bei Tools wie `--secret` sicher, dass Geheimnisse nicht dauerhaft in Zwischen- oder Endbildebenen gespeichert werden.
-- **Geheimnisse dürfen nicht fest in Build-Skripten codiert werden.** Build-Skripte sollten keine sensiblen Informationen enthalten. Speichern Sie sensible Werte sicher und greifen Sie während des Build-Prozesses dynamisch darauf zu.
-- **Implementieren Sie Aufräummechanismen**: Wenn Geheimnisse während des Build-Prozesses in temporäre Dateien geschrieben werden müssen, stellen Sie sicher, dass diese sicher entfernt werden, bevor das Image finalisiert wird.
+- **Vermeide das Einbetten von Geheimnissen in Container-Images:** Geheimnisse sollten niemals fest in Docker-Images integriert werden. Verwende Mechanismen wie Laufzeitumgebungsvariablen oder externe Tools zur Geheimnisverwaltung, um Geheimnisse dynamisch bereitzustellen.
+- **Sichere den Build-Prozess ab**: Stelle auch bei Tools wie `--secret` sicher, dass Geheimnisse nicht dauerhaft in Zwischen- oder Endbildebenen gespeichert werden.
+- **Geheimnisse dürfen nicht fest in Build-Skripten codiert werden.** Build-Skripte sollten keine sensiblen Informationen enthalten. Speichere sensible Werte sicher und greife während des Build-Prozesses dynamisch darauf zu.
+- **Implementiere Aufräummechanismen**: Wenn Geheimnisse während des Build-Prozesses in temporäre Dateien geschrieben werden müssen, stelle sicher, dass diese sicher entfernt werden, bevor das Image finalisiert wird.
 
-Durch die Bewältigung dieser Herausforderung werden Sie die Folgen einer unsachgemäßen Handhabung von Geheimnissen während Docker-Builds verstehen und Best Practices für die sichere Verwaltung von Geheimnissen in containerisierten Umgebungen kennenlernen.
+Durch die Bewältigung dieser Herausforderung wirst du die Folgen einer unsachgemäßen Handhabung von Geheimnissen während Docker-Builds verstehen und Best Practices für die sichere Verwaltung von Geheimnissen in containerisierten Umgebungen kennenlernen.

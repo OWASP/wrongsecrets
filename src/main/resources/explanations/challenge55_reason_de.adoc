@@ -6,6 +6,6 @@ Vergessene Geheimnisse deuten auf unzureichende Sicherheitsvorkehrungen und mang
 
 Diese Herausforderung unterstreicht die Wichtigkeit sicherer Speicherpraktiken und regelmäßiger Überprüfungen sensibler Konfigurationsdateien.
 
-Was Sie stattdessen tun sollten:
-- Halten Sie private Schlüssel und Passwörter aus `.ssh/config` und aus Container-Images heraus. Verwenden Sie einen geschützten Schlüsselspeicher oder einen SSH-Agent und bevorzugen Sie nach Möglichkeit kurzlebige SSH-Zertifikate.
-- Beschränken Sie den Zugriff auf Schlüsseldateien und verwenden Sie für jeden Host eine eigene, eng begrenzte Identität. Rotieren Sie Zugangsdaten, die committet oder verteilt wurden.
+Was du stattdessen tun solltest:
+- Halte private Schlüssel und Passwörter aus `.ssh/config` und aus Container-Images heraus. Verwende einen geschützten Schlüsselspeicher oder einen SSH-Agent und bevorzuge nach Möglichkeit kurzlebige SSH-Zertifikate.
+- Beschränke den Zugriff auf Schlüsseldateien und verwende für jeden Host eine eigene, eng begrenzte Identität. Rotiere Zugangsdaten, die committet oder verteilt wurden.

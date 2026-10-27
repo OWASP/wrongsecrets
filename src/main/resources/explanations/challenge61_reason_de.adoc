@@ -14,15 +14,15 @@ Das Festcodieren der Zugangsdaten für den Telegram-Bot im Quellcode stellt eine
 - Die Funktionalität des Bots kann für böswillige Zwecke missbraucht werden.
 - Verstöße gegen die Compliance-Richtlinien, wenn der Bot personenbezogene oder sensible Daten verarbeitet
 
-**So beheben Sie das Problem:**
+**So behebst du das Problem:**
 1. **Umgebungsvariablen**: Bot-Tokens in Umgebungsvariablen oder sicheren Konfigurationsdateien speichern.
-2. **Geheimnisverwaltung**: Nutzen Sie spezialisierte Geheimnisverwaltungsdienste (HashiCorp Vault, AWS Secrets Manager usw.).
+2. **Geheimnisverwaltung**: Nutze spezialisierte Geheimnisverwaltungsdienste (HashiCorp Vault, AWS Secrets Manager usw.).
 3. **Token-Rotation**: Bot-Token regelmäßig rotieren und alte Token widerrufen.
-4. **Zugriffskontrollen**: Implementieren Sie geeignete Zugriffskontrollen, um festzulegen, wer auf die Zugangsdaten des Bots zugreifen darf.
-5. **Code-Reviews**: Überprüfen Sie den Code vor dem Einchecken immer auf fest codierte Geheimnisse.
+4. **Zugriffskontrollen**: Implementiere geeignete Zugriffskontrollen, um festzulegen, wer auf die Zugangsdaten des Bots zugreifen darf.
+5. **Code-Reviews**: Überprüfe den Code vor dem Einchecken immer auf fest codierte Geheimnisse.
 
 **Erkennung:**
-- Verwenden Sie geheime Scanning-Tools in Ihrer CI/CD-Pipeline
-- Implementieren Sie Pre-Commit-Hooks, um fest codierte Anmeldeinformationen abzufangen.
+- Verwende geheime Scanning-Tools in deiner CI/CD-Pipeline
+- Implementiere Pre-Commit-Hooks, um fest codierte Anmeldeinformationen abzufangen.
 - Regelmäßige Sicherheitsüberprüfungen der Codebasis
 - Überwachung auf unerwartete Bot-Aktivitäten

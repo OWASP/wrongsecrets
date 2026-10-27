@@ -1,4 +1,4 @@
-=== Herausforderung 75: Finden Sie die Nexus-Bereitstellungs-Anmeldeinformationen in der Maven-Datei settings.xml
+=== Herausforderung 75: Finde die Nexus-Bereitstellungs-Anmeldeinformationen in der Maven-Datei settings.xml
 
 Maven speichert die Zugangsdaten für das Repository in einer `settings.xml`. Der Abschnitt `<servers>` von
 dieser Datei ordnet einer Server-ID den Benutzernamen und das Passwort zu, die Maven verwendet, wenn es
@@ -17,8 +17,8 @@ Die Datei ist auch im Quellbaum verfügbar auf
 Link: link:https://github.com/OWASP/wrongsecrets/blob/master/src/main/resources/challenges/challenge-75/settings.xml[GitHub].
 
 Der Abschnitt `<servers>` enthält mehrere `<server>`-Einträge. Jeder Eintrag hat eine
-`<id>`, die mit der ID des zugehörigen Repositorys übereinstimmen muss. Finden Sie den
-Servereintrag, der zum Nexus-Repository-Manager gehört, und übermitteln Sie den Wert seines
+`<id>`, die mit der ID des zugehörigen Repositorys übereinstimmen muss. Finde den
+Servereintrag, der zum Nexus-Repository-Manager gehört, und übermittele den Wert seines
 `<password>`-Elements.
 
 [NOTE]

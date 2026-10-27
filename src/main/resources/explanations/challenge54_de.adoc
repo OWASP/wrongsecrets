@@ -4,10 +4,10 @@
 
 In dieser Challenge hinterließ ein Entwickler ein verschlüsseltes Geheimnis in einem Kommentar der `.gitignore`-Datei. Obwohl verschlüsselt, verdeutlicht dies, wie leicht man wichtige Geheimnisse an leicht zugänglichen Orten vergessen kann.
 
-Ihre Aufgabe ist es, dieses vergessene Geheimnis zu finden und zu entschlüsseln.
+Deine Aufgabe ist es, dieses vergessene Geheimnis zu finden und zu entschlüsseln.
 
 ==== Hinweis
-Das Geheimnis ist mit AES-256-CBC und einem Initialisierungsvektor (IV) verschlüsselt. Verwenden Sie den Schlüssel aus der Datei ".gitignore", um es zu entschlüsseln.
+Das Geheimnis ist mit AES-256-CBC und einem Initialisierungsvektor (IV) verschlüsselt. Verwende den Schlüssel aus der Datei ".gitignore", um es zu entschlüsseln.
 Wir haben folgenden Befehl zur Verschlüsselung verwendet:
 
 ```bash

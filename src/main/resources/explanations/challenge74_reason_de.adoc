@@ -15,14 +15,14 @@ In diesem Szenario verstärken sich drei Fehler gegenseitig:
 Wenn das Modell das Geheimnis preisgibt, haben die vertraulichen Informationen der Anwendung die beabsichtigte Sicherheitsgrenze überschritten.
 
 ----
-Was Sie stattdessen tun sollten:
+Was du stattdessen tun solltest:
 
-- Verwenden Sie niemals die Systemaufforderung eines KI-Modells als Mechanismus zur Geheimnisverwaltung.
+- Verwende niemals die Systemaufforderung eines KI-Modells als Mechanismus zur Geheimnisverwaltung.
 - Geheimnisse sollten nach Möglichkeit außerhalb des Modellkontexts aufbewahrt werden.
-- Gewähren Sie der Anwendung nur dann Zugriff auf Geheimnisse, wenn diese für einen Vorgang tatsächlich erforderlich sind.
+- Gewähre der Anwendung nur dann Zugriff auf Geheimnisse, wenn diese für einen Vorgang tatsächlich erforderlich sind.
 - Alle Benutzereingaben sind als potenziell feindliche Eingaben zu behandeln.
 - Autorisierungs- und Zugriffskontrollen sollten in der Anwendung selbst implementiert werden, anstatt sich auf das Modell zu verlassen, um diese durchzusetzen.
-- Falls sensible Informationen versehentlich einem Modell zugänglich gemacht werden, behandeln Sie die Informationen als potenziell kompromittiert und wechseln Sie gegebenenfalls die betroffenen Zugangsdaten.
+- Falls sensible Informationen versehentlich einem Modell zugänglich gemacht werden, behandle die Informationen als potenziell kompromittiert und wechsle gegebenenfalls die betroffenen Zugangsdaten.
 ----
 
 [NOTE]

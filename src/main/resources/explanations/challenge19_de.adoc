@@ -5,4 +5,4 @@ Dies ist ein Irrglaube, dem wir bei Vorträgen zu Themen der mobilen Sicherheit 
 
 Lasst uns diesen Mythos für C widerlegen: Könnt ihr das Geheimnis in https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-c[wrongsecrets-c] (oder https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-c-arm[wrongsecrets-c-arm], https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-c-linux[wrongsecrets-c-linux]) finden?
 
-Versuchen Sie, die Binärdatei herunterzuladen und lokal auszuführen (z. B. `./wrongsecrets-c<theversion you need> <your answer>`).
+Versuche, die Binärdatei herunterzuladen und lokal auszuführen (z. B. `./wrongsecrets-c<theversion you need> <your answer>`).

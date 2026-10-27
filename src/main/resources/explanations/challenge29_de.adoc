@@ -2,4 +2,4 @@
 
 Ein Benutzer erstellt unwissentlich ein Ticket mit einem Screenshot eines Geheimnisses, während er einen Fehler meldet, bemerkt dies dann und schließt das Ticket.
 
-Können Sie das Geheimnis entdecken, nach dem wir in unseren GitHub-Problemen unter https://github.com/OWASP/wrongsecrets/issues suchen?
+Kannst du das Geheimnis entdecken, nach dem wir in unseren GitHub-Problemen unter https://github.com/OWASP/wrongsecrets/issues suchen?

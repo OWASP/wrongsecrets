@@ -1,8 +1,8 @@
 *Warum es eine schlechte Idee ist, sensible Daten als Metadaten zu verwenden*
 
-Manchmal argumentieren Menschen, dass weniger sensible Daten als geheime Metadaten gespeichert werden sollten. Denken Sie beispielsweise an einen Benutzernamen – weniger sensibel als ein Passwort, oder etwa doch nicht?
+Manchmal argumentieren Menschen, dass weniger sensible Daten als geheime Metadaten gespeichert werden sollten. Denk beispielsweise an einen Benutzernamen – weniger sensibel als ein Passwort, oder etwa doch nicht?
 In vielen dieser Fälle sind diese Informationen ebenso wichtig und sollten den gleichen Schutz genießen wie das Geheimnis (z. B. das Passwort) selbst.
 
 Wir möchten unseren Mitarbeitern oft keinen Lesezugriff auf Geschäftsgeheimnisse gewähren, ihnen aber stattdessen Lesezugriff auf Metadaten ermöglichen. Wenn ein Geschäftsgeheimnis in den Metadaten gespeichert ist, ist es intern gefährdet.
 
-Bewahren Sie sensible Werte, einschließlich Benutzernamen, sofern sie den Zugriff auf ein Konto ermöglichen, im geschützten Geheimniswert statt in Metadaten. Wenden Sie auf die vollständigen Zugangsdaten dieselbe Zugriffsrichtlinie an wie auf das Passwort.
+Bewahre sensible Werte, einschließlich Benutzernamen, sofern sie den Zugriff auf ein Konto ermöglichen, im geschützten Geheimniswert statt in Metadaten auf. Wende auf die vollständigen Zugangsdaten dieselbe Zugriffsrichtlinie an wie auf das Passwort.

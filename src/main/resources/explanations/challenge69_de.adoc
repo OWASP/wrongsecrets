@@ -6,7 +6,7 @@ Diese Anwendung liefert einen Cursor-Skill namens `deploy-preview` aus. Der Skil
 
 Der Quellcode des Skills ist auch auf GitHub unter folgendem Link verfügbar: link:https://github.com/OWASP/wrongsecrets/blob/master/src/main/resources/challenges/challenge-70/cursor-skill/deploy-preview/SKILL.md[`src/main/resources/challenges/challenge-70/cursor-skill/deploy-preview/SKILL.md`].
 
-Lesen Sie den Skill und reichen Sie das Staging-Deploy-Token ein, das der Autor „damit der Skill eigenständig bleibt“ direkt hineingeschrieben hat.
+Lies den Skill und reiche das Staging-Deploy-Token ein, das der Autor „damit der Skill eigenständig bleibt“ direkt hineingeschrieben hat.
 
 [NOTE]
 ====

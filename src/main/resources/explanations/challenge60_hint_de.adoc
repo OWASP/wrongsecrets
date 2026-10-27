@@ -6,8 +6,8 @@ Diese Herausforderung demonstriert, wie ein unsicherer MCP-Server (Model Context
 
 1. **Auf Port 8090 läuft ein separater MCP-Server** – ein anderer Port als der der Hauptanwendung (8080).
 2. **Der MCP-Server implementiert das JSON-RPC 2.0-Protokoll**, wie in der MCP-Spezifikation definiert.
-3. **Beginnen Sie mit der Auflistung der verfügbaren Tools** mithilfe der Methode `tools/list`.
-4. **Rufen Sie das Tool `execute_command` auf** – es gibt die Umgebungsvariablen des Servers zurück.
+3. **Beginne mit der Auflistung der verfügbaren Tools** mithilfe der Methode `tools/list`.
+4. **Rufe das Tool `execute_command` auf** – es gibt die Umgebungsvariablen des Servers zurück.
 
 **Schritt-für-Schritt-Anleitung:**
 
@@ -20,7 +20,7 @@ curl -s -X POST http://localhost:8090/mcp \
   -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
 ----
 
-Rufen Sie anschließend `execute_command` mit einem beliebigen Shell-Befehl auf (z. B. `env`):
+Rufe anschließend `execute_command` mit einem beliebigen Shell-Befehl auf (z. B. `env`):
 
 [source,bash]
 ----
@@ -29,9 +29,9 @@ curl -s -X POST http://localhost:8090/mcp \
   -d '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"execute_command","arguments":{"command":"env"}}}'
 ----
 
-**Worauf Sie achten sollten:**
+**Worauf du achten solltest:**
 
-- Suchen Sie den Schlüssel `WRONGSECRETS_MCP_SECRET` im zurückgegebenen Umgebungsvariablen-Dump.
+- Suche den Schlüssel `WRONGSECRETS_MCP_SECRET` im zurückgegebenen Umgebungsvariablen-Dump.
 - Der daneben stehende Wert ist die Antwort auf diese Herausforderung.
 
-**Hinweis:** Der Endpunkt ist auch über den Hauptport erreichbar – versuchen Sie es mit `/mcp`, falls Port 8090 nicht erreichbar ist.
+**Hinweis:** Der Endpunkt ist auch über den Hauptport erreichbar – versuche es mit `/mcp`, falls Port 8090 nicht erreichbar ist.

@@ -17,13 +17,13 @@ KI-Systeme könnten unbeabsichtigt Informationen preisgeben, die sie eigentlich 
 **Reale Auswirkungen:**
 
 - **API-Schlüssel in Eingabeaufforderungen:** API-Schlüssel, Passwörter oder Token dürfen niemals in Eingabeaufforderungen von KI-Systemen eingebettet werden.
-- **Sensible Geschäftslogik:** Geben Sie in den Eingabeaufforderungen keine vertraulichen Geschäftsregeln oder -prozesse an.
-- **Persönliche Daten:** Vermeiden Sie die Aufnahme personenbezogener Daten oder sensibler Benutzerdaten in Systemanweisungen.
-- **Sicherheitsmaßnahmen:** Verlassen Sie sich für die Sicherheit nicht ausschließlich auf zeitgesteuerte Einschränkungen.
+- **Sensible Geschäftslogik:** Gib in den Eingabeaufforderungen keine vertraulichen Geschäftsregeln oder -prozesse an.
+- **Persönliche Daten:** Vermeide die Aufnahme personenbezogener Daten oder sensibler Benutzerdaten in Systemanweisungen.
+- **Sicherheitsmaßnahmen:** Verlasse dich für die Sicherheit nicht ausschließlich auf zeitgesteuerte Einschränkungen.
 
 **Bewährte Vorgehensweisen:**
-- Verwenden Sie außerhalb des KI-Systems geeignete Authentifizierungs- und Autorisierungsverfahren.
-- Implementieren Sie Sicherheitskontrollen auf Anwendungsebene, nicht nur in Eingabeaufforderungen.
+- Verwende außerhalb des KI-Systems geeignete Authentifizierungs- und Autorisierungsverfahren.
+- Implementiere Sicherheitskontrollen auf Anwendungsebene, nicht nur in Eingabeaufforderungen.
 - KI-Systeme regelmäßig auf Schwachstellen durch Prompt-Injection testen
 - KI-Interaktionen auf potenzielle Sicherheitsprobleme überwachen
 - KI-Sicherheitsrahmen und -richtlinien nutzen

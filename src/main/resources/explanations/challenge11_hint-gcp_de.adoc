@@ -1,6 +1,6 @@
 Diese Herausforderung lässt sich mit folgenden Schritten lösen:
 
-- Erstellen Sie eine neue Jobdatei `job.yaml` mit folgendem Inhalt:
+- Erstelle eine neue Jobdatei `job.yaml` mit folgendem Inhalt:
 
 ```yaml
 apiVersion: batch/v1
@@ -28,5 +28,5 @@ spec:
 
 Dieser Job führt den Befehl `gcloud secrets versions access latest --secret=wrongsecret-3` aus. Da der Job auf dasselbe Dienstkonto wie der Secret-Challenge-Pod zugreifen kann, hat er dieselben Berechtigungen für den Zugriff auf GCP.
 
-- Wenden Sie den Job mit `kubectl apply -f job.yaml` an.
-- Überprüfen Sie die Job-Logs mit `kubectl logs job/wrongsecret-3`. Das sollte Ihnen die Lösung zeigen.
+- Wende den Job mit `kubectl apply -f job.yaml` an.
+- Überprüfe die Job-Logs mit `kubectl logs job/wrongsecret-3`. Das sollte dir die Lösung zeigen.

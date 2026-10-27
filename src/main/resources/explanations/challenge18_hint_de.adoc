@@ -3,18 +3,18 @@ Diese Herausforderung untersucht speziell MD5- und SHA1-Hashes ohne Salting. Sin
 Diese Herausforderung lässt sich mit folgenden Lösungen bewältigen:
 
 1. Für den ersten Hash (MD5):
-- Verwenden Sie ein Tool wie Hashcat:
-- Installieren Sie https://hashcat.net/hashcat/[Hashcat]
-- Laden Sie die Datei https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt[rockyou.txt password list] herunter.
+- Verwende ein Tool wie Hashcat:
+- Installiere https://hashcat.net/hashcat/[Hashcat]
+- Lade die Datei https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt[rockyou.txt password list] herunter.
 - Führe Hashcat auf dem Hash aus: `hashcat -m 0 "2ab96390c7dbe3439de74d0c9b0b1767" /path/to/file/rockyou.txt`
 
 2. Für den zweiten Hash (SHA1):
-- Verwenden Sie ein Tool wie Hashcat:
-- Installieren Sie https://hashcat.net/hashcat/[Hashcat]
-- Laden Sie die Datei https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt[rockyou.txt password list] herunter.
+- Verwende ein Tool wie Hashcat:
+- Installiere https://hashcat.net/hashcat/[Hashcat]
+- Lade die Datei https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt[rockyou.txt password list] herunter.
 - Führe Hashcat auf dem Hash aus: `hashcat -m 100 "F3BBBD66A63D4BF1747940578EC3D0103530E21D" /path/to/file/rockyou.txt`
 
 3. Für jeden der Hashes:
-- Nutzen Sie einen Online-Hash-Cracking-Dienst, der Ihnen die schwere Arbeit abnimmt:
-- Besuchen Sie `https://crackstation.net/`
-- Geben Sie den Hash ein und klicken Sie auf "Hashes knacken".
+- Nutze einen Online-Hash-Cracking-Dienst, der dir die schwere Arbeit abnimmt:
+- Besuche `https://crackstation.net/`
+- Gib den Hash ein und klicke auf "Hashes knacken".

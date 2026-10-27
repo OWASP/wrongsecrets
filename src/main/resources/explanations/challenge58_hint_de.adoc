@@ -4,14 +4,14 @@ Diese Herausforderung verdeutlicht ein sehr häufiges Sicherheits-Anti-Pattern: 
 
 **Wo man suchen sollte:**
 
-1. **Probieren Sie den Fehlerendpunkt aus:** Besuchen Sie `/error-demo/database-connection`, um einen Datenbankverbindungsfehler auszulösen.
-2. **Überprüfen Sie die Antwort:** Die Anwendung versucht, eine Verbindung zu einer Datenbank herzustellen, und schlägt dabei fehl, wodurch die Verbindungszeichenfolge offengelegt wird.
+1. **Probiere den Fehlerendpunkt aus:** Besuche `/error-demo/database-connection`, um einen Datenbankverbindungsfehler auszulösen.
+2. **Überprüfe die Antwort:** Die Anwendung versucht, eine Verbindung zu einer Datenbank herzustellen, und schlägt dabei fehl, wodurch die Verbindungszeichenfolge offengelegt wird.
 3. **Protokolle prüfen:** Die Anwendung protokolliert den Fehler auch mit den offengelegten Anmeldeinformationen.
 
-**Worauf Sie achten sollten:**
+**Worauf du achten solltest:**
 
 - JDBC-Verbindungs-URLs enthalten oft sensible Informationen
-- Achten Sie auf Muster wie `jdbc:postgresql://...?user=USERNAME&password=PASSWORD`
+- Achte auf Muster wie `jdbc:postgresql://...?user=USERNAME&password=PASSWORD`
 - Die Fehlermeldung zeigt die vollständige Verbindungszeichenfolge an, wenn die Datenbankverbindung fehlschlägt.
 
 **Kontext aus der Praxis:**

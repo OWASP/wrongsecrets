@@ -2,6 +2,6 @@ Wie im Text der Herausforderung beschrieben, suchen wir das Geheimnis in einem S
 
 Diese Herausforderung lässt sich mit folgenden Schritten lösen:
 
-1. Gehen Sie auf den Tab `issues` in unserem GitHub-Repository und anschließend auf den Abschnitt "closed", um alle geschlossenen Issues anzuzeigen.
+1. Gehe auf den Tab `issues` in unserem GitHub-Repository und anschließend auf den Abschnitt "closed", um alle geschlossenen Issues anzuzeigen.
 
-2. Gehen Sie alle Fehlerberichte durch und achten Sie dabei insbesondere auf die von Benutzern geposteten Screenshots.
+2. Gehe alle Fehlerberichte durch und achte dabei insbesondere auf die von Benutzern geposteten Screenshots.

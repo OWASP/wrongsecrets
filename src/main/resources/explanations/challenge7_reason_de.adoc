@@ -1,4 +1,4 @@
-*Warum Sie Ihre Geheimnisverwaltungslösung gut konfigurieren müssen*
+*Warum du deine Geheimnisverwaltungslösung gut konfigurieren musst*
 
 https://www.vaultproject.io/[*Hashicorp Vault*] dient der Verwaltung von Geheimnissen. Vault schützt Geheimnisse durch Verschlüsselung und verfügt über zahlreiche Sicherheitskontrollen, um den Zugriff darauf zu sichern.
 
@@ -6,5 +6,5 @@ Einige dieser Kontrollmechanismen können leicht falsch konfiguriert oder missbr
 
 Darüber hinaus verfügt das Geheimnis selbst über keine Metadaten zu dem Bereich, in dem es verwendet wird. Dies erschwert die langfristige Aufrechterhaltung des Geheimnisses.
 
-Bei der Verwendung einer Drittanbieterlösung, wie beispielsweise Hashicorp Vault oder einer anderen: Lesen Sie die Dokumentation sorgfältig durch und sichern Sie das System ab.
-Führen Sie außerdem eine Bedrohungsmodellierung durch, um zu verstehen, welche Risiken bei unsachgemäßer Verwendung bestehen.
+Bei der Verwendung einer Drittanbieterlösung, wie beispielsweise Hashicorp Vault oder einer anderen: Lies die Dokumentation sorgfältig durch und sichere das System ab.
+Führe außerdem eine Bedrohungsmodellierung durch, um zu verstehen, welche Risiken bei unsachgemäßer Verwendung bestehen.

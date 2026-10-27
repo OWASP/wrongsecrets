@@ -1,8 +1,8 @@
 Diese Herausforderung lässt sich mit folgenden Schritten lösen:
 
-- Überprüfen Sie Ihren Tresornamen mit `terraform output vault_name`.
+- Überprüfe deinen Tresornamen mit `terraform output vault_name`.
 
-- Erstellen Sie eine neue Pod-Datei `pod.yaml` mit folgendem Inhalt (ersetzen Sie den Vault-Namen durch die Ausgabe aus dem vorherigen Schritt):
+- Erstelle eine neue Pod-Datei `pod.yaml` mit folgendem Inhalt (ersetze den Vault-Namen durch die Ausgabe aus dem vorherigen Schritt):
 
 ```yaml
 apiVersion: batch/v1
@@ -27,6 +27,6 @@ spec:
             ]
       restartPolicy: Never
 ```
-- Wenden Sie den Job mit `kubectl apply -f job.yaml` an.
+- Wende den Job mit `kubectl apply -f job.yaml` an.
 
-Sie können sich nun im Pod anmelden und beispielsweise `az login --identity --allow-no-subscriptions && az keyvault secret show --name wrongsecret-3 --vault-name wrongsecrets-vault-00000` ausführen. Beachten Sie, dass Sie den tatsächlichen Wert von `wrongsecrets-vault-00000` im Terraform-Status finden. Da der Job auf denselben Vault wie der Secret-Challenge-Pod zugreifen kann, hat er auch Zugriff auf dessen Secrets.
+Du kannst dich nun im Pod anmelden und beispielsweise `az login --identity --allow-no-subscriptions && az keyvault secret show --name wrongsecret-3 --vault-name wrongsecrets-vault-00000` ausführen. Beachte, dass du den tatsächlichen Wert von `wrongsecrets-vault-00000` im Terraform-Status findest. Da der Job auf denselben Vault wie der Secret-Challenge-Pod zugreifen kann, hat er auch Zugriff auf dessen Secrets.

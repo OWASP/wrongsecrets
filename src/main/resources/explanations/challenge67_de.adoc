@@ -1,9 +1,9 @@
-=== Geheimnisse werden an Ihren Cloud-Log-Senken gesendet
+=== Geheimnisse werden an deine Cloud-Log-Senken gesendet
 
 Anwendungen protokollieren Geheimnisse selten absichtlich. Viel häufiger kommt es vor, dass ein „Audit-Ereignis“, ein Request-Dump oder ein strukturiertes Logfeld Anmeldeinformationen enthält. Da der Wert kodiert ist, bemerkt ihn niemand bei der Codeüberprüfung: Er erscheint einfach wie ein undurchsichtiger Datenblock.
 
-In dieser Aufgabe schreibt die Anwendung ein solches Audit-Ereignis in die Standardausgabe. Sie gibt das Geheimnis niemals über einen Endpunkt zurück und bindet es auch nicht als Datei ein. Der Wert erscheint ausschließlich im Logstream, den Ihr Cloud-Anbieter für Sie erfasst. Daher müssen Sie die Log-Senke der Cloud, in der Sie die Anwendung ausführen, abfragen.
+In dieser Aufgabe schreibt die Anwendung ein solches Audit-Ereignis in die Standardausgabe. Sie gibt das Geheimnis niemals über einen Endpunkt zurück und bindet es auch nicht als Datei ein. Der Wert erscheint ausschließlich im Logstream, den dein Cloud-Anbieter für dich erfasst. Daher musst du die Log-Senke der Cloud, in der du die Anwendung ausführst, abfragen.
 
-Beachten Sie, dass der protokollierte Wert Base64-kodiert ist, daher ist das Auffinden der Zeile nur die halbe Miete.
+Beachte, dass der protokollierte Wert Base64-kodiert ist, daher ist das Auffinden der Zeile nur die halbe Miete.
 
 Hinweis: Dies ist nicht dasselbe wie Aufgabe 8. Dort wird die Antwort im Klartext protokolliert und kann direkt aus den lokalen Containerprotokollen gelesen werden.

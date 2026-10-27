@@ -6,4 +6,4 @@ Der erste Hash lautet `2ab96390c7dbe3439de74d0c9b0b1767` und der zweite Hash lau
 
 Trotz der Tatsache, dass viele große Unternehmen diese Hashwerte verwenden, gibt es eine Möglichkeit, das System zu überlisten?
 
-Wenn Sie einen der beiden Hashes knacken, erhalten Sie die richtige Antwort. Versuchen Sie als zusätzliche Herausforderung, beide zu knacken.
+Wenn du einen der beiden Hashes knackst, erhältst du die richtige Antwort. Versuche als zusätzliche Herausforderung, beide zu knacken.

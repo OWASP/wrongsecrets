@@ -6,6 +6,6 @@ Häufig kommt es jedoch vor, dass Entwickler sensible Token, Passwörter, API-Sc
 
 Um diese Herausforderung zu bewältigen:
 
-. Untersuchen Sie die devcontainer-Konfigurationsdatei unter https://github.com/OWASP/wrongsecrets/tree/master/.devcontainer/devcontainer.json[`.devcontainer/devcontainer.json`] im Projekt-Repository oder sehen Sie sich den Konfigurationsausschnitt in der Benutzeroberfläche an.
-. Identifizieren Sie das durchgesickerte `DEVCONTAINER_SECRET` oder das im Containerumfeld definierte Token.
-. Geben Sie das entdeckte Geheimnis im unten stehenden Eingabefeld ein.
+. Untersuche die devcontainer-Konfigurationsdatei unter https://github.com/OWASP/wrongsecrets/tree/master/.devcontainer/devcontainer.json[`.devcontainer/devcontainer.json`] im Projekt-Repository oder sieh dir den Konfigurationsausschnitt in der Benutzeroberfläche an.
+. Identifiziere das durchgesickerte `DEVCONTAINER_SECRET` oder das im Containerumfeld definierte Token.
+. Gib das entdeckte Geheimnis im unten stehenden Eingabefeld ein.

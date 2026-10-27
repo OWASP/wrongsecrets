@@ -5,4 +5,4 @@ In vielen Fällen sind diese Geheimnisse genauso wichtig und sollten denselben S
 
 Wir möchten unseren Mitarbeitern oft keinen Lesezugriff auf Geheimnisse gewähren, sondern stattdessen Lesezugriff auf Unterschlüssel. Wenn ein Geheimnis in den Unterschlüsseln gespeichert ist, ist es intern kompromittiert.
 
-Bewahren Sie sensible Werte im geschützten Geheimniswert statt in lesbaren Unterschlüsseln auf und gewähren Sie den Komponenten einer Zugangsberechtigung keinen weitergehenden Zugriff als der Zugangsberechtigung selbst.
+Bewahre sensible Werte im geschützten Geheimniswert statt in lesbaren Unterschlüsseln auf und gewähre den Komponenten einer Zugangsberechtigung keinen weitergehenden Zugriff als der Zugangsberechtigung selbst.

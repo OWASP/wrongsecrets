@@ -5,6 +5,6 @@ Manchmal müssen Single-Page-Anwendungen oder mobile Apps selbstständig auf Inf
 Zu diesem Zweck stellt https://oauth.net/2/grant-types/client-credentials/[OAuth] den `client_credentials`-Flow zur Verfügung, um ein Zugriffstoken zu erhalten.
 In einer solchen Situation lassen sich Kundengeheimnisse leicht im Frontend- oder mobilen Anwendungscode speichern. Und obwohl man das Geheimnis im Code verschleiern kann, muss man es letztendlich doch verwenden.
 
-Diese Aufgabe besteht darin, mithilfe des Client-Credentials-Flows Kontakt zu einem Server aufzunehmen. Können Sie sein Geheimnis lüften?
+Diese Aufgabe besteht darin, mithilfe des Client-Credentials-Flows Kontakt zu einem Server aufzunehmen. Kannst du sein Geheimnis lüften?
 
-Wie wäre es, wenn Sie in den Entwicklertools des Browsers danach suchen?
+Wie wäre es, wenn du in den Entwicklertools des Browsers danach suchst?

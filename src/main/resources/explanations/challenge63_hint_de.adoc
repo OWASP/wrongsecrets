@@ -2,11 +2,11 @@
 Diese Herausforderung verdeutlicht schlechte Verschlüsselungspraktiken – insbesondere das Festcodieren eines Verschlüsselungs-/Entschlüsselungsschlüssels im Quellcode.
 
 **Wo man suchen sollte:**
-1. **Suchen Sie die Java-Quelldatei Challenge63** im Verzeichnis `challenges/docker/challenge63/`.
-2. **Suchen Sie nach statischen finalen String-Konstanten** im oberen Bereich der Klasse.
-3. **Sie finden den AES-Schlüssel, den Initialisierungsvektor und den Chiffretext** alle in derselben Datei.
+1. **Suche die Java-Quelldatei Challenge63** im Verzeichnis `challenges/docker/challenge63/`.
+2. **Suche nach statischen finalen String-Konstanten** im oberen Bereich der Klasse.
+3. **Du findest den AES-Schlüssel, den Initialisierungsvektor und den Chiffretext** alle in derselben Datei.
 
-**So entschlüsseln Sie, sobald Sie den Schlüssel haben:**
+**So entschlüsselst du, sobald du den Schlüssel hast:**
 [source,python]
 ----
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
@@ -23,4 +23,4 @@ plaintext = decryptor.update(ciphertext) + decryptor.finalize()
 print(plaintext.strip())
 ----
 
-**Wichtig:** Wenn ein Angreifer Ihren Quellcode lesen kann, bieten fest codierte Schlüssel keinerlei Schutz.
+**Wichtig:** Wenn ein Angreifer deinen Quellcode lesen kann, bieten fest codierte Schlüssel keinerlei Schutz.

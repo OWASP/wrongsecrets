@@ -6,7 +6,7 @@ Das macht ein Skill-Bundle zu einem idealen Versteck, da Prüfer in der Regel di
 
 Diese Anwendung enthält einen Claude-Skill namens `incident-reporter`. Das exportierte Skill-Bundle befindet sich im Ressourcenordner und kann unter folgendem Link heruntergeladen werden: link:/skills/claude/incident-reporter.zip[`/skills/claude/incident-reporter.zip`].
 
-Laden Sie das Paket herunter, entpacken Sie es und ermitteln Sie das Token, mit dem sich der Uploader authentifiziert.
+Lade das Paket herunter, entpacke es und ermittle das Token, mit dem sich der Uploader authentifiziert.
 
 Der Quellcode des Skills ist auch auf GitHub unter folgendem Link verfügbar: link:https://github.com/OWASP/wrongsecrets/blob/master/src/main/resources/challenges/challenge-70/claude-skill/incident-reporter.skill[`src/main/resources/challenges/challenge-70/claude-skill/incident-reporter.skill`].
 

@@ -1,4 +1,4 @@
-*Warum Sie niemals ein Geheimnis in einem Agent-Skill ablegen sollten*
+*Warum du niemals ein Geheimnis in einem Agent-Skill ablegen solltest*
 
 Ein Skill ist zur gemeinsamen Nutzung konzipiert. Genau das ist ihr Sinn: Man schreibt den Workflow einmal, und jeder Entwickler, Agent und CI-Job verwendet ihn wieder. Das bedeutet, dass ein Geheimnis in einem Skill die denkbar schlechtesten Eigenschaften besitzt:
 
@@ -9,16 +9,16 @@ Ein Skill ist zur gemeinsamen Nutzung konzipiert. Genau das ist ihr Sinn: Man sc
 - Es handelt sich um eine *gemeinsame* Anmeldeinformation, daher wird sie fast nie rotiert und fast nie eingeschränkt.
 
 ----
-Was Sie stattdessen tun sollten:
+Was du stattdessen tun solltest:
 
-- Halten Sie Credentials aus dem Skill heraus und lassen Sie den Skill diese aus der Umgebung lesen, zum Beispiel `$STAGING_DEPLOY_TOKEN`.
-- Dokumentieren Sie, *welche* Variable benötigt wird und *wo* man sie erhält, niemals den Wert selbst.
+- Halte Credentials aus dem Skill heraus und lass den Skill diese aus der Umgebung lesen, zum Beispiel `$STAGING_DEPLOY_TOKEN`.
+- Dokumentiere, *welche* Variable benötigt wird und *wo* man sie erhält, niemals den Wert selbst.
 - Jedem Verbraucher sollte ein eigenes, kurzlebiges Berechtigungszertifikat mit minimalen Berechtigungen anstelle eines gemeinsamen Team-Tokens zugewiesen werden.
-- Scannen Sie Skill-Dateien mit einem Secret Scanner in Pre-Commit und CI, genau wie Sie Quellcode scannen.
-- Behandeln Sie ein Geheimnis, das jemals in einem Skill aufgetaucht ist, als kompromittiert und rotieren Sie es.
+- Scanne Skill-Dateien mit einem Secret Scanner in Pre-Commit und CI, genau wie du Quellcode scannst.
+- Behandle ein Geheimnis, das jemals in einem Skill aufgetaucht ist, als kompromittiert und rotiere es.
 ----
 
 [NOTE]
 ====
-Skills, Regeln, Prompts, MCP-Serverkonfigurationen und Agenten-Anweisungsdateien sind allesamt Code, was Ihre Geheimnisverwaltung betrifft. Wenn Sie ein Token nicht in einer `.java`-Datei fest codieren würden, sollten Sie es auch nicht in einer `SKILL.md`-Datei fest codieren.
+Skills, Regeln, Prompts, MCP-Serverkonfigurationen und Agenten-Anweisungsdateien sind allesamt Code, was deine Geheimnisverwaltung betrifft. Wenn du ein Token nicht in einer `.java`-Datei fest codieren würdest, solltest du es auch nicht in einer `SKILL.md`-Datei fest codieren.
 ====

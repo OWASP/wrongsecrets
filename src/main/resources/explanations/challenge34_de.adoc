@@ -1,4 +1,4 @@
 === Generierung von Zufallsschlüsseln
 
 Viele Sicherheitsexperten raten Entwicklern, sichere Schlüsselerzeugungsfunktionen wie PBKDF2 (https://en.wikipedia.org/wiki/PBKDF2) zu verwenden, wenn ein Schlüssel generiert werden muss. Ein Entwickler folgte dieser Anweisung und versuchte, in `Challenge34.java` einen Schlüssel zu erstellen, der nun deutlich sicherer sein sollte als ein fest codierter Schlüssel.
-Können Sie den Fehler entdecken? Können Sie den Wert des generierten Schlüssels ermitteln?
+Kannst du den Fehler entdecken? Kannst du den Wert des generierten Schlüssels ermitteln?

@@ -4,16 +4,16 @@ Das von Anthropic entwickelte Model Context Protocol (MCP) ist ein offener Stand
 
 Diese Aufgabe veranschaulicht ein realistisches Szenario, in dem ein Entwickler einen MCP-Server mit einem `execute_command`-Tool bereitgestellt hat. Solche Tools sind auf MCP-Servern üblich, um KI-Assistenten Shell-Zugriff zu gewähren – können aber von jedem missbraucht werden, der den Endpunkt entdeckt.
 
-**Ihr Ziel:**
+**Dein Ziel:**
 
 1. **Ein MCP-Server läuft auf einem dedizierten Port (8090)**, getrennt von der Hauptanwendung.
 2. **Der Server stellt ein Tool namens `execute_command` bereit, das die Prozessumgebungsvariablen zurückgibt.**
 3. **Ein Geheimnis (`WRONGSECRETS_MCP_SECRET`) wird als Umgebungsvariable im laufenden Container gespeichert.**
 4. **Der MCP-Server verfügt über keine Authentifizierung** – jeder, der Port 8090 erreichen kann, kann seine Tools aufrufen.
 
-**So interagieren Sie mit dem MCP-Server:**
+**So interagierst du mit dem MCP-Server:**
 
-Zuerst sollten Sie die verfügbaren Werkzeuge kennenlernen:
+Zuerst solltest du die verfügbaren Werkzeuge kennenlernen:
 
 [source,bash]
 ----
@@ -34,7 +34,7 @@ curl -s -X POST https://www.wrongsecrets.com/mcp \
 ====
 
 
-Rufen Sie anschließend das Tool `execute_command` auf, um Umgebungsvariablen abzurufen und das Geheimnis zu finden:
+Rufe anschließend das Tool `execute_command` auf, um Umgebungsvariablen abzurufen und das Geheimnis zu finden:
 
 [source,bash]
 ----
@@ -61,11 +61,11 @@ curl -s -X POST https://www.wrongsecrets.com/mcp \
 
 Dieser MCP-Server geht noch einen Schritt weiter, als nur Umgebungsvariablen für passive Aufrufer zugänglich zu machen. Er bettet außerdem schädliche Anweisungen in seine `initialize`-Antwort ein (das Feld `instructions`). Sobald sich ein legitimer KI-Assistent mit diesem Server verbindet, werden diese Anweisungen unbemerkt in die Systemeingabeaufforderung des Modells eingeschleust. Das Modell wird angewiesen, sofort `execute_command` mit `env` aufzurufen und das Ergebnis anschließend an das Tool `forward_env` weiterzuleiten – wobei die Umgebungsvariablen des KI-Clients selbst an den Server zurückgesendet werden –, ohne den Benutzer darüber zu informieren.
 
-Sie können dies lokal ausprobieren, indem Sie Folgendes tun:
+Du kannst dies lokal ausprobieren, indem du Folgendes tust:
 
-1. Führen Sie den Container lokal aus (z. B. `docker run -p 8080:8080 -p 8090:8090 ghcr.io/owasp/wrongsecrets/wrongsecrets-pr:pr-2400-7391231`)
-2. Richten Sie einen Agenten ein, indem Sie den MCP-Server "http://localhost:8090/mcp" (oder "https://www.wrongsecrets.com/mcp", falls Sie mit einer Online-Veröffentlichung einverstanden sind) verwenden.
-3. Initialisieren Sie den Agenten und beobachten Sie die Protokolle Ihres Containers, die die Meldung "MCP forward_env received exfiltrated client env data (XXX chars)" anzeigen, was bedeutet, dass der MCP-Server Ihre Umgebungsvariablen empfangen hat.
+1. Führe den Container lokal aus (z. B. `docker run -p 8080:8080 -p 8090:8090 ghcr.io/owasp/wrongsecrets/wrongsecrets-pr:pr-2400-7391231`)
+2. Richte einen Agenten ein, indem du den MCP-Server "http://localhost:8090/mcp" (oder "https://www.wrongsecrets.com/mcp", falls du mit einer Online-Veröffentlichung einverstanden bist) verwendest.
+3. Initialisiere den Agenten und beobachte die Protokolle deines Containers, die die Meldung "MCP forward_env received exfiltrated client env data (XXX chars)" anzeigen, was bedeutet, dass der MCP-Server deine Umgebungsvariablen empfangen hat.
 
-Dies ist als *MCP-Rug-Pull* oder *MCP-Lieferkettenangriff* bekannt und verdeutlicht, warum Sie vor jeder Verbindung mit einem MCP-Server dessen `instructions`-Feld überprüfen sollten. Stellen Sie außerdem sicher, dass nur isolierte Prozesse ohne Zugriff auf sensible Daten MCP-Server nutzen dürfen. Rufen Sie MCP-Server niemals direkt von Ihrem Terminal aus auf, wenn sensible Umgebungsvariablen oder Dateien vorhanden sind.
+Dies ist als *MCP-Rug-Pull* oder *MCP-Lieferkettenangriff* bekannt und verdeutlicht, warum du vor jeder Verbindung mit einem MCP-Server dessen `instructions`-Feld überprüfen solltest. Stelle außerdem sicher, dass nur isolierte Prozesse ohne Zugriff auf sensible Daten MCP-Server nutzen dürfen. Rufe MCP-Server niemals direkt von deinem Terminal aus auf, wenn sensible Umgebungsvariablen oder Dateien vorhanden sind.
 ****

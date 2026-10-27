@@ -1,4 +1,4 @@
 === Herausforderung für Tresor-Unterschlüssel
 
 Manchmal wünscht man sich einfach nur einen kurzen Eintrag im Geheimnisverwaltungssystem. Wie wäre es also, Benutzername und Passwort im selben Eintrag zu speichern?
-Wir haben das versucht, sind aber auf ein neues Problem gestoßen! Mit HashiCorp Vault lassen sich Richtlinien einrichten, die den Zugriff auf einen Unterschlüssel erlauben (der Schlüssel zum Wert Ihres Geheimnisses). Können Sie den zufällig gewählten Benutzernamen für diese Herausforderung erraten?
+Wir haben das versucht, sind aber auf ein neues Problem gestoßen! Mit HashiCorp Vault lassen sich Richtlinien einrichten, die den Zugriff auf einen Unterschlüssel erlauben (der Schlüssel zum Wert deines Geheimnisses). Kannst du den zufällig gewählten Benutzernamen für diese Herausforderung erraten?

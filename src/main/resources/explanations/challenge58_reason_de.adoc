@@ -29,11 +29,11 @@ Diese Herausforderung verdeutlicht eines der häufigsten und gefährlichsten Sze
 
 **Verhütung:**
 
-1. **Externes Geheimnismanagement:** Verwenden Sie Umgebungsvariablen, AWS Secrets Manager, Azure Key Vault oder HashiCorp Vault.
+1. **Externes Geheimnismanagement:** Verwende Umgebungsvariablen, AWS Secrets Manager, Azure Key Vault oder HashiCorp Vault.
 2. **Bereinigung der Verbindungszeichenfolge:** Entfernt Anmeldeinformationen aus Fehlermeldungen vor der Protokollierung.
-3. **Protokollierung nach dem Prinzip der minimalen Berechtigungen:** Protokollieren Sie keine Verbindungszeichenfolgen oder technische Details, die Geheimnisse enthalten könnten.
-4. **Separate Datenbankbenutzer:** Verwenden Sie schreibgeschützte Benutzer für Anwendungen, die keinen Schreibzugriff benötigen.
-5. **Verbindungspooling:** Verwenden Sie Verbindungspooling-Bibliotheken, die Anmeldeinformationen sicher verarbeiten.
+3. **Protokollierung nach dem Prinzip der minimalen Berechtigungen:** Protokolliere keine Verbindungszeichenfolgen oder technische Details, die Geheimnisse enthalten könnten.
+4. **Separate Datenbankbenutzer:** Verwende schreibgeschützte Benutzer für Anwendungen, die keinen Schreibzugriff benötigen.
+5. **Verbindungspooling:** Verwende Verbindungspooling-Bibliotheken, die Anmeldeinformationen sicher verarbeiten.
 
 **Fazit:**
 

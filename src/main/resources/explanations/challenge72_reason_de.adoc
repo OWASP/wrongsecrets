@@ -1,6 +1,6 @@
 *Warum Transkripte von KI-Codierungsagenten ein Risiko für den Verlust von Geheimnissen darstellen*
 
-KI-Codierungsagenten lesen Ihre Dateien, führen Ihre Befehle aus und erstellen Sitzungsprotokolle. Wenn ein Entwickler einen Agenten mit der Fehlersuche beauftragt, kann dieser Konfigurationsdateien , Umgebungsvariablen oder Secrets Manager lesen und diese Werte in seinem Protokoll ausgeben. Genau das geschah in dieser Challenge: Der Agent las eine `.env.staging`-Datei und gab das Deployment-Token in seiner Sitzungsausgabe aus.
+KI-Codierungsagenten lesen deine Dateien, führen deine Befehle aus und erstellen Sitzungsprotokolle. Wenn ein Entwickler einen Agenten mit der Fehlersuche beauftragt, kann dieser Konfigurationsdateien, Umgebungsvariablen oder Secrets Manager lesen und diese Werte in seinem Protokoll ausgeben. Genau das geschah in dieser Challenge: Der Agent las eine `.env.staging`-Datei und gab das Deployment-Token in seiner Sitzungsausgabe aus.
 
 Das Transkript wird zu einem dauerhaften Artefakt, das Folgendes beinhalten kann:
 
@@ -17,16 +17,16 @@ In diesem Szenario verstärken sich drei Fehler gegenseitig:
 - Das Protokoll wird wahrscheinlich ohne Überprüfung gespeichert, geteilt oder übertragen, da es eher wie eine Debug-Ausgabe als wie sensible Daten aussieht.
 
 ----
-Was Sie stattdessen tun sollten:
+Was du stattdessen tun solltest:
 
-- Speichern Sie Geheimnisse niemals in Klartext-Konfigurationsdateien. Verwenden Sie stattdessen einen Geheimnismanager oder Umgebungsvariablen, die zur Laufzeit eingefügt werden.
-- Konfigurieren Sie Agenten so, dass sensible Werte vor der Ausgabe unkenntlich gemacht werden. Viele Agenten-Tools unterstützen Ausgabefilterung oder Sandboxing.
-- Überprüfen Sie die Agentenprotokolle, bevor Sie sie speichern oder teilen, genau wie Sie einen Pull Request überprüfen würden.
-- Behandeln Sie jedes Protokoll, das aus einer geheimen Quelle stammt, als potenziell kompromittiert und rotieren Sie die offengelegten Zugangsdaten.
-- Verwenden Sie kurzlebige, zeitlich begrenzte Token für Testbereitstellungen, um den potenziellen Schadensradius zu begrenzen.
+- Speichere Geheimnisse niemals in Klartext-Konfigurationsdateien. Verwende stattdessen einen Geheimnismanager oder Umgebungsvariablen, die zur Laufzeit eingefügt werden.
+- Konfiguriere Agenten so, dass sensible Werte vor der Ausgabe unkenntlich gemacht werden. Viele Agenten-Tools unterstützen Ausgabefilterung oder Sandboxing.
+- Überprüfe die Agentenprotokolle, bevor du sie speicherst oder teilst, genau wie du einen Pull Request überprüfen würdest.
+- Behandle jedes Protokoll, das aus einer geheimen Quelle stammt, als potenziell kompromittiert und rotiere die offengelegten Zugangsdaten.
+- Verwende kurzlebige, zeitlich begrenzte Token für Testbereitstellungen, um den potenziellen Schadensradius zu begrenzen.
 ----
 
 [NOTE]
 ====
-KI-Programmieragenten sind leistungsstarke Werkzeuge, arbeiten aber mit denselben Dateien und derselben Umgebung wie Sie. Wenn ein menschlicher Entwickler ein Geheimnis in ein Chatprotokoll kopiert, macht ein Agent dasselbe – nur dass der Agent ein strukturiertes Protokoll erstellt, das noch einfacher zu durchsuchen und zu teilen ist.
+KI-Programmieragenten sind leistungsstarke Werkzeuge, arbeiten aber mit denselben Dateien und derselben Umgebung wie du. Wenn ein menschlicher Entwickler ein Geheimnis in ein Chatprotokoll kopiert, macht ein Agent dasselbe – nur dass der Agent ein strukturiertes Protokoll erstellt, das noch einfacher zu durchsuchen und zu teilen ist.
 ====

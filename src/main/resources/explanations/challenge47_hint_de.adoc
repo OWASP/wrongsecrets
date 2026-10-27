@@ -1,11 +1,11 @@
 Diese Herausforderung kann auf folgende Weise gelöst werden:
 
-- Ermitteln Sie die Daten des Sidecars, indem Sie die vom Vault Agent Sidecar erstellten Dateien untersuchen:
-  1. Führen Sie `kubectl get pods -A` aus und suchen Sie nach dem Pod-Namen secret-challenge-xxx.
-  2. Führen Sie `kubectl exec secret-challenge-xxx -c secret-challenge -n default -- cat /vault/secrets/challenge47` aus, wobei `xxx` der Rest des zufällig generierten Pod-Namens ist, um den vom Entwickler verwendeten fest codierten Wert auszugeben.
+- Ermittle die Daten des Sidecars, indem du die vom Vault Agent Sidecar erstellten Dateien untersuchst:
+  1. Führe `kubectl get pods -A` aus und suche nach dem Pod-Namen secret-challenge-xxx.
+  2. Führe `kubectl exec secret-challenge-xxx -c secret-challenge -n default -- cat /vault/secrets/challenge47` aus, wobei `xxx` der Rest des zufällig generierten Pod-Namens ist, um den vom Entwickler verwendeten fest codierten Wert auszugeben.
 
 - Die Daten können durch Überprüfung der Protokolle des Wrongsecrets-Pods während des Exportvorgangs abgerufen werden:
-  1. Führen Sie `kubectl get pods -A` aus und suchen Sie nach dem Pod-Namen secret-challenge-xxx.
-  2. Führen Sie `kubectl logs secret-challenge-xxx -c vault-agent` aus, wobei `xxx` der Rest des zufällig generierten Pod-Namens ist, um die Logs vom Vault AGent Sidecar auszugeben, einschließlich der Protokollierung der Export-Anweisung.
+  1. Führe `kubectl get pods -A` aus und suche nach dem Pod-Namen secret-challenge-xxx.
+  2. Führe `kubectl logs secret-challenge-xxx -c vault-agent` aus, wobei `xxx` der Rest des zufällig generierten Pod-Namens ist, um die Logs vom Vault AGent Sidecar auszugeben, einschließlich der Protokollierung der Export-Anweisung.
 
-Hinweis: Falls Sie dies in einer gehosteten Umgebung ausführen, in der Sie keinen Zugriff auf den Kubernetes-Cluster haben, bitten Sie den Organisator der gehosteten Lösung, die Befehle für Sie auszuführen und Ihnen die Ergebnisse zurückzugeben.
+Hinweis: Falls du dies in einer gehosteten Umgebung ausführst, in der du keinen Zugriff auf den Kubernetes-Cluster hast, bitte den Organisator der gehosteten Lösung, die Befehle für dich auszuführen und dir die Ergebnisse zurückzugeben.

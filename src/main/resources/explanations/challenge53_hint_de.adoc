@@ -1,4 +1,4 @@
-Standardmäßig wird die Challenge ohne Debugging-Sidecar ausgeführt. Ihre Aufgabe ist es, die im Pod laufende Binärdatei zu analysieren und das Geheimnis aufzudecken.
+Standardmäßig wird die Challenge ohne Debugging-Sidecar ausgeführt. Deine Aufgabe ist es, die im Pod laufende Binärdatei zu analysieren und das Geheimnis aufzudecken.
 
 Diese Herausforderung lässt sich mit folgenden Schritten lösen:
 
@@ -6,36 +6,36 @@ Diese Herausforderung lässt sich mit folgenden Schritten lösen:
 ```
    kubectl apply -f k8s/challenge53/secret-challenge53.yml
 ```
-   Überprüfen Sie, ob der Pod ausgeführt wird:
+   Überprüfe, ob der Pod ausgeführt wird:
 ```
    kubectl get pods
 ```
 
-2. Beachten Sie, dass der Pod allein keine Debugging-Funktionen bietet. Ersetzen Sie nun das Deployment durch ein Deployment, das einen Sidecar enthält:
+2. Beachte, dass der Pod allein keine Debugging-Funktionen bietet. Ersetze nun das Deployment durch ein Deployment, das einen Sidecar enthält:
 ```
    kubectl apply -f k8s/challenge53/secret-challenge53-sidecar.yml
 ```
 
-3. Starten Sie den an den laufenden Pod angehängten Debugging-Container:
+3. Starte den an den laufenden Pod angehängten Debugging-Container:
 ```
    kubectl exec -it <pod-name> -c sidecar -- /bin/sh
 ```
 
-4. Navigieren Sie zu dem freigegebenen Verzeichnis, in dem die Binärdatei gespeichert ist:
+4. Navigiere zu dem freigegebenen Verzeichnis, in dem die Binärdatei gespeichert ist:
 ```
    cd /shared-data
 ```
 
-5. Verwenden Sie `gdb`, um die Binärdatei zu untersuchen und sie auszuführen:
+5. Verwende `gdb`, um die Binärdatei zu untersuchen und sie auszuführen:
 ```
    gdb wrongsecrets-challenge53-c-linux
    run &
 ```
 
-6. Ermitteln Sie die Speicheradresse des Geheimnisses:
+6. Ermittle die Speicheradresse des Geheimnisses:
 ```
    print &secret
    x/s <memory-address>
 ```
 
-Durch die Analyse des Speichers werden Sie das im Binärcode fest einprogrammierte Geheimnis aufdecken.
+Durch die Analyse des Speichers wirst du das im Binärcode fest einprogrammierte Geheimnis aufdecken.

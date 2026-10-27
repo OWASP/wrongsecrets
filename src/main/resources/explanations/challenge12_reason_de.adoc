@@ -1,9 +1,9 @@
 *Warum es eine schlechte Idee ist, Geheimnisse in Containern zu speichern*
 
-Wie Sie inzwischen feststellen konnten, lassen sich alle in einem Container gespeicherten Geheimnisse leicht aufspüren. Ob es sich um eine Umgebungsvariable, eine Datei oder eine andere Eigenschaft handelt: Wenn ein System sie lesen kann, kann es auch ein Mensch.
+Wie du inzwischen feststellen konntest, lassen sich alle in einem Container gespeicherten Geheimnisse leicht aufspüren. Ob es sich um eine Umgebungsvariable, eine Datei oder eine andere Eigenschaft handelt: Wenn ein System sie lesen kann, kann es auch ein Mensch.
 
 Da es als bewährte Methode gilt, einen Container unveränderlich und versioniert zu halten, bleibt das Geheimnis oft für immer im Container erhalten, es sei denn, man entfernt es erneut aus der Registry.
 
-Hinweis: Wenn Sie die Anzahl der ausführbaren Dateien in einem Container reduzieren (sodass keine Shell mehr möglich ist), vergessen Sie nicht den `Openssl client` und einfache Binärdateien wie `ls` und `cat`, die gegebenenfalls ebenfalls entfernt werden müssen. Dies hilft, zu verhindern, dass ein Angreifer den Inhalt Ihres Containers durchsucht.
+Hinweis: Wenn du die Anzahl der ausführbaren Dateien in einem Container reduzierst (sodass keine Shell mehr möglich ist), vergiss nicht den `Openssl client` und einfache Binärdateien wie `ls` und `cat`, die gegebenenfalls ebenfalls entfernt werden müssen. Dies hilft, zu verhindern, dass ein Angreifer den Inhalt deines Containers durchsucht.
 
-Halten Sie Geheimnisse aus Image-Layern und stellen Sie sie zur Laufzeit über einen Secrets Manager oder einen plattformeigenen Mechanismus bereit, wobei der Zugriff auf die Workload beschränkt bleibt, die ihn benötigt. Rotieren Sie jedes Geheimnis, das in einem Image enthalten war.
+Halte Geheimnisse aus Image-Layern und stelle sie zur Laufzeit über einen Secrets Manager oder einen plattformeigenen Mechanismus bereit, wobei der Zugriff auf die Workload beschränkt bleibt, die ihn benötigt. Rotiere jedes Geheimnis, das in einem Image enthalten war.

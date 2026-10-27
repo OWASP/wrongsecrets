@@ -4,6 +4,6 @@ Es gilt allgemein als schlechte Praxis, einen Verschlüsselungsschlüssel und di
 
 In solchen Szenarien hat ein Angreifer den Schlüssel, sobald er die Datei besitzt.
 
-Es wird stets empfohlen, Ihre Verschlüsselungsschlüssel sicher aufzubewahren.
+Es wird stets empfohlen, deine Verschlüsselungsschlüssel sicher aufzubewahren.
 
-Halten Sie Schlüssel getrennt von den Daten, die sie schützen, zum Beispiel in einem eigenen Key-Management-Dienst oder Hardware-Sicherheitsmodul, und beschränken Sie den Zugriff darauf sowie überwachen Sie ihn.
+Halte Schlüssel getrennt von den Daten, die sie schützen, zum Beispiel in einem eigenen Key-Management-Dienst oder Hardware-Sicherheitsmodul, und beschränke den Zugriff darauf sowie überwache ihn.

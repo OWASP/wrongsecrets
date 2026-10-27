@@ -2,4 +2,4 @@
 
 Auf öffentlichen Blockchains ist alles, was in der Kette gespeichert wird, für alle lesbar.
 
-In dieser Challenge müssen Sie die Variable namens secret aus dem Vertrag `0x8b72f7cbAD50620c46219ad676Ad9d3a5A273587` auf dem Goerli EVM Testnet lesen.
+In dieser Challenge musst du die Variable namens secret aus dem Vertrag `0x8b72f7cbAD50620c46219ad676Ad9d3a5A273587` auf dem Goerli EVM Testnet lesen.

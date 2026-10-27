@@ -20,13 +20,13 @@ Diese Herausforderung verdeutlicht die Verletzung des **Prinzips der minimalen B
 - **Große Angriffsfläche**: Jeder MCP-Client (legitim oder bösartig) kann das Tool aufrufen.
 - **KI-gestützte Ausnutzung**: Mit diesem MCP-Server verbundene KI-Agenten führen das Tool auf Anweisung automatisch aus und erhöhen so das Risiko.
 
-**So beheben Sie das Problem:**
+**So behebst du das Problem:**
 
 1. **MCP-Aufrufer authentifizieren**: Ein Authentifizierungstoken am MCP-Endpunkt anfordern und die Identität des Aufrufers überprüfen, bevor die Tools ausgeführt werden.
-2. **Autorisierung auf Tool-Ebene**: Prüfen Sie, ob der authentifizierte Aufrufer vor dem Aufruf des Dienstkontos Zugriff auf die angeforderte Ressource hat.
+2. **Autorisierung auf Tool-Ebene**: Prüfe, ob der authentifizierte Aufrufer vor dem Aufruf des Dienstkontos Zugriff auf die angeforderte Ressource hat.
 3. **Dienstkontoberechtigungen eng fassen**: Das Dienstkonto sollte nur über die minimal erforderlichen Berechtigungen für legitime Anwendungsfälle verfügen.
-4. **Alle Toolaufrufe protokollieren**: Protokollieren Sie die Identität des Aufrufers bei jedem Toolaufruf, damit der Zugriff überprüft werden kann.
-5. **Identitätswechsel gegenüber gemeinsam genutzten Anmeldeinformationen bevorzugen**: Verwenden Sie anruferspezifische Anmeldeinformationen oder einen Token-Austausch anstelle eines einzelnen gemeinsam genutzten Dienstkontos.
+4. **Alle Toolaufrufe protokollieren**: Protokolliere die Identität des Aufrufers bei jedem Toolaufruf, damit der Zugriff überprüft werden kann.
+5. **Identitätswechsel gegenüber gemeinsam genutzten Anmeldeinformationen bevorzugen**: Verwende anruferspezifische Anmeldeinformationen oder einen Token-Austausch anstelle eines einzelnen gemeinsam genutzten Dienstkontos.
 
 **Hinweise zur Implementierung von WrongSecrets:**
 

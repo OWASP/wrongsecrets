@@ -9,4 +9,4 @@ Das Team implementierte einen Protokollierungsmechanismus, der detaillierte Prü
 Ohne ihr Wissen enthielten diese Protokolle Spuren des heiligen API-Schlüssels, der darin verborgen war.
 die Prüfungsereignisse.
 
-Können Sie diesen API-Schlüssel finden?
+Kannst du diesen API-Schlüssel finden?

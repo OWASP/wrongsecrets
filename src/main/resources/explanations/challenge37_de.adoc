@@ -1,5 +1,5 @@
-=== Ihren Sicherheitstests Zugriff gewähren
+=== Deinen Sicherheitstests Zugriff gewähren
 
-Angesichts der vielen kuriosen Ergebnisse, die wir in diesem Projekt bereits erzielt haben, haben wir uns entschieden, automatisiertes Scannen mit ZAP zu implementieren. Dazu müssen wir den Endpunkt dieser Challenge `/authenticated/challenge37` fuzzing-analysieren und somit die Basisauthentifizierung für ZAP konfigurieren. Können Sie das vom Endpunkt zurückgegebene Geheimnis finden?
+Angesichts der vielen kuriosen Ergebnisse, die wir in diesem Projekt bereits erzielt haben, haben wir uns entschieden, automatisiertes Scannen mit ZAP zu implementieren. Dazu müssen wir den Endpunkt dieser Challenge `/authenticated/challenge37` fuzzing-analysieren und somit die Basisauthentifizierung für ZAP konfigurieren. Kannst du das vom Endpunkt zurückgegebene Geheimnis finden?
 
 Hinweis: Wir verwenden GitHub Actions.

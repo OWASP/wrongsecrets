@@ -1,8 +1,8 @@
 Diese Herausforderung lässt sich mit folgenden Schritten lösen:
 
-1. Extrahieren Sie das Geheimnis mithilfe von GitHub Actions. Beachten Sie, dass in der aktuellen Projektkonfiguration die vom Eigentümer/Mitwirkenden ausgelöste Aktion das Geheimnis enthält. Dies ist nicht der Fall, wenn Sie es mit Forks versuchen. Lassen Sie uns die Schritte besprechen:
-- Melden Sie sich mit Ihrem eigenen Konto bei GitHub an.
-- Gehen Sie zu https://github.com/OWASP/wrongsecrets/actions und wählen Sie `Get the challenge code 13` aus.
-- Schauen Sie sich die neueste Version an, die von einem der Eigentümer oder Mitarbeiter erstellt wurde.
+1. Extrahiere das Geheimnis mithilfe von GitHub Actions. Beachte, dass in der aktuellen Projektkonfiguration die vom Eigentümer/Mitwirkenden ausgelöste Aktion das Geheimnis enthält. Dies ist nicht der Fall, wenn du es mit Forks versuchst. Lass uns die Schritte besprechen:
+- Melde dich mit deinem eigenen Konto bei GitHub an.
+- Gehe zu https://github.com/OWASP/wrongsecrets/actions und wähle `Get the challenge code 13` aus.
+- Schau dir die neueste Version an, die von einem der Eigentümer oder Mitarbeiter erstellt wurde.
 - Nimm den letzten Durchlauf, bei dem das Geheimnis Base64-kodiert ist. Kopiere das Base64-kodierte Ergebnis und dekodiere es zweimal.
-- Geben Sie die dekodierte Lösung als Antwort ein.
+- Gib die dekodierte Lösung als Antwort ein.

@@ -1,19 +1,19 @@
 *Warum Geheimnisse so dringend rollenbasierte Zugriffskontrolle benötigen*
 
-K8s Secrets sind für die Speicherung von Geheimnissen konzipiert. Wie Sie durch das Lösen der Herausforderung und sorgfältige Recherche feststellen können, sind Geheimnisse bereits `base64`-kodiert, sodass sie verschlüsselte Binärdaten enthalten können.
+K8s Secrets sind für die Speicherung von Geheimnissen konzipiert. Wie du durch das Lösen der Herausforderung und sorgfältige Recherche feststellen kannst, sind Geheimnisse bereits `base64`-kodiert, sodass sie verschlüsselte Binärdaten enthalten können.
 
 Geheimnisse sollten, sofern sie nicht verschlüsselt sind (und besser noch, selbst dann nicht), natürlich nicht in Git eingecheckt werden. Dies ist einer der ersten Fehler, die hier gemacht werden, da wir dann am Ende mit den gleichen Problemen konfrontiert sind wie in den vorherigen Herausforderungen beschrieben.
 
 Am wichtigsten ist: RBAC sollte Geheimnisse wirklich streng handhaben: Nur die Prozesse, die das eigentliche Geheimnis benötigen, sollten es lesen können, und nur eine sehr begrenzte Anzahl anderer Rollen sollte das Geheimnis bewahren dürfen.
 
 Und dann ist da noch der Speicher des K8s-Clusters, in dem die Geheimnisse nun gespeichert sind. Dieser ist momentan nicht verschlüsselt und könnte ebenfalls missbraucht werden.
-Aktivieren Sie die Verschlüsselung im Ruhezustand für Kubernetes-Geheimnisse mit einem verwalteten Schlüssel, halten Sie RBAC eng begrenzt auf die jeweils benötigten Geheimnisse der Workload und überwachen Sie den Zugriff. Die Verschlüsselung im Ruhezustand ersetzt keine Zugriffskontrollen.
+Aktiviere die Verschlüsselung im Ruhezustand für Kubernetes-Geheimnisse mit einem verwalteten Schlüssel, halte RBAC eng begrenzt auf die jeweils benötigten Geheimnisse der Workload und überwache den Zugriff. Die Verschlüsselung im Ruhezustand ersetzt keine Zugriffskontrollen.
 
 Zusammengefasst: K8S-Secrets sind keine schlechte Idee. Allerdings benötigen sie eine korrekte Konfiguration des K8s-Clusters, auf dem sie gehostet werden, um effektiv geschützt zu werden.
 
 
 Zu guter Letzt: Wir könnten uns problemlos in den Container einloggen, um die Umgebungsvariablen nach dem Geheimnis zu durchsuchen. Dies hängt mit drei Dingen zusammen:
 
-- Dies ist uns mittels RBAC gestattet, was in PRD nicht der Normalfall sein sollte: Andernfalls kann jeder in Ihrer Organisation im Container herumstöbern.
+- Dies ist uns mittels RBAC gestattet, was in PRD nicht der Normalfall sein sollte: Andernfalls kann jeder in deiner Organisation im Container herumstöbern.
 - Wir haben ausführbare Dateien im Container (sh/openssl/etc.), die wir ausführen können, um eine Shell einzurichten. Das Entfernen aller unnötigen Binärdateien aus dem Container kann die Angriffsfläche verringern und es Angreifern, die eine Remote Code Execution (RCE) im Container durchgeführt haben, erschweren, auf andere Stellen im Container zuzugreifen und dort weitere Ausführungsrechte zu erlangen.
 - Wir haben die ConfigMap als Umgebungsvariable freigegeben. Das bedeutet, dass jeder, der Zugriff auf die Container-Laufzeitumgebung innerhalb des Pods hat, das Geheimnis nun auslesen kann. Wir haben das Geheimnis zwar in die Nähe des Nutzers gebracht, aber möglicherweise noch nicht nah genug (z. B. nur in die Anwendung).

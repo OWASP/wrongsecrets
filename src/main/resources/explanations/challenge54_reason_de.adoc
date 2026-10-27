@@ -7,6 +7,6 @@ Entwickler aktualisieren regelmäßig Konfigurationsdateien wie `.gitignore`, wo
 
 Diese Herausforderung verdeutlicht die Wichtigkeit von Code-Reviews und der Sicherstellung, dass Geheimnisse niemals versehentlich eingecheckt oder zurückgelassen werden.
 
-Was Sie stattdessen tun sollten:
-- Verwenden Sie `.gitignore` nicht als Ort zum Speichern von Geheimnissen. Bewahren Sie Zugangsdaten in einem Secrets Manager auf; falls die lokale Entwicklung eine Datei erfordert, halten Sie sie fern von der Versionsverwaltung und schränken Sie deren Dateisystemzugriff ein. Durchsuchen Sie das Repository nach versehentlichen Offenlegungen.
-- Falls ein Geheimnis committet wurde, entfernen Sie es aus der Datei und rotieren oder widerrufen Sie es; das Löschen in einem späteren Commit entfernt es nicht aus dem Git-Verlauf.
+Was du stattdessen tun solltest:
+- Verwende `.gitignore` nicht als Ort zum Speichern von Geheimnissen. Bewahre Zugangsdaten in einem Secrets Manager auf; falls die lokale Entwicklung eine Datei erfordert, halte sie fern von der Versionsverwaltung und schränke deren Dateisystemzugriff ein. Durchsuche das Repository nach versehentlichen Offenlegungen.
+- Falls ein Geheimnis committet wurde, entferne es aus der Datei und rotiere oder widerrufe es; das Löschen in einem späteren Commit entfernt es nicht aus dem Git-Verlauf.

@@ -1,4 +1,4 @@
 Diese Herausforderung lässt sich mit folgenden Schritten lösen:
 
-1. Besuchen Sie unsere Website: https://owasp.org/www-project-wrongsecrets/.
+1. Besuche unsere Website: https://owasp.org/www-project-wrongsecrets/.
 2. Schau dir ein paar Tabs an, das Geheimnis ist bestimmt dabei :)

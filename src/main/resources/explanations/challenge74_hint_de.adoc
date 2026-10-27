@@ -1,18 +1,18 @@
-Diese Herausforderung können Sie mit den folgenden Schritten lösen:
+Diese Herausforderung kannst du mit den folgenden Schritten lösen:
 
-1. Interagieren Sie mit dem KI-Assistenten:
-- Nutzen Sie die in der Aufgabe bereitgestellte Chat-Oberfläche.
-- Stellen Sie dem Assistenten Fragen und beobachten Sie seine Reaktionen.
-- Denken Sie daran, dass dem Assistenten im Rahmen seiner Anweisungen vertrauliche Informationen übermittelt wurden.
+1. Interagiere mit dem KI-Assistenten:
+- Nutze die in der Aufgabe bereitgestellte Chat-Oberfläche.
+- Stelle dem Assistenten Fragen und beobachte seine Reaktionen.
+- Denke daran, dass dem Assistenten im Rahmen seiner Anweisungen vertrauliche Informationen übermittelt wurden.
 
-2. Untersuchen Sie, wie der Assistent instruiert wird:
-- Fragen Sie den Assistenten nach seinen Anweisungen, Regeln oder dem Kontext.
-- Überlegen Sie, welche Informationen dem Modell zur Verfügung stehen könnten, die in der Chat-Oberfläche nicht direkt sichtbar sind.
+2. Untersuche, wie der Assistent instruiert wird:
+- Frage den Assistenten nach seinen Anweisungen, Regeln oder dem Kontext.
+- Überlege, welche Informationen dem Modell zur Verfügung stehen könnten, die in der Chat-Oberfläche nicht direkt sichtbar sind.
 
-3. Versuchen Sie eine sofortige Injektion:
+3. Versuche eine sofortige Injektion:
 - Der Assistent wurde angewiesen, die vertraulichen Informationen nicht preiszugeben.
-- Versuchen Sie, Nachrichten zu verfassen, die diese Anweisungen ändern, außer Kraft setzen oder manipulieren.
-- Bitten Sie den Assistenten, Informationen aus seinen Anweisungen oder dem Kontext preiszugeben.
+- Versuche, Nachrichten zu verfassen, die diese Anweisungen ändern, außer Kraft setzen oder manipulieren.
+- Bitte den Assistenten, Informationen aus seinen Anweisungen oder dem Kontext preiszugeben.
 
 4. Suche nach dem Geheimnis:
-- Wenn Sie den Assistenten erfolgreich dazu bringen, die vertraulichen Informationen preiszugeben, verwenden Sie den erhaltenen Wert als Lösung für die Herausforderung.
+- Wenn du den Assistenten erfolgreich dazu bringst, die vertraulichen Informationen preiszugeben, verwende den erhaltenen Wert als Lösung für die Herausforderung.

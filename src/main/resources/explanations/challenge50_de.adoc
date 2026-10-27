@@ -4,4 +4,4 @@ Es ist kinderleicht, ein Geheimnis in einer DLL-Datei zu finden, aber unter macO
 
 Zeigt uns, dass wir das nicht tun sollten! Könnt ihr das Geheimnis in https://github.com/OWASP/wrongsecrets-binaries/releases/download/0.1.0/wrongsecrets-dotnet[wrongsecrets-dotnet] (oder https://github.com/OWASP/wrongsecrets-binaries/releases/download/0.1.0/wrongsecrets-dotnet-arm[wrongsecrets-dotnet-arm], https://github.com/OWASP/wrongsecrets-binaries/releases/download/0.1.0/wrongsecrets-dotnet-linux[wrongsecrets-dotnet-linux]) finden?
 
-Versuchen Sie, die Binärdatei herunterzuladen und lokal auszuführen (z. B. `./wrongsecrets-dotnet<theversion you need> <your answer>`).
+Versuche, die Binärdatei herunterzuladen und lokal auszuführen (z. B. `./wrongsecrets-dotnet<theversion you need> <your answer>`).

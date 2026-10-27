@@ -1,7 +1,7 @@
-Die korrekte Eingabe für die Ratemethode finden Sie wie folgt:
+Die korrekte Eingabe für die Ratemethode findest du wie folgt:
 
 1. Hashwerte vergleichen:
-- Schlagen Sie den Vertrag im Etherscan-Explorer unter https://etherscan.io/[Etherscan] nach.
+- Schlage den Vertrag im Etherscan-Explorer unter https://etherscan.io/[Etherscan] nach.
 - Den Hash aus dem Vertragsspeicher abrufen.
-- Gehen Sie die Transaktionen durch und öffnen Sie dann die Registerkarte "Eingaben", um sie als UTF-8 zu dekodieren.
+- Gehe die Transaktionen durch und öffne dann die Registerkarte "Eingaben", um sie als UTF-8 zu dekodieren.
 - Vergleiche die Hashwerte der Eingaben aus den Transaktionen mit dem gespeicherten Hashwert.

@@ -2,7 +2,7 @@
 
 *Warum unsachgemäße Geheimnisverwaltung in Docker Compose zu Sicherheitslücken führen kann*
 
-In containerisierten Umgebungen ist die Geheimnisverwaltung entscheidend für die Wahrung der Vertraulichkeit und Integrität sensibler Informationen wie Datenbankzugangsdaten, API-Schlüssel und anderer Geheimnisse. Docker Compose bietet eine komfortable Möglichkeit, Geheimnisse zu definieren und zu verwalten. Eine unsachgemäße Handhabung dieser Geheimnisse kann Ihr System jedoch Angriffen aussetzen.
+In containerisierten Umgebungen ist die Geheimnisverwaltung entscheidend für die Wahrung der Vertraulichkeit und Integrität sensibler Informationen wie Datenbankzugangsdaten, API-Schlüssel und anderer Geheimnisse. Docker Compose bietet eine komfortable Möglichkeit, Geheimnisse zu definieren und zu verwalten. Eine unsachgemäße Handhabung dieser Geheimnisse kann dein System jedoch Angriffen aussetzen.
 
 Ein häufiger Fehler ist es, Geheimnisse direkt über Umgebungsvariablen zu übergeben oder geheime Dateien in die Versionskontrolle einzuchecken. Dieser Ansatz ist fehlerhaft, weil:
 
@@ -21,8 +21,8 @@ Diese Aufgabe simuliert ein Szenario, in dem:
 
 *Wichtigste Lernpunkte:*
 
-- **Vermeiden Sie die Verwendung von Umgebungsvariablen für Geheimnisse:** Obwohl sie praktisch sind, eignen sie sich nicht zur sicheren Verwaltung sensibler Informationen. Verwenden Sie stattdessen Docker Secrets oder externe Tools wie Vault oder AWS Secrets Manager.
-- **Geheimnisse nicht in die Versionskontrolle einchecken**: Halten Sie geheime Dateien immer von Ihrem Repository fern, indem Sie `.gitignore` oder sichere Lösungen zur Geheimnisverwaltung verwenden.
+- **Vermeide die Verwendung von Umgebungsvariablen für Geheimnisse:** Obwohl sie praktisch sind, eignen sie sich nicht zur sicheren Verwaltung sensibler Informationen. Verwende stattdessen Docker Secrets oder externe Tools wie Vault oder AWS Secrets Manager.
+- **Geheimnisse nicht in die Versionskontrolle einchecken**: Halte geheime Dateien immer von deinem Repository fern, indem du `.gitignore` oder sichere Lösungen zur Geheimnisverwaltung verwendest.
 - **Sicherstellen, dass Geheimnisse nicht in Images eingebettet werden**: Geheimnisse sollten nicht im Docker-Image selbst eingebettet sein; sie sollten zur Laufzeit eingefügt oder sicher über einen externen Dienst abgerufen werden.
 
-Durch das Absolvieren dieser Aufgabe lernen Sie, wie einfach Angreifer Zugang zu unsachgemäß verwalteten Geheimnissen erlangen können und welche Best Practices für die Sicherung von Geheimnissen in Docker Compose-Umgebungen gelten.
+Durch das Absolvieren dieser Aufgabe lernst du, wie einfach Angreifer Zugang zu unsachgemäß verwalteten Geheimnissen erlangen können und welche Best Practices für die Sicherung von Geheimnissen in Docker Compose-Umgebungen gelten.

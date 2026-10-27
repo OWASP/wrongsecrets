@@ -2,4 +2,4 @@
 
 Okay, jetzt generieren wir ein Geheimnis mit Terraform und speichern es bei unserem Cloud-Anbieter. Was passiert im Terraform-Status?
 
-Sie können versuchen, das Geheimnis zu finden, indem Sie Ihre `terraform.tfstate`-Dateien mit Hilfe von https://github.com/trufflesecurity/truffleHog[*Trufflehog*] durchsuchen.
+Du kannst versuchen, das Geheimnis zu finden, indem du deine `terraform.tfstate`-Dateien mit Hilfe von https://github.com/trufflesecurity/truffleHog[*Trufflehog*] durchsuchst.

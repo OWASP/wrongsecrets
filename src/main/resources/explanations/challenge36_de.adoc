@@ -6,4 +6,4 @@ Immer noch hört man von Entwicklern, die Tricks und Verschleierungsmethoden ein
 
 Die Challenge-Datei heißt https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-advanced-c[wrongsecrets-advanced-c] und ist in vielen Varianten im Ordner https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables[executables folder] zu finden.
 
-Versuchen Sie, die Binärdatei herunterzuladen und lokal auszuführen (z. B. `./wrongsecrets-advanced-c<theversion you need> <your answer>`).
+Versuche, die Binärdatei herunterzuladen und lokal auszuführen (z. B. `./wrongsecrets-advanced-c<theversion you need> <your answer>`).

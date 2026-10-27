@@ -1,9 +1,9 @@
 Anders als andere Git-Herausforderungen lässt sich dieses Problem nicht mit der Vielzahl an Tools lösen, die automatisch nach in Git-Repositories durchgesickerten Geheimnissen suchen.
 
-Versuchen Sie, die Herausforderung durch manuelles Kombinieren der Git-Metadaten zu lösen.
+Versuche, die Herausforderung durch manuelles Kombinieren der Git-Metadaten zu lösen.
 
-1. Klonen Sie das Repository - `git clone https://github.com/OWASP/wrongsecrets`.
-2. Wechseln Sie in das Verzeichnis - `cd wrongsecrets`
+1. Klone das Repository - `git clone https://github.com/OWASP/wrongsecrets`.
+2. Wechsle in das Verzeichnis - `cd wrongsecrets`
 3. Notizen abrufen - `git fetch origin pass:['refs/notes/*:refs/notes/*']`
 4. Alle Notizen im Repository auflisten - `git notes`
-5. Zeigen Sie die Notiz anhand der angezeigten Notizreferenz an - `git notes show [ref]` (es werden 2 Referenzen für jede Notiz angezeigt, die zweite ist die Notizreferenz)
+5. Zeige die Notiz anhand der angezeigten Notizreferenz an - `git notes show [ref]` (es werden 2 Referenzen für jede Notiz angezeigt, die zweite ist die Notizreferenz)

@@ -1,12 +1,12 @@
-=== Herausforderung 56: Finden Sie das Geheimnis in der Projektspezifikation
+=== Herausforderung 56: Finde das Geheimnis in der Projektspezifikation
 
 Wir wollten herausfinden, ob KI eine Herausforderung für uns entwickeln kann. Wie jede WrongSecrets-Herausforderung benötigt auch diese ein „Geheimnis“, das irgendwo offengelegt wird. Die KI musste diese Herausforderung anhand eines Beispiels eines Agentic-Plans mit Geheimnissen erstellen.
 
-In dieser Challenge besteht Ihre Aufgabe darin, ein Geheimnis zu finden, das in der Dokumentationsdatei des Agentenplans des Projekts versteckt ist: https://github.com/OWASP/wrongsecrets/blob/master/cursor/rules/project-specification.mdc[`cursor/rules/project-specification.mdc`].
+In dieser Challenge besteht deine Aufgabe darin, ein Geheimnis zu finden, das in der Dokumentationsdatei des Agentenplans des Projekts versteckt ist: https://github.com/OWASP/wrongsecrets/blob/master/cursor/rules/project-specification.mdc[`cursor/rules/project-specification.mdc`].
 
-Das Geheimnis ist als Beispielkonfigurationswert in der Spezifikationsdatei eingebettet. Lesen Sie die Dokumentation sorgfältig durch – Geheimnisse in Spezifikationsdateien sind oft als Beispielwerte, Konfigurationsparameter oder Beispieldaten getarnt.
+Das Geheimnis ist als Beispielkonfigurationswert in der Spezifikationsdatei eingebettet. Lies die Dokumentation sorgfältig durch – Geheimnisse in Spezifikationsdateien sind oft als Beispielwerte, Konfigurationsparameter oder Beispieldaten getarnt.
 
-**Hinweis:** Suchen Sie nach Verweisen auf "Herausforderung 56" oder nach verdächtig aussehenden Konfigurationswerten, die als Beispiele dienen könnten.
+**Hinweis:** Suche nach Verweisen auf "Herausforderung 56" oder nach verdächtig aussehenden Konfigurationswerten, die als Beispiele dienen könnten.
 
 Diese Herausforderung verdeutlicht, wie Geheimnisse mitunter in Dokumentations- oder Spezifikationsdateien verborgen bleiben können, die bei Sicherheitsüberprüfungen oft übersehen werden. In der Praxis hinterlassen Entwickler manchmal tatsächliche Zugangsdaten in der Dokumentation als „Beispiele“, die dann in Vergessenheit geraten und nie entfernt werden.
 

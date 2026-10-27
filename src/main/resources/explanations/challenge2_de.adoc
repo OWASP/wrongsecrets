@@ -4,4 +4,4 @@ Anstatt das Passwort direkt fest zu codieren, versuchte der Entwickler, es in de
 
 Dadurch ist es nicht mehr direkt in `.java`-Dateien oder kompilierten `.class`-Dateien zu finden. Wie kann man es also aufspüren?
 
-Dies lässt sich leicht mit SAST-Lösungen wie https://github.com/trufflesecurity/truffleHog[truffleHog] und https://github.com/awslabs/git-secrets[git-secrets] sowie durch manuelle Überprüfung Ihrer `application.properties` feststellen.
+Dies lässt sich leicht mit SAST-Lösungen wie https://github.com/trufflesecurity/truffleHog[truffleHog] und https://github.com/awslabs/git-secrets[git-secrets] sowie durch manuelle Überprüfung deiner `application.properties` feststellen.

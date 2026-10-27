@@ -4,4 +4,4 @@ In unserem AKS-Cluster gibt es zwei Azure Identity-Bindungen. Diese werden von A
 
 Das Interessante an Key Vaults ist, dass sie Berechtigungen pro Vault und nicht pro Geheimnis festlegen. Leider haben die Entwickler nur einen Key Vault für zwei Identitäten…
 
-Hinweis: Es gibt eine Bindung an `separate-workload-pod-id`. Versuchen Sie, einen Pod mit den richtigen Labels zu erstellen, um wrongsecret-3 zu stehlen (siehe auch https://docs.microsoft.com/en-us/azure/aks/use-azure-ad-pod-identity#run-a-sample-application [die AKS-Dokumentation]).
+Hinweis: Es gibt eine Bindung an `separate-workload-pod-id`. Versuche, einen Pod mit den richtigen Labels zu erstellen, um wrongsecret-3 zu stehlen (siehe auch https://docs.microsoft.com/en-us/azure/aks/use-azure-ad-pod-identity#run-a-sample-application [die AKS-Dokumentation]).

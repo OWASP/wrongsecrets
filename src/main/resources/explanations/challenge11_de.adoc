@@ -4,6 +4,6 @@ Wir haben den Parameter Store nun direkt in der App verwendet, aber es gibt ein 
 
 Übernimm die Rolle `cant-read-secrets` und versuche, deine IAM-Berechtigungen zu erweitern. Betrüge nicht, indem du deine eigenen Rollen benutzt :)
 
-Hier können Tools wie https://github.com/nccgroup/ScoutSuite[ScoutSuite] wirklich helfen, Probleme mit Ihrer IAM-Konfiguration zu erkennen. IAM kann Wege zur Rechteausweitung eröffnen. Diese Wege können oft genutzt werden, um andere, mächtigere Rollen zu erstellen und/oder anzunehmen, die es Ihnen unter anderem ermöglichen, das Geheimnis zu lesen.
+Hier können Tools wie https://github.com/nccgroup/ScoutSuite[ScoutSuite] wirklich helfen, Probleme mit deiner IAM-Konfiguration zu erkennen. IAM kann Wege zur Rechteausweitung eröffnen. Diese Wege können oft genutzt werden, um andere, mächtigere Rollen zu erstellen und/oder anzunehmen, die es dir unter anderem ermöglichen, das Geheimnis zu lesen.
 
-Falls Sie nicht weiterkommen, versuchen Sie, den Fehler in Terraform zu finden.
+Falls du nicht weiterkommst, versuche, den Fehler in Terraform zu finden.
