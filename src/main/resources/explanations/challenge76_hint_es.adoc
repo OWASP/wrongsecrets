@@ -1,0 +1,16 @@
+Puedes resolver este desafío con los siguientes pasos:
+
+1. Abre el endpoint de búsqueda sin autenticación del almacén vectorial en memoria:
+- `http://localhost:8080/rag/search`
+- Devuelve los cuatro fragmentos de texto indexados como JSON.
+
+2. Lee los fragmentos y busca el que menciona una credencial:
+- El fragmento con la "Draft API note" contiene la credencial del trabajo nocturno
+  de embeddings.
+
+3. Envía esa credencial como respuesta (todo lo que hay después de
+  "uses the credential ").
+
+También puedes acotar la búsqueda, por ejemplo con `q=credential`, pero el secreto
+solo queda expuesto porque el fragmento fue indexado antes de que la nota en
+borrador se limpiara.
