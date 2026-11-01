@@ -31,6 +31,6 @@
     "fsevents@2.3.3": true
   },
   "overrides": {
-    "glob": "^13.0.6"
+    "glob": "^14.0.0"
   }
 }
