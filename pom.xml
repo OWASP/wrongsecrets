@@ -82,7 +82,7 @@
     <spotbugs.version>4.10.5</spotbugs.version>
     <spotless-maven-plugin.version>3.10.4</spotless-maven-plugin.version>
     <spring-boot.version>4.1.1</spring-boot.version>
-    <spring-vault.version>4.1.0</spring-vault.version>
+    <spring-vault.version>4.1.1</spring-vault.version>
     <spring.cloud-version>2025.1.4</spring.cloud-version>
     <spring.security.version>7.0.6</spring.security.version>
     <springdoc-maven.version>1.5</springdoc-maven.version>
