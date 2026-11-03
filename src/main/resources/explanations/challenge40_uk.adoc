@@ -1,0 +1,5 @@
+=== Незахищений ключ шифрування – частина 2
+
+Розробник зашифрував секретний код за допомогою https://en.wikipedia.org/wiki/Advanced_Encryption_Standard[AES] та зберіг його значення у форматі base64 у файлі JSON. Але де залишити ключ? Як щодо того, щоб просто залишити ключ у файлі з секретним кодом? Таким чином, кожен секретний код легко матиме свій власний ключ! Чи зможете ви знайти секретний код?
+
+Файл завдання називається https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/secrchallenge.json[secrchallenge.json] і його можна знайти в папці https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables[executables].

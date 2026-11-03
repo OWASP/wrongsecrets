@@ -1,0 +1,7 @@
+Je kunt deze uitdaging oplossen door de volgende stappen te volgen:
+
+1. Vind het geheim wanneer de app het gebruikt
+- open de development tools van de browser:
+- selecteer het tabblad Network
+- vind de request met pad `/token`
+- vind in de request body de sleutel `client_secret`

@@ -1,0 +1,19 @@
+Vous pouvez relever ce défi grâce aux solutions alternatives suivantes :
+
+1. Vérifiez l'état de la configmap dans Git
+- Pouvez-vous voir où, dans Git, nous avons stocké le fichier `secrets-config.yml` ? Sinon, effectuez une recherche.
+- Jetez un œil au champ `Data` : qu’y trouvez-vous ?
+
+2. Demandez poliment en utilisant Kubectl :
+- Assurez-vous d'avoir installé Kubectl comme indiqué dans le fichier README.MD et que kubectl est configuré pour envoyer des commandes au bon cluster.
+- Exécutez la commande `kubectl get configmap`. Vous y verrez toutes les configmaps actives dans l'espace de noms actuel, qui est normalement `default` pour cette application (sauf indication contraire de votre administrateur/formateur).
+- Maintenant, exécutez `kubectl get configmap secrets-file -o Yaml`. Pouvez-vous voir le secret ?
+
+3. Accédez au pod et récupérez les données :
+- Assurez-vous d'avoir installé Kubectl comme indiqué dans le fichier README.MD et que kubectl est configuré pour envoyer des commandes au bon cluster.
+- Exécutez la commande `kubectl get pods`. Vous verrez alors tous les pods actifs dans l'espace de noms actuel, qui est généralement `default` pour cette application (sauf indication contraire de votre administrateur/formateur).
+- Maintenant, pour votre instance du pod WrongSecrets, exécutez `kubectl exec -it secret-challenge-<rest of the name of the pod from the prev.step> -- sh`.
+- Maintenant, exécutez `env | grep SPECIAL_K8S_SECRET` et vous trouverez votre secret.
+
+
+Au fait : la commande `kubectl get <item> -A` vous donne un aperçu de tous les éléments disponibles dans tous les espaces de noms auxquels vous avez accès. Cela montre combien il est important de ne pas donner accès à tous les espaces de noms de votre cluster, car cela pourrait entraîner la divulgation d'éléments de configuration importants.

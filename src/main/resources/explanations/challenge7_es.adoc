@@ -1,0 +1,5 @@
+=== Un secreto oculto en la bóveda
+
+Así que ahora el secreto ya no está en K8s ni en el código... o eso espera el desarrollador.
+Si este desafío está habilitado y has seguido las instrucciones del archivo `README.md`, deberías poder ejecutarlo en K8s/Minikube y ahora puedes buscar el secreto.
+¿Cuál es el error cometido aquí? https://github.com/trufflesecurity/truffleHog[*Trufflehog*] podría haber ayudado si la entropía fuera un poco mayor ;-).

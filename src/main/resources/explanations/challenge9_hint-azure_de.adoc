@@ -1,0 +1,16 @@
+Diese Herausforderung lässt sich durch folgende alternative Lösungsansätze bewältigen:
+
+1. Durchsuche terraform.tfstate mit Trufflehog:
+- Nachdem du die Infrastruktur gemäß den Anweisungen in der README-Datei des Ordners `azure` erstellt hast, bleibe in diesem Ordner und führe `trufflehog3 --output=terraform-infra.json --format=json .` aus.
+- Öffne nun die Datei terraform-infra.json und suche nach dem Passwort.
+
+2. Finde das Geheimnis im Schlüsseltresor (dies ist der einfache Ausweg, probiere die anderen aus :) ):
+- Melde dich bei Azure unter https://portal.azure.com[cloud] mit dem Konto an, mit dem du das WrongSecrets-Setup erstellt hast.
+- Navigiere zum Schlüsseltresor.
+- Hole dir die Daten von wrongsecret
+
+3. Finde das Geheimnis, indem du dich in den POD einloggst.
+- Stelle sicher, dass Kubectl wie in der README.MD beschrieben installiert ist und dass kubectl so konfiguriert ist, dass Befehle an den richtigen Cluster gesendet werden.
+- Führe nun `kubectl get pods` aus. Hier siehst du alle aktiven Pods im aktuellen Namespace, der für diese Anwendung normalerweise `default` ist (sofern nicht anders von deinem Administrator/Trainer angegeben).
+- Führe nun für deine Instanz des WrongSecrets-Pods den Befehl `kubectl exec -it secret-challenge-<rest of the name of the pod from the prev.step> -- sh` aus.
+- Untersuche die Daten, die du in `/mnt/secrets-store` findest.

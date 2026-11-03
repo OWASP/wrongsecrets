@@ -1,0 +1,6 @@
+=== Inyección de plantillas de HashiCorp Vault
+
+Los secretos se pueden recuperar de Vault mediante el contenedor auxiliar [Vault Agent] (https://developer.hashicorp.com/vault/docs/platform/k8s/injector), que se ejecuta junto con el contenedor principal de la aplicación. Este contenedor auxiliar puede inyectar los secretos en el entorno de la aplicación.
+ Una forma de hacerlo es renderizando los secretos como un archivo. La aplicación de destino puede entonces utilizar ese archivo. Sin embargo, en este caso, el desarrollador no estaba seguro de si el archivo se había procesado, así que en lugar de exportar el secreto como una variable de entorno, los imprimió con `echo`.
+
+¿Puedes encontrar el secreto inyectado en el entorno de la aplicación?

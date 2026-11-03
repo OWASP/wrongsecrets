@@ -1,0 +1,40 @@
+=== Vind de Slack-webhook-URL
+
+Welkom bij deze uitdaging die de kwetsbaarheid van hardcoded Slack-webhook-URL's in omgevingsvariabelen demonstreert!
+
+Deze uitdaging simuleert een praktijksituatie waarin:
+
+1. **Slack-webhook-URL's als omgevingsvariabelen worden opgeslagen** voor applicatiemeldingen
+2. **De URL's worden geobfusceerd** om detectie door secretscanningtools te vermijden
+3. **Risico op personeelsverloop**: Wanneer een medewerker vertrekt, wordt de webhook mogelijk niet vernieuwd, waardoor toegang behouden blijft
+
+==== Je missie
+
+In dit scenario heeft een developer een Slack-webhook-URL opgeslagen als een omgevingsvariabele `CHALLENGE59_SLACK_WEBHOOK_URL`. De URL is met dubbele base64-encoding geobfusceerd om de secretscanningdetectie van Slack te omzeilen.
+
+Je taak is:
+
+1. De geobfusceerde Slack-webhook-URL in de omgevingsvariabele te vinden
+2. Die te deobfusceren om de originele URL zichtbaar te maken
+3. De webhook-URL na deobfuscatie in te dienen als je antwoord
+
+==== Gevolgen in de praktijk
+
+Deze kwetsbaarheid laat de specifieke risico's van blootgestelde Slack-webhook-URL's zien:
+
+- **Onbevoegd plaatsen van berichten**: Aanvallers kunnen kwaadaardige berichten naar je Slack-kanalen sturen
+- **Social-engineeringaanvallen**: Valse aankondigingen of phishingpogingen via vertrouwde kanalen
+- **Informatie-onthulling**: Gevoelige kanaalnamen en werkplekinformatie worden prijsgegeven
+- **Reputatieschade**: Spam of ongepaste inhoud die namens je organisatie wordt geplaatst
+- **Obfuscatie is geen beveiliging**: Base64-encoding biedt geen echte bescherming
+- **Webhooks blijven actief**: In tegenstelling tot tokens kunnen webhooks lang actief blijven
+
+==== Leerzame opmerking
+
+In productieomgevingen:
+- Gebruik goed secretbeheer (AWS Secrets Manager, Azure Key Vault, HashiCorp Vault)
+- Implementeer beleid voor het vernieuwen van webhooks wanneer medewerkers vertrekken
+- Monitor het gebruik van webhooks en stel alerts in op ongebruikelijke activiteit
+- Herroep en genereer webhooks direct opnieuw wanneer medewerkers vertrekken
+- Obfusceer secrets nooit als beveiligingsmaatregel
+- Overweeg webhook-tekensleutels te gebruiken voor extra validatie

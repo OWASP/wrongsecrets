@@ -1,0 +1,13 @@
+Este desafío se puede resolver examinando los metadatos del secreto:
+
+1. Analizándolo a través del código
+- Localiza la definición secreta en git (Challenge33.yml)
+- encontrar el valor secreto en los metadatos.
+2. observándolo a través de la obtención del secreto
+- Conéctese al clúster de k8s con kubectl
+- Llama a `kubectl get secret challenge33 -o yaml` para obtener todos los datos necesarios.
+- Encuentra el valor secreto en los metadatos.
+3. Uso indebido de la depuración al listar todos los secretos.
+- Conéctese al clúster de k8s con kubectl
+- Llama a `kubectl get secrets -v9` para obtener todos los datos necesarios.
+- Encuentra el valor secreto en los metadatos.

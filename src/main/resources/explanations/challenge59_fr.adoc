@@ -1,0 +1,40 @@
+=== Trouvez l'URL du webhook Slack
+
+Bienvenue dans ce défi qui démontre la vulnérabilité des URL de webhook Slack codées en dur dans les variables d'environnement !
+
+Ce défi simule un scénario réel où :
+
+1. **Les URL des webhooks Slack sont stockées en tant que variables d'environnement** pour les notifications de l'application
+2. **Les URL sont obscurcies** afin d'éviter leur détection par des outils d'analyse secrète.
+3. **Risque de roulement du personnel** : Lorsqu’un employé quitte l’entreprise, le webhook peut ne pas être remplacé, ce qui permet un accès continu.
+
+==== Votre mission
+
+Dans ce scénario, un développeur a stocké l'URL d'un webhook Slack comme variable d'environnement `CHALLENGE59_SLACK_WEBHOOK_URL`. Cette URL a été obscurcie par un double encodage base64 afin de contourner la détection de Slack lors de l'analyse des secrets.
+
+Votre tâche consiste à :
+
+1. Trouvez l'URL du webhook Slack obscurcie dans la variable d'environnement
+2. Désobfusquez-le pour révéler l'URL d'origine
+3. Soumettez l'URL du webhook désobfusquée comme réponse.
+
+==== Impact concret
+
+Cette vulnérabilité illustre les risques spécifiques liés à l'exposition des URL de webhook Slack :
+
+- **Envoi de messages non autorisés** : Des attaquants peuvent envoyer des messages malveillants sur vos canaux Slack.
+- **Attaques d'ingénierie sociale** : Fausses annonces ou tentatives d'hameçonnage via des canaux de confiance
+- **Divulgation d'informations** : Les noms de canaux et les informations sensibles relatives aux espaces de travail ont été révélés.
+- **Atteinte à la réputation** : Publication de spams ou de contenus inappropriés sous le nom de votre organisation
+- **L'obfuscation n'est pas une sécurité** : le codage Base64 n'offre aucune protection réelle
+- **Persistance des webhooks** : Contrairement aux jetons, les webhooks peuvent rester actifs pendant des périodes prolongées.
+
+==== Note pédagogique
+
+En environnement de production :
+- Utilisez une gestion appropriée des secrets (AWS Secrets Manager, Azure Key Vault, HashiCorp Vault).
+- Mettre en œuvre des politiques de rotation des webhooks lors du départ des employés.
+- Surveiller l'utilisation des webhooks et configurer des alertes en cas d'activité inhabituelle
+- Révoquer et régénérer immédiatement les webhooks lorsque des employés quittent l'entreprise.
+- Ne jamais dissimuler des secrets par mesure de sécurité
+- Envisagez d'utiliser des secrets de signature de webhook pour une validation supplémentaire.

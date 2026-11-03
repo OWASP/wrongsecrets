@@ -1,0 +1,9 @@
+=== Almacén de parámetros de AWS SSM
+
+Ahora hemos utilizado Parameter Store directamente desde la aplicación, pero hay un problema con IAM...
+
+Asume el rol `cant-read-secrets` e intenta escalar privilegios de IAM. No hagas trampa usando tus propios roles :)
+
+Aquí es donde herramientas como https://github.com/nccgroup/ScoutSuite[ScoutSuite] pueden ser de gran ayuda para detectar problemas con la configuración de IAM. IAM puede ofrecer vías para la escalada de privilegios. Estas vías suelen utilizarse para crear o asumir roles más poderosos que, entre otras cosas, permiten leer el secreto.
+
+Si te quedas atascado, intenta localizar el error en Terraform.

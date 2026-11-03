@@ -1,0 +1,4 @@
+Vous pouvez relever ce défi en suivant les étapes suivantes :
+
+1. Rendez-vous sur notre site web : https://owasp.org/www-project-wrongsecrets/[Website].
+2. Parcourez quelques onglets, le secret s'y trouve sûrement :)

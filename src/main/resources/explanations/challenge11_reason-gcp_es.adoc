@@ -1,0 +1,5 @@
+*La gestión de secretos es más que un simple almacenamiento seguro:*
+
+Como ya habrás podido comprobar, existen muchas maneras de acceder a un secreto: ya sea mediante código incrustado, almacenado en una solución de terceros mal configurada o almacenado correctamente, pero con permisos de acceso IAM erróneos en las cuentas asociadas. Ahora comprenderás por qué decimos que "tu nivel de seguridad se refleja en la gestión de tus secretos".
+
+En este caso concreto, sería una mala idea tener este tipo de acceso a producción sin activar un procedimiento de emergencia y las alarmas correspondientes. Además, cualquier cosa que registre explícitamente información confidencial es peligrosa. Si detectas algún código que registre información confidencial, ¡denuncialo!

@@ -1,0 +1,13 @@
+*Accès au compte Administrateur/Propriétaire :*
+Si vous avez pu utiliser le compte administrateur AWS pour accéder aux données, vous comprenez pourquoi c'est une très mauvaise idée en production. En bref, ce compte vous permet de modifier n'importe quel élément et d'exfiltrer facilement n'importe quelle donnée confidentielle.
+
+Que faire à la place :
+- Utilisez une identité distincte au moindre privilège pour chaque charge de travail et ne lui accordez que les permissions dont elle a besoin. Préférez les identifiants de courte durée obtenus via l'identité de charge de travail aux clés d'accès de longue durée.
+- Donnez aux personnes leur propre rôle qui corresponde strictement à leurs opérations quotidiennes, sans leur permettre de lire des secrets ni d'exécuter des commandes dans les charges de travail, sauf si c'est vraiment nécessaire.
+- Réservez le compte root ou administrateur à un usage de secours strictement contrôlé, protégez-le par la MFA et surveillez son activité.
+
+Enfin, et surtout : nous pourrions facilement accéder au conteneur pour rechercher le point de montage contenant le secret. Cela est lié à trois choses :
+
+- nous sommes autorisés à le faire grâce au RBAC, ce qui ne devrait pas être votre cas normal en PRD : sinon, n’importe qui dans votre organisation pourrait fouiller dans le conteneur.
+- Nous disposons de fichiers exécutables dans le conteneur (sh/openssl/etc.) que nous pouvons lancer pour établir un shell. Supprimer de votre conteneur tout binaire non essentiel contribue à réduire la surface d'attaque et complique la tâche d'un attaquant ayant réussi une exécution de code à distance (RCE) dans votre conteneur, qui pourrait ainsi accéder à d'autres parties du conteneur et obtenir davantage de droits d'exécution.
+- Nous avons exposé la ConfigMap comme une variable d'environnement. Cela signifie que toute personne ayant accès à l'environnement d'exécution du conteneur au sein du pod peut désormais extraire le secret. Nous avons rapproché le secret de l'utilisateur, mais peut-être pas encore suffisamment (par exemple, uniquement de l'application).

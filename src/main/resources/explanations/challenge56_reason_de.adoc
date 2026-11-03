@@ -1,0 +1,29 @@
+*Warum du die Dokumentation auf Geheimnisse überprüfen solltest*
+
+Dokumentations- und Spezifikationsdateien werden oft weit verbreitet und können bei Sicherheitsüberprüfungen übersehen werden.
+Manchmal werden Geheimnisse oder sensible Informationen als Beispiele oder Anweisungen hinzugefügt und vor dem Teilen oder Veröffentlichen nicht entfernt.
+Diese Herausforderung unterstreicht, wie wichtig es ist, sämtliche Projektdateien – einschließlich der Dokumentation – auf Geheimnisse und sensible Daten zu überprüfen.
+
+----
+In einem realen Projekt solltest du in deiner Projektspezifikation oder deinem Projektplan stets explizite Sicherheitsanforderungen festlegen. Das bedeutet:
+- Auflistung, wie Geheimnisse verwaltet, gespeichert und rotiert werden sollen.
+- Festlegung, wer Zugriff auf sensible Dateien hat und wie der Zugriff kontrolliert wird.
+- Angabe, welche Werkzeuge oder Prozesse verwendet werden müssen, um alle Dateien, einschließlich der Dokumentation, nach Geheimnissen zu durchsuchen.
+- Regelmäßige Überprüfungen des Quellcodes und der Dokumentation auf versehentliches Durchsickern von Geheimnissen sind erforderlich.
+
+Durch die Berücksichtigung dieser Anforderungen wird sichergestellt, dass die Sicherheit von Anfang an berücksichtigt wird und das Risiko der Offenlegung sensibler Daten durch übersehene Dateien oder schlechte Praktiken verringert wird.
+----
+
+[NOTE]
+====
+In realen Projekten solltest du immer Sicherheitshinweise zu folgenden Punkten hinzufügen:
+- Verwendung von TLS/SSL für die gesamte Netzwerkkommunikation
+- Verschlüsselung sensibler Daten im Ruhezustand und während der Übertragung
+- Eingabevalidierung und -bereinigung zur Verhinderung von Einschleusungsangriffen
+- Sichere Authentifizierungs- und Autorisierungsmechanismen
+- Regelmäßige Abhängigkeits- und Schwachstellenscans
+- Protokollierung und Überwachung auf verdächtige Aktivitäten
+- Das richtige Modell und die richtige Sprache für das richtige Problem verwenden
+
+Diese Vorgehensweisen sind unerlässlich, um deine Anwendung und deren Daten zu schützen.
+====

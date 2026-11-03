@@ -1,0 +1,11 @@
+Diese Herausforderung lässt sich durch folgende alternative Lösungsansätze bewältigen:
+
+1. Ermittle das Geheimnis aus älteren Commits mithilfe von Trufflehog.
+- Installiere https://github.com/feeltheajf/trufflehog3[trufflehog3], indem du `pip3 install trufflehog3` ausführst. Dies erfordert die Installation von Python 3 und pip.
+- Führe `trufflehog3 https://github.com/OWASP/wrongsecrets` aus und sieh dir die Ausgabe an: Du solltest 3 `aws_secret_access_key` finden, einer davon ist die Lösung!
+2. Erhalte das Geheimnis, indem du die Verschlüsselung der Aufgabe nutzt, da sich die verschlüsselten Materialien noch in der Java-Klasse befinden (Hinweis: Dies ist ein fortgeschrittenerer Test und erfordert Java-Kenntnisse).
+- Finde den Container, der dir diese Herausforderung anbietet.
+- Extrahiere den Chiffretext für Herausforderung 15
+- Klone das Projekt lokal und führe es lokal gemäß den Anweisungen unter https://github.com/OWASP/wrongsecrets#notes-on-development[Readme.md] aus.
+- Debugge das Projekt wie unter https://www.jetbrains.com/help/idea/debugging-your-first-java-application.html[beschrieben], indem du einen Haltepunkt am Anfang der Methode `quickDecrypt` setzt.
+- Überschreibe den Wert von cipherText mit dem in Schritt 2 extrahierten Chiffretext und suche nun den Klartext.

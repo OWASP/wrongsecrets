@@ -1,0 +1,7 @@
+=== Sealed Secret met een toegankelijke sleutel
+
+In deze uitdaging ga je het gebruik van Kubernetes Sealed Secrets verkennen. Sealed Secrets zijn een manier om je Kubernetes-geheimen te versleutelen en veilig op te slaan, zelfs in een openbare repository. Toch kan onjuiste omgang met deze geheimen nog steeds een beveiligingsrisico vormen.
+
+Een ontwikkelaar heeft per ongeluk de privésleutel waarmee de sealed secrets worden ontsleuteld toegankelijk gemaakt binnen dezelfde repository als de sealed secret. Jouw taak is de sealed secret te vinden en te ontsleutelen met de toegankelijke privésleutel.
+
+Kun jij de sealed secret vinden en ontsleutelen om de gevoelige informatie zichtbaar te maken?

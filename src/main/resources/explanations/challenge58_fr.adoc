@@ -1,0 +1,33 @@
+=== Exposition de la chaîne de connexion à la base de données dans les messages d'erreur
+
+L'une des méthodes les plus courantes et les plus dangereuses de fuite de données confidentielles dans les applications réelles est l'utilisation des chaînes de connexion aux bases de données contenant des identifiants intégrés. Lorsque les applications ne parviennent pas à se connecter aux bases de données, elles exposent souvent la chaîne de connexion complète (nom d'utilisateur et mot de passe inclus) dans les messages d'erreur, les journaux ou même les interfaces utilisateur.
+
+Ce défi illustre un scénario dans lequel un développeur :
+
+1. **Utilise des informations d'identification intégrées dans les chaînes de connexion** au lieu d'une gestion externe des secrets
+2. **Gestion des erreurs déficiente** : la chaîne de connexion complète est exposée en cas d’échec de la connexion à la base de données.
+3. **Enregistre des informations sensibles** sans les nettoyer au préalable.
+4. **Affiche des détails techniques** susceptibles d'atteindre les systèmes de surveillance, les outils de suivi des erreurs, voire les utilisateurs finaux.
+
+**Où apparaissent généralement ces chaînes de connexion exposées :**
+
+- Journaux de démarrage de l'application lorsque la base de données est indisponible
+- Traces de pile d'exceptions dans les outils de surveillance tels que Sentry, Rollbar ou CloudWatch
+- Messages d'erreur affichés aux utilisateurs pendant les fenêtres de maintenance
+- Journaux du pipeline CI/CD en cas d'échec des contrôles d'intégrité du déploiement
+- Journaux des conteneurs Docker lors des échecs d'orchestration
+
+**Exemples concrets :**
+
+- Applications qui échouent aux contrôles d'intégrité lors des déploiements Kubernetes
+- Des microservices qui ne peuvent pas accéder à leur base de données au démarrage
+- Scripts de migration de base de données qui échouent en raison d'informations de connexion exposées
+- Environnements de développement/test où le niveau de verbosité des erreurs est trop élevé.
+
+**Comment déclencher l'erreur :**
+
+Appuyez sur le bouton en bas de l'écran ou accédez au point de terminaison `/error-demo/database-connection` pour simuler un échec de connexion à une base de données. Ce point de terminaison tente de se connecter à une base de données à l'aide d'une chaîne de connexion contenant des informations d'identification. En cas d'échec, ces informations sont affichées dans la réponse HTTP et dans les journaux de l'application.
+
+Pouvez-vous trouver le mot de passe de la base de données qui est exposé lorsque l'application tente de se connecter à la base de données ?
+
+**Conseil :** Recherchez les messages d’erreur de connexion à la base de données qui révèlent plus d’informations qu’ils ne le devraient.

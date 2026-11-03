@@ -1,0 +1,31 @@
+*Pourquoi l'intégration de secrets dans les invites des systèmes d'IA présente un risque de fuite de secrets*
+
+Les assistants IA reçoivent généralement une invite système contenant des instructions définissant leur comportement. Il peut être tentant d'y inclure des informations sensibles et de simplement demander au modèle de ne pas les révéler.
+
+C’est précisément ce qui se passe dans ce défi : l’application place le secret directement dans l’invite système de l’assistant IA et indique au modèle de ne pas le divulguer.
+
+L'invite système ne constitue pas une barrière de sécurité. Le modèle reçoit à la fois les instructions système et les entrées de l'utilisateur dans le cadre de son contexte. Un utilisateur peut concevoir des invites visant à modifier le comportement du modèle, à exposer ses instructions ou à l'inciter à divulguer des informations contextuelles.
+
+Dans ce scénario, trois défaillances s'accumulent :
+
+- Le secret est directement intégré au contexte du modèle, le rendant ainsi accessible à celui-ci lors de l'inférence.
+- L'application repose sur le modèle suivant une instruction visant à préserver la confidentialité du secret.
+- Un utilisateur peut interagir directement avec le modèle et tenter de manipuler ces instructions par injection d'invite.
+
+Si le modèle révèle le secret, les informations confidentielles de l'application ont franchi la limite de sécurité prévue.
+
+----
+Que faire à la place :
+
+- N’utilisez jamais l’invite système d’un modèle d’IA comme mécanisme de gestion des secrets.
+- Dans la mesure du possible, gardez les secrets en dehors du contexte du modèle.
+- N'accordez à l'application l'accès aux secrets que lorsqu'ils sont réellement nécessaires à une opération.
+- Considérez toutes les invites fournies par l'utilisateur comme des entrées potentiellement hostiles.
+- Appliquer les autorisations et les contrôles d'accès dans l'application plutôt que de s'appuyer sur le modèle pour les appliquer.
+- Si des informations sensibles sont accidentellement exposées à un modèle, considérez ces informations comme potentiellement compromises et remplacez les identifiants concernés le cas échéant.
+----
+
+[NOTE]
+====
+Une invite système est une instruction adressée à un modèle d'IA, et non un mécanisme de contrôle d'accès. Dire à un modèle « ne jamais révéler ce secret » ne garantit pas sa confidentialité. Si des informations doivent rester secrètes, l'application doit imposer cette restriction en dehors du modèle.
+====

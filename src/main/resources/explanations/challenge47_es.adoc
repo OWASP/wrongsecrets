@@ -1,0 +1,5 @@
+=== Inyección de plantillas de HashiCorp Vault, parte 2
+
+Los secretos se pueden recuperar de Vault mediante el contenedor auxiliar [Vault Agent] (https://developer.hashicorp.com/vault/docs/platform/k8s/injector), que se ejecuta junto con el contenedor principal de la aplicación. Este contenedor auxiliar puede inyectar los secretos en el entorno de la aplicación.
+Un desarrollador intentó depurar el problema de la inyección en su bóveda. Para ello, insertó los secretos de forma "temporal" en la propia plantilla de la bóveda.
+¿Puedes encontrar el secreto codificado en la plantilla de la bóveda?

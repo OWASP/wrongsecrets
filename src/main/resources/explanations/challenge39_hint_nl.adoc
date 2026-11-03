@@ -1,0 +1,12 @@
+Deze uitdaging kan worden opgelost door het base64-gecodeerde geheim in `secrchallenge.md` te ontsleutelen. Dit kun je doen door:
+
+1. Een online aes-decryptietool te gebruiken zoals https://www.devglan.com/online-tools/aes-encryption-decryption[https://www.devglan.com/online-tools/aes-encryption-decryption]
+- Kopieer de inhoud van het bestand `secrchallenge.md` en plak die in het tekstvak van de decryptor.
+- Zorg ervoor dat het invoerformaat `Base64` is en de ciphermodus `ECB`.
+- Gebruik `secrchallenge.md` als ontsleutelsleutel en klik op `Decrypt` om het geheim te krijgen.
+
+2. De terminal gebruiken
+- Start de terminal terwijl je in de map `executables` bent.
+- Typ `echo -n "secrchallenge.md" | xxd -p` om de sleutel als platte tekst om te zetten in een hexadecimale sleutel.
+- Gebruik vervolgens de verkregen ontsleutelsleutel om het bestand te ontsleutelen door `openssl enc -a -d -aes-128-ecb -in secrchallenge.md -K 736563726368616c6c656e67652e6d64 -out decrypted.md` te typen
+- Kopieer het geheim uit het bestand `decrypted.md` in de map `executables`.

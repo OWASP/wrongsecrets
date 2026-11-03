@@ -1,0 +1,58 @@
+Deze uitdaging kan worden opgelost door de strings die in de registers zijn opgeslagen op te halen. Je kunt elke debugtool gebruiken. Hieronder laten we zien hoe je de uitdaging oplost met GDB en Radare2.
+Houd er rekening mee dat we dit alleen laten zien voor de Windows-executable. Elke andere executable heeft een andere indeling, maar de strekking van de oefening is vergelijkbaar.
+
+Om de taak met GDB uit te voeren, open je de terminal en typ je:
+
+1. `gdb -q wrongsecrets-advanced-c-windows.exe` om GDB te openen en de executable te laden
+2. `disas main` , om de `main`-functie, het entrypoint van het programma, te disassembleren.
+3. `b execute` om een breakpoint in te stellen bij de functie `execute`.
+4. `set args 1234567812345678` om de programma-argumenten in te stellen. Je kunt een willekeurige string van 16 tekens instellen.
+5. `r` om het programma uit te voeren. Dit kan op MacOS falen; raadpleeg in dat geval de https://sourceware.org/gdb/wiki/PermissionsDarwin[gdb wiki]
+6. `disas execute` om de functie `execute` te disassembleren
+7. `b compare` om een breakpoint in te stellen bij de functie `compare`. Om de sleutel te krijgen:
+- a. `b get_key` om een breakpoint in te stellen bij de functie `get_key`
+- b. `disas get_key` om de functie `get_key` te disassembleren
+- c. Zoek naar de instructie `movabs xxx, %rax` en kopieer de hexadecimale waarden zonder 0x.
+- d. Herhaal dit voor de instructie `movabs xxx, %rdx`
+Vervolgens moeten we de endianess van de CPU-architectuur controleren om de juiste cipher te ontsleutelen. Open hiervoor de Python3-terminal en typ:
+- e. `from sys import byteorder`
+- f. `print(byteorder)`
+- g. Als de endianess gelijk is aan `little`, https://blockchain-academy.hs-mittweida.de/litte-big-endian-converter/[klik dan hier] om van little naar big endian om te zetten.
+
+8. Kopieer elke string en concateneer de twee strings na de conversie. Voorbeeld:
+- a. `big_endian_a = '69676F74616C6C74'`
+- b. `big_endian_b = '68656B6579737373'`
+- c. `big_endian_result = '69676F74616C6C7468656B6579737373'`, en je hebt de sleutel om te ontsleutelen. Sluit het programma en open het opnieuw om het geheime bericht te krijgen.
+
+9. `b get_secret_message` om een breakpoint in te stellen bij de functie `get_secret_message`
+- a. `c` om de uitvoering van het programma voort te zetten
+- b. `disas get_secret_message` om de functie `get_secret_message` te disassembleren
+- c. Zoek naar de instructie `movabs xxx, %rax` en kopieer de hexadecimale waarden zonder 0x .
+- d. Herhaal dit voor de instructie `movabs xxx, %rdx`
+- e. Controleer de endianess van je CPU-architectuur met de stappen `7.e`, `7.f` en `7.g`. Als resultaat: `big_endian_result = 'E49F2F331A9A251974E1BA7F724C3B7F'`
+10. Download de map `decrypt`, open de terminal en typ:
+- `gcc decrypt.c -o decrypt` om de code te compileren, of je kunt de code compileren volgens je besturingssysteem.
+
+11. `./decrypt E49F2F331A9A251974E1BA7F724C3B7F 69676F74616C6C7468656B6579737373` en je hebt de geheime sleutel die het antwoord op de uitdaging is.
+
+Om de taak met Radare2 uit te voeren, open je de terminal en typ je:
+
+1. `r2 -A wrongsecrets-advanced-c-windows.exe` om het binaire bestand te laden en alle code waarnaar wordt verwezen te analyseren.
+2. `pdf @ sym.get_key` om de functie `get_key` te disassembleren
+3. Zoek naar de instructie `movabs %rax,xxx` en kopieer de hexadecimale waarden zonder 0x.
+4. Herhaal dit voor de instructie `movabs %rdx,xxx`. Vervolgens moeten we de endianess van de CPU-architectuur controleren om de juiste cipher te ontsleutelen. Open hiervoor de Python3-terminal en typ:
+- a. `from sys import byteorder`
+- b. `print(byteorder)`
+- c. Als de endianess gelijk is aan `little`, https://blockchain-academy.hs-mittweida.de/litte-big-endian-converter/[klik dan hier] om van little naar big endian om te zetten.
+5. Kopieer elke string en concateneer de twee strings na de conversie. Voorbeeld:
+- a. `big_endian_a = '69676F74616C6C74'`
+- b. `big_endian_b = '68656B6579737373'`
+- c. `big_endian_result = '69676F74616C6C7468656B6579737373'`, en je hebt de sleutel om te ontsleutelen.
+
+6. `pdf @ sym.get_secret_message` om de functie `get_secret_message` te disassembleren.
+7. Zoek naar de instructie `movabs %rax,xxxx` en kopieer de hexadecimale waarden zonder 0x.
+8. Herhaal de stappen `3` tot en met `5` om de waarden te krijgen. Als resultaat: `big_endian_result = 'E49F2F331A9A251974E1BA7F724C3B7F'`
+9. Sluit het programma, download de map `decrypt`, open de terminal en typ:
+- `gcc decrypt.c -o decrypt` om de code te compileren, of je kunt de code compileren volgens je besturingssysteem.
+
+10. `./decrypt E49F2F331A9A251974E1BA7F724C3B7F 69676F74616C6C7468656B6579737373` en je hebt de geheime sleutel die het antwoord op de uitdaging is.

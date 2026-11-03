@@ -1,0 +1,5 @@
+*Pourquoi faisons-nous cela ?*
+
+Avec ce projet, nous espérons que vous prendrez plaisir à partir à la recherche de secrets. Parallèlement, nous espérons que vous tirerez des leçons des erreurs commises par d'autres en matière de gestion des secrets, afin de ne pas les reproduire.
+
+Saviez-vous que nous avons repéré tous ces défis en situation réelle ? Ils peuvent donc vous être d’une grande aide si vous souhaitez vous adonner davantage à la chasse aux primes.

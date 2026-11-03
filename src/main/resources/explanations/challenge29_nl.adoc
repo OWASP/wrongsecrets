@@ -1,0 +1,5 @@
+=== Geheim in een screenshot van een GitHub-issue
+
+Een gebruiker dient per ongeluk een issue in met een `screenshot` van een geheim tijdens het melden van een bug, realiseert zich dat dan en sluit die issue.
+
+Kun jij het geheim dat we zoeken spotten in onze https://github.com/OWASP/wrongsecrets/issues[GitHub issues]?

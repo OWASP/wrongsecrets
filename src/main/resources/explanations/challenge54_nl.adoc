@@ -1,0 +1,17 @@
+=== Uitdaging: het geheim in .gitignore
+
+`.gitignore`-bestanden helpen voorkomen dat gevoelige of irrelevante gegevens per ongeluk in versiebeheer belanden. Soms voegen developers echter per ongeluk gevoelige gegevens of secrets toe als commentaar of verborgen items in `.gitignore`.
+
+In deze uitdaging heeft een developer een versleuteld geheim achtergelaten in een commentaar in een `.gitignore`-bestand. Hoewel versleuteld, laat het zien hoe makkelijk het is om kritieke geheimen op een bereikbare plek te vergeten.
+
+Je doel is om dit vergeten geheim te vinden en te ontsleutelen.
+
+==== Opmerking
+Het geheim is versleuteld met AES-256-CBC en met een IV. Gebruik de sleutel die je in ".gitignore" vindt om het te ontsleutelen.
+We hebben voor het versleutelen het volgende commando gebruikt:
+
+```bash
+echo -n "<you will have to find out>" | openssl enc -aes-256-cbc -K <you will have to find out> \
+  -iv 30313233343536373839616263646566 \
+  -nosalt -base64 -e
+```

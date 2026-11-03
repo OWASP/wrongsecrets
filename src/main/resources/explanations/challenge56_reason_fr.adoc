@@ -1,0 +1,29 @@
+*Pourquoi devriez-vous vérifier la documentation pour y déceler des secrets ?*
+
+Les fichiers de documentation et de spécifications sont souvent largement diffusés et peuvent être négligés lors des audits de sécurité.
+Il arrive que des secrets ou des informations sensibles soient ajoutés à titre d'exemples ou d'instructions et ne soient pas supprimés avant le partage ou la publication.
+Ce défi souligne l'importance de passer en revue tous les fichiers du projet, y compris la documentation, afin de déceler les secrets et les données sensibles.
+
+----
+Dans un projet réel, vous devez toujours inclure des exigences de sécurité explicites dans votre cahier des charges ou votre plan d'agent. Cela signifie :
+- Indiquer comment les secrets doivent être gérés, stockés et renouvelés.
+- Définir qui a accès aux fichiers sensibles et comment cet accès est contrôlé.
+- Indiquer les outils ou processus à utiliser pour rechercher les secrets dans tous les fichiers, y compris la documentation.
+- Exiger des examens réguliers du code et de la documentation afin de prévenir toute fuite accidentelle de données confidentielles.
+
+L'ajout de ces exigences permet de garantir que la sécurité est prise en compte dès le départ et réduit le risque d'exposition de données sensibles par le biais de fichiers négligés ou de mauvaises pratiques.
+----
+
+[NOTE]
+====
+Dans les projets concrets, incluez toujours des consignes de sécurité sur :
+- Utilisation du protocole TLS/SSL pour toutes les communications réseau
+- Chiffrement des données sensibles au repos et en transit
+- Validation et nettoyage des entrées pour prévenir les attaques par injection
+- Mécanismes d'authentification et d'autorisation sécurisés
+- Analyse régulière des dépendances et des vulnérabilités
+- Enregistrement et surveillance des activités suspectes
+- Utiliser le modèle et le langage appropriés pour le problème approprié
+
+Ces pratiques sont essentielles pour protéger votre application et ses données.
+====

@@ -1,0 +1,26 @@
+*Waarom een skillbundle dezelfde review verdient als je broncode*
+
+Een skillbundle is software die wordt uitgerold. Hij bevat uitvoerbare scripts, draait op developers-machines en in CI, en wordt geïnstalleerd door mensen die hem niet hebben geschreven. Het behandelen van zo'n bundle als "gewoon wat markdown" is hoe geheimen op grote schaal in omloop komen.
+
+In deze uitdaging stapelen twee fouten zich op:
+
+- Het token is in de bundle gecommit, dus iedereen die de skill installeert, krijgt een werkende gedeelde referentie.
+- Wanneer je de skill binnenin Claude deelt, krijgt iedereen met toegang tot de skill ook toegang tot het geheim.
+- Het token is met base64 gecodeerd, en dat is *coderen*, geen versleutelen. Het voorkomt dat een naïeve secretscanner afgaat, en het stopt verder niemand. Iedereen met de bundle kan het met één commando decoderen.
+
+Het tweede punt is het gevaarlijkste van de twee, omdat het een detecteerbaar probleem verandert in een ondetecteerbare. De scanner zwijgt, de bevinding verdwijnt uit de backlog en de referentie blijft jarenlang geldig.
+
+----
+Wat je in plaats daarvan moet doen:
+
+- Lees referenties runtime uit de omgeving of uit een secretmanager en faal luid met een duidelijk bericht wanneer ze ontbreken.
+- Los een bevinding van een secretscanner nooit "op" door de waarde te coderen, te splitsen of te verhullen. Los het op door het geheim te verwijderen en te roteren.
+- Review elk bestand in een skillbundle, niet alleen de `SKILL.md`. Scripts, referentiedocumenten en voorbeeldconfiguratie maken allemaal deel uit van het aanvalsoppervlak.
+- Verifieer de bundle in CI: pak hem uit en draai je secretscanner over de uitgepakte inhoud, inclusief een base64-bewuste ruleset.
+- Publiceer bundles vanuit een buildpipeline die sowieso geen toegang heeft tot productiereferenties.
+----
+
+[NOTE]
+====
+Coderen is geen beveiligingsmaatregel. Als er alleen een `base64 -d` tussen een attacker en je referentie staat, is die referentie publiek.
+====

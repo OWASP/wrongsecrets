@@ -1,0 +1,13 @@
+Ce problème peut être résolu en examinant les métadonnées du secret :
+
+1. En l'analysant à travers le code
+- localiser la définition secrète dans git (Challenge33.yml)
+- Trouvez la valeur secrète dans les métadonnées.
+2. L'examiner en découvrant le secret
+- Se connecter au cluster k8s avec kubectl
+- appelez `kubectl get secret challenge33 -o yaml` pour obtenir toutes les données requises.
+- Trouvez la valeur secrète dans les métadonnées.
+3. Utilisation abusive du débogage lors de la liste de tous les secrets
+- Se connecter au cluster k8s avec kubectl
+- Appelez `kubectl get secrets -v9` pour obtenir toutes les données requises
+- Trouvez la valeur secrète dans les métadonnées.

@@ -1,0 +1,11 @@
+Je kunt deze uitdaging op de volgende alternatieve manieren oplossen:
+
+1. Zoek het geheim direct in de cloud secrets manager (de makkelijkste manier, probeer de moeilijkere ook eens):
+- Log in op de https://portal.azure.com[cloud] console en ga naar de key vault.
+- Haal de gegevens op van `wrongsecret2`.
+
+2. Zoek het geheim door in te loggen op de pod:
+- Zorg ervoor dat Kubectl is geïnstalleerd zoals beschreven in de README.MD en dat kubectl zo is geconfigureerd dat commando's naar het juiste cluster worden gestuurd.
+- Voer nu `kubectl get pods` uit. Je ziet hier alle actieve pods in de huidige namespace; voor deze applicatie is dat doorgaans `default` (tenzij je beheerder of trainer anders heeft aangegeven).
+- Voer voor jouw exemplaar van de WrongSecrets-pod het volgende commando uit: `kubectl exec -it secret-challenge-<rest of the name of the pod from the prev.step> -- sh`.
+- Bekijk de gegevens in `/mnt/secrets-store`.

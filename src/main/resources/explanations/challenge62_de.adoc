@@ -1,0 +1,44 @@
+=== MCP-Server-Berechtigungsausweitung über ein Google-Dienstkonto
+
+Das Model Context Protocol (MCP) ermöglicht KI-Assistenten und -Agenten die Nutzung von Tools und den Zugriff auf externe Dienste. Wenn ein MCP-Server mit einem Google-Dienstkonto konfiguriert ist, das über weitergehende Berechtigungen als der aufrufende Nutzer verfügt, entsteht eine Sicherheitslücke zur Rechteausweitung: Jeder, der das MCP-Tool aufrufen kann, erhält Zugriff auf Ressourcen, für die er nicht direkt autorisiert ist.
+
+Diese Aufgabe veranschaulicht ein realistisches Szenario, in dem ein Entwickler einen MCP-Server erstellt hat, um einem KI-Assistenten den Zugriff auf interne Google Drive-Dokumente zu ermöglichen. Das vom MCP-Server verwendete Dienstkonto hat Lesezugriff auf ein geschütztes Dokument – der MCP-Server überprüft jedoch nicht, ob der Aufrufer zum Zugriff berechtigt ist.
+
+**Dein Ziel:**
+
+1. **Auf dieser Anwendung läuft ein MCP-Server.** Dieser ist über den Endpunkt `/mcp62` erreichbar.
+2. **Der Server stellt ein Tool namens `read_google_drive_document` bereit, das ein Google-Dienstkonto verwendet.**
+3. **Das Dienstkonto hat Lesezugriff auf ein Google Drive-Dokument**, das das Geheimnis enthält.
+4. **Das Tool prüft nicht, ob der Anrufer berechtigt ist, auf dieses Dokument zuzugreifen.**
+
+**So interagierst du mit dem MCP-Server:**
+
+Zuerst solltest du die verfügbaren Werkzeuge kennenlernen:
+
+[source,bash]
+----
+curl -s -X POST http://localhost:8080/mcp62 \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+----
+
+Rufe anschließend das Tool `read_google_drive_document` auf, um den Dokumentinhalt abzurufen:
+
+[source,bash]
+----
+curl -s -X POST http://localhost:8080/mcp62 \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"read_google_drive_document","arguments":{}}}'
+----
+
+****
+💡 *Hinweis:*
+
+Der Server liest ein Google Drive-Dokument mithilfe eines konfigurierten Dienstkontos. Der Inhalt des Dokuments enthält das Geheimnis, das du als Antwort einreichen musst. Der entscheidende Sicherheitsaspekt besteht darin, dass das Dienstkonto des MCP-Servers über privilegierte Zugriffsrechte verfügt, die weder du noch dein KI-Assistent normalerweise hättest – der MCP-Server gewährt diese Rechte jedoch implizit jedem, der seine Tools aufruft.
+****
+
+**Implementierungsdetails (für die Betreuer):**
+
+- Die Antwort auf die Herausforderung wird aus dem Inhalt zwischen `<secret>` und `</secret>` extrahiert.
+- Die Extraktion erfolgt einmalig beim Laden der Geheimnisse und die Daten werden dann zur Validierung der Antwort zwischengespeichert.
+- Der MCP-Controller speichert abgerufene Dokumente im Cache und behält dabei stets das konfigurierte Standarddokument sowie bis zu 20 zusätzliche Dokument-IDs bei.

@@ -1,0 +1,8 @@
+=== Ocultando en binarios, parte 1: el binario C
+
+¡Necesitamos incluir un secreto en una aplicación móvil! ¡Nadie se dará cuenta del secreto en nuestro código compilado!
+Esta es una creencia errónea con la que nos hemos topado con frecuencia al hablar sobre temas de seguridad móvil.
+
+Desmintamos este mito para C: ¿puedes encontrar el secreto en https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-c[wrongsecrets-c] (o https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-c-arm[wrongsecrets-c-arm], https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-c-linux[wrongsecrets-c-linux])?
+
+Intenta descargar el binario y ejecutarlo localmente (por ejemplo, `./wrongsecrets-c<theversion you need> <your answer>`).

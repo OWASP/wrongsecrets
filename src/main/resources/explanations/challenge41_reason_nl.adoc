@@ -1,0 +1,9 @@
+*Waarom wachtwoorden vooraf hashen geen goed idee is*
+
+Hoewel wachtwoorden vooraf hashen een eenvoudige manier is om verouderde hashes te upgraden, maakt het je kwetsbaar voor https://www.scottbrady91.com/authentication/beware-of-password-shucking[password shucking].
+
+Het is een techniek waarbij aanvallers de nieuwere, veilige lagen van een bijgewerkte hash weghalen en die terugbrengen tot de zwakkere, oudere tegenhanger. In dit geval konden we bcrypt-hashes terugbrengen tot onveilige md5-hashes en die vervolgens kraken.
+
+De veiligste manier om dit te voorkomen is de wachtwoorden van alle gebruikers resetten en de nieuwe wachtwoorden met het nieuwe algoritme hashen. Maar deze methode is niet gebruikersvriendelijk.
+
+De beste manier om te upgraden is om de hashes aanvankelijk te stapelen en de volgende keer dat een gebruiker inlogt te vervangen door directe hashes van het wachtwoord van die gebruiker.

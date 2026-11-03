@@ -1,0 +1,20 @@
+Este desafío se centra específicamente en los hashes MD5 y SHA1 sin sal. ¿Son imposibles de descifrar?
+
+Puedes resolver este desafío utilizando las siguientes soluciones:
+
+1. Para el primer hash (MD5):
+- Utilice una herramienta como Hashcat:
+- Instalar https://hashcat.net/hashcat/[Hashcat]
+- Descarga el archivo https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt[rockyou.txt password list]
+- Ejecuta Hashcat en el hash `hashcat -m 0 "2ab96390c7dbe3439de74d0c9b0b1767" /path/to/file/rockyou.txt`
+
+2. Para el segundo hash (SHA1):
+- Utilice una herramienta como Hashcat:
+- Instalar https://hashcat.net/hashcat/[Hashcat]
+- Descarga el archivo https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt[rockyou.txt password list]
+- Ejecuta Hashcat en el hash `hashcat -m 100 "F3BBBD66A63D4BF1747940578EC3D0103530E21D" /path/to/file/rockyou.txt`
+
+3. Para cualquiera de los hashes:
+- Utilice un servicio de descifrado de hashes en línea para que haga el trabajo pesado por usted:
+- Visita `https://crackstation.net/`
+- Introduce el hash y haz clic en "Descifrar hashes".

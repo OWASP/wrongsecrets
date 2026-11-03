@@ -1,0 +1,4 @@
+Estamos ejecutando esto fuera de un clúster K8s con Vault. Ejecútelo en el clúster K8s como se explica en el
+https://github.com/OWASP/wrongsecrets#vault-exercises-with-minikube[README.md]
+
+Es posible que aún haya desafíos disponibles después de este. ¡Intenta con otro desafío!

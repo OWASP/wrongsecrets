@@ -1,0 +1,10 @@
+*Warum wir bei Sicherheitsanmeldeinformationen in CI/CD vorsichtig sein müssen*
+
+Personen, die Zugriff auf die Konfiguration deiner Sicherheitsprüfungen in deiner CI/CD-Umgebung haben, können problemlos auf alle dort konfigurierten Anmeldeinformationen zugreifen. Diese Anmeldeinformationen können dann für beliebige Zwecke missbraucht werden.
+
+Deshalb sollte die Sicherheit bei der Verwaltung ihrer Geheimnisse sehr sorgfältig vorgehen: Nur weil die Anmeldeinformationen von einem Sicherheitstool verwendet werden, bedeutet das nicht, dass wir weniger Sicherheit tolerieren können ;-).
+
+Was du stattdessen tun solltest:
+- Lagere CI/CD-Zugangsdaten im geschützten Secret-Store der Plattform oder verwende eine kurzlebige Workload-Identity und gewähre jedem Job nur die benötigten Berechtigungen.
+- Beschränke, wer die Pipeline-Konfiguration ändern darf: Stelle sicher, dass Konfigurationsdateien (Workflows bzw. CI-Dateien) CODE-OWNERS haben, verlange diese auf einem geschützten Branch und begrenze den Zugriff von Maintainern und Ownern auf ein Repository.
+- Beschränke, wer die Protokolle einer Pipeline sehen kann, maskiere sensible Ausgaben und rotiere Zugangsdaten, die möglicherweise offengelegt wurden.

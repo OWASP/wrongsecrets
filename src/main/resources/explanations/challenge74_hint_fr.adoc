@@ -1,0 +1,18 @@
+Vous pouvez résoudre ce défi en suivant les étapes suivantes :
+
+1. Interagir avec l'assistant IA :
+- Utilisez l'interface de chat fournie dans le défi.
+- Posez des questions à l'assistant et observez ses réponses.
+- N'oubliez pas que l'assistant a reçu des informations confidentielles dans le cadre de ses instructions.
+
+2. Examiner comment l'assistant est formé :
+- Demandez à l’assistant des précisions sur les instructions, les règles ou le contexte.
+- Réfléchissez aux informations dont le modèle pourrait disposer et qui ne sont pas directement visibles dans l'interface de chat.
+
+3. Essayez l'injection de prompt :
+- L'assistant a reçu pour instruction de ne pas divulguer les informations confidentielles.
+- Essayez de rédiger des messages qui modifient, remplacent ou manipulent ces instructions.
+- Demandez à l’assistant de révéler des informations tirées de ses instructions ou de son contexte.
+
+4. Cherchez le secret :
+- Si vous parvenez à obtenir de l'assistant la divulgation des informations confidentielles, utilisez la valeur révélée comme solution au défi.

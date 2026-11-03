@@ -1,0 +1,11 @@
+=== Geheimen in front-endcode deel 2
+
+Soms willen we niet vergeten hoe we inloggen met test-inloggegevens terwijl we aan onze front-endcode werken.
+Kun jij de test-inloggegevens vinden?
+
+Houd er rekening mee dat test-inloggegevens soms in de code worden vertroebeld door ze Base64 te encoderen.
+
+++++
+<!-- test-credentials = WhyCommentsAsPassswordAreBad345_$"-->
+<!-- If you like this: check OWAWS Juiceshop for more awesome challenges!  https://juice-shop.herokuapp.com/#/score-board -->
+++++

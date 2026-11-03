@@ -1,0 +1,12 @@
+Це завдання конфігурації CI/CD. Ви можете знайти відповідь, автентифікувавшись на захищеній кінцевій точці за допомогою базової автентифікації та отримавши значення:
+
+1. Використайте браузер, щоб отримати секрет:
+- Спочатку перейдіть на сторінку https://github.com/OWASP/wrongsecrets/blob/master/.github/workflows/dast-zap-test.yml[Робочий процес Github]
+- Знайти змінну середовища, за допомогою якої ми налаштовуємо базову автентифікацію для ZAP (`ZAP_AUTH_HEADER_VALUE`)
+- Декодувати значення заголовка, закодоване в base64
+- Перейдіть до `/authenticated/challenge37` та введіть ім'я користувача та пароль, які ви отримали на попередньому кроці.
+
+2. Використайте CURL, щоб отримати секрет
+- Спочатку перейдіть на сторінку https://github.com/OWASP/wrongsecrets/blob/master/.github/workflows/dast-zap-test.yml[Робочий процес Github]
+- Знайти змінну середовища, за допомогою якої ми налаштовуємо базову автентифікацію для ZAP (`ZAP_AUTH_HEADER_VALUE`)
+- У вашому терміналі виконайте команду `curl <domain where this is run>/authenticated/challenge37 -H "<basic_auth header of previous step>"`, де `<basic_auth header of previous step>` – це значення знайденого вами `ZAP_AUTH_HEADER_VALUE`.

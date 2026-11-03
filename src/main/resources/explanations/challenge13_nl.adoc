@@ -1,0 +1,6 @@
+=== Forkbare Github-acties
+
+Wanneer je geheimen in je CI/CD-pijplijn wilt beheren, moet je je altijd afvragen: wie kan ernaar kijken?
+Kun je het geheim vinden met de Github-actie?
+
+Let op: deze uitdaging is tegelijkertijd een "slechte crypto"-uitdaging, maar op die manier iets minder gemakkelijk.

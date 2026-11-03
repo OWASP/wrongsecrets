@@ -1,0 +1,11 @@
+Ce défi peut être relevé de différentes manières :
+
+- Récupérez les données du sidecar en consultant les fichiers créés par le sidecar de Vault Agent :
+  1. Exécutez `kubectl get pods -A` et recherchez le nom du pod secret-challenge-xxx
+  2. Exécutez `kubectl exec secret-challenge-xxx -c secret-challenge -n default -- cat /vault/secrets/challenge47` où `xxx` est le reste du nom de pod généré aléatoirement pour imprimer la valeur codée en dur utilisée par le développeur.
+
+- Récupérez les données en consultant les journaux du pod Wrongsecrets pendant que l'exportation est lancée :
+  1. Exécutez `kubectl get pods -A` et recherchez le nom du pod secret-challenge-xxx
+  2. Exécutez `kubectl logs secret-challenge-xxx -c vault-agent` où `xxx` est le reste du nom de pod généré aléatoirement pour imprimer les journaux du sidecar Vault AGent, qui incluront la journalisation de l'instruction d'exportation.
+
+Remarque : si vous exécutez ceci dans un environnement hébergé où vous n’avez pas accès au cluster Kubernetes, demandez à l’organisateur de la solution hébergée d’exécuter les commandes pour vous et de vous renvoyer les résultats.

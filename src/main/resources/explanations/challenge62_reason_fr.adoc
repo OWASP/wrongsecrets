@@ -1,0 +1,43 @@
+=== Pourquoi le défi 62 est important : Élévation de privilèges MCP via un compte de service Google
+
+**Le problème :**
+
+Les serveurs MCP (Model Context Protocol) sont de plus en plus utilisés pour permettre aux assistants IA d'accéder à des services et des sources de données externes. Lorsque ces serveurs sont configurés avec des comptes de service ou des clés API disposant de permissions plus étendues que celles de l'utilisateur appelant, ils créent une faille de sécurité importante permettant une élévation de privilèges.
+
+Ce défi démontre la violation du **principe du moindre privilège** : le compte de service Google du serveur MCP a accès à un document Google Drive restreint, mais le serveur accorde cet accès à *n'importe quel appelant* sans vérifier si l'appelant est autorisé à consulter le document.
+
+**Le scénario réel :**
+
+1. Un développeur crée un serveur MCP pour permettre à un assistant IA interne d'accéder aux documents de l'équipe sur Google Drive.
+2. Le compte de service bénéficie d'un accès en lecture à un document sensible.
+3. Le développeur n'implémente aucun contrôle d'authentification ou d'autorisation de l'appelant sur les outils MCP.
+4. Toute personne découvrant le point de terminaison MCP peut désormais lire des documents auxquels elle n'est pas censée avoir accès, utilisant ainsi le compte de service comme proxy d'élévation de privilèges.
+
+**Pourquoi c'est dangereux :**
+
+- **Élévation des privilèges** : Les appelants obtiennent les autorisations du compte de service, et non les leurs.
+- **Aucune trace d'audit** : L'accès via l'outil MCP peut ne pas être enregistré avec l'identité de l'appelant.
+- **Large surface d'attaque** : Tout client MCP (légitime ou malveillant) peut invoquer l'outil
+- **Exploitation assistée par l'IA** : des agents d'IA connectés à ce serveur MCP exécuteront automatiquement l'outil sur instruction, amplifiant ainsi le risque.
+
+**Comment résoudre ce problème :**
+
+1. **Authentifier les appelants MCP** : Exiger un jeton d’authentification sur le point de terminaison MCP et vérifier l’identité de l’appelant avant d’exécuter les outils
+2. **Autorisation au niveau de l'outil** : Vérifiez si l'appelant authentifié est autorisé à accéder à la ressource demandée avant d'appeler le compte de service.
+3. **Limiter strictement les autorisations du compte de service** : Le compte de service ne doit disposer que des autorisations minimales nécessaires aux cas d’utilisation légitimes.
+4. **Vérifier toutes les invocations d'outils** : Consigner l'identité de l'appelant pour chaque appel d'outil afin de pouvoir examiner les accès.
+5. **Privilégiez l'usurpation d'identité aux identifiants partagés** : utilisez des identifiants spécifiques à l'appelant ou un échange de jetons plutôt qu'un compte de service partagé unique.
+
+**Notes d'implémentation de WrongSecrets :**
+
+- L'analyse de la réponse au défi utilise un contenu étiqueté (`<secret>...</secret>`) et met en cache la valeur extraite pour optimiser son empreinte mémoire.
+- La récupération de documents MCP utilise un cache limité pour limiter les requêtes sortantes répétées tout en préservant le document par défaut configuré.
+- Tests pertinents :
+	- `Challenge62Test`
+	- `Challenge62McpControllerTest`
+
+**Références :**
+
+- https://modelcontextprotocol.io/specification/2024-11-05/[Spécification MCP]
+- https://owasp.org/www-project-top-ten/[OWASP Top 10]
+- https://cloud.google.com/iam/docs/best-practices-service-accounts[Bonnes pratiques relatives aux comptes de service Google]

@@ -1,0 +1,8 @@
+*Waarom je localStorage niet moet gebruiken voor geheime informatie*
+
+LocalStorage bewaart informatie over sessies heen en is eenvoudig toegankelijk via javascript. Dit betekent dat er diverse manieren zijn om er geheime informatie uit te halen die daarin is opgeslagen.
+
+Er zijn diverse manieren om te voorkomen dat geheimen hier lekken:
+- Als het niet hoeft: sla het geheim niet bij de client op, houd het op de server.
+- SessionStorage is ook toegankelijk voor JavaScript, dus die beschermt geheimen niet tegen cross-site scripting. Geef voor browsersessies de voorkeur aan een opaque session identifier in een `Secure`, `HttpOnly`, `SameSite` cookie, waarbij de sessiestatus server-side wordt bewaard.
+- Verlaat je niet op client-side encryptie voor een geheim dat de client moet gebruiken; de client moet ook bij de ontsleutelsleutel kunnen. Gebruik voor cross-domain flows een server-side exchange of een kortlevende, smal gescoped token in plaats van een herbruikbaar geheim in browseropslag te bewaren.

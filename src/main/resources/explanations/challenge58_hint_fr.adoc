@@ -1,0 +1,25 @@
+=== Indice pour le défi 58
+
+Ce défi illustre un anti-modèle de sécurité très courant : **les chaînes de connexion à la base de données avec des informations d’identification intégrées qui fuient à travers les messages d’erreur**.
+
+**Où chercher :**
+
+1. **Essayez le point de terminaison d'erreur :** Visitez `/error-demo/database-connection` pour déclencher un échec de connexion à la base de données
+2. **Vérifiez la réponse :** L’application tentera de se connecter à une base de données et échouera, affichant ainsi la chaîne de connexion.
+3. **Consultez les journaux :** L’application enregistre également l’erreur avec les informations d’identification exposées.
+
+**Ce qu'il faut rechercher :**
+
+- Les URL de connexion JDBC contiennent souvent des informations sensibles
+- Recherchez des modèles comme `jdbc:postgresql://...?user=USERNAME&password=PASSWORD`
+- Le message d'erreur affichera la chaîne de connexion complète en cas d'échec de la connexion à la base de données.
+
+**Contexte réel :**
+
+Voici l'une des façons les plus courantes dont des secrets sont divulgués en production :
+- Échecs de connexion à la base de données lors du démarrage de l'application
+- Échecs des contrôles d'intégrité dans l'orchestration des conteneurs
+- Environnements de développement avec rapports d'erreurs détaillés
+- Pipelines CI/CD où les connexions à la base de données échouent
+
+**Rappel :** L’objectif est de trouver le mot de passe de la base de données qui est révélé dans le message d’erreur lorsque la connexion échoue.

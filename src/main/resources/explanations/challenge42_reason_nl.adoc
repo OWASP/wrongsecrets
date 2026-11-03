@@ -1,0 +1,8 @@
+*Waarom het verbergen van een API-sleutel in de audit-events geen goed idee is*
+
+In een veilig en goed ontworpen systeem is het beschermen van gevoelige informatie zoals API-sleutels cruciaal.
+Audit-events zijn belangrijk voor het volgen en monitoren van activiteiten binnen een applicatie.
+
+Zorg ervoor dat API-sleutels niet als platte tekst zichtbaar zijn in de (audit)logs of in enige andere uitvoer.
+
+Log het event en de noodzakelijke niet-gevoelige metadata in plaats van de API-sleutel zelf. Verberg gevoelige velden voordat de gegevens de logopslag bereiken, beperk de toegang tot de logs en roteer elke sleutel die al is vastgelegd.

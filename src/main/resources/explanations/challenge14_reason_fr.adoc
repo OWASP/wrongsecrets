@@ -1,0 +1,10 @@
+*Pourquoi vous devez faire attention à votre mot de passe et à vos autres secrets*
+
+Que vous utilisiez un mot de passe pour un système de gestion des secrets d'entreprise ou un gestionnaire de mots de passe : vos facteurs d'authentification font la différence entre un système compromis et un système sécurisé.
+
+En termes simples, lorsque vous vous authentifiez directement auprès de votre gestionnaire de mots de passe :
+- Utilisez un mot de passe fort (par exemple, un mot de passe long !)
+- Utilisez l'authentification multifacteur si possible
+- Activer tout type d'alerte lorsqu'un nouvel appareil et/ou une nouvelle adresse IP tente de se connecter.
+
+Si vous utilisez l'authentification unique (SSO) : assurez-vous que le système auquel vous vous authentifiez propose les mêmes contrôles : autorisez les mots de passe longs et forts, l'authentification multifacteur (MFA) et les alertes de sécurité appropriées en cas d'activité suspecte.

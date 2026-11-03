@@ -1,0 +1,2 @@
+We are running outside a docker container.
+Please run this in a container as explained in the https://github.com/OWASP/wrongsecrets#basic-docker-exercises[README]

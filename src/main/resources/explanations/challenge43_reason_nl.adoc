@@ -1,0 +1,8 @@
+*Waarom je geen geheimen op sociale media moet delen*
+
+Een geheim uit je applicatie delen op sociale media is heel erg slecht, want het wordt openbaar beschikbaar voor iedereen die het kan misbruiken zodra diegene weet in welke context het geheim wordt gebruikt.
+
+Hoewel gebruikers of platforms reacties/berichten vaak kunnen verwijderen, belandt het geheim bijna altijd in een database die kan lekken.
+
+Deel nooit geheimen, persoonlijk of werkgerelateerd, op sociale media!
+Als een geheim wordt geplaatst, trek het dan onmiddellijk in of roteer het en vraag het platform het bericht te verwijderen. Beschouw het ook na verwijdering als blootgesteld, omdat anderen het mogelijk hebben gekopieerd of gearchiveerd.

@@ -1,0 +1,18 @@
+*Warum du bei Geheimnissen in deiner Cloud vorsichtig sein solltest:*
+
+Geheimnisse und Terraforming-Status:
+
+Der Terraform-Status kann an verschiedenen Orten gespeichert werden: lokal, in der Cloud-Speicherlösung eines Anbieters usw. Es kann leicht passieren, dass Geheimnisse im Terraform-Status landen, da die von Terraform erstellten Systeme häufig mit anderen Systemen kommunizieren müssen, für die eine Authentifizierung erforderlich ist. Stelle daher sicher, dass Geheimnisse im Terraform-Status immer verschlüsselt sind oder dass alle Geheimnisse in einem Geheimnisverwaltungssystem gespeichert werden. Alternativ kannst du sicherstellen, dass das Geheimnis zwar in Terraform erstellt wird, der Wert jedoch über einen anderen Prozess festgelegt und verwaltet wird.
+
+Beachte, dass Geheimnisse nicht der einzige Grund sind, den Zugriff auf den Terraform-Status zu verhindern. Lesezugriffe auf den TF-Status können Konfigurationsdetails für Unbefugte offenlegen, während Schreibzugriffe es einem Angreifer ermöglichen, einen gefälschten Status einzurichten, der beim nächsten `terraform apply-run` zu unautorisierten Änderungen führt.
+Verwende ein geschütztes Remote-State-Backend mit Verschlüsselung und Sperren und beschränke sowohl den Lese- als auch den Schreibzugriff. Das Markieren eines Terraform-Werts als `sensitive` verbirgt ihn nur vor der normalen CLI-Ausgabe; es entfernt ihn nicht aus dem State. Falls Zugangsdaten im State landen, rotiere diese.
+
+Zugriff auf das Administrator-/Inhaberkonto:
+Wenn du mit dem AWS-Administratorkonto auf die Daten zugreifen konntest, verstehst du sicher, warum dies für die Produktivumgebung keine gute Idee ist. Denn mit diesem Konto kannst du beliebige Änderungen vornehmen und problemlos alle Geheimnisse exfiltrieren.
+Verwende für Workloads und Personen getrennte Identitäten mit den geringstmöglichen Berechtigungen und reserviere das Administratorkonto für überwachte, MFA-geschützte Notfallnutzung.
+
+Nicht zuletzt konnten wir leicht per exec auf den Container zugreifen, um dort mittels grep nach dem Einhängepunkt (Mount) mit dem Secret zu suchen. Dies hängt mit drei Dingen zusammen:
+
+- Dies ist uns mittels RBAC gestattet, was in PRD nicht der Normalfall sein sollte: Andernfalls kann jeder in deiner Organisation im Container herumstöbern.
+- Wir haben ausführbare Dateien im Container (sh/openssl/etc.), die wir ausführen können, um eine Shell einzurichten. Das Entfernen aller unnötigen Binärdateien aus dem Container kann die Angriffsfläche verringern und es Angreifern, die eine Remote Code Execution (RCE) im Container durchgeführt haben, erschweren, auf andere Stellen im Container zuzugreifen und dort weitere Ausführungsrechte zu erlangen.
+- Wir haben die ConfigMap als Umgebungsvariable freigegeben. Das bedeutet, dass jeder, der Zugriff auf die Container-Laufzeitumgebung innerhalb des Pods hat, das Geheimnis nun auslesen kann. Wir haben das Geheimnis zwar in die Nähe des Nutzers gebracht, aber möglicherweise noch nicht nah genug (z. B. nur in die Anwendung).

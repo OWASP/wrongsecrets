@@ -1,0 +1,10 @@
+=== Secretos en el código de la interfaz de usuario
+
+Cuando comenzamos un nuevo proyecto, generalmente nos centramos más en la implementación de nuevas funcionalidades que en el aspecto de seguridad.
+En ocasiones, las aplicaciones de una sola página o las aplicaciones móviles necesitan acceder a la información por sí mismas, en lugar de hacerlo en nombre del usuario.
+Para este propósito, https://oauth.net/2/grant-types/client-credentials/[OAuth] proporciona el flujo `client_credentials` para obtener el token de acceso.
+En tal situación, es fácil almacenar secretos de cliente en el código de la interfaz de usuario o de la aplicación móvil. Y aunque puedas ofuscar el secreto en el código, tarde o temprano tendrás que usarlo.
+
+Este desafío intentará contactar con un servidor utilizando el flujo de credenciales de cliente. ¿Podrás encontrar su secreto?
+
+¿Qué tal si lo buscas en las herramientas para desarrolladores del navegador?

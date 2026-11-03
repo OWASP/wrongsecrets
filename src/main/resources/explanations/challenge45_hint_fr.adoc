@@ -1,0 +1,27 @@
+Ce défi peut être résolu en suivant les étapes suivantes :
+
+1. Trouvez le secret avec la ligne de commande
+- utilisez `kubectl exec vault-0 -n vault -- vault kv get secret/wrongsecret` pour trouver les données.
+
+
+2. Trouvez le secret dans Vault en utilisant le jeton racine enregistré :
+- Lorsque vous configurez l'environnement K8s, le script vous indique la valeur du jeton racine comme ci-dessous :
+
+    Key                  Value
+    ---                  -----
+    token                s.Jqka4lSy8ayQw2LFsvyAgnTI
+    token_accessor       HEr9RYa3OcZNDOHeFRXIMYCV
+    token_duration       ∞
+    token_renewable      false
+    token_policies       ["root"]
+    identity_policies    []
+    policies             ["root"]
+
+
+- Utilisez le jeton pour vous connecter à Vault accessible sur le port 8200.
+- Regardez autour de vous : pouvez-vous trouver l'emplacement du secret dans l'aperçu des secrets ?
+
+3. Découvrez le secret en tant que membre SRE
+- Accédez à l'interface web du coffre-fort
+- connectez-vous avec le nom d'utilisateur « helper » et le mot de passe « foo »
+- découvrir le véritable secret.

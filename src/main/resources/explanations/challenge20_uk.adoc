@@ -1,0 +1,7 @@
+=== Приховування у двійкових файлах, частина 2: двійковий файл C++
+
+Подібно до приховування секретів у застосунку, написаному на C, ви опинитеся в подібній ситуації з C++. Чи можете ви знайти секрет у нашому двійковому файлі?
+
+Давайте розвінчаємо міф про те, що «секрети важко знайти в нативних скомпільованих програмах» для C++: чи можете ви знайти секрет у https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-cplus[wrongsecrets-cplus] (або https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-cplus-arm[wrongsecrets-cplus-arm], https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-cplus-linux[wrongsecrets-cplus-linux])?
+
+Спробуйте завантажити бінарний файл та запустити його локально (наприклад, `./wrongsecrets-cplus<theversion you need> <your answer>`).

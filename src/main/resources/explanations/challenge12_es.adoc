@@ -1,0 +1,7 @@
+=== Docker COPY y WORKDIR
+
+En ocasiones, se copian grandes partes del sistema de archivos local al contenedor para que estén disponibles en este, para comodidad del autor.
+
+En este desafío, también realizamos algunas operaciones de COPY y ocultamos una clave allí. Ten en cuenta que la clave cambia con cada generación del contenedor Docker, así que será mejor que la extraigas y la uses rápidamente :).
+
+Pruebe https://github.com/deepfence/SecretScanner[*deepfenceio/secretscanning*], `docker history` de la imagen, o simplemente `docker exec` contra un contenedor en ejecución.

@@ -1,0 +1,11 @@
+Er zijn twee manieren om deze uitdaging op te lossen:
+
+1. Door naar de storage te kijken:
+- Navigeer naar "localhost:8080" in je webbrowser.
+- Open de developer console door te inspecteren.
+- Navigeer naar de sectie Applications van de developer console.
+- De waarde die bij de key "secret" hoort is je antwoord!
+2. Door naar het netwerkverkeer te kijken:
+- Navigeer naar WrongSecrets in je webbrowser.
+- Open de developer console.
+- Bekijk het netwerk-tabblad: kun je de extra call voor deze uitdaging en de return value daarvan spotten?

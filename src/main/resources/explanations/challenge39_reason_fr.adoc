@@ -1,0 +1,7 @@
+*Pourquoi ne pas utiliser le nom du fichier comme clé de chiffrement ?*
+
+Il existe de nombreux cas où le contenu des fichiers est chiffré à l'aide de leur nom, ce qui permet aux attaquants de le déchiffrer facilement. Cette méthode est souvent perçue comme un moyen simple de conserver la clé de chiffrement à proximité du contenu, sans avoir à la réutiliser systématiquement.
+
+Mais comme vous pouvez le constater, ce n'est pas une bonne idée. Un attaquant détient la clé dès qu'il a le fichier en sa possession.
+
+Générez les clés de chiffrement avec un générateur de nombres aléatoires cryptographiquement sûr et stockez-les dans un gestionnaire de secrets ou un service de gestion de clés dédié. Limitez strictement l'accès aux clés et renouvelez ou rechiffrez les données si une clé est exposée.

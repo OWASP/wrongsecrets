@@ -1,0 +1,5 @@
+=== Незахищений ключ шифрування – частина 1
+
+Розробник зашифрував секретний код за допомогою https://en.wikipedia.org/wiki/Advanced_Encryption_Standard[AES] та зберіг його значення у форматі base64 у файлі. Але де залишити ключ? Як щодо того, щоб просто використовувати ім'я файлу як ключ шифрування? Таким чином, кожен секретний код легко матиме свій власний ключ! Чи зможете ви знайти секретний код?
+
+Файл завдання називається https://github.com/OWASP/wrongsecrets/blob/master/src/main/resources/executables/secrchallenge.md[secrchallenge.md] та знаходиться в папці https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables[executables].

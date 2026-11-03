@@ -1,0 +1,7 @@
+Je kunt de juiste invoer voor de guess-method vinden door:
+
+1. Hashes vergelijken:
+- Zoek het contract op in de https://etherscan.io/[Etherscan]-explorer.
+- Haal de hash op uit de contract storage.
+- Ga door de transacties heen en open daarna het tabblad inputs en decodeer ze als UTF-8.
+- Vergelijk de hashes van de inputs van de transacties met de opgeslagen hashwaarde.

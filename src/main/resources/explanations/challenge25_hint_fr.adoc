@@ -1,0 +1,22 @@
+Vous pouvez relever ce défi grâce aux solutions alternatives suivantes :
+
+1. Examinez le stockage dans Etherscan :
+- Consultez la transaction de création de contrat sur https://goerli.etherscan.io/tx/0x497b71a1fd4c57509bfecc2114ec649387fe669c23a3a7e97961f389444d9561[Etherscan]. Remarque : en cas d’erreur, saisissez simplement `https://goerli.etherscan.io/tx/0x497b71a1fd4c57509bfecc2114ec649387fe669c23a3a7e97961f389444d9561` dans le champ de recherche.
+- Accédez à l'état et consultez le stockage, copiez la nouvelle valeur et décodez-la en hexadécimal.
+
+2. Examinez les données d'entrée dans Etherscan :
+- Consultez la transaction de création de contrat sur https://goerli.etherscan.io/tx/0x497b71a1fd4c57509bfecc2114ec649387fe669c23a3a7e97961f389444d9561[Etherscan]. Remarque : en cas d’erreur, saisissez simplement `https://goerli.etherscan.io/tx/0x497b71a1fd4c57509bfecc2114ec649387fe669c23a3a7e97961f389444d9561` dans le champ de recherche.
+- Cliquez sur « Plus de détails ». Examinez les données d'entrée, copiez la nouvelle valeur et décodez-la en hexadécimal.
+
+3. Utilisez Infura avec web3js chez Infura :
+- Créez une clé Infura sur https://infura.io/[Infura].
+- Écrivez un script simple avec web3js pour appeler la fonction de vue sur la chaîne publique "secret".
+
+4. Effectuez une demande de stockage auprès d'Infura :
+- Créez une clé Infura sur https://infura.io/[Infura].
+- Lire le stockage à la position 0 pour le contrat comme suit :
+
+    curl https://goerli.infura.io/v3/${<votre-clé-infura>} \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc":"2.0", "method": "eth_getStorageAt", "params": ["0x8b72f7cbAD50620c46219ad676Ad9d3a5A273587", "0x0", "latest"], "id": 1}'

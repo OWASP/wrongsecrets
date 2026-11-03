@@ -1,0 +1,4 @@
+=== Contraseña basada en argumentos de Docker
+El desarrollador se volvió más astuto: ahora la contraseña ya no se define mediante un argumento ENV, sino mediante un argumento de compilación del contenedor Docker.
+
+Puedes detectarlo fácilmente observando cómo se construyeron las capas.

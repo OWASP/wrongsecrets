@@ -1,0 +1,5 @@
+*Waarom geheimen op de blockchain opslaan een slecht idee is*
+
+Je moet nooit een geheim naar de blockchain commiten. Alle data is publiek. Zeker wanneer een variabele publiek is, is die heel eenvoudig te lezen.
+
+Toch een geheim nodig? Zorg ervoor dat het deel uitmaakt van een ondersteunend systeem (bijv. een externe service die je zelf aanmaakt).

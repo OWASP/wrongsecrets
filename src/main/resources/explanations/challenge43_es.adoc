@@ -1,0 +1,8 @@
+=== Error de Reddit
+
+Es fácil cometer errores. Por ejemplo, pueden compartir en redes sociales un dato aparentemente inofensivo que posteriormente resulta ser un secreto.
+También pueden publicar algo en la pantalla equivocada y enviarlo. Además, algunos gestores de contraseñas rellenan automáticamente o pegan texto en cualquier página o pantalla.
+
+De manera similar, un desarrollador de la comunidad OWASP, que además era un usuario activo de Reddit, dejó un secreto en la plataforma "por error".
+
+¿Puedes encontrar el secreto?

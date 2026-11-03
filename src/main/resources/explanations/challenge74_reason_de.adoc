@@ -1,0 +1,31 @@
+*Warum das Einfügen von Geheimnissen in KI-Systemabfragen ein Risiko für den Verlust von Geheimnissen darstellt*
+
+KI-Assistenten erhalten üblicherweise eine Systemaufforderung mit Anweisungen, die ihr Verhalten definieren. Es kann verlockend sein, sensible Informationen in diese Aufforderung aufzunehmen und das Modell einfach anzuweisen, diese nicht preiszugeben.
+
+Genau das passiert bei dieser Herausforderung: Die Anwendung gibt das Geheimnis direkt in die Systemeingabeaufforderung des KI-Assistenten ein und weist das Modell an, es nicht preiszugeben.
+
+Die Systemabfrage stellt **keine Sicherheitsgrenze** dar. Das Modell empfängt sowohl die Systemanweisungen als auch die Benutzereingaben als Teil seines Kontextes. Ein Benutzer kann gezielt Abfragen erstellen, die versuchen, das Verhalten des Modells zu ändern, seine Anweisungen offenzulegen oder es dazu zu bewegen, Informationen aus seinem Kontext preiszugeben.
+
+In diesem Szenario verstärken sich drei Fehler gegenseitig:
+
+- Das Geheimnis wird direkt in den Kontext des Modells eingefügt, sodass es dem Modell während der Inferenz zur Verfügung steht.
+- Die Anwendung setzt voraus, dass das Modell einer Anweisung zur Geheimhaltung folgt.
+- Ein Benutzer kann direkt mit dem Modell interagieren und versuchen, diese Anweisungen durch Eingabeaufforderungen zu manipulieren.
+
+Wenn das Modell das Geheimnis preisgibt, haben die vertraulichen Informationen der Anwendung die beabsichtigte Sicherheitsgrenze überschritten.
+
+----
+Was du stattdessen tun solltest:
+
+- Verwende niemals die Systemaufforderung eines KI-Modells als Mechanismus zur Geheimnisverwaltung.
+- Geheimnisse sollten nach Möglichkeit außerhalb des Modellkontexts aufbewahrt werden.
+- Gewähre der Anwendung nur dann Zugriff auf Geheimnisse, wenn diese für einen Vorgang tatsächlich erforderlich sind.
+- Alle Benutzereingaben sind als potenziell feindliche Eingaben zu behandeln.
+- Autorisierungs- und Zugriffskontrollen sollten in der Anwendung selbst implementiert werden, anstatt sich auf das Modell zu verlassen, um diese durchzusetzen.
+- Falls sensible Informationen versehentlich einem Modell zugänglich gemacht werden, behandle die Informationen als potenziell kompromittiert und wechsle gegebenenfalls die betroffenen Zugangsdaten.
+----
+
+[NOTE]
+====
+Eine Systemaufforderung ist eine Anweisung an ein KI-Modell, kein Zugriffskontrollmechanismus. Die Anweisung an ein Modell, „dieses Geheimnis niemals preiszugeben“, garantiert nicht, dass das Geheimnis vertraulich bleibt. Wenn Informationen geheim bleiben müssen, sollte die Anwendung diese Grenze außerhalb des Modells durchsetzen.
+====

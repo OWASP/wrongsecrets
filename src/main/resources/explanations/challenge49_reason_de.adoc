@@ -1,0 +1,9 @@
+*Warum die Verwendung von MD5 als KDF schlecht ist*
+
+Der effektive Schutz von Schlüsseln ist von entscheidender Bedeutung. Dies bedeutet die Verwendung der richtigen Key Derivation Functions (KDFs) mit zusätzlicher Entropie und kontextueller Bindung, wie im Mobile Security Testing Guide (MSTG) unter https://mas.owasp.org/MASTG/0x04g-Testing-Cryptography/#weak-key-generation-functions hervorgehoben wird.
+
+MD5 ist zu schnell und einfach zu berechnen, wodurch Angreifer schnell eine Vielzahl von Eingaben (wie PINs) ausprobieren können, um den Schlüssel abzuleiten. Zudem ist der Kollisionsraum relativ klein (wenn auch etwas schwieriger auszunutzen), was bedeutet, dass mehrere verschiedene Eingaben zum gleichen MD5-Hash führen können.
+
+Stärkere KDFs sind bei der Verarbeitung sensibler Daten von entscheidender Bedeutung, da sie einen dringend benötigten Schutz vor Brute-Force-Angriffen bieten und Geheimnisse auch dann schützen, wenn der Angreifer Zugriff auf Teilinformationen erlangt.
+
+Die MSTG empfiehlt die Verwendung robuster KDFs wie PBKDF2, bcrypt oder Argon2, die zusätzliche Entropie einbeziehen und die Rechenhärte erhöhen, wodurch Brute-Force-Angriffe kostspieliger werden.

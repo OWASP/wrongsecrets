@@ -1,0 +1,7 @@
+=== Se cacher dans les binaires, partie 2 : le binaire C++
+
+Tout comme lorsqu'on dissimule des secrets dans une application écrite en C, on se retrouve dans une situation similaire avec C++. Saurez-vous trouver le secret dans notre binaire ?
+
+Démystifions le mythe selon lequel « les secrets sont difficiles à trouver dans les applications compilées natives » pour C++ : pouvez-vous trouver le secret dans https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-cplus[wrongsecrets-cplus] (ou https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-cplus-arm[wrongsecrets-cplus-arm], https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-cplus-linux[wrongsecrets-cplus-linux]) ?
+
+Essayez de télécharger le fichier binaire et de l'exécuter localement (par exemple `./wrongsecrets-cplus<theversion you need> <your answer>`).

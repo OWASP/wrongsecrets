@@ -1,0 +1,5 @@
+*Geheimenbeheer is meer dan veilige opslag:*
+
+Zoals u inmiddels kunt zien: er zijn veel manieren om bij een geheim te komen: of het nu hardgecodeerd is, opgeslagen in een verkeerd geconfigureerde oplossing van een derde partij, of correct opgeslagen, maar met de verkeerde IAM-toegangsrechten in de accounts ernaast. U zult inmiddels begrijpen waarom we zeggen dat "uw volwassenheid op het gebied van beveiliging tot uiting komt in uw geheimenbeheer".
+
+In dit specifieke geval konden twee afzonderlijke workloads toegang krijgen tot elkaars geheimen. Dit had voorkomen kunnen worden door verschillende sleutelkluizen voor verschillende doeleinden te maken.

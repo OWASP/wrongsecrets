@@ -1,0 +1,11 @@
+=== Un secret téléversé sur une application LLM (Large Language Model)
+
+L'IA est là pour durer. Elle peut être utile dans de nombreux domaines : résolution de problèmes complexes, génération de code ou conseils en matière de sécurité.
+Imaginez que vous ayez téléversé du code pour rechercher des failles de sécurité. Que se passe-t-il si ce code contient un mot de passe ? Des règles devraient limiter le modèle LLM afin d'empêcher la divulgation du mot de passe. Ce secret peut-il néanmoins être extrait ?
+
+Essayez de le trouver dans le premier exercice de ce jeu d'incitation : https://gandalf.lakera.ai/[this prompting game].
+
+
+Veuillez noter que https://gandalf.lakera.ai/[le jeu de questions-réponses] est entièrement gratuit et accessible à tous. Il se peut donc qu'il soit temporairement indisponible et qu'il faille quelques minutes avant qu'il ne se relance après votre première requête. Merci de ne pas effectuer de tests de robustesse ou de test dynamique sur le site web (par exemple, n'utilisez pas ZAP ou Burp). Assurez-vous que d'autres utilisateurs puissent également y jouer !
+
+Notez que nous utilisions auparavant https://gpa.43z.one/[un autre jeu de questions-réponses] qui a été fermé en raison de son coût, il se peut donc que LLM/IA ne soit pas là pour tout ;-).

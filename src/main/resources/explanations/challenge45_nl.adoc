@@ -1,0 +1,4 @@
+=== Uitdaging met een Vault-subkey
+
+Soms wil je gewoon die ene beknopte vermelding in je geheimenbeheersysteem. Dus, waarom zouden je gebruikersnaam en wachtwoord niet in dezelfde vermelding staan?
+We hebben dat geprobeerd, maar kregen een nieuw probleem! Met Hashicorp Vault kun je policies instellen die toegang geven tot een subkey (dat is de sleutel naar de waarde van je geheim). Kun jij de zeer willekeurige gebruikersnaam vinden die we voor deze uitdaging hebben aangemaakt?

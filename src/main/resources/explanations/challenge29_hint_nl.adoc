@@ -1,0 +1,7 @@
+Zoals de tekst van de uitdaging zegt, zijn we op zoek naar het geheim in een `screenshot` van een `closed GitHub issue` in onze GitHub-repository. Maar hoe vinden we het?
+
+Je kunt deze uitdaging oplossen door de volgende stappen te volgen:
+
+1. Ga naar het tabblad `issues` van onze GitHub, en daarna naar de sectie met gesloten issues, om alle gesloten issues te zien.
+
+2. Ga door alle bugrapporten heen en kijk specifiek naar `screenshots` die door gebruikers zijn geplaatst.

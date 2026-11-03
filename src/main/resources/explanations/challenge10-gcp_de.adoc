@@ -1,0 +1,3 @@
+=== GCP Secret Manager Teil 2
+
+Das Geheimnis ist nun randomisiert und wird direkt im GCP Secret Manager gespeichert. Wir binden es aber weiterhin über den CSI-Treiber https://secrets-store-csi-driver.sigs.k8s.io für https://github.com/GoogleCloudPlatform/secrets-store-csi-driver-provider-gcp in den K8s-Pod ein. Kannst du darauf zugreifen?

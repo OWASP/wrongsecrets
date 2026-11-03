@@ -1,0 +1,11 @@
+*¿Por qué hay que tener cuidado con las notas de Git?*
+
+1. Como en todos los repositorios Git, una vez que se filtra un secreto, es muy difícil/imposible eliminarlo de todo el historial.
+
+2. Git Notes parece ser una función poco utilizada de Git, por lo que muchos escáneres de secretos no la verifican. Esto significa que puede pasar desapercibida en la integración continua (CI).*
+
+**Actualmente, el equipo de WrongSecrets está investigando la preocupación número 2. Estamos analizando los proyectos de código abierto más importantes para determinar si se utilizan notas de Git. Si se utilizan, podríamos contribuir a la creación de escáneres de secretos para que sean compatibles con esta función. Si no se utilizan, recomendaríamos simplemente no usar esta característica de Git para evitar problemas. Manténgase al tanto del progreso de este proyecto en el canal de Slack de WrongSecrets.**
+
+Qué hacer en su lugar:
+- No almacenes secretos en notas de Git. Incluye las notas de Git en los procesos de análisis de secretos y revisión del repositorio en lugar de asumir que los escáneres las inspeccionan.
+- Si un secreto se ha committeado en una nota, revótalo o rótalo y trátalo como expuesto, aunque la nota se elimine después.

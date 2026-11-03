@@ -1,0 +1,9 @@
+A diferencia de otros problemas relacionados con Git, este no puede resolverse con la gran cantidad de herramientas que buscan automáticamente secretos filtrados en los repositorios de Git.
+
+Intenta resolver el desafío revisando manualmente los metadatos de Git.
+
+1. Clona el repositorio: `git clone https://github.com/OWASP/wrongsecrets`.
+2. Navegue al directorio - `cd wrongsecrets`
+3. Obtener las notas: `git fetch origin pass:['refs/notes/*:refs/notes/*']`
+4. Enumera todas las notas del repositorio: `git notes`
+5. Utilizando la referencia de la nota que se muestra, muestra la nota: `git notes show [ref]` (se mostrarán 2 referencias por cada nota; la segunda es la referencia de la nota).

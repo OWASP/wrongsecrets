@@ -1,0 +1,17 @@
+= Exposición de secretos de configuración de contenedores de desarrollo
+
+*Por qué codificar secretos directamente en los contenedores de desarrollo supone un riesgo crítico para la seguridad*
+
+Los contenedores de desarrollo son entornos de desarrollo compartidos configurados mediante `.devcontainer/devcontainer.json`. Dado que estos archivos suelen estar controlados por versiones, incluir información confidencial directamente en las definiciones de los contenedores de desarrollo presenta varios riesgos de seguridad:
+
+1. **Exposición a todos los lectores del repositorio**: Cualquier persona con acceso de lectura al repositorio de código fuente (o a bifurcaciones y clones públicos en proyectos de código abierto) puede leer secretos codificados en `.devcontainer/devcontainer.json`.
+2. **Fuga de variables de entorno**: Las credenciales definidas en `containerEnv` o `remoteEnv` se inyectan en cada proceso dentro del contenedor, lo que las hace accesibles a cualquier script, proceso hijo o herramienta de diagnóstico que se ejecute en el contenedor.
+3. **Persistencia en el historial de Git**: Una vez confirmado, eliminar el secreto requiere reescribir el historial de Git, y las claves obsoletas a menudo permanecen válidas indefinidamente si no se realiza la rotación.
+4. **Más difícil de detectar**: Muchos inspectores de secretos y contenedores aún no detectan el archivo `devcontainer.json`, ya que se comporta de manera diferente a un `Dockerfile`.
+
+*Medidas correctivas y mejores prácticas:*
+
+- **Utilice secretos de GitHub Codespaces / secretos del contenedor de desarrollo de VS Code**: inyecte secretos dinámicamente a través de los secretos del repositorio/usuario de Codespaces o la configuración de VS Code en lugar de codificarlos directamente en los archivos de configuración.
+- **Usar sustitución de entorno local**: haga referencia a las variables de entorno del host dinámicamente en `devcontainer.json` usando la sintaxis `${localEnv:MY_SECRET}`.
+- **Utilice archivos `.env` con `.gitignore`**: Coloque los secretos de desarrollo en archivos `.env` locales que estén explícitamente excluidos del control de versiones en `.gitignore`.
+- **Adopte soluciones de gestión de secretos**: Obtenga secretos en tiempo de ejecución utilizando administradores de secretos dedicados (por ejemplo, HashiCorp Vault, AWS Secrets Manager, Azure Key Vault, GCP Secret Manager).

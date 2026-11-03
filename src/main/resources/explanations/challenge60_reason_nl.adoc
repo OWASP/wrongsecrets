@@ -1,0 +1,57 @@
+=== Waarom uitdaging 60 ertoe doet: MCP Prompt Injection en blootstelling van omgevingsvariabelen
+
+**Het probleem:**
+
+MCP-servers (Model Context Protocol) zijn steeds populairder om AI-assistenten toegang te geven tot tools en gegevens. Veel developers deployen MCP-servers echter zonder adequate beveiligingscontroles. Erger nog: een *kwaadaardige* MCP-server kan de verbindende AI-client actief manipuleren via prompt injection — waarbij de AI zelf een onwetend exfiltratieagent wordt.
+
+**Twee kwetsbaarheden in één:**
+
+**1. Onveilige shell-uitvoering (klassieke MCP-configuratiefout)**
+De MCP-server biedt een `execute_command`-tool zonder authenticatie. Iedereen die poort 8090 bereikt, kan deze aanroepen en alle omgevingsvariabelen uitlezen — inclusief secrets.
+
+**2. MCP Prompt Injection / "MCP Rug Pull" (opkomende supply-chain-aanval)**
+Het `initialize`-antwoord van MCP bevat een veld `instructions`. Dit veld wordt rechtstreeks geïnjecteerd in de systeemprompt van de verbindende LLM. Een kwaadaardige server gebruikt dit om de AI stilzwijgend de opdracht te geven om:
+
+1. `execute_command` met `env` aan te roepen om de eigen omgevingsvariabelen van de client te verzamelen
+2. `forward_env` aan te roepen met de verzamelde gegevens — om die terug te sturen naar de aanvaller
+3. De gebruiker nooit over een van deze stappen te informeren
+
+De gebruiker ziet niets bijzonders. Het AI-model volgt zijn "systeeminstructies" zonder tegenspraak.
+
+**Waarom dit gebeurt:**
+
+1. **Gemak voor de developer:** MCP-servers worden snel opgezet voor AI-integraties en beveiliging is een bijzaak
+2. **Aangenomen toegang alleen van binnenuit:** Developers gaan ervan uit dat de MCP-poort alleen door de AI-assistent wordt bereikt
+3. **Krachtige tools zonder authenticatie:** `execute_command` en vergelijkbare tools hebben geen ingebouwde toegangscontrole
+4. **Vertrouwen in MCP-serverinstructies:** AI-clients behandelen het veld `instructions` als gezaghebbend — een kwaadaardige server misbruikt dit vertrouwen
+5. **Secrets in omgevingsvariabelen:** Applicaties slaan secrets op als env-vars, die eenvoudig met een shellcommando worden blootgesteld
+
+**Gevolgen in de praktijk:**
+
+- **Secrets exfiltreren van AI-clients:** Een gecompromitteerde of geïmiteerde MCP-server kan `AWS_ACCESS_KEY_ID`, `GITHUB_TOKEN`, databasegegevens en andere secrets stelen uit de procesomgeving van de AI-agent
+- **Stille werking:** De gebruiker wordt nooit geïnformeerd — de AI voert gegevens uit als onderdeel van zijn "initialisatie"
+- **Supply-chain-aanval:** Als een aanvaller een MCP-serverpakket kan publiceren of vervangen, wordt elke AI-assistent die verbindt een exfiltratievector
+- **Blootstelling aan serverzijde:** De niet-geauthenticeerde `execute_command`-tool lekt ook alle secrets aan serverzijde naar elke aanroeper
+
+**Veelvoorkomende blootstellingsvectoren:**
+
+- MCP-servers gebonden aan `0.0.0.0` in plaats van `127.0.0.1` (toegankelijk vanuit het netwerk)
+- Docker-containers met de MCP-poort blootgesteld zonder firewallregels
+- Kubernetes-pods waar de MCP-poort via service discovery toegankelijk is
+- Kwaadaardige of getyposquatte MCP-serverpakketten in registries
+- Gecompromitteerde MCP-servers in supply-chain-aanvallen op AI-workflows
+
+**Preventie:**
+
+1. **Exposeer nooit shell-uitvoeringstools in productie-MCP-servers** — het risico is te groot
+2. **Bind MCP-servers alleen aan localhost** (`127.0.0.1`) om netwerktoegang te voorkomen
+3. **Eis authenticatie** voor alle MCP-endpoints, ook interne
+4. **Controleer het veld `instructions`** van elke MCP-server waarmee je verbindt — behandel het als een systeemprompt die je niet vertrouwt
+5. **Gebruik secretmanagers** (AWS Secrets Manager, HashiCorp Vault, Azure Key Vault) in plaats van omgevingsvariabelen
+6. **Pas netwerksegmentatie toe** zodat MCP-servers alleen door de AI-assistent bereikbaar zijn
+7. **Monitor de toegangslogs van de MCP-server** op onverwachte toolaanroepen, met name `execute_command` en `forward_env`
+8. **Verifieer de identiteit van de MCP-server** voordat je verbindt — behandel MCP-servers van derden als code die je niet vertrouwt
+
+**De kern:**
+
+Een MCP-server met een shell-uitvoeringstool en zonder authenticatie staat gelijk aan het draaien van `nc -l 8090 -e /bin/sh` op je productieserver. Een kwaadaardige MCP-server die promptinstructies injecteert is nog erger: hij maakt de AI-assistent zelf de aanvalvector en voert hij stilzwijgend secrets uit zonder dat de gebruiker het weet. Behandel elke MCP-server met dezelfde beveiligingscontrole die je op een interne API met rechten zou toepassen — en controleer zijn `initialize`-instructies net zo zorgvuldig als een systeemprompt van derden.

@@ -1,0 +1,17 @@
+*Warum das Protokollieren eines Geheimnisses bei deinem Cloud-Anbieter ein Problem darstellt*
+
+Kodierung ist nicht gleich Verschlüsselung. Base64 hält zwar Anmeldeinformationen bei einer schnellen Codeüberprüfung verborgen, aber jeder, der die Log-Senke lesen kann, kann sie mit einem einzigen Befehl entschlüsseln. Behandle ein kodiertes Geheimnis in einer Log-Zeile wie ein Geheimnis im Klartext.
+
+Ein paar Dinge, die dies in einer Cloud-Umgebung besonders problematisch machen:
+
+- Das Publikum ist viel größer als du denkst. Log-Senken sind in der Regel für die gesamte Plattform oder das SRE-Team lesbar und oft auch für jede Workload mit einer umfassenden Leseberechtigung für `logs:FilterLogEvents`, `roles/logging.viewer` oder Log Analytics. Der Wirkungsbereich des Geheimnisses entspricht dem Wirkungsbereich deiner Protokollierungsberechtigungen.
+- Die Aufbewahrungsdauer ist länger als die Rotation. Protokolle werden üblicherweise monatelang gespeichert und in einem Archiv-Bucket oder einem SIEM-System repliziert. Durch die Rotation der Anmeldeinformationen werden die alten Werte nicht aus diesen Kopien entfernt, daher muss jeder nachgelagerte Speicherort ebenfalls als kompromittiert betrachtet werden.
+- Strukturierte Protokollierung birgt die Gefahr versehentlicher Datenlecks. Das Anhängen einer kompletten Nutzlast, Anfrage oder eines MDC-Kontexts an ein „Audit-Ereignis“ ist zwar praktisch, erfasst aber alles, was sich in diesem Kontext befindet, einschließlich Token und Schlüssel.
+- Durch die Protokollierung kann das Geheimnis in zusätzliche Speichersysteme, Archive oder Überwachungsplattformen von Drittanbietern verschoben werden. Dies ist in der Regel nicht durch das Bedrohungsmodell abgedeckt, das du für dieses Geheimnis erstellt hast.
+
+Was du stattdessen tun solltest:
+
+- Gib niemals Zugangsdaten in einer Log-Anweisung an, nicht einmal verschlüsselt, und auch nicht im `DEBUG`-Modus.
+- Schwärze sensible Daten direkt an der Quelle. Filtere sensible Schlüssel, bevor sie den Appender erreichen, beispielsweise mit einem Logback-Konverter oder einem Maskierungslayout, damit eine zukünftige Codeänderung das Datenleck nicht wieder verursachen kann.
+- danach suchen. Tools zur Erkennung geheimer Informationen können sowohl auf Protokollausgaben als auch auf Quellcode angewendet werden.
+- Falls dies passiert: Rotiere das Geheimnis und bereinige oder lösche anschließend alle Senken und Archive, die es empfangen haben.

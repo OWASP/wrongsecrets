@@ -1,0 +1,7 @@
+Vous pouvez trouver l'entrée correcte pour la méthode de devinette en :
+
+1. Comparaison des hachages :
+- Consultez le contrat sur l'explorateur https://etherscan.io/[Etherscan].
+- Récupérer le hachage depuis le stockage du contrat.
+- Parcourez les transactions, puis ouvrez l'onglet des entrées et décodez-les en UTF-8.
+- Comparez les hachages des entrées des transactions avec la valeur de hachage stockée.

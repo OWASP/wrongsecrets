@@ -1,0 +1,5 @@
+=== Clé de chiffrement non sécurisée - Partie 2
+
+Un développeur a chiffré un secret à l'aide de l'algorithme AES (Advanced Encryption Standard) et a stocké sa valeur encodée en base64 dans un fichier JSON. Mais où stocker la clé ? Et si on la plaçait simplement dans le fichier contenant le secret ? Ainsi, chaque secret aurait facilement sa propre clé ! Saurez-vous trouver le secret ?
+
+Le fichier de défi s'appelle https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/secrchallenge.json[secrchallenge.json] et se trouve dans le dossier https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables[executables].

@@ -1,0 +1,10 @@
+Lade das exportierte Skill-Bundle herunter und entpacke es:
+
+----
+curl -sO http://localhost:8080/skills/claude/incident-reporter.zip
+unzip incident-reporter.zip
+----
+
+Die Datei `SKILL.md` verweist lediglich auf den mitgelieferten Uploader. Öffne `incident-reporter/scripts/upload_report.py` und sieh dir `UPLOAD_TOKEN_B64` an.
+
+Dieser Wert ist noch nicht die Antwort: Der Autor hat ihn Base64-kodiert, um eine Fehlermeldung des Geheimnisscanners zu vermeiden. Dekodiere ihn beispielsweise mit `base64 -d` und übermittle das dekodierte Token.

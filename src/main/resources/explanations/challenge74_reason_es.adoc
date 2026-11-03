@@ -1,0 +1,31 @@
+*Por qué incluir secretos en las indicaciones de los sistemas de IA supone un riesgo de filtración de información confidencial*
+
+Los asistentes de IA suelen recibir instrucciones del sistema que definen su comportamiento. Puede resultar tentador incluir información confidencial en dichas instrucciones y simplemente indicarle al modelo que no la revele.
+
+Esto es precisamente lo que ocurre en este desafío: la aplicación introduce el secreto directamente en el sistema de solicitud del asistente de IA y le indica al modelo que no lo revele.
+
+El mensaje del sistema **no constituye una barrera de seguridad**. El modelo recibe tanto las instrucciones del sistema como la entrada del usuario como parte de su contexto. Un usuario puede crear deliberadamente mensajes que intenten modificar el comportamiento del modelo, exponer sus instrucciones o persuadirlo para que revele información de su contexto.
+
+En este escenario, tres fallos se acumulan:
+
+- El secreto se coloca directamente en el contexto del modelo, lo que lo hace accesible al modelo durante la inferencia.
+- La aplicación depende de que el modelo siga la instrucción de mantener el secreto confidencial.
+- El usuario puede interactuar directamente con el modelo e intentar manipular esas instrucciones mediante la inyección de comandos.
+
+Si el modelo revela el secreto, la información confidencial de la aplicación habrá traspasado el límite de seguridad previsto.
+
+----
+Qué hacer en su lugar:
+
+- Nunca utilice la función de aviso del sistema de un modelo de IA como mecanismo de gestión de secretos.
+- Mantén los secretos fuera del contexto del modelo siempre que sea posible.
+- Otorgue a la aplicación acceso a los secretos solo cuando sean realmente necesarios para una operación.
+- Tratar todas las indicaciones proporcionadas por el usuario como información potencialmente maliciosa.
+- Aplicar los controles de autorización y acceso en la aplicación en lugar de depender del modelo para que los aplique.
+- Si una modelo accede accidentalmente a información confidencial, trate dicha información como potencialmente comprometida y cambie la credencial afectada cuando corresponda.
+----
+
+[NOTE]
+====
+Una solicitud del sistema es una instrucción para un modelo de IA, no un mecanismo de control de acceso. Decirle a un modelo "nunca revele este secreto" no garantiza que el secreto permanezca confidencial. Si la información debe permanecer secreta, la aplicación debe establecer ese límite fuera del modelo.
+====

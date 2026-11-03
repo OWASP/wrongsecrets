@@ -1,0 +1,32 @@
+*Waarom transcripts van AI-codeagents een risico vormen voor geheimlekken*
+
+AI-codeagents lezen je bestanden, voeren je commando's uit en maken sessielogs. Wanneer een developer een agent vraagt om een probleem te debuggen, kan de agent configuratiebestanden, omgevingsvariabelen of secretmanagers lezen — en die waarden in zijn transcript uitvoeren. Dit is precies wat er in deze uitdaging gebeurde: de agent las een bestand `.env.staging` en kaatste de deploy-token terug in zijn sessie-uitvoer.
+
+Het transcript wordt een blijvend artefact dat:
+
+- aan versiebeheer kan worden gecommit als de developer het opslaat
+- met teamgenoten kan worden gedeeld voor context of overdracht
+- naar ondersteuningskanalen kan worden geüpload bij het melden van bugs
+- in agent-geschiedenisbestanden op de machine van de developer kan worden bewaard
+- door IDE-plugins of lokale zoektools kan worden geïndexeerd
+
+Drie fouten versterken elkaar in dit scenario:
+
+- Het geheim bestaat in een configuratiebestand in platte tekst, waardoor elk tool of elke agent het moeiteloos kan lezen.
+- Het debugproces van de agent brengt het geheim vanzelf in de uitvoer, waardoor er een secundaire kopie van de referentie ontstaat.
+- Het transcript wordt waarschijnlijk opgeslagen, gedeeld of gecommit zonder review, omdat het "op debuguitvoer lijkt" in plaats van op gevoelige gegevens.
+
+----
+Wat je in plaats daarvan moet doen:
+
+- Sla geheimen nooit op in configuratiebestanden in platte tekst. Gebruik een secretmanager of omgevingsvariabelen die runtime worden geïnjecteerd.
+- Stel agents zo in dat ze gevoelijke waarden maskeren voordat ze die uitvoeren. Veel agent-tools ondersteunen uitvoerfiltering of sandboxing.
+- Review agent-transcripts voordat je ze opslaat of deelt, net zoals je een pull request zou reviewen.
+- Behandel elk transcript dat uit een secretbron heeft gelezen als mogelijk gecompromitteerd en roteer de blootgestelde referenties.
+- Gebruik kortlevende, ingeperkte tokens voor staging-deployments zodat blootstelling een beperkte reikwijdte heeft.
+----
+
+[NOTE]
+====
+AI-codeagents zijn krachtige tools, maar ze werken met dezelfde bestanden en omgeving als jij. Als een menselijke developer een geheim in een chatlog zou kopiëren en plakken, doet een agent dat ook — met het verschil dat een agent een gestructureerd transcript produceert dat nog makkelijker te doorzoeken en te delen is.
+====

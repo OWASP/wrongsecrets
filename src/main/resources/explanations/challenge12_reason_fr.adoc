@@ -1,0 +1,9 @@
+*Pourquoi utiliser des conteneurs pour y mettre des secrets est une mauvaise idée*
+
+Comme vous pouvez le constater, il est facile de détecter tout secret stocké dans un conteneur. Qu'il s'agisse d'une variable d'environnement, d'un fichier ou d'une autre propriété : si un système peut la lire, un humain le peut aussi.
+
+Étant donné qu'il est recommandé de laisser un conteneur immuable et versionné, vous vous retrouverez souvent avec le secret à l'intérieur d'un conteneur pour toujours, à moins de le supprimer à nouveau du registre.
+
+Remarque : lorsque vous réduisez le nombre d’exécutables dans un conteneur (afin d’empêcher l’exécution d’un shell), n’oubliez pas de supprimer également `Openssl client` et les binaires simples comme `ls` et `cat`. Cela permet d’empêcher un attaquant d’accéder au contenu de votre conteneur.
+
+Gardez les secrets hors des couches d'image et fournissez-les à l'exécution via un gestionnaire de secrets ou un mécanisme propre à la plateforme, avec un accès limité à la charge de travail qui en a besoin. Renouvelez tout secret qui a été inclus dans une image.

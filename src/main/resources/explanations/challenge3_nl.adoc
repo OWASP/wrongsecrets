@@ -1,0 +1,5 @@
+=== Op Docker ENV gebaseerd wachtwoord
+
+Wist je dat je in Docker-containers ook de ENV kunt gebruiken om het wachtwoord in te stellen? Wat een geweldig idee om dat met iedereen te delen!
+
+Je kunt het geheim eenvoudig ontdekken door te kijken hoe de lagen zijn opgebouwd of door het te detecteren met een tool zoals https://github.com/goodwithtech/dockle[*Dockle*].

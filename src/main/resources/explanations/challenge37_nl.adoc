@@ -1,0 +1,5 @@
+=== Je veiligheidstests toegang geven
+
+Gezien alle onzinnige bevindingen die we al in dit project hebben, hebben we besloten om automatische scans met ZAP uit te voeren. Om dat te kunnen doen, moeten we de endpoint van deze uitdaging kunnen fuzzen: `/authenticated/challenge37` en dus basic auth configureren voor ZAP. Kun jij het geheim vinden dat de endpoint teruggeeft?
+
+Hint: we gebruiken GitHub actions.

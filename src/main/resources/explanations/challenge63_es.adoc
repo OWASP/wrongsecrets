@@ -1,0 +1,19 @@
+=== Desafío de clave de cifrado codificada
+Este desafío demuestra un error común pero peligroso: cifrar un secreto mientras se incluye la clave de cifrado directamente en el código fuente del mismo archivo.
+
+Un desarrollador intentó proteger un secreto cifrándolo con AES. Sin embargo, tanto la clave de cifrado como el vector de inicialización (IV) están codificados directamente en el código fuente Java junto con el texto cifrado. Esto hace que el cifrado sea completamente ineficaz: cualquiera con acceso al código fuente puede descifrar el secreto fácilmente.
+
+**Tu objetivo:**
+1. **Encuentra el archivo fuente Java** para este desafío en el código fuente.
+2. **Localiza la clave AES y el IV codificados** en el código fuente.
+3. **Descifra el texto cifrado** usando la clave y el vector de inicialización (IV) que encontraste.
+4. **Envía el texto sin formato** como tu respuesta.
+
+**Cómo descifrar:**
+[source,bash]
+----
+echo "TDPwOvcLsbCWV5erlk6OHFnlFoXNtdQOt2JQeq+i4Ho=" | openssl enc -d -aes-128-cbc \
+  -K $(echo -n "SuperSecretKey12" | xxd -p) \
+  -iv $(echo -n "InitVector123456" | xxd -p) \
+  -base64
+----

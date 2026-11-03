@@ -1,0 +1,17 @@
+Vous pouvez résoudre ce défi en suivant les étapes suivantes :
+
+1. Ouvrez le fichier de configuration Maven versionné :
+- Dans le dépôt : `src/main/resources/challenges/challenge-75/settings.xml`
+- Ou en ligne : lien : link:https://github.com/OWASP/wrongsecrets/blob/master/src/main/resources/challenges/challenge-75/settings.xml[`src/main/resources/challenges/challenge-75/settings.xml`]
+
+2. Consultez la section `<servers>` :
+- Il contient une entrée `<server>` avec `<id>central</id>`.
+- Il contient une entrée `<server>` avec `<id>wrongsecrets-nexus</id>`, l'entrée qui
+  s'authentifie auprès du gestionnaire de référentiel Nexus fictif. Le même identifiant est utilisé
+  pour le dépôt et le dépôt de plugins du profil `wrongsecrets-deploy`.
+
+3. Lisez l'élément `<password>` de l'entrée `<server>` avec l'identifiant
+   `wrongsecrets-nexus`. Cette valeur est la réponse.
+
+Rien n'a besoin d'être déchiffré ou installé : le fichier est versionné en texte clair,
+c’est précisément le problème que soulève ce défi.

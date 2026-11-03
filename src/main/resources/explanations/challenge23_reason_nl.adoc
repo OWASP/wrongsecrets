@@ -1,0 +1,12 @@
+*Waarom geheimen in front-endcode een slecht idee zijn*
+
+Wanneer je een mobiele app op je smart-device draait of een SPA in je webbrowser, moet je proberen er geen geheimen in te hardcoden. Een aanvaller kan de app altijd pakken, reverse-engineeren en het werkelijke geheim vinden. Vraag jezelf in plaats daarvan af of het geheim na authenticatie veilig kan worden gedownload, of op een andere manier kan worden gebruikt.
+
+*Waarom Single-Page apps of Mobile apps gebruiken om een client secret in te stoppen een slecht idee is*
+
+Zoals je inmiddels kunt merken, kun je elk geheim dat in een Single-Page app of mobiele app is opgeslagen eenvoudig vinden.
+Behandel browser- en mobiele applicaties als public clients: stop er nooit client secrets of andere gedeelde inloggegevens in. Gebruik voor OAuth Authorization Code Flow met PKCE; houd privileged operations en bijbehorende inloggegevens op een vertrouwde backend.
+
+*Waarom Base64-encoding geen encryptie is*
+
+Zoals je inmiddels kunt merken, was het decoderen van het geheim uit het Challengebestand vrij eenvoudig. Daarom moeten Base64- en Hex-encoding nooit als een methode worden beschouwd om een geheim te verbergen. Gebruik Base64- en/of Hex-encoding alleen om een binaire sequentie als een String te kunnen transporteren.

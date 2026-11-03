@@ -1,0 +1,12 @@
+Diese Herausforderung lässt sich durch folgende alternative Lösungsansätze bewältigen:
+
+1. Das Geheimnis im AWS Secrets Manager finden (dies ist der einfache Ausweg, versuche es alternativ :) ):
+- Melde dich bei AWS unter https://console.aws.com/[Console] mit dem Konto an, mit dem du das WrongSecrets-Setup erstellt hast.
+- Wechsle zum AWS Secrets Manager.
+- Hole dir die Daten von wrongsecrets2
+
+2. Finde das Geheimnis, indem du dich in den POD einloggst.
+- Stelle sicher, dass Kubectl wie in der README.MD beschrieben installiert ist und dass kubectl so konfiguriert ist, dass Befehle an den richtigen Cluster gesendet werden.
+- Führe nun `kubectl get pods` aus. Hier siehst du alle aktiven Pods im aktuellen Namespace, der für diese Anwendung normalerweise `default` ist (sofern nicht anders von deinem Administrator/Trainer angegeben).
+- Führe für deine Instanz des WrongSecrets-Pods den Befehl `kubectl exec -it secret-challenge-<rest of the name of the pod from the prev.step> -- sh` aus.
+- Untersuche nun die Daten, die du in `/mnt/secrets-store` findest.

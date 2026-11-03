@@ -1,0 +1,40 @@
+=== Encuentra la URL del webhook de Slack
+
+¡Bienvenidos a este desafío que demuestra la vulnerabilidad de las URL de webhook de Slack codificadas en variables de entorno!
+
+Este desafío simula un escenario del mundo real donde:
+
+1. **Las URL de los webhooks de Slack se almacenan como variables de entorno** para las notificaciones de la aplicación.
+2. **Las URL están ofuscadas** para evitar ser detectadas por herramientas de escaneo secretas.
+3. **Riesgo de rotación de empleados**: Cuando un empleado se va, el webhook puede no rotarse, lo que permite un acceso continuo.
+
+==== Tu misión
+
+En este caso, un desarrollador ha almacenado la URL de un webhook de Slack como una variable de entorno llamada `CHALLENGE59_SLACK_WEBHOOK_URL`. La URL ha sido ofuscada mediante codificación base64 doble para eludir la detección de escaneo de secretos de Slack.
+
+Tu tarea es:
+
+1. Encuentra la URL ofuscada del webhook de Slack en la variable de entorno.
+2. Desofusca el código para revelar la URL original.
+3. Envíe la URL del webhook desofuscada como respuesta.
+
+==== Impacto en el mundo real
+
+Esta vulnerabilidad demuestra los riesgos específicos de las URL de webhook de Slack expuestas:
+
+- **Publicación de mensajes no autorizados**: Los atacantes pueden enviar mensajes maliciosos a tus canales de Slack.
+- **Ataques de ingeniería social**: Anuncios falsos o intentos de phishing a través de canales de confianza.
+- **Divulgación de información**: Se revelan nombres de canales confidenciales e información del espacio de trabajo.
+- **Daño a la reputación**: Publicación de spam o contenido inapropiado bajo el nombre de su organización.
+- **La ofuscación no es seguridad**: la codificación Base64 no proporciona una protección real.
+- **Persistencia del webhook**: A diferencia de los tokens, los webhooks pueden permanecer activos durante períodos prolongados.
+
+==== Nota educativa
+
+En entornos de producción:
+- Utilice una gestión de secretos adecuada (AWS Secrets Manager, Azure Key Vault, HashiCorp Vault).
+- Implementar políticas de rotación de webhooks cuando los empleados se vayan
+- Supervisar el uso de webhooks y establecer alertas para actividades inusuales.
+- Revocar y regenerar los webhooks inmediatamente cuando los empleados se vayan
+- Nunca ocultes secretos como medida de seguridad.
+- Considere la posibilidad de utilizar claves de firma de webhook para una validación adicional.

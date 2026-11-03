@@ -1,0 +1,7 @@
+=== Geheimnisse des Telegram-Kanals
+
+Viele mobile Anwendungen und Dienste nutzen Telegram-Bots für Benachrichtigungen, Überwachung oder Benutzerinteraktion. Entwickler kodieren die Zugangsdaten der Telegram-Bots oft direkt im Quellcode ihrer Anwendung, wodurch diese Geheimnisse für jeden mit Zugriff auf die Codebasis leicht auffindbar sind.
+
+Bei dieser Challenge hat ein Entwickler die Zugangsdaten eines Telegram-Bots in den Anwendungscode eingebettet, um mit einem Kontrollkanal zu kommunizieren. Die eigentliche geheime Antwort wird im Telegram-Kanal veröffentlicht, auf den mit diesen Zugangsdaten zugegriffen werden kann.
+
+Kannst du das fest codierte Telegram-Bot-Token finden und damit das Geheimnis im zugehörigen Kanal aufdecken?

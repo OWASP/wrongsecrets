@@ -1,0 +1,7 @@
+*La gestión de secretos es más que un simple almacenamiento seguro:*
+
+Como ya habrás podido comprobar, existen muchas maneras de acceder a un secreto: ya sea mediante código incrustado, almacenado en una solución de terceros mal configurada o almacenado correctamente, pero con permisos de acceso IAM erróneos en las cuentas asociadas. Ahora comprenderás por qué decimos que "tu nivel de seguridad se refleja en la gestión de tus secretos".
+
+En este caso concreto, este tipo de suplantación de identidad debería ser imposible con la configuración adecuada, pero es buena idea monitorizar estos eventos y marcarlos como sospechosos.
+
+Restringe las políticas de confianza de los roles a los principales previstos y a las condiciones requeridas, y concede a cada rol solo los permisos que necesita su carga de trabajo. Supervisa los eventos de asunción de roles e investiga cualquier principal o sesión inesperada. Ten en cuenta que esto vale tanto para servicios como para personas.

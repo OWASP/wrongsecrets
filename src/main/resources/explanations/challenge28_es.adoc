@@ -1,0 +1,4 @@
+=== Secreto en un problema cerrado de GitHub
+Un usuario revela accidentalmente la nueva "clave secreta de AWS" en una conversación con un amigo en un problema de GitHub.
+
+¿Puedes encontrar el secreto en nuestro repositorio de GitHub?

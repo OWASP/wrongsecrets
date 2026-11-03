@@ -1,0 +1,10 @@
+=== Depuración de contenedores y secretos de la memoria
+
+Las herramientas de depuración son potentes, pero si se dejan disponibles en entornos de producción, pueden exponer información confidencial. Este desafío pone de manifiesto cómo un atacante con acceso de depuración puede recuperar secretos de la memoria mediante técnicas de depuración.
+
+El escenario describe un pod de Kubernetes que ejecuta un binario compilado que almacena información confidencial en memoria. Este binario forma parte de una aplicación, pero debido a una configuración incorrecta, se puede conectar un contenedor de depuración para inspeccionarlo. Esto representa un escenario real donde una configuración incorrecta de los permisos de depuración puede generar riesgos de seguridad.
+
+Las organizaciones deben tener en cuenta que:
+- Permitir el uso sin restricciones de herramientas de depuración en entornos de producción aumenta la superficie de ataque.
+- Los secretos almacenados en la memoria pueden extraerse utilizando técnicas de depuración.
+- Las mejores prácticas incluyen restringir los permisos de depuración, usar secretos efímeros y garantizar que los datos confidenciales estén cifrados en la memoria.

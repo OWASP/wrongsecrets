@@ -1,0 +1,33 @@
+=== Blootstelling van database-connectionstrings in foutmeldingen
+
+Een van de meest voorkomende en gevaarlijke manieren waarop secrets in praktijkapplicaties lekken, is via database-connectionstrings met ingebedde inloggegevens. Wanneer applicaties geen verbinding met databases kunnen maken, tonen ze vaak de volledige connectionstring (inclusief gebruikersnamen en wachtwoorden) in foutmeldingen, logs of zelfs in interfaces die de gebruiker ziet.
+
+Deze uitdaging laat een scenario zien waarin een developer:
+
+1. **Ingebedde inloggegevens in connectionstrings gebruikt** in plaats van extern secretbeheer
+2. **Slechte foutafhandeling heeft** die de volledige connectionstring blootstelt wanneer databaseverbindingen falen
+3. **Gevoelige informatie logt** zonder de inloggegevens eerst te saneren
+4. **Technische details toont** die bij monitoringssystemen, foutopvolgingstools of zelfs eindgebruikers terecht kunnen komen
+
+**Veelvoorkomende plekken waar deze blootgestelde connectionstrings opduiken:**
+
+- Opstartlogs van de applicatie wanneer de database niet beschikbaar is
+- Uitzonderingsstacktraces in monitoringtools zoals Sentry, Rollbar of CloudWatch
+- Foutmeldingen die aan gebruikers worden getoond tijdens onderhoudsvensters
+- Logs van CI/CD-pipelines wanneer healthchecks van de deployment falen
+- Logs van Docker-containers tijdens orchestratiefouten
+
+**Praktijkvoorbeelden:**
+
+- Applicaties die healthchecks niet doorstaan tijdens Kubernetes-deployments
+- Microservices die bij het opstarten geen contact met hun database krijgen
+- Databasemigratiescripts die falen met blootgestelde verbindingsgegevens
+- Ontwikkel-/testomgevingen waarin de gedetailleerdheid van foutmeldingen te hoog staat
+
+**Hoe je de fout triggert:**
+
+Druk op de knop onderaan het scherm of bezoek het endpoint `/error-demo/database-connection` om een databaseverbindingsfout te simuleren. Dit endpoint probeert met een connectionstring met ingebedde inloggegevens een verbinding met een database te maken, en wanneer dat mislukt, worden de inloggegevens zowel in het HTTP-antwoord als in de applicatielogs blootgesteld.
+
+Kun je het database-wachtwoord vinden dat wordt blootgesteld wanneer de applicatie verbinding probeert te maken met de database?
+
+**Hint:** Zoek naar foutmeldingen over databaseverbindingen die meer prijsgeven dan ze zouden moeten.

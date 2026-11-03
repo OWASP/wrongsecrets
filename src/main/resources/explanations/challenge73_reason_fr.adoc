@@ -1,0 +1,39 @@
+*Pourquoi vous ne devriez jamais inclure un secret dans un fichier d'instructions d'agent*
+
+`AGENTS.md`, `CLAUDE.md`, `.cursor/rules/*.mdc`, `.windsurfrules` et de nombreux
+autres formats de contexte d'agent sont chargés automatiquement par les agents de programmation. Cela
+les rend pratiques, et c’est précisément cette commodité qui les transforme en un
+problème de gestion des secrets :
+
+- Ils sont versionnés dans le dépôt, donc le secret se trouve dans l'historique Git
+  pour toujours et doit être renouvelé dès son apparition.
+- Ils sont copiés sur chaque machine qui extrait le dépôt, y compris
+  les forks, les runners CI et les ordinateurs personnels.
+- Ils sont chargés dans le contexte du modèle, la valeur peut donc se retrouver dans des transcriptions
+  de chat, des données de télémétrie et des journaux appartenant à des tiers.
+- Ils portent généralement une authentification *partagée*, rarement réduite au périmètre et
+  encore plus rarement renouvelée.
+- De nombreux scanners de secrets considèrent les fichiers de documentation comme peu prioritaires, ce qui explique que la fuite
+  survive longtemps à l'examen.
+
+----
+Que faire à la place :
+
+- N'incluez pas les identifiants dans les fichiers d'instructions et laissez l'agent les lire
+depuis l’environnement, par exemple `$STAGING_DEPLOY_TOKEN`.
+- Indiquez *quelle* variable est requise et *où* la trouver, jamais
+la valeur elle-même.
+- Attribuez à chaque consommateur une attestation éphémère avec un minimum de privilèges, au lieu d'un seul
+jeton partagé.
+- Analysez les fichiers d'instructions de l'agent avec un scanner de secrets en pré-commit et en CI,
+comme vous scannez le code source.
+- Considérez comme compromis tout secret ayant jamais été divulgué dans le contexte d'un agent et
+renouvelez-le.
+----
+
+[NOTE]
+====
+Skills, règles, invites, configurations du serveur MCP et fichiers d'instructions d'agent
+sont du code en ce qui concerne la gestion de vos secrets. Si vous ne coderiez pas
+en dur un jeton dans un fichier `.java`, ne le faites pas non plus dans un fichier `CLAUDE.md`.
+====

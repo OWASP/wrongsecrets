@@ -1,0 +1,5 @@
+=== Geheimen in smart contracts deel 3
+
+Onze smart contract developer werd iets slimmer en heeft alleen een gehasht geheim in zijn contract opgeslagen. Hij vergelijkt vervolgens input data met die hash om te valideren of een transactie true of false teruggeeft. Hij is er zeker van dat het geheim, omdat het nooit in de interne staat van het contract wordt opgeslagen, niet gevonden kan worden.
+
+In deze uitdaging moet je het juiste geheim vinden dat de guess-method van het contract `0x8318d477f4BCae5a80BEA22E3c040cf8BaaFFe8B` op de Goerli EVM Testnet true laat teruggeven.

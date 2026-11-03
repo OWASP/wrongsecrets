@@ -1,0 +1,17 @@
+= Offenlegung geheimer Konfigurationsinformationen für Entwicklercontainer
+
+*Warum das Festcodieren von Geheimnissen in Entwicklungscontainern ein kritisches Sicherheitsrisiko darstellt*
+
+Dev-Container sind gemeinsam genutzte Entwicklungsumgebungen, die über die Datei `.devcontainer/devcontainer.json` konfiguriert werden. Da diese Dateien typischerweise in der Versionskontrolle verwaltet werden, birgt das Festcodieren von Geheimnissen in Dev-Container-Definitionen mehrere Sicherheitsrisiken:
+
+1. **Zugriff für alle Repository-Leser**: Jeder, der Lesezugriff auf das Quellcode-Repository (oder öffentliche Forks und Klone in Open-Source-Projekten) hat, kann in `.devcontainer/devcontainer.json` fest codierte Geheimnisse lesen.
+2. **Verletzung von Umgebungsvariablen**: In `containerEnv` oder `remoteEnv` definierte Anmeldeinformationen werden in jeden Prozess innerhalb des Containers injiziert, wodurch sie für jedes Skript, jeden Kindprozess oder jedes Diagnosetool, das im Container ausgeführt wird, zugänglich werden.
+3. **Persistent in der Git-Historie**: Nach dem Commit erfordert das Entfernen des Geheimnisses eine Überarbeitung der Git-Historie, und veraltete Schlüssel bleiben oft unbegrenzt gültig, wenn keine Rotation durchgeführt wird.
+4. **Schwieriger zu erkennen**: Viele Secret- und Container-Inspektoren erkennen die `devcontainer.json` immer noch nicht, da sie sich anders verhält als eine `Dockerfile`.
+
+*Sanierungsmaßnahmen und bewährte Verfahren:*
+
+- **Verwende GitHub Codespaces Secrets / VS Code Dev Container Secrets**: Füge Geheimnisse dynamisch über Codespaces-Repository-/Benutzergeheimnisse oder VS Code-Einstellungen ein, anstatt sie in Konfigurationsdateien fest zu codieren.
+- **Lokale Umgebungssubstitution verwenden**: Host-Umgebungsvariablen dynamisch in `devcontainer.json` mit der Syntax `${localEnv:MY_SECRET}` referenzieren.
+- **Verwende `.env`-Dateien mit `.gitignore`**: Platziere Entwicklungsgeheimnisse in lokalen `.env`-Dateien, die explizit von der Versionskontrolle in `.gitignore` ausgeschlossen sind.
+- **Verwende Lösungen für das Geheimnismanagement**: Rufe Geheimnisse zur Laufzeit mithilfe dedizierter Geheimnismanager ab (z. B. HashiCorp Vault, AWS Secrets Manager, Azure Key Vault, GCP Secret Manager).

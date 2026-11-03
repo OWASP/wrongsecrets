@@ -1,0 +1,19 @@
+Je kunt deze uitdaging oplossen met de volgende alternatieve oplossingen:
+
+1. Controleer de status van de configmap in Git
+- Kun je zien waar we in git het bestand `secrets-config.yml` hebben opgeslagen? Zo niet, doe dan gewoon een zoekopdracht.
+- Neem een kijkje bij het veld `Data`: wat kun je daar vinden?
+
+2. Vraag het vriendelijk met Kubectl:
+- Zorg dat je Kubectl hebt geïnstalleerd zoals beschreven in de README.MD en zorg dat kubectl is geconfigureerd om commando's naar het juiste cluster te sturen.
+- Doe `kubectl get configmap`. Hier zie je alle configmaps die actief zijn in de namespace waarin je je bevindt, wat voor deze app normaal `default` is (tenzij je beheerder of trainer anders heeft aangegeven).
+- Doe nu `kubectl get configmap secrets-file -o Yaml`. Kun je het geheim zien?
+
+3. Exec in de pod en haal de gegevens op:
+- Zorg dat je Kubectl hebt geïnstalleerd zoals beschreven in de README.MD en zorg dat kubectl is geconfigureerd om commando's naar het juiste cluster te sturen.
+- Doe `kubectl get pods`. Hier zie je alle Pods die actief zijn in de namespace waarin je je bevindt, wat voor deze app normaal `default` is (tenzij je beheerder of trainer anders heeft aangegeven).
+- Doe nu voor jouw exemplaar van de WrongSecrets-pod `kubectl exec -it secret-challenge-<rest of the name of the pod from the prev.step> -- sh`.
+- Doe nu `env | grep SPECIAL_K8S_SECRET` en daar is je geheim.
+
+
+Overigens: met `kubectl get <item> -A` krijg je een overzicht van alle items in alle namespaces waar je toegang toe hebt. Dit laat zien hoe belangrijk het is om mensen niet toegang te geven tot elke namespace in je cluster, omdat dat kan betekenen dat je hen belangrijke config/items lekt.

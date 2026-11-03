@@ -1,0 +1,8 @@
+Puedes resolver este desafío siguiendo estos pasos:
+
+1. Extrae el secreto usando Github Actions. Ten en cuenta que, en la configuración actual del proyecto, la acción activada por el propietario/colaborador incluirá el secreto. Esto no ocurrirá si intentas hacerlo usando bifurcaciones. Analicemos los pasos:
+- Inicia sesión en Github con tu propia cuenta.
+- Ve a https://github.com/OWASP/wrongsecrets/actions y selecciona `Get the challenge code 13`.
+- Echa un vistazo a la última versión correda por uno de los propietarios o colaboradores.
+- Toma el último intento de la ejecución, donde el secreto está codificado en base64. Copia el resultado codificado en base64 y decodifícalo dos veces en algún lugar.
+- Introduce la solución decodificada como respuesta.

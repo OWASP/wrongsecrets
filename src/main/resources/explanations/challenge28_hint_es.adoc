@@ -1,0 +1,7 @@
+Estamos buscando el secreto en un `incidencia cerrada de GitHub` en nuestro repositorio de GitHub. Pero, ¿cómo lo encontramos?
+
+Puedes resolver este desafío siguiendo estos pasos:
+
+1. Cuando accedas a la pestaña de incidencias de nuestro repositorio https://github.com/OWASP/wrongsecrets/issues[GitHub], haz clic en la opción `Cerradas` para ver todas las incidencias cerradas hasta la fecha.
+
+2. Repasa todos los asuntos que te parezcan sospechosos y podrás descubrir el secreto.

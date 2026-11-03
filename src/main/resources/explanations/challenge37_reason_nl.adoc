@@ -1,0 +1,10 @@
+*Waarom we voorzichtig moeten zijn met beveiligingsreferenties in CI/CD*
+
+Mensen die toegang hebben tot de configuratie van je beveiligingscontroles in je CI/CD-omgeving, kunnen gemakkelijk bij alle referenties die daar zijn geconfigureerd. Die referenties kunnen daarna voor van alles worden gebruikt.
+
+Daarom moet beveiliging zeer voorzichtig zijn met het beheren van hun geheimen: alleen omdat de referentie door een beveiligings(tool) wordt gebruikt, betekent niet dat we minder beveiliging kunnen tolereren ;-).
+
+Wat u in plaats daarvan kunt doen:
+- Bewaar CI/CD-referenties in de beveiligde geheimenopslag van het platform of gebruik kortstondige workload identity, en verleen elke job alleen de machtigingen die nodig zijn.
+- Beperk wie de pipelineconfiguratie kan wijzigen: zorg ervoor dat configuratiebestanden (workflows of CI-bestanden) CODE-OWNERS hebben, eis dat ze op een beschermd branch staan en beperk de toegang van maintainers/eigenaren tot een repository.
+- Beperk wie de logs van een pipeline kan zien, maskeer gevoelige uitvoer en roteer referenties die mogelijk zijn blootgesteld.

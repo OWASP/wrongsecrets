@@ -1,0 +1,5 @@
+*Pourquoi l'obfuscation n'est qu'un simple ralentissement.*
+
+Le chiffrement, la réflexion et l'obfuscation légère peuvent compliquer la rétro-ingénierie, mais ne garantissent pas un secret absolu. Le fichier exécutable contient toujours toutes les informations nécessaires pour retrouver le secret.
+
+Si l'application peut déduire le secret localement, un attaquant déterminé peut en faire autant. Protégez les secrets en déplaçant les décisions de confiance et les données confidentielles vers des systèmes serveurs contrôlés.

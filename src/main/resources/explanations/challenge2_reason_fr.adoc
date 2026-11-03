@@ -1,0 +1,11 @@
+*Pourquoi utiliser du code pour y intégrer des secrets est une mauvaise idée.*
+
+Comme vous pouvez le constater, nous avons un peu plus de flexibilité qu'avec le défi 1. Cependant : le mot de passe est toujours codé !
+
+Bien que nous puissions désormais facilement surcharger les variables ultérieurement (comme vous le verrez dans les prochains défis), il arrive fréquemment que les secrets soient stockés dans la configuration Spring ou Spring Cloud, sans être modifiés par la suite. Cela signifie que toute personne ayant accès à la configuration Spring Cloud peut désormais connaître le secret.
+
+L'utilisation d'une solution distribuée comme Spring Cloud Config (https://cloud.spring.io/spring-cloud-config/reference/html/[Spring Cloud Config]), où les propriétés de votre application sont gérées en externe, peut présenter le même problème si vous n'êtes pas vigilant. Consultez attentivement la section « Sécurité » (https://cloud.spring.io/spring-cloud-config/reference/html/#_security[Security]) avant d'utiliser Spring Cloud Config.
+
+Que faire à la place :
+- Ne conservez pas de secret en clair dans les propriétés d'application ou les dépôts de configuration. Récupérez-les auprès d'un gestionnaire de secrets au déploiement ou à l'exécution.
+- Si Spring Cloud Config doit gérer des secrets, essayez de les injecter via des mécanismes sûrs utilisant des gestionnaires de secrets comme source (par exemple injecter un secret via un conteneur sidecar Vault). Si ce n'est pas possible : activez le chiffrement et l'authentification pris en charge par Spring Cloud, restreignez l'accès aux charges de travail et opérateurs autorisés, et auditez les accès.

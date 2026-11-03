@@ -1,0 +1,12 @@
+*Por qué tener secretos en el código front-end es una mala idea*
+
+Siempre que ejecutes una aplicación móvil en tu dispositivo inteligente o una aplicación de una sola página (SPA) en tu navegador web, procura no incluir información confidencial directamente en el código. Un atacante siempre puede tomar la aplicación, aplicar ingeniería inversa y encontrar la información confidencial. En su lugar, pregúntate si la información confidencial se puede descargar de forma segura tras la autenticación o si se puede utilizar de otra manera.
+
+*Por qué usar aplicaciones de una sola página o aplicaciones móviles para almacenar secretos de clientes es una mala idea*
+
+Como ya habrás podido comprobar, es fácil detectar cualquier secreto almacenado en una aplicación de una sola página o en una aplicación móvil.
+Trata las aplicaciones de navegador y móviles como clientes públicos: nunca incrustes secretos de cliente ni otras credenciales compartidas en ellas. Para OAuth, utiliza el flujo de código de autorización con PKCE; mantén las operaciones privilegiadas y sus credenciales en un backend de confianza.
+
+*Por qué la codificación Base64 no es un cifrado*
+
+Como ya habrás podido comprobar, descifrar el secreto del archivo de desafío fue bastante sencillo. Por eso, la codificación Base64 y hexadecimal nunca debería considerarse un método para ocultar un secreto. Úsalas únicamente para garantizar que puedas transmitir una secuencia binaria como una cadena de texto.

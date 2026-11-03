@@ -1,0 +1,9 @@
+*Pourquoi l'écrasement des secrets sur la blockchain ne les supprime pas*
+
+L'état de la chaîne peut être vérifié à tout moment en exécutant les mises à jour d'état jusqu'à un certain bloc.
+
+La mise à jour de l'état de la chaîne ne supprime pas les modifications d'état précédentes.
+
+Que faire à la place :
+- Ne placez jamais un secret sur une blockchain publique ou immuable. Conservez les valeurs secrètes hors chaîne dans un système doté de contrôles d'accès et n'utilisez la chaîne que pour des références ou des preuves non sensibles.
+- Considérez toute valeur déjà écrite sur une chaîne publique comme définitivement exposée et renouvelez ou révoquez l'identifiant concerné.

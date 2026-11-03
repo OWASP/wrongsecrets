@@ -1,0 +1,7 @@
+*Por qué debemos tener cuidado con los informes de vulnerabilidades*
+
+Al informar sobre una vulnerabilidad o publicar un aviso de seguridad, tenga siempre cuidado con la información que comparte. No incluya en su informe de seguridad ni en la publicación los valores exactos de las claves secretas codificadas, especialmente aquellas más difíciles de rotar.
+
+Qué hacer en su lugar:
+- Oculta el secreto en los informes y avisos públicos; comparte cualquier prueba necesaria a través de un canal de divulgación restringido y aprobado.
+- Si una credencial ya ha sido divulgada, notifica a su propietario y gestiona su revocación o rotación inmediata.

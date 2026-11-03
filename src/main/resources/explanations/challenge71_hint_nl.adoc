@@ -1,0 +1,12 @@
+Je kunt deze uitdaging oplossen met de volgende stappen:
+
+1. Inspecteer het configuratiebestand van de Dev Container:
+- Open het bestand `.devcontainer/devcontainer.json` in de root van de [repository](https://github.com/OWASP/wrongsecrets/tree/master/.devcontainer).
+- Zoek naar de secties `containerEnv` of `remoteEnv` waarin omgevingsvariabelen worden gedefinieerd.
+
+2. Inspecteer de omgeving van de draaiende container:
+- Clone de repository naar je computer.
+- Open het project in een devcontainer:
+  . In VS Code: druk op Ctrl+Shift+P (of Cmd+Shift+P op macOS) -> selecteer "Dev Containers: Reopen in Container" (of klik op de melding in de linkeronderhoek).
+  . In IntelliJ IDEA klik je op de pop-up "open in devcontainer".
+- Zodra het project in de devcontainer is geopend, controleer je de omgevingsvariabelen met `printenv DEVCONTAINER_SECRET` of `echo $DEVCONTAINER_SECRET`.

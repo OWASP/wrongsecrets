@@ -1,0 +1,43 @@
+=== Warum Herausforderung 62 wichtig ist: MCP-Berechtigungsausweitung über ein Google-Dienstkonto
+
+**Das Problem:**
+
+MCP-Server (Model Context Protocol) werden zunehmend eingesetzt, um KI-Assistenten Zugriff auf externe Dienste und Datenquellen zu ermöglichen. Werden diese Server mit Dienstkonten oder API-Schlüsseln konfiguriert, die über weitergehende Berechtigungen als der aufrufende Benutzer verfügen, entsteht eine gefährliche Sicherheitslücke zur Rechteausweitung.
+
+Diese Herausforderung verdeutlicht die Verletzung des **Prinzips der minimalen Berechtigungen**: Das Google-Dienstkonto des MCP-Servers hat Zugriff auf ein geschütztes Google Drive-Dokument, aber der Server gewährt diesen Zugriff *jedem Aufrufer*, ohne zu überprüfen, ob der Aufrufer berechtigt ist, das Dokument einzusehen.
+
+**Das reale Szenario:**
+
+1. Ein Entwickler erstellt einen MCP-Server, um einem internen KI-Assistenten den Zugriff auf Teamdokumente in Google Drive zu ermöglichen.
+2. Dem Dienstkonto wird Lesezugriff auf ein vertrauliches Dokument gewährt.
+3. Der Entwickler implementiert keine Authentifizierungs- oder Autorisierungsprüfungen für den Aufrufer in den MCP-Tools.
+4. Jeder, der den MCP-Endpunkt entdeckt, kann nun Dokumente lesen, auf die er keinen Zugriff haben sollte – das Dienstkonto wird somit effektiv als Proxy zur Rechteausweitung missbraucht.
+
+**Warum das gefährlich ist:**
+
+- **Privilegienerweiterung**: Anrufer erhalten die Berechtigungen des Dienstkontos, nicht ihre eigenen.
+- **Kein Prüfprotokoll**: Der Zugriff über das MCP-Tool wird möglicherweise nicht mit der Identität des Anrufers protokolliert.
+- **Große Angriffsfläche**: Jeder MCP-Client (legitim oder bösartig) kann das Tool aufrufen.
+- **KI-gestützte Ausnutzung**: Mit diesem MCP-Server verbundene KI-Agenten führen das Tool auf Anweisung automatisch aus und erhöhen so das Risiko.
+
+**So behebst du das Problem:**
+
+1. **MCP-Aufrufer authentifizieren**: Ein Authentifizierungstoken am MCP-Endpunkt anfordern und die Identität des Aufrufers überprüfen, bevor die Tools ausgeführt werden.
+2. **Autorisierung auf Tool-Ebene**: Prüfe, ob der authentifizierte Aufrufer vor dem Aufruf des Dienstkontos Zugriff auf die angeforderte Ressource hat.
+3. **Dienstkontoberechtigungen eng fassen**: Das Dienstkonto sollte nur über die minimal erforderlichen Berechtigungen für legitime Anwendungsfälle verfügen.
+4. **Alle Toolaufrufe protokollieren**: Protokolliere die Identität des Aufrufers bei jedem Toolaufruf, damit der Zugriff überprüft werden kann.
+5. **Identitätswechsel gegenüber gemeinsam genutzten Anmeldeinformationen bevorzugen**: Verwende anruferspezifische Anmeldeinformationen oder einen Token-Austausch anstelle eines einzelnen gemeinsam genutzten Dienstkontos.
+
+**Hinweise zur Implementierung von WrongSecrets:**
+
+- Die Analyse der Challenge-Antworten verwendet getaggte Inhalte (`<secret>...</secret>`) und speichert den extrahierten Wert im Cache, um den Speicherbedarf zu optimieren.
+- Der MCP-Dokumentenabruf verwendet einen begrenzten Cache, um wiederholte ausgehende Anfragen zu begrenzen und gleichzeitig das konfigurierte Standarddokument beizubehalten.
+- Relevante Tests:
+	- `Challenge62Test`
+	- `Challenge62McpControllerTest`
+
+**Referenzen:**
+
+- https://modelcontextprotocol.io/specification/2024-11-05/[MCP Specification]
+- https://owasp.org/www-project-top-ten/[OWASP Top 10]
+- https://cloud.google.com/iam/docs/best-practices-service-accounts[Best Practices für Google-Dienstkonten]

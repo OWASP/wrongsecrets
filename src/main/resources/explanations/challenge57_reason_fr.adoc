@@ -1,0 +1,38 @@
+**Pourquoi les invites des systèmes d'IA peuvent être vulnérables**
+
+Ce défi met en évidence plusieurs problèmes de sécurité importants liés aux systèmes d'IA :
+
+**1. Vulnérabilités d'injection rapide :**
+Les systèmes d'IA peuvent être manipulés grâce à des entrées soigneusement conçues qui contournent leurs mesures de sécurité ou les limites de leurs instructions. Ce procédé est similaire à l'injection SQL, mais appliqué aux modèles d'IA.
+
+**2. Exposition aux invites système :**
+Lorsque des informations sensibles sont intégrées aux invites système, cela crée un risque d'extraction de ces informations par diverses techniques. Les invites système ne doivent jamais contenir de secrets, d'identifiants ou de données sensibles.
+
+**3. Débruitage de l'IA :**
+Cela fait référence aux techniques utilisées pour contourner les restrictions ou les mesures de sécurité intégrées à une IA. Les attaquants peuvent recourir à l'ingénierie sociale, au jeu de rôle ou à la modification des instructions.
+
+**4. Fuite d'informations :**
+Les systèmes d'IA pourraient révéler par inadvertance des informations qu'ils avaient pour instruction de garder secrètes, notamment lorsqu'ils sont confrontés à des techniques d'interrogatoire sophistiquées.
+
+**Conséquences concrètes :**
+
+- **Clés API dans les invites :** N’intégrez jamais de clés API, de mots de passe ou de jetons dans les invites des systèmes d’IA.
+- **Logique métier sensible :** N’incluez pas de règles ou de processus métier confidentiels dans les invites.
+- **Données personnelles :** Évitez d'inclure des informations personnelles identifiables (IPI) ou des données sensibles de l'utilisateur dans les instructions du système.
+- **Mesures de sécurité :** Ne vous fiez pas uniquement aux restrictions basées sur des invites pour assurer la sécurité.
+
+**Meilleures pratiques :**
+- Utiliser une authentification et une autorisation appropriées en dehors du système d'IA
+- Mettre en œuvre des contrôles de sécurité au niveau de l'application, et pas seulement dans les invites de commande.
+- Tester régulièrement les systèmes d'IA pour détecter les vulnérabilités d'injection rapide
+- Surveiller les interactions de l'IA pour détecter d'éventuels problèmes de sécurité.
+- Utiliser les cadres et les lignes directrices en matière de sécurité de l'IA
+
+**Détection et prévention :**
+- Mettre en œuvre la validation et la désinfection des entrées
+- Utiliser des systèmes de filtrage de contenu
+- Surveiller les schémas d'invite suspects
+- Mettre en œuvre une limitation de débit et une détection des abus
+- Évaluations régulières de la sécurité des implémentations d'IA
+
+Ce défi démontre pourquoi considérer les invites des systèmes d'IA comme une simple barrière de sécurité est insuffisant : une sécurité adéquate doit être mise en œuvre à plusieurs niveaux.

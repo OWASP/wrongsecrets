@@ -1,0 +1,44 @@
+=== Escalada de privilegios del servidor MCP a través de la cuenta de servicio de Google
+
+El Protocolo de Contexto de Modelo (MCP) permite que los asistentes y agentes de IA utilicen herramientas y accedan a servicios externos. Cuando un servidor MCP se configura con una cuenta de servicio de Google que tiene permisos más amplios que el usuario que realiza la llamada, se crea una vulnerabilidad de escalada de privilegios: cualquiera que pueda llamar a la herramienta MCP obtiene acceso a recursos a los que no está autorizado directamente a acceder.
+
+Este desafío demuestra un escenario realista en el que un desarrollador ha creado un servidor MCP para ayudar a un asistente de IA a acceder a documentos internos de Google Drive. La cuenta de servicio utilizada por el servidor MCP tiene acceso de lectura a un documento restringido, pero el servidor MCP no verifica que el usuario esté autorizado para acceder a él.
+
+**Tu objetivo:**
+
+1. **En esta aplicación se está ejecutando un servidor MCP**, accesible a través del punto final `/mcp62`.
+2. **El servidor expone una herramienta `read_google_drive_document`** que utiliza una cuenta de servicio de Google.
+3. **La cuenta de servicio tiene acceso de lectura a un documento de Google Drive** que contiene el secreto.
+4. **La herramienta no verifica si la persona que realiza la llamada está autorizada** para acceder a ese documento.
+
+**Cómo interactuar con el servidor MCP:**
+
+Primero, descubre las herramientas disponibles:
+
+[source,bash]
+----
+curl -s -X POST http://localhost:8080/mcp62 \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+----
+
+A continuación, llama a la herramienta `read_google_drive_document` para recuperar el contenido del documento:
+
+[source,bash]
+----
+curl -s -X POST http://localhost:8080/mcp62 \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"read_google_drive_document","arguments":{}}}'
+----
+
+****
+💡 *Nota:*
+
+El servidor lee un documento de Google Drive mediante una cuenta de servicio configurada. El contenido del documento contiene la clave secreta que debes enviar como respuesta. La clave de seguridad reside en que la cuenta de servicio del servidor MCP tiene acceso privilegiado al que ni tú ni tu asistente de IA tendrían normalmente, pero el servidor MCP lo concede implícitamente a cualquiera que utilice sus herramientas.
+****
+
+**Detalles de implementación (para los responsables del mantenimiento):**
+
+- La respuesta al desafío se extrae del contenido entre `<secret>` y `</secret>`.
+- La extracción se realiza una sola vez al cargar el secreto y luego se almacena en caché para la validación de la respuesta.
+- El controlador MCP almacena en caché los documentos recuperados, conservando siempre el documento predeterminado configurado, además de hasta 20 identificadores de documentos adicionales.

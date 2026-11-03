@@ -1,0 +1,15 @@
+*Waar je op moet letten bij het gebruik van willekeurige geheimen bij het opstarten*
+
+Een willekeurig geheim bij het opstarten kan werken als het geheim niet door andere systemen dan het systeem dat het geheim zelf beheert/genereert hoeft te worden gebruikt. Anders heb je een soort synchronisatiemechanisme nodig.
+
+Het mechanisme dat hier in deze uitdaging wordt gebruikt, kun je in verschillende andere systemen terugzien, zoals bijvoorbeeld Jenkins, waar we vroeger het admin-wachtwoord van Jenkins in de logs zagen bij de eerste start.
+
+Hoewel er misschien niet per se iets mis is met deze aanpak, zijn er een paar dingen waar je op moet letten:
+
+- iedereen die toegang heeft tot de logs, heeft nu toegang tot dit geheim. Wees dus voorzichtig waarheen je je logs stuurt en let erop aan wie je toegang geeft tot het lezen van de logs in je productiesysteem.
+- als het systeem heel lang niet opnieuw start, wordt het geheim verouderd. Als je vaak moet herstarten, wordt het geheim ook vaak geroteerd.
+- op het moment dat je het geheim begint te persisten, kom je vaak uit bij uitdagingen zoals degenen die je in deze app hebt gezien.
+
+Wat je in plaats daarvan kunt doen:
+- Print gegenereerde geheimen niet naar logs. Als andere systemen de waarde nodig hebben, sla ze dan op en distribueer ze via een secrets manager met beperkte toegang.
+- Roteer het geheim via een expliciet lifecycleproces in plaats van te vertrouwen op herstarten van de applicatie.

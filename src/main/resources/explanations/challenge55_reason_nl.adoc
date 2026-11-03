@@ -1,0 +1,11 @@
+=== Risico's van gevoelige gegevens in SSH-configuratiebestanden
+
+Developers slaan SSH-verbindingsconfiguraties vaak op in bestanden `.ssh/config`. Dit gemak kan er echter toe leiden dat er per ongeluk gevoelige informatie in terechtkomt, zoals wachtwoorden of sleutels, die met de tijd vergeten worden.
+
+Vergeten geheimen wijzen op onvoldoende beveiligingscontroles en slechte praktijken op het gebied van secretbeheer.
+
+Deze uitdaging benadrukt het belang van veilige opslagpraktijken en periodieke audits van gevoelige configuratiebestanden.
+
+Wat je in plaats daarvan kunt doen:
+- Houd privésleutels en wachtwoorden buiten `.ssh/config` en containerimages. Gebruik een beveiligde key store of SSH-agent en geef waar mogelijk de voorkeur aan SSH-certificaten met een korte levensduur.
+- Beperk de toegang tot sleutelbestanden en gebruik voor elke host een aparte, nauwkeurig afgebakende identiteit. Vernieuw inloggegevens die zijn gecommit of verdeeld.

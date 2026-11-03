@@ -1,0 +1,41 @@
+Par défaut, le défi s'exécute sans conteneur de débogage. Votre objectif est d'analyser le binaire exécuté dans le pod et d'en découvrir le secret.
+
+Ce défi peut être résolu en suivant les étapes suivantes :
+
+1. Relevez le défi sans le side-car :
+```
+   kubectl apply -f k8s/challenge53/secret-challenge53.yml
+```
+   Vérifiez que le pod est en cours d'exécution :
+```
+   kubectl get pods
+```
+
+2. Sachez que le pod seul ne fournit pas de fonctionnalités de débogage. Remplacez maintenant le déploiement par un déploiement incluant un conteneur sidecar :
+```
+   kubectl apply -f k8s/challenge53/secret-challenge53-sidecar.yml
+```
+
+3. Exécutez le conteneur de débogage attaché au pod en cours d'exécution :
+```
+   kubectl exec -it <pod-name> -c sidecar -- /bin/sh
+```
+
+4. Accédez au répertoire partagé où se trouve le fichier binaire :
+```
+   cd /shared-data
+```
+
+5. Utilisez `gdb` pour inspecter le binaire et l'exécuter :
+```
+   gdb wrongsecrets-challenge53-c-linux
+   run &
+```
+
+6. Localisez l'adresse mémoire du secret :
+```
+   print &secret
+   x/s <memory-address>
+```
+
+En analysant la mémoire, vous découvrirez le secret codé en dur et stocké dans le fichier binaire.

@@ -1,0 +1,28 @@
+=== Défi 75 : Trouvez les informations d’identification de déploiement Nexus dans le fichier settings.xml de Maven
+
+Maven conserve les identifiants du dépôt dans un fichier `settings.xml`. La section `<servers>` de
+ce fichier associe un identifiant de serveur au nom d'utilisateur et au mot de passe utilisés par Maven lorsqu'il
+communique avec un gestionnaire de référentiel tel que Nexus, y compris le mot de passe du compte
+autorisé à déployer des versions. Ces mots de passe sont en clair, donc un
+`settings.xml` ne doit jamais être versionné. Pourtant, cela arrive quand même : le
+fichier est copié dans un projet « afin que la compilation fonctionne sur chaque machine » puis
+versionné avec le reste du code.
+
+Ce dépôt inclut précisément ce type de fichier. Il contient les informations d'identification de déploiement
+d'un gestionnaire de dépôt Nexus fictif :
+
+`src/main/resources/challenges/challenge-75/settings.xml`
+
+Le fichier est également disponible dans l'arborescence source sur
+lien : link:https://github.com/OWASP/wrongsecrets/blob/master/src/main/resources/challenges/challenge-75/settings.xml[GitHub].
+
+La section `<servers>` contient plusieurs entrées `<server>`. Chaque entrée possède un
+`<id>` qui doit correspondre à l’identifiant du dépôt auquel elle appartient. Trouvez l’entrée
+du serveur qui appartient au gestionnaire de référentiel Nexus et soumettez la valeur de son
+élément `<password>`.
+
+[NOTE]
+====
+Le serveur Nexus et toutes les informations d’identification de ce défi sont fictives. Aucune
+connexion réseau n'est établie : l'application lit uniquement le fichier versionné.
+====

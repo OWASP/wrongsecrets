@@ -1,0 +1,8 @@
+*Warum das Posten von Screenshots von Protokollen in einem GitHub-Issue eine schlechte Idee ist*
+
+Screenshots von Protokolldateien sollten nicht in einem GitHub-Issue veröffentlicht werden, da:
+1. Die Daten sind öffentlich (selbst in einem privaten Datenspeicher sind sie oft öffentlicher, als man es sich wünschen würde).
+2. Screenshots lassen sich nicht wie Text schwärzen. Selbst wenn das Geheimnis unkenntlich gemacht wird, kann dies rückgängig gemacht werden.
+
+Prüfe die Ausgabe auf mögliche Datenlecks und verwende Codeblock-Markdown, um die Protokolle in einem GitHub-Issue zu posten. Das erleichtert auch den Maintainern die Fehlersuche erheblich.
+Falls Zugangsdaten offengelegt wurden, widerrufe oder rotiere sie sofort und entferne den Beitrag oder den Anhang, wenn möglich; gehe davon aus, dass sie bereits kopiert wurden.

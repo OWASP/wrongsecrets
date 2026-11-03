@@ -1,0 +1,15 @@
+*Warum man im Umgang mit KI (oder ML) und Geheimnissen vorsichtig sein sollte*
+
+Jede KI/ML-Lösung, die auf deine Eingaben angewiesen ist, kann diese zur weiteren Verbesserung nutzen. Dies wird mitunter als „verstärkendes Lernen durch menschliches Feedback“ bezeichnet. Weltweit gibt es verschiedene Anwendungen wie Co-Pilot, ChatGPT und viele andere, die auf diesem Mechanismus basieren.
+Das bedeutet: Wenn du diese nutzt und ihnen Feedback gibst oder zustimmst, ihnen Daten sendest, damit sie dir besser helfen können, verbleiben diese Daten bei ihnen und können möglicherweise von anderen abgefragt werden.
+
+Beachte, dass allen Benutzereingaben implizit vertraut wird. Das bedeutet: Wenn du ein LLM mit großen Mengen (wiederholtem) Text überlastest, kannst du möglicherweise einige seiner Kontrollmechanismen umgehen und ihm Anweisungen geben.
+
+Reiche keine Geheimnisse oder sensiblen Daten an KI-Dienste ein, sofern der Dienst und seine Kontrollen zur Datenverarbeitung nicht für diese Informationen freigegeben sind. Mache Eingaben unkenntlich, begrenze die Werkzeuge und den Geheimniszugriff, die einer KI-gestützten Anwendung zur Verfügung stehen, und rotiere alle Zugangsdaten, die offengelegt wurden.
+
+Da das System allen Benutzereingaben implizit vertraut, kann man bei der Verwendung eines LLM zum Programmieren leicht zu schlechten Praktiken im Umgang mit Geheimnissen verleitet werden ;-). Denn: Wenn jemand dem LLM wiederholt eine unsichere Methode vorschlägt, wird es auch dir raten, dieselbe zu verwenden.
+
+**Referenzen:**
+
+- Hacking-Prompts, wie sie von LiveOverflow auf https://www.youtube.com/watch?v=h74oXb4Kk8k[YouTube] behandelt werden.
+- https://owasp.org/www-project-ai-security-and-privacy-guide/[OWASP AI Security and Privacy Guide].

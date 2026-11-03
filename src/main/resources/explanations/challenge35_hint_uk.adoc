@@ -1,0 +1,13 @@
+Це проблема з документацією, яку можна вирішити, звернувшись до консультацій Github.
+
+1. Отримайте ключ, скориставшись рекомендаціями щодо безпеки Github
+- Перейдіть за посиланням https://github.com/OWASP/wrongsecrets/security/advisories/GHSA-vv4g-7gjw-fvqw [рекомендація].
+- Знайдіть ключ API Google.
+- Перепишіть це у поле для відповідей.
+
+2. Дотримуйтесь рекомендацій щодо безпеки на Github
+- Перейдіть за посиланням https://github.com/OWASP/wrongsecrets/security/advisories/GHSA-vv4g-7gjw-fvqw [рекомендація].
+- Знайдіть версію, на яку поширюється проблема (1.6.8RC1).
+- Відкрийте тег за адресою https://github.com/OWASP/wrongsecrets/tree/1.6.8RC1[Github].
+- Знайдіть ключ API Google у завданні 35.
+- Перепишіть це у поле для відповідей.

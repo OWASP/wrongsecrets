@@ -1,0 +1,9 @@
+Ce défi peut être résolu en suivant les étapes suivantes :
+
+1. Créez deux fichiers txt `old_hashes.txt` et `new_hashes.txt` contenant uniquement les hachages copiés à partir des fichiers de vidage.
+2. En utilisant `old_hashes.txt` comme liste de mots de passe, nous pouvons utiliser hashcat pour vérifier les hachages md5 qui correspondent aux hachages bcrypt.
+   - Installez https://hashcat.net/hashcat/[Hashcat]
+   - Saisissez `hashcat -m 3200 -a 0 new_hashes.txt old_hashes.txt --show`. Vous trouverez un hachage bcrypt unique associé à un hachage md5.
+3. En utilisant `rockyou.txt` comme liste de mots de passe, nous pouvons casser le hachage md5 obtenu.
+   - Téléchargez le fichier https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt[liste de mots de passe rockyou.txt]
+   - Tapez `hashcat -m 0 -a 0 82080600934821faf0bc59cba79964bc rockyou.txt --show` pour trouver le mot de passe craqué.

@@ -1,0 +1,7 @@
+*Waarom binaries gebruiken om een geheim te verbergen een aanvaller alleen maar vertraagt.*
+
+Met prachtige gratis reverse-engineering-applicaties zoals ILSpy blijft niet veel veilig. Iedereen die het uitvoerbare bestand in zulke tools kan laden, kan makkelijk verkenning doen en geheimen in je binary vinden.
+
+Het geheim versleutelen met een sleutel die in de binary is ingebed, en andere grappige puzzels, vertragen een aanvaller wel en maken het juist leuk om het geheim te vinden. Houd er rekening mee dat het geheim, als het door het uitvoerbare bestand moet worden gebruikt, uiteindelijk in het geheugen klaar moet staan om te worden uitgevoerd.
+
+Toch een geheim in de binary nodig? Zorg ervoor dat het alleen op afstand kan worden opgehaald nadat er tegen een server op authenticatie is gecontroleerd.

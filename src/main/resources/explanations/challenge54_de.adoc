@@ -1,0 +1,17 @@
+=== .gitignore Geheime Herausforderung
+
+`.gitignore`-Dateien helfen, das versehentliche Einchecken sensibler oder irrelevanter Daten in die Versionsverwaltung zu verhindern. Manchmal fügen Entwickler jedoch versehentlich sensible Daten oder Geheimnisse als Kommentare oder versteckte Einträge in `.gitignore` hinzu.
+
+In dieser Challenge hinterließ ein Entwickler ein verschlüsseltes Geheimnis in einem Kommentar der `.gitignore`-Datei. Obwohl verschlüsselt, verdeutlicht dies, wie leicht man wichtige Geheimnisse an leicht zugänglichen Orten vergessen kann.
+
+Deine Aufgabe ist es, dieses vergessene Geheimnis zu finden und zu entschlüsseln.
+
+==== Hinweis
+Das Geheimnis ist mit AES-256-CBC und einem Initialisierungsvektor (IV) verschlüsselt. Verwende den Schlüssel aus der Datei ".gitignore", um es zu entschlüsseln.
+Wir haben folgenden Befehl zur Verschlüsselung verwendet:
+
+```bash
+echo -n "<you will have to find out>" | openssl enc -aes-256-cbc -K <you will have to find out> \
+  -iv 30313233343536373839616263646566 \
+  -nosalt -base64 -e
+```

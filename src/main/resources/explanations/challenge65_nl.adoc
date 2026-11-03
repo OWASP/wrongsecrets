@@ -1,0 +1,10 @@
+=== Verbergen in binaries, deel 6: de gewone Java CLI
+
+Gewone strings in een Java CLI zijn eenvoudig terug te winnen zodra de JAR is gedownload. Kun jij het geheim vinden dat verstopt zit in onze gewone Java CLI?
+
+Om het op te lossen:
+
+. Download en inspecteer https://github.com/OWASP/wrongsecrets/raw/master/src/main/resources/executables/wrongsecrets-java.jar[wrongsecrets-java.jar].
+. Decompileer de JAR of bekijk de hoofdklasse met een Java-decompiler zoals CFR, JADX, IntelliJ IDEA of `javap`.
+. Zoek naar de klasse die het geheim teruggeeft en identificeer de gewone string die in de CLI is ingebed.
+. Zodra je de exacte geheimewaarde hebt teruggevonden, kun je die in het onderstaande vak indienen of valideren met `java -jar wrongsecrets-java.jar <your recovered secret>`.

@@ -1,0 +1,9 @@
+*Waarom containers gebruiken om geheimen in te plaatsen een slecht idee is*
+
+Zoals je inmiddels kunt zien, kun je elk geheim dat in een container is opgeslagen eenvoudig detecteren. Of het nu een ENV, een bestand of een andere property is: als een systeem het kan lezen, kan een mens dat ook.
+
+Omdat het een best practice is om een container onveranderlijk en versiebeheerd te maken, blijft het geheim vaak voor altijd in de container zitten, tenzij je het opnieuw uit de registry verwijdert.
+
+Wat je in plaats daarvan kunt doen:
+- Houd geheimen buiten imagelagen en build-argumenten. Lever ze op runtime aan via een secrets manager of een platformmechanisme voor geheimen, met toegang beperkt tot de workload die ze nodig heeft.
+- Als een geheim in een image is opgenomen, verwijder de image waar mogelijk uit de registries en roteer de credential.

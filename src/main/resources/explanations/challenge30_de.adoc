@@ -1,0 +1,3 @@
+=== Ein weiteres Kundengeheimnis
+
+Der Client empfängt vom Server einen zufälligen Wert und muss diesen als Antwort zurücksenden, um seine Serveridentität zu beweisen. Dies ist beispielsweise häufig der Fall, wenn ein Sitzungstoken benötigt wird. Das Token wird beim Serverstart zufällig generiert und ist daher nicht im Code zu finden. Was aber, wenn wir es unsicher auf dem Client speichern?

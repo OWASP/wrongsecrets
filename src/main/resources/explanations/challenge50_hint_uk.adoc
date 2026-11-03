@@ -1,0 +1,14 @@
+Цей виклик стосується саме секрету у бінарному файлі .NET8.
+
+Ви можете вирішити цю проблему, використовуючи такі альтернативні рішення:
+
+1. Знайдіть секрети за допомогою ILSpy.
+- отримати бінарний файл wrongsecrets-dotnet-<platform>, для цього ви можете:
+- отримати його з образу Docker
+- завантажте його з https://github.com/OWASP/wrongsecrets-binaries/releases[Двійкові файли Wrongsecrets]
+- Встановлення .NET8 та .NET8 SDK
+- Встановіть https://github.com/icsharpcode/ILSpy/tree/master/ICSharpCode.ILSpyCmd[ilspycmd]
+- за бажанням: Встановити `sfextract`: `dotnet tool install -g sfextract`
+- Розпакуйте автономний бінарний файл: `sfextract wrongsecrets-dotnet -o \./tmp`. або скористайтеся ilspy: `mkdir tmp && ilspycmd -d wrongsecrets-dotnet-linux -o ~/tmp`
+- Перейдіть до папки tmp та виконайте команду `ilspycmd dotnetproject.dll`, щоб декомпілювати dll-файл та знайти секретний ключ.
+Не хочете встановлювати інструменти? Перевірте https://github.com/OWASP/wrongsecrets/tree/master?tab=readme-ov-file#want-to-play-but-are-not-allowed-to-install-the-tools[контейнер WrongSecrets Desktop]!

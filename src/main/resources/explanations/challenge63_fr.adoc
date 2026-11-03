@@ -1,0 +1,19 @@
+=== Défi de clé de chiffrement codée en dur
+Ce défi illustre une erreur courante mais dangereuse : chiffrer un secret tout en intégrant en dur la clé de chiffrement dans le même fichier source.
+
+Un développeur a tenté de protéger un secret en le chiffrant avec AES. Cependant, la clé de chiffrement et le vecteur d'initialisation (IV) sont tous deux intégrés directement dans le code source Java, au même titre que le texte chiffré. De ce fait, le chiffrement est totalement inefficace : toute personne ayant accès au code source peut déchiffrer le secret très facilement.
+
+**Votre objectif :**
+1. **Trouvez le fichier source Java** correspondant à ce défi dans le code source.
+2. **Localisez la clé AES et le vecteur d'initialisation (IV) codés en dur** dans le code source
+3. **Déchiffrez le texte chiffré** à l'aide de la clé et du vecteur d'initialisation que vous avez trouvés.
+4. **Soumettez le texte brut** comme réponse.
+
+**Comment décrypter :**
+[source,bash]
+----
+echo "TDPwOvcLsbCWV5erlk6OHFnlFoXNtdQOt2JQeq+i4Ho=" | openssl enc -d -aes-128-cbc \
+  -K $(echo -n "SuperSecretKey12" | xxd -p) \
+  -iv $(echo -n "InitVector123456" | xxd -p) \
+  -base64
+----

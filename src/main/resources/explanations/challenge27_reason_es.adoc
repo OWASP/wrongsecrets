@@ -1,0 +1,8 @@
+*Por qué enviar secretos como datos de entrada a contratos inteligentes es una mala idea, incluso si no se almacenan*
+
+Los datos de entrada para todas las transacciones de contratos, como el estado del almacenamiento interno de los contratos en la cadena, se almacenan de forma permanente y son fáciles de consultar.
+Los datos de entrada para las transacciones son visibles incluso antes de que estas sean aceptadas. Esto puede dar lugar a prácticas fraudulentas por parte de terceros que tengan acceso al conjunto de transacciones y puedan enviar una transacción (con un coste de gas mayor) que se beneficie de la transacción conocida que se ejecuta a continuación.
+
+Qué hacer en su lugar:
+- No envíes valores secretos ni suposiciones en las entradas de transacciones. Mantén la verificación dependiente del secreto fuera de la cadena o utiliza un protocolo de conocimiento cero cuidadosamente diseñado cuando sea necesaria una verificación en la cadena.
+- Trata como públicos los valores enviados en transacciones o expuestos en un pool de transacciones públicas, incluso si el contrato no los almacena.

@@ -1,0 +1,5 @@
+=== Bash-Geschichte
+
+Dieser Entwickler hat einen Container erstellt und betreibt ihn schon eine Weile. Er nutzt ihn für viele Aufgaben und achtet sorgfältig darauf, keine Geheimnisse fest zu kodieren. Wenn er Geheimnisse benötigt, gibt er sie einfach in einem Bash-Befehl während der Ausführung an; dadurch verschwinden sie sofort nach der Eingabe und bleiben geheim. Stimmt das?
+
+Wir alle haben kleine Geheimnisse in unserer Vergangenheit verborgen, auch Bash. Öffne den Container und schau, ob du eines finden kannst.

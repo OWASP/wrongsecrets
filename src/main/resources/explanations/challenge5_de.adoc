@@ -1,0 +1,5 @@
+=== K8s-ConfigMap-basiertes Geheimnis
+
+Etwas in Docker fest zu kodieren, war nicht klug. Aber wie sieht es mit einer ConfigMap im Standard-Namespace ohne RBAC aus?
+
+Wenn diese Herausforderung aktiviert ist, führe das Ganze auf einem Kubernetes-Cluster aus. Kannst du `kubectl` verwenden, um das Geheimnis zu finden? Oder schau doch mal im Repository nach, in dem der Cluster konfiguriert ist. Vielleicht hättest du es dort auch schon entdeckt, wenn die ConfigMap in Git eingecheckt worden wäre.

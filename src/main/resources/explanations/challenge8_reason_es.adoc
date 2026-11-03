@@ -1,0 +1,15 @@
+*Qué tener en cuenta al usar secretos aleatorios al iniciar el sistema*
+
+Utilizar una clave secreta aleatoria al inicio podría funcionar si dicha clave no necesita ser utilizada por otros sistemas además del que la almacena o genera. De lo contrario, se necesitará algún tipo de mecanismo de sincronización.
+
+El mecanismo utilizado en este desafío se puede observar en otros sistemas, como Jenkins, por ejemplo, donde solíamos ver la contraseña de administrador de Jenkins en los registros al iniciar por primera vez.
+
+Si bien este enfoque no tiene por qué ser necesariamente malo, hay algunas cosas a las que debes prestar atención:
+
+- Cualquier persona con acceso a los registros ahora tiene acceso a esta información confidencial. Por lo tanto, tenga cuidado a dónde envía sus registros y quién puede leerlos en su sistema de producción.
+- Si el sistema no se reinicia durante mucho tiempo, la clave secreta pierde vigencia. Si se reinicia con frecuencia, la clave secreta también se actualizará.
+- En el momento en que empieces a insistir en el secreto, a menudo te encontrarás con desafíos como los que enfrentaste en esta aplicación.
+
+Qué hacer en su lugar:
+- No imprimas secretos generados en los registros. Si otros sistemas necesitan el valor, almacénalo y distribúyelo mediante un gestor de secretos con acceso restringido.
+- Rota el secreto mediante un proceso de ciclo de vida explícito en lugar de depender de los reinicios de la aplicación.

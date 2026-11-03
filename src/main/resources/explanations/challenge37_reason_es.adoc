@@ -1,0 +1,10 @@
+*Por qué debemos tener cuidado con las credenciales de seguridad en CI/CD*
+
+Las personas que pueden acceder a la configuración de sus controles de seguridad en su entorno CI/CD pueden acceder fácilmente a cualquier credencial configurada allí. Estas credenciales pueden utilizarse para cualquier fin.
+
+Por eso la seguridad debe ser muy cuidadosa al gestionar sus secretos: el hecho de que la credencial sea utilizada por una herramienta de seguridad no significa que podamos tolerar menos seguridad ;-).
+
+Qué hacer en su lugar:
+- Almacena las credenciales de CI/CD en el almacén de secretos protegido de la plataforma o utiliza una identidad de carga de trabajo de vida corta, y concede a cada job solo los permisos que necesita.
+- Restringe quién puede cambiar la configuración del pipeline: asegúrate de que los archivos de configuración (workflows o archivos CI) tengan CODE-OWNERS, exígelos en una rama protegida y limita el acceso de mantenedores y propietarios al repositorio.
+- Restringe quién puede ver los registros del pipeline, enmascara las salidas sensibles y rota las credenciales que puedan haber quedado expuestas.

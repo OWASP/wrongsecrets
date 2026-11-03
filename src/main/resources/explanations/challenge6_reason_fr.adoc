@@ -1,0 +1,19 @@
+*Pourquoi les secrets ont absolument besoin du contrôle d'accès basé sur les rôles (RBAC)*
+
+Les secrets K8s sont conçus pour héberger des données confidentielles. Comme vous pouvez le constater en résolvant le défi et en effectuant une reconnaissance minutieuse, les secrets sont déjà encodés en `base64` afin de pouvoir contenir des données binaires chiffrées.
+
+Les secrets ne doivent évidemment pas être enregistrés dans git, sauf s'ils sont chiffrés (et même dans ce cas, il vaut mieux ne pas les enregistrer). C'est l'une des premières erreurs commises ici, car nous nous retrouvons alors avec les mêmes problèmes que ceux décrits dans les défis précédents.
+
+Plus important encore : le contrôle d’accès basé sur les rôles (RBAC) doit être extrêmement strict en matière de secrets : seuls les processus qui nécessitent le secret lui-même doivent pouvoir le lire, et un nombre très limité d’autres rôles doivent pouvoir le conserver.
+
+Il y a ensuite le stockage du cluster Kubernetes où sont désormais hébergés les secrets. Ce stockage n'est pas chiffré pour le moment et pourrait également faire l'objet d'une utilisation abusive.
+Activez le chiffrement au repos pour les secrets Kubernetes avec une clé gérée, limitez strictement le RBAC aux secrets spécifiques dont chaque charge de travail a besoin et auditez les accès. Le chiffrement au repos ne remplace pas les contrôles d'accès.
+
+En résumé : les secrets Kubernetes ne sont pas une mauvaise idée. Cependant, une configuration adéquate du cluster Kubernetes qui les héberge est indispensable pour une sécurité optimale.
+
+
+Enfin, et surtout : nous pourrions facilement accéder au conteneur pour rechercher les variables d'environnement contenant le secret. Cela est lié à trois choses :
+
+- nous sommes autorisés à le faire grâce au RBAC, ce qui ne devrait pas être votre cas normal en PRD : sinon, n’importe qui dans votre organisation pourrait fouiller dans le conteneur.
+- Nous avons des exécutables (sh/openssl/etc.) dans le conteneur, que nous pouvons lancer pour établir un shell. Supprimer tout binaire non essentiel de votre conteneur permet de réduire la surface d'attaque et de compliquer la tâche d'un attaquant ayant réussi une exécution de code à distance (RCE) sur votre conteneur, qui pourrait ainsi accéder à d'autres parties du système et exécuter davantage de commandes.
+- Nous avons exposé la ConfigMap comme une variable d'environnement. Cela signifie que toute personne ayant accès à l'environnement d'exécution du conteneur au sein du pod peut désormais extraire le secret. Nous avons rapproché le secret de l'utilisateur, mais peut-être pas encore suffisamment (par exemple, uniquement de l'application).

@@ -1,0 +1,9 @@
+*Waarom het gebruik van binaries om een geheim te verbergen een attacker alleen maar vertraagt.*
+
+Met mooie, gratis reverse-engineering-applicaties als Ghidra blijft er niet veel veilig. Iedereen die de executable in Ghidra of Radare2 kan laden, kan eenvoudig een verkenningsronde starten en geheimen in je Swift-binary vinden.
+
+Swift-binaries zijn, hoewel ze name mangling gebruiken (je kunt `swift-demangle` gebruiken om Swift-symboolnamen te ontmangelen), nog steeds gevoelig voor reverse engineering. Geheimen die als tekensarrays of stringliteralen zijn opgeslagen, zijn terug te vinden in de datasectie van de binary.
+
+Het geheim versleutelen met een sleutel die in de binary is ingebed, en andere grappige puzzels, vertragen een attacker inderdaad en maken het alleen maar leuk om het geheim te vinden. Bedenk dat als het geheim door de executable moet worden gebruikt, het uiteindelijk in het geheugen klaar moet staan voor uitvoering.
+
+Moet er toch een geheim in de binary zitten? Zorg dat het alleen op afstand kan worden opgehaald nadat er tegen een server is geauthenticeerd.

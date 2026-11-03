@@ -1,0 +1,11 @@
+*Warum sollte man bei Git-Notizen vorsichtig sein?*
+
+1. Wie bei allen Git-Repositories ist es auch hier sehr schwierig bis unmöglich, ein einmal durchgesickertes Geheimnis aus der gesamten Historie zu entfernen.
+
+2. Git Notes scheinen eine selten genutzte Funktion von Git zu sein, weshalb viele Secret Scanner sie nicht überprüfen. Das bedeutet, dass sie in CI-Pipelines übersehen werden können.*
+
+**Das zweite Anliegen wird derzeit vom Team von WrongSecrets untersucht. Wir analysieren die größten Open-Source-Projekte, um festzustellen, ob Git-Notizen verwendet werden. Falls ja, versuchen wir möglicherweise, zur Entwicklung von Secret-Scannern beizutragen, um dies zu ermöglichen. Falls nein, empfehlen wir, diese Git-Funktion einfach nicht zu nutzen, um Probleme zu vermeiden. Verfolge den Fortschritt dieses Projekts im WrongSecrets-Slack-Kanal.**
+
+Was du stattdessen tun solltest:
+- Speichere keine Geheimnisse in Git-Notizen. Binde Git-Notizen in die Secret-Scanning- und Prüfprozesse des Repositories ein, anstatt anzunehmen, dass Scanner sie untersuchen.
+- Falls ein Geheimnis in einer Note committet wurde, widerrufe oder rotiere es und behandle es als offengelegt, auch wenn die Note später entfernt wird.

@@ -1,0 +1,9 @@
+*Por qué usar MD5 como KDF es malo*
+
+Proteger las claves de forma eficaz es crucial, y esto significa utilizar las funciones de derivación de claves (KDF) adecuadas con entropía adicional y enlace contextual, como se destaca en la Guía de pruebas de seguridad móvil (MSTG) https://mas.owasp.org/MASTG/0x04g-Testing-Cryptography/#weak-key-generation-functions.
+
+MD5 es demasiado rápido y fácil de calcular, lo que permite a los atacantes probar rápidamente una gran cantidad de entradas (como PIN) para obtener la clave. Además (aunque es un poco más difícil de explotar), el espacio de colisión es relativamente pequeño, lo que significa que varias entradas diferentes pueden generar el mismo hash MD5.
+
+Las funciones de distribución de claves (KDF) más robustas son cruciales al tratar con datos confidenciales, ya que proporcionan la resistencia necesaria contra los ataques de fuerza bruta y protegen los secretos incluso si el atacante obtiene acceso a información parcial.
+
+El MSTG recomienda utilizar funciones de cifrado de claves (KDF) robustas como PBKDF2, bcrypt o Argon2, que incorporan entropía adicional y refuerzan la dificultad computacional, lo que hace que los ataques de fuerza bruta sean más costosos.

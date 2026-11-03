@@ -1,0 +1,7 @@
+=== Zentralisiertes, fest codiertes Passwort
+
+Beim Erstellen eines Proof of Concept verwenden Entwickler oft fest codierte Geheimnisse, wie beispielsweise `password` im Code. Was passiert, wenn wir vergessen, diese fest codierten Geheimnisse zu entfernen?
+
+Kannst du das gesuchte Geheimnis im Java-Code unter https://github.com/OWASP/wrongsecrets/tree/master/src/main/java/org/owasp/wrongsecrets entdecken? Und wie sieht es mit der Suche im Container aus?
+
+Manchmal sind die einfachsten Werkzeuge die effektivsten. Versuche, das Repository zu klonen und mit `grep` (siehe https://man7.org/linux/man-pages/man1/grep.1.html) nachzusehen, was du findest. Alternativ kannst du auch `Git-secrets` (https://github.com/awslabs/git-secrets) oder `Trufflehog` (https://github.com/trufflesecurity/trufflehog) verwenden. Tauche einfach in den Code ein!

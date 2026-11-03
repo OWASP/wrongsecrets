@@ -1,0 +1,17 @@
+Ви можете вирішити цю проблему, виконавши такі кроки:
+
+1. Відкрийте файл налаштувань Maven, доданий до репозиторію:
+- У репозиторії: `src/main/resources/challenges/challenge-75/settings.xml`
+- Або онлайн: посилання: link:https://github.com/OWASP/wrongsecrets/blob/master/src/main/resources/challenges/challenge-75/settings.xml[`src/main/resources/challenges/challenge-75/settings.xml`]
+
+2. Перегляньте розділ `<servers>`:
+- Він містить запис `<server>` з `<id>central</id>`.
+- Він містить запис `<server>` з `<id>wrongsecrets-nexus</id>`, запис, який
+  автентифікується у вигаданому менеджері репозиторію Nexus. Той самий ідентифікатор використовується
+  для репозиторію та репозиторію плагінів профілю `wrongsecrets-deploy`.
+
+3. Зчитайте елемент `<password>` запису `<server>` з ідентифікатором
+   `wrongsecrets-nexus`. Це значення і є відповіддю.
+
+Нічого не потрібно розшифровувати чи встановлювати: файл додано до репозиторію у відкритому тексті,
+і саме ця проблема є предметом цього завдання.

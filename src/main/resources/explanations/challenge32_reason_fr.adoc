@@ -1,0 +1,15 @@
+*Pourquoi il faut être prudent avec l'IA (ou l'apprentissage automatique) et les secrets*
+
+Toute solution d'IA/ML qui dépend de vos données d'entrée peut les utiliser pour s'améliorer. On parle alors d'« apprentissage par renforcement à partir des retours humains ». De nombreuses applications, comme Co-Pilot, ChatGPT et bien d'autres, reposent sur ce mécanisme.
+Cela signifie que lorsque vous utilisez ces services et que vous leur faites part de vos commentaires ou que vous acceptez de leur envoyer des données pour qu'ils puissent vous aider plus efficacement, ces données restent en leur possession et peuvent être consultées par d'autres personnes.
+
+Notez que toutes les données saisies par l'utilisateur sont considérées comme fiables. Cela signifie que si vous inondez un LLM de texte (répété), vous pourriez contourner certains de ses contrôles et lui dicter son fonctionnement.
+
+Ne soumettez pas de secret ni de donnée sensible à des services d'IA, sauf si le service et ses contrôles de traitement des données sont approuvés pour ces informations. Masquez les entrées, limitez les outils et l'accès aux secrets dont dispose une application dotée d'IA, et renouvelez tout identifiant qui a été exposé.
+
+Comme le système fait implicitement confiance à toutes les entrées utilisateur, cela signifie que si vous utilisez un LLM pour coder, vous pourriez être amené à adopter de mauvaises pratiques de gestion des secrets ;-). Après tout, si quelqu'un a demandé au LLM d'utiliser une méthode non sécurisée à plusieurs reprises, il vous incitera à faire de même.
+
+**Références :**
+
+- Les invites de piratage, telles que couvertes par LiveOverflow sur https://www.youtube.com/watch?v=h74oXb4Kk8k[Youtube].
+- https://owasp.org/www-project-ai-security-and-privacy-guide/[Guide OWASP sur la sécurité et la confidentialité de l'IA].

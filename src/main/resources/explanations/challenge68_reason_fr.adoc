@@ -1,0 +1,9 @@
+=== Pourquoi partager des conversations avec des IA contenant des secrets est dangereux
+
+Les modèles d'IA sont souvent utilisés pour générer du code, des configurations, voire des identifiants. Lorsqu'un utilisateur partage une session de chat, il crée une URL publique accessible à tous. Si cette session contient des clés API, des mots de passe ou une logique propriétaire, ces informations confidentielles sont alors exposées.
+
+Il est important de :
+- Ne jamais révéler de véritables secrets aux outils d'IA.
+- Supprimez toute information sensible des conversations avant de les partager.
+- Utilisez les versions professionnelles des outils d'IA qui offrent une meilleure protection des données et des contrôles de partage plus performants.
+- Si un identifiant a été partagé, révoquez-le ou régénérez-le immédiatement et supprimez la conversation partagée dans la mesure du possible ; considérez qu'il a peut-être été copié.

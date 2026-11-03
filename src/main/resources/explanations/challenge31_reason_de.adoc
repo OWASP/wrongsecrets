@@ -1,0 +1,5 @@
+Aus mehreren Gründen ist es keine gute Idee, Geheimnisse auf einer Webseite zu „verstecken“, selbst wenn sie nur intern verwendet werden. Webseiten sind oft für verschiedene Parteien zugänglich, darunter Mitarbeiter, Auftragnehmer und Lieferanten. Geheimnisse auf einer Webseite zu speichern, erhöht das Risiko, dass Unbefugte auf irgendeine Weise Zugriff darauf erlangen. Die Wahrscheinlichkeit, dass ein Hacker nach einem erfolgreichen Angriff weitere Angriffe durchführt, steigt dadurch erheblich.
+
+Was du stattdessen tun solltest:
+- Platziere keine Geheimnisse im Seiteninhalt, im Quellcode oder in der clientseitigen Konfiguration. Bewahre sie auf dem Server auf und führe die erforderliche Operation dort aus.
+- Verlange Authentifizierung und Autorisierung für den Zugriff auf sensible Operationen und rotiere jedes Geheimnis, das bereits veröffentlicht wurde.

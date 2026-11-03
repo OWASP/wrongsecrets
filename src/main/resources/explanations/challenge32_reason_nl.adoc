@@ -1,0 +1,15 @@
+*Waarom je voorzichtig moet zijn met AI (of ML) en geheimen*
+
+Elke AI/ML-oplossing die afhankelijk is van jouw invoer, kan die invoer gebruiken om zich verder te verbeteren. Dit wordt soms "Reinforcement learning from human feedback" genoemd. Er zijn verschillende toepassingen in de wereld, zoals Co-Pilot, ChatGPT en vele andere, die op dit mechanisme zijn gebaseerd.
+Dit betekent dat wanneer je ze gebruikt en ze feedback geeft of instemt met het sturen van data zodat ze je effectiever kunnen helpen, die data bij hen blijft liggen en door anderen raadpleegbaar kan zijn.
+
+Houd er rekening mee dat alle gebruikersinvoer impliciet wordt vertrouwd. Dit betekent dat wanneer je een LLM overspoelt met veel (herhaalde) tekst, je mogelijk enkele van zijn controles kunt omzeilen en het kunt vertellen wat het moet doen.
+
+Dien geen geheimen of gevoelige data in bij AI-diensten, tenzij de dienst en de controles voor gegevensverwerking daarvoor zijn goedgekeurd. Bewerk de invoer, beperk de tools en de toegang tot geheimen waarover een AI-toepassing beschikt en roteer elke referentie die is blootgesteld.
+
+Omdat alle gebruikersinvoer door het systeem impliciet wordt vertrouwd. Dit betekent dat wanneer je een LLM gebruikt om te coderen, je ook kunt worden misleid tot slechte praktijken voor het beheren van geheimen ;-). Want als iemand het LLM vaak genoeg heeft verteld om een onveilige methode te gebruiken, zal het jou hetzelfde adviseren.
+
+**Verwijzingen:**
+
+- Hacken van prompts, zoals LiveOverflow dat behandelt op https://www.youtube.com/watch?v=h74oXb4Kk8k[Youtube].
+- https://owasp.org/www-project-ai-security-and-privacy-guide/[OWASP-gids voor AI-veiligheid en privacy].

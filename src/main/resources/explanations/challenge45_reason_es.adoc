@@ -1,0 +1,8 @@
+*Por qué es una mala idea usar datos confidenciales como claves*
+
+En ocasiones, se argumenta que los datos menos sensibles deberían almacenarse como una subclave del secreto principal. De esta forma, por ejemplo, tanto el nombre de usuario como la contraseña pueden combinarse en una sola entrada.
+En muchos casos, estos secretos son igual de importantes y deberían recibir la misma protección que el secreto en sí (por ejemplo, la contraseña). En el caso de Vault, se puede acceder a una subclave (por ejemplo, el nombre de usuario), pero no al valor secreto en sí (por ejemplo, la contraseña), lo que ya implicaría la filtración del nombre de usuario.
+
+A menudo, no queremos dar acceso de lectura a los secretos a nuestros empleados, pero sí queremos darles acceso de lectura a las subclaves. Si algún secreto se almacena en las subclaves, entonces ese secreto queda comprometido internamente.
+
+Mantén los valores sensibles en el valor secreto protegido y no en subclaves legibles, y no concedas a los componentes de una credencial un acceso más amplio que a la propia credencial.

@@ -1,0 +1,18 @@
+Je kunt deze uitdaging oplossen door de volgende stappen te volgen:
+
+1. Vind het geheim in Vault met de gelogde root token:
+  - Toen je de K8s-omgeving opzette, gaf het script je de waarde van de root token zoals hieronder:
+
+    Key                  Value
+    ---                  -----
+    token                s.Jqka4lSy8ayQw2LFsvyAgnTI
+    token_accessor       HEr9RYa3OcZNDOHeFRXIMYCV
+    token_duration       ∞
+    token_renewable      false
+    token_policies       ["root"]
+    identity_policies    []
+    policies             ["root"]
+
+
+  -  Gebruik de token om in te loggen in Vault die op poort 8200 beschikbaar is
+  -  Kijk rond: kun je de locatie van het geheim vinden in het overzicht van geheimen?

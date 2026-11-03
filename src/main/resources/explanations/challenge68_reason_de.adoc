@@ -1,0 +1,9 @@
+=== Warum das Teilen von KI-Chats mit Geheimnissen gefährlich ist
+
+KI-Modelle werden häufig zur Generierung von Code, Konfigurationen oder sogar Zugangsdaten verwendet. Wenn ein Nutzer eine Chat-Sitzung teilt, erstellt er eine öffentliche URL, auf die jeder zugreifen kann. Enthält die Sitzung API-Schlüssel, Passwörter oder proprietäre Logik, sind diese Geheimnisse nun offengelegt.
+
+Es ist wichtig:
+- Gib KI-Tools niemals echte Geheimnisse preis.
+- Entferne alle sensiblen Informationen aus den Chats, bevor du sie teilst.
+- Nutze Enterprise-Versionen von KI-Tools, die einen besseren Datenschutz und bessere Kontrollmöglichkeiten bei der Datenweitergabe bieten.
+- Falls Zugangsdaten geteilt wurden, widerrufe oder rotiere sie sofort und entferne den geteilten Chat, wenn möglich; gehe davon aus, dass sie kopiert wurden.

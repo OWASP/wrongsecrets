@@ -1,0 +1,9 @@
+*Warum es eine schlechte Idee ist, Geheimnisse in Containern zu speichern*
+
+Wie du inzwischen feststellen konntest, lässt sich jedes in einem Container gespeicherte Geheimnis leicht aufspüren. Ob es sich um eine Umgebungsvariable, eine Datei oder eine andere Eigenschaft handelt: Wenn ein System sie lesen kann, kann es auch ein Mensch.
+
+Da es als bewährte Methode gilt, einen Container unveränderlich und versioniert zu halten, bleibt das Geheimnis oft für immer im Container erhalten, es sei denn, man entfernt es erneut aus der Registry.
+
+Was du stattdessen tun solltest:
+- Halte Geheimnisse aus Image-Layern und Build-Argumenten. Stelle sie zur Laufzeit über einen Secrets Manager oder einen plattformeigenen Mechanismus bereit, wobei der Zugriff auf die Workload beschränkt bleibt, die ihn benötigt.
+- Falls ein Geheimnis in einem Image enthalten war, entferne das Image nach Möglichkeit aus den Registries und rotiere die Zugangsdaten.

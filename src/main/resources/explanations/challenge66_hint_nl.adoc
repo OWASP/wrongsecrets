@@ -1,0 +1,20 @@
+Deze uitdaging gebruikt een verhulde Java CLI JAR.
+
+Je kunt hem oplossen door:
+
+1. Te vinden waar de verhulde gegevens staan:
+- Download het bestand `wrongsecrets-java-obfuscated.jar`.
+- Voer `jar tf wrongsecrets-java-obfuscated.jar` uit en lokaliseer `io/github/owasp/wrongsecrets/WrongSecretsObfuscated.class`.
+- Open die klasse in CFR, JADX, IntelliJ IDEA of een andere decompiler.
+- Zoek naar de statische velden waarin de XOR-sleutel en de gecodeerde geheimbytes staan.
+
+2. De exacte decodeerlogica te onderzoeken:
+- Voer `javap -c -p -classpath wrongsecrets-java-obfuscated.jar io.github.owasp.wrongsecrets.WrongSecretsObfuscated` uit.
+- Zoek in de output het blok `static { ... }` dat `XOR_KEY_CHARS` en `ENCODED_SECRET` vult.
+- Zoek daarna `decodeSecret()` en merk op dat elke gecodeerde byte wordt ge-XORd met één byte uit de sleutel, waarbij de sleutel met modulo-rekenkunde herhaald wordt.
+
+3. Het geheim zelf op te bouwen:
+- Zet de waarden van `XOR_KEY_CHARS` om in bytes.
+- Kopieer de byte-waarden van `ENCODED_SECRET` uit de bytecode of de gecompileerde broncode.
+- XOR elke gecodeerde byte met de bijbehorende sleutelbyte en begin opnieuw aan het eind van de sleutel.
+- Decodeer de resulterende byte-array als UTF-8 om het geheim terug te winnen en dien die waarde daarna in als het antwoord.

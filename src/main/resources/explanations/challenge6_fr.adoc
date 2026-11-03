@@ -1,0 +1,7 @@
+=== Les secrets des chiens
+
+Une ConfigMap n'a donc pas suffi. Mais qu'en est-il d'un secret Kubernetes (https://kubernetes.io/docs/concepts/configuration/secret/[secret Kubernetes]) dans l'espace de noms par défaut sans RBAC ?
+
+Si ce défi est activé, vous exécutez cette commande depuis un cluster Kubernetes. Pouvez-vous utiliser `kubectl` pour trouver le secret ? Ou bien, avez-vous essayé de consulter le dépôt où le cluster est configuré ? Vous l'auriez peut-être repéré si la ConfigMap avait été enregistrée sur Git.
+
+Veuillez noter que les secrets sont encodés en base64 avant d'être intégrés à la charge de travail. Nous recherchons la version décodée du secret ;-).

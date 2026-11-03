@@ -1,0 +1,42 @@
+Este desafío se puede resolver utilizando las siguientes formas:
+
+- Utilice el propio contenedor:
+
+  1. Clona el repositorio que contiene los archivos del desafío:
+```
+     git clone https://github.com/OWASP/wrongsecrets.git
+     cd wrongsecrets
+```
+
+  2. Localiza el archivo `docker-create.sh` en el repositorio. Este archivo contiene la lógica de compilación que utiliza Acme Inc. para crear el contenedor Docker.
+
+  3. Crea la imagen de Docker ejecutando el script `docker-create.sh`:
+```
+     ./docker-create.sh
+```
+
+  4. Inicie el contenedor Docker utilizando la imagen creada para acceder a su entorno:
+```
+     docker run -it jeroenwillemsen/wrongsecrets:local-test-no-vault sh
+```
+
+  5. Investiga el sistema de archivos del contenedor para localizar el archivo secreto:
+```
+     / $ cat var/run/secrets2/secret.txt
+```
+
+  6. El contenido del archivo `secret.txt` es la respuesta.
+
+- Encuentra el secreto en el script buildx:
+
+1. Clona el repositorio que contiene los archivos del desafío:
+```
+     git clone https://github.com/OWASP/wrongsecrets.git
+     cd wrongsecrets
+```
+2. Localiza el archivo `docker-create.sh` en el repositorio. Este archivo contiene la lógica de compilación que utiliza Acme Inc. para crear el contenedor Docker.
+
+3. Puedes encontrar el secreto codificado inyectado en el contenedor `$SECRET_VALUE` en la función `create_containers`.
+
+
+Esta configuración incorrecta demuestra cómo los secretos, transmitidos de forma segura durante el proceso de compilación de Docker mediante `--secret`, pueden quedar expuestos si se almacenan incorrectamente en el contenedor. Sus hallazgos ayudarán a Acme Inc. a comprender y solucionar este problema crítico.

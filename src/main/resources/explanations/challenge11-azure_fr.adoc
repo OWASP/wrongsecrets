@@ -1,0 +1,7 @@
+=== Azure Key Vault partie 3
+
+Dans notre cluster AKS, il existe deux liaisons d'identité Azure. Azure les utilise pour injecter des métadonnées. Dans notre cas, nous les utilisons pour accéder à Azure Key Vault.
+
+Ce qui est intéressant avec Key Vault, c'est qu'il définit les autorisations par coffre-fort, et non par secret. Malheureusement, les développeurs ne proposent qu'un seul coffre-fort pour deux identités…
+
+Astuce : Il existe une liaison avec `separate-workload-pod-id`. Essayez de créer un pod avec les étiquettes appropriées pour récupérer wrongsecret-3 (voir également https://docs.microsoft.com/en-us/azure/aks/use-azure-ad-pod-identity#run-a-sample-application [la documentation aks]).

@@ -1,0 +1,17 @@
+*Waarom een geheim naar je cloudprovider loggen een probleem is*
+
+Coderen is geen versleutelen. Base64 houdt een referentie buiten het zicht bij een snelle codereview, maar iedereen die de logsink kan lezen, kan het met één commando decoderen. Behandel een gecodeerd geheim in een logregel als een geheim in platte tekst.
+
+Een paar dingen die dit bijzonder vervelend maken in een cloud-opzet:
+
+- het publiek is veel groter dan je denkt. Logsinks zijn meestal leesbaar voor het hele platform- of SRE-team, en vaak voor elke workload met een brede `logs:FilterLogEvents`-, `roles/logging.viewer`- of Log Analytics-reader-bevoegdheid. De reikwijdte van het geheim wordt de reikwijdte van je logrechten.
+- bewaartermijnen zijn langer dan rotatie. Logs worden meestal maandenlang bewaard en gerepliceerd naar een archive-bucket of een SIEM. De referentie roteren haalt de oude waarde niet uit die kopieën, dus je moet elke downstream-sink ook als gecompromitteerd behandelen.
+- gestructureerd loggen maakt het makkelijk om per ongeluk te lekken. Een hele payload, verzoek of MDC-context koppelen aan een "audit-gebeurtenis" is handig, en het sleept alles mee wat toevallig in die context zit, inclusief tokens en sleutels.
+- loggen kan het geheim verplaatsen naar extra opslagsystemen, archieven of third-party observability-platforms. Dit valt meestal niet onder het dreigingsmodel dat je voor dat geheim hebt opgeschreven.
+
+Wat je in plaats daarvan moet doen:
+
+- stop nooit referenties in een logstatement, ook niet gecodeerd, en ook niet op `DEBUG`.
+- maskeer bij de bron. Filter gevoelige sleutels voordat ze de appender bereiken, bijvoorbeeld met een Logback-converter of een masker-layout, zodat een toekomstige code-wijziging het lek niet opnieuw kan introduceren.
+- scan erop. Secret-detectietools kunnen ook tegen loguitvoer draaien, niet alleen tegen broncode.
+- als het toch gebeurt: roteer het geheim en ruim daarna elke sink en elk archief op die het heeft ontvangen, of laat ze verlopen.

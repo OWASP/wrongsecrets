@@ -1,0 +1,9 @@
+=== Desafío de metadatos de la bóveda
+
+Los sistemas de gestión de secretos ahora suelen incluir soporte para metadatos. Esto es fantástico, ya que permite enriquecer el secreto con datos contextuales, facilitando así su memorización.
+
+Pero, ¿qué ocurre si, por error, guardas información confidencial o secreta en un lugar secreto?
+
+Un desarrollador ha colocado metadatos secretos en un objeto `wrongsecret` en Vault. ¿Puedes encontrarlo?
+
+Consejo: echa un vistazo a las políticas cuando se instale Vault; verás que la aplicación solo tiene permiso para usar los metadatos ;-).

@@ -1,0 +1,12 @@
+=== Événement d'audit de l'actionneur Spring Boot
+
+Les développeurs ont décidé de tirer parti de la puissance de Spring Boot Actuator.
+pour surveiller et auditer leur application. Le projet impliquait l'interface avec diverses API externes.
+chacune nécessitant une clé unique pour l'authentification. Les événements d'audit, détaillés et informatifs, semblaient
+la solution idéale pour surveiller le fonctionnement interne de leur système.
+
+L'équipe a mis en place un mécanisme de journalisation comprenant des événements d'audit détaillés.
+À leur insu, ces journaux contenaient des traces de la clé API sacrée dissimulée à l'intérieur
+les événements d'audit.
+
+Pouvez-vous trouver cette clé API ?
