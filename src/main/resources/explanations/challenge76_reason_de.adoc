@@ -1,0 +1,46 @@
+*Warum ein RAG-Vektorstore die Geheimnisse der von ihm indizierten Dokumente leakt*
+
+Retrieval-Augmented-Generation speichert den Text von Dokumenten, damit eine Suche ihn
+später zurückgeben kann. Dieser Text verschwindet nicht durch den Embedding-Schritt:
+Die Embeddings werden aus den Chunks berechnet, aber die Chunks selbst bleiben vollständig
+lesbar und werden von jeder Suche wörtlich zurückgegeben. Indiziere ein Dokument, das ein
+Geheimnis enthält, und das Geheimnis wird Teil des Retrieval-Korpus.
+
+Der Fehler in dieser Challenge ist typisch:
+
+- Dokumente werden in großen Mengen indiziert, ohne zu prüfen, was sie enthalten.
+  Entwurfsnotizen, Runbooks und Protokolle sind genau die Art informeller Text, der
+  Zugangscredentials "nur für einen Moment" sammelt.
+- Der Entwicklungs-Vektorstore wurde "damit jeder RAG ausprobieren kann" geöffnet,
+  ohne Authentifizierung auf dem Suchendpoint. Retrieval-Schnittstellen werden selten
+  mit derselben Sorgfalt behandelt wie Datenbank-Logins, obwohl sie denselben Inhalt
+  zurückgeben.
+- Chunking teilt Dokumente an beliebigen Grenzen, sodass ein Geheimnis oft in der
+  Mitte eines harmlos aussehenden Chunks landet. Nur die ersten Zeilen eines Dokuments
+  zu scannen, reicht nicht aus.
+- Vektorstores bewahren ihre Metadaten: aus welchem Dokument ein Chunk stammt, wann
+  er indiziert wurde und wer ihn hochgeladen hat. Diese Metadaten verraten einem
+  Angreifer genau, welcher Leak sich lohnt, exfiltriert zu werden.
+
+----
+Was du stattdessen tun solltest:
+
+- Behandle den Vektorstore wie Produktionsdaten: Verlange Authentifizierung auf jedem
+  Retrieval-Endpoint und autorisiere pro Collection oder Tenant.
+- Scanne und bereinige Dokumente, bevor sie indiziert werden, auf dieselbe Weise wie
+  Repositories und Tickets nach Geheimnissen gescannt werden.
+- Halte Zugangscredentials vollständig aus dem Korpus: Referenziere sie über Namen
+  und löse sie zur Laufzeit auf, damit eine Neuindizierung sie nicht leaken kann.
+- Protokolliere und überwache Retrieval-Queries; ein ungewöhnliches Query-Muster ist
+  oft das erste Zeichen, dass jemand den Korpus nach Geheimnissen durchsucht.
+- Rotiere jedes Zugangscredential, das jemals Teil eines indizierten Dokuments war,
+  auch nachdem das Dokument gelöscht wurde: Kopien des Chunks können in Backups und
+  Replikaten weiterleben.
+----
+
+[NOTE]
+====
+Alles, was in einem Git-Repository inakzeptabel wäre, ist in einem Vektorstore
+ebenfalls inakzeptabel. Ein indizierter Chunk ist eine Kopie des Dokuments, mit all
+seinen Geheimnissen.
+====

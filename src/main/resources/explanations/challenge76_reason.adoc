@@ -1,0 +1,44 @@
+*Why a RAG vector store leaks the secrets inside the documents it indexed*
+
+Retrieval augmented generation stores the text of documents so that a search can
+return it later. That text is not transformed away by the embedding step: the
+embeddings are computed from the chunks, but the chunks themselves remain fully
+readable and are returned verbatim by every search. Index a document that contains
+a secret and the secret becomes part of the retrieval corpus.
+
+The failure in this challenge is typical:
+
+- Documents are indexed in bulk, without a review of what they contain. Draft
+  notes, runbooks and meeting minutes are exactly the kind of informal text that
+  collects credentials "just for now".
+- The development vector store was opened up "so that everybody can try RAG",
+  without authentication on the search endpoint. Retrieval interfaces are rarely
+  treated with the same care as database logins, even though they return the same
+  content.
+- Chunking splits documents at arbitrary boundaries, so a secret often ends up in
+  the middle of an innocent-looking chunk. Scanning only the first lines of a
+  document is not enough.
+- Vector stores keep their metadata: which document a chunk came from, when it was
+  indexed and who uploaded it. That metadata tells an attacker exactly which leak
+  is worth exfiltrating.
+
+----
+What to do instead:
+
+- Treat the vector store as production data: require authentication on every
+  retrieval endpoint and authorize per collection or tenant.
+- Scan and scrub documents before they are indexed, the same way repositories and
+  tickets are scanned for secrets.
+- Keep credentials out of the corpus entirely: reference them by name and resolve
+  them at runtime, so that re-indexing cannot leak them.
+- Log and monitor retrieval queries; an unusual query pattern is often the first
+  sign that someone is browsing the corpus for secrets.
+- Rotate any credential that was ever part of an indexed document, even after the
+  document is deleted: copies of the chunk may live in backups and replicas.
+----
+
+[NOTE]
+====
+Anything that would be unacceptable in a git repository is unacceptable in a
+vector store. An indexed chunk is a copy of the document, with all of its secrets.
+====
