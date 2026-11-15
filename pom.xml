@@ -90,7 +90,7 @@
     <system-stubs-jupiter.version>2.1.8</system-stubs-jupiter.version>
     <testcontainers-cypress.version>1.10.0</testcontainers-cypress.version>
     <testcontainers.version>1.21.4</testcontainers.version>
-    <thymeleaf-extras-springsecurity6.version>3.1.5.RELEASE</thymeleaf-extras-springsecurity6.version>
+    <thymeleaf-extras-springsecurity6.version>3.1.7.RELEASE</thymeleaf-extras-springsecurity6.version>
     <thymeleaf.layout.version>3.4.0</thymeleaf.layout.version>
     <tidy-maven-plugin.version>1.4.1</tidy-maven-plugin.version>
   </properties>
