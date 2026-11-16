@@ -1,0 +1,8 @@
+*Waarom geheimen in front-endcode een slecht idee zijn*
+
+Wanneer je een mobiele app op je smart-device draait of een SPA in je webbrowser, probeer dan geen geheimen hard te coderen in die apps. Een aanvaller kan de app altijd pakken, reverse-engineeren en het echte geheim vinden. Stel jezelf in plaats daarvan de vraag of het geheim veilig na authenticatie kan worden gedownload, of op een andere manier kan worden gebruikt.
+
+*Waarom Single-Page-apps of mobiele apps gebruiken om er een client secret in te zetten een slecht idee is*
+
+Zoals je inmiddels kunt zien, kun je elk geheim dat in een Single-Page-app of mobiele app is opgeslagen eenvoudig detecteren.
+Om zo'n situatie te voorkomen wordt Authorization Code Flow with Proof Key for Code Exchange (PKCE) gebruikt.

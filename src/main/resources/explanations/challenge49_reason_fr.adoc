@@ -1,0 +1,9 @@
+*Pourquoi l'utilisation de MD5 comme KDF est une mauvaise pratique*
+
+Il est crucial de protéger efficacement les clés, ce qui implique d'utiliser les fonctions de dérivation de clés (KDF) appropriées avec une entropie supplémentaire et une liaison contextuelle, comme souligné dans le https://mas.owasp.org/MASTG/0x04g-Testing-Cryptography/#weak-key-generation-functions[Mobile Security Testing Guide (MSTG)].
+
+L'algorithme MD5 est trop rapide et facile à calculer, ce qui permet aux attaquants de tester rapidement un grand nombre de combinaisons de caractères (comme des codes PIN) pour en déduire la clé. De plus (bien que plus difficile à exploiter), l'espace des collisions est relativement restreint, ce qui signifie que plusieurs combinaisons de caractères différentes peuvent produire le même hachage MD5.
+
+Des KDF plus robustes sont essentielles lors du traitement de données sensibles, car elles offrent une résistance indispensable contre les attaques par force brute et protègent les secrets même si l'attaquant accède à des informations partielles.
+
+Le MSTG recommande l'utilisation de KDF robustes comme PBKDF2, bcrypt ou Argon2, qui intègrent une entropie supplémentaire et renforcent la complexité des calculs, rendant les attaques par force brute plus coûteuses.

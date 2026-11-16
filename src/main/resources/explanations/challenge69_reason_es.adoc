@@ -1,0 +1,24 @@
+*Por qué nunca debes incluir un secreto en la habilidad de un agente*
+
+Una habilidad está diseñada para ser compartida. Ese es su propósito: se escribe el flujo de trabajo una sola vez y cada desarrollador, agente y trabajo de CI lo reutiliza. Esto significa que un secreto en una habilidad tiene las peores propiedades posibles:
+
+- Se copia en todas las máquinas que instalan la habilidad, incluidas las computadoras portátiles personales.
+- Acaba en el repositorio, por lo que permanece en el historial de Git para siempre, incluso después de que lo "elimines", lo que te obliga a rotar el secreto.
+- Se publica en plataformas y registros de habilidades, donde se indexa y se puede buscar.
+- El agente lo lee y, por lo tanto, puede quedar reflejado en las transcripciones de chat, los registros y la telemetría de terceros.
+- Es una credencial *compartida*, por lo que casi nunca se rota y casi nunca se limita su alcance.
+
+----
+Qué hacer en su lugar:
+
+- Mantenga las credenciales fuera de la habilidad y deje que la habilidad las lea del entorno, por ejemplo, `$STAGING_DEPLOY_TOKEN`.
+- Documentar *qué* variable se requiere y *dónde* obtenerla, nunca el valor en sí.
+- Proporcionar a cada consumidor su propia credencial temporal con privilegios mínimos, en lugar de un token de equipo compartido.
+- Analiza los archivos de habilidades con un escáner secreto en la fase de pre-commit y CI, del mismo modo que analizas el código fuente.
+- Considera que un secreto que haya aparecido en una habilidad está comprometido y rótalo.
+----
+
+[NOTE]
+====
+Las habilidades, reglas, indicaciones, configuraciones del servidor MCP y archivos de instrucciones del agente son, en lo que respecta a la gestión de secretos, código. Si no codificaría un token directamente en un archivo `.java`, tampoco lo haga en un archivo `SKILL.md`.
+====

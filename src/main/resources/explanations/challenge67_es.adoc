@@ -1,0 +1,9 @@
+=== Secretos enviados a su destino de registro en la nube
+
+Las aplicaciones rara vez registran información confidencial intencionadamente. Lo que ocurre con mucha más frecuencia es que un "evento de auditoría", un volcado de solicitud o un campo de registro estructurado incluya una credencial. Dado que el valor está codificado, nadie lo detecta durante la revisión del código: simplemente aparece como un bloque de datos opaco.
+
+En este desafío, la aplicación escribe un evento de auditoría en la salida estándar. Nunca devuelve el secreto a través de un punto final ni lo monta como un archivo. El único lugar donde aparece el valor es en el flujo de registro que recopila su proveedor de nube, por lo que tendrá que consultar el receptor de registros de la nube en la que se ejecuta.
+
+Tenga en cuenta que el valor registrado está codificado en Base64, por lo que encontrar la línea es solo la mitad del trabajo.
+
+Consejo: esto no es lo mismo que el desafío 8. Allí, la respuesta se registra en texto plano y puedes leerla directamente desde los registros de tu contenedor local.

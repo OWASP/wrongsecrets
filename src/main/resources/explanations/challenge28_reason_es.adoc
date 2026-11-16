@@ -1,0 +1,5 @@
+*¿Por qué es mala idea almacenar secretos en incidencias cerradas de GitHub?*
+
+No pongas secretos en los issues. La visibilidad de los issues depende de la configuración del repositorio, y cerrar un issue no elimina su historial ni sus copias. Comparte los detalles necesarios a través de un canal de divulgación aprobado y restringido por acceso.
+
+Revisa el contenido del issue antes de publicarlo. Si se ha divulgado una credencial, revócala o rótala de inmediato y elimina el contenido expuesto si es posible.

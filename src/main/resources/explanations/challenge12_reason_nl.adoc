@@ -1,0 +1,9 @@
+*Waarom containers een slecht idee zijn om geheimen in op te slaan*
+
+Zoals inmiddels duidelijk zal zijn, is een geheim dat in een container is opgeslagen eenvoudig te achterhalen. Of het nu gaat om een omgevingsvariabele (ENV), een bestand of een andere eigenschap: als een systeem het kan lezen, kan een mens dat ook.
+
+Aangezien het een 'best practice' is om containers onveranderlijk (immutable) en voorzien van versiebeheer te houden, blijft het geheim vaak voorgoed in de container aanwezig, tenzij je deze weer uit de registry verwijdert.
+
+Let op: als je het aantal uitvoerbare bestanden in een container beperkt (zodat er bijvoorbeeld geen shell beschikbaar is), vergeet dan niet `Openssl client` en eenvoudige binaries als `ls` en `cat` die mogelijk ook verwijderd moeten worden. Dit helpt om te voorkomen dat een aanvaller de inhoud van je container doorzoekt.
+
+Houd geheimen buiten de imagelagen en lever ze runtime via een secrets manager of een platformmechanisme voor geheimen, waarbij de toegang beperkt is tot alleen de workload die ze nodig heeft. Roateer elk geheim dat in een image heeft gezeten.

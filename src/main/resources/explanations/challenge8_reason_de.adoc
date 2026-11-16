@@ -1,0 +1,15 @@
+*Worauf du bei der Verwendung zufälliger Geheimnisse beim Start achten solltest*
+
+Die Verwendung eines zufälligen Geheimnisses beim Start kann funktionieren, wenn dieses Geheimnis nur von dem System benötigt wird, das es speichert oder generiert. Andernfalls ist ein Synchronisierungsmechanismus erforderlich.
+
+Der in dieser Challenge verwendete Mechanismus lässt sich auch in verschiedenen anderen Systemen beobachten, beispielsweise in Jenkins, wo wir früher beim ersten Start das Administratorpasswort von Jenkins in den Protokollen sahen.
+
+An diesem Ansatz ist zwar grundsätzlich nichts auszusetzen, dennoch gibt es ein paar Dinge, die du beachten solltest:
+
+- Jeder, der Zugriff auf die Protokolldateien hat, kennt nun auch dieses Geheimnis. Sei daher vorsichtig, wohin du deine Protokolldateien sendest und wem du in deinem Produktivsystem Zugriff darauf gewährst.
+- Wird das System über einen längeren Zeitraum nicht neu gestartet, verliert das Geheimnis seine Gültigkeit. Bei häufigen Neustarts wird das Geheimnis ebenfalls aktualisiert.
+- Sobald man anfängt, das Geheimnis zu bewahren, wird man oft mit Herausforderungen wie denen konfrontiert, denen man in dieser App begegnet ist.
+
+Was du stattdessen tun solltest:
+- Drucke erzeugte Geheimnisse nicht in Protokolle. Falls andere Systeme den Wert benötigen, speichere und verteile ihn über einen Secrets Manager mit eingeschränktem Zugriff.
+- Rotiere das Geheimnis über einen expliziten Lebenszyklusprozess, anstatt sich auf Neustarts der Anwendung zu verlassen.

@@ -1,0 +1,27 @@
+Diese Herausforderung lässt sich mit folgenden Schritten lösen:
+
+1. Finde das Geheimnis mit der Kommandozeile.
+- Verwende `kubectl exec vault-0 -n vault -- vault kv get secret/wrongsecret`, um die Daten zu finden.
+
+
+2. Ermittle das Geheimnis im Vault mithilfe des protokollierten Root-Tokens:
+- Beim Einrichten der K8s-Umgebung zeigt dir das Skript den Wert des Root-Tokens wie folgt an:
+
+    Key                  Value
+    ---                  -----
+    token                s.Jqka4lSy8ayQw2LFsvyAgnTI
+    token_accessor       HEr9RYa3OcZNDOHeFRXIMYCV
+    token_duration       ∞
+    token_renewable      false
+    token_policies       ["root"]
+    identity_policies    []
+    policies             ["root"]
+
+
+- Verwende das Token, um dich bei Vault anzumelden, das über Port 8200 zugänglich ist.
+- Schau dich um: Kannst du den Ort des Geheimnisses in der Geheimnisübersicht finden?
+
+3. Finde das Geheimnis als SRE-Mitglied.
+- zur Vault-Weboberfläche wechseln
+- Melde dich mit dem Benutzernamen "helper" und dem Passwort "foo" an
+- Finde das eigentliche Geheimnis heraus.

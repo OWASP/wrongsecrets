@@ -1,0 +1,14 @@
+=== Desafío 69: Encuentra el secreto en la habilidad del cursor
+
+Las habilidades de agente se están convirtiendo en una forma popular de compartir la automatización con un equipo: se crea una carpeta con un archivo `SKILL.md`, el agente lo abre y todos acceden al mismo flujo de trabajo. Desafortunadamente, esto también las convierte en un lugar muy conveniente para almacenar temporalmente una credencial compartida.
+
+Esta aplicación incluye una habilidad de Cursor llamada `deploy-preview`. La habilidad se encuentra en la carpeta de recursos y está alojada por el backend en link:/skills/cursor/deploy-preview/SKILL.md[`/skills/cursor/deploy-preview/SKILL.md`].
+
+El código fuente de la habilidad también está disponible en GitHub en el siguiente enlace: link:https://github.com/OWASP/wrongsecrets/blob/master/src/main/resources/challenges/challenge-70/cursor-skill/deploy-preview/SKILL.md[`src/main/resources/challenges/challenge-70/cursor-skill/deploy-preview/SKILL.md`].
+
+Lee la descripción de la habilidad y envía el token de despliegue de prueba que el autor incluyó "para mantener la habilidad autónoma".
+
+[NOTE]
+====
+Aquí no hay nada codificado ni cifrado: así es exactamente como se ve una habilidad filtrada en la práctica. Una habilidad es documentación, y la documentación se copia en wikis, tickets, solicitudes de extracción y mensajes de chat.
+====

@@ -1,0 +1,7 @@
+=== Le masquage dans les binaires revisité : l’environnement d’exécution autonome .NET
+
+Trouver un secret dans une DLL est très facile, mais c'est beaucoup plus difficile sous macOS ou Linux. On peut donc en cacher un, n'est-ce pas ?
+
+Prouvez-nous que nous ne devrions pas faire cela ! Pouvez-vous trouver le secret dans https://github.com/OWASP/wrongsecrets-binaries/releases/download/0.1.0/wrongsecrets-dotnet[wrongsecrets-dotnet] (ou https://github.com/OWASP/wrongsecrets-binaries/releases/download/0.1.0/wrongsecrets-dotnet-arm[wrongsecrets-dotnet-arm], https://github.com/OWASP/wrongsecrets-binaries/releases/download/0.1.0/wrongsecrets-dotnet-linux[wrongsecrets-dotnet-linux]) ?
+
+Essayez de télécharger le fichier binaire et de l'exécuter localement (par exemple `./wrongsecrets-dotnet<theversion you need> <your answer>`).

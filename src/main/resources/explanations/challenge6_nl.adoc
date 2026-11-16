@@ -1,0 +1,7 @@
+=== K8s Secrets
+
+Een ConfigMap heeft het werk dus niet gedaan. Maar wat dacht je van een https://kubernetes.io/docs/concepts/configuration/secret/[K8s secret] in de default namespace zonder RBAC?
+
+Als deze uitdaging is ingeschakeld, draai je dit vanaf een K8s-cluster. Kun je `kubectl` gebruiken om het geheim te vinden? Of wat dacht je van het bekijken van de repository waar het cluster mee is geconfigureerd? Misschien heb je het ook al gevonden als de configmap aan Git is gecommit.
+
+Houd er rekening mee dat geheimen worden ge-encodeerd in base64 voordat ze in de workload worden gemonteerd. We zoeken de gedecodeerde variant van het geheim ;-).

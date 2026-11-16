@@ -1,0 +1,33 @@
+=== Offenlegung der Datenbankverbindungszeichenfolge in Fehlermeldungen
+
+Eine der häufigsten und gefährlichsten Methoden, mit denen Geheimnisse in realen Anwendungen preisgegeben werden, sind Datenbankverbindungszeichenfolgen, die eingebettete Anmeldeinformationen enthalten. Wenn Anwendungen keine Verbindung zu Datenbanken herstellen können, geben sie oft die vollständige Verbindungszeichenfolge (einschließlich Benutzernamen und Passwörter) in Fehlermeldungen, Protokollen oder sogar in Benutzeroberflächen preis.
+
+Diese Aufgabe veranschaulicht ein Szenario, in dem ein Entwickler:
+
+1. **Verwendet eingebettete Anmeldeinformationen in Verbindungszeichenfolgen** anstelle externer Geheimnisverwaltung
+2. **Verfügt über eine mangelhafte Fehlerbehandlung**, die die vollständige Verbindungszeichenfolge offenlegt, wenn Datenbankverbindungen fehlschlagen.
+3. **Speichert sensible Informationen**, ohne die Zugangsdaten vorher zu bereinigen.
+4. **Zeigt technische Details an**, die Überwachungssysteme, Fehlerverfolgungstools oder sogar Endbenutzer erreichen könnten.
+
+**Häufige Orte, an denen diese offengelegten Verbindungszeichenfolgen erscheinen:**
+
+- Anwendungsstartprotokolle, wenn die Datenbank nicht verfügbar ist
+- Ausnahme-Stacktraces in Überwachungstools wie Sentry, Rollbar oder CloudWatch
+- Fehlermeldungen, die Benutzern während Wartungsfenstern angezeigt werden
+- Protokolle der CI/CD-Pipeline, wenn die Integritätsprüfungen der Bereitstellung fehlschlagen
+- Docker-Container-Protokolle bei Orchestrierungsfehlern
+
+**Beispiele aus der Praxis:**
+
+- Anwendungen, die bei Kubernetes-Bereitstellungen die Integritätsprüfungen nicht bestehen
+- Mikrodienste, die beim Start nicht auf ihre Datenbank zugreifen können
+- Datenbankmigrationsskripte, die aufgrund offengelegter Verbindungsdetails fehlschlagen
+- Entwicklungs-/Testumgebungen, in denen die Fehlerausführlichkeit zu hoch eingestellt ist
+
+**So wird der Fehler ausgelöst:**
+
+Drücke die Schaltfläche am unteren Bildschirmrand oder rufe den Endpunkt `/error-demo/database-connection` auf, um einen Datenbankverbindungsfehler zu simulieren. Dieser Endpunkt versucht, mithilfe einer Verbindungszeichenfolge mit eingebetteten Anmeldeinformationen eine Verbindung zu einer Datenbank herzustellen. Schlägt dies fehl, werden die Anmeldeinformationen sowohl in der HTTP-Antwort als auch in den Anwendungsprotokollen offengelegt.
+
+Kannst du das Datenbankpasswort finden, das offengelegt wird, wenn die Anwendung versucht, eine Verbindung zur Datenbank herzustellen?
+
+**Hinweis:** Achte auf Datenbankverbindungsfehlermeldungen, die mehr preisgeben, als sie sollten.

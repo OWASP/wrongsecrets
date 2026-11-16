@@ -1,0 +1,17 @@
+= Blootstelling van geheimen in de Dev Container-configuratie
+
+*Waarom het hardcoden van geheimen in Dev Containers een kritieke beveiligingsrisico is*
+
+Dev Containers zijn gedeelde ontwikkelomgevingen die via `.devcontainer/devcontainer.json` zijn geconfigureerd. Omdat deze bestanden doorgaans in versiebeheer worden bijgehouden, brengt het hardcoden van geheimen in devcontainer-definities verschillende beveiligingsrisico's met zich mee:
+
+1. **Blootstelling aan alle lezers van de repository**: Iedereen met leestoegang tot de bronrepository (of publieke forks en clones in open-source-projecten) kan geheimen lezen die hardgecodeerd staan in `.devcontainer/devcontainer.json`.
+2. **Lekken van omgevingsvariabelen**: Referenties die in `containerEnv` of `remoteEnv` zijn gedefinieerd, worden in elk proces in de container geïnjecteerd, waardoor ze toegankelijk zijn voor elk script, elk kindproces of elke diagnose-tool die in de container draait.
+3. **Blijft staan in de git-geschiedenis**: Na het committen vereist het verwijderen van het geheim dat de git-geschiedenis wordt herschreven, en verouderde sleutels blijven vaak onbeperkt geldig als er niet wordt geroteerd.
+4. **Makkelijker te missen**: Veel secret- en containerinspectoren pikken `devcontainer.json` nog steeds niet op, omdat dit bestand zich anders gedraagt dan een `Dockerfile`.
+
+*Remediatie en best practices:*
+
+- **Gebruik GitHub Codespaces Secrets / VS Code Dev Container Secrets**: Injecteer geheimen dynamisch via repository- of gebruikerssecrets van Codespaces of via VS Code-instellingen, in plaats van ze te hardcoderen in configuratiebestanden.
+- **Gebruik lokale omgevingssubstitutie**: Verwijs dynamisch naar host-omgevingsvariabelen in `devcontainer.json` met de syntaxis `${localEnv:MY_SECRET}`.
+- **Gebruik `.env`-bestanden met `.gitignore`**: Zet ontwikkelgeheimen in lokale `.env`-bestanden die expliciet worden uitgesloten van versiebeheer in `.gitignore`.
+- **Neem secretmanagement-oplossingen in gebruik**: Haal geheimen runtime op met dedicated secretmanagers (bijv. HashiCorp Vault, AWS Secrets Manager, Azure Key Vault, GCP Secret Manager).

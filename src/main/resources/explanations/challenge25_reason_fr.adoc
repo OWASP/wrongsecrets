@@ -1,0 +1,5 @@
+*Pourquoi stocker des secrets sur la blockchain est une mauvaise idée*
+
+Il ne faut jamais consigner de secret sur la blockchain. Toutes les données sont publiques. En particulier, lorsqu'une variable est publique, elle est très facile à lire.
+
+Vous avez encore besoin d'utiliser un secret ? Assurez-vous qu'il fasse partie d'un système de support (par exemple, un service externe que vous créez).

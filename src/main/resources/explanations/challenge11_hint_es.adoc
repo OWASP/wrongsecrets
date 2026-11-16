@@ -1,0 +1,10 @@
+Puedes resolver este desafío siguiendo estos pasos:
+
+1. Encuentra la ruta de escalada de privilegios usando solo Terraform:
+  - Debería haber algo interesante en `aws/irsa.tf`.
+
+2. Encuentra la ruta de escalada de privilegios usando https://github.com/nccgroup/ScoutSuite[ScoutSuite]
+- Independientemente del método que utilice, compruebe el rol `cant-read-secrets`. Verá que permite `sts:AssumeRole` en `*`. Esto significa que permite asumir **cualquier** rol en la cuenta.
+- Los roles también tienen una relación de confianza, y el de nuestro pod (`wrongsecrets-secret-manager`) está mal configurado. Permite `arn:aws:iam::<account id>:root`, lo que equivale a 'cualquier persona dentro de esta cuenta de AWS siempre que tenga permisos de IAM'. ¡Esto significa que podemos asumir ese rol desde `cant-read-secrets`!
+
+Después de pasar de `cant-read-secrets` a `wrongsecrets-secret-manager`, podemos simplemente ejecutar `aws ssm get-parameter --name wrongsecretvalue --with-decryption`.

@@ -1,0 +1,3 @@
+=== Менеджер секретів AWS
+
+Секрет тепер рандомізований і зберігається безпосередньо в AWS Secrets Manager. Ми все ще монтуємо його до поду K8s через https://secrets-store-csi-driver.sigs.k8s.io[драйвер CSI] для https://docs.aws.amazon.com/secretsmanager/latest/userguide/integrating_csi_driver.html[AWS], хоча... Чи можете ви отримати до нього доступ?

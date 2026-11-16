@@ -1,0 +1,9 @@
+=== Binaires sans chaînes de caractères en clair
+
+On entend encore parler de développeurs qui utilisent des astuces et de l'obfuscation pour dissimuler un secret dans un binaire. Et si on supprimait les symboles ? Et si on chiffrait le secret ? Ces techniques peuvent compliquer la recherche du secret caché, mais ne la rendent pas impossible.
+
+Roddas (@roddas) nous a contactés avec un « nouveau binaire amusant » dont le secret était chiffré, se demandant si nous pouvions l'utiliser. C'était exactement le genre de défi que vous devriez relever ! Nous lui avons donc demandé d'en faire un défi et de le résoudre. Il l'a résolu avec GDB et Radare2, ce qui lui a beaucoup appris sur la rétro-ingénierie ! Et vous, saurez-vous en faire autant ?
+
+Le fichier de défi s'appelle https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/wrongsecrets-advanced-c[wrongsecrets-advanced-c] et peut être trouvé sous de nombreuses formes dans le dossier https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables[executables].
+
+Essayez de télécharger le fichier binaire et de l'exécuter localement (par exemple `./wrongsecrets-advanced-c<theversion you need> <your answer>`).

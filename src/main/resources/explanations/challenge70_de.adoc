@@ -1,0 +1,16 @@
+=== Herausforderung 70: Finde das Geheimnis im Claude-Skill-Bundle
+
+Claude-Skills werden als exportierte `.skill`-Bundles verteilt: ein ZIP-Archiv mit einem Ordner, der eine `SKILL.md`-Datei enthält. Diese Datei beschreibt, wann der Skill verwendet werden soll, und enthält außerdem alle benötigten Skripte und Referenzmaterialien. Das gesamte Bundle wird auf dem Rechner entpackt, auf dem es installiert wird.
+
+Das macht ein Skill-Bundle zu einem idealen Versteck, da Prüfer in der Regel die Datei `SKILL.md` lesen und dann aufhören. Der interessante Teil befindet sich meist in den angrenzenden Dateien.
+
+Diese Anwendung enthält einen Claude-Skill namens `incident-reporter`. Das exportierte Skill-Bundle befindet sich im Ressourcenordner und kann unter folgendem Link heruntergeladen werden: link:/skills/claude/incident-reporter.zip[`/skills/claude/incident-reporter.zip`].
+
+Lade das Paket herunter, entpacke es und ermittle das Token, mit dem sich der Uploader authentifiziert.
+
+Der Quellcode des Skills ist auch auf GitHub unter folgendem Link verfügbar: link:https://github.com/OWASP/wrongsecrets/blob/master/src/main/resources/challenges/challenge-70/claude-skill/incident-reporter.skill[`src/main/resources/challenges/challenge-70/claude-skill/incident-reporter.skill`].
+
+[NOTE]
+====
+Die `SKILL.md` ist sauber. Nur den Einstiegspunkt eines Skills zu lesen, ist keine Prüfung.
+====

@@ -1,0 +1,20 @@
+Este desafío se puede resolver utilizando las siguientes formas:
+
+- Utilice el archivo docker-compose (`challenge51docker-compose.yml`) para construir los contenedores y encontrar el secreto.
+  1. Clona el repositorio que contiene los archivos del desafío.
+  2. Localiza el archivo `challenge51docker-compose.yml` en el repositorio y navega hasta esa ubicación.
+  3. Identifique sus credenciales:
+    Dentro de la sección de entornos en challenge51docker-compose.yml, compruebe variables como:
+     * `db_user`
+     * `db_password`
+     * `db_name`
+  4. Ahora puedes ejecutar los comandos de Docker Compose para construir y ejecutar tu servicio:
+     * `export DOCKER_BUILDKIT=1`
+     * `docker compose -f challenge51docker-compose.yml build`
+     * `docker compose -f challenge51docker-compose.yml run myservice`
+  5. La respuesta está en la salida.
+
+- Encuentra los secretos directamente en el sistema de archivos:
+   1. Clona el repositorio que contiene los archivos del desafío.
+   2. Utilice las referencias de archivo en `challenge51docker-compose.yml` para localizar los archivos que contienen los secretos.
+   3. Abre el archivo para encontrar el secreto.

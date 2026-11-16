@@ -1,0 +1,20 @@
+Vous pouvez relever ce défi en suivant les étapes suivantes :
+
+1. Vérifiez l'état du secret dans Git :
+- Pouvez-vous voir où, dans Git, nous avons stocké le fichier `secrets-secret.yml` ? Sinon, effectuez une recherche.
+- Examinez le champ `Data` : que pouvez-vous y trouver ? Veuillez noter que les secrets sont encodés en base64. Une fois intégrés aux charges de travail, ils sont décodés.
+
+IMPORTANT : Les options suivantes ne fonctionneront que si vous avez accès à l’API Kubernetes. Dans cette version hébergée de WrongSecrets, vous n’y avez pas accès. Lorsque vous participez à un CTF : demandez à l’organisateur l’accès à l’API Kubernetes ciblée.
+
+1. Demandez poliment en utilisant Kubectl :
+- Assurez-vous d'avoir installé Kubectl comme indiqué dans le fichier README.MD et que kubectl est configuré pour envoyer des commandes au bon cluster.
+- Maintenant, exécutez `kubectl get secrets`. Vous verrez ici toutes les configmaps actives dans l'espace de noms dans lequel vous vous trouvez, qui est normalement `default` pour cette application (sauf indication contraire de votre administrateur/formateur).
+- Maintenant, exécutez `kubectl get secret funnystuff -o Yaml`. Pouvez-vous voir le secret ?
+2. Accédez au pod et récupérez les données :
+- Assurez-vous d'avoir installé Kubectl comme indiqué dans le fichier README.MD et que kubectl est configuré pour envoyer des commandes au bon cluster.
+- Maintenant, exécutez `kubectl get pods`. Vous verrez alors tous les pods actifs dans l'espace de noms actuel, qui est normalement `default` pour cette application (sauf indication contraire de votre administrateur/formateur).
+- Maintenant, pour votre instance du pod WrongSecrets, exécutez `kubectl exec -it secret-challenge-<rest of the name of the pod from the prev.step> -- sh`.
+- Maintenant, exécutez `env | grep SPECIAL_SPECIAL_K8S_SECRET` et vous trouverez votre secret.
+
+
+Remarque : `kubectl get <item> -A` affiche la liste de tous les éléments disponibles dans tous les espaces de noms auxquels vous avez accès. Il est *important* de *ne pas* donner accès à tous les espaces de noms de votre cluster, car cela pourrait divulguer des éléments de configuration importants.

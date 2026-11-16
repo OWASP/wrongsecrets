@@ -1,0 +1,24 @@
+*¿Por qué es importante el manejo adecuado de los secretos sellados?*
+
+Sealed Secrets ofrece una forma de cifrar los secretos de Kubernetes y almacenarlos de forma segura, incluso en repositorios públicos.
+Sin embargo, un manejo inadecuado y una configuración incorrecta pueden dar lugar a graves vulnerabilidades de seguridad.
+
+Si la clave privada utilizada para descifrar los secretos sellados queda expuesta o es accesible dentro del mismo repositorio, se anula la seguridad proporcionada por los secretos sellados.
+Cualquier persona con acceso al repositorio puede descifrar los secretos, lo que podría provocar filtraciones de datos y accesos no autorizados.
+
+Consideremos un ejemplo:
+
+. Imaginemos un escenario en el que un desarrollador almacena la clave privada utilizada para el descifrado de Sealed Secrets en el mismo repositorio:
+* El repositorio contiene `sealed-challenge48.json` y la clave privada `main.key`.
+. Esta situación es análoga a cerrar una puerta con llave y dejarla debajo del felpudo:
+* Un atacante puede encontrar fácilmente la llave y abrir la puerta, obteniendo acceso a todo lo que hay dentro.
+
+Para evitar este tipo de problemas, es fundamental garantizar que las claves privadas se almacenen de forma segura y separada de los datos cifrados.
+Siga siempre las mejores prácticas para la gestión de secretos y evite exponer información confidencial en sus repositorios.
+
+*Reflexiones sobre secretos sellados*
+Los secretos sellados presentan algunos problemas incluso cuando se mantiene la clave privada fuera del repositorio.
+1. Si no configura correctamente RBAC o ABAC, cualquiera podrá seguir accediendo al secreto cuando tenga acceso al clúster.
+2. Los secretos sellados son un tipo de secreto codificado de forma rígida, lo que dificulta la auditoría. ¿Quién o qué accedió a un secreto y desde dónde?
+3. Si vas a rotar tu clave de cifrado, tendrás que rotar todos tus secretos cifrados con dicha clave, posiblemente en docenas de repositorios (para saber por qué, consulta el desafío del historial de Git). ¿Cómo los encontrarás? ¿Y cómo identificarás qué secretos se cifraron con qué clave? ¿Cómo harás que la versión anterior de un secreto sea accesible de forma segura?
+4. Los secretos protegidos pueden ser objeto de ataques fuera de línea, cuya viabilidad depende del método de cifrado utilizado. ¿Se te ocurre algún esquema de cifrado inadecuado?

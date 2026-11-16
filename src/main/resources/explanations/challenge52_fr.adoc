@@ -1,0 +1,7 @@
+=== Défi des secrets de Buildx révélés
+
+Acme Inc., une entreprise SaaS en forte croissance, étend ses déploiements conteneurisés à l'aide de Docker Buildx afin de simplifier les compilations multiplateformes. Cependant, une grave erreur de configuration de sécurité s'est produite lors du processus de compilation.
+
+Lors de l'exécution du script `docker-create.sh` (https://github.com/OWASP/wrongsecrets/blob/master/.github/scripts/docker-create.sh#L365), un secret sensible, censé rester temporaire et sécurisé pendant la phase de construction du conteneur, a été accidentellement intégré au système de fichiers de ce dernier suite à une erreur de configuration. Ce secret, désormais accessible au sein du conteneur en cours d'exécution et visible dans ses scripts de construction, représente un risque de sécurité majeur en cas d'exploitation.
+
+En tant que nouveau consultant en sécurité chez Acme Inc., votre mission est claire : analyser le conteneur, identifier la faille de sécurité exposée et la signaler à l’équipe. En découvrant cette vulnérabilité, vous aiderez Acme Inc. à comprendre les risques et à mettre en œuvre de meilleures pratiques pour sécuriser son processus de déploiement.

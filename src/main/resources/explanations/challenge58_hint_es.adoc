@@ -1,0 +1,25 @@
+=== Pista para el desafío 58
+
+Este desafío demuestra un patrón de seguridad muy común: **cadenas de conexión a bases de datos con credenciales incrustadas que se filtran a través de mensajes de error**.
+
+**Dónde buscar:**
+
+1. **Pruebe el punto final de error:** Visite `/error-demo/database-connection` para provocar un fallo de conexión a la base de datos.
+2. **Verifique la respuesta:** La aplicación intentará conectarse a una base de datos y fallará, exponiendo la cadena de conexión.
+3. **Consulta los registros:** La aplicación también registra el error con las credenciales expuestas.
+
+**Qué buscar:**
+
+- Las URL de conexión JDBC a menudo contienen información confidencial.
+- Busque patrones como `jdbc:postgresql://...?user=USERNAME&password=PASSWORD`
+- El mensaje de error mostrará la cadena de conexión completa cuando falle la conexión a la base de datos.
+
+**Contexto del mundo real:**
+
+Esta es una de las formas más comunes en que se filtran secretos en la producción:
+- Fallos de conexión a la base de datos durante el inicio de la aplicación.
+- Fallos en la comprobación de estado en la orquestación de contenedores
+- Entornos de desarrollo con informes de errores detallados
+- Pipelines de CI/CD donde fallan las conexiones a la base de datos
+
+**Recuerda:** El objetivo es encontrar la contraseña de la base de datos que se muestra en el mensaje de error cuando falla la conexión.

@@ -1,0 +1,13 @@
+Deze uitdaging kan worden opgelost door het base64-gecodeerde geheim in `secrchallenge.json` te ontsleutelen. Dit kun je doen door:
+
+1. Een online aes-decryptietool te gebruiken zoals https://www.devglan.com/online-tools/aes-encryption-decryption[https://www.devglan.com/online-tools/aes-encryption-decryption]
+- Kopieer de waarde van `secret` uit `secrchallenge.json` en plak die in het tekstvak van de decryptor.
+- Zorg ervoor dat het invoerformaat `Base64` is en de ciphermodus `ECB`.
+- Gebruik de waarde van `key` uit `secrchallenge.json` als ontsleutelsleutel en klik op `Decrypt` om het geheim te krijgen.
+
+2. De terminal gebruiken
+- Start de terminal terwijl je in de map `executables` bent.
+- Kopieer de waarde van `key` uit `secrchallenge.json` en typ `echo -n "3Ulyfmfgro6uh1cN" | xxd -p`. Dit geeft je de ontsleutelsleutel in hexadecimaal formaat.
+- Kopieer de waarde van `secret` uit `secrchallenge.json`.
+- Gebruik vervolgens de verkregen ontsleutelsleutel om het bestand te ontsleutelen door `echo "7RwunHeLkY7c0TCTLRMOGCIeX0jWiYibAexA0unYGDI=" | openssl enc -a -d -aes-128-ecb -K 33556c79666d6667726f36756831634e -out decrypted.md` te typen
+- Kopieer het geheim uit het bestand `decrypted.md` in de map `executables`.

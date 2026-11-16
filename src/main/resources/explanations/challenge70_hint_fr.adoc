@@ -1,0 +1,10 @@
+Téléchargez et décompressez le pack de compétences exporté :
+
+----
+curl -sO http://localhost:8080/skills/claude/incident-reporter.zip
+unzip incident-reporter.zip
+----
+
+Le fichier `SKILL.md` ne fait référence qu'à l'outil de chargement intégré. Ouvrez `incident-reporter/scripts/upload_report.py` et consultez `UPLOAD_TOKEN_B64`.
+
+Cette valeur n'est pas encore la réponse : l'auteur l'a encodée en base64 pour éviter les erreurs du scanner de mots de passe. Décodez-la, par exemple avec `base64 -d`, puis soumettez le jeton décodé.

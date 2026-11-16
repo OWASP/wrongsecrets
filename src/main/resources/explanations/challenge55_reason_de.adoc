@@ -1,0 +1,11 @@
+=== Risiken sensibler Daten in SSH-Konfigurationsdateien
+
+Entwickler speichern SSH-Verbindungskonfigurationen häufig in `.ssh/config`-Dateien. Diese Bequemlichkeit kann jedoch dazu führen, dass versehentlich sensible Informationen wie Passwörter oder Schlüssel darin enthalten sind, die mit der Zeit in Vergessenheit geraten können.
+
+Vergessene Geheimnisse deuten auf unzureichende Sicherheitsvorkehrungen und mangelhafte Praktiken im Umgang mit Geheimnissen hin.
+
+Diese Herausforderung unterstreicht die Wichtigkeit sicherer Speicherpraktiken und regelmäßiger Überprüfungen sensibler Konfigurationsdateien.
+
+Was du stattdessen tun solltest:
+- Halte private Schlüssel und Passwörter aus `.ssh/config` und aus Container-Images heraus. Verwende einen geschützten Schlüsselspeicher oder einen SSH-Agent und bevorzuge nach Möglichkeit kurzlebige SSH-Zertifikate.
+- Beschränke den Zugriff auf Schlüsseldateien und verwende für jeden Host eine eigene, eng begrenzte Identität. Rotiere Zugangsdaten, die committet oder verteilt wurden.

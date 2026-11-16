@@ -1,0 +1,15 @@
+*Por qué debes tener cuidado con la IA (o el aprendizaje automático) y los secretos*
+
+Cualquier solución de IA/ML que dependa de tu información puede utilizarla para seguir mejorando. Esto se conoce a veces como «aprendizaje por refuerzo a partir de la retroalimentación humana». Existen diversas aplicaciones en el mundo, como Co-Pilot, ChatGPT y muchas otras, que se basan en este mecanismo.
+Esto significa que cuando utilizas esas herramientas y les proporcionas comentarios o aceptas enviarles datos para que te ayuden de forma más eficaz, esos datos permanecen en su poder y otros podrían consultarlos.
+
+Tenga en cuenta que toda la información ingresada por el usuario se considera implícitamente confiable. Esto significa que si sobrecarga un LLM con gran cantidad de texto (repetido), podría eludir algunos de sus controles e indicarle qué hacer.
+
+No envíes secretos ni datos sensibles a servicios de IA salvo que el servicio y sus controles de tratamiento de datos estén aprobados para esa información. Oculta las entradas, limita las herramientas y el acceso a secretos disponibles para una aplicación habilitada para IA y rota cualquier credencial que haya quedado expuesta.
+
+Dado que el sistema confía implícitamente en toda la información proporcionada por el usuario, esto significa que al usar un LLM para programar, podrías caer en malas prácticas de gestión de secretos. Al fin y al cabo, si alguien le indica al LLM que utilice un método inseguro repetidamente, te indicará que hagas lo mismo.
+
+**Referencias:**
+
+- Indicaciones de hackeo, como se explica en LiveOverflow en https://www.youtube.com/watch?v=h74oXb4Kk8k[Youtube].
+- https://owasp.org/www-project-ai-security-and-privacy-guide/[Guía de seguridad y privacidad de la IA de OWASP].

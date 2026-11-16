@@ -1,0 +1,9 @@
+=== Git-Notizen
+
+Git-Commit-Nachrichten können ein ständiges Ärgernis sein.
+
+Es ist in Ordnung, in Git-Nachrichten kurze, unverständliche Texte oder einfach nur wirres Gehämmer auf der Tastatur zu verwenden, solange man sie nicht überprüfen muss. Dann aber können diese unübersichtlichen Nachrichten zum Albtraum werden.
+
+Git-Notes sind genau dafür da; sie existieren schon lange, werden aber oft übersehen. Sie ermöglichen das Hinzufügen zusätzlicher Metadaten zum Commit, ohne die Commit-Nachricht selbst zu verändern.
+
+Wie bei allen Git-Projekten gilt: Sobald Informationen gespeichert wurden, ist es äußerst schwierig, alle Spuren davon zu entfernen. Was könnte da schon schiefgehen?

@@ -1,0 +1,9 @@
+=== Défi des métadonnées du coffre-fort
+
+Les systèmes de gestion des secrets prennent désormais souvent en charge les métadonnées ! C’est formidable, car cela permet d’enrichir le secret avec des données contextuelles, facilitant ainsi sa mémorisation.
+
+Mais que se passe-t-il si vous placez par erreur des informations confidentielles/secrètes dans un secret ?
+
+Un développeur a placé des métadonnées secrètes sur un `wrongsecret` dans Vault. Pouvez-vous le trouver ?
+
+Conseil : jetez un œil aux politiques lors de l'installation de Vault ; vous pouvez constater que l'application n'est autorisée à utiliser que les métadonnées ;-).

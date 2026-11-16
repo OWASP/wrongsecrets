@@ -1,0 +1,7 @@
+=== Mot de passe centralisé et codé en dur
+
+Lorsqu'on rédige une preuve de concept, on commence souvent par intégrer des secrets codés en dur, comme un `password` dans le code. Que se passe-t-il si l'on oublie de supprimer ces secrets codés en dur ?
+
+Pouvez-vous repérer le secret que nous recherchons dans le code Java (https://github.com/OWASP/wrongsecrets/tree/master/src/main/java/org/owasp/wrongsecrets) ? Et si vous le cherchiez dans le conteneur ?
+
+Parfois, les outils les plus simples sont les plus efficaces. Essayez de cloner le dépôt et utilisez https://man7.org/linux/man-pages/man1/grep.1.html pour voir ce que vous trouvez. Vous pouvez également utiliser https://github.com/awslabs/git-secrets ou https://github.com/trufflesecurity/trufflehog. Plongez-vous dans le code !

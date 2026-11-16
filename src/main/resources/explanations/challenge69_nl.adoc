@@ -1,0 +1,14 @@
+=== Uitdaging 69: Vind het geheim in de Cursor-skill
+
+Agent-skills worden een populaire manier om automatisering met een team te delen: je zet een map neer met daarin een `SKILL.md`, de agent pakt hem op en iedereen heeft dezelfde workflow. Helaas maakt dat van een skill ook een heel handige plek om een gedeelde referentie "tijdelijk" te parkeren.
+
+Deze applicatie bevat een Cursor-skill genaamd `deploy-preview`. De skill staat in de resourcemap en wordt door de backend gehost via link:/skills/cursor/deploy-preview/SKILL.md[`/skills/cursor/deploy-preview/SKILL.md`].
+
+De bron van de skill is ook beschikbaar op GitHub via link:https://github.com/OWASP/wrongsecrets/blob/master/src/main/resources/challenges/challenge-70/cursor-skill/deploy-preview/SKILL.md[`src/main/resources/challenges/challenge-70/cursor-skill/deploy-preview/SKILL.md`].
+
+Lees de skill en dien de staging-deploy-token in die de auteur erin heeft gezet "om de skill zelfvoorzienend te houden".
+
+[NOTE]
+====
+Hier is niets gecodeerd of versleuteld: dit is precies hoe een gelekte skill er in het wild uitziet. Een skill is documentatie, en documentatie wordt gekopieerd naar wiki's, tickets, pull requests en chatberichten.
+====

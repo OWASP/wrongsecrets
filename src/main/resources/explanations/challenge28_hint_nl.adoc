@@ -1,0 +1,7 @@
+We zijn op zoek naar het geheim in een `closed GitHub issue` in onze GitHub-repository. Maar hoe vinden we het?
+
+Je kunt deze uitdaging oplossen door de volgende stappen te volgen:
+
+1. Wanneer je op het issue-tabblad van onze https://github.com/OWASP/wrongsecrets/issues[GitHub] terechtkomt, klik je op de optie `Closed` om alle gesloten issues tot op de dag van vandaag te zien
+
+2. Ga door alle issues die er verdacht voor je uitzien en je kunt het geheim spotten.

@@ -1,0 +1,24 @@
+*Pourquoi la bonne gestion des secrets scellés est-elle importante ?*
+
+Sealed Secrets offre un moyen de chiffrer vos secrets Kubernetes et de les stocker en toute sécurité, même dans des référentiels publics.
+Cependant, une manipulation incorrecte et une mauvaise configuration peuvent entraîner de graves failles de sécurité.
+
+Si la clé privée utilisée pour déchiffrer les secrets scellés est exposée ou accessible au sein du même dépôt, la sécurité assurée par les secrets scellés est annulée.
+Toute personne ayant accès au dépôt peut déchiffrer les secrets, ce qui peut entraîner des violations de données et des accès non autorisés.
+
+Prenons un exemple :
+
+. Imaginez un scénario où un développeur stocke la clé privée utilisée pour le déchiffrement des secrets scellés dans le même dépôt :
+* Le dépôt contient `sealed-challenge48.json` et la clé privée `main.key`.
+. Cette situation est analogue à celle où l'on verrouille une porte et où l'on laisse la clé sous le paillasson :
+* Un agresseur peut facilement trouver la clé et déverrouiller la porte, accédant ainsi à tout ce qui se trouve à l'intérieur.
+
+Pour éviter de tels problèmes, il est crucial de veiller à ce que les clés privées soient stockées en toute sécurité et séparément des données chiffrées.
+Suivez toujours les meilleures pratiques en matière de gestion des secrets et évitez d'exposer des informations sensibles dans vos référentiels.
+
+*De quoi réfléchir aux secrets bien gardés*
+Les secrets scellés présentent certains problèmes, même lorsque la clé privée est conservée hors du référentiel.
+1. Si vous ne configurez pas correctement RBAC ou ABAC, n'importe qui peut toujours accéder au secret s'il a accès au cluster.
+2. Les secrets scellés sont un type de secret codé en dur, ce qui rend l'audit difficile. Qui ou quoi a accédé à un secret, et d'où ?
+3. Si vous prévoyez de changer votre clé de chiffrement, vous devrez également changer tous vos secrets chiffrés avec cette clé, potentiellement répartis sur des dizaines de dépôts (pour comprendre pourquoi : voir le défi de l'historique Git). Comment les retrouver ? Comment identifier les secrets chiffrés avec chaque clé ? Comment rendre la version précédente d'un secret accessible en toute sécurité ?
+4. Les secrets scellés peuvent être la cible d'attaques hors ligne, dont la viabilité dépend de la méthode de chiffrement utilisée. Pouvez-vous citer des exemples de méthodes de chiffrement inappropriées ?

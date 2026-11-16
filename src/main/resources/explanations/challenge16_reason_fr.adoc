@@ -1,0 +1,8 @@
+*Pourquoi il est mauvais d'avoir des secrets dans le code front-end*
+
+Lorsque vous exécutez une application mobile sur votre appareil intelligent ou une application monopage (SPA) sur votre navigateur web, évitez d'y intégrer des données sensibles. Un attaquant peut toujours récupérer l'application, la reconstruire et trouver ces données. Demandez-vous plutôt si ces données peuvent être téléchargées en toute sécurité après authentification, ou utilisées d'une autre manière.
+
+*Pourquoi est-il déconseillé d'utiliser des applications monopages ou des applications mobiles pour stocker des secrets clients ?*
+
+Comme vous pouvez le constater, il est facile de détecter n'importe quel secret stocké dans une application monopage ou une application mobile.
+Pour éviter une telle situation, on utilise le flux de code d'autorisation avec clé de preuve pour l'échange de code (PKCE).

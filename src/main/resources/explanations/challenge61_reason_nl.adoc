@@ -1,0 +1,28 @@
+=== Wat is er mis?
+
+Telegram-bot-referenties hardcoden in broncode is een ernstig beveiligingsprobleem:
+
+**Beveiligingsproblemen:**
+1. **Blootgestelde API-referenties**: Bot-tokens geven volledige toegang tot de functionaliteit van de Telegram-bot
+2. **Gecompromitteerd kanaal**: Iedereen met het token kan berichten lezen en versturen en mogelijk toegang krijgen tot privé-informatie
+3. **Blootstelling van broncode**: Referenties zijn zichtbaar voor iedereen die toegang heeft tot de codebase
+4. **Geschiedenis van versiebeheer**: Tokens blijven in de git-geschiedenis staan, zelfs als ze later worden verwijderd
+
+**Impact in de praktijk:**
+- Attackers kunnen bot-tokens gebruiken om spam of kwaadaardige berichten te versturen
+- Gevoelige informatie die in kanalen wordt gedeeld, wordt toegankelijk voor onbevoegden
+- De functionaliteit van de bot kan worden gekaapt voor kwaadaardige doeleinden
+- Compliance-overtredingen als de bot persoonlijke of gevoelijke gegevens verwerkt
+
+**Hoe los je dit op:**
+1. **Omgevingsvariabelen**: Sla bot-tokens op in omgevingsvariabelen of beveiligde configuratiebestanden
+2. **Secretbeheer**: Gebruik daarvoor bestemde secretmanagementdiensten (HashiCorp Vault, AWS Secrets Manager, etc.)
+3. **Tokenrotatie**: Roteer bot-tokens regelmatig en trek oude tokens in
+4. **Toegangscontroles**: Stel passende toegangscontroles in voor wie toegang krijgt tot bot-referenties
+5. **Codereviews**: Controleer code altijd op hardgecodeerde geheimen voordat je commit
+
+**Detectie:**
+- Gebruik tools voor het scannen op geheimen in je CI/CD-pipeline
+- Gebruik pre-commit hooks om hardgecodeerde referenties te vangen
+- Voer regelmatig beveiligingsaudits uit op de codebase
+- Monitor op onverwachte bot-activiteit

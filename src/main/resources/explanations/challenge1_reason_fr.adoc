@@ -1,0 +1,9 @@
+*Pourquoi utiliser du code pour y intégrer des secrets est une mauvaise idée.*
+
+Vous l'aurez compris, il est facile de détecter de nombreux secrets dissimulés dans le code. Même compilé, le code peut être décompilé pour en extraire le secret. C'est pourquoi les secrets codés en dur sont à proscrire. On a souvent tendance à croire, à tort, que si je ne peux pas décompiler le code, un attaquant ne le peut pas non plus. C'est pourquoi beaucoup pensent que le codage en dur en C/C++/Golang est plus sûr qu'en Java. À ceux qui le pensent : décompilez une application avec des outils comme Ghidra (https://ghidra-sre.org/).
+
+Garantir la confidentialité d'un secret dans le code est une chose. L'ouverture du code représente un autre défi : toute personne ayant accès au code et/ou aux ressources compilées peut découvrir ce secret. Pire encore : si le développeur qui a intégré le secret dans le code quitte l'entreprise, il risque de le connaître puisqu'il est toujours présent dans le code ! De même, en cas de fuite de code ou de ressources, le secret sera compromis et sa rotation sera difficile. Par ailleurs, vous souviendrez-vous encore où se trouve ce mot de passe dans quelques années ?
+
+Que faire à la place :
+- Gardez les secrets hors du code source et des artefacts compilés. Récupérez-les à l'exécution depuis un gestionnaire de secrets ou via une identité de charge de travail au périmètre étroit.
+- Analysez les dépôts et les artefacts de build à la recherche de secrets et renouvelez tout identifiant qui a été validé ou livré.

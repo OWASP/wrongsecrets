@@ -1,0 +1,8 @@
+*Acceso a la cuenta de administrador/propietario:*
+Si pudiste usar la cuenta de administrador/propietario de Google Cloud para acceder a los datos, comprenderás por qué esto es una mala idea para un entorno de producción. En resumen, con esta cuenta puedes modificar cualquier elemento y extraer fácilmente cualquier secreto.
+
+Por último, pero no menos importante: podríamos acceder fácilmente al contenedor mediante exec para buscar el secreto en el punto de montaje. Esto tiene que ver con tres cosas:
+
+- Se nos permite hacerlo mediante RBAC, lo cual no debería ser lo habitual en PRD: de lo contrario, cualquiera de su organización podría husmear en el contenedor.
+- Dentro del contenedor hay ejecutables (sh, openssl, etc.) que podemos ejecutar para establecer una shell. Eliminar cualquier binario innecesario del contenedor puede ayudar a reducir la superficie de ataque y dificultar que un atacante que haya logrado una ejecución remota de código (RCE) en el contenedor pueda acceder a otras partes del mismo para obtener más ejecución.
+- Hemos expuesto el configmap como una variable de entorno. Esto significa que cualquiera que acceda al entorno de ejecución del contenedor dentro del pod ahora puede extraer el secreto. Hemos acercado el secreto al consumidor, pero quizás no lo suficiente (por ejemplo, solo a la aplicación).

@@ -1,0 +1,6 @@
+Ce problème peut être résolu en rejouant la fonction de dérivation de clé avec les entrées données.
+
+1. Exécutez la fonction en ligne
+- Localisez les paramètres utilisés pour la fonction de dérivation de clé dans la fonction `generateKey` de `Challenge34.java`.
+- Copiez les paramètres utilisés dans un générateur en ligne (https://www.dcode.fr/pbkdf2-hash[generator]) et exécutez-le.
+- Le site web renverra la valeur de la clé.

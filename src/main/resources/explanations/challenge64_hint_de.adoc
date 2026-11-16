@@ -1,0 +1,25 @@
+Diese Aufgabe befasst sich speziell mit einem Geheimnis, das in einer Swift-Binärdatei als Zeichenkette gespeichert ist.
+
+Diese Herausforderung lässt sich mit den folgenden alternativen Lösungsansätzen bewältigen:
+
+1. Entdecke die Geheimnisse mit https://ghidra-sre.org/[Ghidra].
+- Installiere https://ghidra-sre.org/[Ghidra].
+- Starte es mit `ghidraRun`.
+- Lade die Anwendung `wrongsecrets-swift` in Ghidra, indem du ein neues Projekt auswählst, dann die Datei importierst und anschließend darauf doppelklickst.
+- Erlaube Ghidra, die Anwendung zu analysieren.
+- Suche nach der Funktion `getSecret` - du kannst sie im Symbolbaum finden.
+- Finde im dekompilierten Code das Array von Zeichen, aus denen das Geheimnis besteht.
+- Alternativ: Unter macOS kannst du mit `nm -gUj wrongsecrets-swift | grep getSecret` und anschließend mit `swift-demangle --expand "s5swift9getSecretSSyF"` die Funktion finden.
+
+2. Entdecke die Geheimnisse mit https://www.radare.org[radare2].
+- Installiere https://www.radare.org[radare2] entweder mit `brew install radare2` auf einem Mac oder folge diesen Schritten: `git clone https://github.com/radareorg/radare2; cd radare2 ; sys/install.sh`
+- Starte die r2-Analyse mit `$ r2 -AAA wrongsecrets-swift`
+- Suche nach Zeichenketten mit `iz | grep -i secret` oder `iz | grep -i "This"`.
+- Alternativ kannst du nach der Funktion `getSecret` suchen: `afl | grep getSecret` und anschließend die Funktion mit `pdf @ <function_address>` ausgeben.
+- Untersuche die Konstruktion des Zeichenarrays im dekompilierten oder disassemblierten Code.
+
+3. Finde die Geheimnisse mit https://binary.ninja[Binary Ninja] oder ähnlichen Tools:
+- Lade die Binärdatei und navigiere zur Swift-Mangled-Funktion `s5swift9getSecretSSyF`.
+- Das Geheimnis setzt sich aus einer Reihe von Zeichen zusammen.
+
+Du möchtest die Tools nicht installieren? Dann schau dir den https://github.com/OWASP/wrongsecrets/tree/master?tab=readme-ov-file#want-to-play-but-are-not-allowed-to-install-the-tools[WrongSecrets Desktop container] an!

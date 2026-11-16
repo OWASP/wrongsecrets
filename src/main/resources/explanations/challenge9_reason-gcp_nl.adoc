@@ -1,0 +1,16 @@
+*Waarom je voorzichtig moet zijn met geheimen in je cloud:*
+
+Geheimen en terraform-state:
+
+De terraform-state kan op veel plaatsen worden opgeslagen: lokaal, in de opslagoplossing van een cloudprovider, enz. Het kan gemakkelijk gebeuren dat geheimen in de terraform-state terechtkomen, omdat de systemen die ermee worden gemaakt vaak moeten communiceren met andere systemen waarvoor authenticatie nodig is. Zorg er dus voor dat geheimen in de terraform-state altijd versleuteld zijn, of zorg ervoor dat alle geheimen in een secrets-managementsysteem worden opgeslagen. Een ander alternatief is om het geheim in Terraform te laten aanmaken, maar de waarde via een ander proces te laten instellen en beheren.
+
+Houd er rekening mee dat geheimen niet de enige reden zijn om mensen geen toegang te geven tot de terraform-state. Leestoegang tot de TF-state kan configuratiegegevens blootstellen aan onbevoegden, terwijl schrijftoegang tot terraform een aanvaller in staat kan stellen een frauduleuze state op te zetten, die bij de volgende terraform apply-run leidt tot onbevoegde wijzigingen.
+
+Toegang tot het beheerders-/eigenaarsaccount:
+Als je het Google-cloudbeheerders-/eigenaarsaccount hebt kunnen gebruiken om bij de gegevens te komen, dan zie je waarom dit een slecht idee is voor productie. Want met dit account kun je alles binnen het account wijzigen, en kun je eenvoudig alle geheimen exfiltreren.
+
+Tot slot: we konden gemakkelijk de container ingaan om de mount met het geheim te doorzoeken. Dit heeft met 3 dingen te maken:
+
+- we mogen dit via RBAC, wat in PRD niet je normale geval zou moeten zijn: anders kan iedereen van je organisatie in de container rondneuzen.
+- er bevinden zich uitvoerbare bestanden in de container (sh/openssl/enz.) die we kunnen uitvoeren om een shell op te zetten. Je container strippen van alle niet-noodzakelijke binaries kan helpen om het aanvalsoppervlak te verkleinen en het moeilijker te maken voor een aanvaller die een RCE op je container heeft uitgevoerd om naar andere plaatsen in de container te springen en daar verder uitvoering te verkrijgen.
+- we hebben de configmap als een ENV beschikbaar gesteld. Dit betekent dat iedereen die de containerruntijd binnen de pod heeft bereikt, nu het geheim kan dumpen. We hebben het geheim dicht bij de consument gebracht, maar misschien nog niet dicht genoeg (bijvoorbeeld alleen de app).

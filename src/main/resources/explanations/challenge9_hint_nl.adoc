@@ -1,0 +1,16 @@
+Je kunt deze uitdaging oplossen met de volgende alternatieve oplossingen:
+
+1. Doorzoek de terraform.tfstate met Trufflehog:
+- Nadat je de infrastructuur hebt opgebouwd volgens de instructies in de README van de map `aws`, blijf in die map en voer `trufflehog3 --output=terraform-infra.json --format=json .` uit.
+- Open nu het bestand terraform-infra.json en zoek naar het wachtwoord.
+
+2. Vind het geheim in AWS Secrets Manager (dit is de goedkope manier, probeer de andere eens :) )
+- Log in op de AWS https://console.aws.com/[Console] met het account waarmee je de WrongSecrets-omgeving hebt opgezet.
+- Ga naar AWS Secrets Manager
+- Haal de gegevens op van wrongsecrets1
+
+3. Vind het geheim door een shell-sessie in de POD te starten (exec)
+- Zorg dat Kubectl is geïnstalleerd zoals beschreven in de README.MD & zorg dat kubectl is geconfigureerd om commando's naar het juiste cluster te sturen.
+- Voer nu `kubectl get pods` uit. Hier zie je alle actieve Pods in de namespace waarin je je bevindt; voor deze app is dat normaal gesproken `default` (tenzij je beheerder/trainer anders heeft aangegeven).
+- Voer nu voor jouw exemplaar van de WrongSecrets-pod `kubectl exec -it secret-challenge-<rest of the name of the pod from the prev.step> -- sh` uit.
+- Onderzoek nu de gegevens die je in `/mnt/secrets-store` kunt vinden

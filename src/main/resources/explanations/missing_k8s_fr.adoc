@@ -1,0 +1,5 @@
+Nous fonctionnons en dehors d'un cluster K8s.
+Veuillez exécuter ceci dans le cluster K8s comme expliqué dans le
+https://github.com/OWASP/wrongsecrets?tab=readme-ov-file#basic-k8s-exercise[README.md]
+
+Il reste encore des défis disponibles après celui-ci. Veuillez en essayer un autre !

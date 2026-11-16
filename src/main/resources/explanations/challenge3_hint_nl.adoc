@@ -1,0 +1,24 @@
+Je kunt deze uitdaging oplossen met de volgende alternatieve oplossingen:
+
+1. Gebruik `docker history`:
+ - Download de container (`docker pull jeroenwillemsen/wrongsecrets:<TAGNAME-HERE>` waarbij de tag `latest-no-vault` kan zijn of een specifieke versie die je nu gebruikt) ,
+- Voer `docker history --no-trunc  jeroenwillemsen/wrongsecrets:<TAGNAME-HERE>` uit, waarmee je de argumenten vindt die voor de container met de opgegeven tag zijn gebruikt.
+- Probeer nu de `DOCKER_ENV_PASSWORD` te vinden .
+
+2. Bezoek de Docker-repository online:
+- Ga naar de https://hub.docker.com/r/jeroenwillemsen/wrongsecrets[*WrongSecrets docker repo*]
+- Neem een kijkje bij de tag die voor jou relevant is. Daar vind je alle commando's die zijn gebruikt om de container samen te stellen. Wat is de waarde van `DOCKER_ENV_PASSWORD` ?
+
+3. Gebruik Dockle https://github.com/goodwithtech/dockle[*Dockle*]:
+ - Installeer Dockle zoals beschreven op zijn https://github.com/goodwithtech/dockle[Github-pagina]
+ - Voer `dockle jeroenwillemsen/wrongsecrets:<TAGNAME-HERE>` uit en gebruik de uitvoer voor je jacht op geheimen.
+
+4. Exec in de container en dump de ENV-vars:
+ - Start de container lokaal met `docker run jeroenwillemsen/wrongsecrets:<TAGNAME-HERE>`
+ - Zoek de container-ID door `docker ps` in een volgende terminal uit te voeren
+ - Doe `docker exec -it <container id> sh`
+ - Doe in de container `env` .
+
+5. Gebruik `docker inspect` om de ENV-vars te vinden:
+- Download de container,
+- Voer `docker inspect jeroenwillemsen/wrongsecrets:<TAGNAME-HERE>` uit en probeer de `Config`-sectie te vinden en daarna de `Env`-sectie. Wat is de waarde van `DOCKER_ENV_PASSWORD` ? Wist je dat je met https://stedolan.github.io/jq/[JQ] in plaats daarvan `docker inspect jeroenwillemsen/wrongsecrets:<TAGNAME-HERE> |  jq '.[] | .Config.Env[]'` kunt gebruiken om het veel sneller te vinden?

@@ -1,0 +1,14 @@
+=== Défi 69 : Trouvez le secret de la compétence du curseur
+
+Les compétences d'agent sont de plus en plus utilisées pour partager l'automatisation au sein d'une équipe : il suffit de déposer un dossier contenant un fichier `SKILL.md`, l'agent le récupère et tous les membres de l'équipe suivent le même flux de travail. Malheureusement, cela en fait aussi un moyen très pratique de stocker « temporairement » un identifiant partagé.
+
+Cette application intègre une compétence Cursor appelée `deploy-preview`. Cette compétence se trouve dans le dossier des ressources et est hébergée par le backend à l'adresse link:/skills/cursor/deploy-preview/SKILL.md[`/skills/cursor/deploy-preview/SKILL.md`].
+
+Le code source de la compétence est également disponible sur GitHub à l'adresse : link:https://github.com/OWASP/wrongsecrets/blob/master/src/main/resources/challenges/challenge-70/cursor-skill/deploy-preview/SKILL.md[`src/main/resources/challenges/challenge-70/cursor-skill/deploy-preview/SKILL.md`].
+
+Lisez la compétence et soumettez le jeton de déploiement de préproduction que l'auteur a intégré « pour que la compétence reste autonome ».
+
+[NOTE]
+====
+Ici, rien n'est encodé ni chiffré : c'est exactement à quoi ressemble une skill divulguée. Une skill est de la documentation, et la documentation est copiée dans les wikis, les tickets, les demandes de fusion et les messages de chat.
+====

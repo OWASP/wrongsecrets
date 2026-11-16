@@ -1,0 +1,5 @@
+=== Passwort-Manager
+
+Als wir meinem Freund Kees dieses Projekt zeigten, fragte er uns: Hey, ist das nicht dasselbe, als hätte man ein sehr schwaches Passwort im Passwortmanager? Denn genau das hatte mein Kollege getan.
+
+Hier ist sie also: die Passwortmanager-Herausforderung! Wir haben eine KeePass-Datei im Docker-Container eingerichtet, in der wir die geheimen Zugangsdaten für Alibaba Cloud hinterlegt haben. Könnt ihr sie knacken?

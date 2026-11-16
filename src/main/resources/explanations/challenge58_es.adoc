@@ -1,0 +1,33 @@
+=== Exposición de la cadena de conexión a la base de datos en los mensajes de error
+
+Una de las formas más comunes y peligrosas en que se filtran secretos en aplicaciones reales es a través de cadenas de conexión a bases de datos que contienen credenciales incrustadas. Cuando las aplicaciones no logran conectarse a las bases de datos, a menudo exponen la cadena de conexión completa (incluidos nombres de usuario y contraseñas) en mensajes de error, registros o incluso en interfaces de usuario.
+
+Este desafío demuestra un escenario en el que un desarrollador:
+
+1. **Utiliza credenciales integradas en las cadenas de conexión** en lugar de la gestión de secretos externa.
+2. **Tiene un manejo de errores deficiente** que expone la cadena de conexión completa cuando fallan las conexiones a la base de datos.
+3. **Registra información confidencial** sin sanitizar primero las credenciales.
+4. **Muestra detalles técnicos** que podrían llegar a sistemas de monitorización, herramientas de seguimiento de errores o incluso a los usuarios finales.
+
+**Lugares comunes donde aparecen estas cadenas de conexión expuestas:**
+
+- Registros de inicio de la aplicación cuando la base de datos no está disponible
+- Rastreo de pila de excepciones en herramientas de monitorización como Sentry, Rollbar o CloudWatch.
+- Mensajes de error mostrados a los usuarios durante las ventanas de mantenimiento
+- Registros de la canalización de CI/CD cuando fallan las comprobaciones de estado de la implementación
+- Registros de contenedores Docker durante fallos de orquestación
+
+**Ejemplos del mundo real:**
+
+- Aplicaciones que no superan las comprobaciones de estado durante las implementaciones de Kubernetes
+- Microservicios que no pueden acceder a su base de datos durante el inicio.
+- Scripts de migración de bases de datos que fallan con detalles de conexión expuestos
+- Entornos de desarrollo/pruebas donde el nivel de detalle de los errores está configurado demasiado alto.
+
+**Cómo provocar el error:**
+
+Pulsa el botón situado en la parte inferior de la pantalla o visita el punto final `/error-demo/database-connection` para simular un fallo de conexión a la base de datos. Este punto final intenta conectarse a la base de datos mediante una cadena de conexión con credenciales integradas y, en caso de fallo, expone las credenciales tanto en la respuesta HTTP como en los registros de la aplicación.
+
+¿Puedes encontrar la contraseña de la base de datos que queda expuesta cuando la aplicación intenta conectarse a ella?
+
+**Sugerencia:** Busque mensajes de error de conexión a la base de datos que revelen más de lo que deberían.

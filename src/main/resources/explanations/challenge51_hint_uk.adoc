@@ -1,0 +1,20 @@
+Цю проблему можна вирішити, використовуючи такі способи:
+
+- Використайте файл docker-compose (`challenge51docker-compose.yml`) для збірки контейнерів та пошуку секрету
+  1. Клонуйте репозиторій, що містить файли завдання.
+  2. Знайдіть файл `challenge51docker-compose.yml` у репозиторії та перейдіть до нього.
+  3. Визначте облікові дані:
+    У розділі environments у файлі challenge51docker-compose.yml перевірте наявність таких змінних, як:
+     * `db_user`
+     * `db_password`
+     * `db_name`
+  4. Тепер ви можете виконати команди Docker Compose для зібрання та запуску вашого сервісу:
+     * `export DOCKER_BUILDKIT=1`
+     * `docker compose -f challenge51docker-compose.yml build`
+     * `docker compose -f challenge51docker-compose.yml run myservice`
+  5. Відповідь знаходиться у виводі
+
+- Знайдіть секрети безпосередньо у файловій системі:
+   1. Клонуйте репозиторій, що містить файли завдання.
+   2. Використайте посилання на файли у `challenge51docker-compose.yml`, щоб знайти файли, що містять секретні коди.
+   3. Відкрийте файл, щоб знайти секрет.

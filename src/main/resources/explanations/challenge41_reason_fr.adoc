@@ -1,0 +1,9 @@
+*Pourquoi le pré-hachage des mots de passe n'est pas une bonne idée ?*
+
+Bien que le pré-hachage des mots de passe soit un moyen facile de mettre à niveau les hachages existants, il devient sujet à https://www.scottbrady91.com/authentication/beware-of-password-shucking[Password shucking].
+
+Il s'agit d'une technique où les attaquants suppriment les couches de sécurité les plus récentes d'un hachage mis à jour, le réduisant ainsi à son ancienne version vulnérable. Dans ce cas précis, nous avons pu réduire des hachages bcrypt à des hachages md5 non sécurisés, puis les casser.
+
+La solution la plus sûre consiste à réinitialiser les mots de passe de tous les utilisateurs et à hacher les nouveaux mots de passe avec le nouvel algorithme. Cependant, cette méthode est peu conviviale.
+
+La meilleure façon de procéder à la mise à niveau consiste à superposer initialement les hachages et à les remplacer par les hachages directs des mots de passe des utilisateurs lors de leur prochaine connexion.

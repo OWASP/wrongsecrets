@@ -1,0 +1,41 @@
+Por defecto, el desafío se ejecuta sin un contenedor auxiliar de depuración. Tu objetivo es analizar el binario que se ejecuta dentro del pod y descubrir el secreto.
+
+Este desafío se puede resolver siguiendo los siguientes pasos:
+
+1. Despliega el desafío sin el sidecar:
+```
+   kubectl apply -f k8s/challenge53/secret-challenge53.yml
+```
+   Verifique que el pod esté en ejecución:
+```
+   kubectl get pods
+```
+
+2. Ten en cuenta que el pod por sí solo no proporciona capacidades de depuración. Ahora, reemplaza la implementación con una que incluya un sidecar:
+```
+   kubectl apply -f k8s/challenge53/secret-challenge53-sidecar.yml
+```
+
+3. Ejecute el contenedor de depuración adjunto al pod en ejecución:
+```
+   kubectl exec -it <pod-name> -c sidecar -- /bin/sh
+```
+
+4. Navegue hasta el directorio compartido donde se almacena el archivo binario:
+```
+   cd /shared-data
+```
+
+5. Utilice `gdb` para inspeccionar el binario y ejecutarlo:
+```
+   gdb wrongsecrets-challenge53-c-linux
+   run &
+```
+
+6. Localiza la dirección de memoria del secreto:
+```
+   print &secret
+   x/s <memory-address>
+```
+
+Analizando la memoria, descubrirás el secreto codificado almacenado en el archivo binario.

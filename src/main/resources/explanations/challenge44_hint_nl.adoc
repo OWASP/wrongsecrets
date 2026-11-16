@@ -1,0 +1,27 @@
+Deze uitdaging kun je oplossen met de volgende stappen:
+
+1. Vind het geheim met de opdrachtregel
+- gebruik `kubectl exec vault-0 -n vault -- vault kv metadata get -mount=secret wrongsecret` en bekijk de metadata: zie je een Map met een `secret`? dat is de waarde die je moet invoeren
+
+
+2. Vind het Secret in Vault met de root token die is weergegeven:
+- Wanneer je de K8s-omgeving opzet, geeft het script de waarde van de root token als volgt aan:
+
+    Key                  Value
+    ---                  -----
+    token                s.Jqka4lSy8ayQw2LFsvyAgnTI
+    token_accessor       HEr9RYa3OcZNDOHeFRXIMYCV
+    token_duration       ∞
+    token_renewable      false
+    token_policies       ["root"]
+    identity_policies    []
+    policies             ["root"]
+
+
+-  Gebruik de token om in te loggen op Vault, die op poort 8200 beschikbaar is
+-  Kijk rond: kun je de locatie van het geheim vinden in het overzicht met geheimen?
+
+3. Vind het geheim als SRE-lid
+- ga naar de webinterface van vault
+- log in met de gebruikersnaam "helper" en wachtwoord "foo"
+- vind het eigenlijke geheim.

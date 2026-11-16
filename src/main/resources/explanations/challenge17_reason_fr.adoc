@@ -1,0 +1,9 @@
+*Pourquoi entrer des secrets dans bash est une mauvaise idée.*
+
+L'interface en ligne de commande peut sembler temporaire et sûre, mais elle est souvent enregistrée. C'est une fonctionnalité standard de la plupart des interpréteurs de commandes. Certains disposent de protections, et la plupart des outils qui demandent un mot de passe secret ne l'affichent pas. Cependant, lors de la création de commandes personnalisées, ces protections sont inexistantes et il est facile de se tirer une balle dans le pied.
+
+Il est relativement difficile de divulguer des informations confidentielles avec un Dockerfile lors de la création d'un conteneur. Cependant, si vous utilisez régulièrement un conteneur, que vous ne le supprimez pas et que vous y saisissez des informations confidentielles en clair, une personne malveillante pourrait exploiter ce conteneur Docker apparemment inoffensif pour obtenir des privilèges élevés. Cela pourrait lui permettre d'exploiter une faille bien plus importante que votre ordinateur.
+
+Que faire à la place :
+- N'entrez pas de secret en argument de ligne de commande ni dans des commandes susceptibles d'être enregistrées dans l'historique de la shell, les listes de processus ou les journaux. Utilisez plutôt un gestionnaire de secrets ou la saisie protégée ou l'entrée standard (stdin) de l'outil.
+- Ne conservez pas de secret dans un conteneur ou une image réutilisable ; injectez-le uniquement dans le processus qui en a besoin et renouvelez-le s'il a pu être exposé.

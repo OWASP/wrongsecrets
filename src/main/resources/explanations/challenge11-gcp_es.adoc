@@ -1,0 +1,11 @@
+=== Administrador de secretos de GCP, parte 3
+
+En nuestro clúster de GKE, existe una cuenta de servicio para las cargas de trabajo, que se corresponde con una cuenta de servicio en Kubernetes.
+
+Lamentablemente, los desarrolladores utilizaron una única cuenta de servicio de GCP para conectarse a varias cuentas de servicio de Kubernetes. Esto significa que un pod diferente puede acceder a nuestros secretos...
+
+Intenta aprovisionar `wrongsecret-3` con un pod con la cuenta de servicio `default` en el espacio de nombres predeterminado.
+
+
+Sugerencia: Podrías usar un trabajo con la imagen `gcr.io/google.com/cloudsdktool/cloud-sdk:latest` y usar la interfaz de línea de comandos `gcloud`.
+Consulte https://cloud.google.com/secret-manager/docs/creating-and-accessing-secrets#a_note_on_resource_consistency[accessing a secret] para obtener ayuda.

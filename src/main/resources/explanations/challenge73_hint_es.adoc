@@ -1,0 +1,15 @@
+Los archivos de instrucciones del agente se envían con el contenedor de desarrollo en el
+Carpeta `.devcontainer`:
+
+- `.devcontainer/AGENTS.md`
+- `.devcontainer/CLAUDE.md`
+- `.devcontainer/.cursor/rules/project.mdc`
+- `.devcontainer/.windsurfrules`
+
+Tres de ellos solo señalan dónde se encuentra la credencial compartida. Uno de ellos
+Inserta el valor de `STAGING_DEPLOY_TOKEN` en un fragmento de shell. Ese valor es
+la respuesta.
+
+Si no estás utilizando el contenedor de desarrollo, también puedes leer los mismos archivos.
+directamente del repositorio en el enlace:link:https://github.com/OWASP/wrongsecrets/tree/master/.devcontainer[`.devcontainer`]
+carpeta.

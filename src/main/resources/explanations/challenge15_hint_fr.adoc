@@ -1,0 +1,11 @@
+Vous pouvez relever ce défi grâce aux solutions alternatives suivantes :
+
+1. Récupérez le secret des anciens commits à l'aide de Trufflehog.
+- Installez Trufflehog3 (https://github.com/feeltheajf/trufflehog3) en exécutant la commande `pip3 install trufflehog3`. Python 3 et pip doivent être installés.
+- Exécutez `trufflehog3 https://github.com/OWASP/wrongsecrets` et examinez le résultat : vous devriez trouver 3 `aws_secret_access_key`, l'une d'entre elles est la solution !
+2. Obtenez le secret en « utilisant le chiffrement » du défi, car les éléments chiffrés se trouvent toujours dans la classe Java (Notez qu'il s'agit d'un test plus avancé qui nécessite certaines compétences en Java).
+- Trouvez le contenant qui sert à vous proposer ce défi.
+- Extraire le texte chiffré pour le défi 15
+- Clonez le projet localement et exécutez-le localement en suivant les instructions du fichier Readme.md à l'adresse https://github.com/OWASP/wrongsecrets#notes-on-development.
+- https://www.jetbrains.com/help/idea/debugging-your-first-java-application.html[Déboguez] le projet, en définissant un point d'arrêt au début de la méthode `quickDecrypt`.
+- Remplacez la valeur cipherText par le texte chiffré que vous avez extrait à l'étape 2, puis trouvez le texte clair.

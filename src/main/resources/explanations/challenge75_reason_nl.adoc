@@ -1,0 +1,55 @@
+*Why committing a Maven settings.xml leaks deployment credentials*
+
+A `settings.xml` is the file Maven reads to learn where to download dependencies
+from and how to authenticate against the repositories that require a login. Its
+`<servers>` section holds the plaintext username and password of every configured
+server, and for a deployment account that password usually carries the right to
+publish artifacts.
+
+Committing such a file feels harmless because the build suddenly works for
+everybody, and that is exactly the failure this challenge demonstrates:
+
+- The credentials are in the git history forever. Deleting the file in a later
+  commit does not remove it from the history, so the password must be treated as
+  compromised from the moment it was pushed.
+- Every person and system that can read the repository also receives the
+  credentials: forks, mirrors, CI runners, developer laptops and any tool with
+  read access.
+- Deployment credentials are high value for supply-chain attacks. With them an
+  attacker can publish a malicious version of the project's artifacts, after
+  which every consumer of that repository silently picks up the poisoned build.
+- Server ids such as the Nexus id in this challenge are not secret at all. They
+  only say which repository a credential belongs to; they never protect the
+  credential itself.
+- Secret scanners often ignore XML files or do not recognize Maven settings, so
+  the leak can survive review for a long time.
+- Maven's own password encryption only hides the password in an obfuscating
+  keystore that lives right next to the file, so it is not a protection for
+  anything that is committed.
+
+----
+What to do instead:
+
+- Keep `settings.xml` in `$HOME/.m2/` and add `settings.xml` to `.gitignore` so
+  it cannot be committed by accident.
+- Reference credentials through environment variables or property interpolation,
+  for example `<password>${env.NEXUS_PASSWORD}</password>`, and provide the value
+  at runtime.
+- In CI, inject the credentials from the CI secret store instead of checking them
+  into the pipeline's repository.
+- Give every consumer a short-lived, least-privilege token that can only deploy to
+  a single repository, and scope the token to a fixed time window.
+- Prefer repository manager features that avoid long-lived passwords, such as
+  bearer tokens or workload identity federation.
+- Rotate the credential immediately when it appears in a commit and purge it from
+  the history where your platform allows it.
+- Scan the repository, including XML and build files, with a secret scanner in
+  pre-commit hooks and CI.
+----
+
+[NOTE]
+====
+A `settings.xml` in the repository is a credential stash in plain sight. Anything
+that would be unacceptable in a `.java` file is unacceptable in a Maven settings
+file as well.
+====

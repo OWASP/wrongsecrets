@@ -1,0 +1,14 @@
+=== Défi 72 : Trouvez le secret dans la transcription de l’agent de codage IA
+
+Les agents de programmation IA tels que Codex, Claude Code et Cursor lisent des fichiers, exécutent des commandes et produisent des transcriptions de session détaillées. Lorsqu'un développeur demande à un agent de déboguer un problème de déploiement, celui-ci peut lire des fichiers de configuration contenant des informations confidentielles et afficher ces valeurs dans sa sortie de session.
+
+Cette application génère une transcription de session Codex où un développeur a demandé à l'agent d'examiner un déploiement de préproduction défaillant. La transcription enregistre l'agent lisant un fichier `.env.staging` et affichant son contenu, y compris le jeton de déploiement, dans le cadre d'un processus de débogage normal.
+
+Téléchargez la transcription à partir du lien :link:/challenges/challenge-72/codex-session-transcript.md[`/challenges/challenge-72/codex-session-transcript.md`] et trouvez le jeton de déploiement de préproduction qui a été exposé pendant la session.
+
+Le code source est également disponible à l'adresse suivante : link:https://github.com/OWASP/wrongsecrets/blob/master/src/main/resources/challenges/challenge-72/codex-session-transcript.md[`src/main/resources/challenges/challenge-72/codex-session-transcript.md`].
+
+[NOTE]
+====
+Le jeton apparaît naturellement dans la transcription — l'agent n'avait pas l'intention de le divulguer, il a simplement lu un fichier dans le cadre de son processus de débogage.
+====

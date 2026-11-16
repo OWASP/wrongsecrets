@@ -1,0 +1,12 @@
+=== Git-Verlauf
+
+Ein Fehler, den wir oft machen, wenn wir Geheimnisse in Git einchecken, ist der Versuch, sie zu löschen, ohne das Geheimnis vorher zu rotieren.
+Was die Sache noch schlimmer macht, ist, dass der Commit ohne das ordnungsgemäße Überschreiben mit dem Geheimnis und/oder das Entfernen des Commits für immer in der Historie erhalten bleibt.
+
+Wir haben versehentlich einige AWS-Zugriffsschlüssel in Git gespeichert. Kannst du sie finden?
+
+Hinweis: Die Antwort enthält eines der drei AWS-Anmeldeinformationsprofile, die du in den Java-Kommentaren eines Commits findest, jedoch ohne die Java-Kommentar-Markup als einzelne Zeile.
+Alternativ kannst du uns einfach den gesuchten geheimen Zugriffsschlüssel mitteilen.
+
+Hinweis 2: Wusstest du, dass es sich hierbei um funktionierende Zugriffsschlüssel handelt? [Es handelt sich nicht um „normale“ AWS-Zugriffsschlüssel, sondern um Canary-Token! Du kannst zwar `aws sts get-caller-identity` damit ausführen. Bei der Verwendung werden jedoch einige deiner Daten (IP-Adresse/Agent) protokolliert.]
+Besuche https://wrongsecrets.herokuapp.com/stats[stats], um mehr darüber zu erfahren, wann du sie ausprobiert hast!

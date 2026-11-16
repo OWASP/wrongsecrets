@@ -1,0 +1,8 @@
+Vous pouvez relever ce défi en suivant les étapes suivantes :
+
+1. Exfiltrez le secret à l'aide de GitHub Actions. Veuillez noter que dans la configuration actuelle du projet, l'action déclenchée par le propriétaire/collaborateur inclura le secret. Ce ne sera pas le cas si vous utilisez des forks. Voici les étapes à suivre :
+- Connectez-vous à Github avec votre propre compte.
+- Rendez-vous sur https://github.com/OWASP/wrongsecrets/actions et sélectionnez `Get the challenge code 13`
+- Jetez un œil à sa dernière réalisation par l'un des propriétaires ou collaborateurs.
+- Prenez la dernière tentative d'exécution, où le secret est encodé en base64. Copiez le résultat encodé en base64 et décodez-le deux fois.
+- Saisissez la solution décodée comme réponse.

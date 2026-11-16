@@ -1,0 +1,5 @@
+*Pourquoi les fonctions de dérivation de clés ne sont pas sûres lorsqu'on utilise des valeurs codées en dur*
+
+Les fonctions de dérivation de clés (KDF) sont déterministes. Cela signifie qu'elles renvoient toujours la même sortie pour une entrée donnée. Par conséquent, si les paramètres sont codés en dur, toute personne ayant accès au code peut exécuter la KDF avec les paramètres spécifiés et obtenir la clé.
+
+Utilisez une KDF telle qu'Argon2id avec un sel aléatoire unique et des paramètres de coût appropriés lors de la dérivation d'une clé à partir d'un mot de passe. Pour les clés générées par une machine, utilisez un générateur de nombres aléatoires cryptographiquement sûr plutôt qu'une KDF, et stockez la clé séparément des données chiffrées.

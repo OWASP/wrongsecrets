@@ -1,0 +1,24 @@
+*Waarom correcte omgang met Sealed Secrets belangrijk is*
+
+Sealed Secrets bieden een manier om je Kubernetes-geheimen te versleutelen en veilig op te slaan, zelfs in openbare repositories.
+Toch kunnen onjuiste omgang en verkeerde configuratie leiden tot ernstige beveiligingsproblemen.
+
+Als de privésleutel waarmee de sealed secrets worden ontsleuteld binnen dezelfde repository wordt blootgesteld of toegankelijk is, wordt de beveiliging die Sealed Secrets bieden tenietgedaan.
+Iedereen met toegang tot de repository kan de geheimen ontsleutelen, wat kan leiden tot datalekken en onbevoegde toegang.
+
+Laten we een voorbeeld bekijken:
+
+. Stel je een scenario voor waarin een ontwikkelaar de privésleutel voor het ontsleutelen van Sealed Secrets in dezelfde repository opslaat:
+* De repository bevat `sealed-challenge48.json` en de privésleutel `main.key`.
+. Deze situatie is vergelijkbaar met een deur op slot doen en de sleutel onder de deurmat leggen:
+* Een aanvaller kan de sleutel makkelijk vinden en de deur opendoen, en krijgt zo toegang tot alles wat er binnenin zit.
+
+Om zulke problemen te voorkomen, is het cruciaal dat privésleutels veilig en apart van de versleutelde gegevens worden opgeslagen.
+Volg altijd de beste praktijken voor geheimenbeheer en voorkom dat je gevoelige informatie in je repositories blootstelt.
+
+*Nadenkertjes over sealed secrets*
+Sealed secrets hebben sommige problemen, zelfs als je de privésleutel uit de repository houdt.
+1.  Als je RBAC of ABAC niet correct configureert, kan iedereen bij het geheim zodra diegene bij het cluster kan.
+2. Sealed secrets zijn een soort hardgecodeerde geheimen, wat auditten moeilijk maakt. Wie of wat heeft toegang gehad tot een geheim, en vanaf waar?
+3. Als je je sealing key gaat roteren, moet je al je geheimen roteren die met die sleutel zijn versleuteld - mogelijk over tientallen repositories (waarom: zie de uitdaging over de git-geschiedenis). Hoe vind je ze terug? En hoe bepaal je welke geheimen met welke sleutel zijn versleuteld? Hoe maak je de vorige versie van een geheim veilig toegankelijk?
+4. Sealed secrets kunnen het doelwit zijn van offline-aanvallen, waarvan de haalbaarheid afhangt van waarmee je de geheimen hebt versleuteld. Kun je aan onjuiste versleutelingsschema's denken?

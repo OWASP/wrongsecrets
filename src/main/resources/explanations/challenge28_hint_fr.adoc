@@ -1,0 +1,7 @@
+Nous recherchons le secret dans une issue GitHub fermée de notre dépôt GitHub. Mais comment le trouver ?
+
+Vous pouvez relever ce défi en suivant les étapes suivantes :
+
+1. Lorsque vous accédez à l'onglet « Problèmes » de notre dépôt GitHub (https://github.com/OWASP/wrongsecrets/issues), cliquez sur l'option « Fermé » pour afficher tous les problèmes résolus à ce jour.
+
+2. Examinez tous les points qui vous semblent suspects et vous pourrez déceler le secret.

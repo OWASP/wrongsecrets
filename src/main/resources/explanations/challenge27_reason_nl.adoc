@@ -1,0 +1,8 @@
+*Waarom het sturen van geheimen als inputs naar smart contracts een slecht idee is, zelfs als ze niet worden opgeslagen*
+
+Inputs van alle transacties naar contracts, net als de staat van de interne storage van contracts op de chain, worden voor altijd opgeslagen en zijn eenvoudig te raadplegen.
+Inputs van transacties zijn zelfs al zichtbaar voordat die transacties zijn geaccepteerd. Dit kan leiden tot front-running door een derde partij die toegang heeft tot de pool van transacties en een transactie (met hogere gas) kan sturen die profiteert van de bekende transactie die er achteraan loopt.
+
+Wat je in plaats daarvan moet doen:
+- Stuur geen geheimwaarden of gokken in transactie-inputs. Houd verificatie die afhangt van een geheim off-chain, of gebruik een zorgvuldig ontworpen zero-knowledge-protocol wanneer on-chain verificatie nodig is.
+- Behandel waarden die in transacties worden verstuurd of die in een publieke transactiepool zichtbaar zijn als publiek, ook als het contract ze niet opslaat.

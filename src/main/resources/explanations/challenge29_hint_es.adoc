@@ -1,0 +1,7 @@
+Tal y como indica el texto del desafío, buscamos el secreto en una captura de pantalla de un problema cerrado de GitHub en nuestro repositorio de GitHub. Pero, ¿cómo lo encontramos?
+
+Puedes resolver este desafío siguiendo estos pasos:
+
+1. Ve a la pestaña `issues` de nuestro GitHub, luego a la sección de problemas cerrados, para ver todos los problemas cerrados.
+
+2. Revisa todos los informes de errores y fíjate específicamente en las capturas de pantalla publicadas por los usuarios.

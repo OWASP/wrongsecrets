@@ -1,0 +1,7 @@
+*Waarom moeten we de bestandsnaam niet als encryptiesleutel gebruiken?*
+
+Er zijn meerdere scenario's geweest waarin de inhoud van bestanden werd versleuteld met de bestandsnaam zelf, waardoor aanvallers de inhoud gemakkelijk konden ontsleutelen. Dit wordt vaak gezien als een makkelijke manier om de sleutel dicht bij de inhoud te houden, zonder overal dezelfde encryptiesleutel te hergebruiken.
+
+Maar zoals je nu kunt merken, is dit geen goed idee. Een aanvaller heeft de sleutel op het moment dat hij het bestand in zijn bezit heeft.
+
+Genereer encryptiesleutels met een cryptografisch veilige willekeurige getalgenerator en bewaar ze in een aparte geheimenmanager of key-management-service. Houd de toegang tot sleutels strikt beperkt en roteer of hersleutel data als een sleutel is blootgesteld.

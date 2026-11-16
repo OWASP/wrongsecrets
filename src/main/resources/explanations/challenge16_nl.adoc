@@ -1,0 +1,10 @@
+=== Geheimen in front-endcode
+
+Wanneer we een nieuw project starten, zijn we meestal gefocust op de implementatie van nieuwe functies dan op het beveiligingsaspect.
+Soms hebben Single-Page-apps of mobiele apps toegang nodig tot informatie voor zichzelf in plaats van namens een gebruiker.
+Voor dit doel biedt https://oauth.net/2/grant-types/client-credentials/[OAuth] de `client_credentials`-flow om een access token te krijgen.
+In zo'n situatie is het makkelijk om client secrets op te slaan in front-end- of mobiele-applicatiecode.  En hoewel je het geheim in de code kunt obfusceren, zul je het uiteindelijk toch moeten gebruiken.
+
+Deze uitdaging zal proberen contact op te nemen met een server met behulp van de client credentials flow. Kun je het geheim vinden?
+
+Wat als je ernaar zoekt in de Development Tools in de browser?

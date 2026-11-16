@@ -1,0 +1,12 @@
+=== Historique Git
+
+L'une des erreurs que nous commettons souvent lorsque nous enregistrons des secrets dans Git, c'est d'essayer de les supprimer sans les faire tourner.
+Ce qui aggrave la situation, c'est que sans remplacer correctement le commit par le secret et/ou supprimer le commit, il restera dans l'historique pour toujours.
+
+Nous avons donc conservé par « erreur » des clés d'accès AWS dans Git. Pouvez-vous les retrouver ?
+
+Remarque : la réponse contient l’un des 3 profils d’identification AWS que vous trouverez dans un commit, dans ses commentaires Java, mais sans le balisage de commentaire Java, sur une seule ligne.
+Vous pouvez également nous fournir directement la clé d'accès secrète que nous recherchons.
+
+Note 2 : Saviez-vous que ce sont des clés d’accès fonctionnelles ? [Ce ne sont pas des clés d’accès AWS « normales » : ce sont des jetons de test ! Vous pouvez toutefois utiliser la commande `aws sts get-caller-identity` avec elles. Lorsque vous les utilisez, certaines de vos données (adresse IP/agent) sont enregistrées.]
+Rendez-vous sur https://wrongsecrets.herokuapp.com/stats[stats] lorsque vous les avez essayés pour en savoir plus !

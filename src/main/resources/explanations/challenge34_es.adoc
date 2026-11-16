@@ -1,0 +1,4 @@
+=== Generación de claves aleatorias
+
+Muchos expertos en seguridad enseñan a los ingenieros a usar funciones de derivación de claves seguras como PBKDF2 (https://en.wikipedia.org/wiki/PBKDF2) cuando se necesita generar una clave. Un desarrollador siguió esta instrucción e intentó crear una clave en `Challenge34.java`, que ahora debería ser mucho más segura que una clave codificada directamente en el código.
+¿Puedes detectar el error? ¿Puedes encontrar el valor de la clave generada?

@@ -1,0 +1,7 @@
+=== Uitdaging: blootgestelde Docker-geheimen
+
+In deze uitdaging verken je het belang van het veilig beheren van gevoelige informatie met Docker secrets in een https://raw.githubusercontent.com/OWASP/wrongsecrets/refs/heads/master/src/main/resources/challenges/challenge-51/challenge51docker-compose.yml[Docker Compose-bestand]. Docker secrets zijn bedoeld om gevoelige gegevens zoals wachtwoorden, API-sleutels en certificaten veilig te versturen en op te slaan binnen Docker-services. Onzorgvuldige verwerking of een verkeerde configuratie kan deze geheimen echter per ongeluk blootstellen, met mogelijke beveiligingsrisico's tot gevolg.
+
+*Acme Inc.*, een snelgroeiend e-commerceplatform, heeft onlangs verdachte activiteiten meegemaakt die erop wijzen dat gevoelige klantgegevens mogelijk gecompromitteerd zijn. Een intern onderzoek toont aan dat een developer per ongeluk databasegegevens heeft blootgesteld door geheimenbestanden in de repository te laten staan en deze naar een publieke Git-repository te pushen. Daarnaast maakte de applicatie geen effectief gebruik van Docker secrets, waardoor gevoelige informatie in platte tekst zichtbaar werd in de draaiende containers.
+
+Je bent aangenomen als Technical Security Consultant en jouw taak is het om de blootgestelde geheimen te beveiligen zodat de gevoelige informatie beschermd is? Identificeer voor nu de verkeerde configuraties en meld het database-wachtwoord in het invoerveld hieronder om het probleem aan te tonen.

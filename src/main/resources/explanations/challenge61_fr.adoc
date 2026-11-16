@@ -1,0 +1,7 @@
+=== Secrets des chaînes Telegram
+
+De nombreuses applications et services mobiles utilisent des bots Telegram pour les notifications, la surveillance ou l'interaction avec les utilisateurs. Les développeurs intègrent souvent les identifiants des bots Telegram directement dans le code source de leur application, ce qui les rend facilement accessibles à toute personne ayant accès à ce code.
+
+Dans ce défi, un développeur a intégré les identifiants d'un bot Telegram dans le code de l'application pour communiquer avec un canal de contrôle. La réponse secrète est publiée sur ce canal Telegram, accessible grâce à ces identifiants.
+
+Pouvez-vous trouver le jeton du bot Telegram codé en dur et l'utiliser pour découvrir le secret dans le canal associé ?

@@ -1,0 +1,5 @@
+Pour plusieurs raisons, dissimuler des informations confidentielles sur une page web est une mauvaise idée, même pour un usage interne. Tout d'abord, les sites web sont souvent accessibles à diverses personnes, notamment les employés, les prestataires et les fournisseurs. Conserver des informations confidentielles sur un site web augmente le risque qu'elles soient compromises par des tiers non autorisés. La possibilité pour un pirate de réutiliser ses données après une intrusion est ainsi considérablement accrue.
+
+Que faire à la place :
+- Ne placez pas de secret dans le contenu de la page, le code source ou la configuration côté client. Conservez-les sur le serveur et effectuez l'opération requise là-bas.
+- Exigez une authentification et une autorisation pour les opérations sensibles et renouvelez tout secret qui a déjà été publié.

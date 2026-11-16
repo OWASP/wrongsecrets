@@ -1,0 +1,9 @@
+*Waarom moeten we de encryptiesleutel en het geheim niet samen bewaren?*
+
+Het samen opslaan van een encryptiesleutel en de data die die versleutelt wordt over het algemeen als slechte praktijk beschouwd, omdat het de beveiliging die versleuteling biedt ondermijnt.
+
+In dergelijke scenario's heeft een aanvaller de sleutel op het moment dat hij het bestand in zijn bezit heeft.
+
+Het wordt altijd aanbevolen om je encryptiesleutels veilig op te slaan.
+
+Houd sleutels apart van de data die ze beschermen, bijvoorbeeld in een aparte key-management-service of hardware security module, en beperk en auditeer de toegang ertoe.

@@ -1,0 +1,15 @@
+Diese Herausforderung lässt sich durch folgende alternative Lösungsansätze bewältigen:
+
+Hinweis: Für diese Aufgabe musst du https://www.keepassx.org/[Keepass(X)] auf deinem System installieren, um die kdbx-Datei zu öffnen. Alternativ kannst du die Lösung auch mithilfe des WrongSecrets Deskop unter https://github.com/OWASP/wrongsecrets?tab=readme-ov-file#want-to-play-but-are-not-allowed-to-install-the-tools finden.
+
+1. Hole dir die KeePass-Datei aus dem Docker-Container und öffne sie.
+ - Schau in der Dockerfile nach, wohin die KeePass-Datei kopiert wurde.
+ - Folge den Anweisungen unter https://docs.docker.com/engine/reference/commandline/cp/[der Docker-Dokumentation], um die Keepass-Datei vom Stammverzeichnis des Containers in dein lokales Dateisystem zu kopieren.
+- Öffne die Datei mit KeepassX. Es erscheint eine Passwortabfrage.
+- Überprüfe zunächst den Code von `Challenge14.java` unter https://github.com/OWASP/wrongsecrets/blob/master/src/main/java/org/owasp/wrongsecrets/challenges/docker/Challenge14.java[github], um herauszufinden, wo das Passwort möglicherweise gespeichert ist. Öffne anschließend die Datei `Application.properties` im Ordner `src/resources` unter https://github.com/OWASP/wrongsecrets[*Ziel-Repository*] und prüfe die Eigenschaft, die das KeePass-Passwort enthält.
+- Öffne nun die KeePass-Datei mit dem gefundenen Passwort. Der Inhalt sollte dir die Zugangsdaten für Alibaba Cloud liefern. Das ist die Lösung!
+2. Hole dir die Keepass-Datei aus den Testressourcen: Wir waren so dumm, die gleiche Datei in `src/test/resources/alibabacreds.kdbx` abzulegen, sodass du diese Datei ebenfalls öffnen kannst.
+ - Schau dir das Projekt mit Git an und öffne die Datei oder lade sie von https://github.com/OWASP/wrongsecrets/blob/master/src/test/resources/alibabacreds.kdbx[Github] herunter.
+ - Öffne die Datei mit KeepassX. Es erscheint eine Passwortabfrage.
+ - Überprüfe zunächst den Code von `Challenge14.java` unter https://github.com/OWASP/wrongsecrets/blob/master/src/main/java/org/owasp/wrongsecrets/challenges/docker/Challenge14.java[github], um herauszufinden, wo das Passwort möglicherweise gespeichert ist. Öffne anschließend die Datei `Application.properties` im Ordner `src/resources` unter https://github.com/OWASP/wrongsecrets[*Ziel-Repository*] und prüfe die Eigenschaft, die das KeePass-Passwort enthält.
+- Öffne nun die KeePass-Datei mit dem gefundenen Passwort. Der Inhalt sollte dir die Zugangsdaten für Alibaba Cloud liefern. Das ist die Lösung!

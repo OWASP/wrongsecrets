@@ -1,0 +1,27 @@
+Este desafío se puede resolver siguiendo los siguientes pasos:
+
+1. Encuentra el secreto con la línea de comandos.
+- utilice `kubectl exec vault-0 -n vault -- vault kv get secret/wrongsecret` para encontrar los datos.
+
+
+2. Encuentra el secreto en Vault usando el token raíz registrado:
+- Al configurar el entorno de K8s, el script le indica el valor del token raíz como se muestra a continuación:
+
+    Key                  Value
+    ---                  -----
+    token                s.Jqka4lSy8ayQw2LFsvyAgnTI
+    token_accessor       HEr9RYa3OcZNDOHeFRXIMYCV
+    token_duration       ∞
+    token_renewable      false
+    token_policies       ["root"]
+    identity_policies    []
+    policies             ["root"]
+
+
+- Utilice el token para iniciar sesión en Vault, accesible a través del puerto 8200.
+- Echa un vistazo a tu alrededor: ¿puedes encontrar la ubicación del secreto en la lista de secretos?
+
+3. Encuentra el secreto como miembro del SRE.
+- Acceda a la interfaz web de la bóveda.
+- Inicia sesión con el nombre de usuario "helper" y la contraseña "foo".
+- Encuentra el verdadero secreto.
