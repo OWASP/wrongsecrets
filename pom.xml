@@ -5,13 +5,13 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>4.1.1</version>
+    <version>4.1.2</version>
     <!-- lookup parent from repository -->
   </parent>
 
   <groupId>org.owasp</groupId>
   <artifactId>wrongsecrets</artifactId>
-  <version>1.14.2RC2-SNAPSHOT</version>
+  <version>1.14.2-SNAPSHOT</version>
 
   <name>OWASP WrongSecrets</name>
   <description>Examples with how to not use secrets</description>
@@ -47,7 +47,7 @@
     <archunit.version>1.5.1</archunit.version>
     <asciidoctor.maven.plugin.version>3.2.0</asciidoctor.maven.plugin.version>
     <asciidoctorj.version>3.0.1</asciidoctorj.version>
-    <aws.sdk.version>2.56.0</aws.sdk.version>
+    <aws.sdk.version>2.59.1</aws.sdk.version>
     <bootstrap.version>5.3.8</bootstrap.version>
     <checkstyle-maven.version>3.6.0</checkstyle-maven.version>
     <checkstyle.version>13.11.0</checkstyle.version>
@@ -63,34 +63,34 @@
     <gatling.version>3.16.0</gatling.version>
     <github.button.version>2.14.1</github.button.version>
     <google-java-format.version>1.36.0</google-java-format.version>
-    <google.cloud.libraries-bom.version>26.90.0</google.cloud.libraries-bom.version>
+    <google.cloud.libraries-bom.version>26.91.0</google.cloud.libraries-bom.version>
     <!-- Pin Groovy to 4.x for thymeleaf-layout-dialect compatibility (Spring Boot 4.x manages 5.x) -->
     <groovy.version>4.0.25</groovy.version>
     <java.version>26</java.version>
     <jquery.version>3.7.1</jquery.version>
-    <jruby.version>10.1.2.0</jruby.version>
+    <jruby.version>10.1.3.0</jruby.version>
     <lombok.version>1.18.48</lombok.version>
     <maven-compiler-plugin.version>3.16.0</maven-compiler-plugin.version>
     <maven-dependency-plugin.version>3.11.0</maven-dependency-plugin.version>
-    <maven-surefire-plugin.version>3.6.0</maven-surefire-plugin.version>
+    <maven-surefire-plugin.version>3.6.1</maven-surefire-plugin.version>
     <maven.compiler.proc>full</maven.compiler.proc>
     <maven.compiler.source>26</maven.compiler.source>
     <maven.compiler.target>26</maven.compiler.target>
-    <node.version>v26.8.1</node.version>
-    <npm.version>11.19.0</npm.version>
+    <node.version>v26.12.1</node.version>
+    <npm.version>11.20.0</npm.version>
     <spotbugs-maven.version>4.10.5.0</spotbugs-maven.version>
     <spotbugs.version>4.10.5</spotbugs.version>
     <spotless-maven-plugin.version>3.10.4</spotless-maven-plugin.version>
     <spring-boot.version>4.1.1</spring-boot.version>
-    <spring-vault.version>4.1.0</spring-vault.version>
-    <spring.cloud-version>2025.1.3</spring.cloud-version>
+    <spring-vault.version>4.1.1</spring-vault.version>
+    <spring.cloud-version>2025.1.4</spring.cloud-version>
     <spring.security.version>7.0.6</spring.security.version>
     <springdoc-maven.version>1.5</springdoc-maven.version>
-    <springdoc.version>3.1.1</springdoc.version>
+    <springdoc.version>3.2.0</springdoc.version>
     <system-stubs-jupiter.version>2.1.8</system-stubs-jupiter.version>
     <testcontainers-cypress.version>1.10.0</testcontainers-cypress.version>
     <testcontainers.version>1.21.4</testcontainers.version>
-    <thymeleaf-extras-springsecurity6.version>3.1.5.RELEASE</thymeleaf-extras-springsecurity6.version>
+    <thymeleaf-extras-springsecurity6.version>3.1.7.RELEASE</thymeleaf-extras-springsecurity6.version>
     <thymeleaf.layout.version>3.4.0</thymeleaf.layout.version>
     <tidy-maven-plugin.version>1.4.1</tidy-maven-plugin.version>
   </properties>

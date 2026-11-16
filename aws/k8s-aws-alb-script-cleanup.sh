@@ -21,6 +21,9 @@ else
   echo "CLUSTERNAME is not set or empty, defaulting to ${CLUSTERNAME}"
 fi
 
+aws eks update-kubeconfig --region $AWS_REGION --name $CLUSTERNAME --kubeconfig ~/.kube/wrongsecrets
+export KUBECONFIG=~/.kube/wrongsecrets
+
 ACCOUNT_ID=$(aws sts get-caller-identity | jq '.Account' -r)
 echo "ACCOUNT_ID=${ACCOUNT_ID}"
 

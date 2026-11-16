@@ -21,6 +21,7 @@ What to do instead:
 
 - Keep credentials out of the instruction files and let the agent read them
   from the environment, for example `$STAGING_DEPLOY_TOKEN`.
+- In case of (autonomous and/or remote) agents: always use something like a secrets proxy pattern.
 - Document *which* variable is required and *where* to obtain it, never the
   value itself.
 - Give every consumer a short-lived, least-privilege credential instead of one
