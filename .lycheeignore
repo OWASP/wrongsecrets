@@ -15,6 +15,9 @@ https://betterprogramming.pub/stop-writing-bad-commit-messages-8df79517177d
 # Twitter its API does not like us
 https://twitter.com/intent/tweet?*
 
+# LinkedIn rejects automated checks of the README share link with 403
+^https://www\.linkedin\.com/shareArticle/\?url=https://www\.github\.com/OWASP/wrongsecrets&title=OWASP%20WrongSecrets$
+
 # Trust that these github links work
 https://github.com/OWASP/CheatSheetSeries*
 https://github.com/OWASP/wrongsecrets*
