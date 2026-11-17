@@ -138,7 +138,7 @@ jobs:
               --retry 5 \
               --retry-delay 2 \
               "http://localhost:8080/spoil/challenge-$challenge" \
-              | grep -q spoiler-answer
+              | grep spoiler-answer > /dev/null
             then
               echo "spoil-challenge-$challenge works"
             else
