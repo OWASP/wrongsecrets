@@ -18,7 +18,6 @@ import org.owasp.wrongsecrets.asciidoc.AsciiDocGenerator;
 import org.owasp.wrongsecrets.asciidoc.PreCompiledGenerator;
 import org.owasp.wrongsecrets.asciidoc.TemplateGenerator;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.junit.jupiter.api.Disabled;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.annotation.Bean;
