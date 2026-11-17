@@ -56,18 +56,12 @@
                            data-bs-toggle="dropdown" aria-expanded="false"
                            th:text="#{nav.language}">Language</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" th:href="@{|${requestURI}?lang=en|}"
-                                   th:text="#{lang.en}">English</a></li>
-                            <li><a class="dropdown-item" th:href="@{|${requestURI}?lang=nl|}"
-                                   th:text="#{lang.nl}">Dutch</a></li>
-                            <li><a class="dropdown-item" th:href="@{|${requestURI}?lang=de|}"
-                                   th:text="#{lang.de}">German</a></li>
-                            <li><a class="dropdown-item" th:href="@{|${requestURI}?lang=es|}"
-                                   th:text="#{lang.es}">Spanish</a></li>
-                            <li><a class="dropdown-item" th:href="@{|${requestURI}?lang=fr|}"
-                                   th:text="#{lang.fr}">French</a></li>
-                            <li><a class="dropdown-item" th:href="@{|${requestURI}?lang=uk|}"
-                                   th:text="#{lang.uk}">Ukrainian</a></li>
+                            <li><a class="dropdown-item" th:href="@{|${requestURI}?lang=en|}">English</a></li>
+                            <li><a class="dropdown-item" th:href="@{|${requestURI}?lang=nl|}">Nederlands</a></li>
+                            <li><a class="dropdown-item" th:href="@{|${requestURI}?lang=de|}">Deutsch</a></li>
+                            <li><a class="dropdown-item" th:href="@{|${requestURI}?lang=es|}">Español</a></li>
+                            <li><a class="dropdown-item" th:href="@{|${requestURI}?lang=fr|}">Français</a></li>
+                            <li><a class="dropdown-item" th:href="@{|${requestURI}?lang=uk|}">Українська</a></li>
                         </ul>
                     </li>
                     <div class="theme-switch toggle-button mt-10" th:attr="data-cy='dark-mode-radio'">

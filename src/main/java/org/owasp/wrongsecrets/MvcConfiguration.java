@@ -1,5 +1,6 @@
 package org.owasp.wrongsecrets;
 
+import jakarta.annotation.PostConstruct;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
@@ -32,6 +33,12 @@ import org.thymeleaf.templateresolver.ITemplateResolver;
 @Slf4j
 public class MvcConfiguration implements WebMvcConfigurer {
 
+  @PostConstruct
+  public void init() {
+    // Force English as the default locale to prevent system locale from interfering
+    Locale.setDefault(Locale.ENGLISH);
+  }
+
   /** Supported locales for the language toggle. */
   public static final List<Locale> SUPPORTED_LOCALES =
       List.of(
@@ -52,17 +59,11 @@ public class MvcConfiguration implements WebMvcConfigurer {
     return sessionLocaleResolver;
   }
 
-  /** Interceptor that reads the {@code lang} request parameter and updates the session locale. */
-  @Bean
-  public LocaleChangeInterceptor localeChangeInterceptor() {
-    LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
-    localeChangeInterceptor.setParamName("lang");
-    return localeChangeInterceptor;
-  }
-
   @Override
   public void addInterceptors(InterceptorRegistry registry) {
-    registry.addInterceptor(localeChangeInterceptor());
+    LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
+    localeChangeInterceptor.setParamName("lang");
+    registry.addInterceptor(localeChangeInterceptor);
   }
 
   @Bean
