@@ -1,6 +1,7 @@
 package org.owasp.wrongsecrets;
 
 import java.time.Duration;
+import java.util.Locale;
 import org.owasp.wrongsecrets.challenges.kubernetes.Vaultinjected;
 import org.owasp.wrongsecrets.challenges.kubernetes.Vaultpassword;
 import org.owasp.wrongsecrets.definitions.ChallengeDefinitionsConfiguration;
@@ -20,6 +21,8 @@ import org.springframework.web.client.RestClient;
 public class WrongSecretsApplication {
 
   public static void main(String[] args) {
+    // Force English as the default locale to prevent system locale from interfering
+    Locale.setDefault(Locale.ENGLISH);
     SpringApplication.run(WrongSecretsApplication.class, args);
   }
 
