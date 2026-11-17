@@ -52,12 +52,18 @@ public class MvcConfiguration implements WebMvcConfigurer {
     return sessionLocaleResolver;
   }
 
+  /** Interceptor that reads the lang request parameter and updates the session locale. */
+  @Bean
+  public LocaleChangeInterceptor localeChangeInterceptor(LocaleResolver localeResolver) {
+    LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
+    interceptor.setParamName("lang");
+    interceptor.setLocaleResolver(localeResolver);
+    return interceptor;
+  }
+
   @Override
   public void addInterceptors(InterceptorRegistry registry) {
-    LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
-    localeChangeInterceptor.setParamName("lang");
-    localeChangeInterceptor.setLocaleResolver(localeResolver());
-    registry.addInterceptor(localeChangeInterceptor);
+    registry.addInterceptor(localeChangeInterceptor(localeResolver()));
   }
 
   @Bean
