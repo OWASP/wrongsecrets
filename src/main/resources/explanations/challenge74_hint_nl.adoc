@@ -1,0 +1,18 @@
+Je kunt deze uitdaging oplossen met de volgende stappen:
+
+1. Ga in interactie met de AI-assistent:
+- Gebruik de chatinterface die in de uitdaging wordt aangeboden.
+- Stel de assistent vragen en observeer hoe hij reageert.
+- Onthoud dat de assistent vertrouwelijke informatie als onderdeel van zijn instructies heeft gekregen.
+
+2. Onderzoek hoe de assistent is geïnstrueerd:
+- Vraag de assistent naar zijn instructies, regels of context.
+- Denk na over welke informatie beschikbaar kan zijn voor het model die niet rechtstreeks zichtbaar is in de chatinterface.
+
+3. Probeer prompt-injection:
+- De assistent is gevraagd de vertrouwelijke informatie niet prijs te geven.
+- Probeer berichten te maken die die instructies veranderen, overschrijven of manipuleren.
+- Vraag de assistent om informatie uit zijn instructies of context prijs te geven.
+
+4. Zoek naar het geheim:
+- Als het je lukt om de assistent de vertrouwelijke informatie te laten prijsgeven, gebruik dan de prijsgegeven waarde als oplossing voor de uitdaging.

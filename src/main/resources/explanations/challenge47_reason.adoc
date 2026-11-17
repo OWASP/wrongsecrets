@@ -13,4 +13,4 @@ Let's consider an example involving a template injection attack in a scripted la
 . When the template is processed it can become:
 * $connection = "password='; system('rm -rf /'); //"
 
-To prevent such issues it is crucial to ensure that the values retrieved from Vault are properly validated.
+To prevent such issues, do not insert secret values into executable source code or evaluate them as template expressions. Pass secrets to the application as runtime configuration where possible; otherwise, use context-appropriate escaping, restrict access to rendered files, and ensure secrets are not written to logs.

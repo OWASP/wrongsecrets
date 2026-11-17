@@ -1,0 +1,9 @@
+*Waarom code gebruiken om geheimen in te plaatsen een slecht idee is.*
+
+Je kunt nu zien dat je veel geheimen die in code zijn opgeslagen eenvoudig kunt detecteren. Zelfs als de code gecompileerd is, kun je die reverse-engineeren om het geheim te vinden. Daarom zijn hardgecodeerde geheimen nooit een goed idee. We grijpen vaak naar de misvatting dat, als ik het niet kan reverse-engineeren, een aanvaller dat ook niet kan, en daarom denken veel mensen dat hard coderen in C/C++/Golang veiliger is dan in Java. Voor wie dat denkt: decompileer een app met tools zoals https://ghidra-sre.org/[*Ghidra*].
+
+De geheimhouding van een geheim in code is één ding. Een andere uitdaging is openbaarheid: iedereen met toegang tot de code en/of de gecompileerde bestanden kan het geheim te weten komen. Om het erger te maken: als de ontwikkelaar die het geheim heeft hardgecodeerd de organisatie verlaat, kan hij het geheim nog steeds kennen, want het zit nog altijd in de code! Op dezelfde manier: als de code lekt of het bestand lekt, wordt het geheim gecompromitteerd en is roteren lastig. Bovendien: weet jij na een paar jaar nog waar dit wachtwoord staat?
+
+Wat je in plaats daarvan kunt doen:
+- Houd geheimen buiten broncode en gecompileerde bestanden. Haal ze op runtime op uit een secrets manager of via een workload identity met nauwkeurig afgebakende toegang.
+- Scan repositories en build-artifacts op geheimen en roteer elke credential die aan Git is gecommit of is meegeleverd.

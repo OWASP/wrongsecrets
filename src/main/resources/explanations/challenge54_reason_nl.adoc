@@ -1,0 +1,12 @@
+=== Waarom secrets in .gitignore plaatsen een beveiligingsrisico is
+
+Developers werken configuratiebestanden zoals `.gitignore` regelmatig bij en laten daarbij wel eens gevoelige informatie achter—zoals wachtwoorden, tokens of kritieke bestandspaden. Deze geheimen, ook al zijn ze versleuteld, vormen risico's:
+
+- Aanvallers kunnen de geheimen ontdekken en ontsleutelen.
+- Vergeten geheimen in openbare bestanden wijzen op slechte beveiligingspraktijken en zwak secretbeheer.
+
+Deze uitdaging laat het belang zien van codereviews en ervoor zorgen dat secrets nooit per ongeluk worden gecommit of achtergelaten.
+
+Wat je in plaats daarvan kunt doen:
+- Gebruik `.gitignore` niet als plek om secrets op te slaan. Bewaar inloggegevens in een secrets manager; als lokale ontwikkeling een bestand nodig heeft, houd het dan buiten versiebeheer en beperk de toegang ertoe op het bestandssysteem. Scan de repository op per ongeluk gelekte gegevens.
+- Als een geheim is gecommit, verwijder het uit het bestand en vernieuw of herroep het; het verwijderen in een latere commit haalt het niet uit de Git-geschiedenis.

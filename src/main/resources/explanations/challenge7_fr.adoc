@@ -1,0 +1,5 @@
+=== Un secret caché dans le coffre-fort
+
+Le secret ne réside donc plus dans Kubernetes ni dans le code… du moins, l’espère le développeur.
+Si ce défi est activé et que vous avez suivi les instructions du fichier `README.md`, vous devriez pouvoir exécuter le défi sur K8s/Minikube et vous pouvez maintenant rechercher le secret.
+Quelle est l'erreur commise ici ? https://github.com/trufflesecurity/truffleHog[*Trufflehog*] aurait peut-être pu aider si l'entropie était un peu plus élevée ;-).

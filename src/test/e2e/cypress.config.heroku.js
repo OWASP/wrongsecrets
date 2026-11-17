@@ -5,6 +5,7 @@ module.exports = defineConfig({
   e2e: {
     baseUrl: 'https://wrongsecrets.herokuapp.com/',
     specPattern: 'cypress/integration/*.cy.js',
+    excludeSpecPattern: ['*.hot-update.js', 'cypress/integration/languageToggle.cy.js'],
     reporter: 'cypress-multi-reporters',
     pageLoadTimeout: 60000,
     reporterOptions: {

@@ -1,0 +1,10 @@
+*Pourquoi copier les spécifications est une mauvaise idée*
+
+Lorsqu'on tente de mettre en œuvre des contrôles cryptographiques, cela peut s'avérer très intimidant : il y a beaucoup de détails auxquels il faut prêter attention.
+Vous savez désormais qu'il est déconseillé de copier systématiquement tous les éléments primitifs d'un exemple pour votre propre implémentation. Dans cet exemple, nous avons copié la clé HMAC d'une spécification NIST, que n'importe qui aurait pu utiliser pour tenter de la deviner par force brute.
+
+Veuillez noter que la copie des clés à partir des spécifications/exemples ne s'applique pas seulement aux HMAC, mais à toute opération cryptographique (signature, chiffrement, déchiffrement, etc.).
+
+Vous avez encore besoin de générer une clé ? Assurez-vous d’utiliser un générateur de nombres aléatoires sécurisé et la bibliothèque appropriée à votre environnement d’exécution pour générer la clé.
+
+Pour une sécurité renforcée, utilisez un système de génération et/ou de dérivation de clés où chaque nouveau message possède une clé différente. Vous bénéficiez ainsi d'une confidentialité persistante parfaite. Cela garantit que les anciens messages ne pourront pas être déchiffrés si une clé est compromise.

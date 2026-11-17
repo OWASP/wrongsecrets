@@ -1,0 +1,42 @@
+Deze uitdaging kun je op de volgende manieren oplossen:
+
+- Gebruik de container zelf:
+
+  1. Clone de repository met de bestanden van de uitdaging:
+     ```
+     git clone https://github.com/OWASP/wrongsecrets.git
+     cd wrongsecrets
+     ```
+
+  2. Zoek het bestand `docker-create.sh` in de repository. Dit bestand bevat de buildlogica die Acme Inc. gebruikt om de Docker-container te maken.
+
+  3. Bouw het Docker-image door het script `docker-create.sh` uit te voeren:
+     ```
+     ./docker-create.sh
+     ```
+
+  4. Start de Docker-container met het gebouwde image om bij de omgeving te komen:
+     ```
+     docker run -it jeroenwillemsen/wrongsecrets:local-test-no-vault sh
+     ```
+
+  5. Onderzoek het bestandssysteem van de container om het secretbestand te vinden:
+     ```
+     / $ cat var/run/secrets2/secret.txt
+     ```
+
+  6. De inhoud van het bestand `secret.txt` is je antwoord.
+
+- Zoek het geheim in het buildx-script:
+
+1. Clone de repository met de bestanden van de uitdaging:
+     ```
+     git clone https://github.com/OWASP/wrongsecrets.git
+     cd wrongsecrets
+     ```
+2. Zoek het bestand `docker-create.sh` in de repository. Dit bestand bevat de buildlogica die Acme Inc. gebruikt om de Docker-container te maken.
+
+3. Je vindt de in de container geïnjecteerde hardgecodeerde secret `$SECRET_VALUE` in de functie `create_containers`
+
+
+De verkeerde configuratie laat zien hoe secrets, die veilig tijdens het Docker-buildproces worden doorgegeven met `--secret`, alsnog blootgesteld kunnen worden wanneer ze onjuist in de container worden opgeslagen. Je bevindingen helpen Acme Inc. dit kritieke probleem te begrijpen en te verhelpen.

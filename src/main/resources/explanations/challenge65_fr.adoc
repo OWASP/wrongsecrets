@@ -1,0 +1,10 @@
+=== Se cacher dans les binaires, partie 6 : l’interface de ligne de commande Java simple
+
+Les chaînes de caractères brutes dans une interface de ligne de commande Java sont faciles à récupérer une fois le fichier JAR téléchargé. Saurez-vous trouver le secret caché dans notre interface de ligne de commande Java ?
+
+Pour résoudre ce problème :
+
+. Téléchargez et examinez https://github.com/OWASP/wrongsecrets/raw/master/src/main/resources/executables/wrongsecrets-java.jar[wrongsecrets-java.jar].
+. Décompilez le fichier JAR ou inspectez la classe principale avec un décompilateur Java tel que CFR, JADX, IntelliJ IDEA ou `javap`.
+. Recherchez la classe qui renvoie le secret et identifiez la chaîne de caractères en clair intégrée dans l'interface de ligne de commande.
+. Une fois que vous aurez récupéré la valeur secrète exacte, vous pourrez la soumettre dans la case ci-dessous ou la valider avec `java -jar wrongsecrets-java.jar <your recovered secret>`.

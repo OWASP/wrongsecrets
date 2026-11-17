@@ -3,3 +3,5 @@
 As you can tell by now: there are many ways to get to a secret: whether hardcoded, stored in a misconfigured third party solution, or stored correctly, but with the wrong IAM access rights in accounts next to it. You will, by now see, why we say that "your security maturity reflects in your secrets management".
 
 In this specific case, this kind of role assumption should be impossible given the proper configuration, but it's a good idea to monitor for these events and flag them as suspicious.
+
+Restrict role trust policies to the intended principals and required conditions, and grant each role only the permissions its workload needs. Monitor role-assumption events and investigate unexpected principals or sessions. Note: this holds both for services as well as for humans.

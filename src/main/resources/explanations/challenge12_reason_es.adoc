@@ -1,0 +1,9 @@
+*Por qué usar contenedores para guardar secretos es una mala idea*
+
+Como ya habrás podido comprobar, es fácil detectar cualquier secreto almacenado en un contenedor. Ya sea una variable de entorno, un archivo u otra propiedad: si un sistema puede leerlo, un humano también puede.
+
+Dado que se considera una buena práctica que un contenedor sea inmutable y esté versionado, a menudo terminarás con el secreto dentro de un contenedor para siempre, a menos que lo elimines nuevamente del registro.
+
+Nota: al reducir la cantidad de ejecutables en un contenedor (de modo que no sea posible acceder a la consola), no olvide eliminar `Openssl client` y binarios sencillos como `ls` y `cat`. Esto ayuda a prevenir que un atacante acceda al contenido del contenedor.
+
+Mantén los secretos fuera de las capas de la imagen y proporciona en tiempo de ejecución mediante un gestor de secretos o un mecanismo propio de la plataforma, con acceso limitado a la carga de trabajo que lo necesita. Rota cualquier secreto que haya estado incluido en una imagen.

@@ -1,0 +1,66 @@
+*Pourquoi l'utilisation des configmaps n'est pas une bonne idée*
+
+Les ConfigMaps n'ont jamais été conçues pour héberger des secrets. Elles ont plutôt été conçues pour héberger des données supplémentaires pour votre Job ou Pod et d'autres ressources Kubernetes.
+Les ConfigMaps sont généralement accessibles à tous ceux qui doivent développer ou exploiter les processus nécessitant des données issues de la ConfigMap. Il est néanmoins possible de restreindre l'accès à la ConfigMap via un contrôle d'accès basé sur les rôles (RBAC). En production, il peut être judicieux de limiter l'accès à la ConfigMap : pour commencer, pourquoi ne pas interdire l'accès à tous ?
+Ensuite, les configmaps sont souvent stockées dans Git pour accélérer le développement, ce qui signifie qu'en général, les données sont assez exposées.
+
+Étant donné qu'une ConfigMap ne fonctionne qu'avec des chaînes de caractères, il est difficile de la chiffrer, sauf en créant une solution personnalisée. Bien sûr, il est possible de chiffrer l'emplacement où la ConfigMap est hébergée après son déploiement, mais elle reste alors lisible dans Git.
+
+Cela fait d'une configmap un élément peu approprié pour y placer un secret, surtout sans RBAC strict : de nombreuses personnes au sein de l'organisation qui y ont accès peuvent toujours le lire.
+
+Donc : évitez d'utiliser des configmaps pour les secrets et assurez-vous d'appliquer correctement le RBAC !
+
+Enfin, et surtout : nous pourrions facilement accéder au conteneur pour rechercher les variables d’environnement contenant le secret. Cela est lié à trois choses :
+
+- nous sommes autorisés à le faire grâce au RBAC, ce qui ne devrait pas être votre cas normal en PRD : sinon, n’importe qui dans votre organisation pourrait fouiller dans le conteneur.
+- Nous disposons de fichiers exécutables dans le conteneur (sh/openssl/etc.) que nous pouvons lancer pour établir un shell. Supprimer de votre conteneur tout binaire non essentiel contribue à réduire la surface d'attaque et complique la tâche d'un attaquant ayant réussi une exécution de code à distance (RCE) sur votre conteneur, qui pourrait ainsi accéder à d'autres parties du conteneur et obtenir davantage de droits d'exécution.
+- Nous avons exposé la ConfigMap comme une variable d'environnement. Cela signifie que toute personne ayant accès à l'environnement d'exécution du conteneur au sein du pod peut désormais extraire le secret. Nous avons rapproché le secret de l'utilisateur, mais peut-être pas encore suffisamment (par exemple, uniquement de l'application).
+
+
+*Explication détaillée de l'importance du contrôle d'accès basé sur les rôles (RBAC) et exemple*
+
+- Supposons que nous ayons un espace de noms `secure-middleware` et deux déploiements exécutés dans `redis` et `ngrok`.
+- Supposons que nous ayons quatre secrets dans l'espace de noms `secure-middleware`, dont un, `redis-master-secret`, accessible uniquement par le déploiement `redis`, et deux autres (`defualt` et `xyz`). Nous avons également le secret `ngrok-api-key`, accessible uniquement par le service `ngrok`.
+- Mais en raison d'un contrôle d'accès peu précis, l'utilisateur s'est vu attribuer le rôle RBAC suivant pour `ServiceAccount`.
+
+```yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: secure-middleware
+  name: ngrok-api-key
+rules:
+- apiGroups: [""]
+  resources: ["secrets"]
+  verbs: ["get", "watch", "list"]
+```
+
+- Donc, si l'attaquant a compromis le service `ngrok` ou si quelqu'un au sein de cette équipe n'a pas accès à Redis, il peut quand même voler d'autres choses.
+
+- En tant que ressources : `["secrets"]` donne accès à tous les secrets au niveau de l'espace de noms, ce qui signifie qu'ils peuvent lire 4 secrets de ce compte de service de pod.
+
+```bash
+export APISERVER=https://${KUBERNETES_SERVICE_HOST}
+export SERVICEACCOUNT=/var/run/secrets/kubernetes.io/serviceaccount
+export NAMESPACE=$(cat ${SERVICEACCOUNT}/namespace)
+export TOKEN=$(cat ${SERVICEACCOUNT}/token)
+export CACERT=${SERVICEACCOUNT}/ca.crt
+curl --cacert ${CACERT} --header "Authorization: Bearer ${TOKEN}" -X GET ${APISERVER}/api/v1/namespaces/${NAMESPACE}/secrets/redis-master-secret
+```
+
+- La politique RBAC devrait donc idéalement être la suivante :
+
+```yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: secure-middleware
+  name: ngrok-api-key
+rules:
+- apiGroups: [""]
+  resourceNames: ["ngrok-api-key"]
+  verbs: ["get", "watch", "list"]
+```
+
+- Consultez la section [Configuration incorrecte du principe de moindre privilège RBAC](https://madhuakula.com/kubernetes-goat/docs/scenarios/scenario-16) pour plus de détails.
+- La documentation officielle de Kubernetes concernant le RBAC [https://kubernetes.io/docs/reference/access-authn-authz/rbac/](https://kubernetes.io/docs/reference/access-authn-authz/rbac/)

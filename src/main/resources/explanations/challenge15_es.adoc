@@ -1,0 +1,12 @@
+=== Historial de Git
+
+Uno de los errores que solemos cometer al guardar secretos en Git es intentar eliminarlos sin rotar el secreto.
+Lo que lo empeora aún más es que, sin sobrescribir correctamente la confirmación con el secreto y/o eliminar la confirmación, esta permanecerá en el historial para siempre.
+
+Así que, por "error", guardamos algunas claves de acceso de AWS en Git. ¿Puedes encontrarlas?
+
+Nota: la respuesta contiene uno de los 3 perfiles de credenciales de AWS que se encuentran en un commit, sus comentarios de Java, pero sin el marcado de comentario de Java como una sola línea.
+Como alternativa, puede proporcionarnos la clave de acceso secreta que estamos buscando.
+
+Nota 2: ¿Sabías que estas son claves de acceso que funcionan? [No son claves de acceso "normales" de AWS: ¡son tokens canary! Aunque puedes usar `aws sts get-caller-identity` con ellas. Cuando las usas, se registran algunos de tus datos (IP/agente).]
+¡Visita https://wrongsecrets.herokuapp.com/stats[stats] cuando los hayas probado para obtener más información!

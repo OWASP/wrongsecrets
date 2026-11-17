@@ -1,0 +1,9 @@
+Цю проблему можна вирішити, виконавши такі кроки:
+
+1. Створіть два текстові файли `old_hashes.txt` та `new_hashes.txt`, що містять лише хеші, скопійовані з файлів дампа.
+2. Використовуючи `old_hashes.txt` як список паролів, ми можемо використовувати hashcat для перевірки хешів md5, які збігаються з хешами bcrypt.
+   - Встановіть https://hashcat.net/hashcat/[Hashcat]
+   - Введіть `hashcat -m 3200 -a 0 new_hashes.txt old_hashes.txt --show`. Ви знайдете один хеш bcrypt, зіставлений з хешем md5.
+3. Використовуючи `rockyou.txt` як список паролів, ми можемо зламати отриманий md5-хеш.
+   - Завантажте https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt[список паролів rockyou.txt]
+   - Введіть `hashcat -m 0 -a 0 82080600934821faf0bc59cba79964bc rockyou.txt --show`, щоб знайти зламаний пароль.

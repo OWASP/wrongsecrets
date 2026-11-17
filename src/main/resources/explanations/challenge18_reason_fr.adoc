@@ -1,0 +1,10 @@
+*Pourquoi le hachage MD5 et SHA1 seul ne suffit pas.*
+
+Les algorithmes de hachage MD5 et SHA1 ne sont plus considérés comme sûrs pour stocker des mots de passe seuls. Leur rapidité est certes leur principal atout, mais aussi leur principal défaut. Hacher des milliers de mots de passe ne prend que quelques minutes ; cela signifie également qu'il est tout aussi rapide de hacher des milliers de mots de passe courants et de comparer ces hachages à un hachage de référence.
+
+Les sels aident à prévenir les attaques précalculées, mais ils ne sont pas des secrets et ne rendent pas un hachage rapide sûr pour le stockage des mots de passe. Utilisez une fonction de hachage de mots de passe dédiée, comme Argon2id, avec un sel unique généré aléatoirement pour chaque mot de passe et un facteur de travail adapté.
+
+En tant qu'utilisateur, vous n'avez souvent aucun choix quant à la manière dont vos mots de passe sont stockés ; la seule chose que vous puissiez faire dans ce cas est d'essayer de les rendre plus longs et plus complexes. Un mot de passe chiffré SHA1 de 7 caractères, composé de majuscules et de minuscules, sera déchiffré par force brute en une minute environ, voire cinq, sur un GPU performant, tandis qu'un mot de passe de 25 caractères sera beaucoup plus long à déchiffrer.
+
+Notez que, lorsque ces types de hachages sont utilisés via `HTTP` (sans TLS, c'est-à-dire sans `HTTPS`) dans le cadre d'un contrôle d'intégrité, un attaquant de l'homme du milieu pourrait intercepter le contenu et le modifier, calculer les hachages et les renvoyer également.
+Un attaquant pourrait même réutiliser les mêmes hachages et fournir un contenu différent en se basant sur une collision de hachages. Par conséquent : utilisez toujours des connexions sécurisées lors du transfert de contenu et ne vous fiez jamais uniquement à des algorithmes de hachage comme `MD5` ou `SHA1` pour garantir l’intégrité des données.

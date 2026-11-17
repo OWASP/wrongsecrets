@@ -1,0 +1,10 @@
+*Waarom je je secretsmanagementoplossing goed moet configureren*
+
+https://www.vaultproject.io/[*Hashicorp Vault*] is ontworpen om geheimen te beheren. Vault beveiligt geheimen door ze te laten versleutelen en kent veel security controls om de (toegang tot de) geheimen te beveiligen.
+
+Sommige van deze controls zijn eenvoudig verkeerd te configureren of te misbruiken. In deze uitdaging hebben we alleen (root)tokens om vault te gebruiken en lekken we die zelfs per ongeluk naar Git. Deze tokens zouden eigenlijk nooit de standaardmanier moeten zijn om jezelf te authenticeren tegenover vault. Het is beter om in plaats daarvan authenticatie via https://www.vaultproject.io/docs/auth/ldap[LDAP] of https://www.vaultproject.io/docs/auth/azure[Azure] in te schakelen.
+
+Daarnaast heeft het geheim zelf geen metadata waarvoor het wordt gebruikt. Dat maakt het lastiger om het geheim in de loop van de tijd te onderhouden.
+
+Gebruik je een oplossing van derden, zoals Hashicorp Vault of een andere: zorg er dan voor dat je de documentatie goed leest en het systeem beveiligt.
+Daarnaast kun je een threatmodel-oefening doen om te begrijpen wat de risico's zijn wanneer het verkeerd wordt gebruikt.

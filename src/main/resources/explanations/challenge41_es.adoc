@@ -1,0 +1,13 @@
+=== Desbloqueo de contraseñas
+
+Un sitio web estaba utilizando https://en.wikipedia.org/wiki/MD5[MD5] para cifrar contraseñas, y sus desarrolladores descubrieron recientemente que alguien había publicado una copia de seguridad de sus datos de usuario.
+
+En un intento por mejorar la seguridad, decidieron migrar a un algoritmo de hash más robusto como https://en.wikipedia.org/wiki/Bcrypt[bcrypt].
+
+Los desarrolladores decidieron que la forma más rápida de migrar sería aplicar un hash a los hashes preexistentes usando bcrypt. Usar dos algoritmos de hash sería más seguro que usar uno, ¿verdad? Al parecer, sí.
+
+Lamentablemente, se produjo otra fuga de datos y, en esta ocasión, el volcado contenía las contraseñas cifradas con bcrypt. Al menos, esta vez están a salvo, ¿verdad?
+
+Para este desafío, se le proporcionan dos volcados de base de datos que contienen nombres de usuario y contraseñas. El archivo de volcado https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/db-dumps/db-dump.txt[db-dump.txt] se generó antes de la migración y el otro archivo de volcado https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/db-dumps/db-dump-2.txt[db-dump-2.txt] se generó después de la migración. Ambos archivos de volcado están disponibles dentro de la carpeta https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/db-dumps[db-dumps].
+
+Ahora bien, suponiendo que todos los usuarios, excepto uno, hayan cambiado sus contraseñas, ¿puedes encontrar la contraseña que no ha cambiado?

@@ -2,3 +2,7 @@
 
 Inputs to all transactions to contracts, like the state of internal storage of contracts on the chain are stored forever and are easy to query.
 Inputs to transactions are even visible before those transactions are accepted. This can lead to front-running by a 3rd party who has access to the pool of transactions and can send a transaction (with higher gas) that benefits from the known transaction running after it.
+
+What to do instead:
+- Do not send secret values or guesses in transaction inputs. Keep secret-dependent verification off-chain, or use a carefully designed zero-knowledge protocol when on-chain verification is required.
+- Treat values submitted in transactions or exposed in a public transaction pool as public, even if the contract does not store them.

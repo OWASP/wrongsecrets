@@ -1,0 +1,75 @@
+=== Pourquoi ce défi est important
+
+Ce défi met en évidence une vulnérabilité critique fréquemment rencontrée dans les systèmes de production : **des jetons d’API Slack codés en dur et stockés dans des variables d’environnement avec une obfuscation insuffisante**.
+
+==== La vulnérabilité
+
+**Cause première** : Les développeurs stockent souvent les jetons d’API dans des variables d’environnement en pensant qu’ils sont sécurisés, et les obscurcissent parfois en croyant que cela assure la sécurité.
+
+**Le problème** :
+1. **Les variables d'environnement sont facilement accessibles** à toute personne ayant accès au système.
+2. **Obfuscation ≠ Sécurité** : L’encodage Base64 est très facile à déchiffrer.
+3. **Risque de roulement du personnel** : Les jetons ne sont souvent pas renouvelés lorsque des employés quittent l’entreprise.
+4. **Inspection des conteneurs** : Les variables d’environnement sont visibles dans les métadonnées du conteneur.
+
+==== Scénarios d'attaques réelles
+
+**Scénario 1 - Accès des anciens employés** :
+- Un développeur quitte l'entreprise
+- Jeton Slack non renouvelé
+- Un ancien employé peut toujours utiliser le jeton pour :
+  - Lire les messages privés
+  - Publier du contenu malveillant
+  - Accéder aux informations confidentielles
+  - Usurper l'identité de l'application
+
+**Scénario 2 - Brèche dans un conteneur** :
+- L'attaquant accède à l'environnement de production
+- Analyse les variables d'environnement du conteneur
+- Trouve le jeton Slack obfusqué
+- Se désobfusque facilement et obtient l'accès à Slack
+
+**Scénario 3 - Exposition des journaux** :
+- Variables d'environnement enregistrées par erreur
+- Journaux stockés dans des emplacements non sécurisés
+- Des jetons obfusqués sont exposés mais facilement décodables.
+
+==== Meilleures pratiques de sécurité
+
+** ✅ Solutions appropriées** :
+
+1. **Utilisez la gestion des secrets** :
+   - Gestionnaire de secrets AWS
+   - Coffre de clés Azure
+   - Coffre-fort HashiCorp
+   - Secrets Kubernetes (avec chiffrement au repos)
+
+2. **Mise en œuvre de la rotation des jetons** :
+   - Rotation automatique régulière
+   - Rotation immédiate au départ de l'employé
+   - Des jetons à durée de vie limitée lorsque cela est possible
+
+3. **Contrôles d'accès** :
+   - Principe du moindre privilège
+   - Accès aux secrets basé sur les rôles
+   - Journaux d'audit pour les accès secrets
+
+4. **Ne jamais obscurcir pour des raisons de sécurité** :
+   - Utilisez plutôt un chiffrement approprié
+   - L'obfuscation n'offre aucun avantage en matière de sécurité
+   - Peut créer un faux sentiment de sécurité
+
+** ❌ Ce qu'il ne faut pas faire** :
+- Stocker les secrets dans des variables d'environnement
+- Utiliser l'obfuscation comme mesure de sécurité
+- Laisser les jetons actifs après le départ de l'employé
+- Des secrets codés en dur sous toutes leurs formes
+
+==== Évaluation d'impact
+
+**Confidentialité** : Élevée – Conversations Slack et divulgation des données
+**Intégrité** : Élevée - Capacité à publier du contenu malveillant
+**Disponibilité** : Moyenne – Risque d’interruption de service
+**Conformité** : Critique – Violation de la réglementation sur la protection des données
+
+Ce type de vulnérabilité a été constaté lors de nombreux audits de sécurité et témoigne d'une incompréhension fondamentale des bonnes pratiques en matière de gestion des secrets.

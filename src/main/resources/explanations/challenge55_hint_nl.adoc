@@ -1,0 +1,14 @@
+De privésleutel staat in het .ssh-deel van de container en is in dit geval per ongeluk gecommit naar git ;-).
+
+Je kunt de sleutel vinden door:
+
+1. hem uit git op te halen in het bestand [`.ssh/wrongsecrets.keys`]():
+- Clone de repository met `git clone https://github.com/OWASP/wrongsecrets`.
+- Ga naar de root van het project, cd naar de map `.ssh` en zoek het bestand `wrongsecrets.keys`.
+
+2. hem uit de docker-container op te halen:
+- Start de container lokaal met `docker run jeroenwillemsen/wrongsecrets:<TAGNAME-HERE>`
+ - Zoek de container-ID door `docker ps` in een volgende terminal uit te voeren
+ - Doe `docker exec -it <container id> sh`
+ - Ga naar /home/wrongsecrets/.ssh/
+ - Voer `cat wrongsecrets.keys` uit

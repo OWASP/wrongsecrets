@@ -1,0 +1,10 @@
+Download en pak de geëxporteerde skillbundle uit:
+
+----
+curl -sO http://localhost:8080/skills/claude/incident-reporter.zip
+unzip incident-reporter.zip
+----
+
+De `SKILL.md` verwijst alleen naar de meegeleverde uploader. Open `incident-reporter/scripts/upload_report.py` en bekijk `UPLOAD_TOKEN_B64`.
+
+Die waarde is nog niet het antwoord: de auteur heeft die met base64 gecodeerd zodat de secretscanner niet zou klagen. Decodeer die, bijvoorbeeld met `base64 -d`, en dien het gedecodeerde token in.

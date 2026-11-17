@@ -1,0 +1,8 @@
+*Pourquoi publier des captures d'écran de journaux dans un problème GitHub est une mauvaise idée*
+
+Il ne faut pas publier de captures d'écran de journaux dans un ticket GitHub car :
+1. Les données sont publiques (même sur un dépôt privé, souvent plus publiques que vous ne le souhaiteriez).
+2. Les captures d'écran ne peuvent pas être masquées comme du texte. Même si le secret est flouté, cela peut être rétabli.
+
+Vérifiez la présence de fuites de code dans la sortie et utilisez la syntaxe Markdown pour publier les journaux dans une issue GitHub. C'est également beaucoup plus pratique pour les mainteneurs qui tentent de vous aider à déboguer :)
+Si un identifiant a été exposé, révoquez-le ou régénérez-le immédiatement et supprimez le message ou la pièce jointe dans la mesure du possible ; considérez qu'il a peut-être déjà été copié.

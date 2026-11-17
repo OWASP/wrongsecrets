@@ -1,0 +1,13 @@
+Dit is een documentatie-uitdaging die kan worden opgelost door naar de Github Advisory te gaan.
+
+1. Kom aan de sleutel via de Github security advisory
+- Ga naar https://github.com/OWASP/wrongsecrets/security/advisories/GHSA-vv4g-7gjw-fvqw[de advisory].
+- Vind de Google API-sleutel.
+- Kopieer die in het antwoordvak.
+
+2. Volg de informatie van de Github security advisory
+- Ga naar https://github.com/OWASP/wrongsecrets/security/advisories/GHSA-vv4g-7gjw-fvqw[de advisory].
+- Vind de versie die wordt beïnvloed (1.6.8RC1).
+- Open de tag op https://github.com/OWASP/wrongsecrets/tree/1.6.8RC1[Github].
+- Vind de Google API-sleutel in challenge 35.
+- Kopieer die in het antwoordvak.

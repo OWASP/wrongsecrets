@@ -1,0 +1,5 @@
+*Warum das Speichern von Geheimnissen auf der Blockchain eine schlechte Idee ist*
+
+Du solltest niemals Geheimnisse in der Blockchain speichern. Alle Daten sind öffentlich. Insbesondere öffentliche Variablen sind sehr leicht lesbar.
+
+Musst du weiterhin ein Geheimnis verwenden? Stelle sicher, dass es Teil eines unterstützenden Systems ist (z. B. eines von dir erstellten externen Dienstes).

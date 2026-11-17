@@ -1,0 +1,5 @@
+*Warum Schlüsselableitungsfunktionen bei Verwendung fest codierter Werte nicht sicher sind*
+
+Schlüsselableitungsfunktionen (KDFs) sind deterministisch. Das bedeutet, dass sie für eine gegebene Eingabe immer dasselbe Ergebnis liefern. Sind die Parameter also fest im Code verankert, kann jeder, der Zugriff auf den Code hat, die KDF mit den angegebenen Parametern ausführen und den Schlüssel erhalten.
+
+Verwende beim Ableiten eines Schlüssels aus einem Passwort eine KDF wie Argon2id mit einem eindeutigen, zufälligen Salt und geeigneten Kostenparametern. Für maschinell erzeugte Schlüssel verwende statt einer KDF einen kryptografisch sicheren Zufallszahlengenerator und speichere den Schlüssel getrennt von den verschlüsselten Daten.

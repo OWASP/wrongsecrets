@@ -1,0 +1,9 @@
+=== Descifrando el cifrado AES con una clave MD5 débil
+
+Imagina que eres un analista de seguridad investigando una aplicación móvil que maneja información confidencial. Descubres que el desarrollador está usando cifrado AES para proteger un secreto, pero en lugar de usar una función de derivación de clave (KDF) robusta, recurre al algoritmo MD5, que es inseguro, para derivar las claves de cifrado a partir de un simple PIN numérico.
+
+Has obtenido una cadena cifrada: `k800mdwu8vlQoqeAgRMHDQ==`. Sabes que esta cadena, al ser descifrada, revela el texto `the answer`.
+
+La clave utilizada para el cifrado AES se obtiene calculando el hash MD5 de un PIN, que es un número entre 0 y 99999. Tu tarea consiste en encontrar el PIN correcto que se utilizó para obtener la clave de cifrado y descifrar el secreto.
+
+¿Puedes averiguar el PIN correcto y desbloquear el secreto?

@@ -1,0 +1,5 @@
+*¿Por qué las funciones de derivación de claves no son seguras cuando se utilizan valores codificados directamente en el código?*
+
+Las funciones de derivación de claves (KDF) son deterministas. Esto significa que siempre devolverán el mismo resultado para una entrada dada. Por lo tanto, si los parámetros están codificados de forma fija, cualquier persona con acceso al código puede ejecutar la KDF con los parámetros especificados y obtener la clave.
+
+Utilice una KDF como Argon2id con una sal aleatoria única y parámetros de coste adecuados al derivar una clave a partir de una contraseña. Para claves generadas por máquina, utilice un generador de números aleatorios criptográficamente seguro en lugar de una KDF, y almacene la clave por separado de los datos cifrados.

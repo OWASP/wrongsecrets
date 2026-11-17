@@ -1,0 +1,32 @@
+Vous pouvez relever ce défi en suivant les étapes suivantes :
+
+- Créez un nouveau fichier de tâche `job.yaml` avec le contenu suivant :
+
+```yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: wrongsecret-3
+spec:
+  template:
+    spec:
+      serviceAccountName: default
+      containers:
+        - name: gcloud
+          image: gcr.io/google.com/cloudsdktool/cloud-sdk:latest
+          command:
+            [
+              "gcloud",
+              "secrets",
+              "versions",
+              "access",
+              "latest",
+              "--secret=wrongsecret-3",
+            ]
+      restartPolicy: Never
+```
+
+Cette tâche exécute la commande `gcloud secrets versions access latest --secret=wrongsecret-3`. Comme elle peut accéder au même compte de service que le pod du défi de secret, elle bénéficie des mêmes privilèges d'accès à GCP.
+
+- Appliquez la tâche avec `kubectl apply -f job.yaml`
+- Consultez les journaux de la tâche avec `kubectl logs job/wrongsecret-3`. Cela devrait vous indiquer la solution :)

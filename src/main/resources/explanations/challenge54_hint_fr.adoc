@@ -1,0 +1,13 @@
+Le secret est caché dans le fichier `.gitignore` sous forme de chiffrement AES-256-CBC.
+
+Suivez ces étapes pour décrypter le secret :
+
+1. Repérez le commentaire chiffré et la clé permettant de le déchiffrer dans `.gitignore`.
+2. Utilisez OpenSSL pour déchiffrer :
++
+[source,bash]
+----
+ echo "h0vRDUS3VDN2gwfd1oftcMtD/YlKE0YfHLTvyk/lrY4=" | openssl enc -aes-256-cbc -K 6b3b913c09d62238b9b8c0cc78904e7e1f9a99fd0a04ebae50a8a9881d452bbd \
+  -iv 30313233343536373839616263646566 \
+  -nosalt -base64 -d
+----

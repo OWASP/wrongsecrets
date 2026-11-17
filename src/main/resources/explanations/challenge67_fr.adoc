@@ -1,0 +1,9 @@
+=== Secrets envoyés à votre serveur de journaux cloud
+
+Les applications enregistrent rarement un secret intentionnellement. Le plus souvent, un événement d'audit, un dump de requête ou un champ de journal structuré contient une information d'identification. Comme la valeur est encodée, elle passe inaperçue lors des revues de code : elle ressemble simplement à une donnée opaque.
+
+Dans ce défi, l'application écrit cet événement d'audit dans la sortie standard. Elle ne renvoie jamais le secret via un point de terminaison et ne le monte jamais comme un fichier. La valeur n'apparaît que dans le flux de journaux collecté par votre fournisseur de cloud ; vous devrez donc interroger ce flux pour accéder aux journaux de votre cloud.
+
+Notez que la valeur enregistrée est encodée en Base64, donc trouver la ligne ne représente que la moitié du travail.
+
+Conseil : ceci est différent du défi 8. Dans ce dernier, la réponse est consignée en texte brut et vous pouvez la lire directement dans les journaux de votre conteneur local.

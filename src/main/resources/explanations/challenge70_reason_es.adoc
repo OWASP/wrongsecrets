@@ -1,0 +1,26 @@
+*¿Por qué un paquete de habilidades necesita la misma revisión que tu código fuente?*
+
+Un paquete de habilidades es un software distribuido. Contiene scripts ejecutables, se ejecuta en las máquinas de los desarrolladores y en la integración continua, y lo instalan personas que no lo escribieron. Tratarlo como si fuera simplemente un archivo Markdown es la forma en que se terminan distribuyendo secretos a gran escala.
+
+En este desafío se acumulan dos fallos:
+
+- El token está incluido en el paquete, por lo que todos los que instalen la habilidad recibirán una credencial compartida que funciona.
+- Al compartir la habilidad dentro de Claude, todos los que tengan acceso a la habilidad, tendrán acceso al secreto.
+- El token está codificado en base64, lo cual es *codificación*, no cifrado. Impide que un escáner de secretos ingenuo se active, pero no detiene a nadie más. Cualquiera que tenga el paquete puede decodificarlo con un solo comando.
+
+El segundo punto es el más peligroso de los dos, porque convierte un problema detectable en uno indetectable. El escáner se silencia, el hallazgo desaparece de la lista de casos pendientes y la credencial permanece válida durante años.
+
+----
+Qué hacer en su lugar:
+
+- Lee las credenciales del entorno o de un gestor de secretos en tiempo de ejecución y, si no están presentes, muestra un mensaje claro y visible.
+- Nunca intentes corregir un hallazgo de un escáner secreto codificando, dividiendo u ofuscando el valor. Repáralo eliminando el secreto y rotándolo.
+- Revisa todos los archivos de un paquete de habilidades, no solo el archivo `SKILL.md`. Los scripts, los documentos de referencia y la configuración de ejemplo forman parte de la superficie de ataque.
+- Verifica el paquete en CI: descomprímelo y ejecuta tu escáner de secretos sobre el contenido extraído, incluyendo un conjunto de reglas compatible con base64.
+- Publicar paquetes desde una canalización de compilación que no tenga acceso a las credenciales de producción.
+----
+
+[NOTE]
+====
+La codificación no es un control de seguridad. Si lo único que separa a un atacante de tus credenciales es un `base64 -d`, entonces las credenciales son públicas.
+====

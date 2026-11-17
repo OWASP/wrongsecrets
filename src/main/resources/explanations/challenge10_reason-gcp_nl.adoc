@@ -1,0 +1,8 @@
+*Toegang tot het beheerders-/eigenaarsaccount:*
+Als u het beheerders-/eigenaarsaccount van Google Cloud kunt gebruiken om toegang te krijgen tot de gegevens, kunt u zien waarom dit een slecht idee is voor productie. Kortom, met dit account kun je alles binnen het account wijzigen en kun je gemakkelijk alle geheimen ontfutselen.
+
+Tot slot: we konden gemakkelijk de container ingaan, om de berg met het geheim te pakken. Dit heeft met 3 dingen te maken:
+
+- dat mag bij ons via RBAC, wat bij PRD niet normaal zou moeten zijn: anders kan iedereen van uw organisatie in de container rondneuzen.
+- we hebben uitvoerbare bestanden in de container (sh/openssl/etc) die we kunnen uitvoeren om een shell in te stellen. Het verwijderen van niet-noodzakelijke binaire bestanden in uw container kan helpen het aanvalsoppervlak te verkleinen en het voor een aanvaller die een RCE in uw container heeft uitgevoerd moeilijker te maken om naar andere plaatsen in de container te springen om verder uitvoering te krijgen.
+- we hebben de configuratiemap weergegeven als een ENV. Dit betekent dat iedereen die de containerruntime binnen de pod heeft bereikt, nu het geheim kan dumpen. We hebben het geheim dichtbij de consument gebracht, maar misschien nog niet dichtbij genoeg (bijvoorbeeld alleen via de app).

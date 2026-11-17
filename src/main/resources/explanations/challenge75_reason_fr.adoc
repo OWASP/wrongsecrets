@@ -1,0 +1,55 @@
+*Pourquoi la validation d'un fichier settings.xml Maven entraîne la divulgation des identifiants de déploiement*
+
+Le fichier `settings.xml` est celui que Maven lit pour savoir où télécharger les dépendances
+et comment s'authentifier auprès des dépôts qui nécessitent une connexion. Sa
+section `<servers>` contient le nom d’utilisateur et le mot de passe en clair de chaque serveur configuré,
+et pour un compte de déploiement, ce mot de passe confère généralement le droit de
+publier des artefacts.
+
+Versionner un tel fichier semble inoffensif car la compilation fonctionne soudainement pour
+tout le monde, et c’est précisément l’échec que démontre ce défi :
+
+- Les identifiants restent indéfiniment dans l'historique Git. Supprimer le fichier ultérieurement
+  ne le supprime pas de l'historique, le mot de passe doit donc être traité comme
+  compromis dès l’instant où il a été poussé.
+- Toute personne et tout système pouvant lire le dépôt reçoivent également le
+  identifiants : forks, miroirs, exécuteurs CI, ordinateurs portables de développeurs et tout outil avec
+  accès en lecture.
+- Les identifiants de déploiement sont très précieux pour les attaques ciblant la chaîne d'approvisionnement. Grâce à eux,
+  un attaquant peut publier une version malveillante des artefacts du projet, après quoi
+  chaque utilisateur de ce dépôt récupère silencieusement la version corrompue.
+- Les identifiants de serveur, tels que l'identifiant Nexus dans ce défi, ne sont absolument pas secrets.
+  Ils indiquent seulement à quel dépôt appartient un identifiant d'accès ; ils ne protègent jamais
+  cet identifiant d'accès lui-même.
+- Les scanners de secrets ignorent souvent les fichiers XML ou ne reconnaissent pas les paramètres Maven, donc
+  la fuite peut survivre longtemps à tout examen.
+- Le chiffrement de mot de passe propre à Maven ne fait que masquer le mot de passe dans un
+  keystore obfusqué situé juste à côté du fichier ; il ne constitue donc pas une protection pour
+  tout ce qui est versionné.
+
+----
+Que faire à la place :
+
+- Conservez `settings.xml` dans `$HOME/.m2/` et ajoutez `settings.xml` à `.gitignore` afin qu’il
+ne puisse pas être versionné par accident.
+- Référencer les informations d'identification via des variables d'environnement ou l'interpolation de propriétés,
+par exemple `<password>${env.NEXUS_PASSWORD}</password>`, et indiquez la valeur
+au moment de l'exécution.
+- Dans l'intégration continue, injectez les identifiants à partir du magasin de secrets de l'intégration continue au lieu de les versionner
+dans le référentiel du pipeline.
+- Attribuez à chaque consommateur un jeton éphémère à privilèges minimaux qui ne peut être déployé que sur
+un seul dépôt, et limitez la portée du jeton à une fenêtre temporelle fixe.
+- Privilégiez les fonctionnalités des gestionnaires de référentiels qui évitent les mots de passe à longue durée de vie, telles que :
+jetons porteurs ou fédération d'identité de charge de travail.
+- Renouvelez immédiatement les informations d’identification dès leur apparition dans un commit et supprimez-les
+de l'historique là où votre plateforme le permet.
+- Analyser le dépôt, y compris les fichiers XML et de compilation, avec un scanner secret dans
+hooks pre-commit et CI.
+----
+
+[NOTE]
+====
+Un fichier `settings.xml` dans le dépôt est un véritable coffre d'identifiants à la vue de tous. N'importe quoi
+qui serait inacceptable dans un fichier `.java` est inacceptable dans un fichier de
+configuration Maven.
+====

@@ -1,0 +1,24 @@
+Vous pouvez relever ce défi grâce aux solutions alternatives suivantes :
+
+1. Utilisez `docker history` :
+- Téléchargez le conteneur,
+- Exécutez `docker history --no-trunc  jeroenwillemsen/wrongsecrets:<TAGNAME-HERE>` pour trouver les arguments utilisés pour le conteneur avec l'étiquette donnée.
+- Essayez maintenant de trouver le `ARG_BASED_PASSWORD` .
+
+2. Consultez le dépôt Docker en ligne :
+- Rendez-vous sur https://hub.docker.com/r/jeroenwillemsen/wrongsecrets[*Dépôt Docker WrongSecrets*]
+- Consultez l'étiquette qui vous concerne. Vous y trouverez toutes les commandes utilisées pour composer le conteneur. Quelle est la valeur de `ARG_BASED_PASSWORD` ?
+
+3. Utilisez Dockle https://github.com/goodwithtech/dockle[*Dockle*] :
+- Installez Dockle comme décrit sur sa page Github : https://github.com/goodwithtech/dockle
+- Exécutez `dockle jeroenwillemsen/wrongsecrets:<TAGNAME-HERE>` et utilisez sa sortie pour votre chasse aux secrets.
+
+4. Accédez au conteneur et affichez les variables d'environnement :
+- Démarrez le conteneur localement avec `docker run jeroenwillemsen/wrongsecrets:<TAGNAME-HERE>`
+- Trouvez l'identifiant du conteneur en exécutant la commande `docker ps` dans un autre terminal.
+- Exécutez `docker exec -it <container id> sh`
+- Dans le conteneur, exécutez `env` .
+
+5. Utilisez `docker inspect` pour trouver les variables d'environnement :
+- Téléchargez le conteneur,
+- Exécutez `docker inspect jeroenwillemsen/wrongsecrets:<TAGNAME-HERE>` et recherchez la section `Config` puis la section `Env`. Quelle est la valeur de `ARG_BASED_PASSWORD` ? Saviez-vous qu'avec https://stedolan.github.io/jq/[JQ], vous pouvez utiliser `docker inspect jeroenwillemsen/wrongsecrets:<TAGNAME-HERE> | jq '.[] | .Config.Env[]'` pour une recherche beaucoup plus rapide ?

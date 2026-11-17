@@ -1,0 +1,12 @@
+Ce défi peut être relevé en déchiffrant le secret encodé en base64 dans `secrchallenge.md`. Vous pouvez procéder de deux manières :
+
+1. Utiliser un outil de décryptage AES en ligne comme https://www.devglan.com/online-tools/aes-encryption-decryption[https://www.devglan.com/online-tools/aes-encryption-decryption]
+- Copiez le contenu du fichier `secrchallenge.md` et collez-le dans la zone de texte du déchiffreur.
+- Assurez-vous que le format d'entrée est `Base64` et que le mode de chiffrement est `ECB`.
+- Utilisez `secrchallenge.md` comme clé de déchiffrement et cliquez sur `Decrypt` pour obtenir le secret.
+
+2. Utilisation du terminal
+- Lancez le terminal depuis le répertoire `executables`.
+- Tapez `echo -n "secrchallenge.md" | xxd -p` pour convertir la clé en texte clair en une clé hexadécimale.
+- Ensuite, utilisez la clé de déchiffrement obtenue pour déchiffrer le fichier en saisissant `openssl enc -a -d -aes-128-ecb -in secrchallenge.md -K 736563726368616c6c656e67652e6d64 -out decrypted.md`
+- Copiez le secret du fichier `decrypted.md` situé dans le dossier `executables`.

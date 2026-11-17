@@ -1,0 +1,13 @@
+=== Wachtwoord-shucking
+
+Een website gebruikte https://en.wikipedia.org/wiki/MD5[MD5] om wachtwoorden te hashen, en de ontwikkelaars ontdekten onlangs dat iemand een dump van hun gebruikersgegevens had vrijgegeven.
+
+In een poging de beveiliging te verbeteren, besloten ze over te stappen op een sterker hashalgoritme zoals https://en.wikipedia.org/wiki/Bcrypt[bcrypt].
+
+De ontwikkelaars besloten dat de snelste manier om te migreren zou zijn om de bestaande hashes met bcrypt te hashen. Het gebruik van twee hashalgoritmen is veiliger dan het gebruik van één, toch? Dat lijkt het geval te zijn.
+
+Helaas vond er opnieuw een datalek plaats en deze keer bevatte de dump de met bcrypt gehashte wachtwoorden. Tenminste, dit keer zijn ze toch veilig?
+
+Voor deze uitdaging krijg je twee database-dumps met gebruikersnamen en wachtwoorden. Het dumpbestand https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/db-dumps/db-dump.txt[db-dump.txt] is gemaakt vóór de migratie en het andere dumpbestand https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/db-dumps/db-dump-2.txt[db-dump-2.txt] is gemaakt na de migratie. Beide dumpbestanden staan in de https://github.com/OWASP/wrongsecrets/tree/master/src/main/resources/executables/db-dumps[db-dumps-map].
+
+Nu geldt dat alle gebruikers behalve één hun wachtwoord hebben gewijzigd: kun jij het ongewijzigde wachtwoord vinden?

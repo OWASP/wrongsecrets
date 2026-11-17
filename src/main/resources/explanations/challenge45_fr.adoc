@@ -1,0 +1,4 @@
+=== Défi de sous-clé du coffre-fort
+
+Parfois, on souhaite simplement une entrée concise dans son système de gestion des secrets. Alors, pourquoi ne pas stocker son nom d'utilisateur et son mot de passe dans la même entrée ?
+Nous avons essayé, mais un nouveau problème est apparu ! Avec HashiCorp Vault, vous pouvez configurer des politiques d'accès à une sous-clé (qui est la clé de la valeur de votre secret). Saurez-vous retrouver le nom d'utilisateur aléatoire que nous avons créé pour ce défi ?

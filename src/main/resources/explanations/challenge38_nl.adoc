@@ -1,0 +1,9 @@
+=== Git Notes
+
+Git-commitberichten kunnen een constant pijnpunt zijn.
+
+Het is prima om een kort bericht, onleesbare praat of een simpele toetsenbordmash in een git-bericht te gebruiken, totdat je de ongelukkige taak hebt om het te reviewen. Op dat moment kunnen deze slordige berichten een nachtmerrie zijn.
+
+Git notes zijn er om dit op te lossen; het bestaat al lang maar wordt vaak over het hoofd gezien. Voeg extra metadata over de commit toe zonder het commitbericht zelf te beïnvloeden.
+
+Zoals bij alle Git: zodra informatie is gecommit, is het heel erg moeilijk om alle verwijzingen ernaar te verwijderen. Wat zou er mis kunnen gaan?

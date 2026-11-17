@@ -5,9 +5,11 @@ Secrets and terraform state:
 Terraform state can be stored in many places: locally, on a cloud provider its storage solution, etc.. It can easily happen that secrets end up in Terraform state, as the systems which are created by it often needs to communicate with other systems for which it requires authentication. So, ensure that secrets are always encrypted in terraform state, or ensure that all secrets are stored in a secrets management system. Alternatively, ensure the secret is created in Terraform, but the value is set and managed through a different process.
 
 Note that secrets are not the only reason not to let people access terraform state. TF state read access can expose configuration details to unauthorized eyes, while terraform write access can allow an attacker to setup a bogus state which, on the next terraform apply-run ends up with unauthorized changes.
+Use a protected remote state backend with encryption and locking, and restrict both read and write access. Marking a Terraform value as `sensitive` only hides it from normal CLI output; it does not remove it from state. If credentials reach state, rotate them.
 
 Access to the Administrator/owner account:
 If you were able to use the AWS administrator account to access the data, then you can see why this is a bad idea for production. Because with this account you can change anything within the account, and you can easily exfiltrate any of the secrets.
+Use separate least-privilege identities for workloads and people, and reserve the administrator account for monitored, MFA-protected break-glass use.
 
 Last but not least: we could easily exec into the container, to grep the mount with the secret. This has to do with 3 things:
 

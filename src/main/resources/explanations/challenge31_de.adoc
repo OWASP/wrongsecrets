@@ -1,0 +1,5 @@
+=== Geheimnis auf einer Webseite
+
+Ein Benutzer hat beim Hinzufügen von Inhalten zu unserer Website versehentlich die „Geheimzutat“ verschüttet.
+
+Kannst du das Geheimnis auf unserer Website https://owasp.org/www-project-wrongsecrets/ entdecken?

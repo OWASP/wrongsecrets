@@ -1,0 +1,26 @@
+=== Pista para el desafío 63
+Este desafío pone de manifiesto malas prácticas de cifrado, concretamente la inclusión de una clave de cifrado/descifrado directamente en el código fuente.
+
+**Dónde buscar:**
+1. **Busca el archivo fuente Java de Challenge63** en el directorio `challenges/docker/challenge63/`.
+2. **Busca las constantes estáticas finales de tipo String** cerca del principio de la clase.
+3. **Encontrarás la clave AES, el vector de inicialización (IV) y el texto cifrado** todo en el mismo archivo.
+
+**Cómo descifrar una vez que tenga la clave:**
+[source,python]
+----
+from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+from cryptography.hazmat.backends import default_backend
+import base64
+
+key = b'SuperSecretKey12'
+iv  = b'InitVector123456'
+ciphertext = base64.b64decode("TDPwOvcLsbCWV5erlk6OHFnlFoXNtdQOt2JQeq+i4Ho=")
+
+cipher = Cipher(algorithms.AES(key), modes.CBC(iv), backend=default_backend())
+decryptor = cipher.decryptor()
+plaintext = decryptor.update(ciphertext) + decryptor.finalize()
+print(plaintext.strip())
+----
+
+**Recuerda:** Si un atacante puede leer tu código fuente, las claves codificadas directamente en el código no ofrecen ninguna protección.

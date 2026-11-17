@@ -1,0 +1,18 @@
+Este desafío se puede resolver utilizando las siguientes formas:
+
+- Descifra el secreto sellado utilizando la clave privada accesible que se encuentra en el repositorio:
+  1. Clona el repositorio que contiene los archivos del desafío.
+  2. Localiza el archivo `sealed-challenge48.json` en el repositorio.
+  3. Busque el archivo de clave privada sin cifrar llamado `main.key` en el repositorio.
+  4. Utilice la herramienta `kubeseal` para descifrar el secreto sellado:
+     ``
+     kubeseal --recovery-unseal --recovery-private-key k8s/main.key < k8s/sealed-challenge48.json > unsealed-secret.yaml
+     ``
+  5. `unsealed-secret.yaml` es un secreto no sellado está codificado en base64, necesitamos decodificarlo y el texto resultante será la respuesta.
+
+- Obtén acceso directo al secreto:
+  1. Con acceso al clúster, ejecute `kubectl get secret challenge48secret -o yaml`.
+  2. Descifra el secreto.
+
+
+Nota: Asegúrese de tener una configuración válida de Kubernetes y acceso a un clúster de Kubernetes. Si está ejecutando esto en un entorno alojado donde no tiene acceso directo al clúster de Kubernetes, solicite al organizador de la solución alojada que ejecute los comandos por usted y le devuelva los resultados.

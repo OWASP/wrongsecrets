@@ -1,0 +1,5 @@
+*Waarom obfuscatie alleen een vangrail is.*
+
+Coderen, reflectie en lichte obfuscatie kunnen reverse engineering minder gemakkelijk maken, maar ze zorgen niet voor echte geheimhouding. De executable bevat nog steeds alles wat nodig is om het geheim terug te vinden.
+
+Als de applicatie het geheim lokaal kan afleiden, kan een vastberaden attacker dat ook. Bescherm geheimen door beslissingen over vertrouwen en geheimmateriaal naar gecontroleerde serverside-systemen te verplaatsen.

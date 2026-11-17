@@ -1,0 +1,22 @@
+*Por qué debes tener cuidado con CI/CD y los secretos*
+
+Al usar herramientas de CI/CD, a menudo es necesario que dichas herramientas (por ejemplo, el ejecutor/agente que ejecuta una tarea) utilicen un secreto para autenticarse en un servicio secundario. La extracción de estos secretos puede resultar bastante compleja.
+Hay varias maneras de hacerlo:
+
+- ejecutar una herramienta CI/CD en modo de depuración o solicitar más variables de entorno, que, a su vez, podrían ser legibles para cualquiera que tenga acceso a la compilación (registro).
+- utilizar técnicas de exfiltración como las útiles en este desafío para obtener el secreto, que podría ser legible para cualquiera que tenga acceso a la compilación (registro).
+- Utiliza tus derechos de acceso como administrador/mantenedor de un repositorio o proyecto para obtener los secretos.
+
+Por lo tanto, es vital que usted:
+
+- Limitar quién tiene acceso a las ejecuciones de trabajos/configuración de trabajos/secretos reales
+- Registrar todas las acciones del sistema y alertar sobre cualquier acción de exfiltración.
+- Asegúrate de no tener secretos que permanezcan ocultos en tu configuración de CI/CD.
+
+¿Quieres saber más? Consulta los recursos en la página principal de la aplicación.
+
+*¿Por qué las criptomonedas siguen siendo tan difíciles?*
+
+Como se puede apreciar en el código fuente de Challenge13, seleccionamos un vector de inicialización (IV) predefinido. Hicimos esto para asegurarnos de obtener siempre el mismo texto cifrado.
+Se podría argumentar que este es un mal ejemplo de https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Secrets_Management_Cheat_Sheet.md#72-convergent-encryption[Convergent Encryption].
+Este cifrado convergente tiene una ventaja: ahora se puede saber si un secreto ha cambiado si se dispone de una clave y un vector de inicialización (IV) fijos. Sin embargo, esto puede causar problemas si los secretos son demasiado cortos. Se producirá una colisión al intentar encontrar el texto plano cifrando diferentes fragmentos con la esperanza de obtener el mismo texto cifrado.

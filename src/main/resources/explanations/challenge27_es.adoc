@@ -1,0 +1,5 @@
+=== Secretos en los contratos inteligentes, parte 3
+
+Nuestro desarrollador de contratos inteligentes, con un enfoque más astuto, solo almacenó un secreto cifrado en su contrato. Luego, compara los datos de entrada con ese hash para validar si una transacción devuelve verdadero o falso. Está seguro de que, dado que el secreto nunca se almacena en el estado interno del contrato, no se puede encontrar.
+
+En este desafío, debes encontrar el secreto correcto que tiene el método guess del contrato `0x8318d477f4BCae5a80BEA22E3c040cf8BaaFFe8B` en la red de prueba Goerli EVM devuelve verdadero.

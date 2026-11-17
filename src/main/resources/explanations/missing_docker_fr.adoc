@@ -1,0 +1,2 @@
+Nous fonctionnons en dehors d'un conteneur Docker.
+Veuillez exécuter ceci dans un conteneur comme expliqué dans le fichier README : https://github.com/OWASP/wrongsecrets#basic-docker-exercises.

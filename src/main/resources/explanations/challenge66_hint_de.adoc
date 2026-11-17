@@ -1,0 +1,20 @@
+Diese Aufgabe verwendet eine verschleierte Java CLI JAR-Datei.
+
+Du kannst es lösen, indem du:
+
+1. Ermittle, wo sich die verschleierten Daten befinden:
+- Lade `wrongsecrets-java-obfuscated.jar` herunter.
+- Führe `jar tf wrongsecrets-java-obfuscated.jar` aus und suche nach `io/github/owasp/wrongsecrets/WrongSecretsObfuscated.class`.
+- Öffne diese Klasse in CFR, JADX, IntelliJ IDEA oder einem anderen Dekompiler.
+- Suche nach den statischen Feldern, die den XOR-Schlüssel und die kodierten geheimen Bytes enthalten.
+
+2. Überprüfe die genaue Dekodierungslogik:
+- Führe `javap -c -p -classpath wrongsecrets-java-obfuscated.jar io.github.owasp.wrongsecrets.WrongSecretsObfuscated` aus.
+- Suche in der Ausgabe nach dem `static { ... }`-Block, der `XOR_KEY_CHARS` und `ENCODED_SECRET` füllt.
+- Suche dann nach `decodeSecret()` und beachte, dass jedes codierte Byte mit einem Byte des Schlüssels per XOR verknüpft wird, wobei der Schlüssel mit Modulo-Arithmetik wiederholt wird.
+
+3. Baue das Geheimnis selbst wieder auf:
+- Konvertiere die `XOR_KEY_CHARS`-Werte in Bytes.
+- Kopiere die `ENCODED_SECRET`-Bytewerte aus dem Bytecode oder dem dekompilierten Quellcode.
+- Jedes codierte Byte wird mit dem entsprechenden Schlüsselbyte per XOR verknüpft, wobei der Vorgang wiederholt wird, sobald das Ende des Schlüssels erreicht ist.
+- Dekodiere das resultierende Byte-Array als UTF-8, um das Geheimnis wiederherzustellen, und übermittle diesen Wert dann als Antwort.

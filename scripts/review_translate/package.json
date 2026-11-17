@@ -1,0 +1,7 @@
+{
+  "name": "review-translate",
+  "private": true,
+  "scripts": {
+    "serve": "npx --yes serve . -l 8000"
+  }
+}

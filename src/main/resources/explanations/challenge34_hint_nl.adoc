@@ -1,0 +1,6 @@
+Deze uitdaging kan worden opgelost door de key derivation function opnieuw af te spelen met de gegeven invoer.
+
+1. Voer de functie online uit
+- Zoek de parameters die voor de key derivation function worden gebruikt in de functie `generateKey` in `Challenge34.java`.
+- Kopieer de gebruikte parameters naar een online https://www.dcode.fr/pbkdf2-hash[generator] en voer die uit
+- De website geeft de waarde van de sleutel terug.

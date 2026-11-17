@@ -1,0 +1,20 @@
+Este desafío utiliza un archivo JAR de Java CLI ofuscado.
+
+Puedes resolverlo de la siguiente manera:
+
+1. Encuentre dónde se encuentran los datos ofuscados:
+- Descarga `wrongsecrets-java-obfuscated.jar`.
+- Ejecute `jar tf wrongsecrets-java-obfuscated.jar` y localice `io/github/owasp/wrongsecrets/WrongSecretsObfuscated.class`.
+- Abra esa clase en CFR, JADX, IntelliJ IDEA u otro descompilador.
+- Busque los campos estáticos que contienen la clave XOR y los bytes secretos codificados.
+
+2. Inspeccione la lógica de decodificación exacta:
+- Ejecuta `javap -c -p -classpath wrongsecrets-java-obfuscated.jar io.github.owasp.wrongsecrets.WrongSecretsObfuscated`.
+- En la salida, busque el bloque `static { ... }` que rellena `XOR_KEY_CHARS` y `ENCODED_SECRET`.
+- Luego, busque `decodeSecret()` y observe que cada byte codificado se combina mediante XOR con un byte de la clave, repitiendo la clave con aritmética modular.
+
+3. Reconstruye el secreto tú mismo:
+- Convierte los valores `XOR_KEY_CHARS` en bytes.
+- Copie los valores de byte `ENCODED_SECRET` del código de bytes o del código fuente descompilado.
+- Aplica la operación XOR a cada byte codificado con el byte de clave correspondiente, reiniciando el ciclo cuando llegues al final de la clave.
+- Decodifica la matriz de bytes resultante como UTF-8 para recuperar el secreto y, a continuación, envía ese valor como respuesta.

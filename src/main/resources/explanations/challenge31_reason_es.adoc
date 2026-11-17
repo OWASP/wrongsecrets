@@ -1,0 +1,5 @@
+Por varias razones, ocultar secretos en una página web no es una buena idea, incluso si es solo para uso interno. En primer lugar, los sitios web suelen ser accesibles a diversas partes, incluidos empleados, contratistas y proveedores. Mantener secretos en un sitio web aumenta el riesgo de que personas no autorizadas accedan a ellos por cualquier medio. La posibilidad de que un hacker cambie de estrategia tras una brecha de seguridad aumenta considerablemente.
+
+Qué hacer en su lugar:
+- No pongas secretos en el contenido de la página, en el código fuente ni en la configuración del lado del cliente. Consérvalos en el servidor y realiza allí la operación necesaria.
+- Exige autenticación y autorización para acceder a operaciones sensibles y rota cualquier secreto que ya haya sido publicado.

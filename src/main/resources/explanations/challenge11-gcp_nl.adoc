@@ -1,0 +1,11 @@
+=== GCP Secret Manager deel 3
+
+In onze GKE-cluster is er een service account voor workloads, die overeenkomt met een service account in kubernetes.
+
+Helaas hebben de ontwikkelaars slechts één GCP service account gebruikt om die aan meerdere K8s service accounts te koppelen. Dit betekent dat een andere pod bij onze geheimen kan...
+
+Probeer `wrongsecret-3` te provisionen met een pod met de `default` service account in de default namespace.
+
+
+Tip: je kunt een job gebruiken met de image `gcr.io/google.com/cloudsdktool/cloud-sdk:latest` en de `gcloud` cli.
+Zie https://cloud.google.com/secret-manager/docs/creating-and-accessing-secrets#a_note_on_resource_consistency[toegang tot een geheim] voor hulp.

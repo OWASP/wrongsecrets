@@ -1,0 +1,11 @@
+Puedes resolver este desafío mediante las siguientes soluciones alternativas:
+
+1. Encuentra el secreto en el Administrador de secretos de Google (esta es la forma más sencilla, prueba la otra :) ):
+- Inicie sesión en Google https://cloud.google.com/[cloud] con la cuenta con la que creó la configuración de WrongSecrets.
+- Obtén los datos de wrongsecrets2
+
+2. Encuentra el secreto accediendo al POD mediante exec.
+- Asegúrese de tener Kubectl instalado como se define en el archivo README.MD y asegúrese de que kubectl esté configurado para enviar comandos al clúster correcto.
+- Ahora ejecuta `kubectl get pods`. Aquí verás todos los Pods activos en el espacio de nombres en el que te encuentras, que para esta aplicación normalmente es `default` (a menos que tu administrador/tutor especifique lo contrario).
+- Para tu instancia del pod WrongSecrets, ejecuta `kubectl exec -it secret-challenge-<rest of the name of the pod from the prev.step> -- sh`.
+- Examine los datos que puede encontrar en `/mnt/secrets-store`.

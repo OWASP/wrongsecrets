@@ -1,0 +1,12 @@
+=== Audit-events van Spring Boot Actuator
+
+De ontwikkelaars besloten de kracht van Spring Boot Actuator te benutten
+om hun applicatie te monitoren en auditen. Het project hield in dat er met diverse externe API's werd gekoppeld,
+waarvan elke een unieke sleutel voor authenticatie vereist. De audit-events, gedetailleerd en informatief, leken
+de perfecte oplossing om de interne werking van hun systeem te monitoren.
+
+Het team implementeerde een logmechanisme met gedetailleerde audit-events.
+Zonder het te weten bevatten deze logs sporen van de heilige API-sleutel die verborgen zat
+in de audit-events.
+
+Kun jij deze API-sleutel vinden?

@@ -1,0 +1,4 @@
+Estamos ejecutando esto fuera de un entorno de nube configurado correctamente. Ejecútelo en un entorno AWS/Azure/GCP como
+explicado en https://github.com/OWASP/wrongsecrets#cloud-challenges[README.md]
+
+Aún quedan desafíos disponibles después de este. ¡Intenta con otro desafío!

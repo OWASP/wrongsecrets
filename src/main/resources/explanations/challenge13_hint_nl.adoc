@@ -1,0 +1,8 @@
+Je kunt deze uitdaging oplossen door de volgende stappen te volgen:
+
+1. Exfiltreer het geheim met Github Actions. Houd er rekening mee dat in de huidige configuratie van het project de door de eigenaar/medewerker geactiveerde actie het geheim zal bevatten. Dat gebeurt niet als je het via forks probeert te doen. Laten we de stappen bespreken:
+- Log in op Github met je eigen account.
+- Ga naar https://github.com/OWASP/wrongsecrets/actions en selecteer `Get the challenge code 13`
+- Kijk eens naar de nieuwste uitvoering van een van de eigenaren of medewerkers.
+- Neem de laatste poging van de run, waarbij het geheim base64-gecodeerd is. Kopieer het base64-gecodeerde resultaat en decodeer het ergens twee keer.
+- Voer de gedecodeerde oplossing in als antwoord.

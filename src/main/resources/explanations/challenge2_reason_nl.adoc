@@ -1,0 +1,11 @@
+*Waarom code gebruiken om geheimen in te plaatsen een slecht idee is.*
+
+Zoals je kunt zien, hebben we iets meer flexibiliteit dan bij challenge1. Maar: we hebben het wachtwoord nog steeds in de code!
+
+Hoewel we de variabelen nu eenvoudig in een later stadium kunnen overschrijven - zoals je in de volgende uitdagingen ziet - zien we vaak dat geheimen worden opgeslagen als onderdeel van de Spring Config of Spring Cloud config, zonder ze in een later stadium te overschrijven. Dat betekent dat iedereen met toegang tot de Spring Cloud config nu kan weten wat het geheim is.
+
+Het gebruik van een gedistribueerde oplossing zoals https://cloud.spring.io/spring-cloud-config/reference/html/[Spring Cloud Config], waarbij je je application properties extern beheert, kan hetzelfde probleem opleveren als je niet oplet. Neem de https://cloud.spring.io/spring-cloud-config/reference/html/#_security[sectie over beveiliging] goed door voordat je Spring Cloud Config gebruikt.
+
+Wat je in plaats daarvan kunt doen:
+- Bewaar geen plaintext-geheimen in application properties of configuratie-repositories. Haal ze bij deployment of runtime op uit een secrets manager.
+- Als Spring Cloud Config geheimen moet verwerken, probeer ze dan te injecteren via veilige patronen waarbij secrets managers als bron dienen (injecteer bijvoorbeeld een geheim met een vault side-car-container). Als dat niet mogelijk is: schakel de ondersteunde encryptie en authenticatie van Spring Cloud in, beperk de toegang tot geautoriseerde workloads en operators en audit de toegang.

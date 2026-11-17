@@ -1,0 +1,5 @@
+=== Histoire de Bash
+
+Ce développeur a créé un conteneur qu'il utilise depuis un certain temps. Il l'emploie fréquemment et veille à ne jamais y intégrer de données sensibles. Lorsqu'il a besoin d'accéder à des données sensibles, il les saisit simplement dans une commande Bash lors de l'exécution ; elles disparaissent donc instantanément et restent confidentielles. N'est-ce pas ?
+
+Nous avons tous des petits secrets enfouis dans notre passé, y compris Bash. Accédez au conteneur et voyez si vous pouvez en trouver un.

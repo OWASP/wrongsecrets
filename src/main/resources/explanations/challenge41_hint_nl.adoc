@@ -1,0 +1,9 @@
+Deze uitdaging kun je oplossen met de volgende stappen:
+
+1. Maak twee txt-bestanden `old_hashes.txt` en `new_hashes.txt` die alleen de hashes bevatten die uit de dumpbestanden zijn gekopieerd.
+2. Met `old_hashes.txt` als wachtwoordenlijst kunnen we met hashcat controleren welke md5-hashes overeenkomen met de bcrypt-hashes.
+   - Installeer https://hashcat.net/hashcat/[Hashcat]
+   - Typ `hashcat -m 3200 -a 0 new_hashes.txt old_hashes.txt --show`. Je vindt dan één bcrypt-hash die aan een md5-hash is gekoppeld.
+3. Met `rockyou.txt` als wachtwoordenlijst kunnen we de verkregen md5-hash kraken.
+   - Download de https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt[rockyou.txt-wachtwoordenlijst]
+   - Typ `hashcat -m 0 -a 0 82080600934821faf0bc59cba79964bc rockyou.txt --show` om het gekraakte wachtwoord te vinden.

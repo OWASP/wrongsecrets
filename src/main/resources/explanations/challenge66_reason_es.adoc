@@ -1,0 +1,5 @@
+*Por qué la ofuscación es solo un obstáculo.*
+
+La codificación, la reflexión y la ofuscación de la luz pueden dificultar la ingeniería inversa, pero no crean un secreto real. El archivo ejecutable aún contiene todo lo necesario para recuperar el secreto.
+
+Si la aplicación puede obtener el secreto localmente, un atacante decidido puede hacer lo mismo. Proteja los secretos trasladando las decisiones de confianza y el material confidencial a sistemas controlados del lado del servidor.

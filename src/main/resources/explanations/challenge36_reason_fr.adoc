@@ -1,0 +1,5 @@
+*Pourquoi faut-il faire attention aux constantes déclarées dans le programme ?*
+
+Les constantes sont des valeurs fixes utiles pour stocker des valeurs qui n'ont pas besoin de changer pendant l'exécution d'un programme. Lors du processus de rétro-ingénierie, l'exploration binaire est une technique qui consiste à extraire le maximum d'informations du code binaire afin de comprendre la logique du programme. Cependant, certaines informations cruciales doivent être chiffrées de manière à rendre leur lecture difficile.
+
+Cela montre que même le chiffrement ralentit un attaquant sans l'empêcher de trouver les informations cruciales. N'intégrez pas de secret dans le binaire ; si une application en a besoin, récupérez-le auprès d'un service côté serveur qui authentifie et autorise la requête, plutôt que de vous fier uniquement au chiffrement hors ligne.

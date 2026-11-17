@@ -1,0 +1,9 @@
+=== Schlechtes Hashing
+
+Dieser Entwickler speichert sein Passwort auf seinem Computer. Er ist aber nicht dumm, er hat es zweimal gehasht – mit denselben Systemen, die viele der größten Unternehmen der Welt verwenden. Nur mit etwas weniger Sicherheitsaufwand. Niemand wird das knacken können.
+
+Der erste Hash lautet `2ab96390c7dbe3439de74d0c9b0b1767` und der zweite Hash lautet `F3BBBD66A63D4BF1747940578EC3D0103530E21D`
+
+Trotz der Tatsache, dass viele große Unternehmen diese Hashwerte verwenden, gibt es eine Möglichkeit, das System zu überlisten?
+
+Wenn du einen der beiden Hashes knackst, erhältst du die richtige Antwort. Versuche als zusätzliche Herausforderung, beide zu knacken.

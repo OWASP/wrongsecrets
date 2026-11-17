@@ -1,0 +1,22 @@
+*Warum du bei CI/CD und Geheimnissen vorsichtig sein musst*
+
+Bei der Verwendung von CI/CD-Tools ist es häufig erforderlich, dass die Tools (z. B. Runner/Agent, der einen Job ausführt) ein Geheimnis zur Authentifizierung gegenüber einem sekundären Dienst verwenden. Das Auslesen dieser Geheimnisse kann sehr interessant sein.
+Dafür gibt es verschiedene Möglichkeiten:
+
+- ein CI/CD-Tool im Debug-Modus ausführen oder weitere Umgebungsvariablen anfordern, die wiederum für jeden lesbar sein könnten, der Zugriff auf das Build-Log hat.
+- Verwende Exfiltrationstechniken, wie sie in dieser Aufgabe nützlich sind, um das Geheimnis zu erhalten, das möglicherweise für jeden lesbar ist, der Zugriff auf das Build-Log hat.
+- Nutze deine Zugriffsrechte als Administrator/Betreuer eines Repositorys oder Projekts, um die Geheimnisse zu erhalten.
+
+Daher ist es unerlässlich, dass du:
+
+- Beschränke den Zugriff auf Jobausführungen/Jobkonfigurationen/interne Geheimnisse.
+- Alle Systemaktionen protokollieren und bei jeglichen Datenexfiltrationsvorgängen eine Warnung ausgeben
+- Stelle sicher, dass deine CI/CD-Konfiguration keine lang anhaltenden Geheimnisse enthält.
+
+Möchtest du mehr erfahren? Schau dir die Ressourcen auf der Startseite der App an.
+
+*Warum Kryptowährungen immer noch sehr schwierig sind*
+
+Wie du dem Quellcode von Challenge13 entnehmen kannst, haben wir einen vordefinierten Initialisierungsvektor (IV) ausgewählt. Dies haben wir getan, um sicherzustellen, dass wir jedes Mal denselben Chiffretext erhalten.
+Man könnte argumentieren, dass dies ein schlechtes Beispiel für https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Secrets_Management_Cheat_Sheet.md#72-convergent-encryption[Konvergente Verschlüsselung] ist.
+Diese konvergente Verschlüsselung hat einen Vorteil: Mit einem festen Schlüssel und Initialisierungsvektor (IV) lässt sich feststellen, ob sich ein Geheimnis geändert hat. Allerdings birgt dies Probleme, wenn Geheimnisse zu kurz sind. Beim Versuch, den Klartext durch Verschlüsselung verschiedener Klartextfragmente zu ermitteln und so denselben Geheimtext zu erhalten, kommt es zu einer Kollision.
