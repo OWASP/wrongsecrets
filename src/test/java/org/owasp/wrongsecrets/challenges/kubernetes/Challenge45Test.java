@@ -2,6 +2,7 @@ package org.owasp.wrongsecrets.challenges.kubernetes;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.cloud.vault.config.VaultProperties;
 import org.springframework.vault.authentication.TokenAuthentication;
