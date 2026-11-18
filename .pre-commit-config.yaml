@@ -13,7 +13,7 @@ repos:
     hooks:
       - id: renovate-config-validator
   - repo: https://github.com/eslint/eslint
-    rev: v10.15.0
+    rev: v9.39.5
     hooks:
       - id: eslint
         args:
@@ -50,13 +50,18 @@ repos:
     hooks:
       - id: commitlint
         stages: [commit-msg]
-  - repo: https://github.com/ejba/pre-commit-maven
-    rev: v0.3.4
+  - repo: local
     hooks:
       - id: maven
-        args: ["clean compile"]
-      - id: maven
-        args: ["spotless:apply"]
+        name: maven clean compile
+        entry: ./mvnw clean compile
+        language: system
+        pass_filenames: false
+      - id: maven-spotless-apply
+        name: maven spotless apply
+        entry: ./mvnw spotless:apply
+        language: system
+        pass_filenames: false
   - repo: https://github.com/psf/black
     rev: 26.10.1
     hooks:
