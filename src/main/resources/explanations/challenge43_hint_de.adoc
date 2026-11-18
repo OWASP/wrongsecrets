@@ -1,0 +1,4 @@
+Diese Herausforderung kann wie folgt gelöst werden:
+
+1. Suche im Subreddit r/owasp nach dem Stichwort „Entwickler“.
+2. Das Geheimnis wird in einem Kommentar zu einem der Beiträge aus Schritt 1 offen zu finden sein.

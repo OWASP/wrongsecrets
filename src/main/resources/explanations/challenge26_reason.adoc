@@ -3,3 +3,7 @@
 The state of the chain can be verified for any point in time by executing the state updates up until a certain block.
 
 Updating the state of the chain does not remove previous changes to state.
+
+What to do instead:
+- Never put a secret on a public or immutable blockchain. Keep secret values off-chain in a system with access controls, and use the chain only for non-sensitive references or proofs.
+- Treat any value already written to a public chain as permanently exposed and rotate or revoke the affected credential.

@@ -1,0 +1,9 @@
+=== AWS SSM-parameteropslag
+
+We hebben Parameter Store nu rechtstreeks vanuit de app gebruikt, maar er is een IAM-probleem...
+
+Neem de rol `cant-read-secrets` over en probeer een escalatie van IAM-rechten. Speel niet vals met je eigen rollen :)
+
+Hier kunnen tools als https://github.com/nccgroup/ScoutSuite[ScoutSuite] echt helpen bij het opsporen van problemen met uw IAM-installatie. IAM kan paden bieden naar escalatie van bevoegdheden. Deze paden kunnen vaak worden gebruikt om andere, krachtigere rollen te creëren en/of op zich te nemen, waardoor je (onder andere) het geheim kunt lezen.
+
+Als je vastzit, probeer dan de fout in Terraform op te sporen.

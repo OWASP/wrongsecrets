@@ -1,0 +1,20 @@
+*Por qué necesitas limpiar y rotar los secretos*
+
+Si por error has guardado un secreto en Git, habrá maneras de encontrarlo, ya sea manualmente o con herramientas.
+
+Por lo tanto, cuando un secreto se guarda en Git por error:
+
+- Informar a cualquier autoridad de seguridad responsable en la organización.
+- Asegúrate de rotar el secreto
+- Opcionalmente, limpieza: utilice https://github.com/rtyley/bfg-repo-cleaner[BFG repo-cleaner] o intente eliminar la confirmación problemática de otra manera.
+
+Hay muchas maneras de evitar que se confirme un secreto, por ejemplo, configurando https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks[un gancho de pre-commit] con controles de detección de secretos.
+
+Nota: "ocultar" una confirmación errónea añadiendo más confirmaciones para que no se muestre durante una solicitud de extracción solo empeorará las cosas.
+En el mejor de los casos, deberías combinar la confirmación problemática con la confirmación de eliminación, de modo que el secreto solo esté en tu rama.
+
+Nota 2: si usted envió un secreto, tenga en cuenta que todos los colegas/bots que lo extraigan también podrían tenerlo localmente.
+
+Nota-3: las claves de AWS ocultas en este proyecto son tokens canary reales. Cuando las usa, se realiza una llamada a nuestro https://github.com/OWASP/wrongsecrets/blob/master/src/main/java/org/owasp/wrongsecrets/canaries/CanariesController.java[CanariesController],
+lo que puede alertar a los sistemas y/o datos de que se han utilizado las credenciales/tokens canary. El contenido de la última llamada a este endpoint se puede encontrar en nuestro endpoint de estadísticas, que para configuraciones de Heroku y Docker se encuentra en http://wrongsecrets.herokuapp.com/stats[stats].
+Creamos y gestionamos nuestros tokens Canary a través de https://canarytokens.org/[Canarytokens.org]. ¡Imagina todo lo que puedes lograr con los tokens Canary en tu organización!

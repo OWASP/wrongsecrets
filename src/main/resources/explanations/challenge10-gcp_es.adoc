@@ -1,0 +1,3 @@
+=== Administrador de secretos de GCP, parte 2
+
+El secreto ahora se genera aleatoriamente y se almacena directamente en el administrador de secretos de GCP. Sin embargo, seguimos montándolo en el pod de K8s a través del controlador CSI https://secrets-store-csi-driver.sigs.k8s.io para https://github.com/GoogleCloudPlatform/secrets-store-csi-driver-provider-gcp[GCP]... ¿Puedes acceder a él?

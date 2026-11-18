@@ -5,6 +5,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.Locale;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,6 +16,17 @@ import org.springframework.test.web.servlet.MockMvc;
 @SpringBootTest
 @AutoConfigureMockMvc
 class StatsControllerTests {
+
+  static {
+    // Set default locale to English for all tests
+    Locale.setDefault(Locale.ENGLISH);
+  }
+
+  @BeforeEach
+  void ensureLocaleIsEnglish() {
+    Locale.setDefault(Locale.ENGLISH);
+  }
+
   @Autowired private MockMvc mvc;
 
   @Test

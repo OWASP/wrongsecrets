@@ -81,6 +81,9 @@ module "eks" {
 
   #create_auto_mode_iam_resources = true
 
+  # The default "<cluster_name>-eks-auto-" prefix exceeds the 38 character IAM name_prefix limit
+  node_iam_role_name = "wrongsecrets-eks-auto"
+
   enable_cluster_creator_admin_permissions = true
 
   upgrade_policy = {

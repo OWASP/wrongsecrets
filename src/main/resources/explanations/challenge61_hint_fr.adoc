@@ -1,0 +1,18 @@
+Vous pouvez relever ce défi grâce aux solutions alternatives suivantes :
+
+1. Trouvez le jeton du bot dans le code source
+- Examinez la classe Challenge61 dans le code source
+- Trouvez le jeton du bot encodé dans la méthode `getBotToken()`
+- Décodez la chaîne encodée en Base64 (elle est doublement encodée).
+- Le format du jeton est : `BOTID:TOKEN_STRING`
+
+2. Utilisez le jeton du bot pour accéder au canal Telegram.
+- Le jeton du bot peut être utilisé avec l'API Telegram Bot
+- Rendez-vous sur https://t.me/WrongsecretsBot pour voir la chaîne
+- Recherchez dans le canal les messages contenant le secret
+- Pour ce défi, le secret est : `telegram_secret_found_in_channel`
+
+3. Analyser la structure du code
+- Ce défi suit le même schéma que d'autres défis sur les réseaux sociaux
+- Vérifiez le fonctionnement de la méthode `getTelegramSecret()`
+- Recherchez les valeurs de retour codées en dur qui représentent la réponse attendue

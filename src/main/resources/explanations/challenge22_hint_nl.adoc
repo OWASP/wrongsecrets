@@ -1,0 +1,25 @@
+Deze uitdaging kijkt specifiek naar een geheim in een Rust-binary die is gebaseerd op een https://doc.rust-lang.org/cargo/reference/profiles.html#release[release profile].
+
+Je kunt deze uitdaging oplossen met de volgende alternatieve oplossingen:
+
+1. Vind de geheimen met https://ghidra-sre.org/[Ghidra].
+- Installeer https://ghidra-sre.org/[Ghidra].
+- Start het met `ghidraRun`.
+- Laad de applicatie `wrongsecrets-rust` in ghidra door een nieuw project te kiezen, vervolgens het bestand te importeren en er dan dubbel op te klikken.
+- Sta Ghidra toe de applicatie te analyseren.
+- Importeer nu https://gist.github.com/str4d/e541f4c28e2bca80d222434ac1a204f4[demangle script] en voer het uit via de Ghidra Script manager om de functies te demanglen.
+- Zoek de `main`-functie in de namespace `rust`
+- Zoek het argument dat vergeleken moet worden (in ons voorbeeld is dat `local_80`, gedefinieerd in `std::env::args((env *)&local_80);`)
+- Zoek waar het argument wordt vergeleken (in ons voorbeeld is dat `iVar1 = __stubs::_memcmp(local_80,puVar2,0x3b);`)
+- Zoek nu naar de waarde van de invoer waarmee het wordt vergeleken (`puVar2`). Kun jij het geheim vinden?
+- Alternatief: ga naar de data type manager linksonder, filter nu op `string`, klik dan met de rechtermuisknop op `string` als lid van `wrongsecrets-rust` en kies `find uses of`. Filter vervolgens op bekende sleutelwoorden: je zou nu het geheim gemakkelijk moeten kunnen vinden!
+
+2. Vind de geheimen met https://www.radare.org[radare2].
+- Installeer https://www.radare.org[radare2] met `brew install radare2` op Mac of volg deze stappen: `git clone https://github.com/radareorg/radare2; cd radare2 ; sys/install.sh`
+- Start de r2-analyse met `$ r2 -AAA wrongsecrets-rust`
+- Print het entrypoint `s sym.rust::main::h66ace6a84e548891` en daarna `pdf`. (niet de standaard `main`!)
+- Zoek met `pdf | grep memcmp` het argument dat vergeleken moet worden (in ons voorbeeld is dat `r12`).
+- Probeer te achterhalen hoe dit argument wordt voorbereid. Kun jij het geheim ontdekken?
+- Alternatief: voer na het starten van radare2 `iz | grep secret` uit en zoek de tekenreeks.
+
+Wil je de tools niet installeren? Bekijk dan de https://github.com/OWASP/wrongsecrets/tree/master?tab=readme-ov-file#want-to-play-but-are-not-allowed-to-install-the-tools[WrongSecrets Desktop container]!

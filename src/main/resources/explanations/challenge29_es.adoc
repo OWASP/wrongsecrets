@@ -1,0 +1,5 @@
+=== Secreto en una captura de pantalla de un problema de GitHub
+
+Un usuario, sin darse cuenta, crea un problema adjuntando una captura de pantalla de un secreto al informar de un error, luego se da cuenta y cierra el problema.
+
+¿Puedes descubrir el secreto que buscamos en nuestros problemas de GitHub: https://github.com/OWASP/wrongsecrets/issues?

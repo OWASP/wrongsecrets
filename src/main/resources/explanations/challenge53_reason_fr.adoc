@@ -1,0 +1,10 @@
+=== Débogage des conteneurs et secrets de la mémoire
+
+Les outils de débogage sont puissants, mais lorsqu'ils sont laissés accessibles en production, ils peuvent exposer des informations sensibles. Ce problème met en lumière comment un attaquant disposant d'un accès de débogage peut récupérer des secrets en mémoire grâce à des techniques de débogage.
+
+Ce scénario décrit un pod Kubernetes exécutant un binaire compilé qui stocke un secret en mémoire. Ce binaire fait partie d'une application, mais une erreur de configuration permet à un conteneur de débogage de s'y attacher pour l'inspecter. Ceci illustre un cas concret où des permissions de débogage mal configurées peuvent engendrer des failles de sécurité.
+
+Les organisations doivent être conscientes que :
+- Autoriser l'utilisation sans restriction d'outils de débogage dans les environnements de production augmente la surface d'attaque.
+- Les secrets stockés en mémoire peuvent être extraits grâce à des techniques de débogage.
+- Les bonnes pratiques consistent notamment à restreindre les autorisations de débogage, à utiliser des secrets éphémères et à s'assurer que les données sensibles sont chiffrées en mémoire.

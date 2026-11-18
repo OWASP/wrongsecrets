@@ -2,4 +2,4 @@
 
 Key Derivation Functions (KDFs) are deterministic. This means that they will always give back the same output for a given input. So, if the parameters are hardcoded, anyone with access to the code can run the KDF with the specified parameters and get the key.
 
-KDFs should be used to generate keys based on dynamic input, such as human-supplied passwords. KDFs might be used when secure random sources can be used to generate keys. Again, the KDF's input is not hardcoded/deterministic in both cases.
+Use a KDF such as Argon2id with a unique random salt and appropriate cost parameters when deriving a key from a password. For machine-generated keys, use a cryptographically secure random number generator instead of a KDF, and store the key separately from the encrypted data.

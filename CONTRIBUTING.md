@@ -170,7 +170,7 @@ Pull requests should be as small/atomic as possible. Large, wide-sweeping change
 The project includes a fully configured Dev Container for **VS Code** and **GitHub Codespaces**. You do not need to install Java, Maven, Node.js, Python, or Terraform tools locally on your machine—everything is self-contained inside the Dev Container.
 
 The Dev Container environment automatically provides:
-- **JDK 26** & **Maven Wrapper** (`./mvnw`)
+- **JDK 27** & **Maven Wrapper** (`./mvnw`)
 - **Node.js 26** & **npm** (for commitlint, ESLint, and frontend build)
 - **Python 3** & **pre-commit** hooks
 - **Terraform**, **tflint**, and **terraform-docs** (for pre-commit validation)
@@ -267,8 +267,8 @@ Please be sure to take a careful look at our [Code of Conduct](https://github.co
 2. **Node.Js 26**
    [_Node.Js_](https://nodejs.org/en/) is an open-source library and a cross-platform JavaScript **runtime environment** specifically for running web applications outside one's browser.
 
-3. **JDK-26**
-   [_JDK_](https://www.oracle.com/java/technologies/downloads/#java26) is a tool used in development and testing programs written in the Java programming language.
+3. **JDK-27**
+   [_JDK_](https://www.oracle.com/java/technologies/downloads/#java27) is a tool used in development and testing programs written in the Java programming language.
 
 4. **IntelliJ IDEA**
    [_IntelliJ IDEA_](https://www.jetbrains.com/idea/download) is an integrated development environment basically an **IDE** written in Java for developing software written in Java, Kotlin, Groovy etc.
@@ -334,7 +334,7 @@ Select **_google-java-format Settings_** and click enable.
 
 Open **_File > Project structure _**.
 
-In the tab `Project` make sure that an SDK of version `26` is selected (e.g. `openjdk-26`, `oraclejdk-26` or just `26` depending on which Java JDK variant you installed).
+In the tab `Project` make sure that an SDK of version `27` is selected (e.g. `openjdk-27`, `oraclejdk-27` or just `27` depending on which Java JDK variant you installed).
 
 In the tab `SDKs` make sure that an SDK of version `26` is selected.
 

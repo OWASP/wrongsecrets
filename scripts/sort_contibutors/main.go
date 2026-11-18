@@ -152,6 +152,11 @@ func (a *app) run() error {
 		{Username: "mchangsp", Name: "Marc Chang Sing Pang"},
 		{Username: "djvinnie", Name: "Vineeth Jagadeesh"},
 	}
+	translators := []Contributor{
+		{Username: "LittlePrimate", Name: "LittlePrimate"},
+		{Username: "S3DFX-CYBER", Name: "S3DFX-CYBER"},
+		{Username: "bhushan4work", Name: "Bhushan Agrawal"},
+	}
 	specialThanks := []Contributor{
 		{Username: "madhuakula", Name: "Madhu Akula @madhuakula"},
 		{Username: "nbaars", Name: "Nanne Baars @nbaars"},
@@ -170,7 +175,7 @@ func (a *app) run() error {
 
 	htmlOutputPath := filepath.Join(a.outputDir, outputHTMLFile)
 	fmt.Printf("[+] Print to HTML file: %s\n", htmlOutputPath)
-	htmlPayload := renderHTML(createdDate, leaders, topContributors, contributors, testers, specialThanks)
+	htmlPayload := renderHTML(createdDate, leaders, topContributors, contributors, testers, translators, specialThanks)
 	if err := writeFile(htmlOutputPath, htmlPayload); err != nil {
 		return fmt.Errorf("write html output: %w", err)
 	}
@@ -181,6 +186,7 @@ func (a *app) run() error {
 	mdPayload += renderMarkdown(topContributors, "Top contributors")
 	mdPayload += renderMarkdown(contributors, "Contributors")
 	mdPayload += renderMarkdown(testers, "Testers")
+	mdPayload += renderMarkdown(translators, "Translators")
 	mdPayload += renderMarkdown(specialThanks, "Special thanks")
 	if err := writeFile(markdownOutputPath, mdPayload); err != nil {
 		return fmt.Errorf("write markdown output: %w", err)
@@ -209,7 +215,7 @@ func renderCreatedComment(date string) string {
 	return fmt.Sprintf("<!-- Generated on %s -->\n\n", date)
 }
 
-func renderHTML(createdDate string, leaders, topContributors, contributors, testers, specialThanks []Contributor) string {
+func renderHTML(createdDate string, leaders, topContributors, contributors, testers, translators, specialThanks []Contributor) string {
 	var b strings.Builder
 	b.WriteString(renderCreatedComment(createdDate))
 	b.WriteString("<html><head></head><body>\n")
@@ -217,6 +223,7 @@ func renderHTML(createdDate string, leaders, topContributors, contributors, test
 	writeHTMLSection(&b, "Top Contributors", topContributors)
 	writeHTMLSection(&b, "Contributors", contributors)
 	writeHTMLSection(&b, "Testers", testers)
+	writeHTMLSection(&b, "Translators", translators)
 	writeHTMLSection(&b, "Special mentions for helping out", specialThanks)
 	b.WriteString("</body><html>\n")
 	return b.String()

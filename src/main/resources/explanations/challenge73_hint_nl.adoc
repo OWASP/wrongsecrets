@@ -1,0 +1,15 @@
+De agent-instructiebestanden worden meegeleverd met de Dev Container in de
+map `.devcontainer`:
+
+- `.devcontainer/AGENTS.md`
+- `.devcontainer/CLAUDE.md`
+- `.devcontainer/.cursor/rules/project.mdc`
+- `.devcontainer/.windsurfrules`
+
+Drie ervan verwijzen alleen naar waar de gedeelde referentie staat. Eén ervan
+zet de waarde van `STAGING_DEPLOY_TOKEN` erin, in een shell-snippet. Die waarde
+is het antwoord.
+
+Als je de Dev Container niet gebruikt, kun je dezelfde bestanden ook gewoon
+rechtstreeks uit de repository lezen in de map
+link:https://github.com/OWASP/wrongsecrets/tree/master/.devcontainer[`.devcontainer`].

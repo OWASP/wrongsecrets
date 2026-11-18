@@ -21,18 +21,18 @@ jobs:
       - name: Setup python
         uses: actions/setup-python@v6
         with:
-          python-version: "3.14"
+          python-version: "3.15.2"
       - name: Format python code with black
         uses: psf/black@stable
       - uses: actions/setup-node@v6
         with:
-          node-version: 26
+          node-version: '26'
           cache: "npm"
       - uses: actions/setup-java@v5
         with:
           distribution: "temurin"
-          java-version: "26"
-          cache: maven
+          java-version: "27"
+          cache: "maven"
       - name: Install npm dependencies
         run: npm install
       - uses: actions/cache@v4
@@ -43,7 +43,7 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
-          terraform_version: 1.9.8
+          terraform_version: v1.17.2
       - name: Setup TFLint
         uses: terraform-linters/setup-tflint@v6
         with:

@@ -4,3 +4,5 @@ In a secure and well-architected system, protecting sensitive information such a
 Audit events are significant in tracking and monitoring activities within an application.
 
 Ensure that API keys are not visible in plain text in the (audit) logs or any other output.
+
+Log the event and necessary non-sensitive metadata instead of the credential itself. Redact sensitive fields before data reaches log storage, restrict log access, and rotate any key that has already been recorded.

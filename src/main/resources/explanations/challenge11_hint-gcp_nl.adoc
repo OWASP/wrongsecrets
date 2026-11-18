@@ -1,0 +1,32 @@
+Je kunt deze uitdaging oplossen door de volgende stappen te volgen:
+
+- Maak een nieuw taakbestand `job.yaml` aan met de volgende inhoud:
+
+```jaml
+apiVersie: batch/v1
+soort: baan
+metagegevens:
+  naam: foutgeheim-3
+specificatie:
+  sjabloon:
+    specificatie:
+      serviceAccountName: standaard
+      containers:
+        - naam: gcloud
+          afbeelding: gcr.io/google.com/cloudsdktool/cloud-sdk:latest
+          commando:
+            [
+              "gwolk",
+              "geheimen",
+              "versies",
+              "toegang",
+              "nieuwste",
+              "--geheim=verkeerdgeheim-3",
+            ]
+      herstartbeleid: Nooit
+```
+
+Deze taak voert de opdracht `gcloud secrets versions access latest --secret=wrongsecret-3` uit. Omdat de taak toegang heeft tot hetzelfde serviceaccount als de geheime uitdagingspod, heeft deze met dezelfde rechten toegang tot GCP.
+
+- Pas de taak toe met `kubectl apply -f job.yaml`
+- Controleer de logboeken van de taak met `kubectl logs job/wrongsecret-3`. Dit zou je de oplossing moeten laten zien :)

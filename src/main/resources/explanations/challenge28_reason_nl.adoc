@@ -1,0 +1,5 @@
+*Waarom het opslaan van geheimen in een gesloten GitHub-issue een slecht idee is*
+
+Zet geen geheimen in issues. De zichtbaarheid van een issue hangt af van de repository-instellingen, en een issue sluiten wist zijn geschiedenis of kopieën niet. Deel noodzakelijke details in plaats daarvan via een goedgekeurd, toegangsbeperkt disclosure-kanaal.
+
+Controleer de inhoud van een issue voordat je plaatst. Als een inloggegeven wordt blootgelegd, herroep of roteer dat dan onmiddellijk en verwijder de blootgelegde inhoud waar mogelijk.

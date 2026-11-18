@@ -1,0 +1,37 @@
+name: Publish review-translate to GitHub Pages
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'scripts/review_translate/**'
+      - '.github/workflows/review-translate-pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages-review-translate
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}review-translate/
+    steps:
+      - uses: actions/checkout@v7
+      - name: Assemble site
+        run: |
+          mkdir -p static-site/review-translate
+          cp -r scripts/review_translate/* static-site/review-translate/
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: ./static-site
+      - id: deployment
+        uses: actions/deploy-pages@v4

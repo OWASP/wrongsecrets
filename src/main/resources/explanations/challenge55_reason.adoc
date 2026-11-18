@@ -5,3 +5,7 @@ Developers frequently store SSH connection configurations in `.ssh/config` files
 Forgotten secrets indicate inadequate security checks and poor secret management practices.
 
 This challenge emphasizes the importance of secure storage practices and periodic auditing of sensitive configuration files.
+
+What to do instead:
+- Keep private keys and passwords out of `.ssh/config` and container images. Use a protected key store or SSH agent, and prefer short-lived SSH certificates where available.
+- Restrict access to key files and use a separate, narrowly scoped identity for each host. Rotate credentials that have been committed or distributed.

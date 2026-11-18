@@ -1,0 +1,9 @@
+*Warum das Eingeben von Geheimnissen in Bash eine schlechte Idee ist.*
+
+Die Kommandozeile mag sich flüchtig und sicher anfühlen, wird aber häufig protokolliert. Dies ist bei den meisten Shells Standard. Einige bieten zwar Schutzmechanismen, und die meisten Tools, die nach einem Geheimnis fragen, geben es nicht aus. Beim Schreiben eigener Befehle greifen diese Schutzmechanismen jedoch nicht, und man kann sich leicht selbst schaden.
+
+Das Auslesen von Geheimnissen ist beim Erstellen eines Containers mit einer Dockerfile zwar etwas schwieriger. Wenn du jedoch einen Container regelmäßig nutzt, ihn nicht löschst und Geheimnisse im Klartext eingibst, könnte ein Angreifer deinen scheinbar harmlosen Docker-Container missbrauchen, um seine Berechtigungen zu erweitern. Dies könnte ihm unter Umständen ermöglichen, weitaus wichtigere Systeme als deinen PC auszunutzen.
+
+Was du stattdessen tun solltest:
+- Gib keine Geheimnisse als Befehlszeilenargumente oder in Befehlen ein, die im Shell-Verlauf, in Prozesslisten oder in Protokollen gespeichert werden könnten. Verwende stattdessen einen Secrets Manager oder das geschützte Eingabeformular bzw. die Standardeingabe des Tools.
+- Speichere kein Geheimnis in einem wiederverwendbaren Container oder Image; injiziere es nur in den Prozess, der es benötigt, und rotiere es, falls es freigelegt worden sein könnte.

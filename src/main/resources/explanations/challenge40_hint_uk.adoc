@@ -1,0 +1,13 @@
+Цю проблему можна вирішити, розшифрувавши секретний код, закодований у base64, у файлі `secrchallenge.json`. Ви можете зробити це одним із таких способів:
+
+1. Використання онлайн-інструменту для розшифровки AES, такого як https://www.devglan.com/online-tools/aes-encryption-decryption[https://www.devglan.com/online-tools/aes-encryption-decryption]
+- Скопіюйте значення `secret` з `secrchallenge.json` та вставте його в текстове поле дешифратора.
+- Переконайтеся, що вхідний формат — `Base64`, а режим шифрування — `ECB`.
+- Використайте значення `key` з `secrchallenge.json` як ключ розшифрування та натисніть `Decrypt`, щоб отримати секрет.
+
+2. Використання терміналу
+- Запустіть термінал, перебуваючи в каталозі `executables`.
+- Скопіюйте значення `key` з `secrchallenge.json` та введіть `echo -n "3Ulyfmfgro6uh1cN" | xxd -p`. Це дасть вам ключ розшифрування у шістнадцятковому форматі.
+- Скопіюйте значення `secret` з `secrchallenge.json`.
+- Потім, використовуйте отриманий ключ дешифрування для розшифрування, ввівши `echo "7RwunHeLkY7c0TCTLRMOGCIeX0jWiYibAexA0unYGDI=" | openssl enc -a -d -aes-128-ecb -K 33556c79666d6667726f36756831634e -out decrypted.md`
+- Скопіюйте секретний код з файлу `decrypted.md` у папку `executables`.

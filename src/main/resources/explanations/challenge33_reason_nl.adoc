@@ -1,0 +1,4 @@
+*Waarom je voorzichtig moet zijn met het migreren van geheimen*
+
+Wanneer je een Kubernetes-secret bijwerkt en naar een ander formaat migreert, is de oorspronkelijke data onderdeel van de metadata die in de oorspronkelijke configuratie is vastgelegd.
+Migratie van geheimen naar "iets anders" zou ook een rotatiestap moeten bevatten, zodat de oudere (minder goed beschermde) waarde nu nutteloos is.

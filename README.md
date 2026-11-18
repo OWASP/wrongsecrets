@@ -422,6 +422,7 @@ Contributors:
 - [O @osamamagdy](https://www.github.com/osamamagdy)
 - [Pastekitoo @Pastekitoo](https://www.github.com/Pastekitoo)
 - [za @za](https://www.github.com/za)
+- [Sandeep @youknowme19](https://www.github.com/youknowme19)
 - [Divyanshu Dev @Novice-expert](https://www.github.com/Novice-expert)
 - [Anirban Ghosh @kekubhai](https://www.github.com/kekubhai)
 - [Tibor Hercz @tiborhercz](https://www.github.com/tiborhercz)
@@ -429,7 +430,6 @@ Contributors:
 - [Shubham Patel @Shubham-Patel07](https://www.github.com/Shubham-Patel07)
 - [Adarsh A @adarsh-a-tw](https://www.github.com/adarsh-a-tw)
 - [Chris Elbring Jr. @neatzsche](https://www.github.com/neatzsche)
-- [Sandeep @youknowme19](https://www.github.com/youknowme19)
 - [Diamond Rivero @diamant3](https://www.github.com/diamant3)
 - [Norbert Wolniak @nwolniak](https://www.github.com/nwolniak)
 - [Jeffy123-zhu @Jeffy123-zhu](https://www.github.com/Jeffy123-zhu)
@@ -442,6 +442,7 @@ Contributors:
 - [Turjo Chowdhury @turjoc120](https://www.github.com/turjoc120)
 - [SndR @SndR85](https://www.github.com/SndR85)
 - [alphasec @alphasecio](https://www.github.com/alphasecio)
+- [Bhushan Agrawal  @bhushan4work](https://www.github.com/bhushan4work)
 - [CaduRoriz @CaduRoriz](https://www.github.com/CaduRoriz)
 - [Josh Grossman @tghosth](https://www.github.com/tghosth)
 - [Miracle Owolabi @ArksherX](https://www.github.com/ArksherX)
@@ -449,7 +450,6 @@ Contributors:
 - [Mike Woudenberg @mikewoudenberg](https://www.github.com/mikewoudenberg)
 - [Spyros @northdpole](https://www.github.com/northdpole)
 - [Satyam Pandey @SatyamPandey-07](https://www.github.com/SatyamPandey-07)
-- [Bhushan Agrawal  @bhushan4work](https://www.github.com/bhushan4work)
 - [Muhammad Moeed Ur Rehman Khan @moeedrehman135](https://www.github.com/moeedrehman135)
 - [RubenAtBinx @RubenAtBinx](https://www.github.com/RubenAtBinx)
 - [Alex Bender @alex-bender](https://www.github.com/alex-bender)
@@ -460,6 +460,8 @@ Contributors:
 - [Rick M @kingthorin](https://www.github.com/kingthorin)
 - [Bobo @lb1192176991-lab](https://www.github.com/lb1192176991-lab)
 - [Nicolas Humblot @nhumblot](https://www.github.com/nhumblot)
+- [Shivam Saini @shivam-saini18](https://www.github.com/shivam-saini18)
+- [Simranjit8933 @Simranjit8933](https://www.github.com/Simranjit8933)
 - [Shlomo Zalman Heigh @szh](https://www.github.com/szh)
 - [Jeff Tong @Wind010](https://www.github.com/Wind010)
 
@@ -469,6 +471,12 @@ Testers:
 - [Marcin Nowak @drnow4u](https://www.github.com/drnow4u)
 - [Marc Chang Sing Pang @mchangsp](https://www.github.com/mchangsp)
 - [Vineeth Jagadeesh @djvinnie](https://www.github.com/djvinnie)
+
+Translators:
+
+- [LittlePrimate @LittlePrimate](https://www.github.com/LittlePrimate)
+- [S3DFX-CYBER @S3DFX-CYBER](https://www.github.com/S3DFX-CYBER)
+- [Bhushan Agrawal @bhushan4work](https://www.github.com/bhushan4work)
 
 Special thanks:
 
@@ -678,11 +686,11 @@ See [Dependency-Check Maven Plugin Documentation](https://jeremylong.github.io/D
 
 ### Get the project started in IntelliJ IDEA
 
-Requirements: make sure you have the following tools installed: [Docker](https://www.docker.com/products/docker-desktop/), [Java26 JDK](https://jdk.java.net/26/), [NodeJS 26](https://nodejs.org/en/download/current) and [IntelliJ IDEA](https://www.jetbrains.com/idea/download).
+Requirements: make sure you have the following tools installed: [Docker](https://www.docker.com/products/docker-desktop/), [Java27 JDK](https://jdk.java.net/26/), [NodeJS 26](https://nodejs.org/en/download/current) and [IntelliJ IDEA](https://www.jetbrains.com/idea/download).
 
 1. Fork and clone the project as described in the [documentation](https://github.com/OWASP/wrongsecrets/blob/master/CONTRIBUTING.md).
 2. Import the project in IntelliJ (e.g. import as mvn project / local sources)
-3. Go to the project settings and make sure it uses Java26 (And that the JDK can be found)
+3. Go to the project settings and make sure it uses Java27 (And that the JDK can be found)
 4. Go to the IDE settings>Language & Frameworks > Lombok and make sure Lombok processing is enabled
 5. Open the Maven Tab in your IDEA and run "Reload All Maven Projects" to make the system sync and download everything. Next, in that same tab use the "install" option as part of the OWASP WrongSecrets Lifecycle to genereate the asciidoc and such.
 6. Now run the `main` method in `org.owasp.wrongsecrets.WrongSecretsApplication.java`. This should fail with a stack trace.
@@ -814,7 +822,7 @@ If you want to run WrongSecrets but without certain challenges you don't want to
 *_NOTE_* Please note that we do not deliver any support to your fork when you follow the process below. Please understand that license and copyright of the original application remain intact for your Fork.
 
 Requirements:
-- Have the JDK of Java 26 installed;
+- Have the JDK of Java 27 installed;
 - Have an account at a registry to which you can push your variant of the WrongSecrets container;
 
 Here are the steps you have to follow to create your own release of WrongSecrets with certain challenges disabled:

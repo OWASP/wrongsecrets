@@ -1,0 +1,9 @@
+*Warum das Überschreiben von Geheimnissen in der Blockchain diese nicht beseitigt*
+
+Der Zustand der Blockchain kann für jeden beliebigen Zeitpunkt überprüft werden, indem die Zustandsaktualisierungen bis zu einem bestimmten Block ausgeführt werden.
+
+Durch die Aktualisierung des Zustands der Kette werden vorherige Zustandsänderungen nicht entfernt.
+
+Was du stattdessen tun solltest:
+- Platziere niemals ein Geheimnis auf einer öffentlichen oder unveränderlichen Blockchain. Halte Geheimniswerte außerhalb der Kette in einem System mit Zugriffskontrollen und verwende die Kette nur für nicht sensible Verweise oder Nachweise.
+- Behandle jeden Wert, der bereits auf einer öffentlichen Kette geschrieben wurde, als dauerhaft offengelegt, und rotiere oder widerrufe die betroffenen Zugangsdaten.

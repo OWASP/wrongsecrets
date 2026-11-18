@@ -1,0 +1,8 @@
+=== Erreur de Reddit
+
+L'erreur est humaine. On peut, par exemple, partager sur les réseaux sociaux une information apparemment anodine qui s'avère être un secret.
+Ou bien ils peuvent publier un message sur le « mauvais écran » et le soumettre. De plus, certains gestionnaires de mots de passe remplissent ou collent automatiquement le texte sur n'importe quelle page ou écran.
+
+De même, un développeur de la communauté OWASP, qui était aussi un utilisateur actif de Reddit, a laissé un secret sur la plateforme « par erreur ».
+
+Saurez-vous trouver le secret ?

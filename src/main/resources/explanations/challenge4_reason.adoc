@@ -3,3 +3,7 @@
 As you can tell by now, you can easily detect any secret that stored within a container. Whether it is an ENV, a file, or another property: if a system can read it, so can a human.
 
 Given it is a best practice to let a container be immutable and versioned, you will often end up with the secret within a container forever, unless you remove it again from the registry.
+
+What to do instead:
+- Keep secrets out of image layers and build arguments. Provide them at runtime through a secrets manager or platform secret mechanism, with access limited to the workload that needs them.
+- If a secret was included in an image, remove the image from registries where possible and rotate the credential.

@@ -98,12 +98,35 @@ func TestMergeUsers(t *testing.T) {
 func TestRenderMarkdown(t *testing.T) {
 	t.Parallel()
 
-	payload := renderMarkdown([]Contributor{{Username: "octocat", Name: "The Cat"}}, "Contributors")
-	if !strings.Contains(payload, "Contributors:\n\n") {
+	payload := renderMarkdown([]Contributor{
+		{Username: "LittlePrimate", Name: "LittlePrimate"},
+		{Username: "S3DFX-CYBER", Name: "S3DFX-CYBER"},
+		{Username: "bhushan4work", Name: "Bhushan Agrawal"},
+	}, "Translators")
+	if !strings.Contains(payload, "Translators:\n\n") {
 		t.Fatalf("payload missing section header: %s", payload)
 	}
-	if !strings.Contains(payload, "https://www.github.com/octocat") {
+	if !strings.Contains(payload, "[LittlePrimate @LittlePrimate](https://www.github.com/LittlePrimate)") {
+		t.Fatalf("payload missing first translator: %s", payload)
+	}
+	if !strings.Contains(payload, "[S3DFX-CYBER @S3DFX-CYBER](https://www.github.com/S3DFX-CYBER)") {
+		t.Fatalf("payload missing second translator: %s", payload)
+	}
+	if !strings.Contains(payload, "[Bhushan Agrawal @bhushan4work](https://www.github.com/bhushan4work)") {
 		t.Fatalf("payload missing github url: %s", payload)
+	}
+}
+
+func TestRenderHTMLIncludesTranslators(t *testing.T) {
+	t.Parallel()
+
+	translators := []Contributor{{Username: "octocat", Name: "The Cat"}}
+	payload := renderHTML("2026-10-11", nil, nil, nil, nil, translators, nil)
+	if !strings.Contains(payload, "Translators:") {
+		t.Fatalf("payload missing translators section: %s", payload)
+	}
+	if !strings.Contains(payload, "<li><a href='https://www.github.com/octocat'>The Cat @octocat</a></li>") {
+		t.Fatalf("payload missing translator: %s", payload)
 	}
 }
 

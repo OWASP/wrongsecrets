@@ -1,0 +1,7 @@
+*Pourquoi les fichiers JAR exécutables et les APK Android ne doivent pas être utilisés pour dissimuler des secrets.*
+
+Les fichiers JAR exécutables ne sont pas un endroit sûr pour dissimuler des secrets. Tout comme les fichiers APK Android, ce sont des archives qui transmettent directement du bytecode et des ressources à l'attaquant, ce qui rend les chaînes de caractères, les constantes et les méthodes auxiliaires intégrées faciles à inspecter avec les outils de rétro-ingénierie courants.
+
+Si un artefact Java côté client nécessite un secret pour fonctionner, considérez que ce secret peut être extrait une fois le fichier téléchargé. Conservez les secrets importants sur un serveur de confiance et ne les divulguez qu'après une authentification et une autorisation appropriées.
+
+Si vous souhaitez vous entraîner davantage à la rétro-ingénierie Java et Android, explorez le https://github.com/OWASP/MASTG-Hacking-Playground[OWASP MASTG Hacking Playground].

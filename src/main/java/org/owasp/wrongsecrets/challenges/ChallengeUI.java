@@ -1,9 +1,12 @@
 package org.owasp.wrongsecrets.challenges;
 
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import lombok.Getter;
+import org.apache.commons.io.FilenameUtils;
 import org.owasp.wrongsecrets.RuntimeEnvironment;
 import org.owasp.wrongsecrets.ScoreCard;
 import org.owasp.wrongsecrets.definitions.ChallengeDefinition;
@@ -11,48 +14,54 @@ import org.owasp.wrongsecrets.definitions.Difficulty;
 import org.owasp.wrongsecrets.definitions.Environment;
 import org.owasp.wrongsecrets.definitions.Navigator;
 import org.owasp.wrongsecrets.definitions.Sources.ChallengeSource;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.core.io.ClassPathResource;
 
 /** Wrapper class to move logic from Thymeleaf to keep logic in code instead of the html file. */
 @Getter
 public class ChallengeUI {
 
+  /**
+   * Cache of classpath file existence results so that we only hit the filesystem once per unique
+   * locale-specific filename across all requests.
+   */
+  private static final ConcurrentHashMap<String, Boolean> LOCALIZED_FILE_EXISTS_CACHE =
+      new ConcurrentHashMap<>();
+
+  private static final Map<DifficultyKey, DifficultyUI> DIFFICULTY_UI_CACHE =
+      new ConcurrentHashMap<>();
+
   private final DifficultyUI difficultyUI;
   private final List<Environment> environments;
   private final Navigator navigation;
+  private final String runtimeEnvironmentCategory;
 
-  /** Wrapper class to express the difficulty level into a UI representation. */
-  private record DifficultyUI(int difficulty, int totalOfDifficultyLevels) {
+  private record DifficultyKey(int level, int totalOfDifficultyLevels) {}
 
-    public String minimal() {
-      return "☆".repeat(difficulty);
-    }
-
-    public String scale() {
-      String fullScale = "★".repeat(difficulty) + "☆".repeat(totalOfDifficultyLevels);
-      return fullScale.substring(0, totalOfDifficultyLevels);
-    }
-  }
+  private record DifficultyUI(String minimal, String scale) {}
 
   private final ChallengeDefinition challengeDefinition;
   private final ScoreCard scoreCard;
   private final RuntimeEnvironment runtimeEnvironment;
   private final List<Difficulty> difficulties;
 
-  public ChallengeUI(
+  private ChallengeUI(
       ChallengeDefinition challengeDefinition,
       ScoreCard scoreCard,
       RuntimeEnvironment runtimeEnvironment,
       List<Difficulty> difficulties,
       List<Environment> environments,
-      Navigator navigation) {
+      Navigator navigation,
+      DifficultyUI difficultyUI,
+      String runtimeEnvironmentCategory) {
     this.challengeDefinition = challengeDefinition;
     this.scoreCard = scoreCard;
     this.runtimeEnvironment = runtimeEnvironment;
     this.difficulties = difficulties;
     this.environments = environments;
     this.navigation = navigation;
-    this.difficultyUI =
-        new DifficultyUI(challengeDefinition.difficulty(difficulties), difficulties.size());
+    this.difficultyUI = difficultyUI;
+    this.runtimeEnvironmentCategory = runtimeEnvironmentCategory;
   }
 
   /**
@@ -143,30 +152,62 @@ public class ChallengeUI {
   }
 
   /**
-   * Returns filename of the explanation of the challenge.
+   * Resolves a locale-specific filename if available, falling back to the default (English) file.
+   * Checks both the raw .adoc source (used in dev mode) and the pre-compiled .html (used in
+   * production). If neither locale-specific file exists, the original filename is returned so the
+   * English content is shown. Results are cached to avoid repeated classpath lookups. Must be
+   * called at render time as {@link ChallengeUI} instances are cached across requests.
+   *
+   * @param defaultFileName the default (English) file path, e.g. "explanations/challenge1.adoc"
+   * @return locale-specific filename if it exists, otherwise the default filename
+   */
+  private String localizeFileName(String defaultFileName) {
+    if (defaultFileName == null || defaultFileName.isEmpty()) {
+      return defaultFileName;
+    }
+    var locale = LocaleContextHolder.getLocale();
+    if (locale.getLanguage().isEmpty() || "en".equals(locale.getLanguage())) {
+      return defaultFileName;
+    }
+    String ext = FilenameUtils.getExtension(defaultFileName);
+    String base = FilenameUtils.removeExtension(defaultFileName);
+    String suffix = "_" + locale.getLanguage();
+    String localizedAdoc = base + suffix + (ext.isEmpty() ? "" : "." + ext);
+    String localizedHtml = base + suffix + ".html";
+    boolean exists =
+        LOCALIZED_FILE_EXISTS_CACHE.computeIfAbsent(
+            localizedAdoc,
+            key ->
+                new ClassPathResource(key).exists()
+                    || new ClassPathResource(localizedHtml).exists());
+    return exists ? localizedAdoc : defaultFileName;
+  }
+
+  /**
+   * Returns filename of the explanation of the challenge, locale-aware with English fallback.
    *
    * @return String with filename.
    */
   public String getExplanation() {
-    return documentation(s -> s.explanation().fileName());
+    return localizeFileName(documentation(s -> s.explanation().fileName()));
   }
 
   /**
-   * Returns filename of the hints for the challenge.
+   * Returns filename of the hints for the challenge, locale-aware with English fallback.
    *
    * @return String with filename.
    */
   public String getHint() {
-    return documentation(s -> s.hint().fileName());
+    return localizeFileName(documentation(s -> s.hint().fileName()));
   }
 
   /**
-   * Returns filename of the reasons of the challenge.
+   * Returns filename of the reasons of the challenge, locale-aware with English fallback.
    *
    * @return String with filename.
    */
   public String getReason() {
-    return documentation(s -> s.reason().fileName());
+    return localizeFileName(documentation(s -> s.reason().fileName()));
   }
 
   /**
@@ -176,7 +217,7 @@ public class ChallengeUI {
    */
   public String requiredEnv() {
     return challengeDefinition.supportedEnvironments().stream()
-        .map(e -> e.name())
+        .map(Environment::name)
         .limit(1)
         .collect(Collectors.joining())
         .toUpperCase();
@@ -246,20 +287,21 @@ public class ChallengeUI {
   public String getUiSnippet() {
     return challengeDefinition
         .source(runtimeEnvironment)
-        .map(source -> source.uiSnippet())
+        .map(ChallengeSource::uiSnippet)
         .orElse("");
   }
 
-  public String getRuntimeEnvironmentCategory() {
+  private static String calculateRuntimeEnvironmentCategory(
+      ChallengeDefinition challengeDefinition, List<Environment> environments) {
     var challengeEnvironmentsOverviewNames =
-        challengeDefinition.supportedEnvironments().stream().map(env -> env.overview()).toList();
+        challengeDefinition.supportedEnvironments().stream().map(Environment::overview).toList();
     if (challengeEnvironmentsOverviewNames.size() == 1) {
-      return challengeEnvironmentsOverviewNames.iterator().next();
+      return challengeEnvironmentsOverviewNames.getFirst();
     } else {
       // Now if we have multiple we select the lowest one for our global environment definition
-      var allEnvironmentsOverviewNames = environments.stream().map(env -> env.overview()).toList();
+      var allEnvironmentsOverviewNames = environments.stream().map(Environment::overview).toList();
       return allEnvironmentsOverviewNames.stream()
-          .filter(name -> challengeEnvironmentsOverviewNames.contains(name))
+          .filter(challengeEnvironmentsOverviewNames::contains)
           .findFirst()
           .orElse("Unknown");
     }
@@ -272,7 +314,26 @@ public class ChallengeUI {
       List<Difficulty> difficulties,
       List<Environment> environments,
       Navigator navigation) {
+    int difficulty = definition.difficulty(difficulties);
+    var difficultyUI =
+        DIFFICULTY_UI_CACHE.computeIfAbsent(
+            new DifficultyKey(difficulty, difficulties.size()),
+            key -> {
+              String fullScale =
+                  "★".repeat(key.level()) + "☆".repeat(key.totalOfDifficultyLevels());
+              return new DifficultyUI(
+                  "☆".repeat(key.level()), fullScale.substring(0, key.totalOfDifficultyLevels()));
+            });
+    String runtimeEnvironmentCategory =
+        calculateRuntimeEnvironmentCategory(definition, environments);
     return new ChallengeUI(
-        definition, scoreCard, environment, difficulties, environments, navigation);
+        definition,
+        scoreCard,
+        environment,
+        difficulties,
+        environments,
+        navigation,
+        difficultyUI,
+        runtimeEnvironmentCategory);
   }
 }

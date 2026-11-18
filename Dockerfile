@@ -1,12 +1,12 @@
-FROM bellsoft/liberica-openjre-debian:26-cds AS builder
+FROM bellsoft/liberica-openjre-debian:27-cds AS builder
 WORKDIR /builder
 
-ARG argBasedVersion="1.14.2RC1"
+ARG argBasedVersion="1.15.0RC1"
 
 COPY --chown=wrongsecrets target/wrongsecrets-${argBasedVersion}-SNAPSHOT.jar application.jar
 RUN java -Djarmode=tools -jar application.jar extract --layers --destination extracted
 
-FROM eclipse-temurin:26-jre-alpine
+FROM eclipse-temurin:27.0.1.0-jre-alpine
 WORKDIR /application
 
 LABEL org.opencontainers.image.title="OWASP WrongSecrets"

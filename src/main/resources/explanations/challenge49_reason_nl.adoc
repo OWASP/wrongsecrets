@@ -1,0 +1,9 @@
+*Waarom MD5 gebruiken als KDF slecht is*
+
+Sleutels effectief beschermen is cruciaal, en dat betekent dat je de juiste Key Derivation Functions (KDF's) moet gebruiken met extra entropie en contextgebonden binding, zoals benadrukt in de https://mas.owasp.org/MASTG/0x04g-Testing-Cryptography/#weak-key-generation-functions[Mobile Security Testing Guide (MSTG).]
+
+MD5 is te snel en te eenvoudig te berekenen, waardoor aanvallers snel een enorme hoeveelheid invoeren (zoals PIN's) kunnen proberen om de sleutel af te leiden. Daarnaast (hoewel iets moeilijker te misbruiken) is de collisieruimte relatief klein, wat betekent dat meerdere verschillende invoeren tot dezelfde md5-hash kunnen leiden.
+
+Sterkere KDF's zijn cruciaal bij het werken met gevoelige gegevens, omdat ze de broodnodige weerstand bieden tegen brute-force-aanvallen en geheimen beschermen, zelfs als de aanvaller toegang krijgt tot gedeeltelijke informatie.
+
+De MSTG beveelt robuuste KDF's zoals PBKDF2, bcrypt of Argon2 aan, die extra entropie meenemen en rekenkundige hardheid afdwingen, waardoor brute-force-aanvallen kostbaarder worden.

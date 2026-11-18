@@ -1,0 +1,5 @@
+Om verschillende redenen is het "verbergen" van geheimen op een webpagina geen goed idee, ook als het alleen voor intern gebruik is. Ten eerste zijn websites vaak toegankelijk voor verschillende partijen, zoals medewerkers, aannemers en leveranciers. Geheimen op een website bewaren vergroot het risico dat onbevoegde partijen er via welke route dan ook toegang toe krijgen. De kans dat een hacker na een compromittering verder kan pivoten, wordt daardoor sterk vergroot.
+
+Wat u in plaats daarvan kunt doen:
+- Plaats geen geheimen in de inhoud van de pagina, de broncode of de configuratie aan clientzijde. Bewaar ze op de server en voer daar de vereiste bewerking uit.
+- Verlang authenticatie en autorisatie voor toegang tot gevoelige bewerkingen en roteer elk geheim dat al is gepubliceerd.

@@ -1,0 +1,8 @@
+*Por qué no deberías usar localStorage para información secreta*
+
+LocalStorage conserva la información entre sesiones y es fácilmente accesible mediante JavaScript. Esto significa que existen diversas maneras de obtener cualquier información confidencial almacenada en él.
+
+Aquí hay varias maneras de evitar que se filtren secretos:
+- Si no es necesario: no guardes el secreto con el cliente; consérvalo en el servidor.
+- SessionStorage también es accesible para JavaScript, por lo que no protege los secretos frente a la inyección de scripts entre sitios (XSS). Para las sesiones del navegador, prefiera un identificador de sesión opaco en una cookie `Secure`, `HttpOnly`, `SameSite`, manteniendo el estado de la sesión en el servidor.
+- No confíe en el cifrado del lado del cliente para un secreto que el cliente deba utilizar; el cliente también necesita acceso a la clave de descifrado. Para flujos entre dominios, utilice un intercambio en el servidor o un token de vida corta y alcance limitado, en lugar de almacenar un secreto reutilizable en el almacenamiento del navegador.

@@ -35,10 +35,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
 
-      - name: Set up JDK 26
+      - name: Set up JDK 27
         uses: actions/setup-java@v5
         with:
-          java-version: "26"
+          java-version: "27"
           distribution: "temurin"
           cache: "maven"
 
@@ -209,6 +209,11 @@ jobs:
           export EXISTING_INDEX="$EXISTING_INDEX"
           python3 .github/scripts/update_pr_index.py
 
+      - name: Include review-translate tool
+        run: |
+          mkdir -p static-site/review-translate
+          cp -r scripts/review_translate/* static-site/review-translate/
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
@@ -316,6 +321,11 @@ jobs:
           cp -r /tmp/cleaned-site/* static-site/ 2>/dev/null || true
 
           echo "Cleanup preparation completed"
+
+      - name: Re-include review-translate tool
+        run: |
+          mkdir -p static-site/review-translate
+          cp -r scripts/review_translate/* static-site/review-translate/
 
       - name: Setup Pages for cleanup
         uses: actions/configure-pages@v5

@@ -1,0 +1,5 @@
+=== Wachtwoordbeheerders
+
+Toen we dit project aan mijn vriend Kees lieten zien, vroeg hij ons: hé, is dat niet hetzelfde als een heel zwak wachtwoord hebben op je wachtwoordbeheerder? Want dat deed mijn collega.
+
+Dus hier is hij dan: de uitdaging voor wachtwoordbeheer! We hebben een Keepass-bestand opgezet in de Docker-container waarin we geheime inloggegevens voor Alibabacloud plaatsen. Kun je het krijgen?

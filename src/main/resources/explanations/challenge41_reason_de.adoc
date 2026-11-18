@@ -1,0 +1,9 @@
+*Warum das Vorhashing von Passwörtern keine gute Idee ist?*
+
+Obwohl das Vorhashing von Passwörtern eine einfache Möglichkeit ist, ältere Hashes zu aktualisieren, ist es anfällig für https://www.scottbrady91.com/authentication/beware-of-password-shucking[Password shucking].
+
+Es handelt sich um eine Technik, bei der Angreifer die neueren Sicherheitsebenen eines aktualisierten Hashwerts entfernen und ihn so auf seine schwächere, ältere Version reduzieren. In diesem Fall konnten wir bcrypt-Hashes auf unsichere MD5-Hashes reduzieren und diese anschließend knacken.
+
+Am sichersten lässt sich dies vermeiden, indem man die Passwörter aller Benutzer zurücksetzt und die neuen Passwörter mit dem neueren Algorithmus hasht. Diese Methode ist jedoch nicht benutzerfreundlich.
+
+Die beste Methode zum Upgrade besteht darin, die Hashes zunächst zu schichten und sie beim nächsten Login der Benutzer durch direkte Hashes ihrer Passwörter zu ersetzen.

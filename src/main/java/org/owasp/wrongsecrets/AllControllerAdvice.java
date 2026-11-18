@@ -1,6 +1,8 @@
 package org.owasp.wrongsecrets;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.stream.Collectors;
 import org.owasp.wrongsecrets.challenges.ChallengeUI;
 import org.owasp.wrongsecrets.definitions.ChallengeDefinitionsConfiguration;
@@ -9,11 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-/**
- * Make sure shared model properties are always set for each controller. So for example `challenges`
- * should be present in the model instead of adding it in all endpoint we can use this advice to let
- * Spring do this for us.
- */
 @ControllerAdvice
 public class AllControllerAdvice {
 
@@ -22,6 +19,8 @@ public class AllControllerAdvice {
   private final ScoreCard scoreCard;
   private final ChallengeDefinitionsConfiguration challengeDefinitionsConfiguration;
   private final RuntimeEnvironment runtimeEnvironment;
+
+  private List<ChallengeUI> cachedChallenges;
 
   public AllControllerAdvice(
       Challenges challenges,
@@ -36,10 +35,9 @@ public class AllControllerAdvice {
     this.runtimeEnvironment = runtimeEnvironment;
   }
 
-  @ModelAttribute
-  public void addChallenges(Model model) {
-    model.addAttribute(
-        "challenges",
+  @PostConstruct
+  public void init() {
+    this.cachedChallenges =
         challengeDefinitionsConfiguration.challenges().stream()
             .map(
                 def ->
@@ -50,7 +48,12 @@ public class AllControllerAdvice {
                         challenges.difficulties(),
                         challenges.getDefinitions().environments(),
                         challenges.navigation(def)))
-            .collect(Collectors.toList()));
+            .collect(Collectors.toList());
+  }
+
+  @ModelAttribute
+  public void addChallenges(Model model) {
+    model.addAttribute("challenges", cachedChallenges);
   }
 
   @ModelAttribute

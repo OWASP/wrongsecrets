@@ -1,0 +1,11 @@
+=== Secretos en el código front-end, parte 2
+
+A veces, no queremos olvidar cómo iniciar sesión con credenciales de prueba mientras trabajamos en nuestro código de interfaz.
+¿Puedes encontrar las credenciales de la prueba?
+
+Tenga en cuenta que, en ocasiones, las credenciales de prueba se ofuscan en el código mediante su codificación Base64.
+
+++++
+<!-- test-credentials = WhyCommentsAsPassswordAreBad345_$"-->
+<!-- Si te gusta esto: ¡visita OWAWS Juiceshop para más desafíos increíbles! https://juice-shop.herokuapp.com/#/score-board -->
+++++

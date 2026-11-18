@@ -1,5 +1,8 @@
 package org.owasp.wrongsecrets;
 
+import jakarta.annotation.PostConstruct;
+import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 import lombok.extern.slf4j.Slf4j;
 import nz.net.ultraq.thymeleaf.layoutdialect.LayoutDialect;
@@ -12,7 +15,11 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.thymeleaf.extras.springsecurity6.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 import org.thymeleaf.spring6.templateresolver.SpringResourceTemplateResolver;
@@ -26,7 +33,38 @@ import org.thymeleaf.templateresolver.ITemplateResolver;
 @Slf4j
 public class MvcConfiguration implements WebMvcConfigurer {
 
+  @PostConstruct
+  public void init() {
+    // Force English as the default locale to prevent system locale from interfering
+    Locale.setDefault(Locale.ENGLISH);
+  }
+
+  /** Supported locales for the language toggle. */
+  public static final List<Locale> SUPPORTED_LOCALES =
+      List.of(
+          Locale.ENGLISH,
+          Locale.of("nl"),
+          Locale.GERMAN,
+          Locale.of("es"),
+          Locale.FRENCH,
+          Locale.of("uk"));
+
   private static final String UTF8 = "UTF-8";
+
+  /** Session-based locale resolver so the selected language persists across requests. */
+  @Bean
+  public LocaleResolver localeResolver() {
+    SessionLocaleResolver sessionLocaleResolver = new SessionLocaleResolver();
+    sessionLocaleResolver.setDefaultLocale(Locale.ENGLISH);
+    return sessionLocaleResolver;
+  }
+
+  @Override
+  public void addInterceptors(InterceptorRegistry registry) {
+    LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
+    localeChangeInterceptor.setParamName("lang");
+    registry.addInterceptor(localeChangeInterceptor);
+  }
 
   @Bean
   public ITemplateResolver springThymeleafTemplateResolver(ApplicationContext applicationContext) {
@@ -35,7 +73,7 @@ public class MvcConfiguration implements WebMvcConfigurer {
     resolver.setSuffix(".html");
     resolver.setTemplateMode(TemplateMode.HTML);
     resolver.setOrder(2);
-    resolver.setCacheable(false);
+    resolver.setCacheable(true);
     resolver.setCharacterEncoding(UTF8);
     resolver.setApplicationContext(applicationContext);
     return resolver;

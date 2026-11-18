@@ -1,0 +1,11 @@
+=== Fuite de secrets concernant le conteneur de développement
+
+Les conteneurs de développement permettent aux équipes de définir des environnements de développement reproductibles grâce à des outils de conteneurisation comme VS Code Remote Containers et GitHub Codespaces. En encapsulant les outils, les environnements d'exécution et les dépendances dans un fichier `.devcontainer/devcontainer.json`, les développeurs peuvent démarrer sans installer de piles logicielles locales complexes.
+
+Cependant, les développeurs commettent fréquemment l'erreur d'intégrer des jetons sensibles, des mots de passe, des clés API ou des informations d'identification d'accès à un registre privé directement dans `.devcontainer/devcontainer.json` (par exemple dans `containerEnv`, `remoteEnv` ou des scripts de cycle de vie) et de les enregistrer dans le contrôle de version.
+
+Pour relever ce défi :
+
+. Inspectez le fichier de configuration devcontainer https://github.com/OWASP/wrongsecrets/tree/master/.devcontainer/devcontainer.json[`.devcontainer/devcontainer.json`] dans le dépôt du projet ou examinez l'extrait de configuration dans l'interface utilisateur.
+. Identifiez le jeton ou la clé secrète `DEVCONTAINER_SECRET` divulgué(e) et définie dans l'environnement du conteneur.
+. Veuillez soumettre le secret découvert dans le champ de saisie ci-dessous.

@@ -1,0 +1,9 @@
+*Waarom het invoeren van geheimen in bash een slecht idee is.*
+
+De commandoregel kan tijdelijk en veilig aanvoelen, maar wordt vaak gelogd. Dit is een standaardfunctie bij de meeste shells. Sommige hebben beschermingen en de meeste tools die om een geheim vragen, printen het niet. Wanneer je echter eigen commando's schrijft, ontbreken deze beschermingen en kun je jezelf gemakkelijk in de voet schieten.
+
+Geheimen lekken is lastig te doen met een Dockerfile wanneer je een container maakt. Als je echter een container hebt die je regelmatig gebruikt, die je niet verwijdert en waarin je geheimen in platte tekst typt, dan zou een kwaadwillende je ogenschijnlijk onschuldige docker-container kunnen gebruiken om privileges te escalateren. Wat ertoe kan leiden dat ze iets veel belangrijkers dan je PC exploiteren.
+
+Wat je in plaats daarvan moet doen:
+- Vermijd het invoeren van geheimen als commandoregelargumenten of in commando's die in de shell-geschiedenis, processenlijsten of logs terecht kunnen komen. Gebruik in plaats daarvan een secrets manager of de beveiligde prompt of het standaard-invoermechanisme van een tool.
+- Sla een geheim niet op in een herbruikbare container of image; injecteer het alleen in het proces dat het nodig heeft, en roteer het als het mogelijk is blootgesteld.

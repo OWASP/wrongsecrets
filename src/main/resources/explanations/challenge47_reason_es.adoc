@@ -1,0 +1,16 @@
+*¿Por qué la inyección de plantillas de Vault no siempre es una buena idea?*
+
+Si bien la inyección de agentes de Vault a través de plantillas puede ser una forma conveniente de administrar secretos en ciertos escenarios,
+Hay situaciones en las que puede que no sea el mejor enfoque.
+
+Las plantillas podrían exponer accidentalmente información confidencial en los registros o archivos temporales.
+Si no se configuran correctamente, los secretos podrían acabar en lugares donde sean accesibles a usuarios o procesos no autorizados.
+
+Consideremos un ejemplo que involucra un ataque de inyección de plantillas en un lenguaje de programación como PHP:
+
+. Imaginemos un escenario en el que una aplicación PHP utiliza una plantilla con información confidencial.
+* donde la plantilla puede verse así: $password = "'; system('rm -rf /'); //"
+. Cuando se procesa la plantilla, puede convertirse en:
+* $connection = "password='; system('rm -rf /'); //"
+
+Para evitar este tipo de problemas, no insertes valores secretos en código fuente ejecutable ni los evalúes como expresiones de plantilla. Pasa los secretos a la aplicación como configuración en tiempo de ejecución siempre que sea posible; de lo contrario, utiliza un escape adecuado al contexto, restringe el acceso a los archivos renderizados y asegúrate de que los secretos no se escriban en los registros.

@@ -5,8 +5,22 @@
     <meta charset="UTF-8">
     <title>OWASP WrongSecrets</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="OWASP WrongSecrets - a deliberately vulnerable app to learn how to find and fix hardcoded secrets in code.">
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="OWASP WrongSecrets" />
+    <meta property="og:title" content="OWASP WrongSecrets" />
+    <meta property="og:description" content="A deliberately vulnerable app to learn how to find and fix hardcoded secrets in code." />
+    <meta property="og:url" content="https://wrongsecrets.herokuapp.com/" />
+    <meta property="og:image" content="https://wrongsecrets.herokuapp.com/img/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="OWASP WrongSecrets - find hardcoded secrets in code" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="OWASP WrongSecrets" />
+    <meta name="twitter:description" content="A deliberately vulnerable app to learn how to find and fix hardcoded secrets in code." />
+    <meta name="twitter:image" content="https://wrongsecrets.herokuapp.com/img/og-image.png" />
     <link rel="stylesheet" th:href="@{/webjars/datatables/2.3.8/css/dataTables.bootstrap5.min.css}" />
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.8/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/dark.css}" />
 
@@ -18,34 +32,32 @@
         <th:block layout:fragment="content"></th:block>
     </div>
 
-    <script th:src="@{/webjars/bootstrap/5.3.8/js/bootstrap.bundle.min.js}"></script>
-    <script th:src="@{/webjars/github-buttons/2.14.1/dist/buttons.min.js}"></script>
+    <script defer th:src="@{/webjars/bootstrap/5.3.8/js/bootstrap.bundle.min.js}"></script>
+    <script defer th:src="@{/webjars/github-buttons/2.14.1/dist/buttons.min.js}"></script>
     <script th:src="@{/webjars/jquery/3.7.1/jquery.min.js}"></script>
-    <script th:src="@{/webjars/datatables/2.3.8/js/dataTables.min.js}"></script>
-    <script th:src="@{/webjars/datatables/2.3.8/js/dataTables.bootstrap5.min.js}"></script>
+    <script defer th:src="@{/webjars/datatables/2.3.8/js/dataTables.min.js}"></script>
+    <script defer th:src="@{/webjars/datatables/2.3.8/js/dataTables.bootstrap5.min.js}"></script>
     <script th:if="${allCompleted} eq 'party'">
-        window.addEventListener("load", function () {
+        document.addEventListener("DOMContentLoaded", function () {
             new bootstrap.Modal(document.getElementById('finishedModal'), {}).toggle()
         });
     </script>
-    <script th:src="@{/theme-toggle.js}"></script>
+    <script defer th:src="@{/theme-toggle.js}"></script>
 
     <!-- Replaces a possible UI snippet (JS) dynamically -->
     <div th:replace="~{ui-snippet:__${challenge?.uiSnippet}__}"></div>
 </body>
 
 <script>
-
-    $.extend(true, $.fn.dataTable.defaults, {
-        searching: true,
-        ordering: true,
-    });
-    $(document).ready(function () {
+    document.addEventListener("DOMContentLoaded", function () {
+        $.extend(true, $.fn.dataTable.defaults, {
+            searching: true,
+            ordering: true,
+        });
         $('#challenge_overview').DataTable({
             lengthMenu: [ [30, 50, -1], [30, 50, "All"] ]
         });
     });
 </script>
-
 
 </html>

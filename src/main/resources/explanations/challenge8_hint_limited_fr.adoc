@@ -1,0 +1,7 @@
+Vous pouvez relever ce défi en suivant les étapes suivantes :
+
+1. Détectez le secret dans les journaux de connexion.
+ - Utilisez-vous le conteneur Docker ? Utilisez `docker logs <containerID>` pour obtenir les journaux et trouver la valeur de challenge8.
+ - Utilisez-vous K8s ? Trouvez le Pod (`kubectl get pods | grep secret`) puis exécutez `kubectl logs -f <nameOfThePod>` pour obtenir les journaux et trouver la valeur du défi 8.
+
+ATTENTION : vous participez à ce défi sur une version hébergée de WrongSecrets. Si vous n’hébergez pas le serveur vous-même, vous n’aurez peut-être pas accès aux résultats définis ci-dessus. Lors de l’organisation d’un CTF : demandez à l’organisateur l’accès aux journaux.

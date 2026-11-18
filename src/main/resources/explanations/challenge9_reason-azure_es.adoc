@@ -1,0 +1,16 @@
+*Por qué debes tener cuidado con los secretos en tu nube:*
+
+Secretos y estado de la terraformación:
+
+El estado de Terraform se puede almacenar en varios lugares: localmente, en la solución de almacenamiento de un proveedor de nube, etc. Es fácil que los secretos terminen en el estado de Terraform, ya que los sistemas creados por este suelen necesitar comunicarse con otros sistemas que requieren autenticación. Por lo tanto, asegúrese de que los secretos siempre estén cifrados en el estado de Terraform o de que todos los secretos se almacenen en un sistema de gestión de secretos. Como alternativa, asegúrese de que el secreto se cree en Terraform, pero que su valor se establezca y gestione mediante un proceso diferente.
+
+Cabe destacar que los secretos no son la única razón para impedir el acceso al estado de Terraform. El acceso de lectura al estado de TF puede exponer detalles de configuración a personas no autorizadas, mientras que el acceso de escritura a Terraform puede permitir que un atacante configure un estado falso que, en la siguiente ejecución de terraform apply-run, genere cambios no autorizados.
+
+Acceso a la cuenta de administrador/propietario:
+Si pudiste usar la cuenta de administrador/propietario de la nube de Azure para acceder a los datos, entonces puedes ver por qué esto es una mala idea para un entorno de producción. Porque con esta cuenta puedes modificar cualquier cosa dentro de ella y extraer fácilmente cualquier secreto.
+
+Por último, pero no menos importante: podríamos acceder fácilmente al contenedor mediante exec para buscar el secreto en el punto de montaje. Esto tiene que ver con tres cosas:
+
+- Se nos permite hacerlo mediante RBAC, lo cual no debería ser lo habitual en PRD: de lo contrario, cualquiera de su organización podría husmear en el contenedor.
+- Dentro del contenedor hay ejecutables (sh/openssl/etc.) que podemos ejecutar para establecer una shell. Eliminar cualquier binario innecesario del contenedor puede ayudar a reducir la superficie de ataque y dificultar que un atacante que haya logrado una ejecución remota de código (RCE) en el contenedor pueda acceder a otras partes del mismo para obtener más ejecución.
+- Hemos expuesto el configmap como una variable de entorno. Esto significa que cualquiera que acceda al entorno de ejecución del contenedor dentro del pod ahora puede extraer el secreto. Hemos acercado el secreto al consumidor, pero quizás no lo suficiente (por ejemplo, solo a la aplicación).

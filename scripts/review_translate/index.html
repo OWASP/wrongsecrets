@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WrongSecrets Translation Viewer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <p class="eyebrow">OWASP WrongSecrets · community utility</p>
+    <h1>Translation side-by-side viewer</h1>
+    <p class="intro">Browse translated <code>*_&lt;lang&gt;.*</code> files in any language and compare them with the English original.</p>
+  </header>
+
+  <main>
+    <section class="toolbar" aria-label="Repository controls">
+      <label>Repository
+        <input id="repo" value="OWASP/WrongSecrets" autocomplete="off" spellcheck="false">
+      </label>
+      <label>Branch, tag, or commit
+        <input id="ref" value="master" autocomplete="off" spellcheck="false">
+      </label>
+      <label>Language
+        <input id="language" value="nl" list="languages" autocomplete="off" spellcheck="false">
+        <datalist id="languages">
+          <option value="nl"><option value="de"><option value="es"><option value="fr"><option value="it"><option value="pt"><option value="pt-br"><option value="ru"><option value="uk"><option value="pl"><option value="tr"><option value="ja"><option value="ko"><option value="zh"><option value="zh-cn"><option value="ar"><option value="hi"><option value="sv"><option value="da"><option value="fi"><option value="nb"><option value="cs"><option value="el"><option value="he"><option value="id">
+        </datalist>
+      </label>
+      <button id="load">Load files</button>
+      <label class="filter">Filter files
+        <input id="filter" placeholder="Search filenames…" autocomplete="off">
+      </label>
+      <span id="status" role="status" aria-live="polite">Ready.</span>
+    </section>
+
+    <section class="workspace">
+      <aside class="file-panel">
+        <div class="panel-heading">
+          <h2 id="lang-title">Dutch files</h2><span id="count">0</span>
+        </div>
+        <ul id="file-list" aria-label="Dutch translation files"></ul>
+      </aside>
+      <section class="compare-panel">
+        <div id="empty" class="empty">
+          <h2>Choose a file to compare</h2>
+          <p id="lang-hint">Select a <code>*_nl.*</code> file from the list. Its English original will appear beside it.</p>
+        </div>
+        <div id="comparison" hidden>
+          <div class="compare-heading">
+            <div><h2 id="selected-title">File comparison</h2><p id="path-label"></p></div>
+            <a id="github-link" href="#" target="_blank" rel="noopener noreferrer">Open on GitHub ↗</a>
+          </div>
+          <div class="columns">
+            <article class="code-column">
+              <div class="code-heading"><h3>English original</h3><button data-copy="original">Copy</button></div>
+              <pre><code id="original"></code></pre>
+              <p id="original-meta" class="file-meta"></p>
+            </article>
+            <article class="code-column">
+              <div class="code-heading"><h3 id="lang-heading">Dutch translation</h3><button data-copy="translation">Copy</button></div>
+              <pre><code id="translation"></code></pre>
+              <p id="translation-meta" class="file-meta"></p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </section>
+  </main>
+  <footer>
+    Read-only viewer. Content is fetched from the public GitHub API; no token or backend is used.
+    GitHub API rate limits may apply. This is an independent utility and is not an official OWASP project.
+  </footer>
+  <script src="app.js"></script>
+</body>
+</html>

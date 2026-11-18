@@ -1,0 +1,10 @@
+=== Secrets dans le code front-end
+
+Lorsque nous démarrons un nouveau projet, nous nous concentrons généralement davantage sur la mise en œuvre de nouvelles fonctionnalités que sur l'aspect sécurité.
+Il arrive que les applications monopages ou les applications mobiles aient besoin d'accéder à des informations pour elles-mêmes plutôt que pour le compte d'un utilisateur.
+À cette fin, https://oauth.net/2/grant-types/client-credentials/[OAuth] fournit le flux `client_credentials` pour obtenir un jeton d'accès.
+Dans ce genre de situation, il est facile de stocker des secrets clients dans le code de l'interface utilisateur ou de l'application mobile. Et même si vous pouvez les masquer dans le code, vous devrez bien finir par devoir les utiliser.
+
+Ce défi consiste à contacter un serveur en utilisant les identifiants du client. Saurez-vous trouver son secret ?
+
+Et si vous le cherchiez dans les outils de développement du navigateur ?

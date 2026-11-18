@@ -1,0 +1,8 @@
+*Waarom het plaatsen van screenshots van logs in een GitHub-issue een slecht idee is*
+
+Je moet geen screenshots van logs plaatsen in een GitHub-issue, omdat:
+1. Data publiek is (zelfs in een private repository vaak publieker dan je zou hopen)
+2. Screenshots niet gecensureerd kunnen worden zoals tekst. Zelfs wanneer het geheim wazig is gemaakt, kan dit ongedaan worden gemaakt.
+
+Controleer op geheimlekken in de output en gebruik code-block markdown om logs in een GitHub-issue te plaatsen. Dit is bovendien veel fijner voor de maintainers die je proberen te helpen debuggen :).
+Als een inloggegeven is blootgelegd, herroep of roteer dat dan onmiddellijk en verwijder het bericht of de bijlage waar mogelijk; ga ervan uit dat het al gekopieerd kan zijn.

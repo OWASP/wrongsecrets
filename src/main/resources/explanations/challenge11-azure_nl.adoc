@@ -1,0 +1,7 @@
+=== Azure Key Vault deel 3
+
+In onze AKS-cluster zijn er twee Azure Identity-bindingen. Deze worden door Azure gebruikt om metadata te injecteren. In ons geval gebruiken we deze om bij Azure Key Vault te komen.
+
+Het interessante aan key vault is dat het rechten per vault instelt in plaats per secret. De ontwikkelaars hebben helaas slechts één key vault voor twee identiteiten...
+
+Tip: er is een binding naar `separate-workload-pod-id`. Probeer een pod met de juiste labels aan te maken om wrongsecret-3 te stelen (zie ook https://docs.microsoft.com/en-us/azure/aks/use-azure-ad-pod-identity#run-a-sample-application[de aks-documentatie]).

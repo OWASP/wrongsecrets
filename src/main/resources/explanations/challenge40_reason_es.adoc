@@ -1,0 +1,9 @@
+*¿Por qué no deberíamos almacenar la clave de cifrado y el secreto juntos?*
+
+Almacenar conjuntamente la clave de cifrado y los datos que cifra se consideran una mala práctica, ya que socava la seguridad que proporciona el cifrado.
+
+En tales escenarios, el atacante tiene la clave en el momento en que el archivo está en su poder.
+
+Siempre se recomienda almacenar las claves de cifrado de forma segura.
+
+Mantén las claves separadas de los datos que protegen, por ejemplo en un servicio de gestión de claves dedicado o un módulo de seguridad de hardware, y restringe y audita el acceso a ellas.

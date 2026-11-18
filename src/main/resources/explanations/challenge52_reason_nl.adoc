@@ -1,0 +1,30 @@
+= Uitdaging: verkeerde configuratie van Docker Buildx-secreten
+
+*Waarom onjuist secretbeheer in Docker-buildprocessen tot kwetsbaarheden kan leiden*
+
+In moderne DevOps-workflows is Docker Buildx een krachtig hulpmiddel om multi-platform Docker-images efficiënt te bouwen. Het biedt een veilige manier om gevoelijke informatie zoals API-sleutels, databasegegevens en certificaten tijdens het bouwproces door te geven met de vlag `--secret`. Onjuiste verwerking of opslag van deze secrets tijdens of na het bouwproces kan echter kritieke kwetsbaarheden introduceren.
+
+Een veelgemaakte fout is om deze secrets in het bestandssysteem van de container te schrijven of ze bloot te stellen in buildscripts. Deze aanpak is gebrekkig omdat:
+
+1. **Secrets worden onderdeel van het containerimage**: Wanneer secrets tijdens de buildfase in het bestandssysteem van de container worden geschreven, komen ze terecht in het uiteindelijke image. Iedereen met toegang tot het image kan deze secrets ophalen door de containerlagen te inspecteren of bij het bestandssysteem te komen.
+2. **Secrets hardcoded in buildscripts**: Developers kunnen secrets hardcoderen in scripts waarmee images worden gebouwd. Wanneer deze scripts in versiebeheersystemen worden opgeslagen, zijn de secrets blootgesteld aan iedereen met toegang tot de repository.
+3. **Geen opruiming tijdens het bouwproces**: Zelfs als secrets tijdelijk worden gebruikt, kan het nalaten om deze secrets veilig op te ruimen of te verwijderen voordat het image definitief wordt gemaakt, ertoe leiden dat ze bloot blijven liggen.
+
+*Waarom deze uitdaging?*
+
+Het doel van deze uitdaging is de risico's van onjuiste verwerking van secrets in Docker Buildx-workflows te tonen. Concreet laat het zien hoe secrets die tijdens het bouwproces maar tijdelijk bedoeld waren, door een verkeerde configuratie permanent in het bestandssysteem van de container terechtkomen.
+
+Deze uitdaging simuleert een scenario waarin:
+
+- Een gevoelig geheim wordt doorgegeven aan het Docker-buildproces met de vlag `--secret`.
+- Door een verkeerde configuratie wordt het geheim tijdens de buildfase naar een bestand in het bestandssysteem van de container geschreven (`/app/secret.txt`).
+- Het resulterende image bevat dit geheim, waardoor het toegankelijk is voor iedereen die de container kan uitvoeren of inspecteren.
+
+*Belangrijkste leerpunten:*
+
+- **Bed geen secrets in containerimages**: Secrets mogen nooit in Docker-images worden ingebakken. Gebruik mechanismen zoals omgevingsvariabelen tijdens het uitvoeren of externe secretbeheertools om secrets dynamisch aan te leveren.
+- **Beveilig het bouwproces**: Zorg er zelfs met tools als `--secret` voor dat secrets niet permanent in tussenliggende of definitieve imagelagen worden opgeslagen.
+- **Hardcode geen secrets in buildscripts**: Buildscripts mogen geen gevoelige informatie bevatten. Sla gevoelige waarden veilig op en verwijder ernaar tijdens het bouwproces.
+- **Implementeer opruimmechanismen**: Als secrets tijdens het bouwproces naar tijdelijke bestanden moeten worden geschreven, zorg er dan voor dat ze veilig worden verwijderd voordat het image definitief wordt gemaakt.
+
+Door deze uitdaging te voltooien, begrijp je de gevolgen van onjuiste verwerking van secrets tijdens Docker-builds en leer je best practices voor het veilig beheren van secrets in gecontaineriseerde omgevingen.

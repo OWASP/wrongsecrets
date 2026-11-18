@@ -1,0 +1,5 @@
+=== Fuite secrète de conversation IA
+
+Partager des sessions de chat issues d'outils d'IA comme ChatGPT est un excellent moyen de collaborer, mais il est facile d'oublier que ces liens partagés sont publics. Si la conversation contient des informations sensibles, toute personne disposant du lien peut y accéder.
+
+Pouvez-vous trouver le secret dans cette session ChatGPT partagée : https://chatgpt.com/share/6a99237a-c2e0-83eb-9a09-a1cf76213ff5 ?

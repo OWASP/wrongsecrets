@@ -1,0 +1,30 @@
+= Desafío de configuración incorrecta de Docker Buildx Secrets
+
+*Por qué una gestión inadecuada de secretos en los procesos de compilación de Docker puede generar vulnerabilidades*
+
+En los flujos de trabajo DevOps modernos, Docker Buildx es una herramienta potente para crear imágenes Docker multiplataforma de forma eficiente. Proporciona una manera segura de transmitir información confidencial, como claves API, credenciales de bases de datos y certificados, durante el proceso de compilación mediante la opción `--secret`. Sin embargo, un manejo o almacenamiento inadecuado de estos secretos durante o después del proceso de compilación puede generar vulnerabilidades críticas.
+
+Un error común es escribir estos secretos en el sistema de archivos del contenedor o exponerlos en los scripts de compilación. Este enfoque es erróneo porque:
+
+1. **Los secretos se integran a la imagen del contenedor**: Si se escriben secretos en el sistema de archivos del contenedor durante la fase de compilación, se incluyen en la imagen final. Cualquier persona con acceso a la imagen puede extraer estos secretos inspeccionando las capas del contenedor o accediendo al sistema de archivos.
+2. **Inclusión de información confidencial en los scripts de compilación**: Los desarrolladores pueden incluir información confidencial en los scripts utilizados para compilar imágenes. Cuando estos scripts se almacenan en sistemas de control de versiones, la información confidencial queda expuesta a cualquier persona con acceso al repositorio.
+3. **Falta de limpieza durante el proceso de compilación**: Incluso si los secretos se utilizan temporalmente, no limpiarlos o eliminarlos de forma segura antes de finalizar la imagen puede dejarlos expuestos.
+
+*¿Por qué este reto?*
+
+El objetivo de este desafío es demostrar los riesgos de gestionar incorrectamente los secretos en los flujos de trabajo de Docker Buildx. En concreto, muestra cómo los secretos que deberían ser temporales durante el proceso de compilación pueden acabar almacenándose permanentemente en el sistema de archivos del contenedor debido a una configuración incorrecta.
+
+Este desafío simula un escenario en el que:
+
+- Se pasa un secreto sensible al proceso de compilación de Docker mediante la bandera `--secret`.
+- Debido a una configuración incorrecta, el secreto se escribe en un archivo del sistema de archivos del contenedor (`/app/secret.txt`) durante la fase de compilación.
+- La imagen resultante contiene este secreto, lo que la hace accesible a cualquiera que pueda ejecutar o inspeccionar el contenedor.
+
+*Puntos clave de aprendizaje:*
+
+- **Evite incrustar secretos en las imágenes de contenedores**: Los secretos nunca deben estar integrados en las imágenes de Docker. Utilice mecanismos como variables de entorno de ejecución o herramientas externas de gestión de secretos para proporcionar secretos de forma dinámica.
+- **Asegure el proceso de compilación**: Incluso con herramientas como `--secret`, asegúrese de que los secretos no se almacenen permanentemente en capas de imagen intermedias o finales.
+- **No incluyas información confidencial directamente en los scripts de compilación**: Los scripts de compilación no deben contener información sensible. Almacena los valores confidenciales de forma segura y haz referencia a ellos dinámicamente durante el proceso de compilación.
+- **Implementar mecanismos de limpieza**: Si es necesario escribir información confidencial en archivos temporales durante el proceso de compilación, asegúrese de que se elimine de forma segura antes de que se finalice la imagen.
+
+Al completar este desafío, comprenderá las implicaciones de un manejo inadecuado de secretos durante las compilaciones de Docker y aprenderá las mejores prácticas para administrar secretos de forma segura en entornos de contenedores.

@@ -1,0 +1,5 @@
+*Waarom moeten we voorzichtig zijn met de constanten die in het programma zijn gedeclareerd?*
+
+Constanten zijn vaste waarden die handig zijn voor het opslaan van waarden die niet hoeven te veranderen tijdens de uitvoering van het programma. Tijdens het reverse-engineerproces is binary exploration een techniek waarbij je zoveel mogelijk informatie uit het binaire bestand haalt om de logica van het programma te begrijpen. Sommige cruciale informatie moet echter zo worden versleuteld dat die informatie lastig te lezen is.
+
+Dit laat zien dat ook versleuteling een aanvaller vertraagt, maar hem niet belet om de cruciale informatie te vinden. Verwerk geen geheimen in het binaire bestand; als een toepassing er een nodig heeft, haal die dan op via een service aan serverzijde die het verzoek authenticeert en autoriseert, in plaats van alleen te vertrouwen op offline versleuteling.

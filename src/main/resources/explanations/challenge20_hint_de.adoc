@@ -1,0 +1,20 @@
+Diese Aufgabe befasst sich speziell mit einem Geheimnis in einer C++-Binärdatei.
+
+Diese Herausforderung lässt sich mit den folgenden alternativen Lösungsansätzen bewältigen:
+
+1. Entdecke die Geheimnisse mit https://ghidra-sre.org/[Ghidra].
+- Installiere https://ghidra-sre.org/[Ghidra].
+- Starte es mit `ghidraRun`.
+- Lade die Anwendung `wrongsecrets-cplus` in Ghidra, indem du ein neues Projekt auswählst, dann die Datei importierst und anschließend darauf doppelklickst.
+- Erlaube Ghidra, die Anwendung zu analysieren.
+- Suche nach dem Geheimnis: Gehe links auf `Functions` und wähle `__Z6secretv()`. Das Geheimnis wird nun rechts angezeigt. Es handelt sich um einen in C++ geschriebenen String, der in einer anderen Klasse (`SecretContainer`) gekapselt ist.
+- Suche nach demselben Geheimnis, das als Zeichenarray „versteckt“ ist: Gehe links auf `Functions` und wähle `__Z7secret2v()` aus. Rechts siehst du die Funktion. Klicke nun auf das Ergebnis der Funktion unter `__ZZ7secret2vE6harder`. Das Ergebnis wird nun in der Listenansicht angezeigt.
+- Alternativ: Wenn du die Anwendung mit Ghirda analysiert hast, suche in allen Blöcken nach Zeichenketten und sieh, ob du das Geheimnis entdecken kannst ;-).
+
+2. Entdecke die Geheimnisse mit https://www.radare.org[radare2].
+- Installiere https://www.radare.org[radare2] entweder mit `brew install radare2` auf einem Mac oder folge diesen Schritten: `git clone https://github.com/radareorg/radare2; cd radare2 ; sys/install.sh`
+- Starte die r2-Analyse mit `$ r2 -A wrongsecrets-cplus`
+- Verwende den Befehl `pdf @ sym.secret__`, um die disassemblierte Ausgabe der Funktion anzuzeigen, die das Geheimnis zurückgibt.
+- Verwende den Befehl `pdf @ sym.secret2__`, um die disassemblierte Ausgabe der Funktion anzuzeigen, die secret2 zurückgibt.
+
+Du möchtest die Tools nicht installieren? Dann schau dir den https://github.com/OWASP/wrongsecrets/tree/master?tab=readme-ov-file#want-to-play-but-are-not-allowed-to-install-the-tools[WrongSecrets Desktop container] an!

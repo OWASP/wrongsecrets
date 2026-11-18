@@ -1,1 +1,5 @@
 For several reasons, "hiding" secrets on a web page is not a good idea, even if it is only for internal use. First and foremost, websites are often accessible to a variety of parties, including employees, contractors and vendors. Keeping secrets on a website increases the risk that unauthorized parties will gain access to them through any vector. The possibility of a hacker pivoting after any compromise is greatly increased.
+
+What to do instead:
+- Do not put secrets in page content, source, or client-side configuration. Keep them on the server and perform the required operation there.
+- Require authentication and authorization for access to sensitive operations, and rotate any secret that has already been published.

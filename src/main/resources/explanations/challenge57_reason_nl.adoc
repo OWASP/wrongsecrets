@@ -1,0 +1,38 @@
+**Waarom AI-systeemprompts kwetsbaar kunnen zijn**
+
+Deze uitdaging laat verschillende belangrijke beveiligingsproblemen met AI-systemen zien:
+
+**1. Kwetsbaarheden voor prompt injection:**
+AI-systemen kunnen worden gemanipuleerd met zorgvuldig samengestelde invoer die hun beveiligingsmaatregelen of instructiegrenzen omzeilt. Dit lijkt op SQL-injectie, maar dan voor AI-modellen.
+
+**2. Blootstellen van de systeemprompt:**
+Wanneer gevoelige informatie in systeemprompts wordt ingebed, bestaat het risico dat deze informatie met verschillende technieken kan worden opgehaald. Systeemprompts mogen nooit secrets, inloggegevens of gevoelige gegevens bevatten.
+
+**3. AI jailbreaking:**
+Dit verwijst naar technieken waarmee ingebouwde beperkingen of beveiligingsmaatregelen van een AI worden omzeild. Aanvallers kunnen social engineering, rollenspellen of technieken om instructies te overschrijven gebruiken.
+
+**4. Informatielek:**
+AI-systemen kunnen per ongeluk informatie prijsgeven die ze moesten verbergen, vooral wanneer ze worden geconfronteerd met geavanceerde vraagtechnieken.
+
+**Gevolgen in de praktijk:**
+
+- **API-sleutels in prompts:** Embed nooit API-sleutels, wachtwoorden of tokens in AI-systeemprompts
+- **Gevoelige bedrijfslogica:** Neem geen vertrouwelijke bedrijfsregels of processen op in prompts
+- **Persoonsgegevens:** Vermijd PII of gevoelige gebruikersgegevens in systeeminstructies
+- **Beveiligingsmaatregelen:** Vertrouw niet alleen op promptgebaseerde beperkingingen voor beveiliging
+
+**Best practices:**
+- Gebruik juiste authenticatie en autorisatie buiten het AI-systeem
+- Implementeer beveiligingscontroles op applicatieniveau, niet alleen in prompts
+- Test AI-systemen regelmatig op kwetsbaarheden voor prompt injection
+- Monitor AI-interacties op mogelijke beveiligingsproblemen
+- Gebruik AI-beveiligingskaders en -richtlijnen
+
+**Detectie en preventie:**
+- Implementeer inputvalidatie en -sanitatie
+- Gebruik systemen voor inhoudsfiltering
+- Monitor op verdachte promptpatronen
+- Implementeer rate limiting en misbruikdetectie
+- Voer regelmatig beveiligingsbeoordelingen uit van AI-implementaties
+
+Deze uitdaging laat zien waarom het niet volstaat om AI-systeemprompts als beveiligingsgrens te beschouwen - goede beveiliging moet op meerdere lagen worden geïmplementeerd.

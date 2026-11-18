@@ -1,0 +1,14 @@
+Este desafío consiste específicamente en analizar un secreto en un binario de .NET8.
+
+Puedes resolver este desafío utilizando las siguientes soluciones alternativas:
+
+1. Descubre los secretos con ILSpy.
+- Obtenga el binario wrongsecrets-dotnet-<platform>, para ello puede:
+- recupéralo de la imagen de Docker
+- Descárguelo desde https://github.com/OWASP/wrongsecrets-binaries/releases[Wrongsecrets Binaries]
+- Instalar .NET8 y el SDK de .NET8
+- Instalar https://github.com/icsharpcode/ILSpy/tree/master/ICSharpCode.ILSpyCmd[ilspycmd]
+- Opcionalmente: Instalar `sfextract`: `dotnet tool install -g sfextract`
+- Descomprime el binario autocontenido: `sfextract wrongsecrets-dotnet -o \./tmp`. o usa ilspy: `mkdir tmp && ilspycmd -d wrongsecrets-dotnet-linux -o ~/tmp`
+- Ve a la carpeta tmp y ejecuta `ilspycmd dotnetproject.dll` para descompilar la dll y encontrar el secreto.
+¿No quieres instalar las herramientas? ¡Consulta el archivo https://github.com/OWASP/wrongsecrets/tree/master?tab=readme-ov-file#want-to-play-but-are-not-allowed-to-install-the-tools[WrongSecrets Desktop container]!
