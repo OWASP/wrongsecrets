@@ -57,6 +57,17 @@ jobs:
 
           kubectl create -f k8s/sealed-challenge48.json
 
+          # Wait for the sealed secret to be unsealed and the secret to be created
+          echo "Waiting for challenge48secret to be created by sealed-secrets controller..."
+          for i in {1..30}; do
+            if kubectl get secret challenge48secret > /dev/null 2>&1; then
+              echo "challenge48secret created"
+              break
+            fi
+            echo "Waiting for challenge48secret..."
+            sleep 2
+          done
+
           echo "Finishing Sealed Secrets setup"
 
           kubectl apply -f k8s/secrets-config.yml
