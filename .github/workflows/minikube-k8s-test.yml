@@ -34,7 +34,7 @@ jobs:
           set -euo pipefail
 
           echo "=== DEBUG: Starting deployment ==="
-          kubectl version --client --short
+          kubectl version --client
           kubectl get nodes
 
           echo "=== Applying workspace-psa.yml ==="
