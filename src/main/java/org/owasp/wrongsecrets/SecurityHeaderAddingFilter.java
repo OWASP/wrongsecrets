@@ -23,7 +23,7 @@ public class SecurityHeaderAddingFilter implements Filter {
       httpServletResponse.setHeader(
           "Content-Security-Policy",
           "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self'"
-              + " 'unsafe-inline'; img-src 'self' data:; connect-src https://api.github.com;"
+              + " 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https://api.github.com;"
               + " frame-ancestors 'self'; object-src 'none'; base-uri 'self'");
     }
     chain.doFilter(request, response);

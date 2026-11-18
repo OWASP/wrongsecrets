@@ -69,12 +69,12 @@ jobs:
       #- run: |
       #   make bootstrap
       #   make release
-      - name: Set up JDK 26
+      - name: Set up JDK 27
         uses: actions/setup-java@v5
         with:
-          java-version: "26"
+          java-version: "27"
           distribution: "temurin"
-          cache: maven
+          cache: "maven"
       - name: run mvn clean package
         run: ./mvnw clean package -Ddependency-check.skip=true -Dmaven.test.skip=true
       - name: Perform CodeQL Analysis

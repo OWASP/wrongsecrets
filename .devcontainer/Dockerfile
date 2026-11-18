@@ -1,4 +1,4 @@
-FROM eclipse-temurin:26-jdk-resolute
+FROM eclipse-temurin:27.0.1.0-jdk-resolute
 
 LABEL org.opencontainers.image.title="WrongSecrets Dev Container"
 LABEL org.opencontainers.image.description="Development environment for OWASP WrongSecrets"

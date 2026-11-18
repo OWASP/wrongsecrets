@@ -1,6 +1,6 @@
 module wrongsecrets
 
-go 1.26.10
+go 1.27.4
 
 require github.com/gruntwork-io/terratest v0.56.0
 

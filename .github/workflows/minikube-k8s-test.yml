@@ -33,71 +33,125 @@ jobs:
         run: |
           set -euo pipefail
 
+          echo "=== DEBUG: Starting deployment ==="
+          kubectl version --client
+          kubectl get nodes
+
+          echo "=== Applying workspace-psa.yml ==="
           kubectl apply -f k8s/workspace-psa.yml
 
-          echo "Setting up the Bitnami Sealed Secrets controller"
-
+          echo "=== Setting up the Bitnami Sealed Secrets controller ==="
           kubectl apply \
             -f https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.27.0/controller.yaml
-
           kubectl apply -f k8s/sealed-secret-controller.yaml
           kubectl apply -f k8s/main.key
 
           # Restart controller so the test key is picked up
+          echo "=== Restarting sealed-secrets-controller ==="
           kubectl delete pod \
             -n kube-system \
             -l name=sealed-secrets-controller \
             --ignore-not-found
 
           # Wait for controller to come back
+          echo "=== Waiting for sealed-secrets-controller rollout ==="
           kubectl rollout status \
             deployment/sealed-secrets-controller \
             -n kube-system \
             --timeout=120s
+          echo "=== Sealed-secrets-controller status ==="
+          kubectl get pods -n kube-system -l name=sealed-secrets-controller
 
+          echo "=== Creating sealed-challenge48.json ==="
           kubectl create -f k8s/sealed-challenge48.json
 
-          echo "Finishing Sealed Secrets setup"
+          # Wait for the sealed secret to be unsealed and the secret to be created
+          echo "=== Waiting for challenge48secret to be created ==="
+          for i in {1..30}; do
+            if kubectl get secret challenge48secret > /dev/null 2>&1; then
+              echo "✓ challenge48secret created"
+              kubectl get secret challenge48secret -o yaml | head -5
+              break
+            fi
+            echo "Waiting for challenge48secret... ($i/30)"
+            sleep 2
+          done
 
+          echo "=== Applying configuration ==="
           kubectl apply -f k8s/secrets-config.yml
+          echo "✓ Applied secrets-config.yml"
+          kubectl get configmap secrets-file -o yaml | head -5
+
           kubectl apply -f k8s/secrets-secret.yml
+          echo "✓ Applied secrets-secret.yml"
+          kubectl get secret funnystuff -o yaml | head -5
+
           kubectl apply -f k8s/challenge33.yml
+          echo "✓ Applied challenge33.yml"
+          kubectl get secret challenge33 -o yaml | head -5
+
+          echo "=== Applying secret-challenge-deployment.yml ==="
           kubectl apply -f k8s/secret-challenge-deployment.yml
+          echo "✓ Applied secret-challenge-deployment.yml"
+
           kubectl apply -f k8s/challenge53/secret-challenge53.yml
-          echo "Deploy wrongsecrets-llama app"
+          echo "✓ Applied challenge53.yml"
+
+          echo "=== Deploying wrongsecrets-llama app ==="
           kubectl apply -f k8s/challenge74/wrongsecrets-llama-secret.yaml
           kubectl apply -f k8s/challenge74/wrongsecrets-llama-service.yaml
           kubectl apply -f k8s/challenge74/wrongsecrets-llama-deployment.yaml
           while [[ $(kubectl get pods -l app=challenge74-llama -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do
             echo "waiting for wrongsecrets-llama" && sleep 2
           done
-          kubectl get pods -l app=challenge74-llama
-          kubectl logs deployment/challenge74-llama
+          echo "=== Llama pod status ==="
+          kubectl get pods -l app=challenge74-llama -o wide
+          kubectl logs deployment/challenge74-llama --tail=20
       - name: Wait for application
         shell: bash
         run: |
           set -euo pipefail
 
+          echo "=== Waiting for secret-challenge rollout ==="
           kubectl rollout status \
             deployment/secret-challenge \
-            --timeout=180s
+            --timeout=180s || {
+              echo "=== ROLLOUT FAILED ==="
+              kubectl get pods -l app=secret-challenge -o wide
+              kubectl describe deployment secret-challenge
+              kubectl get events --sort-by=.lastTimestamp | tail -20
+              exit 1
+            }
 
+          echo "=== Waiting for secret-challenge pod to be ready ==="
           kubectl wait \
             --for=condition=ready \
             pod \
             -l app=secret-challenge \
-            --timeout=180s
+            --timeout=180s || {
+              echo "=== POD READY WAIT FAILED ==="
+              kubectl get pods -l app=secret-challenge -o wide
+              kubectl describe pods -l app=secret-challenge
+              kubectl get events --sort-by=.lastTimestamp | tail -20
+              exit 1
+            }
+          echo "=== Pod is ready, checking logs ==="
+          kubectl logs -l app=secret-challenge --tail=50 || true
 
       - name: Start port forwarding
         shell: bash
         run: |
           set -euo pipefail
 
+          echo "=== Getting pod name ==="
           POD=$(kubectl get pod \
             -l app=secret-challenge \
             -o jsonpath="{.items[0].metadata.name}")
+          echo "Forwarding pod: $POD"
 
-          echo "Forwarding pod $POD"
+          echo "=== Pod details ==="
+          kubectl get pod $POD -o wide
+          kubectl describe pod $POD | head -30
 
           kubectl port-forward \
             "$POD" \
@@ -108,44 +162,93 @@ jobs:
           echo $! > port-forward.pid
 
           # Wait until the application is actually reachable
+          echo "=== Waiting for application to be reachable ==="
           for i in {1..30}; do
             if curl --fail --silent --show-error \
               http://localhost:8080/ > /dev/null; then
-              echo "Application is reachable"
+              echo "✓ Application is reachable"
               exit 0
             fi
 
-            echo "Waiting for application..."
+            echo "Waiting for application... ($i/30)"
             sleep 2
           done
 
-          echo "Application did not become reachable"
+          echo "=== APPLICATION NOT REACHABLE ==="
+          echo "Port forward log:"
           cat port-forward.log
+          echo "=== Pod status ==="
+          kubectl get pods -l app=secret-challenge -o wide
+          echo "=== Pod logs ==="
+          kubectl logs $POD --tail=100 || true
+          echo "=== Pod describe ==="
+          kubectl describe pod $POD || true
           exit 1
+
+      - name: Retrieve and display challenges
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/spoil-responses"
+          for challenge in 5 6 7 33; do
+            response="$RUNNER_TEMP/spoil-responses/challenge-$challenge.html"
+            status="$RUNNER_TEMP/spoil-responses/challenge-$challenge.http"
+            result="$RUNNER_TEMP/spoil-responses/challenge-$challenge.exit"
+            : > "$response"
+            if curl --fail-with-body --silent --show-error --retry 5 --retry-delay 2 \
+              --output "$response" --write-out '%{http_code}' \
+              "http://localhost:8080/spoil/challenge-$challenge" > "$status"; then
+              printf '0\n' > "$result"
+            else
+              code=$?
+              printf '%s\n' "$code" > "$result"
+            fi
+            printf '\n=== challenge-%s: HTTP ' "$challenge"
+            cat "$status"
+            printf ', curl exit %s ===\n' "$(<"$result")"
+            cat "$response" || true
+            printf '\n'
+          done
 
       - name: Test challenges
         shell: bash
         run: |
           set -euo pipefail
-
+          failed=0
           for challenge in 5 6 7 33; do
-            echo "Testing challenge-$challenge"
-
-            if curl \
-              --fail \
-              --silent \
-              --show-error \
-              --retry 5 \
-              --retry-delay 2 \
-              "http://localhost:8080/spoil/challenge-$challenge" \
-              | grep -q spoiler-answer
-            then
+            response="$RUNNER_TEMP/spoil-responses/challenge-$challenge.html"
+            result="$RUNNER_TEMP/spoil-responses/challenge-$challenge.exit"
+            if [[ -f "$result" ]] && [[ $(<"$result") == 0 ]] && grep -q spoiler-answer "$response"; then
               echo "spoil-challenge-$challenge works"
             else
               echo "ERROR: spoil-challenge-$challenge failed"
-              exit 1
+              failed=1
             fi
           done
+          exit "$failed"
+#      - name: Test challenges
+#        shell: bash
+#        run: |
+#          set -euo pipefail
+#
+#          for challenge in 5 6 7 33; do
+#            echo "Testing challenge-$challenge"
+#
+#            if curl \
+#              --fail \
+#              --silent \
+#              --show-error \
+#              --retry 5 \
+#              --retry-delay 2 \
+#              "http://localhost:8080/spoil/challenge-$challenge" \
+#              | grep -q spoiler-answer
+#            then
+#              echo "spoil-challenge-$challenge works"
+#            else
+#              echo "ERROR: spoil-challenge-$challenge failed"
+#              exit 1
+#            fi
+#          done
 
       - name: Test challenge 74 prompt injection (llama e2e)
         shell: bash

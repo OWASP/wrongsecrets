@@ -1,6 +1,6 @@
 # Spring Boot 4 Adoption Checklist (WrongSecrets)
 
-This checklist is tailored to the current `wrongsecrets` codebase (Spring Boot `4.1.1`, Java `26`).
+This checklist is tailored to the current `wrongsecrets` codebase (Spring Boot `4.1.2`, Java `27`).
 
 ## How to use this document
 
