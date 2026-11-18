@@ -213,7 +213,7 @@ jobs:
       - name: Setup Java
         uses: actions/setup-java@v5
         with:
-          java-version: '26'
+          java-version: '27'
           distribution: 'temurin'
           cache: maven
 
