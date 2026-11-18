@@ -1,0 +1,24 @@
+*Why is storing passwords like this dangerous?*
+
+This challenge used two storage techniques that are commonly found in legacy applications, and both of them fail in the same way: as soon as the database ends up in the wrong hands, every single password can be read back without guessing anything.
+
+**Unsalted MD5 is not password hashing.** MD5 was designed to be fast, and that is exactly the wrong property for a password hash. A single GPU can try billions of MD5 candidates per second, and because no salt is stored, identical passwords produce identical hashes, which allows precomputed https://en.wikipedia.org/wiki/Rainbow_table[rainbow tables] to be reused across the whole database. The `hash_algorithm` column in this database even documents the algorithm that was used, so an attacker knows exactly which table to reach for.
+
+**Encryption with a key that sits next to the data is not protection.** The ciphertext was produced with AES in ECB mode, which means identical plaintext blocks turn into identical ciphertext blocks and patterns in the data stay visible. On top of that the key is a fixed 16 character constant that ships inside the application source code. Whoever has the database and the repository - which is everyone in this challenge - has the key, so the encryption only ever protected the data against someone who has neither.
+
+**Only one of the 2000 records had to be correct.** The application selected your target user at runtime, displayed its username, and expected exactly that user's password. Because both stored representations are fully reversible for every record, every possible target could be recovered with the same offline procedure.
+
+----
+What to do instead:
+
+- Hash passwords with a dedicated, slow algorithm such as Argon2id, bcrypt or scrypt, with a unique random salt per user and a work factor tuned to your hardware.
+- Keep verification cheap but guessing expensive: never use MD5, SHA-1 or plain SHA-256 on passwords.
+- If you also need to encrypt data at rest, use a proper mode such as AES-GCM and keep the key in a KMS, HSM or secret manager where it is separated from the data, scoped per tenant and rotatable.
+- Never hardcode cryptographic keys in source code, and never deploy the key together with the ciphertext it protects.
+- Treat a leaked password database as a credential breach: force a reset of every affected password.
+----
+
+[NOTE]
+====
+Both failures are silent: nothing in the database tells a user that their password was only ever "protected" by a hash that can be reversed and a key that was shipped along with it.
+====
