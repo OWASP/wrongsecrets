@@ -137,7 +137,7 @@ src/test/java/org/owasp/wrongsecrets/
 
 ### Prerequisites
 
-- Java 26
+- Java 27
 - Maven 3.9+
 - Docker
 - Node.js (for frontend dependencies)

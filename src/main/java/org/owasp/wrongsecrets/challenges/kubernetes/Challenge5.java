@@ -10,7 +10,8 @@ public class Challenge5 extends FixedAnswerChallenge {
 
   private final String configmapK8sSecret;
 
-  public Challenge5(@Value("${SPECIAL_K8S_SECRET}") String configmapK8sSecret) {
+  public Challenge5(
+      @Value("${SPECIAL_K8S_SECRET:if_you_see_this_please_use_k8s}") String configmapK8sSecret) {
     this.configmapK8sSecret = configmapK8sSecret;
   }
 

@@ -19,12 +19,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - name: Set up JDK 26
+      - name: Set up JDK 27
         uses: actions/setup-java@v5
         with:
-          java-version: "26"
+          java-version: "27"
           distribution: "temurin"
-          cache: maven
+          cache: "maven"
       - name: Clean install
         run: ./mvnw --no-transfer-progress clean install -DskipTests -Ddependency-check.skip -Dcyclonedx.skip=true -Dexec.skip
       - name: Show npm logs on failure
