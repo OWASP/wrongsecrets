@@ -185,29 +185,70 @@ jobs:
           kubectl describe pod $POD || true
           exit 1
 
+      - name: Retrieve and display challenges
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/spoil-responses"
+          for challenge in 5 6 7 33; do
+            response="$RUNNER_TEMP/spoil-responses/challenge-$challenge.html"
+            status="$RUNNER_TEMP/spoil-responses/challenge-$challenge.http"
+            result="$RUNNER_TEMP/spoil-responses/challenge-$challenge.exit"
+            : > "$response"
+            if curl --fail-with-body --silent --show-error --retry 5 --retry-delay 2 \
+              --output "$response" --write-out '%{http_code}' \
+              "http://localhost:8080/spoil/challenge-$challenge" > "$status"; then
+              printf '0\n' > "$result"
+            else
+              code=$?
+              printf '%s\n' "$code" > "$result"
+            fi
+            printf '\n=== challenge-%s: HTTP ' "$challenge"
+            cat "$status"
+            printf ', curl exit %s ===\n' "$(<"$result")"
+            cat "$response" || true
+            printf '\n'
+          done
+
       - name: Test challenges
         shell: bash
         run: |
           set -euo pipefail
-
+          failed=0
           for challenge in 5 6 7 33; do
-            echo "Testing challenge-$challenge"
-
-            if curl \
-              --fail \
-              --silent \
-              --show-error \
-              --retry 5 \
-              --retry-delay 2 \
-              "http://localhost:8080/spoil/challenge-$challenge" \
-              | grep -q spoiler-answer
-            then
+            response="$RUNNER_TEMP/spoil-responses/challenge-$challenge.html"
+            result="$RUNNER_TEMP/spoil-responses/challenge-$challenge.exit"
+            if [[ -f "$result" ]] && [[ $(<"$result") == 0 ]] && grep -q spoiler-answer "$response"; then
               echo "spoil-challenge-$challenge works"
             else
               echo "ERROR: spoil-challenge-$challenge failed"
-              exit 1
+              failed=1
             fi
           done
+          exit "$failed"
+#      - name: Test challenges
+#        shell: bash
+#        run: |
+#          set -euo pipefail
+#
+#          for challenge in 5 6 7 33; do
+#            echo "Testing challenge-$challenge"
+#
+#            if curl \
+#              --fail \
+#              --silent \
+#              --show-error \
+#              --retry 5 \
+#              --retry-delay 2 \
+#              "http://localhost:8080/spoil/challenge-$challenge" \
+#              | grep -q spoiler-answer
+#            then
+#              echo "spoil-challenge-$challenge works"
+#            else
+#              echo "ERROR: spoil-challenge-$challenge failed"
+#              exit 1
+#            fi
+#          done
 
       - name: Test challenge 74 prompt injection (llama e2e)
         shell: bash
