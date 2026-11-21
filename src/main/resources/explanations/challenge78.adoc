@@ -1,0 +1,9 @@
+=== The backup bucket that forgot to lock its door
+
+Teams regularly copy "backups" to object storage: configuration archives, database dumps, and the key material that happened to be lying around on a build machine. For this exercise a small backup set was copied to an S3 bucket of the account you are running in.
+
+That bucket is readable by anybody. Listing the bucket is blocked, so you cannot simply browse its contents, but everybody who knows (or guesses) where the objects live can download them without any credentials at all.
+
+One of the objects in there is an ed25519 private key. It is a dedicated, non-production key which was created for this exercise only, but it is a real key and it is exactly the kind of material you never want to find in a backup.
+
+Find the bucket, download the key and paste the contents of the key file into the answer box below.
