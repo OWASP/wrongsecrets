@@ -1,0 +1,20 @@
+=== Challenge 77: Het forkbare GitHub Actions-geheim
+
+GitHub Actions-secrets worden niet gekopieerd wanneer iemand een repository forkt. Een workflow die
+afhankelijk is van `${{ secrets.SOMETHING }}` werkt daarom in geen enkele fork meer. Een verleidelijke
+"oplossing" is om helemaal geen GitHub-secret meer te gebruiken: versleutel de waarde, commit de ciphertext
+in de workflow en ontsleutel deze tijdens de run. Nu werkt de workflow in elke fork.
+
+Het probleem is dat de workflow ook de ontsleutelingssleutel nodig heeft, en die sleutel is in
+precies hetzelfde bestand terechtgekomen. Iedereen die deze repository forkt of zelfs alleen maar leest, ontvangt het
+versleutelde geheim samen met alles wat nodig is om het te ontsleutelen.
+
+Bekijk de workflow
+link:https://github.com/OWASP/wrongsecrets/blob/master/.github/workflows/challenge77.yml[`.github/workflows/challenge77.yml`],
+achterhaal het geheim en dien de waarde in platte tekst in.
+
+[NOTE]
+====
+Je kunt deze challenge offline oplossen met `openssl`, of door de repository te forken,
+GitHub Actions in je fork in te schakelen en de workflow daar uit te voeren.
+====

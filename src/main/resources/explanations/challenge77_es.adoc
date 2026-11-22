@@ -1,0 +1,20 @@
+=== Challenge 77: El secreto de GitHub Actions que se puede bifurcar
+
+Los secretos de GitHub Actions no se copian cuando alguien hace un fork de un repositorio. Por lo tanto, un workflow que
+depende de `${{ secrets.SOMETHING }}` deja de funcionar en todos los forks. Una "solución" tentadora
+es dejar de usar un secreto de GitHub por completo: cifrar el valor, confirmar el texto cifrado
+en el workflow y descifrarlo durante la ejecución. Ahora el workflow funciona en todos los forks.
+
+El problema es que el workflow también necesita la clave de descifrado, y esa clave terminó en
+el mismo archivo. Cualquiera que haga un fork de este repositorio, o simplemente lo lea, recibe el
+secreto cifrado junto con todo lo necesario para descifrarlo.
+
+Echa un vistazo al workflow
+link:https://github.com/OWASP/wrongsecrets/blob/master/.github/workflows/challenge77.yml[`.github/workflows/challenge77.yml`],
+recupera el secreto y envía su valor en texto plano.
+
+[NOTE]
+====
+Puedes resolver este reto sin conexión con `openssl`, o haciendo un fork del repositorio,
+habilitando GitHub Actions en tu fork y ejecutando allí el workflow.
+====

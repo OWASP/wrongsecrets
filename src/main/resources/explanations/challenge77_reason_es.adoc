@@ -1,0 +1,30 @@
+*Por qué un secreto cifrado con su clave en el mismo repositorio no es ningún secreto*
+
+GitHub no entrega deliberadamente los secretos del repositorio a los forks: de lo contrario, cualquiera podría
+hacer un fork de un proyecto, cambiar un workflow e imprimir todos sus secretos. Eludir esa
+limitación confirmando un valor cifrado junto con su clave simplemente anula la protección:
+
+- El cifrado solo traslada el problema a la clave. Cuando la clave está junto al
+  texto cifrado, cualquiera que pueda leer uno puede leer el otro.
+- Cada fork, clon y espejo contiene ahora el secreto, al igual que el historial de git.
+  Eliminar el workflow más adelante no elimina la clave de los commits que
+  ya están publicados.
+- Cualquiera puede ejecutar el workflow en su propio fork y leer el valor descifrado en el
+  registro del job. GitHub solo enmascara los valores que provienen de secretos reales, por lo que el
+  valor descifrado se imprime en claro.
+- El texto cifrado parece aleatorio, lo que hace que la fuga sea fácil de pasar por alto en una revisión y
+  difícil de detectar para los escáneres de secretos.
+
+----
+Qué hacer en su lugar:
+
+- Guarda los secretos en el almacén de secretos de tu CI (secretos o entornos de GitHub Actions) y
+  acepta que los forks no los reciban. Haz que los workflows en los forks omitan los pasos que
+  los necesitan.
+- Prefiere credenciales de corta duración, como la federación de OpenID Connect con tu proveedor
+  de nube, en lugar de secretos de larga duración.
+- Nunca uses `pull_request_target` para dar acceso a secretos a código no confiable de un fork.
+- Si cifras un valor en un repositorio (por ejemplo, con SOPS o sealed secrets),
+  guarda la clave de descifrado fuera del repositorio, en un KMS o gestor de secretos.
+- Rota cualquier secreto cuya clave se haya confirmado y trátalo como comprometido.
+----

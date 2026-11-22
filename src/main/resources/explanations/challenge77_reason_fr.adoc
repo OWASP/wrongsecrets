@@ -1,0 +1,30 @@
+*Pourquoi un secret chiffré dont la clé se trouve dans le même dépôt n'est pas un secret du tout*
+
+GitHub ne transmet délibérément pas les secrets du dépôt aux forks : sinon, n'importe qui pourrait
+forker un projet, modifier un workflow et afficher tous ses secrets. Contourner cette
+limitation en versionnant une valeur chiffrée accompagnée de sa clé annule tout simplement la protection :
+
+- Le chiffrement ne fait que déplacer le problème vers la clé. Lorsque la clé se trouve à côté du
+  texte chiffré, quiconque peut lire l'un peut lire l'autre.
+- Chaque fork, clone et miroir contient désormais le secret, tout comme l'historique git.
+  Supprimer le workflow plus tard ne supprime pas la clé des commits qui
+  circulent déjà.
+- N'importe qui peut exécuter le workflow dans son propre fork et lire la valeur déchiffrée dans le
+  journal du job. GitHub ne masque que les valeurs provenant de véritables secrets, la valeur
+  déchiffrée est donc affichée en clair.
+- Le texte chiffré semble aléatoire, ce qui rend la fuite facile à manquer lors d'une revue et
+  difficile à détecter pour les scanners de secrets.
+
+----
+Que faire à la place :
+
+- Conservez les secrets dans le magasin de secrets de la CI (secrets ou environnements GitHub Actions) et
+  acceptez que les forks ne les reçoivent pas. Laissez les workflows des forks ignorer les étapes qui
+  en ont besoin.
+- Préférez des identifiants de courte durée, comme la fédération OpenID Connect avec votre fournisseur
+  cloud, aux secrets de longue durée.
+- N'utilisez jamais `pull_request_target` pour donner à du code non fiable provenant d'un fork l'accès aux secrets.
+- Si vous chiffrez une valeur dans un dépôt (par exemple avec SOPS ou sealed secrets),
+  conservez la clé de déchiffrement en dehors du dépôt, dans un KMS ou un gestionnaire de secrets.
+- Effectuez la rotation de tout secret dont la clé a été versionnée et considérez-le comme compromis.
+----
