@@ -12,11 +12,11 @@ jobs:
     name: decrypt the forkable secret
     runs-on: ubuntu-latest
     env:
-      CHALLENGE_77_CIPHERTEXT: "XbHaDIdaxp2qQxtTY+bgh7w0pOA/ZZ007P//8FO29pOjIaSKMisnRajNDz20XMo04cacu6gIK05BYHiJtUUnFg=="
+      CHALLENGE_77_CIPHERTEXT: "A8rW/GHqeiATV7gXaHoBku1+eF7zzu8NuAD4BDwAYPGDelPmPq38pi66/qE1ERh1hMTg1G5Lxn0="
       CHALLENGE_77_KEY: "8fa2807c0391c43fb804d8c00a6267f486c0201492f85d668390100b4463cdc5"
       CHALLENGE_77_IV: "38242bf02823f7fd9557b2570e97c1c1"
     steps:
       - name: Decrypt the secret
         shell: bash
         run: |
-          echo "The secret is: $(echo "${CHALLENGE_77_CIPHERTEXT}" | openssl enc -d -aes-256-cbc -K "${CHALLENGE_77_KEY}" -iv "${CHALLENGE_77_IV}" -a -A)"
+          echo "The secret is: $(echo "${CHALLENGE_77_CIPHERTEXT}" | openssl enc -d -aes-256-ctr -K "${CHALLENGE_77_KEY}" -iv "${CHALLENGE_77_IV}" -a -A)"

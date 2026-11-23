@@ -10,7 +10,7 @@ Puedes resolver este reto siguiendo estos pasos:
 
 3. Descifra el secreto usando cualquiera de estos enfoques:
 - Sin conexión, con el mismo comando que ejecuta el workflow:
-  `echo "<ciphertext>" | openssl enc -d -aes-256-cbc -K <key> -iv <iv> -a -A`
+  `echo "<ciphertext>" | openssl enc -d -aes-256-ctr -K <key> -iv <iv> -a -A`
 - O haz un fork del repositorio, habilita GitHub Actions en tu fork, ejecuta el
   workflow "Get the challenge code 77" y lee el secreto en su registro.
 

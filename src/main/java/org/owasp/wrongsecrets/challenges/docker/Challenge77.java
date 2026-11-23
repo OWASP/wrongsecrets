@@ -26,20 +26,18 @@ public class Challenge77 extends FixedAnswerChallenge {
 
   // Must stay identical to the env values in .github/workflows/challenge77.yml (checked by a test).
   static final String CIPHERTEXT =
-      "XbHaDIdaxp2qQxtTY+bgh7w0pOA/ZZ007P//8FO29pOjIaSKMisnRajNDz20XMo04cacu6gIK05BYHiJtUUnFg==";
+      "A8rW/GHqeiATV7gXaHoBku1+eF7zzu8NuAD4BDwAYPGDelPmPq38pi66/qE1ERh1hMTg1G5Lxn0=";
   static final String KEY = "8fa2807c0391c43fb804d8c00a6267f486c0201492f85d668390100b4463cdc5";
   static final String IV = "38242bf02823f7fd9557b2570e97c1c1";
 
   @Override
   @SuppressFBWarnings(
-      value = {"CIPHER_INTEGRITY", "PADDING_ORACLE"},
+      value = "CIPHER_INTEGRITY",
       justification =
-          "AES-CBC matches the openssl enc command in the challenge workflow, which has no GCM")
+          "AES-CTR matches the openssl enc command in the challenge workflow, which has no GCM")
   public String getAnswer() {
     try {
-      // codeql[java/weak-cryptographic-algorithm] Intentional AES-CBC to match `openssl enc` in the
-      // challenge 77 workflow; the secret is meant to be recoverable
-      var cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+      var cipher = Cipher.getInstance("AES/CTR/NoPadding");
       cipher.init(
           Cipher.DECRYPT_MODE,
           new SecretKeySpec(HexFormat.of().parseHex(KEY), "AES"),

@@ -10,7 +10,7 @@
 
 3. Розшифруйте секрет одним із двох способів:
 - Офлайн, тією самою командою, яку виконує workflow:
-  `echo "<ciphertext>" | openssl enc -d -aes-256-cbc -K <key> -iv <iv> -a -A`
+  `echo "<ciphertext>" | openssl enc -d -aes-256-ctr -K <key> -iv <iv> -a -A`
 - Або створіть форк репозиторію, увімкніть GitHub Actions у своєму форку, запустіть
   workflow "Get the challenge code 77" і прочитайте секрет у його журналі.
 
