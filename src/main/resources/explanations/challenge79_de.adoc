@@ -1,4 +1,4 @@
-=== Challenge 77: Das forkbare GitHub Actions-Geheimnis
+=== Challenge 79: Das forkbare GitHub Actions-Geheimnis
 
 GitHub Actions-Secrets werden nicht kopiert, wenn jemand ein Repository forkt. Ein Workflow, der
 von `${{ secrets.SOMETHING }}` abhängt, funktioniert daher in keinem Fork mehr. Ein verlockender
@@ -10,7 +10,7 @@ in genau derselben Datei gelandet. Jeder, der dieses Repository forkt oder auch 
 verschlüsselte Geheimnis zusammen mit allem, was zum Entschlüsseln nötig ist.
 
 Sieh dir den Workflow
-link:https://github.com/OWASP/wrongsecrets/blob/master/.github/workflows/challenge77.yml[`.github/workflows/challenge77.yml`]
+link:https://github.com/OWASP/wrongsecrets/blob/master/.github/workflows/challenge79.yml[`.github/workflows/challenge79.yml`]
 an, stelle das Geheimnis wieder her und übermittele seinen Klartextwert.
 
 [NOTE]

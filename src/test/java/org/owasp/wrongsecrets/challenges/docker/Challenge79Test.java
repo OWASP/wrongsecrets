@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class Challenge77Test {
+class Challenge79Test {
 
   private static final String EXPECTED_SECRET =
       "Forking this repo forked my encrypted secret and its key";
@@ -20,7 +20,7 @@ class Challenge77Test {
 
   @Test
   void spoilerShouldGiveTheDecryptedSecret() {
-    var challenge = new Challenge77();
+    var challenge = new Challenge79();
 
     assertThat(challenge.spoiler().solution()).isEqualTo(EXPECTED_SECRET);
     assertThat(challenge.answerCorrect(EXPECTED_SECRET)).isTrue();
@@ -28,32 +28,32 @@ class Challenge77Test {
 
   @Test
   void incorrectAnswersShouldNotSolveChallenge() {
-    var challenge = new Challenge77();
+    var challenge = new Challenge79();
 
     assertThat(challenge.answerCorrect("wrong answer")).isFalse();
     assertThat(challenge.answerCorrect("")).isFalse();
-    assertThat(challenge.answerCorrect(Challenge77.CIPHERTEXT)).isFalse();
+    assertThat(challenge.answerCorrect(Challenge79.CIPHERTEXT)).isFalse();
   }
 
   @Test
   void workflowShouldShipTheSameCiphertextKeyAndIv() throws IOException {
-    var workflow = Files.readString(Path.of(".github/workflows/challenge77.yml"));
+    var workflow = Files.readString(Path.of(".github/workflows/challenge79.yml"));
 
     assertThat(workflow)
-        .contains("CHALLENGE_77_CIPHERTEXT: \"" + Challenge77.CIPHERTEXT + "\"")
-        .contains("CHALLENGE_77_KEY: \"" + Challenge77.KEY + "\"")
-        .contains("CHALLENGE_77_IV: \"" + Challenge77.IV + "\"")
+        .contains("CHALLENGE_79_CIPHERTEXT: \"" + Challenge79.CIPHERTEXT + "\"")
+        .contains("CHALLENGE_79_KEY: \"" + Challenge79.KEY + "\"")
+        .contains("CHALLENGE_79_IV: \"" + Challenge79.IV + "\"")
         .doesNotContain("secrets.");
   }
 
   @Test
-  void challenge77ShouldBeRegisteredAndSolveable() {
-    var definition = challenges.findByShortName("challenge-77");
+  void challenge79ShouldBeRegisteredAndSolveable() {
+    var definition = challenges.findByShortName("challenge-79");
 
     assertThat(definition).isPresent();
     var challenge = challenges.getChallenge(definition.get()).getFirst();
 
-    assertThat(challenge).isInstanceOf(Challenge77.class);
+    assertThat(challenge).isInstanceOf(Challenge79.class);
     assertThat(challenge.answerCorrect(EXPECTED_SECRET)).isTrue();
   }
 }

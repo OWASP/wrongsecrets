@@ -16,15 +16,15 @@ import org.springframework.stereotype.Component;
 
 /**
  * Challenge about a GitHub Actions secret that is made "forkable": because repository secrets are
- * not copied to forks, the workflow {@code .github/workflows/challenge77.yml} ships the secret
+ * not copied to forks, the workflow {@code .github/workflows/challenge79.yml} ships the secret
  * encrypted and keeps the AES key and IV right next to it. Everybody who forks the repository gets
  * the ciphertext and the key, so the encryption protects nothing.
  */
 @Slf4j
 @Component
-public class Challenge77 extends FixedAnswerChallenge {
+public class Challenge79 extends FixedAnswerChallenge {
 
-  // Must stay identical to the env values in .github/workflows/challenge77.yml (checked by a test).
+  // Must stay identical to the env values in .github/workflows/challenge79.yml (checked by a test).
   static final String CIPHERTEXT =
       "A8rW/GHqeiATV7gXaHoBku1+eF7zzu8NuAD4BDwAYPGDelPmPq38pi66/qE1ERh1hMTg1G5Lxn0=";
   static final String KEY = "8fa2807c0391c43fb804d8c00a6267f486c0201492f85d668390100b4463cdc5";
@@ -45,7 +45,7 @@ public class Challenge77 extends FixedAnswerChallenge {
       return new String(
           cipher.doFinal(Base64.getDecoder().decode(CIPHERTEXT)), StandardCharsets.UTF_8);
     } catch (GeneralSecurityException | IllegalArgumentException e) {
-      log.warn("Could not decrypt the secret of challenge 77", e);
+      log.warn("Could not decrypt the secret of challenge 79", e);
       return DECRYPTION_ERROR;
     }
   }

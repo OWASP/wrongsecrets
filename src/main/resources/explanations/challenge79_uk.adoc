@@ -1,4 +1,4 @@
-=== Challenge 77: Секрет GitHub Actions, який можна форкнути
+=== Challenge 79: Секрет GitHub Actions, який можна форкнути
 
 Секрети GitHub Actions не копіюються, коли хтось створює форк репозиторію. Тому workflow, що
 залежить від `${{ secrets.SOMETHING }}`, перестає працювати в кожному форку. Спокусливе
@@ -10,7 +10,7 @@
 зашифрований секрет разом з усім необхідним для його розшифрування.
 
 Перегляньте workflow
-link:https://github.com/OWASP/wrongsecrets/blob/master/.github/workflows/challenge77.yml[`.github/workflows/challenge77.yml`],
+link:https://github.com/OWASP/wrongsecrets/blob/master/.github/workflows/challenge79.yml[`.github/workflows/challenge79.yml`],
 відновіть секрет і надішліть його значення у відкритому вигляді.
 
 [NOTE]

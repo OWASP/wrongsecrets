@@ -1,17 +1,17 @@
 Ви можете розв'язати це завдання, виконавши такі кроки:
 
 1. Відкрийте файл workflow:
-- У репозиторії: `.github/workflows/challenge77.yml`
-- Або онлайн: link:https://github.com/OWASP/wrongsecrets/blob/master/.github/workflows/challenge77.yml[`.github/workflows/challenge77.yml`]
+- У репозиторії: `.github/workflows/challenge79.yml`
+- Або онлайн: link:https://github.com/OWASP/wrongsecrets/blob/master/.github/workflows/challenge79.yml[`.github/workflows/challenge79.yml`]
 
 2. Перегляньте розділ `env` завдання (job) `decrypt`. Він містить шифротекст у Base64
-   (`CHALLENGE_77_CIPHERTEXT`), ключ AES-256 (`CHALLENGE_77_KEY`) та IV
-   (`CHALLENGE_77_IV`), усе у відкритому тексті.
+   (`CHALLENGE_79_CIPHERTEXT`), ключ AES-256 (`CHALLENGE_79_KEY`) та IV
+   (`CHALLENGE_79_IV`), усе у відкритому тексті.
 
 3. Розшифруйте секрет одним із двох способів:
 - Офлайн, тією самою командою, яку виконує workflow:
   `echo "<ciphertext>" | openssl enc -d -aes-256-ctr -K <key> -iv <iv> -a -A`
 - Або створіть форк репозиторію, увімкніть GitHub Actions у своєму форку, запустіть
-  workflow "Get the challenge code 77" і прочитайте секрет у його журналі.
+  workflow "Get the challenge code 79" і прочитайте секрет у його журналі.
 
 4. Надішліть розшифрований текст як відповідь.

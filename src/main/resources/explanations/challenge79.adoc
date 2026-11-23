@@ -1,4 +1,4 @@
-=== Challenge 77: The Forkable GitHub Actions Secret
+=== Challenge 79: The Forkable GitHub Actions Secret
 
 GitHub Actions secrets are not copied when somebody forks a repository. A workflow that
 depends on `${{ secrets.SOMETHING }}` therefore stops working in every fork. A tempting
@@ -10,7 +10,7 @@ the very same file. Everybody who forks or even just reads this repository recei
 encrypted secret together with everything needed to decrypt it.
 
 Have a look at the workflow
-link:https://github.com/OWASP/wrongsecrets/blob/master/.github/workflows/challenge77.yml[`.github/workflows/challenge77.yml`],
+link:https://github.com/OWASP/wrongsecrets/blob/master/.github/workflows/challenge79.yml[`.github/workflows/challenge79.yml`],
 recover the secret and submit its plaintext value.
 
 [NOTE]
