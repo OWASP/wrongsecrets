@@ -2,6 +2,7 @@ package org.owasp.wrongsecrets.challenges.docker;
 
 import static org.owasp.wrongsecrets.Challenges.ErrorResponses.DECRYPTION_ERROR;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.nio.charset.StandardCharsets;
 import java.security.GeneralSecurityException;
 import java.util.Base64;
@@ -30,8 +31,14 @@ public class Challenge77 extends FixedAnswerChallenge {
   static final String IV = "38242bf02823f7fd9557b2570e97c1c1";
 
   @Override
+  @SuppressFBWarnings(
+      value = {"CIPHER_INTEGRITY", "PADDING_ORACLE"},
+      justification =
+          "AES-CBC matches the openssl enc command in the challenge workflow, which has no GCM")
   public String getAnswer() {
     try {
+      // codeql[java/weak-cryptographic-algorithm] Intentional AES-CBC to match `openssl enc` in the
+      // challenge 77 workflow; the secret is meant to be recoverable
       var cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
       cipher.init(
           Cipher.DECRYPT_MODE,
