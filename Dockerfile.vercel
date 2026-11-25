@@ -1,0 +1,30 @@
+# Vercel detects Dockerfile.vercel automatically and deploys it as a
+# container-backed Vercel Function.
+#
+# This reuses the published no-Vault WrongSecrets image, just like the
+# existing Docker-based deployment options. Update the image tag when
+# you want to pin a particular WrongSecrets release.
+FROM jeroenwillemsen/wrongsecrets:latest-no-vault
+
+ENV SPRING_PROFILES_ACTIVE=without-vault \
+    K8S_ENV="Vercel(Docker)" \
+    SPRINGDOC_UI=false \
+    SPRINGDOC_DOC=false \
+    hints_enabled=true \
+    ctf_enabled=false \
+    challengedockermtpath=/var/helpers \
+    keepasspath=/var/helpers/alibabacreds.kdbx \
+    BASTIONHOSTPATH=/home/wrongsecrets/.ssh \
+    JAVA_TOOL_OPTIONS="-XX:MaxRAMPercentage=70.0 -XX:+ExitOnOutOfMemoryError"
+
+# These files are also copied by the existing Dockerfile.web deployment.
+# They support challenges that depend on helper scripts or sample files.
+COPY .github/scripts/ /var/helpers/
+COPY src/test/resources/alibabacreds.kdbx /var/helpers/
+COPY src/test/resources/RSAprivatekey.pem /var/helpers/
+COPY .ssh/ /home/wrongsecrets/.ssh/
+
+# Vercel supplies PORT at runtime. Fall back to port 80, which is the
+# default port for Vercel container functions.
+EXPOSE 80
+CMD ["/bin/sh", "-c", "exec java -Dspring.profiles.active=${SPRING_PROFILES_ACTIVE} -Dserver.port=${PORT:-80} -Dspringdoc.swagger-ui.enabled=${SPRINGDOC_UI} -Dspringdoc.api-docs.enabled=${SPRINGDOC_DOC} -jar application.jar"]
