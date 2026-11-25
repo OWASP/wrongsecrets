@@ -75,6 +75,7 @@ This repository contains **intentionally vulnerable code and configuration files
     -   [Running these on Heroku](#running-these-on-heroku)
     -   [Running these on Render.io](#running-these-on-renderio)
     -   [Running these on Railway](#running-these-on-railway)
+    -   [Running these on Fly](#running-these-on-fly)
 -   [Basic K8s exercise](#basic-k8s-exercise)
     -   [Minikube based](#minikube-based)
     -   [k8s based](#k8s-based)
@@ -257,6 +258,22 @@ Want to deploy yourself with Render? Click the button below:
 If you want to host WrongSecrets on Railway, you can do so by deploying [this one-click template](https://railway.com/deploy/McqJ_j?referralCode=I07F1). Railway does not offer an always-free plan anymore, but the free trial is good enough to test-drive this before you decide to upgrade. If you need a step-by-step companion guide, see [this blog post](https://alphasec.io/test-your-secret-management-skills-with-owasp-wrongsecrets/).
 
 [![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/deploy/McqJ_j?referralCode=I07F1j)
+
+
+### Running these on Fly
+*status: experimental*
+
+You can run the app on the Fly.io free tier ($5,- free credits per month):
+
+1. Create a Fly.io account.
+2. Install the Fly CLI.
+3. Clone the WrongSecrets repository, in terminal, run: `git clone https://github.com/OWASP/wrongsecrets.git && cd wrongsecrets`
+4. Launch your application: from terminal: `fly launch --from https://github.com/OWASP/wrongsecrets`
+5. Follow the prompts to create your own Fly.io application and deploy it.
+
+Once deployed, your WrongSecrets instance will be available at:
+
+https://<your-app-name>.fly.dev . You can set a new deployment name in the `fly.toml` file.
 
 ## Basic K8s exercise
 
