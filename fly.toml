@@ -1,5 +1,5 @@
 # fly.toml app configuration file generated for wrongsecrets on 2023-09-15T21:48:54+02:00
-# this is an example which you can use if you have a paid account at fly.io as you need 512 MB ram.
+# this is an example which you can use. Please change the app name to the app name you want to use.
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
@@ -8,7 +8,7 @@ app = "wrongsecrets"
 primary_region = "ams"
 
 [build]
-  image = "docker.io/jeroenwillemsen/wrongsecrets:1.15.0RC2-no-vault"
+  image = "docker.io/jeroenwillemsen/wrongsecrets:1.15.1RC1-no-vault"
 
 [env]
   K8S_ENV = "Fly(Docker)"
