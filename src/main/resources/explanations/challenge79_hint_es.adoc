@@ -1,0 +1,17 @@
+Puedes resolver este reto siguiendo estos pasos:
+
+1. Abre el archivo del workflow:
+- En el repositorio: `.github/workflows/challenge79.yml`
+- O en línea: link:https://github.com/OWASP/wrongsecrets/blob/master/.github/workflows/challenge79.yml[`.github/workflows/challenge79.yml`]
+
+2. Observa la sección `env` del job `decrypt`. Contiene el texto cifrado en Base64
+   (`CHALLENGE_79_CIPHERTEXT`), la clave AES-256 (`CHALLENGE_79_KEY`) y el IV
+   (`CHALLENGE_79_IV`), todo en texto plano.
+
+3. Descifra el secreto usando cualquiera de estos enfoques:
+- Sin conexión, con el mismo comando que ejecuta el workflow:
+  `echo "<ciphertext>" | openssl enc -d -aes-256-ctr -K <key> -iv <iv> -a -A`
+- O haz un fork del repositorio, habilita GitHub Actions en tu fork, ejecuta el
+  workflow "Get the challenge code 79" y lee el secreto en su registro.
+
+4. Envía el texto descifrado como respuesta.

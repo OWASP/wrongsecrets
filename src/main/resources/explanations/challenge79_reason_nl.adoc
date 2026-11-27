@@ -1,0 +1,30 @@
+*Waarom een versleuteld geheim met de sleutel in dezelfde repository helemaal geen geheim is*
+
+GitHub geeft repository-secrets bewust niet door aan forks: anders zou iedereen een
+project kunnen forken, een workflow kunnen aanpassen en al zijn secrets kunnen afdrukken. Deze
+beperking omzeilen door een versleutelde waarde plus de sleutel te committen, maakt de bescherming simpelweg ongedaan:
+
+- Versleuteling verplaatst het probleem alleen naar de sleutel. Wanneer de sleutel naast de
+  ciphertext staat, kan iedereen die het ene kan lezen ook het andere lezen.
+- Elke fork, clone en mirror bevat nu het geheim, en de git-geschiedenis ook.
+  Het later verwijderen van de workflow verwijdert de sleutel niet uit de commits die
+  al in omloop zijn.
+- Iedereen kan de workflow in zijn eigen fork uitvoeren en de ontsleutelde waarde in de
+  job-log lezen. GitHub maskeert alleen waarden die uit echte secrets komen, dus de ontsleutelde
+  waarde wordt leesbaar afgedrukt.
+- De ciphertext ziet er willekeurig uit, waardoor het lek in een review makkelijk over het hoofd wordt gezien en
+  moeilijk te detecteren is voor secret scanners.
+
+----
+Wat je in plaats daarvan moet doen:
+
+- Bewaar secrets in de secret store van je CI (GitHub Actions-secrets of environments) en
+  accepteer dat forks ze niet krijgen. Laat workflows in forks de stappen overslaan die ze
+  nodig hebben.
+- Geef de voorkeur aan kortlevende credentials, zoals OpenID Connect-federatie met je cloud-
+  provider, boven langlevende secrets.
+- Gebruik nooit `pull_request_target` om onbetrouwbare code uit forks toegang te geven tot secrets.
+- Als je een waarde in een repository versleutelt (bijvoorbeeld met SOPS of sealed secrets),
+  bewaar de ontsleutelingssleutel dan buiten de repository, in een KMS of secret manager.
+- Roteer elk geheim waarvan de sleutel is gecommit en beschouw het als gecompromitteerd.
+----

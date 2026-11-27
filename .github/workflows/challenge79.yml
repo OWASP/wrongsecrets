@@ -1,0 +1,22 @@
+name: "Get the challenge code 79"
+
+# Challenge 79: a "secret" that survives forking. GitHub does not copy repository secrets to forks,
+# so this workflow ships the secret encrypted and keeps the decryption key right next to it.
+# Anyone who forks the repository gets both, and can run this workflow (or openssl) to decrypt it.
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  decrypt:
+    name: decrypt the forkable secret
+    runs-on: ubuntu-latest
+    env:
+      CHALLENGE_79_CIPHERTEXT: "A8rW/GHqeiATV7gXaHoBku1+eF7zzu8NuAD4BDwAYPGDelPmPq38pi66/qE1ERh1hMTg1G5Lxn0="
+      CHALLENGE_79_KEY: "8fa2807c0391c43fb804d8c00a6267f486c0201492f85d668390100b4463cdc5"
+      CHALLENGE_79_IV: "38242bf02823f7fd9557b2570e97c1c1"
+    steps:
+      - name: Decrypt the secret
+        shell: bash
+        run: |
+          echo "The secret is: $(echo "${CHALLENGE_79_CIPHERTEXT}" | openssl enc -d -aes-256-ctr -K "${CHALLENGE_79_KEY}" -iv "${CHALLENGE_79_IV}" -a -A)"

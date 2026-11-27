@@ -1,0 +1,20 @@
+=== Challenge 79: The Forkable GitHub Actions Secret
+
+GitHub Actions secrets are not copied when somebody forks a repository. A workflow that
+depends on `${{ secrets.SOMETHING }}` therefore stops working in every fork. A tempting
+"fix" is to stop using a GitHub secret at all: encrypt the value, commit the ciphertext
+in the workflow, and decrypt it during the run. Now the workflow works in every fork.
+
+The problem is that the workflow also needs the decryption key, and that key ended up in
+the very same file. Everybody who forks or even just reads this repository receives the
+encrypted secret together with everything needed to decrypt it.
+
+Have a look at the workflow
+link:https://github.com/OWASP/wrongsecrets/blob/master/.github/workflows/challenge79.yml[`.github/workflows/challenge79.yml`],
+recover the secret and submit its plaintext value.
+
+[NOTE]
+====
+You can solve this challenge offline with `openssl`, or by forking the repository,
+enabling GitHub Actions in your fork and running the workflow there.
+====

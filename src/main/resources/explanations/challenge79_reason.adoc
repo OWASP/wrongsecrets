@@ -1,0 +1,30 @@
+*Why an encrypted secret with its key in the same repository is no secret at all*
+
+GitHub deliberately does not hand repository secrets to forks: otherwise anybody could
+fork a project, change a workflow and print every secret it has. Working around that
+limitation by committing an encrypted value plus its key simply undoes the protection:
+
+- Encryption only moves the problem to the key. When the key sits next to the
+  ciphertext, anybody who can read one can read the other.
+- Every fork, clone and mirror now carries the secret, and so does the git history.
+  Removing the workflow later does not remove the key from the commits that are
+  already out there.
+- Anybody can run the workflow in their own fork and read the decrypted value in the
+  job log. GitHub only masks values that come from real secrets, so the decrypted
+  value is printed in the clear.
+- The ciphertext looks random, which makes the leak easy to overlook in a review and
+  hard for secret scanners to detect.
+
+----
+What to do instead:
+
+- Keep secrets in the CI secret store (GitHub Actions secrets or environments) and
+  accept that forks do not get them. Let workflows in forks skip the steps that need
+  them.
+- Prefer short-lived credentials, such as OpenID Connect federation to your cloud
+  provider, over long-lived secrets.
+- Never use `pull_request_target` to give untrusted fork code access to secrets.
+- If you encrypt a value in a repository (for example with SOPS or sealed secrets),
+  keep the decryption key outside of the repository, in a KMS or secret manager.
+- Rotate any secret whose key has been committed and treat it as compromised.
+----

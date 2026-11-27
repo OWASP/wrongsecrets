@@ -1,0 +1,30 @@
+*Warum ein verschlüsseltes Geheimnis mit seinem Schlüssel im selben Repository überhaupt kein Geheimnis ist*
+
+GitHub gibt Repository-Secrets absichtlich nicht an Forks weiter: Sonst könnte jeder ein
+Projekt forken, einen Workflow ändern und alle seine Secrets ausgeben. Diese Einschränkung zu
+umgehen, indem man einen verschlüsselten Wert samt Schlüssel eincheckt, hebt den Schutz einfach auf:
+
+- Verschlüsselung verlagert das Problem nur auf den Schlüssel. Liegt der Schlüssel neben dem
+  Geheimtext, kann jeder, der das eine lesen kann, auch das andere lesen.
+- Jeder Fork, jeder Clone und jeder Mirror enthält nun das Geheimnis, ebenso die Git-Historie.
+  Das spätere Entfernen des Workflows entfernt den Schlüssel nicht aus den Commits, die
+  bereits im Umlauf sind.
+- Jeder kann den Workflow in seinem eigenen Fork ausführen und den entschlüsselten Wert im
+  Job-Log lesen. GitHub maskiert nur Werte, die aus echten Secrets stammen, daher wird der
+  entschlüsselte Wert im Klartext ausgegeben.
+- Der Geheimtext sieht zufällig aus, wodurch das Leck in einem Review leicht übersehen wird und
+  für Secret-Scanner schwer zu erkennen ist.
+
+----
+Was du stattdessen tun solltest:
+
+- Bewahre Secrets im Secret-Store deiner CI auf (GitHub Actions-Secrets oder Environments) und
+  akzeptiere, dass Forks sie nicht erhalten. Lass Workflows in Forks die Schritte überspringen,
+  die sie benötigen.
+- Bevorzuge kurzlebige Zugangsdaten, etwa OpenID Connect-Föderation mit deinem Cloud-
+  Anbieter, gegenüber langlebigen Secrets.
+- Verwende niemals `pull_request_target`, um nicht vertrauenswürdigem Code aus Forks Zugriff auf Secrets zu geben.
+- Wenn du einen Wert in einem Repository verschlüsselst (zum Beispiel mit SOPS oder Sealed Secrets),
+  bewahre den Entschlüsselungsschlüssel außerhalb des Repositorys auf, in einem KMS oder Secret-Manager.
+- Rotiere jedes Geheimnis, dessen Schlüssel eingecheckt wurde, und betrachte es als kompromittiert.
+----
