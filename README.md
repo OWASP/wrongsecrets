@@ -75,6 +75,8 @@ This repository contains **intentionally vulnerable code and configuration files
     -   [Running these on Heroku](#running-these-on-heroku)
     -   [Running these on Render.io](#running-these-on-renderio)
     -   [Running these on Railway](#running-these-on-railway)
+    -   [Running these on Fly](#running-these-on-fly)
+    -   [Running these on Vercel](#running-these-on-vercel)
 -   [Basic K8s exercise](#basic-k8s-exercise)
     -   [Minikube based](#minikube-based)
     -   [k8s based](#k8s-based)
@@ -258,6 +260,54 @@ Want to deploy yourself with Render? Click the button below:
 If you want to host WrongSecrets on Railway, you can do so by deploying [this one-click template](https://railway.com/deploy/McqJ_j?referralCode=I07F1). Railway does not offer an always-free plan anymore, but the free trial is good enough to test-drive this before you decide to upgrade. If you need a step-by-step companion guide, see [this blog post](https://alphasec.io/test-your-secret-management-skills-with-owasp-wrongsecrets/).
 
 [![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/deploy/McqJ_j?referralCode=I07F1j)
+
+
+### Running these on Fly
+*status: experimental*
+
+You can run the app on the Fly.io free tier ($5,- free credits per month):
+
+1. Create a Fly.io account.
+2. Install the Fly CLI.
+3. Clone the WrongSecrets repository, in terminal, run: `git clone https://github.com/OWASP/wrongsecrets.git && cd wrongsecrets`
+4. Launch your application: from terminal: `fly launch --from https://github.com/OWASP/wrongsecrets`
+5. Follow the prompts to create your own Fly.io application and deploy it.
+
+Once deployed, your WrongSecrets instance will be available at:
+
+https://<your-app-name>.fly.dev . You can set a new deployment name in the `fly.toml` file.
+
+
+### Running these on Vercel
+
+WrongSecrets can be deployed to Vercel using its container runtime. The
+repository includes `Dockerfile.vercel`, which reuses the published
+`latest-no-vault` WrongSecrets image and configures Spring Boot to listen on
+the port supplied by Vercel.
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FOWASP%2Fwrongsecrets&project-name=wrongsecrets)
+
+1. Click **Deploy with Vercel** and import the WrongSecrets repository.
+2. Select the repository's root directory as the project root.
+3. Deploy. Vercel detects `Dockerfile.vercel` automatically; no `vercel.json`
+   or separate Docker build command is required.
+
+Vercel container deployments run as stateless, autoscaling Functions and can
+scale down when idle. Do not rely on local files or in-memory state persisting
+between requests. The Vercel container runtime is billed according to Vercel's
+Function usage and plan limits; it is not an unlimited always-on VM.
+
+**Important:** WrongSecrets is intentionally vulnerable and contains
+deliberately exposed secrets. Treat a public deployment as an intentionally
+vulnerable training target. Do not put real credentials, private data, or
+production integrations into it. The Vercel deployment uses the no-Vault
+image; challenges that require Vault, Kubernetes, or other external
+infrastructure are not provided by this single-container deployment.
+
+See the [Vercel Docker/container documentation](https://vercel.com/kb/guide/docker)
+and [Vercel pricing](https://vercel.com/pricing) for current runtime behavior,
+limits, and costs.
+
 
 ## Basic K8s exercise
 
